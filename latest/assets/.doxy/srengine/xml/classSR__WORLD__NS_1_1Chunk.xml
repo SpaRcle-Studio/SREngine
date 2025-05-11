@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="36" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="36" bodyend="38"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="36" column="9" bodyfile="Engine/libs/Utils/inc/Utils/World/Chunk.h" bodystart="36" bodyend="38"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__WORLD__NS_1_1Chunk_1a18103dc4974d5084056dbf3118ac6ca4" prot="public" static="no">
         <type>std::function&lt; <ref refid="classSR__WORLD__NS_1_1Chunk" kindref="compound">Chunk</ref> *(SRChunkAllocArgs)&gt;</type>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="41" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="41" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="41" column="31" bodyfile="Engine/libs/Utils/inc/Utils/World/Chunk.h" bodystart="41" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-type">
@@ -73,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="29" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="29" column="9" bodyfile="Engine/libs/Utils/inc/Utils/World/Chunk.h" bodystart="29" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-attrib">
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="72" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="72" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="72" column="26" bodyfile="Engine/libs/Utils/inc/Utils/World/Chunk.h" bodystart="72" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="75" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="75" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="75" column="19" bodyfile="Engine/libs/Utils/inc/Utils/World/Chunk.h" bodystart="75" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1Chunk_1ab154ddd9c05d6828a1872833f6d15b4b" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__WORLD__NS_1_1Observer" kindref="compound">Observer</ref> *</type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="77" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="77" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="77" column="18" bodyfile="Engine/libs/Utils/inc/Utils/World/Chunk.h" bodystart="77" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1Chunk_1a0afd98e0eebc541dffcefc3c1aff59e8" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__WORLD__NS_1_1Region" kindref="compound">Region</ref> *</type>
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="78" column="16" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="78" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="78" column="16" bodyfile="Engine/libs/Utils/inc/Utils/World/Chunk.h" bodystart="78" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1Chunk_1a1edc641dc9d70d46f3dfa814674f173d" prot="protected" static="no" mutable="no">
         <type>float_t</type>
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="80" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="80" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="80" column="17" bodyfile="Engine/libs/Utils/inc/Utils/World/Chunk.h" bodystart="80" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1Chunk_1aabba4d4e4f7132e19d3a5488551fea86" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::IVector2</type>
@@ -161,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="82" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="82" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="82" column="30" bodyfile="Engine/libs/Utils/inc/Utils/World/Chunk.h" bodystart="82" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1Chunk_1a3149485c6e8cae2c91df5b706f424b45" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::IVector3</type>
@@ -175,7 +175,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="83" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="83" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="83" column="30" bodyfile="Engine/libs/Utils/inc/Utils/World/Chunk.h" bodystart="83" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1Chunk_1a57af58b90ff0bc7ce686e1a5f30e993a" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::IVector3</type>
@@ -189,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="84" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="84" column="30" bodyfile="Engine/libs/Utils/inc/Utils/World/Chunk.h" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1Chunk_1a9d6dab50d9d5b4004a8fab6c20efb202" prot="protected" static="no" mutable="no">
         <type>std::list&lt; <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; GameObject &gt; &gt;</type>
@@ -203,7 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="86" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="86" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="86" column="19" bodyfile="Engine/libs/Utils/inc/Utils/World/Chunk.h" bodystart="86" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -222,7 +222,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="31" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="31" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -238,7 +238,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="34" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="34" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1ad4d531148868f9ad6b457fee620e2c3a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD LoadState</type>
@@ -252,7 +252,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="49" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="49" bodyend="49"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="49" column="32" bodyfile="Engine/libs/Utils/inc/Utils/World/Chunk.h" bodystart="49" bodyend="49"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a3fb7a37ec04b7d93dded113d0d385f97" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -266,7 +266,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="50" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="50" bodyend="50"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="50" column="27" bodyfile="Engine/libs/Utils/inc/Utils/World/Chunk.h" bodystart="50" bodyend="50"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1ac8232d05c35ebbaa15e924552d1078d1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -280,7 +280,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="51" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="51" bodyend="51"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="51" column="27" bodyfile="Engine/libs/Utils/inc/Utils/World/Chunk.h" bodystart="51" bodyend="51"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a2c09d08e2eeb22f7432f089cedf7e2a9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::IVector3</type>
@@ -294,7 +294,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="52" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="52" bodyend="52"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="52" column="43" bodyfile="Engine/libs/Utils/inc/Utils/World/Chunk.h" bodystart="52" bodyend="52"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a12f68bb27995884a47e52d5f5e523685" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -313,7 +313,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="53" column="43"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="53" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1abcb9b9635562e4cfcd25fc7c7b72e705" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD ScenePtr</type>
@@ -327,7 +327,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="54" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="54" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a1c056996e2449d88ff6d0c642f21ba2e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr</type>
@@ -345,7 +345,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="56" column="49"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="56" column="49"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a8e31722e3128faa1d63b215e85b0dac3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -360,7 +360,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="59" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="59" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a883b7ec599bfac9bbec72a59051429ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -375,7 +375,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="60" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="60" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a96f807e0c845dd67e2678e57c1d02578" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -390,7 +390,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="61" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="61" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a14a5abe2a7d81b6d56d4d871282ba599" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -409,7 +409,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="62" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="62" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a4a7f8ca9d703d0249052f2710e11f3e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -427,7 +427,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="63" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="63" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a0d2fbf30e70809288ddd22a2e33b01f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -445,7 +445,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="64" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="64" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a54ff9a41ef85f2d4805e8aa17e7d8712" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -460,7 +460,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="65" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="65" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a9ac35fdf670771506e4e19b42493b6ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -478,7 +478,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="66" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="66" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1af197d24b5da4bfb59246bad37c47be9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -492,7 +492,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="67" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="67" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a1efded0b832bb1fc1450cd99d708932c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -507,7 +507,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="69" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="69" column="22"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -527,7 +527,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="44" column="21"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="44" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a12dce23e46a83b6ebbc4e77ff0b1351b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__WORLD__NS_1_1Chunk" kindref="compound">Chunk</ref> *</type>
@@ -544,7 +544,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="45" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="45" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a0e5de285ca827b454a2621cd3fe8dfcd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -570,7 +570,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="46" column="21"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="46" column="21"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -640,7 +640,7 @@
         <link refid="structSR__MATH__NS_1_1Vector3"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="28" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="28" bodyend="88"/>
+    <location file="Engine/libs/Utils/inc/Utils/World/Chunk.h" line="28" column="5" bodyfile="Engine/libs/Utils/inc/Utils/World/Chunk.h" bodystart="28" bodyend="88"/>
     <listofallmembers>
       <member refid="classSR__WORLD__NS_1_1Chunk_1a4a7f8ca9d703d0249052f2710e11f3e6" prot="public" virt="virtual"><scope>SR_WORLD_NS::Chunk</scope><name>Access</name></member>
       <member refid="classSR__WORLD__NS_1_1Chunk_1a12dce23e46a83b6ebbc4e77ff0b1351b" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>Allocate</name></member>

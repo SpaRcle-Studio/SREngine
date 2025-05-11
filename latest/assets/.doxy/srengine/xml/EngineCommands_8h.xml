@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="EngineCommands_8h" kind="file" language="C++">
     <compoundname>EngineCommands.h</compoundname>
-    <includes refid="Engine_8h" local="no">Core/Engine.h</includes>
+    <includes refid="Engine_8h" local="no">Engine/Engine.h</includes>
     <includes refid="SafePointer_8h" local="no">Utils/Types/SafePointer.h</includes>
     <includes refid="CmdManager_8h" local="no">Utils/CommandManager/CmdManager.h</includes>
     <includes refid="EntityController_8h" local="no">Utils/ECS/EntityController.h</includes>
@@ -10,7 +10,7 @@
     <includes refid="Scene_8h" local="no">Utils/World/Scene.h</includes>
     <incdepgraph>
       <node id="2">
-        <label>Core/Engine.h</label>
+        <label>Engine/Engine.h</label>
         <link refid="Engine_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -48,7 +48,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/inc/Core/EngineCommands.h</label>
+        <label>Engine/inc/Engine/EngineCommands.h</label>
         <link refid="EngineCommands_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -64,7 +64,7 @@
         </childnode>
       </node>
       <node id="3">
-        <label>Core/EngineResources.h</label>
+        <label>Engine/EngineResources.h</label>
         <link refid="EngineResources_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
@@ -1803,7 +1803,7 @@
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SR_ENGINE_ENGINECOMMANDS_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ENGINE_ENGINECOMMANDS_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Core/Engine.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Engine/Engine.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Types/SafePointer.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/CommandManager/CmdManager.h&gt;</highlight><highlight class="normal"></highlight></codeline>
@@ -2055,6 +2055,6 @@
 <codeline lineno="268"><highlight class="normal"></highlight></codeline>
 <codeline lineno="269"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_ENGINECOMMANDS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/EngineCommands.h"/>
+    <location file="Engine/inc/Engine/EngineCommands.h"/>
   </compounddef>
 </doxygen>

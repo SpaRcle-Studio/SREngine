@@ -61,7 +61,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h</label>
         <link refid="SkyboxPass_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1056,6 +1056,6 @@
 <codeline lineno="32"><highlight class="normal"></highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_SKYBOXPASS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h"/>
   </compounddef>
 </doxygen>

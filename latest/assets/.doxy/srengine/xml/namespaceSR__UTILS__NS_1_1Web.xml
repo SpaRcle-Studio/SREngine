@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSColor.h" line="11" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSColor.h" bodystart="11" bodyend="13"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/CSS/CSSColor.h" line="11" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Web/CSS/CSSColor.h" bodystart="11" bodyend="13"/>
       </memberdef>
       <memberdef kind="enum" id="CSSEnums_8h_1aa93dc339c01ef9c676c57c34d9feb980" prot="public" static="no" strong="yes">
         <type>uint8_t</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="14" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="14" bodyend="16"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="14" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="14" bodyend="16"/>
       </memberdef>
       <memberdef kind="enum" id="CSSEnums_8h_1a41f623bc7af9c0e43d3d8adf87fad652" prot="public" static="no" strong="yes">
         <type>uint8_t</type>
@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="18" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="18" bodyend="24"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="18" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="18" bodyend="24"/>
       </memberdef>
       <memberdef kind="enum" id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406" prot="public" static="no" strong="yes">
         <type>uint8_t</type>
@@ -444,7 +444,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="26" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="26" bodyend="57"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="26" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="26" bodyend="57"/>
       </memberdef>
       <memberdef kind="enum" id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cf" prot="public" static="no" strong="yes">
         <type></type>
@@ -771,7 +771,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/Tag.h" line="12" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/Tag.h" bodystart="12" bodyend="20"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/HTML/Tag.h" line="12" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Web/HTML/Tag.h" bodystart="12" bodyend="20"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="typedef">
@@ -787,7 +787,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSSizeValue.h" line="114" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSSizeValue.h" bodystart="114" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/CSS/CSSSizeValue.h" line="114" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Web/CSS/CSSSizeValue.h" bodystart="114" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -804,7 +804,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSColor.h" line="108" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSColor.h" bodystart="108" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/CSS/CSSColor.h" line="108" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Web/CSS/CSSColor.h" bodystart="108" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="CSSEnums_8h_1a63273cc4473b133af5c10c39a5913050" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC CSSDisplay</type>
@@ -819,7 +819,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="59" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="59" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="59" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="CSSEnums_8h_1a31cbbb5786848a889cf397df9c9850de" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC CSSDisplay</type>
@@ -834,7 +834,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="60" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="60" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="60" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="CSSEnums_8h_1a605642f63228439b3374afb82d134b75" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC CSSPosition</type>
@@ -849,7 +849,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="61" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="61" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="61" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="61" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="CSSEnums_8h_1ae692c86525be53cde7d7cb3dcfd6dc73" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC CSSBoxSizing</type>
@@ -864,7 +864,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="62" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="62" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="62" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="62" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="Tag_8h_1af03b8b44b1918a8a1a718837975628a2" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -879,7 +879,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/Tag.h" line="22" column="46" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/Tag.h" bodystart="22" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/HTML/Tag.h" line="22" column="46" bodyfile="Engine/libs/Utils/inc/Utils/Web/HTML/Tag.h" bodystart="22" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -899,7 +899,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="64" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="64" bodyend="77"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="64" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="64" bodyend="77"/>
       </memberdef>
       <memberdef kind="function" id="CSSEnums_8h_1a6adf3aef00576acd10d04b32a08bae0d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>CSSBoxSizing</type>
@@ -917,7 +917,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="79" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="79" bodyend="90"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="79" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="79" bodyend="90"/>
       </memberdef>
       <memberdef kind="function" id="CSSEnums_8h_1a2c099f3fddb2993be90f7f60a8bb12f7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>CSSDisplay</type>
@@ -935,7 +935,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="92" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="92" bodyend="140"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="92" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="92" bodyend="140"/>
       </memberdef>
       <memberdef kind="function" id="CSSEnums_8h_1a47e40e7ba60b8c143c4e296eea45ee5b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -954,7 +954,7 @@
         <inbodydescription>
 <para>NOLINT</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="142" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="142" bodyend="156"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="142" column="36" bodyfile="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="142" bodyend="156"/>
       </memberdef>
       <memberdef kind="function" id="CSSEnums_8h_1ab1da839fd07f6e42d92537e93748113c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -973,7 +973,7 @@
         <inbodydescription>
 <para>NOLINT</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="158" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="158" bodyend="170"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="158" column="36" bodyfile="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="158" bodyend="170"/>
       </memberdef>
       <memberdef kind="function" id="CSSEnums_8h_1ac230e19b2f0afcc45de37df79d0e3d98" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -992,7 +992,7 @@
         <inbodydescription>
 <para>NOLINT</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="172" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="172" bodyend="221"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="172" column="36" bodyfile="Engine/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="172" bodyend="221"/>
       </memberdef>
       <memberdef kind="function" id="Tag_8h_1ad0fbfe75f59b4efb5b2cc05df2a1868a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD HTMLTag</type>
@@ -1010,7 +1010,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/Tag.h" line="24" column="26" declfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/Tag.h" declline="24" declcolumn="26"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/HTML/Tag.h" line="24" column="26" declfile="Engine/libs/Utils/inc/Utils/Web/HTML/Tag.h" declline="24" declcolumn="26"/>
       </memberdef>
       <memberdef kind="function" id="Tag_8h_1a6d9909a7034110cfc3452de878e6baa1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD HTMLTag</type>
@@ -1028,7 +1028,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/Tag.h" line="26" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/Tag.h" bodystart="26" bodyend="43"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/HTML/Tag.h" line="26" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Web/HTML/Tag.h" bodystart="26" bodyend="43"/>
       </memberdef>
       <memberdef kind="function" id="Tag_8h_1affe5e55457f28854e81e2a7ecb3de7b6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -1046,13 +1046,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/Tag.h" line="45" column="49" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/Tag.h" bodystart="45" bodyend="58"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/HTML/Tag.h" line="45" column="49" bodyfile="Engine/libs/Utils/inc/Utils/Web/HTML/Tag.h" bodystart="45" bodyend="58"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" line="15" column="1"/>
+    <location file="Engine/libs/Utils/inc/Utils/Web/CSS/CSS.h" line="15" column="1"/>
   </compounddef>
 </doxygen>

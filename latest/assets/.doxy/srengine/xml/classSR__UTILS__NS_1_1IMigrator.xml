@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/IMigrator.h" line="15" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/IMigrator.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/IMigrator.h" line="15" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/IMigrator.h" bodystart="15" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/IMigrator.h" line="18" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/IMigrator.h" bodystart="18" bodyend="20"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/IMigrator.h" line="18" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/IMigrator.h" bodystart="18" bodyend="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IMigrator_1a863d60ef3d91bb27662030eef2fc8a9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD MigrationResult</type>
@@ -51,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/IMigrator.h" line="23" column="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/IMigrator.h" line="23" column="46"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -113,7 +113,7 @@
         <link refid="classSR__UTILS__NS_1_1SRClass"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/IMigrator.h" line="14" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/IMigrator.h" bodystart="14" bodyend="25"/>
+    <location file="Engine/libs/Utils/inc/Utils/Serialization/IMigrator.h" line="14" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/IMigrator.h" bodystart="14" bodyend="25"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IMigrator</scope><name>AllocateStatic</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IMigrator</scope><name>AutoFree</name></member>

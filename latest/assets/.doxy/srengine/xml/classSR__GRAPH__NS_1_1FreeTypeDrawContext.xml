@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="15" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="15" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="15" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="47" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="47" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FreeTypeDrawContext_1abfe2d5326e26620471c1cd03cee884a8" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -51,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="48" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="48" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="48" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="48" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FreeTypeDrawContext_1a49dbb28134cd510b314b9cf72735d64b" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="50" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="50" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="50" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="50" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FreeTypeDrawContext_1a312b9ce81beefa59465afe7a0cdbf6f5" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="51" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="51" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FreeTypeDrawContext_1a509de37323340ebb181d4a22f54c939a" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -96,7 +96,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="53" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="53" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FreeTypeDrawContext_1a5882d73049349020c2f1e18980765d40" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -111,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="54" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="54" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="54" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="54" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FreeTypeDrawContext_1a0b023aefc5d20e804d6b89fb16ca6d2d" prot="private" static="no" mutable="no">
         <type>std::vector&lt; uint8_t &gt;</type>
@@ -125,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="56" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="56" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="56" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="56" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -141,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="17" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="17" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FreeTypeDrawContext_1a7db392d0b5392ac4b59334fc8be75bd4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -155,7 +155,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="18" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="18" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FreeTypeDrawContext_1abdae3a1b8a3d8f3a967fd70c1c3a3e17" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -172,7 +172,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="19" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="19" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FreeTypeDrawContext_1a861bfff3cdefbcc86a5cf0b5ddf011fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__GRAPH__NS_1_1FreeTypeDrawContext" kindref="compound">FreeTypeDrawContext</ref> &amp;</type>
@@ -189,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="20" column="29"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="20" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FreeTypeDrawContext_1ac6835a2652f57ff59f73e6b6bea85fef" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint8_t *</type>
@@ -203,7 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="23" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="23" bodyend="33"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="23" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="23" bodyend="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FreeTypeDrawContext_1a992118cf7d534fb7eb404f4d07ec632e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -217,7 +217,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="35" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="35" bodyend="35"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="35" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="35" bodyend="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FreeTypeDrawContext_1ae50a440d0e8847e8e430595a4ab7843e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -231,7 +231,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="36" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="36" bodyend="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="36" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="36" bodyend="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FreeTypeDrawContext_1aebf2dd99f149a78c2ef57356bcb5530c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -249,7 +249,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="38" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="38" bodyend="40"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="38" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="38" bodyend="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FreeTypeDrawContext_1a70e87b2bf7641045b01e56c1686c049c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -267,7 +267,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="42" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="42" bodyend="44"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="42" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="42" bodyend="44"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -298,7 +298,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="14" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="14" bodyend="58"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" line="14" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h" bodystart="14" bodyend="58"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1FreeTypeDrawContext_1aebf2dd99f149a78c2ef57356bcb5530c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FreeTypeDrawContext</scope><name>Align</name></member>
       <member refid="classSR__GRAPH__NS_1_1FreeTypeDrawContext_1ac6835a2652f57ff59f73e6b6bea85fef" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FreeTypeDrawContext</scope><name>Bitmap</name></member>

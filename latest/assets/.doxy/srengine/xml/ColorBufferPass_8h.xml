@@ -104,7 +104,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
         <link refid="ColorBufferPass_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1466,6 +1466,6 @@
 <codeline lineno="45"><highlight class="normal"></highlight></codeline>
 <codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_COLORBUFFERPASS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h"/>
   </compounddef>
 </doxygen>

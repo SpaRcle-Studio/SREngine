@@ -22,7 +22,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" line="123" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" bodystart="123" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Stack.h" line="123" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/Stack.h" bodystart="123" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1Stack_1ade99aa3915fc1e8a6f1137748215e1d9" prot="private" static="no" mutable="no">
         <type>uint64_t</type>
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" line="124" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" bodystart="124" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Stack.h" line="124" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Types/Stack.h" bodystart="124" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -53,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" line="27" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Stack.h" line="27" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stack_1a7a97965e95e8a2983226312d8f0f3957" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" line="29" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" bodystart="29" bodyend="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Stack.h" line="29" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/Stack.h" bodystart="29" bodyend="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stack_1aae4a10107852a7c33bbd25f271afe672" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" line="37" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" bodystart="37" bodyend="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Stack.h" line="37" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/Stack.h" bodystart="37" bodyend="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stack_1a7f63e8b6f767cad423ea892dc812b7a1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classSR__HTYPES__NS_1_1Stack" kindref="compound">Stack</ref> &amp;</type>
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" line="42" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" bodystart="42" bodyend="53"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Stack.h" line="42" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Types/Stack.h" bodystart="42" bodyend="53"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stack_1ac481b215437a8602643d41889c93c63d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classSR__HTYPES__NS_1_1Stack" kindref="compound">Stack</ref> &amp;</type>
@@ -125,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" line="55" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" bodystart="55" bodyend="63"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Stack.h" line="55" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Types/Stack.h" bodystart="55" bodyend="63"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stack_1ae52021a8dc7dbcf0d001a5f9e414462c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -139,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" line="65" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" bodystart="65" bodyend="67"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Stack.h" line="65" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/Stack.h" bodystart="65" bodyend="67"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stack_1ae37c12d7404b4e793adcd69d20d3727d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -153,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" line="69" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" bodystart="69" bodyend="76"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Stack.h" line="69" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/Stack.h" bodystart="69" bodyend="76"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stack_1aa8586aa1b19b2f739e857fab2cb420fe" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" line="78" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" bodystart="78" bodyend="80"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Stack.h" line="78" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Types/Stack.h" bodystart="78" bodyend="80"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stack_1a33493360d8aa7adb6fc362f894e2aff2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -181,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" line="82" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" bodystart="82" bodyend="84"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Stack.h" line="82" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Types/Stack.h" bodystart="82" bodyend="84"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stack_1a04a9c7f11593f068389938fbc6b7260b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -199,7 +199,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" line="86" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" bodystart="86" bodyend="91"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Stack.h" line="86" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/Stack.h" bodystart="86" bodyend="91"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stack_1ac39bc8cd11f1a639f9cc19cefe106029" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -217,7 +217,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" line="93" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" bodystart="93" bodyend="98"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Stack.h" line="93" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/Stack.h" bodystart="93" bodyend="98"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stack_1ad34d402c245cabe92b50e24face97b2d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>T</type>
@@ -231,7 +231,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" line="100" column="11" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" bodystart="100" bodyend="112"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Stack.h" line="100" column="11" bodyfile="Engine/libs/Utils/inc/Utils/Types/Stack.h" bodystart="100" bodyend="112"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stack_1a38bcf7dc0781c905df8da3914f54716c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD T &amp;</type>
@@ -245,14 +245,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" line="114" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" bodystart="114" bodyend="120"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Stack.h" line="114" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Types/Stack.h" bodystart="114" bodyend="120"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" line="12" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Stack.h" bodystart="12" bodyend="126"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/Stack.h" line="12" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Types/Stack.h" bodystart="12" bodyend="126"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1Stack_1ae37c12d7404b4e793adcd69d20d3727d" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Stack</scope><name>Clear</name></member>
       <member refid="classSR__HTYPES__NS_1_1Stack_1a33493360d8aa7adb6fc362f894e2aff2" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Stack</scope><name>IsEmpty</name></member>

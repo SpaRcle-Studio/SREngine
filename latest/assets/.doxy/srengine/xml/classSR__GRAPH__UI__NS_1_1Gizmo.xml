@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="64" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="64" bodyend="66"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="64" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="64" bodyend="66"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__UI__NS_1_1Gizmo_1ab218bc0ea8e232beb4edd8d8a32d513f" prot="private" static="no">
         <type><ref refid="classSR__GTYPES__NS_1_1IRenderComponent" kindref="compound">SR_GTYPES_NS::IRenderComponent</ref></type>
@@ -51,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="63" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="63" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="63" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="63" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="131" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="131" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="131" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="131" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a8056c93bfd5c9310004ee24f8e0826fc" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="133" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="133" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="133" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="133" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1Gizmo_1aa7fc30c915f8bb94fcf47110f1a5a452" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -97,7 +97,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="136" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="136" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="136" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="136" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1Gizmo_1ab5bb648f0d0c460785f40298f76297c6" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -112,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="138" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="138" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="138" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="138" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a116ca636c3b7584c4d76ecdc5264a657" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FPoint</type>
@@ -127,7 +127,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="140" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="140" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="140" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="140" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a5e87ee7e09ab004e3c732bfe106da920" prot="private" static="no" mutable="no">
         <type>GizmoMode</type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="142" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="142" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="142" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="142" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1Gizmo_1aa71bbdf3762a36c31afc2505d8dc42ba" prot="private" static="no" mutable="no">
         <type>GizmoOperation</type>
@@ -157,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="143" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="143" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="143" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="143" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1Gizmo_1ade23e6baf87bdbc4120ddb6819d6e497" prot="private" static="no" mutable="no">
         <type>GizmoOperation</type>
@@ -172,7 +172,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="145" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="145" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="145" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="145" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a64191bdc54704eea9498d23057ad0ee1" prot="private" static="no" mutable="no">
         <type>GizmoOperation</type>
@@ -187,7 +187,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="146" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="146" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="146" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="146" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1Gizmo_1aae758674f646c7dc38dfc8f217d45fd2" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -201,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="148" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="148" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="148" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="148" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a0b2f78065f029cdefca0b35edbedae27" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="149" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="149" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="149" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="149" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a7a55397d7e692b5cabe1b0261ef15c01" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -229,7 +229,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="150" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="150" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="150" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="150" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a95f304b7660e72e14c4ca3e327596ce4" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector4</type>
@@ -243,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="151" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="151" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="151" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="151" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a17e37b2571a348c13193c1aebca2692f" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector4</type>
@@ -257,7 +257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="152" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="152" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="152" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="152" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1Gizmo_1abd721d674937ade8c01e87aafef2acdb" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref></type>
@@ -271,7 +271,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="153" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="153" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="153" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="153" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a5413f3830a9b7db12ea9eab8affddaff" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::Unit</type>
@@ -286,7 +286,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="155" column="26" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="155" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="155" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="155" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -303,7 +303,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="68" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="68" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1aee9f6f515d7d1865a82e4df375f27e45" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -318,7 +318,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="69" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="69" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a2e51576a6cb34b150fbbd857a5eec3a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -334,7 +334,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="70" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="70" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a9fe3a665736d30d1af3f1d8a7ee892a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -350,7 +350,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="71" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="71" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a2b7b7b117f082b0f656430005dfb9544" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -365,7 +365,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="72" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="72" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a401ef6d6f8420ded3becc645b4677a6d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -379,7 +379,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="74" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="74" bodyend="76"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="74" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="74" bodyend="76"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1afccad0e103c60649debfa00b3b75d0f2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -393,7 +393,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="78" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="78" bodyend="80"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="78" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="78" bodyend="80"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a364de674805195cdc727415630252ccb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -407,7 +407,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="82" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="82" bodyend="84"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="82" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="82" bodyend="84"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a5f8fd1896be6e01120c737b9db7f5f26" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -421,7 +421,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="86" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="86" bodyend="88"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="86" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="86" bodyend="88"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1ac6c5ebaac85cacff3048273f5a6d72b9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -439,7 +439,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="90" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="90" bodyend="90"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="90" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="90" bodyend="90"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1ab3e4f0357b64d1feb91e9e0c49ee7068" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -457,7 +457,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="91" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="91" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a84dbc2bfaefdde3d36292db5c4c0981a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD GizmoMode</type>
@@ -472,7 +472,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="93" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="93" bodyend="93"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="93" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="93" bodyend="93"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1ada27a4f20b4542d135ca54f63c0ed475" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD GizmoOperation</type>
@@ -486,7 +486,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="94" column="45" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="94" bodyend="94"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="94" column="45" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="94" bodyend="94"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -506,7 +506,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="97" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="97" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a9d94c58d1224035f94a01a5c553e61d4" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -520,7 +520,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="98" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="98" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a93d00adb712cd336db5ca4a267a2fe59" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -534,7 +534,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="99" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="99" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a4d50ce765a1b6d4315012cf0fb6bca39" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -564,7 +564,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="100" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="100" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a4f17f29f7126e75314d0d27260550fa1" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -578,7 +578,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="101" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="101" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1ad330f390b7fa8727fc1e4f834f396e38" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -593,7 +593,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="103" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="103" bodyend="103"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="103" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="103" bodyend="103"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a691503132cb3b4283992c17a65e17715" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -612,7 +612,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="105" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="105" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1ad73ecf7bbd12bd17ccbcd2fb3ca14de6" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -631,7 +631,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="106" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="106" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a09b0821f2daa47e935169eebe52a83ba" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -650,7 +650,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="107" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="107" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a41b51381495fdcb7f5b140088b159dd5" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -665,7 +665,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="109" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="109" bodyend="109"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="109" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="109" bodyend="109"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a53d9f6d4abef9306ed1d88b53e5787e3" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -680,7 +680,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="110" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="110" bodyend="110"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="110" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="110" bodyend="110"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1af1425cfd1c99827ac0c6330c098c5202" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -695,7 +695,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="112" column="35" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="112" bodyend="112"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="112" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="112" bodyend="112"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a520e5b81ca8c03d56ef07b15b0df9e4d" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -710,7 +710,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="113" column="35" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="113" bodyend="113"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="113" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="113" bodyend="113"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1aceef24e1ea92b0720f98a929185afd33" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref></type>
@@ -725,7 +725,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="114" column="52"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="114" column="52"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a8d910d76f8c02f8db67d4e84867cd742" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -739,7 +739,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="115" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="115" bodyend="115"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="115" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="115" bodyend="115"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a77f8ff5ce61d879d54626897b750c57a" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD GameObjectPtr</type>
@@ -761,7 +761,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="117" column="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="117" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a35207ced845e0fe3566dac84ead3feb9" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::Axis</type>
@@ -775,7 +775,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="119" column="39"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="119" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1ada8ab8ef34bd9850e674eeaf2c500e88" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE bool</type>
@@ -790,7 +790,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="121" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="121" bodyend="121"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="121" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="121" bodyend="121"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Gizmo_1a04a9ebf962f0456b9f62a2c3b9e4f3bb" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">SR_MATH_NS::FColor</ref></type>
@@ -808,7 +808,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="123" column="41"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="123" column="41"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -885,7 +885,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="61" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="61" bodyend="157"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="61" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" bodystart="61" bodyend="157"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GRAPH_UI_NS::Gizmo</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::Gizmo</scope><name>BaseComponent</name></member>

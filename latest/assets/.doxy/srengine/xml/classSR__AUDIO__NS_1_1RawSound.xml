@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/RawSound.h" line="39" column="25" bodyfile="Engine/Core/libs/Audio/inc/Audio/RawSound.h" bodystart="39" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/RawSound.h" line="39" column="25" bodyfile="Engine/libs/Audio/inc/Audio/RawSound.h" bodystart="39" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/RawSound.h" line="17" column="9"/>
+        <location file="Engine/libs/Audio/inc/Audio/RawSound.h" line="17" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1RawSound_1ad5c748bba6b3e743cdf9fcf1be715cfc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/RawSound.h" line="18" column="9"/>
+        <location file="Engine/libs/Audio/inc/Audio/RawSound.h" line="18" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/RawSound.h" line="21" column="25"/>
+        <location file="Engine/libs/Audio/inc/Audio/RawSound.h" line="21" column="25"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -83,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/RawSound.h" line="24" column="31" bodyfile="Engine/Core/libs/Audio/inc/Audio/RawSound.h" bodystart="24" bodyend="24"/>
+        <location file="Engine/libs/Audio/inc/Audio/RawSound.h" line="24" column="31" bodyfile="Engine/libs/Audio/inc/Audio/RawSound.h" bodystart="24" bodyend="24"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1RawSound_1aac2d8d6df30103cef25d35c9c3cdf61a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -97,7 +97,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/RawSound.h" line="25" column="31"/>
+        <location file="Engine/libs/Audio/inc/Audio/RawSound.h" line="25" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1RawSound_1ae4c563b63f87848cd6ab3733d080eb7d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -112,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/RawSound.h" line="26" column="40"/>
+        <location file="Engine/libs/Audio/inc/Audio/RawSound.h" line="26" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1RawSound_1a3030679ceb772f662ffef5da655c1085" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const uint8_t *</type>
@@ -126,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/RawSound.h" line="27" column="36"/>
+        <location file="Engine/libs/Audio/inc/Audio/RawSound.h" line="27" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1RawSound_1a6124586266cea7acbbf70df0d27f7023" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint8_t</type>
@@ -140,7 +140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/RawSound.h" line="28" column="30"/>
+        <location file="Engine/libs/Audio/inc/Audio/RawSound.h" line="28" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1RawSound_1a44819abc522c7d021fbff9ed49fc2dd8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint8_t</type>
@@ -154,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/RawSound.h" line="29" column="30"/>
+        <location file="Engine/libs/Audio/inc/Audio/RawSound.h" line="29" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1RawSound_1a9ebc9e109f794042af25a90fa5bf8f51" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -168,7 +168,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/RawSound.h" line="30" column="31"/>
+        <location file="Engine/libs/Audio/inc/Audio/RawSound.h" line="30" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1RawSound_1acc16a9e976d849277bb4c257274a2fb9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -183,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/RawSound.h" line="31" column="27" bodyfile="Engine/Core/libs/Audio/inc/Audio/RawSound.h" bodystart="31" bodyend="31"/>
+        <location file="Engine/libs/Audio/inc/Audio/RawSound.h" line="31" column="27" bodyfile="Engine/libs/Audio/inc/Audio/RawSound.h" bodystart="31" bodyend="31"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -200,7 +200,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/RawSound.h" line="34" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/RawSound.h" line="34" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1RawSound_1a5d2f32f6b567fc106f656df14637b7ff" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/RawSound.h" line="35" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/RawSound.h" line="35" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1RawSound_1a5b8b791713f1d2b9999a9ea32fbb4c74" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -230,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/RawSound.h" line="36" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/RawSound.h" line="36" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -305,7 +305,7 @@
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Audio/inc/Audio/RawSound.h" line="15" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/RawSound.h" bodystart="15" bodyend="41"/>
+    <location file="Engine/libs/Audio/inc/Audio/RawSound.h" line="15" column="5" bodyfile="Engine/libs/Audio/inc/Audio/RawSound.h" bodystart="15" bodyend="41"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::RawSound</scope><name>AddDependency</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1abcf6bc4fde8bd87a0f1d72d0183af0cf" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::RawSound</scope><name>AddUsePoint</name></member>

@@ -343,5 +343,5 @@ inline SR_NODISCARD WheelsData & SR_PTYPES_NS::Vehicle4W3D::GetWheelsData ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Physics/inc/Physics/3D/Vehicle4W3D.h`
+The documentation for this class was generated from the following file `Engine/libs/Physics/inc/Physics/3D/Vehicle4W3D.h`
 

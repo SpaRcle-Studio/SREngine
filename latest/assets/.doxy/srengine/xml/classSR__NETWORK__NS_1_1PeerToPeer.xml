@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="16" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="16" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="16" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__NETWORK__NS_1_1PeerToPeer_1a93b9b4ddb4f598799c04afbbafaedcab" prot="private" static="no">
         <type>std::function&lt; void(const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">PeerToPeer::Ptr</ref> &amp;pP2P, const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Socket::Ptr</ref> &amp;)&gt;</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="17" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="17" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="17" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="17" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="friend">
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="15" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="15" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="15" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="55" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="55" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="55" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="55" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1PeerToPeer_1a15d9c34caeb902dcca22395c002f092a" prot="private" static="no" mutable="no">
         <type>uint16_t</type>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="56" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="56" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="56" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1PeerToPeer_1a3ea4eaf94c3b4b4ce2cd2baf3b848544" prot="private" static="no" mutable="no">
         <type>const SocketType</type>
@@ -96,7 +96,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="58" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="58" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="58" column="26" bodyfile="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1PeerToPeer_1ae8df20ca98925ebe1b9c8a3a3dfb6b4b" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Context::Ptr</ref></type>
@@ -110,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="60" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="60" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="60" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1PeerToPeer_1a4a7d015f33fd66131283a4cff7a7cc97" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Acceptor::Ptr</ref></type>
@@ -124,7 +124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="62" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="62" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="62" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="62" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1PeerToPeer_1adbd9f6c93aa9b9c71b91229101b9d435" prot="private" static="no" mutable="no">
         <type>std::map&lt; <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Socket::Ptr</ref>, Connection &gt;</type>
@@ -138,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="69" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="69" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="69" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="69" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1PeerToPeer_1a0ee58c0530300caf0d1461453d7e7cb6" prot="private" static="no" mutable="no">
         <type>std::set&lt; <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Socket::Ptr</ref> &gt;</type>
@@ -152,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="71" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="71" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="71" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="71" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1PeerToPeer_1a9fea866bbde27f51aa7caae5b706f3c0" prot="private" static="no" mutable="no">
         <type>Callback</type>
@@ -166,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="73" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="73" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="73" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="73" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -198,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="19" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="19" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a9e321ac7a0130c0ff99436719f644e8c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -216,7 +216,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="42" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="42" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a6f1991b92ae154821f75fd20a420a314" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -242,7 +242,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="44" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="44" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1afd00868c6f1ee799b3bc5a0795d6b5e3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -268,7 +268,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="46" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="46" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1aa6950e1dc0ba481431a0bc2b4db34256" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -290,7 +290,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="48" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="48" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1accc3bf1652e31e510ad5c73d18ee3e24" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -312,7 +312,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="50" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="50" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a4184c6875fae929a1f667b062b3082cc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -330,7 +330,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="51" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="51" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a6996acc2803b7d73540a907ae0bb17c9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -348,7 +348,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="52" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="52" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -364,7 +364,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="22" column="17"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="22" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a27937a844c58b4d232999667424bde58" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -378,7 +378,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="25" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="25" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a63cee9862b9ab1f37f26b01c3ef42be6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -392,7 +392,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="26" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="26" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a9cad5487c5dcc24cbcc18c637a8db385" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -414,7 +414,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="28" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="28" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1af6ef4309ac68d306182e6ba14beadeb4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -432,7 +432,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="30" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="30" bodyend="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="30" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="30" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a21598dea4f6bd657f2986a9f4548da89" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Acceptor::Ptr</ref> &amp;</type>
@@ -446,7 +446,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="32" column="42" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="32" bodyend="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="32" column="42" bodyfile="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="32" bodyend="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a6e2b8e0c437b5a3e92865cd299d04730" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -460,7 +460,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="34" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="34" bodyend="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="34" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="34" bodyend="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1ac6ee3f326a78e918b4f30d84ab60c4ad" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -474,7 +474,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="35" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="35" bodyend="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="35" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="35" bodyend="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a2e27cd70b0fbb2fbcb2467dc9d04df64" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -488,7 +488,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="36" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="36" bodyend="36"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="36" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="36" bodyend="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a598d833978b3000cbeae4876617524bf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -510,7 +510,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="37" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="37" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a0dc2421ba851fe6ce0422eb0c6255ad5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -528,7 +528,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="39" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="39" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -578,7 +578,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="14" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="14" bodyend="75"/>
+    <location file="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="14" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="14" bodyend="75"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>AutoFree</name></member>

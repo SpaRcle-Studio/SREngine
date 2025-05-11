@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="50" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" bodystart="50" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="50" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Component.h" bodystart="50" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__UTILS__NS_1_1Component_1a5b3c94dcc9fd4c8f2ed748601d0c4e2a" prot="public" static="no">
         <type><ref refid="classSR__UTILS__NS_1_1Component" kindref="compound">Component</ref></type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="51" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="51" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Component.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__UTILS__NS_1_1Component_1a2e37d2ebbceab36530a6c79cad4b3606" prot="public" static="no">
         <type><ref refid="classSR__WORLD__NS_1_1Scene" kindref="compound">SR_WORLD_NS::Scene</ref> *</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="52" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" bodystart="52" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="52" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Component.h" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__UTILS__NS_1_1Component_1aebb43fee7f75dd142ad299853208ee1e" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__UTILS__NS_1_1GameObject" kindref="compound">GameObject</ref> &gt;</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="53" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="53" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Component.h" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__UTILS__NS_1_1Component_1a6e97391d1dc50a29f1bdc0179c925019" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; SceneObject &gt;</type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="54" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" bodystart="54" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="54" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Component.h" bodystart="54" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="friend">
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="46" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" bodystart="46" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="46" column="22" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Component.h" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="friend" id="classSR__UTILS__NS_1_1Component_1acb349d022d5aa8c4f9f54ca1605a0c4a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>class</type>
@@ -125,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="47" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="47" column="22" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Component.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="friend" id="classSR__UTILS__NS_1_1Component_1a4542618ef05fbb881e9783ae3755240a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>class</type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="48" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" bodystart="48" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="48" column="22" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Component.h" bodystart="48" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="141" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" bodystart="141" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="141" column="14" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Component.h" bodystart="141" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Component_1a353c88717dd50e343371ffe0d0d8c068" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -174,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="142" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" bodystart="142" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="142" column="14" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Component.h" bodystart="142" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Component_1a58ed325cff4da93cce7d1ffd323e4886" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -189,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="143" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" bodystart="143" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="143" column="14" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Component.h" bodystart="143" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Component_1a01d2835c4cb9cab3dc85a24cb6330830" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -204,7 +204,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="144" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" bodystart="144" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="144" column="14" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Component.h" bodystart="144" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Component_1a4a854563851b2106daf5d678e3a4b3a6" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -219,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="145" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" bodystart="145" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="145" column="14" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Component.h" bodystart="145" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Component_1ad9e404095f004e707f755beb764ab8e7" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -234,7 +234,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="148" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" bodystart="148" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="148" column="14" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Component.h" bodystart="148" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Component_1aa9adbbbd60ec4e4065d8a953778488df" prot="protected" static="no" mutable="no">
         <type>int32_t</type>
@@ -249,7 +249,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="150" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" bodystart="150" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="150" column="17" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Component.h" bodystart="150" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Component_1a5bbd2e2f1ed3059025e390d428d4d6ac" prot="protected" static="no" mutable="no">
         <type>SceneObjectPtr</type>
@@ -264,7 +264,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="152" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" bodystart="152" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="152" column="24" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Component.h" bodystart="152" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Component_1a9dddd30253cd78eb28f504e1afb66514" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1IComponentable" kindref="compound">IComponentable</ref> *</type>
@@ -279,7 +279,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="153" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" bodystart="153" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="153" column="24" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Component.h" bodystart="153" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Component_1ae7b09faaab768e65bf45cef6d3a84666" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__WORLD__NS_1_1Scene" kindref="compound">SR_WORLD_NS::Scene</ref> *</type>
@@ -294,7 +294,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="154" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" bodystart="154" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="154" column="28" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Component.h" bodystart="154" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -310,7 +310,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="56" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="56" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a135465a44a99fa3e946782dbc11f56c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -324,7 +324,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="57" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="57" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a6e4032583aabcd6cfebed3e13f39a1a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -343,7 +343,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="60" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="60" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1aee0027f96ce5bec8a30edf069fa4dc10" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -358,7 +358,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="61" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="61" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1adb3637af3274c542b44b17a27bebd5a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -374,7 +374,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="62" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="62" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1af7e2ecd6bef36595ac12274d6a6cc77c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -390,7 +390,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="65" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="65" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a6e3f39cd7894486df8af8336c6778036" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -417,7 +417,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="67" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="67" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1aba0d2511d0fb2342ae68f97c24f05ffc" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -435,7 +435,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="69" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="69" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1ae31753f4a155ecfdc85b995a775aab1f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -468,7 +468,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="71" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="71" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1af582e05d713cc0849a532ba2554c41ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -491,7 +491,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="73" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="73" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a33c4d449284bb7be17ac6c0b66dad816" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -514,7 +514,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="74" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="74" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -530,7 +530,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="76" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="76" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a572b27823d61376ebbd0c33758ea5d6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -548,7 +548,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="77" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="77" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1ac6a1ba6c0a2a6d0b8f29f4a9924b25fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -575,7 +575,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="78" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="78" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1acae95de33825449f163ab99828593fd5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -593,7 +593,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="79" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="79" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1af7cb379e3802c66b0a864bf1178bfda8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -608,7 +608,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="80" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="80" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a1a42ced6421db34114f544ba2d7b6c6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -622,7 +622,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="82" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="82" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a561f35b144564e8df91651b3f8e57693" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -637,7 +637,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="83" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="83" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1aaa0c5a5e6d07bf4d4516229fe544dd49" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -656,7 +656,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="85" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="85" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a7a6557ebfc240e92b332b22fe85ebddf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -675,7 +675,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="86" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="86" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1af64eb0df50ce6d50cd22662edf0e6a7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -694,7 +694,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="87" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="87" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1aac7babfab0aaf8e811e05f8f55dbebb1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -713,7 +713,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="89" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="89" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a9bb3f2e63ed778951c409dba0bd1915f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -732,7 +732,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="90" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="90" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a54e04b235d9aaa0f027996b71362242b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -751,7 +751,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="91" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="91" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1ad595cda1bf5fd49695826b348848bea7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -765,7 +765,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="94" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="94" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1af21012e67de013634a8e25e8900f4f7c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -779,7 +779,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="96" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="96" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1ad94a8ad5e03600e4f9bdae868ba6021b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -797,7 +797,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="98" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="98" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1af57bdc6a2c4f4ed50fec8a5175bcbf8f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -815,7 +815,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="99" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="99" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1abf90394b84e3af5e16c18d992de38d41" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -829,7 +829,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="101" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="101" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a34593c73db55cbd4c58e983b23190c56" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -843,7 +843,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="102" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="102" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a1d7984f57df2fb1519bca8e2346cbcdd" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -857,7 +857,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="103" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="103" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1ace675f265b886fef357651e43c29c5d4" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -874,7 +874,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="106" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="106" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a1601529fb5946634c4e4d235769b4b80" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -890,7 +890,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="108" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="108" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a8f95ff169b8df189b211b036ba06def5" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -905,7 +905,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="110" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="110" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1aaa40b9cae6a7b9c771bcf20671f80455" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -919,7 +919,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="112" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="112" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a547028a4a9ab2b115832b2000259e127" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -933,7 +933,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="113" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="113" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a3d09e0388a5a982e6fe71cbf59f8c813" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -948,7 +948,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="116" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="116" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1af9ad40b9b09d748d7e0b591f4b78b60f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -963,7 +963,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="118" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="118" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a51e106ce1c788f4452dbee8ee484a51c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -991,7 +991,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="120" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="120" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1ad0630357a7ef40b1c526565323c1cea0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD Math::FVector3</type>
@@ -1005,7 +1005,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="121" column="45"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="121" column="45"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Component" kindref="compound">Component</ref> *</type>
@@ -1019,7 +1019,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="122" column="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="122" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1ae81e0c4dd084a7d3d4620e53c10ca2fc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1IComponentable" kindref="compound">IComponentable</ref> *</type>
@@ -1033,7 +1033,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="123" column="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="123" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a55ba0d3b4c08092148668bae579366ff" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1IComponentable" kindref="compound">IComponentable</ref> *</type>
@@ -1047,7 +1047,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="124" column="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="124" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a0baa97c9e541c9150845fcd338b6f4f8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD ScenePtr</type>
@@ -1061,7 +1061,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="125" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="125" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a5dc93a6f5bb2867f7a20476c569451ed" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -1075,7 +1075,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="126" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="126" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a9d72186be6f9c2f138a8ad989b440c01" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD GameObjectPtr</type>
@@ -1089,7 +1089,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="127" column="36"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="127" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1afa3d93c2126fa899ebbcc8ab7b752291" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SceneObjectPtr</type>
@@ -1103,7 +1103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="128" column="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="128" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a02cdaa6ae8c728a1f66192c9e6f54322" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD ScenePtr</type>
@@ -1117,7 +1117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="129" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="129" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a499a53cb08f173222c9a0bbc06af98fd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SceneObjectPtr</type>
@@ -1131,7 +1131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="130" column="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="130" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1ab6d313e3075c5dabf5b41189b10f236e" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Transform" kindref="compound">Transform</ref> *</type>
@@ -1145,7 +1145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="131" column="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="131" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a1bc2cbdfbcd251764907ebd0dddef009" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -1159,7 +1159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="132" column="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="132" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1a0255fd473a25f237c833df1d507bdbfb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -1173,7 +1173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="133" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="133" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Component_1ae178f96f84ede2be45870eab162e794d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD Component::Ptr</type>
@@ -1187,7 +1187,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="135" column="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="135" column="37"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -1207,7 +1207,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="138" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="138" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1512,7 +1512,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" line="44" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Component.h" bodystart="44" bodyend="156"/>
+    <location file="Engine/libs/Utils/inc/Utils/ECS/Component.h" line="44" column="5" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Component.h" bodystart="44" bodyend="156"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_UTILS_NS::Component</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Component</scope><name>BaseComponent</name></member>

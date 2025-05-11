@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="41" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" bodystart="41" bodyend="41"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="41" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Localization/LocalizationManager.h" bodystart="41" bodyend="41"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Localization_1_1LocalizationFile_1ad307817692f919a7945e54fe62a93cf9" prot="private" static="no" mutable="no">
         <type>FileWatcher::Ptr</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="42" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" bodystart="42" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="42" column="26" bodyfile="Engine/libs/Utils/inc/Utils/Localization/LocalizationManager.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Localization_1_1LocalizationFile_1a79807dfeecef930c170f0df459501c69" prot="private" static="no" mutable="no">
         <type>std::unordered_map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref>, <ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">SR_HTYPES_NS::UnicodeString</ref> &gt;</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="43" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" bodystart="43" bodyend="43"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="43" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Localization/LocalizationManager.h" bodystart="43" bodyend="43"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="34" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="34" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Localization_1_1LocalizationFile_1aa751ddc326126cf012722a52307e48e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="35" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="35" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Localization_1_1LocalizationFile_1a4cf9d4478fcb7e6e30273f2b71fe510c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -98,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="36" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="36" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Localization_1_1LocalizationFile_1a39a5924449f70c721c6940b42fb949dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -116,7 +116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="37" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="37" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Localization_1_1LocalizationFile_1a4922b7e3edd22be44abae89bfba3dacf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -134,7 +134,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="38" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="38" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Localization_1_1LocalizationFile_1a576464abfdc2ea9fb40f4b0456c83c1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">SR_HTYPES_NS::UnicodeString</ref></type>
@@ -152,14 +152,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="39" column="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="39" column="37"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="32" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" bodystart="32" bodyend="45"/>
+    <location file="Engine/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="32" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Localization/LocalizationManager.h" bodystart="32" bodyend="45"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Localization_1_1LocalizationFile_1a576464abfdc2ea9fb40f4b0456c83c1c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::LocalizationFile</scope><name>GetStringById</name></member>
       <member refid="classSR__UTILS__NS_1_1Localization_1_1LocalizationFile_1a4922b7e3edd22be44abae89bfba3dacf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::LocalizationFile</scope><name>LoadLocalizationStrings</name></member>

@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" line="36" column="28" bodyfile="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/VisualScriptEditor.h" line="36" column="28" bodyfile="Engine/inc/Engine/GUI/VisualScriptEditor.h" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1ae154a31b8e83dd539562bc8abc1a9805" prot="private" static="no" mutable="no">
         <type>std::unordered_map&lt; uintptr_t, <ref refid="classSR__GRAPH__NS_1_1GUI_1_1Link" kindref="compound">SR_GRAPH_NS::GUI::Link</ref> * &gt;</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" line="37" column="28" bodyfile="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/VisualScriptEditor.h" line="37" column="28" bodyfile="Engine/inc/Engine/GUI/VisualScriptEditor.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1a462203fac8b9cc6a39c2dc388b143834" prot="private" static="no" mutable="no">
         <type>std::unordered_map&lt; std::string, SR_GRAPH_NS::GUI::Node * &gt;</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" line="38" column="28" bodyfile="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/VisualScriptEditor.h" line="38" column="28" bodyfile="Engine/inc/Engine/GUI/VisualScriptEditor.h" bodystart="38" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" line="19" column="9"/>
+        <location file="Engine/inc/Engine/GUI/VisualScriptEditor.h" line="19" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1a265a3dba72ca79ba79e7ae590c965d3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" line="20" column="9"/>
+        <location file="Engine/inc/Engine/GUI/VisualScriptEditor.h" line="20" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1af39c96ddc6e55ff8f45d22e99ce54169" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" line="23" column="14"/>
+        <location file="Engine/inc/Engine/GUI/VisualScriptEditor.h" line="23" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1acbcb77dabee7bab73dc8ffc2cbc247ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" line="24" column="14"/>
+        <location file="Engine/inc/Engine/GUI/VisualScriptEditor.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1afeac4039a6d4ae7ffeb5c1b3b045d396" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -125,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" line="25" column="14"/>
+        <location file="Engine/inc/Engine/GUI/VisualScriptEditor.h" line="25" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" line="31" column="14"/>
+        <location file="Engine/inc/Engine/GUI/VisualScriptEditor.h" line="31" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -171,7 +171,7 @@
         <label>SR_GRAPH_NS::GUI::Widget</label>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" line="17" column="5" bodyfile="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" bodystart="17" bodyend="40"/>
+    <location file="Engine/inc/Engine/GUI/VisualScriptEditor.h" line="17" column="5" bodyfile="Engine/inc/Engine/GUI/VisualScriptEditor.h" bodystart="17" bodyend="40"/>
     <listofallmembers>
       <member refid="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1afeac4039a6d4ae7ffeb5c1b3b045d396" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::VisualScriptEditor</scope><name>AddLink</name></member>
       <member refid="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1acbcb77dabee7bab73dc8ffc2cbc247ad" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::VisualScriptEditor</scope><name>AddNode</name></member>

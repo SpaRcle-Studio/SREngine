@@ -11,7 +11,7 @@
     <includes refid="Properties_8h" local="no">Utils/TypeTraits/Properties.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/Utils.h</label>
         <link refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1101,6 +1101,6 @@
 <codeline lineno="30"><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GUI_UTILS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/Utils.h"/>
   </compounddef>
 </doxygen>

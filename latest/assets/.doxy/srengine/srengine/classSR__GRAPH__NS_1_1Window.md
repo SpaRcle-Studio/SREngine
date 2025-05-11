@@ -763,5 +763,5 @@ SR_GRAPH_NS::Window::~Window () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Window/Window.h`
 

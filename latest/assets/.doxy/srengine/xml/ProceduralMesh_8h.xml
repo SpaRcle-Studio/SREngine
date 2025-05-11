@@ -225,7 +225,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h</label>
         <link refid="ProceduralMesh_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1546,6 +1546,6 @@
 <codeline lineno="46"><highlight class="normal"></highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_PROCEDURALMESH_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h"/>
   </compounddef>
 </doxygen>

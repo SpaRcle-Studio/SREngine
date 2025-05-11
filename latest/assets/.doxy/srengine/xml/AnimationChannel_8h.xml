@@ -7,7 +7,7 @@
     <includes refid="AnimationContext_8h" local="no">Graphics/Animations/AnimationContext.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h</label>
         <link refid="AnimationChannel_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1521,6 +1521,6 @@
 <codeline lineno="70"><highlight class="normal"></highlight></codeline>
 <codeline lineno="71"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_ANIMATIONCHANNEL_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h"/>
   </compounddef>
 </doxygen>

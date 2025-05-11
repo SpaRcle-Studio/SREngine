@@ -1194,5 +1194,5 @@ SR_MATH_NS::UVector2 SR_GRAPH_NS::BasicWindowImpl::m_surfaceSize;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h`
 

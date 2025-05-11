@@ -7,7 +7,7 @@
     <includes refid="IShaderProgram_8h" local="no">Graphics/Pipeline/IShaderProgram.h</includes>
     <includes refid="RenderPredicates_8h" local="no">Graphics/Render/RenderPredicates.h</includes>
     <includes refid="Transform_8h" local="no">Utils/ECS/Transform.h</includes>
-    <includedby refid="RenderScene_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h</includedby>
+    <includedby refid="RenderScene_8h" local="no">Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h</includedby>
     <incdepgraph>
       <node id="2">
         <label>Graphics/Memory/UBOManager.h</label>
@@ -52,7 +52,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderStrategy.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderStrategy.h</label>
         <link refid="RenderStrategy_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1171,11 +1171,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="3">
-        <label>Engine/Core/inc/Core/World/EngineScene.h</label>
+        <label>Engine/inc/Engine/World/EngineScene.h</label>
         <link refid="EngineScene_8h_source"/>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h</label>
         <link refid="RenderScene_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -1183,13 +1183,13 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderStrategy.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderStrategy.h</label>
         <link refid="RenderStrategy_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/UI/Canvas.h</label>
         <link refid="Canvas_8h_source"/>
       </node>
     </invincdepgraph>
@@ -1538,6 +1538,6 @@
 <codeline lineno="379"><highlight class="normal"></highlight></codeline>
 <codeline lineno="380"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_RENDER_STRATEGY_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderStrategy.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderStrategy.h"/>
   </compounddef>
 </doxygen>

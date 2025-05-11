@@ -215,5 +215,5 @@ inline SR_NODISCARD SR_FORCE_INLINE T & SR_AUDIO_NS::PlayParamChangeChecker::val
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Audio/inc/Audio/PlayParams.h`
+The documentation for this class was generated from the following file `Engine/libs/Audio/inc/Audio/PlayParams.h`
 

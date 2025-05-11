@@ -5,7 +5,7 @@
     <includes local="no">Scripting/Compilation/Method.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/EvoClass.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Old/Compilation/EvoClass.h</label>
         <link refid="EvoClass_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -112,6 +112,6 @@
 <codeline lineno="89"><highlight class="normal"></highlight></codeline>
 <codeline lineno="90"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//EVOSCRIPT_EVOCLASS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/EvoClass.h"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/EvoClass.h"/>
   </compounddef>
 </doxygen>

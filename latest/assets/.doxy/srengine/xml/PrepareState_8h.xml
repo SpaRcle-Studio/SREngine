@@ -5,7 +5,7 @@
     <includes refid="ThreadWorker_8h" local="no">Utils/TaskManager/ThreadWorker.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/States/PrepareState.h</label>
+        <label>Engine/inc/Engine/States/PrepareState.h</label>
         <link refid="PrepareState_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -854,6 +854,6 @@
 <codeline lineno="19"><highlight class="normal"></highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_CORE_PREPARE_STATE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/States/PrepareState.h"/>
+    <location file="Engine/inc/Engine/States/PrepareState.h"/>
   </compounddef>
 </doxygen>

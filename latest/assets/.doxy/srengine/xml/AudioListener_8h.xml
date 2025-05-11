@@ -19,7 +19,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h</label>
+        <label>Engine/libs/Audio/inc/Audio/Types/AudioListener.h</label>
         <link refid="AudioListener_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1065,6 +1065,6 @@
 <codeline lineno="47"><highlight class="normal"></highlight></codeline>
 <codeline lineno="48"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_AUDIOLISTENER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h"/>
+    <location file="Engine/libs/Audio/inc/Audio/Types/AudioListener.h"/>
   </compounddef>
 </doxygen>

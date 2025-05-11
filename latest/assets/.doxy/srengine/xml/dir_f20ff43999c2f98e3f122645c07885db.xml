@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_f20ff43999c2f98e3f122645c07885db" kind="dir">
+    <compoundname>Engine/libs/Utils/inc/Utils/Math</compoundname>
+    <innerfile refid="Axis_8h">Axis.h</innerfile>
+    <innerfile refid="Mathematics_8h">Mathematics.h</innerfile>
+    <innerfile refid="Matrix3x3_8h">Matrix3x3.h</innerfile>
+    <innerfile refid="Matrix4x4_8h">Matrix4x4.h</innerfile>
+    <innerfile refid="Matrix4x4Utils_8h">Matrix4x4Utils.h</innerfile>
+    <innerfile refid="Noise_8h">Noise.h</innerfile>
+    <innerfile refid="NoiseTable_8h">NoiseTable.h</innerfile>
+    <innerfile refid="Quaternion_8h">Quaternion.h</innerfile>
+    <innerfile refid="Rect_8h">Rect.h</innerfile>
+    <innerfile refid="Size_8h">Size.h</innerfile>
+    <innerfile refid="Vector2_8h">Vector2.h</innerfile>
+    <innerfile refid="Vector3_8h">Vector3.h</innerfile>
+    <innerfile refid="Vector4_8h">Vector4.h</innerfile>
+    <innerfile refid="Vector6_8h">Vector6.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Utils/inc/Utils/Math/"/>
+  </compounddef>
+</doxygen>

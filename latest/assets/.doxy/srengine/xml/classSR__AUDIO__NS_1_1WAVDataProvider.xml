@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" line="25" column="25" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" line="25" column="25" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1WAVDataProvider_1ae684e59bd89b1d28a92f413909596fdb" prot="private" static="no" mutable="no">
         <type>size_t</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" line="26" column="16" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" line="26" column="16" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" bodystart="26" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1WAVDataProvider_1a29952613bb3573d5f4d8c508bd7a5281" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__AUDIO__NS_1_1WaveDataFormat" kindref="compound">WaveDataFormat</ref></type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" line="27" column="24" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" line="27" column="24" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" bodystart="27" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" line="14" column="18"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" line="14" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1WAVDataProvider_1a5a72fb84bdd112e90e81d2c6ba6bd1ec" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD const <ref refid="classSR__AUDIO__NS_1_1WaveDataFormat" kindref="compound">WaveDataFormat</ref> &amp;</type>
@@ -80,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" line="16" column="43" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" bodystart="16" bodyend="16"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" line="16" column="43" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" bodystart="16" bodyend="16"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1WAVDataProvider_1a6eb3a78e3b874e78e9aebcc59fa9f8ab" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD const uint8_t *</type>
@@ -95,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" line="18" column="36"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" line="18" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1WAVDataProvider_1a5948b19ffcedc4dd7d86c859f7244a5d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD size_t</type>
@@ -110,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" line="19" column="29"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" line="19" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1WAVDataProvider_1a1e82149127542d76e44891a9d8dec1ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD size_t</type>
@@ -129,7 +129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" line="20" column="29"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" line="20" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1WAVDataProvider_1a51e66d592bf28994996e36fb8eb7ff78" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" line="22" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" line="22" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -191,7 +191,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" line="12" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" bodystart="12" bodyend="29"/>
+    <location file="Engine/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" line="12" column="5" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" bodystart="12" bodyend="29"/>
     <listofallmembers>
       <member refid="classSR__AUDIO__NS_1_1WAVDataProvider_1a6eb3a78e3b874e78e9aebcc59fa9f8ab" prot="public" virt="virtual"><scope>SR_AUDIO_NS::WAVDataProvider</scope><name>GetWaveData</name></member>
       <member refid="classSR__AUDIO__NS_1_1WAVDataProvider_1a5a72fb84bdd112e90e81d2c6ba6bd1ec" prot="public" virt="virtual"><scope>SR_AUDIO_NS::WAVDataProvider</scope><name>GetWaveDataFormat</name></member>

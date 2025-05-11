@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="20" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" bodystart="20" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="20" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" bodystart="20" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="37" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="37" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshMaterialProperty_1a08edfea45e904bb79c904fa5fd5a6e31" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1BaseMaterial" kindref="compound">BaseMaterial</ref> *</type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="38" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="38" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshMaterialProperty_1a7e8338aee58578b6f42fe910b36e111e" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="39" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" bodystart="39" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="39" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" bodystart="39" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="22" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="22" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshMaterialProperty_1a5334b51ea0256bb05f70751306ec3a83" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="23" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="23" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshMaterialProperty_1ae560dc8e2d4727b10e4abfdefa3745d3" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -112,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="26" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="26" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshMaterialProperty_1a309f4225f3a7cc39980587c6a2624a88" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -131,7 +131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="27" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="27" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshMaterialProperty_1a6485d84662b58518c8db4c5236b33086" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD MaterialType</type>
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="30" column="35"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="30" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshMaterialProperty_1a5afc0e21a93164bdbf90abda9db9838a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1BaseMaterial" kindref="compound">BaseMaterial</ref> *</type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="31" column="35" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" bodystart="31" bodyend="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="31" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" bodystart="31" bodyend="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshMaterialProperty_1a9138d0738c08b613156fcc792f08e2a0" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -177,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="32" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshMaterialProperty_1a00e9a5e77a0bf663c42672cc3fde079c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -195,7 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="33" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="33" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshMaterialProperty_1a2a73ff9679bd6b72be3172cf4d0d3dc6" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -213,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="34" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" bodystart="34" bodyend="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="34" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" bodystart="34" bodyend="34"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -256,7 +256,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="18" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" bodystart="18" bodyend="41"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" line="18" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h" bodystart="18" bodyend="41"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Property_1ad10eb1ac5384dcd8db5377da438bb98a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshMaterialProperty</scope><name>ActiveConditionFn</name></member>
       <member refid="classSR__UTILS__NS_1_1Property_1ac72cf8f65b3de91dfea85a3bdc6c46a3" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::MeshMaterialProperty</scope><name>AllocatePropertyBlock</name></member>

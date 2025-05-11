@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" line="32" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Uniforms.h" line="32" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Uniforms.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1WireframeUBO_1ad0c5c1918cc90d61fdb8c1ff93acfcd8" prot="public" static="no" mutable="no">
         <type>glm::vec4</type>
@@ -29,14 +29,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" line="33" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Uniforms.h" line="33" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Uniforms.h" bodystart="33" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" line="31" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" bodystart="31" bodyend="34"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Uniforms.h" line="31" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Uniforms.h" bodystart="31" bodyend="34"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1WireframeUBO_1ad0c5c1918cc90d61fdb8c1ff93acfcd8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::WireframeUBO</scope><name>color</name></member>
       <member refid="structSR__GRAPH__NS_1_1WireframeUBO_1a6be4303077efbefd824b87d6d88cd190" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::WireframeUBO</scope><name>model</name></member>

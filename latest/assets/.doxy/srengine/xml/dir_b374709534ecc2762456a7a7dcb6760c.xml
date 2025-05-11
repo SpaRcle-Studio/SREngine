@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_b374709534ecc2762456a7a7dcb6760c" kind="dir">
+    <compoundname>Engine/libs/Scripting/inc/Scripting</compoundname>
+    <innerdir refid="dir_ae9b2f7fe7573db66ee183afae23951c">Engine/libs/Scripting/inc/Scripting/Base</innerdir>
+    <innerdir refid="dir_b8cef419041e294130040bdf7c4c8d81">Engine/libs/Scripting/inc/Scripting/Cpp</innerdir>
+    <innerdir refid="dir_b244a4bff51c9cedd445e3d7c2557c90">Engine/libs/Scripting/inc/Scripting/Old</innerdir>
+    <innerfile refid="Scripting_2inc_2Scripting_2macros_8h">macros.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Scripting/inc/Scripting/"/>
+  </compounddef>
+</doxygen>

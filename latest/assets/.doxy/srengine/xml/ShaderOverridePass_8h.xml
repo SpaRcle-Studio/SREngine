@@ -5,8 +5,8 @@
     <includes refid="IMesh3DClusterPass_8h" local="no">Graphics/Pass/IMesh3DClusterPass.h</includes>
     <includes refid="IFramebufferPass_8h" local="no">Graphics/Pass/IFramebufferPass.h</includes>
     <includes refid="PipelineType_8h" local="no">Graphics/Pipeline/PipelineType.h</includes>
-    <includedby refid="DepthBufferPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h</includedby>
-    <includedby refid="ShadowMapPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/ShadowMapPass.h</includedby>
+    <includedby refid="DepthBufferPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h</includedby>
+    <includedby refid="ShadowMapPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/ShadowMapPass.h</includedby>
     <incdepgraph>
       <node id="138">
         <label>Graphics/Memory/DescriptorManager.h</label>
@@ -87,7 +87,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h</label>
         <link refid="ShaderOverridePass_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1097,11 +1097,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h</label>
         <link refid="DepthBufferPass_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h</label>
         <link refid="ShaderOverridePass_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1109,7 +1109,7 @@
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ShadowMapPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/ShadowMapPass.h</label>
         <link refid="ShadowMapPass_8h_source"/>
       </node>
     </invincdepgraph>
@@ -1171,6 +1171,6 @@
 <codeline lineno="48"><highlight class="normal"></highlight></codeline>
 <codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_SHADEROVERRIDEPASS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h"/>
   </compounddef>
 </doxygen>

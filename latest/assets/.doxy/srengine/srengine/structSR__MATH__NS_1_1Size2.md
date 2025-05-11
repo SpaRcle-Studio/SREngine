@@ -235,5 +235,5 @@ inline SR_NODISCARD Vector2 < T > SR_MATH_NS::Size2::ToPixels (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Math/Size.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Math/Size.h`
 

@@ -217,5 +217,5 @@ SR_SCRIPTING_NS::Compiler::Compiler () = default
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Scripting/inc/Scripting/Old/Compiler.h`
+The documentation for this class was generated from the following file `Engine/libs/Scripting/inc/Scripting/Old/Compiler.h`
 

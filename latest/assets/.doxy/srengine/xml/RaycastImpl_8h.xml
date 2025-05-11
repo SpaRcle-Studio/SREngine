@@ -5,10 +5,10 @@
     <includes refid="Physics_2inc_2Physics_2macros_8h" local="no">Physics/macros.h</includes>
     <includes refid="NonCopyable_8h" local="no">Utils/Common/NonCopyable.h</includes>
     <includes refid="RaycastHit_8h" local="no">Utils/Common/RaycastHit.h</includes>
-    <includedby refid="Raycast3DImpl_8h" local="no">Engine/Core/libs/Physics/inc/Physics/3D/Raycast3DImpl.h</includedby>
+    <includedby refid="Raycast3DImpl_8h" local="no">Engine/libs/Physics/inc/Physics/3D/Raycast3DImpl.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h</label>
+        <label>Engine/libs/Physics/inc/Physics/RaycastImpl.h</label>
         <link refid="RaycastImpl_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -352,17 +352,17 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/libs/Physics/inc/Physics/3D/Raycast3DImpl.h</label>
+        <label>Engine/libs/Physics/inc/Physics/3D/Raycast3DImpl.h</label>
         <link refid="Raycast3DImpl_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRaycast3DImpl.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXRaycast3DImpl.h</label>
         <link refid="PhysXRaycast3DImpl_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h</label>
+        <label>Engine/libs/Physics/inc/Physics/RaycastImpl.h</label>
         <link refid="RaycastImpl_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -408,6 +408,6 @@
 <codeline lineno="31"><highlight class="normal"></highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_RAYCASTIMPL_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h"/>
+    <location file="Engine/libs/Physics/inc/Physics/RaycastImpl.h"/>
   </compounddef>
 </doxygen>

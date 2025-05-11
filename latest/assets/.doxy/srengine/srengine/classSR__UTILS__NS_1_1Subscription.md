@@ -238,5 +238,5 @@ SR_UTILS_NS::Subscription::~Subscription () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Common/SubscriptionHolder.h`
 

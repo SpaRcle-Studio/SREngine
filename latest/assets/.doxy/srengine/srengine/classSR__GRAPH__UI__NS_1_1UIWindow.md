@@ -435,5 +435,5 @@ void SR_GRAPH_UI_NS::UIWindow::SetWindowSize (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/UI/UIWindow.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h`
 

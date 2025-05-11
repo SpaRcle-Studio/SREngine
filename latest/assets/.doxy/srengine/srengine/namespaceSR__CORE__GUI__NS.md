@@ -196,5 +196,5 @@ SR_CORE_GUI_NS::SR_ENUM_NS_CLASS_T (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/Engine.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/Engine.h`
 

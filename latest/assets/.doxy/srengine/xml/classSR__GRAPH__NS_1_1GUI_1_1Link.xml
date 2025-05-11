@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" line="35" column="13" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" bodystart="35" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Link.h" line="35" column="13" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Link.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1Link_1a7b6268dbf7c607fe7dc3c69cdf9f9974" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1GUI_1_1Pin" kindref="compound">Pin</ref> *</type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" line="36" column="13" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Link.h" line="36" column="13" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Link.h" bodystart="36" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" line="16" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Link.h" line="16" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Link_1af6b5981e30f48cdbce10fb73e2edfedd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -70,7 +70,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" line="17" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Link.h" line="17" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Link_1a8cc1a5d905aaf2f407aea861aa832224" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" line="19" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Link.h" line="19" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Link_1a0a4d52650633ec2cd3c0e8b8afedf1f3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uintptr_t</type>
@@ -98,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" line="22" column="32"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Link.h" line="22" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Link_1a89956522f37dd1b001939da92ec8fd9b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -116,7 +116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" line="23" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Link.h" line="23" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Link_1a4f7d31094b35134601c371b123fb9e15" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -130,7 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" line="24" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" bodystart="24" bodyend="24"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Link.h" line="24" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Link.h" bodystart="24" bodyend="24"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Link_1a04c041983337e7225f56b4604e964ec8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1GUI_1_1Pin" kindref="compound">Pin</ref> *</type>
@@ -144,7 +144,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" line="25" column="26" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" bodystart="25" bodyend="25"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Link.h" line="25" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Link.h" bodystart="25" bodyend="25"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Link_1ad857eb4ac7c3a71b78d788361443bbcb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1GUI_1_1Pin" kindref="compound">Pin</ref> *</type>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" line="26" column="26" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" bodystart="26" bodyend="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Link.h" line="26" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Link.h" bodystart="26" bodyend="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Link_1abf27f1154b3e08da043583231a04f120" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -176,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" line="28" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Link.h" line="28" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Link_1ac6667ba2c919f155d8d0cfb9ece00783" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -194,7 +194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" line="29" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Link.h" line="29" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Link_1a2576e9019788829920a707e0f73b636d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -208,7 +208,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" line="31" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Link.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Link_1a4ceffdff73486bcfd815093b25db7d75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -226,7 +226,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" line="32" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Link.h" line="32" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -257,7 +257,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" line="14" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" bodystart="14" bodyend="40"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/Link.h" line="14" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Link.h" bodystart="14" bodyend="40"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1Link_1a4ceffdff73486bcfd815093b25db7d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Link</scope><name>Broke</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1Link_1a2576e9019788829920a707e0f73b636d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Link</scope><name>Draw</name></member>

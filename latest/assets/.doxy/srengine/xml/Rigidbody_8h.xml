@@ -10,8 +10,8 @@
     <includes refid="Component_8h" local="no">Utils/ECS/Component.h</includes>
     <includes refid="SafePointer_8h" local="no">Utils/Types/SafePointer.h</includes>
     <includes refid="Matrix4x4_8h" local="no">Utils/Math/Matrix4x4.h</includes>
-    <includedby refid="Rigidbody2D_8h" local="no">Engine/Core/libs/Physics/inc/Physics/2D/Rigidbody2D.h</includedby>
-    <includedby refid="Rigidbody3D_8h" local="no">Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h</includedby>
+    <includedby refid="Rigidbody2D_8h" local="no">Engine/libs/Physics/inc/Physics/2D/Rigidbody2D.h</includedby>
+    <includedby refid="Rigidbody3D_8h" local="no">Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h</includedby>
     <incdepgraph>
       <node id="94">
         <label>Physics/CollisionShape.h</label>
@@ -48,7 +48,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Physics/inc/Physics/Rigidbody.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Rigidbody.h</label>
         <link refid="Rigidbody_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1221,11 +1221,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/libs/Physics/inc/Physics/2D/Rigidbody2D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/2D/Rigidbody2D.h</label>
         <link refid="Rigidbody2D_8h_source"/>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h</label>
         <link refid="Rigidbody3D_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
@@ -1233,15 +1233,15 @@
         </childnode>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h</label>
         <link refid="Bullet3Rigidbody3D_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h</label>
         <link refid="PhysXRigidbody3D_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Physics/inc/Physics/Rigidbody.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Rigidbody.h</label>
         <link refid="Rigidbody_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1444,6 +1444,6 @@
 <codeline lineno="190"><highlight class="normal"></highlight></codeline>
 <codeline lineno="191"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_RIGIDBODY_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h"/>
+    <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h"/>
   </compounddef>
 </doxygen>

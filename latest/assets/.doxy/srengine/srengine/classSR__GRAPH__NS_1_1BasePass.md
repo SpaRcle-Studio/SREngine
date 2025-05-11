@@ -1093,5 +1093,5 @@ Memory::UBOManager& SR_GRAPH_NS::BasePass::m_uboManager;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pass/BasePass.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h`
 

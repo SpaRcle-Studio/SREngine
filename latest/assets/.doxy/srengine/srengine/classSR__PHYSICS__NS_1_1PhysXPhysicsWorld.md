@@ -401,5 +401,5 @@ SR_PHYSICS_NS::PhysXPhysicsWorld::~PhysXPhysicsWorld () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h`
+The documentation for this class was generated from the following file `Engine/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h`
 

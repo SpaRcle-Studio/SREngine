@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="30" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="30" bodyend="35"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="30" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="30" bodyend="35"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1DescriptorManager_1a89ef4b17aa94cd26134221632713414b" prot="public" static="no">
         <type>int32_t</type>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="29" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="29" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="29" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-type">
@@ -73,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="23" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="23" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="23" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="51" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="51" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1DescriptorManager_1aecf3c2a43605148da6debe626d98acee" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1Pipeline" kindref="compound">Pipeline</ref> &gt;</type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="52" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="52" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="52" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1DescriptorManager_1a38d76ce5645b49866375dcd4024e8125" prot="private" static="no" mutable="yes">
         <type>std::vector&lt; DescriptorType &gt;</type>
@@ -117,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="54" column="29" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="54" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="54" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="54" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="37" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="37" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DescriptorManager_1acb6d2719e41b0b734ab781be63e63b88" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD VirtualDescriptorSet</type>
@@ -152,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="39" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="39" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DescriptorManager_1a9df1a047fccd12bdb084198af268bf30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>BindResult</type>
@@ -170,7 +170,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="40" column="20"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="40" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DescriptorManager_1a38ffbe7ead0bc0c5249739ec6ce9927d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -184,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="41" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="41" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DescriptorManager_1a5e6ca1672086cd5a34fd30b854cca2f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -202,7 +202,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="43" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="43" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DescriptorManager_1ae5abda35cce1a6a7f3eb5fdc733478cb" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -220,7 +220,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="45" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="45" bodyend="45"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="45" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="45" bodyend="45"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -240,7 +240,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="48" column="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="48" column="36"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -295,7 +295,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="21" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="21" bodyend="56"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="21" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="21" bodyend="56"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1acb6d2719e41b0b734ab781be63e63b88" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>AllocateDescriptorSet</name></member>
       <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a236ffb02af589b653d82eede9836d721" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>AllocateMemory</name></member>

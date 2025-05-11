@@ -6,7 +6,7 @@
     <includes refid="Types_2Shader_8h" local="no">Graphics/Types/Shader.h</includes>
     <includes refid="Camera_8h" local="no">Graphics/Types/Camera.h</includes>
     <includes refid="Texture_8h" local="no">Graphics/Types/Texture.h</includes>
-    <includedby refid="HTMLRenderer_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</includedby>
+    <includedby refid="HTMLRenderer_8h" local="no">Engine/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</includedby>
     <incdepgraph>
       <node id="163">
         <label>Graphics/Loaders/SRSL.h</label>
@@ -137,7 +137,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
         <link refid="HTMLDrawableElement_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1573,17 +1573,17 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
         <link refid="HTMLDrawerPass_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
         <link refid="HTMLDrawableElement_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
         <link refid="HTMLRenderer_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -1614,6 +1614,6 @@
 <codeline lineno="17"><highlight class="normal"></highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GRAPHICS_HTML_DRAWABLE_ELEMENT_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h"/>
   </compounddef>
 </doxygen>

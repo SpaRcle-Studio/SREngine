@@ -249,5 +249,5 @@ SR_SRLM_NS::SR_ENUM_NS_STRUCT_T (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h`
 

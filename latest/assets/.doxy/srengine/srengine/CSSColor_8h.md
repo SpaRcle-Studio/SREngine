@@ -4,7 +4,7 @@
 
 
 
-[**FileList**](files.md) **>** [**Core**](dir_0e25eeab45a2a860e54b41439eaf8784.md) **>** [**libs**](dir_ec277bd8bac57730a602f096f68de393.md) **>** [**Utils**](dir_f3d6dc6978aa78088efd06c6b2710310.md) **>** [**inc**](dir_e0f1b8570fc577fb78354cd460e9e760.md) **>** [**Utils**](dir_06a42b3e946fb631201a76a22d1aab06.md) **>** [**Web**](dir_70f8c8659136766207f9e88b26ae6fb0.md) **>** [**CSS**](dir_c67fdec84752b754610b5eee0005e4af.md) **>** [**CSSColor.h**](CSSColor_8h.md)
+[**FileList**](files.md) **>** [**CSS**](dir_8392c415e30628e2ce7c2879273a6118.md) **>** [**CSSColor.h**](CSSColor_8h.md)
 
 [Go to the source code of this file](CSSColor_8h_source.md)
 
@@ -94,5 +94,5 @@
 
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSColor.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Web/CSS/CSSColor.h`
 

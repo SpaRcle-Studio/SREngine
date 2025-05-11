@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" line="14" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" line="14" column="9" bodyfile="Engine/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" bodystart="14" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" line="16" column="9"/>
+        <location file="Engine/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" line="16" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1Box2DLibraryImpl_1afd33597070249202674014816df576db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" line="17" column="9"/>
+        <location file="Engine/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" line="17" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1Box2DLibraryImpl_1a8b86a923ef871cf6cfcc9f5591d36c94" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" line="20" column="27"/>
+        <location file="Engine/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" line="20" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1Box2DLibraryImpl_1a584fcdc1ea2cf9dadd203372bb7e36c9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -80,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" line="22" column="27"/>
+        <location file="Engine/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" line="22" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1Box2DLibraryImpl_1a9083fec385b85a6998513fda0ee0d07c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD ShapeType</type>
@@ -95,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" line="23" column="32" bodyfile="Engine/Core/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" bodystart="23" bodyend="23"/>
+        <location file="Engine/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" line="23" column="32" bodyfile="Engine/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" bodystart="23" bodyend="23"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1Box2DLibraryImpl_1af72d5f1fc973468bacd4285911c4198a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__PTYPES__NS_1_1CollisionShape" kindref="compound">SR_PTYPES_NS::CollisionShape</ref> *</type>
@@ -109,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" line="25" column="51"/>
+        <location file="Engine/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" line="25" column="51"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1Box2DLibraryImpl_1a59f86d0d29afdc0d13e737d227af0933" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__PTYPES__NS_1_1Rigidbody2D" kindref="compound">SR_PTYPES_NS::Rigidbody2D</ref> *</type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" line="26" column="48"/>
+        <location file="Engine/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" line="26" column="48"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1Box2DLibraryImpl_1afbf0112161e2271085977f640493d3fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__PHYSICS__NS_1_1PhysicsWorld" kindref="compound">SR_PHYSICS_NS::PhysicsWorld</ref> *</type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" line="27" column="50"/>
+        <location file="Engine/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" line="27" column="50"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -185,7 +185,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" line="13" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" bodystart="13" bodyend="29"/>
+    <location file="Engine/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" line="13" column="5" bodyfile="Engine/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h" bodystart="13" bodyend="29"/>
     <listofallmembers>
       <member refid="classSR__PHYSICS__NS_1_1Box2DLibraryImpl_1afd3ea284faac0d0fef4ca79ee19493d6" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::Box2DLibraryImpl</scope><name>Box2DLibraryImpl</name></member>
       <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1a905dee5a7955426bd66b1a27f35848f1" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::Box2DLibraryImpl</scope><name>ConnectPVD</name></member>

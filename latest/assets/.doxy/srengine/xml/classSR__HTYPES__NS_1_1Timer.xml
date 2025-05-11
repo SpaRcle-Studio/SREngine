@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" line="50" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" bodystart="50" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Timer.h" line="50" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Types/Timer.h" bodystart="50" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1Timer_1a6f9cb29c7e7e6c5e4bb677f21d836ca7" prot="private" static="no" mutable="no">
         <type>double_t</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" line="51" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Timer.h" line="51" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Types/Timer.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1Timer_1a847b9687b132031d1a58260708c738ba" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" line="52" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" bodystart="52" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Timer.h" line="52" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Types/Timer.h" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1Timer_1aae293b1433add52a1d770223a231fbb5" prot="private" static="no" mutable="no">
         <type>TimePointType</type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" line="53" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" bodystart="53" bodyend="53"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Timer.h" line="53" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Types/Timer.h" bodystart="53" bodyend="53"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -80,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" line="14" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" bodystart="14" bodyend="16"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Timer.h" line="14" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Types/Timer.h" bodystart="14" bodyend="16"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Timer_1ae2388dd12503d2039640d702068b451a" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -98,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" line="18" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" bodystart="18" bodyend="20"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Timer.h" line="18" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Types/Timer.h" bodystart="18" bodyend="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Timer_1a4891934df088ac13b6417bb21a5004cf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -112,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" line="22" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" bodystart="22" bodyend="24"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Timer.h" line="22" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/Timer.h" bodystart="22" bodyend="24"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Timer_1aa42c7d6abc0131bba54371a54c5e6b1e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -126,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" line="27" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" bodystart="27" bodyend="44"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Timer.h" line="27" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/Timer.h" bodystart="27" bodyend="44"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Timer_1aa6a8e5323509416159e48d0f408a15c1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -140,7 +140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" line="46" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" bodystart="46" bodyend="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Timer.h" line="46" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Types/Timer.h" bodystart="46" bodyend="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Timer_1a802745446d25fa4eba73c74dc3749cd2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -154,14 +154,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" line="47" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" bodystart="47" bodyend="47"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Timer.h" line="47" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Types/Timer.h" bodystart="47" bodyend="47"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" line="12" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" bodystart="12" bodyend="55"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/Timer.h" line="12" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Types/Timer.h" bodystart="12" bodyend="55"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1Timer_1aa6a8e5323509416159e48d0f408a15c1" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Timer</scope><name>GetDeltaTime</name></member>
       <member refid="classSR__HTYPES__NS_1_1Timer_1a802745446d25fa4eba73c74dc3749cd2" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Timer</scope><name>GetFrames</name></member>

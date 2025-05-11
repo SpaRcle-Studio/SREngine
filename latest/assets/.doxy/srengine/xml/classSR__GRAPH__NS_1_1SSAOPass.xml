@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="18" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" bodystart="18" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="18" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" bodystart="18" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="40" column="20" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" bodystart="40" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="40" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1SSAOPass_1a59f6de27017a1d22134174b0c4e3a7fc" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> *</type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="41" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" bodystart="41" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="41" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" bodystart="41" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="20" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="20" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SSAOPass_1a64a5335318021c02f2474f6560f5dbde" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -80,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="21" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="21" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SSAOPass_1a117e63f90fa13a3a6b99fff395f8dfb8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -96,7 +96,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="23" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="23" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SSAOPass_1a852fcbdd62931d9e0cc2cf32982226f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -112,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="24" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SSAOPass_1a5fb104f9c71313f49c4180b13645b9f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -131,7 +131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="26" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="26" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SSAOPass_1a6bc1b216556e9e922298a4ff7ff4749a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -150,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="28" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="28" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SSAOPass_1a7fdbd68ae30677605bda55699c419394" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="30" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="30" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SSAOPass_1aba94366a31e8300db39429be3371d299" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD std::vector&lt; <ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">SR_GTYPES_NS::Framebuffer</ref> * &gt;</type>
@@ -184,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="32" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="32" column="34"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -200,7 +200,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="35" column="33"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="35" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SSAOPass_1acd82fe43d77f1b1eb9fe27ba9dc2665b" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> *</type>
@@ -214,7 +214,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="36" column="44"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="36" column="44"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SSAOPass_1a13dc47f09937e1a0254a128fdb938891" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> *</type>
@@ -229,7 +229,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="37" column="39"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="37" column="39"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -463,7 +463,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="16" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" bodystart="16" bodyend="43"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="16" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" bodystart="16" bodyend="43"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>AddDependency</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>AddInputConnection</name></member>

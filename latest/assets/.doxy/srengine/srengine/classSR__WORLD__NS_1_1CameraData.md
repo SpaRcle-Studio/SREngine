@@ -196,5 +196,5 @@ static inline CameraData * SR_WORLD_NS::CameraData::Load (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/World/CameraData.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/World/CameraData.h`
 

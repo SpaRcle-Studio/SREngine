@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="53" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Observer.h" line="53" column="24" bodyfile="Engine/libs/Utils/inc/Utils/World/Observer.h" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__WORLD__NS_1_1Offset_1aa922df730f33efbad3adfa85ffabf82b" prot="public" static="no" mutable="no">
         <type>Math::IVector3</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="54" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" bodystart="54" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Observer.h" line="54" column="24" bodyfile="Engine/libs/Utils/inc/Utils/World/Observer.h" bodystart="54" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -53,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="23" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" bodystart="23" bodyend="26"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Observer.h" line="23" column="9" bodyfile="Engine/libs/Utils/inc/Utils/World/Observer.h" bodystart="23" bodyend="26"/>
       </memberdef>
       <memberdef kind="function" id="structSR__WORLD__NS_1_1Offset_1ac046f87ed7e3df528e2a3ebf07bc4b36" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="28" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" bodystart="28" bodyend="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Observer.h" line="28" column="9" bodyfile="Engine/libs/Utils/inc/Utils/World/Observer.h" bodystart="28" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="structSR__WORLD__NS_1_1Offset_1a6d3b78486bd7b9bdd5854174ef193ff7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::IVector3</type>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="32" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" bodystart="32" bodyend="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Observer.h" line="32" column="43" bodyfile="Engine/libs/Utils/inc/Utils/World/Observer.h" bodystart="32" bodyend="32"/>
       </memberdef>
       <memberdef kind="function" id="structSR__WORLD__NS_1_1Offset_1a5cedfab04912b0e4d313874edbc3f193" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::IVector3</type>
@@ -95,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="33" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" bodystart="33" bodyend="33"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Observer.h" line="33" column="43" bodyfile="Engine/libs/Utils/inc/Utils/World/Observer.h" bodystart="33" bodyend="33"/>
       </memberdef>
       <memberdef kind="function" id="structSR__WORLD__NS_1_1Offset_1ae7413bf201055a3b4269206c3c2dad25" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -109,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="35" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" bodystart="35" bodyend="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Observer.h" line="35" column="34" bodyfile="Engine/libs/Utils/inc/Utils/World/Observer.h" bodystart="35" bodyend="37"/>
       </memberdef>
       <memberdef kind="function" id="structSR__WORLD__NS_1_1Offset_1a9b9aae68a50385ac934a583c85c52b44" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="39" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" bodystart="39" bodyend="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Observer.h" line="39" column="27" bodyfile="Engine/libs/Utils/inc/Utils/World/Observer.h" bodystart="39" bodyend="39"/>
       </memberdef>
       <memberdef kind="function" id="structSR__WORLD__NS_1_1Offset_1a1577920cfa2beaf2ad000b9b46640fe4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE bool</type>
@@ -141,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="41" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" bodystart="41" bodyend="43"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Observer.h" line="41" column="30" bodyfile="Engine/libs/Utils/inc/Utils/World/Observer.h" bodystart="41" bodyend="43"/>
       </memberdef>
       <memberdef kind="function" id="structSR__WORLD__NS_1_1Offset_1a78a8cc77db60927fc59cab9a8998e4fd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE bool</type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="45" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" bodystart="45" bodyend="47"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Observer.h" line="45" column="30" bodyfile="Engine/libs/Utils/inc/Utils/World/Observer.h" bodystart="45" bodyend="47"/>
       </memberdef>
       <memberdef kind="function" id="structSR__WORLD__NS_1_1Offset_1a9a62d4661df60727f6e1b3a7b6bb5fc8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE <ref refid="structSR__WORLD__NS_1_1Offset" kindref="compound">Offset</ref></type>
@@ -177,14 +177,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="49" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" bodystart="49" bodyend="51"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Observer.h" line="49" column="32" bodyfile="Engine/libs/Utils/inc/Utils/World/Observer.h" bodystart="49" bodyend="51"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="22" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" bodystart="22" bodyend="55"/>
+    <location file="Engine/libs/Utils/inc/Utils/World/Observer.h" line="22" column="5" bodyfile="Engine/libs/Utils/inc/Utils/World/Observer.h" bodystart="22" bodyend="55"/>
     <listofallmembers>
       <member refid="structSR__WORLD__NS_1_1Offset_1a9b9aae68a50385ac934a583c85c52b44" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Offset</scope><name>Empty</name></member>
       <member refid="structSR__WORLD__NS_1_1Offset_1a5cedfab04912b0e4d313874edbc3f193" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Offset</scope><name>GetChunk</name></member>

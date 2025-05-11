@@ -153,5 +153,5 @@ std::string SR_GRAPH_NS::SRSL::SRSLFunc::retType;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h`
 

@@ -296,5 +296,5 @@ SR_GRAPH_NS::Memory::VirtualUBOInfo::~VirtualUBOInfo () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Memory/UBOManager.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h`
 

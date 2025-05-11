@@ -7,7 +7,7 @@
     <includes refid="SafePointer_8h" local="no">Utils/Types/SafePointer.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/X11SurfaceInit.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/X11SurfaceInit.h</label>
         <link refid="X11SurfaceInit_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -845,6 +845,6 @@
 <codeline lineno="21"><highlight class="normal"></highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_X11SURFACEINIT_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/X11SurfaceInit.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/X11SurfaceInit.h"/>
   </compounddef>
 </doxygen>

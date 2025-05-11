@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="47" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="47" column="26" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" bodystart="47" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="21" column="17"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="21" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1SRClassMeta_1a318015ac1e836d0de14bf04d74e895ff" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="23" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="23" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1SRClassMeta_1a5355cd1a2ea1a9d0c56c8493dbd7f8ae" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="24" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="24" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1SRClassMeta_1af07fd075d32e77c6a7a37c244746b446" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="26" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="26" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1SRClassMeta_1ad88e0fe10086e869a3af7b10cbc1a408" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -117,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="28" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="28" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1SRClassMeta_1a66e1c75a69b056d062945b3a0a7e5aa8" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -131,7 +131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="30" column="54"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="30" column="54"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1SRClassMeta_1a0506ed5a374f963fcaba3ac090093f10" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="32" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="32" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1SRClassMeta_1af6711458702bb1e3c1e17979c6a3aebb" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD std::span&lt; const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="34" column="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="34" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1SRClassMeta_1a340f3a79c6053046ae7c29bf4c18ed34" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -173,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="35" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="35" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1SRClassMeta_1a0a3a8c0336c395c6ade45bd055e86e5c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -187,7 +187,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="36" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="36" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1SRClassMeta_1ad8e38ca646debd46e69e7a4ab369247d" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -201,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="37" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="37" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1SRClassMeta_1ab4c15f4a2d6e4b641aa16b972ea3af03" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD std::span&lt; const <ref refid="classSR__UTILS__NS_1_1SRClassMeta" kindref="compound">SRClassMeta</ref> * &gt;</type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="38" column="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="38" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1SRClassMeta_1ae55d9ab1ad11b516395f72a26cf17e1a" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD std::span&lt; const <ref refid="classSR__UTILS__NS_1_1Reflection_1_1Property" kindref="compound">SR_UTILS_NS::Reflection::Property</ref> &gt;</type>
@@ -229,7 +229,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="39" column="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="39" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1SRClassMeta_1a70540ba2d08d6fb553a56392dbc8ea63" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -243,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="40" column="54"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="40" column="54"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1SRClassMeta_1a9db967125d3723675ee630b87e68234a" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1SRClass" kindref="compound">SRClass</ref> *</type>
@@ -257,7 +257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="41" column="38"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="41" column="38"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -273,14 +273,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="44" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="44" column="39"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="19" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" bodystart="19" bodyend="49"/>
+    <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="19" column="5" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" bodystart="19" bodyend="49"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1SRClassMeta_1a9db967125d3723675ee630b87e68234a" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRClassMeta</scope><name>Allocate</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClassMeta_1ad88e0fe10086e869a3af7b10cbc1a408" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRClassMeta</scope><name>ForEachProperty</name></member>

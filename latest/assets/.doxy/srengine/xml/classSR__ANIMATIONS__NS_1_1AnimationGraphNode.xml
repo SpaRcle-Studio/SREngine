@@ -20,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="43" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="43" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="43" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1a06c148aad06c2bec159933325ffb86a8" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__ANIMATIONS__NS_1_1AnimationPose" kindref="compound">AnimationPose</ref> *</type>
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="44" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="44" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1af7f3a78d6b0bb03a52e661ca5a45bab4" prot="protected" static="no" mutable="no">
         <type>std::vector&lt; std::optional&lt; <ref refid="structSR__ANIMATIONS__NS_1_1AnimationLink" kindref="compound">AnimationLink</ref> &gt; &gt;</type>
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="46" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="46" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="46" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1a9ce274254fc20557051d1441fd65c7a3" prot="protected" static="no" mutable="no">
         <type>std::vector&lt; std::optional&lt; <ref refid="structSR__ANIMATIONS__NS_1_1AnimationLink" kindref="compound">AnimationLink</ref> &gt; &gt;</type>
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="47" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="47" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="47" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="24" column="18"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="24" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1a2314026f75ade68bc0bc4fbf2bfa7a73" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="25" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="25" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1a891a7e9de136ac3a46245e34df06d9c3" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="30" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="30" bodyend="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="30" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="30" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1a2f5190ef7d02128a08c4b62342f168c3" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="31" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="31" bodyend="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="31" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="31" bodyend="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1a641bc1f3c4226b7b81b9795884818bb2" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
         <type>SR_NODISCARD AnimationGraphNodeType</type>
@@ -163,7 +163,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="32" column="53"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="32" column="53"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1a6bb150752fe838747b567110d9f6e086" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD <ref refid="classSR__ANIMATIONS__NS_1_1AnimationPose" kindref="compound">AnimationPose</ref> *</type>
@@ -187,7 +187,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="33" column="44"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="33" column="44"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1ae317d1aa8bf667395363c4fc518058b1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -206,7 +206,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="34" column="35"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="34" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1adda8f281ad37be24ec4f4de1823f3827" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -225,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="35" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="35" bodyend="35"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="35" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="35" bodyend="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1ade5e8529b80b34d7a28bdfcd4a323320" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -243,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="36" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="36" bodyend="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="36" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="36" bodyend="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1a1c900bc5ca0cdbef38527084ea4474e0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -257,7 +257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="38" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="38" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1a5387fc82236ee410872bafda8a12624b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -283,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="40" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="40" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -303,7 +303,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="28" column="48"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="28" column="48"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -418,7 +418,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="18" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="18" bodyend="49"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="18" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="18" bodyend="49"/>
     <listofallmembers>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1ad053976f9a82fe6617f4345b8b127288" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNode</scope><name>AnimationGraphNode</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1adda8f281ad37be24ec4f4de1823f3827" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNode</scope><name>Compile</name></member>

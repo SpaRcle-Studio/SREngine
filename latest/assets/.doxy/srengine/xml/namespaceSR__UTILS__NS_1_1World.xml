@@ -6,6 +6,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/inc/Core/EngineCommands.h" line="21" column="5"/>
+    <location file="Engine/inc/Engine/EngineCommands.h" line="21" column="5"/>
   </compounddef>
 </doxygen>

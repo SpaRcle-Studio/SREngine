@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="101" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="101" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="101" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="101" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="95" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="95" bodyend="95"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="95" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="95" bodyend="95"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1ViewportsTableManager_1a7e853e3fe02f3c29eefa818da5804968" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD Widget *</type>
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="96" column="29"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="96" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1ViewportsTableManager_1a1d9943da444b147171254ec4294cbcf3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="98" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="98" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -127,7 +127,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="92" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="92" bodyend="102"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="92" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="92" bodyend="102"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::ViewportsTableManager</scope><name>DestroySingleton</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a6f131e2fa1b2641f7e9ea8662ba8da53" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::ViewportsTableManager</scope><name>GetMutex</name></member>

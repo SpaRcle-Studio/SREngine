@@ -25,7 +25,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="119" column="40" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="119" bodyend="142"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Property.h" line="119" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="119" bodyend="142"/>
       </memberdef>
       <memberdef kind="function" id="Reflection_2Property_8h_1a9fb70cc066a772ac6296cdcd2daf6772" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="144" column="29" declfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" declline="144" declcolumn="29"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Property.h" line="144" column="29" declfile="Engine/libs/Utils/inc/Utils/Reflection/Property.h" declline="144" declcolumn="29"/>
       </memberdef>
       <memberdef kind="function" id="Reflection_2Property_8h_1a09b8fcb9fe79fb1815c2163a249f63d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -61,13 +61,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="145" column="29" declfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" declline="145" declcolumn="29"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Property.h" line="145" column="29" declfile="Engine/libs/Utils/inc/Utils/Reflection/Property.h" declline="145" declcolumn="29"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="11" column="1"/>
+    <location file="Engine/libs/Utils/inc/Utils/Reflection/Property.h" line="11" column="1"/>
   </compounddef>
 </doxygen>

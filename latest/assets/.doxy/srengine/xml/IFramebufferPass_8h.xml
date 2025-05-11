@@ -4,11 +4,11 @@
     <compoundname>IFramebufferPass.h</compoundname>
     <includes refid="TextureHelper_8h" local="no">Graphics/Pipeline/TextureHelper.h</includes>
     <includes refid="UBOManager_8h" local="no">Graphics/Memory/UBOManager.h</includes>
-    <includedby refid="FlatColorBufferPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/FlatColorBufferPass.h</includedby>
-    <includedby refid="FramebufferPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h</includedby>
-    <includedby refid="OffScreenMeshDrawerPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</includedby>
-    <includedby refid="SSAOPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h</includedby>
-    <includedby refid="ShaderOverridePass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h</includedby>
+    <includedby refid="FlatColorBufferPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/FlatColorBufferPass.h</includedby>
+    <includedby refid="FramebufferPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h</includedby>
+    <includedby refid="OffScreenMeshDrawerPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</includedby>
+    <includedby refid="SSAOPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h</includedby>
+    <includedby refid="ShaderOverridePass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h</includedby>
     <incdepgraph>
       <node id="105">
         <label>Graphics/Memory/UBOManager.h</label>
@@ -25,7 +25,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/IFramebufferPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/IFramebufferPass.h</label>
         <link refid="IFramebufferPass_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -863,29 +863,29 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="5">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h</label>
         <link refid="CascadedShadowMapPass_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="7">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
         <link refid="ColorBufferPass_8h_source"/>
       </node>
       <node id="10">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h</label>
         <link refid="DepthBufferPass_8h_source"/>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/FlatColorBufferPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/FlatColorBufferPass.h</label>
         <link refid="FlatColorBufferPass_8h_source"/>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h</label>
         <link refid="FramebufferPass_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/IFramebufferPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/IFramebufferPass.h</label>
         <link refid="IFramebufferPass_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -899,7 +899,7 @@
         </childnode>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
         <link refid="OffScreenMeshDrawerPass_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
@@ -907,11 +907,11 @@
         </childnode>
       </node>
       <node id="8">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h</label>
         <link refid="SSAOPass_8h_source"/>
       </node>
       <node id="9">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h</label>
         <link refid="ShaderOverridePass_8h_source"/>
         <childnode refid="10" relation="include">
         </childnode>
@@ -919,11 +919,11 @@
         </childnode>
       </node>
       <node id="11">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ShadowMapPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/ShadowMapPass.h</label>
         <link refid="ShadowMapPass_8h_source"/>
       </node>
       <node id="6">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h</label>
         <link refid="VarianceShadowMapPass_8h_source"/>
       </node>
     </invincdepgraph>
@@ -1008,6 +1008,6 @@
 <codeline lineno="72"><highlight class="normal"></highlight></codeline>
 <codeline lineno="73"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_IFRAMEBUFFERPASS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IFramebufferPass.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/IFramebufferPass.h"/>
   </compounddef>
 </doxygen>

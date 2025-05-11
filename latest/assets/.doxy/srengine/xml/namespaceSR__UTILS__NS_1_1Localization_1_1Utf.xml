@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="11" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="11" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/UTF.h" line="11" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="11" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="13" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/UTF.h" line="13" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="13" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="UTF_8h_1a384de697677d1b289ca02a249e0033e7" prot="public" static="yes" mutable="no">
         <type>const CodePoint</type>
@@ -51,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="15" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/UTF.h" line="15" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="15" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -71,13 +71,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="17" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="17" bodyend="23"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/UTF.h" line="17" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="17" bodyend="23"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="10" column="1"/>
+    <location file="Engine/libs/Utils/inc/Utils/Localization/UTF.h" line="10" column="1"/>
   </compounddef>
 </doxygen>

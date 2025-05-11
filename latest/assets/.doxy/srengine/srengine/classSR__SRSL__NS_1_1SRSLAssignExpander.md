@@ -306,5 +306,5 @@ SR_NODISCARD std::pair< std::vector< Lexem >, SRSLResult > SR_SRSL_NS::SRSLAssig
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h`
 

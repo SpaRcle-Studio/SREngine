@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_8392c415e30628e2ce7c2879273a6118" kind="dir">
+    <compoundname>Engine/libs/Utils/inc/Utils/Web/CSS</compoundname>
+    <innerfile refid="CSS_8h">CSS.h</innerfile>
+    <innerfile refid="CSSColor_8h">CSSColor.h</innerfile>
+    <innerfile refid="CSSEnums_8h">CSSEnums.h</innerfile>
+    <innerfile refid="CSSOptional_8h">CSSOptional.h</innerfile>
+    <innerfile refid="CSSParser_8h">CSSParser.h</innerfile>
+    <innerfile refid="CSSSizeValue_8h">CSSSizeValue.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Utils/inc/Utils/Web/CSS/"/>
+  </compounddef>
+</doxygen>

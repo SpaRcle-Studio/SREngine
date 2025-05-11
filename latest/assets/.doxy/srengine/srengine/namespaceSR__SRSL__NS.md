@@ -605,5 +605,5 @@ static std::string SR_SRSL_NS::LexemKindToString (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h`
 

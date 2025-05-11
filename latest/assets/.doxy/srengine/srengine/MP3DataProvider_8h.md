@@ -4,7 +4,7 @@
 
 
 
-[**FileList**](files.md) **>** [**Audio**](dir_3b2bdb60abfc21f80d0d742b38f9bf0d.md) **>** [**inc**](dir_e119e7616d11278def47bdba41f03e3f.md) **>** [**Audio**](dir_d71989b0a6c56e7cf67d0c5ae6ec80fd.md) **>** [**Decoders**](dir_16681fe1464e2912a23db58ce5093931.md) **>** [**MP3DataProvider.h**](MP3DataProvider_8h.md)
+[**FileList**](files.md) **>** [**Audio**](dir_af8f778bf511d1bbb5230b0ab41e3424.md) **>** [**inc**](dir_1caa84b6edd46a6082f45882423e2ed3.md) **>** [**Audio**](dir_9d91a3f4ef73924e6058505af21a433d.md) **>** [**Decoders**](dir_d6420aac584bfe507791c41fd230d9ac.md) **>** [**MP3DataProvider.h**](MP3DataProvider_8h.md)
 
 [Go to the source code of this file](MP3DataProvider_8h_source.md)
 
@@ -88,5 +88,5 @@
 
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h`
+The documentation for this class was generated from the following file `Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h`
 

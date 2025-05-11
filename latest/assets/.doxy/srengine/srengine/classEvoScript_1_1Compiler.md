@@ -381,5 +381,5 @@ EvoScript::Compiler::~Compiler () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h`
+The documentation for this class was generated from the following file `Engine/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h`
 

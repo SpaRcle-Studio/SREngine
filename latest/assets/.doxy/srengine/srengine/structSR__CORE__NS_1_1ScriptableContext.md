@@ -119,5 +119,5 @@ inline SR_CORE_NS::Engine & SR_CORE_NS::ScriptableContext::GetEngine ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/Scripting/ScriptableContext.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/Scripting/ScriptableContext.h`
 

@@ -329,5 +329,5 @@ inline SR_GRAPH_NS::ImGui_ImplVulkan_Data::ImGui_ImplVulkan_Data ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h`
 

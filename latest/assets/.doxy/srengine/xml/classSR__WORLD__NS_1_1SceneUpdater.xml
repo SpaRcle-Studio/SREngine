@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" line="19" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" bodystart="19" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" line="19" column="9" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" bodystart="19" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" line="37" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" line="37" column="30" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1SceneUpdater_1af5430fa6d84334542f28c9a2a55034af" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__WORLD__NS_1_1Scene" kindref="compound">Scene</ref> *</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" line="38" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" line="38" column="15" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1SceneUpdater_1aa4a75a184b6fa4d59af59d6c94597499" prot="private" static="no" mutable="no">
         <type>SR_UTILS_NS::TimePointType</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" line="40" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" bodystart="40" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" line="40" column="36" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1SceneUpdater_1ab7025f0b6ea14f355085ca1adbaf6ca7" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" line="41" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" bodystart="41" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" line="41" column="14" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1SceneUpdater_1ad6688ec60842f8187ab85033c1cb809e" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" line="43" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" bodystart="43" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" line="43" column="18" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1SceneUpdater_1a6dc684b7a7593e0111862d5cf07944cc" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classSR__UTILS__NS_1_1Component" kindref="compound">SR_UTILS_NS::Component</ref> * &gt;</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" line="44" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" line="44" column="21" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1SceneUpdater_1a1777386a4d44953c3e2dc8e2cceecf52" prot="private" static="no" mutable="no">
         <type>std::list&lt; uint32_t &gt;</type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" line="45" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" bodystart="45" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" line="45" column="19" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" bodystart="45" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -139,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" line="21" column="18"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" line="21" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneUpdater_1a63e9267e12760ef22b08f4df97dcbcde" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -157,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" line="24" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneUpdater_1aff0e8b7916b1fed36ef5f899de652f7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -179,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" line="25" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" line="25" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneUpdater_1a4d288157d5550e8034fd948db2832bec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -197,7 +197,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" line="26" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" line="26" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneUpdater_1a9afcd26ac183c3d97523cc3d3d2b8238" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" line="27" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" line="27" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneUpdater_1a327111913c9c90baf7a38221f21536e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -229,7 +229,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" line="29" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" line="29" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneUpdater_1a52f338aa3711d0744d834080a31670b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -247,7 +247,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" line="31" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneUpdater_1a101f80447db8f495734bbe00e404ff27" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -265,7 +265,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" line="32" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneUpdater_1a7679c3176d8200b017c9811d9cb4160a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_UTILS_NS::TimePointType</type>
@@ -279,7 +279,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" line="34" column="49" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" bodystart="34" bodyend="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" line="34" column="49" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" bodystart="34" bodyend="34"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -310,7 +310,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" line="18" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h" bodystart="18" bodyend="47"/>
+    <location file="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" line="18" column="5" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h" bodystart="18" bodyend="47"/>
     <listofallmembers>
       <member refid="classSR__WORLD__NS_1_1SceneUpdater_1a63e9267e12760ef22b08f4df97dcbcde" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::SceneUpdater</scope><name>Build</name></member>
       <member refid="classSR__WORLD__NS_1_1SceneUpdater_1a4d288157d5550e8034fd948db2832bec" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::SceneUpdater</scope><name>FixedUpdate</name></member>

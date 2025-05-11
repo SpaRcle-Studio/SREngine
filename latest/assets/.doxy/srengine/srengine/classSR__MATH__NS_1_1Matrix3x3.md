@@ -173,5 +173,5 @@ inline SR_FORCE_INLINE FVector3 & SR_MATH_NS::Matrix3x3::operator[] (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Math/Matrix3x3.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Math/Matrix3x3.h`
 

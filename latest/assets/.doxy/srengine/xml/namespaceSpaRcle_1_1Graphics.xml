@@ -7,6 +7,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationContext.h" line="11" column="1"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationContext.h" line="11" column="1"/>
   </compounddef>
 </doxygen>

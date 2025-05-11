@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_ccc40ac273e6f569bc0e58b2cdbc2be5" kind="dir">
+    <compoundname>Engine/libs/Utils/inc/Utils/CommandManager</compoundname>
+    <innerfile refid="CmdManager_8h">CmdManager.h</innerfile>
+    <innerfile refid="CommandBuffer_8h">CommandBuffer.h</innerfile>
+    <innerfile refid="ICommand_8h">ICommand.h</innerfile>
+    <innerfile refid="ReversibleCommand_8h">ReversibleCommand.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Utils/inc/Utils/CommandManager/"/>
+  </compounddef>
+</doxygen>

@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="20" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="20" bodyend="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="20" column="9" bodyfile="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="20" bodyend="22"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="114" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="114" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="114" column="21" bodyfile="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="114" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Path_1ae1dfe3096883b52d69efcaaa589c6b6a" prot="private" static="no" mutable="no">
         <type>std::string_view</type>
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="115" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="115" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="115" column="26" bodyfile="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="115" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Path_1ae1e6ad028dad03f59cecad04ed413fc9" prot="private" static="no" mutable="no">
         <type>std::string_view</type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="116" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="116" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="116" column="26" bodyfile="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="116" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Path_1a56e08b52981aeb04b27542237f6f9b1e" prot="private" static="no" mutable="no">
         <type>uint64_t</type>
@@ -92,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="117" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="117" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="117" column="18" bodyfile="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="117" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Path_1a3d4e8f2411b9fb9caef76e927fca6453" prot="private" static="no" mutable="no">
         <type>Type</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="118" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="118" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="118" column="14" bodyfile="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="118" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -122,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="25" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="25" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a7db2a0d235222435521a8be7d94b12b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -140,7 +140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="26" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="26" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1ab179d98c72d781414e6f8966b3477ee1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="27" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="27" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1ae65997db21b625db1d6aedbc76a6c6fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -176,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="28" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="28" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a49edd8c28246ea7e31f2b52308966d87" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -194,7 +194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="29" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="29" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a514692aa1a46f0d1e773b84eb8a85ab1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -212,7 +212,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="30" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="30" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1aed18d742e6c6cae14e678cf2b046e818" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -230,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="31" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="31" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a202548a9488e66ee2912b4b79150a7e0" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -248,7 +248,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="33" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="33" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a7fa52a724ebfa3bcd553bf93de52f6bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -262,7 +262,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="34" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="34" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1af20c5766b829ff2fe3156307c909003e" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &amp;</type>
@@ -280,7 +280,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="36" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="36" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a2670fff21cf4bfcf9b1e13f49efbd683" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -294,7 +294,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="37" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="37" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a339d138a039b8631b280efe940bbea6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &amp;</type>
@@ -313,7 +313,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="38" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="38" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a87990decbebcd223a665323cf800a440" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -331,7 +331,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="39" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="39" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1aa455307fa464fbb994d0ae901474137c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>char</type>
@@ -349,7 +349,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="40" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="40" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a9c8884ef5fd9bf40f3550c95b95ad260" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>char &amp;</type>
@@ -367,7 +367,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="41" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="41" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a95f9c48e1538b1dddadf3dc4a385ee4f" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -385,7 +385,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="42" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="42" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a4e8a4d5a17cb558aebd21e9e3149c88d" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -403,7 +403,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="43" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="43" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a60a2df54efabac7acb51a58e02fa6da9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -425,7 +425,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="46" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="46" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a09f40f55a9aede4c00ad434c106da853" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -447,7 +447,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="47" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="47" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a19073e46f3c626f291a9933ab6d2c34f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_DEPRECATED bool</type>
@@ -466,7 +466,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="49" column="28"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="49" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a2b0b6d65fb83ad855dcaea1331b1138d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -480,7 +480,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="50" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="50" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a1303337230a1832e0cce2ff209d374f0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -494,7 +494,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="51" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="51" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1aa116a2d72108b3211b5417022ea59dde" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -512,7 +512,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="53" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="53" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1aa1836cb432ad15352db0eeedce67f7b7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -526,7 +526,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="55" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="55" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a3bc351fdb28132b90373fc82448f5ca4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -540,7 +540,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="56" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="56" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1ad6a5d256bdfbee33e89337d0a4814c6c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const std::string &amp;</type>
@@ -554,7 +554,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="57" column="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="57" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1aee068b77e8ede7c7c4e11d7aa078d91c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD std::string *</type>
@@ -568,7 +568,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="58" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="58" bodyend="58"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="58" column="34" bodyfile="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="58" bodyend="58"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1ab3f7e156e0a640de3caf4e0d2180ae5e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string_view</type>
@@ -582,7 +582,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="59" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="59" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a8e2b509fb1203a8c3c41d1cee2f84e3f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::wstring</type>
@@ -596,7 +596,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="60" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="60" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1aa7633eb8c868f037ba70b2881434f288" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::wstring</type>
@@ -610,7 +610,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="61" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="61" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a55b4c744396e25585085e718e415d12e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD size_t</type>
@@ -624,7 +624,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="62" column="29"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="62" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1ac52e86ff938e367615ea878bf00fa79e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -638,7 +638,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="63" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="63" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1adcf1c8785f9901eb3729cd42aeb32965" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -657,7 +657,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="64" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="64" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1aeab65aa6d171b4658790e2963567d14d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const char *</type>
@@ -671,7 +671,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="65" column="33"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="65" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a8933384dd1bd82fd06eb173162571481" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const char *</type>
@@ -685,7 +685,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="66" column="33"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="66" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a41a7267bbed303326b2cdd5246c3f2ba" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
@@ -699,7 +699,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="68" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="68" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1acec4d6ee41932fa0cda52ad01f249200" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
@@ -713,7 +713,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="69" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="69" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1aa2809738a048f0111d418b68fd45ed42" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
@@ -731,7 +731,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="70" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="70" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a7142245f563beb4d8fdef33b31dcaae5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
@@ -749,7 +749,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="71" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="71" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1abc973ba1ea672af7c7b7d0699aa23c72" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
@@ -767,7 +767,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="72" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="72" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1ab101fbf69b8d8a6a0f7756bd60e8a227" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
@@ -785,7 +785,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="73" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="73" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a022a527541e32269eb6652495969f842" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
@@ -803,7 +803,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="74" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="74" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1aaa978829ea239c8449ecdc8b3b5d6a60" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
@@ -821,7 +821,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="75" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="75" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a2ee92284f6247a85b5a1a12d2e3da034" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
@@ -839,7 +839,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="76" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="76" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1ae5e4b32e61a6f75401969e279dc28d2d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
@@ -857,7 +857,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="77" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="77" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a9d49b1bf9e9aed021402a127ba126e00" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -871,7 +871,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="79" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="79" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a573f4a6f3d64e5ec02c1cda85ccbab2d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -885,7 +885,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="80" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="80" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a0305faf27d5c822e5644afe7b9e9ddaf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -903,7 +903,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="81" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="81" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1ab6c0f82531e30900285a698a1c40d840" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -921,7 +921,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="82" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="82" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a66ea75fb9bdf17668ffe907f5668ce8f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -935,7 +935,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="83" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="83" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1ac5a8bdb1dad2f7cff03330a1b8f155d2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -949,7 +949,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="84" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="84" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a2e175b50b1f6c33954799cede938fd00" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -967,7 +967,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="85" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="85" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1abc571853263a3e6419ca9784b24aff6c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD Type</type>
@@ -981,7 +981,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="87" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="87" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a3698abc636553ceaa589cba87ccbea5e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -995,7 +995,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="88" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="88" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a020e077951b3f7bfe4843cc8f701d687" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -1009,7 +1009,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="89" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="89" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a376ec5cecc1c170ee7c2c04cb1964717" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -1023,7 +1023,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="90" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="90" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a90ac8b451687e7e846563335e55959c1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -1037,7 +1037,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="91" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="91" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a3a6c6cd123296b9058367808bcaffe2c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -1051,7 +1051,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="92" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="92" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1afac17b5806247c91a070ea05434d2bd4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::list&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &gt;</type>
@@ -1065,7 +1065,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="94" column="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="94" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1ad7a63e123ddb75094f85572f24e8e00f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::list&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &gt;</type>
@@ -1079,7 +1079,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="95" column="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="95" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1af79931ba215f438c605103b917b5cd1f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::list&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &gt;</type>
@@ -1093,7 +1093,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="96" column="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="96" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1ab7999c070e80458e2e00196b856bcb49" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -1107,7 +1107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="98" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="98" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a65314940277eaf649637f218592141fd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string_view</type>
@@ -1121,7 +1121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="99" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="99" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a5f8a38bebd4f84565a7ecdecfcd02469" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string_view</type>
@@ -1135,7 +1135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="100" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="100" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a8a4a81e3d3ba3ec69c8c01f67e05e512" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string_view</type>
@@ -1149,7 +1149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="101" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="101" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1aeb17e9c0b159d77deaaaf35f8786b66b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -1163,7 +1163,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="102" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="102" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a3287307023ec789dd17c19b5d63b73fe" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -1177,7 +1177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="103" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="103" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a4acb268f00da343e7a179f1e9377e3d9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -1191,7 +1191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="104" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="104" column="34"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -1207,7 +1207,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="107" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="107" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a048dc2249537660f4fb816c2e0b3adb3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
@@ -1221,7 +1221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="109" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="109" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a26e02ba4d6d21ab28282e1891c56bec4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1235,7 +1235,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="110" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="110" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a5375fa7ad660574762ee0ce35edfea06" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1249,14 +1249,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="111" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="111" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="18" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="18" bodyend="120"/>
+    <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="18" column="5" bodyfile="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="18" bodyend="120"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Path_1a8933384dd1bd82fd06eb173162571481" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>c_str</name></member>
       <member refid="classSR__UTILS__NS_1_1Path_1aa2809738a048f0111d418b68fd45ed42" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>Concat</name></member>

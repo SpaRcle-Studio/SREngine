@@ -17,7 +17,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/Common/CmdOptions.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Common/CmdOptions.h</label>
         <link refid="CmdOptions_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -632,6 +632,6 @@
 <codeline lineno="14"><highlight class="normal"></highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_CMDOPTIONS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Common/CmdOptions.h"/>
+    <location file="Engine/libs/Utils/inc/Utils/Common/CmdOptions.h"/>
   </compounddef>
 </doxygen>

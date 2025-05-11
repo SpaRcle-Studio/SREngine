@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="246" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="246" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="246" column="36" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="246" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -39,7 +39,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="150" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="150" bodyend="150"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="150" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="150" bodyend="150"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1a97255b60cbd191f5bf7f79077f000a8c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="152" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="152" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1a7886e3df1897f3be8f32f9366eff5e1f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -73,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="154" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="154" bodyend="154"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="154" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="154" bodyend="154"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1a0d3298539c157d8ec4b8f9fb2fb34824" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -96,7 +96,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="156" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="156" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1a4d18c6a2b0437ba0ec69d241819d4a42" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -111,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="157" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="157" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1a9ef5e296def19ffc466bf77d9787c633" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -130,7 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="159" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="159" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1a6095a9c03e5caef545618b09c1085fe6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="160" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="160" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1a288a3d56ac47bd979c2c851c1273c601" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>uint64_t</type>
@@ -164,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="162" column="18"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="162" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1a78fe121da536bcc3766bf23d6cc9b09f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -179,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="163" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="163" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1a9da1d572c985200dbffe6a8aed6ed3ba" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -202,7 +202,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="165" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="165" bodyend="165"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="165" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="165" bodyend="165"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1aa0726eac2ef10d236a5a856746213bba" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -225,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="166" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="166" bodyend="166"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="166" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="166" bodyend="166"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1ad0ae1c7cb737c8f7e3612583c4b1d286" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -248,7 +248,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="167" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="167" bodyend="167"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="167" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="167" bodyend="167"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1affe2bfcff08cd0728d6e7bb6cc18fb75" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -271,7 +271,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="169" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="169" bodyend="173"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="169" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="169" bodyend="173"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1a5e9020baaac2f2639122919f9eb07a62" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -294,7 +294,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="175" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="175" bodyend="185"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="175" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="175" bodyend="185"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1a5c9290b8e702e9dc5f461c65d18acf0f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -317,7 +317,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="187" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="187" bodyend="187"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="187" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="187" bodyend="187"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1afb83ca9d7bf784fa43f3be34cb5dfe63" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -340,7 +340,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="188" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="188" bodyend="188"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="188" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="188" bodyend="188"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1a87a5d04d5dd9f7435f2ce41110e70186" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -363,7 +363,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="189" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="189" bodyend="189"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="189" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="189" bodyend="189"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1a2e0c45f71676998a0abacbf8f8c21a96" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -386,7 +386,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="190" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="190" bodyend="190"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="190" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="190" bodyend="190"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1a2be0bcb6c2248c624ee7193ebc3b8ac2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -409,7 +409,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="191" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="191" bodyend="191"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="191" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="191" bodyend="191"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1a2f97d8a37b14ea026ae08a4b58f5bcfe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -432,7 +432,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="192" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="192" bodyend="192"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="192" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="192" bodyend="192"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1a786afd129d1c9ddef8315dfdf5c2e212" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -455,7 +455,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="193" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="193" bodyend="193"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="193" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="193" bodyend="193"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1ad48a3ce7dcf3619e7df602f46ed601d7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -478,7 +478,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="194" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="194" bodyend="194"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="194" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="194" bodyend="194"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1a57602329ccadb43676004c3bfbed47f4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -501,7 +501,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="196" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="196" bodyend="196"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="196" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="196" bodyend="196"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1a4150c0fedeccfe74530749733d86b119" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -524,7 +524,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="197" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="197" bodyend="197"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="197" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="197" bodyend="197"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -553,7 +553,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="200" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="200" bodyend="210"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="200" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="200" bodyend="210"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1aa62ea592530e1eec4cc2dff0459210f0" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -580,7 +580,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="212" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="212" bodyend="222"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="212" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="212" bodyend="222"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1aea9c933380d97a679fc7a6d342372908" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -607,7 +607,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="224" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="224" bodyend="234"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="224" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="224" bodyend="234"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseDeserializer_1ab3eb9c11f4d3f3f27b6239e262e17ad7" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1IBaseSerialization" kindref="compound">IBaseSerialization</ref> &amp;</type>
@@ -621,7 +621,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="237" column="41" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="237" bodyend="243"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="237" column="41" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="237" bodyend="243"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -658,7 +658,7 @@
         <link refid="classSR__UTILS__NS_1_1IDeserializer"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="148" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="148" bodyend="248"/>
+    <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="148" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="148" bodyend="248"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1IDeserializer_1acbd2f1ecf77dc820da221fd597b43de1" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IBaseDeserializer</scope><name>AllowNewMapKeys</name></member>
       <member refid="classSR__UTILS__NS_1_1IDeserializer_1a6c51334854ba345f5c5c4922b8c57f2d" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IBaseDeserializer</scope><name>AllowReAllocPointer</name></member>

@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="12" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" declline="12" declcolumn="5"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="12" column="5" declfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" declline="12" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="Gizmo_8h_1a18016035e921f0f2240c442b0d806101" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -188,7 +188,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="14" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" declline="14" declcolumn="5"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="14" column="5" declfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" declline="14" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="UIWindow_8h_1af8332c5d96379e836088713a7362370d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -236,13 +236,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="11" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/UI/UIWindow.h" declline="11" declcolumn="5"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="11" column="5" declfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" declline="11" declcolumn="5"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/inc/Core/GUI/SceneTools.h" line="12" column="1"/>
+    <location file="Engine/inc/Engine/GUI/SceneTools.h" line="12" column="1"/>
   </compounddef>
 </doxygen>

@@ -8,13 +8,13 @@
     <includes local="no">PxPhysicsAPI.h</includes>
     <includes local="no">PxFoundation.h</includes>
     <includes local="no">PxSimulationEventCallback.h</includes>
-    <includedby refid="PhysXCollisionShape_8h" local="no">Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h</includedby>
-    <includedby refid="PhysXLibraryImpl_8h" local="no">Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXLibraryImpl.h</includedby>
-    <includedby refid="PhysXPhysicsWorld_8h" local="no">Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h</includedby>
-    <includedby refid="PhysXSimulationCallback_8h" local="no">Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXSimulationCallback.h</includedby>
+    <includedby refid="PhysXCollisionShape_8h" local="no">Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h</includedby>
+    <includedby refid="PhysXLibraryImpl_8h" local="no">Engine/libs/Physics/inc/Physics/PhysX/PhysXLibraryImpl.h</includedby>
+    <includedby refid="PhysXPhysicsWorld_8h" local="no">Engine/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h</includedby>
+    <includedby refid="PhysXSimulationCallback_8h" local="no">Engine/libs/Physics/inc/Physics/PhysX/PhysXSimulationCallback.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h</label>
         <link refid="PhysXUtils_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -536,23 +536,23 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h</label>
         <link refid="PhysXCollisionShape_8h_source"/>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXLibraryImpl.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXLibraryImpl.h</label>
         <link refid="PhysXLibraryImpl_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h</label>
         <link refid="PhysXPhysicsWorld_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXSimulationCallback.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXSimulationCallback.h</label>
         <link refid="PhysXSimulationCallback_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h</label>
         <link refid="PhysXUtils_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -579,7 +579,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="17" column="19" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="17" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="17" column="19" bodyfile="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="17" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="PhysXUtils_8h_1a9d7b5bb5a65c00759676bf7df508da09" prot="public" static="no" mutable="no">
         <type>SR_CONSTEXPR auto</type>
@@ -593,7 +593,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="18" column="19" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="18" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="18" column="19" bodyfile="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="18" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -669,6 +669,6 @@
 <codeline lineno="66"><highlight class="normal"></highlight></codeline>
 <codeline lineno="67"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_PHYSXUTILS_H</highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h"/>
+    <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h"/>
   </compounddef>
 </doxygen>

@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h" line="23" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderSettings.h" line="23" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderSettings.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderSettings_1a509fb64ce86e52f564e09809b9d92089" prot="private" static="no" mutable="no">
         <type>Quality</type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h" line="24" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderSettings.h" line="24" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderSettings.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderSettings_1ae4d4a6e707952961f7694acfddec47f0" prot="private" static="no" mutable="no">
         <type>Quality</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h" line="25" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderSettings.h" line="25" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderSettings.h" bodystart="25" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -78,7 +78,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h" line="22" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h" bodystart="22" bodyend="27"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderSettings.h" line="22" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderSettings.h" bodystart="22" bodyend="27"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettings</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettings</scope><name>NonCopyable</name></member>

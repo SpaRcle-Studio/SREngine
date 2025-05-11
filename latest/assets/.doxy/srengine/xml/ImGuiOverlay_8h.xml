@@ -4,10 +4,10 @@
     <compoundname>ImGuiOverlay.h</compoundname>
     <includes refid="Graphics_2inc_2Graphics_2macros_8h" local="no">Graphics/macros.h</includes>
     <includes refid="Overlay_8h" local="no">Graphics/Overlay/Overlay.h</includes>
-    <includedby refid="VulkanImGuiOverlay_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h</includedby>
+    <includedby refid="VulkanImGuiOverlay_8h" local="no">Engine/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h</label>
         <link refid="ImGuiOverlay_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -814,13 +814,13 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h</label>
         <link refid="ImGuiOverlay_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h</label>
         <link refid="VulkanImGuiOverlay_8h_source"/>
       </node>
     </invincdepgraph>
@@ -880,6 +880,6 @@
 <codeline lineno="47"><highlight class="normal"></highlight></codeline>
 <codeline lineno="48"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GRAPHICS_IMGUI_OVERLAY_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h"/>
   </compounddef>
 </doxygen>

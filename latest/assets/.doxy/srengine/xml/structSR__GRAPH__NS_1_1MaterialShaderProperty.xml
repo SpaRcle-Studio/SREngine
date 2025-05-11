@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="30" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="30" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="30" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="30" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="37" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="37" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1MaterialShaderProperty_1ae8840a2b50f91258ae515f8c20000210" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="38" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="38" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1MaterialShaderProperty_1a24deb5290e15f5e471e137b73dddf978" prot="public" static="no" mutable="no">
         <type>ShaderPropertyVariant</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="39" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="39" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="39" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1MaterialShaderProperty_1a046d392d3a4a8e38d9ab27b198f0f2ee" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="42" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="42" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="42" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1MaterialShaderProperty_1a4534fce6c23b3f7763d44bf9534b015d" prot="public" static="no" mutable="no">
         <type>ShaderVarType</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="44" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="44" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1MaterialShaderProperty_1a4c7a05aba481d391220c3f705ce9a106" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="46" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="46" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="46" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="46" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -126,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="33" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="33" column="14"/>
       </memberdef>
       <memberdef kind="function" id="structSR__GRAPH__NS_1_1MaterialShaderProperty_1a18a61688cd2b86a147f45062401be9bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="34" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="34" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -196,7 +196,7 @@
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="27" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="27" bodyend="47"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="27" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="27" bodyend="47"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialShaderProperty</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialShaderProperty</scope><name>AllocateStatic</name></member>

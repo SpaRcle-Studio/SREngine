@@ -382,5 +382,5 @@ inline SR_NODISCARD T * SR_PTYPES_NS::RigidbodyImpl::GetRigidbody () noexcept co
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Physics/inc/Physics/Rigidbody.h`
+The documentation for this class was generated from the following file `Engine/libs/Physics/inc/Physics/Rigidbody.h`
 

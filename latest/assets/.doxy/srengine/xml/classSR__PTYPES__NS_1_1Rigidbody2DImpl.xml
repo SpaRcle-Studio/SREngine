@@ -148,7 +148,7 @@
         <link refid="structSR__MATH__NS_1_1Vector3"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Physics/inc/Physics/2D/Rigidbody2D.h" line="11" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/2D/Rigidbody2D.h" bodystart="11" bodyend="13"/>
+    <location file="Engine/libs/Physics/inc/Physics/2D/Rigidbody2D.h" line="11" column="5" bodyfile="Engine/libs/Physics/inc/Physics/2D/Rigidbody2D.h" bodystart="11" bodyend="13"/>
     <listofallmembers>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a83f6c74a873186b4920c0df977f6bce4" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody2DImpl</scope><name>ClearForces</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1af62c18b6b8b7602e2c4898e57c7f7824" prot="public" virt="pure-virtual"><scope>SR_PTYPES_NS::Rigidbody2DImpl</scope><name>GetHandle</name></member>

@@ -365,5 +365,5 @@ SR_AUDIO_NS::MP3DataProvider::~MP3DataProvider () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h`
+The documentation for this class was generated from the following file `Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h`
 

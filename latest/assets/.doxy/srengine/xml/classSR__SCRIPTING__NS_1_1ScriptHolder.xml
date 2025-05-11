@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" line="13" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" line="13" column="9" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" bodystart="13" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" line="15" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" line="15" column="9" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" bodystart="15" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" line="37" column="14" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" line="37" column="14" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" bodystart="37" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -70,7 +70,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" line="18" column="18" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" bodystart="18" bodyend="21"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" line="18" column="18" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" bodystart="18" bodyend="21"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptHolder_1a0489cf3fd6f2a4c50f074a529c1bebc2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" line="23" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" bodystart="23" bodyend="25"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" line="23" column="9" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" bodystart="23" bodyend="25"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptHolder_1a008f290fe7f3bd90d4384b2db2c0a22b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -102,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" line="28" column="14" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" bodystart="28" bodyend="30"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" line="28" column="14" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" bodystart="28" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptHolder_1abda4c7ae40b0f227c5dbe6f6eb4c0ced" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" line="32" column="35" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" bodystart="32" bodyend="34"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" line="32" column="35" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" bodystart="32" bodyend="34"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -183,7 +183,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" line="12" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" bodystart="12" bodyend="39"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" line="12" column="5" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/ScriptHolder.h" bodystart="12" bodyend="39"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptHolder</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptHolder</scope><name>AutoFree</name></member>

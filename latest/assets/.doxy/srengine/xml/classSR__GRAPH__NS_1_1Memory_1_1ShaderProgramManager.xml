@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="112" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" bodystart="112" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="112" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" bodystart="112" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1ae949cd3bf7e47274b925cdbc4763759d" prot="public" static="no">
         <type>int32_t</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="113" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" bodystart="113" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="113" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" bodystart="113" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1ae7007abaa97bb888afeefb97400b4a0e" prot="public" static="no">
         <type>int32_t</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="114" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" bodystart="114" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="114" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" bodystart="114" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="146" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" bodystart="146" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="146" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" bodystart="146" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1a7042608842cc331923ea6ac98d45184a" prot="private" static="no" mutable="no">
         <type>PipelinePtr</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="147" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" bodystart="147" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="147" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" bodystart="147" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="116" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="116" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1a32f86e1af67e0cd8abf1911ed20934e2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="117" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="117" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1acd62b16f17fc2f1f1d69605061553627" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD VirtualProgramInfo::Identifier</type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="138" column="53"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="138" column="53"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1af886cbd384ecfc447adc3a6c61a359c7" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualProgramInfo_1_1ShaderProgramInfo" kindref="compound">VirtualProgramInfo::ShaderProgramInfo</ref></type>
@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="139" column="60"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="139" column="60"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1ab4e8acae94ddd7b5d608d322ed66522b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD ShaderBindResult</type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="140" column="39"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="140" column="39"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -179,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="120" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" bodystart="120" bodyend="120"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="120" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" bodystart="120" bodyend="120"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1a69dcba73220338cc785dd494309cd7ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD VirtualProgram</type>
@@ -201,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="122" column="37"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="122" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1aad37bb35d64cecd63487488677c17c45" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD VirtualProgram</type>
@@ -219,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="123" column="37"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="123" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1a1fd13994112dc0fba3a908fdac497bb2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -237,7 +237,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="125" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="125" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1a9f04deba9804e5a0de8594612b425c38" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -255,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="126" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="126" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1ab04c98a49ec339c115067b3393a67904" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -269,7 +269,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="128" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="128" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1a4d6c34e09f62faa807fae0e3883e8cbc" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>ShaderBindResult</type>
@@ -287,7 +287,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="130" column="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="130" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1a79b0a119cd56ddc6ebe18f9bf3668eca" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualProgramInfo" kindref="compound">VirtualProgramInfo</ref> *</type>
@@ -305,7 +305,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="132" column="47"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="132" column="47"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1a0d9a2905daab03a14f55ce94ec4dea33" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD ShaderProgram</type>
@@ -323,7 +323,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="133" column="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="133" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1a5976bbe871249e6d4f35edcf134414c2" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -341,7 +341,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="134" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="134" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1aed22dd1e48cdf9d09b7fa26af330308c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -359,7 +359,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="135" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="135" column="27"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -376,7 +376,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="143" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="143" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -432,7 +432,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="109" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" bodystart="109" bodyend="149"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="109" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" bodystart="109" bodyend="149"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1aad37bb35d64cecd63487488677c17c45" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderProgramManager</scope><name>Allocate</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1af886cbd384ecfc447adc3a6c61a359c7" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderProgramManager</scope><name>AllocateShaderProgram</name></member>

@@ -632,5 +632,5 @@ void SR_UTILS_NS::Property::SavePropertyBase (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/TypeTraits/Property.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/TypeTraits/Property.h`
 

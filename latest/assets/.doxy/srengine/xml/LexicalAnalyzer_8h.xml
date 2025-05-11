@@ -27,7 +27,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h</label>
         <link refid="LexicalAnalyzer_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1037,6 +1037,6 @@
 <codeline lineno="52"><highlight class="normal"></highlight></codeline>
 <codeline lineno="53"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_SRSL_LEXICAL_ANALYZER_H</highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h"/>
   </compounddef>
 </doxygen>

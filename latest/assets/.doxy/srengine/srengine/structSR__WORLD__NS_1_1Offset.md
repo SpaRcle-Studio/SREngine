@@ -252,5 +252,5 @@ inline SR_FORCE_INLINE bool SR_WORLD_NS::Offset::operator== (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/World/Observer.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/World/Observer.h`
 

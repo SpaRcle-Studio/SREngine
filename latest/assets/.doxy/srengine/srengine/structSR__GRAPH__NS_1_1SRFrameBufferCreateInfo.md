@@ -181,5 +181,5 @@ SR_MATH_NS::IVector2 SR_GRAPH_NS::SRFrameBufferCreateInfo::size;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h`
 

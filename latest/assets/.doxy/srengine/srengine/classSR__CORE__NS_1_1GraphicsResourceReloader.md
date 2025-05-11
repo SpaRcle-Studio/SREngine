@@ -246,5 +246,5 @@ Implements [*SR\_UTILS\_NS::IResourceReloader::Reload*](classSR__UTILS__NS_1_1IR
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/Utils/GraphicsResourceReloader.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/Utils/GraphicsResourceReloader.h`
 

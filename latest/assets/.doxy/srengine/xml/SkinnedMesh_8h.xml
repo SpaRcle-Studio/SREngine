@@ -244,7 +244,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
         <link refid="SkinnedMesh_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1798,6 +1798,6 @@
 <codeline lineno="74"><highlight class="normal"></highlight></codeline>
 <codeline lineno="75"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GRAPHICS_SKINNED_MESH_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h"/>
   </compounddef>
 </doxygen>

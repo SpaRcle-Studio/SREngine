@@ -3,12 +3,12 @@
   <compounddef id="IWaveDataProvider_8h" kind="file" language="C++">
     <compoundname>IWaveDataProvider.h</compoundname>
     <includes refid="Utils_2inc_2Utils_2macros_8h" local="no">Utils/macros.h</includes>
-    <includedby refid="MP3DataProvider_8h" local="no">Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h</includedby>
-    <includedby refid="ModPlugDataProvider_8h" local="no">Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h</includedby>
-    <includedby refid="WAVDataProvider_8h" local="no">Engine/Core/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h</includedby>
+    <includedby refid="MP3DataProvider_8h" local="no">Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h</includedby>
+    <includedby refid="ModPlugDataProvider_8h" local="no">Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h</includedby>
+    <includedby refid="WAVDataProvider_8h" local="no">Engine/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h</label>
+        <label>Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h</label>
         <link refid="IWaveDataProvider_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -31,7 +31,7 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h</label>
+        <label>Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h</label>
         <link refid="IWaveDataProvider_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -41,15 +41,15 @@
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h</label>
+        <label>Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h</label>
         <link refid="MP3DataProvider_8h_source"/>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h</label>
+        <label>Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h</label>
         <link refid="ModPlugDataProvider_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h</label>
+        <label>Engine/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h</label>
         <link refid="WAVDataProvider_8h_source"/>
       </node>
     </invincdepgraph>
@@ -118,6 +118,6 @@
 <codeline lineno="55"><highlight class="normal"></highlight></codeline>
 <codeline lineno="56"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_IWAVEDATAPROVIDER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h"/>
+    <location file="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h"/>
   </compounddef>
 </doxygen>

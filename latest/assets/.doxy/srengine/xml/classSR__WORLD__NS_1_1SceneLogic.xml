@@ -20,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="21" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="21" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="21" column="9" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="21" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="23" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="23" column="9" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__WORLD__NS_1_1SceneLogic_1ad785cec52c92350c95bb746c28e38c8d" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__WORLD__NS_1_1Scene" kindref="compound">Scene</ref> &gt;</type>
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="24" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="24" column="9" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__WORLD__NS_1_1SceneLogic_1a34b793cc93ce2021ff3b54d10ecb3ac4" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; SceneObject &gt;</type>
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="25" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="25" column="9" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__WORLD__NS_1_1SceneLogic_1afb47975291cd9be8b5bad3a30fd4488b" prot="public" static="no">
         <type>std::vector&lt; SceneObjectPtr &gt;</type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="26" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="26" column="9" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="26" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__WORLD__NS_1_1SceneLogic_1a2473452fc5f1c0a4746b17257f703291" prot="public" static="no">
         <type><ref refid="classSR__WORLD__NS_1_1SceneLogic" kindref="compound">SceneLogic</ref></type>
@@ -92,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="27" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="27" column="9" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="27" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="52" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="52" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="52" column="18" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1SceneLogic_1aea36f9b5819c54a5e7aaa59a43c90db6" prot="protected" static="no" mutable="yes">
         <type>std::recursive_mutex</type>
@@ -122,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="53" column="38" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="53" column="38" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="53" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -138,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="30" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="30" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneLogic_1a3fb7adbbb7381ca601f8fc195f9d5a26" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -153,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="33" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="33" bodyend="33"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="33" column="35" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="33" bodyend="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneLogic_1a8fa32757e3357a2fd99eb8fe0bdc77d6" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
         <type>SR_NODISCARD SceneLogicType</type>
@@ -170,7 +170,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="34" column="45"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="34" column="45"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneLogic_1a28f43f9c7795a1f45fa4655d35dd1013" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
         <type>SR_NODISCARD StringAtom</type>
@@ -187,7 +187,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="35" column="41"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="35" column="41"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneLogic_1a6f59b163557d984cb6187cacac72a3f5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const ScenePtr &amp;</type>
@@ -201,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="36" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="36" bodyend="36"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="36" column="37" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="36" bodyend="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneLogic_1a8f657d02ae909be927f0aec112f808b5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -220,7 +220,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="37" column="48" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="37" bodyend="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="37" column="48" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="37" bodyend="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneLogic_1a5b6feef053ddd3245d347a7004f7d540" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -239,7 +239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="39" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="39" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneLogic_1af783cf5327990ba694b8b831b4f82c88" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -258,7 +258,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="41" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="41" bodyend="41"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="41" column="22" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="41" bodyend="41"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneLogic_1a48e3e0f1bb1eac7a62782c7fae540739" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -273,7 +273,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="42" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="42" bodyend="42"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="42" column="22" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="42" bodyend="42"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneLogic_1aac2b4ffb8e83e6e94593fffc7ffecf42" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -288,7 +288,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="43" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="43" bodyend="43"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="43" column="22" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="43" bodyend="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneLogic_1aaea262adf016ef62cd4fcb74dd77ca28" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -304,7 +304,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="45" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="45" bodyend="45"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="45" column="22" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="45" bodyend="45"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneLogic_1aea65aafafeea90fd16bc4d7101a2819f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -328,7 +328,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="46" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="46" bodyend="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="46" column="22" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="46" bodyend="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneLogic_1a05c469fa255f48e4f7b3588ffe285735" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -352,7 +352,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="47" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="47" bodyend="47"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="47" column="22" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="47" bodyend="47"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneLogic_1a8d989f46c40b47c7fb25afc481e84fc4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -367,7 +367,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="49" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="49" bodyend="49"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="49" column="22" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="49" bodyend="49"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -459,7 +459,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" line="19" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="19" bodyend="55"/>
+    <location file="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" line="19" column="5" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneLogic.h" bodystart="19" bodyend="55"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::SceneLogic</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::SceneLogic</scope><name>AllocateStatic</name></member>

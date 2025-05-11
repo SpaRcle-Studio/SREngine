@@ -6,11 +6,11 @@
     <includes refid="Vector3_8h" local="no">Utils/Math/Vector3.h</includes>
     <includes refid="Function_8h" local="no">Utils/Types/Function.h</includes>
     <includes refid="PipelineType_8h" local="no">Graphics/Pipeline/PipelineType.h</includes>
-    <includedby refid="AndroidWindow_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Window/AndroidWindow.h</includedby>
-    <includedby refid="GLFWWindow_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Window/GLFWWindow.h</includedby>
-    <includedby refid="Win32Window_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h</includedby>
-    <includedby refid="Window_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h</includedby>
-    <includedby refid="X11Window_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Window/X11Window.h</includedby>
+    <includedby refid="AndroidWindow_8h" local="no">Engine/libs/Graphics/inc/Graphics/Window/AndroidWindow.h</includedby>
+    <includedby refid="GLFWWindow_8h" local="no">Engine/libs/Graphics/inc/Graphics/Window/GLFWWindow.h</includedby>
+    <includedby refid="Win32Window_8h" local="no">Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h</includedby>
+    <includedby refid="Window_8h" local="no">Engine/libs/Graphics/inc/Graphics/Window/Window.h</includedby>
+    <includedby refid="X11Window_8h" local="no">Engine/libs/Graphics/inc/Graphics/Window/X11Window.h</includedby>
     <incdepgraph>
       <node id="91">
         <label>Graphics/Pipeline/PipelineType.h</label>
@@ -25,7 +25,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h</label>
         <link refid="BasicWindowImpl_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -659,7 +659,7 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="6">
-        <label>Engine/Core/inc/Core/Engine.h</label>
+        <label>Engine/inc/Engine/Engine.h</label>
         <link refid="Engine_8h_source"/>
         <childnode refid="7" relation="include">
         </childnode>
@@ -669,23 +669,23 @@
         </childnode>
       </node>
       <node id="7">
-        <label>Engine/Core/inc/Core/EngineCommands.h</label>
+        <label>Engine/inc/Engine/EngineCommands.h</label>
         <link refid="EngineCommands_8h_source"/>
       </node>
       <node id="8">
-        <label>Engine/Core/inc/Core/Scripting/ScriptableContext.h</label>
+        <label>Engine/inc/Engine/Scripting/ScriptableContext.h</label>
         <link refid="ScriptableContext_8h_source"/>
       </node>
       <node id="9">
-        <label>Engine/Core/inc/Core/World/World.h</label>
+        <label>Engine/inc/Engine/World/World.h</label>
         <link refid="World_8h_source"/>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Window/AndroidWindow.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Window/AndroidWindow.h</label>
         <link refid="AndroidWindow_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h</label>
         <link refid="BasicWindowImpl_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -699,15 +699,15 @@
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Window/GLFWWindow.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Window/GLFWWindow.h</label>
         <link refid="GLFWWindow_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h</label>
         <link refid="Win32Window_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Window/Window.h</label>
         <link refid="Window_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
@@ -715,7 +715,7 @@
         </childnode>
       </node>
       <node id="10">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Window/X11Window.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Window/X11Window.h</label>
         <link refid="X11Window_8h_source"/>
       </node>
     </invincdepgraph>
@@ -844,6 +844,6 @@
 <codeline lineno="117"><highlight class="normal"></highlight></codeline>
 <codeline lineno="118"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_BASICWINDOW_IMPL_H</highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h"/>
   </compounddef>
 </doxygen>

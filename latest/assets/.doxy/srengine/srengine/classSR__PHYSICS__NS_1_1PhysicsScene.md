@@ -478,5 +478,5 @@ class SR_PHYSICS_NS::PhysicsScene::SafePtr< PhysicsScene > (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h`
+The documentation for this class was generated from the following file `Engine/libs/Physics/inc/Physics/PhysicsScene.h`
 

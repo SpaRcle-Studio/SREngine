@@ -193,5 +193,5 @@ virtual SR_UTILS_NS::EventDispatcher::~EventDispatcher ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Events/EventDispatcher.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Events/EventDispatcher.h`
 

@@ -12,7 +12,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRaycast3DImpl.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXRaycast3DImpl.h</label>
         <link refid="PhysXRaycast3DImpl_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -393,6 +393,6 @@
 <codeline lineno="22"><highlight class="normal"></highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_PHYSXRAYCAST3DIMPL_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRaycast3DImpl.h"/>
+    <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXRaycast3DImpl.h"/>
   </compounddef>
 </doxygen>

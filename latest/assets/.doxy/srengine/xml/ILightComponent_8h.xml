@@ -4,14 +4,14 @@
     <compoundname>ILightComponent.h</compoundname>
     <includes refid="IRenderComponent_8h" local="no">Graphics/Types/IRenderComponent.h</includes>
     <includes refid="Enumerations_8h" local="no">Utils/Common/Enumerations.h</includes>
-    <includedby refid="AreaLight_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Lighting/AreaLight.h</includedby>
-    <includedby refid="DirectionalLight_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h</includedby>
-    <includedby refid="PointLight_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Lighting/PointLight.h</includedby>
-    <includedby refid="ProbeLight_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Lighting/ProbeLight.h</includedby>
-    <includedby refid="SpotLight_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Lighting/SpotLight.h</includedby>
+    <includedby refid="AreaLight_8h" local="no">Engine/libs/Graphics/inc/Graphics/Lighting/AreaLight.h</includedby>
+    <includedby refid="DirectionalLight_8h" local="no">Engine/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h</includedby>
+    <includedby refid="PointLight_8h" local="no">Engine/libs/Graphics/inc/Graphics/Lighting/PointLight.h</includedby>
+    <includedby refid="ProbeLight_8h" local="no">Engine/libs/Graphics/inc/Graphics/Lighting/ProbeLight.h</includedby>
+    <includedby refid="SpotLight_8h" local="no">Engine/libs/Graphics/inc/Graphics/Lighting/SpotLight.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h</label>
         <link refid="ILightComponent_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1013,15 +1013,15 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Lighting/AreaLight.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Lighting/AreaLight.h</label>
         <link refid="AreaLight_8h_source"/>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h</label>
         <link refid="DirectionalLight_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h</label>
         <link refid="ILightComponent_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1035,15 +1035,15 @@
         </childnode>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Lighting/PointLight.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Lighting/PointLight.h</label>
         <link refid="PointLight_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Lighting/ProbeLight.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Lighting/ProbeLight.h</label>
         <link refid="ProbeLight_8h_source"/>
       </node>
       <node id="6">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Lighting/SpotLight.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Lighting/SpotLight.h</label>
         <link refid="SpotLight_8h_source"/>
       </node>
     </invincdepgraph>
@@ -1094,6 +1094,6 @@
 <codeline lineno="38"><highlight class="normal"></highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_ILIGHTCOMPONENT_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h"/>
   </compounddef>
 </doxygen>

@@ -142,5 +142,5 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Render/RenderSettings.h`
 

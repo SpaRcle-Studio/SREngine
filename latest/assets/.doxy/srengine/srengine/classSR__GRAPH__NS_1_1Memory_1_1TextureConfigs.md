@@ -353,5 +353,5 @@ class SR_GRAPH_NS::Memory::TextureConfigs::Singleton< TextureConfigs > (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h`
 

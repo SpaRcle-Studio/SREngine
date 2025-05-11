@@ -381,5 +381,5 @@ inline void SR_GRAPH_NS::SSBOManager::SetPipeline (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Memory/SSBOManager.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Memory/SSBOManager.h`
 

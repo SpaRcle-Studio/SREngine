@@ -4,10 +4,10 @@
     <compoundname>RenderSettings.h</compoundname>
     <includes refid="Graphics_2inc_2Graphics_2macros_8h" local="no">Graphics/macros.h</includes>
     <includes refid="RenderSettings_8h" local="no">Graphics/Render/RenderSettings.h</includes>
-    <includedby refid="RenderSettings_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h</includedby>
+    <includedby refid="RenderSettings_8h" local="no">Engine/libs/Graphics/inc/Graphics/Render/RenderSettings.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderSettings.h</label>
         <link refid="RenderSettings_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -38,7 +38,7 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderSettings.h</label>
         <link refid="RenderSettings_8h"/>
         <childnode refid="1" relation="include">
         </childnode>
@@ -82,6 +82,6 @@
 <codeline lineno="29"><highlight class="normal"></highlight></codeline>
 <codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_RENDERSETTINGS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderSettings.h"/>
   </compounddef>
 </doxygen>

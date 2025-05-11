@@ -6,7 +6,7 @@
     <includes refid="Bullet3PhysicsLib_8h" local="no">Physics/Bullet3/Bullet3PhysicsLib.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h</label>
         <link refid="Bullet3CollisionShape_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1114,6 +1114,6 @@
 <codeline lineno="32"><highlight class="normal"></highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_BULLET3COLLISIONSHAPE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h"/>
+    <location file="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h"/>
   </compounddef>
 </doxygen>

@@ -724,5 +724,5 @@ Implements [*SR\_GRAPH\_NS::GroupPass::Update*](classSR__GRAPH__NS_1_1GroupPass.
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h`
 

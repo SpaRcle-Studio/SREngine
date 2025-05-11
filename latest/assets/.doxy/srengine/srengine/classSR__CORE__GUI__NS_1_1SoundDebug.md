@@ -484,5 +484,5 @@ SR_CORE_GUI_NS::SoundDebug::SoundDebug ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/GUI/SoundDebug.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/GUI/SoundDebug.h`
 

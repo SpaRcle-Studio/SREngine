@@ -3,7 +3,7 @@
   <compounddef id="AnimationStateTransition_8h" kind="file" language="C++">
     <compoundname>AnimationStateTransition.h</compoundname>
     <includes refid="AnimationStateCondition_8h" local="no">Graphics/Animations/AnimationStateCondition.h</includes>
-    <includedby refid="AnimationState_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h</includedby>
+    <includedby refid="AnimationState_8h" local="no">Engine/libs/Graphics/inc/Graphics/Animations/AnimationState.h</includedby>
     <incdepgraph>
       <node id="106">
         <label>Graphics/Animations/AnimationCommon.h</label>
@@ -46,7 +46,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h</label>
         <link refid="AnimationStateTransition_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -695,25 +695,25 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationState.h</label>
         <link refid="AnimationState_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateMachine.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateMachine.h</label>
         <link refid="AnimationStateMachine_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h</label>
         <link refid="AnimationStateTransition_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
         <link refid="Animator_8h_source"/>
       </node>
     </invincdepgraph>
@@ -776,6 +776,6 @@
 <codeline lineno="50"><highlight class="normal"></highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_ANIMATIONSTATETRANSITION_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h"/>
   </compounddef>
 </doxygen>

@@ -8,6 +8,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/inc/Core/EvoScriptAPI.h" line="18" column="1"/>
+    <location file="Engine/inc/Engine/EvoScriptAPI.h" line="18" column="1"/>
   </compounddef>
 </doxygen>

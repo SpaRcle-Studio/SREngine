@@ -5,10 +5,10 @@
     <includes refid="Graphics_2inc_2Graphics_2macros_8h" local="no">Graphics/macros.h</includes>
     <includes refid="Utils_2inc_2Utils_2macros_8h" local="no">Utils/macros.h</includes>
     <includes local="no">EvoVulkan/Memory/Allocator.h</includes>
-    <includedby refid="VulkanMemory_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h</includedby>
+    <includedby refid="VulkanMemory_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h</label>
         <link refid="DynamicTextureDescriptorSet_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -44,13 +44,13 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h</label>
         <link refid="DynamicTextureDescriptorSet_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h</label>
         <link refid="VulkanMemory_8h_source"/>
       </node>
     </invincdepgraph>
@@ -86,6 +86,6 @@
 <codeline lineno="22"><highlight class="normal"></highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_DYNAMICTEXTUREDESCRIPTORSET_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h"/>
   </compounddef>
 </doxygen>

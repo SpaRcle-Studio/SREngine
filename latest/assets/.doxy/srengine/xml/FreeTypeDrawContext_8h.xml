@@ -4,7 +4,7 @@
     <compoundname>FreeTypeDrawContext.h</compoundname>
     <includes refid="FreeType_8h" local="no">Graphics/Font/FreeType.h</includes>
     <includes refid="NonCopyable_8h" local="no">Utils/Common/NonCopyable.h</includes>
-    <includedby refid="FreeTypeFace_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeFace.h</includedby>
+    <includedby refid="FreeTypeFace_8h" local="no">Engine/libs/Graphics/inc/Graphics/Font/FreeTypeFace.h</includedby>
     <incdepgraph>
       <node id="2">
         <label>Graphics/Font/FreeType.h</label>
@@ -23,7 +23,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h</label>
         <link refid="FreeTypeDrawContext_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -373,13 +373,13 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h</label>
         <link refid="FreeTypeDrawContext_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeFace.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Font/FreeTypeFace.h</label>
         <link refid="FreeTypeFace_8h_source"/>
       </node>
     </invincdepgraph>
@@ -452,6 +452,6 @@
 <codeline lineno="60"><highlight class="normal"></highlight></codeline>
 <codeline lineno="61"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_FREETYPEDRAWCONTEXT_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h"/>
   </compounddef>
 </doxygen>

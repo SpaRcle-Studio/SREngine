@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="16" column="39" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="16" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="16" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1DebugPass_1_1ShaderInfo_1a67c4615f04c9eaa66792b28510d51aa9" prot="public" static="no" mutable="no">
         <type>uint32_t</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="23" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="23" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1DebugPass_1_1ShaderInfo_1a77020c7be74d99d4a741deb9e48776c0" prot="public" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="structSR__GRAPH__NS_1_1DebugPass_1_1ShaderInfo_1_1MemInfo" kindref="compound">MemInfo</ref> &gt;</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="24" column="25" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="24" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1DebugPass_1_1ShaderInfo_1a343d526c92b9b279de42575a129b16fa" prot="public" static="no" mutable="no">
         <type>std::vector&lt; std::vector&lt; <ref refid="structSR__GRAPH__NS_1_1DebugRenderer_1_1DrawInfo" kindref="compound">DebugRenderer::DrawInfo</ref> &gt; &gt;</type>
@@ -59,14 +59,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="25" column="25" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="25" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="25" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="15" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="15" bodyend="26"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="15" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="15" bodyend="26"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1DebugPass_1_1ShaderInfo_1a343d526c92b9b279de42575a129b16fa" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPass::ShaderInfo</scope><name>drawQueues</name></member>
       <member refid="structSR__GRAPH__NS_1_1DebugPass_1_1ShaderInfo_1a8740f1f0702996c788a213ac02f4cfcf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPass::ShaderInfo</scope><name>pShader</name></member>

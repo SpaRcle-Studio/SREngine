@@ -257,5 +257,5 @@ void SR_UTILS_NS::GameObject::OnHierarchyChanged () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/ECS/GameObject.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/ECS/GameObject.h`
 

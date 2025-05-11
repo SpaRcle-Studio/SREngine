@@ -754,5 +754,5 @@ SR_GTYPES_NS::IndexedMesh::IndexedMesh () = default
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h`
 

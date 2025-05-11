@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="27" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="27" column="9" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a15293e9b13780a1bc95a84a755e3527e" prot="public" static="no">
         <type>Super</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="28" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="28" column="9" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a0892471462082b6d4455ad7eeaf7afe6" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__PTYPES__NS_1_1Rigidbody" kindref="compound">SR_PTYPES_NS::Rigidbody</ref> &gt;</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="29" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="29" column="9" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a806d013be31cb3748a22d9eaa8ab6909" prot="public" static="no">
         <type><ref refid="classSR__PHYSICS__NS_1_1PhysicsWorld" kindref="compound">SR_PHYSICS_NS::PhysicsWorld</ref> *</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="30" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="30" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="30" column="9" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a1711e50af5feedbcc3f5da3951bfa344" prot="public" static="no">
         <type><ref refid="classSR__PHYSICS__NS_1_1LibraryImpl" kindref="compound">SR_PHYSICS_NS::LibraryImpl</ref> *</type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="31" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="31" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="31" column="9" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a99f101df470c906978dcd47da8012c8f" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__WORLD__NS_1_1Scene" kindref="compound">SR_WORLD_NS::Scene</ref> &gt;</type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="32" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="32" column="9" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a6369b96923d5ec449bcd29a05fc17cec" prot="public" static="no">
         <type>SR_UTILS_NS::Measurement</type>
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="33" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="33" column="9" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="33" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="friend">
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="1" column="0" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="1" column="0" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="25" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -135,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="59" column="19" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="59" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="59" column="19" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a83c7bcfc71ec8e51de54feb59ad154e1" prot="private" static="no" mutable="no">
         <type>std::list&lt; RigidbodyPtr &gt;</type>
@@ -149,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="60" column="19" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="60" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="60" column="19" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a8656725aeb0eef24d3ef73b9574fb516" prot="private" static="no" mutable="no">
         <type>ScenePtr</type>
@@ -163,7 +163,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="62" column="18" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="62" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="62" column="18" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="62" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PHYSICS__NS_1_1PhysicsScene_1aef44bdfb10322366fa33c101ffcc7cc0" prot="private" static="no" mutable="no">
         <type>LibraryPtr</type>
@@ -178,7 +178,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="64" column="20" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="64" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="64" column="20" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="64" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a16138281f0c677464e862e9c6addc4c4" prot="private" static="no" mutable="no">
         <type>LibraryPtr</type>
@@ -193,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="65" column="20" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="65" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="65" column="20" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a8a77f62fc0dffccff1aac006e8c9c15c" prot="private" static="no" mutable="no">
         <type>PhysicsWorldPtr</type>
@@ -208,7 +208,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="67" column="25" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="67" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="67" column="25" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="67" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a0997dd65abba58adf88930dd73c56a70" prot="private" static="no" mutable="no">
         <type>PhysicsWorldPtr</type>
@@ -223,7 +223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="68" column="25" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="68" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="68" column="25" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="68" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a60a7e45eee91ab793cab3ebaaf610a45" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -238,7 +238,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="70" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="70" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="70" column="14" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="70" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a38c7c587fe445f56f4b3e743d232e300" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -253,7 +253,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="71" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="71" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="71" column="14" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="71" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a7354f5b0daa2eeafa9522fece1024eea" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -268,7 +268,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="72" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="72" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="72" column="14" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="72" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -288,7 +288,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="35" column="18"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="35" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a9106456fc34265d853304a3fce7dfccc" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -302,7 +302,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="36" column="17"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="36" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a256ed9992f6b3dda3e821d0d5f4cb2b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -320,7 +320,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="39" column="22"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="39" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysicsScene_1ab823884e903c964296da00c07657a0de" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -334,7 +334,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="40" column="22"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="40" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a96084840f79e6eef60c011993c857507" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -348,7 +348,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="41" column="22"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="41" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a083b1d93a089871e03fee7c4ce88c5d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -366,7 +366,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="43" column="22"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="43" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysicsScene_1ad3b02f6e323a1aa0cc869607288e5733" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -384,7 +384,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="44" column="22"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="44" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a215e81546cd41761508728dccfa97af5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -398,7 +398,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="46" column="22"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="46" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a921d137f0bc3efbf8e2580d2311d000f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__PHYSICS__NS_1_1PhysicsWorld" kindref="compound">SR_PHYSICS_NS::PhysicsWorld</ref> *</type>
@@ -412,7 +412,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="48" column="50" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="48" bodyend="48"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="48" column="50" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="48" bodyend="48"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysicsScene_1aaed5816614ab949f332c4ca9ba3872f3" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__PHYSICS__NS_1_1PhysicsWorld" kindref="compound">SR_PHYSICS_NS::PhysicsWorld</ref> *</type>
@@ -426,7 +426,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="49" column="50" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="49" bodyend="49"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="49" column="50" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="49" bodyend="49"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a79202b27f13283cf26d759c29e8e661b" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -440,7 +440,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="50" column="27"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="50" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a2e6b12379abddc22c77af29c3352a260" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -458,7 +458,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="52" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="52" bodyend="52"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="52" column="14" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="52" bodyend="52"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -474,7 +474,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="55" column="22"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="55" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysicsScene_1a784be99932c00b3c340df541df5373bd" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -488,7 +488,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="56" column="22"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="56" column="22"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -519,7 +519,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" line="24" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="24" bodyend="74"/>
+    <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h" line="24" column="5" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsScene.h" bodystart="24" bodyend="74"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1SafePtr_1a10cb98d4a7cb312140cdf2b2786f422e" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysicsScene</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SafePtr_1a8c0b09cfa1d13b9fa8e79a1266f9e900" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysicsScene</scope><name>AutoFree</name></member>

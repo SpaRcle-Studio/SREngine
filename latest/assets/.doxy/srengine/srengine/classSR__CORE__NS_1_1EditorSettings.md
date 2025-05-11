@@ -489,5 +489,5 @@ class SR_CORE_NS::EditorSettings::GlobalSettings< EditorSettings > (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/Settings/EditorSettings.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/Settings/EditorSettings.h`
 

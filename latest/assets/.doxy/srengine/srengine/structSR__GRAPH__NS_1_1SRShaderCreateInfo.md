@@ -257,5 +257,5 @@ inline SR_NODISCARD bool SR_GRAPH_NS::SRShaderCreateInfo::Validate () noexcept c
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h`
 

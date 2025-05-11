@@ -9,10 +9,10 @@
     <includes refid="FrameBufferQueue_8h" local="no">Graphics/Pipeline/FrameBufferQueue.h</includes>
     <includes refid="IShaderProgram_8h" local="no">Graphics/Pipeline/IShaderProgram.h</includes>
     <includes refid="OverlayType_8h" local="no">Graphics/Overlay/OverlayType.h</includes>
-    <includedby refid="LightSystem_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Lighting/LightSystem.h</includedby>
-    <includedby refid="EmptyPipeline_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pipeline/EmptyPipeline.h</includedby>
-    <includedby refid="VulkanPipeline_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanPipeline.h</includedby>
-    <includedby refid="IndexedMesh_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h</includedby>
+    <includedby refid="LightSystem_8h" local="no">Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h</includedby>
+    <includedby refid="EmptyPipeline_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pipeline/EmptyPipeline.h</includedby>
+    <includedby refid="VulkanPipeline_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanPipeline.h</includedby>
+    <includedby refid="IndexedMesh_8h" local="no">Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h</includedby>
     <incdepgraph>
       <node id="146">
         <label>Graphics/Overlay/OverlayType.h</label>
@@ -59,7 +59,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h</label>
         <link refid="Pipeline_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1128,25 +1128,25 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="13">
-        <label>Engine/Core/inc/Core/GUI/EditorGizmo.h</label>
+        <label>Engine/inc/Engine/GUI/EditorGizmo.h</label>
         <link refid="EditorGizmo_8h_source"/>
         <childnode refid="14" relation="include">
         </childnode>
       </node>
       <node id="14">
-        <label>Engine/Core/inc/Core/GUI/SceneTools.h</label>
+        <label>Engine/inc/Engine/GUI/SceneTools.h</label>
         <link refid="SceneTools_8h_source"/>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Lighting/LightSystem.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h</label>
         <link refid="LightSystem_8h_source"/>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/EmptyPipeline.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pipeline/EmptyPipeline.h</label>
         <link refid="EmptyPipeline_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h</label>
         <link refid="Pipeline_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1158,15 +1158,15 @@
         </childnode>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanPipeline.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanPipeline.h</label>
         <link refid="VulkanPipeline_8h_source"/>
       </node>
       <node id="6">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</label>
         <link refid="DebugWireframeMesh_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h</label>
         <link refid="IndexedMesh_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
@@ -1174,11 +1174,11 @@
         </childnode>
       </node>
       <node id="8">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</label>
         <link refid="Mesh3D_8h_source"/>
       </node>
       <node id="7">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/MeshComponent.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/MeshComponent.h</label>
         <link refid="MeshComponent_8h_source"/>
         <childnode refid="8" relation="include">
         </childnode>
@@ -1192,19 +1192,19 @@
         </childnode>
       </node>
       <node id="9">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h</label>
         <link refid="ProceduralMesh_8h_source"/>
       </node>
       <node id="10">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
         <link refid="SkinnedMesh_8h_source"/>
       </node>
       <node id="11">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h</label>
         <link refid="Sprite_8h_source"/>
       </node>
       <node id="12">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h</label>
         <link refid="Gizmo_8h_source"/>
         <childnode refid="13" relation="include">
         </childnode>
@@ -1475,6 +1475,6 @@
 <codeline lineno="296"><highlight class="normal"></highlight></codeline>
 <codeline lineno="297"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_PIPELINE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h"/>
   </compounddef>
 </doxygen>

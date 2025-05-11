@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" line="40" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" bodystart="40" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" line="40" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1MessageBoxWidget_1ad0e173edae3fb9de76eb39e257b212ea" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" line="41" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" bodystart="41" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" line="41" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1MessageBoxWidget_1ab24b4e3d2b4481ed0ab915c2bbfdf194" prot="private" static="no" mutable="no">
         <type>MessageBoxType</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" line="42" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" bodystart="42" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" line="42" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1MessageBoxWidget_1a1216b9e9f38beaed1b8e7321ac231fd7" prot="private" static="no" mutable="no">
         <type>MessageBoxButton</type>
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" line="43" column="26" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" bodystart="43" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" line="43" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" bodystart="43" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" line="28" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" line="28" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1MessageBoxWidget_1a7e7e5e84c8701907aa3e9e44c87ef619" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" line="29" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" line="29" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1MessageBoxWidget_1af40db6a7a6fe75aba03059e71981616e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" line="37" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" line="37" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -138,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" line="32" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" line="32" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -203,7 +203,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" line="25" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" bodystart="25" bodyend="45"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" line="25" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h" bodystart="25" bodyend="45"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::MessageBoxWidget</scope><name>DestroySingleton</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1MessageBoxWidget_1af40db6a7a6fe75aba03059e71981616e" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::MessageBoxWidget</scope><name>Draw</name></member>

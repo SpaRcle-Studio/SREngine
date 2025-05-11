@@ -3,7 +3,7 @@
   <compounddef id="RefAnalyzer_8h" kind="file" language="C++">
     <compoundname>RefAnalyzer.h</compoundname>
     <includes refid="LexicalTree_8h" local="no">Graphics/SRSL/LexicalTree.h</includes>
-    <includedby refid="SRSL_2Shader_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/SRSL/Shader.h</includedby>
+    <includedby refid="SRSL_2Shader_8h" local="no">Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h</includedby>
     <incdepgraph>
       <node id="3">
         <label>Graphics/SRSL/LexerUtils.h</label>
@@ -34,7 +34,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h</label>
         <link refid="RefAnalyzer_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -971,13 +971,13 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h</label>
         <link refid="RefAnalyzer_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/Shader.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h</label>
         <link refid="SRSL_2Shader_8h_source"/>
       </node>
     </invincdepgraph>
@@ -1048,6 +1048,6 @@
 <codeline lineno="56"><highlight class="normal"></highlight></codeline>
 <codeline lineno="57"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_REFANALYZER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h"/>
   </compounddef>
 </doxygen>

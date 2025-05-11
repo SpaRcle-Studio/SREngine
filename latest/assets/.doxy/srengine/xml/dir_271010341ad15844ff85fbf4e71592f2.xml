@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_271010341ad15844ff85fbf4e71592f2" kind="dir">
+    <compoundname>Engine/libs/Graphics/inc/Graphics/GUI</compoundname>
+    <innerdir refid="dir_cef4e51036814995af3e2bf6cd9d4d03">Engine/libs/Graphics/inc/Graphics/GUI/Editor</innerdir>
+    <innerfile refid="Icons_8h">Icons.h</innerfile>
+    <innerfile refid="ImGUI_8h">ImGUI.h</innerfile>
+    <innerfile refid="ImmediateGUI_8h">ImmediateGUI.h</innerfile>
+    <innerfile refid="ImNodeEditorUtils_8h">ImNodeEditorUtils.h</innerfile>
+    <innerfile refid="Link_8h">Link.h</innerfile>
+    <innerfile refid="Graphics_2inc_2Graphics_2GUI_2Node_8h">Node.h</innerfile>
+    <innerfile refid="NodeBuilder_8h">NodeBuilder.h</innerfile>
+    <innerfile refid="NodeCreation_8h">NodeCreation.h</innerfile>
+    <innerfile refid="NodeManager_8h">NodeManager.h</innerfile>
+    <innerfile refid="NodeWidget_8h">NodeWidget.h</innerfile>
+    <innerfile refid="Pin_8h">Pin.h</innerfile>
+    <innerfile refid="PopupMenu_8h">PopupMenu.h</innerfile>
+    <innerfile refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h">Utils.h</innerfile>
+    <innerfile refid="Widget_8h">Widget.h</innerfile>
+    <innerfile refid="WidgetContainer_8h">WidgetContainer.h</innerfile>
+    <innerfile refid="WidgetManager_8h">WidgetManager.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/"/>
+  </compounddef>
+</doxygen>

@@ -173,5 +173,5 @@ inline void SR_SCRIPTING_NS::ScriptModule::SetPath (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h`
+The documentation for this class was generated from the following file `Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h`
 

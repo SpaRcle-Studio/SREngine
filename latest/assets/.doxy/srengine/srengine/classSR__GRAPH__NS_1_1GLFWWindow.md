@@ -492,5 +492,5 @@ Implements [*SR\_GRAPH\_NS::BasicWindowImpl::SetIcon*](classSR__GRAPH__NS_1_1Bas
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Window/GLFWWindow.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Window/GLFWWindow.h`
 

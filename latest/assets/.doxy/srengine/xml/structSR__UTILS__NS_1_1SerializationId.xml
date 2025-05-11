@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="52" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="52" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="52" column="27" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="52" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="53" column="10" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="53" column="10" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1SerializationId_1a03a0de48b5947138423c20d449d4b176" prot="private" static="no" mutable="no">
         <type>char</type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="54" column="6" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="54" bodyend="54"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="54" column="6" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="54" bodyend="54"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="18" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="18" column="14"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1SerializationId_1abda5fb9828142c3bdcc485f194802203" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_CONSTEXPR</type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="20" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="20" column="14"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1SerializationId_1a1d6fdbbf28420049dbeb9f565f34bdb7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const char *</type>
@@ -92,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="48" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="48" bodyend="48"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="48" column="25" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="48" bodyend="48"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1SerializationId_1aba3af465784f658aa0940b503be5e7c1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="49" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="49" bodyend="49"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="49" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="49" bodyend="49"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -134,7 +134,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="22" column="45" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="22" bodyend="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="22" column="45" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="22" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1SerializationId_1ac77baf0f1db4ed045cbca89c30e8b22a" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref></type>
@@ -152,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="32" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="32" bodyend="38"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="32" column="24" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="32" bodyend="38"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1SerializationId_1a36b98aeaf3b8722c37ad571d711974b2" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref></type>
@@ -170,14 +170,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="40" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="40" bodyend="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="40" column="24" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="40" bodyend="46"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="17" column="1" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="17" bodyend="55"/>
+    <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="17" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="17" bodyend="55"/>
     <listofallmembers>
       <member refid="structSR__UTILS__NS_1_1SerializationId_1a4bb40d69e29c7929ee058b5b2001d869" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationId</scope><name>Create</name></member>
       <member refid="structSR__UTILS__NS_1_1SerializationId_1ac77baf0f1db4ed045cbca89c30e8b22a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationId</scope><name>CreateFromCStr</name></member>

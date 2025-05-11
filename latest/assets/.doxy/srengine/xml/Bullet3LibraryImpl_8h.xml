@@ -5,7 +5,7 @@
     <includes refid="LibraryImpl_8h" local="no">Physics/LibraryImpl.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3LibraryImpl.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3LibraryImpl.h</label>
         <link refid="Bullet3LibraryImpl_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -512,6 +512,6 @@
 <codeline lineno="29"><highlight class="normal"></highlight></codeline>
 <codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_BULLET3LIBRARYIMPL_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3LibraryImpl.h"/>
+    <location file="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3LibraryImpl.h"/>
   </compounddef>
 </doxygen>

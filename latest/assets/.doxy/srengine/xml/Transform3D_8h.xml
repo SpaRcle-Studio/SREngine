@@ -3,8 +3,8 @@
   <compounddef id="Transform3D_8h" kind="file" language="C++">
     <compoundname>Transform3D.h</compoundname>
     <includes refid="Transform_8h" local="no">Utils/ECS/Transform.h</includes>
-    <includedby refid="Guizmo_8h" local="no">Engine/Core/inc/Core/GUI/Guizmo.h</includedby>
-    <includedby refid="World_8h" local="no">Engine/Core/inc/Core/World/World.h</includedby>
+    <includedby refid="Guizmo_8h" local="no">Engine/inc/Engine/GUI/Guizmo.h</includedby>
+    <includedby refid="World_8h" local="no">Engine/inc/Engine/World/World.h</includedby>
     <incdepgraph>
       <node id="108">
         <label>Utils/Common/AnyMarshal.h</label>
@@ -227,7 +227,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h</label>
+        <label>Engine/libs/Utils/inc/Utils/ECS/Transform3D.h</label>
         <link refid="Transform3D_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -926,15 +926,15 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/inc/Core/GUI/Guizmo.h</label>
+        <label>Engine/inc/Engine/GUI/Guizmo.h</label>
         <link refid="Guizmo_8h_source"/>
       </node>
       <node id="3">
-        <label>Engine/Core/inc/Core/World/World.h</label>
+        <label>Engine/inc/Engine/World/World.h</label>
         <link refid="World_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h</label>
+        <label>Engine/libs/Utils/inc/Utils/ECS/Transform3D.h</label>
         <link refid="Transform3D_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1034,6 +1034,6 @@
 <codeline lineno="89"><highlight class="normal"></highlight></codeline>
 <codeline lineno="90"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_TRANSFORM3D_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h"/>
+    <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h"/>
   </compounddef>
 </doxygen>

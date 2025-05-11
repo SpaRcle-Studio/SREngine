@@ -2598,5 +2598,5 @@ WindowPtr SR_GRAPH_NS::Pipeline::m_window;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h`
 

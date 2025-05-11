@@ -3,7 +3,7 @@
   <compounddef id="NodeBuilder_8h" kind="file" language="C++">
     <compoundname>NodeBuilder.h</compoundname>
     <includes refid="ImNodeEditorUtils_8h" local="no">Graphics/GUI/ImNodeEditorUtils.h</includes>
-    <includedby refid="NodeWidget_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h</includedby>
+    <includedby refid="NodeWidget_8h" local="no">Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h</includedby>
     <incdepgraph>
       <node id="2">
         <label>Graphics/GUI/ImNodeEditorUtils.h</label>
@@ -12,7 +12,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h</label>
         <link refid="NodeBuilder_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -41,21 +41,21 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="3">
-        <label>Engine/Core/inc/Core/GUI/AnimatorEditor.h</label>
+        <label>Engine/inc/Engine/GUI/AnimatorEditor.h</label>
         <link refid="AnimatorEditor_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h</label>
+        <label>Engine/inc/Engine/GUI/RenderTechniqueEditor.h</label>
         <link refid="RenderTechniqueEditor_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h</label>
         <link refid="NodeBuilder_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h</label>
         <link refid="NodeWidget_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -146,6 +146,6 @@
 <codeline lineno="72"><highlight class="normal"></highlight></codeline>
 <codeline lineno="73"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_NODEBUILDER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h"/>
   </compounddef>
 </doxygen>

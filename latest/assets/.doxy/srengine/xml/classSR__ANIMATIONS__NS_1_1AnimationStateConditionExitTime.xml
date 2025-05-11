@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="111" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="111" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="111" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="111" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="124" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="124" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="124" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="124" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationStateConditionExitTime_1aca7ecd89bbc1d7d1c58c88f78592f5c8" prot="protected" static="no" mutable="no">
         <type>float_t</type>
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="125" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="125" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="125" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="125" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationStateConditionExitTime_1ab6a650e15c3bfa0c3feaa91fcb2c173e" prot="protected" static="no" mutable="no">
         <type>float_t</type>
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="126" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="126" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="126" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="126" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationStateConditionExitTime_1aee6e250b543f64c5151aca61b139a557" prot="protected" static="no" mutable="no">
         <type>float_t</type>
@@ -80,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="135" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="135" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="135" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="135" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationStateConditionExitTime_1afbc729af0c999bc90032397b493ddf49" prot="protected" static="no" mutable="no">
         <type>float_t</type>
@@ -95,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="136" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="136" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="136" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="136" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationStateConditionExitTime_1a78ce122ebe424bcb00c8777ce0293b60" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -110,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="137" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="137" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="137" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="137" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -130,7 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="113" column="61"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="113" column="61"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -151,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="115" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="115" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateConditionExitTime_1a3d1d0e5c227ed120fc6cdc746426147d" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -170,7 +170,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="116" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="116" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateConditionExitTime_1a22018ede6a62cd65a5ab14e07701297e" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD std::optional&lt; float_t &gt;</type>
@@ -185,7 +185,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="118" column="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="118" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateConditionExitTime_1a6ba18bb4953570f90716defbaecc7b76" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -200,7 +200,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="120" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="120" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateConditionExitTime_1ae7b2b1f657a9232e19eaf40a1b3bab55" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -219,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="121" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="121" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -264,7 +264,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="110" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="110" bodyend="139"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="110" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="110" bodyend="139"/>
     <listofallmembers>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionExitTime_1a22018ede6a62cd65a5ab14e07701297e" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateConditionExitTime</scope><name>GetProgress</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionExitTime_1a3d1d0e5c227ed120fc6cdc746426147d" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateConditionExitTime</scope><name>IsFinished</name></member>

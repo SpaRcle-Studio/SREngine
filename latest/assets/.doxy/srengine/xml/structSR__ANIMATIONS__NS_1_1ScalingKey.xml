@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="68" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="68" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="68" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="68" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="62" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="62" column="9"/>
       </memberdef>
       <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1ScalingKey_1a4d21b6e2ad451b8c34177cfe31c0ea4e" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="63" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="63" bodyend="65"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="63" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="63" bodyend="65"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -59,7 +59,7 @@
 <para><hruler/>
  </para>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="60" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="60" bodyend="70"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="60" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="60" bodyend="70"/>
     <listofallmembers>
       <member refid="structSR__ANIMATIONS__NS_1_1ScalingKey_1a27df7ddb664f1c356378c65c373986df" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::ScalingKey</scope><name>scaling</name></member>
       <member refid="structSR__ANIMATIONS__NS_1_1ScalingKey_1a68a2a827f2b2d8227f7fed2be11f7f49" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::ScalingKey</scope><name>ScalingKey</name></member>

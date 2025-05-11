@@ -15,14 +15,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/Tests/HTMLTest.h" line="15" column="21" bodyfile="Engine/Core/inc/Core/Tests/HTMLTest.h" bodystart="15" bodyend="21"/>
+        <location file="Engine/inc/Engine/Tests/HTMLTest.h" line="15" column="21" bodyfile="Engine/inc/Engine/Tests/HTMLTest.h" bodystart="15" bodyend="21"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/inc/Core/Tests/HTMLTest.h" line="13" column="5" bodyfile="Engine/Core/inc/Core/Tests/HTMLTest.h" bodystart="13" bodyend="22"/>
+    <location file="Engine/inc/Engine/Tests/HTMLTest.h" line="13" column="5" bodyfile="Engine/inc/Engine/Tests/HTMLTest.h" bodystart="13" bodyend="22"/>
     <listofallmembers>
       <member refid="classSR__CORE__NS_1_1Tests_1_1HTMLTest_1a80a00448005e9aa807ef62eae7722575" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Tests::HTMLTest</scope><name>Run</name></member>
     </listofallmembers>

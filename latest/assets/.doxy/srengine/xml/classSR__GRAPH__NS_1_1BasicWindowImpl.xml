@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="23" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="23" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1adeaf8edae05dc163c5deb811cd520ee6" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(<ref refid="classSR__GRAPH__NS_1_1BasicWindowImpl" kindref="compound">BasicWindowImpl</ref> *, int32_t, int32_t)&gt;</type>
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="24" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="24" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a7efe4e9db15c11e68120d7d3aba4889e" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(<ref refid="classSR__GRAPH__NS_1_1BasicWindowImpl" kindref="compound">BasicWindowImpl</ref> *, int32_t, int32_t)&gt;</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="25" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="25" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1af0787aaa75ce89ef6ccc6f7d018d989e" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(<ref refid="classSR__GRAPH__NS_1_1BasicWindowImpl" kindref="compound">BasicWindowImpl</ref> *, double_t, double_t)&gt;</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="26" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="26" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="26" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a6872acee06a37fb838df9a507bd4d919" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(<ref refid="classSR__GRAPH__NS_1_1BasicWindowImpl" kindref="compound">BasicWindowImpl</ref> *, bool)&gt;</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="27" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="27" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a4aec1d9c7833dc9b0ec7c7ec409f29e3" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(<ref refid="classSR__GRAPH__NS_1_1BasicWindowImpl" kindref="compound">BasicWindowImpl</ref> *)&gt;</type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="28" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="28" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a9f720e1811e97e3c54fa747e47cb9ab5" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(<ref refid="classSR__GRAPH__NS_1_1BasicWindowImpl" kindref="compound">BasicWindowImpl</ref> *)&gt;</type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="29" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="29" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="29" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="94" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="94" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="94" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="94" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a8bc88213074a710795d960ed53aa7dd1" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -135,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="95" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="95" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="95" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="95" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1af66e8340bd1b735814c7703ecc1900f2" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -150,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="96" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="96" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="96" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="96" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a9ea99c4a491837453d12024e41f2d967" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -165,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="97" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="97" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="97" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="97" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1af00eb8823d8cb0971b2681eca5d9d1a9" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -180,7 +180,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="98" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="98" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="98" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="98" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a1f3602de7d5fc6e0b583c4b168aa4264" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -195,7 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="99" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="99" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="99" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="99" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a47645e76755ec95d1a18df857f79285e" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -210,7 +210,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="100" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="100" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="100" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="100" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a5b670f266756957ff7d4fda3437df0df" prot="protected" static="no" mutable="no">
         <type>ResizeCallback</type>
@@ -224,7 +224,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="102" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="102" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="102" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="102" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a13f95061d9738f44b52d17e957f2b8e5" prot="protected" static="no" mutable="no">
         <type>MoveCallback</type>
@@ -238,7 +238,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="103" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="103" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="103" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="103" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a2fbeb9ff9a3f57359d95a5be03b575ab" prot="protected" static="no" mutable="no">
         <type>ScrollCallback</type>
@@ -252,7 +252,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="104" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="104" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="104" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="104" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a8fbeb8ad6892b0a7e1c634df1f7b07a7" prot="protected" static="no" mutable="no">
         <type>FocusCallback</type>
@@ -266,7 +266,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="105" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="105" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="105" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="105" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a4f260f8a8910af7912126758ecb32e6b" prot="protected" static="no" mutable="no">
         <type>CloseCallback</type>
@@ -280,7 +280,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="106" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="106" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="106" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="106" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1afa3f5867894b46617b4cb552723908e0" prot="protected" static="no" mutable="no">
         <type>DrawCallback</type>
@@ -294,7 +294,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="107" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="107" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="107" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="107" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a98b021f88aff8eb413b6c1a352da9510" prot="protected" static="no" mutable="no">
         <type>WindowState</type>
@@ -309,7 +309,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="109" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="109" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="109" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="109" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1aa2283172ffe549b680599aa7d1037086" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::IVector2</type>
@@ -323,7 +323,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="111" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="111" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="111" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="111" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1aa861c827b45caf62a7861dcb103666b0" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::UVector2</type>
@@ -337,7 +337,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="112" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="112" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="112" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="112" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a5e040db22035dd9b5ee134fcdcc89777" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::UVector2</type>
@@ -351,7 +351,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="113" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="113" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="113" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="113" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -394,7 +394,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="22" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="22" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1ab042a7c3ec62e016f28d1a7897ca6404" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -408,7 +408,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="31" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="31" bodyend="33"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="31" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="31" bodyend="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1ae4ddf1769856b64dfdc1ca1a08da8002" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -422,7 +422,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="35" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="35" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a5f5d8527a7f8971430c967b6e301df06" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -440,7 +440,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="40" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="40" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1ad8572b29a4bad65c38cc7290833b9a17" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -458,7 +458,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="41" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="41" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a600f1c6bef36b190fa0bf4011959eb52" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -476,7 +476,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="42" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="42" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a801b943300e0a93927b64b73c9b440d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -494,7 +494,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="43" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="43" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a192a0a4a135ec1a8793aaf623b1b8f83" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -512,7 +512,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="44" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="44" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a700420e572549ab21add9b973fe13442" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -530,7 +530,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="45" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="45" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1adfcbdae4fed86100833ea95abe0c6c66" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD WindowType</type>
@@ -547,7 +547,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="47" column="41"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="47" column="41"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a9cc14e63e768327233989e9df01f84b4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD WindowState</type>
@@ -561,7 +561,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="49" column="42" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="49" bodyend="49"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="49" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="49" bodyend="49"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1ab1f66c22e07ad034c84495bbf53a726f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -575,7 +575,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="50" column="39" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="50" bodyend="50"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="50" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="50" bodyend="50"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a476fece81d355c15a0306168bd845673" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -589,7 +589,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="51" column="39" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="51" bodyend="51"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="51" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="51" bodyend="51"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a4bdc21806d7d734ebf3d336e92914685" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -603,7 +603,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="52" column="39" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="52" bodyend="52"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="52" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="52" bodyend="52"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a7d8e63f05b83ae8cc4051d4cf9476169" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -617,7 +617,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="53" column="39" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="53" bodyend="53"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="53" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="53" bodyend="53"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a6da7b3514a3098f675e31fca805b3cc8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -631,7 +631,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="54" column="35" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="54" bodyend="54"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="54" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="54" bodyend="54"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1acee739a2c7220751e6f9f7a5ff5185a7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -645,7 +645,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="55" column="35" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="55" bodyend="55"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="55" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="55" bodyend="55"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a102db6e9f4d28cddd71ce0470efe6fa5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -659,7 +659,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="56" column="35" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="56" bodyend="56"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="56" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="56" bodyend="56"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a4f82ad908dbb3b7b736c9117201de5c8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -673,7 +673,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="57" column="35" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="57" bodyend="57"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="57" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="57" bodyend="57"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a8bda25c6d5f223d39f984783ecb339db" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -687,7 +687,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="58" column="35" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="58" bodyend="58"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="58" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="58" bodyend="58"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1ab5de98a5abdd159dcae1792b9e386e51" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -701,7 +701,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="59" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="59" bodyend="59"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="59" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="59" bodyend="59"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a47a6f76e304c072da80d13c922e5fd30" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::IVector2</type>
@@ -716,7 +716,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="60" column="51" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="60" bodyend="60"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="60" column="51" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="60" bodyend="60"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1aab2f39cbe19d458b2480cee8db470733" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::IVector2</type>
@@ -731,7 +731,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="61" column="51" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="61" bodyend="61"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="61" column="51" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="61" bodyend="61"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a6436a0d24a88b86e35eefbd36c1c000e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::IVector2</type>
@@ -750,7 +750,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="62" column="51" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="62" bodyend="62"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="62" column="51" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="62" bodyend="62"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a5eb6fd4fc6634e5fcd4e38c57091fa6c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::IVector2</type>
@@ -769,7 +769,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="63" column="51" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="63" bodyend="63"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="63" column="51" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="63" bodyend="63"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a69f19c0a01c9ad3b4c908be9f4c04f65" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -784,7 +784,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="64" column="35" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="64" bodyend="64"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="64" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="64" bodyend="64"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a28edb5cf985e891390fd31064acd7f77" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -799,7 +799,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="66" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="66" bodyend="66"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="66" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="66" bodyend="66"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1af0657d567b796197d94caafd206e7633" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -822,7 +822,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="68" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="68" bodyend="68"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="68" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="68" bodyend="68"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1affa097f0124993cb7f8315125003b120" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -845,7 +845,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="69" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="69" bodyend="69"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="69" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="69" bodyend="69"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a9aaa949799725083903db7805cdf4d7a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -860,7 +860,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="70" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="70" bodyend="70"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="70" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="70" bodyend="70"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a053acf93c929228bb24a710890bd4466" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -875,7 +875,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="71" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="71" bodyend="71"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="71" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="71" bodyend="71"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a881df22ba7f0a3128d1e445791d5f1a6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -890,7 +890,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="72" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="72" bodyend="72"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="72" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="72" bodyend="72"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1ac4fa9ed42dc3926a68634685388bca3c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -905,7 +905,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="73" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="73" bodyend="73"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="73" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="73" bodyend="73"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a0a1ecb7093e62065da180858becd81f0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -920,7 +920,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="74" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="74" bodyend="74"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="74" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="74" bodyend="74"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a44e794b3d47f242a92de668d3970b458" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -937,7 +937,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="75" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="75" bodyend="75"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="75" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="75" bodyend="75"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a3cf55463636601f123fcb60cf7e6eb28" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -952,7 +952,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="76" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="76" bodyend="76"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="76" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="76" bodyend="76"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1ac226c4784ec29600b2727de1abb0f6fe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -972,7 +972,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="77" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="77" bodyend="77"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="77" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="77" bodyend="77"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a09ccd6785f3657dba1f6de418906d68e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -991,7 +991,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="78" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="78" bodyend="78"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="78" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="78" bodyend="78"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a93853b03bd4816a295f82c3bb1d85ab1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -1009,7 +1009,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="79" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="79" bodyend="79"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="79" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="79" bodyend="79"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a23adc86625c223e9a0709dd9dbbf5bfd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -1023,7 +1023,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="80" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="80" bodyend="80"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="80" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="80" bodyend="80"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a69882ff376b375464c7f91caa3a85d80" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -1037,7 +1037,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="81" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="81" bodyend="81"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="81" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="81" bodyend="81"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a490e214ff849ee59cc8b0aa8aac9ee04" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -1051,7 +1051,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="82" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="82" bodyend="82"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="82" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="82" bodyend="82"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a947133acc9ef1ea40f798aeaf7734072" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -1065,7 +1065,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="83" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="83" bodyend="83"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="83" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="83" bodyend="83"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a7b4af825526ab40be0cb2f90c4817a26" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD void *</type>
@@ -1081,7 +1081,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="85" column="35"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="85" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasicWindowImpl_1a90863d93ea27633d59e97ba572a68a84" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -1119,7 +1119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="88" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="88" column="22"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -1139,7 +1139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="37" column="32"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="37" column="32"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1188,7 +1188,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="20" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="20" bodyend="115"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="20" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="20" bodyend="115"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1ab042a7c3ec62e016f28d1a7897ca6404" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasicWindowImpl</scope><name>BasicWindowImpl</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a9aaa949799725083903db7805cdf4d7a" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasicWindowImpl</scope><name>Centralize</name></member>

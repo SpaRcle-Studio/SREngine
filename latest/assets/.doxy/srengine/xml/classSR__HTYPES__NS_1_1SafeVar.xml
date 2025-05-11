@@ -21,7 +21,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="43" column="11" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="43" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="43" column="11" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1SafeVar_1ac55867d136d5b53943091a3de05fcf2e" prot="private" static="no" mutable="yes">
         <type>std::atomic&lt; bool &gt;</type>
@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="45" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="45" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="45" column="29" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1SafeVar_1a0b3793c9f5c60a01f6208cd9e283e141" prot="private" static="no" mutable="yes">
         <type>std::atomic&lt; uint32_t &gt;</type>
@@ -51,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="46" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="46" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="46" column="29" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1SafeVar_1a26b6006c9ff7361649606ee2e7872930" prot="private" static="no" mutable="yes">
         <type>std::atomic&lt; std::thread::id &gt;</type>
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="47" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="47" column="29" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="47" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -85,7 +85,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="13" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="146" bodyend="148"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="13" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="146" bodyend="148"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SafeVar_1a7f3293fb011ae482a8b047cb4910c1a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -99,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="14" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="14" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SafeVar_1aba6b836b0245574efb65a81769d84f10" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__HTYPES__NS_1_1SafeVar" kindref="compound">SafeVar</ref>&lt; T &gt; &amp;</type>
@@ -117,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="17" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="150" bodyend="155"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="17" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="150" bodyend="155"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SafeVar_1ab31992c9dab306177d593171f7676264" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -131,7 +131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="19" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="51" bodyend="51"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="19" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="51" bodyend="51"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SafeVar_1a0e682b9807c432a5eacf4f14dc5c6dbe" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="20" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="52" bodyend="52"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="20" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="52" bodyend="52"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SafeVar_1a7c679fd62ee7831f89ae44921a26d47b" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>T &amp;</type>
@@ -161,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="22" column="11" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="54" bodyend="54"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="22" column="11" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="54" bodyend="54"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SafeVar_1a30eefe29463080cfa05a9c619c559df0" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>T</type>
@@ -175,7 +175,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="23" column="11" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="55" bodyend="55"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="23" column="11" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="55" bodyend="55"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SafeVar_1a84869df783ee06de9aca44761d922804" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -193,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="25" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="57" bodyend="59"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="25" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="57" bodyend="59"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SafeVar_1ae1659893a52afb3c6bb2aeed93fdb487" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -211,7 +211,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="26" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="61" bodyend="63"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="26" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="61" bodyend="63"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SafeVar_1a9d5d0255a4af1fbbda42118c38caf90b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD T &amp;</type>
@@ -225,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="28" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="65" bodyend="65"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="28" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="65" bodyend="65"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SafeVar_1ac6fe684534b6e24a7859a506f1696765" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const T &amp;</type>
@@ -239,7 +239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="29" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="66" bodyend="66"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="29" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="66" bodyend="66"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SafeVar_1ac1fdd318bf32f6a7024b4fbc936e57dc" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -253,7 +253,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="31" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="68" bodyend="72"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="31" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="68" bodyend="72"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SafeVar_1a709b3d88fa046d99a7e1763374993a2b" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -267,7 +267,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="33" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="94" bodyend="108"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="33" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="94" bodyend="108"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SafeVar_1a503d8de9639dd161411af438d823dc2d" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -283,7 +283,7 @@
 <para>recursive unlocking</para>
 <para>normal unlocking</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="34" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="110" bodyend="126"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="34" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="110" bodyend="126"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SafeVar_1a3d9de5bfbb2b01fe5d81b8fa20b083ea" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -298,7 +298,7 @@
         <inbodydescription>
 <para>recursive locking</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="35" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="128" bodyend="144"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="35" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="128" bodyend="144"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SafeVar_1aa22b01a6031a91cbb28d0524cd019b5b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -316,7 +316,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="37" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="37" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SafeVar_1a7340ebf0720b1a70fc5143ecec10335c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -334,7 +334,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="38" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="38" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SafeVar_1a3f8573c1cb55a8c16d495419626fb14c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -357,7 +357,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="39" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="84" bodyend="92"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="39" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="84" bodyend="92"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SafeVar_1ad6d59c2b5865498a804980ce0f8aae08" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -380,7 +380,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="40" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="74" bodyend="82"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="40" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="74" bodyend="82"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SafeVar_1a30ff383a1c92bb10afe99ecc6b9ddb8a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -403,7 +403,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="157" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="157" bodyend="161"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="157" column="29" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="157" bodyend="161"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SafeVar_1af8b4f2564742668df8decb36e05b969f" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -426,7 +426,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="163" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="163" bodyend="167"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="163" column="29" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="163" bodyend="167"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -455,7 +455,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" line="11" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="11" bodyend="49"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" line="11" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafeVariable.h" bodystart="11" bodyend="49"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1SafeVar_1aa22b01a6031a91cbb28d0524cd019b5b" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SafeVar</scope><name>Do</name></member>
       <member refid="classSR__HTYPES__NS_1_1SafeVar_1a7340ebf0720b1a70fc5143ecec10335c" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SafeVar</scope><name>Do</name></member>

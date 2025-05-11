@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="18" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="18" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="18" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="18" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="20" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="20" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="20" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="20" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GTYPES__NS_1_1SkinnedMesh_1a8ccc9d2644a4b78c5639aec643a642d3" prot="public" static="no">
         <type>Vertices::SkinnedMeshVertex</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="25" column="45" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="25" column="45" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="25" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="57" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="57" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="57" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="57" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1SkinnedMesh_1ab05d8daea896649e20c455db3309295a" prot="private" static="no" mutable="no">
         <type>int32_t</type>
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="58" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="58" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="58" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1SkinnedMesh_1a56d66bbf33447ad9f2e90085f9c58397" prot="private" static="no" mutable="no">
         <type>int32_t</type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="59" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="59" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="59" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1SkinnedMesh_1a2bd9206390706eccc7baec8feded96fa" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1EntityRef" kindref="compound">SR_UTILS_NS::EntityRef</ref></type>
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="63" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="63" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="63" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="63" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -124,7 +124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="22" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="22" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1SkinnedMesh_1aac8383df19fbed15c4d227f7de6662bf" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD MeshType</type>
@@ -139,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="28" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="28" bodyend="28"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="28" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="28" bodyend="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1SkinnedMesh_1ad0bdf32ee9a2d8d5aa0ebaf8df5483ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -154,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="30" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="30" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1SkinnedMesh_1ae936a8109ab76da9ae3878f2b6b5332e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="31" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1SkinnedMesh_1ae957c15800961614c9fe81e35b2670ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -184,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="32" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1SkinnedMesh_1ad3e99fe89f8732ff4cb746d4200e3aa7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -198,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="34" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="34" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1SkinnedMesh_1acb1c5d3dbde2c12c7b317e3d0106129a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -213,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="35" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="35" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1SkinnedMesh_1aa730e74cb28847c43704b36a50940195" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -229,7 +229,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="36" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="36" bodyend="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="36" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="36" bodyend="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1SkinnedMesh_1a5b8a1064f113a20c908fc4184bd7e5bd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD std::string</type>
@@ -244,7 +244,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="37" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="37" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1SkinnedMesh_1a31c8c9c1422d8102e97bbd7aade56ec5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="classSR__UTILS__NS_1_1EntityRef" kindref="compound">SR_UTILS_NS::EntityRef</ref> &amp;</type>
@@ -258,7 +258,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="38" column="51" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="38" bodyend="38"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="38" column="51" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="38" bodyend="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1SkinnedMesh_1a7ea1ee518561532f6d33eb32047b0bfd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1EntityRef" kindref="compound">SR_UTILS_NS::EntityRef</ref> &amp;</type>
@@ -272,7 +272,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="39" column="45" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="39" bodyend="39"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="39" column="45" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="39" bodyend="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1SkinnedMesh_1a713668b44ac1423a7d7a66b69876e8e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -286,7 +286,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="41" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="41" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1SkinnedMesh_1aed5fe44d2a612d6d6dfd4f1bb3ccb253" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -301,7 +301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="43" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="43" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -317,7 +317,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="46" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="46" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1SkinnedMesh_1a8c1d049c7af97a2220afd66d0c134caf" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -336,7 +336,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="48" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="48" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1SkinnedMesh_1a5882874deab2bb403553f7a28ffdc43d" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -351,7 +351,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="49" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="49" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1SkinnedMesh_1ac956768308c8cc73915daeb35ae81219" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -366,7 +366,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="50" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="50" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1SkinnedMesh_1a7c9f4f4a97cbb51d0e1bcf93a8af7ea3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -380,7 +380,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="52" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="52" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1SkinnedMesh_1acaa71e57c9ca61e6a5de5c30136f08bd" prot="private" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD std::vector&lt; uint32_t &gt;</type>
@@ -395,7 +395,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="54" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="54" column="34"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -537,7 +537,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="16" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="16" bodyend="72"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="16" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="16" bodyend="72"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>BaseComponent</name></member>

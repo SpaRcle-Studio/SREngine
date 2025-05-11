@@ -69,7 +69,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Material/FileMaterial.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h</label>
         <link refid="FileMaterial_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1394,6 +1394,6 @@
 <codeline lineno="68"><highlight class="normal"></highlight></codeline>
 <codeline lineno="69"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GRAPHICS_FILE_MATERIAL_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/FileMaterial.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h"/>
   </compounddef>
 </doxygen>

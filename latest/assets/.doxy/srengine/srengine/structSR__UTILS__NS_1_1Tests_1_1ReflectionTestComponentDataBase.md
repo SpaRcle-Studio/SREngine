@@ -237,5 +237,5 @@ bool SR_UTILS_NS::Tests::ReflectionTestComponentDataBase::baseField;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h`
 

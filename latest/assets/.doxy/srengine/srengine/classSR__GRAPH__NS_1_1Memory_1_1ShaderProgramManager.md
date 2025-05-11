@@ -543,5 +543,5 @@ Implements [*SR\_UTILS\_NS::SingletonBase::OnSingletonDestroy*](classSR__UTILS__
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h`
 

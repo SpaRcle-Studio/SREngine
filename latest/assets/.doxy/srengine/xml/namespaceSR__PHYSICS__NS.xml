@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" line="28" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" bodystart="28" bodyend="32"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="28" column="5" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="28" bodyend="32"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="typedef">
@@ -70,7 +70,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="22" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="22" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="22" column="43" bodyfile="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="22" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -121,13 +121,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="13" column="5" declfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" declline="13" declcolumn="5"/>
+        <location file="Engine/libs/Physics/inc/Physics/Utils/Utils.h" line="13" column="5" declfile="Engine/libs/Physics/inc/Physics/Utils/Utils.h" declline="13" declcolumn="5"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/inc/Core/Engine.h" line="35" column="1"/>
+    <location file="Engine/inc/Engine/Engine.h" line="35" column="1"/>
   </compounddef>
 </doxygen>

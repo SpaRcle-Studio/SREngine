@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/RenderTexture.h" line="27" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/RenderTexture.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/RenderTexture.h" line="27" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/RenderTexture.h" bodystart="27" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/RenderTexture.h" line="16" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/RenderTexture.h" line="16" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1RenderTexture_1a3db41383b86995f62a9be94b2e61c842" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/RenderTexture.h" line="17" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/RenderTexture.h" line="17" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/RenderTexture.h" line="20" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/RenderTexture.h" line="20" column="30"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -83,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/RenderTexture.h" line="23" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/RenderTexture.h" line="23" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1RenderTexture_1a8b16103fda2c49b5dae74f97e83f7445" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/RenderTexture.h" line="24" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/RenderTexture.h" line="24" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -130,7 +130,7 @@
         <label>SR_UTILS_NS::Settings</label>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/RenderTexture.h" line="14" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/RenderTexture.h" bodystart="14" bodyend="29"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/RenderTexture.h" line="14" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/RenderTexture.h" bodystart="14" bodyend="29"/>
     <listofallmembers>
       <member refid="classSR__GTYPES__NS_1_1RenderTexture_1ab7f43d9054bc15ea0f72158c71a0b5f4" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::RenderTexture</scope><name>ClearSettings</name></member>
       <member refid="classSR__GTYPES__NS_1_1RenderTexture_1a95298b48ebe7ae8dd4a56c16d0cba96a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::RenderTexture</scope><name>Load</name></member>

@@ -429,5 +429,5 @@ ShadowType SR_GRAPH_NS::ILightComponent::m_shadowType;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h`
 

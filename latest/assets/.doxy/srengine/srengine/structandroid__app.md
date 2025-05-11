@@ -469,5 +469,5 @@ ANativeWindow* android_app::window;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h`
 

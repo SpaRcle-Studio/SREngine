@@ -7,11 +7,11 @@
     <includes local="no">BulletCollision/CollisionShapes/btBox2dShape.h</includes>
     <includes local="no">LinearMath/btVector3.h</includes>
     <includes local="no">LinearMath/btAlignedObjectArray.h</includes>
-    <includedby refid="Bullet3CollisionShape_8h" local="no">Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h</includedby>
-    <includedby refid="Bullet3PhysicsWorld_8h" local="no">Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsWorld.h</includedby>
+    <includedby refid="Bullet3CollisionShape_8h" local="no">Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h</includedby>
+    <includedby refid="Bullet3PhysicsWorld_8h" local="no">Engine/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsWorld.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h</label>
         <link refid="Bullet3PhysicsLib_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -562,11 +562,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h</label>
         <link refid="Bullet3CollisionShape_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h</label>
         <link refid="Bullet3PhysicsLib_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -574,7 +574,7 @@
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsWorld.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsWorld.h</label>
         <link refid="Bullet3PhysicsWorld_8h_source"/>
       </node>
     </invincdepgraph>
@@ -611,6 +611,6 @@
 <codeline lineno="25"><highlight class="normal"></highlight></codeline>
 <codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_BULLET3PHYSICSLIB_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h"/>
+    <location file="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h"/>
   </compounddef>
 </doxygen>

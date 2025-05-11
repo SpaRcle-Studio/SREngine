@@ -28,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Events/EventManager.h" line="20" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Events/EventManager.h" bodystart="20" bodyend="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/Events/EventManager.h" line="20" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Events/EventManager.h" bodystart="20" bodyend="22"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__UTILS__NS_1_1EventManager_1a895f68b33d30f81f3b5c09bbde32eb85" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(const Event &amp;)&gt;</type>
@@ -42,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Events/EventManager.h" line="24" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Events/EventManager.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Events/EventManager.h" line="24" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Events/EventManager.h" bodystart="24" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Events/EventManager.h" line="41" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Events/EventManager.h" bodystart="41" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Events/EventManager.h" line="41" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Events/EventManager.h" bodystart="41" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Events/EventManager.h" line="17" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Events/EventManager.h" line="17" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Events/EventManager.h" line="27" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Events/EventManager.h" bodystart="27" bodyend="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Events/EventManager.h" line="27" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Events/EventManager.h" bodystart="27" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EventManager_1a9e9c50530e3715a2187e282f63b5f5b9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -112,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Events/EventManager.h" line="32" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Events/EventManager.h" bodystart="32" bodyend="38"/>
+        <location file="Engine/libs/Utils/inc/Utils/Events/EventManager.h" line="32" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Events/EventManager.h" bodystart="32" bodyend="38"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -167,7 +167,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Events/EventManager.h" line="14" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Events/EventManager.h" bodystart="14" bodyend="43"/>
+    <location file="Engine/libs/Utils/inc/Utils/Events/EventManager.h" line="14" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Events/EventManager.h" bodystart="14" bodyend="43"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1EventManager_1a9e9c50530e3715a2187e282f63b5f5b9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EventManager</scope><name>Broadcast</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EventManager</scope><name>DestroySingleton</name></member>

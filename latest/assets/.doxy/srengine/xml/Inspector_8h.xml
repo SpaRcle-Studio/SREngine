@@ -2,22 +2,22 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="Inspector_8h" kind="file" language="C++">
     <compoundname>Inspector.h</compoundname>
-    <includes refid="ComponentDrawer_8h" local="no">Core/GUI/ComponentDrawer.h</includes>
-    <includes refid="PropertyDrawer_8h" local="no">Core/GUI/PropertyDrawer.h</includes>
-    <includes refid="ObjectPropertyDrawer_8h" local="no">Core/GUI/PropertyDrawers/ObjectPropertyDrawer.h</includes>
-    <includes refid="PointerPropertyDrawer_8h" local="no">Core/GUI/PropertyDrawers/PointerPropertyDrawer.h</includes>
+    <includes refid="ComponentDrawer_8h" local="no">Engine/GUI/ComponentDrawer.h</includes>
+    <includes refid="PropertyDrawer_8h" local="no">Engine/GUI/PropertyDrawer.h</includes>
+    <includes refid="ObjectPropertyDrawer_8h" local="no">Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h</includes>
+    <includes refid="PointerPropertyDrawer_8h" local="no">Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h</includes>
     <includes refid="GameObject_8h" local="no">Utils/ECS/GameObject.h</includes>
     <includes refid="Scene_8h" local="no">Utils/World/Scene.h</includes>
     <includes refid="Widget_8h" local="no">Graphics/GUI/Widget.h</includes>
     <incdepgraph>
       <node id="2">
-        <label>Core/GUI/ComponentDrawer.h</label>
+        <label>Engine/GUI/ComponentDrawer.h</label>
         <link refid="ComponentDrawer_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/inc/Core/GUI/Inspector.h</label>
+        <label>Engine/inc/Engine/GUI/Inspector.h</label>
         <link refid="Inspector_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -35,7 +35,7 @@
         </childnode>
       </node>
       <node id="66">
-        <label>Core/GUI/PropertyDrawer.h</label>
+        <label>Engine/GUI/PropertyDrawer.h</label>
         <link refid="PropertyDrawer_8h_source"/>
         <childnode refid="67" relation="include">
         </childnode>
@@ -47,13 +47,13 @@
         </childnode>
       </node>
       <node id="197">
-        <label>Core/GUI/PropertyDrawers/ObjectPropertyDrawer.h</label>
+        <label>Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h</label>
         <link refid="ObjectPropertyDrawer_8h_source"/>
         <childnode refid="66" relation="include">
         </childnode>
       </node>
       <node id="198">
-        <label>Core/GUI/PropertyDrawers/PointerPropertyDrawer.h</label>
+        <label>Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h</label>
         <link refid="PointerPropertyDrawer_8h_source"/>
         <childnode refid="66" relation="include">
         </childnode>
@@ -1880,10 +1880,10 @@
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SR_ENGINE_CORE_INSPECTOR_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ENGINE_CORE_INSPECTOR_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Core/GUI/ComponentDrawer.h&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Core/GUI/PropertyDrawer.h&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Core/GUI/PropertyDrawers/ObjectPropertyDrawer.h&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Core/GUI/PropertyDrawers/PointerPropertyDrawer.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Engine/GUI/ComponentDrawer.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Engine/GUI/PropertyDrawer.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/ECS/GameObject.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/World/Scene.h&gt;</highlight><highlight class="normal"></highlight></codeline>
@@ -1969,6 +1969,6 @@
 <codeline lineno="94"><highlight class="normal"></highlight></codeline>
 <codeline lineno="95"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_CORE_INSPECTOR_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/GUI/Inspector.h"/>
+    <location file="Engine/inc/Engine/GUI/Inspector.h"/>
   </compounddef>
 </doxygen>

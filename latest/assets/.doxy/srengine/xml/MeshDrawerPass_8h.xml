@@ -7,7 +7,7 @@
     <includes refid="RenderPredicates_8h" local="no">Graphics/Render/RenderPredicates.h</includes>
     <includes refid="IShaderProgram_8h" local="no">Graphics/Pipeline/IShaderProgram.h</includes>
     <includes refid="ShaderType_8h" local="no">Graphics/SRSL/ShaderType.h</includes>
-    <includedby refid="OffScreenMeshDrawerPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</includedby>
+    <includedby refid="OffScreenMeshDrawerPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</includedby>
     <incdepgraph>
       <node id="156">
         <label>Graphics/Loaders/ShaderProperties.h</label>
@@ -118,7 +118,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
         <link refid="MeshDrawerPass_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1385,23 +1385,23 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h</label>
         <link refid="CascadedShadowMapPass_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
         <link refid="ColorBufferPass_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
         <link refid="MeshDrawerPass_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
         <link refid="OffScreenMeshDrawerPass_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -1409,7 +1409,7 @@
         </childnode>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h</label>
         <link refid="VarianceShadowMapPass_8h_source"/>
       </node>
     </invincdepgraph>
@@ -1517,6 +1517,6 @@
 <codeline lineno="94"><highlight class="normal"></highlight></codeline>
 <codeline lineno="95"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_MESH_DRAWER_PASS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h"/>
   </compounddef>
 </doxygen>

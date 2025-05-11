@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="27" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="27" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GTYPES__NS_1_1Camera_1_1RenderTechniqueInfo_1a600322093046661b9c7b987e6cc845d8" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">SR_GRAPH_NS::IRenderTechnique</ref> *</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="28" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="28" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="28" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -214,7 +214,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="26" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="26" bodyend="29"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="26" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="26" bodyend="29"/>
     <listofallmembers>
       <member refid="structSR__GTYPES__NS_1_1Camera_1_1RenderTechniqueInfo_1a5476c81ec5e9514c8f44eda3d0a7f2d3" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera::RenderTechniqueInfo</scope><name>path</name></member>
       <member refid="structSR__GTYPES__NS_1_1Camera_1_1RenderTechniqueInfo_1a600322093046661b9c7b987e6cc845d8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera::RenderTechniqueInfo</scope><name>pTechnique</name></member>

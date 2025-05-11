@@ -348,5 +348,5 @@ Implements [*SR\_UTILS\_NS::Serializable::Save*](classSR__UTILS__NS_1_1Serializa
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h`
 

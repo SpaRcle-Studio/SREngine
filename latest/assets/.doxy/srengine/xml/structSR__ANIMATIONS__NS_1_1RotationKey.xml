@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="54" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="54" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="54" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="54" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="48" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="48" column="9"/>
       </memberdef>
       <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1RotationKey_1a77cea408e1dda07b91a4fd272aebe82f" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="49" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="49" bodyend="51"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="49" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="49" bodyend="51"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -72,7 +72,7 @@
         <link refid="classSR__MATH__NS_1_1Quaternion"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="46" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="46" bodyend="56"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="46" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="46" bodyend="56"/>
     <listofallmembers>
       <member refid="structSR__ANIMATIONS__NS_1_1RotationKey_1afc40bc52438aab579c1fa62dec5407c5" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::RotationKey</scope><name>rotation</name></member>
       <member refid="structSR__ANIMATIONS__NS_1_1RotationKey_1a1669fe35e027bbecb58dee939a5e6891" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::RotationKey</scope><name>RotationKey</name></member>

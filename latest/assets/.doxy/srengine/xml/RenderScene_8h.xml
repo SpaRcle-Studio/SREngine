@@ -12,8 +12,8 @@
     <includes refid="SortedMeshQueue_8h" local="no">Graphics/Render/SortedMeshQueue.h</includes>
     <includes refid="WidgetManager_8h" local="no">Graphics/GUI/WidgetManager.h</includes>
     <includes refid="PassQueue_8h" local="no">Graphics/Pass/PassQueue.h</includes>
-    <includedby refid="EngineScene_8h" local="no">Engine/Core/inc/Core/World/EngineScene.h</includedby>
-    <includedby refid="Canvas_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h</includedby>
+    <includedby refid="EngineScene_8h" local="no">Engine/inc/Engine/World/EngineScene.h</includedby>
+    <includedby refid="Canvas_8h" local="no">Engine/libs/Graphics/inc/Graphics/UI/Canvas.h</includedby>
     <incdepgraph>
       <node id="157">
         <label>Graphics/GUI/WidgetManager.h</label>
@@ -108,7 +108,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h</label>
         <link refid="RenderScene_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1323,11 +1323,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/inc/Core/World/EngineScene.h</label>
+        <label>Engine/inc/Engine/World/EngineScene.h</label>
         <link refid="EngineScene_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h</label>
         <link refid="RenderScene_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1335,7 +1335,7 @@
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/UI/Canvas.h</label>
         <link refid="Canvas_8h_source"/>
       </node>
     </invincdepgraph>
@@ -1370,7 +1370,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="173" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="173" bodyend="188"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="173" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="173" bodyend="188"/>
       </memberdef>
       <memberdef kind="define" id="RenderScene_8h_1a86506141e7423b8dc7ac0e18df80fa5c" prot="public" static="no">
         <name>SR_RENDER_TECHNIQUES_RETURN_CALL</name>
@@ -1396,7 +1396,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="189" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="189" bodyend="204"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="189" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="189" bodyend="204"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1609,6 +1609,6 @@
 <codeline lineno="204"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="205"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_RENDERSCENE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h"/>
   </compounddef>
 </doxygen>

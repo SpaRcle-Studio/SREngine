@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="16" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="16" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" bodystart="16" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="friend">
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="17" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" bodystart="17" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="17" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" bodystart="17" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -51,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="40" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" bodystart="40" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="40" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1a5a895e508ab4ceed8773a2268a0be082" prot="private" static="no" mutable="no">
         <type>std::optional&lt; asio::ip::tcp::socket &gt;</type>
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="41" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" bodystart="41" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="41" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" bodystart="41" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="19" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="19" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1a8b22b2f1af7b1d0574aa5e645431d073" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="34" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="34" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1a7cfcbe0de6133d08a9196578be2aaf00" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -127,7 +127,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="36" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="36" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1a8ddb1244a5d5758f9a1f4ba2e2959101" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="37" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="37" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -161,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="22" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="22" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1a29750a8ec0b88fcd11dca90793679c60" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -176,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="25" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="25" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1a8777dc9c16713f3dfeb7cb57fea940f7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD std::string</type>
@@ -191,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="27" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="27" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1a82f89b081d5f66f57ada83d73912e115" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD std::string</type>
@@ -206,7 +206,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="28" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="28" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1a6f3a3581303ffa626b5b11cc36c8da22" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD uint16_t</type>
@@ -221,7 +221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="30" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="30" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1a4d01f24c4a58ca9834ad15017cbedd3b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD uint16_t</type>
@@ -236,7 +236,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="31" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="31" column="31"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -298,7 +298,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="15" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" bodystart="15" bodyend="43"/>
+    <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" line="15" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Network/Asio/AsioTCPAcceptor.h" bodystart="15" bodyend="43"/>
     <listofallmembers>
       <member refid="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1a8ddb1244a5d5758f9a1f4ba2e2959101" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Accept</name></member>
       <member refid="classSR__NETWORK__NS_1_1Acceptor_1a55368b1b1c1a8946093e27754224bea2" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Acceptor</name></member>

@@ -545,5 +545,5 @@ static IconType SR_GRAPH_NS::GUI::Pin::GetIconType (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/GUI/Pin.h`
 

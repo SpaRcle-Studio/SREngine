@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="15" column="9" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Tests/TestManager.h" line="15" column="9" bodyfile="Engine/inc/Engine/Tests/TestManager.h" bodystart="15" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__CORE__NS_1_1TestManager_1a57253f102a53d5f29974dc4427ea0c10" prot="private" static="no">
         <type>std::pair&lt; std::string, TestFn &gt;</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="16" column="9" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Tests/TestManager.h" line="16" column="9" bodyfile="Engine/inc/Engine/Tests/TestManager.h" bodystart="16" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="30" column="18" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="30" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Tests/TestManager.h" line="30" column="18" bodyfile="Engine/inc/Engine/Tests/TestManager.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1TestManager_1aac2c17a7fd3baecf7db336eaadbc79f0" prot="private" static="no" mutable="no">
         <type>std::map&lt; std::string, TestFn &gt;</type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="31" column="18" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="31" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Tests/TestManager.h" line="31" column="18" bodyfile="Engine/inc/Engine/Tests/TestManager.h" bodystart="31" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="18" column="14" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="18" bodyend="18"/>
+        <location file="Engine/inc/Engine/Tests/TestManager.h" line="18" column="14" bodyfile="Engine/inc/Engine/Tests/TestManager.h" bodystart="18" bodyend="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1TestManager_1ab2f12bfd2f46ab1ef72b285b171a563e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="19" column="14" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="19" bodyend="19"/>
+        <location file="Engine/inc/Engine/Tests/TestManager.h" line="19" column="14" bodyfile="Engine/inc/Engine/Tests/TestManager.h" bodystart="19" bodyend="19"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1TestManager_1a96dfca32a385c2beeb855dc6022d6309" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="21" column="14"/>
+        <location file="Engine/inc/Engine/Tests/TestManager.h" line="21" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1TestManager_1a0b2d7272e354b1ec660416287dc9baea" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -135,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="23" column="14" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="23" bodyend="23"/>
+        <location file="Engine/inc/Engine/Tests/TestManager.h" line="23" column="14" bodyfile="Engine/inc/Engine/Tests/TestManager.h" bodystart="23" bodyend="23"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -155,7 +155,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="26" column="14"/>
+        <location file="Engine/inc/Engine/Tests/TestManager.h" line="26" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1TestManager_1a6ae9a713d1579b05b4f011a694adc806" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -173,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="27" column="14"/>
+        <location file="Engine/inc/Engine/Tests/TestManager.h" line="27" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -228,7 +228,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="13" column="5" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="13" bodyend="32"/>
+    <location file="Engine/inc/Engine/Tests/TestManager.h" line="13" column="5" bodyfile="Engine/inc/Engine/Tests/TestManager.h" bodystart="13" bodyend="32"/>
     <listofallmembers>
       <member refid="classSR__CORE__NS_1_1TestManager_1ab2f12bfd2f46ab1ef72b285b171a563e" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>AddEngineTest</name></member>
       <member refid="classSR__CORE__NS_1_1TestManager_1a28d635404f453c8a84f630873c66847c" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>AddTest</name></member>

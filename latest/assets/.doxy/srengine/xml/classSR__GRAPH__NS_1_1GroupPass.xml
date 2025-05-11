@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="47" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="47" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" bodystart="47" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="13" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="13" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1afb4405820e3f634ad6eaaf91285c840e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="16" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="16" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1ad5c1af15b98c42ac465ace7d9dc1d520" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="18" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="18" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1a29b1bfca493d7c9e93b9d2ccd0919a1e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="19" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="19" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1afcd0df18da4c2514e1c04791846424cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="21" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="21" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1a1bb5f8f8e93b8068a9d80ab183e1cf66" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="23" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="23" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1af5e458a31d0c5bd370bd486d46ae8a75" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="25" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="25" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1aeb3bb1e19eb614553fd33d63890e03d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -154,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="26" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="26" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1aaa25866fae2b8ae8552b8d8508a35ac2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -170,7 +170,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="27" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="27" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1a023706556f7c21c0f366b64d9ee250fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -188,7 +188,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="29" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="29" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1ad52301708b23646274027c680dda84b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -203,7 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="30" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="30" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1a2b5a1013c99bd74a87e2505f5409dfbc" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -223,7 +223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="32" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1af1ea7ea9db878175331d7e78c3c06991" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -239,7 +239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="33" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="33" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1a482bd1243f9b252fa81b99aeaa88617c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -258,7 +258,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="35" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="35" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1abcbd0e8263b9809e9bbc2f0c817e4503" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1BasePass" kindref="compound">BasePass</ref> *</type>
@@ -276,7 +276,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="37" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="37" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1a81ad67862db2e023140ea7f197d6b119" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -294,7 +294,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="39" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="39" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1a20c3fb2bf3786cd776f09f008371ba7c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -313,7 +313,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="41" column="35"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="41" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1a4f4001a872701b375649681b01f13e91" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void SR_FASTCALL</type>
@@ -336,7 +336,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="43" column="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="43" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1af37e4e5995bd3ff7b33c3df773254ac9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void SR_FASTCALL</type>
@@ -359,7 +359,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="44" column="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="44" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1a9a955888dae260a30ee590bc3afb5bf9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -378,7 +378,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="51" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" bodystart="51" bodyend="65"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="51" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" bodystart="51" bodyend="65"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -592,7 +592,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="11" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h" bodystart="11" bodyend="49"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="11" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" bodystart="11" bodyend="49"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GroupPass</scope><name>AddDependency</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GroupPass</scope><name>AddInputConnection</name></member>

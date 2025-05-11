@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" line="56" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" bodystart="56" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" line="56" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" bodystart="56" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" line="58" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" line="58" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextureLoader_1a6eeb1f510c10906c05ed92a445f94d66" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" line="59" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" line="59" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextureLoader_1a3696efa53978350010d7646a7e2bdc82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" line="60" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" line="60" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextureLoader_1ab153cf5210209de1d4b1538dab78122a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" line="61" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" line="61" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -99,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" line="64" column="33"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" line="64" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextureLoader_1a108fcb11db8743ce213f36ee824b68fe" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">TextureData::Ptr</ref></type>
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" line="65" column="33"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" line="65" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextureLoader_1a86d061663dc716e2be3d4e59f221fce6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -139,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" line="67" column="21"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" line="67" column="21"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-func">
@@ -159,14 +159,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" line="70" column="33"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" line="70" column="33"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" line="55" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" bodystart="55" bodyend="72"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" line="55" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h" bodystart="55" bodyend="72"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1TextureLoader_1a86d061663dc716e2be3d4e59f221fce6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureLoader</scope><name>Free</name></member>
       <member refid="classSR__GRAPH__NS_1_1TextureLoader_1a0a8d60dd4bc20016e67a8b9f2ed0b48e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureLoader</scope><name>Load</name></member>

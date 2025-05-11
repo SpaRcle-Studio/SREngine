@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/EngineSettings.h" line="11" column="9"/>
+        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="11" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EngineSettings_1a758afd3eaeaa571828b0bdb3e9ef6d98" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/EngineSettings.h" line="12" column="9"/>
+        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="12" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/EngineSettings.h" line="15" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="15" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/EngineSettings.h" line="18" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="18" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EngineSettings_1a8acef32c8aed31ca7259bd0e409cab7c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/EngineSettings.h" line="19" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="19" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EngineSettings_1ac3aa90e47a8d6f86120fee283d68e902" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/EngineSettings.h" line="20" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="20" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EngineSettings_1abd6fabdeda3f62dc1ff897b7090547f2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/EngineSettings.h" line="21" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="21" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -184,7 +184,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/inc/Core/GUI/EngineSettings.h" line="9" column="5" bodyfile="Engine/Core/inc/Core/GUI/EngineSettings.h" bodystart="9" bodyend="23"/>
+    <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="9" column="5" bodyfile="Engine/inc/Engine/GUI/EngineSettings.h" bodystart="9" bodyend="23"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a4a04e0628b5729444eca1c24a9011fa2" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>AddFlags</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1adb2cb15cb7a11b055f8659f1db8c5521" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>AddSubWidget</name></member>

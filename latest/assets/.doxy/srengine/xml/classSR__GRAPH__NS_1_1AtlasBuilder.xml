@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="25" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="25" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" bodystart="25" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="46" column="26" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" bodystart="46" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="46" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1AtlasBuilder_1a09eae0a9018b8bc5e402393244c4c970" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::UVector2</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="47" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="47" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1AtlasBuilder_1a2831693622a9136802e5735f7c11a82b" prot="private" static="no" mutable="no">
         <type>std::vector&lt; SR_GRAPH_NS::TextureData::Ptr &gt;</type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="49" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" bodystart="49" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="49" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1AtlasBuilder_1a4b830e3aaaa19e8a5a35e91e733c1cdf" prot="private" static="no" mutable="no">
         <type>SR_GRAPH_NS::TextureData::Ptr</type>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="50" column="39" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" bodystart="50" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="50" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" bodystart="50" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="27" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="27" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1AtlasBuilder_1a9ab27b369397bb31536ed4ce175be391" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="30" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="30" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1AtlasBuilder_1a0ec05c0dff52cac36a3a1806a0fa8fce" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -122,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="32" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="32" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1AtlasBuilder_1ac61a176a09908ab5a85d6f32475957e9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -140,7 +140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="33" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="33" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1AtlasBuilder_1af0a574904efc208d368dce0434e8c827" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -154,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="36" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" bodystart="36" bodyend="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="36" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" bodystart="36" bodyend="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1AtlasBuilder_1ad831c77f3a03df79a2c365029250aef8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -168,7 +168,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="37" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" bodystart="37" bodyend="37"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="37" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" bodystart="37" bodyend="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1AtlasBuilder_1adbba7c1fb359f277ed86df7ab479f9c2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::UVector2</type>
@@ -182,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="38" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" bodystart="38" bodyend="38"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="38" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" bodystart="38" bodyend="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1AtlasBuilder_1acf693026fee901fc4bfa1471b717d273" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::UVector2</type>
@@ -196,7 +196,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="39" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" bodystart="39" bodyend="39"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="39" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" bodystart="39" bodyend="39"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -212,7 +212,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="42" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="42" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1AtlasBuilder_1a7255868fea1bf833fe09e2069709c04f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -226,7 +226,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="43" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="43" column="27"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -257,7 +257,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="24" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" bodystart="24" bodyend="51"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" line="24" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h" bodystart="24" bodyend="51"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1AtlasBuilder_1a339702afa465d2b38dbeb72d2fdae304" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::AtlasBuilder</scope><name>AtlasBuilder</name></member>
       <member refid="classSR__GRAPH__NS_1_1AtlasBuilder_1a3a57c82da9dba870fd53aba4caa1af77" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::AtlasBuilder</scope><name>Create</name></member>

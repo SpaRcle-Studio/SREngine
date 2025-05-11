@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/SceneRunner.h" line="32" column="14" bodyfile="Engine/Core/inc/Core/GUI/SceneRunner.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/SceneRunner.h" line="32" column="14" bodyfile="Engine/inc/Engine/GUI/SceneRunner.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1SceneRunner_1af7583601267eec4cf47750e7fabb52fb" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/SceneRunner.h" line="33" column="14" bodyfile="Engine/Core/inc/Core/GUI/SceneRunner.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/SceneRunner.h" line="33" column="14" bodyfile="Engine/inc/Engine/GUI/SceneRunner.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1SceneRunner_1a6808c322315329cd8a83d1691f1b0285" prot="private" static="no" mutable="no">
         <type>SR_WORLD_NS::Scene::Ptr</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/SceneRunner.h" line="35" column="33" bodyfile="Engine/Core/inc/Core/GUI/SceneRunner.h" bodystart="35" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/SceneRunner.h" line="35" column="33" bodyfile="Engine/inc/Engine/GUI/SceneRunner.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1SceneRunner_1a66adf5c82d740a6729f557080d7ca6af" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/SceneRunner.h" line="36" column="27" bodyfile="Engine/Core/inc/Core/GUI/SceneRunner.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/SceneRunner.h" line="36" column="27" bodyfile="Engine/inc/Engine/GUI/SceneRunner.h" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1SceneRunner_1a4f2c9c7c7ce92d5406c3bd064ab0a817" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/SceneRunner.h" line="37" column="27" bodyfile="Engine/Core/inc/Core/GUI/SceneRunner.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/SceneRunner.h" line="37" column="27" bodyfile="Engine/inc/Engine/GUI/SceneRunner.h" bodystart="37" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/SceneRunner.h" line="17" column="9"/>
+        <location file="Engine/inc/Engine/GUI/SceneRunner.h" line="17" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1SceneRunner_1af82f0a39c11cfdbddcf73163aeb8a9f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/SceneRunner.h" line="18" column="9"/>
+        <location file="Engine/inc/Engine/GUI/SceneRunner.h" line="18" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1SceneRunner_1adfebbc0bd64887550816c60241f8d1df" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -122,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/SceneRunner.h" line="21" column="14"/>
+        <location file="Engine/inc/Engine/GUI/SceneRunner.h" line="21" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -138,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/SceneRunner.h" line="24" column="14"/>
+        <location file="Engine/inc/Engine/GUI/SceneRunner.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1SceneRunner_1ac817320aebeee8ca669ba585730daaaf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -152,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/SceneRunner.h" line="26" column="14"/>
+        <location file="Engine/inc/Engine/GUI/SceneRunner.h" line="26" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1SceneRunner_1ac34ffe44516175f4017935deb2624204" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -166,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/SceneRunner.h" line="27" column="14"/>
+        <location file="Engine/inc/Engine/GUI/SceneRunner.h" line="27" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1SceneRunner_1afedfcca07717caf19534f01d579bdeca" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__CORE__GUI__NS_1_1EditorGUI" kindref="compound">EditorGUI</ref> *</type>
@@ -180,7 +180,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/SceneRunner.h" line="29" column="32"/>
+        <location file="Engine/inc/Engine/GUI/SceneRunner.h" line="29" column="32"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -209,7 +209,7 @@
         <label>SR_GRAPH_NS::GUI::Widget</label>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/inc/Core/GUI/SceneRunner.h" line="15" column="5" bodyfile="Engine/Core/inc/Core/GUI/SceneRunner.h" bodystart="15" bodyend="39"/>
+    <location file="Engine/inc/Engine/GUI/SceneRunner.h" line="15" column="5" bodyfile="Engine/inc/Engine/GUI/SceneRunner.h" bodystart="15" bodyend="39"/>
     <listofallmembers>
       <member refid="classSR__CORE__GUI__NS_1_1SceneRunner_1a52168ca733de36009322e5dbbad96de5" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneRunner</scope><name>Draw</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneRunner_1afedfcca07717caf19534f01d579bdeca" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneRunner</scope><name>GetEditor</name></member>

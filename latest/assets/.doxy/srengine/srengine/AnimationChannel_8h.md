@@ -4,7 +4,7 @@
 
 
 
-[**FileList**](files.md) **>** [**Animations**](dir_417ea13389e3cbd1256e515e0204a036.md) **>** [**AnimationChannel.h**](AnimationChannel_8h.md)
+[**FileList**](files.md) **>** [**Animations**](dir_f2b59a27925630266b6aa3e5cfad87aa.md) **>** [**AnimationChannel.h**](AnimationChannel_8h.md)
 
 [Go to the source code of this file](AnimationChannel_8h_source.md)
 
@@ -91,5 +91,5 @@
 
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h`
 

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="17" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="17" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="17" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="17" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="43" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="43" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="43" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1LookAtComponent_1ae19c563deb541d21473002b1bc92c0bc" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="44" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="44" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1LookAtComponent_1a5661f223ba4b3cde7630314cb163c289" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1EntityRef" kindref="compound">SR_UTILS_NS::EntityRef</ref></type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="47" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="47" column="32" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1LookAtComponent_1a4eb6a8c8b95dde264f0f7f32f599b3b6" prot="private" static="no" mutable="no">
         <type>LookAtAxis</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="49" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="49" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="49" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1LookAtComponent_1a787ed5e4c843406707313f0e37855127" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="51" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="51" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1LookAtComponent_1a43af51bfeacf3e7665f6018b9d9e9619" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="53" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="53" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1LookAtComponent_1a3360decd4955f9e6a3d77fcb2938deb5" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="55" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="55" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="55" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="55" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1LookAtComponent_1ab770b10f32f8e88ccf3f3d9fd9578584" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -135,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="57" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="57" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="57" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="57" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -151,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="19" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="19" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1a4175484c1f635692fea02d5952e2f806" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -170,7 +170,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="22" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="22" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1aefa500f2e618b1c0ed7fbdb11978abf6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -186,7 +186,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="24" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1adb2a393a0c9030e4dd96b399b480edda" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -204,7 +204,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="26" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="26" bodyend="26"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="26" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="26" bodyend="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1a3a85e72c18341ac843aacd42eaf2a517" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -222,7 +222,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="27" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="27" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1acbdf1351740506c8b4032787650d2787" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -240,7 +240,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="28" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="28" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1a61940171722de95167f5827d67a57148" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -258,7 +258,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="29" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="29" bodyend="29"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="29" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="29" bodyend="29"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1a7095a84da2ac7b9053f8af307712e30c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -276,7 +276,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="30" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="30" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1a4ae0ee486c082a0c6524a3bb2a8f06ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -294,7 +294,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="31" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1ab9fa19e244f446f928013fcfb403943b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -309,7 +309,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="33" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="33" bodyend="33"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="33" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="33" bodyend="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1a64f434d749559e96991702484c9e1a4a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -323,7 +323,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="34" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="34" bodyend="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="34" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="34" bodyend="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1a5c539d9cfbad44ee86f0355c9bbc7fcf" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -337,7 +337,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="35" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="35" bodyend="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="35" column="43" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="35" bodyend="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1ad64c79ba2d98e425779d9408ec934df9" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -351,7 +351,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="36" column="43"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="36" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1a73ed0656b09848c2b10c188b184808a5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -365,7 +365,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="37" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="37" bodyend="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="37" column="43" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="37" bodyend="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1affaa5757e4bf01274493ce1452c7767a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1EntityRef" kindref="compound">SR_UTILS_NS::EntityRef</ref> &amp;</type>
@@ -379,7 +379,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="38" column="45" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="38" bodyend="38"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="38" column="45" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="38" bodyend="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1a09fed0a61caff6f19940cc9785f9eb40" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -393,7 +393,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="39" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="39" bodyend="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="39" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="39" bodyend="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1a24d1ea86f1bc477a6025fb58d4e0fd0e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD LookAtAxis</type>
@@ -407,7 +407,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="40" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="40" bodyend="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="40" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="40" bodyend="40"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -466,7 +466,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="15" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="15" bodyend="59"/>
+    <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="15" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="15" bodyend="59"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>BaseComponent</name></member>

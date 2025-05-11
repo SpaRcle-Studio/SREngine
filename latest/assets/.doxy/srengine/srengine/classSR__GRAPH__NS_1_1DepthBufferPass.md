@@ -944,5 +944,5 @@ Implements [*SR\_GRAPH\_NS::IMeshClusterPass::UseUniforms*](classSR__GRAPH__NS_1
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h`
 

@@ -175,5 +175,5 @@ std::optional<SR_MATH_NS::FVector3> SR_ANIMATIONS_NS::AnimationGameObjectData::t
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationData.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Animations/AnimationData.h`
 

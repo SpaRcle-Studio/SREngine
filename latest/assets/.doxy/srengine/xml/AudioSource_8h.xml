@@ -39,7 +39,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h</label>
+        <label>Engine/libs/Audio/inc/Audio/Types/AudioSource.h</label>
         <link refid="AudioSource_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1214,6 +1214,6 @@
 <codeline lineno="87"><highlight class="normal"></highlight></codeline>
 <codeline lineno="88"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_AUDIOSOURCE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h"/>
+    <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h"/>
   </compounddef>
 </doxygen>

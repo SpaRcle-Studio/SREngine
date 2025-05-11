@@ -345,5 +345,5 @@ SR_UTILS_NS::ResourceType::~ResourceType () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h`
 

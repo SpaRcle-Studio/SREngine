@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="94" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="94" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="94" column="9" bodyfile="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="94" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="115" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="115" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="115" column="18" bodyfile="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="115" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ThreadsWorker_1ad5a2fd172b241fa19a714d29920769d9" prot="private" static="no" mutable="no">
         <type>std::list&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="116" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="116" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="116" column="19" bodyfile="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="116" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ThreadsWorker_1ab355e14078cf5ce04884be35616400f1" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">ThreadWorker::Ptr</ref> &gt;</type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="117" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="117" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="117" column="21" bodyfile="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="117" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ThreadsWorker_1a8c583bfac3126565b7c60a6d5066fd8d" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="118" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="118" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="118" column="14" bodyfile="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="118" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ThreadsWorker_1a876cb892df2bd21d9cc9b565c623a503" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="119" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="119" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="119" column="21" bodyfile="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="119" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ThreadsWorker_1a7eb5c1a9862cad0f3973803ca297dec9" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1DataStorage" kindref="compound">SR_HTYPES_NS::DataStorage</ref></type>
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="120" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="120" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="120" column="35" bodyfile="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="120" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ThreadsWorker_1ab6b64848b55916fdc1f36b2c64b37430" prot="private" static="no" mutable="no">
         <type>std::recursive_mutex</type>
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="121" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="121" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="121" column="30" bodyfile="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="121" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -134,7 +134,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="96" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="96" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -154,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="99" column="48"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="99" column="48"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -174,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="101" column="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="101" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ThreadsWorker_1aec0f57fb417a5f2da9fb4debbe342c89" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -188,7 +188,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="102" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="102" bodyend="102"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="102" column="27" bodyfile="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="102" bodyend="102"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ThreadsWorker_1a1cfe8a4782068642a592d14119293551" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1DataStorage" kindref="compound">SR_HTYPES_NS::DataStorage</ref> &amp;</type>
@@ -202,7 +202,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="103" column="48" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="103" bodyend="103"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="103" column="48" bodyfile="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="103" bodyend="103"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ThreadsWorker_1a369e62ee8aaa34ac99647a3592aa02d0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -216,7 +216,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="104" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="104" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ThreadsWorker_1a4f9bb45a452dccc0970f6f78babb278d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -234,7 +234,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="106" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="106" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ThreadsWorker_1a12f98cdc13cde109c0c003e8c9a575cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -248,7 +248,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="108" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="108" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ThreadsWorker_1a505cc2880d81b2fbb15603eea5e0f2d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -262,7 +262,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="109" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="109" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ThreadsWorker_1afe2d5af0c702a193015f6cbfa5098148" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -276,7 +276,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="110" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="110" bodyend="110"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="110" column="14" bodyfile="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="110" bodyend="110"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ThreadsWorker_1a6682a05299572c6d1084732a40e56bd1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -294,7 +294,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="112" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="112" column="27"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -344,7 +344,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="93" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="93" bodyend="123"/>
+    <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="93" column="5" bodyfile="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="93" bodyend="123"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ThreadsWorker_1a4f9bb45a452dccc0970f6f78babb278d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadsWorker</scope><name>AddThread</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadsWorker</scope><name>AutoFree</name></member>

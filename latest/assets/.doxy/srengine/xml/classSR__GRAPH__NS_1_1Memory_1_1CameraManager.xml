@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="27" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="27" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Memory_1_1CameraManager_1a98aedc9109d8b88b26d38218f7b1efdc" prot="private" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1RenderScene" kindref="compound">RenderScene</ref> &gt;</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="28" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="28" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Memory_1_1CameraManager_1a93975939e472e2c682b765861637de7c" prot="private" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1Pipeline" kindref="compound">Pipeline</ref> &gt;</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="29" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="29" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" bodystart="29" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="friend">
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="26" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="26" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" bodystart="26" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -80,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="64" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" bodystart="64" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="64" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" bodystart="64" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1CameraManager_1aead6654af3d91cd81eb84061ae0c23bf" prot="private" static="no" mutable="no">
         <type>PipelinePtr</type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="65" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" bodystart="65" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="65" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" bodystart="65" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -110,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="37" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="37" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1CameraManager_1a4de8d9418b13dd57a8daad5189b9e255" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -125,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="56" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="56" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="40" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" bodystart="40" bodyend="40"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="40" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" bodystart="40" bodyend="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1CameraManager_1a7d34c71797982f0b3dbac7ec9de4680e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="42" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="42" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1CameraManager_1af409c8780230350a49e7b2924cc9fce5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -185,7 +185,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="44" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="44" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1CameraManager_1a2d0ae0588258400dd1e34bde984c65b7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -199,7 +199,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="46" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="46" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1CameraManager_1a9ff4b4ac9d716676a968a3196c4a6543" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD CameraPtr</type>
@@ -213,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="47" column="32"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="47" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1CameraManager_1a19711cf2659a2645309cc9b96a8503ec" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::list&lt; CameraPtr &gt;</type>
@@ -227,7 +227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="48" column="32"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="48" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1CameraManager_1aa076229fa1706138627732807a3e0405" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD CameraPtr</type>
@@ -245,7 +245,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="49" column="32"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="49" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1CameraManager_1a564442ac32c227f691299624bc88cc1e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::vector&lt; CameraPtr &gt;</type>
@@ -263,7 +263,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="50" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="50" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1CameraManager_1abc27fa46b2ac8180325808210fb1c614" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -281,7 +281,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="52" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="52" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1CameraManager_1a095b4204768d2becc2777b1de6c2da35" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -299,7 +299,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="53" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="53" column="27"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -319,7 +319,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="59" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="59" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1CameraManager_1a41509cbaebee1ecfedacafb9db6f3413" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -337,7 +337,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="60" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="60" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1CameraManager_1adaedaddf2c6526f0f5c9732de37cabc2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -355,7 +355,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="61" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="61" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -410,7 +410,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="24" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" bodystart="24" bodyend="67"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="24" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" bodystart="24" bodyend="67"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1CameraManager_1add2e4267cc79cd23ccbb6a09fcfa100d" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::CameraManager</scope><name>CameraPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1CameraManager_1adaedaddf2c6526f0f5c9732de37cabc2" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::CameraManager</scope><name>DestroyCamera</name></member>

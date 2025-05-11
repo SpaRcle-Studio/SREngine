@@ -3,9 +3,9 @@
   <compounddef id="KeyCodes_8h" kind="file" language="C++">
     <compoundname>KeyCodes.h</compoundname>
     <includes refid="Debug_8h" local="no">Utils/Debug.h</includes>
-    <includedby refid="InputDevice_8h" local="no">Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h</includedby>
-    <includedby refid="InputEvents_8h" local="no">Engine/Core/libs/Utils/inc/Utils/Input/InputEvents.h</includedby>
-    <includedby refid="InputSystem_8h" local="no">Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h</includedby>
+    <includedby refid="InputDevice_8h" local="no">Engine/libs/Utils/inc/Utils/Input/InputDevice.h</includedby>
+    <includedby refid="InputEvents_8h" local="no">Engine/libs/Utils/inc/Utils/Input/InputEvents.h</includedby>
+    <includedby refid="InputSystem_8h" local="no">Engine/libs/Utils/inc/Utils/Input/InputSystem.h</includedby>
     <incdepgraph>
       <node id="75">
         <label>Utils/Common/Breakpoint.h</label>
@@ -138,7 +138,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/Input/KeyCodes.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Input/KeyCodes.h</label>
         <link refid="KeyCodes_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -615,7 +615,7 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="4">
-        <label>Engine/Core/inc/Core/Engine.h</label>
+        <label>Engine/inc/Engine/Engine.h</label>
         <link refid="Engine_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
@@ -625,87 +625,87 @@
         </childnode>
       </node>
       <node id="5">
-        <label>Engine/Core/inc/Core/EngineCommands.h</label>
+        <label>Engine/inc/Engine/EngineCommands.h</label>
         <link refid="EngineCommands_8h_source"/>
       </node>
       <node id="10">
-        <label>Engine/Core/inc/Core/GUI/About.h</label>
+        <label>Engine/inc/Engine/GUI/About.h</label>
         <link refid="About_8h_source"/>
       </node>
       <node id="22">
-        <label>Engine/Core/inc/Core/GUI/AnimatorEditor.h</label>
+        <label>Engine/inc/Engine/GUI/AnimatorEditor.h</label>
         <link refid="AnimatorEditor_8h_source"/>
       </node>
       <node id="27">
-        <label>Engine/Core/inc/Core/GUI/EditorGUI.h</label>
+        <label>Engine/inc/Engine/GUI/EditorGUI.h</label>
         <link refid="EditorGUI_8h_source"/>
       </node>
       <node id="11">
-        <label>Engine/Core/inc/Core/GUI/EngineStatistics.h</label>
+        <label>Engine/inc/Engine/GUI/EngineStatistics.h</label>
         <link refid="EngineStatistics_8h_source"/>
       </node>
       <node id="12">
-        <label>Engine/Core/inc/Core/GUI/FileBrowser.h</label>
+        <label>Engine/inc/Engine/GUI/FileBrowser.h</label>
         <link refid="FileBrowser_8h_source"/>
       </node>
       <node id="33">
-        <label>Engine/Core/inc/Core/GUI/Guizmo.h</label>
+        <label>Engine/inc/Engine/GUI/Guizmo.h</label>
         <link refid="Guizmo_8h_source"/>
       </node>
       <node id="13">
-        <label>Engine/Core/inc/Core/GUI/Hierarchy.h</label>
+        <label>Engine/inc/Engine/GUI/Hierarchy.h</label>
         <link refid="Hierarchy_8h_source"/>
       </node>
       <node id="14">
-        <label>Engine/Core/inc/Core/GUI/Inspector.h</label>
+        <label>Engine/inc/Engine/GUI/Inspector.h</label>
         <link refid="Inspector_8h_source"/>
       </node>
       <node id="15">
-        <label>Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h</label>
+        <label>Engine/inc/Engine/GUI/PhysicsMaterialEditor.h</label>
         <link refid="PhysicsMaterialEditor_8h_source"/>
       </node>
       <node id="23">
-        <label>Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h</label>
+        <label>Engine/inc/Engine/GUI/RenderTechniqueEditor.h</label>
         <link refid="RenderTechniqueEditor_8h_source"/>
       </node>
       <node id="16">
-        <label>Engine/Core/inc/Core/GUI/SceneRunner.h</label>
+        <label>Engine/inc/Engine/GUI/SceneRunner.h</label>
         <link refid="SceneRunner_8h_source"/>
       </node>
       <node id="25">
-        <label>Engine/Core/inc/Core/GUI/SceneTools.h</label>
+        <label>Engine/inc/Engine/GUI/SceneTools.h</label>
         <link refid="SceneTools_8h_source"/>
       </node>
       <node id="17">
-        <label>Engine/Core/inc/Core/GUI/SoundDebug.h</label>
+        <label>Engine/inc/Engine/GUI/SoundDebug.h</label>
         <link refid="SoundDebug_8h_source"/>
       </node>
       <node id="18">
-        <label>Engine/Core/inc/Core/GUI/VisualScriptEditor.h</label>
+        <label>Engine/inc/Engine/GUI/VisualScriptEditor.h</label>
         <link refid="VisualScriptEditor_8h_source"/>
       </node>
       <node id="19">
-        <label>Engine/Core/inc/Core/GUI/WorldEdit.h</label>
+        <label>Engine/inc/Engine/GUI/WorldEdit.h</label>
         <link refid="WorldEdit_8h_source"/>
       </node>
       <node id="6">
-        <label>Engine/Core/inc/Core/Scripting/ScriptableContext.h</label>
+        <label>Engine/inc/Engine/Scripting/ScriptableContext.h</label>
         <link refid="ScriptableContext_8h_source"/>
       </node>
       <node id="29">
-        <label>Engine/Core/inc/Core/World/EngineScene.h</label>
+        <label>Engine/inc/Engine/World/EngineScene.h</label>
         <link refid="EngineScene_8h_source"/>
       </node>
       <node id="7">
-        <label>Engine/Core/inc/Core/World/World.h</label>
+        <label>Engine/inc/Engine/World/World.h</label>
         <link refid="World_8h_source"/>
       </node>
       <node id="20">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h</label>
         <link refid="Graphics_2inc_2Graphics_2GUI_2Editor_2MessageBox_8h_source"/>
       </node>
       <node id="21">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h</label>
         <link refid="NodeWidget_8h_source"/>
         <childnode refid="22" relation="include">
         </childnode>
@@ -713,7 +713,7 @@
         </childnode>
       </node>
       <node id="9">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/Widget.h</label>
         <link refid="Widget_8h_source"/>
         <childnode refid="10" relation="include">
         </childnode>
@@ -743,13 +743,13 @@
         </childnode>
       </node>
       <node id="24">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h</label>
         <link refid="WidgetContainer_8h_source"/>
         <childnode refid="25" relation="include">
         </childnode>
       </node>
       <node id="26">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h</label>
         <link refid="WidgetManager_8h_source"/>
         <childnode refid="27" relation="include">
         </childnode>
@@ -757,7 +757,7 @@
         </childnode>
       </node>
       <node id="28">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h</label>
         <link refid="RenderScene_8h_source"/>
         <childnode refid="29" relation="include">
         </childnode>
@@ -765,11 +765,11 @@
         </childnode>
       </node>
       <node id="30">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/UI/Canvas.h</label>
         <link refid="Canvas_8h_source"/>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Input/InputDevice.h</label>
         <link refid="InputDevice_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -777,13 +777,13 @@
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Utils/inc/Utils/Input/InputDispatcher.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Input/InputDispatcher.h</label>
         <link refid="InputDispatcher_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
       <node id="31">
-        <label>Engine/Core/libs/Utils/inc/Utils/Input/InputEvents.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Input/InputEvents.h</label>
         <link refid="InputEvents_8h_source"/>
         <childnode refid="13" relation="include">
         </childnode>
@@ -793,7 +793,7 @@
         </childnode>
       </node>
       <node id="8">
-        <label>Engine/Core/libs/Utils/inc/Utils/Input/InputHandler.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Input/InputHandler.h</label>
         <link refid="InputHandler_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
@@ -803,7 +803,7 @@
         </childnode>
       </node>
       <node id="32">
-        <label>Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Input/InputSystem.h</label>
         <link refid="InputSystem_8h_source"/>
         <childnode refid="33" relation="include">
         </childnode>
@@ -815,7 +815,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/Input/KeyCodes.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Input/KeyCodes.h</label>
         <link refid="KeyCodes_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1016,6 +1016,6 @@
 <codeline lineno="183"><highlight class="normal"></highlight></codeline>
 <codeline lineno="184"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_KEYCODES_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Input/KeyCodes.h"/>
+    <location file="Engine/libs/Utils/inc/Utils/Input/KeyCodes.h"/>
   </compounddef>
 </doxygen>

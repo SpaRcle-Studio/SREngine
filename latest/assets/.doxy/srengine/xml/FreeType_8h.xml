@@ -8,14 +8,14 @@
     <includes local="no">freetype/ftglyph.h</includes>
     <includes local="no">freetype/tttables.h</includes>
     <includes local="no">freetype/src/truetype/ttobjs.h</includes>
-    <includedby refid="Font_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h</includedby>
-    <includedby refid="FreeTypeDrawContext_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h</includedby>
-    <includedby refid="FreeTypeFace_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeFace.h</includedby>
-    <includedby refid="Glyph_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h</includedby>
-    <includedby refid="TextBuilder_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h</includedby>
+    <includedby refid="Font_8h" local="no">Engine/libs/Graphics/inc/Graphics/Font/Font.h</includedby>
+    <includedby refid="FreeTypeDrawContext_8h" local="no">Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h</includedby>
+    <includedby refid="FreeTypeFace_8h" local="no">Engine/libs/Graphics/inc/Graphics/Font/FreeTypeFace.h</includedby>
+    <includedby refid="Glyph_8h" local="no">Engine/libs/Graphics/inc/Graphics/Font/Glyph.h</includedby>
+    <includedby refid="TextBuilder_8h" local="no">Engine/libs/Graphics/inc/Graphics/Font/TextBuilder.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Font/FreeType.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Font/FreeType.h</label>
         <link refid="FreeType_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -66,11 +66,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Font/Font.h</label>
         <link refid="Font_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Font/FreeType.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Font/FreeType.h</label>
         <link refid="FreeType_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -84,23 +84,23 @@
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Font/FreeTypeDrawContext.h</label>
         <link refid="FreeTypeDrawContext_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeFace.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Font/FreeTypeFace.h</label>
         <link refid="FreeTypeFace_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Font/Glyph.h</label>
         <link refid="Glyph_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="6">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Font/TextBuilder.h</label>
         <link refid="TextBuilder_8h_source"/>
       </node>
     </invincdepgraph>
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeType.h" line="21" column="10"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeType.h" line="21" column="10"/>
       </memberdef>
       <memberdef kind="define" id="FreeType_8h_1acdd2abea75f6319f8197e3f2675358ae" prot="public" static="no">
         <name>FT_ERROR_START_LIST</name>
@@ -129,7 +129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeType.h" line="22" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeType.h" line="22" column="9"/>
       </memberdef>
       <memberdef kind="define" id="FreeType_8h_1af38c09f62b94bff3bd2dd0ec17d280a0" prot="public" static="no">
         <name>FT_ERROR_END_LIST</name>
@@ -140,7 +140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeType.h" line="23" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeType.h" line="23" column="9"/>
       </memberdef>
       <memberdef kind="define" id="FreeType_8h_1a565a3ae12f2fe6aded3096fc54cf4bde" prot="public" static="no">
         <name>SRFreeTypeErrToString</name>
@@ -152,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeType.h" line="47" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeType.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeType.h" line="47" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/FreeType.h" bodystart="47" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -210,6 +210,6 @@
 <codeline lineno="48"><highlight class="normal"></highlight></codeline>
 <codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_FREETYPE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeType.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeType.h"/>
   </compounddef>
 </doxygen>

@@ -465,5 +465,5 @@ SR_GRAPH_GUI_NS::Node::~Node () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/GUI/Node.h`
 

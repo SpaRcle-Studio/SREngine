@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h" line="17" column="38" bodyfile="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h" bodystart="17" bodyend="19"/>
+        <location file="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h" line="17" column="38" bodyfile="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h" bodystart="17" bodyend="19"/>
       </memberdef>
       <memberdef kind="function" id="Bullet3PhysicsLib_8h_1a4cd4e5ca38ef160292f447cd203f0ffc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_MATH_NS::FVector3</type>
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h" line="21" column="49" bodyfile="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h" bodystart="21" bodyend="23"/>
+        <location file="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h" line="21" column="49" bodyfile="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h" bodystart="21" bodyend="23"/>
       </memberdef>
       <memberdef kind="function" id="PhysXUtils_8h_1a25d8621307f650bab731d04970a7c729" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED physx::PxVec3</type>
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="29" column="42" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="29" bodyend="31"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="29" column="42" bodyfile="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="29" bodyend="31"/>
       </memberdef>
       <memberdef kind="function" id="PhysXUtils_8h_1abe7bd676e82e8ac55584b69e34213e18" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_MATH_NS::FVector3</type>
@@ -73,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="33" column="49" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="33" bodyend="35"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="33" column="49" bodyfile="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="33" bodyend="35"/>
       </memberdef>
       <memberdef kind="function" id="PhysXUtils_8h_1ab5c7a7285e58314f90eb183fb5e27577" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>physx::PxCombineMode::Enum</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="37" column="39" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="37" bodyend="51"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="37" column="39" bodyfile="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="37" bodyend="51"/>
       </memberdef>
       <memberdef kind="function" id="PhysXUtils_8h_1ad933fdaa38942c2bd434eb65536dab8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>PhysXPvdConnection *</type>
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="53" column="24" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="53" bodyend="64"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="53" column="24" bodyfile="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="53" bodyend="64"/>
       </memberdef>
       <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1a1c28045e08bc39187bcb207211b9a536" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -139,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="47" column="33" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="47" bodyend="60"/>
+        <location file="Engine/libs/Physics/inc/Physics/Utils/Utils.h" line="47" column="33" bodyfile="Engine/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="47" bodyend="60"/>
       </memberdef>
       <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1a0607430050c8ee5de3f50faafe1a55e5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -157,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="62" column="33" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="62" bodyend="76"/>
+        <location file="Engine/libs/Physics/inc/Physics/Utils/Utils.h" line="62" column="33" bodyfile="Engine/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="62" bodyend="76"/>
       </memberdef>
       <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1a864399de2b8af02d36265ceec26b7c41" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED constexpr bool</type>
@@ -175,7 +175,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="78" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="78" bodyend="86"/>
+        <location file="Engine/libs/Physics/inc/Physics/Utils/Utils.h" line="78" column="43" bodyfile="Engine/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="78" bodyend="86"/>
       </memberdef>
       <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1a452a0fbada6e5b599681c61b51a15396" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED constexpr bool</type>
@@ -193,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="88" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="88" bodyend="96"/>
+        <location file="Engine/libs/Physics/inc/Physics/Utils/Utils.h" line="88" column="43" bodyfile="Engine/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="88" bodyend="96"/>
       </memberdef>
       <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1af372567cfbd5aef4ef346d590f13b3a7" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED constexpr bool</type>
@@ -211,7 +211,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="98" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="98" bodyend="105"/>
+        <location file="Engine/libs/Physics/inc/Physics/Utils/Utils.h" line="98" column="43" bodyfile="Engine/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="98" bodyend="105"/>
       </memberdef>
       <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1af3a2f3925505ea67af6dadbc99676ab6" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED constexpr bool</type>
@@ -229,7 +229,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="107" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="107" bodyend="115"/>
+        <location file="Engine/libs/Physics/inc/Physics/Utils/Utils.h" line="107" column="43" bodyfile="Engine/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="107" bodyend="115"/>
       </memberdef>
       <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1a301cc76cb2301b592a86d5eb11603ed3" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED constexpr bool</type>
@@ -247,7 +247,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="117" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="117" bodyend="124"/>
+        <location file="Engine/libs/Physics/inc/Physics/Utils/Utils.h" line="117" column="43" bodyfile="Engine/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="117" bodyend="124"/>
       </memberdef>
       <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1a603c825ab1ec3526ed8d2d474ba30ba8" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED constexpr bool</type>
@@ -265,7 +265,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="126" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="126" bodyend="133"/>
+        <location file="Engine/libs/Physics/inc/Physics/Utils/Utils.h" line="126" column="43" bodyfile="Engine/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="126" bodyend="133"/>
       </memberdef>
       <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1af62e9080d20bc3bdb9bb8eddad1165a5" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED constexpr bool</type>
@@ -283,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="135" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="135" bodyend="143"/>
+        <location file="Engine/libs/Physics/inc/Physics/Utils/Utils.h" line="135" column="43" bodyfile="Engine/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="135" bodyend="143"/>
       </memberdef>
       <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1a2b99866b2335d6a27ef378e7c4c00c9c" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED constexpr bool</type>
@@ -301,7 +301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="145" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="145" bodyend="147"/>
+        <location file="Engine/libs/Physics/inc/Physics/Utils/Utils.h" line="145" column="43" bodyfile="Engine/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="145" bodyend="147"/>
       </memberdef>
       <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1a7cc140a83f8c8191422cbcd14366c6e9" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED constexpr bool</type>
@@ -319,7 +319,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="149" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="149" bodyend="151"/>
+        <location file="Engine/libs/Physics/inc/Physics/Utils/Utils.h" line="149" column="43" bodyfile="Engine/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="149" bodyend="151"/>
       </memberdef>
       <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1a260a8772535a18455e6f9e43e21c02a6" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED constexpr bool</type>
@@ -337,7 +337,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="153" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="153" bodyend="155"/>
+        <location file="Engine/libs/Physics/inc/Physics/Utils/Utils.h" line="153" column="43" bodyfile="Engine/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="153" bodyend="155"/>
       </memberdef>
       <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1a21fa692b02564eca946add83527f4834" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED constexpr bool</type>
@@ -355,13 +355,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="157" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="157" bodyend="159"/>
+        <location file="Engine/libs/Physics/inc/Physics/Utils/Utils.h" line="157" column="43" bodyfile="Engine/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="157" bodyend="159"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h" line="16" column="1"/>
+    <location file="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h" line="16" column="1"/>
   </compounddef>
 </doxygen>

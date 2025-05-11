@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Client.h" line="13" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Client.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Client.h" line="13" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Network/Client.h" bodystart="13" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Client.h" line="23" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Client.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Client.h" line="23" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Network/Client.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Client_1a3a12633dc23c4b2938b5c12d9e5b2a04" prot="private" static="no" mutable="no">
         <type>int32_t</type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Client.h" line="24" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Client.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Client.h" line="24" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Network/Client.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Client_1a486ef48f32089641d3ac10de3b708428" prot="private" static="no" mutable="no">
         <type>int32_t</type>
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Client.h" line="25" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Client.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Client.h" line="25" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Network/Client.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Client_1a4a56d508819ba50eb9f389f5f0f61ca6" prot="private" static="no" mutable="no">
         <type>int32_t</type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Client.h" line="26" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Client.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Client.h" line="26" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Network/Client.h" bodystart="26" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Client_1a5b5ce72b17553822b0fb4c78c5c334d3" prot="private" static="no" mutable="no">
         <type>uint64_t</type>
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Client.h" line="27" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Client.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Client.h" line="27" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Network/Client.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Client_1a2f45cb39585706be5eb71cd4cea2bf6b" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__NETWORK__NS_1_1Socket" kindref="compound">Socket</ref> &gt;</type>
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Client.h" line="29" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Client.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Client.h" line="29" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Network/Client.h" bodystart="29" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Client.h" line="15" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Client.h" line="15" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Client_1a92781136f5c80bad943cd372bd35a082" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -173,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Client.h" line="18" column="21"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Client.h" line="18" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Client_1a4103b1f31fd7165f18d277db5c327f1f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -195,7 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Client.h" line="20" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Client.h" line="20" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -245,7 +245,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Network/Client.h" line="12" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Client.h" bodystart="12" bodyend="30"/>
+    <location file="Engine/libs/Utils/inc/Utils/Network/Client.h" line="12" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Network/Client.h" bodystart="12" bodyend="30"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Client</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Client</scope><name>AutoFree</name></member>

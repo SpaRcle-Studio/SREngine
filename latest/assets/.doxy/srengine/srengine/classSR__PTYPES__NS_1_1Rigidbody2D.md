@@ -385,5 +385,5 @@ Implements [*SR\_PTYPES\_NS::Rigidbody::GetMeasurement*](classSR__PTYPES__NS_1_1
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Physics/inc/Physics/2D/Rigidbody2D.h`
+The documentation for this class was generated from the following file `Engine/libs/Physics/inc/Physics/2D/Rigidbody2D.h`
 

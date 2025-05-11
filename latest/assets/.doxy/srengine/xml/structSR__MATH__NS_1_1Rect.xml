@@ -20,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="17" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="17" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="17" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="17" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__MATH__NS_1_1Rect_1adc22b9cfb78813df1f1f007180bedf1d" prot="public" static="no" mutable="no">
         <type>T</type>
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="18" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="18" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="18" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="18" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__MATH__NS_1_1Rect_1a7e13bd594ab338f0901e163bbe27283f" prot="public" static="no" mutable="no">
         <type>T</type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="19" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="19" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="19" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="19" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__MATH__NS_1_1Rect_1a9aede93f101b42c6c96837e35f77248a" prot="public" static="no" mutable="no">
         <type>T</type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="20" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="20" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="20" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="20" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__MATH__NS_1_1Rect_1a291917b262fd3db63af18713e0142a94" prot="public" static="no" mutable="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">SR_MATH_NS::Vector2</ref>&lt; T &gt;</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="23" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="23" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__MATH__NS_1_1Rect_1a876d951a1851731af35458cc261b55ff" prot="public" static="no" mutable="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">SR_MATH_NS::Vector2</ref>&lt; T &gt;</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="24" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="24" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__MATH__NS_1_1Rect_1a406e1b6ebb516602a7c98cb5dc2f2ff8" prot="public" static="no" mutable="no">
         <type>union <ref refid="structSR__MATH__NS_1_1Rect" kindref="compound">SR_MATH_NS::Rect</ref></type>
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="26" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="26" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="29" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="103" bodyend="108"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="29" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="103" bodyend="108"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1afc07cf71e559d2acbe5ab00acc7fe65d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="30" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="110" bodyend="115"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="30" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="110" bodyend="115"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1a6ef063c8e43e96d191d5b7b27e721ba6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -184,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="31" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="117" bodyend="122"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="31" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="117" bodyend="122"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1a1a4d58a21c5dba425598316dce72fd56" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -210,7 +210,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="32" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="124" bodyend="129"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="32" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="124" bodyend="129"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1a205aa16502a6e2cd1fdc07f2470a498f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -224,7 +224,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="33" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="131" bodyend="133"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="33" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="131" bodyend="133"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1a324801493494b47583ab2b0619115706" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD T</type>
@@ -238,7 +238,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="36" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="135" bodyend="135"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="36" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="135" bodyend="135"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1a7c71987a27bf70bfeabf5f0045488183" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD T</type>
@@ -252,7 +252,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="37" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="136" bodyend="136"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="37" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="136" bodyend="136"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1a21c722de5d7dc33d91d3fe80739763c3" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD T</type>
@@ -266,7 +266,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="39" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="138" bodyend="138"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="39" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="138" bodyend="138"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1ae190994798570a85c71808ca0549c456" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD T</type>
@@ -280,7 +280,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="40" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="139" bodyend="139"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="40" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="139" bodyend="139"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1a4d3724d408af90256d2a100f0beb59ae" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD T</type>
@@ -294,7 +294,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="42" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="141" bodyend="141"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="42" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="141" bodyend="141"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1ac44c0d23925ce200d72d10e331a59537" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD T</type>
@@ -308,7 +308,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="43" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="142" bodyend="142"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="43" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="142" bodyend="142"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1ac4a09edf4875060eb2208db5e8d8f0ec" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD T</type>
@@ -322,7 +322,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="45" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="144" bodyend="144"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="45" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="144" bodyend="144"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1a8bfa0261373bf73cb46d2d7bc7a47747" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD T</type>
@@ -336,7 +336,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="46" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="145" bodyend="145"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="46" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="145" bodyend="145"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1aa06964911a225f92cce7ac1476331fa3" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">SR_MATH_NS::Vector2</ref>&lt; T &gt;</type>
@@ -350,7 +350,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="48" column="42" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="147" bodyend="147"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="48" column="42" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="147" bodyend="147"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1a36d7b28462ec37ac7426c4802956bdc4" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">SR_MATH_NS::Vector2</ref>&lt; T &gt;</type>
@@ -364,7 +364,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="49" column="42" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="148" bodyend="148"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="49" column="42" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="148" bodyend="148"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1a3d5eb72fbe410c5608f3ba54835b5ef0" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">SR_MATH_NS::Vector3</ref>&lt; T &gt;</type>
@@ -378,7 +378,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="51" column="42" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="150" bodyend="150"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="51" column="42" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="150" bodyend="150"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1a211f67c0ca8c80a3df0158f32805e277" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">SR_MATH_NS::Vector3</ref>&lt; T &gt;</type>
@@ -392,7 +392,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="52" column="42" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="151" bodyend="151"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="52" column="42" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="151" bodyend="151"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1ac7a106f7da3c19300696dcc5a8770809" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">SR_MATH_NS::Vector3</ref>&lt; T &gt;</type>
@@ -406,7 +406,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="53" column="42" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="152" bodyend="152"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="53" column="42" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="152" bodyend="152"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1a5f12aed91cbe8a9fc04b8cbadb0f7ce6" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -429,7 +429,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="55" column="38" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="154" bodyend="157"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="55" column="38" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="154" bodyend="157"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1a89f0f56cbdbd7d73ecb9256a1d5e8918" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -447,7 +447,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="56" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="159" bodyend="162"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="56" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="159" bodyend="162"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1a1aecc57e77e9774da0dcf46c4b29b184" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -465,7 +465,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="57" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="164" bodyend="166"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="57" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="164" bodyend="166"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1a5fb6d96143656337fd96d602d8f37d78" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Rect" kindref="compound">Rect</ref></type>
@@ -483,7 +483,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="58" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="168" bodyend="170"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="58" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="168" bodyend="170"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1abb1b60d15ba073fc6e225c305708c9c3" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Rect" kindref="compound">Rect</ref></type>
@@ -501,7 +501,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="59" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="172" bodyend="174"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="59" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="172" bodyend="174"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1a7adbfd9b3450e7769e59c5489ec889d4" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Rect" kindref="compound">Rect</ref></type>
@@ -519,7 +519,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="60" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="176" bodyend="178"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="60" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="176" bodyend="178"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1af38199062a93b59e58efda1961563476" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Rect" kindref="compound">Rect</ref></type>
@@ -537,7 +537,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="61" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="180" bodyend="182"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="61" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="180" bodyend="182"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1a57f9ea441c4763b6db70c25154ef6896" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -555,7 +555,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="62" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="184" bodyend="189"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="62" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="184" bodyend="189"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1a6ac9d844e0e440ce3840a629aac3ee74" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -573,7 +573,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="63" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="191" bodyend="196"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="63" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="191" bodyend="196"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1ad21c80c895916626dca3707dabbf5246" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -591,7 +591,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="64" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="198" bodyend="203"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="64" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="198" bodyend="203"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1a7e5913fb51bede5371954e82e227e48d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -609,7 +609,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="65" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="205" bodyend="210"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="65" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="205" bodyend="210"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1ab3fd1df7926f87effc270e50cae5e010" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -627,7 +627,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="70" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="99" bodyend="101"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="70" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="99" bodyend="101"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1aa91aaa378b1a2561a495893c662d29c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -646,7 +646,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="73" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="81" bodyend="84"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="73" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="81" bodyend="84"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1afc322d2f9a1511d2bba50a55bb431759" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -664,7 +664,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="74" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="86" bodyend="89"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="74" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="86" bodyend="89"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1a1adaf44c61d5e8362101ff401289af24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -682,7 +682,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="75" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="91" bodyend="93"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="75" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="91" bodyend="93"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Rect_1a0b48299514a2587622e6569875c5ff2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -700,7 +700,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="76" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="95" bodyend="97"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="76" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="95" bodyend="97"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -724,14 +724,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="68" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="212" bodyend="214"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="68" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="212" bodyend="214"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="13" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="13" bodyend="77"/>
+    <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="13" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="13" bodyend="77"/>
     <listofallmembers>
       <member refid="structSR__MATH__NS_1_1Rect_1ac4a09edf4875060eb2208db5e8d8f0ec" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Rect</scope><name>Bottom</name></member>
       <member refid="structSR__MATH__NS_1_1Rect_1ab3fd1df7926f87effc270e50cae5e010" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Rect</scope><name>Contains</name></member>

@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="53" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="53" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1SharedPtrDynamicDataCounter_1a5cdb6c190ab4cdea92075351c88521ec" prot="private" static="no" mutable="no">
         <type>std::unordered_set&lt; <ref refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData" kindref="compound">SharedPtrDynamicData</ref> * &gt;</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="54" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="54" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="54" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="54" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="28" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="28" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="30" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="30" bodyend="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="30" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="30" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtrDynamicDataCounter_1a49301d2e23724fce3807d73d32045f0c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="32" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="32" bodyend="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="32" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="32" bodyend="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtrDynamicDataCounter_1a4416073280bb237e063388dc0eb8bc13" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -102,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="39" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="39" bodyend="44"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="39" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="39" bodyend="44"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtrDynamicDataCounter_1a674635e3544fc9f5726d96e2c1a34628" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -116,7 +116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="49" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="49" bodyend="49"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="49" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="49" bodyend="49"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtrDynamicDataCounter_1affb097366df04077b2f49cd5a212f731" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const std::unordered_set&lt; <ref refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData" kindref="compound">SharedPtrDynamicData</ref> * &gt; &amp;</type>
@@ -130,7 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="50" column="47" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="50" bodyend="50"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="50" column="47" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="50" bodyend="50"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="46" column="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="46" column="37"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -175,7 +175,7 @@
         <label>Singleton&lt; SharedPtrDynamicDataCounter &gt;</label>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="27" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="27" bodyend="56"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="27" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="27" bodyend="56"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrDynamicDataCounter_1a2015738beea44ff4463c5e177f550e3f" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtrDynamicDataCounter</scope><name>CheckMemoryLeaks</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrDynamicDataCounter_1a4416073280bb237e063388dc0eb8bc13" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtrDynamicDataCounter</scope><name>Decrement</name></member>

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="37" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="37" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__HTYPES__NS_1_1RawMesh_1a74c23b3a39fb972c20982e564d3de917" prot="private" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1RawMesh" kindref="compound">RawMesh</ref> *</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="38" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="38" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__HTYPES__NS_1_1RawMesh_1a0e9a05f5396141901088b8a7b5e06aac" prot="private" static="no">
         <type>uint64_t</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="39" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="39" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="39" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="39" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="97" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="97" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="97" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="97" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1RawMesh_1abf8632bac99823ca37a81ee33027eacf" prot="private" static="no" mutable="no">
         <type>ska::flat_hash_map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, uint16_t &gt;</type>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="98" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="98" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="98" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="98" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1RawMesh_1a4ff181ab7feccbbb2f45b70feab3ba61" prot="private" static="no" mutable="no">
         <type>ska::flat_hash_map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &gt;</type>
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="100" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="100" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="100" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="100" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1RawMesh_1a881cad9b1baac4f97fabca46f3859eb6" prot="private" static="no" mutable="no">
         <type>ska::flat_hash_map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &gt;</type>
@@ -102,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="101" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="101" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="101" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="101" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1RawMesh_1a98ade07e13ec7aa2f071c23f03460a9b" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &gt;</type>
@@ -116,7 +116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="103" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="103" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="103" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="103" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1RawMesh_1a5fbb776c541a49063e328eb0d3dcff6b" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &gt;</type>
@@ -130,7 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="104" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="104" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="104" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="104" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1RawMesh_1a084a30182433ba36595c5ef31561279f" prot="private" static="no" mutable="yes">
         <type>std::vector&lt; std::vector&lt; uint32_t &gt; &gt;</type>
@@ -144,7 +144,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="106" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="106" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="106" column="29" bodyfile="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="106" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1RawMesh_1af975764fa41ededd89cc98bc6883edc6" prot="private" static="no" mutable="no">
         <type><ref refid="structSR__HTYPES__NS_1_1RawMeshParams" kindref="compound">RawMeshParams</ref></type>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="108" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="108" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="108" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="108" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1RawMesh_1a46e8738269644f31d009f91cb106dd62" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -173,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="110" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="110" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="110" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="110" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -189,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="41" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="41" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1ab6f7084a067fbeb6aa224e6016cec36d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -203,7 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="42" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="42" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1afa437a7868b6768f37deba07af40f582" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -217,7 +217,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="85" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="85" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1a55d81c3d135fc77ba2ee629c9583e0ed" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -231,7 +231,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="86" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="86" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1a2b04e6adf33922d9a53b6e9f98b610e8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -245,7 +245,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="87" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="87" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1abe394cbd525f06bf0a2864b9a59b176f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -259,7 +259,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="88" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="88" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1ab73f56c7a9bbc60d29701efbbe3e8040" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -273,7 +273,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="89" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="89" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1a2a76058ab245ae54e355efa6f2ccd522" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -287,7 +287,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="90" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="90" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -311,7 +311,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="45" column="24"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="45" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1a2704d19c23c0d59fa4c33ce7ef41dc4a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__HTYPES__NS_1_1RawMesh" kindref="compound">RawMesh</ref> *</type>
@@ -329,7 +329,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="46" column="24"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="46" column="24"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -345,7 +345,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="49" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="49" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1a309aabfdeebc20db5e437f47b76fe948" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -359,7 +359,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="51" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="51" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1ad9e42b0283df048253e571a1ed063aa6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string_view</type>
@@ -377,7 +377,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="52" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="52" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1ad5ca8020192796636cbde6e50e677741" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::vector&lt; <ref refid="structSR__UTILS__NS_1_1Vertex" kindref="compound">SR_UTILS_NS::Vertex</ref> &gt;</type>
@@ -395,7 +395,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="54" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="54" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1a1e7ca45eac317e4d872789d5ba82efd6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const std::vector&lt; uint32_t &gt; &amp;</type>
@@ -413,7 +413,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="55" column="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="55" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1ae6680beeaef37826e6bb786637d519cb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const ska::flat_hash_map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, uint32_t &gt; &amp;</type>
@@ -431,7 +431,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="56" column="47"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="56" column="47"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1a06da406487c0dccc95521fec583a2f47" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const ska::flat_hash_map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, uint16_t &gt; &amp;</type>
@@ -445,7 +445,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="57" column="47"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="57" column="47"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1a4a23c21a6d1edb9b2a34620df8c2d62d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
@@ -463,7 +463,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="58" column="50"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="58" column="50"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1a5557423521f769cfa41ce9a3bc1dd5d1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
@@ -481,7 +481,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="59" column="50"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="59" column="50"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1ac19c02e9464578e7f0571a4bbcf523a1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
@@ -499,7 +499,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="60" column="50"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="60" column="50"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1acc2bf52e49e940ad875a4165e93018a2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -517,7 +517,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="61" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="61" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1aa2cb2d59c34a1374083712f45d22186a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const std::vector&lt; <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &gt; &amp;</type>
@@ -531,7 +531,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="62" column="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="62" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1adb4bca84b6406abfc2ea7b58b436f247" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -549,7 +549,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="64" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="64" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1a2014c43312bc981fb914bb19c3bf6e3e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -567,7 +567,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="65" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="65" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1a66aeb4c1f2a9921b076b33135545e5c4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -581,7 +581,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="66" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="66" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1a4cfdb3b27be53ce380582312ff86f52c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::vector&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
@@ -595,7 +595,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="67" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="67" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1a6582aae48a6ec2a59d1cf39b2a6bf4fe" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -609,7 +609,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="68" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="68" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1adc09b1c4dee7323045ea675f9a87bd4d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -627,7 +627,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="69" column="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="69" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1aa4635596004f6a0fbcf6e7f8d4076467" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -641,7 +641,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="71" column="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="71" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1a70ac9773e236dc38fb9f537988962668" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -655,7 +655,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="72" column="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="72" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1a080a2b38b9b25b29ea6102b7e878f5e9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -669,7 +669,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="74" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="74" column="27"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -685,7 +685,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="81" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="81" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1RawMesh_1a68a7bb9ae84e8f122c78f09247b7d874" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -699,7 +699,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="82" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="82" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -728,7 +728,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" line="36" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="36" bodyend="118"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" line="36" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Types/RawMesh.h" bodystart="36" bodyend="118"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1RawMesh_1a2a76058ab245ae54e355efa6f2ccd522" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::RawMesh</scope><name>CalculateAnimations</name></member>
       <member refid="classSR__HTYPES__NS_1_1RawMesh_1a55d81c3d135fc77ba2ee629c9583e0ed" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::RawMesh</scope><name>CalculateBones</name></member>

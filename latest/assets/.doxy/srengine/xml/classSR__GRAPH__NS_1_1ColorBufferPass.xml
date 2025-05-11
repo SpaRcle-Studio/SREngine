@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="23" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="23" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1ColorBufferPass_1a214631b3d7b4fc2c9a21737df75abd29" prot="private" static="no">
         <type><ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">SR_GTYPES_NS::Framebuffer</ref> *</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="24" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="24" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1ColorBufferPass_1ac8680e3242fc88684458fd0bbcb5fc82" prot="private" static="no">
         <type><ref refid="classSR__GTYPES__NS_1_1Mesh" kindref="compound">SR_GTYPES_NS::Mesh</ref> *</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="25" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="25" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1ColorBufferPass_1adf82d7adaeba219fd443cd53aceb3f82" prot="private" static="no">
         <type><ref refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass" kindref="compound">OffScreenMeshDrawerPass</ref></type>
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="26" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="26" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" bodystart="26" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="friend">
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="27" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="27" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" bodystart="27" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -96,7 +96,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="29" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="29" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ColorBufferPass_1af2b30bca318e5c56cff97873043ddcdf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="31" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ColorBufferPass_1a6f54adc2540ed988c1ec5394740fa4d0" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">SR_GTYPES_NS::Framebuffer</ref> *</type>
@@ -130,7 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="33" column="48"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="33" column="48"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ColorBufferPass_1aca8f7594e4f439183b818c77c6a2d345" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="34" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" bodystart="34" bodyend="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="34" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" bodystart="34" bodyend="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ColorBufferPass_1ab550fd2e244fe6dd72c6c7749634fcb3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -164,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="36" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="36" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -189,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="39" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="39" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ColorBufferPass_1acd59641e1521db2359577cbf7bce1409" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD RenderQueuePtr</type>
@@ -204,7 +204,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="41" column="37"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="41" column="37"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -484,7 +484,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="21" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" bodystart="21" bodyend="43"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="21" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" bodystart="21" bodyend="43"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>AddDependency</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>AddInputConnection</name></member>

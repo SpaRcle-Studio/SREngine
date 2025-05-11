@@ -270,5 +270,5 @@ SR_NODISCARD bool SR_UTILS_NS::IBaseSerialization::SaveToFileImpl (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h`
 

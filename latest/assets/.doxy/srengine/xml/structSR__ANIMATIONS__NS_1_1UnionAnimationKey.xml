@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="126" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="126" column="14"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a080f30db780af211a7b5cca084a26aaf" prot="public" static="no" mutable="no">
         <type>AnimationKeyType</type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="128" column="26" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="128" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="128" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="128" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a10d87b8c33862ef75b8b6faf22c58f40" prot="public" static="no" mutable="no">
         <type>float_t</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="129" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="129" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="129" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="129" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="75" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="75" column="9"/>
       </memberdef>
       <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a2036aa02b9f18bb167156d7cb760d911" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="76" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="76" column="9"/>
       </memberdef>
       <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a90e7b51c09d5ba5687f7b85b5341c600" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -95,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="78" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="78" bodyend="80"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="78" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="78" bodyend="80"/>
       </memberdef>
       <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1ae1455282823660ea2622843bd01833d6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey" kindref="compound">UnionAnimationKey</ref> &amp;</type>
@@ -113,7 +113,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="82" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="82" bodyend="87"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="82" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="82" bodyend="87"/>
       </memberdef>
       <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a9375757a8cf36f3f824e4804920444c6" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="89" column="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="89" column="26"/>
       </memberdef>
       <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a469430964ff8e9a7a6c50fd5b51b4d2c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -165,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="90" column="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="90" column="26"/>
       </memberdef>
       <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1aa7bb8d2d085267e11fd9d67fa7af5fd3" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -191,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="92" column="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="92" column="26"/>
       </memberdef>
       <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1ad8f948eee1d1061a22a05d7614a9cbf6" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -209,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="93" column="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="93" column="26"/>
       </memberdef>
       <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1ab9b6fad1509b0a949f8ad9be39abeff8" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -239,7 +239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="95" column="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="95" column="26"/>
       </memberdef>
       <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a8d4d4affe3080a58bc0110244fa10594" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -261,7 +261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="96" column="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="96" column="26"/>
       </memberdef>
       <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a87233e17300f1e323a35936a31490420" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -284,7 +284,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="98" column="25" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="98" bodyend="114"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="98" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="98" bodyend="114"/>
       </memberdef>
       <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1acb69f2bd0f5409cddbf9bb261cbcf340" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -302,7 +302,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="116" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="116" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -352,7 +352,7 @@
         <link refid="classSR__MATH__NS_1_1Quaternion"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="74" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="74" bodyend="131"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="74" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="74" bodyend="131"/>
     <listofallmembers>
       <member refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1acb69f2bd0f5409cddbf9bb261cbcf340" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::UnionAnimationKey</scope><name>CopyFrom</name></member>
       <member refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a548d143ee96dc663fc8e187396216101" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::UnionAnimationKey</scope><name>data</name></member>

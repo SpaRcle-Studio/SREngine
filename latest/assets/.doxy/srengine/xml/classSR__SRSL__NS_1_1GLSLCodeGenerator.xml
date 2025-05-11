@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="62" column="26" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" bodystart="62" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="62" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" bodystart="62" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="15" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="15" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a423e3a77662503b89860b26b24f56ccf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="16" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="16" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a0bdd790c680d0526bac96df4459dbb13" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="22" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="22" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ad0922e31901a83dada538d131562d398" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::optional&lt; std::string &gt;</type>
@@ -85,7 +85,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="24" column="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="24" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a9f60c203567d812099c5ad4009b8a98f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::optional&lt; std::string &gt;</type>
@@ -99,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="25" column="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="25" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a4b1b842d90a0109656e963985326e667" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::optional&lt; std::string &gt;</type>
@@ -113,7 +113,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="26" column="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="26" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a51378bfe0bfd54506e98fec3e1db1af2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::optional&lt; std::string &gt;</type>
@@ -127,7 +127,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="28" column="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="28" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1aab416cf922d27083c311dbcea1318126" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::optional&lt; std::string &gt;</type>
@@ -141,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="29" column="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="29" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a2ae6e82b6e65624d301724dc6d91308d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::optional&lt; std::string &gt;</type>
@@ -155,7 +155,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="30" column="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="30" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ac2c5e7735981393ab4773e74c6cf12e7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::optional&lt; std::string &gt;</type>
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="31" column="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="31" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1aa17abb3fd06144a9e739bf3c3b2bde91" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::optional&lt; std::string &gt;</type>
@@ -183,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="32" column="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="32" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1acb08fd2d7b96bce4111a374c61ebea28" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::optional&lt; std::string &gt;</type>
@@ -197,7 +197,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="33" column="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="33" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a7c4a4d34970e85bd04c232e8729f2458" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="35" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="35" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1aa07d1886ef32a61f048750c6de356455" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -233,7 +233,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="36" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="36" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1afe351661975fbf294aa78da854327b7d" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -251,7 +251,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="37" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="37" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ae7d032fe4dfc8ed4345a2a34c7140562" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -269,7 +269,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="38" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="38" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a489f35883f0699096e3ddc88a378eecd" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -287,7 +287,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="39" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="39" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ae4fa6003d306b08c42c1b6739f880414" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -309,7 +309,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="41" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="41" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a2a03c19d8d66c4a7f5d088865f6b079a" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -339,7 +339,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="42" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="42" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a83e02f281bf4edebe3da97ee32221005" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -361,7 +361,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="44" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="44" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a52017c7477dd19d49178e33af1a43f09" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -391,7 +391,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="45" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="45" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a9030fd38f461fd824ae8f9f8cbe9cb7f" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -413,7 +413,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="47" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="47" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ad779109cd8002bd3398f65e82e6a6167" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -435,7 +435,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="49" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="49" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a83e3d11a83598fa9c3c7ca2f6dfc0c23" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -457,7 +457,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="50" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="50" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a5dfc09d4792c37e9aa48ddd0945e6433" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -479,7 +479,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="52" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="52" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a1e0220c5c51af8ea110e51b95c38a8c7" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -501,7 +501,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="53" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="53" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1aec64664086590a9263a9dcbd04c4e03a" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -523,7 +523,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="54" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="54" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1afd1e75f560a145805c440b309091e0c8" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -545,7 +545,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="55" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="55" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a09182f2f2a2133d11f3e4284d3cf63c5" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -563,7 +563,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="57" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="57" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a072d22dd9e2491c6f48c465b365d9386" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -581,7 +581,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="59" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="59" column="34"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -602,7 +602,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="19" column="37"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="19" column="37"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -676,7 +676,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="12" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" bodystart="12" bodyend="64"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="12" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" bodystart="12" bodyend="64"/>
     <listofallmembers>
       <member refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator_1aa93fd305bdbd46c3acf2c2109f58c27b" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>Clear</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>DestroySingleton</name></member>

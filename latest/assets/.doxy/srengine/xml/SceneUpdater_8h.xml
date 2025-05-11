@@ -4,7 +4,7 @@
     <compoundname>SceneUpdater.h</compoundname>
     <includes refid="NonCopyable_8h" local="no">Utils/Common/NonCopyable.h</includes>
     <includes refid="Time_8h" local="no">Utils/Types/Time.h</includes>
-    <includedby refid="EngineScene_8h" local="no">Engine/Core/inc/Core/World/EngineScene.h</includedby>
+    <includedby refid="EngineScene_8h" local="no">Engine/inc/Engine/World/EngineScene.h</includedby>
     <incdepgraph>
       <node id="77">
         <label>Utils/Common/Breakpoint.h</label>
@@ -287,7 +287,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h</label>
+        <label>Engine/libs/Utils/inc/Utils/World/SceneUpdater.h</label>
         <link refid="SceneUpdater_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -630,11 +630,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/inc/Core/World/EngineScene.h</label>
+        <label>Engine/inc/Engine/World/EngineScene.h</label>
         <link refid="EngineScene_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h</label>
+        <label>Engine/libs/Utils/inc/Utils/World/SceneUpdater.h</label>
         <link refid="SceneUpdater_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -699,6 +699,6 @@
 <codeline lineno="49"><highlight class="normal"></highlight></codeline>
 <codeline lineno="50"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_UTILS_SCENE_UPDATER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneUpdater.h"/>
+    <location file="Engine/libs/Utils/inc/Utils/World/SceneUpdater.h"/>
   </compounddef>
 </doxygen>

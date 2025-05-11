@@ -7,7 +7,7 @@
     <includes refid="Component_8h" local="no">Utils/ECS/Component.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/BoneComponent.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/BoneComponent.h</label>
         <link refid="BoneComponent_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1043,6 +1043,6 @@
 <codeline lineno="34"><highlight class="normal"></highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_BONECOMPONENT_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/BoneComponent.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Animations/BoneComponent.h"/>
   </compounddef>
 </doxygen>

@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="37" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="37" column="14" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ClassDB_1ae8ddcb1803358d615d376152e7995093" prot="private" static="no" mutable="no">
         <type>std::shared_mutex</type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="38" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="38" column="27" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ClassDB_1a2db07abbcfbbbe5b4a25b65030a19783" prot="private" static="no" mutable="no">
         <type>std::unordered_map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref>, <ref refid="structSR__UTILS__NS_1_1ClassInfo" kindref="compound">ClassInfo</ref> &gt;</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="39" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" bodystart="39" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="39" column="28" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ClassDB_1ac9db36ae9b4ebc671d5bf7263e7d70e9" prot="private" static="no" mutable="no">
         <type>std::unordered_map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref>, std::vector&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &gt; &gt;</type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="40" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" bodystart="40" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="40" column="28" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" bodystart="40" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="23" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="23" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ClassDB_1a445fcd38f970fb0bf5741dde0f1b6099" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="24" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="24" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="27" column="24"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="27" column="24"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -122,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="29" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="29" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ClassDB_1a89cb069bd89ce238a67e14f66bcbd2ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -141,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="32" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ClassDB_1a3214622f782fcd0351e7f45e1673ad5c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -163,7 +163,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="33" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="33" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ClassDB_1a8a1da1bfa4cd78636960188bfa1e9c06" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -189,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="34" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="34" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -232,7 +232,7 @@
         <link refid="classSR__UTILS__NS_1_1NonMovable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="21" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" bodystart="21" bodyend="42"/>
+    <location file="Engine/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" line="21" column="5" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/ClassDB.h" bodystart="21" bodyend="42"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ClassDB_1a32368ec59f5a024d873df2ef4f0245d1" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ClassDB</scope><name>ClassDB</name></member>
       <member refid="classSR__UTILS__NS_1_1ClassDB_1a6868f821c99fa5005e1ec3eab0d67d11" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ClassDB</scope><name>Instance</name></member>

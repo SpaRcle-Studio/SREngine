@@ -13,7 +13,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Lighting/PointLight.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Lighting/PointLight.h</label>
         <link refid="PointLight_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1039,6 +1039,6 @@
 <codeline lineno="19"><highlight class="normal"></highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_POINTLIGHT_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Lighting/PointLight.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Lighting/PointLight.h"/>
   </compounddef>
 </doxygen>

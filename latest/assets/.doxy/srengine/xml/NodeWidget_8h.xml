@@ -6,8 +6,8 @@
     <includes refid="Widget_8h" local="no">Graphics/GUI/Widget.h</includes>
     <includes refid="PopupMenu_8h" local="no">Graphics/GUI/PopupMenu.h</includes>
     <includes refid="Xml_8h" local="no">Utils/Resources/Xml.h</includes>
-    <includedby refid="AnimatorEditor_8h" local="no">Engine/Core/inc/Core/GUI/AnimatorEditor.h</includedby>
-    <includedby refid="RenderTechniqueEditor_8h" local="no">Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h</includedby>
+    <includedby refid="AnimatorEditor_8h" local="no">Engine/inc/Engine/GUI/AnimatorEditor.h</includedby>
+    <includedby refid="RenderTechniqueEditor_8h" local="no">Engine/inc/Engine/GUI/RenderTechniqueEditor.h</includedby>
     <incdepgraph>
       <node id="3">
         <label>Graphics/GUI/ImNodeEditorUtils.h</label>
@@ -30,7 +30,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h</label>
         <link refid="NodeWidget_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1024,15 +1024,15 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/inc/Core/GUI/AnimatorEditor.h</label>
+        <label>Engine/inc/Engine/GUI/AnimatorEditor.h</label>
         <link refid="AnimatorEditor_8h_source"/>
       </node>
       <node id="3">
-        <label>Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h</label>
+        <label>Engine/inc/Engine/GUI/RenderTechniqueEditor.h</label>
         <link refid="RenderTechniqueEditor_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h</label>
         <link refid="NodeWidget_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1138,6 +1138,6 @@
 <codeline lineno="87"><highlight class="normal"></highlight></codeline>
 <codeline lineno="88"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_NODEWIDGET_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h"/>
   </compounddef>
 </doxygen>

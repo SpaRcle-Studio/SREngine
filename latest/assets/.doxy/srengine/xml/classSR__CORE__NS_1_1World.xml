@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/World.h" line="23" column="9" bodyfile="Engine/Core/inc/Core/World/World.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/inc/Engine/World/World.h" line="23" column="9" bodyfile="Engine/inc/Engine/World/World.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__CORE__NS_1_1World_1aa81a5950f49ce90686f91f749390ecaa" prot="private" static="no">
         <type><ref refid="classSR__GTYPES__NS_1_1Camera" kindref="compound">SR_GTYPES_NS::Camera</ref> *</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/World.h" line="24" column="9" bodyfile="Engine/Core/inc/Core/World/World.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/inc/Engine/World/World.h" line="24" column="9" bodyfile="Engine/inc/Engine/World/World.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__CORE__NS_1_1World_1ae00ad0a7142895fd2de6d2d357fe27e1" prot="private" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1RenderScene" kindref="compound">SR_GRAPH_NS::RenderScene</ref> &gt;</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/World.h" line="25" column="9" bodyfile="Engine/Core/inc/Core/World/World.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/inc/Engine/World/World.h" line="25" column="9" bodyfile="Engine/inc/Engine/World/World.h" bodystart="25" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/World.h" line="27" column="9"/>
+        <location file="Engine/inc/Engine/World/World.h" line="27" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1World_1a898c2da93d0aed4bd6369cda8950f28c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_UTILS_NS::SceneObject::Ptr</type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/World.h" line="33" column="39"/>
+        <location file="Engine/inc/Engine/World/World.h" line="33" column="39"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/World.h" line="30" column="9"/>
+        <location file="Engine/inc/Engine/World/World.h" line="30" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1World_1af55883dfe237f95081f47ca2f974efb2" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD RenderScenePtr</type>
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/World.h" line="36" column="37"/>
+        <location file="Engine/inc/Engine/World/World.h" line="36" column="37"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -161,7 +161,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/inc/Core/World/World.h" line="22" column="5" bodyfile="Engine/Core/inc/Core/World/World.h" bodystart="22" bodyend="38"/>
+    <location file="Engine/inc/Engine/World/World.h" line="22" column="5" bodyfile="Engine/inc/Engine/World/World.h" bodystart="22" bodyend="38"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1IComponentable_1ae35fb0df155f53c85555ba954c56aa75" prot="public" virt="virtual"><scope>SR_CORE_NS::World</scope><name>AddComponent</name></member>
       <member refid="classSR__UTILS__NS_1_1IComponentable_1ad01a80b3546df658202d432bd6994c25" prot="public" virt="non-virtual"><scope>SR_CORE_NS::World</scope><name>AddComponent</name></member>

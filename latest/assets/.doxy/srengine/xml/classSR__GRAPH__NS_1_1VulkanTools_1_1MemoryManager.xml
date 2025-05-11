@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="141" column="44" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="141" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="141" column="44" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="141" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1ae05e2ce07019b05e42e590316270b111" prot="private" static="no" mutable="no">
         <type>EvoVulkan::Types::Device *</type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="142" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="142" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="142" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="142" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1af33a3965cf06f74e1429ce9b9cc56882" prot="private" static="no" mutable="no">
         <type>EvoVulkan::Memory::Allocator *</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="143" column="38" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="143" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="143" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="143" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a72f779aa16aa9b2536dadb067fcf64e5" prot="private" static="no" mutable="no">
         <type>EvoVulkan::Types::CmdPool *</type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="144" column="35" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="144" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="144" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="144" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a5d8a5123f68ba3f4eb7fbe2443c7ed1c" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1ObjectPool" kindref="compound">SR_HTYPES_NS::ObjectPool</ref>&lt; EvoVulkan::Types::DescriptorSet, int32_t &gt;</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="146" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="146" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="146" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="146" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a7b05d7546c5896320fe205a1fe60244c" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1ObjectPool" kindref="compound">SR_HTYPES_NS::ObjectPool</ref>&lt; EvoVulkan::Complexes::Shader *, int32_t &gt;</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="147" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="147" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="147" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="147" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a489249205f37d979e52a97811b1f57eb" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1ObjectPool" kindref="compound">SR_HTYPES_NS::ObjectPool</ref>&lt; EvoVulkan::Types::VmaBuffer *, int32_t &gt;</type>
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="148" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="148" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="148" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="148" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1ac51087cbdb3070aa115c32b8a48829e1" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1ObjectPool" kindref="compound">SR_HTYPES_NS::ObjectPool</ref>&lt; EvoVulkan::Types::VmaBuffer *, int32_t &gt;</type>
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="149" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="149" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="149" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="149" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a3e89bb612479885c4e30b64aeb95d4a4" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1ObjectPool" kindref="compound">SR_HTYPES_NS::ObjectPool</ref>&lt; EvoVulkan::Types::VmaBuffer *, int32_t &gt;</type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="150" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="150" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="150" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="150" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a611cc51c7d8b7732c84e7f90995e289e" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1ObjectPool" kindref="compound">SR_HTYPES_NS::ObjectPool</ref>&lt; EvoVulkan::Types::VmaBuffer *, int32_t &gt;</type>
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="151" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="151" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="151" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="151" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a8b835d398bef40810bf7e1562ddf4730" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1ObjectPool" kindref="compound">SR_HTYPES_NS::ObjectPool</ref>&lt; EvoVulkan::Complexes::FrameBuffer *, int32_t &gt;</type>
@@ -160,7 +160,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="152" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="152" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="152" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="152" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a313a12e34a00c5b0689f242337dcec3a" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1ObjectPool" kindref="compound">SR_HTYPES_NS::ObjectPool</ref>&lt; EvoVulkan::Types::Texture *, int32_t &gt;</type>
@@ -174,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="153" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="153" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="153" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="153" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1afcb492a4261c4d5e4dbe84857c6c5903" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -189,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="156" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="156" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="156" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="156" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1afb2db1e93e31e5f0e80d81a65cd8c5bd" prot="private" static="no" mutable="no">
         <type>EvoVulkan::Core::VulkanKernel *</type>
@@ -204,7 +204,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="157" column="39" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="157" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="157" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="157" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -220,7 +220,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="38" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="38" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1aabf2cd5543cbdde79ab0ae6204bbad93" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -234,7 +234,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="39" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="39" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a275afe199e194a660ffa784713df6d9a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -252,7 +252,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="42" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="42" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -272,7 +272,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="45" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="45" bodyend="54"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="45" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="45" bodyend="54"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -288,7 +288,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="55" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="55" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1aa910e79aca11d55c6f82d493c7e8b02a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -306,7 +306,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="58" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="58" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a50885a9bcd9be7246bb02b99f1642959" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -324,7 +324,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="60" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="60" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1aaef672c372a0f0268383d00907144853" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -342,7 +342,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="62" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="62" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a97f39bd9a49c32a589c68fe95075561c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -360,7 +360,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="63" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="63" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a98e3e16b90573ae466317350690c4f15" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -378,7 +378,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="64" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="64" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1af4e1d13bc6475d6c96f272a79aca63c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -396,7 +396,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="65" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="65" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a76ad2323ccb8edab8c318316afa0be94" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -414,7 +414,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="66" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="66" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a91912f0ce4fc0e563fdbfea261d9cd0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -432,7 +432,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="68" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="68" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1ab594cc4462cc9ae91df1a4763e0fb006" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -454,7 +454,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="71" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="71" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1af6eed8e1dacbe9403fafd4e10a651568" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -472,7 +472,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="73" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="73" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a76326a776ec36ffac5167c8e3bf94355" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -494,7 +494,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="75" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="75" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1ae9871e6c45fc71cb377731f99f5aa5b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -512,7 +512,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="76" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="76" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1afc8d22e470561270c179d12777d1fc17" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -534,7 +534,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="77" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="77" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1ab6dcf38813e2a1150050cb7928154c9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -556,7 +556,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="78" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="78" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a713bbbd6887c6f427f5f2a0f9cf35ffc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -574,7 +574,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="80" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="80" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a9436df0795b7c7daf282bc5fb8deb775" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -592,7 +592,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="82" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="82" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1acdee39fe4df39b54a0319bd3ee2cafc0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -638,7 +638,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="84" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="84" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a91b89516fd2439e30f973c6b0d85cf09" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -680,7 +680,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="94" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="94" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1afbc3f2bfee6e5e11aa081be4af083e0e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const EvoVulkan::Types::Texture *</type>
@@ -698,7 +698,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="103" column="54" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="103" bodyend="103"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="103" column="54" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="103" bodyend="103"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a121892ac6de1a944dfecced0092c8d43" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const EvoVulkan::Types::VmaBuffer *</type>
@@ -716,7 +716,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="104" column="56" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="104" bodyend="104"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="104" column="56" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="104" bodyend="104"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a53fb29c944de844d13071f0e6fc77a2d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const EvoVulkan::Types::VmaBuffer *</type>
@@ -734,7 +734,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="105" column="56" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="105" bodyend="105"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="105" column="56" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="105" bodyend="105"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a867cd2262ab55991c7922c8236b3ca13" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const EvoVulkan::Types::VmaBuffer *</type>
@@ -752,7 +752,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="106" column="56" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="106" bodyend="106"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="106" column="56" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="106" bodyend="106"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a27b2665a9784b3f43bb0db48e81e6f2b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const EvoVulkan::Types::VmaBuffer *</type>
@@ -770,7 +770,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="107" column="56" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="107" bodyend="107"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="107" column="56" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="107" bodyend="107"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1ac000f742eace123d55f40ea748570156" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const EvoVulkan::Complexes::FrameBuffer *</type>
@@ -788,7 +788,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="108" column="62" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="108" bodyend="108"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="108" column="62" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="108" bodyend="108"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a1a2d19a03c58535b511b92a071cff85b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const EvoVulkan::Complexes::Shader *</type>
@@ -806,7 +806,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="109" column="57" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="109" bodyend="109"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="109" column="57" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="109" bodyend="109"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a487bab7ddbc4e45f426482975a828443" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const EvoVulkan::Types::DescriptorSet &amp;</type>
@@ -824,7 +824,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="110" column="60" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="110" bodyend="110"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="110" column="60" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="110" bodyend="110"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a7599f689e4328e42213847468a984399" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD EvoVulkan::Types::Texture *</type>
@@ -842,7 +842,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="112" column="48" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="112" bodyend="112"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="112" column="48" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="112" bodyend="112"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1ab9f6c523c759884e4cea51ccde8201f4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD EvoVulkan::Types::VmaBuffer *</type>
@@ -860,7 +860,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="113" column="50" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="113" bodyend="113"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="113" column="50" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="113" bodyend="113"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1af0fff616a1975654382ca8353e5ab879" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD EvoVulkan::Types::VmaBuffer *</type>
@@ -878,7 +878,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="114" column="50" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="114" bodyend="114"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="114" column="50" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="114" bodyend="114"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a6b6d587580c8b26469eb03505f46d05e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD EvoVulkan::Types::VmaBuffer *</type>
@@ -896,7 +896,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="115" column="50" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="115" bodyend="115"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="115" column="50" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="115" bodyend="115"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1aa793df4e815fb31539946012f985dd0b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD EvoVulkan::Types::VmaBuffer *</type>
@@ -914,7 +914,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="116" column="50" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="116" bodyend="116"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="116" column="50" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="116" bodyend="116"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a1531a5d305a9cc1b75765c74a02a1a05" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD EvoVulkan::Complexes::FrameBuffer *</type>
@@ -932,7 +932,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="117" column="56" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="117" bodyend="117"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="117" column="56" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="117" bodyend="117"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1adfe2a3e0a2fe6c3d354215d5bc0239ff" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD EvoVulkan::Complexes::Shader *</type>
@@ -950,7 +950,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="118" column="51" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="118" bodyend="118"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="118" column="51" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="118" bodyend="118"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1ac20c41a1882c1fb81cfabecd1fb361ac" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD EvoVulkan::Types::DescriptorSet &amp;</type>
@@ -968,7 +968,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="119" column="54" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="119" bodyend="119"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="119" column="54" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="119" bodyend="119"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1ad47d2a9c9db11779d71e67c0080d6d1d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -986,7 +986,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="121" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="121" bodyend="121"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="121" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="121" bodyend="121"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a2ad4a4057929b11d1d04bc3b3b5d4d09" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1004,7 +1004,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="123" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="123" bodyend="125"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="123" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="123" bodyend="125"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1ad2a6bc17010acb08ea6d2ee93ecea2e5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1022,7 +1022,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="127" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="127" bodyend="129"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="127" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="127" bodyend="129"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a112b5f2271460fa7f8b8ea3e28abf880" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -1036,7 +1036,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="131" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="131" bodyend="131"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="131" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="131" bodyend="131"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a82a62d2a0ed4f88b16de4a61f670a737" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -1050,7 +1050,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="132" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="132" bodyend="132"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="132" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="132" bodyend="132"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a2db1ebfc2f382924fbf80b35b85d003a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -1064,7 +1064,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="133" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="133" bodyend="133"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="133" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="133" bodyend="133"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1abe9a7f12dfdaac44902ec2706591abfb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -1078,7 +1078,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="134" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="134" bodyend="134"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="134" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="134" bodyend="134"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1af34a231cd0755b6cbd0a81dc1e5b6246" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -1092,7 +1092,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="135" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="135" bodyend="135"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="135" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="135" bodyend="135"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a3ff896df7636e4285b8abbdb44d29602" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -1106,7 +1106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="136" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="136" bodyend="136"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="136" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="136" bodyend="136"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1aa5b77eb5fb673eeb00b5c270a1dbe1a8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -1120,7 +1120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="137" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="137" bodyend="137"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="137" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="137" bodyend="137"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a73cae037523b23505e1c6bae738788b5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -1134,7 +1134,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="138" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="138" bodyend="138"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="138" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="138" bodyend="138"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1165,7 +1165,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="36" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="36" bodyend="159"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="36" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="36" bodyend="159"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1ab594cc4462cc9ae91df1a4763e0fb006" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanTools::MemoryManager</scope><name>AllocateDescriptorSet</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager_1a9436df0795b7c7daf282bc5fb8deb775" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanTools::MemoryManager</scope><name>AllocateFBO</name></member>

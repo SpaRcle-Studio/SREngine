@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_a6f28b551a04c8f6c9ec3f9b059c2feb" kind="dir">
+    <compoundname>Engine/libs/Utils/inc/Utils/SRLM</compoundname>
+    <innerfile refid="ConvertorNode_8h">ConvertorNode.h</innerfile>
+    <innerfile refid="DataOperators_8h">DataOperators.h</innerfile>
+    <innerfile refid="DataType_8h">DataType.h</innerfile>
+    <innerfile refid="DataTypeManager_8h">DataTypeManager.h</innerfile>
+    <innerfile refid="LogicalMachine_8h">LogicalMachine.h</innerfile>
+    <innerfile refid="LogicalNode_8h">LogicalNode.h</innerfile>
+    <innerfile refid="LogicalNodeManager_8h">LogicalNodeManager.h</innerfile>
+    <innerfile refid="LogicalNodes_8h">LogicalNodes.h</innerfile>
+    <innerfile refid="Utils_2inc_2Utils_2SRLM_2Utils_8h">Utils.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Utils/inc/Utils/SRLM/"/>
+  </compounddef>
+</doxygen>

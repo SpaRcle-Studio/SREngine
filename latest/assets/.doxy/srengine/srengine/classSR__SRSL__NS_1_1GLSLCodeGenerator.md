@@ -380,5 +380,5 @@ Implements [*SR\_SRSL\_NS::ISRSLCodeGenerator::GenerateStages*](classSR__SRSL__N
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h`
 

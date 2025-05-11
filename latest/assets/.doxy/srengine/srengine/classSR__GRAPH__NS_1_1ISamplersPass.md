@@ -222,5 +222,5 @@ inline void SR_GRAPH_NS::ISamplersPass::SetISamplerRenderTechnique (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h`
 

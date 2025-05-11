@@ -350,5 +350,5 @@ SR_CORE_NS::Commands::SceneObjectInstance::~SceneObjectInstance () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/EngineCommands.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/EngineCommands.h`
 

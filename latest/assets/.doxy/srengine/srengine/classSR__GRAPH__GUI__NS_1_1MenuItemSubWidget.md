@@ -322,5 +322,5 @@ std::string SR_GRAPH_GUI_NS::MenuItemSubWidget::m_name;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h`
 

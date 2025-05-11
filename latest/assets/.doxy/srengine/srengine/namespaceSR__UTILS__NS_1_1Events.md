@@ -97,5 +97,5 @@ const SR_UTILS_NS::StringAtom SR_UTILS_NS::Events::EVENT_ON_SCRIPT_MODULE_RELOAD
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Events/Broadcaster.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Events/Broadcaster.h`
 

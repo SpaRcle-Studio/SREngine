@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="15" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="15" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" bodystart="15" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__GUI__NS_1_1DrawPopupContext_1a28c67661a27f0ab1dd3551b7c88e15dd" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__GUI__NS_1_1NodeWidget" kindref="compound">NodeWidget</ref> *</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="16" column="20" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="16" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" bodystart="16" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -87,7 +87,7 @@
         <link refid="classSR__UTILS__NS_1_1Path"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="14" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" bodystart="14" bodyend="17"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="14" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" bodystart="14" bodyend="17"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__GUI__NS_1_1DrawPopupContext_1a3395af9e076c334b3f4a23ef343973eb" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::DrawPopupContext</scope><name>popupPos</name></member>
       <member refid="structSR__GRAPH__GUI__NS_1_1DrawPopupContext_1a28c67661a27f0ab1dd3551b7c88e15dd" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::DrawPopupContext</scope><name>pWidget</name></member>

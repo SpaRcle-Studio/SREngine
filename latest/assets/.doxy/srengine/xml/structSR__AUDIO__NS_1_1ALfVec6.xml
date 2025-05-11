@@ -15,14 +15,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="15" column="34" bodyfile="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="15" column="34" bodyfile="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="15" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="15" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="15" bodyend="15"/>
+    <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="15" column="5" bodyfile="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="15" bodyend="15"/>
     <listofallmembers>
       <member refid="structSR__AUDIO__NS_1_1ALfVec6_1a54599ba7cb68f470bfb63b42e52140e3" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::ALfVec6</scope><name>vec6</name></member>
     </listofallmembers>

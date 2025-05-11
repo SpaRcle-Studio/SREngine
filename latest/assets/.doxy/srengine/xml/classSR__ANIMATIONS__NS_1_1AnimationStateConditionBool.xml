@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="151" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="151" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="151" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="151" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="162" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="162" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="162" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="162" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationStateConditionBool_1a678e63a81f4b33c71094fda218ca4796" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="163" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="163" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="163" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="163" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationStateConditionBool_1a0a85d69cbd74cb9b7bd80a29c5449b6a" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="164" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="164" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="164" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="164" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -83,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="153" column="57"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="153" column="57"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="155" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="155" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateConditionBool_1a199135246a65892850a22370c8cfb677" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD void</type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="156" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="156" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateConditionBool_1ade9fa0c8de3d47307cdae64ecade0eb6" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -138,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="157" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="157" bodyend="157"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="157" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="157" bodyend="157"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateConditionBool_1a0ff921ace18cec903742582652e261cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -153,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="159" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="159" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -199,7 +199,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="150" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="150" bodyend="166"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="150" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="150" bodyend="166"/>
     <listofallmembers>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateCondition_1a1b6e5d530463dd877b7effc10c91bae1" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateConditionBool</scope><name>GetProgress</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateCondition_1a2c720e0460a312cbf9064858b711a904" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateConditionBool</scope><name>IsFinished</name></member>

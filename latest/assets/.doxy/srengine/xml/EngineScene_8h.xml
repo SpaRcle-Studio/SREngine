@@ -10,7 +10,7 @@
     <includes refid="PhysicsScene_8h" local="no">Physics/PhysicsScene.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/World/EngineScene.h</label>
+        <label>Engine/inc/Engine/World/EngineScene.h</label>
         <link refid="EngineScene_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1943,6 +1943,6 @@
 <codeline lineno="66"><highlight class="normal"></highlight></codeline>
 <codeline lineno="67"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_ENGINESCENE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/World/EngineScene.h"/>
+    <location file="Engine/inc/Engine/World/EngineScene.h"/>
   </compounddef>
 </doxygen>

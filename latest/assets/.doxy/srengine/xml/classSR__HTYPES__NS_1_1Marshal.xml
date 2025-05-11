@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="20" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" bodystart="20" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="20" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/Marshal.h" bodystart="20" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__HTYPES__NS_1_1Marshal_1a8d5a10a4c57948eba87d30c5e9661002" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Marshal" kindref="compound">Marshal</ref> *</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="21" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" bodystart="21" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="21" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/Marshal.h" bodystart="21" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="24" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="24" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1a3be4c442aa7ba4251135888fceae9fa1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="25" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="25" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1a988c1536023fe2e2334400243bc7e4d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -83,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="26" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="26" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1ac773d260998d5032d2605a6e3748b2bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="27" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="27" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1acde827327a2b2285d0f91422b14d023d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="28" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="28" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1ae584561741fa53c53c72b4f0b821042b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -138,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="31" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1a42c1526450f2c8798a3f3faf20546b68" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1Marshal" kindref="compound">Marshal</ref></type>
@@ -153,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="32" column="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="32" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1af2832a5dcbc79a63ca3d57126852c7e5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1Marshal" kindref="compound">Marshal::Ptr</ref></type>
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="33" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="33" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1a02acc1e524c23e3012072b1a1d4dbb93" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1Marshal" kindref="compound">Marshal</ref></type>
@@ -181,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="35" column="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="35" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1a73760ddd9c60785d2ffc5e6f05c8fc7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -199,7 +199,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="42" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="42" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1ae25b1cd17cac99cee0cb9fd14cb08be6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -217,7 +217,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="43" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="43" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1a8625dfbc1086a397255c15fea5a39129" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -235,7 +235,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="44" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="44" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1aae8284f4e23b929a18a72222c791ef75" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1Marshal" kindref="compound">Marshal</ref></type>
@@ -253,7 +253,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="46" column="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="46" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1aaaeabc23380e26ef545de70571a0c6dd" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1Marshal" kindref="compound">Marshal::Ptr</ref></type>
@@ -271,7 +271,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="47" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="47" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1a8f18adb8f1fa99308c36e0a4bc2326d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -293,7 +293,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="49" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="49" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1a37af9ef0247721c6fcdecfe04be5ae68" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -311,7 +311,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="50" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="50" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1acbf1061211821075069eb2659838e9d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -334,7 +334,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="52" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" bodystart="105" bodyend="124"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="52" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Types/Marshal.h" bodystart="105" bodyend="124"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1acd918f2cb60c1938e06fdb02f2302b03" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -361,7 +361,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="53" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" bodystart="60" bodyend="68"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="53" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Types/Marshal.h" bodystart="60" bodyend="68"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1a4d83935039fde3a62bb514fb564da852" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -384,7 +384,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="54" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" bodystart="70" bodyend="76"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="54" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Types/Marshal.h" bodystart="70" bodyend="76"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1adc776781c8dbfc7921adc89bbd21c516" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -403,7 +403,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="55" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" bodystart="78" bodyend="85"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="55" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Types/Marshal.h" bodystart="78" bodyend="85"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1a34714864d7ccbaa952b6a2e6566baf3e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -422,7 +422,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="56" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" bodystart="87" bodyend="103"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="56" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Types/Marshal.h" bodystart="87" bodyend="103"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1a40cc4e7229cb340bc1667e3156da05d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -445,7 +445,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="57" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" bodystart="126" bodyend="132"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="57" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Types/Marshal.h" bodystart="126" bodyend="132"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -465,7 +465,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="37" column="24"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="37" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1a6ba1e64b7528c8064532b2ca2ba9e108" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__HTYPES__NS_1_1Marshal" kindref="compound">Marshal::Ptr</ref></type>
@@ -483,7 +483,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="38" column="29"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="38" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1a805adc19cb1252f7493e53dd526eae20" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__HTYPES__NS_1_1Marshal" kindref="compound">Marshal</ref></type>
@@ -501,7 +501,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="39" column="24"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="39" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1a4145927050a69267de2052ecd3d777a7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__HTYPES__NS_1_1Marshal" kindref="compound">Marshal</ref></type>
@@ -519,7 +519,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="40" column="24"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="40" column="24"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -550,7 +550,7 @@
         <link refid="classSR__HTYPES__NS_1_1Stream"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" line="18" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Marshal.h" bodystart="18" bodyend="58"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="18" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Types/Marshal.h" bodystart="18" bodyend="58"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1Marshal_1a73760ddd9c60785d2ffc5e6f05c8fc7f" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Append</name></member>
       <member refid="classSR__HTYPES__NS_1_1Marshal_1ae25b1cd17cac99cee0cb9fd14cb08be6" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Append</name></member>

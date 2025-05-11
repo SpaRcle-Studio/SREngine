@@ -898,5 +898,5 @@ Implements [*SR\_GRAPH\_NS::BasePass::Update*](classSR__GRAPH__NS_1_1BasePass.md
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h`
 

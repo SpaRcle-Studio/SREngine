@@ -5,10 +5,10 @@
     <includes refid="SRClass_8h" local="no">Utils/TypeTraits/SRClass.h</includes>
     <includes refid="Utils_2inc_2Utils_2Common_2Vertices_8h" local="no">Utils/Common/Vertices.h</includes>
     <includes refid="SubscriptionHolder_8h" local="no">Utils/Common/SubscriptionHolder.h</includes>
-    <includedby refid="DebugWireframeMesh_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</includedby>
-    <includedby refid="Mesh3D_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</includedby>
-    <includedby refid="SkinnedMesh_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</includedby>
-    <includedby refid="CollisionShape_8h" local="no">Engine/Core/libs/Physics/inc/Physics/CollisionShape.h</includedby>
+    <includedby refid="DebugWireframeMesh_8h" local="no">Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</includedby>
+    <includedby refid="Mesh3D_8h" local="no">Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</includedby>
+    <includedby refid="SkinnedMesh_8h" local="no">Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</includedby>
+    <includedby refid="CollisionShape_8h" local="no">Engine/libs/Physics/inc/Physics/CollisionShape.h</includedby>
     <incdepgraph>
       <node id="106">
         <label>Utils/Common/AnyMarshal.h</label>
@@ -385,7 +385,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h</label>
         <link refid="IRawMeshHolder_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -814,23 +814,23 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</label>
         <link refid="DebugWireframeMesh_8h_source"/>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</label>
         <link refid="Mesh3D_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
         <link refid="SkinnedMesh_8h_source"/>
       </node>
       <node id="9">
-        <label>Engine/Core/libs/Physics/inc/Physics/2D/Rigidbody2D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/2D/Rigidbody2D.h</label>
         <link refid="Rigidbody2D_8h_source"/>
       </node>
       <node id="10">
-        <label>Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h</label>
         <link refid="Rigidbody3D_8h_source"/>
         <childnode refid="11" relation="include">
         </childnode>
@@ -838,15 +838,15 @@
         </childnode>
       </node>
       <node id="6">
-        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h</label>
         <link refid="Bullet3CollisionShape_8h_source"/>
       </node>
       <node id="11">
-        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h</label>
         <link refid="Bullet3Rigidbody3D_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Physics/inc/Physics/CollisionShape.h</label>
+        <label>Engine/libs/Physics/inc/Physics/CollisionShape.h</label>
         <link refid="CollisionShape_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
@@ -856,15 +856,15 @@
         </childnode>
       </node>
       <node id="7">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h</label>
         <link refid="PhysXCollisionShape_8h_source"/>
       </node>
       <node id="12">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h</label>
         <link refid="PhysXRigidbody3D_8h_source"/>
       </node>
       <node id="8">
-        <label>Engine/Core/libs/Physics/inc/Physics/Rigidbody.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Rigidbody.h</label>
         <link refid="Rigidbody_8h_source"/>
         <childnode refid="9" relation="include">
         </childnode>
@@ -872,7 +872,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h</label>
         <link refid="IRawMeshHolder_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -937,6 +937,6 @@
 <codeline lineno="47"><highlight class="normal"></highlight></codeline>
 <codeline lineno="48"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_UTILS_I_RAW_MESH_HOLDER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h"/>
   </compounddef>
 </doxygen>

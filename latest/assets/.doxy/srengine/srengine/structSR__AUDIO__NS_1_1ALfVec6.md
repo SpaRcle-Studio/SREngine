@@ -97,5 +97,5 @@ ALfloat SR_AUDIO_NS::ALfVec6::vec6[6];
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h`
+The documentation for this class was generated from the following file `Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h`
 

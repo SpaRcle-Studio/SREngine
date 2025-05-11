@@ -10,7 +10,7 @@
     <includes refid="ResourceManager_8h" local="no">Utils/Resources/ResourceManager.h</includes>
     <includes refid="LogicalNode_8h" local="no">Utils/SRLM/LogicalNode.h</includes>
     <includes refid="Xml_8h" local="no">Utils/Resources/Xml.h</includes>
-    <includedby refid="ScriptableRenderTechnique_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Render/ScriptableRenderTechnique.h</includedby>
+    <includedby refid="ScriptableRenderTechnique_8h" local="no">Engine/libs/Graphics/inc/Graphics/Render/ScriptableRenderTechnique.h</includedby>
     <incdepgraph>
       <node id="113">
         <label>Utils/Common/AnyMarshal.h</label>
@@ -423,7 +423,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalMachine.h</label>
+        <label>Engine/libs/Utils/inc/Utils/SRLM/LogicalMachine.h</label>
         <link refid="LogicalMachine_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -986,11 +986,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/ScriptableRenderTechnique.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/ScriptableRenderTechnique.h</label>
         <link refid="ScriptableRenderTechnique_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalMachine.h</label>
+        <label>Engine/libs/Utils/inc/Utils/SRLM/LogicalMachine.h</label>
         <link refid="LogicalMachine_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1101,6 +1101,6 @@
 <codeline lineno="95"><highlight class="normal"></highlight></codeline>
 <codeline lineno="96"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_LOGICALMACHINE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalMachine.h"/>
+    <location file="Engine/libs/Utils/inc/Utils/SRLM/LogicalMachine.h"/>
   </compounddef>
 </doxygen>

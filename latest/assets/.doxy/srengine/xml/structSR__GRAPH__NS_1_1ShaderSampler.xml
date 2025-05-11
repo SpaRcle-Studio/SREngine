@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="89" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="89" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="89" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="89" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ShaderSampler_1aa07d0376e7a6fc881b152cf6cd5320be" prot="public" static="no" mutable="no">
         <type>uint32_t</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="90" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="90" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="90" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="90" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ShaderSampler_1aab36f9d0b23e4ee4ef97f77ce13b9f73" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="91" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="91" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="91" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="91" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ShaderSampler_1aee2ca2c07711819bfb41f7da5b020c57" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="92" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="92" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="92" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="92" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ShaderSampler_1a66cd17d66f06ba84b70892fc75a5a379" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="93" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="93" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="93" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="93" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -95,7 +95,7 @@
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="88" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="88" bodyend="94"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="88" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="88" bodyend="94"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1ShaderSampler_1ad3d4eda3e0d322732074315d1c239090" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ShaderSampler</scope><name>binding</name></member>
       <member refid="structSR__GRAPH__NS_1_1ShaderSampler_1a66cd17d66f06ba84b70892fc75a5a379" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ShaderSampler</scope><name>defaultValue</name></member>

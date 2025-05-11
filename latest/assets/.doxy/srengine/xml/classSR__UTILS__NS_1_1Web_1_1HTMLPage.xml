@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="89" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" bodystart="89" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="89" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Web/HTML/HTML.h" bodystart="89" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="94" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" bodystart="94" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="94" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Web/HTML/HTML.h" bodystart="94" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="112" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" bodystart="112" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="112" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Web/HTML/HTML.h" bodystart="112" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1af16e2d48699c25dfb249398579a26311" prot="private" static="no" mutable="no">
         <type>void *</type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="116" column="10" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" bodystart="116" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="116" column="10" bodyfile="Engine/libs/Utils/inc/Utils/Web/HTML/HTML.h" bodystart="116" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="91" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="91" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="96" column="5"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="96" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1ae96fc44aeaa129a24a295c08f513a6a4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const std::vector&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &gt; &amp;</type>
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="101" column="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="101" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1a30fabf6856c357ac7fd869588e09942c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">HTMLContainerInterface::Ptr</ref></type>
@@ -122,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="102" column="42" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" bodystart="102" bodyend="102"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="102" column="42" bodyfile="Engine/libs/Utils/inc/Utils/Web/HTML/HTML.h" bodystart="102" bodyend="102"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1a5e44070490f3d34886028782a26bbfe5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD void *</type>
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="106" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" bodystart="106" bodyend="106"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="106" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Web/HTML/HTML.h" bodystart="106" bodyend="106"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -161,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="99" column="20"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="99" column="20"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -211,7 +211,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="88" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" bodystart="88" bodyend="119"/>
+    <location file="Engine/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="88" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Web/HTML/HTML.h" bodystart="88" bodyend="119"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>AutoFree</name></member>

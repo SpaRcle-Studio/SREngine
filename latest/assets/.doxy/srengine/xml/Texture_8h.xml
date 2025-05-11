@@ -8,8 +8,8 @@
     <includes refid="TextureConfigs_8h" local="no">Graphics/Memory/TextureConfigs.h</includes>
     <includes refid="IGraphicsResource_8h" local="no">Graphics/Memory/IGraphicsResource.h</includes>
     <includes refid="TextureLoader_8h" local="no">Graphics/Loaders/TextureLoader.h</includes>
-    <includedby refid="ISamplersPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h</includedby>
-    <includedby refid="HTMLDrawableElement_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</includedby>
+    <includedby refid="ISamplersPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h</includedby>
+    <includedby refid="HTMLDrawableElement_8h" local="no">Engine/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</includedby>
     <incdepgraph>
       <node id="131">
         <label>Graphics/Loaders/TextureLoader.h</label>
@@ -48,7 +48,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Texture.h</label>
         <link refid="Texture_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -956,33 +956,33 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="5">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h</label>
         <link refid="CascadedShadowMapPass_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="7">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
         <link refid="ColorBufferPass_8h_source"/>
       </node>
       <node id="10">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
         <link refid="HTMLDrawerPass_8h_source"/>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h</label>
         <link refid="ISamplersPass_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
         <link refid="MeshDrawerPass_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
         <link refid="OffScreenMeshDrawerPass_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
@@ -990,23 +990,23 @@
         </childnode>
       </node>
       <node id="6">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h</label>
         <link refid="VarianceShadowMapPass_8h_source"/>
       </node>
       <node id="8">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
         <link refid="HTMLDrawableElement_8h_source"/>
         <childnode refid="9" relation="include">
         </childnode>
       </node>
       <node id="9">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
         <link refid="HTMLRenderer_8h_source"/>
         <childnode refid="10" relation="include">
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Texture.h</label>
         <link refid="Texture_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1099,6 +1099,6 @@
 <codeline lineno="75"><highlight class="normal"></highlight></codeline>
 <codeline lineno="76"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_TEXTURE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h"/>
   </compounddef>
 </doxygen>

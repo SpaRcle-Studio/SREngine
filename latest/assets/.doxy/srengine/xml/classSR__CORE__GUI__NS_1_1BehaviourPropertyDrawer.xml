@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" line="20" column="35" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" bodystart="20" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" line="20" column="35" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" bodystart="20" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1BehaviourPropertyDrawer_1ad4a23f937e227ae045429230888b88a6" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" line="21" column="21" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" bodystart="21" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" line="21" column="21" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" bodystart="21" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1BehaviourPropertyDrawer_1a0a4c91f20112dbda73cc113087ffc519" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" line="22" column="14" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" bodystart="22" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" line="22" column="14" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" bodystart="22" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1BehaviourPropertyDrawer_1ac52353dd29cf2bb6aa3377077650e7f3" prot="private" static="no" mutable="no">
         <type>ObjectPropertyDrawer::Ptr</type>
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" line="23" column="35" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" line="23" column="35" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" bodystart="23" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" line="14" column="9"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" line="14" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1BehaviourPropertyDrawer_1ab539eca1cfcf315ebd488c7b3a32c738" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref></type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" line="17" column="32"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" line="17" column="32"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -180,7 +180,7 @@
         <link refid="classSR__UTILS__NS_1_1SRClass"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" line="11" column="5" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" bodystart="11" bodyend="25"/>
+    <location file="Engine/inc/Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" line="11" column="5" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.h" bodystart="11" bodyend="25"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BehaviourPropertyDrawer</scope><name>AllocateStatic</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BehaviourPropertyDrawer</scope><name>AutoFree</name></member>

@@ -26,7 +26,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h</label>
         <link refid="AbstractCasts_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1441,6 +1441,6 @@
 <codeline lineno="430"><highlight class="normal"></highlight></codeline>
 <codeline lineno="431"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_ABSTRACTCASTS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h"/>
   </compounddef>
 </doxygen>

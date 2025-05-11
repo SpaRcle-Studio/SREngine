@@ -338,5 +338,5 @@ static SR_MAYBE_UNUSED std::string SR_GRAPH_NS::Vertices::ToString (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Types/Vertices.h`
 

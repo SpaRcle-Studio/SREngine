@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/AnimatorEditor.h" line="20" column="9" bodyfile="Engine/Core/inc/Core/GUI/AnimatorEditor.h" bodystart="20" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/AnimatorEditor.h" line="20" column="9" bodyfile="Engine/inc/Engine/GUI/AnimatorEditor.h" bodystart="20" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__CORE__GUI__NS_1_1AnimatorEditor_1a0f8860f8e2d47eb323b83f3b014f43c2" prot="private" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__ANIMATIONS__NS_1_1Animator" kindref="compound">SR_ANIMATIONS_NS::Animator</ref> &gt;</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/AnimatorEditor.h" line="22" column="9" bodyfile="Engine/Core/inc/Core/GUI/AnimatorEditor.h" bodystart="22" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/AnimatorEditor.h" line="22" column="9" bodyfile="Engine/inc/Engine/GUI/AnimatorEditor.h" bodystart="22" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-attrib">
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/AnimatorEditor.h" line="21" column="35" bodyfile="Engine/Core/inc/Core/GUI/AnimatorEditor.h" bodystart="21" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/AnimatorEditor.h" line="21" column="35" bodyfile="Engine/inc/Engine/GUI/AnimatorEditor.h" bodystart="21" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/AnimatorEditor.h" line="33" column="21" bodyfile="Engine/Core/inc/Core/GUI/AnimatorEditor.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/AnimatorEditor.h" line="33" column="21" bodyfile="Engine/inc/Engine/GUI/AnimatorEditor.h" bodystart="33" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/AnimatorEditor.h" line="24" column="9"/>
+        <location file="Engine/inc/Engine/GUI/AnimatorEditor.h" line="24" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1AnimatorEditor_1a3a6e9a9442c893b07a1f617d4319391e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/AnimatorEditor.h" line="25" column="9"/>
+        <location file="Engine/inc/Engine/GUI/AnimatorEditor.h" line="25" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1AnimatorEditor_1a765d468d0b6b2af912fe24f71e256909" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -111,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/AnimatorEditor.h" line="28" column="14"/>
+        <location file="Engine/inc/Engine/GUI/AnimatorEditor.h" line="28" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1AnimatorEditor_1a4b6b327798b2ef07364b9d75ded7f2ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -126,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/AnimatorEditor.h" line="30" column="14"/>
+        <location file="Engine/inc/Engine/GUI/AnimatorEditor.h" line="30" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -205,7 +205,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/inc/Core/GUI/AnimatorEditor.h" line="19" column="5" bodyfile="Engine/Core/inc/Core/GUI/AnimatorEditor.h" bodystart="19" bodyend="35"/>
+    <location file="Engine/inc/Engine/GUI/AnimatorEditor.h" line="19" column="5" bodyfile="Engine/inc/Engine/GUI/AnimatorEditor.h" bodystart="19" bodyend="35"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a4a04e0628b5729444eca1c24a9011fa2" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::AnimatorEditor</scope><name>AddFlags</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1adb2cb15cb7a11b055f8659f1db8c5521" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::AnimatorEditor</scope><name>AddSubWidget</name></member>

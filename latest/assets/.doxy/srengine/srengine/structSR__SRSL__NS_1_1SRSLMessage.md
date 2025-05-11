@@ -274,5 +274,5 @@ inline SR_NODISCARD std::string SR_SRSL_NS::SRSLMessage::ToString (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h`
 

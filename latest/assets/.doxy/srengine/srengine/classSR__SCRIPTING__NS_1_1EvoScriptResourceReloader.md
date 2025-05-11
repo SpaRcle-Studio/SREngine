@@ -230,5 +230,5 @@ Implements [*SR\_UTILS\_NS::IResourceReloader::Reload*](classSR__UTILS__NS_1_1IR
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoScriptResourceReloader.h`
+The documentation for this class was generated from the following file `Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoScriptResourceReloader.h`
 

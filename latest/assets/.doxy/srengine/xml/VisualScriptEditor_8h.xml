@@ -5,7 +5,7 @@
     <includes refid="Widget_8h" local="no">Graphics/GUI/Widget.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/GUI/VisualScriptEditor.h</label>
+        <label>Engine/inc/Engine/GUI/VisualScriptEditor.h</label>
         <link refid="VisualScriptEditor_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1023,6 +1023,6 @@
 <codeline lineno="42"><highlight class="normal"></highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_VISUALSCRIPTEDITOR_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/GUI/VisualScriptEditor.h"/>
+    <location file="Engine/inc/Engine/GUI/VisualScriptEditor.h"/>
   </compounddef>
 </doxygen>

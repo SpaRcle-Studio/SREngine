@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="14" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="14" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="14" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="friend">
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="13" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="13" column="22" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="13" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-attrib">
@@ -52,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="65" column="47" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="65" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="65" column="47" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform3D_1a00e295def9660765e087fa00ac70758a" prot="public" static="yes" mutable="no">
         <type>SR_INLINE SR_MATH_NS::FVector3</type>
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="66" column="47" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="66" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="66" column="47" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="66" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform3D_1ab84b91e9821dab852d83e61dfe3cc81e" prot="public" static="yes" mutable="no">
         <type>SR_INLINE SR_MATH_NS::FVector3</type>
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="67" column="47" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="67" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="67" column="47" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="67" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -99,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="70" column="39" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="70" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="70" column="39" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="70" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform3D_1a540489cc0c0012d483bedcd34fc76a70" prot="protected" static="no" mutable="yes">
         <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref></type>
@@ -114,7 +114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="71" column="39" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="71" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="71" column="39" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="71" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform3D_1a5f87dba840238352d5be8c4480301247" prot="protected" static="no" mutable="yes">
         <type>bool</type>
@@ -129,7 +129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="73" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="73" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="73" column="22" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="73" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform3D_1abb49eb6e6a86fa5c8739aef4e1e74e91" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -144,7 +144,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="76" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="76" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="76" column="30" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="76" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform3D_1ab8c253b9f36e221a4116371cbeb5334b" prot="protected" static="no" mutable="yes">
         <type>SR_MATH_NS::FVector3</type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="78" column="38" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="78" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="78" column="38" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="78" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform3D_1a6320af8bebc144dd2c1720c9051d08e9" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref></type>
@@ -174,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="80" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="80" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="80" column="32" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="80" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform3D_1a1f4261dd3ccde097a44e087e51852599" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -189,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="82" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="82" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="82" column="30" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="82" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform3D_1a587a36d7fc8059a10c58153ed12cc1fe" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -204,7 +204,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="84" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="84" column="30" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="84" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -225,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="16" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="16" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1a258e587409bfa520d5a54a80f499d92a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -244,7 +244,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="17" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="17" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1a97989a5688025416db22f2b3ea88d2b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -263,7 +263,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="18" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="18" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1add9935a473b87b23128b04c952c83900" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -282,7 +282,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="19" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="19" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1a8eec0af8064288633abce73f0d54528d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -305,7 +305,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="21" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="21" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1abbb8219a37559936437ddf85aac780e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -324,7 +324,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="22" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="22" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1a4b9fdcb6bc8d2032a1ceae0f0b5ae2a8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -343,7 +343,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="25" column="43"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="25" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1a95bbfae6375acadb952d56ec4cf29095" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -370,7 +370,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="27" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="27" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1ab5bab517d782c02bc1d5e7a64d16ec69" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -389,7 +389,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="31" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1a52ebd376a4bfa649a9376a557eb363ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -408,7 +408,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="32" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1a346d3603f6dd00f1461cda1a4206a687" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -427,7 +427,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="34" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="34" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1aecd8b4d66492300b473badf8dbb8755e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -450,7 +450,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="35" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="35" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1a7938948ffd8611054c958faa6a1086cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -469,7 +469,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="36" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="36" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1af6558156e85644a4571431baf9934dd7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -488,7 +488,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="37" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="37" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1a38f718cf0c4850b3ac9c6c2850d3e326" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -507,7 +507,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="38" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="38" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1a30639e0dd23c621258db8f3ff3cd5214" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -526,7 +526,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="39" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="39" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1a5cefefb2d5e52061821e42cb86ce2313" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
@@ -541,7 +541,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="41" column="50"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="41" column="50"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1ada59eac52a55b8aebf5c22d7e95ed5e8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref></type>
@@ -556,7 +556,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="43" column="45" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="43" bodyend="43"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="43" column="45" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="43" bodyend="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1a7885b2f0b0b76276fdf35d78342eff59" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -571,7 +571,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="45" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="45" bodyend="45"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="45" column="43" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="45" bodyend="45"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1aabaf8faec5819c811ff6c10d46f4b66b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -586,7 +586,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="46" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="46" bodyend="52"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="46" column="43" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="46" bodyend="52"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1a9c0c7638f9c6469c10718012115139af" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -601,7 +601,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="53" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="53" bodyend="53"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="53" column="43" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="53" bodyend="53"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1abda803dc62b8b7dcdd7a6b1177214df8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -616,7 +616,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="54" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="54" bodyend="54"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="54" column="43" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="54" bodyend="54"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1ae38cabb9c40887f69a04aa5ef287107b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -635,7 +635,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="56" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="56" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1aa7c941443e7fc4affc7dd7546fc2b8f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -658,7 +658,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="57" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="57" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1acf4b611b4a5bf6d11cd4dde2acf2452b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD Measurement</type>
@@ -673,7 +673,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="59" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="59" bodyend="59"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="59" column="34" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="59" bodyend="59"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -690,7 +690,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="62" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="62" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -813,7 +813,7 @@
         <link refid="structSR__MATH__NS_1_1Vector3"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="11" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="11" bodyend="86"/>
+    <location file="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" line="11" column="5" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="11" bodyend="86"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>AllocateStatic</name></member>

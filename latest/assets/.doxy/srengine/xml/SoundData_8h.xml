@@ -5,7 +5,7 @@
     <includes refid="SoundFormat_8h" local="no">Audio/SoundFormat.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Audio/inc/Audio/SoundData.h</label>
+        <label>Engine/libs/Audio/inc/Audio/SoundData.h</label>
         <link refid="SoundData_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -378,6 +378,6 @@
 <codeline lineno="22"><highlight class="normal"></highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_SOUNDDATA_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Audio/inc/Audio/SoundData.h"/>
+    <location file="Engine/libs/Audio/inc/Audio/SoundData.h"/>
   </compounddef>
 </doxygen>

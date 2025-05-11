@@ -99,5 +99,5 @@ bool SR_CORE_NS::Resources::RegisterResources (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/EngineResources.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/EngineResources.h`
 

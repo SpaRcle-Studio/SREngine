@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="95" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="95" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="95" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="95" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a27fe254f9ee0f40088432c90dbae0fe6" prot="public" static="no" mutable="no">
         <type>uint16_t</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="96" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="96" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="96" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="96" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a8cffdfea7aa99fe9be9d2ebbd64f9752" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="97" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="97" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="97" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="97" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a0b7857f246571b22541bc4c96ac22649" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="98" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="98" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="98" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="98" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1acc433e8736ab15ef769894164521fe69" prot="public" static="no" mutable="no">
         <type>SR_UTILS_NS::SharedPtrPolicy</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="99" column="38" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="99" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="99" column="38" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="99" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="59" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="59" bodyend="69"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="59" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="59" bodyend="69"/>
       </memberdef>
       <memberdef kind="function" id="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1ab55eceecd5cfda804f3575f2c72ae46e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -122,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="71" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="71" bodyend="73"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="71" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="71" bodyend="73"/>
       </memberdef>
       <memberdef kind="function" id="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1ab6ac3d1692ff45ea4909ff191bc4a45e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="75" column="46" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="75" bodyend="81"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="75" column="46" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="75" bodyend="81"/>
       </memberdef>
       <memberdef kind="function" id="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a290520c4e55e26ab8b130132b627ca74" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD uint16_t</type>
@@ -150,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="83" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="83" bodyend="83"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="83" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="83" bodyend="83"/>
       </memberdef>
       <memberdef kind="function" id="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1abb6c1e4a4fa28365ef156ace4fd67e0d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -164,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="85" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="85" bodyend="88"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="85" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="85" bodyend="88"/>
       </memberdef>
       <memberdef kind="function" id="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1af7effed899c43f643e0912a0305b3745" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -178,14 +178,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="90" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="90" bodyend="93"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="90" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="90" bodyend="93"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="58" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="58" bodyend="105"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="58" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="58" bodyend="105"/>
     <listofallmembers>
       <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a0b7857f246571b22541bc4c96ac22649" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtrDynamicData</scope><name>deallocated</name></member>
       <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1af7effed899c43f643e0912a0305b3745" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtrDynamicData</scope><name>DecrementStrong</name></member>

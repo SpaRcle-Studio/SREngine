@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="18" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="18" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="18" column="9" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="18" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="56" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="56" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="56" column="14" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1PropertyContainer_1ad9b80e163dd1033b7a99a1309f6ecb2b" prot="private" static="no" mutable="no">
         <type>PropertyList</type>
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="57" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="57" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="57" column="22" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="57" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="20" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="20" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1a15c25015b7a8126324f98f746bfcd746" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="21" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="21" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1a31ecc713a1934555e626fe183387b835" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -98,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="24" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1a64aa8eb9718d0c5d9f0f93da06f8883a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -117,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="25" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="25" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1aa6cfed379417a11fb63f583a017de34c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="27" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="27" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1a923cf9da760e87ae40ff4e6635695b4f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -151,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="28" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="28" bodyend="28"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="28" column="22" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="28" bodyend="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1a2fc100ff2d722beb0377ac8f7d1566aa" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD PropertyList &amp;</type>
@@ -165,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="30" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="30" bodyend="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="30" column="35" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="30" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1af577ea16d5469e7f71a9dc0342e60b0f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const PropertyList &amp;</type>
@@ -179,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="31" column="41" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="31" bodyend="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="31" column="41" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="31" bodyend="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1a4fb4b02a5d5ff5283f7f60e137786246" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -203,7 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="33" column="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="33" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1a23e8efb8124ee289abceb7bdc335f2de" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -227,7 +227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="34" column="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="34" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1a6379b135eacdfb558eb74f97281ecc20" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1PropertyContainer" kindref="compound">PropertyContainer</ref> &amp;</type>
@@ -245,7 +245,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="36" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="36" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1ada8c5fe41dea7e271fe4f31b3d93c962" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1EntityRefProperty" kindref="compound">EntityRefProperty</ref> &amp;</type>
@@ -267,7 +267,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="37" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="37" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1a627b3d20aaf14fa3ce36cec3dd9c96e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1ArrayReferenceProperty" kindref="compound">ArrayReferenceProperty</ref> &amp;</type>
@@ -285,7 +285,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="38" column="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="38" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1af7ecac8f7851ced94098cfd145093035" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -303,7 +303,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="40" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="40" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1a672f7c9513dedb0fa1efdc51b196707a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -335,7 +335,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="42" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="134" bodyend="152"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="42" column="24" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="134" bodyend="152"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1a7b48fc67585643fca95aba3f55780ac1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -358,7 +358,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="43" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="113" bodyend="132"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="43" column="37" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="113" bodyend="132"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1a0f382322bd857067d39ffff446f0a6d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -385,7 +385,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="44" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="154" bodyend="181"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="44" column="37" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="154" bodyend="181"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1a5741434c517352b83ae27914a147b578" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -412,7 +412,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="45" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="183" bodyend="210"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="45" column="33" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="183" bodyend="210"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1aecd48eeb845dacf4f146e1657476de1a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -435,7 +435,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="46" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="212" bodyend="231"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="46" column="33" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="212" bodyend="231"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1ab924f4acd69c3c9ce92ee8a054cf566e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -458,7 +458,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="48" column="38" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="73" bodyend="80"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="48" column="38" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="73" bodyend="80"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1a8b599bc37eb9c82de0b1e1ed85b261df" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -481,7 +481,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="49" column="44" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="82" bodyend="89"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="49" column="44" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="82" bodyend="89"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1ac684a99713e81718582886e07efd58ff" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -504,7 +504,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="51" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="61" bodyend="71"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="51" column="25" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="61" bodyend="71"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1a0de13c3fd11c47e4b0ba8248c1c7d8a3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -522,7 +522,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="53" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="53" bodyend="53"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="53" column="14" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="53" bodyend="53"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1a590b399dc9ed1698a32f66ccae025875" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -545,7 +545,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="91" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="91" bodyend="106"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="91" column="18" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="91" bodyend="106"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1PropertyContainer_1ae3fa63da2d0dde7df9e7b77f8c038d98" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -568,7 +568,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="108" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="108" bodyend="111"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="108" column="18" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="108" bodyend="111"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -617,7 +617,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="12" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="12" bodyend="59"/>
+    <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" line="12" column="5" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h" bodystart="12" bodyend="59"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Property_1ad10eb1ac5384dcd8db5377da438bb98a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::PropertyContainer</scope><name>ActiveConditionFn</name></member>
       <member refid="classSR__UTILS__NS_1_1PropertyContainer_1a627b3d20aaf14fa3ce36cec3dd9c96e5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::PropertyContainer</scope><name>AddArrayReferenceProperty</name></member>

@@ -248,5 +248,5 @@ SR_COMMON_DLL_API Math::IVector3 SR_WORLD_NS::MakeChunk (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/Engine.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/Engine.h`
 

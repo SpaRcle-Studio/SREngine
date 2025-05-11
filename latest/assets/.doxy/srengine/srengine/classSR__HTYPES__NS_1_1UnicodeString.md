@@ -574,5 +574,5 @@ virtual SR_HTYPES_NS::UnicodeString::~UnicodeString () = default
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Types/UnicodeString.h`
 

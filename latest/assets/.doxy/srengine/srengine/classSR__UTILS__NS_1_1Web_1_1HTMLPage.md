@@ -360,5 +360,5 @@ static Ptr SR_UTILS_NS::Web::HTMLPage::Load (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Web/HTML/HTML.h`
 

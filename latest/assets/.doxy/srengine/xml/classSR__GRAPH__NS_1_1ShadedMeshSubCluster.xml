@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="45" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="45" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="45" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1ShadedMeshSubCluster_1a1c254aac6d0e15930f6b184ee2a0e8fc" prot="public" static="no">
         <type>MeshGroups::const_iterator</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="46" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="46" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="46" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1ShadedMeshSubCluster_1a666800cd1cb3bb673c4be4a21ee3ab7a" prot="public" static="no">
         <type><ref refid="classSR__UTILS__NS_1_1NonCopyable" kindref="compound">SR_UTILS_NS::NonCopyable</ref></type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="47" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="47" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="47" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="84" column="20" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="84" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1ShadedMeshSubCluster_1a63676936a92ff388cd829daf30beeb05" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="85" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="85" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="85" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="85" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="50" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="50" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShadedMeshSubCluster_1a028d9407112266cb1a48d3cd549f5f3e" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
         <type></type>
@@ -109,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="51" column="18"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="51" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShadedMeshSubCluster_1a3cfd071cb975b6a8cc0c8ca95d800b30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="52" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="52" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShadedMeshSubCluster_1a2a577242814ccb2aba15069947d75a00" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -141,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="54" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="54" bodyend="57"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="54" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="54" bodyend="57"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShadedMeshSubCluster_1aa9fb6d26ca6562e02c60a7892ceee806" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classSR__GRAPH__NS_1_1ShadedMeshSubCluster" kindref="compound">ShadedMeshSubCluster</ref> &amp;</type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="59" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="59" bodyend="63"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="59" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="59" bodyend="63"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShadedMeshSubCluster_1a8ea59e458a969113308a2e9f0c115952" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Iterator</type>
@@ -177,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="66" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="66" bodyend="68"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="66" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="66" bodyend="68"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShadedMeshSubCluster_1a9dd4a2cd37998d70023173b1fb5560c6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD Iterator</type>
@@ -191,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="70" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="70" bodyend="70"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="70" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="70" bodyend="70"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShadedMeshSubCluster_1aead38c7f23ea8b98b868510714baa7d0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD Iterator</type>
@@ -205,7 +205,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="71" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="71" bodyend="71"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="71" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="71" bodyend="71"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShadedMeshSubCluster_1a6264af5cd4c4b65f685e49430aa208ca" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD ConstIterator</type>
@@ -219,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="73" column="36" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="73" bodyend="73"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="73" column="36" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="73" bodyend="73"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShadedMeshSubCluster_1af1c42b35cca5ecab40dbc119ba434edf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD ConstIterator</type>
@@ -233,7 +233,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="74" column="36" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="74" bodyend="74"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="74" column="36" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="74" bodyend="74"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShadedMeshSubCluster_1a4c8ff08c37b6a8c654b085d5fe28538b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -251,7 +251,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="76" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="76" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShadedMeshSubCluster_1af04790bffa932694ac21e62350aec531" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool SR_FASTCALL</type>
@@ -265,7 +265,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="79" column="39"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="79" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShadedMeshSubCluster_1a73e6d7ab1b1bc383e7937ca2c4c9d021" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_SRSL_NS::ShaderType</type>
@@ -279,7 +279,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="81" column="45"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="81" column="45"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -310,7 +310,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="43" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="43" bodyend="87"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="43" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="43" bodyend="87"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1ShadedMeshSubCluster_1a9dd4a2cd37998d70023173b1fb5560c6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ShadedMeshSubCluster</scope><name>begin</name></member>
       <member refid="classSR__GRAPH__NS_1_1ShadedMeshSubCluster_1a6264af5cd4c4b65f685e49430aa208ca" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ShadedMeshSubCluster</scope><name>begin</name></member>

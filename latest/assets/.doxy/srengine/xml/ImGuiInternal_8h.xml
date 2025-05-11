@@ -4,10 +4,10 @@
     <compoundname>ImGuiInternal.h</compoundname>
     <includes refid="Graphics_2inc_2Graphics_2macros_8h" local="no">Graphics/macros.h</includes>
     <includes refid="stdInclude_8h" local="no">Utils/stdInclude.h</includes>
-    <includedby refid="VulkanImGuiOverlay_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h</includedby>
+    <includedby refid="VulkanImGuiOverlay_8h" local="no">Engine/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h</label>
         <link refid="ImGuiInternal_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -339,13 +339,13 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h</label>
         <link refid="ImGuiInternal_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h</label>
         <link refid="VulkanImGuiOverlay_8h_source"/>
       </node>
     </invincdepgraph>
@@ -419,6 +419,6 @@
 <codeline lineno="65"><highlight class="normal"></highlight></codeline>
 <codeline lineno="66"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GRAPHICS_IMGUI_INTERNAL_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h"/>
   </compounddef>
 </doxygen>

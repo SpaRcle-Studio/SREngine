@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="14" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="14" bodyend="16"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="14" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="14" bodyend="16"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -42,6 +42,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="13" column="1"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="13" column="1"/>
   </compounddef>
 </doxygen>

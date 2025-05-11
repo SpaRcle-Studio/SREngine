@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceContainer.h" line="26" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceContainer.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceContainer.h" line="26" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceContainer.h" bodystart="26" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceContainer_1af0f9878d8c3d1c42d5812dd5abb927b2" prot="private" static="no" mutable="no">
         <type>std::unordered_set&lt; <ref refid="classSR__UTILS__NS_1_1ResourceContainer" kindref="compound">ResourceContainer</ref> * &gt;</type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceContainer.h" line="27" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceContainer.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceContainer.h" line="27" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceContainer.h" bodystart="27" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceContainer.h" line="13" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceContainer.h" line="13" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceContainer_1ac84a44cf058fa5cb53715e250ae7157c" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceContainer.h" line="22" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceContainer.h" line="22" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceContainer_1a833f3da55449659aeb8df7992155dd69" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceContainer.h" line="23" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceContainer.h" line="23" column="22"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -111,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceContainer.h" line="16" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceContainer.h" line="16" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceContainer_1ab3931d45e2b3c2fd69160c76748dd95d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -129,7 +129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceContainer.h" line="17" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceContainer.h" line="17" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceContainer_1ac6c46124f5261f90e4392fd749afc0e1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const std::unordered_set&lt; <ref refid="classSR__UTILS__NS_1_1ResourceContainer" kindref="compound">ResourceContainer</ref> * &gt; &amp;</type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceContainer.h" line="19" column="47" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceContainer.h" bodystart="19" bodyend="19"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceContainer.h" line="19" column="47" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceContainer.h" bodystart="19" bodyend="19"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -410,7 +410,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceContainer.h" line="11" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceContainer.h" bodystart="11" bodyend="29"/>
+    <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceContainer.h" line="11" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceContainer.h" bodystart="11" bodyend="29"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceContainer</scope><name>AddDependency</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac6c46124f5261f90e4392fd749afc0e1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceContainer</scope><name>GetContainerParents</name></member>

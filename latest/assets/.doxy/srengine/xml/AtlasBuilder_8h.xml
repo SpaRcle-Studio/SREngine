@@ -7,8 +7,8 @@
     <includes refid="Path_8h" local="no">Utils/FileSystem/Path.h</includes>
     <includes refid="Vector2_8h" local="no">Utils/Math/Vector2.h</includes>
     <includes refid="TextureLoader_8h" local="no">Graphics/Loaders/TextureLoader.h</includes>
-    <includedby refid="inc_2Core_2Tests_2AtlasBuilderTest_8h" local="no">Engine/Core/inc/Core/Tests/AtlasBuilderTest.h</includedby>
-    <includedby refid="libs_2Utils_2inc_2Utils_2Tests_2AtlasBuilderTest_8h" local="no">Engine/Core/libs/Utils/inc/Utils/Tests/AtlasBuilderTest.h</includedby>
+    <includedby refid="inc_2Engine_2Tests_2AtlasBuilderTest_8h" local="no">Engine/inc/Engine/Tests/AtlasBuilderTest.h</includedby>
+    <includedby refid="libs_2Utils_2inc_2Utils_2Tests_2AtlasBuilderTest_8h" local="no">Engine/libs/Utils/inc/Utils/Tests/AtlasBuilderTest.h</includedby>
     <incdepgraph>
       <node id="96">
         <label>Graphics/Loaders/TextureLoader.h</label>
@@ -39,7 +39,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h</label>
         <link refid="AtlasBuilder_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -855,11 +855,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/inc/Core/Tests/AtlasBuilderTest.h</label>
-        <link refid="inc_2Core_2Tests_2AtlasBuilderTest_8h_source"/>
+        <label>Engine/inc/Engine/Tests/AtlasBuilderTest.h</label>
+        <link refid="inc_2Engine_2Tests_2AtlasBuilderTest_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h</label>
         <link refid="AtlasBuilder_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -867,7 +867,7 @@
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Utils/inc/Utils/Tests/AtlasBuilderTest.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Tests/AtlasBuilderTest.h</label>
         <link refid="libs_2Utils_2inc_2Utils_2Tests_2AtlasBuilderTest_8h_source"/>
       </node>
     </invincdepgraph>
@@ -934,6 +934,6 @@
 <codeline lineno="53"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>SR_ENGINE_ATLAS_BUILDER_H</highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h"/>
   </compounddef>
 </doxygen>

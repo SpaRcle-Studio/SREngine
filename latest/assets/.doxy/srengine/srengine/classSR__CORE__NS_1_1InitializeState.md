@@ -368,5 +368,5 @@ Implements [*SR\_UTILS\_NS::ThreadWorkerStateBase::FinalizeImpl*](classSR__UTILS
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/States/InitializeState.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/States/InitializeState.h`
 

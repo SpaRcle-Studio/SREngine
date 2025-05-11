@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="65" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="65" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="65" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="65" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="363" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="363" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="363" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="363" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a9b21c41f9324cf8ee3e882c4771f3962" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="364" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="364" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="364" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="364" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="68" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="68" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1aa55fde4e37a44fcd265fdc28a1e07bfa" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
         <type></type>
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="69" column="18"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="69" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a01f7a0f24b8fb7e291e3d4ee4a0bed5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -96,7 +96,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="70" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="70" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a9c8d652e42bea275d1f69c87b41f8057" prot="public" static="no" const="yes" explicit="yes" inline="no" virt="non-virtual">
         <type></type>
@@ -110,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="76" column="18"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="76" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a230019dfc3c959717fe94a86cd93ec52" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -124,7 +124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="79" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="79" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a70f70418d956470dc665975163f8892c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -138,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="80" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="80" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1ac1ed1afa838a7c85a8e05a0cf5125ac4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string_view</type>
@@ -152,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="81" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="81" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1ae0fb4ed2f39e3fe4ba688194425c131d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Xml_1_1Document" kindref="compound">Document</ref></type>
@@ -166,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="82" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="82" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1ac4efc726d1989b6549767daaf357cc65" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Xml_1_1Attribute" kindref="compound">Attribute</ref></type>
@@ -184,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="83" column="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="83" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1adf20a103e4b5618be7743a2a6de08b59" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Xml_1_1Attribute" kindref="compound">Attribute</ref></type>
@@ -202,7 +202,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="84" column="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="84" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1aeced429f2897948188e763991662cfaa" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -225,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="86" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="86" bodyend="88"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="86" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="86" bodyend="88"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a1317d655d6e2f6671c77de40fe166a99" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -243,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="90" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="90" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1aeb8e3835a38790d8b609ae3d0555ce78" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::vector&lt; <ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref> &gt;</type>
@@ -257,7 +257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="92" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="92" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a992a60d30831d26105887d115e6526e3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::vector&lt; <ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref> &gt;</type>
@@ -275,7 +275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="93" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="93" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1ac7f982ab547499634d3b38cf33d19b98" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::vector&lt; <ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref> &gt;</type>
@@ -293,7 +293,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="94" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="94" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1adab8dacdcfebfda641af435d14bc0c2f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::vector&lt; <ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref> &gt;</type>
@@ -307,7 +307,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="95" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="95" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1ae817205bcee89ec02f2643c0b9ad2ba3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -334,7 +334,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="97" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="97" bodyend="116"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="97" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="97" bodyend="116"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1ac569ad8d96579c7eebc5337abab38b66" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -368,7 +368,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="118" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="118" bodyend="138"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="118" column="32" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="118" bodyend="138"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a2abc1563466066648f1348509389c0e4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -387,7 +387,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="140" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="140" bodyend="253"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="140" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="140" bodyend="253"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1aa72ebb25985830cd4de5bdf5d6b38567" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -410,7 +410,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="255" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="255" bodyend="348"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="255" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="255" bodyend="348"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1ac65989b3c8d319477c30412c5e0c4b65" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -437,7 +437,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="350" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="444" bodyend="469"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="350" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="444" bodyend="469"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1ab3ec37d0ff609bf0331bd4ba1da8dad5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -471,7 +471,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="351" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="422" bodyend="442"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="351" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="422" bodyend="442"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a82a8f5a7542c973916e3b7d696aa6dda" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref></type>
@@ -489,7 +489,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="353" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="353" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a6b6dacbeba9842b657d7062ad0ee3ab5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref></type>
@@ -507,7 +507,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="354" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="354" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a6f4727e17e9f099b40006946a785275c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref></type>
@@ -525,7 +525,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="356" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="356" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a8ba56685209a6d5631d028183c7e8f2a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref></type>
@@ -543,7 +543,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="357" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="357" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a3bd51bfbee2218f55dbafd731e4966b4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref></type>
@@ -561,7 +561,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="359" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="359" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a206d9138710abda8bcce8c26915dd423" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref></type>
@@ -579,7 +579,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="360" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="360" column="27"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -595,14 +595,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="73" column="21"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="73" column="21"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="64" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="64" bodyend="366"/>
+    <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="64" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="64" bodyend="366"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1aa72ebb25985830cd4de5bdf5d6b38567" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>AppendAttribute</name></member>
       <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1ac65989b3c8d319477c30412c5e0c4b65" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>AppendAttribute</name></member>

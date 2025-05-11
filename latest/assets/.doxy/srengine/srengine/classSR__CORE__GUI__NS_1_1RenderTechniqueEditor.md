@@ -628,5 +628,5 @@ SR_CORE_GUI_NS::RenderTechniqueEditor::~RenderTechniqueEditor () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/GUI/RenderTechniqueEditor.h`
 

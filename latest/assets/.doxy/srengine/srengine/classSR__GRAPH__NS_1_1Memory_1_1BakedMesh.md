@@ -507,5 +507,5 @@ static Ptr SR_GRAPH_NS::Memory::BakedMesh::Bake (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Memory/MeshManager.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h`
 

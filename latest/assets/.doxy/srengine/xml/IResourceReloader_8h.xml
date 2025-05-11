@@ -4,8 +4,8 @@
     <compoundname>IResourceReloader.h</compoundname>
     <includes refid="NonCopyable_8h" local="no">Utils/Common/NonCopyable.h</includes>
     <includes refid="Path_8h" local="no">Utils/FileSystem/Path.h</includes>
-    <includedby refid="GraphicsResourceReloader_8h" local="no">Engine/Core/inc/Core/Utils/GraphicsResourceReloader.h</includedby>
-    <includedby refid="EvoScriptResourceReloader_8h" local="no">Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoScriptResourceReloader.h</includedby>
+    <includedby refid="GraphicsResourceReloader_8h" local="no">Engine/inc/Engine/Utils/GraphicsResourceReloader.h</includedby>
+    <includedby refid="EvoScriptResourceReloader_8h" local="no">Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoScriptResourceReloader.h</includedby>
     <incdepgraph>
       <node id="75">
         <label>Utils/Common/Breakpoint.h</label>
@@ -158,7 +158,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/Resources/IResourceReloader.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Resources/IResourceReloader.h</label>
         <link refid="IResourceReloader_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -559,15 +559,15 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/inc/Core/Utils/GraphicsResourceReloader.h</label>
+        <label>Engine/inc/Engine/Utils/GraphicsResourceReloader.h</label>
         <link refid="GraphicsResourceReloader_8h_source"/>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoScriptResourceReloader.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoScriptResourceReloader.h</label>
         <link refid="EvoScriptResourceReloader_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/Resources/IResourceReloader.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Resources/IResourceReloader.h</label>
         <link refid="IResourceReloader_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -616,6 +616,6 @@
 <codeline lineno="32"><highlight class="normal"></highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_IRESOURCERELOADER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Resources/IResourceReloader.h"/>
+    <location file="Engine/libs/Utils/inc/Utils/Resources/IResourceReloader.h"/>
   </compounddef>
 </doxygen>

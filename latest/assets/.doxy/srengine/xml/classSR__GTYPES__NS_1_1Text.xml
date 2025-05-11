@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="17" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="17" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="17" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="17" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="72" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="72" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="72" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="72" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Text_1a31dea4a5313bfd0b9bb0603f572de619" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::UVector2</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="78" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="78" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="78" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="78" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Text_1aec4ba4d41c08481d4394929687adfdb0" prot="protected" static="no" mutable="no">
         <type>uint16_t</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="80" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="80" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="80" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="80" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Text_1a1153adefcd16278fa1ea6eac5be8058e" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="82" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="82" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="82" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="82" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Text_1ac45fd2faa8aa3ca3a606c56c0fe2d267" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="84" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="84" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Text_1ace286a9b3db4841ca29416b802c08111" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="86" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="86" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="86" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="86" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Text_1a212acf09aa1cccef5ee4ba8a5b7890fb" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="88" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="88" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="88" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="88" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Text_1a36dde86498395a4c3b93ce578f451b41" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="90" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="90" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="90" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="90" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -153,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="93" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="93" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="93" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="93" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Text_1ac0d92d2f83bdb1b8aeddfa271fe5fb20" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GTYPES__NS_1_1Font" kindref="compound">Font</ref> *</type>
@@ -168,7 +168,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="94" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="94" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="94" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="94" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -184,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="19" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="19" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1ace15847c818021baa50eaa7352d00ea2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -198,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="20" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="20" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a16ebb160d9689c3f4d82a2f1b0a9132d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -213,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="23" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="23" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a0be9578346de45690762dc249e5e8d17" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -228,7 +228,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="24" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a08b2b25d038432498aa5871803cacef4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -243,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="26" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="26" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1af05f81d2ff5a2b8d3d5f156b2d81ee22" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD MeshType</type>
@@ -258,7 +258,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="28" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="28" bodyend="28"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="28" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="28" bodyend="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a485f6e04654fffbebae0ec7a141e3b2c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -273,7 +273,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="30" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="30" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a57a18cb5d54f38cbe4768cae125669c4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -289,7 +289,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="33" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="33" bodyend="33"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="33" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="33" bodyend="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a3f02b4b66998089cc6a0a3599605193a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -304,7 +304,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="35" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="35" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a1b414f779f834e54bb66eff59d262322" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE bool</type>
@@ -318,7 +318,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="36" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="36" bodyend="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="36" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="36" bodyend="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1aab661ee23a9379e40a94a2f2c8cdf34f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE bool</type>
@@ -332,7 +332,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="37" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="37" bodyend="37"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="37" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="37" bodyend="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1ac1eafba1c54285d51d1d46123b9b76c6" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE bool</type>
@@ -346,7 +346,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="38" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="38" bodyend="38"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="38" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="38" bodyend="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a17a8eba0482cb92c11855aa7f5781308" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE bool</type>
@@ -360,7 +360,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="39" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="39" bodyend="39"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="39" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="39" bodyend="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a76a8e13f53e747486782f22758bab85c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE <ref refid="classSR__GTYPES__NS_1_1Font" kindref="compound">Font</ref> *</type>
@@ -374,7 +374,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="40" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="40" bodyend="40"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="40" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="40" bodyend="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1ab5d62d990e456f81bea4f58d00bd0100" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE uint16_t</type>
@@ -388,7 +388,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="41" column="47" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="41" bodyend="41"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="41" column="47" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="41" bodyend="41"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a82c1372140d1fd686a9a04cd7d6318d4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -403,7 +403,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="43" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="43" bodyend="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="43" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="43" bodyend="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1ac072059473f7992a3b2660f41b0a9215" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -417,7 +417,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="45" column="40"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="45" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1ac305aaf2c864c2909fec9d0dfa0cb8fa" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -431,7 +431,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="46" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="46" bodyend="46"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="46" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="46" bodyend="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a5f7db96960ca4cedb7d9dfd22b984ac3" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -445,7 +445,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="47" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="47" bodyend="47"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="47" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="47" bodyend="47"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1af35ce908eaf1daceaee463f0d3db53e3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">SR_HTYPES_NS::UnicodeString</ref> &amp;</type>
@@ -459,7 +459,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="49" column="56" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="49" bodyend="49"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="49" column="56" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="49" bodyend="49"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a80fce8c1c18b753b586d2c6c00d101c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -477,7 +477,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="51" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="51" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a714b414a4d2abd9f7223cb36347d6442" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -495,7 +495,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="52" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="52" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1ab473e4ac5fba3de138ad1c1c26bfe768" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -513,7 +513,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="53" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="53" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a799c1357f30cf016b3a688ff20b313b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -531,7 +531,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="54" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="54" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a40f02731e29a088105cdd422f9d567b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -549,7 +549,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="55" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="55" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1aee3589cc10d0768b524b7bfd62d8d072" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -567,7 +567,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="56" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="56" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1aa7f411307e3fdad56f62b00e0c5ab6f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -585,7 +585,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="57" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="57" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1ab2e323bf6a531f738f8a921af2d2b509" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -603,7 +603,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="58" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="58" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a3eb372bec3d1acc456c74e18f1f5e7e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -621,7 +621,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="59" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="59" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a68790e68f11e8b3630bf8e537b2dc88c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -639,7 +639,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="60" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="60" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a707708bf29aef6266fb4ba93d952e85a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -654,7 +654,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="62" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="62" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a69ff7aafb753429e2ed6cd135bdfca26" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -668,7 +668,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="63" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="63" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -684,7 +684,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="66" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="66" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a4d3993567f140461da4b9d2f61080861" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -698,7 +698,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="67" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="67" column="27"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -823,7 +823,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="15" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="15" bodyend="96"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="15" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="15" bodyend="96"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>BaseComponent</name></member>

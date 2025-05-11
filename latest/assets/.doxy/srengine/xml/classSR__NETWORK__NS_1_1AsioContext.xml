@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="14" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="14" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" bodystart="14" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="31" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" bodystart="31" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="31" column="26" bodyfile="Engine/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" bodystart="31" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="16" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="16" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioContext_1aedd4e3ec5162ae4279e9825b57635ef1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="17" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="17" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioContext_1ab0094541c416562fcaa768fbd4fcffab" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>asio::io_context &amp;</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="20" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" bodystart="20" bodyend="20"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="20" column="26" bodyfile="Engine/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" bodystart="20" bodyend="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioContext_1ac3f4c00cd91c13622a95c974a1c4b6f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="22" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="22" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioContext_1a3258b5ec1a44944c1edcfeb3f8a13307" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="23" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="23" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioContext_1a6b6e34d0e93167c54739c8c6a63aea7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="24" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioContext_1a1c912c59ff870b95b28df9116fa760e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__NETWORK__NS_1_1Socket" kindref="compound">Socket</ref> &gt;</type>
@@ -140,7 +140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="26" column="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="26" column="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioContext_1ab39de2e023a7d74d2b0244aaa4ea0d5a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__NETWORK__NS_1_1Pinger" kindref="compound">Pinger</ref> &gt;</type>
@@ -155,7 +155,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="27" column="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="27" column="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioContext_1aae63691eae1739bf6d78e99cc05c2f4c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__NETWORK__NS_1_1Acceptor" kindref="compound">Acceptor</ref> &gt;</type>
@@ -182,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="28" column="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="28" column="46"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -244,7 +244,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="13" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" bodystart="13" bodyend="33"/>
+    <location file="Engine/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" line="13" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Network/Asio/AsioContext.h" bodystart="13" bodyend="33"/>
     <listofallmembers>
       <member refid="classSR__NETWORK__NS_1_1Context_1a9fb6baa462165b345e1a3e442673b610" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioContext</scope><name>AddAsyncAcceptor</name></member>
       <member refid="classSR__NETWORK__NS_1_1Context_1a4630818f55d4b2be901c65b2871516a7" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioContext</scope><name>AddAsyncReceiveSocket</name></member>

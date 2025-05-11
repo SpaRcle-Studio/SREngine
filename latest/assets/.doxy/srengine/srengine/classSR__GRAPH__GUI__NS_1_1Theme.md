@@ -298,5 +298,5 @@ static bool SR_GRAPH_GUI_NS::Theme::SaveGlobal (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h`
 

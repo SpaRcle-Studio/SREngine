@@ -8,7 +8,7 @@
     <includes local="no">Scripting/IState.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h</label>
         <link refid="AddressTableGen_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -255,6 +255,6 @@
 <codeline lineno="213"><highlight class="normal"></highlight></codeline>
 <codeline lineno="214"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_SCRIPTING_ADDRESS_TABLE_GEN_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h"/>
   </compounddef>
 </doxygen>

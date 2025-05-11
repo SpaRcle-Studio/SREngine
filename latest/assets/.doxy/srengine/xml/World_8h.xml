@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="World_8h" kind="file" language="C++">
     <compoundname>World.h</compoundname>
-    <includes refid="Engine_8h" local="no">Core/Engine.h</includes>
+    <includes refid="Engine_8h" local="no">Engine/Engine.h</includes>
     <includes refid="Scene_8h" local="no">Utils/World/Scene.h</includes>
     <includes refid="Component_8h" local="no">Utils/ECS/Component.h</includes>
     <includes refid="Transform3D_8h" local="no">Utils/ECS/Transform3D.h</includes>
@@ -10,7 +10,7 @@
     <includes refid="Window_8h" local="no">Graphics/Window/Window.h</includes>
     <incdepgraph>
       <node id="2">
-        <label>Core/Engine.h</label>
+        <label>Engine/Engine.h</label>
         <link refid="Engine_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -48,13 +48,13 @@
         </childnode>
       </node>
       <node id="3">
-        <label>Core/EngineResources.h</label>
+        <label>Engine/EngineResources.h</label>
         <link refid="EngineResources_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/inc/Core/World/World.h</label>
+        <label>Engine/inc/Engine/World/World.h</label>
         <link refid="World_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1795,7 +1795,7 @@
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SR_ENGINE_WORLD_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ENGINE_WORLD_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Core/Engine.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Engine/Engine.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/World/Scene.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/ECS/Component.h&gt;</highlight><highlight class="normal"></highlight></codeline>
@@ -1830,6 +1830,6 @@
 <codeline lineno="40"><highlight class="normal"></highlight></codeline>
 <codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_WORLD_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/World/World.h"/>
+    <location file="Engine/inc/Engine/World/World.h"/>
   </compounddef>
 </doxygen>

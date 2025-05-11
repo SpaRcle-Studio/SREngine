@@ -21,7 +21,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="37" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="37" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform.h" bodystart="37" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="39" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" bodystart="39" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="39" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform.h" bodystart="39" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="friend">
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="36" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="36" column="22" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform.h" bodystart="36" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -73,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="119" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" bodystart="119" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="119" column="20" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform.h" bodystart="119" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="122" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" bodystart="122" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="122" column="22" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform.h" bodystart="122" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="42" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="42" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a3feaf3a2aa4e02d67bcba8750f0a7ef5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="43" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="43" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1aeb716e378923d69508409ff5bb268681" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -138,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="46" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="46" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a172b2469edd0980eca030a0eafb47492" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="48" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="48" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a1055e8ce5f5effac26e150670f48e52c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -184,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="49" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="49" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a40e33942adff2c74db3a3cba199a8db4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -203,7 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="50" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="50" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a613b66e356919a4c344cc5daa8cbc3c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -223,7 +223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="51" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="51" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a11614c784c280a68da9d6d291d3638a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -249,7 +249,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="52" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="52" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1aa1442c8c6880349d936212128d7c26e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -269,7 +269,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="53" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="53" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1adea47f4c07064942aff43f93541162b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -295,7 +295,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="54" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="54" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a21ae4c8e5f142ead1fac899a406c325a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -313,7 +313,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="56" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="56" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a4c0515615022f8efb4ff72c28afc0ea1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -331,7 +331,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="57" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="57" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1ac325a59316802daffa0ab737d5d70c9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -349,7 +349,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="58" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="58" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a8d76360d076a210651545c584b068fd9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -375,7 +375,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="59" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="59" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a146b6c65edb42a6661abafd0cec707bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -393,7 +393,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="60" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="60" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1aaa673ea75de87d78ab0f75bc42244cf8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -411,7 +411,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="61" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="61" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1af9cd604ad5bc319782d6751b7eb7d63a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -434,7 +434,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="63" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="63" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a893af8cad22e8da241936a4f86914df9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -453,7 +453,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="64" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="64" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a2e3fcdf71157c91347cc1a7e46c9e0e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -480,7 +480,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="66" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="66" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1ac415bb82723362537cae3b1a5458bdb3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -500,7 +500,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="70" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="70" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1ab73649b46b1c9cbcefefe484b1cf1402" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -518,7 +518,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="72" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="72" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1af33602aeb1b5ec02a4b7faa82ea1a9d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -538,7 +538,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="74" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="74" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1ad8051e693b8ad38f5d4e18bc2629d713" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -558,7 +558,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="76" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="76" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a4ea13bf1ddb99927b268c868a6f2bfe3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -584,7 +584,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="77" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="77" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1aee4faeb9653bd046ed73714bdbc2a38f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -608,7 +608,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="78" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="78" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1add96455f907930514cb82f4da5eaeb11" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -628,7 +628,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="79" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="79" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a4bc87f42137d656eb1d1b0909d285e18" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -648,7 +648,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="80" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="80" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a79ffc3832aa21f8f05f72bade89f2cd3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -674,7 +674,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="81" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="81" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a36e0387abf0fd788aad58a61a0fa094a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -694,7 +694,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="82" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="82" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a388f9298eb61b71b47462639aaa0affe" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -720,7 +720,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="83" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="83" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a14740c2beb8b77e5f00f70baf9c3a18a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -740,7 +740,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="84" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="84" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a158c5a4450b218871475fbb84c1df414" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -766,7 +766,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="85" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="85" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a87bac715cab85ac73401c0b6dfad6a64" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -785,7 +785,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="87" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="87" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a737164ec1385c59a5d507b587d1dbf09" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -808,7 +808,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="88" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="88" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1aad53d8a93b787c824b7b046c4ee6e99e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
@@ -824,7 +824,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="90" column="58"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="90" column="58"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a2cb44c340e9f36c51602abed9bd82cab" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref></type>
@@ -839,7 +839,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="92" column="53"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="92" column="53"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a2f9cc4ce76921065064d77d116452f6a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -853,7 +853,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="94" column="51"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="94" column="51"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1aa578cbae8eac7e80c5720d863299353b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -867,7 +867,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="95" column="51"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="95" column="51"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a8d1072763a0b8b4b6e4ef9ab3c2469a0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -881,7 +881,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="96" column="51"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="96" column="51"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a233a6ad8e9f5301dee9bce24bd47d1ad" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -897,7 +897,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="98" column="51"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="98" column="51"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a535d5fe8ff811ab9aaa535c9c19ca7ff" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -913,7 +913,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="99" column="51"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="99" column="51"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1af7566b66d53fe7fd00c94d541964c2f3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -929,7 +929,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="100" column="51"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="100" column="51"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a87c6ec3ea1ca889591dded1923c13064" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -945,7 +945,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="101" column="51"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="101" column="51"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a8e5adef1d6e1efe2b572e1f17b590399" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector2</type>
@@ -959,7 +959,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="103" column="51"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="103" column="51"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a6015d3e57389eae7899c127fd4c0439b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector2</type>
@@ -973,7 +973,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="104" column="51"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="104" column="51"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a0cf06aa11a23d65e2465e140084d8941" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Transform" kindref="compound">Transform</ref> *</type>
@@ -987,7 +987,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="106" column="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="106" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a3c31b4e72f7c0216150f07c3db1a7260" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__UTILS__NS_1_1GameObject" kindref="compound">GameObject</ref> &gt;</type>
@@ -1001,7 +1001,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="107" column="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="107" column="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a2ca70eca500cae911616d22030fd31c9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD Measurement</type>
@@ -1019,7 +1019,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="109" column="42"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="109" column="42"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1aca6932ea6b4e30845d5651e9606df6f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -1033,7 +1033,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="111" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="111" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1acc9696fec9faa7f5ae1cb8cb668da396" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -1048,7 +1048,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="112" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="112" column="22"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -1064,7 +1064,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="115" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="115" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform_1a07c15ed68f83cbe8a6f832fdccd6dd46" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -1080,7 +1080,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="116" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="116" column="22"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1190,7 +1190,7 @@
         <label>SceneObject</label>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" line="34" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h" bodystart="34" bodyend="124"/>
+    <location file="Engine/libs/Utils/inc/Utils/ECS/Transform.h" line="34" column="5" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform.h" bodystart="34" bodyend="124"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform</scope><name>AllocateStatic</name></member>

@@ -3,7 +3,7 @@
   <compounddef id="RenderTechnique_8h" kind="file" language="C++">
     <compoundname>RenderTechnique.h</compoundname>
     <includes refid="IRenderTechnique_8h" local="no">Graphics/Render/IRenderTechnique.h</includes>
-    <includedby refid="EngineScene_8h" local="no">Engine/Core/inc/Core/World/EngineScene.h</includedby>
+    <includedby refid="EngineScene_8h" local="no">Engine/inc/Engine/World/EngineScene.h</includedby>
     <incdepgraph>
       <node id="145">
         <label>Graphics/Memory/DescriptorManager.h</label>
@@ -104,7 +104,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderTechnique.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h</label>
         <link refid="RenderTechnique_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1145,11 +1145,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/inc/Core/World/EngineScene.h</label>
+        <label>Engine/inc/Engine/World/EngineScene.h</label>
         <link refid="EngineScene_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderTechnique.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h</label>
         <link refid="RenderTechnique_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1197,6 +1197,6 @@
 <codeline lineno="34"><highlight class="normal"></highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_RENDERTECHNIQUE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderTechnique.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h"/>
   </compounddef>
 </doxygen>

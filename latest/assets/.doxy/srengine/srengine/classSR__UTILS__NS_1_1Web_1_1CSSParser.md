@@ -324,5 +324,5 @@ SR_NODISCARD CSS::Ptr SR_UTILS_NS::Web::CSSParser::Parse (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSParser.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Web/CSS/CSSParser.h`
 

@@ -12,7 +12,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/Link.h</label>
         <link refid="Link_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -513,6 +513,6 @@
 <codeline lineno="42"><highlight class="normal"></highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_LINK_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/Link.h"/>
   </compounddef>
 </doxygen>

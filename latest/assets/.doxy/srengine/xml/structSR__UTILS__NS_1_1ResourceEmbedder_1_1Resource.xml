@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" line="15" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" line="15" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" bodystart="15" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1ResourceEmbedder_1_1Resource_1a03bf567cc12cb74ee9c620231976a91e" prot="public" static="no" mutable="no">
         <type>uint64_t</type>
@@ -30,14 +30,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" line="16" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" line="16" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" bodystart="16" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" line="14" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" bodystart="14" bodyend="17"/>
+    <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" line="14" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" bodystart="14" bodyend="17"/>
     <listofallmembers>
       <member refid="structSR__UTILS__NS_1_1ResourceEmbedder_1_1Resource_1ab2f15f053a3b464a5e1faa91b17d4929" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceEmbedder::Resource</scope><name>compressedHex</name></member>
       <member refid="structSR__UTILS__NS_1_1ResourceEmbedder_1_1Resource_1a03bf567cc12cb74ee9c620231976a91e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceEmbedder::Resource</scope><name>decompressedSize</name></member>

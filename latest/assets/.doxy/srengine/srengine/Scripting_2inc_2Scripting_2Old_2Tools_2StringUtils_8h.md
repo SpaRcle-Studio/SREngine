@@ -4,7 +4,7 @@
 
 
 
-[**FileList**](files.md) **>** [**Core**](dir_0e25eeab45a2a860e54b41439eaf8784.md) **>** [**libs**](dir_ec277bd8bac57730a602f096f68de393.md) **>** [**Scripting**](dir_8d890c1ced0da046da53f80c44d31720.md) **>** [**inc**](dir_7f135c995c1edef3d688ff3261945ab5.md) **>** [**Scripting**](dir_1d502c2700a8bda2469c0cfc127e6ee9.md) **>** [**Old**](dir_7c26f9091b44a892879dd4e8d1d7c144.md) **>** [**Tools**](dir_04907cd073aeacf0a44a00b3a87fc81c.md) **>** [**StringUtils.h**](Scripting_2inc_2Scripting_2Old_2Tools_2StringUtils_8h.md)
+[**FileList**](files.md) **>** [**Engine**](dir_0b6ee6e7e9547e675db4add2e5de97da.md) **>** [**libs**](dir_864715c2a33e3813fa4e93cb9390f3e1.md) **>** [**Scripting**](dir_5986759bc4f73c4edd437f1c9a37190d.md) **>** [**inc**](dir_4119b3a7205d9e389f51f0e00ee95b80.md) **>** [**Scripting**](dir_b374709534ecc2762456a7a7dcb6760c.md) **>** [**Old**](dir_b244a4bff51c9cedd445e3d7c2557c90.md) **>** [**Tools**](dir_34b1643912c4d8f0022f3f30c24098db.md) **>** [**StringUtils.h**](Scripting_2inc_2Scripting_2Old_2Tools_2StringUtils_8h.md)
 
 [Go to the source code of this file](Scripting_2inc_2Scripting_2Old_2Tools_2StringUtils_8h_source.md)
 
@@ -92,5 +92,5 @@
 
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Scripting/inc/Scripting/Old/Tools/StringUtils.h`
+The documentation for this class was generated from the following file `Engine/libs/Scripting/inc/Scripting/Old/Tools/StringUtils.h`
 

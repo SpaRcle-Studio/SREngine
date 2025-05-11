@@ -2,16 +2,16 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="Button_8h" kind="file" language="C++">
     <compoundname>Button.h</compoundname>
-    <includes refid="IButton_8h" local="no">Core/UI/IButton.h</includes>
+    <includes refid="IButton_8h" local="no">Engine/UI/IButton.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/UI/Button.h</label>
+        <label>Engine/inc/Engine/UI/Button.h</label>
         <link refid="Button_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="2">
-        <label>Core/UI/IButton.h</label>
+        <label>Engine/UI/IButton.h</label>
         <link refid="IButton_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -1023,7 +1023,7 @@
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SR_ENGINE_UI_BUTTON_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ENGINE_UI_BUTTON_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Core/UI/IButton.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Engine/UI/IButton.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SR_CORE_UI_NS<sp/>{</highlight></codeline>
 <codeline lineno="11" refid="classSR__CORE__UI__NS_1_1Button" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__CORE__UI__NS_1_1Button" kindref="compound">Button</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__CORE__UI__NS_1_1IButton" kindref="compound">IButton</ref><sp/>{</highlight></codeline>
@@ -1041,6 +1041,6 @@
 <codeline lineno="23"><highlight class="normal"></highlight></codeline>
 <codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_UI_BUTTON_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/UI/Button.h"/>
+    <location file="Engine/inc/Engine/UI/Button.h"/>
   </compounddef>
 </doxygen>

@@ -611,5 +611,5 @@ Implements [*SR\_UTILS\_NS::IResource::Unload*](classSR__UTILS__NS_1_1IResource.
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationClip.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h`
 

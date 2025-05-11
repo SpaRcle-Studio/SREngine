@@ -2202,5 +2202,5 @@ static inline Vector3 < T > SR_MATH_NS::Vector3::Zero ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Math/Vector3.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Math/Vector3.h`
 

@@ -839,5 +839,5 @@ SR_GTYPES_NS::DebugWireframeMesh::~DebugWireframeMesh () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h`
 

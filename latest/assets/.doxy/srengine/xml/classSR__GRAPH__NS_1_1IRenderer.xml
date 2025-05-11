@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="19" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="19" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="19" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="19" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="39" column="38" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="39" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="39" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="39" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -51,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="42" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="42" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="42" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="42" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="21" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="21" bodyend="24"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="21" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="21" bodyend="24"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderer_1aad6a33f3246980bda9bb98878db126d6" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1RenderScene" kindref="compound">RenderScene</ref> *</type>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="27" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="27" bodyend="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="27" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="27" bodyend="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderer_1a7da40776927baac614d86a7d1fdf5348" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -99,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="29" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="29" bodyend="29"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="29" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="29" bodyend="29"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderer_1a45739855d1bfbe05b70841d7636b5c03" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -114,7 +114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="31" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="31" bodyend="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="31" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="31" bodyend="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderer_1a4c0369c85657585cb4ef147c0862052f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -129,7 +129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="32" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="32" bodyend="32"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="32" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="32" bodyend="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderer_1ad290aea4ec51db184a7e7db6011b6e22" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -144,7 +144,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="33" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="33" bodyend="33"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="33" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="33" bodyend="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderer_1a669941fd54c4631332893a66aacf27e1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="34" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="34" bodyend="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="34" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="34" bodyend="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderer_1a38f52c1afa5cd6e1960aa41c6bb1a33b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -173,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="35" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="35" bodyend="35"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="35" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="35" bodyend="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderer_1a905f69cb02c130de1e26cd5d93518c90" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>bool</type>
@@ -188,7 +188,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="36" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="36" bodyend="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="36" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="36" bodyend="36"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -256,7 +256,7 @@
         <link refid="classSR__UTILS__NS_1_1SRClass"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="16" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="16" bodyend="44"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" line="16" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h" bodystart="16" bodyend="44"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderer</scope><name>AllocateStatic</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderer</scope><name>AutoFree</name></member>

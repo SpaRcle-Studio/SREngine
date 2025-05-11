@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="34" column="9" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="34" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="34" column="9" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="34" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="37" column="9"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="37" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1IWaveDataProvider_1ac2c1207d17bd11ac4f4d438bff43ace8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD const <ref refid="classSR__AUDIO__NS_1_1WaveDataFormat" kindref="compound">WaveDataFormat</ref> &amp;</type>
@@ -52,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="39" column="51"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="39" column="51"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1IWaveDataProvider_1a569b97418d4a6ed4ee516ef0f2abb556" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD const uint8_t *</type>
@@ -69,7 +69,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="41" column="44"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="41" column="44"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1IWaveDataProvider_1ab26e87dbef38f1885342e89213f38c00" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD size_t</type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="42" column="37"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="42" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1IWaveDataProvider_1a372028ebebed211b3aa15210533f15d3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -102,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="44" column="35" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="44" bodyend="44"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="44" column="35" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="44" bodyend="44"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1IWaveDataProvider_1a8defe15a64304984ac5bbb4bec8bf13a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="45" column="35" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="45" bodyend="45"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="45" column="35" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="45" bodyend="45"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1IWaveDataProvider_1a6b4466d3ec1888197aa7b8502896a186" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -138,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="46" column="22" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="46" bodyend="46"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="46" column="22" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="46" bodyend="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1IWaveDataProvider_1ae64cfd3e4df002b4b8f24032f3d2eec8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>size_t</type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="47" column="24" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="47" bodyend="47"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="47" column="24" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="47" bodyend="47"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1IWaveDataProvider_1a520b48179b5c4a3d4e1f99bf6f72395f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -173,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="49" column="27" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="49" bodyend="49"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="49" column="27" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="49" bodyend="49"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -222,7 +222,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="31" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="32" bodyend="51"/>
+    <location file="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="31" column="5" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="32" bodyend="51"/>
     <listofallmembers>
       <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a569b97418d4a6ed4ee516ef0f2abb556" prot="public" virt="pure-virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>GetWaveData</name></member>
       <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1ac2c1207d17bd11ac4f4d438bff43ace8" prot="public" virt="pure-virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>GetWaveDataFormat</name></member>

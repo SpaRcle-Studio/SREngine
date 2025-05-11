@@ -3,10 +3,10 @@
   <compounddef id="EditorGizmo_8h" kind="file" language="C++">
     <compoundname>EditorGizmo.h</compoundname>
     <includes refid="Gizmo_8h" local="no">Graphics/UI/Gizmo.h</includes>
-    <includedby refid="SceneTools_8h" local="no">Engine/Core/inc/Core/GUI/SceneTools.h</includedby>
+    <includedby refid="SceneTools_8h" local="no">Engine/inc/Engine/GUI/SceneTools.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/GUI/EditorGizmo.h</label>
+        <label>Engine/inc/Engine/GUI/EditorGizmo.h</label>
         <link refid="EditorGizmo_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1502,13 +1502,13 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/GUI/EditorGizmo.h</label>
+        <label>Engine/inc/Engine/GUI/EditorGizmo.h</label>
         <link refid="EditorGizmo_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/inc/Core/GUI/SceneTools.h</label>
+        <label>Engine/inc/Engine/GUI/SceneTools.h</label>
         <link refid="SceneTools_8h_source"/>
       </node>
     </invincdepgraph>
@@ -1562,6 +1562,6 @@
 <codeline lineno="42"><highlight class="normal"></highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_EDITOR_GIZMO_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/GUI/EditorGizmo.h"/>
+    <location file="Engine/inc/Engine/GUI/EditorGizmo.h"/>
   </compounddef>
 </doxygen>

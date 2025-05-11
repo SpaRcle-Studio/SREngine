@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="12" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" bodystart="12" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="12" column="9" bodyfile="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" bodystart="12" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="45" column="29" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" bodystart="45" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="45" column="29" bodyfile="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" bodystart="45" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="14" column="9"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="14" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1ad57c6a182f85c36db6f42893edccb9ee" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD void *</type>
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="17" column="27"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="17" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1afd0cec0d9578288c87c17a96af961761" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="20" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="20" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1a3df24742c107940f16d74d95539f7fd3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="21" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="21" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1af14d2900ed651cddb2b7f67c2f7337da" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -109,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="22" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="22" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1ab80ea2bb4df2ed146f6d91d216f475a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="24" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1aeb097767c948e042c91561c5fbe65553" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="25" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="25" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1aea1e23e741c4a5bab8d21024cbbf3d3f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -166,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="27" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="27" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1af40a67bad84db5d84ce6f4eeb7f40bb5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -185,7 +185,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="28" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="28" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1a9a0e4607f7ec42900757f1bca1f93cc6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -200,7 +200,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="30" column="43"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="30" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1a5495ec34f88008336a7eec8e1e53dbe3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="31" column="43"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="31" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1a414e545b5c4c67bcfc3f2a5221f3440f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -230,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="33" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="33" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1aec0cdc553592c6128ca4838c67c40f9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -249,7 +249,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="35" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="35" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1af43051b63fe417439ae5c06a54326f3e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -264,7 +264,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="36" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="36" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1a0c0c9aa681a2f385c0c4de7dffd96a27" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -283,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="38" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="38" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1ac0b9acb994ee9fadfb27547791a26845" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -302,7 +302,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="39" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="39" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -318,7 +318,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="42" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="42" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -478,7 +478,7 @@
         <link refid="structSR__MATH__NS_1_1Vector3"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="11" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" bodystart="11" bodyend="47"/>
+    <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" line="11" column="5" bodyfile="Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h" bodystart="11" bodyend="47"/>
     <listofallmembers>
       <member refid="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1aeb097767c948e042c91561c5fbe65553" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysXRigidbody3DImpl</scope><name>AddAngularVelocity</name></member>
       <member refid="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1ab80ea2bb4df2ed146f6d91d216f475a0" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysXRigidbody3DImpl</scope><name>AddLinearVelocity</name></member>

@@ -114,5 +114,5 @@ static VkSurfaceKHR SR_GRAPH_NS::X11SurfaceInit::Init (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/X11SurfaceInit.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/X11SurfaceInit.h`
 

@@ -457,5 +457,5 @@ static inline SRSLExpr * SR_SRSL_NS::SRSLExpr::CreateStringExpression (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h`
 

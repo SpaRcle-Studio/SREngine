@@ -551,5 +551,5 @@ SR_CORE_NS::EngineScene::~EngineScene () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/World/EngineScene.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/World/EngineScene.h`
 

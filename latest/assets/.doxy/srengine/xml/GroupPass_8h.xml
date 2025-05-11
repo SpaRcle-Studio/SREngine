@@ -3,9 +3,9 @@
   <compounddef id="GroupPass_8h" kind="file" language="C++">
     <compoundname>GroupPass.h</compoundname>
     <includes refid="BasePass_8h" local="no">Graphics/Pass/BasePass.h</includes>
-    <includedby refid="FramebufferPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h</includedby>
-    <includedby refid="SwapchainPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h</includedby>
-    <includedby refid="IRenderTechnique_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h</includedby>
+    <includedby refid="FramebufferPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h</includedby>
+    <includedby refid="SwapchainPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h</includedby>
+    <includedby refid="IRenderTechnique_8h" local="no">Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h</includedby>
     <incdepgraph>
       <node id="136">
         <label>Graphics/Memory/DescriptorManager.h</label>
@@ -64,7 +64,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h</label>
         <link refid="GroupPass_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1019,15 +1019,15 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="6">
-        <label>Engine/Core/inc/Core/World/EngineScene.h</label>
+        <label>Engine/inc/Engine/World/EngineScene.h</label>
         <link refid="EngineScene_8h_source"/>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h</label>
         <link refid="FramebufferPass_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h</label>
         <link refid="GroupPass_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1037,11 +1037,11 @@
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h</label>
         <link refid="SwapchainPass_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h</label>
         <link refid="IRenderTechnique_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
@@ -1049,13 +1049,13 @@
         </childnode>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderTechnique.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h</label>
         <link refid="RenderTechnique_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="7">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/ScriptableRenderTechnique.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/ScriptableRenderTechnique.h</label>
         <link refid="ScriptableRenderTechnique_8h_source"/>
       </node>
     </invincdepgraph>
@@ -1135,6 +1135,6 @@
 <codeline lineno="67"><highlight class="normal"></highlight></codeline>
 <codeline lineno="68"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GROUPPASS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h"/>
   </compounddef>
 </doxygen>

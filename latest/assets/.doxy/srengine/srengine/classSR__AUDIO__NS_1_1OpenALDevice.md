@@ -289,5 +289,5 @@ SR_AUDIO_NS::OpenALDevice::~OpenALDevice () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Audio/inc/Audio/Impl/OpenALDevice.h`
+The documentation for this class was generated from the following file `Engine/libs/Audio/inc/Audio/Impl/OpenALDevice.h`
 

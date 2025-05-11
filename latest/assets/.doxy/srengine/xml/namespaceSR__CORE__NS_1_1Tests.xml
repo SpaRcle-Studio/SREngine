@@ -9,6 +9,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/inc/Core/Tests/AtlasBuilderTest.h" line="11" column="1"/>
+    <location file="Engine/inc/Engine/Tests/AtlasBuilderTest.h" line="11" column="1"/>
   </compounddef>
 </doxygen>

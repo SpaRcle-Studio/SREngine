@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="24" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Utils.h" line="24" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="24" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="20" column="18"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Utils.h" line="20" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1ImGuiDisabledLockGuard_1a759524e8296a1613d7f4c8804c9e3d79" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -51,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="21" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Utils.h" line="21" column="9"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -82,7 +82,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="18" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="18" bodyend="26"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/Utils.h" line="18" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="18" bodyend="26"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__GUI__NS_1_1ImGuiDisabledLockGuard_1ae618f846d8b0dc1cf896e88163678d6c" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard</scope><name>ImGuiDisabledLockGuard</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1ImGuiDisabledLockGuard_1a10a55beb9bb8a45cf88859b0cf100b54" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard</scope><name>m_disabled</name></member>

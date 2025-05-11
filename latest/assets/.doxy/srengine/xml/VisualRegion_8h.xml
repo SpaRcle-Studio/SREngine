@@ -7,7 +7,7 @@
     <includes refid="Vector2_8h" local="no">Utils/Math/Vector2.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/World/VisualRegion.h</label>
+        <label>Engine/inc/Engine/World/VisualRegion.h</label>
         <link refid="VisualRegion_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -909,6 +909,6 @@
 <codeline lineno="46"><highlight class="normal"></highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_VISUALREGION_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/World/VisualRegion.h"/>
+    <location file="Engine/inc/Engine/World/VisualRegion.h"/>
   </compounddef>
 </doxygen>

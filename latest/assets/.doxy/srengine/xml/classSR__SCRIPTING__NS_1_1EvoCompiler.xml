@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" line="33" column="36" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" line="33" column="36" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoCompiler_1a4e4f02bd8fbacfdca8cd6f63024dfb85" prot="private" static="no" mutable="no">
         <type><ref refid="classEvoScript_1_1CastingGen" kindref="compound">EvoScript::CastingGen</ref> *</type>
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" line="34" column="36" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" bodystart="34" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" line="34" column="36" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" bodystart="34" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" line="19" column="18"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" line="19" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoCompiler_1a17eee310493d6a969fdadd42db740511" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" line="20" column="9"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" line="20" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoCompiler_1a3a21f4e8179d3dfbfea2bfeb18ffe259" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classEvoScript_1_1CastingGen" kindref="compound">EvoScript::CastingGen</ref> *</type>
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" line="23" column="44" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" bodystart="23" bodyend="23"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" line="23" column="44" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" bodystart="23" bodyend="23"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoCompiler_1a654e242a4f9012e9859740c7b4269a6a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classEvoScript_1_1AddressTableGen" kindref="compound">EvoScript::AddressTableGen</ref> *</type>
@@ -96,7 +96,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" line="24" column="49"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" line="24" column="49"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoCompiler_1a5250ffac67e2a6eaa1fccb34660e116a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -111,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" line="27" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" line="27" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -131,7 +131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" line="30" column="34"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" line="30" column="34"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -196,7 +196,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" line="17" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" bodystart="17" bodyend="36"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" line="17" column="5" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" bodystart="17" bodyend="36"/>
     <listofallmembers>
       <member refid="classEvoScript_1_1Compiler_1a5f5e8d05595ff1000f5bf985afb5f226" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::EvoCompiler</scope><name>AddIncludePath</name></member>
       <member refid="classEvoScript_1_1Compiler_1a87c02afb565fbe109c5e553f6935de0d" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::EvoCompiler</scope><name>AllocateState</name></member>

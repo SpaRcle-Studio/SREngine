@@ -3,13 +3,13 @@
   <compounddef id="Scripting_2inc_2Scripting_2macros_8h" kind="file" language="C++">
     <compoundname>macros.h</compoundname>
     <includes refid="Utils_2inc_2Utils_2macros_8h" local="no">Utils/macros.h</includes>
-    <includedby refid="CppBehaviour_8h" local="no">Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h</includedby>
-    <includedby refid="CppCompiler_8h" local="no">Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppCompiler.h</includedby>
-    <includedby refid="ModuleManager_8h" local="no">Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h</includedby>
-    <includedby refid="ScriptModuleInfo_8h" local="no">Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptModuleInfo.h</includedby>
+    <includedby refid="CppBehaviour_8h" local="no">Engine/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h</includedby>
+    <includedby refid="CppCompiler_8h" local="no">Engine/libs/Scripting/inc/Scripting/Cpp/CppCompiler.h</includedby>
+    <includedby refid="ModuleManager_8h" local="no">Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h</includedby>
+    <includedby refid="ScriptModuleInfo_8h" local="no">Engine/libs/Scripting/inc/Scripting/Cpp/ScriptModuleInfo.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/macros.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/macros.h</label>
         <link refid="Scripting_2inc_2Scripting_2macros_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -32,7 +32,7 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="7">
-        <label>Engine/Core/inc/Core/Engine.h</label>
+        <label>Engine/inc/Engine/Engine.h</label>
         <link refid="Engine_8h_source"/>
         <childnode refid="8" relation="include">
         </childnode>
@@ -42,43 +42,43 @@
         </childnode>
       </node>
       <node id="8">
-        <label>Engine/Core/inc/Core/EngineCommands.h</label>
+        <label>Engine/inc/Engine/EngineCommands.h</label>
         <link refid="EngineCommands_8h_source"/>
       </node>
       <node id="9">
-        <label>Engine/Core/inc/Core/Scripting/ScriptableContext.h</label>
+        <label>Engine/inc/Engine/Scripting/ScriptableContext.h</label>
         <link refid="ScriptableContext_8h_source"/>
       </node>
       <node id="10">
-        <label>Engine/Core/inc/Core/World/World.h</label>
+        <label>Engine/inc/Engine/World/World.h</label>
         <link refid="World_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h</label>
         <link refid="Behaviour_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
       </node>
       <node id="13">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h</label>
         <link refid="CodeGenerator_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h</label>
         <link refid="CppBehaviour_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="11">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppCompiler.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/CppCompiler.h</label>
         <link refid="CppCompiler_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h</label>
         <link refid="ModuleManager_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
@@ -86,23 +86,23 @@
         </childnode>
       </node>
       <node id="12">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptModuleInfo.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ScriptModuleInfo.h</label>
         <link refid="ScriptModuleInfo_8h_source"/>
         <childnode refid="13" relation="include">
         </childnode>
       </node>
       <node id="6">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h</label>
         <link refid="ScriptSystem_8h_source"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h</label>
         <link refid="EvoBehaviour_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/macros.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/macros.h</label>
         <link refid="Scripting_2inc_2Scripting_2macros_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -124,7 +124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/macros.h" line="13" column="14" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/macros.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/macros.h" line="13" column="14" bodyfile="Engine/libs/Scripting/inc/Scripting/macros.h" bodystart="13" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -149,6 +149,6 @@
 <codeline lineno="15"><highlight class="normal"></highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_SCRIPTING_MACROS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Scripting/inc/Scripting/macros.h"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/macros.h"/>
   </compounddef>
 </doxygen>

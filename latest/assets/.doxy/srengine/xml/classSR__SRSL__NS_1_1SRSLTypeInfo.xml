@@ -24,7 +24,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="16" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="16" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLTypeInfo_1a48b5a372397bd35b55c9b23ef154780e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::vector&lt; uint64_t &gt;</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="17" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="17" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLTypeInfo_1a22ca2cf0f92bd6292200d7dc410d87b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD ShaderVarType</type>
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="19" column="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="19" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLTypeInfo_1a3a6c518decc8bc45f32b3a56e426d5ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="20" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="20" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLTypeInfo_1a10bb91ff0505af7496ca7ad53c431cd9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="21" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="21" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLTypeInfo_1ab7bc23b19e8198db852746eb7e29e4dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -122,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="23" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="23" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLTypeInfo_1aad9a9229b5b455cfc8139e9a5e374d37" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -144,7 +144,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="24" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="24" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLTypeInfo_1a542ca981b17766776972cd29206b585b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -166,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="26" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="26" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLTypeInfo_1a50feb6471bf93880af1c2d359d559bbd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -188,7 +188,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="27" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="27" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLTypeInfo_1af64d66c1d5843a077f9e8e6266e31aa9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -210,7 +210,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="29" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="29" column="31"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -230,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="32" column="44"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="32" column="44"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -285,7 +285,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="13" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" bodystart="13" bodyend="34"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="13" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" bodystart="13" bodyend="34"/>
     <listofallmembers>
       <member refid="classSR__SRSL__NS_1_1SRSLTypeInfo_1afb7fe7a3cca767b4ca9cfb9e08f81372" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>Analyze</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>DestroySingleton</name></member>

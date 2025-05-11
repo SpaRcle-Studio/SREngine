@@ -388,5 +388,5 @@ SR_GRAPH_NS::TextBuilder::~TextBuilder () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Font/TextBuilder.h`
 

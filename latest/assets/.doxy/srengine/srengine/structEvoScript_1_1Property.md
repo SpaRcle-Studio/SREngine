@@ -125,5 +125,5 @@ std::string EvoScript::Property::m_type;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Method.h`
+The documentation for this class was generated from the following file `Engine/libs/Scripting/inc/Scripting/Old/Compilation/Method.h`
 

@@ -24,7 +24,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" line="14" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" line="14" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a660d8bc99d6b36b662e68730ca4c81ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -39,7 +39,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" line="16" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" line="16" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a4cecff17587b90edebb89381333c25d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" line="17" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" line="17" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a33fefe9ddd8bac7c20397308bd4c4261" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" line="19" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" line="19" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a39032468632681f25ca46f0693308a7a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" line="20" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" line="20" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1acd26e840324963cdb65360c9b6eddb61" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD std::vector&lt; <ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">SR_GTYPES_NS::Framebuffer</ref> * &gt;</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" line="22" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" line="22" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a04760d339cf709f94df212049e62314e" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD uint8_t</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" line="23" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" line="23" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a8d7278781a2119c4feb86916b8eba81f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> *</type>
@@ -135,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" line="25" column="39" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" bodystart="25" bodyend="25"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" line="25" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" bodystart="25" bodyend="25"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -152,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" line="28" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" line="28" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a0978ccfbc5caabc47c1a0048e464ac7d" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" line="29" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" line="29" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -441,7 +441,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" line="12" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" bodystart="12" bodyend="31"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" line="12" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h" bodystart="12" bodyend="31"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::OffScreenMeshDrawerPass</scope><name>AddDependency</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::OffScreenMeshDrawerPass</scope><name>AddInputConnection</name></member>

@@ -99,5 +99,5 @@ using SR_UTILS_NS::Details::GetPromPack< I, T, Types >::type =  typename GetProm
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h`
 

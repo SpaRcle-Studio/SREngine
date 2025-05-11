@@ -113,5 +113,5 @@ static SR_MAYBE_UNUSED static SR_NODISCARD std::unique_ptr< SR_UTILS_NS::ISerial
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/EngineCommands.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/EngineCommands.h`
 

@@ -167,5 +167,5 @@ std::vector<SR_UTILS_NS::Path> SR_SCRIPTING_NS::CppCompilerContext::sourceFiles;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppCompiler.h`
+The documentation for this class was generated from the following file `Engine/libs/Scripting/inc/Scripting/Cpp/CppCompiler.h`
 

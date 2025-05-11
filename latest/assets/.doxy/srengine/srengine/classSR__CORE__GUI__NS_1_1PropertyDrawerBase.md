@@ -486,5 +486,5 @@ static inline void SR_CORE_GUI_NS::PropertyDrawerBase::SetValue (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/GUI/PropertyDrawer.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/GUI/PropertyDrawer.h`
 

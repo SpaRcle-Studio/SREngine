@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="44" column="10" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="44" column="10" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1a69e6a61ebff05365e6fcde4ed14e6789" prot="public" static="no" mutable="no">
         <type>void(*</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="47" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="47" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1aba2fed988bfbfd74db05247d688b4d30" prot="public" static="no" mutable="no">
         <type>int32_t(*</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="53" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="53" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1a2d6bfa818258be6c0a99f9cd5b52e84e" prot="public" static="no" mutable="no">
         <type>ANativeActivity *</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="56" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="56" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="56" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1a213d5969dfae6fc952d2c6dc10077066" prot="public" static="no" mutable="no">
         <type>AConfiguration *</type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="59" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="59" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="59" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1a25fd3ec42798fb7cffc243502b35a5e3" prot="public" static="no" mutable="no">
         <type>void *</type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="69" column="10" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="69" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="69" column="10" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="69" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1a2194e58c113f617e474728d15193e4e1" prot="public" static="no" mutable="no">
         <type>size_t</type>
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="70" column="12" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="70" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="70" column="12" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="70" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1aacbfb39562eb5b5386e9affb2e5c852a" prot="public" static="no" mutable="no">
         <type>ALooper *</type>
@@ -114,7 +114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="73" column="13" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="73" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="73" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="73" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1a4f86310f53e837ef5c66afd74f91ce2d" prot="public" static="no" mutable="no">
         <type>AInputQueue *</type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="77" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="77" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="77" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="77" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1a7a0fd7c92b854bd467d982bddd7b7db8" prot="public" static="no" mutable="no">
         <type>ANativeWindow *</type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="80" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="80" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="80" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="80" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1a8502b9a38db281f86421191fba5e82ab" prot="public" static="no" mutable="no">
         <type>ARect</type>
@@ -156,7 +156,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="84" column="11" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="84" column="11" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1aa7ec7147572780debc989a1d4d175383" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -170,7 +170,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="88" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="88" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="88" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="88" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1a28aec6ab9685d0cba4a1fcb2fb78ea99" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -184,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="92" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="92" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="92" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="92" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1a3a1f74c4af609c4c7ae4457a7c686f61" prot="public" static="no" mutable="no">
         <type>pthread_mutex_t</type>
@@ -198,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="97" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="97" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="97" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="97" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1a89324f948282d6551d919cefdcd667b0" prot="public" static="no" mutable="no">
         <type>pthread_cond_t</type>
@@ -212,7 +212,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="98" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="98" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="98" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="98" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1a9b66853f6e98efd59c9a4b27b4e1fbef" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -226,7 +226,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="100" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="100" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="100" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="100" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1adef48f78848f853957640e9798a99390" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -240,7 +240,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="101" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="101" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="101" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="101" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1ad4673c395bd118da630a9519b2637bca" prot="public" static="no" mutable="no">
         <type>pthread_t</type>
@@ -254,7 +254,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="103" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="103" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="103" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="103" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1a6cb348c61073727f63377d17f46cb65a" prot="public" static="no" mutable="no">
         <type>struct <ref refid="structandroid__poll__source" kindref="compound">android_poll_source</ref></type>
@@ -268,7 +268,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="105" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="105" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="105" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="105" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1a166449235d0e396b525bb999de75c0a4" prot="public" static="no" mutable="no">
         <type>struct <ref refid="structandroid__poll__source" kindref="compound">android_poll_source</ref></type>
@@ -282,7 +282,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="106" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="106" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="106" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="106" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1a190c62e896f82c250374fad40ba8ae24" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -296,7 +296,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="108" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="108" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="108" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="108" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1ac73b6aa897edb307e948d0eee9626c98" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -310,7 +310,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="109" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="109" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="109" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="109" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1ab4b551733da7fe120c791392f65f5679" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -324,7 +324,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="110" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="110" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="110" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="110" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1ae89558379501525a919e14b7f672a4fe" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -338,7 +338,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="111" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="111" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="111" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="111" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1a9fc6db2fc1dc138141bfb7575bd14750" prot="public" static="no" mutable="no">
         <type>AInputQueue *</type>
@@ -352,7 +352,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="112" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="112" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="112" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="112" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1ae1d06ab52beb0aeace4a8673b6351be4" prot="public" static="no" mutable="no">
         <type>ANativeWindow *</type>
@@ -366,7 +366,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="113" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="113" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="113" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="113" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structandroid__app_1ad4fa67ecf38286ac638b97cf936a8196" prot="public" static="no" mutable="no">
         <type>ARect</type>
@@ -380,7 +380,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="114" column="11" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="114" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="114" column="11" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="114" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -411,7 +411,7 @@
         <label>size_t</label>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="41" column="1" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="41" bodyend="115"/>
+    <location file="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="41" column="1" bodyfile="Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="41" bodyend="115"/>
     <listofallmembers>
       <member refid="structandroid__app_1a2d6bfa818258be6c0a99f9cd5b52e84e" prot="public" virt="non-virtual"><scope>android_app</scope><name>activity</name></member>
       <member refid="structandroid__app_1aa7ec7147572780debc989a1d4d175383" prot="public" virt="non-virtual"><scope>android_app</scope><name>activityState</name></member>

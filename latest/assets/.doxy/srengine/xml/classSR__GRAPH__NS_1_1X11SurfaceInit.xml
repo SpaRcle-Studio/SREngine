@@ -23,7 +23,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/X11SurfaceInit.h" line="17" column="29"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/X11SurfaceInit.h" line="17" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1X11SurfaceInit_1ac85f4d34fdc406a8e905479e3c980c58" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const char *</type>
@@ -37,14 +37,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/X11SurfaceInit.h" line="18" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/X11SurfaceInit.h" line="18" column="27"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/X11SurfaceInit.h" line="15" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/X11SurfaceInit.h" bodystart="15" bodyend="19"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/X11SurfaceInit.h" line="15" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/X11SurfaceInit.h" bodystart="15" bodyend="19"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1X11SurfaceInit_1ac85f4d34fdc406a8e905479e3c980c58" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::X11SurfaceInit</scope><name>GetSurfaceExtensionName</name></member>
       <member refid="classSR__GRAPH__NS_1_1X11SurfaceInit_1a7e13827baa3e5b5e474c9c8c9e52406c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::X11SurfaceInit</scope><name>Init</name></member>

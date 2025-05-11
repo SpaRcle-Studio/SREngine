@@ -6,12 +6,12 @@
     <includes refid="Enumerations_8h" local="no">Utils/Common/Enumerations.h</includes>
     <includes refid="Vector3_8h" local="no">Utils/Math/Vector3.h</includes>
     <includes refid="Vector6_8h" local="no">Utils/Math/Vector6.h</includes>
-    <includedby refid="SoundListener_8h" local="no">Engine/Core/libs/Audio/inc/Audio/SoundListener.h</includedby>
-    <includedby refid="SoundManager_8h" local="no">Engine/Core/libs/Audio/inc/Audio/SoundManager.h</includedby>
-    <includedby refid="AudioListener_8h" local="no">Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h</includedby>
+    <includedby refid="SoundListener_8h" local="no">Engine/libs/Audio/inc/Audio/SoundListener.h</includedby>
+    <includedby refid="SoundManager_8h" local="no">Engine/libs/Audio/inc/Audio/SoundManager.h</includedby>
+    <includedby refid="AudioListener_8h" local="no">Engine/libs/Audio/inc/Audio/Types/AudioListener.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Audio/inc/Audio/ListenerData.h</label>
+        <label>Engine/libs/Audio/inc/Audio/ListenerData.h</label>
         <link refid="ListenerData_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -528,11 +528,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="3">
-        <label>Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h</label>
+        <label>Engine/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h</label>
         <link refid="OpenALSoundListener_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Audio/inc/Audio/ListenerData.h</label>
+        <label>Engine/libs/Audio/inc/Audio/ListenerData.h</label>
         <link refid="ListenerData_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -542,17 +542,17 @@
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Audio/inc/Audio/SoundListener.h</label>
+        <label>Engine/libs/Audio/inc/Audio/SoundListener.h</label>
         <link refid="SoundListener_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Audio/inc/Audio/SoundManager.h</label>
+        <label>Engine/libs/Audio/inc/Audio/SoundManager.h</label>
         <link refid="SoundManager_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h</label>
+        <label>Engine/libs/Audio/inc/Audio/Types/AudioListener.h</label>
         <link refid="AudioListener_8h_source"/>
       </node>
     </invincdepgraph>
@@ -598,6 +598,6 @@
 <codeline lineno="33"><highlight class="normal"></highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_LISTENERDATA_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Audio/inc/Audio/ListenerData.h"/>
+    <location file="Engine/libs/Audio/inc/Audio/ListenerData.h"/>
   </compounddef>
 </doxygen>

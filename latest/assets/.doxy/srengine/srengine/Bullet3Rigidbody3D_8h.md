@@ -4,7 +4,7 @@
 
 
 
-[**FileList**](files.md) **>** [**Bullet3**](dir_d808912b90bd0713ac82f52ede71578e.md) **>** [**Bullet3Rigidbody3D.h**](Bullet3Rigidbody3D_8h.md)
+[**FileList**](files.md) **>** [**Bullet3**](dir_b49b257c816fcf8e49fc788b011f4b07.md) **>** [**Bullet3Rigidbody3D.h**](Bullet3Rigidbody3D_8h.md)
 
 [Go to the source code of this file](Bullet3Rigidbody3D_8h_source.md)
 
@@ -88,5 +88,5 @@
 
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h`
+The documentation for this class was generated from the following file `Engine/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h`
 

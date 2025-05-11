@@ -3,7 +3,7 @@
   <compounddef id="WidgetContainer_8h" kind="file" language="C++">
     <compoundname>WidgetContainer.h</compoundname>
     <includes refid="Widget_8h" local="no">Graphics/GUI/Widget.h</includes>
-    <includedby refid="SceneTools_8h" local="no">Engine/Core/inc/Core/GUI/SceneTools.h</includedby>
+    <includedby refid="SceneTools_8h" local="no">Engine/inc/Engine/GUI/SceneTools.h</includedby>
     <incdepgraph>
       <node id="131">
         <label>Graphics/GUI/ImmediateGUI.h</label>
@@ -38,7 +38,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h</label>
         <link refid="WidgetContainer_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -975,11 +975,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/inc/Core/GUI/SceneTools.h</label>
+        <label>Engine/inc/Engine/GUI/SceneTools.h</label>
         <link refid="SceneTools_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h</label>
         <link refid="WidgetContainer_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1065,6 +1065,6 @@
 <codeline lineno="70"><highlight class="normal"></highlight></codeline>
 <codeline lineno="71"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GRAPHICS_GUI_WIDGET_CONTAINER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h"/>
   </compounddef>
 </doxygen>

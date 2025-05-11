@@ -490,5 +490,5 @@ static std::string_view SR_SCRIPTING_NS::ScriptSystem::GetDynamicLibraryExtensio
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h`
+The documentation for this class was generated from the following file `Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h`
 

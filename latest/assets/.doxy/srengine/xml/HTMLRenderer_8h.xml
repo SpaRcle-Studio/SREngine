@@ -4,7 +4,7 @@
     <compoundname>HTMLRenderer.h</compoundname>
     <includes refid="Graphics_2inc_2Graphics_2macros_8h" local="no">Graphics/macros.h</includes>
     <includes refid="HTMLDrawableElement_8h" local="no">Graphics/Render/HTML/HTMLDrawableElement.h</includes>
-    <includedby refid="HTMLDrawerPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</includedby>
+    <includedby refid="HTMLDrawerPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</includedby>
     <incdepgraph>
       <node id="164">
         <label>Graphics/Loaders/SRSL.h</label>
@@ -147,7 +147,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
         <link refid="HTMLRenderer_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1579,11 +1579,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
         <link refid="HTMLDrawerPass_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
         <link refid="HTMLRenderer_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1696,6 +1696,6 @@
 <codeline lineno="99"><highlight class="normal"></highlight></codeline>
 <codeline lineno="100"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GRAPHICS_HTML_RENDERER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h"/>
   </compounddef>
 </doxygen>

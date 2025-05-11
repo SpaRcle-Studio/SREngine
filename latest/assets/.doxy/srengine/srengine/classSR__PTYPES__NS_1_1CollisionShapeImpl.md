@@ -253,5 +253,5 @@ inline virtual bool SR_PTYPES_NS::CollisionShapeImpl::UpdateShape ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Physics/inc/Physics/CollisionShape.h`
+The documentation for this class was generated from the following file `Engine/libs/Physics/inc/Physics/CollisionShape.h`
 

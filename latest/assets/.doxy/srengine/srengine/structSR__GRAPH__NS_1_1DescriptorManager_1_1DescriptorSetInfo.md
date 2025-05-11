@@ -111,5 +111,5 @@ void* SR_GRAPH_NS::DescriptorManager::DescriptorSetInfo::pShaderHandle;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h`
 

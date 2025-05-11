@@ -139,5 +139,5 @@ std::vector<std::pair<Vertices::Attribute, size_t > > SR_GRAPH_NS::Vertices::Ver
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Types/Vertices.h`
 

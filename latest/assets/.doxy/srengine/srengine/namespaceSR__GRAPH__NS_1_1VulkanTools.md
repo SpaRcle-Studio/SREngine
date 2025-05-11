@@ -410,5 +410,5 @@ static SR_MAYBE_UNUSED SR_FORCE_INLINE ShaderStage SR_GRAPH_NS::VulkanTools::VkS
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h`
 

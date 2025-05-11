@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="13" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="13" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" bodystart="13" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -40,7 +40,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="15" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="15" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ColorBufferRenderQueue_1aae5de2f813ae73bdae449d0652091a0d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="17" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="17" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -121,7 +121,7 @@
         <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="12" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" bodystart="12" bodyend="19"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" line="12" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h" bodystart="12" bodyend="19"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferRenderQueue</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferRenderQueue</scope><name>AutoFree</name></member>

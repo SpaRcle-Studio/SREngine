@@ -395,5 +395,5 @@ float_t SR_GRAPH_NS::AreaLight::m_radius;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Lighting/AreaLight.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Lighting/AreaLight.h`
 

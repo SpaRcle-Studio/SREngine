@@ -720,5 +720,5 @@ static FColor SR_MATH_NS::FColor::Yellow ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Math/Vector4.h`
 

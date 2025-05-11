@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="34" column="20" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" bodystart="34" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="34" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLAssignExpander_1adf8a5fe7bdd6bbd450770412dda38714" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="structSR__SRSL__NS_1_1Lexem" kindref="compound">Lexem</ref> &gt;</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="36" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="36" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLAssignExpander_1a347fdeab65d8fec67326a838e200b44d" prot="private" static="no" mutable="no">
         <type>int64_t</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="37" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="37" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" bodystart="37" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="15" column="32"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="15" column="32"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="18" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="18" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLAssignExpander_1a6205fa4eb5951c6c8ece7286af8fd989" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::vector&lt; <ref refid="structSR__SRSL__NS_1_1Lexem" kindref="compound">Lexem</ref> &gt;</type>
@@ -95,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="20" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="20" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLAssignExpander_1a4adc75f553e841280ae66df7c4458de1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -109,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="21" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="21" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLAssignExpander_1a51d882234a12c8e01c60e9f547d5ff99" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="22" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="22" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLAssignExpander_1a58397080661571114ea0f927b9727b55" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="24" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLAssignExpander_1a8541a79067f348e80e0dac4bb5e91ca4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -151,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="25" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="25" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLAssignExpander_1abacfa7c090d44811da1b2933b28a4200" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -165,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="26" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="26" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLAssignExpander_1a08f7ab12b29fe158d50d758269810911" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -179,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="28" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="28" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLAssignExpander_1ad5e8372943a831e335b90e0494b10841" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -193,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="29" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="29" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLAssignExpander_1aa17ccc339f336fbf52017d8ac33611f3" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="structSR__SRSL__NS_1_1Lexem" kindref="compound">Lexem</ref> *</type>
@@ -211,7 +211,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="30" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="30" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLAssignExpander_1ad9417fb149f9631e8879570d80b18f16" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="structSR__SRSL__NS_1_1Lexem" kindref="compound">Lexem</ref> *</type>
@@ -225,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="31" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="31" column="34"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -280,7 +280,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="12" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" bodystart="12" bodyend="39"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" line="12" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h" bodystart="12" bodyend="39"/>
     <listofallmembers>
       <member refid="classSR__SRSL__NS_1_1SRSLAssignExpander_1a58fe73e285558bcb3d20b63a3bba1e76" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLAssignExpander</scope><name>Clear</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLAssignExpander</scope><name>DestroySingleton</name></member>

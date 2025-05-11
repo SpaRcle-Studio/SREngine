@@ -333,5 +333,5 @@ void SR_GRAPH_UI_NS::UISizeComponent::OnChanged ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/UI/UISizeComponent.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/UI/UISizeComponent.h`
 

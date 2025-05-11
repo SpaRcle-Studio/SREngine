@@ -7,7 +7,7 @@
     <includes refid="Function_8h" local="no">Utils/Types/Function.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/Tests/TestManager.h</label>
+        <label>Engine/inc/Engine/Tests/TestManager.h</label>
         <link refid="TestManager_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -466,6 +466,6 @@
 <codeline lineno="34"><highlight class="normal"></highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_TESTMANAGER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/Tests/TestManager.h"/>
+    <location file="Engine/inc/Engine/Tests/TestManager.h"/>
   </compounddef>
 </doxygen>

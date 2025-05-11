@@ -502,5 +502,5 @@ void SR_UTILS_NS::TagManager::RegisterTag (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/ECS/TagManager.h`
 

@@ -7,7 +7,7 @@
     <includes refid="Matrix4x4_8h" local="no">Utils/Math/Matrix4x4.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/FrustumCulling.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/FrustumCulling.h</label>
         <link refid="FrustumCulling_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -590,6 +590,6 @@
 <codeline lineno="44"><highlight class="normal"></highlight></codeline>
 <codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GRAPHICS_FRUSTUM_CULLING_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FrustumCulling.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/FrustumCulling.h"/>
   </compounddef>
 </doxygen>

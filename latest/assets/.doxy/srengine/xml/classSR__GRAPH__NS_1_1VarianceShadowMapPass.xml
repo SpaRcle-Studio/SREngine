@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h" line="12" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h" bodystart="12" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h" line="12" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h" bodystart="12" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -303,7 +303,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h" line="11" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h" bodystart="11" bodyend="15"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h" line="11" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h" bodystart="11" bodyend="15"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>AddDependency</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>AddInputConnection</name></member>

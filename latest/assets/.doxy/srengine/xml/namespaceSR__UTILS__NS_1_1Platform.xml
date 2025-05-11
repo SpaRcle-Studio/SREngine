@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="41" column="23" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="41" declcolumn="23"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="41" column="23" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="41" declcolumn="23"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="19" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" bodystart="19" bodyend="25"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="19" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" bodystart="19" bodyend="25"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a823e92d1527ade945d551d6ad41d4c55" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NORETURN SR_COMMON_DLL_API void</type>
@@ -52,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="43" column="47" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="43" declcolumn="47"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="43" column="47" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="43" declcolumn="47"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1adfece0fe545b0f7df1bfa64586708819" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="45" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="45" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="45" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="45" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a0c8e718809993d242418905e4ad96954" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -80,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="46" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="46" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="46" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="46" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a6af1b85a9bfe97ba30c350d12d694226" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -98,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="47" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="47" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="47" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="47" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a53e27a650c3b31900ea0cee84ba55a65" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void *</type>
@@ -112,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="48" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="48" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="48" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="48" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1ab07839c4540b526e56191911e0852fb5" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API PlatformType</type>
@@ -126,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="49" column="43" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="49" declcolumn="43"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="49" column="43" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="49" declcolumn="43"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1aa8fbd5f03a4a611a3834f90975254eb6" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API std::string</type>
@@ -149,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="51" column="42" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="51" declcolumn="42"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="51" column="42" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="51" declcolumn="42"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1aca2d1d80ba98ad24d363db8bc7450e4d" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -171,7 +171,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="52" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="52" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="52" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="52" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a22cae6c3e3843e0705a3d2e2cf4b750e" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API std::optional&lt; std::string &gt;</type>
@@ -189,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="53" column="44" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="53" declcolumn="44"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="53" column="44" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="53" declcolumn="44"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1ab3aa1bde900c7040853487b5f01257b7" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -207,7 +207,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="54" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="54" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="54" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="54" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a3f875fc265b87803a2d3c4a8099d661f" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -225,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="55" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="55" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="55" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="55" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a290d519c438731e00d8ab0eb557f632c" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -243,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="56" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="56" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="56" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="56" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1aa1dff869e8ddc0410fdd0f1ee05251af" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -261,7 +261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="57" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="57" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="57" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="57" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a82f9b9dc8eb5f915f03bf62deaa57d25" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -275,7 +275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="58" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="58" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="58" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="58" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a212fc77342cc0aaed632bdcd3cb0e018" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -293,7 +293,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="59" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="59" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="59" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="59" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a8ead31df95a59b2acc97f384778f4222" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -311,7 +311,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="60" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="60" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="60" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="60" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1afcd77d1737ac12df025ae3b34c934747" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -329,7 +329,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="61" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="61" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="61" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="61" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a8115d32d32165de134a8ee5abf51c2c7" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -347,7 +347,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="62" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="62" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="62" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="62" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a10e66316285f1a25f7d69836165f4540" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -361,7 +361,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="63" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="63" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="63" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="63" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a9730c4d284525cd7dd454c17b2689d45" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -383,7 +383,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="64" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="64" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="64" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="64" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a972c7dbdee7fd124f2ca6bb3d5ed60c7" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -410,7 +410,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="65" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="65" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="65" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="65" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a11bf97b623560f9992565d3291c2fedc" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -428,7 +428,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="66" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="66" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="66" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="66" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a8891c56d6f39a655df1c32c05b671b35" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API bool</type>
@@ -446,7 +446,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="67" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="67" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="67" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="67" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a592f9a969ace9b6f8f39f609908aba27" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API bool</type>
@@ -468,7 +468,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="68" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="68" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="68" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="68" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1ab2c77fa14275f95a08e97ff29b2c47b8" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API bool</type>
@@ -486,7 +486,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="69" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="69" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="69" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="69" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a5b0f72078907e7e9543a222d75df81d1" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API bool</type>
@@ -504,7 +504,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="70" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="70" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="70" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="70" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a68f12b32aa78480637f41aeafd49a79f" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API bool</type>
@@ -526,7 +526,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="71" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="71" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="71" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="71" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a080724aeae210171e6ae0700fcb37c4d" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void *</type>
@@ -544,7 +544,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="72" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="72" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="72" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="72" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1aede803f3aec3b916c3e08c1502063ccb" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API bool</type>
@@ -562,7 +562,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="73" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="73" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="73" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="73" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a7a9d5f26614d7c7e9f9ba0f967ae34f7" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void *</type>
@@ -584,7 +584,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="74" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="74" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="74" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="74" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a9b1c71736355d2b7fa6059503dda74e6" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API uint64_t</type>
@@ -598,7 +598,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="76" column="39" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="76" declcolumn="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="76" column="39" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="76" declcolumn="39"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a6a11dc1253fb2ce33da5c0711a994710" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API uint16_t</type>
@@ -612,7 +612,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="77" column="39" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="77" declcolumn="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="77" column="39" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="77" declcolumn="39"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1aa59ef9bee913dd1fc7ce80eaa9d14ac5" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API SR_MATH_NS::FVector2</type>
@@ -626,7 +626,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="78" column="51" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="78" declcolumn="51"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="78" column="51" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="78" declcolumn="51"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a5989270567fd5c747cfbb6c51bf2b730" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API <ref refid="structSR__UTILS__NS_1_1Platform_1_1MouseState" kindref="compound">MouseState</ref></type>
@@ -640,7 +640,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="79" column="41" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="79" declcolumn="41"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="79" column="41" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="79" declcolumn="41"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a2dc77c9073ab768e6aa79dc42c0a6fea" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API bool</type>
@@ -658,7 +658,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="80" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="80" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="80" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="80" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a1d33d5852bb1df810cba0e22218894ac" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API std::string</type>
@@ -672,7 +672,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="81" column="42" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="81" declcolumn="42"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="81" column="42" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="81" declcolumn="42"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a5d8be2cdd6cde91207729c4252766050" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
@@ -686,7 +686,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="82" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="82" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="82" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="82" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1af29c6353a3c9ad93cdb34fc1ba5dafe9" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
@@ -700,7 +700,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="83" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="83" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="83" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="83" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a0cf9e62a14b84f4582c900822a1713e1" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
@@ -714,7 +714,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="84" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="84" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="84" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="84" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a6d5a36c8bf06e5bce0762fe905b05b41" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API std::list&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &gt;</type>
@@ -736,7 +736,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="85" column="40" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="85" declcolumn="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="85" column="40" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="85" declcolumn="40"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a49e0ba6a4b4fbd1ad993552bf8e765a7" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API std::list&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &gt;</type>
@@ -754,7 +754,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="86" column="40" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="86" declcolumn="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="86" column="40" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="86" declcolumn="40"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1acb3f82fe9394e358f2185028e797e774" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API <ref refid="structSR__UTILS__NS_1_1Platform_1_1FileMetadata" kindref="compound">FileMetadata</ref></type>
@@ -772,7 +772,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="87" column="43" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="87" declcolumn="43"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="87" column="43" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="87" declcolumn="43"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a778caf59a03a9f6427b1c08b715fd657" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API SR_MATH_NS::UVector2</type>
@@ -786,7 +786,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="88" column="51" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="88" declcolumn="51"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="88" column="51" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="88" declcolumn="51"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1aba006e3af0100391c7f1a3ca983e096a" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API double_t</type>
@@ -800,7 +800,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="89" column="39" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="89" declcolumn="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="89" column="39" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="89" declcolumn="39"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a75fd0af8233f848a62f63a52e3cbee1f" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API std::vector&lt; SR_MATH_NS::UVector2 &gt;</type>
@@ -814,7 +814,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="90" column="42" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="90" declcolumn="42"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="90" column="42" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="90" declcolumn="42"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a527a0c4b53819ff485eed9b9dd1a80d0" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API bool</type>
@@ -832,7 +832,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="91" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="91" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="91" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="91" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1aa77c5b4e385f945d451993ef1abad41c" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API bool</type>
@@ -850,7 +850,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="92" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="92" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="92" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="92" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a11d789cc06bd275e182bf81c7b0bddcd" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API bool</type>
@@ -868,7 +868,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="93" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="93" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="93" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="93" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1ad34daa9606ec04fdecc6ad0c73afaa19" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API bool</type>
@@ -882,7 +882,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="94" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="94" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="94" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="94" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a9286b2b90eb69dbbd187c906fc5ff065" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API bool</type>
@@ -900,7 +900,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="95" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="95" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="95" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="95" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a2cba344e5b20a7f8d120cb5a8c84f90f" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -918,7 +918,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="97" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="97" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="97" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="97" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a5a18ad9c714a0f7c4d516086d4377cfe" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -936,7 +936,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="98" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="98" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="98" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="98" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1aa1d8eb2c1b9a04bcc82d6fd6cfb30b1f" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -950,7 +950,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="99" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="99" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="99" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="99" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a438b53243ec3b9dd8ce94036ce4dc6d8" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -964,7 +964,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="100" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="100" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="100" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="100" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1acd75ef9876cd2d3a7457c8dad0a471e6" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -986,7 +986,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="101" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="101" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="101" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="101" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1aa120142f714aca63c6153474c7a0d84e" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -1008,13 +1008,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="102" column="35" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" declline="102" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="102" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="102" declcolumn="35"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h" line="18" column="1"/>
+    <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="18" column="1"/>
   </compounddef>
 </doxygen>

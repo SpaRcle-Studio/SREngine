@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="185" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="185" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="185" column="23" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="185" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="161" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="161" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeEnum_1a965f7ceedf6498f4a56a311d93563949" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="163" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="163" bodyend="166"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="163" column="18" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="163" bodyend="166"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeEnum_1acdba5647917b2cdecf041885dd404b69" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="168" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="168" bodyend="171"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="168" column="18" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="168" bodyend="171"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeEnum_1ab1ee37a4b4e2894ca14941ae6947bf53" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD Hash</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="174" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="174" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeEnum_1a40ed83f07157f40ccbeeb5d31f0aee2a" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD std::string</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="175" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="175" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeEnum_1a9a01e201d47260d556cfeb0b0efb54e6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD EnumReflector *</type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="176" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="176" bodyend="176"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="176" column="36" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="176" bodyend="176"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeEnum_1a4c5b7d58d576fa51dbe96927ed0a6064" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">DataType</ref> *</type>
@@ -135,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="178" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="178" bodyend="180"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="178" column="31" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="178" bodyend="180"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeEnum_1adc31f7a6b872d580c9a65b77fb6b7e58" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -153,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="182" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="182" bodyend="182"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="182" column="14" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="182" bodyend="182"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -216,7 +216,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="158" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="158" bodyend="187"/>
+    <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="158" column="5" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="158" bodyend="187"/>
     <listofallmembers>
       <member refid="classSR__SRLM__NS_1_1DataTypeEnum_1a4c5b7d58d576fa51dbe96927ed0a6064" prot="public" virt="virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>Copy</name></member>
       <member refid="classSR__SRLM__NS_1_1DataType_1aba8f7bb2e8b7dd6fe69d578cf9ffce5f" prot="public" virt="pure-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>CopyTo</name></member>

@@ -854,5 +854,5 @@ void SR_AUDIO_NS::SoundManager::Update ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Audio/inc/Audio/SoundManager.h`
+The documentation for this class was generated from the following file `Engine/libs/Audio/inc/Audio/SoundManager.h`
 

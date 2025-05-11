@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="15" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="15" column="9" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="15" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__UTILS__NS_1_1StandardProperty_1a1a21f5e2f6720728f813ea2875ff2453" prot="private" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(void *)&gt;</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="16" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="16" column="9" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="16" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="97" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="97" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="97" column="14" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="97" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1StandardProperty_1a94c90924e850abbb758f543a603239e0" prot="private" static="no" mutable="no">
         <type>StandardType</type>
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="98" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="98" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="98" column="22" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="98" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1StandardProperty_1a0668e506abffb82b6b7c1e44cbc386ee" prot="private" static="no" mutable="no">
         <type>SetterFn</type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="99" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="99" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="99" column="18" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="99" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1StandardProperty_1af3cb635a8bca23185d0be1aee8bfb1b1" prot="private" static="no" mutable="no">
         <type>GetterFn</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="100" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="100" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="100" column="18" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="100" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1StandardProperty_1af28600ea9800fb76451b0a3ecc8e4ed3" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="101" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="101" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="101" column="17" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="101" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1StandardProperty_1abc4d053ca462b0c8bcbd6e9d03219470" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="102" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="102" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="102" column="17" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="102" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="18" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="18" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1aeb403c56c772e47dfa0ac15fcdd637ef" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -161,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="19" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="19" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1ab4e6be7ca97495d3bd3597f0424a5210" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1StandardProperty" kindref="compound">StandardProperty</ref> &amp;</type>
@@ -179,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="21" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="21" bodyend="21"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="21" column="26" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="21" bodyend="21"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a5ab9ed92d0917b90bbe8eb931202d13a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1StandardProperty" kindref="compound">StandardProperty</ref> &amp;</type>
@@ -197,7 +197,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="22" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="22" bodyend="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="22" column="26" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="22" bodyend="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1af6118864750dcc1436b8de69bf07756a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1StandardProperty" kindref="compound">StandardProperty</ref> &amp;</type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="23" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="23" bodyend="23"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="23" column="26" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="23" bodyend="23"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1aef5e15dc8cd5dfa9239ca07594e125aa" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD StandardType</type>
@@ -229,7 +229,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="25" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="25" bodyend="25"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="25" column="35" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="25" bodyend="25"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a60cea3bc7a10e8bb6bf435a547afcec0" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -243,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="27" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="27" bodyend="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="27" column="30" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="27" bodyend="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1aea43c653fb4df276075f866ed26ba9e4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1StandardProperty" kindref="compound">StandardProperty</ref> &amp;</type>
@@ -261,7 +261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="28" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="28" bodyend="28"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="28" column="26" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="28" bodyend="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1ab1a8980092714aefd1493be828975413" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -275,7 +275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="30" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="30" bodyend="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="30" column="30" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="30" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a1465e897a10a28ae226575ccbfb074c3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1StandardProperty" kindref="compound">StandardProperty</ref> &amp;</type>
@@ -293,7 +293,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="31" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="31" bodyend="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="31" column="26" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="31" bodyend="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a7166459fdd01cba8825a1e90644143f3" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -307,7 +307,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="33" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="33" bodyend="33"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="33" column="27" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="33" bodyend="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1af40b59d55668b0f913c7c5ee8fdfc9d1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -321,7 +321,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="34" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="34" bodyend="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="34" column="14" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="34" bodyend="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1aedc7c7f9ac0407c9f40023b96656ae7f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -335,7 +335,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="36" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="36" bodyend="36"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="36" column="27" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="36" bodyend="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1aaf161b55a9e7cc786208746b42a0b78c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -353,7 +353,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="37" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="37" bodyend="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="37" column="14" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="37" bodyend="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a552fa65fb12c8ea60bcd6afa94a22b8f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -367,7 +367,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="39" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="39" bodyend="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="39" column="30" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="39" bodyend="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a12052b26a149c3909bfd5d92f7e25c02" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -385,7 +385,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="40" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="40" bodyend="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="40" column="14" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="40" bodyend="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a75ba9604554713f671c5a90920f2a652" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -399,7 +399,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="42" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="42" bodyend="42"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="42" column="30" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="42" bodyend="42"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a09976dd12f7fff0215b80cd282dfa6fc" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -417,7 +417,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="43" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="43" bodyend="43"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="43" column="14" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="43" bodyend="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a3e61e14668cf674995a5f0fc7c311830" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint16_t</type>
@@ -431,7 +431,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="45" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="45" bodyend="45"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="45" column="31" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="45" bodyend="45"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a0cfd6856b5b65d989800adcc7cf68e99" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -449,7 +449,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="46" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="46" bodyend="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="46" column="14" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="46" bodyend="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a57410a6bb0792d3dd47828177159564c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD int16_t</type>
@@ -463,7 +463,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="48" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="48" bodyend="48"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="48" column="30" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="48" bodyend="48"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a73d3301fdf2a4a79f835ab81a8918936" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -481,7 +481,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="49" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="49" bodyend="49"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="49" column="14" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="49" bodyend="49"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a4e3097f8344462a040c7f152f6f9d327" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -495,7 +495,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="51" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="51" bodyend="51"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="51" column="31" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="51" bodyend="51"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a3c6265abdd1091beaef11f44ca7d02d5" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -513,7 +513,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="52" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="52" bodyend="52"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="52" column="14" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="52" bodyend="52"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1aec640cb7abd481b0c92df32f026ced43" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -527,7 +527,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="54" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="54" bodyend="54"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="54" column="34" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="54" bodyend="54"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a9cd43ef8ceda857f699c98302c284194" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -545,7 +545,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="55" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="55" bodyend="55"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="55" column="14" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="55" bodyend="55"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a29dc542e159fb1344a1887b720e160ef" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">SR_HTYPES_NS::UnicodeString</ref></type>
@@ -559,7 +559,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="57" column="50" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="57" bodyend="57"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="57" column="50" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="57" bodyend="57"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1abb7518d0bd26474807cae31d80ce2b93" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -577,7 +577,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="58" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="58" bodyend="58"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="58" column="14" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="58" bodyend="58"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1ad78c3b7568e1bc905c4bdf74036a38eb" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -591,7 +591,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="60" column="46" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="60" bodyend="60"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="60" column="46" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="60" bodyend="60"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a78b2e42944bfb8ce3e6a5c051c1c3988" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -609,7 +609,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="61" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="61" bodyend="61"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="61" column="14" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="61" bodyend="61"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a68462a2ad4f51e31183f5ed3e401ea2b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector2</type>
@@ -623,7 +623,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="63" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="63" bodyend="63"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="63" column="43" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="63" bodyend="63"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a93cc6801401ed434be27f48191e19d82" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -641,7 +641,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="64" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="64" bodyend="64"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="64" column="14" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="64" bodyend="64"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a24288db6986e05933eec8e0f6565370f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::UVector2</type>
@@ -655,7 +655,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="66" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="66" bodyend="66"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="66" column="43" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="66" bodyend="66"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a4c8c5da1dfb9876d800b03ad3bd8e48e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -673,7 +673,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="67" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="67" bodyend="67"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="67" column="14" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="67" bodyend="67"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a6156fcede63d3645f89d35331b040a94" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -687,7 +687,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="69" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="69" bodyend="69"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="69" column="43" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="69" bodyend="69"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1aa034758e87f1df6fc9c06c57e981acd3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -705,7 +705,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="70" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="70" bodyend="70"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="70" column="14" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="70" bodyend="70"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1ac699d255495bb41b1621cd96ed4ae862" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::BVector3</type>
@@ -719,7 +719,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="72" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="72" bodyend="72"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="72" column="43" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="72" bodyend="72"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a4f9521206cc7ac1a2af307d6defc2a86" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -737,7 +737,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="73" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="73" bodyend="73"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="73" column="14" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="73" bodyend="73"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1aa3599c079ac2963d1688233a2e3c2e63" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector4</type>
@@ -751,7 +751,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="75" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="75" bodyend="75"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="75" column="43" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="75" bodyend="75"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a291c6da276b9e06860bb6f3b46cd1bfb" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -769,7 +769,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="76" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="76" bodyend="76"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="76" column="14" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="76" bodyend="76"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -796,7 +796,7 @@
         <inbodydescription>
 <para>NOLINT</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="79" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="79" bodyend="87"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="79" column="37" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="79" bodyend="87"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1ade704d3b92aca4c529a423e562898bb6" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -824,7 +824,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="89" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="89" bodyend="94"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="89" column="27" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="89" bodyend="94"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -868,7 +868,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="13" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="13" bodyend="104"/>
+    <location file="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="13" column="5" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="13" bodyend="104"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Property_1ad10eb1ac5384dcd8db5377da438bb98a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>ActiveConditionFn</name></member>
       <member refid="classSR__UTILS__NS_1_1Property_1ac72cf8f65b3de91dfea85a3bdc6c46a3" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>AllocatePropertyBlock</name></member>

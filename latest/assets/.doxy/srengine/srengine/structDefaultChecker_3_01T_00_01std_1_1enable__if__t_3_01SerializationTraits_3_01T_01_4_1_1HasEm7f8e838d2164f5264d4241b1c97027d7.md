@@ -102,5 +102,5 @@ static inline bool DefaultChecker< T, std::enable_if_t< SerializationTraits< T >
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Serialization/DefaultCheckers.inl.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Serialization/DefaultCheckers.inl.h`
 

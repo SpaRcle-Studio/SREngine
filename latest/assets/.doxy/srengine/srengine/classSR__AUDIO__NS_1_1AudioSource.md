@@ -610,5 +610,5 @@ Implements [*SR\_UTILS\_NS::Component::OnEnable*](classSR__UTILS__NS_1_1Componen
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h`
+The documentation for this class was generated from the following file `Engine/libs/Audio/inc/Audio/Types/AudioSource.h`
 

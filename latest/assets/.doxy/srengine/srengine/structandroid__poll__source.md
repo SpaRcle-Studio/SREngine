@@ -125,5 +125,5 @@ void(* android_poll_source::process) (struct android_app *app, struct android_po
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h`
 

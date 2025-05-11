@@ -277,5 +277,5 @@ SR_GRAPH_GUI_NS::SR_ENUM_NS_STRUCT_T (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h`
 

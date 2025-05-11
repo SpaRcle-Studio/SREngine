@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="23" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="23" column="9" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="23" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="97" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="97" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="97" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="97" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classEvoScript_1_1Script_1a254b89ef881ecbfe4a63f7134c0df08e" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="98" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="98" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="98" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="98" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classEvoScript_1_1Script_1a184dbbefe4578db99f479e435f39055c" prot="private" static="no" mutable="no">
         <type>MethodPointers</type>
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="99" column="24" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="99" bodyend="99"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="99" column="24" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="99" bodyend="99"/>
       </memberdef>
       <memberdef kind="variable" id="classEvoScript_1_1Script_1a29093411835a0974c5b8bf6deed17878" prot="private" static="no" mutable="no">
         <type><ref refid="classEvoScript_1_1IState" kindref="compound">IState</ref> *</type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="100" column="16" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="100" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="100" column="16" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="100" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classEvoScript_1_1Script_1ad48b595bf2304f0d7fe957adff317783" prot="private" static="no" mutable="no">
         <type><ref refid="classEvoScript_1_1Compiler" kindref="compound">Compiler</ref> *</type>
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="101" column="18" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="101" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="101" column="18" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="101" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classEvoScript_1_1Script_1acafc0c5ea5a39d8e696a036ba97facc1" prot="private" static="no" mutable="no">
         <type>const bool</type>
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="106" column="20" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="106" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="106" column="20" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="106" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="25" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="25" bodyend="26"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="25" column="9" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="25" bodyend="26"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1Script_1a4fc003a68f955a15bba399024518b9e9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -150,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="94" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="94" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -166,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="29" column="9"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="29" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1Script_1aa587d5b39ac04f70f695aa666c3402e2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -180,7 +180,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="32" column="27"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="32" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1Script_1aaf73bb80eed4200dd737493146868295" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -203,7 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="37" column="22" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="37" bodyend="39"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="37" column="22" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="37" bodyend="39"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1Script_1a31547194a08151e15410865cb28dd88a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -226,7 +226,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="42" column="24" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="42" bodyend="44"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="42" column="24" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="42" bodyend="44"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1Script_1aca272ffc7d6e91b9273a842fec4ed463" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -261,7 +261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="47" column="26" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="47" bodyend="49"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="47" column="26" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="47" bodyend="49"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1Script_1a9fdbb0eaef26e66fae41fd159391dfcd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -293,7 +293,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="52" column="24" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="52" bodyend="54"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="52" column="24" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="52" bodyend="54"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1Script_1aa629d9c077d1006f65af9d6c9fa1cb86" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -319,7 +319,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="57" column="26" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="57" bodyend="59"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="57" column="26" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="57" bodyend="59"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1Script_1ac8b3a7ed6cb390a957f43ac87557bf57" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -354,7 +354,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="62" column="26" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="62" bodyend="64"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="62" column="26" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="62" bodyend="64"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1Script_1ac1903bc806447b361e5ebc83d30208e0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -386,7 +386,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="67" column="24" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="67" bodyend="69"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="67" column="24" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="67" bodyend="69"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1Script_1ad905f2c24800fa9ad6387e1ba77ac72f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -412,7 +412,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="72" column="26" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="72" bodyend="74"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="72" column="26" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="72" bodyend="74"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1Script_1ab44e2a940c7715f5a2bc137045874a52" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -435,7 +435,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="77" column="24" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="77" bodyend="79"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="77" column="24" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="77" bodyend="79"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1Script_1ac0cc285798bf739b6e83b5bbec1465fe" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -449,7 +449,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="82" column="27" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="82" bodyend="82"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="82" column="27" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="82" bodyend="82"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1Script_1a0d2a345a5868d06bf2342e9a501051ee" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classEvoScript_1_1IState" kindref="compound">IState</ref> *</type>
@@ -463,7 +463,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="84" column="29" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="84" bodyend="84"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="84" column="29" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="84" bodyend="84"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1Script_1a62c0bd91eb40d4776ecc373451ba87cd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -477,7 +477,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="86" column="34" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="86" bodyend="86"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="86" column="34" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="86" bodyend="86"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1Script_1af52e50aef29c6c4cf5c1a9182a63c917" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -491,7 +491,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="88" column="34" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="88" bodyend="88"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="88" column="34" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="88" bodyend="88"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1Script_1acf07305611406a7cec21b6916b7ef936" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -517,7 +517,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="91" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="91" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -545,7 +545,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="34" column="23"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="34" column="23"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -576,7 +576,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="22" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="22" bodyend="109"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="22" column="5" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="22" bodyend="109"/>
     <listofallmembers>
       <member refid="classEvoScript_1_1Script_1acc8d85fe048099225c74553d42416162" prot="public" virt="non-virtual"><scope>EvoScript::Script</scope><name>Allocate</name></member>
       <member refid="classEvoScript_1_1Script_1aca272ffc7d6e91b9273a842fec4ed463" prot="public" virt="non-virtual"><scope>EvoScript::Script</scope><name>Call</name></member>

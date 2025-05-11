@@ -114,7 +114,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/Events/Broadcaster.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Events/Broadcaster.h</label>
         <link refid="Broadcaster_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -655,6 +655,6 @@
 <codeline lineno="22"><highlight class="normal"></highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_UTILS_EVENTS_BROADCASTER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Events/Broadcaster.h"/>
+    <location file="Engine/libs/Utils/inc/Utils/Events/Broadcaster.h"/>
   </compounddef>
 </doxygen>

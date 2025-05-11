@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/CLIManager.h" line="12" column="5" declfile="Engine/Core/inc/Core/CLIManager.h" declline="12" declcolumn="5"/>
+        <location file="Engine/inc/Engine/CLIManager.h" line="12" column="5" declfile="Engine/inc/Engine/CLIManager.h" declline="12" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__CORE__NS_1af675ea75d8844e2a4221c98f61d22f44" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/CLIManager.h" line="18" column="5" declfile="Engine/Core/inc/Core/CLIManager.h" declline="18" declcolumn="5"/>
+        <location file="Engine/inc/Engine/CLIManager.h" line="18" column="5" declfile="Engine/inc/Engine/CLIManager.h" declline="18" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__CORE__NS_1a1b7065090cb28cddf59270370fc79aa4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -174,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/Settings/EditorSettings.h" line="12" column="5" declfile="Engine/Core/inc/Core/Settings/EditorSettings.h" declline="12" declcolumn="5"/>
+        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="12" column="5" declfile="Engine/inc/Engine/Settings/EditorSettings.h" declline="12" declcolumn="5"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -182,6 +182,6 @@
     <detaileddescription>
 <para>#include &lt;Graphics/Font/ITextComponent.h&gt; </para>
     </detaileddescription>
-    <location file="Engine/Core/inc/Core/Application.h" line="11" column="1"/>
+    <location file="Engine/inc/Engine/Application.h" line="11" column="1"/>
   </compounddef>
 </doxygen>

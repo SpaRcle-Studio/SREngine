@@ -981,5 +981,5 @@ virtual void SR_GRAPH_NS::IMeshClusterPass::UseUniforms (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h`
 

@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="Engine_8h" kind="file" language="C++">
     <compoundname>Engine.h</compoundname>
-    <includes refid="EngineResources_8h" local="no">Core/EngineResources.h</includes>
+    <includes refid="EngineResources_8h" local="no">Engine/EngineResources.h</includes>
     <includes refid="Window_8h" local="no">Graphics/Window/Window.h</includes>
     <includes refid="ScriptSystem_8h" local="no">Scripting/Cpp/ScriptSystem.h</includes>
     <includes refid="EventManager_8h" local="no">Utils/Events/EventManager.h</includes>
@@ -19,12 +19,12 @@
     <includes refid="SafeQueue_8h" local="no">Utils/Types/SafeQueue.h</includes>
     <includes refid="LocalizationManager_8h" local="no">Utils/Localization/LocalizationManager.h</includes>
     <includes refid="CmdManager_8h" local="no">Utils/CommandManager/CmdManager.h</includes>
-    <includedby refid="EngineCommands_8h" local="no">Engine/Core/inc/Core/EngineCommands.h</includedby>
-    <includedby refid="ScriptableContext_8h" local="no">Engine/Core/inc/Core/Scripting/ScriptableContext.h</includedby>
-    <includedby refid="World_8h" local="no">Engine/Core/inc/Core/World/World.h</includedby>
+    <includedby refid="EngineCommands_8h" local="no">Engine/inc/Engine/EngineCommands.h</includedby>
+    <includedby refid="ScriptableContext_8h" local="no">Engine/inc/Engine/Scripting/ScriptableContext.h</includedby>
+    <includedby refid="World_8h" local="no">Engine/inc/Engine/World/World.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/Engine.h</label>
+        <label>Engine/inc/Engine/Engine.h</label>
         <link refid="Engine_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -62,7 +62,7 @@
         </childnode>
       </node>
       <node id="2">
-        <label>Core/EngineResources.h</label>
+        <label>Engine/EngineResources.h</label>
         <link refid="EngineResources_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -1710,7 +1710,7 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/Engine.h</label>
+        <label>Engine/inc/Engine/Engine.h</label>
         <link refid="Engine_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1720,15 +1720,15 @@
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/inc/Core/EngineCommands.h</label>
+        <label>Engine/inc/Engine/EngineCommands.h</label>
         <link refid="EngineCommands_8h_source"/>
       </node>
       <node id="3">
-        <label>Engine/Core/inc/Core/Scripting/ScriptableContext.h</label>
+        <label>Engine/inc/Engine/Scripting/ScriptableContext.h</label>
         <link refid="ScriptableContext_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/inc/Core/World/World.h</label>
+        <label>Engine/inc/Engine/World/World.h</label>
         <link refid="World_8h_source"/>
       </node>
     </invincdepgraph>
@@ -1751,7 +1751,7 @@
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SR_ENGINE_ENGINE_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ENGINE_ENGINE_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Core/EngineResources.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Engine/EngineResources.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Graphics/Window/Window.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
@@ -1899,6 +1899,6 @@
 <codeline lineno="155"><highlight class="normal"></highlight></codeline>
 <codeline lineno="156"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_ENGINE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/Engine.h"/>
+    <location file="Engine/inc/Engine/Engine.h"/>
   </compounddef>
 </doxygen>

@@ -121,5 +121,5 @@ static inline void ObjectDataAccessor< T, typename std::enable_if< IsSREnumV< T 
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h`
 

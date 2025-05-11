@@ -77,7 +77,7 @@
         <link refid="Allocator_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/Network/Headers/ICMPHeader.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Network/Headers/ICMPHeader.h</label>
         <link refid="ICMPHeader_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -537,6 +537,6 @@
 <codeline lineno="82"><highlight class="normal"></highlight></codeline>
 <codeline lineno="83"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_UTILS_NETWORK_ICMPHEADER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Network/Headers/ICMPHeader.h"/>
+    <location file="Engine/libs/Utils/inc/Utils/Network/Headers/ICMPHeader.h"/>
   </compounddef>
 </doxygen>

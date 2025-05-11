@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_1bd135d85244281d14f19c1ce566dd82" kind="dir">
+    <compoundname>Engine/libs/Audio/inc/Audio/Impl</compoundname>
+    <innerfile refid="OpenALDevice_8h">OpenALDevice.h</innerfile>
+    <innerfile refid="OpenALSoundContext_8h">OpenALSoundContext.h</innerfile>
+    <innerfile refid="OpenALSoundListener_8h">OpenALSoundListener.h</innerfile>
+    <innerfile refid="OpenALTools_8h">OpenALTools.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Audio/inc/Audio/Impl/"/>
+  </compounddef>
+</doxygen>

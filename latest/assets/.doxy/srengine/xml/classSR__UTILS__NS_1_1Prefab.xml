@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Prefab.h" line="24" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Prefab.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Prefab.h" line="24" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Prefab.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__UTILS__NS_1_1Prefab_1a241ec258f10c85b84a35507a4ff2080f" prot="public" static="no">
         <type><ref refid="classSR__WORLD__NS_1_1Scene" kindref="compound">SR_WORLD_NS::Scene</ref> *</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Prefab.h" line="25" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Prefab.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Prefab.h" line="25" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Prefab.h" bodystart="25" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-attrib">
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Prefab.h" line="27" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Prefab.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Prefab.h" line="27" column="37" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Prefab.h" bodystart="27" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Prefab.h" line="45" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Prefab.h" bodystart="45" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Prefab.h" line="45" column="24" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Prefab.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Prefab_1ab8d67411906d3cccec71730de28a9cc3" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1IDeserializer" kindref="compound">SR_UTILS_NS::IDeserializer</ref> *</type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Prefab.h" line="46" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Prefab.h" bodystart="46" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Prefab.h" line="46" column="36" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Prefab.h" bodystart="46" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Prefab.h" line="30" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Prefab.h" line="30" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Prefab_1a722208f10ac1fc92872035c3ec585cc8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Prefab.h" line="31" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Prefab.h" line="31" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Prefab.h" line="34" column="23"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Prefab.h" line="34" column="23"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -148,7 +148,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Prefab.h" line="36" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Prefab.h" line="36" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Prefab_1a1779c26f1acab2c907dc64a25c8c5cdd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SceneObjectPtr</type>
@@ -166,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Prefab.h" line="37" column="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Prefab.h" line="37" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Prefab_1aae2289a1ad9c416517107ebba41e2172" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const SceneObjectPtr &amp;</type>
@@ -180,7 +180,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Prefab.h" line="38" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Prefab.h" bodystart="38" bodyend="38"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Prefab.h" line="38" column="43" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Prefab.h" bodystart="38" bodyend="38"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -197,7 +197,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Prefab.h" line="41" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Prefab.h" line="41" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Prefab_1ae36898b43f196487e085a5a8dec23cae" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -212,7 +212,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Prefab.h" line="42" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Prefab.h" line="42" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -287,7 +287,7 @@
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Prefab.h" line="22" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Prefab.h" bodystart="22" bodyend="48"/>
+    <location file="Engine/libs/Utils/inc/Utils/ECS/Prefab.h" line="22" column="5" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Prefab.h" bodystart="22" bodyend="48"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Prefab</scope><name>AddDependency</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1abcf6bc4fde8bd87a0f1d72d0183af0cf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Prefab</scope><name>AddUsePoint</name></member>

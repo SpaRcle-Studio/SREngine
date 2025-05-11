@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/WidgetPass.h" line="13" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/WidgetPass.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/WidgetPass.h" line="13" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/WidgetPass.h" bodystart="13" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/WidgetPass.h" line="15" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/WidgetPass.h" line="15" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1WidgetPass_1a86e472c6af737085a6a7aad1660e2cec" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/WidgetPass.h" line="16" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/WidgetPass.h" line="16" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -234,7 +234,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/WidgetPass.h" line="11" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/WidgetPass.h" bodystart="11" bodyend="18"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/WidgetPass.h" line="11" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/WidgetPass.h" bodystart="11" bodyend="18"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::WidgetPass</scope><name>AddDependency</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::WidgetPass</scope><name>AddInputConnection</name></member>

@@ -544,5 +544,5 @@ static Node SR_UTILS_NS::Xml::Node::Empty ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Resources/Xml.h`
 

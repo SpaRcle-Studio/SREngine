@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="26" column="17"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="26" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1PriorityFilterPredicate_1a3aaaf84f61353e3957325c60bb5d7e34" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD bool</type>
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="27" column="35"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="27" column="35"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -78,7 +78,7 @@
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="24" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" bodystart="24" bodyend="28"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="24" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" bodystart="24" bodyend="28"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1PriorityFilterPredicate_1a3aaaf84f61353e3957325c60bb5d7e34" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::PriorityFilterPredicate</scope><name>IsPriorityAllowed</name></member>
       <member refid="classSR__GRAPH__NS_1_1PriorityFilterPredicate_1a597e5df2d40b6d48c2774bdb34b516ca" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PriorityFilterPredicate</scope><name>~PriorityFilterPredicate</name></member>

@@ -3,11 +3,11 @@
   <compounddef id="Measurement_8h" kind="file" language="C++">
     <compoundname>Measurement.h</compoundname>
     <includes refid="Enumerations_8h" local="no">Utils/Common/Enumerations.h</includes>
-    <includedby refid="PhysicsLib_8h" local="no">Engine/Core/libs/Physics/inc/Physics/PhysicsLib.h</includedby>
-    <includedby refid="Rigidbody_8h" local="no">Engine/Core/libs/Physics/inc/Physics/Rigidbody.h</includedby>
-    <includedby refid="Physics_2inc_2Physics_2Utils_2Utils_8h" local="no">Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h</includedby>
-    <includedby refid="Vehicle_8h" local="no">Engine/Core/libs/Physics/inc/Physics/Vehicle.h</includedby>
-    <includedby refid="Transform_8h" local="no">Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h</includedby>
+    <includedby refid="PhysicsLib_8h" local="no">Engine/libs/Physics/inc/Physics/PhysicsLib.h</includedby>
+    <includedby refid="Rigidbody_8h" local="no">Engine/libs/Physics/inc/Physics/Rigidbody.h</includedby>
+    <includedby refid="Physics_2inc_2Physics_2Utils_2Utils_8h" local="no">Engine/libs/Physics/inc/Physics/Utils/Utils.h</includedby>
+    <includedby refid="Vehicle_8h" local="no">Engine/libs/Physics/inc/Physics/Vehicle.h</includedby>
+    <includedby refid="Transform_8h" local="no">Engine/libs/Utils/inc/Utils/ECS/Transform.h</includedby>
     <incdepgraph>
       <node id="69">
         <label>Utils/Common/Breakpoint.h</label>
@@ -56,7 +56,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/Common/Measurement.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Common/Measurement.h</label>
         <link refid="Measurement_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -453,7 +453,7 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="36">
-        <label>Engine/Core/inc/Core/Engine.h</label>
+        <label>Engine/inc/Engine/Engine.h</label>
         <link refid="Engine_8h_source"/>
         <childnode refid="37" relation="include">
         </childnode>
@@ -463,47 +463,47 @@
         </childnode>
       </node>
       <node id="37">
-        <label>Engine/Core/inc/Core/EngineCommands.h</label>
+        <label>Engine/inc/Engine/EngineCommands.h</label>
         <link refid="EngineCommands_8h_source"/>
       </node>
       <node id="41">
-        <label>Engine/Core/inc/Core/GUI/Guizmo.h</label>
+        <label>Engine/inc/Engine/GUI/Guizmo.h</label>
         <link refid="Guizmo_8h_source"/>
       </node>
       <node id="42">
-        <label>Engine/Core/inc/Core/GUI/Hierarchy.h</label>
+        <label>Engine/inc/Engine/GUI/Hierarchy.h</label>
         <link refid="Hierarchy_8h_source"/>
       </node>
       <node id="43">
-        <label>Engine/Core/inc/Core/GUI/Inspector.h</label>
+        <label>Engine/inc/Engine/GUI/Inspector.h</label>
         <link refid="Inspector_8h_source"/>
       </node>
       <node id="24">
-        <label>Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h</label>
+        <label>Engine/inc/Engine/GUI/PhysicsMaterialEditor.h</label>
         <link refid="PhysicsMaterialEditor_8h_source"/>
       </node>
       <node id="44">
-        <label>Engine/Core/inc/Core/GUI/SceneViewer.h</label>
+        <label>Engine/inc/Engine/GUI/SceneViewer.h</label>
         <link refid="SceneViewer_8h_source"/>
       </node>
       <node id="38">
-        <label>Engine/Core/inc/Core/Scripting/ScriptableContext.h</label>
+        <label>Engine/inc/Engine/Scripting/ScriptableContext.h</label>
         <link refid="ScriptableContext_8h_source"/>
       </node>
       <node id="14">
-        <label>Engine/Core/inc/Core/World/EngineScene.h</label>
+        <label>Engine/inc/Engine/World/EngineScene.h</label>
         <link refid="EngineScene_8h_source"/>
       </node>
       <node id="39">
-        <label>Engine/Core/inc/Core/World/World.h</label>
+        <label>Engine/inc/Engine/World/World.h</label>
         <link refid="World_8h_source"/>
       </node>
       <node id="47">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h</label>
         <link refid="AnimationChannel_8h_source"/>
       </node>
       <node id="46">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h</label>
         <link refid="AnimationKey_8h_source"/>
         <childnode refid="47" relation="include">
         </childnode>
@@ -511,23 +511,23 @@
         </childnode>
       </node>
       <node id="45">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationPose.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationPose.h</label>
         <link refid="AnimationPose_8h_source"/>
         <childnode refid="46" relation="include">
         </childnode>
       </node>
       <node id="48">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
         <link refid="Animator_8h_source"/>
       </node>
       <node id="49">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/Bone.h</label>
         <link refid="Bone_8h_source"/>
         <childnode refid="50" relation="include">
         </childnode>
       </node>
       <node id="50">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/Skeleton.h</label>
         <link refid="Skeleton_8h_source"/>
         <childnode refid="48" relation="include">
         </childnode>
@@ -535,7 +535,7 @@
         </childnode>
       </node>
       <node id="29">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h</label>
         <link refid="RenderScene_8h_source"/>
         <childnode refid="14" relation="include">
         </childnode>
@@ -543,25 +543,25 @@
         </childnode>
       </node>
       <node id="28">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderStrategy.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderStrategy.h</label>
         <link refid="RenderStrategy_8h_source"/>
         <childnode refid="29" relation="include">
         </childnode>
       </node>
       <node id="51">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
         <link refid="SkinnedMesh_8h_source"/>
       </node>
       <node id="30">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/UI/Canvas.h</label>
         <link refid="Canvas_8h_source"/>
       </node>
       <node id="9">
-        <label>Engine/Core/libs/Physics/inc/Physics/2D/Rigidbody2D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/2D/Rigidbody2D.h</label>
         <link refid="Rigidbody2D_8h_source"/>
       </node>
       <node id="10">
-        <label>Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h</label>
         <link refid="Rigidbody3D_8h_source"/>
         <childnode refid="11" relation="include">
         </childnode>
@@ -569,25 +569,25 @@
         </childnode>
       </node>
       <node id="16">
-        <label>Engine/Core/libs/Physics/inc/Physics/3D/Vehicle4W3D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/3D/Vehicle4W3D.h</label>
         <link refid="Vehicle4W3D_8h_source"/>
         <childnode refid="17" relation="include">
         </childnode>
       </node>
       <node id="20">
-        <label>Engine/Core/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h</label>
         <link refid="Box2DLibraryImpl_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h</label>
         <link refid="Bullet3CollisionShape_8h_source"/>
       </node>
       <node id="21">
-        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3LibraryImpl.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3LibraryImpl.h</label>
         <link refid="Bullet3LibraryImpl_8h_source"/>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h</label>
         <link refid="Bullet3PhysicsLib_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
@@ -595,15 +595,15 @@
         </childnode>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsWorld.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsWorld.h</label>
         <link refid="Bullet3PhysicsWorld_8h_source"/>
       </node>
       <node id="11">
-        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h</label>
         <link refid="Bullet3Rigidbody3D_8h_source"/>
       </node>
       <node id="6">
-        <label>Engine/Core/libs/Physics/inc/Physics/CollisionShape.h</label>
+        <label>Engine/libs/Physics/inc/Physics/CollisionShape.h</label>
         <link refid="CollisionShape_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
@@ -613,7 +613,7 @@
         </childnode>
       </node>
       <node id="19">
-        <label>Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h</label>
+        <label>Engine/libs/Physics/inc/Physics/LibraryImpl.h</label>
         <link refid="LibraryImpl_8h_source"/>
         <childnode refid="20" relation="include">
         </childnode>
@@ -623,27 +623,27 @@
         </childnode>
       </node>
       <node id="7">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h</label>
         <link refid="PhysXCollisionShape_8h_source"/>
       </node>
       <node id="22">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXLibraryImpl.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXLibraryImpl.h</label>
         <link refid="PhysXLibraryImpl_8h_source"/>
       </node>
       <node id="26">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h</label>
         <link refid="PhysXPhysicsWorld_8h_source"/>
       </node>
       <node id="12">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h</label>
         <link refid="PhysXRigidbody3D_8h_source"/>
       </node>
       <node id="17">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXVehicle4W3D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXVehicle4W3D.h</label>
         <link refid="PhysXVehicle4W3D_8h_source"/>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysicsLib.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysicsLib.h</label>
         <link refid="PhysicsLib_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -657,19 +657,19 @@
         </childnode>
       </node>
       <node id="23">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysicsMaterial.h</label>
         <link refid="PhysicsMaterial_8h_source"/>
         <childnode refid="24" relation="include">
         </childnode>
       </node>
       <node id="13">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysicsScene.h</label>
         <link refid="PhysicsScene_8h_source"/>
         <childnode refid="14" relation="include">
         </childnode>
       </node>
       <node id="25">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysicsWorld.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysicsWorld.h</label>
         <link refid="PhysicsWorld_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
@@ -677,7 +677,7 @@
         </childnode>
       </node>
       <node id="8">
-        <label>Engine/Core/libs/Physics/inc/Physics/Rigidbody.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Rigidbody.h</label>
         <link refid="Rigidbody_8h_source"/>
         <childnode refid="9" relation="include">
         </childnode>
@@ -685,7 +685,7 @@
         </childnode>
       </node>
       <node id="18">
-        <label>Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Utils/Utils.h</label>
         <link refid="Physics_2inc_2Physics_2Utils_2Utils_8h_source"/>
         <childnode refid="19" relation="include">
         </childnode>
@@ -697,25 +697,25 @@
         </childnode>
       </node>
       <node id="15">
-        <label>Engine/Core/libs/Physics/inc/Physics/Vehicle.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Vehicle.h</label>
         <link refid="Vehicle_8h_source"/>
         <childnode refid="16" relation="include">
         </childnode>
       </node>
       <node id="33">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h</label>
         <link refid="Behaviour_8h_source"/>
         <childnode refid="34" relation="include">
         </childnode>
       </node>
       <node id="31">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h</label>
         <link refid="CppBehaviour_8h_source"/>
         <childnode refid="32" relation="include">
         </childnode>
       </node>
       <node id="32">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h</label>
         <link refid="ModuleManager_8h_source"/>
         <childnode refid="33" relation="include">
         </childnode>
@@ -723,17 +723,17 @@
         </childnode>
       </node>
       <node id="35">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h</label>
         <link refid="ScriptSystem_8h_source"/>
         <childnode refid="36" relation="include">
         </childnode>
       </node>
       <node id="34">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h</label>
         <link refid="EvoBehaviour_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/Common/Measurement.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Common/Measurement.h</label>
         <link refid="Measurement_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -747,7 +747,7 @@
         </childnode>
       </node>
       <node id="40">
-        <label>Engine/Core/libs/Utils/inc/Utils/ECS/GameObject.h</label>
+        <label>Engine/libs/Utils/inc/Utils/ECS/GameObject.h</label>
         <link refid="GameObject_8h_source"/>
         <childnode refid="37" relation="include">
         </childnode>
@@ -773,7 +773,7 @@
         </childnode>
       </node>
       <node id="27">
-        <label>Engine/Core/libs/Utils/inc/Utils/ECS/Transform.h</label>
+        <label>Engine/libs/Utils/inc/Utils/ECS/Transform.h</label>
         <link refid="Transform_8h_source"/>
         <childnode refid="28" relation="include">
         </childnode>
@@ -793,13 +793,13 @@
         </childnode>
       </node>
       <node id="54">
-        <label>Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h</label>
+        <label>Engine/libs/Utils/inc/Utils/ECS/Transform2D.h</label>
         <link refid="Transform2D_8h_source"/>
         <childnode refid="41" relation="include">
         </childnode>
       </node>
       <node id="55">
-        <label>Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h</label>
+        <label>Engine/libs/Utils/inc/Utils/ECS/Transform3D.h</label>
         <link refid="Transform3D_8h_source"/>
         <childnode refid="41" relation="include">
         </childnode>
@@ -807,15 +807,15 @@
         </childnode>
       </node>
       <node id="56">
-        <label>Engine/Core/libs/Utils/inc/Utils/ECS/TransformZero.h</label>
+        <label>Engine/libs/Utils/inc/Utils/ECS/TransformZero.h</label>
         <link refid="TransformZero_8h_source"/>
       </node>
       <node id="52">
-        <label>Engine/Core/libs/Utils/inc/Utils/Game/DebugLogComponent.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Game/DebugLogComponent.h</label>
         <link refid="DebugLogComponent_8h_source"/>
       </node>
       <node id="53">
-        <label>Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h</label>
         <link refid="LookAtComponent_8h_source"/>
       </node>
     </invincdepgraph>
@@ -848,6 +848,6 @@
 <codeline lineno="21"><highlight class="normal"></highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_MEASUREMENT_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Common/Measurement.h"/>
+    <location file="Engine/libs/Utils/inc/Utils/Common/Measurement.h"/>
   </compounddef>
 </doxygen>

@@ -324,5 +324,5 @@ virtual SR_NODISCARD uint64_t SR_UTILS_NS::SRClassMeta::GetVersionImpl () noexce
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h`
 

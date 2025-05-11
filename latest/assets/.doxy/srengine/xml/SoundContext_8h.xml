@@ -5,10 +5,10 @@
     <includes refid="Audio_2inc_2Audio_2macros_8h" local="no">Audio/macros.h</includes>
     <includes refid="NonCopyable_8h" local="no">Utils/Common/NonCopyable.h</includes>
     <includes refid="SoundFormat_8h" local="no">Audio/SoundFormat.h</includes>
-    <includedby refid="OpenALSoundContext_8h" local="no">Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h</includedby>
+    <includedby refid="OpenALSoundContext_8h" local="no">Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Audio/inc/Audio/SoundContext.h</label>
+        <label>Engine/libs/Audio/inc/Audio/SoundContext.h</label>
         <link refid="SoundContext_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -356,11 +356,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h</label>
+        <label>Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h</label>
         <link refid="OpenALSoundContext_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Audio/inc/Audio/SoundContext.h</label>
+        <label>Engine/libs/Audio/inc/Audio/SoundContext.h</label>
         <link refid="SoundContext_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -462,6 +462,6 @@
 <codeline lineno="87"><highlight class="normal"></highlight></codeline>
 <codeline lineno="88"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_SOUNDCONTEXT_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Audio/inc/Audio/SoundContext.h"/>
+    <location file="Engine/libs/Audio/inc/Audio/SoundContext.h"/>
   </compounddef>
 </doxygen>

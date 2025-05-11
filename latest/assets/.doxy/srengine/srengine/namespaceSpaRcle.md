@@ -87,5 +87,5 @@
 
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/EvoScriptAPI.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/EvoScriptAPI.h`
 

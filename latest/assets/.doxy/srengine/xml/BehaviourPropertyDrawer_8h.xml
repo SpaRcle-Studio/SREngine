@@ -2,10 +2,10 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="BehaviourPropertyDrawer_8h" kind="file" language="C++">
     <compoundname>BehaviourPropertyDrawer.h</compoundname>
-    <includes refid="ObjectPropertyDrawer_8h" local="no">Core/GUI/PropertyDrawers/ObjectPropertyDrawer.h</includes>
+    <includes refid="ObjectPropertyDrawer_8h" local="no">Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h</includes>
     <incdepgraph>
       <node id="3">
-        <label>Core/GUI/PropertyDrawer.h</label>
+        <label>Engine/GUI/PropertyDrawer.h</label>
         <link refid="PropertyDrawer_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
@@ -17,13 +17,13 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/BehaviourPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.h</label>
         <link refid="BehaviourPropertyDrawer_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="2">
-        <label>Core/GUI/PropertyDrawers/ObjectPropertyDrawer.h</label>
+        <label>Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h</label>
         <link refid="ObjectPropertyDrawer_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -1664,7 +1664,7 @@
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SR_ENGINE_GUI_BEHAVIOUR_PROPERTY_DRAWER_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ENGINE_GUI_BEHAVIOUR_PROPERTY_DRAWER_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Core/GUI/PropertyDrawers/ObjectPropertyDrawer.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SR_CORE_GUI_NS<sp/>{</highlight></codeline>
 <codeline lineno="11" refid="classSR__CORE__GUI__NS_1_1BehaviourPropertyDrawer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__CORE__GUI__NS_1_1BehaviourPropertyDrawer" kindref="compound">BehaviourPropertyDrawer</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__CORE__GUI__NS_1_1ObjectPropertyDrawer" kindref="compound">ObjectPropertyDrawer</ref><sp/>{</highlight></codeline>
@@ -1686,6 +1686,6 @@
 <codeline lineno="27"><highlight class="normal"></highlight></codeline>
 <codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GUI_BEHAVIOUR_PROPERTY_DRAWER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/BehaviourPropertyDrawer.h"/>
+    <location file="Engine/inc/Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.h"/>
   </compounddef>
 </doxygen>

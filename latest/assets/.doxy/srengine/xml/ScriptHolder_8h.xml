@@ -6,7 +6,7 @@
     <includes refid="NonCopyable_8h" local="no">Utils/Common/NonCopyable.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Old/ScriptHolder.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Old/ScriptHolder.h</label>
         <link refid="ScriptHolder_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -853,6 +853,6 @@
 <codeline lineno="41"><highlight class="normal"></highlight></codeline>
 <codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_SCRIPTING_SCRIPT_HOLDER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/ScriptHolder.h"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Old/ScriptHolder.h"/>
   </compounddef>
 </doxygen>

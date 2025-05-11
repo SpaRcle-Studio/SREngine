@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="29" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="29" column="17" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__PTYPES__NS_1_1PhysicsMaterialData_1a1e0ba622189e625d98c6377366c17dd7" prot="public" static="no" mutable="no">
         <type>float_t</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="30" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="30" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="30" column="17" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__PTYPES__NS_1_1PhysicsMaterialData_1a5118fc318d80e9da9083d91fa38ef54e" prot="public" static="no" mutable="no">
         <type>float_t</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="32" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="32" column="17" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__PTYPES__NS_1_1PhysicsMaterialData_1a75164601dfa1bace6b400be61ccf52b1" prot="public" static="no" mutable="no">
         <type>Combine</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="34" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="34" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="34" column="17" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__PTYPES__NS_1_1PhysicsMaterialData_1a9f79380368d2fd5ee09e126157906c5e" prot="public" static="no" mutable="no">
         <type>Combine</type>
@@ -76,14 +76,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="35" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="35" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="35" column="17" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="35" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="28" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="28" bodyend="36"/>
+    <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="28" column="5" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="28" bodyend="36"/>
     <listofallmembers>
       <member refid="structSR__PTYPES__NS_1_1PhysicsMaterialData_1a9f79380368d2fd5ee09e126157906c5e" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterialData</scope><name>bounceCombine</name></member>
       <member refid="structSR__PTYPES__NS_1_1PhysicsMaterialData_1a5118fc318d80e9da9083d91fa38ef54e" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterialData</scope><name>bounciness</name></member>

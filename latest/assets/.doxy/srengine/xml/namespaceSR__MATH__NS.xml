@@ -28,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" line="133" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="133" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" line="133" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="133" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Rect_8h_1a996644829b3cfa3d9eb54253b3f2e6c7" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Rect" kindref="compound">Rect</ref>&lt; Unit &gt;</type>
@@ -42,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="216" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="216" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="216" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="216" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Rect_8h_1ad5c82373097f35b09c87f0840234e4dd" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Rect" kindref="compound">Rect</ref>&lt; int32_t &gt;</type>
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="217" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="217" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="217" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="217" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Rect_8h_1a0b19db8b861de0d99a3db07a8e7eaa55" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Rect" kindref="compound">Rect</ref>&lt; uint32_t &gt;</type>
@@ -70,7 +70,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="218" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="218" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h" line="218" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Math/Rect.h" bodystart="218" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Size_8h_1ae00e5bcb9c1a4ae92593f39108511196" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Size" kindref="compound">Size</ref>&lt; float_t &gt;</type>
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="85" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="85" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Size.h" line="85" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Math/Size.h" bodystart="85" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Size_8h_1ab7052bc6d5197a5dad9097d49b946f81" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Size" kindref="compound">Size</ref>&lt; int32_t &gt;</type>
@@ -98,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="86" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="86" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Size.h" line="86" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Math/Size.h" bodystart="86" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Size_8h_1a670bc97bd98b6bebde0cb3301d807d9d" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Size" kindref="compound">Size</ref>&lt; uint32_t &gt;</type>
@@ -112,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="87" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="87" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Size.h" line="87" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Math/Size.h" bodystart="87" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Size_8h_1ad660b861de3feffa766a0b5f32e90649" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Size2" kindref="compound">Size2</ref>&lt; float_t &gt;</type>
@@ -126,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="89" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="89" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Size.h" line="89" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Math/Size.h" bodystart="89" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Size_8h_1a427d0a0d8bfd2e71ad4b238fc62aaab9" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Size2" kindref="compound">Size2</ref>&lt; int32_t &gt;</type>
@@ -140,7 +140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="90" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="90" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Size.h" line="90" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Math/Size.h" bodystart="90" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Size_8h_1ab177cb8be8a525b65574c8cf1dd095d9" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Size2" kindref="compound">Size2</ref>&lt; uint32_t &gt;</type>
@@ -154,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="91" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="91" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Size.h" line="91" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Math/Size.h" bodystart="91" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector2_8h_1a5159ce2c654d1fa5cd44ca5cbacc1143" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">Vector2</ref>&lt; Unit &gt;</type>
@@ -168,7 +168,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector2.h" line="242" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="242" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="242" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="242" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector2_8h_1a830ffc08e2a280913c9c11469fa1e102" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">Vector2</ref>&lt; Unit &gt;</type>
@@ -182,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector2.h" line="243" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="243" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="243" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="243" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector2_8h_1a1c1edc6944d688f33883e4d87e4f15ff" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">Vector2</ref>&lt; uint16_t &gt;</type>
@@ -196,7 +196,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector2.h" line="244" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="244" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="244" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="244" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector2_8h_1ae9fffd128599d38072045e159e437fdf" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">Vector2</ref>&lt; int32_t &gt;</type>
@@ -210,7 +210,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector2.h" line="245" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="245" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="245" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="245" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector2_8h_1a99a788a51ddccd699b4536765ce3feaa" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">Vector2</ref>&lt; int32_t &gt;</type>
@@ -224,7 +224,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector2.h" line="246" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="246" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="246" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="246" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector2_8h_1a061559d90d66fb9f7ee4d75c56b000f9" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">Vector2</ref>&lt; uint32_t &gt;</type>
@@ -238,7 +238,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector2.h" line="247" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="247" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="247" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="247" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector2_8h_1a65fd6cf61e5a702ddd8af69b0ebf3018" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">Vector2</ref>&lt; uint32_t &gt;</type>
@@ -252,7 +252,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector2.h" line="248" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="248" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="248" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="248" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector2_8h_1a1280b690b10e3824ff0c7e83ecff2ef1" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">Vector2</ref>&lt; bool &gt;</type>
@@ -266,7 +266,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector2.h" line="249" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="249" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="249" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="249" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector3_8h_1ad98521dcabd87b4f2cf14f162c18e6bb" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; Unit &gt;</type>
@@ -280,7 +280,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector3.h" line="768" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="768" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="768" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="768" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector3_8h_1add6b330eb901c035034dd90071be1fd3" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; int32_t &gt;</type>
@@ -294,7 +294,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector3.h" line="769" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="769" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="769" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="769" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector3_8h_1a8094d49587a7bdbb32095580b21f3569" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; uint32_t &gt;</type>
@@ -308,7 +308,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector3.h" line="770" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="770" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="770" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="770" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector3_8h_1a2e21de6b81820721056fa8a6f478873f" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; bool &gt;</type>
@@ -322,7 +322,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector3.h" line="771" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="771" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="771" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="771" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector4_8h_1afea3818a990ae3c65e79ef5aa83fd9e4" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">Vector4</ref>&lt; Unit &gt;</type>
@@ -336,7 +336,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="152" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="152" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="152" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="152" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector4_8h_1a98c074fc8239ea6586b9d05b78530e39" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">Vector4</ref>&lt; int32_t &gt;</type>
@@ -350,7 +350,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="153" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="153" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="153" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="153" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector4_8h_1a67331635a8537c54a5251e41a20eb08d" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">Vector4</ref>&lt; uint32_t &gt;</type>
@@ -364,7 +364,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="154" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="154" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="154" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="154" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector4_8h_1a65cd65b33920a715b4c64b6953a9f39a" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">Vector4</ref>&lt; bool &gt;</type>
@@ -378,7 +378,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="155" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="155" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="155" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="155" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector6_8h_1ab9902736bb8b7ac9c6d3e504ce0e4104" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector6" kindref="compound">Vector6</ref>&lt; Unit &gt;</type>
@@ -392,7 +392,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="113" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="113" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="113" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="113" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector6_8h_1a424966ec2ede5e7db678e880cb640a25" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector6" kindref="compound">Vector6</ref>&lt; int32_t &gt;</type>
@@ -406,7 +406,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="114" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="114" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="114" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="114" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector6_8h_1abaf963fe78dbe28a4dca6628efe06b11" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector6" kindref="compound">Vector6</ref>&lt; uint32_t &gt;</type>
@@ -420,7 +420,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="115" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="115" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="115" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="115" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -438,7 +438,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" line="135" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="135" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" line="135" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="135" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="Mathematics_8h_1ac7f4904102ad18cae706461a6198e764" prot="public" static="no" constexpr="yes" mutable="no">
         <type>constexpr float_t</type>
@@ -453,7 +453,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" line="136" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="136" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" line="136" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="136" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="Mathematics_8h_1a183d4268cc7f073ba3e586aad6e86de8" prot="public" static="no" constexpr="yes" mutable="no">
         <type>constexpr int32_t</type>
@@ -468,7 +468,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" line="137" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="137" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" line="137" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="137" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="Mathematics_8h_1ab4609eb5adff7f6b2dfe0fcec00e3ce4" prot="public" static="no" constexpr="yes" mutable="no">
         <type>constexpr Unit</type>
@@ -483,7 +483,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" line="139" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="139" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" line="139" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="139" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="Quaternion_8h_1a874af9c391edce0571afdb451ddbbfb5" prot="public" static="yes" mutable="no">
         <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
@@ -498,7 +498,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="102" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="102" bodyend="102"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="102" column="36" bodyfile="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="102" bodyend="102"/>
       </memberdef>
       <memberdef kind="variable" id="Vector2_8h_1a2cd38c94ec3d103af40e77f0a2a0cee4" prot="public" static="yes" mutable="no">
         <type>SR_INLINE const <ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">FVector2</ref></type>
@@ -513,7 +513,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector2.h" line="251" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="251" bodyend="251"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="251" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="251" bodyend="251"/>
       </memberdef>
       <memberdef kind="variable" id="Vector2_8h_1a8827c7ae5fc1ea905fd9edf01480cb9a" prot="public" static="no" constexpr="yes" mutable="no">
         <type>constexpr <ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">IVector2</ref></type>
@@ -528,7 +528,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector2.h" line="253" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="253" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="253" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="253" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="Vector3_8h_1a1cc03d04964003922ea1ff6376abef39" prot="public" static="yes" mutable="no">
         <type>SR_INLINE const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref></type>
@@ -543,7 +543,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector3.h" line="773" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="773" bodyend="773"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="773" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="773" bodyend="773"/>
       </memberdef>
       <memberdef kind="variable" id="Vector3_8h_1a2273f6a66c33776961808f35ac2add59" prot="public" static="yes" mutable="no">
         <type>SR_INLINE const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref></type>
@@ -562,7 +562,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector3.h" line="774" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="774" bodyend="778"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="774" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="774" bodyend="778"/>
       </memberdef>
       <memberdef kind="variable" id="Vector4_8h_1a3c1b358c33546a81df1e0a72caad36ee" prot="public" static="no" extern="yes" mutable="no">
         <type>std::unordered_map&lt; SRHashType, <ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref> &gt;</type>
@@ -576,7 +576,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="150" column="31" declfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" declline="150" declcolumn="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="150" column="31" declfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" declline="150" declcolumn="31"/>
       </memberdef>
       <memberdef kind="variable" id="Vector4_8h_1a37bc10f7a660f0a75fbe038117b4948e" prot="public" static="yes" mutable="no">
         <type>SR_INLINE const <ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">FVector4</ref></type>
@@ -591,7 +591,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="157" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="157" bodyend="157"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="157" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="157" bodyend="157"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -645,7 +645,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Axis.h" line="11" column="5" declfile="Engine/Core/libs/Utils/inc/Utils/Math/Axis.h" declline="11" declcolumn="5"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Axis.h" line="11" column="5" declfile="Engine/libs/Utils/inc/Utils/Math/Axis.h" declline="11" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="Mathematics_8h_1acab42dc1579d40e289dda3d9716061b2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_FORCE_INLINE bool</type>
@@ -663,7 +663,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" line="92" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="92" bodyend="116"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" line="92" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="92" bodyend="116"/>
       </memberdef>
       <memberdef kind="function" id="Mathematics_8h_1a3e0b87ca1cff4c5992b24bd35a8eee52" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_FORCE_INLINE bool</type>
@@ -681,7 +681,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" line="118" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="118" bodyend="131"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" line="118" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="118" bodyend="131"/>
       </memberdef>
       <memberdef kind="function" id="Mathematics_8h_1a67c2d5175d59fdb653d1e842628440b5" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -704,7 +704,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" line="141" column="64" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="141" bodyend="151"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" line="141" column="64" bodyfile="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="141" bodyend="151"/>
       </memberdef>
       <memberdef kind="function" id="Mathematics_8h_1a7400e6c84ef8346ee5fd197c4ec6ea62" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_FORCE_INLINE Unit</type>
@@ -722,7 +722,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" line="153" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="153" bodyend="155"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" line="153" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="153" bodyend="155"/>
       </memberdef>
       <memberdef kind="function" id="Mathematics_8h_1ac255b4d012a2b0f4d9e33f8e8a63bf4e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_FORCE_INLINE double_t</type>
@@ -748,7 +748,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" line="157" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="157" bodyend="159"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" line="157" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="157" bodyend="159"/>
       </memberdef>
       <memberdef kind="function" id="Mathematics_8h_1a1645686a2705d79316ab685fde3381d2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -778,7 +778,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" line="161" column="46" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="161" bodyend="163"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" line="161" column="46" bodyfile="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="161" bodyend="163"/>
       </memberdef>
       <memberdef kind="function" id="Mathematics_8h_1a3c11332d498fd783446053d45f02c714" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -808,7 +808,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" line="165" column="46" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="165" bodyend="173"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" line="165" column="46" bodyfile="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="165" bodyend="173"/>
       </memberdef>
       <memberdef kind="function" id="Mathematics_8h_1a7e6d983a17313e39a31431895f54737b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_FORCE_INLINE double_t SR_FASTCALL</type>
@@ -826,7 +826,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" line="175" column="49" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="175" bodyend="177"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" line="175" column="49" bodyfile="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="175" bodyend="177"/>
       </memberdef>
       <memberdef kind="function" id="Mathematics_8h_1a7ce6c7e9cd635d8a771096ea2a8ec7a1" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -856,7 +856,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" line="179" column="46" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="179" bodyend="198"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" line="179" column="46" bodyfile="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="179" bodyend="198"/>
       </memberdef>
       <memberdef kind="function" id="Mathematics_8h_1a1735264985629a662ec2b90992facda7" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -893,7 +893,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" line="200" column="48" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="200" bodyend="209"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" line="200" column="48" bodyfile="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="200" bodyend="209"/>
       </memberdef>
       <memberdef kind="function" id="Mathematics_8h_1ae523399fcb540ec843d7e5a343841d22" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -912,7 +912,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" line="211" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="211" bodyend="219"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" line="211" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="211" bodyend="219"/>
       </memberdef>
       <memberdef kind="function" id="Mathematics_8h_1a62139dc7ff47dac1b650fcfc80334be0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -931,7 +931,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" line="221" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="221" bodyend="224"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" line="221" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="221" bodyend="224"/>
       </memberdef>
       <memberdef kind="function" id="Mathematics_8h_1a9d509067e214713e3b6a63d6e52c8e73" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -950,7 +950,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" line="226" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="226" bodyend="246"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" line="226" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="226" bodyend="246"/>
       </memberdef>
       <memberdef kind="function" id="Mathematics_8h_1a805cae8d5e9301251cbcfa7a9c9ac89c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -969,7 +969,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" line="248" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="248" bodyend="250"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" line="248" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="248" bodyend="250"/>
       </memberdef>
       <memberdef kind="function" id="Matrix4x4_8h_1abdc3884724d134588776219dea271a5d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED <ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">FVector4</ref></type>
@@ -999,7 +999,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="100" column="30" declfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" declline="100" declcolumn="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="100" column="30" declfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" declline="100" declcolumn="30"/>
       </memberdef>
       <memberdef kind="function" id="Matrix4x4_8h_1aaa425deeeb3003229794a4e12492e7ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED <ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">FVector4</ref></type>
@@ -1025,7 +1025,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="101" column="30" declfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" declline="101" declcolumn="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="101" column="30" declfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" declline="101" declcolumn="30"/>
       </memberdef>
       <memberdef kind="function" id="Matrix4x4_8h_1a3b5fe39db0707f5ec4b3e2e3af31bdd2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED <ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">FVector4</ref></type>
@@ -1047,7 +1047,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="102" column="30" declfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" declline="102" declcolumn="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="102" column="30" declfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" declline="102" declcolumn="30"/>
       </memberdef>
       <memberdef kind="function" id="Matrix4x4_8h_1abf7c88a92b276534f22075fed67b09a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -1077,7 +1077,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="103" column="26" declfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" declline="103" declcolumn="26"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="103" column="26" declfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" declline="103" declcolumn="26"/>
       </memberdef>
       <memberdef kind="function" id="Matrix4x4Utils_8h_1a8ad40cfbdda796ce03a5f53336546b97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_INLINE_STATIC void SR_FASTCALL</type>
@@ -1099,7 +1099,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="12" column="39" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="12" bodyend="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="12" column="39" bodyfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="12" bodyend="32"/>
       </memberdef>
       <memberdef kind="function" id="Matrix4x4Utils_8h_1a65be4602a3c2ce986df8a4bde8d52579" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_INLINE_STATIC void SR_FASTCALL</type>
@@ -1121,7 +1121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="34" column="39" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="34" bodyend="54"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="34" column="39" bodyfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="34" bodyend="54"/>
       </memberdef>
       <memberdef kind="function" id="Matrix4x4Utils_8h_1a86913409f989a33a6451e048ad4ba399" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_INLINE_STATIC void SR_FASTCALL</type>
@@ -1143,7 +1143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="56" column="39" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="56" bodyend="66"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="56" column="39" bodyfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="56" bodyend="66"/>
       </memberdef>
       <memberdef kind="function" id="Matrix4x4Utils_8h_1a6e2f7b18c1300eb463d3a31b0f161d32" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_INLINE_STATIC void SR_FASTCALL</type>
@@ -1165,7 +1165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="68" column="39" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="68" bodyend="78"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="68" column="39" bodyfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="68" bodyend="78"/>
       </memberdef>
       <memberdef kind="function" id="Matrix4x4Utils_8h_1ac177c74c831ca359c75a8cdd4f62e167" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_INLINE_STATIC void SR_FASTCALL</type>
@@ -1191,7 +1191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="80" column="39" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="80" bodyend="115"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="80" column="39" bodyfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="80" bodyend="115"/>
       </memberdef>
       <memberdef kind="function" id="Matrix4x4Utils_8h_1a3e60fc1e3eab9cd1636f460a0afa5294" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_INLINE_STATIC void SR_FASTCALL</type>
@@ -1217,7 +1217,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="117" column="39" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="117" bodyend="151"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="117" column="39" bodyfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="117" bodyend="151"/>
       </memberdef>
       <memberdef kind="function" id="Matrix4x4Utils_8h_1acfbe00e5483ecd634fe8a5f89aa2f6a5" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_INLINE_STATIC glm::mat4 SR_FASTCALL</type>
@@ -1239,7 +1239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="153" column="57" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="153" bodyend="157"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="153" column="57" bodyfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="153" bodyend="157"/>
       </memberdef>
       <memberdef kind="function" id="Matrix4x4Utils_8h_1ab0862f51c1ed658154fe370aede89184" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_INLINE_STATIC void SR_FASTCALL</type>
@@ -1262,7 +1262,7 @@
         <inbodydescription>
 <para>rotation matrix</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="159" column="39" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="159" bodyend="194"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="159" column="39" bodyfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="159" bodyend="194"/>
       </memberdef>
       <memberdef kind="function" id="Noise_8h_1a8a925a10a3f2bd3498867acad2ebfccc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint8_t</type>
@@ -1284,7 +1284,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" line="15" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" bodystart="15" bodyend="17"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Noise.h" line="15" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Math/Noise.h" bodystart="15" bodyend="17"/>
       </memberdef>
       <memberdef kind="function" id="Noise_8h_1a315dd3b56509407a4ec72f1322b7a65e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint8_t</type>
@@ -1310,7 +1310,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" line="19" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" bodystart="19" bodyend="21"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Noise.h" line="19" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Math/Noise.h" bodystart="19" bodyend="21"/>
       </memberdef>
       <memberdef kind="function" id="Noise_8h_1a72e7bbd7b7d42b0e96cef5a2a1d10283" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint8_t</type>
@@ -1340,7 +1340,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" line="23" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" bodystart="23" bodyend="25"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Noise.h" line="23" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Math/Noise.h" bodystart="23" bodyend="25"/>
       </memberdef>
       <memberdef kind="function" id="Noise_8h_1a8d142100ad7c0c2748eea6c3a6a8431c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1375,7 +1375,7 @@
 <para>Determine cell</para>
 <para>Coordinate components relative to the cell vertices</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" line="37" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" bodystart="37" bodyend="68" declfile="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" declline="27" declcolumn="25"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Noise.h" line="37" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Math/Noise.h" bodystart="37" bodyend="68" declfile="Engine/libs/Utils/inc/Utils/Math/Noise.h" declline="27" declcolumn="25"/>
       </memberdef>
       <memberdef kind="function" id="Noise_8h_1a6dce9c64fcbeda90684a47a448d33dee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1414,7 +1414,7 @@
 <para>Determine cell</para>
 <para>Coordinate components relative to the cell vertices</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" line="70" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" bodystart="70" bodyend="121" declfile="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" declline="28" declcolumn="25"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Noise.h" line="70" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Math/Noise.h" bodystart="70" bodyend="121" declfile="Engine/libs/Utils/inc/Utils/Math/Noise.h" declline="28" declcolumn="25"/>
       </memberdef>
       <memberdef kind="function" id="Noise_8h_1a8ddd9ae3c98b8f1390c6e61b82d1f1d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1461,7 +1461,7 @@
 <para>at it</para>
 <para>at it+1</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" line="123" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" bodystart="123" bodyend="212" declfile="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" declline="29" declcolumn="25"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Noise.h" line="123" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Math/Noise.h" bodystart="123" bodyend="212" declfile="Engine/libs/Utils/inc/Utils/Math/Noise.h" declline="29" declcolumn="25"/>
       </memberdef>
       <memberdef kind="function" id="Noise_8h_1a028d6546156913c402052ff23f0dc840" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double_t</type>
@@ -1483,7 +1483,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" line="31" column="14" declfile="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" declline="31" declcolumn="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Noise.h" line="31" column="14" declfile="Engine/libs/Utils/inc/Utils/Math/Noise.h" declline="31" declcolumn="14"/>
       </memberdef>
       <memberdef kind="function" id="Noise_8h_1a4f6fd054d148c5ad58bbf71d6afca10a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double_t</type>
@@ -1509,7 +1509,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" line="32" column="14" declfile="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" declline="32" declcolumn="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Noise.h" line="32" column="14" declfile="Engine/libs/Utils/inc/Utils/Math/Noise.h" declline="32" declcolumn="14"/>
       </memberdef>
       <memberdef kind="function" id="Noise_8h_1a2f9c31c244f69c70d13118470906fe95" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double_t</type>
@@ -1539,7 +1539,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" line="33" column="14" declfile="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" declline="33" declcolumn="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Noise.h" line="33" column="14" declfile="Engine/libs/Utils/inc/Utils/Math/Noise.h" declline="33" declcolumn="14"/>
       </memberdef>
       <memberdef kind="function" id="Size_8h_1a2332f476400ca6d5c3c84a0c68b556d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -1565,7 +1565,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="12" column="5" declfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" declline="12" declcolumn="5"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Size.h" line="12" column="5" declfile="Engine/libs/Utils/inc/Utils/Math/Size.h" declline="12" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="Vector4_8h_1a057315e58c05b1f6d781e56882180c6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">FVector4</ref></type>
@@ -1587,7 +1587,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="175" column="14" declfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" declline="175" declcolumn="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="175" column="14" declfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" declline="175" declcolumn="14"/>
       </memberdef>
       <memberdef kind="function" id="Vector4_8h_1af39d3304c6385b4b41398d41bacd7fdd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">FVector4</ref></type>
@@ -1609,7 +1609,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="176" column="14" declfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" declline="176" declcolumn="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="176" column="14" declfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" declline="176" declcolumn="14"/>
       </memberdef>
       <memberdef kind="function" id="Vector4_8h_1a42ffacae5f662985988ebe16123f7812" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -1627,7 +1627,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="177" column="14" declfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" declline="177" declcolumn="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="177" column="14" declfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" declline="177" declcolumn="14"/>
       </memberdef>
       <memberdef kind="function" id="Vector4_8h_1ae7dd4229cc847de5fa64d271d53b4f41" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -1645,7 +1645,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="178" column="14" declfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" declline="178" declcolumn="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="178" column="14" declfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" declline="178" declcolumn="14"/>
       </memberdef>
       <memberdef kind="function" id="Vector4_8h_1a4902bce6674652cbf9406b696a2c4e1d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">IVector3</ref></type>
@@ -1663,7 +1663,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="179" column="14" declfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" declline="179" declcolumn="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="179" column="14" declfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" declline="179" declcolumn="14"/>
       </memberdef>
       <memberdef kind="function" id="Vector4_8h_1a254c476886e78faf1a79a67ee51c70b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">IVector3</ref></type>
@@ -1681,13 +1681,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="180" column="14" declfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" declline="180" declcolumn="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="180" column="14" declfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" declline="180" declcolumn="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Math/Axis.h" line="10" column="1"/>
+    <location file="Engine/libs/Utils/inc/Utils/Math/Axis.h" line="10" column="1"/>
   </compounddef>
 </doxygen>

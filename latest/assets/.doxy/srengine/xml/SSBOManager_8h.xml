@@ -7,7 +7,7 @@
     <includes refid="ObjectPool_8h" local="no">Utils/Types/ObjectPool.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Memory/SSBOManager.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Memory/SSBOManager.h</label>
         <link refid="SSBOManager_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -682,6 +682,6 @@
 <codeline lineno="52"><highlight class="normal"></highlight></codeline>
 <codeline lineno="53"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_GRAPHICS_ENGINE_SSBO_MANAGER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/SSBOManager.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Memory/SSBOManager.h"/>
   </compounddef>
 </doxygen>

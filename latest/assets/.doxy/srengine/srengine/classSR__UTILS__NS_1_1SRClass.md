@@ -188,5 +188,5 @@ static bool SR_UTILS_NS::SRClass::RegisterPropertiesCodegen ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClass.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/TypeTraits/SRClass.h`
 

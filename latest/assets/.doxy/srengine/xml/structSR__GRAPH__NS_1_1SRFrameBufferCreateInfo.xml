@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="22" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="22" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="22" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="22" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SRFrameBufferCreateInfo_1afd31399d15b214003ed6c369bb2d6c1c" prot="public" static="no" mutable="no">
         <type>int32_t *</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="23" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="23" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SRFrameBufferCreateInfo_1a57ea44c84977e22b6224fa8e72212e19" prot="public" static="no" mutable="no">
         <type><ref refid="structSR__GRAPH__NS_1_1DepthLayer" kindref="compound">DepthLayer</ref> *</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="24" column="20" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="24" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SRFrameBufferCreateInfo_1af7843fc4a785120a297147eb84a0eacc" prot="public" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="structSR__GRAPH__NS_1_1ColorLayer" kindref="compound">ColorLayer</ref> &gt; *</type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="25" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="25" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SRFrameBufferCreateInfo_1a3434e5f1a62413c84bd1645f400e86e1" prot="public" static="no" mutable="no">
         <type>uint8_t</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="26" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="26" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="26" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SRFrameBufferCreateInfo_1a6eca354f6ce62fd23d5ad180bcb4b36e" prot="public" static="no" mutable="no">
         <type>uint32_t</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="27" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="27" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SRFrameBufferCreateInfo_1a00c66b0d259c52d777bf1ecea5eab1d5" prot="public" static="no" mutable="no">
         <type><ref refid="structSR__GRAPH__NS_1_1FrameBufferFeatures" kindref="compound">FrameBufferFeatures</ref></type>
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="28" column="29" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="28" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="28" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -131,7 +131,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="21" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="21" bodyend="30"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="21" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="21" bodyend="30"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1SRFrameBufferCreateInfo_1af7843fc4a785120a297147eb84a0eacc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SRFrameBufferCreateInfo</scope><name>colors</name></member>
       <member refid="structSR__GRAPH__NS_1_1SRFrameBufferCreateInfo_1a00c66b0d259c52d777bf1ecea5eab1d5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SRFrameBufferCreateInfo</scope><name>features</name></member>

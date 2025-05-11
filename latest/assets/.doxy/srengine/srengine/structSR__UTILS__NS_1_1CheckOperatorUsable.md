@@ -128,5 +128,5 @@ Inherits the following classes: [SR\_UTILS\_NS::IsDetected](structSR__UTILS__NS_
 
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h`
 

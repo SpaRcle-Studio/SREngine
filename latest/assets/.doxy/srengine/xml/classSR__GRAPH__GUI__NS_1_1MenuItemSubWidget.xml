@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="43" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" bodystart="43" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="43" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__GUI__NS_1_1MenuItemSubWidget_1aca94494607e086507ff7d4ff564dfb3c" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(const <ref refid="structSR__GRAPH__GUI__NS_1_1DrawPopupContext" kindref="compound">DrawPopupContext</ref> &amp;context)&gt;</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="44" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="44" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" bodystart="44" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="61" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" bodystart="61" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="61" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" bodystart="61" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1MenuItemSubWidget_1adb5348eab7f27f5b77196b9084647679" prot="protected" static="no" mutable="no">
         <type>std::string</type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="62" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" bodystart="62" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="62" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" bodystart="62" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1MenuItemSubWidget_1aa5bf31f717efd0f3c132affd3bfc884d" prot="protected" static="no" mutable="no">
         <type>Action</type>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="63" column="16" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" bodystart="63" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="63" column="16" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" bodystart="63" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="47" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="47" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1MenuItemSubWidget_1a54f62d4980858e6f19e357b75f572f0c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="48" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" bodystart="48" bodyend="50"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="48" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" bodystart="48" bodyend="50"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1MenuItemSubWidget_1a216c3be1d77ce26906d4927a516707f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -126,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="53" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="53" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1MenuItemSubWidget_1a39e3980d5e3500c944444c917c7d4e53" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const std::string &amp;</type>
@@ -140,7 +140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="55" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" bodystart="55" bodyend="55"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="55" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" bodystart="55" bodyend="55"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1MenuItemSubWidget_1aa983bf981b71d364e959ec07e54afa9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__GRAPH__GUI__NS_1_1MenuItemSubWidget" kindref="compound">MenuItemSubWidget</ref> &amp;</type>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="57" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="57" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1MenuItemSubWidget_1ad0d4f30b78c0d83382fe5f5a9555b033" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__GRAPH__GUI__NS_1_1MenuItemSubWidget" kindref="compound">MenuItemSubWidget</ref> &amp;</type>
@@ -176,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="58" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="58" column="27"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -207,7 +207,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="41" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" bodystart="41" bodyend="65"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" line="41" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/PopupMenu.h" bodystart="41" bodyend="65"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__GUI__NS_1_1MenuItemSubWidget_1aca94494607e086507ff7d4ff564dfb3c" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::MenuItemSubWidget</scope><name>Action</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1MenuItemSubWidget_1aa983bf981b71d364e959ec07e54afa9c" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::MenuItemSubWidget</scope><name>AddMenu</name></member>

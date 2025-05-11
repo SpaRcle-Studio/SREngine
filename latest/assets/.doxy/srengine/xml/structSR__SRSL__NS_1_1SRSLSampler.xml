@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="20" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="20" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="20" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="20" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLSampler_1a05fa88364c15045318c0ccb7a575d70f" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="21" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="21" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="21" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="21" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLSampler_1a17b62421794ee096dda86a4c1847ca01" prot="public" static="no" mutable="no">
         <type>uint64_t</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="22" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="22" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="22" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="22" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLSampler_1a0c4ebfb4b9f2dfbb3959f64805807063" prot="public" static="no" mutable="no">
         <type>int32_t</type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="23" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="23" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLSampler_1a91b213fc720002aadda74700876fec48" prot="public" static="no" mutable="no">
         <type>std::set&lt; ShaderStage &gt;</type>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="24" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="24" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLSampler_1aed01c0a2aa6454cfcaa9b8e0c69f8d8f" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="25" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="25" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="25" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -109,7 +109,7 @@
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="19" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="19" bodyend="26"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="19" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="19" bodyend="26"/>
     <listofallmembers>
       <member refid="structSR__SRSL__NS_1_1SRSLSampler_1a0c4ebfb4b9f2dfbb3959f64805807063" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLSampler</scope><name>attachment</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLSampler_1a17b62421794ee096dda86a4c1847ca01" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLSampler</scope><name>binding</name></member>

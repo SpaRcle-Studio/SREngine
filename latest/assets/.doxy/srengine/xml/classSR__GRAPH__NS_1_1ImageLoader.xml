@@ -6,7 +6,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ImageLoader.h" line="9" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ImageLoader.h" bodystart="9" bodyend="11"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ImageLoader.h" line="9" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ImageLoader.h" bodystart="9" bodyend="11"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

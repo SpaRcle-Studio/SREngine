@@ -30,7 +30,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h</label>
         <link refid="Win32Window_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -749,6 +749,6 @@
 <codeline lineno="79"><highlight class="normal"></highlight></codeline>
 <codeline lineno="80"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_WIN32WINDOW_H</highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h"/>
   </compounddef>
 </doxygen>

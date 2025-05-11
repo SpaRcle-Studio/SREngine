@@ -1143,5 +1143,5 @@ See [SR\_GRAPH\_NS::ISamplersPass](classSR__GRAPH__NS_1_1ISamplersPass.md)
 
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h`
 

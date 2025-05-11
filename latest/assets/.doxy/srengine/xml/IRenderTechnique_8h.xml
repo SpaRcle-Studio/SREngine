@@ -10,8 +10,8 @@
     <includes refid="IGraphicsResource_8h" local="no">Graphics/Memory/IGraphicsResource.h</includes>
     <includes refid="GroupPass_8h" local="no">Graphics/Pass/GroupPass.h</includes>
     <includes refid="PassQueue_8h" local="no">Graphics/Pass/PassQueue.h</includes>
-    <includedby refid="RenderTechnique_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Render/RenderTechnique.h</includedby>
-    <includedby refid="ScriptableRenderTechnique_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Render/ScriptableRenderTechnique.h</includedby>
+    <includedby refid="RenderTechnique_8h" local="no">Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h</includedby>
+    <includedby refid="ScriptableRenderTechnique_8h" local="no">Engine/libs/Graphics/inc/Graphics/Render/ScriptableRenderTechnique.h</includedby>
     <incdepgraph>
       <node id="144">
         <label>Graphics/Memory/DescriptorManager.h</label>
@@ -92,7 +92,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h</label>
         <link refid="IRenderTechnique_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1147,11 +1147,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="3">
-        <label>Engine/Core/inc/Core/World/EngineScene.h</label>
+        <label>Engine/inc/Engine/World/EngineScene.h</label>
         <link refid="EngineScene_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h</label>
         <link refid="IRenderTechnique_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1159,13 +1159,13 @@
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderTechnique.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h</label>
         <link refid="RenderTechnique_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/ScriptableRenderTechnique.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/ScriptableRenderTechnique.h</label>
         <link refid="ScriptableRenderTechnique_8h_source"/>
       </node>
     </invincdepgraph>
@@ -1270,6 +1270,6 @@
 <codeline lineno="91"><highlight class="normal"></highlight></codeline>
 <codeline lineno="92"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GRAPHICS_I_RENDER_TECHNIQUE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h"/>
   </compounddef>
 </doxygen>

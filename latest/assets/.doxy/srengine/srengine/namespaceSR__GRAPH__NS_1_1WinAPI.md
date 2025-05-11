@@ -101,5 +101,5 @@ enum SR_GRAPH_NS::WinAPI::StyleState {
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h`
 

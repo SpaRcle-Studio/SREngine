@@ -3,10 +3,10 @@
   <compounddef id="IButton_8h" kind="file" language="C++">
     <compoundname>IButton.h</compoundname>
     <includes refid="IRenderComponent_8h" local="no">Graphics/Types/IRenderComponent.h</includes>
-    <includedby refid="Button_8h" local="no">Engine/Core/inc/Core/UI/Button.h</includedby>
+    <includedby refid="Button_8h" local="no">Engine/inc/Engine/UI/Button.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/UI/IButton.h</label>
+        <label>Engine/inc/Engine/UI/IButton.h</label>
         <link refid="IButton_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1006,11 +1006,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/inc/Core/UI/Button.h</label>
+        <label>Engine/inc/Engine/UI/Button.h</label>
         <link refid="Button_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/inc/Core/UI/IButton.h</label>
+        <label>Engine/inc/Engine/UI/IButton.h</label>
         <link refid="IButton_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1087,6 +1087,6 @@
 <codeline lineno="61"><highlight class="normal"></highlight></codeline>
 <codeline lineno="62"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_IBUTTON_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/UI/IButton.h"/>
+    <location file="Engine/inc/Engine/UI/IButton.h"/>
   </compounddef>
 </doxygen>

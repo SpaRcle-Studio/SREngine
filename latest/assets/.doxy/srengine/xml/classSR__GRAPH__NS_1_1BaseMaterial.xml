@@ -20,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="35" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="35" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="35" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="35" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-type">
@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="38" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="38" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BaseMaterial_1ae80ca5583683cd6ab3db00f5fc315871" prot="protected" static="no">
         <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="39" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="39" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="39" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BaseMaterial_1a1b60febc85872aad9f9dfb3dd5dfcba1" prot="protected" static="no">
         <type><ref refid="classSR__GTYPES__NS_1_1Mesh" kindref="compound">SR_GTYPES_NS::Mesh</ref> *</type>
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="40" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="40" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="40" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BaseMaterial_1a9fff54e4e52215623b23a61e52f572f0" prot="protected" static="no">
         <type><ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> *</type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="41" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="41" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="41" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="41" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="79" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="79" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="79" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="79" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BaseMaterial_1a31412c64e09721f9c352ad2a552f125e" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1ObjectPool" kindref="compound">SR_HTYPES_NS::ObjectPool</ref>&lt; MeshPtr, uint32_t &gt;</type>
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="81" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="81" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="81" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="81" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BaseMaterial_1a1caf518d2d7d5d9e2bc45f6eba3ca6fd" prot="protected" static="no" mutable="yes">
         <type><ref refid="classSR__UTILS__NS_1_1Subscription" kindref="compound">SR_UTILS_NS::Subscription</ref></type>
@@ -122,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="83" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="83" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="83" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="83" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BaseMaterial_1a6b2790fc232fecca8d01386a28282d55" prot="protected" static="no" mutable="yes">
         <type><ref refid="classSR__UTILS__NS_1_1Subscription" kindref="compound">SR_UTILS_NS::Subscription</ref></type>
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="84" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="84" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="84" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -152,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="44" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="44" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1afa769f4b888d7f3900afc25e4019c08b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -166,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="45" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="45" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a49bcd5177ade3cc781423acc8fb97588" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -188,7 +188,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="48" column="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="48" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a70ae86eaacce8465fa095b7c7f1bb9f7" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -210,7 +210,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="49" column="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="49" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a6376c40d72e9fa60453f7a5cd4125c6b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -232,7 +232,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="50" column="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="50" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a63ce489b511922a2922f35cc3b3e91bf" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -254,7 +254,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="51" column="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="51" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1addd7a75fff2b7b2a015c1fb6925fc2bb" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -268,7 +268,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="53" column="46"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="53" column="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a80bcd5bfd9f517dcda9cba03a29609aa" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -282,7 +282,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="54" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="54" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1afc0fdc33be15755db556ae76419c446e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD ShaderPtr</type>
@@ -296,7 +296,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="55" column="32"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="55" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1aef301cb16c0609034aeab36bdb616c9b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD RenderContextPtr</type>
@@ -310,7 +310,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="56" column="39" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="56" bodyend="56"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="56" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="56" bodyend="56"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a932f0df30f2837d4bd3561f458fc4728" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
         <type>SR_NODISCARD const MaterialData::Ptr &amp;</type>
@@ -326,7 +326,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="57" column="54"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="57" column="54"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1ac188eae5e0af929f3d17dcc8c3d71a0f" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
         <type>SR_NODISCARD MaterialType</type>
@@ -342,7 +342,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="59" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="59" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a7025adb4e608e7c8c7db2130f4e9dfbf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -360,7 +360,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="61" column="39"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="61" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1aa8b535c58e8a90670b530f67f6df2e53" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -378,7 +378,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="62" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="62" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1aab3c58af7c559c0d45faab3c45334500" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -401,7 +401,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="64" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="64" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a8b70231d2e3a61312c808e89d3f69836" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -424,7 +424,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="65" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="65" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a92a95b1b6960ed0f5ba00b99acb9ffee" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -442,7 +442,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="67" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="67" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a1765c7bfb2e577fa22dddf54b8567bec" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -456,7 +456,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="68" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="68" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a60e16713e2e63b1797b5c1201713711f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -470,7 +470,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="70" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="70" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1af721891f19dafc0675929be355612ee6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -484,7 +484,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="71" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="71" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -500,7 +500,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="74" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="74" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a1f6d3286ce83c0d551b632da1719b92f" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -514,7 +514,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="75" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="75" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1ad6a6915f5ec2118b1a31c7cd651e97d5" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -528,7 +528,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="76" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="76" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -636,7 +636,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="32" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="32" bodyend="86"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="32" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="32" bodyend="86"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>AllocateStatic</name></member>

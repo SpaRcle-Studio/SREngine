@@ -101,5 +101,5 @@ inline size_t SR_UTILS_NS::SRHash< SR_GRAPH_NS::ShaderProperties >::operator() (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h`
 

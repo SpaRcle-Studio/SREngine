@@ -142,5 +142,5 @@ inline explicit SR_ANIMATIONS_NS::ScalingKey::ScalingKey (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h`
 

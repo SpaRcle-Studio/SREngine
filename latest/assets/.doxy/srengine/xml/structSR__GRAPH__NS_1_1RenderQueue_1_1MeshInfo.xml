@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="43" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="43" bodyend="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="43" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="43" bodyend="43"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshInfo_1ae196a545df973bd7615e7043e67ed6a8" prot="public" static="no" mutable="no">
         <type>VBO</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="44" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="44" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshInfo_1ae15006207e21602a25aa695d6ce99757" prot="public" static="no" mutable="no">
         <type>MeshPtr</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="45" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="45" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="45" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshInfo_1aee176f052a3a62b862f341fa98298c0e" prot="public" static="no" mutable="no">
         <type>int64_t</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="46" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="46" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="46" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshInfo_1a949fc58ac426c476cb067a7bed45ac93" prot="public" static="no" mutable="no">
         <type>QueueStateFlags</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="47" column="29" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="47" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshInfo_1a0df821ea947cf0452e356793f28b2c63" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="48" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="48" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="48" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="48" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -111,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="50" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="50" bodyend="56"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="50" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="50" bodyend="56"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -240,7 +240,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="42" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="42" bodyend="57"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="42" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="42" bodyend="57"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshInfo_1a0df821ea947cf0452e356793f28b2c63" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue::MeshInfo</scope><name>hasVBO</name></member>
       <member refid="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshInfo_1ad8efc22f282fa98a9d2091cb074d5b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue::MeshInfo</scope><name>operator==</name></member>

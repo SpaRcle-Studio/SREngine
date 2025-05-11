@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="18" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" bodystart="18" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="18" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" bodystart="18" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="20" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" bodystart="20" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="20" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" bodystart="20" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="51" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="51" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1DebugWireframeMesh_1aae4ea8aa715a4994c7fe04198dded61d" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref></type>
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="52" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" bodystart="52" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="52" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" bodystart="52" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="23" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="23" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugWireframeMesh_1afcafec07d0ec2c7947a6c786f9f0e7e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="24" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="24" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugWireframeMesh_1ac19a69ea0f0e71c016ffdf08d28561b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -111,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="27" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="27" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a8b4bae459592a401bf9a665c7ceefda1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -130,7 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="29" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="29" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a71647c3497766a65ce2eb7835762aa05" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="31" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a939e3597723f5e3feb514adfeab23fb4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD MeshType</type>
@@ -160,7 +160,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="33" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" bodystart="33" bodyend="33"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="33" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" bodystart="33" bodyend="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a0d446a3a06fbaf0cec37d82998d134ca" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD std::vector&lt; uint32_t &gt;</type>
@@ -175,7 +175,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="35" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="35" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a3c933dd4ceee02d3ffb0e6eaf6f3e646" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD std::string</type>
@@ -190,7 +190,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="36" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="36" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a2fdf9b8f55c42130fae558a6ff59964a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -205,7 +205,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="38" column="46" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" bodystart="38" bodyend="41"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="38" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" bodystart="38" bodyend="41"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a4fbda01e8a426c3efbd3e4adf45adeba" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -224,7 +224,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="43" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="43" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugWireframeMesh_1afb98d2df644f5727322795c5d1584915" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
@@ -239,7 +239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="44" column="50" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" bodystart="44" bodyend="44"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="44" column="50" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" bodystart="44" bodyend="44"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a4d597832057985029f3b6ef2c69ee9c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -254,7 +254,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="46" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="46" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugWireframeMesh_1ac1bbce7c76cdc1591b3a2354e8f5f217" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -269,7 +269,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="48" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="48" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -411,7 +411,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="16" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" bodystart="16" bodyend="54"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="16" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" bodystart="16" bodyend="54"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>BaseComponent</name></member>

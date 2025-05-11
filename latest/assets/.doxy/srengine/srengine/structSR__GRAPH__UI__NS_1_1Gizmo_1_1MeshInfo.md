@@ -125,5 +125,5 @@ SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Mesh> SR_GRAPH_UI_NS::Gizmo::MeshInfo::pVi
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h`
 

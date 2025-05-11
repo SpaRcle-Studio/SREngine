@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="24" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="24" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1MeshDrawerPass_1_1Sampler_1ac40ea239041fc435b18f052bbf7b5765" prot="public" static="no" mutable="no">
         <type>uint32_t</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="25" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="25" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1MeshDrawerPass_1_1Sampler_1ac7f2c47ed54d1787f9b164932e4bbadb" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="26" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="26" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="26" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1MeshDrawerPass_1_1Sampler_1ad99bf51ae4faa0609777691f0560184f" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="27" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="27" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1MeshDrawerPass_1_1Sampler_1ae9b3a3f75fba3b2c4aa295d053db1eba" prot="public" static="no" mutable="no">
         <type>uint64_t</type>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="28" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="28" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1MeshDrawerPass_1_1Sampler_1a5575d66193cf8c82f5c189721216470c" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="29" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="29" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="29" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -109,7 +109,7 @@
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="23" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="23" bodyend="30"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="23" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="23" bodyend="30"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1MeshDrawerPass_1_1Sampler_1a5575d66193cf8c82f5c189721216470c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass::Sampler</scope><name>depth</name></member>
       <member refid="structSR__GRAPH__NS_1_1MeshDrawerPass_1_1Sampler_1ac40ea239041fc435b18f052bbf7b5765" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass::Sampler</scope><name>fboId</name></member>

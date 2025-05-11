@@ -5,7 +5,7 @@
     <includes refid="ThreadWorker_8h" local="no">Utils/TaskManager/ThreadWorker.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/States/StopState.h</label>
+        <label>Engine/inc/Engine/States/StopState.h</label>
         <link refid="StopState_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -854,6 +854,6 @@
 <codeline lineno="19"><highlight class="normal"></highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_CORE_STOP_STATE_H</highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/States/StopState.h"/>
+    <location file="Engine/inc/Engine/States/StopState.h"/>
   </compounddef>
 </doxygen>

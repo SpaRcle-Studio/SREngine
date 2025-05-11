@@ -738,5 +738,5 @@ static SR_NODISCARD Rect < Unit > SR_MATH_NS::Rect::FromTranslationAndScale (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Math/Rect.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Math/Rect.h`
 

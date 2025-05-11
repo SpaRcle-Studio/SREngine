@@ -30,7 +30,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeFace.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Font/FreeTypeFace.h</label>
         <link refid="FreeTypeFace_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -532,6 +532,6 @@
 <codeline lineno="146"><highlight class="normal"></highlight></codeline>
 <codeline lineno="147"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_FREETYPEFACE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeTypeFace.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Font/FreeTypeFace.h"/>
   </compounddef>
 </doxygen>

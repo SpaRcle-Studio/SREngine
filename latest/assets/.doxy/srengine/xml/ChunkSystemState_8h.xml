@@ -6,7 +6,7 @@
     <includes refid="Timer_8h" local="no">Utils/Types/Timer.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/States/ChunkSystemState.h</label>
+        <label>Engine/inc/Engine/States/ChunkSystemState.h</label>
         <link refid="ChunkSystemState_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -873,6 +873,6 @@
 <codeline lineno="23"><highlight class="normal"></highlight></codeline>
 <codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_CORE_CHUNK_SYSTEM_STATE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/States/ChunkSystemState.h"/>
+    <location file="Engine/inc/Engine/States/ChunkSystemState.h"/>
   </compounddef>
 </doxygen>

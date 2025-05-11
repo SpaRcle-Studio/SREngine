@@ -355,5 +355,5 @@ SR_NODISCARD OutResult SR_SRSL_NS::SRSLPreProcessor::Process (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/SRSL/PreProcessor.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/SRSL/PreProcessor.h`
 

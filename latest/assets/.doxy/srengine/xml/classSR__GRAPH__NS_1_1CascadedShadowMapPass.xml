@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="15" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="15" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="15" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="31" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="31" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="31" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aa05bb9ae4b5ec4c6a9b6510e52f04bb4" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="32" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="32" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a6029524d0a90c307ea0540df53b25f57" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref></type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="33" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="33" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a220a2c6c443b2b89e8f78cbe5f551668" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::UVector2</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="34" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="34" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="34" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aa6fb1cb20d3ec4171a4b62aff791b2d8" prot="protected" static="no" mutable="no">
         <type>float_t</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="36" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="36" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a316c137b56d58d88498d8826b75c9d99" prot="protected" static="no" mutable="no">
         <type>float_t</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="37" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="37" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a4282279a8fb4de5dfaa74cddd3dc72c9" prot="protected" static="no" mutable="no">
         <type>float_t</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="39" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="39" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="39" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ac1cfb486e5b40e21a404aeabccca8bb8" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -135,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="41" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="41" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="41" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a30ef6bef23016db8551b58cdc094c84c" prot="protected" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &gt;</type>
@@ -149,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="43" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="43" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="43" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a7c88f47420b46139ad9dfb1a41cc0d4e" prot="protected" static="no" mutable="no">
         <type>std::vector&lt; float_t &gt;</type>
@@ -163,7 +163,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="44" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="44" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="44" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -184,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="17" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="17" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aa389d8b46444dfa274aa68cc69e67d85" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const std::vector&lt; <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &gt; &amp;</type>
@@ -198,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="19" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="19" bodyend="19"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="19" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="19" bodyend="19"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a013ac2ccec3d56f755d585ac7129b981" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const std::vector&lt; float_t &gt; &amp;</type>
@@ -212,7 +212,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="20" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="20" bodyend="20"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="20" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="20" bodyend="20"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -233,7 +233,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="23" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="23" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a6b7b3dfb130a65c03cf8f36d8a4dc666" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -256,7 +256,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="24" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a0912cb535115952924c5a03d8f81346b" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -275,7 +275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="25" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="25" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a0e10ec729cc354bfba2dbe8715380318" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -289,7 +289,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="27" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="27" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aeea9bcce13f150416fca9034b439f906" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -303,7 +303,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="28" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="28" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -584,7 +584,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="13" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="13" bodyend="46"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="13" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="13" bodyend="46"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>AddDependency</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>AddInputConnection</name></member>

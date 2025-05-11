@@ -242,5 +242,5 @@ Implements [*SR\_ANIMATIONS\_NS::AnimationStateCondition::IsSuitable*](classSR__
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h`
 

@@ -790,5 +790,5 @@ void SR_GRAPH_UI_NS::Gizmo::UpdateGizmoTransform ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h`
 

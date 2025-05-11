@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="123" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="123" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="123" column="9" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="123" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="205" column="36" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="205" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="205" column="36" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="205" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classEvoScript_1_1AddressTableGen_1ac05bd5031ffe3e487e2a47b00d22c432" prot="private" static="no" mutable="no">
         <type>std::map&lt; std::string, <ref refid="structEvoScript_1_1Header" kindref="compound">Header</ref> &gt;</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="206" column="41" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="206" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="206" column="41" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="206" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classEvoScript_1_1AddressTableGen_1a53898d67a22d7af52426ca92db62de7e" prot="private" static="no" mutable="no">
         <type>std::vector&lt; std::function&lt; void(<ref refid="classEvoScript_1_1IState" kindref="compound">EvoScript::IState</ref> *)&gt; &gt;</type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="207" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="207" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="207" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="207" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classEvoScript_1_1AddressTableGen_1a737a54206f931e2ac126f6e1488c13be" prot="private" static="no" mutable="no">
         <type>size_t</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="208" column="62" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="208" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="208" column="62" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="208" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classEvoScript_1_1AddressTableGen_1a5c2a4dcc4342ec70d4d2b21df2482ee0" prot="private" static="no" mutable="no">
         <type>std::map&lt; uint64_t, void * &gt;</type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="209" column="18" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="209" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="209" column="18" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="209" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="125" column="9"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="125" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1AddressTableGen_1ab545b4dd68883abb485406cc23766844" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="126" column="9"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="126" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1AddressTableGen_1ac0dbe9db8ed287d2857d56eba167a938" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="128" column="9"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="128" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1AddressTableGen_1a6d85200eb58218ca074643a8c5fcd9af" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="131" column="25" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="131" bodyend="133"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="131" column="25" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="131" bodyend="133"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1AddressTableGen_1af063ea71070e43b1e6897a9613e91012" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -178,7 +178,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="135" column="22" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="135" bodyend="141"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="135" column="22" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="135" bodyend="141"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1AddressTableGen_1a0a8f18ab50267920768fcdef614d09f7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD size_t</type>
@@ -192,7 +192,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="143" column="29" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="143" bodyend="143"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="143" column="29" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="143" bodyend="143"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1AddressTableGen_1af4f3f50043144c6ec7d2488e0a15e41a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -206,7 +206,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="144" column="34" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="144" bodyend="144"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="144" column="34" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="144" bodyend="144"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1AddressTableGen_1a925e65cb99df47c2a6d494075fc68a06" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD std::vector&lt; std::function&lt; void(<ref refid="classEvoScript_1_1IState" kindref="compound">EvoScript::IState</ref> *)&gt; &gt;</type>
@@ -220,7 +220,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="145" column="34" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="145" bodyend="145"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="145" column="34" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="145" bodyend="145"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1AddressTableGen_1a0501a9cca980348f9ed5a490202f243a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structEvoScript_1_1Header" kindref="compound">Header</ref></type>
@@ -238,7 +238,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="146" column="29" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="146" bodyend="152"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="146" column="29" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="146" bodyend="152"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1AddressTableGen_1ad83bb2d5aa688f3f955dd964a6ace04a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -256,7 +256,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="153" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="153" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1AddressTableGen_1adc98c08bdd504117ce03eb1ef077fcab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -304,7 +304,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="156" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="156" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1AddressTableGen_1a75026744603b2bda5e55326035198bae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -338,7 +338,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="166" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="166" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1AddressTableGen_1ad1689955ec284c74ba55575a8c57bffd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -382,7 +382,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="173" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="173" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1AddressTableGen_1a6a718a7e80ecd3fdf4a7a8dad811fcf9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -405,7 +405,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="182" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="182" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1AddressTableGen_1aebdf860bf74d0e08a967ea94360f1af0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -437,7 +437,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="184" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="184" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1AddressTableGen_1a7b13317507787287dec99437911f712c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -467,7 +467,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="190" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="190" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1AddressTableGen_1aaeb9984514ad52aab6659364d0d3dcde" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -493,7 +493,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="196" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="196" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1AddressTableGen_1a68e1aa4f6f58a9d132b48da2d2ffbe76" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -519,7 +519,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="197" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="197" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1AddressTableGen_1a5c97882f8a044611d51422ad1481bffc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -545,7 +545,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="198" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="198" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1AddressTableGen_1ad456244beead72a882b4c49129e52035" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -567,7 +567,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="199" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="199" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1AddressTableGen_1a3fcfb2e863eee1d0907c3127ff78831c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -585,7 +585,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="200" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="200" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classEvoScript_1_1AddressTableGen_1a4d9e9a7e67e901ecc872b1d5ed7dbd39" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -603,14 +603,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="201" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="201" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="122" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="122" bodyend="211"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="122" column="5" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="122" bodyend="211"/>
     <listofallmembers>
       <member refid="classEvoScript_1_1AddressTableGen_1ad456244beead72a882b4c49129e52035" prot="public" virt="non-virtual"><scope>EvoScript::AddressTableGen</scope><name>AddIncompleteType</name></member>
       <member refid="classEvoScript_1_1AddressTableGen_1a3fcfb2e863eee1d0907c3127ff78831c" prot="public" virt="non-virtual"><scope>EvoScript::AddressTableGen</scope><name>AddMethodPointer</name></member>

@@ -195,5 +195,5 @@ std::optional<int64_t> SR_GRAPH_NS::MeshRegistrationInfo::priority;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Utils/MeshUtils.h`
 

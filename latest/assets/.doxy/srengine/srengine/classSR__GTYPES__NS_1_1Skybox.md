@@ -611,5 +611,5 @@ Implements [*SR\_UTILS\_NS::ResourceContainer::OnResourceUpdated*](classSR__UTIL
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Types/Skybox.h`
 

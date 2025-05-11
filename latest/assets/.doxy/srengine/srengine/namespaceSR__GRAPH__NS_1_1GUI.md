@@ -221,5 +221,5 @@ SR_GRAPH_NS::GUI::SR_ENUM_NS_CLASS (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/GUI/VisualScriptEditor.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/GUI/VisualScriptEditor.h`
 

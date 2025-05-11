@@ -5,7 +5,7 @@
     <includes refid="Widget_8h" local="no">Graphics/GUI/Widget.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/GUI/About.h</label>
+        <label>Engine/inc/Engine/GUI/About.h</label>
         <link refid="About_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1002,6 +1002,6 @@
 <codeline lineno="21"><highlight class="normal"></highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_ABOUT_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/GUI/About.h"/>
+    <location file="Engine/inc/Engine/GUI/About.h"/>
   </compounddef>
 </doxygen>

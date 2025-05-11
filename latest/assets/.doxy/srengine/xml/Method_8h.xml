@@ -10,7 +10,7 @@
     <includes local="no">sstream</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Method.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Old/Compilation/Method.h</label>
         <link refid="Method_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -117,6 +117,6 @@
 <codeline lineno="63"><highlight class="normal"></highlight></codeline>
 <codeline lineno="64"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//EVOSCRIPT_METHOD_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Method.h"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/Method.h"/>
   </compounddef>
 </doxygen>

@@ -21,7 +21,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="187" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="187" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/UTF.h" line="187" column="26" bodyfile="Engine/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="187" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-attrib">
@@ -38,7 +38,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="257" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="257" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/UTF.h" line="257" column="26" bodyfile="Engine/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="257" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="190" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="190" bodyend="192"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/UTF.h" line="190" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="190" bodyend="192"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_012_01_4_1a877cf1f541f9349e9ad3d091ee283500" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="194" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="194" bodyend="196"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/UTF.h" line="194" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="194" bodyend="196"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_012_01_4_1acbc845c5ad34a05bdbea69d260520c57" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>CodePoint</type>
@@ -99,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="198" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="198" bodyend="200"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/UTF.h" line="198" column="26" bodyfile="Engine/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="198" bodyend="200"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_012_01_4_1af2eb8ca1796a5bb9a39892f6db899c4b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>int</type>
@@ -117,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="202" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="202" bodyend="210"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/UTF.h" line="202" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="202" bodyend="210"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_012_01_4_1afe47081ccced7539d9eb733abd93ffc9" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="215" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="215" bodyend="217"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/UTF.h" line="215" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="215" bodyend="217"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_012_01_4_1af510b06962da83d03fecf76a0a2e7733" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -155,7 +155,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="222" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="222" bodyend="224"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/UTF.h" line="222" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="222" bodyend="224"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_012_01_4_1a6fc1eb943eb2c7a9428dc70c6fdfc306" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -182,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="226" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="226" bodyend="246"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/UTF.h" line="226" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="226" bodyend="246"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_012_01_4_1ac53e451fa115817b643e1240e3b64ca6" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -205,7 +205,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="248" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="248" bodyend="255"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/UTF.h" line="248" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="248" bodyend="255"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_012_01_4_1a82af2f4845d670c7e1034830c2f25644" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>int</type>
@@ -223,7 +223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="259" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="259" bodyend="261"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/UTF.h" line="259" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="259" bodyend="261"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_012_01_4_1a77a382489e3674f645b159fb49f8634c" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -250,7 +250,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="263" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="263" bodyend="272"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/UTF.h" line="263" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="263" bodyend="272"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -258,7 +258,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="186" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="186" bodyend="273"/>
+    <location file="Engine/libs/Utils/inc/Utils/Localization/UTF.h" line="186" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="186" bodyend="273"/>
     <listofallmembers>
       <member refid="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_012_01_4_1afb5fb60d4e680203c607c483d912aa3a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 2 &gt;</scope><name>char_type</name></member>
       <member refid="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_012_01_4_1acbc845c5ad34a05bdbea69d260520c57" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 2 &gt;</scope><name>CombineSurrogate</name></member>

@@ -13,7 +13,7 @@
     <includes local="no">stdarg.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Old/Tools/StringUtils.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Old/Tools/StringUtils.h</label>
         <link refid="Scripting_2inc_2Scripting_2Old_2Tools_2StringUtils_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -196,6 +196,6 @@
 <codeline lineno="125"><highlight class="normal"></highlight></codeline>
 <codeline lineno="126"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//EVOSCRIPT_STRINGUTILS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Tools/StringUtils.h"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Old/Tools/StringUtils.h"/>
   </compounddef>
 </doxygen>

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="81" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="81" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="81" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="81" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__ANIMATIONS__NS_1_1StateConditionContext_1aa3f7a084e7344c4f14744335d40df527" prot="public" static="no" mutable="no">
         <type>const <ref refid="classSR__ANIMATIONS__NS_1_1AnimationStateMachine" kindref="compound">AnimationStateMachine</ref> *</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="82" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="82" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="82" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="82" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__ANIMATIONS__NS_1_1StateConditionContext_1af20304f945955f13eac893fb0905a341" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__ANIMATIONS__NS_1_1AnimationState" kindref="compound">AnimationState</ref> *</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="83" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="83" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="83" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="83" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -115,7 +115,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="80" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="80" bodyend="84"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="80" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="80" bodyend="84"/>
     <listofallmembers>
       <member refid="structSR__ANIMATIONS__NS_1_1StateConditionContext_1a6648d3abe6ab30d472cbe7bb65c29b6c" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::StateConditionContext</scope><name>dt</name></member>
       <member refid="structSR__ANIMATIONS__NS_1_1StateConditionContext_1aa3f7a084e7344c4f14744335d40df527" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::StateConditionContext</scope><name>pMachine</name></member>

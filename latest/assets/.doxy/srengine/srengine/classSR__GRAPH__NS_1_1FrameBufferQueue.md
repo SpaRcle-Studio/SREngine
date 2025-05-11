@@ -192,5 +192,5 @@ SR_NODISCARD bool SR_GRAPH_NS::FrameBufferQueue::IsAllowMultiFrameBuffers () con
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferQueue.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pipeline/FrameBufferQueue.h`
 

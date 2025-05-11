@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_133fa8d60355654b3e9ec84c6210a08b" kind="dir">
+    <compoundname>Engine/libs/Utils/inc/Utils/Input</compoundname>
+    <innerfile refid="InputDevice_8h">InputDevice.h</innerfile>
+    <innerfile refid="InputDispatcher_8h">InputDispatcher.h</innerfile>
+    <innerfile refid="InputEvents_8h">InputEvents.h</innerfile>
+    <innerfile refid="InputHandler_8h">InputHandler.h</innerfile>
+    <innerfile refid="InputSystem_8h">InputSystem.h</innerfile>
+    <innerfile refid="KeyCodes_8h">KeyCodes.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Utils/inc/Utils/Input/"/>
+  </compounddef>
+</doxygen>

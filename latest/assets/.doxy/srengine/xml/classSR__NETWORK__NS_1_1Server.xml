@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Server.h" line="13" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Server.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Server.h" line="13" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Network/Server.h" bodystart="13" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Server.h" line="23" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Server.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Server.h" line="23" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Network/Server.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Server_1aeaf33afe2ee62a39728b5b0e8362249c" prot="private" static="no" mutable="no">
         <type>int32_t</type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Server.h" line="24" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Server.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Server.h" line="24" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Network/Server.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Server_1afa1fb518979f4b911b5db759ebe7e9b7" prot="private" static="no" mutable="no">
         <type>int32_t</type>
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Server.h" line="25" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Server.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Server.h" line="25" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Network/Server.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Server_1a42e90967f8608fc642732536d64d9585" prot="private" static="no" mutable="no">
         <type>int32_t</type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Server.h" line="26" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Server.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Server.h" line="26" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Network/Server.h" bodystart="26" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Server_1afb965b45bdfbed266ab16a090d2188ce" prot="private" static="no" mutable="no">
         <type>int32_t</type>
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Server.h" line="27" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Server.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Server.h" line="27" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Network/Server.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Server_1a3b8719c01ef74a46e391ef5a2700af24" prot="private" static="no" mutable="no">
         <type>uint64_t</type>
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Server.h" line="28" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Server.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Server.h" line="28" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Network/Server.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Server_1a424efe5d19c7489bd2d67aee60931e75" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__NETWORK__NS_1_1Socket" kindref="compound">Socket</ref> &gt;</type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Server.h" line="32" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Server.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Server.h" line="32" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Network/Server.h" bodystart="32" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Server.h" line="15" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Server.h" line="15" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Server_1adab8231d2814819d92ac90c80871a888" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -181,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Server.h" line="16" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Server.h" line="16" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Server_1abbed98e6ef4dbfe196395ecbbc319a68" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -195,7 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Server.h" line="19" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Server.h" line="19" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Server_1a0505c3697c261559bb2e99c18f7e2ed7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -209,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Server.h" line="20" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Server.h" line="20" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -259,7 +259,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Network/Server.h" line="12" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Server.h" bodystart="12" bodyend="34"/>
+    <location file="Engine/libs/Utils/inc/Utils/Network/Server.h" line="12" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Network/Server.h" bodystart="12" bodyend="34"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Server</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Server</scope><name>AutoFree</name></member>

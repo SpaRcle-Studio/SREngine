@@ -4,7 +4,7 @@
     <compoundname>ReversibleCommand.h</compoundname>
     <includes refid="ICommand_8h" local="no">Utils/CommandManager/ICommand.h</includes>
     <includes refid="Xml_8h" local="no">Utils/Resources/Xml.h</includes>
-    <includedby refid="CmdManager_8h" local="no">Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h</includedby>
+    <includedby refid="CmdManager_8h" local="no">Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h</includedby>
     <incdepgraph>
       <node id="2">
         <label>Utils/CommandManager/ICommand.h</label>
@@ -13,7 +13,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/CommandManager/ReversibleCommand.h</label>
+        <label>Engine/libs/Utils/inc/Utils/CommandManager/ReversibleCommand.h</label>
         <link refid="ReversibleCommand_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -643,7 +643,7 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="3">
-        <label>Engine/Core/inc/Core/Engine.h</label>
+        <label>Engine/inc/Engine/Engine.h</label>
         <link refid="Engine_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
@@ -653,19 +653,19 @@
         </childnode>
       </node>
       <node id="4">
-        <label>Engine/Core/inc/Core/EngineCommands.h</label>
+        <label>Engine/inc/Engine/EngineCommands.h</label>
         <link refid="EngineCommands_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/inc/Core/Scripting/ScriptableContext.h</label>
+        <label>Engine/inc/Engine/Scripting/ScriptableContext.h</label>
         <link refid="ScriptableContext_8h_source"/>
       </node>
       <node id="6">
-        <label>Engine/Core/inc/Core/World/World.h</label>
+        <label>Engine/inc/Engine/World/World.h</label>
         <link refid="World_8h_source"/>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h</label>
+        <label>Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h</label>
         <link refid="CmdManager_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -673,7 +673,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/CommandManager/ReversibleCommand.h</label>
+        <label>Engine/libs/Utils/inc/Utils/CommandManager/ReversibleCommand.h</label>
         <link refid="ReversibleCommand_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -694,7 +694,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/ReversibleCommand.h" line="52" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/CommandManager/ReversibleCommand.h" bodystart="52" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/ReversibleCommand.h" line="52" column="9" bodyfile="Engine/libs/Utils/inc/Utils/CommandManager/ReversibleCommand.h" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="ReversibleCommand_8h_1a058da629cf9aa60547a81de11e2b969c" prot="public" static="no">
         <name>SR_REGISTER_REVERSIBLE_CMD</name>
@@ -708,7 +708,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/ReversibleCommand.h" line="53" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/CommandManager/ReversibleCommand.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/ReversibleCommand.h" line="53" column="9" bodyfile="Engine/libs/Utils/inc/Utils/CommandManager/ReversibleCommand.h" bodystart="53" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -772,6 +772,6 @@
 <codeline lineno="54"><highlight class="normal"></highlight></codeline>
 <codeline lineno="55"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_REVERSIBLECOMMAND_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/ReversibleCommand.h"/>
+    <location file="Engine/libs/Utils/inc/Utils/CommandManager/ReversibleCommand.h"/>
   </compounddef>
 </doxygen>

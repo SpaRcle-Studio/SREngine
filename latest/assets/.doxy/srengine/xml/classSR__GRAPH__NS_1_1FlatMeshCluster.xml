@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="24" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="24" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1FlatMeshCluster_1a7f943d88f1017065ecd299192d4d7c08" prot="public" static="no">
         <type>std::vector&lt; MeshPtr &gt;::iterator</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="25" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="25" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1FlatMeshCluster_1ac5fbc6fb4cb2d01edb824e2848f03a38" prot="public" static="no">
         <type>std::vector&lt; MeshPtr &gt;::const_iterator</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="26" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="26" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="26" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="54" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="54" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="54" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="54" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FlatMeshCluster_1a5b29a88faf944e351cef78fad86060ff" prot="private" static="no" mutable="no">
         <type>std::vector&lt; MeshPtr &gt;</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="55" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="55" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="55" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="55" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FlatMeshCluster_1ac644a346cf0a15cda95ff27674f0a31f" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="56" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="56" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="56" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FlatMeshCluster_1a95d324986727f4a81111740531876c88" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="57" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="57" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="57" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="57" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FlatMeshCluster_1a3e807f81f34a11acd981771a301a3d94" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="59" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="59" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="59" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="59" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -140,7 +140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="29" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="29" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FlatMeshCluster_1a90c6324b2971d315ff5486e4aad36f6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -154,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="30" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="30" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FlatMeshCluster_1a1d5b0c2bb588b924a3790a5f62f71f33" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -172,7 +172,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="33" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="33" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FlatMeshCluster_1a5573f432483daa864f4f13cd8e0a5241" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -190,7 +190,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="34" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="34" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FlatMeshCluster_1a010bdc55a9ac3390a2610d856e7e15e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -208,7 +208,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="36" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="36" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FlatMeshCluster_1aa79c29ed80ee249f320b0e217a7b80ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -222,7 +222,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="38" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="38" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FlatMeshCluster_1abb9e5b9492a2b7a1f491ff5d7308a310" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -236,7 +236,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="40" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="40" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FlatMeshCluster_1a44e49cae73cfe5f1ac00a4eec62fc78c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -250,7 +250,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="41" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="41" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FlatMeshCluster_1acecc85d1f7b093879c24912cc3631a24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -264,7 +264,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="43" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="43" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FlatMeshCluster_1af308aa7023f6cd47cd34ad46a6bbac65" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD Iterator</type>
@@ -278,7 +278,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="45" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="45" bodyend="45"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="45" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="45" bodyend="45"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FlatMeshCluster_1a0c08a0ee25c9a9fc5adda73a55571c5c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD Iterator</type>
@@ -292,7 +292,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="46" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="46" bodyend="46"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="46" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="46" bodyend="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FlatMeshCluster_1acab0342f29e7306584cced8e20d8c2fa" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD ConstIterator</type>
@@ -306,7 +306,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="48" column="36" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="48" bodyend="48"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="48" column="36" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="48" bodyend="48"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FlatMeshCluster_1ae5d683b3d2fe14bb5428f34e0a917b86" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD ConstIterator</type>
@@ -320,7 +320,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="49" column="36" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="49" bodyend="49"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="49" column="36" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="49" bodyend="49"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FlatMeshCluster_1aa5a9bdfdf362a61aa15d5da636cb1292" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool SR_FASTCALL</type>
@@ -334,7 +334,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="51" column="39" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="51" bodyend="51"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="51" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="51" bodyend="51"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -365,7 +365,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="22" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="22" bodyend="61"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" line="22" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h" bodystart="22" bodyend="61"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1FlatMeshCluster_1a1d5b0c2bb588b924a3790a5f62f71f33" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FlatMeshCluster</scope><name>Add</name></member>
       <member refid="classSR__GRAPH__NS_1_1FlatMeshCluster_1af308aa7023f6cd47cd34ad46a6bbac65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FlatMeshCluster</scope><name>begin</name></member>

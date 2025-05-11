@@ -156,5 +156,5 @@ const std::vector<Vertices::UIVertex> SR_GTYPES_NS::SR_SPRITE_VERTICES;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/Engine.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/Engine.h`
 

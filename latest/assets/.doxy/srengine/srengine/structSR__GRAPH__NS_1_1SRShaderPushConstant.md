@@ -111,5 +111,5 @@ uint64_t SR_GRAPH_NS::SRShaderPushConstant::size;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h`
 

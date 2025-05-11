@@ -306,5 +306,5 @@ SR_NODISCARD std::pair< SRSLAnalyzedTree::Ptr, SRSLResult > SR_SRSL_NS::SRSLLexi
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h`
 

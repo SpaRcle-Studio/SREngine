@@ -111,5 +111,5 @@ std::vector<SR_UTILS_NS::StringAtom> SR_CORE_GUI_NS::Inspector::ComponentCategor
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/GUI/Inspector.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/GUI/Inspector.h`
 

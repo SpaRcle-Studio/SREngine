@@ -6,7 +6,7 @@
     <includes refid="Widget_8h" local="no">Graphics/GUI/Widget.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h</label>
+        <label>Engine/inc/Engine/GUI/PhysicsMaterialEditor.h</label>
         <link refid="PhysicsMaterialEditor_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1115,6 +1115,6 @@
 <codeline lineno="55"><highlight class="normal"></highlight></codeline>
 <codeline lineno="56"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_PHYSICSMATERIALEDITOR_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h"/>
+    <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h"/>
   </compounddef>
 </doxygen>

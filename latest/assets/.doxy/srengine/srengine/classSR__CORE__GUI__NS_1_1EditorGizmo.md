@@ -589,5 +589,5 @@ inline void SR_CORE_GUI_NS::EditorGizmo::SetHierarchy (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/GUI/EditorGizmo.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/GUI/EditorGizmo.h`
 

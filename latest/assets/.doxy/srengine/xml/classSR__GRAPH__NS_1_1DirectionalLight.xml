@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h" line="13" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h" bodystart="13" bodyend="13"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h" line="13" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h" bodystart="13" bodyend="13"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DirectionalLight_1ab9681129f321a3edc8b9cfd527ab0dd6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h" line="14" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h" line="14" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -116,7 +116,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h" line="11" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h" bodystart="11" bodyend="15"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h" line="11" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h" bodystart="11" bodyend="15"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>BaseComponent</name></member>

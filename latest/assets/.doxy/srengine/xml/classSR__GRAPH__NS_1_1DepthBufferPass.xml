@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" line="14" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" line="14" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" bodystart="14" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1DepthBufferPass_1a62f65cec64353927469fba9a0c66702c" prot="private" static="no">
         <type><ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">SR_GTYPES_NS::Framebuffer</ref> *</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" line="15" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" line="15" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" bodystart="15" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1DepthBufferPass_1a977588bc1dbabae45b6879732ab809a3" prot="private" static="no">
         <type><ref refid="classSR__GTYPES__NS_1_1Mesh" kindref="compound">SR_GTYPES_NS::Mesh</ref> *</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" line="16" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" line="16" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" bodystart="16" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1DepthBufferPass_1ab3a0019dca20c0ed820047765ceaa000" prot="private" static="no">
         <type><ref refid="classSR__GRAPH__NS_1_1ShaderOverridePass" kindref="compound">ShaderOverridePass</ref></type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" line="17" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" bodystart="17" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" line="17" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" bodystart="17" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -83,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" line="19" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" line="19" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DepthBufferPass_1a114d9a989ff503115255ee4864fc9f59" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -102,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" line="20" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" line="20" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -397,7 +397,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" line="12" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" bodystart="12" bodyend="22"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" line="12" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h" bodystart="12" bodyend="22"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DepthBufferPass</scope><name>AddDependency</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DepthBufferPass</scope><name>AddInputConnection</name></member>

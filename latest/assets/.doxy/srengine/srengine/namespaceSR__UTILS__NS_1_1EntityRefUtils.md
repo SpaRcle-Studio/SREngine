@@ -227,5 +227,5 @@ SR_UTILS_NS::EntityRefUtils::SR_ENUM_NS_CLASS_T (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h`
 

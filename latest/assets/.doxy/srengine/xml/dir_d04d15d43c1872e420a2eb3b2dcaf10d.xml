@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_d04d15d43c1872e420a2eb3b2dcaf10d" kind="dir">
+    <compoundname>Engine/libs/Utils/inc/Utils/Localization</compoundname>
+    <innerfile refid="Convert_8h">Convert.h</innerfile>
+    <innerfile refid="Encoding_8h">Encoding.h</innerfile>
+    <innerfile refid="Icu_8h">Icu.h</innerfile>
+    <innerfile refid="LocalizationManager_8h">LocalizationManager.h</innerfile>
+    <innerfile refid="UTF_8h">UTF.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Utils/inc/Utils/Localization/"/>
+  </compounddef>
+</doxygen>

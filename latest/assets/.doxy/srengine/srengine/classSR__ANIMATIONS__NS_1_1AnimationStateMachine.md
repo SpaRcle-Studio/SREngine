@@ -439,5 +439,5 @@ static SR_NODISCARD AnimationStateMachine * SR_ANIMATIONS_NS::AnimationStateMach
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateMachine.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateMachine.h`
 

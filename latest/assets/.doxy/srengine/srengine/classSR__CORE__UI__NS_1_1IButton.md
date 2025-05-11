@@ -560,5 +560,5 @@ virtual void SR_CORE_UI_NS::IButton::OnKeyUp ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/UI/IButton.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/UI/IButton.h`
 

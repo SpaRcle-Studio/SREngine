@@ -4,11 +4,11 @@
     <compoundname>PhysicsWorld.h</compoundname>
     <includes refid="Physics_2inc_2Physics_2macros_8h" local="no">Physics/macros.h</includes>
     <includes refid="Physics_2inc_2Physics_2Utils_2Utils_8h" local="no">Physics/Utils/Utils.h</includes>
-    <includedby refid="Bullet3PhysicsWorld_8h" local="no">Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsWorld.h</includedby>
-    <includedby refid="PhysXPhysicsWorld_8h" local="no">Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h</includedby>
+    <includedby refid="Bullet3PhysicsWorld_8h" local="no">Engine/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsWorld.h</includedby>
+    <includedby refid="PhysXPhysicsWorld_8h" local="no">Engine/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysicsWorld.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysicsWorld.h</label>
         <link refid="PhysicsWorld_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -473,15 +473,15 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsWorld.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsWorld.h</label>
         <link refid="Bullet3PhysicsWorld_8h_source"/>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h</label>
         <link refid="PhysXPhysicsWorld_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysicsWorld.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysicsWorld.h</label>
         <link refid="PhysicsWorld_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -560,6 +560,6 @@
 <codeline lineno="62"><highlight class="normal"></highlight></codeline>
 <codeline lineno="63"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_PHYSICSWORLD_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsWorld.h"/>
+    <location file="Engine/libs/Physics/inc/Physics/PhysicsWorld.h"/>
   </compounddef>
 </doxygen>

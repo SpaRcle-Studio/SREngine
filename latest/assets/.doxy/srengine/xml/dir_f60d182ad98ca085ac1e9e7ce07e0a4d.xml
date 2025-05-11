@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_f60d182ad98ca085ac1e9e7ce07e0a4d" kind="dir">
+    <compoundname>Engine/libs/Graphics/inc/Graphics/Pass</compoundname>
+    <innerfile refid="BasePass_8h">BasePass.h</innerfile>
+    <innerfile refid="CascadedShadowMapPass_8h">CascadedShadowMapPass.h</innerfile>
+    <innerfile refid="ColorBufferPass_8h">ColorBufferPass.h</innerfile>
+    <innerfile refid="DebugPass_8h">DebugPass.h</innerfile>
+    <innerfile refid="DepthBufferPass_8h">DepthBufferPass.h</innerfile>
+    <innerfile refid="EditorMaskPass_8h">EditorMaskPass.h</innerfile>
+    <innerfile refid="FlatClusterPass_8h">FlatClusterPass.h</innerfile>
+    <innerfile refid="FlatColorBufferPass_8h">FlatColorBufferPass.h</innerfile>
+    <innerfile refid="FramebufferPass_8h">FramebufferPass.h</innerfile>
+    <innerfile refid="GroupPass_8h">GroupPass.h</innerfile>
+    <innerfile refid="HTMLDrawerPass_8h">HTMLDrawerPass.h</innerfile>
+    <innerfile refid="IColorBufferPass_8h">IColorBufferPass.h</innerfile>
+    <innerfile refid="IFramebufferPass_8h">IFramebufferPass.h</innerfile>
+    <innerfile refid="IMesh3DClusterPass_8h">IMesh3DClusterPass.h</innerfile>
+    <innerfile refid="IMeshClusterPass_8h">IMeshClusterPass.h</innerfile>
+    <innerfile refid="InvokeFunctionPass_8h">InvokeFunctionPass.h</innerfile>
+    <innerfile refid="ISamplersPass_8h">ISamplersPass.h</innerfile>
+    <innerfile refid="MeshDrawerPass_8h">MeshDrawerPass.h</innerfile>
+    <innerfile refid="OffScreenMeshDrawerPass_8h">OffScreenMeshDrawerPass.h</innerfile>
+    <innerfile refid="OpaquePass_8h">OpaquePass.h</innerfile>
+    <innerfile refid="PassQueue_8h">PassQueue.h</innerfile>
+    <innerfile refid="PostProcessPass_8h">PostProcessPass.h</innerfile>
+    <innerfile refid="ShaderOverridePass_8h">ShaderOverridePass.h</innerfile>
+    <innerfile refid="ShadowMapPass_8h">ShadowMapPass.h</innerfile>
+    <innerfile refid="SkyboxPass_8h">SkyboxPass.h</innerfile>
+    <innerfile refid="SSAOPass_8h">SSAOPass.h</innerfile>
+    <innerfile refid="SwapchainPass_8h">SwapchainPass.h</innerfile>
+    <innerfile refid="TransparentPass_8h">TransparentPass.h</innerfile>
+    <innerfile refid="VarianceShadowMapPass_8h">VarianceShadowMapPass.h</innerfile>
+    <innerfile refid="WidgetPass_8h">WidgetPass.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/"/>
+  </compounddef>
+</doxygen>

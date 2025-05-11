@@ -357,5 +357,5 @@ Implements [*SR\_UTILS\_NS::Component::Start*](classSR__UTILS__NS_1_1Component.m
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Game/DebugLogComponent.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Game/DebugLogComponent.h`
 

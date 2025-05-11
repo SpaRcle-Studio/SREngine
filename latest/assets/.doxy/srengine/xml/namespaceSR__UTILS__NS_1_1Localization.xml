@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/Icu.h" line="26" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/Icu.h" bodystart="26" bodyend="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/Icu.h" line="26" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Localization/Icu.h" bodystart="26" bodyend="30"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="typedef">
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="26" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="26" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Localization/LocalizationManager.h" bodystart="26" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -98,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/Convert.h" line="23" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/Convert.h" bodystart="23" bodyend="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/Convert.h" line="23" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Localization/Convert.h" bodystart="23" bodyend="31"/>
       </memberdef>
       <memberdef kind="function" id="Convert_8h_1aaab5ddb76265dfd368731f4ea8dac406" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -134,7 +134,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/Convert.h" line="33" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/Convert.h" bodystart="33" bodyend="41"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/Convert.h" line="33" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Localization/Convert.h" bodystart="33" bodyend="41"/>
       </memberdef>
       <memberdef kind="function" id="Encoding_8h_1a8d521ab16c25c45ddc930ddb9fde5f36" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED void</type>
@@ -148,7 +148,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/Encoding.h" line="12" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/Encoding.h" bodystart="12" bodyend="15"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/Encoding.h" line="12" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Localization/Encoding.h" bodystart="12" bodyend="15"/>
       </memberdef>
       <memberdef kind="function" id="Encoding_8h_1a6de28c9c1cdb4b72b6a47ef5253c4913" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -183,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/Encoding.h" line="17" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/Encoding.h" bodystart="17" bodyend="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/Encoding.h" line="17" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Localization/Encoding.h" bodystart="17" bodyend="39"/>
       </memberdef>
       <memberdef kind="function" id="Encoding_8h_1a5e3e9d71b7887ce5ff19d02b43542aa6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/Encoding.h" line="44" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/Encoding.h" bodystart="44" bodyend="52"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/Encoding.h" line="44" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Localization/Encoding.h" bodystart="44" bodyend="52"/>
       </memberdef>
       <memberdef kind="function" id="Encoding_8h_1a6e96a3c955182fb8aba9c2338f40a1de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -247,7 +247,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/Encoding.h" line="57" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/Encoding.h" bodystart="57" bodyend="59"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/Encoding.h" line="57" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Localization/Encoding.h" bodystart="57" bodyend="59"/>
       </memberdef>
       <memberdef kind="function" id="Encoding_8h_1a189dc5cf90099665c499d66cab34bb8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -278,7 +278,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/Encoding.h" line="61" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/Encoding.h" bodystart="61" bodyend="63"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/Encoding.h" line="61" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Localization/Encoding.h" bodystart="61" bodyend="63"/>
       </memberdef>
       <memberdef kind="function" id="Encoding_8h_1a0772b9c1a0b1154ffea0c7632eb8e245" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -315,7 +315,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/Encoding.h" line="74" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/Encoding.h" bodystart="74" bodyend="76"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/Encoding.h" line="74" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Localization/Encoding.h" bodystart="74" bodyend="76"/>
       </memberdef>
       <memberdef kind="function" id="Encoding_8h_1a6a5245c160bcd92044cf7555223cf70e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -351,13 +351,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/Encoding.h" line="78" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/Encoding.h" bodystart="78" bodyend="80"/>
+        <location file="Engine/libs/Utils/inc/Utils/Localization/Encoding.h" line="78" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Localization/Encoding.h" bodystart="78" bodyend="80"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Localization/Convert.h" line="10" column="1"/>
+    <location file="Engine/libs/Utils/inc/Utils/Localization/Convert.h" line="10" column="1"/>
   </compounddef>
 </doxygen>

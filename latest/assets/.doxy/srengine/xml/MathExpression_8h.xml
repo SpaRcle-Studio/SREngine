@@ -4,7 +4,7 @@
     <compoundname>MathExpression.h</compoundname>
     <includes refid="Singleton_8h" local="no">Utils/Common/Singleton.h</includes>
     <includes refid="LexicalTree_8h" local="no">Graphics/SRSL/LexicalTree.h</includes>
-    <includedby refid="LexicalAnalyzer_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h</includedby>
+    <includedby refid="LexicalAnalyzer_8h" local="no">Engine/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h</includedby>
     <incdepgraph>
       <node id="77">
         <label>Graphics/SRSL/LexerUtils.h</label>
@@ -35,7 +35,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h</label>
         <link refid="MathExpression_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -974,11 +974,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h</label>
         <link refid="LexicalAnalyzer_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h</label>
         <link refid="MathExpression_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1037,6 +1037,6 @@
 <codeline lineno="44"><highlight class="normal"></highlight></codeline>
 <codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_SRSL_MATHEXPRESSION_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h"/>
   </compounddef>
 </doxygen>

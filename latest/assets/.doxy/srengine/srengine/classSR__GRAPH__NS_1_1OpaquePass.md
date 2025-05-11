@@ -787,5 +787,5 @@ Implements [*SR\_GRAPH\_NS::IMeshClusterPass::UseSharedUniforms*](classSR__GRAPH
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pass/OpaquePass.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pass/OpaquePass.h`
 

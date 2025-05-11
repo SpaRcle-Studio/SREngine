@@ -3,12 +3,12 @@
   <compounddef id="Socket_8h" kind="file" language="C++">
     <compoundname>Socket.h</compoundname>
     <includes refid="Context_8h" local="no">Utils/Network/Context.h</includes>
-    <includedby refid="AsioICMPSocket_8h" local="no">Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioICMPSocket.h</includedby>
-    <includedby refid="AsioTCPSocket_8h" local="no">Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h</includedby>
-    <includedby refid="Client_8h" local="no">Engine/Core/libs/Utils/inc/Utils/Network/Client.h</includedby>
-    <includedby refid="PeerToPeer_8h" local="no">Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h</includedby>
-    <includedby refid="Pinger_8h" local="no">Engine/Core/libs/Utils/inc/Utils/Network/Pinger.h</includedby>
-    <includedby refid="Server_8h" local="no">Engine/Core/libs/Utils/inc/Utils/Network/Server.h</includedby>
+    <includedby refid="AsioICMPSocket_8h" local="no">Engine/libs/Utils/inc/Utils/Network/Asio/AsioICMPSocket.h</includedby>
+    <includedby refid="AsioTCPSocket_8h" local="no">Engine/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h</includedby>
+    <includedby refid="Client_8h" local="no">Engine/libs/Utils/inc/Utils/Network/Client.h</includedby>
+    <includedby refid="PeerToPeer_8h" local="no">Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h</includedby>
+    <includedby refid="Pinger_8h" local="no">Engine/libs/Utils/inc/Utils/Network/Pinger.h</includedby>
+    <includedby refid="Server_8h" local="no">Engine/libs/Utils/inc/Utils/Network/Server.h</includedby>
     <incdepgraph>
       <node id="111">
         <label>Utils/Common/AnyMarshal.h</label>
@@ -285,7 +285,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/Network/Socket.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Network/Socket.h</label>
         <link refid="Socket_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -808,39 +808,39 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioICMPSocket.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Network/Asio/AsioICMPSocket.h</label>
         <link refid="AsioICMPSocket_8h_source"/>
       </node>
       <node id="7">
-        <label>Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioPinger.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Network/Asio/AsioPinger.h</label>
         <link refid="AsioPinger_8h_source"/>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h</label>
         <link refid="AsioTCPSocket_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Utils/inc/Utils/Network/Client.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Network/Client.h</label>
         <link refid="Client_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Network/PeerToPeer.h</label>
         <link refid="PeerToPeer_8h_source"/>
       </node>
       <node id="6">
-        <label>Engine/Core/libs/Utils/inc/Utils/Network/Pinger.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Network/Pinger.h</label>
         <link refid="Pinger_8h_source"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
       <node id="8">
-        <label>Engine/Core/libs/Utils/inc/Utils/Network/Server.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Network/Server.h</label>
         <link refid="Server_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/Network/Socket.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Network/Socket.h</label>
         <link refid="Socket_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -933,6 +933,6 @@
 <codeline lineno="68"><highlight class="normal"></highlight></codeline>
 <codeline lineno="69"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_UTILS_NETWORK_SOCKET_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h"/>
+    <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h"/>
   </compounddef>
 </doxygen>

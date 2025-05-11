@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h" line="20" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h" bodystart="20" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Canvas.h" line="20" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Canvas.h" bodystart="20" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__UI__NS_1_1Canvas_1a032bb48c4348763e64781e1dc2a394e3" prot="private" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SafePtr" kindref="compound">SR_HTYPES_NS::SafePtr</ref>&lt; RenderContext &gt;</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h" line="21" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h" bodystart="21" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Canvas.h" line="21" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Canvas.h" bodystart="21" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__UI__NS_1_1Canvas_1acfd4880ac4b4db1165e563425dd37bce" prot="private" static="no">
         <type><ref refid="classSR__UTILS__NS_1_1Component" kindref="compound">SR_UTILS_NS::Component</ref></type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h" line="22" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h" bodystart="22" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Canvas.h" line="22" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Canvas.h" bodystart="22" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h" line="33" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Canvas.h" line="33" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Canvas.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1Canvas_1ad3c44f8263597bf4e7c3f3e4c3ff56ce" prot="private" static="no" mutable="no">
         <type>RenderContextPtr</type>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h" line="35" column="26" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h" bodystart="35" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Canvas.h" line="35" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Canvas.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1Canvas_1a3fc09a416c0b6f6395a81c707da7c6a1" prot="private" static="no" mutable="no">
         <type>RenderScenePtr</type>
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h" line="36" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Canvas.h" line="36" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Canvas.h" bodystart="36" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h" line="24" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h" bodystart="24" bodyend="24"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Canvas.h" line="24" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Canvas.h" bodystart="24" bodyend="24"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Canvas_1ac97064aed1cb1bb557b51bcc4d2098e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h" line="26" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Canvas.h" line="26" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1Canvas_1a096459bb0d2277cfab38e0d1a11c5f0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h" line="27" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Canvas.h" line="27" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h" line="30" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/Canvas.h" line="30" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -217,7 +217,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h" line="18" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h" bodystart="18" bodyend="38"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/UI/Canvas.h" line="18" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/Canvas.h" bodystart="18" bodyend="38"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GRAPH_UI_NS::Canvas</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::Canvas</scope><name>BaseComponent</name></member>

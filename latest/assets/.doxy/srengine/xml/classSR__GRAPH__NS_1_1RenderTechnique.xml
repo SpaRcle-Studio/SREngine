@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="14" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="14" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderTechnique_1a128cf9179832d16ba1b1bfdd081de15f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="29" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="29" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderTechnique_1a79c19d5d8ec219853295ba8874cabcb9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="30" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="30" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="17" column="32"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="17" column="32"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="20" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="20" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderTechnique_1afc7e19f40643b4ca3dcdfbbf0158830b" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="22" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="22" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderTechnique_1a7fc1721e233a4e99c12ad96b1cd2ff85" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="23" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="23" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderTechnique_1ad75261c89fed5457c1824f9701d359d1" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="25" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="25" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderTechnique_1ada79a4853f7e0ec0b404369d318beabe" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -151,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="26" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="26" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -395,7 +395,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="12" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" bodystart="12" bodyend="32"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="12" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" bodystart="12" bodyend="32"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderTechnique</scope><name>AddDependency</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderTechnique</scope><name>AddInputConnection</name></member>

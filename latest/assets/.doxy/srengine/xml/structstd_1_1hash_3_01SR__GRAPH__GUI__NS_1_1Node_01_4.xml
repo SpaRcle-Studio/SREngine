@@ -21,14 +21,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="92" column="16" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="92" bodyend="95"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="92" column="16" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="92" bodyend="95"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="91" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="91" bodyend="96"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="91" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="91" bodyend="96"/>
     <listofallmembers>
       <member refid="structstd_1_1hash_3_01SR__GRAPH__GUI__NS_1_1Node_01_4_1a7d037c36f37fdb23f7f872869fff6292" prot="public" virt="non-virtual"><scope>std::hash&lt; SR_GRAPH_GUI_NS::Node &gt;</scope><name>operator()</name></member>
     </listofallmembers>

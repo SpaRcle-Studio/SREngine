@@ -24,7 +24,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Serialization.h" line="60" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="60" bodyend="68"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" line="60" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="60" bodyend="68"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1_1Serialization_1a5a478b6fa724526716fb1cf614cbdefe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Serialization.h" line="70" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="70" bodyend="72"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" line="70" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="70" bodyend="72"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1_1Serialization_1a7f872dd7efb74bad3401e8210382d090" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Serialization.h" line="74" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="74" bodyend="79"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" line="74" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="74" bodyend="79"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1_1Serialization_1ab43b014a55565d8b785b2a883a4921a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -109,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Serialization.h" line="81" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="81" bodyend="86"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" line="81" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="81" bodyend="86"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1_1Serialization_1a88fcf6f092fee0d1340f66d56378a177" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -140,7 +140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Serialization.h" line="88" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="88" bodyend="100"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" line="88" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="88" bodyend="100"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -148,6 +148,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Serialization.h" line="59" column="1"/>
+    <location file="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" line="59" column="1"/>
   </compounddef>
 </doxygen>

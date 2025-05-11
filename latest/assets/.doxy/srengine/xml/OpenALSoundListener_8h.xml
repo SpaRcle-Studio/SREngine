@@ -5,7 +5,7 @@
     <includes refid="SoundListener_8h" local="no">Audio/SoundListener.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h</label>
+        <label>Engine/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h</label>
         <link refid="OpenALSoundListener_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -579,6 +579,6 @@
 <codeline lineno="32"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_OPENALSOUNDLISTENER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h"/>
+    <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h"/>
   </compounddef>
 </doxygen>

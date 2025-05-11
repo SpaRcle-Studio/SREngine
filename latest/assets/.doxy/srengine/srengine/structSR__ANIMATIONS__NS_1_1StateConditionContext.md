@@ -125,5 +125,5 @@ AnimationState* SR_ANIMATIONS_NS::StateConditionContext::pState;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h`
 

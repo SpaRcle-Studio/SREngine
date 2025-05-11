@@ -4,12 +4,12 @@
     <compoundname>LibraryImpl.h</compoundname>
     <includes refid="Physics_2inc_2Physics_2macros_8h" local="no">Physics/macros.h</includes>
     <includes refid="Physics_2inc_2Physics_2Utils_2Utils_8h" local="no">Physics/Utils/Utils.h</includes>
-    <includedby refid="Box2DLibraryImpl_8h" local="no">Engine/Core/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h</includedby>
-    <includedby refid="Bullet3LibraryImpl_8h" local="no">Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3LibraryImpl.h</includedby>
-    <includedby refid="PhysXLibraryImpl_8h" local="no">Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXLibraryImpl.h</includedby>
+    <includedby refid="Box2DLibraryImpl_8h" local="no">Engine/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h</includedby>
+    <includedby refid="Bullet3LibraryImpl_8h" local="no">Engine/libs/Physics/inc/Physics/Bullet3/Bullet3LibraryImpl.h</includedby>
+    <includedby refid="PhysXLibraryImpl_8h" local="no">Engine/libs/Physics/inc/Physics/PhysX/PhysXLibraryImpl.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h</label>
+        <label>Engine/libs/Physics/inc/Physics/LibraryImpl.h</label>
         <link refid="LibraryImpl_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -474,15 +474,15 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h</label>
         <link refid="Box2DLibraryImpl_8h_source"/>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3LibraryImpl.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3LibraryImpl.h</label>
         <link refid="Bullet3LibraryImpl_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h</label>
+        <label>Engine/libs/Physics/inc/Physics/LibraryImpl.h</label>
         <link refid="LibraryImpl_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -492,7 +492,7 @@
         </childnode>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXLibraryImpl.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXLibraryImpl.h</label>
         <link refid="PhysXLibraryImpl_8h_source"/>
       </node>
     </invincdepgraph>
@@ -564,6 +564,6 @@
 <codeline lineno="58"><highlight class="normal"></highlight></codeline>
 <codeline lineno="59"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_LIBRARYIMPL_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h"/>
+    <location file="Engine/libs/Physics/inc/Physics/LibraryImpl.h"/>
   </compounddef>
 </doxygen>

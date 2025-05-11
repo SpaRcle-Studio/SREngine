@@ -111,5 +111,5 @@ Property* SR_UTILS_NS::PropertyContainer::PropertyInfo::pProperty;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h`
 

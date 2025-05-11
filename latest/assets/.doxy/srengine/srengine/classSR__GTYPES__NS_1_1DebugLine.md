@@ -632,5 +632,5 @@ Implements [*SR\_GTYPES\_NS::Mesh::UseMaterial*](classSR__GTYPES__NS_1_1Mesh.md#
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h`
 

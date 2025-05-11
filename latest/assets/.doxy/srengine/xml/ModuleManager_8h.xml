@@ -7,8 +7,8 @@
     <includes refid="PassKey_8h" local="no">Utils/Common/PassKey.h</includes>
     <includes refid="SceneObject_8h" local="no">Utils/ECS/SceneObject.h</includes>
     <includes refid="CppBehaviour_8h" local="no">Scripting/Cpp/CppBehaviour.h</includes>
-    <includedby refid="Behaviour_8h" local="no">Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h</includedby>
-    <includedby refid="ScriptSystem_8h" local="no">Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h</includedby>
+    <includedby refid="Behaviour_8h" local="no">Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h</includedby>
+    <includedby refid="ScriptSystem_8h" local="no">Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h</includedby>
     <incdepgraph>
       <node id="166">
         <label>Scripting/Cpp/CppBehaviour.h</label>
@@ -25,7 +25,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h</label>
         <link refid="ModuleManager_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1387,7 +1387,7 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="5">
-        <label>Engine/Core/inc/Core/Engine.h</label>
+        <label>Engine/inc/Engine/Engine.h</label>
         <link refid="Engine_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
@@ -1397,25 +1397,25 @@
         </childnode>
       </node>
       <node id="6">
-        <label>Engine/Core/inc/Core/EngineCommands.h</label>
+        <label>Engine/inc/Engine/EngineCommands.h</label>
         <link refid="EngineCommands_8h_source"/>
       </node>
       <node id="7">
-        <label>Engine/Core/inc/Core/Scripting/ScriptableContext.h</label>
+        <label>Engine/inc/Engine/Scripting/ScriptableContext.h</label>
         <link refid="ScriptableContext_8h_source"/>
       </node>
       <node id="8">
-        <label>Engine/Core/inc/Core/World/World.h</label>
+        <label>Engine/inc/Engine/World/World.h</label>
         <link refid="World_8h_source"/>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h</label>
         <link refid="Behaviour_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h</label>
         <link refid="ModuleManager_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1423,13 +1423,13 @@
         </childnode>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h</label>
         <link refid="ScriptSystem_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h</label>
         <link refid="EvoBehaviour_8h_source"/>
       </node>
     </invincdepgraph>
@@ -1571,6 +1571,6 @@
 <codeline lineno="127"><highlight class="normal"></highlight></codeline>
 <codeline lineno="128"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_SCRIPTING_CPP_MODULE_MANAGER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h"/>
   </compounddef>
 </doxygen>

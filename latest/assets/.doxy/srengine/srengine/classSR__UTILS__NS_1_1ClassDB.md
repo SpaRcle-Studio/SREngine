@@ -298,5 +298,5 @@ static ClassDB & SR_UTILS_NS::ClassDB::Instance ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/TypeTraits/ClassDB.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/TypeTraits/ClassDB.h`
 

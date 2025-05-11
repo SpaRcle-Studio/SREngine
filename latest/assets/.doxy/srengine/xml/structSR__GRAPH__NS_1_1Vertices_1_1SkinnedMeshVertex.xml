@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="99" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="99" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="99" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="99" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1a24a13d0c4131776f3f9f7c42a3dc63cb" prot="public" static="no" mutable="no">
         <type>glm::vec2</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="100" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="100" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="100" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="100" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1a9c7c7cc63955c1c7cb7958352b76dee8" prot="public" static="no" mutable="no">
         <type>glm::vec3</type>
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="101" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="101" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="101" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="101" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1ac64864da2b6e9c02dfd690f2af736110" prot="public" static="no" mutable="no">
         <type>glm::vec3</type>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="102" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="102" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="102" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="102" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1a36ddfba3412597c43114afbb66239444" prot="public" static="no" mutable="no">
         <type>glm::vec3</type>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="103" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="103" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="103" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="103" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1ab9cd63365445990924273f2c2ab01b2c" prot="public" static="no" mutable="no">
         <type>uint32_t</type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="105" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="105" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="105" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="105" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1af741129a0b7da587381ea7f94aa0d7d2" prot="public" static="no" mutable="no">
         <type>glm::vec2</type>
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="108" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="108" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="108" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="108" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -117,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="110" column="44" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="110" bodyend="119"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="110" column="44" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="110" bodyend="119"/>
       </memberdef>
       <memberdef kind="function" id="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1a8952ce5d65bf1eb91dad2b91ba3bf080" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>constexpr SR_FORCE_INLINE SR_VERTEX_DESCRIPTION</type>
@@ -131,7 +131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="121" column="64" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="121" bodyend="123"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="121" column="64" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="121" bodyend="123"/>
       </memberdef>
       <memberdef kind="function" id="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1adedb64e8fe15a94a50b542f0d469060b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE std::vector&lt; std::pair&lt; Attribute, size_t &gt; &gt;</type>
@@ -149,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="125" column="44" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="125" bodyend="151"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="125" column="44" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="125" bodyend="151"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="153" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="153" bodyend="162"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="153" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="153" bodyend="162"/>
       </memberdef>
       <memberdef kind="function" id="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1a5635239a7c49963cc03d3c78ea0fdaf8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -183,14 +183,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="164" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="164" bodyend="172"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="164" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="164" bodyend="172"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="98" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="98" bodyend="173"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="98" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="98" bodyend="173"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1a36ddfba3412597c43114afbb66239444" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::SkinnedMeshVertex</scope><name>bitang</name></member>
       <member refid="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1adedb64e8fe15a94a50b542f0d469060b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::SkinnedMeshVertex</scope><name>GetAttributes</name></member>

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" line="19" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" bodystart="19" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" line="19" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" bodystart="19" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" line="29" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" line="29" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1BoneComponent_1adcab27734573726457f58893265a8927" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1EntityRef" kindref="compound">SR_UTILS_NS::EntityRef</ref></type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" line="30" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" bodystart="30" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" line="30" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" bodystart="30" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" line="21" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" line="21" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1BoneComponent_1a3674417ad71d98543cba14f65d5c47fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -85,7 +85,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" line="24" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1BoneComponent_1acc21230e47c855f81a70d0e45fd5e562" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" line="26" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" bodystart="26" bodyend="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" line="26" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" bodystart="26" bodyend="26"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -159,7 +159,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" line="17" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" bodystart="17" bodyend="32"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" line="17" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/BoneComponent.h" bodystart="17" bodyend="32"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::BoneComponent</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::BoneComponent</scope><name>BaseComponent</name></member>

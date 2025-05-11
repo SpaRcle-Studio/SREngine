@@ -125,5 +125,5 @@ inline void SR_HTYPES_NS::SignalSemaphore::Wait ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Types/Semaphore.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Types/Semaphore.h`
 

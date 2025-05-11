@@ -5,7 +5,7 @@
     <includes refid="UIModifier_8h" local="no">Utils/UI/UIModifier.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/UICanvasComponent.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UICanvasComponent.h</label>
         <link refid="UICanvasComponent_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1037,6 +1037,6 @@
 <codeline lineno="19"><highlight class="normal"></highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_UTILS_UI_CANVAS_COMPONENT_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/UICanvasComponent.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/UI/UICanvasComponent.h"/>
   </compounddef>
 </doxygen>

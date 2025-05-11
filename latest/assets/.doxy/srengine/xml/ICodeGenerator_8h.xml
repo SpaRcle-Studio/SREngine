@@ -4,9 +4,9 @@
     <compoundname>ICodeGenerator.h</compoundname>
     <includes refid="LexicalTree_8h" local="no">Graphics/SRSL/LexicalTree.h</includes>
     <includes refid="IShaderProgram_8h" local="no">Graphics/Pipeline/IShaderProgram.h</includes>
-    <includedby refid="GLSLCodeGenerator_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h</includedby>
-    <includedby refid="PseudoCodeGenerator_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/SRSL/PseudoCodeGenerator.h</includedby>
-    <includedby refid="SRSL_2Shader_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/SRSL/Shader.h</includedby>
+    <includedby refid="GLSLCodeGenerator_8h" local="no">Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h</includedby>
+    <includedby refid="PseudoCodeGenerator_8h" local="no">Engine/libs/Graphics/inc/Graphics/SRSL/PseudoCodeGenerator.h</includedby>
+    <includedby refid="SRSL_2Shader_8h" local="no">Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h</includedby>
     <incdepgraph>
       <node id="134">
         <label>Graphics/Pipeline/IShaderProgram.h</label>
@@ -27,7 +27,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/ICodeGenerator.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/SRSL/ICodeGenerator.h</label>
         <link refid="ICodeGenerator_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1038,11 +1038,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h</label>
         <link refid="GLSLCodeGenerator_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/ICodeGenerator.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/SRSL/ICodeGenerator.h</label>
         <link refid="ICodeGenerator_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1052,11 +1052,11 @@
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/PseudoCodeGenerator.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/SRSL/PseudoCodeGenerator.h</label>
         <link refid="PseudoCodeGenerator_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/Shader.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h</label>
         <link refid="SRSL_2Shader_8h_source"/>
       </node>
     </invincdepgraph>
@@ -1102,6 +1102,6 @@
 <codeline lineno="33"><highlight class="normal"></highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_ICODEGENERATOR_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/ICodeGenerator.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ICodeGenerator.h"/>
   </compounddef>
 </doxygen>

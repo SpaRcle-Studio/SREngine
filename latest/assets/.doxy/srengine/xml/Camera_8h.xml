@@ -7,11 +7,11 @@
     <includes refid="ComponentManager_8h" local="no">Utils/ECS/ComponentManager.h</includes>
     <includes refid="Vector3_8h" local="no">Utils/Math/Vector3.h</includes>
     <includes refid="Matrix4x4_8h" local="no">Utils/Math/Matrix4x4.h</includes>
-    <includedby refid="EditorCamera_8h" local="no">Engine/Core/inc/Core/GUI/EditorCamera.h</includedby>
-    <includedby refid="HTMLDrawableElement_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</includedby>
+    <includedby refid="EditorCamera_8h" local="no">Engine/inc/Engine/GUI/EditorCamera.h</includedby>
+    <includedby refid="HTMLDrawableElement_8h" local="no">Engine/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Camera.h</label>
         <link refid="Camera_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1118,27 +1118,27 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/inc/Core/GUI/EditorCamera.h</label>
+        <label>Engine/inc/Engine/GUI/EditorCamera.h</label>
         <link refid="EditorCamera_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
         <link refid="HTMLDrawerPass_8h_source"/>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
         <link refid="HTMLDrawableElement_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
         <link refid="HTMLRenderer_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Camera.h</label>
         <link refid="Camera_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1288,6 +1288,6 @@
 <codeline lineno="142"><highlight class="normal"></highlight></codeline>
 <codeline lineno="143"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_CAMERA_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h"/>
   </compounddef>
 </doxygen>

@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="14" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="14" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="14" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="44" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="44" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1DebugPass_1aeb51de380f2d261c9f284aa7f9bc340f" prot="private" static="no" mutable="no">
         <type>std::vector&lt; std::pair&lt; uint32_t, uint32_t &gt; &gt;</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="45" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="45" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="45" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1DebugPass_1a8f521ff04e77964eaa8b8679724fa4d8" prot="private" static="no" mutable="no">
         <type>std::map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, ShaderInfo &gt;</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="46" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="46" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="46" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1DebugPass_1a61818949ada432c0c78d7f4ebfc03584" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="47" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="47" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1DebugPass_1a3892bccea7aeb0552aca72b8f0e7c7bb" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="48" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="48" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="48" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="48" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -112,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="28" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="28" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugPass_1af6340e2214eba8b099b816f2488310cc" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="30" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="30" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugPass_1a501b6e1ebe5566cecf1905dbf55f465f" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -144,7 +144,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="31" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugPass_1a20f04eafd50653bec1f4b38dd4ad2e7c" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -160,7 +160,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="32" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugPass_1a754cc25d99190df25422561aa267c74f" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -175,7 +175,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="34" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="34" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugPass_1a9c7391221f30fc2fc4e18f08431672fc" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -190,7 +190,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="35" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="35" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugPass_1ae29403bb64ce29618ac0bc8ea0749eff" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -209,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="37" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="37" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugPass_1a7ab65f985fded2e7e2ab71cfa5528ae4" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -223,7 +223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="39" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="39" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugPass_1a9be36ca853e1788c8d16ee8b9dfec996" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -253,7 +253,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="40" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="40" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugPass_1a5d45fa477fdb0937fcd791400af3f2b0" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -275,7 +275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="41" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="41" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -459,7 +459,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="12" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="12" bodyend="50"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="12" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="12" bodyend="50"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPass</scope><name>AddDependency</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPass</scope><name>AddInputConnection</name></member>

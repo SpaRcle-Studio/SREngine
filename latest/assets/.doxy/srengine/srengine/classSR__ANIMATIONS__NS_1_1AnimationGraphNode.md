@@ -424,5 +424,5 @@ AnimationPose* SR_ANIMATIONS_NS::AnimationGraphNode::m_pose;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h`
 

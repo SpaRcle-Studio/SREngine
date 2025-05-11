@@ -129,5 +129,5 @@ SR_PTYPES_NS::SR_ENUM_NS_STRUCT_T (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Physics/inc/Physics/2D/Rigidbody2D.h`
+The documentation for this class was generated from the following file `Engine/libs/Physics/inc/Physics/2D/Rigidbody2D.h`
 

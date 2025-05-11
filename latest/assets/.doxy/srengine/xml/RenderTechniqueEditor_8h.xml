@@ -6,7 +6,7 @@
     <includes refid="NodeWidget_8h" local="no">Graphics/GUI/NodeWidget.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h</label>
+        <label>Engine/inc/Engine/GUI/RenderTechniqueEditor.h</label>
         <link refid="RenderTechniqueEditor_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1061,6 +1061,6 @@
 <codeline lineno="26"><highlight class="normal"></highlight></codeline>
 <codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_RENDERTECHNIQUEEDITOR_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h"/>
+    <location file="Engine/inc/Engine/GUI/RenderTechniqueEditor.h"/>
   </compounddef>
 </doxygen>

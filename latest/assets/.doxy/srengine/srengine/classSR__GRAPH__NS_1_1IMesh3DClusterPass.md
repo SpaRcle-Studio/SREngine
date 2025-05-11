@@ -827,5 +827,5 @@ virtual void SR_GRAPH_NS::IMesh3DClusterPass::UpdateCluster (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pass/IMesh3DClusterPass.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pass/IMesh3DClusterPass.h`
 

@@ -223,5 +223,5 @@ SR_NODISCARD std::string SR_HTYPES_NS::Regex::operator[] (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Types/Regex.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Types/Regex.h`
 

@@ -5,10 +5,10 @@
     <includes refid="Graphics_2inc_2Graphics_2macros_8h" local="no">Graphics/macros.h</includes>
     <includes refid="SharedPtr_8h" local="no">Utils/Types/SharedPtr.h</includes>
     <includes refid="SRClass_8h" local="no">Utils/TypeTraits/SRClass.h</includes>
-    <includedby refid="DebugRenderer_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</includedby>
+    <includedby refid="DebugRenderer_8h" local="no">Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h</label>
         <link refid="IRenderer_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -799,17 +799,17 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
         <link refid="DebugPass_8h_source"/>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</label>
         <link refid="DebugRenderer_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h</label>
         <link refid="IRenderer_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -870,6 +870,6 @@
 <codeline lineno="46"><highlight class="normal"></highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_GRAPHICS_RENDER_I_RENDERER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderer.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h"/>
   </compounddef>
 </doxygen>

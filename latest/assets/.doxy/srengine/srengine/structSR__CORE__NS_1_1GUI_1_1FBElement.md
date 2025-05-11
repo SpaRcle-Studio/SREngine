@@ -139,5 +139,5 @@ bool SR_CORE_NS::GUI::FBElement::isDir;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/GUI/FileBrowser.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/GUI/FileBrowser.h`
 

@@ -336,5 +336,5 @@ inline explicit EvoScript::IState::IState (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Scripting/inc/Scripting/Old/IState.h`
+The documentation for this class was generated from the following file `Engine/libs/Scripting/inc/Scripting/Old/IState.h`
 

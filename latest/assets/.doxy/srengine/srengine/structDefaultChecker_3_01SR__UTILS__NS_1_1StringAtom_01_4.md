@@ -101,5 +101,5 @@ static inline bool DefaultChecker< SR_UTILS_NS::StringAtom >::IsDefault (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Serialization/DefaultCheckers.inl.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Serialization/DefaultCheckers.inl.h`
 

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" line="14" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" line="14" column="9" bodyfile="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" bodystart="14" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" line="28" column="26" bodyfile="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" line="28" column="26" bodyfile="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" bodystart="28" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -53,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" line="16" column="9"/>
+        <location file="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" line="16" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Bullet3CollisionShape_1a2a5486ebcd4eaf6aa6a27ebfc6002e90" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" line="17" column="9"/>
+        <location file="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" line="17" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Bullet3CollisionShape_1a2297f44ab771cb72fc9bae17a1a79f94" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD void *</type>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" line="20" column="27" bodyfile="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" bodystart="20" bodyend="20"/>
+        <location file="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" line="20" column="27" bodyfile="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" bodystart="20" bodyend="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Bullet3CollisionShape_1a6ec0d2c0bb132bafbed93f65ba4930ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -95,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" line="22" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" line="22" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Bullet3CollisionShape_1a4007d7fa7f31b61bbe8969cc646c3f88" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -109,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" line="23" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" line="23" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Bullet3CollisionShape_1a7a18cb9c7f5c96e35e0400596537d56d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -127,7 +127,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" line="25" column="43"/>
+        <location file="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" line="25" column="43"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -355,7 +355,7 @@
         <link refid="structSR__MATH__NS_1_1Vector3"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" line="13" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" bodystart="13" bodyend="30"/>
+    <location file="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" line="13" column="5" bodyfile="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" bodystart="13" bodyend="30"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>AllocateStatic</name></member>

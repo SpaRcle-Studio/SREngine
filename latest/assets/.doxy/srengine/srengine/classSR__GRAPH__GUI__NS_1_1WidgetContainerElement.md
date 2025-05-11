@@ -589,5 +589,5 @@ SR_GRAPH_GUI_NS::WidgetContainerElement::WidgetContainerElement ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h`
 

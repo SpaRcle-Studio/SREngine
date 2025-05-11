@@ -16,6 +16,6 @@
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//NNCOMPONENT_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/AI/NeuralNetwork/NNComponent.h"/>
+    <location file="Engine/inc/Engine/AI/NeuralNetwork/NNComponent.h"/>
   </compounddef>
 </doxygen>

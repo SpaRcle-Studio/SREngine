@@ -354,5 +354,5 @@ void SR_CORE_NS::TestManager::RunAll ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/Tests/TestManager.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/Tests/TestManager.h`
 

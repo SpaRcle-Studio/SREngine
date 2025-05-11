@@ -638,5 +638,5 @@ inline SR_CORE_GUI_NS::SceneTools::SceneTools ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/GUI/SceneTools.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/GUI/SceneTools.h`
 

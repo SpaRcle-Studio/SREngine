@@ -141,5 +141,5 @@ using SR_TYPES_NS::detail::uint_type_helper< BitCount, std::enable_if_t<(BitCoun
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Types/UintWide_t.h`
 

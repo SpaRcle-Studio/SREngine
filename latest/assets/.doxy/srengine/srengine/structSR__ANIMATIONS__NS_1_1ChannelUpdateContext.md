@@ -125,5 +125,5 @@ AnimationPose* SR_ANIMATIONS_NS::ChannelUpdateContext::pPose;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationContext.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Animations/AnimationContext.h`
 

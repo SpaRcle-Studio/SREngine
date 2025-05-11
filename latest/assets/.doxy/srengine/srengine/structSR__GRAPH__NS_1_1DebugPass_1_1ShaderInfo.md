@@ -144,5 +144,5 @@ uint32_t SR_GRAPH_NS::DebugPass::ShaderInfo::uboUsed;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h`
 

@@ -8,7 +8,7 @@
     <includes refid="NonCopyable_8h" local="no">Utils/Common/NonCopyable.h</includes>
     <includes refid="Vector3_8h" local="no">Utils/Math/Vector3.h</includes>
     <includes refid="Vector4_8h" local="no">Utils/Math/Vector4.h</includes>
-    <includedby refid="DebugPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h</includedby>
+    <includedby refid="DebugPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h</includedby>
     <incdepgraph>
       <node id="159">
         <label>Graphics/Loaders/SRSL.h</label>
@@ -135,7 +135,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</label>
         <link refid="DebugRenderer_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1335,11 +1335,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
         <link refid="DebugPass_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</label>
         <link refid="DebugRenderer_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1444,6 +1444,6 @@
 <codeline lineno="86"><highlight class="normal"></highlight></codeline>
 <codeline lineno="87"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GRAPHICS_DEBUG_RENDERER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h"/>
   </compounddef>
 </doxygen>

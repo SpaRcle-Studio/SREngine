@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="26" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="26" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="26" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="400" column="42" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="400" bodyend="417"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="400" column="42" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="400" bodyend="417"/>
       </memberdef>
       <memberdef kind="function" id="Xml_8h_1a7da7f57576e6641173481fd5a8152e8f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED void</type>
@@ -68,13 +68,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="419" column="26" declfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" declline="419" declcolumn="26"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="419" column="26" declfile="Engine/libs/Utils/inc/Utils/Resources/Xml.h" declline="419" declcolumn="26"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="20" column="1"/>
+    <location file="Engine/libs/Utils/inc/Utils/Resources/Xml.h" line="20" column="1"/>
   </compounddef>
 </doxygen>

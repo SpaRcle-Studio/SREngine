@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_b8cef419041e294130040bdf7c4c8d81" kind="dir">
+    <compoundname>Engine/libs/Scripting/inc/Scripting/Cpp</compoundname>
+    <innerfile refid="CodeGenerator_8h">CodeGenerator.h</innerfile>
+    <innerfile refid="CppBehaviour_8h">CppBehaviour.h</innerfile>
+    <innerfile refid="CppCompiler_8h">CppCompiler.h</innerfile>
+    <innerfile refid="ModuleManager_8h">ModuleManager.h</innerfile>
+    <innerfile refid="ScriptModuleInfo_8h">ScriptModuleInfo.h</innerfile>
+    <innerfile refid="ScriptSystem_8h">ScriptSystem.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Scripting/inc/Scripting/Cpp/"/>
+  </compounddef>
+</doxygen>

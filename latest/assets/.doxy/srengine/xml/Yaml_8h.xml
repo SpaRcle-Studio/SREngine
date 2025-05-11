@@ -15,7 +15,7 @@
         <link refid="Allocator_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Resources/Yaml.h</label>
         <link refid="Yaml_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -429,6 +429,6 @@
 <codeline lineno="85"><highlight class="normal"></highlight></codeline>
 <codeline lineno="86"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_COMMON_YAML_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h"/>
+    <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h"/>
   </compounddef>
 </doxygen>

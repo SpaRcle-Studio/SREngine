@@ -5,10 +5,10 @@
     <includes refid="ModuleManager_8h" local="no">Scripting/Cpp/ModuleManager.h</includes>
     <includes refid="Component_8h" local="no">Utils/ECS/Component.h</includes>
     <includes refid="IResource_8h" local="no">Utils/Resources/IResource.h</includes>
-    <includedby refid="EvoBehaviour_8h" local="no">Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h</includedby>
+    <includedby refid="EvoBehaviour_8h" local="no">Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h</label>
         <link refid="Behaviour_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1394,13 +1394,13 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h</label>
         <link refid="Behaviour_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h</label>
         <link refid="EvoBehaviour_8h_source"/>
       </node>
     </invincdepgraph>
@@ -1497,6 +1497,6 @@
 <codeline lineno="85"><highlight class="normal"></highlight></codeline>
 <codeline lineno="86"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_BEHAVIOUR_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h"/>
   </compounddef>
 </doxygen>

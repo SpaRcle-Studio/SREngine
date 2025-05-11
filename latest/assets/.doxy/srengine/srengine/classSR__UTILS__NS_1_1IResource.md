@@ -1175,5 +1175,5 @@ SR_UTILS_NS::IResource::~IResource () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Resources/IResource.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Resources/IResource.h`
 

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_387552b0934ce9512c4f7c4e31a03e0f" kind="dir">
+    <compoundname>Engine/libs/Graphics/inc/Graphics/Window</compoundname>
+    <innerfile refid="AndroidWindow_8h">AndroidWindow.h</innerfile>
+    <innerfile refid="BasicWindowImpl_8h">BasicWindowImpl.h</innerfile>
+    <innerfile refid="GLFWWindow_8h">GLFWWindow.h</innerfile>
+    <innerfile refid="Win32Window_8h">Win32Window.h</innerfile>
+    <innerfile refid="Window_8h">Window.h</innerfile>
+    <innerfile refid="X11Window_8h">X11Window.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Graphics/inc/Graphics/Window/"/>
+  </compounddef>
+</doxygen>

@@ -248,5 +248,5 @@ constexpr uchar s_s::str_len (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Common/str_switch.h`
 

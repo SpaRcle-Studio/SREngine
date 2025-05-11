@@ -210,7 +210,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</label>
         <link refid="DebugWireframeMesh_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1566,6 +1566,6 @@
 <codeline lineno="56"><highlight class="normal"></highlight></codeline>
 <codeline lineno="57"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_DEBUGWIREFRAMEMESH_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h"/>
   </compounddef>
 </doxygen>

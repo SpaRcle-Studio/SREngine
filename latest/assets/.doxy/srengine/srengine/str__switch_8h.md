@@ -4,7 +4,7 @@
 
 
 
-[**FileList**](files.md) **>** [**Common**](dir_964cfbb3f15edef5ecfb3ae3bc01626c.md) **>** [**str\_switch.h**](str__switch_8h.md)
+[**FileList**](files.md) **>** [**Common**](dir_3494e32b0a79d085f92ff9f3955f97da.md) **>** [**str\_switch.h**](str__switch_8h.md)
 
 [Go to the source code of this file](str__switch_8h_source.md)
 
@@ -136,5 +136,5 @@
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Common/str_switch.h`
 

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="21" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="21" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="21" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="21" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="66" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="66" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="66" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="66" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Win32Window_1a85437c624c8365669a973b9e024b0888" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::IVector2</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="68" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="68" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="68" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="68" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Win32Window_1af6f72d38b5caa651e7fe0b0555dfd370" prot="private" static="no" mutable="no">
         <type>HWND</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="70" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="70" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="70" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="70" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Win32Window_1af19181f94b60857aa83213c1da3465c5" prot="private" static="no" mutable="no">
         <type>HDC</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="71" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="71" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="71" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="71" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Win32Window_1a9b8394f04fb283e6eab17855d09acf86" prot="private" static="no" mutable="no">
         <type>HGLRC</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="72" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="72" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="72" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="72" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Win32Window_1a42fb6db2e11be2888ff177b2fafefad2" prot="private" static="no" mutable="no">
         <type>HINSTANCE</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="73" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="73" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="73" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="73" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Win32Window_1a54935776842907702385aa2ed107d820" prot="private" static="no" mutable="no">
         <type>DWORD</type>
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="74" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="74" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="74" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="74" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Win32Window_1ad9d347c8de170fe7195f57e9a4bebb0d" prot="private" static="no" mutable="no">
         <type>DWORD</type>
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="75" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="75" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="75" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="75" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -152,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="23" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="23" bodyend="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="23" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="23" bodyend="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Win32Window_1ace9c57f670e05999987e788dfcc226db" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -188,7 +188,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="29" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="29" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Win32Window_1a916fe55b7c2be2482c8b8b91e64f7543" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::IVector2</type>
@@ -203,7 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="34" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="34" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Win32Window_1a4dcee9a82125bfc84a42bddddedb13cd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE HINSTANCE</type>
@@ -217,7 +217,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="35" column="48" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="35" bodyend="35"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="35" column="48" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="35" bodyend="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Win32Window_1a0c2b8dfdb476a660e02a76683dae336e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE HWND</type>
@@ -231,7 +231,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="36" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="36" bodyend="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="36" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="36" bodyend="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Win32Window_1a5695d421a2f209d26c718555c7803da5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::IVector2</type>
@@ -246,7 +246,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="37" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="37" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Win32Window_1ad8f3406da9288ee6230b582ca1c86844" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD void *</type>
@@ -261,7 +261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="38" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="38" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Win32Window_1a7d87ef9a9c92dbea533b7e762979f0f5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::IVector2</type>
@@ -280,7 +280,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="40" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="40" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Win32Window_1ad90b468ae8a4a409db2e6ab6b26a064b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::IVector2</type>
@@ -299,7 +299,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="41" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="41" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Win32Window_1acc5890eb9e82660d4bbdf52e91826a89" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD WindowType</type>
@@ -314,7 +314,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="43" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="43" bodyend="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="43" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="43" bodyend="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Win32Window_1a2d4c9d69cae4a9b471fc628036c516a4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -329,7 +329,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="44" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="44" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Win32Window_1af6af52819ef3e0ef295332bdf6d394a2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -344,7 +344,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="46" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="46" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Win32Window_1a690f5f5c45cf8247956974b7e7069fdb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -359,7 +359,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="47" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="47" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Win32Window_1aadecdde85f04deb755fdb0a7815269c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -374,7 +374,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="49" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="49" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Win32Window_1a6a8e29a6df578a77beee12bcc290f508" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -389,7 +389,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="50" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="50" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Win32Window_1af0881b535349cb7fc6e0cbe2451a0644" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -404,7 +404,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="51" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="51" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Win32Window_1aae52e07b2c251248a9fbcd32fe506336" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -419,7 +419,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="52" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="52" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Win32Window_1a80122b63d86d0f83f02080d0a10c76e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -434,7 +434,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="53" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="53" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Win32Window_1aba8c8b62eb86ae4ba153842edc9cc160" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -449,7 +449,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="54" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="54" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Win32Window_1a9aa9baecdd7406dbb2897fc756818e07" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -468,7 +468,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="56" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="56" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Win32Window_1a1a6f641eb43e0e22c9539f8b1ec56996" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -487,7 +487,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="57" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="57" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Win32Window_1a513c942c514d09e5cc52e1df8c40574b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -510,7 +510,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="58" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="58" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Win32Window_1a11d33b6b280d39f073f3e361878bc70b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -533,7 +533,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="59" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="59" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -565,7 +565,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="62" column="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="62" column="26"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-func">
@@ -597,7 +597,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="63" column="33"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="63" column="33"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -640,7 +640,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="20" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="20" bodyend="77"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" line="20" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/Win32Window.h" bodystart="20" bodyend="77"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1ab042a7c3ec62e016f28d1a7897ca6404" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Win32Window</scope><name>BasicWindowImpl</name></member>
       <member refid="classSR__GRAPH__NS_1_1Win32Window_1aba8c8b62eb86ae4ba153842edc9cc160" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Win32Window</scope><name>Centralize</name></member>

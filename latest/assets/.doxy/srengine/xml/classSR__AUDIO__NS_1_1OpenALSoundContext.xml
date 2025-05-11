@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="14" column="9" bodyfile="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="14" column="9" bodyfile="Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" bodystart="14" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="48" column="20" bodyfile="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" bodystart="48" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="48" column="20" bodyfile="Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" bodystart="48" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -53,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="16" column="18"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="16" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundContext_1a3d4cffa98f379d8f7b17688da67560e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="17" column="9"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="17" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundContext_1afcb5eb8888ec68976abd683844c6c4f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="20" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="20" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundContext_1aa4df63537ede047892d307bdc7e4666e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="21" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="21" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundContext_1afa3c7476940148888f045f6845960553" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -116,7 +116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="23" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="23" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundContext_1a23e9da75e3795f53608ec8b7843ede2e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="25" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="25" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundContext_1a860d6ebe46027bb039c1d4520ca97a30" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -162,7 +162,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="28" column="27"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="28" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundContext_1ac008fe2476de774bcd364025239f0ed6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -181,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="29" column="27"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="29" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundContext_1a876bce572d5b477ab79e5f2e8713d7d9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -200,7 +200,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="30" column="27"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="30" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundContext_1a35cc71d560c49c1327e0f0495fd0d9f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD SoundSource</type>
@@ -219,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="33" column="34"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="33" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundContext_1ab1d8f6c49f0e146b3feb221a388ee923" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD <ref refid="structSR__AUDIO__NS_1_1PlayParams" kindref="compound">PlayParams</ref></type>
@@ -238,7 +238,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="35" column="33"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="35" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundContext_1afb126621f86c45b3b2c00a36a524b3de" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD SoundBuffer</type>
@@ -269,7 +269,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="37" column="34"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="37" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundContext_1ab681a91b96ef9af4681febedbf46df33" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -288,7 +288,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="44" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="44" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundContext_1ac32a79c941478a13ca9418fb60e13551" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -307,7 +307,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="45" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="45" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -359,7 +359,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="13" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" bodystart="13" bodyend="50"/>
+    <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" line="13" column="5" bodyfile="Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h" bodystart="13" bodyend="50"/>
     <listofallmembers>
       <member refid="classSR__AUDIO__NS_1_1SoundContext_1ab73e5a52a134042a39995136c9226aae" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundContext</scope><name>Allocate</name></member>
       <member refid="classSR__AUDIO__NS_1_1OpenALSoundContext_1afb126621f86c45b3b2c00a36a524b3de" prot="public" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundContext</scope><name>AllocateBuffer</name></member>

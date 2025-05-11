@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="97" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="97" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="97" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="97" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLExpr_1a949356ada0ff620166cc3ce64b50e271" prot="public" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref> * &gt;</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="98" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="98" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="98" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="98" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLExpr_1a6837bec8f99611dc4e8530a79f1cec4c" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="100" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="100" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="100" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="100" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLExpr_1a20c5abc9709e62dbc4046d77b11f6539" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="101" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="101" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="101" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="101" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLExpr_1a65c1db3af48c3d106888fa4d3cb3b479" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="102" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="102" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="102" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="102" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLExpr_1ab8cc2d89eea593f449a5ad29cf8ae344" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="103" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="103" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="103" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="103" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -110,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="24" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="24" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLExpr_1a44ecadd3c7c1113818d2a8b4c0e8858c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="32" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="32" bodyend="42"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="32" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="32" bodyend="42"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLExpr_1a12543790d40f95f9600fb5a0945c879c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -150,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="44" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="44" bodyend="51"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="44" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="44" bodyend="51"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLExpr_1ae16146ab060df4e3fcf1e3ef87733fe2" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -177,7 +177,7 @@
         <inbodydescription>
 <para>массив без явного размера (динамический массив вида float[] arr;)</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="53" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="53" bodyend="74"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="53" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="53" bodyend="74"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLExpr_1a5640411d8138bcd15e6da23eef090fae" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -199,7 +199,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="76" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="76" bodyend="80"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="76" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="76" bodyend="80"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLExpr_1a7513d0b8b0fce5533e507a0011b17b6a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -213,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="82" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="82" bodyend="86"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="82" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="82" bodyend="86"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLExpr_1a375c23fffc3e0ae7332056be829306f7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -231,7 +231,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="88" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="88" bodyend="93"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="88" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="88" bodyend="93"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLExpr_1aacf2ca3bd73877945d725fac28e9aeac" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD std::string</type>
@@ -250,7 +250,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="95" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="95" column="34"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -270,7 +270,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="26" column="25" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="26" bodyend="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="26" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="26" bodyend="30"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -315,7 +315,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="22" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="22" bodyend="105"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="22" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="22" bodyend="105"/>
     <listofallmembers>
       <member refid="classSR__SRSL__NS_1_1SRSLExpr_1a949356ada0ff620166cc3ce64b50e271" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLExpr</scope><name>args</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLExpr_1a10abfe2942b159d1dc2acd8b4cd7a020" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLExpr</scope><name>CreateStringExpression</name></member>

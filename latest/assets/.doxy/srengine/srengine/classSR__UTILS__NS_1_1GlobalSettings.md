@@ -327,5 +327,5 @@ SR_UTILS_NS::GlobalSettings::~GlobalSettings () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Settings.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Settings.h`
 

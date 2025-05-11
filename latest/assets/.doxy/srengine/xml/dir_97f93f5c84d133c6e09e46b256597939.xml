@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_97f93f5c84d133c6e09e46b256597939" kind="dir">
+    <compoundname>Engine/libs/Utils/inc/Utils/Resources</compoundname>
+    <innerfile refid="FileSystemWatcher_8h">FileSystemWatcher.h</innerfile>
+    <innerfile refid="FileWatcher_8h">FileWatcher.h</innerfile>
+    <innerfile refid="IResource_8h">IResource.h</innerfile>
+    <innerfile refid="IResourceReloader_8h">IResourceReloader.h</innerfile>
+    <innerfile refid="ResourceContainer_8h">ResourceContainer.h</innerfile>
+    <innerfile refid="ResourceEmbedder_8h">ResourceEmbedder.h</innerfile>
+    <innerfile refid="ResourceInfo_8h">ResourceInfo.h</innerfile>
+    <innerfile refid="ResourceManager_8h">ResourceManager.h</innerfile>
+    <innerfile refid="ResourcesHolder_8h">ResourcesHolder.h</innerfile>
+    <innerfile refid="Xml_8h">Xml.h</innerfile>
+    <innerfile refid="Yaml_8h">Yaml.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Utils/inc/Utils/Resources/"/>
+  </compounddef>
+</doxygen>

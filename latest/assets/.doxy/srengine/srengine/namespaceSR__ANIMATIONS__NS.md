@@ -285,5 +285,5 @@ static AnimationGameObjectData SR_ANIMATIONS_NS::Merge (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/Common/Importers.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/Common/Importers.h`
 

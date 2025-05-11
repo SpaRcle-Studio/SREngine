@@ -22,7 +22,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1159" column="48" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1159" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1159" column="48" bodyfile="Engine/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1159" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B7a78e65e0b63e6416c6fcf49f479b0b2_1a13cbb9e31de0eb59c03a91b235c27dba" prot="public" static="no">
         <type>std::int64_t</type>
@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1159" column="78" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1159" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1159" column="78" bodyfile="Engine/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1159" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B7a78e65e0b63e6416c6fcf49f479b0b2_1a6a94bf33280782771f7a39118a02481b" prot="public" static="no">
         <type>std::uint_fast64_t</type>
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1159" column="105" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1159" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1159" column="105" bodyfile="Engine/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1159" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B7a78e65e0b63e6416c6fcf49f479b0b2_1a9d51ab55fe8ccf56d049d9d903d27d49" prot="public" static="no">
         <type>std::int_fast64_t</type>
@@ -64,14 +64,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1159" column="130" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1159" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1159" column="130" bodyfile="Engine/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1159" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1159" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1159" bodyend="1159"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1159" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1159" bodyend="1159"/>
     <listofallmembers>
       <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B7a78e65e0b63e6416c6fcf49f479b0b2_1a13cbb9e31de0eb59c03a91b235c27dba" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::uint_type_helper&lt; BitCount, std::enable_if_t&lt;(BitCount &gt;=static_cast&lt; size_t &gt;(UINT8_C(33))) &amp;&amp;(BitCount&lt;=static_cast&lt; size_t &gt;(UINT8_C(64)))&gt; &gt;</scope><name>exact_signed_type</name></member>
       <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B7a78e65e0b63e6416c6fcf49f479b0b2_1aa0201043145d6efdd848aadbe66cab79" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::uint_type_helper&lt; BitCount, std::enable_if_t&lt;(BitCount &gt;=static_cast&lt; size_t &gt;(UINT8_C(33))) &amp;&amp;(BitCount&lt;=static_cast&lt; size_t &gt;(UINT8_C(64)))&gt; &gt;</scope><name>exact_unsigned_type</name></member>

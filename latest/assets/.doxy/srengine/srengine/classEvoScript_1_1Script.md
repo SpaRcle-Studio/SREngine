@@ -431,5 +431,5 @@ static Script * EvoScript::Script::Allocate (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h`
+The documentation for this class was generated from the following file `Engine/libs/Scripting/inc/Scripting/Old/Script.h`
 

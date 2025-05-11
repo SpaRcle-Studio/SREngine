@@ -197,5 +197,5 @@ static inline SR_FORCE_INLINE std::vector< std::string > SR_GRAPH_NS::Vertices::
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Types/Vertices.h`
 

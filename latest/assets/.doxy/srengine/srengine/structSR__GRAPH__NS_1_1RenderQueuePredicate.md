@@ -120,5 +120,5 @@ inline SR_NODISCARD bool SR_GRAPH_NS::RenderQueuePredicate::operator() (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Render/RenderQueue.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h`
 

@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_ae9b2f7fe7573db66ee183afae23951c" kind="dir">
+    <compoundname>Engine/libs/Scripting/inc/Scripting/Base</compoundname>
+    <innerfile refid="Behaviour_8h">Behaviour.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Scripting/inc/Scripting/Base/"/>
+  </compounddef>
+</doxygen>

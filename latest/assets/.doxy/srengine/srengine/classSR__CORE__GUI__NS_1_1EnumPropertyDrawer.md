@@ -432,5 +432,5 @@ Implements [*SR\_CORE\_GUI\_NS::PropertyDrawerBase::Draw*](classSR__CORE__GUI__N
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/GUI/PropertyDrawers/EnumPropertyDrawer.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/GUI/PropertyDrawers/EnumPropertyDrawer.h`
 

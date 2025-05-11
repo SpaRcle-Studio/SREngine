@@ -238,5 +238,5 @@ inline SR_NODISCARD std::lock_guard< std::shared_mutex > SR_HTYPES_NS::SafeQueue
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Types/SafeQueue.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Types/SafeQueue.h`
 

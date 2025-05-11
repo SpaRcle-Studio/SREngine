@@ -5,7 +5,7 @@
     <includes refid="DataType_8h" local="no">Utils/SRLM/DataType.h</includes>
     <includes refid="LogicalNode_8h" local="no">Utils/SRLM/LogicalNode.h</includes>
     <includes refid="Icons_8h" local="no">Graphics/GUI/Icons.h</includes>
-    <includedby refid="AnimatorEditor_8h" local="no">Engine/Core/inc/Core/GUI/AnimatorEditor.h</includedby>
+    <includedby refid="AnimatorEditor_8h" local="no">Engine/inc/Engine/GUI/AnimatorEditor.h</includedby>
     <incdepgraph>
       <node id="128">
         <label>Graphics/GUI/Icons.h</label>
@@ -14,7 +14,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/Node.h</label>
         <link refid="Graphics_2inc_2Graphics_2GUI_2Node_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -921,11 +921,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/inc/Core/GUI/AnimatorEditor.h</label>
+        <label>Engine/inc/Engine/GUI/AnimatorEditor.h</label>
         <link refid="AnimatorEditor_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/Node.h</label>
         <link refid="Graphics_2inc_2Graphics_2GUI_2Node_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1048,6 +1048,6 @@
 <codeline lineno="105"><highlight class="normal"></highlight></codeline>
 <codeline lineno="106"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_NODE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h"/>
   </compounddef>
 </doxygen>

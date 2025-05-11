@@ -34,7 +34,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/PreProcessor.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/SRSL/PreProcessor.h</label>
         <link refid="PreProcessor_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1028,6 +1028,6 @@
 <codeline lineno="48"><highlight class="normal"></highlight></codeline>
 <codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_SRSL_PREPROCESSOR_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/PreProcessor.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/PreProcessor.h"/>
   </compounddef>
 </doxygen>

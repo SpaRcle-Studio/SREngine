@@ -4,10 +4,10 @@
     <compoundname>ImmediateGUI.h</compoundname>
     <includes refid="PipelineType_8h" local="no">Graphics/Pipeline/PipelineType.h</includes>
     <includes refid="Rect_8h" local="no">Utils/Math/Rect.h</includes>
-    <includedby refid="Widget_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h</includedby>
+    <includedby refid="Widget_8h" local="no">Engine/libs/Graphics/inc/Graphics/GUI/Widget.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/ImmediateGUI.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/ImmediateGUI.h</label>
         <link refid="ImmediateGUI_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -659,69 +659,69 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="3">
-        <label>Engine/Core/inc/Core/GUI/About.h</label>
+        <label>Engine/inc/Engine/GUI/About.h</label>
         <link refid="About_8h_source"/>
       </node>
       <node id="15">
-        <label>Engine/Core/inc/Core/GUI/AnimatorEditor.h</label>
+        <label>Engine/inc/Engine/GUI/AnimatorEditor.h</label>
         <link refid="AnimatorEditor_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/inc/Core/GUI/EngineStatistics.h</label>
+        <label>Engine/inc/Engine/GUI/EngineStatistics.h</label>
         <link refid="EngineStatistics_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/inc/Core/GUI/FileBrowser.h</label>
+        <label>Engine/inc/Engine/GUI/FileBrowser.h</label>
         <link refid="FileBrowser_8h_source"/>
       </node>
       <node id="6">
-        <label>Engine/Core/inc/Core/GUI/Hierarchy.h</label>
+        <label>Engine/inc/Engine/GUI/Hierarchy.h</label>
         <link refid="Hierarchy_8h_source"/>
       </node>
       <node id="7">
-        <label>Engine/Core/inc/Core/GUI/Inspector.h</label>
+        <label>Engine/inc/Engine/GUI/Inspector.h</label>
         <link refid="Inspector_8h_source"/>
       </node>
       <node id="8">
-        <label>Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h</label>
+        <label>Engine/inc/Engine/GUI/PhysicsMaterialEditor.h</label>
         <link refid="PhysicsMaterialEditor_8h_source"/>
       </node>
       <node id="16">
-        <label>Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h</label>
+        <label>Engine/inc/Engine/GUI/RenderTechniqueEditor.h</label>
         <link refid="RenderTechniqueEditor_8h_source"/>
       </node>
       <node id="9">
-        <label>Engine/Core/inc/Core/GUI/SceneRunner.h</label>
+        <label>Engine/inc/Engine/GUI/SceneRunner.h</label>
         <link refid="SceneRunner_8h_source"/>
       </node>
       <node id="18">
-        <label>Engine/Core/inc/Core/GUI/SceneTools.h</label>
+        <label>Engine/inc/Engine/GUI/SceneTools.h</label>
         <link refid="SceneTools_8h_source"/>
       </node>
       <node id="10">
-        <label>Engine/Core/inc/Core/GUI/SoundDebug.h</label>
+        <label>Engine/inc/Engine/GUI/SoundDebug.h</label>
         <link refid="SoundDebug_8h_source"/>
       </node>
       <node id="11">
-        <label>Engine/Core/inc/Core/GUI/VisualScriptEditor.h</label>
+        <label>Engine/inc/Engine/GUI/VisualScriptEditor.h</label>
         <link refid="VisualScriptEditor_8h_source"/>
       </node>
       <node id="12">
-        <label>Engine/Core/inc/Core/GUI/WorldEdit.h</label>
+        <label>Engine/inc/Engine/GUI/WorldEdit.h</label>
         <link refid="WorldEdit_8h_source"/>
       </node>
       <node id="13">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h</label>
         <link refid="Graphics_2inc_2Graphics_2GUI_2Editor_2MessageBox_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/ImmediateGUI.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/ImmediateGUI.h</label>
         <link refid="ImmediateGUI_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="14">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h</label>
         <link refid="NodeWidget_8h_source"/>
         <childnode refid="15" relation="include">
         </childnode>
@@ -729,7 +729,7 @@
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/Widget.h</label>
         <link refid="Widget_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -759,7 +759,7 @@
         </childnode>
       </node>
       <node id="17">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h</label>
         <link refid="WidgetContainer_8h_source"/>
         <childnode refid="18" relation="include">
         </childnode>
@@ -1194,6 +1194,6 @@
 <codeline lineno="420"><highlight class="normal"></highlight></codeline>
 <codeline lineno="421"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SRENGINE_IMMEDIATEGUI_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/ImmediateGUI.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/ImmediateGUI.h"/>
   </compounddef>
 </doxygen>

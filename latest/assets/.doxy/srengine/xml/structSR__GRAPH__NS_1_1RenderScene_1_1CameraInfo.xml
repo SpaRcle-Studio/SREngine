@@ -15,14 +15,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="57" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="57" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="57" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="57" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="56" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="56" bodyend="58"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="56" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="56" bodyend="58"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1RenderScene_1_1CameraInfo_1a60ca90507c59b7a25f729e82f5b4830c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene::CameraInfo</scope><name>pCamera</name></member>
     </listofallmembers>

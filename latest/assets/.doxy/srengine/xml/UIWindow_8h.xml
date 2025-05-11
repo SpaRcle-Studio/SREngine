@@ -5,7 +5,7 @@
     <includes refid="Component_8h" local="no">Utils/ECS/Component.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/UIWindow.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h</label>
         <link refid="UIWindow_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1047,6 +1047,6 @@
 <codeline lineno="49"><highlight class="normal"></highlight></codeline>
 <codeline lineno="50"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GRAPHICS_UI_WINDOW_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/UIWindow.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h"/>
   </compounddef>
 </doxygen>

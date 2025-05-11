@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="14" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="14" column="9" bodyfile="Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" bodystart="14" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="30" column="24" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" bodystart="30" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="30" column="24" bodyfile="Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" bodystart="30" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="16" column="9"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="16" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXCollisionShape_1a51e27896fecccb6d81a2734b50781534" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="19" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="19" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXCollisionShape_1ad58d722ffe208e003b309b233a9a33d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="20" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="20" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXCollisionShape_1a579531b9f85d581c58538d07114681cd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD physx::PxMaterial *</type>
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="22" column="40"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="22" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXCollisionShape_1ad3e272c0b1561ec0053f29e04a625812" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD physx::PxConvexMesh *</type>
@@ -111,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="24" column="42"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="24" column="42"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXCollisionShape_1a57d781a33d83d57726a41e1e752f95c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD physx::PxTriangleMesh *</type>
@@ -129,7 +129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="25" column="44"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="25" column="44"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXCollisionShape_1af272d3187d78a32cbeaa4ab544a1ce0a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD void *</type>
@@ -144,7 +144,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="27" column="27" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" bodystart="27" bodyend="27"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="27" column="27" bodyfile="Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" bodystart="27" bodyend="27"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -187,7 +187,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="13" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" bodystart="13" bodyend="32"/>
+    <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="13" column="5" bodyfile="Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" bodystart="13" bodyend="32"/>
     <listofallmembers>
       <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a2225190aa1ab2a4ddf5b4202342c2b23" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>CalculateLocalInertia</name></member>
       <member refid="classSR__PTYPES__NS_1_1PhysXCollisionShape_1ad3e272c0b1561ec0053f29e04a625812" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>CreateConvexMesh</name></member>

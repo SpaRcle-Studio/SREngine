@@ -515,5 +515,5 @@ inline SR_NODISCARD MeshDrawerPass * SR_GRAPH_NS::RenderQueue::GetMeshDrawerPass
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Render/RenderQueue.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h`
 

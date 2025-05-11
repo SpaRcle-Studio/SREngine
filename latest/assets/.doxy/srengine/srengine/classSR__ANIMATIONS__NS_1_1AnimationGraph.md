@@ -529,5 +529,5 @@ static SR_NODISCARD AnimationGraph * SR_ANIMATIONS_NS::AnimationGraph::Load (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraph.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraph.h`
 

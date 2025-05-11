@@ -22,7 +22,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="63" column="18"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="63" column="18"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1MultiThreadPtr_1a9f338fef847010fbd9ec265957a53f8c" prot="private" static="no" mutable="no">
         <type>T *</type>
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="64" column="11" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="64" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="64" column="11" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="64" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -62,7 +62,7 @@
 <para>m_useCount</para>
 <para>m_valid</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="16" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="70" bodyend="80"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="16" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="70" bodyend="80"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1MultiThreadPtr_1a210b7ba2dc238fccc46c2d5417f5f454" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -80,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="17" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="82" bodyend="88"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="17" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="82" bodyend="88"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1MultiThreadPtr_1a15ffacaa262abad2062a67b1a8990c27" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="18" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="18" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1MultiThreadPtr_1a7481a9853f996b34560c29c0d73aca58" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="19" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="90" bodyend="99"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="19" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="90" bodyend="99"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1MultiThreadPtr_1a69aa204d982beda32caa0e10e8fc1fdb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__HTYPES__NS_1_1MultiThreadPtr" kindref="compound">MultiThreadPtr</ref>&lt; T &gt; &amp;</type>
@@ -127,7 +127,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="22" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="101" bodyend="117"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="22" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="101" bodyend="117"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1MultiThreadPtr_1aa1c82d850732afe78f49a625a73297be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__HTYPES__NS_1_1MultiThreadPtr" kindref="compound">MultiThreadPtr</ref>&lt; T &gt; &amp;</type>
@@ -148,7 +148,7 @@
 <para>m_useCount</para>
 <para>m_valid</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="23" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="119" bodyend="151"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="23" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="119" bodyend="151"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1MultiThreadPtr_1a38eb0abc84130ec05bc9785ab88cb911" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -162,7 +162,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="25" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="25" bodyend="25"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="25" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="25" bodyend="25"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1MultiThreadPtr_1a5019feabc7ca55c65a20ef3c57cc7c49" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>T &amp;</type>
@@ -177,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="27" column="11" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="27" bodyend="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="27" column="11" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="27" bodyend="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1MultiThreadPtr_1a308bb9d2463bc143a3e6b5db3d19589b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>T *</type>
@@ -191,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="28" column="11" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="28" bodyend="28"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="28" column="11" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="28" bodyend="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1MultiThreadPtr_1aa1dfc2365d74373165d2edfb94ef8f56" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_INLINE bool</type>
@@ -209,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="30" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="30" bodyend="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="30" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="30" bodyend="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1MultiThreadPtr_1ad2ac1754a8d0c8cbe5add600d5c8e8ca" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_INLINE bool</type>
@@ -227,7 +227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="33" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="33" bodyend="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="33" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="33" bodyend="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1MultiThreadPtr_1acdcf8df9564d0b1278a047386e68ef31" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -241,7 +241,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="38" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="179" bodyend="185"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="38" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="179" bodyend="185"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1MultiThreadPtr_1a143e5a8879887f571c207acfa2990d8d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -255,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="39" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="187" bodyend="193"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="39" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="187" bodyend="193"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1MultiThreadPtr_1a39393f4ebec8061e645dc1d2c96c930e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -274,7 +274,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="41" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="41" bodyend="43"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="41" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="41" bodyend="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1MultiThreadPtr_1a2bc696030136cba5fd8e5833a3270fcb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD T *</type>
@@ -288,7 +288,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="45" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="45" bodyend="45"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="45" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="45" bodyend="45"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1MultiThreadPtr_1ad386a9fce22d4cb2e1c36d28edb5b7c0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD void *</type>
@@ -302,7 +302,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="46" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="46" bodyend="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="46" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="46" bodyend="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1MultiThreadPtr_1a48853ddcdb417f42579f67d4e1198157" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD std::recursive_mutex &amp;</type>
@@ -316,7 +316,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="47" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="47" bodyend="47"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="47" column="43" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="47" bodyend="47"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1MultiThreadPtr_1a83e89cabf77e57ab48fa6ee3f499f68b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1MultiThreadPtr" kindref="compound">MultiThreadPtr</ref>&lt; T &gt;</type>
@@ -330,7 +330,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="48" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="48" bodyend="48"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="48" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="48" bodyend="48"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1MultiThreadPtr_1a0137d3ff9cbca64a53a68cf17a1b2faa" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -344,7 +344,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="50" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="50" bodyend="50"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="50" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="50" bodyend="50"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1MultiThreadPtr_1a4c61a49e82588d191781b49993ce9b4d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -358,7 +358,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="51" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="51" bodyend="51"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="51" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="51" bodyend="51"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1MultiThreadPtr_1a87f3bbf86dc86d2b91f1ca342af160f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -377,7 +377,7 @@
         <inbodydescription>
 <para>после вызова FreeImpl this может потенциально инвалидироваться!</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="53" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="153" bodyend="165"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="53" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="153" bodyend="165"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -397,14 +397,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="56" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="167" bodyend="177"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="56" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="167" bodyend="177"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="14" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="14" bodyend="66"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" line="14" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Types/MultiThreadPtr.h" bodystart="14" bodyend="66"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1MultiThreadPtr_1a87f3bbf86dc86d2b91f1ca342af160f1" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::MultiThreadPtr</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1MultiThreadPtr_1a39393f4ebec8061e645dc1d2c96c930e" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::MultiThreadPtr</scope><name>DynamicCast</name></member>

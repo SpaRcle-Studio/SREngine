@@ -254,5 +254,5 @@ inline SerializationNode & SR_UTILS_NS::SerializationNode::operator= (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h`
 

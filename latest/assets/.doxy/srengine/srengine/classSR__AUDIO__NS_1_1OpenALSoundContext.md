@@ -490,5 +490,5 @@ SR_AUDIO_NS::OpenALSoundContext::~OpenALSoundContext () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h`
+The documentation for this class was generated from the following file `Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h`
 

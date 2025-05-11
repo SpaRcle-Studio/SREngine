@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRProperty.h" line="46" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRProperty.h" bodystart="46" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRProperty.h" line="46" column="20" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/SRProperty.h" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1SRProperty_1a4248027d88a33f6d3ad6a55b5aaae314" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref></type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRProperty.h" line="47" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRProperty.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRProperty.h" line="47" column="20" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/SRProperty.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1SRProperty_1abb74f7cd35b87d1265907304596e3c5a" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref></type>
@@ -43,14 +43,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRProperty.h" line="48" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRProperty.h" bodystart="48" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRProperty.h" line="48" column="20" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/SRProperty.h" bodystart="48" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRProperty.h" line="44" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRProperty.h" bodystart="44" bodyend="50"/>
+    <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRProperty.h" line="44" column="5" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/SRProperty.h" bodystart="44" bodyend="50"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1SRProperty_1abb74f7cd35b87d1265907304596e3c5a" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::SRProperty</scope><name>m_description</name></member>
       <member refid="classSR__UTILS__NS_1_1SRProperty_1a8af17be07062a9b5fa523a2d15731e48" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::SRProperty</scope><name>m_name</name></member>

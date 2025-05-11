@@ -261,5 +261,5 @@ static SR_NODISCARD AnimationStateCondition * SR_ANIMATIONS_NS::AnimationStateCo
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h`
 

@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="29" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Region.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="29" column="9" bodyfile="Engine/libs/Utils/inc/Utils/World/Region.h" bodystart="29" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="74" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Region.h" bodystart="74" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="74" column="31" bodyfile="Engine/libs/Utils/inc/Utils/World/Region.h" bodystart="74" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-attrib">
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="80" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Region.h" bodystart="80" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="80" column="26" bodyfile="Engine/libs/Utils/inc/Utils/World/Region.h" bodystart="80" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1Region_1a5c7e287e62cf17eb890602feead2b3f1" prot="private" static="yes" mutable="no">
         <type>const uint16_t</type>
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="81" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Region.h" bodystart="81" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="81" column="31" bodyfile="Engine/libs/Utils/inc/Utils/World/Region.h" bodystart="81" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -80,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="84" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Region.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="84" column="18" bodyfile="Engine/libs/Utils/inc/Utils/World/Region.h" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1Region_1a0942248348d6f386c48ce4d124efb41b" prot="protected" static="no" mutable="no">
         <type>Chunks</type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="86" column="16" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Region.h" bodystart="86" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="86" column="16" bodyfile="Engine/libs/Utils/inc/Utils/World/Region.h" bodystart="86" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1Region_1ab214172756798c3c27546aaef1c331e3" prot="protected" static="no" mutable="no">
         <type>CachedChunks</type>
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="87" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Region.h" bodystart="87" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="87" column="22" bodyfile="Engine/libs/Utils/inc/Utils/World/Region.h" bodystart="87" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1Region_1ad177e07af8b6107860244bde80c58c98" prot="protected" static="no" mutable="no">
         <type>uint32_t</type>
@@ -122,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="88" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Region.h" bodystart="88" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="88" column="18" bodyfile="Engine/libs/Utils/inc/Utils/World/Region.h" bodystart="88" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1Region_1ab36cf9716fe2e65882004793fcf455f3" prot="protected" static="no" mutable="no">
         <type>Math::IVector2</type>
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="89" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Region.h" bodystart="89" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="89" column="24" bodyfile="Engine/libs/Utils/inc/Utils/World/Region.h" bodystart="89" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1Region_1a187cd18f09966963143c67c54d5269ae" prot="protected" static="no" mutable="no">
         <type>Math::IVector3</type>
@@ -150,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="90" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Region.h" bodystart="90" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="90" column="24" bodyfile="Engine/libs/Utils/inc/Utils/World/Region.h" bodystart="90" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1Region_1a2daae7e453b727641c22d13578da3629" prot="protected" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -164,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="91" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Region.h" bodystart="91" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="91" column="21" bodyfile="Engine/libs/Utils/inc/Utils/World/Region.h" bodystart="91" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -183,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="31" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Region.h" bodystart="31" bodyend="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="31" column="18" bodyfile="Engine/libs/Utils/inc/Utils/World/Region.h" bodystart="31" bodyend="40"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -199,7 +199,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="43" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="43" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Region_1a81291fe353c7d6483f38a4f6516fe488" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -217,7 +217,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="46" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="46" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Region_1ad8eca2fbd93b147b16c62b6646695226" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -232,7 +232,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="47" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="47" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Region_1a4dee68cf6aea582ea633cf508ef1da5b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -246,7 +246,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="48" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="48" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Region_1a6b93f572ca1405c7d4cc5ef02f337d1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -266,7 +266,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="49" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="49" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Region_1aad83c6a7208a29f473c7777496e7c11c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -281,7 +281,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="50" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="50" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Region_1a6131c0be302136081ecb553fdfe8df51" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -296,7 +296,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="51" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="51" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Region_1af5bf92e9c76e75628f979529d88518ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -310,7 +310,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="52" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="52" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Region_1a7829024a31e48b8796ebc4f6ac69be53" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -325,7 +325,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="54" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="54" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Region_1a8b888670f03aef8563f8fdadbe92cf70" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__WORLD__NS_1_1Chunk" kindref="compound">Chunk</ref> *</type>
@@ -343,7 +343,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="57" column="15"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="57" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Region_1a3c6d5896280cc90cb56c4cd658c4f27f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__WORLD__NS_1_1Chunk" kindref="compound">Chunk</ref> *</type>
@@ -361,7 +361,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="58" column="15"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="58" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Region_1afaf77b85fd9be0945940283bf1845839" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const Chunks &amp;</type>
@@ -375,7 +375,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="60" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Region.h" bodystart="60" bodyend="60"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="60" column="35" bodyfile="Engine/libs/Utils/inc/Utils/World/Region.h" bodystart="60" bodyend="60"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Region_1a0b9a66834b4761d2a55a6e3e9e5e2ab7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__WORLD__NS_1_1Chunk" kindref="compound">Chunk</ref> *</type>
@@ -393,7 +393,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="61" column="28"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="61" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Region_1a522061359db82b9caef26670fa785d1c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__WORLD__NS_1_1Chunk" kindref="compound">Chunk</ref> *</type>
@@ -411,7 +411,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="62" column="28"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="62" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Region_1a8f1e074c5a7640ee75a72a60d19b19c5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -425,7 +425,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="63" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Region.h" bodystart="63" bodyend="63"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="63" column="31" bodyfile="Engine/libs/Utils/inc/Utils/World/Region.h" bodystart="63" bodyend="63"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Region_1ac9071c3782e2aaede763b497fd3eca8a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -439,7 +439,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="64" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Region.h" bodystart="64" bodyend="64"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="64" column="27" bodyfile="Engine/libs/Utils/inc/Utils/World/Region.h" bodystart="64" bodyend="64"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Region_1a9341458d01a1c82851f05f3cbdc5bb2b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD Math::IVector3</type>
@@ -453,7 +453,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="65" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Region.h" bodystart="65" bodyend="65"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="65" column="37" bodyfile="Engine/libs/Utils/inc/Utils/World/Region.h" bodystart="65" bodyend="65"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Region_1a53394297ec0a79a3d84516d01e90be0b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD Math::IVector3</type>
@@ -467,7 +467,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="66" column="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="66" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Region_1af17bdf0d664ac6f9f14adb3461755ae7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -481,7 +481,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="67" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Region.h" bodystart="67" bodyend="67"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="67" column="27" bodyfile="Engine/libs/Utils/inc/Utils/World/Region.h" bodystart="67" bodyend="67"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Region_1aae785e4c5ce1477e492c0713726125dc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -499,7 +499,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="68" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="68" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Region_1ad43c148c2baa201d4c399caf7198ccc0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD ScenePtr</type>
@@ -513,7 +513,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="69" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="69" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Region_1a1b7bc28d4ad9f662edac306b990678ef" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr</type>
@@ -531,7 +531,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="71" column="49"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="71" column="49"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -551,7 +551,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="76" column="21"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="76" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Region_1aa38ac46514f89736e3b86e1014cf4092" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__WORLD__NS_1_1Region" kindref="compound">Region</ref> *</type>
@@ -568,7 +568,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="77" column="23"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="77" column="23"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -626,7 +626,7 @@
         <link refid="structSR__MATH__NS_1_1Vector3"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="28" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Region.h" bodystart="28" bodyend="93"/>
+    <location file="Engine/libs/Utils/inc/Utils/World/Region.h" line="28" column="5" bodyfile="Engine/libs/Utils/inc/Utils/World/Region.h" bodystart="28" bodyend="93"/>
     <listofallmembers>
       <member refid="classSR__WORLD__NS_1_1Region_1aa38ac46514f89736e3b86e1014cf4092" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Region</scope><name>Allocate</name></member>
       <member refid="classSR__WORLD__NS_1_1Region_1aafc779fb103832bf0c7ad0ac16a36baa" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Region</scope><name>Allocator</name></member>

@@ -81,5 +81,5 @@ Inherited by the following classes: [SR\_UTILS\_NS::CheckOperatorUsable](structS
 
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h`
 

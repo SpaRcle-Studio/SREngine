@@ -11,7 +11,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h</label>
         <link refid="Bullet3Rigidbody3D_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1271,6 +1271,6 @@
 <codeline lineno="40"><highlight class="normal"></highlight></codeline>
 <codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_BULLET3RIGIDBODY3D_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h"/>
+    <location file="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h"/>
   </compounddef>
 </doxygen>

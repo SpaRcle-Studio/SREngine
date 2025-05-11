@@ -306,5 +306,5 @@ SR_NODISCARD std::pair< SRSLExpr *, SRSLResult > SR_SRSL_NS::SRSLMathExpression:
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h`
 

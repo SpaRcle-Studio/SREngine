@@ -470,5 +470,5 @@ inline virtual void SR_CORE_GUI_NS::PointerPropertyDrawer::OnObjectReplaced (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h`
 

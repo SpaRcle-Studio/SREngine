@@ -4,11 +4,11 @@
     <compoundname>TextureConfigs.h</compoundname>
     <includes refid="Singleton_8h" local="no">Utils/Common/Singleton.h</includes>
     <includes refid="TextureHelper_8h" local="no">Graphics/Pipeline/TextureHelper.h</includes>
-    <includedby refid="TextureLoader_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h</includedby>
-    <includedby refid="Texture_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h</includedby>
+    <includedby refid="TextureLoader_8h" local="no">Engine/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h</includedby>
+    <includedby refid="Texture_8h" local="no">Engine/libs/Graphics/inc/Graphics/Types/Texture.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h</label>
         <link refid="TextureConfigs_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -654,11 +654,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="15">
-        <label>Engine/Core/inc/Core/Tests/AtlasBuilderTest.h</label>
-        <link refid="inc_2Core_2Tests_2AtlasBuilderTest_8h_source"/>
+        <label>Engine/inc/Engine/Tests/AtlasBuilderTest.h</label>
+        <link refid="inc_2Engine_2Tests_2AtlasBuilderTest_8h_source"/>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Loaders/TextureLoader.h</label>
         <link refid="TextureLoader_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -668,7 +668,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h</label>
         <link refid="TextureConfigs_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -676,33 +676,33 @@
         </childnode>
       </node>
       <node id="8">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h</label>
         <link refid="CascadedShadowMapPass_8h_source"/>
         <childnode refid="9" relation="include">
         </childnode>
       </node>
       <node id="10">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
         <link refid="ColorBufferPass_8h_source"/>
       </node>
       <node id="13">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
         <link refid="HTMLDrawerPass_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h</label>
         <link refid="ISamplersPass_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="6">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
         <link refid="MeshDrawerPass_8h_source"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
       <node id="7">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
         <link refid="OffScreenMeshDrawerPass_8h_source"/>
         <childnode refid="8" relation="include">
         </childnode>
@@ -710,27 +710,27 @@
         </childnode>
       </node>
       <node id="9">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h</label>
         <link refid="VarianceShadowMapPass_8h_source"/>
       </node>
       <node id="11">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
         <link refid="HTMLDrawableElement_8h_source"/>
         <childnode refid="12" relation="include">
         </childnode>
       </node>
       <node id="12">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
         <link refid="HTMLRenderer_8h_source"/>
         <childnode refid="13" relation="include">
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Skybox.h</label>
         <link refid="Skybox_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Texture.h</label>
         <link refid="Texture_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
@@ -738,7 +738,7 @@
         </childnode>
       </node>
       <node id="14">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h</label>
         <link refid="AtlasBuilder_8h_source"/>
         <childnode refid="15" relation="include">
         </childnode>
@@ -746,7 +746,7 @@
         </childnode>
       </node>
       <node id="16">
-        <label>Engine/Core/libs/Utils/inc/Utils/Tests/AtlasBuilderTest.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Tests/AtlasBuilderTest.h</label>
         <link refid="libs_2Utils_2inc_2Utils_2Tests_2AtlasBuilderTest_8h_source"/>
       </node>
     </invincdepgraph>
@@ -844,6 +844,6 @@
 <codeline lineno="83"><highlight class="normal"></highlight></codeline>
 <codeline lineno="84"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_TEXTURE_CONFIGS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h"/>
   </compounddef>
 </doxygen>

@@ -170,5 +170,5 @@ SR_PHYSICS_NS::SR_ENUM_NS_CLASS (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/Engine.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/Engine.h`
 

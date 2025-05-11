@@ -5,7 +5,7 @@
     <includes refid="Physics_2inc_2Physics_2macros_8h" local="no">Physics/macros.h</includes>
     <includes refid="PhysicsLib_8h" local="no">Physics/PhysicsLib.h</includes>
     <includes refid="SafePointer_8h" local="no">Utils/Types/SafePointer.h</includes>
-    <includedby refid="EngineScene_8h" local="no">Engine/Core/inc/Core/World/EngineScene.h</includedby>
+    <includedby refid="EngineScene_8h" local="no">Engine/inc/Engine/World/EngineScene.h</includedby>
     <incdepgraph>
       <node id="6">
         <label>Physics/PhysicsLib.h</label>
@@ -22,7 +22,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysicsScene.h</label>
         <link refid="PhysicsScene_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -843,11 +843,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/inc/Core/World/EngineScene.h</label>
+        <label>Engine/inc/Engine/World/EngineScene.h</label>
         <link refid="EngineScene_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysicsScene.h</label>
         <link refid="PhysicsScene_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -940,6 +940,6 @@
 <codeline lineno="76"><highlight class="normal"></highlight></codeline>
 <codeline lineno="77"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_PHYSICSSCENE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h"/>
+    <location file="Engine/libs/Physics/inc/Physics/PhysicsScene.h"/>
   </compounddef>
 </doxygen>

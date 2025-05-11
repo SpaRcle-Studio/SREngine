@@ -5,10 +5,10 @@
     <includes refid="Component_8h" local="no">Utils/ECS/Component.h</includes>
     <includes refid="GameObject_8h" local="no">Utils/ECS/GameObject.h</includes>
     <includes refid="Mesh_8h" local="no">Graphics/Types/Mesh.h</includes>
-    <includedby refid="Skeleton_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h</includedby>
+    <includedby refid="Skeleton_8h" local="no">Engine/libs/Graphics/inc/Graphics/Animations/Skeleton.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/Bone.h</label>
         <link refid="Bone_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1580,17 +1580,17 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
         <link refid="Animator_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/Bone.h</label>
         <link refid="Bone_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/Skeleton.h</label>
         <link refid="Skeleton_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -1598,7 +1598,7 @@
         </childnode>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
         <link refid="SkinnedMesh_8h_source"/>
       </node>
     </invincdepgraph>
@@ -1657,6 +1657,6 @@
 <codeline lineno="48"><highlight class="normal"></highlight></codeline>
 <codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_BONE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Animations/Bone.h"/>
   </compounddef>
 </doxygen>

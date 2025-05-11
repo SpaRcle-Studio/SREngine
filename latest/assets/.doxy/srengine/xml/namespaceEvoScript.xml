@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Casting.h" line="13" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Casting.h" bodystart="13" bodyend="15"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/Casting.h" line="13" column="5" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/Casting.h" bodystart="13" bodyend="15"/>
       </memberdef>
       <memberdef kind="enum" id="Method_8h_1aa6d68cf4eaba7ac9750346eee45ab4a9" prot="public" static="no" strong="no">
         <type></type>
@@ -95,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Method.h" line="16" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Method.h" bodystart="16" bodyend="18"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/Method.h" line="16" column="5" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/Method.h" bodystart="16" bodyend="18"/>
       </memberdef>
       <memberdef kind="enum" id="Method_8h_1a65c7ce0698a2fa03dffabef0c711be53" prot="public" static="no" strong="no">
         <type></type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Method.h" line="20" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Method.h" bodystart="20" bodyend="22"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/Method.h" line="20" column="5" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/Method.h" bodystart="20" bodyend="22"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="typedef">
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="13" column="32" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="13" column="32" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" bodystart="13" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -178,7 +178,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Casting.h" line="17" column="24" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Casting.h" bodystart="17" bodyend="26"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/Casting.h" line="17" column="24" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/Casting.h" bodystart="17" bodyend="26"/>
       </memberdef>
       <memberdef kind="function" id="Method_8h_1a6d3fd93ee5cb78640ec0dcc28977b9fc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -201,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Method.h" line="24" column="24" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Method.h" bodystart="24" bodyend="36"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/Method.h" line="24" column="24" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/Method.h" bodystart="24" bodyend="36"/>
       </memberdef>
       <memberdef kind="function" id="Script_8h_1a499176e2afeee957035e9626833dc4f8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void *</type>
@@ -219,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="14" column="17" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="14" bodyend="16"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="14" column="17" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="14" bodyend="16"/>
       </memberdef>
       <memberdef kind="function" id="Script_8h_1ac1ecd082d2faefdddb4b55e910c0cd52" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -237,13 +237,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" line="18" column="17" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="18" bodyend="20"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h" line="18" column="17" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Script.h" bodystart="18" bodyend="20"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/inc/Core/EvoScriptAPI.h" line="10" column="1"/>
+    <location file="Engine/inc/Engine/EvoScriptAPI.h" line="10" column="1"/>
   </compounddef>
 </doxygen>

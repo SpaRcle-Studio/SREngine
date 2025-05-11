@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="30" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="30" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="30" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="30" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="79" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="79" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="79" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="79" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1Node_1a09ba269c19262b737b32c5fe9e67d604" prot="private" static="no" mutable="no">
         <type>std::vector&lt; Pin * &gt;</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="80" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="80" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="80" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="80" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1Node_1aea97141a61bc9b22710dea863b51e540" prot="private" static="no" mutable="no">
         <type>std::vector&lt; Pin * &gt;</type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="81" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="81" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="81" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="81" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1Node_1ab8bcdf1132cd38b63600d4bc850887ae" prot="private" static="no" mutable="no">
         <type>NodeType</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="83" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="83" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="83" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="83" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1Node_1a6a69ff01625b70e5168144868b086de0" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="84" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="84" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1Node_1a11c2ac2c131157f1d6fd98653261d231" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="85" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="85" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="85" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="85" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="32" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="32" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1af1721c4cd74c5c9d2cb4329ff2365f48" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -135,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="39" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="39" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1acab81c34447f86284724c7800eb05966" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__GRAPH__GUI__NS_1_1Node" kindref="compound">Node</ref> &amp;</type>
@@ -153,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="42" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="42" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1acdc9aad544455cd1f9f98b32e6d85631" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__GRAPH__GUI__NS_1_1Node" kindref="compound">Node</ref> &amp;</type>
@@ -171,7 +171,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="43" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="43" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1ac00f53fc7427c74e6b5cb97f2d7f307f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -189,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="54" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="54" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1a95d731562e5956e860e85200fb39dd47" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -207,7 +207,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="55" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="55" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1ab27b1680a4d9cd949fe00b4473bff03b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD Pin *</type>
@@ -225,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="57" column="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="57" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1a7558d7e81c897ffdf318782f4906f04a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD Pin *</type>
@@ -243,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="58" column="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="58" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1a33faed3479344c568785f53546e97e50" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uintptr_t</type>
@@ -257,7 +257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="60" column="32"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="60" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1a10b71c476be12a9de0c3b4754d75ccd8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -271,7 +271,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="61" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="61" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1a8dfc82f16c2b3dd978c3bd64bbdeea46" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -285,7 +285,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="62" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="62" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1a63151625e84c48d6c56bc87e9ffada41" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -299,7 +299,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="63" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="63" bodyend="63"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="63" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="63" bodyend="63"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1a4b3248ee2b529a611934e253dfb03791" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const std::vector&lt; Pin * &gt; &amp;</type>
@@ -313,7 +313,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="64" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="64" bodyend="64"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="64" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="64" bodyend="64"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1a9a30f4cee332c80cffc1e94cd812521a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const std::vector&lt; Pin * &gt; &amp;</type>
@@ -327,7 +327,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="65" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="65" bodyend="65"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="65" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="65" bodyend="65"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1a13a9e67ae949ad54e7dbaf64956d637f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -345,7 +345,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="66" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="66" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1a89a776b5bec344d64f148086081754a9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector2</type>
@@ -359,7 +359,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="67" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="67" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1af19bac7eecd41182f4b76650db51c0f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__GRAPH__GUI__NS_1_1Node" kindref="compound">Node</ref> &amp;</type>
@@ -377,7 +377,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="70" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="70" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1a12a5cd06de48cb60117abcd76874ebaf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__GRAPH__GUI__NS_1_1Node" kindref="compound">Node</ref> &amp;</type>
@@ -395,7 +395,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="71" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="71" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1a3c59a15c73e11c657898d90721b04c7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__GRAPH__GUI__NS_1_1Node" kindref="compound">Node</ref> &amp;</type>
@@ -413,7 +413,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="72" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="72" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1a94a7c853a2777e4d3fe75dc5b1955ea2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -435,7 +435,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="74" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="74" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1ac7009b0cbad717efd98e2e5ab6dd8550" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -449,7 +449,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="75" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="75" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -480,7 +480,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="29" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="29" bodyend="87"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="29" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="29" bodyend="87"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1acab81c34447f86284724c7800eb05966" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>AddInput</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1acdc9aad544455cd1f9f98b32e6d85631" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>AddOutput</name></member>

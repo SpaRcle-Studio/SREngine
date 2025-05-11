@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="28" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="28" column="9" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__UTILS__NS_1_1Factory_1ad415b85000df66c4e79b39e0e6476d43" prot="private" static="no">
         <type>const <ref refid="classSR__UTILS__NS_1_1SRClassMeta" kindref="compound">SRClassMeta</ref> *(*)()</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="29" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="29" column="9" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="29" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="89" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="89" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="89" column="28" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="89" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="38" column="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="38" column="37"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="40" column="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="40" column="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1a71ddf67dde2896204c693268f1291bc8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -111,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="42" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="93" bodyend="128"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="42" column="25" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="93" bodyend="128"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1a96869148b0bf9d48ba090d35fca41ec9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -130,7 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="43" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="130" bodyend="147"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="43" column="25" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="130" bodyend="147"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1aaaae777f553140cc3aaad4afaf903da0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="45" column="57" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="45" bodyend="50"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="45" column="57" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="45" bodyend="50"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1a46126c4f01addcdce938bb69e401c70f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -177,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="52" column="57" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="52" bodyend="54"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="52" column="57" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="52" bodyend="54"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1a92b042c9e5d6381a53f18f7028f31273" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -200,7 +200,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="56" column="57" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="56" bodyend="71"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="56" column="57" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="56" bodyend="71"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1a8ba1371f8fad7f7df981dd97bb637627" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -219,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="73" column="57" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="73" bodyend="75"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="73" column="57" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="73" bodyend="75"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1a1c4343507e9222623d73f64bf1c8dd32" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1SRClass" kindref="compound">SRClass</ref> *</type>
@@ -237,7 +237,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="77" column="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="77" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1ad422a2e2f1f0ffdb801ff0c44c102a9a" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD std::vector&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
@@ -255,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="78" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="78" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1aa407e8f279036bf0afbc7ff1074c3b28" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -273,7 +273,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="79" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="79" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1aa43262d314840159b15320ab11bdc464" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD const <ref refid="classSR__UTILS__NS_1_1SRClassMeta" kindref="compound">SRClassMeta</ref> *</type>
@@ -292,7 +292,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="80" column="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="80" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1a8e1355ed93077eb307681239e84db8b3" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const TypeInfo *</type>
@@ -310,7 +310,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="81" column="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="81" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1acaa2a0e7f867d3fd844510ef1322f822" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD void</type>
@@ -332,7 +332,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="82" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="82" column="27"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -352,7 +352,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="85" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="85" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1a67220e10d3697bc683dbd1f14d4df7e3" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -370,7 +370,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="86" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="86" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -401,7 +401,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="27" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="27" bodyend="91"/>
+    <location file="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="27" column="5" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="27" bodyend="91"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Factory_1ac3223e9e0b0c2cb7adc6569821cda82a" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Factory</scope><name>AllocatorT</name></member>
       <member refid="classSR__UTILS__NS_1_1Factory_1a92b042c9e5d6381a53f18f7028f31273" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Factory</scope><name>Create</name></member>

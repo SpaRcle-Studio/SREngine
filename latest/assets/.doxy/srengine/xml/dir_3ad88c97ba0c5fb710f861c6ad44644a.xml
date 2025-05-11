@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_3ad88c97ba0c5fb710f861c6ad44644a" kind="dir">
+    <compoundname>Engine/libs/Physics/inc/Physics/PhysX</compoundname>
+    <innerfile refid="PhysXCollisionShape_8h">PhysXCollisionShape.h</innerfile>
+    <innerfile refid="PhysXLibraryImpl_8h">PhysXLibraryImpl.h</innerfile>
+    <innerfile refid="PhysXMaterialImpl_8h">PhysXMaterialImpl.h</innerfile>
+    <innerfile refid="PhysXPhysicsWorld_8h">PhysXPhysicsWorld.h</innerfile>
+    <innerfile refid="PhysXRaycast3DImpl_8h">PhysXRaycast3DImpl.h</innerfile>
+    <innerfile refid="PhysXRigidbody3D_8h">PhysXRigidbody3D.h</innerfile>
+    <innerfile refid="PhysXSimulationCallback_8h">PhysXSimulationCallback.h</innerfile>
+    <innerfile refid="PhysXUtils_8h">PhysXUtils.h</innerfile>
+    <innerfile refid="PhysXVehicle4W3D_8h">PhysXVehicle4W3D.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Physics/inc/Physics/PhysX/"/>
+  </compounddef>
+</doxygen>

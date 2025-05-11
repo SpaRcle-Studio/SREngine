@@ -166,5 +166,5 @@ inline virtual SR_NODISCARD std::string SR_SRSL_NS::SRSLLexicalUnit::ToString (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h`
 

@@ -153,5 +153,5 @@ float_t SR_PTYPES_NS::PhysicsMaterialData::staticFriction;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h`
+The documentation for this class was generated from the following file `Engine/libs/Physics/inc/Physics/PhysicsMaterial.h`
 

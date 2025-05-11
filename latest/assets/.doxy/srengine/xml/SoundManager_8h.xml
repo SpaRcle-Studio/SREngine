@@ -51,7 +51,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Audio/inc/Audio/SoundManager.h</label>
+        <label>Engine/libs/Audio/inc/Audio/SoundManager.h</label>
         <link refid="SoundManager_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -801,6 +801,6 @@
 <codeline lineno="109"><highlight class="normal"></highlight></codeline>
 <codeline lineno="110"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_SOUNDMANAGER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h"/>
+    <location file="Engine/libs/Audio/inc/Audio/SoundManager.h"/>
   </compounddef>
 </doxygen>

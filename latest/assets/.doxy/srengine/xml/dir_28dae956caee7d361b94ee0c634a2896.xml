@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_28dae956caee7d361b94ee0c634a2896" kind="dir">
+    <compoundname>Engine/inc/Engine/Utils</compoundname>
+    <innerfile refid="GraphicsResourceReloader_8h">GraphicsResourceReloader.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/inc/Engine/Utils/"/>
+  </compounddef>
+</doxygen>

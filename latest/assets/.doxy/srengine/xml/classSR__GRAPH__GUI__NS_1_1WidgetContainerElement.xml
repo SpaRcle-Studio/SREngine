@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="12" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="12" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="12" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="12" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1aea464c46c1f034338a99a1bc741724f5" prot="private" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(<ref refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement" kindref="compound">WidgetContainerElement</ref> *)&gt;</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="13" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="13" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="13" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a2bcbb6d0b759f55d49b973bcb90c2030" prot="private" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; bool()&gt;</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="14" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="14" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="14" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="31" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="31" bodyend="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="31" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="31" bodyend="31"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1ae20dbc428686b05ffdd6e21de3cb0054" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="32" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="32" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a90e9dc1dca436ee409ee8e11b0ab492e" prot="private" static="no" mutable="no">
         <type>Callback</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="33" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="33" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a0dc224ed847f3bb807cb82bbb16a2f7d" prot="private" static="no" mutable="no">
         <type>CustomDrawCallback</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="34" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="34" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="34" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a772f1bea4713074a7efe679fefde113c" prot="private" static="no" mutable="no">
         <type>IsActiveFn</type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="35" column="20" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="35" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="35" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1abcc886ce07e20f0fbfb7e8e70c8565c3" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="36" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="36" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="36" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -149,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="16" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="16" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a9bff8e8b46a091359da31dfe81aa2822" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement" kindref="compound">WidgetContainerElement</ref> &amp;</type>
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="19" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="19" bodyend="19"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="19" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="19" bodyend="19"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1ada296ed9b56d72e09d86ef4250735e8a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement" kindref="compound">WidgetContainerElement</ref> &amp;</type>
@@ -185,7 +185,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="20" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="20" bodyend="20"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="20" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="20" bodyend="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a214e8bd223457dd209d8f05c4b106df7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement" kindref="compound">WidgetContainerElement</ref> &amp;</type>
@@ -203,7 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="21" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="21" bodyend="21"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="21" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="21" bodyend="21"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a9c3237cebd1525610bc03ecd7268adc8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement" kindref="compound">WidgetContainerElement</ref> &amp;</type>
@@ -221,7 +221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="22" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="22" bodyend="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="22" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="22" bodyend="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a6031d30e3399647593ce570a736dfdd7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement" kindref="compound">WidgetContainerElement</ref> &amp;</type>
@@ -239,7 +239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="23" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="23" bodyend="23"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="23" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="23" bodyend="23"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a1ca9850ec6bc6dba686f2dd13960ce7b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement" kindref="compound">WidgetContainerElement</ref> &amp;</type>
@@ -257,7 +257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="24" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="24" bodyend="24"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="24" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="24" bodyend="24"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a5578ee2733ee5bebd41a70ca812be38d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector2</type>
@@ -271,7 +271,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="26" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="26" bodyend="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="26" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="26" bodyend="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a66e0558480edc132a5ca2f6c85ce138d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -285,7 +285,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="28" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="28" column="22"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -371,7 +371,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="11" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="11" bodyend="38"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="11" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="11" bodyend="38"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>AutoFree</name></member>

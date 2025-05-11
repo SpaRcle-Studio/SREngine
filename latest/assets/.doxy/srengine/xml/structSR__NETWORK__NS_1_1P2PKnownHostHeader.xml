@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Utils.h" line="34" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Utils.h" bodystart="34" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Utils.h" line="34" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Network/Utils.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__NETWORK__NS_1_1P2PKnownHostHeader_1a6adec02aaa095ee34e24e91cdbf767ca" prot="public" static="no" mutable="no">
         <type>uint8_t</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Utils.h" line="35" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Utils.h" bodystart="35" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Utils.h" line="35" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Network/Utils.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__NETWORK__NS_1_1P2PKnownHostHeader_1afaccfa113c4eb56689a0e7e7e817c600" prot="public" static="no" mutable="no">
         <type>uint32_t</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Utils.h" line="36" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Utils.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Utils.h" line="36" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Network/Utils.h" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__NETWORK__NS_1_1P2PKnownHostHeader_1a2d8890f00f30dfe4145694f71984e211" prot="public" static="no" mutable="no">
         <type>uint16_t</type>
@@ -61,14 +61,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Utils.h" line="37" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Utils.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Utils.h" line="37" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Network/Utils.h" bodystart="37" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Network/Utils.h" line="33" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Utils.h" bodystart="33" bodyend="38"/>
+    <location file="Engine/libs/Utils/inc/Utils/Network/Utils.h" line="33" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Network/Utils.h" bodystart="33" bodyend="38"/>
     <listofallmembers>
       <member refid="structSR__NETWORK__NS_1_1P2PKnownHostHeader_1afaccfa113c4eb56689a0e7e7e817c600" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::P2PKnownHostHeader</scope><name>iPv4</name></member>
       <member refid="structSR__NETWORK__NS_1_1P2PKnownHostHeader_1a2d8890f00f30dfe4145694f71984e211" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::P2PKnownHostHeader</scope><name>port</name></member>

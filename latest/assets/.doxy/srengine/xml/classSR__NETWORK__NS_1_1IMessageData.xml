@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Message.h" line="35" column="17"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Message.h" line="35" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1IMessageData_1a96f7b63d5fe941bc85692735e1b94794" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD std::unique_ptr&lt; <ref refid="classSR__NETWORK__NS_1_1IMessageData" kindref="compound">IMessageData</ref> &gt;</type>
@@ -29,14 +29,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Message.h" line="36" column="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Message.h" line="36" column="46"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Network/Message.h" line="33" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Message.h" bodystart="33" bodyend="37"/>
+    <location file="Engine/libs/Utils/inc/Utils/Network/Message.h" line="33" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Network/Message.h" bodystart="33" bodyend="37"/>
     <listofallmembers>
       <member refid="classSR__NETWORK__NS_1_1IMessageData_1a96f7b63d5fe941bc85692735e1b94794" prot="public" virt="pure-virtual"><scope>SR_NETWORK_NS::IMessageData</scope><name>clone</name></member>
       <member refid="classSR__NETWORK__NS_1_1IMessageData_1a49831c2ab43df613a7c014115c8451e0" prot="public" virt="virtual"><scope>SR_NETWORK_NS::IMessageData</scope><name>~IMessageData</name></member>

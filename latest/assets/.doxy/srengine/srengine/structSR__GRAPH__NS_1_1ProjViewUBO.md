@@ -111,5 +111,5 @@ glm::mat4 SR_GRAPH_NS::ProjViewUBO::view;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Types/Uniforms.h`
 

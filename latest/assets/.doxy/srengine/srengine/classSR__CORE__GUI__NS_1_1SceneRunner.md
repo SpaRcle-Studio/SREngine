@@ -128,5 +128,5 @@ SR_CORE_GUI_NS::SceneRunner::~SceneRunner () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/GUI/SceneRunner.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/GUI/SceneRunner.h`
 

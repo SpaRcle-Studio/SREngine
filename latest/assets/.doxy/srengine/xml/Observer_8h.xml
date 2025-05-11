@@ -7,9 +7,9 @@
     <includes refid="Vector3_8h" local="no">Utils/Math/Vector3.h</includes>
     <includes refid="StringFormat_8h" local="no">Utils/Common/StringFormat.h</includes>
     <includes refid="NonCopyable_8h" local="no">Utils/Common/NonCopyable.h</includes>
-    <includedby refid="Chunk_8h" local="no">Engine/Core/libs/Utils/inc/Utils/World/Chunk.h</includedby>
-    <includedby refid="Region_8h" local="no">Engine/Core/libs/Utils/inc/Utils/World/Region.h</includedby>
-    <includedby refid="Scene_8h" local="no">Engine/Core/libs/Utils/inc/Utils/World/Scene.h</includedby>
+    <includedby refid="Chunk_8h" local="no">Engine/libs/Utils/inc/Utils/World/Chunk.h</includedby>
+    <includedby refid="Region_8h" local="no">Engine/libs/Utils/inc/Utils/World/Region.h</includedby>
+    <includedby refid="Scene_8h" local="no">Engine/libs/Utils/inc/Utils/World/Scene.h</includedby>
     <incdepgraph>
       <node id="111">
         <label>Utils/Common/AnyMarshal.h</label>
@@ -468,7 +468,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/World/Observer.h</label>
+        <label>Engine/libs/Utils/inc/Utils/World/Observer.h</label>
         <link refid="Observer_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -817,19 +817,19 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="7">
-        <label>Engine/Core/inc/Core/EngineCommands.h</label>
+        <label>Engine/inc/Engine/EngineCommands.h</label>
         <link refid="EngineCommands_8h_source"/>
       </node>
       <node id="8">
-        <label>Engine/Core/inc/Core/GUI/Hierarchy.h</label>
+        <label>Engine/inc/Engine/GUI/Hierarchy.h</label>
         <link refid="Hierarchy_8h_source"/>
       </node>
       <node id="9">
-        <label>Engine/Core/inc/Core/GUI/Inspector.h</label>
+        <label>Engine/inc/Engine/GUI/Inspector.h</label>
         <link refid="Inspector_8h_source"/>
       </node>
       <node id="16">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawer.h</label>
         <link refid="PropertyDrawer_8h_source"/>
         <childnode refid="9" relation="include">
         </childnode>
@@ -851,31 +851,31 @@
         </childnode>
       </node>
       <node id="17">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/BehaviourNamePropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/BehaviourNamePropertyDrawer.h</label>
         <link refid="BehaviourNamePropertyDrawer_8h_source"/>
       </node>
       <node id="21">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/BehaviourPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.h</label>
         <link refid="BehaviourPropertyDrawer_8h_source"/>
       </node>
       <node id="18">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/BitMapPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/BitMapPropertyDrawer.h</label>
         <link refid="BitMapPropertyDrawer_8h_source"/>
       </node>
       <node id="19">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/EnumPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/EnumPropertyDrawer.h</label>
         <link refid="EnumPropertyDrawer_8h_source"/>
       </node>
       <node id="22">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h</label>
         <link refid="MaterialDataPropertyDrawer_8h_source"/>
       </node>
       <node id="25">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/MaterialPropertyDrawer.h</label>
         <link refid="MaterialPropertyDrawer_8h_source"/>
       </node>
       <node id="20">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/ObjectPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h</label>
         <link refid="ObjectPropertyDrawer_8h_source"/>
         <childnode refid="9" relation="include">
         </childnode>
@@ -885,11 +885,11 @@
         </childnode>
       </node>
       <node id="23">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/PathPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/PathPropertyDrawer.h</label>
         <link refid="PathPropertyDrawer_8h_source"/>
       </node>
       <node id="24">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h</label>
         <link refid="PointerPropertyDrawer_8h_source"/>
         <childnode refid="9" relation="include">
         </childnode>
@@ -897,43 +897,43 @@
         </childnode>
       </node>
       <node id="26">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/StringPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/StringPropertyDrawer.h</label>
         <link refid="StringPropertyDrawer_8h_source"/>
       </node>
       <node id="27">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/VectorPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/VectorPropertyDrawer.h</label>
         <link refid="VectorPropertyDrawer_8h_source"/>
       </node>
       <node id="10">
-        <label>Engine/Core/inc/Core/GUI/SceneRunner.h</label>
+        <label>Engine/inc/Engine/GUI/SceneRunner.h</label>
         <link refid="SceneRunner_8h_source"/>
       </node>
       <node id="11">
-        <label>Engine/Core/inc/Core/GUI/SceneViewer.h</label>
+        <label>Engine/inc/Engine/GUI/SceneViewer.h</label>
         <link refid="SceneViewer_8h_source"/>
       </node>
       <node id="12">
-        <label>Engine/Core/inc/Core/GUI/WorldEdit.h</label>
+        <label>Engine/inc/Engine/GUI/WorldEdit.h</label>
         <link refid="WorldEdit_8h_source"/>
       </node>
       <node id="13">
-        <label>Engine/Core/inc/Core/World/EngineScene.h</label>
+        <label>Engine/inc/Engine/World/EngineScene.h</label>
         <link refid="EngineScene_8h_source"/>
       </node>
       <node id="3">
-        <label>Engine/Core/inc/Core/World/VisualChunk.h</label>
+        <label>Engine/inc/Engine/World/VisualChunk.h</label>
         <link refid="VisualChunk_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/inc/Core/World/VisualRegion.h</label>
+        <label>Engine/inc/Engine/World/VisualRegion.h</label>
         <link refid="VisualRegion_8h_source"/>
       </node>
       <node id="14">
-        <label>Engine/Core/inc/Core/World/World.h</label>
+        <label>Engine/inc/Engine/World/World.h</label>
         <link refid="World_8h_source"/>
       </node>
       <node id="15">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderContext.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderContext.h</label>
         <link refid="RenderContext_8h_source"/>
         <childnode refid="16" relation="include">
         </childnode>
@@ -941,13 +941,13 @@
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Utils/inc/Utils/World/Chunk.h</label>
+        <label>Engine/libs/Utils/inc/Utils/World/Chunk.h</label>
         <link refid="Chunk_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/World/Observer.h</label>
+        <label>Engine/libs/Utils/inc/Utils/World/Observer.h</label>
         <link refid="Observer_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -957,13 +957,13 @@
         </childnode>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Utils/inc/Utils/World/Region.h</label>
+        <label>Engine/libs/Utils/inc/Utils/World/Region.h</label>
         <link refid="Region_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
       </node>
       <node id="6">
-        <label>Engine/Core/libs/Utils/inc/Utils/World/Scene.h</label>
+        <label>Engine/libs/Utils/inc/Utils/World/Scene.h</label>
         <link refid="Scene_8h_source"/>
         <childnode refid="7" relation="include">
         </childnode>
@@ -1105,6 +1105,6 @@
 <codeline lineno="109"><highlight class="normal"></highlight></codeline>
 <codeline lineno="110"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_OBSERVER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h"/>
+    <location file="Engine/libs/Utils/inc/Utils/World/Observer.h"/>
   </compounddef>
 </doxygen>

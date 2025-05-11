@@ -6,7 +6,7 @@
     <includes local="no">iostream</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Old/Tools/SetUtils.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Old/Tools/SetUtils.h</label>
         <link refid="SetUtils_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -53,6 +53,6 @@
 <codeline lineno="24"><highlight class="normal"></highlight></codeline>
 <codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_SCRIPTING_SET_UTILS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Tools/SetUtils.h"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Old/Tools/SetUtils.h"/>
   </compounddef>
 </doxygen>

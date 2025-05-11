@@ -368,5 +368,5 @@ void SR_SCRIPTING_NS::EvoScriptManager::Update (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoScriptManager.h`
+The documentation for this class was generated from the following file `Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoScriptManager.h`
 

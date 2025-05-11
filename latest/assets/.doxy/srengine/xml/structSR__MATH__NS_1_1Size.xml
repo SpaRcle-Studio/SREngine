@@ -20,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="29" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Size.h" line="29" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Math/Size.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__MATH__NS_1_1Size_1a22fb4d151dfcbad7ef2dd298ab816a6b" prot="public" static="no" mutable="no">
         <type>T</type>
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="32" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Size.h" line="32" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Math/Size.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__MATH__NS_1_1Size_1a368cbda216a5cc8b8ada90f8a70d0a6d" prot="public" static="no" mutable="no">
         <type>union <ref refid="structSR__MATH__NS_1_1Size" kindref="compound">SR_MATH_NS::Size</ref></type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="34" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Size.h" line="34" column="9"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__MATH__NS_1_1Size_1acaedcbaca354b1bc1fefb28af1b48d99" prot="public" static="no" mutable="no">
         <type>SizeMetric</type>
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="36" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Size.h" line="36" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Math/Size.h" bodystart="36" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="17" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="17" bodyend="19"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Size.h" line="17" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/Size.h" bodystart="17" bodyend="19"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Size_1aafc6c9612b22c422e319732be1bd87ba" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="22" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="22" bodyend="25"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Size.h" line="22" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/Size.h" bodystart="22" bodyend="25"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Size_1a38f7defd01223ee46312f223634f133a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="38" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="38" bodyend="38"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Size.h" line="38" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Size.h" bodystart="38" bodyend="38"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Size_1a93b7c89048dff9640953268b24e3969d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -129,7 +129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="39" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="39" bodyend="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Size.h" line="39" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Size.h" bodystart="39" bodyend="39"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Size_1a073d7b36835b2a0890b63e884de6b1a6" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD T</type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="41" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="41" bodyend="41"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Size.h" line="41" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Math/Size.h" bodystart="41" bodyend="41"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Size_1ad31b062c3a8cf2e1eb15d3c5fca473e9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD T</type>
@@ -161,14 +161,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="42" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="42" bodyend="47"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Size.h" line="42" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Math/Size.h" bodystart="42" bodyend="47"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="16" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="16" bodyend="48"/>
+    <location file="Engine/libs/Utils/inc/Utils/Math/Size.h" line="16" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Math/Size.h" bodystart="16" bodyend="48"/>
     <listofallmembers>
       <member refid="structSR__MATH__NS_1_1Size_1a93b7c89048dff9640953268b24e3969d" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Size</scope><name>IsPercent</name></member>
       <member refid="structSR__MATH__NS_1_1Size_1a38f7defd01223ee46312f223634f133a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Size</scope><name>IsPixel</name></member>

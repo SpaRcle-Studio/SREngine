@@ -406,5 +406,5 @@ SR_NODISCARD bool SR_HTYPES_NS::SafeVar::operator== (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Types/SafeVariable.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Types/SafeVariable.h`
 

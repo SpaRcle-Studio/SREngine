@@ -4,8 +4,8 @@
     <compoundname>IMeshClusterPass.h</compoundname>
     <includes refid="BasePass_8h" local="no">Graphics/Pass/BasePass.h</includes>
     <includes refid="MeshCluster_8h" local="no">Graphics/Render/MeshCluster.h</includes>
-    <includedby refid="FlatClusterPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/FlatClusterPass.h</includedby>
-    <includedby refid="IMesh3DClusterPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/IMesh3DClusterPass.h</includedby>
+    <includedby refid="FlatClusterPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/FlatClusterPass.h</includedby>
+    <includedby refid="IMesh3DClusterPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/IMesh3DClusterPass.h</includedby>
     <incdepgraph>
       <node id="136">
         <label>Graphics/Memory/DescriptorManager.h</label>
@@ -64,7 +64,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h</label>
         <link refid="IMeshClusterPass_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1035,25 +1035,25 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="5">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
         <link refid="DebugPass_8h_source"/>
       </node>
       <node id="8">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h</label>
         <link refid="DepthBufferPass_8h_source"/>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/FlatClusterPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/FlatClusterPass.h</label>
         <link refid="FlatClusterPass_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/FlatColorBufferPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/FlatColorBufferPass.h</label>
         <link refid="FlatColorBufferPass_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/IMesh3DClusterPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/IMesh3DClusterPass.h</label>
         <link refid="IMesh3DClusterPass_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
@@ -1065,7 +1065,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h</label>
         <link refid="IMeshClusterPass_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1073,11 +1073,11 @@
         </childnode>
       </node>
       <node id="6">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/OpaquePass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/OpaquePass.h</label>
         <link refid="OpaquePass_8h_source"/>
       </node>
       <node id="7">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h</label>
         <link refid="ShaderOverridePass_8h_source"/>
         <childnode refid="8" relation="include">
         </childnode>
@@ -1085,11 +1085,11 @@
         </childnode>
       </node>
       <node id="9">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ShadowMapPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/ShadowMapPass.h</label>
         <link refid="ShadowMapPass_8h_source"/>
       </node>
       <node id="10">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/TransparentPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/TransparentPass.h</label>
         <link refid="TransparentPass_8h_source"/>
       </node>
     </invincdepgraph>
@@ -1167,6 +1167,6 @@
 <codeline lineno="64"><highlight class="normal"></highlight></codeline>
 <codeline lineno="65"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_IMESHCLUSTERPASS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h"/>
   </compounddef>
 </doxygen>

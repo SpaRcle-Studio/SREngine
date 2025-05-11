@@ -5,10 +5,10 @@
     <includes refid="Scripting_2inc_2Scripting_2macros_8h" local="no">Scripting/macros.h</includes>
     <includes refid="NonCopyable_8h" local="no">Utils/Common/NonCopyable.h</includes>
     <includes refid="SharedPtr_8h" local="no">Utils/Types/SharedPtr.h</includes>
-    <includedby refid="ScriptSystem_8h" local="no">Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h</includedby>
+    <includedby refid="ScriptSystem_8h" local="no">Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppCompiler.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/CppCompiler.h</label>
         <link refid="CppCompiler_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -799,7 +799,7 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="3">
-        <label>Engine/Core/inc/Core/Engine.h</label>
+        <label>Engine/inc/Engine/Engine.h</label>
         <link refid="Engine_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
@@ -809,25 +809,25 @@
         </childnode>
       </node>
       <node id="4">
-        <label>Engine/Core/inc/Core/EngineCommands.h</label>
+        <label>Engine/inc/Engine/EngineCommands.h</label>
         <link refid="EngineCommands_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/inc/Core/Scripting/ScriptableContext.h</label>
+        <label>Engine/inc/Engine/Scripting/ScriptableContext.h</label>
         <link refid="ScriptableContext_8h_source"/>
       </node>
       <node id="6">
-        <label>Engine/Core/inc/Core/World/World.h</label>
+        <label>Engine/inc/Engine/World/World.h</label>
         <link refid="World_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppCompiler.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/CppCompiler.h</label>
         <link refid="CppCompiler_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h</label>
         <link refid="ScriptSystem_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -922,6 +922,6 @@
 <codeline lineno="83"><highlight class="normal"></highlight></codeline>
 <codeline lineno="84"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_SCRIPTING_CPP_COMPILER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppCompiler.h"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CppCompiler.h"/>
   </compounddef>
 </doxygen>

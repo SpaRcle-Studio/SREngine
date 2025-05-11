@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="11" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" bodystart="11" bodyend="11"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="11" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" bodystart="11" bodyend="11"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__GTYPES__NS_1a891cb30e128540b5973b759ec77c1c95" prot="public" static="no" mutable="no">
         <type>const std::vector&lt; Vertices::UIVertex &gt;</type>
@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="13" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" bodystart="13" bodyend="18"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="13" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" bodystart="13" bodyend="18"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -78,6 +78,6 @@
 </listitem></itemizedlist>
 </para>
     </detaileddescription>
-    <location file="Engine/Core/inc/Core/Engine.h" line="39" column="1"/>
+    <location file="Engine/inc/Engine/Engine.h" line="39" column="1"/>
   </compounddef>
 </doxygen>

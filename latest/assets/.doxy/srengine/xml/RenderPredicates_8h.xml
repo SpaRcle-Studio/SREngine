@@ -5,8 +5,8 @@
     <includes refid="Graphics_2inc_2Graphics_2macros_8h" local="no">Graphics/macros.h</includes>
     <includes refid="StringAtom_8h" local="no">Utils/Types/StringAtom.h</includes>
     <includes refid="IShaderProgram_8h" local="no">Graphics/Pipeline/IShaderProgram.h</includes>
-    <includedby refid="MeshDrawerPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</includedby>
-    <includedby refid="RenderStrategy_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Render/RenderStrategy.h</includedby>
+    <includedby refid="MeshDrawerPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</includedby>
+    <includedby refid="RenderStrategy_8h" local="no">Engine/libs/Graphics/inc/Graphics/Render/RenderStrategy.h</includedby>
     <incdepgraph>
       <node id="69">
         <label>Graphics/Pipeline/IShaderProgram.h</label>
@@ -27,7 +27,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderPredicates.h</label>
         <link refid="RenderPredicates_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -992,27 +992,27 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="9">
-        <label>Engine/Core/inc/Core/World/EngineScene.h</label>
+        <label>Engine/inc/Engine/World/EngineScene.h</label>
         <link refid="EngineScene_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h</label>
         <link refid="CascadedShadowMapPass_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
       </node>
       <node id="6">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
         <link refid="ColorBufferPass_8h_source"/>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
         <link refid="MeshDrawerPass_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
         <link refid="OffScreenMeshDrawerPass_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
@@ -1020,11 +1020,11 @@
         </childnode>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h</label>
         <link refid="VarianceShadowMapPass_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderPredicates.h</label>
         <link refid="RenderPredicates_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1032,7 +1032,7 @@
         </childnode>
       </node>
       <node id="8">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h</label>
         <link refid="RenderScene_8h_source"/>
         <childnode refid="9" relation="include">
         </childnode>
@@ -1040,13 +1040,13 @@
         </childnode>
       </node>
       <node id="7">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderStrategy.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderStrategy.h</label>
         <link refid="RenderStrategy_8h_source"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
       <node id="10">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/UI/Canvas.h</label>
         <link refid="Canvas_8h_source"/>
       </node>
     </invincdepgraph>
@@ -1098,6 +1098,6 @@
 <codeline lineno="36"><highlight class="normal"></highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GRAPHICS_RENDER_PREDICATES_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderPredicates.h"/>
   </compounddef>
 </doxygen>

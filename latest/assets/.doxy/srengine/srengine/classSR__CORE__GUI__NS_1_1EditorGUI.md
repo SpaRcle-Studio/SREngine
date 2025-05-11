@@ -487,5 +487,5 @@ SR_CORE_GUI_NS::EditorGUI::~EditorGUI () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/GUI/EditorGUI.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/GUI/EditorGUI.h`
 

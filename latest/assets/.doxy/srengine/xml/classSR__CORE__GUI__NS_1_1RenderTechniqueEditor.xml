@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h" line="14" column="9" bodyfile="Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/RenderTechniqueEditor.h" line="14" column="9" bodyfile="Engine/inc/Engine/GUI/RenderTechniqueEditor.h" bodystart="14" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h" line="16" column="9"/>
+        <location file="Engine/inc/Engine/GUI/RenderTechniqueEditor.h" line="16" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor_1ae7fcc71de04237ef1d72fefffcfb4141" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h" line="17" column="9"/>
+        <location file="Engine/inc/Engine/GUI/RenderTechniqueEditor.h" line="17" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor_1a73f18cf12576b6a171327f40967bef6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h" line="20" column="14"/>
+        <location file="Engine/inc/Engine/GUI/RenderTechniqueEditor.h" line="20" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor_1adbae2473b4812b3d72882920bf160ece" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h" line="21" column="14"/>
+        <location file="Engine/inc/Engine/GUI/RenderTechniqueEditor.h" line="21" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor_1a64cadc3e2d8e7bf54628a7b15e4202cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h" line="22" column="14"/>
+        <location file="Engine/inc/Engine/GUI/RenderTechniqueEditor.h" line="22" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -189,7 +189,7 @@
         <link refid="classSR__UTILS__NS_1_1Path"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h" line="13" column="5" bodyfile="Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h" bodystart="13" bodyend="24"/>
+    <location file="Engine/inc/Engine/GUI/RenderTechniqueEditor.h" line="13" column="5" bodyfile="Engine/inc/Engine/GUI/RenderTechniqueEditor.h" bodystart="13" bodyend="24"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a4a04e0628b5729444eca1c24a9011fa2" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>AddFlags</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a688a0dcd9938d906e3d2be254eca48e4" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>AddLink</name></member>

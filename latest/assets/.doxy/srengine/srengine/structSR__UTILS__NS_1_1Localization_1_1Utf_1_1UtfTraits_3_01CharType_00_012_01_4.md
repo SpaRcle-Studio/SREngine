@@ -301,5 +301,5 @@ static inline int SR_UTILS_NS::Localization::Utf::UtfTraits< CharType, 2 >::Widt
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Localization/UTF.h`
 

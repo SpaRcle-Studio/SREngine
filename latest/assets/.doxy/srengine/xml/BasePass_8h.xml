@@ -15,13 +15,13 @@
     <includes refid="Utils_2inc_2Utils_2SRLM_2Utils_8h" local="no">Utils/SRLM/Utils.h</includes>
     <includes refid="UBOManager_8h" local="no">Graphics/Memory/UBOManager.h</includes>
     <includes refid="DescriptorManager_8h" local="no">Graphics/Memory/DescriptorManager.h</includes>
-    <includedby refid="GroupPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h</includedby>
-    <includedby refid="HTMLDrawerPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</includedby>
-    <includedby refid="IMeshClusterPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h</includedby>
-    <includedby refid="MeshDrawerPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</includedby>
-    <includedby refid="PostProcessPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h</includedby>
-    <includedby refid="SkyboxPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h</includedby>
-    <includedby refid="WidgetPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/WidgetPass.h</includedby>
+    <includedby refid="GroupPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h</includedby>
+    <includedby refid="HTMLDrawerPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</includedby>
+    <includedby refid="IMeshClusterPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h</includedby>
+    <includedby refid="MeshDrawerPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</includedby>
+    <includedby refid="PostProcessPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h</includedby>
+    <includedby refid="SkyboxPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h</includedby>
+    <includedby refid="WidgetPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/WidgetPass.h</includedby>
     <incdepgraph>
       <node id="135">
         <label>Graphics/Memory/DescriptorManager.h</label>
@@ -50,7 +50,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/BasePass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h</label>
         <link refid="BasePass_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1029,11 +1029,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="7">
-        <label>Engine/Core/inc/Core/World/EngineScene.h</label>
+        <label>Engine/inc/Engine/World/EngineScene.h</label>
         <link refid="EngineScene_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/BasePass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h</label>
         <link refid="BasePass_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1051,39 +1051,39 @@
         </childnode>
       </node>
       <node id="22">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h</label>
         <link refid="CascadedShadowMapPass_8h_source"/>
         <childnode refid="23" relation="include">
         </childnode>
       </node>
       <node id="24">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
         <link refid="ColorBufferPass_8h_source"/>
       </node>
       <node id="14">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
         <link refid="DebugPass_8h_source"/>
       </node>
       <node id="17">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h</label>
         <link refid="DepthBufferPass_8h_source"/>
       </node>
       <node id="11">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/FlatClusterPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/FlatClusterPass.h</label>
         <link refid="FlatClusterPass_8h_source"/>
         <childnode refid="12" relation="include">
         </childnode>
       </node>
       <node id="12">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/FlatColorBufferPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/FlatColorBufferPass.h</label>
         <link refid="FlatColorBufferPass_8h_source"/>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h</label>
         <link refid="FramebufferPass_8h_source"/>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h</label>
         <link refid="GroupPass_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -1093,11 +1093,11 @@
         </childnode>
       </node>
       <node id="9">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
         <link refid="HTMLDrawerPass_8h_source"/>
       </node>
       <node id="13">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/IMesh3DClusterPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/IMesh3DClusterPass.h</label>
         <link refid="IMesh3DClusterPass_8h_source"/>
         <childnode refid="14" relation="include">
         </childnode>
@@ -1109,7 +1109,7 @@
         </childnode>
       </node>
       <node id="10">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h</label>
         <link refid="IMeshClusterPass_8h_source"/>
         <childnode refid="11" relation="include">
         </childnode>
@@ -1117,13 +1117,13 @@
         </childnode>
       </node>
       <node id="20">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
         <link refid="MeshDrawerPass_8h_source"/>
         <childnode refid="21" relation="include">
         </childnode>
       </node>
       <node id="21">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
         <link refid="OffScreenMeshDrawerPass_8h_source"/>
         <childnode refid="22" relation="include">
         </childnode>
@@ -1131,21 +1131,21 @@
         </childnode>
       </node>
       <node id="15">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/OpaquePass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/OpaquePass.h</label>
         <link refid="OpaquePass_8h_source"/>
       </node>
       <node id="25">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h</label>
         <link refid="PostProcessPass_8h_source"/>
         <childnode refid="26" relation="include">
         </childnode>
       </node>
       <node id="26">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h</label>
         <link refid="SSAOPass_8h_source"/>
       </node>
       <node id="16">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h</label>
         <link refid="ShaderOverridePass_8h_source"/>
         <childnode refid="17" relation="include">
         </childnode>
@@ -1153,31 +1153,31 @@
         </childnode>
       </node>
       <node id="18">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ShadowMapPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/ShadowMapPass.h</label>
         <link refid="ShadowMapPass_8h_source"/>
       </node>
       <node id="27">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h</label>
         <link refid="SkyboxPass_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h</label>
         <link refid="SwapchainPass_8h_source"/>
       </node>
       <node id="19">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/TransparentPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/TransparentPass.h</label>
         <link refid="TransparentPass_8h_source"/>
       </node>
       <node id="23">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h</label>
         <link refid="VarianceShadowMapPass_8h_source"/>
       </node>
       <node id="28">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/WidgetPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/WidgetPass.h</label>
         <link refid="WidgetPass_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h</label>
         <link refid="IRenderTechnique_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
@@ -1185,13 +1185,13 @@
         </childnode>
       </node>
       <node id="6">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderTechnique.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h</label>
         <link refid="RenderTechnique_8h_source"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
       <node id="8">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/ScriptableRenderTechnique.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/ScriptableRenderTechnique.h</label>
         <link refid="ScriptableRenderTechnique_8h_source"/>
       </node>
     </invincdepgraph>
@@ -1223,7 +1223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="133" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="133" bodyend="147"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="133" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="133" bodyend="147"/>
       </memberdef>
       <memberdef kind="define" id="BasePass_8h_1a8c50e701c083cee08f5106329bcc9ac0" prot="public" static="no">
         <name>SR_ALLOCATE_RENDER_PASS</name>
@@ -1237,7 +1237,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="148" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="148" bodyend="151"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="148" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="148" bodyend="151"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1391,6 +1391,6 @@
 <codeline lineno="152"><highlight class="normal"></highlight></codeline>
 <codeline lineno="153"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_BASE_PASS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/BasePass.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h"/>
   </compounddef>
 </doxygen>

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/EditorGizmo.h" line="16" column="9" bodyfile="Engine/Core/inc/Core/GUI/EditorGizmo.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGizmo.h" line="16" column="9" bodyfile="Engine/inc/Engine/GUI/EditorGizmo.h" bodystart="16" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/EditorGizmo.h" line="37" column="19" bodyfile="Engine/Core/inc/Core/GUI/EditorGizmo.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGizmo.h" line="37" column="19" bodyfile="Engine/inc/Engine/GUI/EditorGizmo.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGizmo_1a665100b7419957185ae6c82d61f07d39" prot="private" static="no" mutable="no">
         <type>SR_UTILS_NS::ISerializer::UniquePtr</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/EditorGizmo.h" line="38" column="45" bodyfile="Engine/Core/inc/Core/GUI/EditorGizmo.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGizmo.h" line="38" column="45" bodyfile="Engine/inc/Engine/GUI/EditorGizmo.h" bodystart="38" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/EditorGizmo.h" line="18" column="43" bodyfile="Engine/Core/inc/Core/GUI/EditorGizmo.h" bodystart="18" bodyend="18"/>
+        <location file="Engine/inc/Engine/GUI/EditorGizmo.h" line="18" column="43" bodyfile="Engine/inc/Engine/GUI/EditorGizmo.h" bodystart="18" bodyend="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGizmo_1ada9a2c68bf4bb2a6b630dec48f1a7b1a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/EditorGizmo.h" line="20" column="14" bodyfile="Engine/Core/inc/Core/GUI/EditorGizmo.h" bodystart="20" bodyend="20"/>
+        <location file="Engine/inc/Engine/GUI/EditorGizmo.h" line="20" column="14" bodyfile="Engine/inc/Engine/GUI/EditorGizmo.h" bodystart="20" bodyend="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGizmo_1aeb586875c417499674325a0373f9a21b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref></type>
@@ -97,7 +97,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/EditorGizmo.h" line="22" column="44"/>
+        <location file="Engine/inc/Engine/GUI/EditorGizmo.h" line="22" column="44"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGizmo_1a55d8a4247c3badef069fa928aca8a3e7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -112,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/EditorGizmo.h" line="23" column="27" bodyfile="Engine/Core/inc/Core/GUI/EditorGizmo.h" bodystart="23" bodyend="23"/>
+        <location file="Engine/inc/Engine/GUI/EditorGizmo.h" line="23" column="27" bodyfile="Engine/inc/Engine/GUI/EditorGizmo.h" bodystart="23" bodyend="23"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGizmo_1aaeef37ffd030076638d951cb8cfa90be" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -127,7 +127,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/EditorGizmo.h" line="24" column="27"/>
+        <location file="Engine/inc/Engine/GUI/EditorGizmo.h" line="24" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGizmo_1ab7a2e450508b32c1fe3d87371e4bcfc1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD SR_GRAPH_UI_NS::GizmoMode</type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/EditorGizmo.h" line="26" column="48"/>
+        <location file="Engine/inc/Engine/GUI/EditorGizmo.h" line="26" column="48"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGizmo_1aef9cafe801d0d80583b34fd76a20b4fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -161,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/EditorGizmo.h" line="28" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGizmo.h" line="28" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGizmo_1a4af5404a991b28b5d10c13b3bf7099fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -180,7 +180,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/EditorGizmo.h" line="29" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGizmo.h" line="29" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGizmo_1a568ea38ba9267125b45d5f4041dd83e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -199,7 +199,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/EditorGizmo.h" line="30" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGizmo.h" line="30" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGizmo_1a2ae4c6b2fca68fb578355a28e0a45cd7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -214,7 +214,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/EditorGizmo.h" line="32" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGizmo.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGizmo_1a76ebdc6613bda151e1a4ae141b04fb90" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -229,7 +229,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/EditorGizmo.h" line="33" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGizmo.h" line="33" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGizmo_1a50b32ef7991410c4e610b0cf902c0569" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -244,7 +244,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/EditorGizmo.h" line="34" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGizmo.h" line="34" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -327,7 +327,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/inc/Core/GUI/EditorGizmo.h" line="14" column="5" bodyfile="Engine/Core/inc/Core/GUI/EditorGizmo.h" bodystart="14" bodyend="40"/>
+    <location file="Engine/inc/Engine/GUI/EditorGizmo.h" line="14" column="5" bodyfile="Engine/inc/Engine/GUI/EditorGizmo.h" bodystart="14" bodyend="40"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>BaseComponent</name></member>

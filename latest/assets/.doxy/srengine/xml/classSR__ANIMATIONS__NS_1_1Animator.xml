@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" line="23" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" line="23" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" bodystart="23" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" line="47" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" line="47" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1Animator_1aae8abd81fddcfa895aace6da70e96f9c" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" line="49" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" bodystart="49" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" line="49" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1Animator_1ac9b4e51725e8c4ac2fb367784fecc69e" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" line="51" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" line="51" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1Animator_1a048a965ec24e4861bb117ad60fafd8f2" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" line="53" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" line="53" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1Animator_1ad9d3d78bff2bed8682e646295964ec02" prot="private" static="no" mutable="no">
         <type>SR_VIRTUAL_PROPERTY <ref refid="classSR__ANIMATIONS__NS_1_1AnimationGraph" kindref="compound">AnimationGraph</ref> *</type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" line="58" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" bodystart="58" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" line="58" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1Animator_1aabc2d2805769e3918c3c829cabd79c6c" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__ANIMATIONS__NS_1_1Skeleton" kindref="compound">Skeleton</ref> &gt;</type>
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" line="60" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" bodystart="60" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" line="60" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" bodystart="60" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -124,7 +124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" line="25" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" line="25" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Animator_1ac8c5686f9c98c480ea7ed5790c144394" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -139,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" line="28" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" line="28" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Animator_1af5e6c112f125ae5730cd9954d3633edd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" line="29" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" line="29" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Animator_1ac68edbb2432cbce78f21b1925aaceecb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -174,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" line="31" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Animator_1a62bfaea86fe0af7ec65f1d1c2826a55e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -190,7 +190,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" line="32" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Animator_1ab1e07660d4a5af222c335637cd22f641" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -205,7 +205,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" line="34" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" line="34" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Animator_1ac58cadffd8f5a593a16929535899487e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -223,7 +223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" line="36" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" line="36" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Animator_1a5fe9c3037fcda5908876dc32d15031b4" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -237,7 +237,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" line="38" column="40"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" line="38" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Animator_1aa022bd5e04e460c3aea48e3040e1737b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__ANIMATIONS__NS_1_1AnimationGraph" kindref="compound">AnimationGraph</ref> *</type>
@@ -251,7 +251,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" line="39" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" bodystart="39" bodyend="39"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" line="39" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" bodystart="39" bodyend="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Animator_1a6939fc26d9558915f927c5f70ac77806" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__ANIMATIONS__NS_1_1Skeleton" kindref="compound">Skeleton</ref> &gt; &amp;</type>
@@ -265,7 +265,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" line="40" column="46" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" bodystart="40" bodyend="40"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" line="40" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" bodystart="40" bodyend="40"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -285,7 +285,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" line="43" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" line="43" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -344,7 +344,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" line="21" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h" bodystart="21" bodyend="62"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" line="21" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/Animator.h" bodystart="21" bodyend="62"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Animator</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Animator</scope><name>BaseComponent</name></member>

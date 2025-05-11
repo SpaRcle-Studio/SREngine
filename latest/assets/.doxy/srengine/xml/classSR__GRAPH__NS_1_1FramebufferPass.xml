@@ -22,7 +22,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h" line="19" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h" line="19" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FramebufferPass_1af26d60b8538dba1f553991136299e461" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -41,7 +41,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h" line="20" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h" line="20" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FramebufferPass_1ae2a0c09a997c4490f78a91ec836b8e37" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h" line="21" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h" line="21" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FramebufferPass_1ab7e6b7984f93accef582690be7aa8dd7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h" line="23" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h" line="23" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FramebufferPass_1add5c3faa372b9c02729e06251c20548f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h" line="24" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FramebufferPass_1a2fc780b0b9338a93229754af63d5f6d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h" line="25" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h" line="25" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FramebufferPass_1a755f61be9e57184801b8c188ee3edb09" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h" line="27" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h" line="27" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FramebufferPass_1afe1cbf148b6e74d8a15f1b0af9ffdd47" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> *</type>
@@ -135,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h" line="30" column="39"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h" line="30" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FramebufferPass_1adf41fe2d2b508deb6aa251c2d39baf37" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD std::vector&lt; <ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">SR_GTYPES_NS::Framebuffer</ref> * &gt;</type>
@@ -150,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h" line="31" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h" line="31" column="34"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -358,7 +358,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h" line="16" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h" bodystart="16" bodyend="33"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h" line="16" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h" bodystart="16" bodyend="33"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FramebufferPass</scope><name>AddDependency</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FramebufferPass</scope><name>AddInputConnection</name></member>

@@ -6,7 +6,7 @@
     <includes refid="Enumerations_8h" local="no">Utils/Common/Enumerations.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/CLIManager.h</label>
+        <label>Engine/inc/Engine/CLIManager.h</label>
         <link refid="CLIManager_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -500,6 +500,6 @@
 <codeline lineno="42"><highlight class="normal"></highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_CORE_CLI_MANAGER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/CLIManager.h"/>
+    <location file="Engine/inc/Engine/CLIManager.h"/>
   </compounddef>
 </doxygen>

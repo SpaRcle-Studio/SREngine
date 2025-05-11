@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="16" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" bodystart="16" bodyend="18"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="16" column="9" bodyfile="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" bodystart="16" bodyend="18"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__UTILS__NS_1_1Task_1a51a2c4ca7f53bd61bcaea275c0eaf050" prot="public" static="no">
         <type>std::atomic&lt; State &gt; *</type>
@@ -70,7 +70,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="19" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" bodystart="19" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="19" column="9" bodyfile="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" bodystart="19" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__UTILS__NS_1_1Task_1a414ce1d120a1195fae48f8d26a1d7497" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(StatePtr)&gt;</type>
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="21" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" bodystart="21" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="21" column="9" bodyfile="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" bodystart="21" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="42" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" bodystart="42" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="42" column="14" bodyfile="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Task_1ac2e80151eb920d556f1d9455b0ac18b8" prot="private" static="no" mutable="no">
         <type>uint64_t</type>
@@ -114,7 +114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="43" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" bodystart="43" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="43" column="18" bodyfile="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Task_1ad2301bd6abb0d26f4fae6975ad21b6c1" prot="private" static="no" mutable="no">
         <type>Types::Thread::Ptr</type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="44" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="44" column="28" bodyfile="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Task_1a545aa91401fcca5e9b4b8ea0a3a11e33" prot="private" static="no" mutable="no">
         <type>TaskFn</type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="45" column="16" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" bodystart="45" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="45" column="16" bodyfile="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Task_1acc2413cb8e473d51f15b4bdadcefc3cb" prot="private" static="no" mutable="no">
         <type>StatePtr</type>
@@ -157,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="47" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="47" column="18" bodyfile="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" bodystart="47" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -181,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="24" column="18"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="24" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Task_1a0801cc43d1a3f348e17535b90f43acac" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -199,7 +199,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="25" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="25" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Task_1a35b76a7bb16ed1c238d876cbd4c856f6" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1Task" kindref="compound">Task</ref> &amp;</type>
@@ -217,7 +217,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="26" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="26" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Task_1a4ab64ac291e3600a6b680c282994cb4e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -231,7 +231,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="28" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="28" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Task_1abb3fe7d3d789235248a10e20c00bf01c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -245,7 +245,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="31" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Task_1a8098f7d2510c1ca649ddd9f8fcd41d64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -259,7 +259,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="32" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Task_1a5c5b9a21491afe36ae0cfb75e2ce0c2a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -277,7 +277,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="34" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="34" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Task_1a71c1f59b68c757ba2f5c187c33a7b0a8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -291,7 +291,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="36" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="36" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Task_1ae0f8cd7eb4e6ed18e2a0e8b6b0046f69" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -305,7 +305,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="37" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="37" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Task_1ac8596ba0db846cb97d9e996c3517d565" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD State</type>
@@ -319,7 +319,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="38" column="28"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="38" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Task_1ab24da08bc086be60647b73dceed205bf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -333,7 +333,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="39" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="39" column="31"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -364,7 +364,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="14" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" bodystart="14" bodyend="49"/>
+    <location file="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="14" column="5" bodyfile="Engine/libs/Utils/inc/Utils/TaskManager/TaskManager.h" bodystart="14" bodyend="49"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Task_1ab24da08bc086be60647b73dceed205bf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Task</scope><name>GetId</name></member>
       <member refid="classSR__UTILS__NS_1_1Task_1ac8596ba0db846cb97d9e996c3517d565" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Task</scope><name>GetResult</name></member>

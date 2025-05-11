@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" line="34" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" bodystart="34" bodyend="38"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Widget.h" line="34" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Widget.h" bodystart="34" bodyend="38"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="typedef">
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" line="39" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" bodystart="39" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Widget.h" line="39" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/Widget.h" bodystart="39" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -216,7 +216,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/ImmediateGUI.h" line="16" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/ImmediateGUI.h" bodystart="16" bodyend="418"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/ImmediateGUI.h" line="16" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/ImmediateGUI.h" bodystart="16" bodyend="418"/>
       </memberdef>
       <memberdef kind="function" id="ImNodeEditorUtils_8h_1a9af30789be4fa58d696559e8226fb4b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -238,7 +238,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h" line="21" column="10" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h" declline="21" declcolumn="10"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h" line="21" column="10" declfile="Engine/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h" declline="21" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="ImNodeEditorUtils_8h_1a23d1e46e96a195c85e0d020565cda2a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -260,7 +260,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h" line="23" column="10" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h" declline="23" declcolumn="10"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h" line="23" column="10" declfile="Engine/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h" declline="23" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Node_8h_1a5d3cf45c7de47f13c53b08ead8d46f2c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -298,7 +298,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="13" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" declline="13" declcolumn="5"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" line="13" column="5" declfile="Engine/libs/Graphics/inc/Graphics/GUI/Node.h" declline="13" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="NodeCreation_8h_1a140794b0e783b160bc16a29414971ac2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__GRAPH__GUI__NS_1_1Node" kindref="compound">Node</ref> *</type>
@@ -320,7 +320,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeCreation.h" line="15" column="10" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeCreation.h" declline="15" declcolumn="10"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeCreation.h" line="15" column="10" declfile="Engine/libs/Graphics/inc/Graphics/GUI/NodeCreation.h" declline="15" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1abe406f7972f29e6bca7a628616184d08" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -347,13 +347,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="28" column="10" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" declline="28" declcolumn="10"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/Utils.h" line="28" column="10" declfile="Engine/libs/Graphics/inc/Graphics/GUI/Utils.h" declline="28" declcolumn="10"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="10" column="1"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="10" column="1"/>
   </compounddef>
 </doxygen>

@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/Features.h" line="49" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/Features.h" bodystart="49" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Features.h" line="49" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Common/Features.h" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Features_1ad9254b57e20ad60e5bd3f3035b3edf98" prot="private" static="no" mutable="no">
         <type>std::unordered_map&lt; std::string, <ref refid="classSR__UTILS__NS_1_1FeatureGroup" kindref="compound">FeatureGroup</ref> &gt;</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/Features.h" line="50" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/Features.h" bodystart="50" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Features.h" line="50" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Common/Features.h" bodystart="50" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Features_1a4abcc9215d2ee2d3e8e73b5affc213f1" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/Features.h" line="51" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/Features.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Features.h" line="51" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Common/Features.h" bodystart="51" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/Features.h" line="31" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Features.h" line="31" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Features_1ab31cac9a8073c2eca821b632537e4ba7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/Features.h" line="33" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Features.h" line="33" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Features_1a5963a51f12da267ef6551ccc5a95ff6a" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="classSR__UTILS__NS_1_1FeatureGroup" kindref="compound">FeatureGroup</ref> &amp;</type>
@@ -96,7 +96,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/Features.h" line="45" column="41"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Features.h" line="45" column="41"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Features_1ae9d340e754e3d8dd479529b9dd1d8897" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -122,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/Features.h" line="46" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Features.h" line="46" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -138,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/Features.h" line="36" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Features.h" line="36" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Features_1ac0919bc488567c70a318e43e769d193e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -156,7 +156,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/Features.h" line="38" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Features.h" line="38" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Features_1ab27110a642dcd14832e98f15b304e747" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -174,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/Features.h" line="40" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Features.h" line="40" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Features_1adfbf41430e56ce2448421776952180be" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -196,7 +196,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/Features.h" line="41" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Features.h" line="41" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Features_1a7bef74c5098996f682b1da2fdbe8ce8a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -218,7 +218,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/Features.h" line="42" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Features.h" line="42" column="27"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -273,7 +273,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Common/Features.h" line="30" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/Features.h" bodystart="30" bodyend="53"/>
+    <location file="Engine/libs/Utils/inc/Utils/Common/Features.h" line="30" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Common/Features.h" bodystart="30" bodyend="53"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Features</scope><name>DestroySingleton</name></member>
       <member refid="classSR__UTILS__NS_1_1Features_1ab27110a642dcd14832e98f15b304e747" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Features</scope><name>Enabled</name></member>

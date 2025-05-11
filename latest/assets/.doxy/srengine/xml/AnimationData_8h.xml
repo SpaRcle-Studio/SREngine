@@ -3,7 +3,7 @@
   <compounddef id="AnimationData_8h" kind="file" language="C++">
     <compoundname>AnimationData.h</compoundname>
     <includes refid="AnimationCommon_8h" local="no">Graphics/Animations/AnimationCommon.h</includes>
-    <includedby refid="AnimationContext_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationContext.h</includedby>
+    <includedby refid="AnimationContext_8h" local="no">Engine/libs/Graphics/inc/Graphics/Animations/AnimationContext.h</includedby>
     <incdepgraph>
       <node id="2">
         <label>Graphics/Animations/AnimationCommon.h</label>
@@ -24,7 +24,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationData.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationData.h</label>
         <link refid="AnimationData_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -657,15 +657,15 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="6">
-        <label>Engine/Core/inc/Core/GUI/AnimatorEditor.h</label>
+        <label>Engine/inc/Engine/GUI/AnimatorEditor.h</label>
         <link refid="AnimatorEditor_8h_source"/>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h</label>
         <link refid="AnimationChannel_8h_source"/>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationContext.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationContext.h</label>
         <link refid="AnimationContext_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -677,13 +677,13 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationData.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationData.h</label>
         <link refid="AnimationData_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraph.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraph.h</label>
         <link refid="AnimationGraph_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
@@ -691,13 +691,13 @@
         </childnode>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h</label>
         <link refid="AnimationGraphNode_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
       </node>
       <node id="8">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h</label>
         <link refid="AnimationKey_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -705,31 +705,31 @@
         </childnode>
       </node>
       <node id="11">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationState.h</label>
         <link refid="AnimationState_8h_source"/>
         <childnode refid="12" relation="include">
         </childnode>
       </node>
       <node id="9">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h</label>
         <link refid="AnimationStateCondition_8h_source"/>
         <childnode refid="10" relation="include">
         </childnode>
       </node>
       <node id="12">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateMachine.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateMachine.h</label>
         <link refid="AnimationStateMachine_8h_source"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
       <node id="10">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h</label>
         <link refid="AnimationStateTransition_8h_source"/>
         <childnode refid="11" relation="include">
         </childnode>
       </node>
       <node id="7">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
         <link refid="Animator_8h_source"/>
       </node>
     </invincdepgraph>
@@ -792,6 +792,6 @@
 <codeline lineno="52"><highlight class="normal"></highlight></codeline>
 <codeline lineno="53"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_ANIMATIONDATA_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationData.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationData.h"/>
   </compounddef>
 </doxygen>

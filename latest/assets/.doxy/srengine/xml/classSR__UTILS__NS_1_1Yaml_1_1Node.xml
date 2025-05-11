@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="12" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="12" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="12" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="12" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="51" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="51" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Yaml_1_1Node_1a17d56c5afd7cc14638ba8089d05b3301" prot="private" static="no" mutable="no">
         <type>void *</type>
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="52" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="52" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="52" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Yaml_1_1Node_1a710b7cf47f9838ef081eb673a3ce6fce" prot="private" static="no" mutable="no">
         <type>size_t</type>
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="53" column="16" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="53" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="53" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="15" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="15" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Node_1a252699c5052f4393adf07b65447d061e" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="17" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="17" bodyend="20"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="17" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="17" bodyend="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Node_1a9d2112239bbc91aee7f5b87eb8ae5501" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -125,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="22" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="22" bodyend="25"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="22" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="22" bodyend="25"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Node_1a39e49374c30aaa6640993f8866443315" prot="public" static="no" const="yes" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -139,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="30" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="30" bodyend="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="30" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="30" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Node_1ab54bc297dd62d88532f325c3bd1a067e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -153,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="31" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="31" bodyend="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="31" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="31" bodyend="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Node_1a1467858f262f2afd37b5d7e2c51c3f38" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="33" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="33" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Node_1ae85d26029e8dafb13eed5cc0b676bd08" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string_view</type>
@@ -181,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="34" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="34" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Node_1ab9e7c253e27ad3603679d25ed4fa2c28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD void</type>
@@ -199,7 +199,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="36" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="36" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Node_1aeb08963e17861058d4564f572e96b3c8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -213,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="37" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="37" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Node_1a083da124090b0201856292ef60202c06" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string_view</type>
@@ -227,7 +227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="38" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="38" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Node_1a3b8b756b2f0060ab1496a5c3a96c2f1b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -241,7 +241,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="39" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="39" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Node_1aeb8d97d90ae88204ebacf5674e64462b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string_view</type>
@@ -255,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="40" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="40" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Node_1add2f9e0f6f76b7dea8d8aa1cd0188bb5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::vector&lt; <ref refid="classSR__UTILS__NS_1_1Yaml_1_1Node" kindref="compound">Node</ref> &gt;</type>
@@ -269,7 +269,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="41" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="41" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Node_1a79a9b1cda6a7b82d51a80cdd1888bce1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint16_t</type>
@@ -283,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="42" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="42" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Node_1a0dae60a2b47bdcc9814f66995469636f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Yaml_1_1Node" kindref="compound">Node</ref></type>
@@ -301,7 +301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="43" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="43" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Node_1a29947c7f747508424c52f07464a99428" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Yaml_1_1Node" kindref="compound">Node</ref></type>
@@ -319,7 +319,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="44" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="44" column="27"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -335,7 +335,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="28" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="28" bodyend="28"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="28" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="28" bodyend="28"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -351,7 +351,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="47" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="47" bodyend="47"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="47" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="47" bodyend="47"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Node_1a5fe09dff8fbf01eec97e9f19be8e9397" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void const *</type>
@@ -365,14 +365,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="48" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="48" bodyend="48"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="48" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="48" bodyend="48"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="11" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="11" bodyend="54"/>
+    <location file="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" line="11" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="11" bodyend="54"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Yaml_1_1Node_1a29947c7f747508424c52f07464a99428" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Yaml::Node</scope><name>AppendChild</name></member>
       <member refid="classSR__UTILS__NS_1_1Yaml_1_1Node_1a883538034e58fc5c0de7d4e4cab3cef7" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Yaml::Node</scope><name>Document</name></member>

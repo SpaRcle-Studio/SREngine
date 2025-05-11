@@ -265,5 +265,5 @@ Implements [*SR\_ANIMATIONS\_NS::AnimationState::GetName*](classSR__ANIMATIONS__
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Animations/AnimationState.h`
 

@@ -22,7 +22,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" line="60" column="11" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" bodystart="60" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" line="60" column="11" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1SafePtrRecursiveLockGuard_1ae2b5a002defa6d8fa8d3fb0518e466eb" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" line="61" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" bodystart="61" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" line="61" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" bodystart="61" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" line="35" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" bodystart="35" bodyend="44"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" line="35" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" bodystart="35" bodyend="44"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SafePtrRecursiveLockGuard_1a7010821a1f305d9b9b77af29470ff87e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" line="46" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" bodystart="46" bodyend="57"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" line="46" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" bodystart="46" bodyend="57"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -102,7 +102,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" line="33" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" bodystart="33" bodyend="63"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" line="33" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" bodystart="33" bodyend="63"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1SafePtrRecursiveLockGuard_1ae2b5a002defa6d8fa8d3fb0518e466eb" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::SafePtrRecursiveLockGuard</scope><name>m_locked</name></member>
       <member refid="classSR__HTYPES__NS_1_1SafePtrRecursiveLockGuard_1a4b69dc9183d1ca57032257ab2a221ac2" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::SafePtrRecursiveLockGuard</scope><name>m_ptr</name></member>

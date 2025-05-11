@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_8792055a44bdbf0c2433786b5c711595" kind="dir">
+    <compoundname>Engine/inc/Engine/AI/NeuralNetwork</compoundname>
+    <innerfile refid="NNComponent_8h">NNComponent.h</innerfile>
+    <innerfile refid="NNRenderer_8h">NNRenderer.h</innerfile>
+    <innerfile refid="NNRenderPass_8h">NNRenderPass.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/inc/Engine/AI/NeuralNetwork/"/>
+  </compounddef>
+</doxygen>

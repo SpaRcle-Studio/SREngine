@@ -20,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="18" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="18" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="18" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="18" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a1e49a98ca25d90f7b5a7208a58477f84" prot="public" static="no">
         <type>int32_t</type>
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="19" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="19" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="19" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="19" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="39" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="39" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="39" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1ae95e6c9b60553a100ddedecf8fa2face" prot="private" static="no" mutable="no">
         <type>RawMeshPtr</type>
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="40" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="40" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="40" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a48bbd761d0762ba3b63fac9aa34daff5" prot="private" static="no" mutable="no">
         <type>MeshIndex</type>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="43" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="43" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="43" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="43" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -97,7 +97,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="21" column="17"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="21" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a1f90420ae0c606687c75766d55d95621" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD MeshIndex</type>
@@ -111,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="24" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="24" bodyend="24"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="24" column="32" bodyfile="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="24" bodyend="24"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a4df7afb95a7b0b85ebd5791dcc87a650" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD RawMeshPtr</type>
@@ -125,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="25" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="25" bodyend="25"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="25" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="25" bodyend="25"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a39436d2cc283eb4a57a268d6448f4fd3" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -139,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="26" column="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="26" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1af16c3ef83f6a6e8b98a62fc85a6928d0" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -153,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="27" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="27" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a38601beec7f801e569e00c1236d9e487" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="28" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="28" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a5b9e46a96d1f3ffdcd128f071e6934ac" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD std::vector&lt; <ref refid="structSR__UTILS__NS_1_1Vertex" kindref="compound">SR_UTILS_NS::Vertex</ref> &gt;</type>
@@ -181,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="29" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="29" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a8cedda755c832cabdaaf14644939695d" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD std::string_view</type>
@@ -195,7 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="30" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="30" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a0b7780b0866a0482fa8bbc365d9b795b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -213,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="32" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="32" bodyend="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="32" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="32" bodyend="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a8f54083212793185d112dfc01e612baf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -231,7 +231,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="34" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="34" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1ad5f9834371708471d3f6712e145aa7ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -249,7 +249,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="35" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="35" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a5a6bc29a5ae54972e18fb7d61124ecff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -272,7 +272,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="36" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="36" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -316,7 +316,7 @@
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="16" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="16" bodyend="45"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="16" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="16" bodyend="45"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a8cedda755c832cabdaaf14644939695d" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>GetGeometryName</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a1f90420ae0c606687c75766d55d95621" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>GetMeshId</name></member>

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" line="57" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="57" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="57" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="57" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1MouseInputData_1af7afc4d6634ac7ed628951418aea6b60" prot="public" static="no" mutable="no">
         <type>KeyState</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" line="58" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="58" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="58" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1MouseInputData_1aae17fc090e20ecac093fc607cca2db2c" prot="public" static="no" mutable="no">
         <type>SR_MATH_NS::FVector2</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" line="59" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="59" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="59" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1MouseInputData_1a7ac56c40b250344e61a9a9a09ce81774" prot="public" static="no" mutable="no">
         <type>SR_MATH_NS::FVector2</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" line="60" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="60" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="60" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1MouseInputData_1af8b924e6a869e5bbaa92dd147f3f4bc7" prot="public" static="no" mutable="no">
         <type>SR_MATH_NS::FVector2</type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" line="61" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="61" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="61" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="61" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" line="31" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="31" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1MouseInputData_1a7b69a5e6965484ac28be2d5ee53fb8ca" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -122,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" line="33" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="33" bodyend="43"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="33" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="33" bodyend="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1MouseInputData_1a45915d2cf8628391113783eef9a87e86" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" line="45" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="45" bodyend="48"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="45" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="45" bodyend="48"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1MouseInputData_1aa0d64c28f8852caf958af7c716e105fd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>InputDeviceType</type>
@@ -151,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" line="51" column="25"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="51" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1MouseInputData_1ac7fd802161f57977917961b529fe1579" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector2</type>
@@ -165,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" line="53" column="43"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="53" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1MouseInputData_1aa21ca6d3e365a7eaea89892cb17c3522" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -179,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" line="54" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="54" column="27"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -222,7 +222,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" line="29" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="29" bodyend="63"/>
+    <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="29" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="29" bodyend="63"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1MouseInputData_1ac7fd802161f57977917961b529fe1579" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::MouseInputData</scope><name>GetDrag</name></member>
       <member refid="classSR__UTILS__NS_1_1MouseInputData_1aa0d64c28f8852caf958af7c716e105fd" prot="public" virt="virtual"><scope>SR_UTILS_NS::MouseInputData</scope><name>GetType</name></member>

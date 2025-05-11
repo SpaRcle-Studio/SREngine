@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" line="21" column="9" bodyfile="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" bodystart="21" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" line="21" column="9" bodyfile="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" bodystart="21" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" line="50" column="22" bodyfile="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" bodystart="50" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" line="50" column="22" bodyfile="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" bodystart="50" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1PhysicsMaterialEditor_1a11a95d728804ee2eecb61bd81036f468" prot="private" static="no" mutable="no">
         <type><ref refid="structSR__PTYPES__NS_1_1PhysicsMaterialData" kindref="compound">SR_PTYPES_NS::PhysicsMaterialData</ref></type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" line="51" column="43" bodyfile="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" line="51" column="43" bodyfile="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1PhysicsMaterialEditor_1ac68b3f83e894b58000385464118110e6" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" line="52" column="27" bodyfile="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" bodystart="52" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" line="52" column="27" bodyfile="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" bodystart="52" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" line="23" column="9"/>
+        <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" line="23" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1PhysicsMaterialEditor_1a879659669e8a749d5949b092aad5d415" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" line="24" column="9"/>
+        <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" line="24" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1PhysicsMaterialEditor_1a25315881fc84bdd2e9646059364d77dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -109,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" line="27" column="14"/>
+        <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" line="27" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1PhysicsMaterialEditor_1a20c289e689f22e6e4b8237d0fb3e4c8a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -127,7 +127,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" line="29" column="14" bodyfile="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" bodystart="29" bodyend="29"/>
+        <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" line="29" column="14" bodyfile="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" bodystart="29" bodyend="29"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -144,7 +144,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" line="32" column="14"/>
+        <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" line="32" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -160,7 +160,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" line="35" column="14"/>
+        <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" line="35" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1PhysicsMaterialEditor_1a4d3d8ce9d143c45998e110124afa179d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -178,7 +178,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" line="36" column="14"/>
+        <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" line="36" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1PhysicsMaterialEditor_1a673244b3ba4828243952eae131e88c8d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -208,7 +208,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" line="37" column="14"/>
+        <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" line="37" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1PhysicsMaterialEditor_1a0d3e803fadba11ab721e0e3fe0cfcdd8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -222,7 +222,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" line="39" column="14"/>
+        <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" line="39" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1PhysicsMaterialEditor_1a1b3c4605e7d1e1bf8c715e1b3a5b4ba2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -236,7 +236,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" line="40" column="14"/>
+        <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" line="40" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1PhysicsMaterialEditor_1a3801c85bfb334e19f023ff2337e251fd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -250,7 +250,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" line="41" column="14"/>
+        <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" line="41" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1PhysicsMaterialEditor_1a84ecf1306cf5d511a7f722e4f670e217" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -268,7 +268,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" line="43" column="14" bodyfile="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" bodystart="43" bodyend="43"/>
+        <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" line="43" column="14" bodyfile="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" bodystart="43" bodyend="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1PhysicsMaterialEditor_1ac67b789a0403c4b69c2d5de48b03baf5" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -286,7 +286,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" line="44" column="14" bodyfile="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" bodystart="44" bodyend="44"/>
+        <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" line="44" column="14" bodyfile="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" bodystart="44" bodyend="44"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1PhysicsMaterialEditor_1a884a4d49767e89eb802010a3c46ffc98" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -304,7 +304,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" line="45" column="14" bodyfile="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" bodystart="45" bodyend="45"/>
+        <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" line="45" column="14" bodyfile="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" bodystart="45" bodyend="45"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1PhysicsMaterialEditor_1a03064f93c92e0067013890d186ea65b5" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -322,7 +322,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" line="46" column="14" bodyfile="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" bodystart="46" bodyend="46"/>
+        <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" line="46" column="14" bodyfile="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" bodystart="46" bodyend="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1PhysicsMaterialEditor_1a354658c2718a88cec96c6dca31717d38" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -340,7 +340,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" line="47" column="14" bodyfile="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" bodystart="47" bodyend="47"/>
+        <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" line="47" column="14" bodyfile="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" bodystart="47" bodyend="47"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -419,7 +419,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" line="20" column="5" bodyfile="Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h" bodystart="20" bodyend="53"/>
+    <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" line="20" column="5" bodyfile="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" bodystart="20" bodyend="53"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a4a04e0628b5729444eca1c24a9011fa2" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::PhysicsMaterialEditor</scope><name>AddFlags</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1adb2cb15cb7a11b055f8659f1db8c5521" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PhysicsMaterialEditor</scope><name>AddSubWidget</name></member>

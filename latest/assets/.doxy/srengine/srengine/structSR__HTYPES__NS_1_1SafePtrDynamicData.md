@@ -153,5 +153,5 @@ bool SR_HTYPES_NS::SafePtrDynamicData::m_valid;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Types/SafePointer.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Types/SafePointer.h`
 

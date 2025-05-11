@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="40" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="40" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="40" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="40" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="34" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="34" column="9"/>
       </memberdef>
       <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1TranslationKey_1a2d13d9c1560f2bb354c9d70c9a05ed7c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="35" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="35" bodyend="37"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="35" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="35" bodyend="37"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -59,7 +59,7 @@
 <para>Задача ключа обеспечить необходимый переход из предыдущего ключа в этот в зависимости от интервала времени. Интервал времени задается от 0.f до 1.f в зависимости от положения перехода в момент времени. Переход должен работать и в обратную сторону (от 1.f до 0.f)<hruler/>
  </para>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="32" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="32" bodyend="42"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="32" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="32" bodyend="42"/>
     <listofallmembers>
       <member refid="structSR__ANIMATIONS__NS_1_1TranslationKey_1aa5721f8bff8975b272bfc44fcafdc49d" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::TranslationKey</scope><name>translation</name></member>
       <member refid="structSR__ANIMATIONS__NS_1_1TranslationKey_1a3175596caa16b58a454c482d9850b701" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::TranslationKey</scope><name>TranslationKey</name></member>

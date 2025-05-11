@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="22" column="9" bodyfile="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" bodystart="22" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="22" column="9" bodyfile="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" bodystart="22" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__AUDIO__NS_1_1AudioSource_1a9fc793b1b5f7a25f18183ac0fc7050a4" prot="private" static="no">
         <type>void *</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="23" column="9" bodyfile="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="23" column="9" bodyfile="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" bodystart="23" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="61" column="20" bodyfile="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" bodystart="61" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="61" column="20" bodyfile="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" bodystart="61" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1AudioSource_1aaebbab8d57b3d88494d245bd75c8d050" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="62" column="27" bodyfile="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" bodystart="62" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="62" column="27" bodyfile="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" bodystart="62" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1AudioSource_1a00d270e41493d5afd83aca1be213a750" prot="private" static="no" mutable="no">
         <type>Handle</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="63" column="16" bodyfile="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" bodystart="63" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="63" column="16" bodyfile="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" bodystart="63" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="25" column="9"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="25" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1ad3131c00bc5492d93e029d829859634a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="28" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="28" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1a4ec20896784e02c405bbb6508e6e5b3e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -124,7 +124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="30" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="30" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1a278eae434c31fc59dd6a34e3c31e362d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="31" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1a6d39b1ca7baf6db4890475d5ca25034c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -160,7 +160,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="32" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1ae2a9edf1d9e1c34a003ad56d5f31fd7e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -178,7 +178,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="33" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="33" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1aca5fd353360482359111b17427861ba3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -196,7 +196,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="34" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="34" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1a9317868b615123982c4663b66db372f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -214,7 +214,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="35" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="35" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1a5ef52522a361c1ffc273fab4a40fb5a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -232,7 +232,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="36" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="36" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1a62d20f12dc5f82a0d8109f31ab58176f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -250,7 +250,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="37" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="37" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1a51e4807f652cdb27e069650fbe26b42c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -268,7 +268,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="38" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="38" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1a0bb6b44f65361111ccfea6297f23f3a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -286,7 +286,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="39" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="39" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1ab4f245770ca675513777f88b7644753e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -300,7 +300,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="41" column="27"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="41" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1a0a9a082c62a42f564fcd9a00d9d39b3f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -314,7 +314,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="42" column="30"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="42" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1a3229cb6a307c7e493edd835599ab4e11" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -328,7 +328,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="43" column="30"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="43" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1a97932cb645d057966fab71a67fa1280d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -342,7 +342,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="44" column="40"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="44" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1a87c06584512801d31825339afb0f129a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -356,7 +356,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="45" column="30"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="45" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1ad8039331ae2a36b17963488ef2fd7ad1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -370,7 +370,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="46" column="30"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="46" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1a59123bb00fcdee34404c3f4a56abea74" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -384,7 +384,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="47" column="30"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="47" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1a277092a223f0d7bfa5756303c643f52e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -398,7 +398,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="48" column="30"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="48" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1a872cabf3c52e9295ce7135c067622aaf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -412,7 +412,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="49" column="43"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="49" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1ae2549a37257dfd29e4a0b66ae8b93da9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SpatializeMode</type>
@@ -426,7 +426,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="50" column="37"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="50" column="37"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -443,7 +443,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="53" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="53" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1a5b3174dc2e8773b605e28393aa381a7d" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -458,7 +458,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="54" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="54" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioSource_1ab046ab0a393a9df8d83f677eb633d912" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -474,7 +474,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="55" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="55" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -490,7 +490,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="58" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="58" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -549,7 +549,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="20" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" bodystart="20" bodyend="85"/>
+    <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="20" column="5" bodyfile="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" bodystart="20" bodyend="85"/>
     <listofallmembers>
       <member refid="classSR__AUDIO__NS_1_1AudioSource_1add6436f9f8d9cf281ac1ab53108ba1cd" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::AudioSource</scope><name>AudioSource</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_AUDIO_NS::AudioSource</scope><name>Awake</name></member>

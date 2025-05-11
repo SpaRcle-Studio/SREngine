@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h" line="16" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h" line="16" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h" bodystart="16" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h" line="28" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h" line="28" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h" bodystart="28" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h" line="19" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h" line="19" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SkyboxPass_1aed7ed4d4fca55a4e07efd61720f9e667" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h" line="22" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h" line="22" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SkyboxPass_1a7ec2dcbcc7d3c2e4104151b0d68776be" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h" line="23" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h" line="23" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SkyboxPass_1aad5a1eeb1659372fdad4437d6996a5df" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h" line="24" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SkyboxPass_1a9392fa5e9339c5d91ebcb805bb1c0836" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h" line="25" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h" line="25" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -299,7 +299,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h" line="15" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h" bodystart="15" bodyend="30"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h" line="15" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h" bodystart="15" bodyend="30"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SkyboxPass</scope><name>AddDependency</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SkyboxPass</scope><name>AddInputConnection</name></member>

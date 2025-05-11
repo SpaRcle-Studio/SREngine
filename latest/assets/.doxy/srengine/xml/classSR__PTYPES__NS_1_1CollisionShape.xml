@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="55" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="55" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="55" column="9" bodyfile="Engine/libs/Physics/inc/Physics/CollisionShape.h" bodystart="55" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__PTYPES__NS_1_1CollisionShape_1a964d06a9debef4224caf3e79cab1557f" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__PTYPES__NS_1_1CollisionShape" kindref="compound">CollisionShape</ref> &gt;</type>
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="56" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="56" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="56" column="9" bodyfile="Engine/libs/Physics/inc/Physics/CollisionShape.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__PTYPES__NS_1_1CollisionShape_1aae603ade2ab137101c2bf623738b111d" prot="public" static="no">
         <type><ref refid="classSR__PHYSICS__NS_1_1LibraryImpl" kindref="compound">SR_PHYSICS_NS::LibraryImpl</ref> *</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="57" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="57" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="57" column="9" bodyfile="Engine/libs/Physics/inc/Physics/CollisionShape.h" bodystart="57" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="friend">
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="53" column="22" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="53" column="22" bodyfile="Engine/libs/Physics/inc/Physics/CollisionShape.h" bodystart="53" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -83,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="100" column="28" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="100" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="100" column="28" bodyfile="Engine/libs/Physics/inc/Physics/CollisionShape.h" bodystart="100" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PTYPES__NS_1_1CollisionShape_1a0b3bb2266040a5311530ccd1ce52d916" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__PTYPES__NS_1_1Rigidbody" kindref="compound">Rigidbody</ref> *</type>
@@ -98,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="101" column="19" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="101" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="101" column="19" bodyfile="Engine/libs/Physics/inc/Physics/CollisionShape.h" bodystart="101" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PTYPES__NS_1_1CollisionShape_1a2d2d6d00ecdf80e0ffba5993af3810bb" prot="protected" static="no" mutable="no">
         <type>uint64_t</type>
@@ -113,7 +113,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="103" column="18" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="103" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="103" column="18" bodyfile="Engine/libs/Physics/inc/Physics/CollisionShape.h" bodystart="103" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PTYPES__NS_1_1CollisionShape_1a950802b4153d92deed19f5c527d3bc8a" prot="protected" static="no" mutable="no">
         <type>ShapeType</type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="107" column="19" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="107" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="107" column="19" bodyfile="Engine/libs/Physics/inc/Physics/CollisionShape.h" bodystart="107" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PTYPES__NS_1_1CollisionShape_1a8fac0b531811f61b4a3207058e8366b9" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="109" column="30" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="109" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="109" column="30" bodyfile="Engine/libs/Physics/inc/Physics/CollisionShape.h" bodystart="109" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="60" column="9"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="60" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1ad7531680cdb928bd184c69186f92a966" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -173,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="61" column="9"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="61" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1a4026e23408491761aa40dcea19cf8915" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -191,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="64" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="64" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1add34bdd0ff6bf78697d39ce2b155ae7c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -206,7 +206,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="66" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="66" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1a633696e3e46f25d0606e33bfd945a392" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -220,7 +220,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="68" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="68" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1abe33389d853dec3ef96a64ca1420bf27" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -234,7 +234,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="69" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="69" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1a1b9765ffacd92281c4b72157fdbf6bf5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -248,7 +248,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="71" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="71" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1a94b0c3672317a30a366af7a65697950e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -262,7 +262,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="72" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="72" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1aa9f46865f61b3173fb4196cddebafa02" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -276,7 +276,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="74" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="74" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1abac2b9f7d97aa353fdcc13ce1baa2b91" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -294,7 +294,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="76" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="76" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1ad3127578427f4adb2c2530b32c8163d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -312,7 +312,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="78" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="78" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1af7cfba14e9f9e6e5fc460d7970e7ee83" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -330,7 +330,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="79" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="79" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1a763c4dbeb490f52cb4d0bf7d253514c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -348,7 +348,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="80" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="80" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1a6153ff5d49b470bbb64db12c63cf1e39" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -366,7 +366,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="81" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="81" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1a7ce02d5fdcd7e384f7a0d396dee9db01" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -384,7 +384,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="82" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="82" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1af3bf913c9123e5e7c04f738707b6aa4d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -402,7 +402,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="83" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="83" bodyend="83"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="83" column="14" bodyfile="Engine/libs/Physics/inc/Physics/CollisionShape.h" bodystart="83" bodyend="83"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1a5d3675d891b93b7036e548a565b9f1a3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -420,7 +420,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="85" column="43"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="85" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1a46758fc1f75e744e3ec3c0e33e1cfc7c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -434,7 +434,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="87" column="30"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="87" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1a3a24afeef1bfafabb24b2382f97d7b0d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -448,7 +448,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="88" column="30"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="88" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1a31c04226ff49e04007fec2c8c0636cb5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -462,7 +462,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="89" column="43"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="89" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1a5f6f3709e86da6137a31ed98197f4d38" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -476,7 +476,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="90" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="90" bodyend="90"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="90" column="43" bodyfile="Engine/libs/Physics/inc/Physics/CollisionShape.h" bodystart="90" bodyend="90"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1a2bc7ef2daab35462c864b0469708c018" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector2</type>
@@ -490,7 +490,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="91" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="91" bodyend="91"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="91" column="43" bodyfile="Engine/libs/Physics/inc/Physics/CollisionShape.h" bodystart="91" bodyend="91"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1aba6eeeec75f5607a7a052ebcc665272f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__PTYPES__NS_1_1Rigidbody" kindref="compound">Rigidbody</ref> *</type>
@@ -504,7 +504,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="92" column="32"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="92" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1a230b13e649bcde0823986aca025651e0" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -518,7 +518,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="94" column="27"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="94" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1af766ddc2bbffee81c0c5591e41ddcae1" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -532,7 +532,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="95" column="27"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="95" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1ab1daff1452ec6b1fead62070e4b4e31c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD ShapeType</type>
@@ -546,7 +546,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="96" column="32"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="96" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShape_1aadb7fa2d23c46886f2f631767d0d2cf3" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD void *</type>
@@ -560,7 +560,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="97" column="27"/>
+        <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="97" column="27"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -782,7 +782,7 @@
         <link refid="structSR__MATH__NS_1_1Vector3"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="48" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="51" bodyend="134"/>
+    <location file="Engine/libs/Physics/inc/Physics/CollisionShape.h" line="48" column="5" bodyfile="Engine/libs/Physics/inc/Physics/CollisionShape.h" bodystart="51" bodyend="134"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::CollisionShape</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::CollisionShape</scope><name>AllocateStatic</name></member>

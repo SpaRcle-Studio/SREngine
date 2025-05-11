@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="12" column="9" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" bodystart="12" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="12" column="9" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" bodystart="12" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="25" column="18" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="25" column="18" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer_1ac5584e727040e12574d39c1c2b739425" prot="private" static="no" mutable="no">
         <type>std::set&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="26" column="18" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="26" column="18" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" bodystart="26" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer_1a78ba00919f8aee67362eb901997aa381" prot="private" static="no" mutable="no">
         <type>MathVectorPropertyDrawer::Ptr</type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="28" column="39" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="28" column="39" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer_1a2399fa3f2380ea6c0bdcbb54da346a3a" prot="private" static="no" mutable="no">
         <type>NumericPropertyDrawer::Ptr</type>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="29" column="36" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="29" column="36" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer_1a297a03314753fba5ac0dba0687364134" prot="private" static="no" mutable="no">
         <type>BoolPropertyDrawer::Ptr</type>
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="30" column="33" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" bodystart="30" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="30" column="33" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer_1a0c31e28d4dac762ca2c7a13d57cde11c" prot="private" static="no" mutable="no">
         <type>PathPropertyDrawer::Ptr</type>
@@ -102,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="31" column="33" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" bodystart="31" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="31" column="33" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" bodystart="31" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="15" column="9"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="15" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer_1a834a77fccce32556f96ed372027ebf81" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref></type>
@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="17" column="32"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="17" column="32"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="20" column="14"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="20" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer_1aaf79d6c9b12cd4783b43f2b2d73a5a60" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -195,7 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="21" column="14"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="21" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer_1aca6167b4cb646b61de053f17a999f81c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -221,7 +221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="22" column="14"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="22" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -307,7 +307,7 @@
         <link refid="classSR__UTILS__NS_1_1SRClass"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="11" column="5" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" bodystart="11" bodyend="33"/>
+    <location file="Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" line="11" column="5" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h" bodystart="11" bodyend="33"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::MaterialDataPropertyDrawer</scope><name>AllocateStatic</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::MaterialDataPropertyDrawer</scope><name>AutoFree</name></member>

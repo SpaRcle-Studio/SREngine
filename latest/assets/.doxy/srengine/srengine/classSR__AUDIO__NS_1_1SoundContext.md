@@ -534,5 +534,5 @@ explicit SR_AUDIO_NS::SoundContext::SoundContext (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Audio/inc/Audio/SoundContext.h`
+The documentation for this class was generated from the following file `Engine/libs/Audio/inc/Audio/SoundContext.h`
 

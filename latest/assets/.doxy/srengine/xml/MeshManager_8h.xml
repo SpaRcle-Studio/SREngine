@@ -6,11 +6,11 @@
     <includes refid="Thread_8h" local="no">Utils/Types/Thread.h</includes>
     <includes refid="Graphics_2inc_2Graphics_2Types_2Vertices_8h" local="no">Graphics/Types/Vertices.h</includes>
     <includes refid="PipelineType_8h" local="no">Graphics/Pipeline/PipelineType.h</includes>
-    <includedby refid="DebugRenderer_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</includedby>
-    <includedby refid="IndexedMesh_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h</includedby>
+    <includedby refid="DebugRenderer_8h" local="no">Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</includedby>
+    <includedby refid="IndexedMesh_8h" local="no">Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Memory/MeshManager.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h</label>
         <link refid="MeshManager_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -698,17 +698,17 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="12">
-        <label>Engine/Core/inc/Core/GUI/EditorGizmo.h</label>
+        <label>Engine/inc/Engine/GUI/EditorGizmo.h</label>
         <link refid="EditorGizmo_8h_source"/>
         <childnode refid="13" relation="include">
         </childnode>
       </node>
       <node id="13">
-        <label>Engine/Core/inc/Core/GUI/SceneTools.h</label>
+        <label>Engine/inc/Engine/GUI/SceneTools.h</label>
         <link refid="SceneTools_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Memory/MeshManager.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h</label>
         <link refid="MeshManager_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -716,21 +716,21 @@
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
         <link refid="DebugPass_8h_source"/>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</label>
         <link refid="DebugRenderer_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</label>
         <link refid="DebugWireframeMesh_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h</label>
         <link refid="IndexedMesh_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
@@ -738,11 +738,11 @@
         </childnode>
       </node>
       <node id="7">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</label>
         <link refid="Mesh3D_8h_source"/>
       </node>
       <node id="6">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/MeshComponent.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/MeshComponent.h</label>
         <link refid="MeshComponent_8h_source"/>
         <childnode refid="7" relation="include">
         </childnode>
@@ -756,19 +756,19 @@
         </childnode>
       </node>
       <node id="8">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h</label>
         <link refid="ProceduralMesh_8h_source"/>
       </node>
       <node id="9">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
         <link refid="SkinnedMesh_8h_source"/>
       </node>
       <node id="10">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h</label>
         <link refid="Sprite_8h_source"/>
       </node>
       <node id="11">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h</label>
         <link refid="Gizmo_8h_source"/>
         <childnode refid="12" relation="include">
         </childnode>
@@ -1037,6 +1037,6 @@
 <codeline lineno="251"><highlight class="normal"></highlight></codeline>
 <codeline lineno="252"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_MESHMANAGER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/MeshManager.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h"/>
   </compounddef>
 </doxygen>

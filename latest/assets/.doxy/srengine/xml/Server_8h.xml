@@ -4,7 +4,7 @@
     <compoundname>Server.h</compoundname>
     <includes refid="Socket_8h" local="no">Utils/Network/Socket.h</includes>
     <includes refid="NodeDictionary_8h" local="no">Utils/Types/NodeDictionary.h</includes>
-    <includedby refid="Client_8h" local="no">Engine/Core/libs/Utils/inc/Utils/Network/Client.h</includedby>
+    <includedby refid="Client_8h" local="no">Engine/libs/Utils/inc/Utils/Network/Client.h</includedby>
     <incdepgraph>
       <node id="112">
         <label>Utils/Common/AnyMarshal.h</label>
@@ -281,7 +281,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/Network/Server.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Network/Server.h</label>
         <link refid="Server_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -838,11 +838,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/libs/Utils/inc/Utils/Network/Client.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Network/Client.h</label>
         <link refid="Client_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/Network/Server.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Network/Server.h</label>
         <link refid="Server_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -892,6 +892,6 @@
 <codeline lineno="36"><highlight class="normal"></highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_UTILS_NETWORK_SERVER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Network/Server.h"/>
+    <location file="Engine/libs/Utils/inc/Utils/Network/Server.h"/>
   </compounddef>
 </doxygen>

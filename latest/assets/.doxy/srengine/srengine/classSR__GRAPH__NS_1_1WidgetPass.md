@@ -609,5 +609,5 @@ Implements [*SR\_GRAPH\_NS::BasePass::Prepare*](classSR__GRAPH__NS_1_1BasePass.m
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pass/WidgetPass.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pass/WidgetPass.h`
 

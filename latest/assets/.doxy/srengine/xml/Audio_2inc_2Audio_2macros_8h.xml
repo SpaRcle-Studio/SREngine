@@ -3,21 +3,21 @@
   <compounddef id="Audio_2inc_2Audio_2macros_8h" kind="file" language="C++">
     <compoundname>macros.h</compoundname>
     <includes refid="Utils_2inc_2Utils_2macros_8h" local="no">Utils/macros.h</includes>
-    <includedby refid="AudioLibrary_8h" local="no">Engine/Core/libs/Audio/inc/Audio/AudioLibrary.h</includedby>
-    <includedby refid="ListenerData_8h" local="no">Engine/Core/libs/Audio/inc/Audio/ListenerData.h</includedby>
-    <includedby refid="PlayParams_8h" local="no">Engine/Core/libs/Audio/inc/Audio/PlayParams.h</includedby>
-    <includedby refid="RawSound_8h" local="no">Engine/Core/libs/Audio/inc/Audio/RawSound.h</includedby>
-    <includedby refid="Sound_8h" local="no">Engine/Core/libs/Audio/inc/Audio/Sound.h</includedby>
-    <includedby refid="SoundContext_8h" local="no">Engine/Core/libs/Audio/inc/Audio/SoundContext.h</includedby>
-    <includedby refid="SoundDevice_8h" local="no">Engine/Core/libs/Audio/inc/Audio/SoundDevice.h</includedby>
-    <includedby refid="SoundFormat_8h" local="no">Engine/Core/libs/Audio/inc/Audio/SoundFormat.h</includedby>
-    <includedby refid="SoundListener_8h" local="no">Engine/Core/libs/Audio/inc/Audio/SoundListener.h</includedby>
-    <includedby refid="SoundManager_8h" local="no">Engine/Core/libs/Audio/inc/Audio/SoundManager.h</includedby>
-    <includedby refid="AudioListener_8h" local="no">Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h</includedby>
-    <includedby refid="AudioSource_8h" local="no">Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h</includedby>
+    <includedby refid="AudioLibrary_8h" local="no">Engine/libs/Audio/inc/Audio/AudioLibrary.h</includedby>
+    <includedby refid="ListenerData_8h" local="no">Engine/libs/Audio/inc/Audio/ListenerData.h</includedby>
+    <includedby refid="PlayParams_8h" local="no">Engine/libs/Audio/inc/Audio/PlayParams.h</includedby>
+    <includedby refid="RawSound_8h" local="no">Engine/libs/Audio/inc/Audio/RawSound.h</includedby>
+    <includedby refid="Sound_8h" local="no">Engine/libs/Audio/inc/Audio/Sound.h</includedby>
+    <includedby refid="SoundContext_8h" local="no">Engine/libs/Audio/inc/Audio/SoundContext.h</includedby>
+    <includedby refid="SoundDevice_8h" local="no">Engine/libs/Audio/inc/Audio/SoundDevice.h</includedby>
+    <includedby refid="SoundFormat_8h" local="no">Engine/libs/Audio/inc/Audio/SoundFormat.h</includedby>
+    <includedby refid="SoundListener_8h" local="no">Engine/libs/Audio/inc/Audio/SoundListener.h</includedby>
+    <includedby refid="SoundManager_8h" local="no">Engine/libs/Audio/inc/Audio/SoundManager.h</includedby>
+    <includedby refid="AudioListener_8h" local="no">Engine/libs/Audio/inc/Audio/Types/AudioListener.h</includedby>
+    <includedby refid="AudioSource_8h" local="no">Engine/libs/Audio/inc/Audio/Types/AudioSource.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Audio/inc/Audio/macros.h</label>
+        <label>Engine/libs/Audio/inc/Audio/macros.h</label>
         <link refid="Audio_2inc_2Audio_2macros_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -40,7 +40,7 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/libs/Audio/inc/Audio/AudioLibrary.h</label>
+        <label>Engine/libs/Audio/inc/Audio/AudioLibrary.h</label>
         <link refid="AudioLibrary_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -48,19 +48,19 @@
         </childnode>
       </node>
       <node id="8">
-        <label>Engine/Core/libs/Audio/inc/Audio/Impl/OpenALDevice.h</label>
+        <label>Engine/libs/Audio/inc/Audio/Impl/OpenALDevice.h</label>
         <link refid="OpenALDevice_8h_source"/>
       </node>
       <node id="15">
-        <label>Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h</label>
+        <label>Engine/libs/Audio/inc/Audio/Impl/OpenALSoundContext.h</label>
         <link refid="OpenALSoundContext_8h_source"/>
       </node>
       <node id="11">
-        <label>Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h</label>
+        <label>Engine/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h</label>
         <link refid="OpenALSoundListener_8h_source"/>
       </node>
       <node id="9">
-        <label>Engine/Core/libs/Audio/inc/Audio/ListenerData.h</label>
+        <label>Engine/libs/Audio/inc/Audio/ListenerData.h</label>
         <link refid="ListenerData_8h_source"/>
         <childnode refid="10" relation="include">
         </childnode>
@@ -70,7 +70,7 @@
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Audio/inc/Audio/PlayParams.h</label>
+        <label>Engine/libs/Audio/inc/Audio/PlayParams.h</label>
         <link refid="PlayParams_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
@@ -80,31 +80,31 @@
         </childnode>
       </node>
       <node id="13">
-        <label>Engine/Core/libs/Audio/inc/Audio/RawSound.h</label>
+        <label>Engine/libs/Audio/inc/Audio/RawSound.h</label>
         <link refid="RawSound_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Audio/inc/Audio/Sound.h</label>
+        <label>Engine/libs/Audio/inc/Audio/Sound.h</label>
         <link refid="Sound_8h_source"/>
       </node>
       <node id="14">
-        <label>Engine/Core/libs/Audio/inc/Audio/SoundContext.h</label>
+        <label>Engine/libs/Audio/inc/Audio/SoundContext.h</label>
         <link refid="SoundContext_8h_source"/>
         <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="17">
-        <label>Engine/Core/libs/Audio/inc/Audio/SoundData.h</label>
+        <label>Engine/libs/Audio/inc/Audio/SoundData.h</label>
         <link refid="SoundData_8h_source"/>
       </node>
       <node id="7">
-        <label>Engine/Core/libs/Audio/inc/Audio/SoundDevice.h</label>
+        <label>Engine/libs/Audio/inc/Audio/SoundDevice.h</label>
         <link refid="SoundDevice_8h_source"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
       <node id="16">
-        <label>Engine/Core/libs/Audio/inc/Audio/SoundFormat.h</label>
+        <label>Engine/libs/Audio/inc/Audio/SoundFormat.h</label>
         <link refid="SoundFormat_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -114,25 +114,25 @@
         </childnode>
       </node>
       <node id="10">
-        <label>Engine/Core/libs/Audio/inc/Audio/SoundListener.h</label>
+        <label>Engine/libs/Audio/inc/Audio/SoundListener.h</label>
         <link refid="SoundListener_8h_source"/>
         <childnode refid="11" relation="include">
         </childnode>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Audio/inc/Audio/SoundManager.h</label>
+        <label>Engine/libs/Audio/inc/Audio/SoundManager.h</label>
         <link refid="SoundManager_8h_source"/>
       </node>
       <node id="12">
-        <label>Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h</label>
+        <label>Engine/libs/Audio/inc/Audio/Types/AudioListener.h</label>
         <link refid="AudioListener_8h_source"/>
       </node>
       <node id="6">
-        <label>Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h</label>
+        <label>Engine/libs/Audio/inc/Audio/Types/AudioSource.h</label>
         <link refid="AudioSource_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Audio/inc/Audio/macros.h</label>
+        <label>Engine/libs/Audio/inc/Audio/macros.h</label>
         <link refid="Audio_2inc_2Audio_2macros_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -170,7 +170,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/macros.h" line="9" column="14" bodyfile="Engine/Core/libs/Audio/inc/Audio/macros.h" bodystart="9" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/macros.h" line="9" column="14" bodyfile="Engine/libs/Audio/inc/Audio/macros.h" bodystart="9" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -191,6 +191,6 @@
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_AUDIO_MACROS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Audio/inc/Audio/macros.h"/>
+    <location file="Engine/libs/Audio/inc/Audio/macros.h"/>
   </compounddef>
 </doxygen>

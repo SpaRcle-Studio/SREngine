@@ -671,5 +671,5 @@ static bool SR_PTYPES_NS::PhysicsMaterial::Save (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h`
+The documentation for this class was generated from the following file `Engine/libs/Physics/inc/Physics/PhysicsMaterial.h`
 

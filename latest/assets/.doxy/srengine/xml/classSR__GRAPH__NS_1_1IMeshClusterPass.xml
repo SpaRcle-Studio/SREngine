@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="16" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="16" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="16" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="26" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="26" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="26" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1IMeshClusterPass_1a74434745e7881638eece076d9ae393d3" prot="public" static="no">
         <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="27" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="27" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1IMeshClusterPass_1a684233bafb23bbe800d34090c9ec5be7" prot="public" static="no">
         <type><ref refid="classSR__GTYPES__NS_1_1Mesh" kindref="compound">SR_GTYPES_NS::Mesh</ref> *</type>
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="28" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="28" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1IMeshClusterPass_1afa26f4e1c7996747e682952a429ede33" prot="public" static="no">
         <type><ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">SR_GTYPES_NS::Framebuffer</ref> *</type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="29" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="29" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="29" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="56" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="56" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="56" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1IMeshClusterPass_1a140d5d68d3d18c30e4b731af12d02352" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -109,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="57" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="57" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="57" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="57" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1IMeshClusterPass_1ae3f93bf88af4e6f4bd49f05e1ed630ab" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -124,7 +124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="58" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="58" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="58" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1IMeshClusterPass_1afc6c953678a97c2a20ebb95300f416bb" prot="protected" static="no" mutable="no">
         <type>Samplers</type>
@@ -138,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="59" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="59" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="59" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1IMeshClusterPass_1a7d51ba6c7a2983aa76679daec6f9e186" prot="protected" static="no" mutable="no">
         <type>MeshClusterType</type>
@@ -153,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="60" column="25" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="60" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="60" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="60" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -176,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="31" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IMeshClusterPass_1a661adeb2704d34a3c017111e41b42917" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -193,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="33" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="33" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IMeshClusterPass_1abefde6903c1310e9469844939695ae29" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -209,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="35" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="35" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IMeshClusterPass_1a58fe72b533c23c8986cb298548a11baf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -227,7 +227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="36" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="36" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IMeshClusterPass_1a0b54458d9dc89d63757ba38e20591da9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -244,7 +244,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="37" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="37" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IMeshClusterPass_1a808a79d7f71dcb4477199fd4555aee3f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -264,7 +264,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="39" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="39" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IMeshClusterPass_1ae1818ca6d02dce41e492539ff8540212" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -279,7 +279,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="40" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="40" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -299,7 +299,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="43" column="46"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="43" column="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IMeshClusterPass_1a3684868d9a3ba99fe4ee0116985d830e" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD ShaderPtr</type>
@@ -318,7 +318,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="44" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="44" bodyend="44"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="44" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="44" bodyend="44"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IMeshClusterPass_1aacc9b50a9de0afb675cd6df2d16b8ad4" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -336,7 +336,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="46" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="46" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IMeshClusterPass_1a6026d0e1f621e32e404127267db784bf" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -360,7 +360,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="47" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="47" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IMeshClusterPass_1a6e0b0be7192ee6c3ad407830f047d192" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -384,7 +384,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="48" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="48" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IMeshClusterPass_1aa612145aa1e1d722faa1ae623ca7c7af" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -402,7 +402,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="49" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="49" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IMeshClusterPass_1a71e3824091a19f27f99e6a07fd277436" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -416,7 +416,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="51" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="51" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IMeshClusterPass_1a795817c2cc41326b2f417c25391f9b43" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -430,7 +430,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="52" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="52" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IMeshClusterPass_1aaad2929fe26586cc7ea119b90bd45281" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -446,7 +446,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="53" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="53" bodyend="53"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="53" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="53" bodyend="53"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -672,7 +672,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="15" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="15" bodyend="62"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" line="15" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h" bodystart="15" bodyend="62"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IMeshClusterPass</scope><name>AddDependency</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IMeshClusterPass</scope><name>AddInputConnection</name></member>

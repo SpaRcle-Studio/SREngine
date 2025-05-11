@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" line="15" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" line="15" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" bodystart="15" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__UTILS__NS_1_1TagManager_1a143203296bfb1d930fcf81bf65718b37" prot="private" static="no">
         <type>uint64_t</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" line="16" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" line="16" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" bodystart="16" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="friend">
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" line="1" column="0" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" line="1" column="0" bodyfile="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" bodystart="14" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-attrib">
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" line="18" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" bodystart="18" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" line="18" column="43" bodyfile="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" bodystart="18" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" line="35" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" bodystart="35" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" line="35" column="18" bodyfile="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1TagManager_1a4c57ce794fad3d9efb9ab0eb7a6d4edb" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &gt;</type>
@@ -96,7 +96,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" line="36" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" line="36" column="21" bodyfile="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" bodystart="36" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -117,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" line="21" column="33"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" line="21" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1TagManager_1a1a1b10f90d1feaba57a2c0aabc18069e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref></type>
@@ -131,7 +131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" line="22" column="33"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" line="22" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1TagManager_1a400b1491d35c50c70773f9e8624a908f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint16_t</type>
@@ -149,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" line="23" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" line="23" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1TagManager_1ad49e5ff1add0968cf6f1e61088160965" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const std::vector&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &gt; &amp;</type>
@@ -163,7 +163,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" line="24" column="40" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" bodystart="24" bodyend="24"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" line="24" column="40" bodyfile="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" bodystart="24" bodyend="24"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -179,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" line="27" column="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" line="27" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1TagManager_1aff97395508cf3a89e198cee8ce83168b" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -193,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" line="29" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" line="29" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1TagManager_1aef4a5aa247f74225aeeee1826fb37424" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -211,7 +211,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" line="30" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" line="30" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1TagManager_1a4dcb2d59f6280af915ee422431f3e436" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -229,7 +229,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" line="32" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" line="32" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -313,7 +313,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" line="12" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h" bodystart="12" bodyend="38"/>
+    <location file="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" line="12" column="5" bodyfile="Engine/libs/Utils/inc/Utils/ECS/TagManager.h" bodystart="12" bodyend="38"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1TagManager_1aff97395508cf3a89e198cee8ce83168b" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::TagManager</scope><name>ClearSettings</name></member>
       <member refid="classSR__UTILS__NS_1_1GlobalSettings_1a7c384beb02cf67610f00e1d2e0da6f15" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::TagManager</scope><name>DestroySettings</name></member>

@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_864715c2a33e3813fa4e93cb9390f3e1" kind="dir">
+    <compoundname>Engine/libs</compoundname>
+    <innerdir refid="dir_af8f778bf511d1bbb5230b0ab41e3424">Engine/libs/Audio</innerdir>
+    <innerdir refid="dir_e4e4141e409277d12c2a4a311178ca74">Engine/libs/Graphics</innerdir>
+    <innerdir refid="dir_b6093f632646a02ac714961018ea77eb">Engine/libs/Physics</innerdir>
+    <innerdir refid="dir_5986759bc4f73c4edd437f1c9a37190d">Engine/libs/Scripting</innerdir>
+    <innerdir refid="dir_3df27e53d7cc6cea988e3644dbf87b98">Engine/libs/Utils</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/"/>
+  </compounddef>
+</doxygen>

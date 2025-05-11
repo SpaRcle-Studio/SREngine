@@ -302,5 +302,5 @@ void SR_SCRIPTING_NS::Behaviour::Save (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h`
+The documentation for this class was generated from the following file `Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h`
 

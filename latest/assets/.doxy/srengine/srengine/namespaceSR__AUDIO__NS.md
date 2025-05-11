@@ -594,5 +594,5 @@ static SR_MAYBE_UNUSED ALfVec6 SR_AUDIO_NS::FV6ToALV6 (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Audio/inc/Audio/AudioLibrary.h`
+The documentation for this class was generated from the following file `Engine/libs/Audio/inc/Audio/AudioLibrary.h`
 

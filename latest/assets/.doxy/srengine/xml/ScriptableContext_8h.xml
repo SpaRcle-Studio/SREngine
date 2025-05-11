@@ -2,10 +2,10 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="ScriptableContext_8h" kind="file" language="C++">
     <compoundname>ScriptableContext.h</compoundname>
-    <includes refid="Engine_8h" local="no">Core/Engine.h</includes>
+    <includes refid="Engine_8h" local="no">Engine/Engine.h</includes>
     <incdepgraph>
       <node id="2">
-        <label>Core/Engine.h</label>
+        <label>Engine/Engine.h</label>
         <link refid="Engine_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -43,13 +43,13 @@
         </childnode>
       </node>
       <node id="3">
-        <label>Core/EngineResources.h</label>
+        <label>Engine/EngineResources.h</label>
         <link refid="EngineResources_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/inc/Core/Scripting/ScriptableContext.h</label>
+        <label>Engine/inc/Engine/Scripting/ScriptableContext.h</label>
         <link refid="ScriptableContext_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1709,7 +1709,7 @@
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SR_ENGINE_CORE_SCRIPTABLE_CONTEXT_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ENGINE_CORE_SCRIPTABLE_CONTEXT_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Core/Engine.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Engine/Engine.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceSR__CORE__NS" kindref="compound">SR_CORE_NS</ref><sp/>{</highlight></codeline>
 <codeline lineno="12" refid="structSR__CORE__NS_1_1ScriptableContext" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__CORE__NS_1_1ScriptableContext" kindref="compound">ScriptableContext</ref><sp/>{</highlight></codeline>
@@ -1722,6 +1722,6 @@
 <codeline lineno="20"><highlight class="normal"></highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_CORE_SCRIPTABLE_CONTEXT_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/Scripting/ScriptableContext.h"/>
+    <location file="Engine/inc/Engine/Scripting/ScriptableContext.h"/>
   </compounddef>
 </doxygen>

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="16" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="16" column="9" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="16" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a32133784a441208cff7b1c6c7d292f4f" prot="private" static="no">
         <type>SR_SCRIPTING_NS::IRawBehaviour</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="17" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="17" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="17" column="9" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="17" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="83" column="27" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="83" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="83" column="27" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="83" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a27f468e365f544361a6efdb26f3a9ff7" prot="private" static="no" mutable="no">
         <type>void *</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="84" column="14" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="84" column="14" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1abe17ad39c264eb69780a26059859de3c" prot="private" static="no" mutable="no">
         <type>EvoScript::Typedefs::AwakeFnPtr</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="86" column="41" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="86" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="86" column="41" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="86" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1ab341ad721314fd55db94cde3f2e75cc3" prot="private" static="no" mutable="no">
         <type>EvoScript::Typedefs::OnEnableFnPtr</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="87" column="44" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="87" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="87" column="44" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="87" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a45b68903518959a2df42472d5a72b825" prot="private" static="no" mutable="no">
         <type>EvoScript::Typedefs::OnDisableFnPtr</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="88" column="45" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="88" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="88" column="45" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="88" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a08d52cb8603b13733f7d410a7e1da753" prot="private" static="no" mutable="no">
         <type>EvoScript::Typedefs::StartFnPtr</type>
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="89" column="41" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="89" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="89" column="41" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="89" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1ae294152332a7365b32b698355c912162" prot="private" static="no" mutable="no">
         <type>EvoScript::Typedefs::UpdateFnPtr</type>
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="90" column="42" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="90" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="90" column="42" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="90" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a629558300d0f795cff68a1477710506f" prot="private" static="no" mutable="no">
         <type>EvoScript::Typedefs::FixedUpdateFnPtr</type>
@@ -151,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="91" column="47" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="91" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="91" column="47" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="91" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a4bcf656718104fa3af8e8f905657160f" prot="private" static="no" mutable="no">
         <type>CollisionFnPtr</type>
@@ -166,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="93" column="24" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="93" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="93" column="24" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="93" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a0e1b218a51fac158445cf708dbdbccab" prot="private" static="no" mutable="no">
         <type>CollisionFnPtr</type>
@@ -181,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="94" column="24" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="94" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="94" column="24" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="94" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1aa391214bb8707c4b6a8592b175d72426" prot="private" static="no" mutable="no">
         <type>CollisionFnPtr</type>
@@ -196,7 +196,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="95" column="24" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="95" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="95" column="24" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="95" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a19e5fc39c79ce000f991f35a714838d1" prot="private" static="no" mutable="no">
         <type>CollisionFnPtr</type>
@@ -211,7 +211,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="96" column="24" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="96" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="96" column="24" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="96" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a3b3892232df7170f1e463ca9543bd326" prot="private" static="no" mutable="no">
         <type>CollisionFnPtr</type>
@@ -226,7 +226,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="97" column="24" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="97" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="97" column="24" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="97" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1ad1df1c06e7db48788cda40a5c4f751fe" prot="private" static="no" mutable="no">
         <type>CollisionFnPtr</type>
@@ -241,7 +241,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="98" column="24" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="98" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="98" column="24" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="98" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1ac2b566245db5adf1b6045825d071caa3" prot="private" static="no" mutable="no">
         <type>EvoScript::Typedefs::InitBehaviourFnPtr</type>
@@ -256,7 +256,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="100" column="49" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="100" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="100" column="49" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="100" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1ab4b69cee20026c9694814b17f68a234f" prot="private" static="no" mutable="no">
         <type>EvoScript::Typedefs::ReleaseBehaviourFnPtr</type>
@@ -271,7 +271,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="101" column="52" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="101" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="101" column="52" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="101" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a390158b6e1841413371e22e5c229a291" prot="private" static="no" mutable="no">
         <type>EvoScript::Typedefs::SwitchContextFnPtr</type>
@@ -286,7 +286,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="102" column="49" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="102" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="102" column="49" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="102" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a84682dc18f97943f90f874622f10abf7" prot="private" static="no" mutable="no">
         <type>EvoScript::Typedefs::GetPropertiesFnPtr</type>
@@ -301,7 +301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="103" column="49" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="103" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="103" column="49" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="103" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a516c088f5eba9ccc03c49d0e68398f48" prot="private" static="no" mutable="no">
         <type>EvoScript::Typedefs::GetPropertyFnPtr</type>
@@ -316,7 +316,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="104" column="47" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="104" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="104" column="47" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="104" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1ae24b44064443fc24cddba727f3089662" prot="private" static="no" mutable="no">
         <type>EvoScript::Typedefs::SetPropertyFnPtr</type>
@@ -331,7 +331,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="105" column="47" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="105" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="105" column="47" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="105" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -347,7 +347,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="19" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="19" bodyend="21"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="19" column="9" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="19" bodyend="21"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a03c88b5c4852cb5ea27c9ba37263653a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>Properties</type>
@@ -361,7 +361,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="24" column="20"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="24" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1ad7764fbe8bf3c73c434bd83aa6e2a9bf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::any</type>
@@ -379,7 +379,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="25" column="18"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="25" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a7225dbc865653bae7245471252018ae5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -401,7 +401,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="26" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="26" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1ac694644f21c766e5eac945008c4042c2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -419,7 +419,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="28" column="14" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="28" bodyend="31"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="28" column="14" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="28" bodyend="31"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -435,7 +435,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="34" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="34" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1ac112e54a30b067b82bb454cddeadb257" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -449,7 +449,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="35" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="35" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1aa56329ca17aec7ff8f9896ebd761779c" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -463,7 +463,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="36" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="36" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1afc44d67c18e8aca09012beef90516d89" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -477,7 +477,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="37" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="37" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a3ba5a3649678459e3fc385ca72738c45" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -491,7 +491,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="38" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="38" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1ab8e8d9e8f6962040c72243a2fe2baa5b" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -505,7 +505,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="39" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="39" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1ac37271fc95e2b68e28925c077c787f54" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -523,7 +523,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="40" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="40" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1aa2a6802e3987c5c1ef53df2663c838b2" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -537,7 +537,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="41" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="41" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a9e173410c8c7e6afc2f9d8f9972bf72e" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -551,7 +551,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="42" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="42" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a48bdbd20832b81f145a11cebf4dc0c6d" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -569,7 +569,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="44" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="44" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a8dfee99cd6503a1e833d1c5d6d7c503f" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -587,7 +587,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="45" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="45" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a39d661a834b180304d695055acb3a04b" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -605,7 +605,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="46" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="46" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a9a831af8dcd88a5295f10197c0e275f5" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -623,7 +623,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="47" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="47" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a00fccb8ccaaf453f2a25a6b0f7d06ece" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -641,7 +641,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="48" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="48" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a8fa55bd416d9112420f56a7dc8fb7468" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -659,7 +659,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="49" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="49" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a6998754c09cbf753a471f8ae8af892c1" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -673,7 +673,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="51" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="51" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a1de8d943155a764da877740f115b20a1" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -687,7 +687,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="53" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="53" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1ab042ddc3d3c08d3c31685e634b96e2fd" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -701,7 +701,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="54" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="54" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1ace544660c68fa3c49073c6c8eba6737e" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -715,7 +715,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="55" column="31"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="55" column="31"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -753,7 +753,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="58" column="27" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="58" bodyend="70"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="58" column="27" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="58" bodyend="70"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a363a1584846c1f86bb64f996ddaaadaf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -767,7 +767,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="72" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="72" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1aac0debf53b2f823ae51a9589004908b6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -781,7 +781,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="73" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="73" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a0ea6670c45188b7a0beb1d4e6ed9941e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -795,7 +795,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="74" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="74" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a71804c4f16dc5800f4e71a875f174838" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -809,7 +809,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="75" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="75" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a6a6ce1e32c10b82bc88eccc742ab5ce7" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -823,7 +823,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="76" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="76" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a489c7aa4837181bddaffe6348d86af0f" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -846,7 +846,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="78" column="22" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="78" bodyend="80"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="78" column="22" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="78" bodyend="80"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -875,7 +875,7 @@
         <label>SR_SCRIPTING_NS::IRawBehaviour</label>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="15" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="15" bodyend="107"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" line="15" column="5" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h" bodystart="15" bodyend="107"/>
     <listofallmembers>
       <member refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1acc0b70f783a805a5b5688b3eb9dd28ff" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::EvoBehaviour</scope><name>Awake</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a4407bc9513496466d5fd48fd18edc1ab" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::EvoBehaviour</scope><name>CallFunction</name></member>

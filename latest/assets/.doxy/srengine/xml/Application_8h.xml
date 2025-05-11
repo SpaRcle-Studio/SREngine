@@ -4,10 +4,10 @@
     <compoundname>Application.h</compoundname>
     <includes refid="SharedPtr_8h" local="no">Utils/Types/SharedPtr.h</includes>
     <includes refid="Path_8h" local="no">Utils/FileSystem/Path.h</includes>
-    <includedby refid="Launcher_8h" local="no">Engine/Core/inc/Core/Launcher.h</includedby>
+    <includedby refid="Launcher_8h" local="no">Engine/inc/Engine/Launcher.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/Application.h</label>
+        <label>Engine/inc/Engine/Application.h</label>
         <link refid="Application_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -790,13 +790,13 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/Application.h</label>
+        <label>Engine/inc/Engine/Application.h</label>
         <link refid="Application_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/inc/Core/Launcher.h</label>
+        <label>Engine/inc/Engine/Launcher.h</label>
         <link refid="Launcher_8h_source"/>
       </node>
     </invincdepgraph>
@@ -861,6 +861,6 @@
 <codeline lineno="55"><highlight class="normal"></highlight></codeline>
 <codeline lineno="56"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_CORE_APPLICATION_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/Application.h"/>
+    <location file="Engine/inc/Engine/Application.h"/>
   </compounddef>
 </doxygen>

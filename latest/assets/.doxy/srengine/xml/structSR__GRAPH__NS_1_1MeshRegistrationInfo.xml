@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="33" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="33" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1MeshRegistrationInfo_1ac27a80c54cd1ca3b9d847dad6620f682" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__GTYPES__NS_1_1Mesh" kindref="compound">SR_GTYPES_NS::Mesh</ref> *</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="34" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" bodystart="34" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="34" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1MeshRegistrationInfo_1a1d9e204a6401af454da763d0758cb545" prot="public" static="no" mutable="no">
         <type>const <ref refid="classSR__GRAPH__NS_1_1BaseMaterial" kindref="compound">BaseMaterial</ref> *</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="35" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" bodystart="35" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="35" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1MeshRegistrationInfo_1ac81735b3f987d4ef68f634b867651443" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="36" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="36" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1MeshRegistrationInfo_1ae590fc347c7d59f7f135c39fdbcd8e26" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="37" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="37" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1MeshRegistrationInfo_1ac5b9e0cef711a4d05057dd2891a5d2b6" prot="public" static="no" mutable="no">
         <type>std::optional&lt; int32_t &gt;</type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="38" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="38" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1MeshRegistrationInfo_1a3ce501dccfaa3350f75eaefd9fcb5bea" prot="public" static="no" mutable="no">
         <type>std::optional&lt; int64_t &gt;</type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="39" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" bodystart="39" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="39" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1MeshRegistrationInfo_1aeb25273813c90d95da5e671ee56abf17" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1RenderScene" kindref="compound">SR_GRAPH_NS::RenderScene</ref> *</type>
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="40" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" bodystart="40" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="40" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" bodystart="40" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -308,7 +308,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="32" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" bodystart="32" bodyend="41"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="32" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" bodystart="32" bodyend="41"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1MeshRegistrationInfo_1ae590fc347c7d59f7f135c39fdbcd8e26" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshRegistrationInfo</scope><name>layer</name></member>
       <member refid="structSR__GRAPH__NS_1_1MeshRegistrationInfo_1a1d9e204a6401af454da763d0758cb545" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshRegistrationInfo</scope><name>pMaterial</name></member>

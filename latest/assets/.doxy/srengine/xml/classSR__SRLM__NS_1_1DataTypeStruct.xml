@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="261" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="261" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="261" column="14" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="261" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SRLM__NS_1_1DataTypeStruct_1a712a5e027b2710b0789ef70df0fd1407" prot="private" static="no" mutable="no">
         <type>std::map&lt; Hash, <ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">DataType</ref> * &gt;</type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="262" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="262" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="262" column="18" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="262" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="239" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="239" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeStruct_1ae8a1a024f07fda00d1c227ba355acd2b" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="241" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="241" bodyend="244"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="241" column="18" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="241" bodyend="244"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeStruct_1a85d51426a652b30c3300c32cd9648461" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -80,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="246" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="246" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeStruct_1a6b1024e351c85ff05ba0cd1ebd4a0718" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -99,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="249" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="249" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeStruct_1a1ee51071e30bad2f41fd8027ef92729c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="250" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="250" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeStruct_1a7074e6106329f28ae93df1545decd09e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="251" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="251" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeStruct_1a5124b16aaa4fe1865b6a3c7eebd8f015" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="252" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="252" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeStruct_1a457e116c54a5ce802e527b8a360b0760" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -176,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="253" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="253" bodyend="253"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="253" column="14" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="253" bodyend="253"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeStruct_1a9cb390b5d83706b0cda1b71f9203141c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">DataType</ref> *</type>
@@ -191,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="255" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="255" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeStruct_1a25b3c7959a5b0e007c521a5cafbfbb21" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD std::vector&lt; <ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">DataType</ref> * &gt;</type>
@@ -206,7 +206,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="256" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="256" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeStruct_1aa7fd7497162ade3c00fdf2a4f84f2176" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const std::map&lt; Hash, <ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">DataType</ref> * &gt; &amp;</type>
@@ -220,7 +220,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="257" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="257" bodyend="257"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="257" column="37" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="257" bodyend="257"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeStruct_1acc8fe64e50447cf92be00ec51f105238" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD Hash</type>
@@ -234,7 +234,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="258" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="258" bodyend="258"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="258" column="27" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="258" bodyend="258"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -279,7 +279,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="236" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="236" bodyend="264"/>
+    <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="236" column="5" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="236" bodyend="264"/>
     <listofallmembers>
       <member refid="classSR__SRLM__NS_1_1DataTypeStruct_1a1ee51071e30bad2f41fd8027ef92729c" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeStruct</scope><name>AddVariable</name></member>
       <member refid="classSR__SRLM__NS_1_1DataTypeStruct_1a7074e6106329f28ae93df1545decd09e" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeStruct</scope><name>AddVariable</name></member>

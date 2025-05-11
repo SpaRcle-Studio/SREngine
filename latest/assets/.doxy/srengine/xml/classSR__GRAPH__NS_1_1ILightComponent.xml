@@ -22,7 +22,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="32" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="32" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1ILightComponent_1a76e298638ed28671b35d707975d9d3f3" prot="protected" static="no" mutable="no">
         <type>float_t</type>
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="33" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="33" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1ILightComponent_1a3412e5696f828c235dde1ff6aad8e4d4" prot="protected" static="no" mutable="no">
         <type>ShadowType</type>
@@ -52,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="34" column="20" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="34" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="34" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="34" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -69,7 +69,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="24" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="24" bodyend="24"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="24" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="24" bodyend="24"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ILightComponent_1a0a33ef54fce35d288b67b81c7c6dfad5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -85,7 +85,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="25" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="25" bodyend="25"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="25" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="25" bodyend="25"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ILightComponent_1a92cd97808ed4fcedd79595fa767ebdbb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD LightType</type>
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="26" column="40"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="26" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ILightComponent_1a6106b0f1d3165399d07fa17f8fc3476a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -116,7 +116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="28" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="28" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ILightComponent_1a10ee3185e641149fe7adc6f38124d1af" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="29" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="29" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -233,7 +233,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="22" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="22" bodyend="36"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="22" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="22" bodyend="36"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>BaseComponent</name></member>

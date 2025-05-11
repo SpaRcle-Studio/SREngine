@@ -5,11 +5,11 @@
     <includes refid="Mathematics_8h" local="no">Utils/Math/Mathematics.h</includes>
     <includes refid="Vector2_8h" local="no">Utils/Math/Vector2.h</includes>
     <includes refid="Vector3_8h" local="no">Utils/Math/Vector3.h</includes>
-    <includedby refid="ImmediateGUI_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/GUI/ImmediateGUI.h</includedby>
-    <includedby refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h</includedby>
-    <includedby refid="Types_2Shader_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h</includedby>
-    <includedby refid="Transform2D_8h" local="no">Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h</includedby>
-    <includedby refid="UIModifier_8h" local="no">Engine/Core/libs/Utils/inc/Utils/UI/UIModifier.h</includedby>
+    <includedby refid="ImmediateGUI_8h" local="no">Engine/libs/Graphics/inc/Graphics/GUI/ImmediateGUI.h</includedby>
+    <includedby refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h" local="no">Engine/libs/Graphics/inc/Graphics/GUI/Utils.h</includedby>
+    <includedby refid="Types_2Shader_8h" local="no">Engine/libs/Graphics/inc/Graphics/Types/Shader.h</includedby>
+    <includedby refid="Transform2D_8h" local="no">Engine/libs/Utils/inc/Utils/ECS/Transform2D.h</includedby>
+    <includedby refid="UIModifier_8h" local="no">Engine/libs/Utils/inc/Utils/UI/UIModifier.h</includedby>
     <incdepgraph>
       <node id="76">
         <label>Utils/Common/Breakpoint.h</label>
@@ -106,7 +106,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/Math/Rect.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Math/Rect.h</label>
         <link refid="Rect_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -513,39 +513,39 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="4">
-        <label>Engine/Core/inc/Core/GUI/About.h</label>
+        <label>Engine/inc/Engine/GUI/About.h</label>
         <link refid="About_8h_source"/>
       </node>
       <node id="16">
-        <label>Engine/Core/inc/Core/GUI/AnimatorEditor.h</label>
+        <label>Engine/inc/Engine/GUI/AnimatorEditor.h</label>
         <link refid="AnimatorEditor_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/inc/Core/GUI/EngineStatistics.h</label>
+        <label>Engine/inc/Engine/GUI/EngineStatistics.h</label>
         <link refid="EngineStatistics_8h_source"/>
       </node>
       <node id="6">
-        <label>Engine/Core/inc/Core/GUI/FileBrowser.h</label>
+        <label>Engine/inc/Engine/GUI/FileBrowser.h</label>
         <link refid="FileBrowser_8h_source"/>
       </node>
       <node id="44">
-        <label>Engine/Core/inc/Core/GUI/Guizmo.h</label>
+        <label>Engine/inc/Engine/GUI/Guizmo.h</label>
         <link refid="Guizmo_8h_source"/>
       </node>
       <node id="7">
-        <label>Engine/Core/inc/Core/GUI/Hierarchy.h</label>
+        <label>Engine/inc/Engine/GUI/Hierarchy.h</label>
         <link refid="Hierarchy_8h_source"/>
       </node>
       <node id="8">
-        <label>Engine/Core/inc/Core/GUI/Inspector.h</label>
+        <label>Engine/inc/Engine/GUI/Inspector.h</label>
         <link refid="Inspector_8h_source"/>
       </node>
       <node id="9">
-        <label>Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h</label>
+        <label>Engine/inc/Engine/GUI/PhysicsMaterialEditor.h</label>
         <link refid="PhysicsMaterialEditor_8h_source"/>
       </node>
       <node id="24">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawer.h</label>
         <link refid="PropertyDrawer_8h_source"/>
         <childnode refid="8" relation="include">
         </childnode>
@@ -567,31 +567,31 @@
         </childnode>
       </node>
       <node id="25">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/BehaviourNamePropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/BehaviourNamePropertyDrawer.h</label>
         <link refid="BehaviourNamePropertyDrawer_8h_source"/>
       </node>
       <node id="29">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/BehaviourPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.h</label>
         <link refid="BehaviourPropertyDrawer_8h_source"/>
       </node>
       <node id="26">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/BitMapPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/BitMapPropertyDrawer.h</label>
         <link refid="BitMapPropertyDrawer_8h_source"/>
       </node>
       <node id="27">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/EnumPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/EnumPropertyDrawer.h</label>
         <link refid="EnumPropertyDrawer_8h_source"/>
       </node>
       <node id="30">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h</label>
         <link refid="MaterialDataPropertyDrawer_8h_source"/>
       </node>
       <node id="33">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/MaterialPropertyDrawer.h</label>
         <link refid="MaterialPropertyDrawer_8h_source"/>
       </node>
       <node id="28">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/ObjectPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h</label>
         <link refid="ObjectPropertyDrawer_8h_source"/>
         <childnode refid="8" relation="include">
         </childnode>
@@ -601,11 +601,11 @@
         </childnode>
       </node>
       <node id="31">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/PathPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/PathPropertyDrawer.h</label>
         <link refid="PathPropertyDrawer_8h_source"/>
       </node>
       <node id="32">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h</label>
         <link refid="PointerPropertyDrawer_8h_source"/>
         <childnode refid="8" relation="include">
         </childnode>
@@ -613,49 +613,49 @@
         </childnode>
       </node>
       <node id="34">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/StringPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/StringPropertyDrawer.h</label>
         <link refid="StringPropertyDrawer_8h_source"/>
       </node>
       <node id="35">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/VectorPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/VectorPropertyDrawer.h</label>
         <link refid="VectorPropertyDrawer_8h_source"/>
       </node>
       <node id="17">
-        <label>Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h</label>
+        <label>Engine/inc/Engine/GUI/RenderTechniqueEditor.h</label>
         <link refid="RenderTechniqueEditor_8h_source"/>
       </node>
       <node id="10">
-        <label>Engine/Core/inc/Core/GUI/SceneRunner.h</label>
+        <label>Engine/inc/Engine/GUI/SceneRunner.h</label>
         <link refid="SceneRunner_8h_source"/>
       </node>
       <node id="19">
-        <label>Engine/Core/inc/Core/GUI/SceneTools.h</label>
+        <label>Engine/inc/Engine/GUI/SceneTools.h</label>
         <link refid="SceneTools_8h_source"/>
       </node>
       <node id="11">
-        <label>Engine/Core/inc/Core/GUI/SoundDebug.h</label>
+        <label>Engine/inc/Engine/GUI/SoundDebug.h</label>
         <link refid="SoundDebug_8h_source"/>
       </node>
       <node id="12">
-        <label>Engine/Core/inc/Core/GUI/VisualScriptEditor.h</label>
+        <label>Engine/inc/Engine/GUI/VisualScriptEditor.h</label>
         <link refid="VisualScriptEditor_8h_source"/>
       </node>
       <node id="13">
-        <label>Engine/Core/inc/Core/GUI/WorldEdit.h</label>
+        <label>Engine/inc/Engine/GUI/WorldEdit.h</label>
         <link refid="WorldEdit_8h_source"/>
       </node>
       <node id="14">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h</label>
         <link refid="Graphics_2inc_2Graphics_2GUI_2Editor_2MessageBox_8h_source"/>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/ImmediateGUI.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/ImmediateGUI.h</label>
         <link refid="ImmediateGUI_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="15">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h</label>
         <link refid="NodeWidget_8h_source"/>
         <childnode refid="16" relation="include">
         </childnode>
@@ -663,11 +663,11 @@
         </childnode>
       </node>
       <node id="20">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/Utils.h</label>
         <link refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_source"/>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/Widget.h</label>
         <link refid="Widget_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
@@ -697,13 +697,13 @@
         </childnode>
       </node>
       <node id="18">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h</label>
         <link refid="WidgetContainer_8h_source"/>
         <childnode refid="19" relation="include">
         </childnode>
       </node>
       <node id="23">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h</label>
         <link refid="BaseMaterial_8h_source"/>
         <childnode refid="24" relation="include">
         </childnode>
@@ -713,47 +713,47 @@
         </childnode>
       </node>
       <node id="36">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Material/FileMaterial.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h</label>
         <link refid="FileMaterial_8h_source"/>
       </node>
       <node id="22">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h</label>
         <link refid="MaterialData_8h_source"/>
         <childnode refid="23" relation="include">
         </childnode>
       </node>
       <node id="37">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Material/UniqueMaterial.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Material/UniqueMaterial.h</label>
         <link refid="UniqueMaterial_8h_source"/>
       </node>
       <node id="39">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
         <link refid="DebugPass_8h_source"/>
       </node>
       <node id="42">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
         <link refid="HTMLDrawerPass_8h_source"/>
       </node>
       <node id="38">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</label>
         <link refid="DebugRenderer_8h_source"/>
         <childnode refid="39" relation="include">
         </childnode>
       </node>
       <node id="40">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
         <link refid="HTMLDrawableElement_8h_source"/>
         <childnode refid="41" relation="include">
         </childnode>
       </node>
       <node id="41">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
         <link refid="HTMLRenderer_8h_source"/>
         <childnode refid="42" relation="include">
         </childnode>
       </node>
       <node id="21">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Shader.h</label>
         <link refid="Types_2Shader_8h_source"/>
         <childnode refid="22" relation="include">
         </childnode>
@@ -763,21 +763,21 @@
         </childnode>
       </node>
       <node id="46">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/UICanvasComponent.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UICanvasComponent.h</label>
         <link refid="UICanvasComponent_8h_source"/>
       </node>
       <node id="47">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/UISizeComponent.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UISizeComponent.h</label>
         <link refid="UISizeComponent_8h_source"/>
       </node>
       <node id="43">
-        <label>Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h</label>
+        <label>Engine/libs/Utils/inc/Utils/ECS/Transform2D.h</label>
         <link refid="Transform2D_8h_source"/>
         <childnode refid="44" relation="include">
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/Math/Rect.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Math/Rect.h</label>
         <link refid="Rect_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -791,7 +791,7 @@
         </childnode>
       </node>
       <node id="45">
-        <label>Engine/Core/libs/Utils/inc/Utils/UI/UIModifier.h</label>
+        <label>Engine/libs/Utils/inc/Utils/UI/UIModifier.h</label>
         <link refid="UIModifier_8h_source"/>
         <childnode refid="46" relation="include">
         </childnode>
@@ -1029,6 +1029,6 @@
 <codeline lineno="220"><highlight class="normal"></highlight></codeline>
 <codeline lineno="221"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_RECT_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h"/>
+    <location file="Engine/libs/Utils/inc/Utils/Math/Rect.h"/>
   </compounddef>
 </doxygen>

@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="29" column="25" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="29" column="25" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1MP3DataProvider_1adc8a53c723c6f2f6891c074f1b9aeee0" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__AUDIO__NS_1_1WaveDataFormat" kindref="compound">WaveDataFormat</ref></type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="30" column="24" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="30" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="30" column="24" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1MP3DataProvider_1a3df37b0ec3febaac364af4e40dbd520f" prot="private" static="no" mutable="no">
         <type>std::vector&lt; uint8_t &gt;</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="32" column="21" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="32" column="21" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1MP3DataProvider_1adff8f9c2791aa6ce9a449b408854cc64" prot="private" static="no" mutable="no">
         <type>size_t</type>
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="33" column="16" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="33" column="16" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1MP3DataProvider_1a5b12f7a7812cef692c7105284323608b" prot="private" static="no" mutable="no">
         <type>size_t</type>
@@ -73,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="35" column="16" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="35" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="35" column="16" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1MP3DataProvider_1acb63f6371e981344d8f6d2316dcd319d" prot="private" static="no" mutable="no">
         <type>size_t</type>
@@ -87,7 +87,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="36" column="16" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="36" column="16" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1MP3DataProvider_1af50c64aa2f7f2d109c03273486748112" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="37" column="14" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="37" column="14" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1MP3DataProvider_1a274790c5d7a738bda421fe58006b3edf" prot="private" static="no" mutable="no">
         <type>struct DecoderData *</type>
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="40" column="27" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="40" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="40" column="27" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="40" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -135,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="15" column="18"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="15" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1MP3DataProvider_1aacaa47438df6024b2840cb8d6c4ef9f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -149,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="16" column="9"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="16" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1MP3DataProvider_1a0b3f539e8b73f37bcc725040202142cb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD const <ref refid="classSR__AUDIO__NS_1_1WaveDataFormat" kindref="compound">WaveDataFormat</ref> &amp;</type>
@@ -164,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="18" column="43" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="18" bodyend="18"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="18" column="43" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="18" bodyend="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1MP3DataProvider_1ab83d9cd1a7d910abf18513bca3ce6a26" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>const uint8_t *</type>
@@ -179,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="20" column="23"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="20" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1MP3DataProvider_1aff400c1c4c096a3a93636791aee6f2dc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>size_t</type>
@@ -194,7 +194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="21" column="16"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="21" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1MP3DataProvider_1a69cf12659055fa7a18d217c8ae187ff7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>size_t</type>
@@ -213,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="23" column="16"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="23" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1MP3DataProvider_1a3e8de87febca6173c2bbe2d6075ce88f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -228,7 +228,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="24" column="14" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="24" bodyend="24"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="24" column="14" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="24" bodyend="24"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1MP3DataProvider_1ac99a82966ebbe8217303757227a33ecc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -243,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="25" column="14" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="25" bodyend="25"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="25" column="14" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="25" bodyend="25"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1MP3DataProvider_1a10b14fe33c53df3fe72f6b84a30fef8f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -262,7 +262,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="26" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="26" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -306,7 +306,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="12" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="13" bodyend="42"/>
+    <location file="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" line="12" column="5" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h" bodystart="13" bodyend="42"/>
     <listofallmembers>
       <member refid="classSR__AUDIO__NS_1_1MP3DataProvider_1ab83d9cd1a7d910abf18513bca3ce6a26" prot="public" virt="virtual"><scope>SR_AUDIO_NS::MP3DataProvider</scope><name>GetWaveData</name></member>
       <member refid="classSR__AUDIO__NS_1_1MP3DataProvider_1a0b3f539e8b73f37bcc725040202142cb" prot="public" virt="virtual"><scope>SR_AUDIO_NS::MP3DataProvider</scope><name>GetWaveDataFormat</name></member>

@@ -4,7 +4,7 @@
 
 
 
-[**FileList**](files.md) **>** [**Core**](dir_0e25eeab45a2a860e54b41439eaf8784.md) **>** [**inc**](dir_9bceefd1de4616d8c4c29c5c810ccf2f.md) **>** [**Core**](dir_69060d94e27077a49c91b4da0482ce5e.md) **>** [**World**](dir_61ddcda44ab5988dd2bd052e2f237885.md) **>** [**VisualRegion.h**](VisualRegion_8h.md)
+[**FileList**](files.md) **>** [**Engine**](dir_0b6ee6e7e9547e675db4add2e5de97da.md) **>** [**inc**](dir_384e30eefdcc60ad4aa259e47cd19ad6.md) **>** [**Engine**](dir_92c4f4d9e201e1e90834671676ddd6c7.md) **>** [**World**](dir_748c98af40e9646c77253b96f05954cd.md) **>** [**VisualRegion.h**](VisualRegion_8h.md)
 
 [Go to the source code of this file](VisualRegion_8h_source.md)
 
@@ -93,5 +93,5 @@
 
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/World/VisualRegion.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/World/VisualRegion.h`
 

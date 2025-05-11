@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="18" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" bodystart="18" bodyend="20"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="18" column="9" bodyfile="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" bodystart="18" bodyend="20"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="55" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" bodystart="55" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="55" column="20" bodyfile="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" bodystart="55" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1CmdManager_1a01f4e38365858ab96aba7bc7875c817e" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classSR__UTILS__NS_1_1ReversibleCommand" kindref="compound">ReversibleCommand</ref> * &gt;</type>
@@ -73,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="56" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" bodystart="56" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="56" column="21" bodyfile="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1CmdManager_1a58c52f8c9989988bd9205153af3e8b7b" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="57" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" bodystart="57" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="57" column="18" bodyfile="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" bodystart="57" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1CmdManager_1a61d0e95795d9432cb41a55d7fb895c5e" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="58" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" bodystart="58" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="58" column="18" bodyfile="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1CmdManager_1a1e9061880ef9e8fb6c8543d3c46575d7" prot="private" static="no" mutable="yes">
         <type>std::recursive_mutex</type>
@@ -117,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="60" column="38" bodyfile="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" bodystart="60" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="60" column="38" bodyfile="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1CmdManager_1adbda242b9ec14876d788b9d1f34f5ba0" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -131,7 +131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="61" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" bodystart="61" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="61" column="21" bodyfile="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" bodystart="61" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="28" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="28" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1CmdManager_1a8398e6229e5cac106012b560eb669631" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -161,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="29" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="29" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1CmdManager_1a99ad406b6e6aa72091488cdf220f5675" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -175,7 +175,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="32" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="32" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1CmdManager_1a01059c8c960224346e178f8b02651a17" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -197,7 +197,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="34" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="34" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1CmdManager_1a693d6be44acb96b2eddbd934349dc22f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="35" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="35" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1CmdManager_1a0497a422ac4d10a3f2ffe6df960bd952" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -229,7 +229,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="36" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="36" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1CmdManager_1aa9c4dc1ab3d731a69859b793bc38ddf3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -243,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="37" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="37" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1CmdManager_1a47a5dd7a4ce54b475636b1ae95ce207a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -257,7 +257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="39" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="39" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1CmdManager_1ad33c4d29076bb2d9136873bb92302237" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -271,7 +271,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="41" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="41" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1CmdManager_1a1aef9fdaa5a24da3a2c847a65a5288a7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -303,7 +303,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="43" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" bodystart="43" bodyend="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="43" column="27" bodyfile="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" bodystart="43" bodyend="46"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -327,7 +327,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="49" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="49" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1CmdManager_1a1733f2bf36d1b953308928a057d71c63" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -349,7 +349,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="50" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="50" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1CmdManager_1a4544177653eb0e5d51e937badf0fb781" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -367,7 +367,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="51" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="51" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1CmdManager_1afce62c75e411c3f73ef165c75243770e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -381,7 +381,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="52" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="52" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -412,7 +412,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="16" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/CommandManager/CmdManager.h" bodystart="16" bodyend="63"/>
+    <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="16" column="5" bodyfile="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" bodystart="16" bodyend="63"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1CmdManager_1aa9c4dc1ab3d731a69859b793bc38ddf3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::CmdManager</scope><name>Cancel</name></member>
       <member refid="classSR__UTILS__NS_1_1CmdManager_1ad33c4d29076bb2d9136873bb92302237" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::CmdManager</scope><name>Clear</name></member>

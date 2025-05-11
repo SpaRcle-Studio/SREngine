@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="40" column="16" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="40" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="40" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="40" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -38,7 +38,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="42" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="42" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1SRADeserializer_1a32090fcffef7d279921a145599e56362" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="43" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="43" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1SRADeserializer_1a7f4250d699fe7f88140c2358c58f2729" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="44" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="44" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1SRADeserializer_1a257c7731126b9614f4510f37bf6748d1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="46" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="46" bodyend="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="46" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="46" bodyend="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1SRADeserializer_1ab73b63cd98a4bfa60783be61ea424027" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -109,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="47" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="47" bodyend="47"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="47" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="47" bodyend="47"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1SRADeserializer_1a67181fd654516e454c45e063e5f4bbd9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -124,7 +124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="48" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="48" bodyend="48"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="48" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="48" bodyend="48"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1SRADeserializer_1ae7e250e8ea6d1f90ad1b1b58e2a16207" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -139,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="49" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="49" bodyend="49"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="49" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="49" bodyend="49"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1SRADeserializer_1a738a00dcd6015aaa7f11d45f8c06f4f6" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="50" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="50" bodyend="50"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="50" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="50" bodyend="50"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1SRADeserializer_1a26a8b21e1852d7428a65d70b99a0c03e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -177,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="52" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="52" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -265,7 +265,7 @@
         <link refid="unionSR__UTILS__NS_1_1SerializationTrivialDataType"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="39" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="39" bodyend="54"/>
+    <location file="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="39" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="39" bodyend="54"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1SRADeserializer_1a67181fd654516e454c45e063e5f4bbd9" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>AllowNewMapKeys</name></member>
       <member refid="classSR__UTILS__NS_1_1SRADeserializer_1a738a00dcd6015aaa7f11d45f8c06f4f6" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>AllowReAllocPointer</name></member>

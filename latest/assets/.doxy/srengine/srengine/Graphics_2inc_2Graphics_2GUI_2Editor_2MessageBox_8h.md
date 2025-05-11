@@ -4,7 +4,7 @@
 
 
 
-[**FileList**](files.md) **>** [**Core**](dir_0e25eeab45a2a860e54b41439eaf8784.md) **>** [**libs**](dir_ec277bd8bac57730a602f096f68de393.md) **>** [**Graphics**](dir_3963f30637b7260601ed2fee5486623e.md) **>** [**inc**](dir_cf695446dee09d9ecb81ac3a708470c3.md) **>** [**Graphics**](dir_7d904954ae4eb5028070508fad42280f.md) **>** [**GUI**](dir_a12e42d7d4180b47da59cbd43b47a80e.md) **>** [**Editor**](dir_ee39d7974ea8a860c3bbba1b251e09d1.md) **>** [**MessageBox.h**](Graphics_2inc_2Graphics_2GUI_2Editor_2MessageBox_8h.md)
+[**FileList**](files.md) **>** [**Editor**](dir_cef4e51036814995af3e2bf6cd9d4d03.md) **>** [**MessageBox.h**](Graphics_2inc_2Graphics_2GUI_2Editor_2MessageBox_8h.md)
 
 [Go to the source code of this file](Graphics_2inc_2Graphics_2GUI_2Editor_2MessageBox_8h_source.md)
 
@@ -90,5 +90,5 @@
 
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/GUI/Editor/MessageBox.h`
 

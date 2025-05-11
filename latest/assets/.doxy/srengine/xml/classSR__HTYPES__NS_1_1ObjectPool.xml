@@ -25,7 +25,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="223" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="223" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="223" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="223" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1ObjectPool_1a1a39c0909f8ac87cac6eb65facedc4bf" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Stack" kindref="compound">Stack</ref>&lt; Index &gt;</type>
@@ -39,7 +39,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="224" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="224" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="224" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="224" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="15" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="15" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1ObjectPool_1a949d73ba91d1080da12fd925f4d6811d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -73,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="17" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="17" bodyend="20"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="17" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="17" bodyend="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1ObjectPool_1ad6569f7e8653fdf578fe8fc4cc890bbc" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classSR__HTYPES__NS_1_1ObjectPool" kindref="compound">ObjectPool</ref> &amp;</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="22" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="22" bodyend="26"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="22" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="22" bodyend="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1ObjectPool_1a94cc8c0ecc72e2083e7af72d4401eebc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="28" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="28" bodyend="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="28" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="28" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1ObjectPool_1a9ca67d506f6e1c1237f772e571e00244" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="32" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="32" bodyend="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="32" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="32" bodyend="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1ObjectPool_1afa029d951bb46f4a0abd643a37d11907" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="36" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="36" bodyend="38"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="36" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="36" bodyend="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1ObjectPool_1a121a03920d1d53d2be47483044565195" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const std::vector&lt; std::pair&lt; bool, T &gt; &gt; &amp;</type>
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="40" column="40" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="40" bodyend="42"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="40" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="40" bodyend="42"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1ObjectPool_1ad561a9e491020f3bc8da5d319a4d5efd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Index</type>
@@ -165,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="44" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="44" bodyend="55"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="44" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="44" bodyend="55"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1ObjectPool_1a543d663da2bdb3e551ab8c9cf4b4ff29" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Index</type>
@@ -183,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="57" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="57" bodyend="68"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="57" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="57" bodyend="68"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1ObjectPool_1aae333deccc6a08dcee8a95a6f4d75029" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>T &amp;</type>
@@ -201,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="70" column="11" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="70" bodyend="78"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="70" column="11" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="70" bodyend="78"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1ObjectPool_1a6d9a6bbcf8f993f28ed8d10bc1be299f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>const T &amp;</type>
@@ -219,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="80" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="80" bodyend="88"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="80" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="80" bodyend="88"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1ObjectPool_1a744713e31200ebd36d619f0d9c1dc6a1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>T &amp;SR_FASTCALL</type>
@@ -237,7 +237,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="90" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="90" bodyend="92"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="90" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="90" bodyend="92"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1ObjectPool_1a0d4fe11b19040355487b798a5618ad88" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>const T &amp;SR_FASTCALL</type>
@@ -255,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="94" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="94" bodyend="96"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="94" column="29" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="94" bodyend="96"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1ObjectPool_1ae5323b676f94ccc7f31e8bb6fe790197" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -269,7 +269,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="98" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="98" bodyend="101"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="98" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="98" bodyend="101"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1ObjectPool_1af85974b371f799c8659c4dd4e72bc40e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -287,7 +287,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="103" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="103" bodyend="105"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="103" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="103" bodyend="105"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1ObjectPool_1a3ec89237b0f97476a80422e4ab38a35b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -301,7 +301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="107" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="107" bodyend="132"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="107" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="107" bodyend="132"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1ObjectPool_1a5f2fdbc49bd50be0e4adbd428d97dc6f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -315,7 +315,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="134" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="134" bodyend="136"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="134" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="134" bodyend="136"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1ObjectPool_1af15b668afd0de3ec153894c9c56bd9d9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool SR_FASTCALL</type>
@@ -333,7 +333,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="138" column="39" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="138" bodyend="144"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="138" column="39" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="138" bodyend="144"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1ObjectPool_1a87a363c65e30afe2681df4ce1e804b22" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>T</type>
@@ -351,7 +351,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="146" column="11" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="146" bodyend="161"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="146" column="11" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="146" bodyend="161"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1ObjectPool_1aac28114c0c77b8079901ab1152b42791" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -369,7 +369,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="163" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="163" bodyend="178"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="163" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="163" bodyend="178"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1ObjectPool_1a51d1bc55a92804df0f7703cc94e00584" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -391,7 +391,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="180" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="180" bodyend="192"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="180" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="180" bodyend="192"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1ObjectPool_1ae3b97c9a9234e24250a6d872965ca948" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -409,7 +409,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="194" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="194" bodyend="206"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="194" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="194" bodyend="206"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1ObjectPool_1a3d848d64e642f5abdfb6683468a2c6b6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -427,7 +427,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="208" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="208" bodyend="220"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="208" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="208" bodyend="220"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -458,7 +458,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" line="13" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="13" bodyend="226"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" line="13" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Types/ObjectPool.h" bodystart="13" bodyend="226"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1ObjectPool_1ad561a9e491020f3bc8da5d319a4d5efd" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::ObjectPool</scope><name>Add</name></member>
       <member refid="classSR__HTYPES__NS_1_1ObjectPool_1a543d663da2bdb3e551ab8c9cf4b4ff29" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::ObjectPool</scope><name>Add</name></member>

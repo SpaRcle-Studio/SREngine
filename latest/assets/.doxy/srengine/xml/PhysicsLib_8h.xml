@@ -7,14 +7,14 @@
     <includes refid="Singleton_8h" local="no">Utils/Common/Singleton.h</includes>
     <includes refid="Vector3_8h" local="no">Utils/Math/Vector3.h</includes>
     <includes refid="Physics_2inc_2Physics_2Utils_2Utils_8h" local="no">Physics/Utils/Utils.h</includes>
-    <includedby refid="Bullet3PhysicsLib_8h" local="no">Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h</includedby>
-    <includedby refid="CollisionShape_8h" local="no">Engine/Core/libs/Physics/inc/Physics/CollisionShape.h</includedby>
-    <includedby refid="PhysicsScene_8h" local="no">Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h</includedby>
-    <includedby refid="Rigidbody_8h" local="no">Engine/Core/libs/Physics/inc/Physics/Rigidbody.h</includedby>
-    <includedby refid="Vehicle_8h" local="no">Engine/Core/libs/Physics/inc/Physics/Vehicle.h</includedby>
+    <includedby refid="Bullet3PhysicsLib_8h" local="no">Engine/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h</includedby>
+    <includedby refid="CollisionShape_8h" local="no">Engine/libs/Physics/inc/Physics/CollisionShape.h</includedby>
+    <includedby refid="PhysicsScene_8h" local="no">Engine/libs/Physics/inc/Physics/PhysicsScene.h</includedby>
+    <includedby refid="Rigidbody_8h" local="no">Engine/libs/Physics/inc/Physics/Rigidbody.h</includedby>
+    <includedby refid="Vehicle_8h" local="no">Engine/libs/Physics/inc/Physics/Vehicle.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysicsLib.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysicsLib.h</label>
         <link refid="PhysicsLib_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -539,15 +539,15 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="13">
-        <label>Engine/Core/inc/Core/World/EngineScene.h</label>
+        <label>Engine/inc/Engine/World/EngineScene.h</label>
         <link refid="EngineScene_8h_source"/>
       </node>
       <node id="8">
-        <label>Engine/Core/libs/Physics/inc/Physics/2D/Rigidbody2D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/2D/Rigidbody2D.h</label>
         <link refid="Rigidbody2D_8h_source"/>
       </node>
       <node id="9">
-        <label>Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h</label>
         <link refid="Rigidbody3D_8h_source"/>
         <childnode refid="10" relation="include">
         </childnode>
@@ -555,17 +555,17 @@
         </childnode>
       </node>
       <node id="15">
-        <label>Engine/Core/libs/Physics/inc/Physics/3D/Vehicle4W3D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/3D/Vehicle4W3D.h</label>
         <link refid="Vehicle4W3D_8h_source"/>
         <childnode refid="16" relation="include">
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h</label>
         <link refid="Bullet3CollisionShape_8h_source"/>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h</label>
         <link refid="Bullet3PhysicsLib_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -573,15 +573,15 @@
         </childnode>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsWorld.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsWorld.h</label>
         <link refid="Bullet3PhysicsWorld_8h_source"/>
       </node>
       <node id="10">
-        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h</label>
         <link refid="Bullet3Rigidbody3D_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Physics/inc/Physics/CollisionShape.h</label>
+        <label>Engine/libs/Physics/inc/Physics/CollisionShape.h</label>
         <link refid="CollisionShape_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -591,19 +591,19 @@
         </childnode>
       </node>
       <node id="6">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h</label>
         <link refid="PhysXCollisionShape_8h_source"/>
       </node>
       <node id="11">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h</label>
         <link refid="PhysXRigidbody3D_8h_source"/>
       </node>
       <node id="16">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXVehicle4W3D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXVehicle4W3D.h</label>
         <link refid="PhysXVehicle4W3D_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysicsLib.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysicsLib.h</label>
         <link refid="PhysicsLib_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -617,13 +617,13 @@
         </childnode>
       </node>
       <node id="12">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysicsScene.h</label>
         <link refid="PhysicsScene_8h_source"/>
         <childnode refid="13" relation="include">
         </childnode>
       </node>
       <node id="7">
-        <label>Engine/Core/libs/Physics/inc/Physics/Rigidbody.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Rigidbody.h</label>
         <link refid="Rigidbody_8h_source"/>
         <childnode refid="8" relation="include">
         </childnode>
@@ -631,7 +631,7 @@
         </childnode>
       </node>
       <node id="14">
-        <label>Engine/Core/libs/Physics/inc/Physics/Vehicle.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Vehicle.h</label>
         <link refid="Vehicle_8h_source"/>
         <childnode refid="15" relation="include">
         </childnode>
@@ -698,6 +698,6 @@
 <codeline lineno="51"><highlight class="normal"></highlight></codeline>
 <codeline lineno="52"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_PHYSICSLIB_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsLib.h"/>
+    <location file="Engine/libs/Physics/inc/Physics/PhysicsLib.h"/>
   </compounddef>
 </doxygen>

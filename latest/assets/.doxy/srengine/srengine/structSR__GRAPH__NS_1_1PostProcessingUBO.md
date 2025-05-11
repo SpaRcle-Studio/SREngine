@@ -111,5 +111,5 @@ float SR_GRAPH_NS::PostProcessingUBO::saturation;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Types/Uniforms.h`
 

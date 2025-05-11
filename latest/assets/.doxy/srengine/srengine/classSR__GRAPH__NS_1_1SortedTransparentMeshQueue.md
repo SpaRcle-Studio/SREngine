@@ -258,5 +258,5 @@ SR_GRAPH_NS::SortedTransparentMeshQueue::~SortedTransparentMeshQueue () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h`
 

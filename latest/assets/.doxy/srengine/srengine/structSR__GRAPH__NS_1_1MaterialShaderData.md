@@ -364,5 +364,5 @@ void SR_GRAPH_NS::MaterialShaderData::UpdateProperties ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h`
 

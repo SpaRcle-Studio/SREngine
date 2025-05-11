@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="35" column="14" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="35" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="35" column="14" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SCRIPTING__NS_1_1CppCodegenModule_1ac6abe462c0890786770d45d728d999e9" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="36" column="14" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="36" column="14" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SCRIPTING__NS_1_1CppCodegenModule_1a18a10845f9837669672bd28e6c5c2062" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="37" column="27" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="37" column="27" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SCRIPTING__NS_1_1CppCodegenModule_1ab2d7c901c88094534fa2ef13728729d5" prot="public" static="no" mutable="no">
         <type><ref refid="structSR__SCRIPTING__NS_1_1CppScriptModuleInfo" kindref="compound">CppScriptModuleInfo</ref></type>
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="38" column="29" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="38" column="29" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SCRIPTING__NS_1_1CppCodegenModule_1a352ec73eb73fa64387e43d7338d91c0d" prot="public" static="no" mutable="no">
         <type>std::set&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &gt;</type>
@@ -73,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="39" column="18" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="39" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="39" column="18" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="39" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -119,7 +119,7 @@
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="34" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="34" bodyend="40"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="34" column="5" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="34" bodyend="40"/>
     <listofallmembers>
       <member refid="structSR__SCRIPTING__NS_1_1CppCodegenModule_1a352ec73eb73fa64387e43d7338d91c0d" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodegenModule</scope><name>codeFiles</name></member>
       <member refid="structSR__SCRIPTING__NS_1_1CppCodegenModule_1aff0fa1cf3136719370234568e4da9c83" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodegenModule</scope><name>isCompiled</name></member>

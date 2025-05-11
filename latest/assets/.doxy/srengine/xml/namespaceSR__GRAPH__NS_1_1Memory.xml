@@ -46,13 +46,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="22" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="22" bodyend="24"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="22" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="22" bodyend="24"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="23" column="1"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="23" column="1"/>
   </compounddef>
 </doxygen>

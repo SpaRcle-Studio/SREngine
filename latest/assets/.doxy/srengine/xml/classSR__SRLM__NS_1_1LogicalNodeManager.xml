@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="19" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" bodystart="19" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="19" column="9" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" bodystart="19" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__SRLM__NS_1_1LogicalNodeManager_1aa26a224fb24800e041758a9bb341a425" prot="private" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; <ref refid="classSR__SRLM__NS_1_1LogicalNode" kindref="compound">LogicalNode</ref> *()&gt;</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="20" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" bodystart="20" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="20" column="9" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" bodystart="20" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__SRLM__NS_1_1LogicalNodeManager_1a56cd7f82f7d0e473ae0679b2c3d84bfd" prot="private" static="no">
         <type>std::vector&lt; std::string &gt;</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="21" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" bodystart="21" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="21" column="9" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" bodystart="21" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__SRLM__NS_1_1LogicalNodeManager_1ac179b113514dc110710b7becc62f33b7" prot="private" static="no">
         <type>std::unordered_map&lt; Hash, NodeInfo &gt;</type>
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="26" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="26" column="9" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" bodystart="26" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="41" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" bodystart="41" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="41" column="26" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" bodystart="41" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -92,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="28" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" bodystart="28" bodyend="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="28" column="27" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" bodystart="28" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNodeManager_1a2ecd390f193fccb4ad1ef8ac763bf018" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const NodeConstructors &amp;</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="32" column="45" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" bodystart="32" bodyend="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="32" column="45" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" bodystart="32" bodyend="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNodeManager_1a8dc56be857b10416b2827230544f4098" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__SRLM__NS_1_1LogicalNode" kindref="compound">LogicalNode</ref> *</type>
@@ -124,7 +124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="33" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="33" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNodeManager_1adec5dbd086133d0f4a500ddff5005d8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__SRLM__NS_1_1LogicalNode" kindref="compound">LogicalNode</ref> *</type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="34" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="34" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNodeManager_1ab26aed04a52ffa8eb82609dc7a21eda9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -168,7 +168,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="36" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="36" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNodeManager_1acd0e59a163fa87dcf0f78bcc1e37f848" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -182,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="38" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="38" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -237,7 +237,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="17" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" bodystart="17" bodyend="43"/>
+    <location file="Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" line="17" column="5" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h" bodystart="17" bodyend="43"/>
     <listofallmembers>
       <member refid="classSR__SRLM__NS_1_1LogicalNodeManager_1a56cd7f82f7d0e473ae0679b2c3d84bfd" prot="private" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNodeManager</scope><name>Category</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNodeManager_1aa26a224fb24800e041758a9bb341a425" prot="private" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNodeManager</scope><name>Constructor</name></member>

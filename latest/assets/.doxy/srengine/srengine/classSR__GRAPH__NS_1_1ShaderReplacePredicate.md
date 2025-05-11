@@ -114,5 +114,5 @@ virtual SR_GRAPH_NS::ShaderReplacePredicate::~ShaderReplacePredicate () = defaul
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Render/RenderPredicates.h`
 

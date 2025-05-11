@@ -3,7 +3,7 @@
   <compounddef id="AnimationStateMachine_8h" kind="file" language="C++">
     <compoundname>AnimationStateMachine.h</compoundname>
     <includes refid="AnimationState_8h" local="no">Graphics/Animations/AnimationState.h</includes>
-    <includedby refid="Animator_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h</includedby>
+    <includedby refid="Animator_8h" local="no">Engine/libs/Graphics/inc/Graphics/Animations/Animator.h</includedby>
     <incdepgraph>
       <node id="108">
         <label>Graphics/Animations/AnimationCommon.h</label>
@@ -52,7 +52,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateMachine.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateMachine.h</label>
         <link refid="AnimationStateMachine_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -707,13 +707,13 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateMachine.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateMachine.h</label>
         <link refid="AnimationStateMachine_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
         <link refid="Animator_8h_source"/>
       </node>
     </invincdepgraph>
@@ -782,6 +782,6 @@
 <codeline lineno="57"><highlight class="normal"></highlight></codeline>
 <codeline lineno="58"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_ANIMATIONSTATEMACHINE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateMachine.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateMachine.h"/>
   </compounddef>
 </doxygen>

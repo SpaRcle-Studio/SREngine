@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="25" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="25" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1PostProcessPass_1a6acbca72068f03527437c2bf0c4cc53f" prot="private" static="no">
         <type>std::vector&lt; Property &gt;</type>
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="26" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="26" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" bodystart="26" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1PostProcessPass_1a8ed46f20c9897a113dd3af25388abdee" prot="private" static="no">
         <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="27" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="27" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" bodystart="27" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="51" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="51" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1PostProcessPass_1ac42a8113851ae68639f889b4d96d63fe" prot="protected" static="no" mutable="no">
         <type>int32_t</type>
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="52" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" bodystart="52" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="52" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1PostProcessPass_1aca7aa8cdbc2a820e2f3dc1f5f4f3d06c" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="53" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="53" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1PostProcessPass_1aeb568da68eaef452f4012cf924dfbb8c" prot="protected" static="no" mutable="no">
         <type>ShaderPtr</type>
@@ -109,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="54" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" bodystart="54" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="54" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" bodystart="54" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1PostProcessPass_1a5ca8a0f2a8e6eb11c45f4a843195ce1a" prot="protected" static="no" mutable="no">
         <type>Properties</type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="55" column="20" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" bodystart="55" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="55" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" bodystart="55" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1PostProcessPass_1a3608e405ea2964ef96c03016fa090728" prot="protected" static="no" mutable="no">
         <type>uint32_t</type>
@@ -138,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="56" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" bodystart="56" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="56" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" bodystart="56" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -154,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="29" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="29" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1PostProcessPass_1ab19e43f8ba0885b3eed12dc6e324fcb1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -174,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="32" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1PostProcessPass_1ab12b11b6f5b8d4ed11c5925e9ef5eb09" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -194,7 +194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="34" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="34" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1PostProcessPass_1ad05a141ed0aa624f1f0f2a04855070e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -209,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="35" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="35" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1PostProcessPass_1a96b21122ce1e39f663bc2b1b71e16f0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -225,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="37" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="37" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1PostProcessPass_1aee63a18b98828d01a10509c185aa9ff3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -241,7 +241,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="38" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="38" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1PostProcessPass_1afe3807c59ce206965c62a218db9c28ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -258,7 +258,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="39" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="39" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1PostProcessPass_1a06bc4f4875d9ca6fb96a77a054e3a5d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -275,7 +275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="40" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="40" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1PostProcessPass_1af056f40419800fddaac682e304b500ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -298,7 +298,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="42" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="42" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -318,7 +318,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="45" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="45" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1PostProcessPass_1a1a44d55a15b735d027045de829fe6146" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -337,7 +337,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="46" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="46" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1PostProcessPass_1ab8874150879aa212169d50ce46a6a57c" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -353,7 +353,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="48" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="48" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -569,7 +569,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="17" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" bodystart="17" bodyend="58"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" line="17" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h" bodystart="17" bodyend="58"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PostProcessPass</scope><name>AddDependency</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PostProcessPass</scope><name>AddInputConnection</name></member>

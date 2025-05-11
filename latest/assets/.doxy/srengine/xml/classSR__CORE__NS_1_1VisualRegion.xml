@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualRegion.h" line="26" column="9" bodyfile="Engine/Core/inc/Core/World/VisualRegion.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/inc/Engine/World/VisualRegion.h" line="26" column="9" bodyfile="Engine/inc/Engine/World/VisualRegion.h" bodystart="26" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualRegion.h" line="32" column="45" bodyfile="Engine/Core/inc/Core/World/VisualRegion.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/inc/Engine/World/VisualRegion.h" line="32" column="45" bodyfile="Engine/inc/Engine/World/VisualRegion.h" bodystart="32" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -52,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualRegion.h" line="28" column="18" bodyfile="Engine/Core/inc/Core/World/VisualRegion.h" bodystart="28" bodyend="28"/>
+        <location file="Engine/inc/Engine/World/VisualRegion.h" line="28" column="18" bodyfile="Engine/inc/Engine/World/VisualRegion.h" bodystart="28" bodyend="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1VisualRegion_1a3fc9214471e4f302dae4d020d46ce3f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualRegion.h" line="29" column="9"/>
+        <location file="Engine/inc/Engine/World/VisualRegion.h" line="29" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualRegion.h" line="35" column="14"/>
+        <location file="Engine/inc/Engine/World/VisualRegion.h" line="35" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1VisualRegion_1a458da0dfdc0a9b9f1bf6e3415d3793e8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualRegion.h" line="36" column="14"/>
+        <location file="Engine/inc/Engine/World/VisualRegion.h" line="36" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1VisualRegion_1a74eb8b99dc37a4c3ba2d7060da67c1e0" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualRegion.h" line="38" column="14"/>
+        <location file="Engine/inc/Engine/World/VisualRegion.h" line="38" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1VisualRegion_1a9cd9fe8e6d0f488728dd2ceee5eded9c" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -130,7 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualRegion.h" line="39" column="14"/>
+        <location file="Engine/inc/Engine/World/VisualRegion.h" line="39" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1VisualRegion_1ade11b19848f6f6c0579c2f3264d0a0ae" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualRegion.h" line="40" column="14"/>
+        <location file="Engine/inc/Engine/World/VisualRegion.h" line="40" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1VisualRegion_1ad4da14e13513cf68ac7df8e254725517" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -164,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualRegion.h" line="41" column="14"/>
+        <location file="Engine/inc/Engine/World/VisualRegion.h" line="41" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1VisualRegion_1a277f1b86c0c0fee56f3c31ccc5732384" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -179,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualRegion.h" line="42" column="14"/>
+        <location file="Engine/inc/Engine/World/VisualRegion.h" line="42" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -243,7 +243,7 @@
         <link refid="structSR__MATH__NS_1_1Vector3"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/inc/Core/World/VisualRegion.h" line="25" column="5" bodyfile="Engine/Core/inc/Core/World/VisualRegion.h" bodystart="25" bodyend="44"/>
+    <location file="Engine/inc/Engine/World/VisualRegion.h" line="25" column="5" bodyfile="Engine/inc/Engine/World/VisualRegion.h" bodystart="25" bodyend="44"/>
     <listofallmembers>
       <member refid="classSR__WORLD__NS_1_1Region_1aa38ac46514f89736e3b86e1014cf4092" prot="public" virt="non-virtual"><scope>SR_CORE_NS::VisualRegion</scope><name>Allocate</name></member>
       <member refid="classSR__WORLD__NS_1_1Region_1aafc779fb103832bf0c7ad0ac16a36baa" prot="public" virt="non-virtual"><scope>SR_CORE_NS::VisualRegion</scope><name>Allocator</name></member>

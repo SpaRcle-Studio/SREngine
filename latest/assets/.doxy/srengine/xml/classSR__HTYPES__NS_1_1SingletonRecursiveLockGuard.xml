@@ -22,7 +22,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" line="90" column="11" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" bodystart="90" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" line="90" column="11" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" bodystart="90" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -42,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" line="69" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" bodystart="69" bodyend="78"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" line="69" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" bodystart="69" bodyend="78"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SingletonRecursiveLockGuard_1aaa0ae69d6f3011ae2c4f40c975282ad9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" line="80" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" bodystart="80" bodyend="87"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" line="80" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" bodystart="80" bodyend="87"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -87,7 +87,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" line="67" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" bodystart="67" bodyend="92"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" line="67" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h" bodystart="67" bodyend="92"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1SingletonRecursiveLockGuard_1a5d840b2bf6c6ac9fa7b51a1aede58ce2" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::SingletonRecursiveLockGuard</scope><name>m_ptr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SingletonRecursiveLockGuard_1a7465f3f330a94c552ceb3569f05d18fd" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SingletonRecursiveLockGuard</scope><name>SingletonRecursiveLockGuard</name></member>

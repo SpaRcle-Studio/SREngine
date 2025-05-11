@@ -111,5 +111,5 @@ SR_UTILS_NS::Compression::~Compression () = delete
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Common/Compression.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Common/Compression.h`
 

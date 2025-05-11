@@ -2,10 +2,10 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="PathPropertyDrawer_8h" kind="file" language="C++">
     <compoundname>PathPropertyDrawer.h</compoundname>
-    <includes refid="PropertyDrawer_8h" local="no">Core/GUI/PropertyDrawer.h</includes>
+    <includes refid="PropertyDrawer_8h" local="no">Engine/GUI/PropertyDrawer.h</includes>
     <incdepgraph>
       <node id="2">
-        <label>Core/GUI/PropertyDrawer.h</label>
+        <label>Engine/GUI/PropertyDrawer.h</label>
         <link refid="PropertyDrawer_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -17,7 +17,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/PathPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/PathPropertyDrawer.h</label>
         <link refid="PathPropertyDrawer_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1658,7 +1658,7 @@
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SR_ENGINE_GUI_PATH_PROPERTY_DRAWER_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ENGINE_GUI_PATH_PROPERTY_DRAWER_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Core/GUI/PropertyDrawer.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Engine/GUI/PropertyDrawer.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SR_CORE_GUI_NS<sp/>{</highlight></codeline>
 <codeline lineno="11" refid="classSR__CORE__GUI__NS_1_1PathPropertyDrawer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__CORE__GUI__NS_1_1PathPropertyDrawer" kindref="compound">PathPropertyDrawer</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" kindref="compound">PropertyDrawerBase</ref><sp/>{</highlight></codeline>
@@ -1674,6 +1674,6 @@
 <codeline lineno="21"><highlight class="normal"></highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GUI_PATH_PROPERTY_DRAWER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/PathPropertyDrawer.h"/>
+    <location file="Engine/inc/Engine/GUI/PropertyDrawers/PathPropertyDrawer.h"/>
   </compounddef>
 </doxygen>

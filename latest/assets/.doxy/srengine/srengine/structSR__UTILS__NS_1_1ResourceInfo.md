@@ -241,5 +241,5 @@ inline SR_UTILS_NS::ResourceInfo::ResourceInfo (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h`
 

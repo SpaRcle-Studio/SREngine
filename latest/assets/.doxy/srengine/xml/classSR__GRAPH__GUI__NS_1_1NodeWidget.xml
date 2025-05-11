@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="25" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="25" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" bodystart="25" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="66" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" bodystart="66" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="66" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" bodystart="66" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a5bb204a26ed8697fe08dc62b71cef85b" prot="protected" static="no" mutable="no">
         <type>SR_GRAPH_GUI_NS::NodeBuilder *</type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="73" column="38" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" bodystart="73" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="73" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" bodystart="73" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1ae16783115005044f264d68ce1ef1c826" prot="protected" static="no" mutable="no">
         <type>std::map&lt; uintptr_t, <ref refid="classSR__GRAPH__GUI__NS_1_1Node" kindref="compound">Node</ref> * &gt;</type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="75" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" bodystart="75" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="75" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" bodystart="75" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1ab04e5e7aec8ff357a1ae1571d747d89e" prot="protected" static="no" mutable="no">
         <type>std::map&lt; uintptr_t, Link * &gt;</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="76" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" bodystart="76" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="76" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" bodystart="76" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a8e4520d386cb425733cbb7edb746134d" prot="protected" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="structSR__GRAPH__GUI__NS_1_1NodeWidgetProperty" kindref="compound">NodeWidgetProperty</ref> &gt;</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="78" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" bodystart="78" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="78" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" bodystart="78" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a4364eb5014b66ff915c3c7c399cb1d44" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="80" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" bodystart="80" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="80" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" bodystart="80" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1abe9dc88e5c3264ac078406770ccea6d5" prot="protected" static="no" mutable="no">
         <type>float_t</type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="82" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" bodystart="82" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="82" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" bodystart="82" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a059b5c27872a0d4ed29d002017916d99" prot="protected" static="no" mutable="no">
         <type>float_t</type>
@@ -134,7 +134,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="83" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" bodystart="83" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="83" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" bodystart="83" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="27" column="18"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="27" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1af750605b9405c534ffa4f43115988362" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -173,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="28" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="28" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a375d36a4967522114518eaab08b1a3b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__GRAPH__GUI__NS_1_1Node" kindref="compound">Node</ref> &amp;</type>
@@ -191,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="31" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a688a0dcd9938d906e3d2be254eca48e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Link &amp;</type>
@@ -209,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="32" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a1a801810ac93ae3abc03d8b0227c5c2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -227,7 +227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="34" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="34" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1afdb344a0f229ecb10652306b49effc43" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -245,7 +245,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="35" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="35" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -265,7 +265,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="38" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" bodystart="38" bodyend="38"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="38" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" bodystart="38" bodyend="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a0c5ff7c46b409834768b63c0f32d4e7b" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -279,7 +279,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="40" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="40" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a1c4d0b9c92d2bffb22eb55ff3d8bf160" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -293,7 +293,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="41" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="41" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a5b5ae7cf8ac26992099be697274ffb73" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -307,7 +307,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="42" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="42" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1ab5616229433d3415bb18dad3a2575e96" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -322,7 +322,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="43" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="43" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1af000e35da9096733217349a049c9cbba" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -336,7 +336,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="44" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="44" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1af15f6aa41a3091dd3c548f0453b8568c" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -350,7 +350,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="46" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="46" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a868196f4ac5c84bb7e150539a92885a1" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -364,7 +364,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="47" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="47" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1af62026011224cb39ac96bdc325af6304" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -378,7 +378,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="48" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="48" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a071866f1c8743450f2c77cbf91db146f" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -392,7 +392,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="49" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="49" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1ad2b11de509089ba0bd64bb06cf6fb6c7" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -406,7 +406,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="51" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="51" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a31e1dfc6d1173842c53b8eb40e48dbe9" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -421,7 +421,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="53" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="53" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a32412b02a67f2d6cc5c12e90e4b0a920" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -435,7 +435,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="54" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="54" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1ac991400ebbaa7c5bdb885f88225c0ecb" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__GRAPH__GUI__NS_1_1NodeWidgetProperty" kindref="compound">NodeWidgetProperty</ref> *</type>
@@ -453,7 +453,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="56" column="41"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="56" column="41"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a321ec2ddb378410a0b56721cfb18487e" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -467,7 +467,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="58" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="58" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1af427950d40d48cd091fae13a8ffc21b7" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -482,7 +482,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="60" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="60" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a85ee3523b82687852fc2e6192c7cc74f" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -497,7 +497,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="62" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="62" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a32da4f2ba831d4b13c687bc829beb7a7" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -512,7 +512,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="63" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="63" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -604,7 +604,7 @@
         <link refid="classSR__UTILS__NS_1_1Path"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="24" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" bodystart="24" bodyend="85"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" line="24" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h" bodystart="24" bodyend="85"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a4a04e0628b5729444eca1c24a9011fa2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::NodeWidget</scope><name>AddFlags</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a688a0dcd9938d906e3d2be254eca48e4" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::NodeWidget</scope><name>AddLink</name></member>

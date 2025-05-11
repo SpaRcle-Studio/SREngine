@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="15" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="15" column="9" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="15" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="68" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="68" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="68" column="19" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="68" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a5837bc3a22ea5f81eb9d9202c7e3041b" prot="private" static="no" mutable="no">
         <type>std::list&lt; int64_t &gt;</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="69" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="69" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="69" column="19" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="69" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1af8430b0c5e8fafb5cd92c501650c534b" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="70" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="70" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="70" column="14" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="70" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a3a5ecc035c8c6f288166ec0c5ac58835" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="72" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="72" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="72" column="21" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="72" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a958568104f7e6a2293d719e2d75023c7" prot="private" static="no" mutable="no">
         <type>World::Tensor</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="74" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="74" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="74" column="23" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="74" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a7834dc59136374fe74a7b8cb2aa5823f" prot="private" static="no" mutable="no">
         <type>Regions</type>
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="76" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="76" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="76" column="17" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="76" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a87f2089961dfd3a465b297f79a8a4fdd" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::IVector2</type>
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="77" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="77" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="77" column="30" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="77" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a10a5609c82c8600ffa7cb3feb81f035f" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="78" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="78" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="78" column="18" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="78" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a1617dde586a4797f45b085811d3ca236" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__WORLD__NS_1_1Observer" kindref="compound">Observer</ref> *</type>
@@ -148,7 +148,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="80" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="80" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="80" column="18" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="80" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a3ccb84dc54c93b9fbff98e0a5da2eb0f" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__WORLD__NS_1_1Chunk" kindref="compound">Chunk</ref> *</type>
@@ -163,7 +163,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="81" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="81" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="81" column="15" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="81" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1ac2b4a3632f539648a09f9c7c8dee9ab5" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -178,7 +178,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="83" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="83" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="83" column="14" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="83" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1aa3402c3f581165ea8333748c7e286089" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -193,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="84" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="84" column="14" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a2117a8367e1c9bb63c7a20db4aa25c38" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -208,7 +208,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="85" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="85" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="85" column="14" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="85" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -224,7 +224,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="17" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="17" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1afae366f40dbd139523ae8869d7005592" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -243,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="20" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="20" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a9e2b9e612f974bc0d675f0feb4252816" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -258,7 +258,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="22" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="22" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a14282ee7a0a86380ca7ce28d7834382f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -273,7 +273,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="23" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="23" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a66ffa5aaf155add34182dbe2d6653baf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -288,7 +288,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="24" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1aa31bf97d2e797c2c1556b664ad2ade0f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -307,7 +307,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="25" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="25" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1abd96bada2d17076e0297fb1d50d12140" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -322,7 +322,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="27" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="27" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1afff2c68d758ffeb2fc2bc38eb7ca2beb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -345,7 +345,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="29" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="29" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1ac51438933acd37c5a51a58d2fbe4c004" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -368,7 +368,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="30" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="30" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1af2ea53dab24b66cccc957658f1d19e39" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -386,7 +386,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="32" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a3d4fb50abca6027ac53c7ddcde2cc401" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -404,7 +404,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="33" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="33" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a1d318d3e75328215d81d9d9d479ee2aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -418,7 +418,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="35" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="35" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1ae17e80be20bdb0c2a16dfe2cfb1fb51d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -432,7 +432,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="36" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="36" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1ae0b82366170f1e397648e4d84b5daa93" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const std::vector&lt; SceneObject::Ptr &gt; &amp;</type>
@@ -454,7 +454,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="38" column="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="38" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a7dd6179809f36cc9c11d95cbe9f814e3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__WORLD__NS_1_1Chunk" kindref="compound">Chunk</ref> *</type>
@@ -468,7 +468,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="39" column="28"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="39" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1aa0e504bc8a20a5d7da1c81bfbcadd832" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__WORLD__NS_1_1Observer" kindref="compound">Observer</ref> *</type>
@@ -482,7 +482,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="40" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="40" bodyend="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="40" column="31" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="40" bodyend="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a023b10d954f9255dc714fe58b2c38cdc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -504,7 +504,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="41" column="43"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="41" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1adb0c3947a0e0db6c70248936f0d6d358" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__WORLD__NS_1_1Region" kindref="compound">Region</ref> *</type>
@@ -522,7 +522,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="42" column="29"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="42" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1aea9f2f69c5d3054e8c59c9418b3922ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__WORLD__NS_1_1Region" kindref="compound">Region</ref> *</type>
@@ -540,7 +540,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="43" column="29"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="43" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a9046c5ecd5f4d0b3f34d5cea9a9e2b0b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -562,7 +562,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="44" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="44" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1aa8e8ef9281ca7982be5f9537a57e1720" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -588,7 +588,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="45" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="45" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1acc7680d2d2d543be33d1fae4c00ea509" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD Path</type>
@@ -602,7 +602,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="46" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="46" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a0c3c246ee9b82691723b6686e5ab160e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::pair&lt; SR_MATH_NS::IVector3, SR_MATH_NS::IVector3 &gt;</type>
@@ -620,7 +620,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="47" column="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="47" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1ae7f2323ec9b2feb8cf5bc33414f0b257" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -639,7 +639,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="48" column="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="48" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a5eab35f0fabad9f6f191d7fc8b8e2a29" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD StringAtom</type>
@@ -654,7 +654,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="50" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="50" bodyend="50"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="50" column="33" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="50" bodyend="50"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a0f718a9c1128f70180efa183ae47370f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD SceneLogicType</type>
@@ -669,7 +669,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="51" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="51" bodyend="51"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="51" column="37" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="51" bodyend="51"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -685,7 +685,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="54" column="43"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="54" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a0f4c4faada5bab7d661ce4f924e14170" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -699,7 +699,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="56" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="56" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a1c6790aa4b80df69091d5403c70944fa" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -721,7 +721,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="58" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="58" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1ae11531c616058fb2e44597e72d94641a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -739,7 +739,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="59" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="59" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a2500fee80c245f370449008fc1e5b4ea" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -757,7 +757,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="60" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="60" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a7542f56cc3ab3940785aa0c577f608ef" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -775,7 +775,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="62" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="62" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a2ebd87d1b74ed145dec201773fbdbc15" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -789,7 +789,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="63" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="63" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a8ac30541b371a9aa33755e59e55dbddf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -807,7 +807,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="64" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="64" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a7917843694cb4195c56e2e578a41b33a" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -833,7 +833,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="65" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="65" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -919,7 +919,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="14" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="14" bodyend="87"/>
+    <location file="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" line="14" column="5" bodyfile="Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h" bodystart="14" bodyend="87"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::SceneCubeChunkLogic</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::SceneCubeChunkLogic</scope><name>AllocateStatic</name></member>

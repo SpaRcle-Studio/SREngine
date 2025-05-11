@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="17" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="17" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="17" column="22" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="17" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-attrib">
@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="67" column="57" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="67" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="67" column="57" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="67" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform2D_1a1eeb6345b51c3da66cc4eaf9fa6f0aa0" prot="public" static="yes" constexpr="yes" mutable="no">
         <type>SR_INLINE constexpr SR_MATH_NS::FVector2</type>
@@ -51,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="68" column="57" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="68" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="68" column="57" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="68" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="74" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="74" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="74" column="36" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="74" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform2D_1a7e943e69225798fd832cc871651db152" prot="protected" static="no" mutable="yes">
         <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref></type>
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="75" column="39" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="75" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="75" column="39" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="75" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform2D_1afb8dd0191cb177945eea9b66a69d353a" prot="protected" static="no" mutable="yes">
         <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref></type>
@@ -97,7 +97,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="76" column="39" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="76" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="76" column="39" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="76" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform2D_1a22203bc8bc8a43a3993167fe08d1e02c" prot="protected" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classSR__UTILS__NS_1_1UI_1_1UIModifierComponent" kindref="compound">UI::UIModifierComponent</ref> * &gt;</type>
@@ -111,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="78" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="78" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="78" column="21" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="78" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform2D_1aaebb3fbb8f76e5be2517e367ca1d2095" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -126,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="80" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="80" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="80" column="14" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="80" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform2D_1a631ff7e95fea055f076128f859e9fc96" prot="protected" static="no" mutable="no">
         <type>int32_t</type>
@@ -141,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="81" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="81" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="81" column="17" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="81" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform2D_1a2d450a046a738c69afb8e8fa7627c607" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -156,7 +156,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="84" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="84" column="30" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform2D_1ae584783d25f68d70593481a640272b7e" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -171,7 +171,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="86" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="86" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="86" column="30" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="86" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform2D_1a00f86b51bacc92b65ffafbd5648bf160" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref></type>
@@ -186,7 +186,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="88" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="88" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="88" column="32" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="88" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform2D_1a9615e12243551e884e67f65914d7a723" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -201,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="90" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="90" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="90" column="30" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="90" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform2D_1a2823a60c89c0bc1b77ec2c67abdda79f" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -216,7 +216,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="92" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="92" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="92" column="30" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="92" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform2D_1a3609e210dab1f2f74aab933603ea097c" prot="protected" static="no" mutable="no">
         <type>int32_t</type>
@@ -231,7 +231,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="95" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="95" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="95" column="17" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="95" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform2D_1a0a3b4a481b6668fce96e35e925d26151" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -246,7 +246,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="97" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="97" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="97" column="14" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="97" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -262,7 +262,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="19" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="19" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1ab62ad67176a7b0ebaaa735c260ec3a0d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -281,7 +281,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="22" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="22" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1a33256fa7d1fb3045d16e46308979f3a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -304,7 +304,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="23" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="23" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1aa6aa1bea13d8015b65d00010291e2e8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -323,7 +323,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="24" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1a424aa57185718eab9a068ddf0f2b81e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -342,7 +342,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="25" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="25" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1a78e1a0a1ccfdbcf2a403cee899a200da" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -361,7 +361,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="26" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="26" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1aeb161745c587d001c76c58b3c392b976" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -380,7 +380,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="27" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="27" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1a42e56879bdf771a9ea8ba016c21f64b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -399,7 +399,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="29" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="29" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1ad660e8b9679c804b9097c11fe348063e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -418,7 +418,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="30" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="30" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1afa072f05c3aa31c923632cdda6b5d1ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -437,7 +437,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="31" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1ae32f9f6f66b6f5faa89099432d61bd29" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -456,7 +456,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="33" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="33" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1a78ed3c02f5bf40562a281d8bf762ba12" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -475,7 +475,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="34" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="34" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1a8a6d94c2a75ce3cae448a7d70641f2bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -493,7 +493,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="36" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="36" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1ae8f166dee8bea41de18547ba2ff6096d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -511,7 +511,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="37" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="37" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1abdc1afee80d75c703a4c90988b256806" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -526,7 +526,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="39" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="39" bodyend="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="39" column="43" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="39" bodyend="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1ae65356383375705ad1b536c9b0e09826" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -541,7 +541,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="40" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="40" bodyend="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="40" column="43" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="40" bodyend="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1a00c303c938e3947b768ca4b8f6871bcc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -556,7 +556,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="41" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="41" bodyend="41"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="41" column="43" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="41" bodyend="41"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1a8f39f00dc8a6a312c08b5ca00a979652" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -571,7 +571,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="42" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="42" bodyend="42"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="42" column="43" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="42" bodyend="42"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1a802a29a2b612afc73d8ab8173d27c486" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD Measurement</type>
@@ -586,7 +586,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="44" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="44" bodyend="44"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="44" column="34" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="44" bodyend="44"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1ac6e594fb114a3e89f1a3d90e95eef801" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
@@ -601,7 +601,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="46" column="50"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="46" column="50"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1af98248f59b9d54ee39fc2f1de289e626" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -615,7 +615,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="48" column="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="48" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1a4e2877a139db2de2070870435b93f8ae" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -629,7 +629,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="49" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="49" bodyend="49"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="49" column="30" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="49" bodyend="49"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1a2fdbeb851554abc43329223ecd620d9b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -643,7 +643,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="51" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="51" bodyend="51"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="51" column="27" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="51" bodyend="51"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1a801b22293c42569bf287df1c680fcc95" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -658,7 +658,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="53" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="53" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1aa3e9f95373e0596cb80f05db769cca41" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -676,7 +676,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="55" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="55" bodyend="55"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="55" column="14" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="55" bodyend="55"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1a8fb0975fa82c1206259a7273df4012d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -694,7 +694,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="56" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="56" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1ac5dc1aa381a6ca1b432c69ce20b671bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -708,7 +708,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="58" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="58" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -725,7 +725,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="61" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="61" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1a0e52dca69afb2d4db5da0170a8e07b1c" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -739,7 +739,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="62" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="62" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform2D_1a345b6d446a9cffd53a025526135139ed" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector2</type>
@@ -753,7 +753,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="64" column="43"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="64" column="43"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -769,7 +769,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="71" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="71" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -892,7 +892,7 @@
         <link refid="structSR__MATH__NS_1_1Vector3"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" line="15" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="15" bodyend="99"/>
+    <location file="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" line="15" column="5" bodyfile="Engine/libs/Utils/inc/Utils/ECS/Transform2D.h" bodystart="15" bodyend="99"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Transform2D_1aa3e9f95373e0596cb80f05db769cca41" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>AddModifier</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>AddSerializationFlags</name></member>

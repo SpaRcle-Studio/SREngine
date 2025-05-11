@@ -534,5 +534,5 @@ AnimatorPtr SR_CORE_GUI_NS::AnimatorEditor::m_pAnimator;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/GUI/AnimatorEditor.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/GUI/AnimatorEditor.h`
 

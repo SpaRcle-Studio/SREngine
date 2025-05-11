@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="62" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="68" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="62" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="68" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="78" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="78" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="78" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="78" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs_1a8c93875dc7242adc43527b9502fe1420" prot="private" static="no" mutable="no">
         <type>std::unordered_map&lt; std::string, <ref refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig" kindref="compound">TextureConfig</ref> &gt;</type>
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="79" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="79" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="79" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="79" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="70" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="70" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="73" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="73" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs_1aa282779a33cad510f71f74767288c859" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::optional&lt; <ref refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig" kindref="compound">TextureConfig</ref> &gt;</type>
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="74" column="23"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="74" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs_1a8816321592b06cb0a0ea19a108e08267" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig" kindref="compound">TextureConfig</ref></type>
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="75" column="23"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="75" column="23"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -173,7 +173,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="67" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="67" bodyend="81"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="67" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="67" bodyend="81"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>DestroySingleton</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs_1aa282779a33cad510f71f74767288c859" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>Find</name></member>

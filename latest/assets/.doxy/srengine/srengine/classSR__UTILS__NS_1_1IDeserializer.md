@@ -682,5 +682,5 @@ virtual SR_UTILS_NS::IDeserializer::~IDeserializer () = default
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Serialization/Deserializer.h`
 

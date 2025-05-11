@@ -156,5 +156,5 @@ See [SR\_UTILS\_NS::SRClassMeta](classSR__UTILS__NS_1_1SRClassMeta.md)
 
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h`
 

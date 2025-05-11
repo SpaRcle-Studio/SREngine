@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALDevice.h" line="24" column="19" bodyfile="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALDevice.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALDevice.h" line="24" column="19" bodyfile="Engine/libs/Audio/inc/Audio/Impl/OpenALDevice.h" bodystart="24" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -41,7 +41,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALDevice.h" line="15" column="18"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALDevice.h" line="15" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALDevice_1ad10f0fa8c3ccce1547300532c16361f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALDevice.h" line="16" column="9"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALDevice.h" line="16" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALDevice_1af16b0979f1f31c3dd98a1c25bd228e45" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -70,7 +70,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALDevice.h" line="19" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALDevice.h" line="19" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALDevice_1a76cbb5d0d2292dd886f666596b8b3378" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD ALCdevice *</type>
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALDevice.h" line="21" column="32"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALDevice.h" line="21" column="32"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -127,7 +127,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALDevice.h" line="13" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALDevice.h" bodystart="13" bodyend="26"/>
+    <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALDevice.h" line="13" column="5" bodyfile="Engine/libs/Audio/inc/Audio/Impl/OpenALDevice.h" bodystart="13" bodyend="26"/>
     <listofallmembers>
       <member refid="classSR__AUDIO__NS_1_1SoundDevice_1a7b8b2f88db5344ae11c76fd896110419" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALDevice</scope><name>Allocate</name></member>
       <member refid="classSR__AUDIO__NS_1_1OpenALDevice_1a76cbb5d0d2292dd886f666596b8b3378" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALDevice</scope><name>GetALDevice</name></member>

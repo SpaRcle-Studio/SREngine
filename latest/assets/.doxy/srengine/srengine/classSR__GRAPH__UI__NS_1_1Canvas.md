@@ -299,5 +299,5 @@ Implements [*SR\_UTILS\_NS::Component::Update*](classSR__UTILS__NS_1_1Component.
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/UI/Canvas.h`
 

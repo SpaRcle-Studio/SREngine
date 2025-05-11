@@ -2,17 +2,17 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="SceneTools_8h" kind="file" language="C++">
     <compoundname>SceneTools.h</compoundname>
-    <includes refid="EditorGizmo_8h" local="no">Core/GUI/EditorGizmo.h</includes>
+    <includes refid="EditorGizmo_8h" local="no">Engine/GUI/EditorGizmo.h</includes>
     <includes refid="WidgetContainer_8h" local="no">Graphics/GUI/WidgetContainer.h</includes>
     <incdepgraph>
       <node id="2">
-        <label>Core/GUI/EditorGizmo.h</label>
+        <label>Engine/GUI/EditorGizmo.h</label>
         <link refid="EditorGizmo_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/inc/Core/GUI/SceneTools.h</label>
+        <label>Engine/inc/Engine/GUI/SceneTools.h</label>
         <link refid="SceneTools_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1638,7 +1638,7 @@
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SR_ENGINE_CORE_SCENE_TOOLS_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ENGINE_CORE_SCENE_TOOLS_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Core/GUI/EditorGizmo.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Engine/GUI/EditorGizmo.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Graphics/GUI/WidgetContainer.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
@@ -1688,6 +1688,6 @@
 <codeline lineno="55"><highlight class="normal"></highlight></codeline>
 <codeline lineno="56"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_CORE_SCENE_TOOLS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/GUI/SceneTools.h"/>
+    <location file="Engine/inc/Engine/GUI/SceneTools.h"/>
   </compounddef>
 </doxygen>

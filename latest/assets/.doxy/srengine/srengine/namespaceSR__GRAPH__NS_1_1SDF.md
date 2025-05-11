@@ -108,5 +108,5 @@ static SR_MAYBE_UNUSED SDFImage SR_GRAPH_NS::SDF::DFCalculate (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Font/SDF.h`
 

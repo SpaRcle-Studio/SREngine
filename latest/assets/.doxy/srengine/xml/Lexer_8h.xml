@@ -5,7 +5,7 @@
     <includes refid="LexerUtils_8h" local="no">Graphics/SRSL/LexerUtils.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/Lexer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/SRSL/Lexer.h</label>
         <link refid="Lexer_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1017,6 +1017,6 @@
 <codeline lineno="46"><highlight class="normal"></highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_SRSL_LEXER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Lexer.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Lexer.h"/>
   </compounddef>
 </doxygen>

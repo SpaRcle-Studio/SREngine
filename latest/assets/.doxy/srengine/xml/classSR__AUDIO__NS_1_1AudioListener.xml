@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h" line="20" column="9" bodyfile="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h" bodystart="20" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioListener.h" line="20" column="9" bodyfile="Engine/libs/Audio/inc/Audio/Types/AudioListener.h" bodystart="20" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__AUDIO__NS_1_1AudioListener_1a984002a81b904f2906d7254a4e68ed7f" prot="private" static="no">
         <type>void *</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h" line="21" column="9" bodyfile="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h" bodystart="21" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioListener.h" line="21" column="9" bodyfile="Engine/libs/Audio/inc/Audio/Types/AudioListener.h" bodystart="21" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h" line="37" column="23" bodyfile="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioListener.h" line="37" column="23" bodyfile="Engine/libs/Audio/inc/Audio/Types/AudioListener.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1AudioListener_1a17d2d5e00ced9499be818798e31f8f92" prot="private" static="no" mutable="no">
         <type>ListenerDistanceModel</type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h" line="40" column="31" bodyfile="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h" bodystart="40" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioListener.h" line="40" column="31" bodyfile="Engine/libs/Audio/inc/Audio/Types/AudioListener.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1AudioListener_1ac782e16b727e2a420143ea47cb1fc227" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h" line="42" column="30" bodyfile="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h" bodystart="42" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioListener.h" line="42" column="30" bodyfile="Engine/libs/Audio/inc/Audio/Types/AudioListener.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1AudioListener_1a1c1ce68bfbf9d43d3c74fda4fd5c87b4" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h" line="44" column="17" bodyfile="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioListener.h" line="44" column="17" bodyfile="Engine/libs/Audio/inc/Audio/Types/AudioListener.h" bodystart="44" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h" line="23" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioListener.h" line="23" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioListener_1a34fd84a273f6feb514699ed686da9730" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h" line="24" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioListener.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioListener_1a8340431f3e58ff22e26b04894e765435" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -138,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h" line="26" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioListener.h" line="26" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioListener_1a1a7a57c1c0b1adb4fa55378fa2d1db4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -154,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h" line="27" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioListener.h" line="27" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioListener_1a7701660b7c9b21341c4e83b36a243b9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -172,7 +172,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h" line="29" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioListener.h" line="29" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioListener_1a9baf80f523c67ffb0d5424cb12476df8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -190,7 +190,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h" line="30" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioListener.h" line="30" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1AudioListener_1a0583d6bb062727c782efc8fd3e1eafa4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -208,7 +208,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h" line="31" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioListener.h" line="31" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -226,7 +226,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h" line="34" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioListener.h" line="34" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -285,7 +285,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h" line="18" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h" bodystart="18" bodyend="45"/>
+    <location file="Engine/libs/Audio/inc/Audio/Types/AudioListener.h" line="18" column="5" bodyfile="Engine/libs/Audio/inc/Audio/Types/AudioListener.h" bodystart="18" bodyend="45"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_AUDIO_NS::AudioListener</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::AudioListener</scope><name>BaseComponent</name></member>

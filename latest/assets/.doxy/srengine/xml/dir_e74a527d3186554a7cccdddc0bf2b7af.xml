@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_e74a527d3186554a7cccdddc0bf2b7af" kind="dir">
+    <compoundname>Engine/libs/Utils/inc/Utils/Events</compoundname>
+    <innerfile refid="Broadcaster_8h">Broadcaster.h</innerfile>
+    <innerfile refid="Event_8h">Event.h</innerfile>
+    <innerfile refid="EventDispatcher_8h">EventDispatcher.h</innerfile>
+    <innerfile refid="EventManager_8h">EventManager.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Utils/inc/Utils/Events/"/>
+  </compounddef>
+</doxygen>

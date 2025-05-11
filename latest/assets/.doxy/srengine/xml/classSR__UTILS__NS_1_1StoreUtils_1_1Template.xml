@@ -22,7 +22,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StoreUtils.h" line="90" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="90" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1af1e375c053d0dbea0040bf00fecce5be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StoreUtils.h" line="91" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="91" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StoreUtils.h" line="94" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="94" bodyend="96"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="94" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="94" bodyend="96"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1acf17bf2a44d114ee5fffd3f1412b5713" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StoreUtils.h" line="98" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="98" bodyend="98"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="98" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="98" bodyend="98"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1afd1d813d035cc91b7b7858e6f6468851" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -102,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StoreUtils.h" line="99" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="99" bodyend="101"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="99" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="99" bodyend="101"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1a8ba155f55339bfbdbb989db1cff63435" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -124,7 +124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StoreUtils.h" line="102" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="102" bodyend="104"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="102" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="102" bodyend="104"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1adf7a9efd5753f55966d8beea4b6c3df7" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StoreUtils.h" line="106" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="106" bodyend="106"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="106" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="106" bodyend="106"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1aa0d10fb1d5804f0b3931ca953a0e9e61" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -165,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StoreUtils.h" line="107" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="107" bodyend="109"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="107" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="107" bodyend="109"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1af38fb4019d2b581e2875db75a25ee20e" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -187,14 +187,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StoreUtils.h" line="110" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="110" bodyend="112"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="110" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="110" bodyend="112"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Common/StoreUtils.h" line="88" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="88" bodyend="114"/>
+    <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="88" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="88" bodyend="114"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1aa0d10fb1d5804f0b3931ca953a0e9e61" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Template</scope><name>GetBool</name></member>
       <member refid="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1afd1d813d035cc91b7b7858e6f6468851" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Template</scope><name>GetFloat</name></member>

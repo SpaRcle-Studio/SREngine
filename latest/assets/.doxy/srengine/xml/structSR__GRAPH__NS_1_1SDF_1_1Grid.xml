@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h" line="52" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h" bodystart="52" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/SDF.h" line="52" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/SDF.h" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SDF_1_1Grid_1acc9d5125c03006a06d194e644c977ea0" prot="public" static="no" mutable="no">
         <type>int32_t</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h" line="52" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h" bodystart="52" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/SDF.h" line="52" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/SDF.h" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SDF_1_1Grid_1a0527c9b101ae4d218a711b8a11bcc740" prot="public" static="no" mutable="no">
         <type><ref refid="structSR__GRAPH__NS_1_1SDF_1_1Point" kindref="compound">Point</ref> *</type>
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h" line="53" column="15" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/SDF.h" line="53" column="15" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/SDF.h" bodystart="53" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h" line="55" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h" bodystart="55" bodyend="77"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/SDF.h" line="55" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/SDF.h" bodystart="55" bodyend="77"/>
       </memberdef>
       <memberdef kind="function" id="structSR__GRAPH__NS_1_1SDF_1_1Grid_1a833aa79050a6a1598a2b9c9bee5cc138" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__GRAPH__NS_1_1SDF_1_1Point" kindref="compound">Point</ref></type>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h" line="79" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h" bodystart="79" bodyend="81"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/SDF.h" line="79" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/SDF.h" bodystart="79" bodyend="81"/>
       </memberdef>
       <memberdef kind="function" id="structSR__GRAPH__NS_1_1SDF_1_1Grid_1ab510bddf6e3b9dc1e5bbb2503562eb69" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h" line="83" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h" bodystart="83" bodyend="85"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/SDF.h" line="83" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/SDF.h" bodystart="83" bodyend="85"/>
       </memberdef>
       <memberdef kind="function" id="structSR__GRAPH__NS_1_1SDF_1_1Grid_1a122ef12e7311479140b03f492c99e2e3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -129,7 +129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h" line="87" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h" bodystart="87" bodyend="92"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/SDF.h" line="87" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/SDF.h" bodystart="87" bodyend="92"/>
       </memberdef>
       <memberdef kind="function" id="structSR__GRAPH__NS_1_1SDF_1_1Grid_1a8c86baa9dd43d3d613266e4b98e4ef05" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h" line="94" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h" bodystart="94" bodyend="96"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/SDF.h" line="94" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/SDF.h" bodystart="94" bodyend="96"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -163,7 +163,7 @@
         <link refid="structSR__GRAPH__NS_1_1SDF_1_1Point"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h" line="51" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h" bodystart="51" bodyend="97"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Font/SDF.h" line="51" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/SDF.h" bodystart="51" bodyend="97"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1SDF_1_1Grid_1a8b3191945cc0c8394f21fe4814bfdd20" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SDF::Grid</scope><name>GenerateSDF</name></member>
       <member refid="structSR__GRAPH__NS_1_1SDF_1_1Grid_1a833aa79050a6a1598a2b9c9bee5cc138" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SDF::Grid</scope><name>Get</name></member>

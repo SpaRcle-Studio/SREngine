@@ -6,7 +6,7 @@
     <includes local="no">Scripting/Compilation/Typedefs.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Old/Script.h</label>
         <link refid="Script_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -140,6 +140,6 @@
 <codeline lineno="111"><highlight class="normal"></highlight></codeline>
 <codeline lineno="112"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//EVOSCRIPT_SCRIPT_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Script.h"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Old/Script.h"/>
   </compounddef>
 </doxygen>

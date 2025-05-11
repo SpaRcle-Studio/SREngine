@@ -365,5 +365,5 @@ SR_AUDIO_NS::ModPlugDataProvider::~ModPlugDataProvider () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h`
+The documentation for this class was generated from the following file `Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h`
 

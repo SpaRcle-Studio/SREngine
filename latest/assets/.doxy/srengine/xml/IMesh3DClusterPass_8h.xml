@@ -3,10 +3,10 @@
   <compounddef id="IMesh3DClusterPass_8h" kind="file" language="C++">
     <compoundname>IMesh3DClusterPass.h</compoundname>
     <includes refid="IMeshClusterPass_8h" local="no">Graphics/Pass/IMeshClusterPass.h</includes>
-    <includedby refid="DebugPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h</includedby>
-    <includedby refid="OpaquePass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/OpaquePass.h</includedby>
-    <includedby refid="ShaderOverridePass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h</includedby>
-    <includedby refid="TransparentPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/TransparentPass.h</includedby>
+    <includedby refid="DebugPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h</includedby>
+    <includedby refid="OpaquePass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/OpaquePass.h</includedby>
+    <includedby refid="ShaderOverridePass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h</includedby>
+    <includedby refid="TransparentPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/TransparentPass.h</includedby>
     <incdepgraph>
       <node id="137">
         <label>Graphics/Memory/DescriptorManager.h</label>
@@ -65,7 +65,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/IMesh3DClusterPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/IMesh3DClusterPass.h</label>
         <link refid="IMesh3DClusterPass_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1042,15 +1042,15 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
         <link refid="DebugPass_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h</label>
         <link refid="DepthBufferPass_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/IMesh3DClusterPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/IMesh3DClusterPass.h</label>
         <link refid="IMesh3DClusterPass_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1062,11 +1062,11 @@
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/OpaquePass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/OpaquePass.h</label>
         <link refid="OpaquePass_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h</label>
         <link refid="ShaderOverridePass_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
@@ -1074,11 +1074,11 @@
         </childnode>
       </node>
       <node id="6">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ShadowMapPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/ShadowMapPass.h</label>
         <link refid="ShadowMapPass_8h_source"/>
       </node>
       <node id="7">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/TransparentPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/TransparentPass.h</label>
         <link refid="TransparentPass_8h_source"/>
       </node>
     </invincdepgraph>
@@ -1123,6 +1123,6 @@
 <codeline lineno="32"><highlight class="normal"></highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_IMESH3DCLUSTERPASS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IMesh3DClusterPass.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/IMesh3DClusterPass.h"/>
   </compounddef>
 </doxygen>

@@ -6,7 +6,7 @@
     <includes refid="Time_8h" local="no">Utils/Types/Time.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/States/DeltaTimeState.h</label>
+        <label>Engine/inc/Engine/States/DeltaTimeState.h</label>
         <link refid="DeltaTimeState_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -875,6 +875,6 @@
 <codeline lineno="23"><highlight class="normal"></highlight></codeline>
 <codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_CORE_DELTA_TIME_STATE_H</highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/States/DeltaTimeState.h"/>
+    <location file="Engine/inc/Engine/States/DeltaTimeState.h"/>
   </compounddef>
 </doxygen>

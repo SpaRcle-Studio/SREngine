@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_b306193d88a6a4b0067721036c79fdf5" kind="dir">
+    <compoundname>Engine/inc/Engine/Tests</compoundname>
+    <innerfile refid="inc_2Engine_2Tests_2AtlasBuilderTest_8h">AtlasBuilderTest.h</innerfile>
+    <innerfile refid="HTMLTest_8h">HTMLTest.h</innerfile>
+    <innerfile refid="TestManager_8h">TestManager.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/inc/Engine/Tests/"/>
+  </compounddef>
+</doxygen>

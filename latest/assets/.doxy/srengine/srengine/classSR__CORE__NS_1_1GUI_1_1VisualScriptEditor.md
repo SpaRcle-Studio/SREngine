@@ -158,5 +158,5 @@ SR_CORE_NS::GUI::VisualScriptEditor::~VisualScriptEditor () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/GUI/VisualScriptEditor.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/GUI/VisualScriptEditor.h`
 

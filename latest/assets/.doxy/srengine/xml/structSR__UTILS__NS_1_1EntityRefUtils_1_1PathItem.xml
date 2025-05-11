@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="44" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="44" column="20" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem_1a49ccafb9afad94a3d4ec633ee29491a6" prot="public" static="no" mutable="no">
         <type>uint16_t</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="46" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" bodystart="46" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="46" column="18" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem_1a5fdf4ae10ff96be9de9f2f4a23f171b4" prot="public" static="no" mutable="no">
         <type>Action</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="48" column="16" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" bodystart="48" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="48" column="16" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" bodystart="48" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="38" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="38" column="9"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem_1a20f1a54f51f556834e13e0eda51142f9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="39" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" bodystart="39" bodyend="41"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="39" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" bodystart="39" bodyend="41"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem_1aeb991f296240550007b955fcbb0477e2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="50" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" bodystart="50" bodyend="55"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="50" column="14" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" bodystart="50" bodyend="55"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -156,7 +156,7 @@
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="35" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" bodystart="35" bodyend="56"/>
+    <location file="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="35" column="5" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" bodystart="35" bodyend="56"/>
     <listofallmembers>
       <member refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem_1a5fdf4ae10ff96be9de9f2f4a23f171b4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>action</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>AddSerializationFlags</name></member>

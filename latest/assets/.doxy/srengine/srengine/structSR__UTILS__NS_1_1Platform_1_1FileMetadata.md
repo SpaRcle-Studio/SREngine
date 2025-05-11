@@ -97,5 +97,5 @@ uint64_t SR_UTILS_NS::Platform::FileMetadata::lastWriteTime;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Platform/Platform.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Platform/Platform.h`
 

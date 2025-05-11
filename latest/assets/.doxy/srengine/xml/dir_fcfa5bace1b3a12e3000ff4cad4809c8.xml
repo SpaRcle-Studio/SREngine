@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_fcfa5bace1b3a12e3000ff4cad4809c8" kind="dir">
+    <compoundname>Engine/libs/Utils/inc/Utils/Network</compoundname>
+    <innerdir refid="dir_1cfa5756459a2c0a929c2f3bb67979f7">Engine/libs/Utils/inc/Utils/Network/Asio</innerdir>
+    <innerdir refid="dir_5fb37d98e33c57c80beb790a969e531f">Engine/libs/Utils/inc/Utils/Network/Headers</innerdir>
+    <innerfile refid="Acceptor_8h">Acceptor.h</innerfile>
+    <innerfile refid="Client_8h">Client.h</innerfile>
+    <innerfile refid="Context_8h">Context.h</innerfile>
+    <innerfile refid="FileDownloader_8h">FileDownloader.h</innerfile>
+    <innerfile refid="Message_8h">Message.h</innerfile>
+    <innerfile refid="PeerToPeer_8h">PeerToPeer.h</innerfile>
+    <innerfile refid="Pinger_8h">Pinger.h</innerfile>
+    <innerfile refid="Server_8h">Server.h</innerfile>
+    <innerfile refid="Socket_8h">Socket.h</innerfile>
+    <innerfile refid="Utils_2inc_2Utils_2Network_2Utils_8h">Utils.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Utils/inc/Utils/Network/"/>
+  </compounddef>
+</doxygen>

@@ -4,7 +4,7 @@
 
 
 
-[**FileList**](files.md) **>** [**Core**](dir_0e25eeab45a2a860e54b41439eaf8784.md) **>** [**libs**](dir_ec277bd8bac57730a602f096f68de393.md) **>** [**Scripting**](dir_8d890c1ced0da046da53f80c44d31720.md) **>** [**inc**](dir_7f135c995c1edef3d688ff3261945ab5.md) **>** [**Scripting**](dir_1d502c2700a8bda2469c0cfc127e6ee9.md) **>** [**Cpp**](dir_5b4c9295b84b252e440361db0d67cd77.md) **>** [**ScriptSystem.h**](ScriptSystem_8h.md)
+[**FileList**](files.md) **>** [**Cpp**](dir_b8cef419041e294130040bdf7c4c8d81.md) **>** [**ScriptSystem.h**](ScriptSystem_8h.md)
 
 [Go to the source code of this file](ScriptSystem_8h_source.md)
 
@@ -94,5 +94,5 @@
 
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h`
+The documentation for this class was generated from the following file `Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h`
 

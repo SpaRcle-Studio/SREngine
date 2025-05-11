@@ -195,5 +195,5 @@ bool SR_GRAPH_NS::FrameBufferFeatures::depthTransferSrc;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h`
 

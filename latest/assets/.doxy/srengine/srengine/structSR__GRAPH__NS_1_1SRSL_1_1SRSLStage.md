@@ -97,5 +97,5 @@ SR_UTILS_NS::Path SR_GRAPH_NS::SRSL::SRSLStage::path;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h`
 

@@ -139,5 +139,5 @@ std::vector<Enumerator> SR_UTILS_NS::EnumReflector::Data::values;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Common/EnumReflector.h`
 

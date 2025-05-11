@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="58" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" bodystart="58" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="58" column="25" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" bodystart="58" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="31" column="5" declfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" declline="31" declcolumn="5"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="31" column="5" declfile="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" declline="31" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="EntityRefUtils_8h_1a483b89d75a9bd68d6ff3e491dc15f5cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__WORLD__NS_1_1Scene" kindref="compound">SR_WORLD_NS::Scene</ref> &gt;</type>
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="60" column="45" declfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" declline="60" declcolumn="45"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="60" column="45" declfile="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" declline="60" declcolumn="45"/>
       </memberdef>
       <memberdef kind="function" id="EntityRefUtils_8h_1afed7830f50023af921f90e27e3886bae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; Entity &gt;</type>
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="62" column="45" declfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" declline="62" declcolumn="45"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="62" column="45" declfile="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" declline="62" declcolumn="45"/>
       </memberdef>
       <memberdef kind="function" id="EntityRefUtils_8h_1af17be528d7bff5d8303f39ada7dd11d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED RefPath</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="64" column="29" declfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" declline="64" declcolumn="29"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="64" column="29" declfile="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" declline="64" declcolumn="29"/>
       </memberdef>
       <memberdef kind="function" id="EntityRefUtils_8h_1a240cf646a185a380314ac97b21458482" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED RefPath</type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="65" column="29" declfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" declline="65" declcolumn="29"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="65" column="29" declfile="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" declline="65" declcolumn="29"/>
       </memberdef>
       <memberdef kind="function" id="EntityRefUtils_8h_1a6aab74edf35f6a4acdd846b5dcd4b065" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="67" column="26" declfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" declline="67" declcolumn="26"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="67" column="26" declfile="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" declline="67" declcolumn="26"/>
       </memberdef>
       <memberdef kind="function" id="EntityRefUtils_8h_1a36885ae0b9bfc160d84769174ccf2b6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -164,13 +164,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="68" column="26" declfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" declline="68" declcolumn="26"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="68" column="26" declfile="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" declline="68" declcolumn="26"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="21" column="1"/>
+    <location file="Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="21" column="1"/>
   </compounddef>
 </doxygen>

@@ -117,5 +117,5 @@ using SR_UTILS_NS::Details::ReserveMethodT = typedef decltype(std::declval<T>().
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Common/StringAtomLiterals.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Common/StringAtomLiterals.h`
 

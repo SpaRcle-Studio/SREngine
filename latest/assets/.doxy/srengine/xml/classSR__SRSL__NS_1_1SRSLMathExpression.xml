@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="37" column="20" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="37" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLMathExpression_1a0bdfd641b18e8ca7706c18a3f477df0e" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="structSR__SRSL__NS_1_1Lexem" kindref="compound">Lexem</ref> &gt;</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="39" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" bodystart="39" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="39" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLMathExpression_1a17520944c4f639d93c741c147118b3e8" prot="private" static="no" mutable="no">
         <type>int64_t</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="40" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" bodystart="40" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="40" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" bodystart="40" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="15" column="32"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="15" column="32"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="18" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="18" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLMathExpression_1a7877b0d38e04db74abc71a2a7243ec34" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="20" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="20" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLMathExpression_1abe91656ed2ca679a27cfc1a097cf7363" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="21" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="21" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLMathExpression_1a6bbc5828ed3f100d6ca91d6366f90adf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref> *</type>
@@ -139,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="23" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="23" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLMathExpression_1a1017451846b220127aac998f98b076d9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref> *</type>
@@ -153,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="24" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="24" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLMathExpression_1a6162c05a97a3cc132f4056372c85a415" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref> *</type>
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="25" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="25" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLMathExpression_1a2b2d6b98c4689bc6bb41629db1f9d201" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -181,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="27" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="27" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLMathExpression_1a597e0b112c62fd1cf7873e3289bb4c4f" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -195,7 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="29" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="29" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLMathExpression_1a9ccada350129433fa52760ebf1daaffa" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -209,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="31" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="31" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLMathExpression_1ae275b1b2ffca07a934e3893dafbe75e4" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -223,7 +223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="32" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="32" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLMathExpression_1a302abcb85de9fb0563167d42508c0260" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="structSR__SRSL__NS_1_1Lexem" kindref="compound">Lexem</ref> *</type>
@@ -241,7 +241,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="33" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="33" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLMathExpression_1a12866e1a1461f0a767c71153e7cfc66c" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="structSR__SRSL__NS_1_1Lexem" kindref="compound">Lexem</ref> *</type>
@@ -255,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="34" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="34" column="34"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -310,7 +310,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="12" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" bodystart="12" bodyend="42"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" line="12" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h" bodystart="12" bodyend="42"/>
     <listofallmembers>
       <member refid="classSR__SRSL__NS_1_1SRSLMathExpression_1a1c06da5173c6615fb2e9590304a878e4" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLMathExpression</scope><name>Analyze</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLMathExpression_1a80e7fc5bcfc80d927bd48b12954651da" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLMathExpression</scope><name>Clear</name></member>

@@ -3,10 +3,10 @@
   <compounddef id="ImNodeEditorUtils_8h" kind="file" language="C++">
     <compoundname>ImNodeEditorUtils.h</compoundname>
     <includes refid="Graphics_2inc_2Graphics_2macros_8h" local="no">Graphics/macros.h</includes>
-    <includedby refid="NodeBuilder_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h</includedby>
+    <includedby refid="NodeBuilder_8h" local="no">Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h</label>
         <link refid="ImNodeEditorUtils_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -35,27 +35,27 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="4">
-        <label>Engine/Core/inc/Core/GUI/AnimatorEditor.h</label>
+        <label>Engine/inc/Engine/GUI/AnimatorEditor.h</label>
         <link refid="AnimatorEditor_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h</label>
+        <label>Engine/inc/Engine/GUI/RenderTechniqueEditor.h</label>
         <link refid="RenderTechniqueEditor_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h</label>
         <link refid="ImNodeEditorUtils_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h</label>
         <link refid="NodeBuilder_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h</label>
         <link refid="NodeWidget_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
@@ -107,6 +107,6 @@
 <codeline lineno="35"><highlight class="normal"></highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_IMNODEEDITORUTILS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h"/>
   </compounddef>
 </doxygen>

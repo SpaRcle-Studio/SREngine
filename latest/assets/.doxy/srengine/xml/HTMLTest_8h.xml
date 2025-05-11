@@ -7,7 +7,7 @@
     <includes refid="CSSParser_8h" local="no">Utils/Web/CSS/CSSParser.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/Tests/HTMLTest.h</label>
+        <label>Engine/inc/Engine/Tests/HTMLTest.h</label>
         <link refid="HTMLTest_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1070,6 +1070,6 @@
 <codeline lineno="35"><highlight class="normal"></highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_CORE_HTML_TEST_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/Tests/HTMLTest.h"/>
+    <location file="Engine/inc/Engine/Tests/HTMLTest.h"/>
   </compounddef>
 </doxygen>

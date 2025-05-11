@@ -3,7 +3,7 @@
   <compounddef id="CSSColor_8h" kind="file" language="C++">
     <compoundname>CSSColor.h</compoundname>
     <includes refid="CSSSizeValue_8h" local="no">Utils/Web/CSS/CSSSizeValue.h</includes>
-    <includedby refid="CSS_8h" local="no">Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h</includedby>
+    <includedby refid="CSS_8h" local="no">Engine/libs/Utils/inc/Utils/Web/CSS/CSS.h</includedby>
     <incdepgraph>
       <node id="78">
         <label>Utils/Common/Breakpoint.h</label>
@@ -272,7 +272,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSColor.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Web/CSS/CSSColor.h</label>
         <link refid="CSSColor_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -631,27 +631,27 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="4">
-        <label>Engine/Core/inc/Core/Tests/HTMLTest.h</label>
+        <label>Engine/inc/Engine/Tests/HTMLTest.h</label>
         <link refid="HTMLTest_8h_source"/>
       </node>
       <node id="8">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
         <link refid="HTMLDrawerPass_8h_source"/>
       </node>
       <node id="6">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
         <link refid="HTMLDrawableElement_8h_source"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
       <node id="7">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
         <link refid="HTMLRenderer_8h_source"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Web/CSS/CSS.h</label>
         <link refid="CSS_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -659,19 +659,19 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSColor.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Web/CSS/CSSColor.h</label>
         <link refid="CSSColor_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSParser.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Web/CSS/CSSParser.h</label>
         <link refid="CSSParser_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Web/HTML/HTML.h</label>
         <link refid="HTML_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
@@ -679,7 +679,7 @@
         </childnode>
       </node>
       <node id="9">
-        <label>Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTMLParser.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Web/HTML/HTMLParser.h</label>
         <link refid="HTMLParser_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
@@ -808,6 +808,6 @@
 <codeline lineno="110"><highlight class="normal"></highlight></codeline>
 <codeline lineno="111"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_COMMON_WEB_CSS_COLOR_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSColor.h"/>
+    <location file="Engine/libs/Utils/inc/Utils/Web/CSS/CSSColor.h"/>
   </compounddef>
 </doxygen>

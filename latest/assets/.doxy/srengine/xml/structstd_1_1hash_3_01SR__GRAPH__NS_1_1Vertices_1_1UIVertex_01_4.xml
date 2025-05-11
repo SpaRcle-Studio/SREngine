@@ -21,14 +21,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="430" column="16" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="430" bodyend="438"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="430" column="16" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="430" bodyend="438"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="429" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="429" bodyend="439"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="429" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="429" bodyend="439"/>
     <listofallmembers>
       <member refid="structstd_1_1hash_3_01SR__GRAPH__NS_1_1Vertices_1_1UIVertex_01_4_1a534f926bf1520cbbfac9f74834b5460b" prot="public" virt="non-virtual"><scope>std::hash&lt; SR_GRAPH_NS::Vertices::UIVertex &gt;</scope><name>operator()</name></member>
     </listofallmembers>

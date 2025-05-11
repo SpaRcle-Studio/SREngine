@@ -167,5 +167,5 @@ SR_MATH_NS::UVector2 SR_GRAPH_NS::AtlasBuilderData::step;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h`
 

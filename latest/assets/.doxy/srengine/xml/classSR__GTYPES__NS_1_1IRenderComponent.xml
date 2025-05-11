@@ -20,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" line="18" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" bodystart="18" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" line="18" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" bodystart="18" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" line="20" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" bodystart="20" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" line="20" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" bodystart="20" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GTYPES__NS_1_1IRenderComponent_1a95e88410ef4fd3374845724623f6cf55" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GTYPES__NS_1_1Camera" kindref="compound">Camera</ref> &gt;</type>
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" line="21" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" bodystart="21" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" line="21" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" bodystart="21" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" line="32" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" line="32" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" bodystart="32" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -85,7 +85,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" line="24" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1IRenderComponent_1a341f5491cabb294266eec545684cc553" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" line="25" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" line="25" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1IRenderComponent_1a8ffc0a7bba083f7d2703dd38752c7405" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD CameraPtr</type>
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" line="27" column="32"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" line="27" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1IRenderComponent_1ab61fb3a6e950d558e4a24fd316c97062" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD RenderScenePtr</type>
@@ -129,7 +129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" line="28" column="37"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" line="28" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1IRenderComponent_1af32114a133ad6f5455d0e5ee95161fe5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD RenderScenePtr</type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" line="29" column="37"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" line="29" column="37"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -316,7 +316,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" line="16" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" bodystart="16" bodyend="34"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" line="16" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/IRenderComponent.h" bodystart="16" bodyend="34"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::IRenderComponent</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::IRenderComponent</scope><name>BaseComponent</name></member>

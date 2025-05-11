@@ -8,7 +8,7 @@
     <includes refid="Component_8h" local="no">Utils/ECS/Component.h</includes>
     <includes refid="Measurement_8h" local="no">Utils/Common/Measurement.h</includes>
     <includes refid="SafePointer_8h" local="no">Utils/Types/SafePointer.h</includes>
-    <includedby refid="Vehicle4W3D_8h" local="no">Engine/Core/libs/Physics/inc/Physics/3D/Vehicle4W3D.h</includedby>
+    <includedby refid="Vehicle4W3D_8h" local="no">Engine/libs/Physics/inc/Physics/3D/Vehicle4W3D.h</includedby>
     <incdepgraph>
       <node id="6">
         <label>Physics/PhysicsLib.h</label>
@@ -33,7 +33,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Physics/inc/Physics/Vehicle.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Vehicle.h</label>
         <link refid="Vehicle_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1047,17 +1047,17 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/libs/Physics/inc/Physics/3D/Vehicle4W3D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/3D/Vehicle4W3D.h</label>
         <link refid="Vehicle4W3D_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXVehicle4W3D.h</label>
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXVehicle4W3D.h</label>
         <link refid="PhysXVehicle4W3D_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Physics/inc/Physics/Vehicle.h</label>
+        <label>Engine/libs/Physics/inc/Physics/Vehicle.h</label>
         <link refid="Vehicle_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1110,6 +1110,6 @@
 <codeline lineno="39"><highlight class="normal"></highlight></codeline>
 <codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_VEHICLE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Physics/inc/Physics/Vehicle.h"/>
+    <location file="Engine/libs/Physics/inc/Physics/Vehicle.h"/>
   </compounddef>
 </doxygen>

@@ -122,5 +122,5 @@ static inline void SR_UTILS_NS::ObjectDataAccessor::Save (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Serialization/ObjectDataAccessor.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessor.h`
 

@@ -6,18 +6,18 @@
     <includes refid="RenderContext_8h" local="no">Graphics/Render/RenderContext.h</includes>
     <includes refid="SRClass_8h" local="no">Utils/TypeTraits/SRClass.h</includes>
     <includes refid="Reflection_2Property_8h" local="no">Utils/Reflection/Property.h</includes>
-    <includedby refid="Inspector_8h" local="no">Engine/Core/inc/Core/GUI/Inspector.h</includedby>
-    <includedby refid="BehaviourNamePropertyDrawer_8h" local="no">Engine/Core/inc/Core/GUI/PropertyDrawers/BehaviourNamePropertyDrawer.h</includedby>
-    <includedby refid="BitMapPropertyDrawer_8h" local="no">Engine/Core/inc/Core/GUI/PropertyDrawers/BitMapPropertyDrawer.h</includedby>
-    <includedby refid="EnumPropertyDrawer_8h" local="no">Engine/Core/inc/Core/GUI/PropertyDrawers/EnumPropertyDrawer.h</includedby>
-    <includedby refid="ObjectPropertyDrawer_8h" local="no">Engine/Core/inc/Core/GUI/PropertyDrawers/ObjectPropertyDrawer.h</includedby>
-    <includedby refid="PathPropertyDrawer_8h" local="no">Engine/Core/inc/Core/GUI/PropertyDrawers/PathPropertyDrawer.h</includedby>
-    <includedby refid="PointerPropertyDrawer_8h" local="no">Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h</includedby>
-    <includedby refid="StringPropertyDrawer_8h" local="no">Engine/Core/inc/Core/GUI/PropertyDrawers/StringPropertyDrawer.h</includedby>
-    <includedby refid="VectorPropertyDrawer_8h" local="no">Engine/Core/inc/Core/GUI/PropertyDrawers/VectorPropertyDrawer.h</includedby>
+    <includedby refid="Inspector_8h" local="no">Engine/inc/Engine/GUI/Inspector.h</includedby>
+    <includedby refid="BehaviourNamePropertyDrawer_8h" local="no">Engine/inc/Engine/GUI/PropertyDrawers/BehaviourNamePropertyDrawer.h</includedby>
+    <includedby refid="BitMapPropertyDrawer_8h" local="no">Engine/inc/Engine/GUI/PropertyDrawers/BitMapPropertyDrawer.h</includedby>
+    <includedby refid="EnumPropertyDrawer_8h" local="no">Engine/inc/Engine/GUI/PropertyDrawers/EnumPropertyDrawer.h</includedby>
+    <includedby refid="ObjectPropertyDrawer_8h" local="no">Engine/inc/Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h</includedby>
+    <includedby refid="PathPropertyDrawer_8h" local="no">Engine/inc/Engine/GUI/PropertyDrawers/PathPropertyDrawer.h</includedby>
+    <includedby refid="PointerPropertyDrawer_8h" local="no">Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h</includedby>
+    <includedby refid="StringPropertyDrawer_8h" local="no">Engine/inc/Engine/GUI/PropertyDrawers/StringPropertyDrawer.h</includedby>
+    <includedby refid="VectorPropertyDrawer_8h" local="no">Engine/inc/Engine/GUI/PropertyDrawers/VectorPropertyDrawer.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawer.h</label>
         <link refid="PropertyDrawer_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1652,11 +1652,11 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/inc/Core/GUI/Inspector.h</label>
+        <label>Engine/inc/Engine/GUI/Inspector.h</label>
         <link refid="Inspector_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawer.h</label>
         <link refid="PropertyDrawer_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1678,31 +1678,31 @@
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/BehaviourNamePropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/BehaviourNamePropertyDrawer.h</label>
         <link refid="BehaviourNamePropertyDrawer_8h_source"/>
       </node>
       <node id="7">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/BehaviourPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.h</label>
         <link refid="BehaviourPropertyDrawer_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/BitMapPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/BitMapPropertyDrawer.h</label>
         <link refid="BitMapPropertyDrawer_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/EnumPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/EnumPropertyDrawer.h</label>
         <link refid="EnumPropertyDrawer_8h_source"/>
       </node>
       <node id="8">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h</label>
         <link refid="MaterialDataPropertyDrawer_8h_source"/>
       </node>
       <node id="11">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/MaterialPropertyDrawer.h</label>
         <link refid="MaterialPropertyDrawer_8h_source"/>
       </node>
       <node id="6">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/ObjectPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h</label>
         <link refid="ObjectPropertyDrawer_8h_source"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1712,11 +1712,11 @@
         </childnode>
       </node>
       <node id="9">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/PathPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/PathPropertyDrawer.h</label>
         <link refid="PathPropertyDrawer_8h_source"/>
       </node>
       <node id="10">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h</label>
         <link refid="PointerPropertyDrawer_8h_source"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1724,11 +1724,11 @@
         </childnode>
       </node>
       <node id="12">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/StringPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/StringPropertyDrawer.h</label>
         <link refid="StringPropertyDrawer_8h_source"/>
       </node>
       <node id="13">
-        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/VectorPropertyDrawer.h</label>
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/VectorPropertyDrawer.h</label>
         <link refid="VectorPropertyDrawer_8h_source"/>
       </node>
     </invincdepgraph>
@@ -1940,6 +1940,6 @@
 <codeline lineno="192"><highlight class="normal"></highlight></codeline>
 <codeline lineno="193"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_CORE_PROPERTY_DRAWER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h"/>
+    <location file="Engine/inc/Engine/GUI/PropertyDrawer.h"/>
   </compounddef>
 </doxygen>

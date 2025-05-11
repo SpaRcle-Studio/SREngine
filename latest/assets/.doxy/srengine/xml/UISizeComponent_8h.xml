@@ -5,7 +5,7 @@
     <includes refid="UIModifier_8h" local="no">Utils/UI/UIModifier.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/UISizeComponent.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UISizeComponent.h</label>
         <link refid="UISizeComponent_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1044,6 +1044,6 @@
 <codeline lineno="29"><highlight class="normal"></highlight></codeline>
 <codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_GRAPHICS_UI_SIZE_COMPONENT_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/UISizeComponent.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/UI/UISizeComponent.h"/>
   </compounddef>
 </doxygen>

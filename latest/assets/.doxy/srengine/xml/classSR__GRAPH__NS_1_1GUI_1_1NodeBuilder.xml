@@ -70,7 +70,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="20" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="20" bodyend="29"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="20" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="20" bodyend="29"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -87,7 +87,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="54" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="54" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="54" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="54" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a6d33ec119c71986fc40157842b0d80c5" prot="private" static="no" mutable="no">
         <type>uintptr_t</type>
@@ -102,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="56" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="56" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="56" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ac4dafb35d01d34c364201d85428d8878" prot="private" static="no" mutable="no">
         <type>Node *</type>
@@ -117,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="58" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="58" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="58" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ae2682e5910d3ba5285c5e8b5afb1549d" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1GUI_1_1Pin" kindref="compound">Pin</ref> *</type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="59" column="13" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="59" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="59" column="13" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ae09f47eb8fcc1838e0dad285e891e726" prot="private" static="no" mutable="no">
         <type>Stage</type>
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="61" column="15" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="61" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="61" column="15" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="61" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ae3f2bce2f05af7a20594c51bcf467e70" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -162,7 +162,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="67" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="67" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="67" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="67" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -182,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="31" column="18"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="31" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a47223e89216a464dd784684d8a3e9c72" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -196,7 +196,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="32" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="32" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a3b6d535c3044bd47dd9a3164b5b00d15" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -214,7 +214,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="34" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="34" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a7f740b5d0b701ddb0025e4c3d283eafd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -228,7 +228,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="35" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="35" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a75cd670eb7d489b6185d24e74a2e8b7d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -242,7 +242,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="38" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="38" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1aa0409a84d4d648c0c14fb991d2fffc87" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -260,7 +260,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="40" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="40" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a992864431d1a812a7ac685ef8563fd54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -274,7 +274,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="41" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="41" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a92c3c2944e4be77744de7586e451f4e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -288,7 +288,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="43" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="43" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a7d64622abb2b73fe86b8ba2ecfae0ae4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -306,7 +306,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="45" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="45" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1af4f5bd5eaf79515dcdc62d3b4c160663" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -320,7 +320,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="46" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="46" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -340,7 +340,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="49" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="49" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -371,7 +371,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="19" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="19" bodyend="69"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="19" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="19" bodyend="69"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a3b6d535c3044bd47dd9a3164b5b00d15" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>Begin</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a7f740b5d0b701ddb0025e4c3d283eafd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>End</name></member>

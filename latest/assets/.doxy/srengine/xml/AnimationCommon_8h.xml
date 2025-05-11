@@ -9,12 +9,12 @@
     <includes refid="Enumerations_8h" local="no">Utils/Common/Enumerations.h</includes>
     <includes local="no">assimp/vector3.h</includes>
     <includes local="no">assimp/quaternion.h</includes>
-    <includedby refid="AnimationData_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationData.h</includedby>
-    <includedby refid="AnimationGraphNode_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h</includedby>
-    <includedby refid="AnimationPose_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationPose.h</includedby>
+    <includedby refid="AnimationData_8h" local="no">Engine/libs/Graphics/inc/Graphics/Animations/AnimationData.h</includedby>
+    <includedby refid="AnimationGraphNode_8h" local="no">Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h</includedby>
+    <includedby refid="AnimationPose_8h" local="no">Engine/libs/Graphics/inc/Graphics/Animations/AnimationPose.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h</label>
         <link refid="AnimationCommon_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -659,15 +659,15 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="7">
-        <label>Engine/Core/inc/Core/GUI/AnimatorEditor.h</label>
+        <label>Engine/inc/Engine/GUI/AnimatorEditor.h</label>
         <link refid="AnimatorEditor_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h</label>
         <link refid="AnimationChannel_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h</label>
         <link refid="AnimationCommon_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -677,7 +677,7 @@
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationContext.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationContext.h</label>
         <link refid="AnimationContext_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
@@ -689,13 +689,13 @@
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationData.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationData.h</label>
         <link refid="AnimationData_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="6">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraph.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraph.h</label>
         <link refid="AnimationGraph_8h_source"/>
         <childnode refid="7" relation="include">
         </childnode>
@@ -703,13 +703,13 @@
         </childnode>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h</label>
         <link refid="AnimationGraphNode_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="9">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h</label>
         <link refid="AnimationKey_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
@@ -717,37 +717,37 @@
         </childnode>
       </node>
       <node id="14">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationPose.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationPose.h</label>
         <link refid="AnimationPose_8h_source"/>
         <childnode refid="9" relation="include">
         </childnode>
       </node>
       <node id="12">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationState.h</label>
         <link refid="AnimationState_8h_source"/>
         <childnode refid="13" relation="include">
         </childnode>
       </node>
       <node id="10">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h</label>
         <link refid="AnimationStateCondition_8h_source"/>
         <childnode refid="11" relation="include">
         </childnode>
       </node>
       <node id="13">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateMachine.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateMachine.h</label>
         <link refid="AnimationStateMachine_8h_source"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
       <node id="11">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h</label>
         <link refid="AnimationStateTransition_8h_source"/>
         <childnode refid="12" relation="include">
         </childnode>
       </node>
       <node id="8">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
         <link refid="Animator_8h_source"/>
       </node>
     </invincdepgraph>
@@ -890,6 +890,6 @@
 <codeline lineno="129"><highlight class="normal"></highlight></codeline>
 <codeline lineno="130"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_ANIMATION_COMMON_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h"/>
   </compounddef>
 </doxygen>

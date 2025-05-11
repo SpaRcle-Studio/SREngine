@@ -6,7 +6,7 @@
     <includes refid="Vector3_8h" local="no">Utils/Math/Vector3.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/inc/Core/World/VisualChunk.h</label>
+        <label>Engine/inc/Engine/World/VisualChunk.h</label>
         <link refid="VisualChunk_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -903,6 +903,6 @@
 <codeline lineno="50"><highlight class="normal"></highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_VISUALCHUNK_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/World/VisualChunk.h"/>
+    <location file="Engine/inc/Engine/World/VisualChunk.h"/>
   </compounddef>
 </doxygen>

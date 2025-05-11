@@ -153,5 +153,5 @@ SR_MATH_NS::FVector3 SR_AUDIO_NS::ListenerData::velocity;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Audio/inc/Audio/ListenerData.h`
+The documentation for this class was generated from the following file `Engine/libs/Audio/inc/Audio/ListenerData.h`
 

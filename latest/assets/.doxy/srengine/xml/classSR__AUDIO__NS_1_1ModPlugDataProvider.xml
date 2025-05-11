@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="34" column="25" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="34" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="34" column="25" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a4aeffd3a4c807733281d3e82174dd505" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__AUDIO__NS_1_1WaveDataFormat" kindref="compound">WaveDataFormat</ref></type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="35" column="24" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="35" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="35" column="24" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a885c214bd1338a33c623b175f01187db" prot="private" static="no" mutable="no">
         <type>std::vector&lt; uint8_t &gt;</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="37" column="21" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="37" column="21" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1ac531a206a369d3f9e84c95e43ef4f9e7" prot="private" static="no" mutable="no">
         <type>size_t</type>
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="38" column="16" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="38" column="16" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1abc65a63eacb6492ba4f39c458a56506e" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -73,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="40" column="14" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="40" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="40" column="14" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1ac03869f156186054259a4466cb9cd7d7" prot="private" static="no" mutable="no">
         <type>ModPlugFile *</type>
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="43" column="21" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="43" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="43" column="21" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="43" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="17" column="18"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="17" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1af3ea5e569588f2e078a68cc637c9947a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -122,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="18" column="9"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="18" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1aa6809b862fe59785f57782930ea6e90c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD const <ref refid="classSR__AUDIO__NS_1_1WaveDataFormat" kindref="compound">WaveDataFormat</ref> &amp;</type>
@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="20" column="43" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="20" bodyend="20"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="20" column="43" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="20" bodyend="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a2bc43585cb3606b49994781f65baf602" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>const uint8_t *</type>
@@ -152,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="22" column="23"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="22" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a86ec48e3a7b319fbc078e50f7c0ae4f8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>size_t</type>
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="23" column="16"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="23" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a9196fb87f84b0395d20d814ed93540a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>size_t</type>
@@ -186,7 +186,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="25" column="16"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="25" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1ac602d28656f674e6b3972701547959bf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -201,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="26" column="14" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="26" bodyend="26"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="26" column="14" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="26" bodyend="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1ad2d7933470365e6fea38820dca6b1d48" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -216,7 +216,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="27" column="14" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="27" bodyend="27"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="27" column="14" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="27" bodyend="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a0851d7f0660c280c5f8deb0a6db174e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -235,7 +235,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="28" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="28" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -255,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="31" column="13"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="31" column="13"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -299,7 +299,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="14" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="15" bodyend="44"/>
+    <location file="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="14" column="5" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="15" bodyend="44"/>
     <listofallmembers>
       <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1ae0f5191c5ca18fe67e3951c9c8343061" prot="private" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>DecodeFromFile</name></member>
       <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a2bc43585cb3606b49994781f65baf602" prot="public" virt="virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>GetWaveData</name></member>

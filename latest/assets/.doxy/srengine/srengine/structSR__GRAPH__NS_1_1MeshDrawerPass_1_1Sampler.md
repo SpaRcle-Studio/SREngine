@@ -167,5 +167,5 @@ uint32_t SR_GRAPH_NS::MeshDrawerPass::Sampler::textureId;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h`
 

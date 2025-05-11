@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="39" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="39" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="39" column="9" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="39" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="71" column="29" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="71" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="71" column="29" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="71" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1a658f9aa77cb56f9f3b19c557b33d62fb" prot="private" static="no" mutable="no">
         <type>std::set&lt; <ref refid="classSR__PTYPES__NS_1_1Rigidbody" kindref="compound">SR_PTYPES_NS::Rigidbody</ref> * &gt;</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="73" column="18" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="73" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="73" column="18" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="73" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1a06b47aaf1614cd4497944121b2682b41" prot="private" static="no" mutable="no">
         <type>std::map&lt; LibraryType, <ref refid="classSR__PTYPES__NS_1_1PhysicsMaterialImpl" kindref="compound">PhysicsMaterialImpl</ref> * &gt;</type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="74" column="18" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="74" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="74" column="18" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="74" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="41" column="9"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="41" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1a273863fd433b44e4fa3b259e4d9701ec" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="42" column="9"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="42" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1add639a8a30846a7d4f75e87f3e6a3fc6" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="67" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="67" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1ac8f715f54be0c9b7186d66f1cc60f8be" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="68" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="68" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -140,7 +140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="45" column="32"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="45" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1ad3e8dcd4874a74466ac8b077e1cac5a5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -162,7 +162,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="46" column="21"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="46" column="21"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -183,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="49" column="28"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="49" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1a8a15f368404d49bd976f46de6b79adf3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -197,7 +197,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="51" column="30" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="51" bodyend="51"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="51" column="30" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="51" bodyend="51"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1a32d30c8a2dd0dcc5812b080f9c85c93e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -211,7 +211,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="52" column="30" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="52" bodyend="52"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="52" column="30" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="52" bodyend="52"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1a3e6e1ea0e9f96db0f501f73291cc3c03" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -225,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="53" column="30" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="53" bodyend="53"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="53" column="30" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="53" bodyend="53"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1aac18b013ee8a49e0baeeb9ecbc3c512f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD Combine</type>
@@ -239,7 +239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="54" column="30" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="54" bodyend="54"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="54" column="30" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="54" bodyend="54"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1ae4e7042c493bffaff95d132a0659dc31" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD Combine</type>
@@ -253,7 +253,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="55" column="30" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="55" bodyend="55"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="55" column="30" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="55" bodyend="55"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1a44bb4bdcedf4b23aef077989b770d410" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__PTYPES__NS_1_1PhysicsMaterialImpl" kindref="compound">PhysicsMaterialImpl</ref> *</type>
@@ -271,7 +271,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="56" column="42"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="56" column="42"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1afe998d968a1f7a0af8c99916b64b655d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -289,7 +289,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="58" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="58" bodyend="58"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="58" column="14" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="58" bodyend="58"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1ac67c655ff586305ed4a50afb87e2a05c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -307,7 +307,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="59" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="59" bodyend="59"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="59" column="14" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="59" bodyend="59"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1a0e70a19233941b64f39c70a847615b6b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -325,7 +325,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="60" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="60" bodyend="60"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="60" column="14" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="60" bodyend="60"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1abec1bc86764c5fba71440d2553803ccb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -343,7 +343,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="61" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="61" bodyend="61"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="61" column="14" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="61" bodyend="61"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1a87e767dd76531a96d8e755ab27edca02" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -361,7 +361,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="62" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="62" bodyend="62"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="62" column="14" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="62" bodyend="62"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1afdf0727af089eb1197b232921a75c1ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -379,7 +379,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="63" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="63" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1aae7a9a347521d769facf9dee3899acf0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -397,7 +397,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="65" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="65" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -472,7 +472,7 @@
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="38" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="38" bodyend="75"/>
+    <location file="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" line="38" column="5" bodyfile="Engine/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="38" bodyend="75"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>AddDependency</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1abcf6bc4fde8bd87a0f1d72d0183af0cf" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>AddUsePoint</name></member>

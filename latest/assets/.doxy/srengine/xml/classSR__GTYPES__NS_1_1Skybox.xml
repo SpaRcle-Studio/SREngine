@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="47" column="16" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="47" column="16" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Skybox_1a8a2e6f118171b032551b106b236b5879" prot="private" static="no" mutable="no">
         <type>int32_t</type>
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="49" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="49" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="49" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Skybox_1a5f5189a5c25df434881ac40ef801d2e0" prot="private" static="no" mutable="no">
         <type>int32_t</type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="50" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="50" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="50" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="50" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Skybox_1a886323013f2236e6e29f859c2fc7ae9a" prot="private" static="no" mutable="no">
         <type>int32_t</type>
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="52" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="52" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="52" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Skybox_1a36f56b63a24f54b9486e86dcba9b6617" prot="private" static="no" mutable="no">
         <type>int32_t</type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="54" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="54" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="54" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="54" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Skybox_1a77ae6ebc7b8be16c11ef6d26444c758f" prot="private" static="no" mutable="no">
         <type>int32_t</type>
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="55" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="55" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="55" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="55" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Skybox_1ab5c92f0799411c36f22bc7db2234d5f6" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="57" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="57" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="57" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="57" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Skybox_1a91d4041ad95ec057abf0cfaf788edd89" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="58" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="58" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="58" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Skybox_1a2424cfe5a3bed3b627d960f46a4beb7f" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -138,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="60" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="60" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="60" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Skybox_1a7821ed61e472d266ae06783efccbe027" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -153,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="61" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="61" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="61" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="61" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Skybox_1a532a944ad2a1347f27987eb4a1538fa0" prot="private" static="no" mutable="no">
         <type>Memory::UBOManager &amp;</type>
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="63" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="63" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="63" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="63" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Skybox_1a902ac7d2ba7496ef1b6a7605c3a134fe" prot="private" static="no" mutable="no">
         <type>DescriptorManager &amp;</type>
@@ -181,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="64" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="64" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="64" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="64" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Skybox_1a49e706cf3a8664cd011b7bcebe2fe8d7" prot="private" static="no" mutable="no">
         <type>std::array&lt; TextureData::Ptr, 6 &gt;</type>
@@ -195,7 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="66" column="20" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="66" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="66" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="66" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -211,7 +211,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="18" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="18" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Skybox_1ac02acc25b21317d74304bf206e95f0f3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -225,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="19" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="19" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Skybox_1a417e3c9fb6ed1555aa9fc1ab48b58afb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -239,7 +239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="44" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="44" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -259,7 +259,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="22" column="23"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="22" column="23"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -275,7 +275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="25" column="29" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="25" bodyend="25"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="25" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="25" bodyend="25"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Skybox_1ad683507805c66207a0cba640ba9e8789" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -289,7 +289,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="26" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="26" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Skybox_1af29331f74b70b5a441acbb89c4a72b07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -303,7 +303,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="27" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="27" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Skybox_1aa49a9f4fb9e881fd51decd0a48108cc9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -317,7 +317,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="28" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="28" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Skybox_1a5fb71cea01d9b994d5cdd4525405dd54" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -332,7 +332,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="30" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="30" bodyend="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="30" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="30" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Skybox_1ab6e78d4a1f033a335c08b4de04d3d0a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -346,7 +346,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="32" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Skybox_1aff7ec4b0d77f912fa8e0cce91f5846fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -360,7 +360,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="33" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="33" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Skybox_1abd0469e29f1339adcf2ab00e4b6872a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -378,7 +378,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="35" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="35" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Skybox_1a14067cdde836d48bd1a8bd2d34a201ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -393,7 +393,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="37" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="37" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -418,7 +418,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="40" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="40" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Skybox_1a90e25702787cbb6e1b2335eedd7c0043" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>uint64_t</type>
@@ -433,7 +433,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="41" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="41" bodyend="41"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="41" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="41" bodyend="41"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -518,7 +518,7 @@
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" line="16" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="16" bodyend="68"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="16" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="16" bodyend="68"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>AddDependency</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1abcf6bc4fde8bd87a0f1d72d0183af0cf" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>AddUsePoint</name></member>

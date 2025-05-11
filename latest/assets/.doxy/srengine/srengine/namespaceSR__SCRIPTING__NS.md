@@ -149,5 +149,5 @@ SR_SCRIPTING_NS::SR_ENUM_NS_CLASS_T (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h`
+The documentation for this class was generated from the following file `Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h`
 

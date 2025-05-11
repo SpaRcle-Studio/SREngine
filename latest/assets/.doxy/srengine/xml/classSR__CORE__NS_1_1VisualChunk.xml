@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualChunk.h" line="25" column="9" bodyfile="Engine/Core/inc/Core/World/VisualChunk.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/inc/Engine/World/VisualChunk.h" line="25" column="9" bodyfile="Engine/inc/Engine/World/VisualChunk.h" bodystart="25" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualChunk.h" line="31" column="42" bodyfile="Engine/Core/inc/Core/World/VisualChunk.h" bodystart="31" bodyend="-1"/>
+        <location file="Engine/inc/Engine/World/VisualChunk.h" line="31" column="42" bodyfile="Engine/inc/Engine/World/VisualChunk.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1VisualChunk_1ad0fff7ebb41e30af6b4cae676762db09" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GTYPES__NS_1_1DebugWireframeMesh" kindref="compound">SR_GTYPES_NS::DebugWireframeMesh</ref> *</type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualChunk.h" line="32" column="42" bodyfile="Engine/Core/inc/Core/World/VisualChunk.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/inc/Engine/World/VisualChunk.h" line="32" column="42" bodyfile="Engine/inc/Engine/World/VisualChunk.h" bodystart="32" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualChunk.h" line="27" column="18"/>
+        <location file="Engine/inc/Engine/World/VisualChunk.h" line="27" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1VisualChunk_1ac67859d92752a9809905d431388e2538" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualChunk.h" line="28" column="9"/>
+        <location file="Engine/inc/Engine/World/VisualChunk.h" line="28" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualChunk.h" line="35" column="14"/>
+        <location file="Engine/inc/Engine/World/VisualChunk.h" line="35" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1VisualChunk_1a3411369b9163f29b6bf7d66512008122" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualChunk.h" line="36" column="14"/>
+        <location file="Engine/inc/Engine/World/VisualChunk.h" line="36" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1VisualChunk_1a0230326a9b42984829a344b432ac5185" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualChunk.h" line="37" column="14"/>
+        <location file="Engine/inc/Engine/World/VisualChunk.h" line="37" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1VisualChunk_1a72589f749bed47987eab8d1524a50c8f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualChunk.h" line="38" column="14"/>
+        <location file="Engine/inc/Engine/World/VisualChunk.h" line="38" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1VisualChunk_1a1a73b44ae8302a3da51524bd648f092f" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -162,7 +162,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualChunk.h" line="40" column="14"/>
+        <location file="Engine/inc/Engine/World/VisualChunk.h" line="40" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1VisualChunk_1acced2c4c847659a025d32644d2090ad5" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -177,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualChunk.h" line="41" column="14"/>
+        <location file="Engine/inc/Engine/World/VisualChunk.h" line="41" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1VisualChunk_1aee7833cab1baa9d7975b7455c1349af7" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -192,7 +192,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualChunk.h" line="42" column="14"/>
+        <location file="Engine/inc/Engine/World/VisualChunk.h" line="42" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1VisualChunk_1a2f26f8ff1c05310bed156b6bc806c82b" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -207,7 +207,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualChunk.h" line="43" column="14"/>
+        <location file="Engine/inc/Engine/World/VisualChunk.h" line="43" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1VisualChunk_1a24395e3af563c73fbb73df1d3dd1c611" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -222,7 +222,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualChunk.h" line="44" column="14"/>
+        <location file="Engine/inc/Engine/World/VisualChunk.h" line="44" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1VisualChunk_1aa34d726bf29c94881f5ab660e3172db9" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -241,7 +241,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/World/VisualChunk.h" line="46" column="14"/>
+        <location file="Engine/inc/Engine/World/VisualChunk.h" line="46" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -317,7 +317,7 @@
         <link refid="structSR__MATH__NS_1_1Vector3"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/inc/Core/World/VisualChunk.h" line="24" column="5" bodyfile="Engine/Core/inc/Core/World/VisualChunk.h" bodystart="24" bodyend="48"/>
+    <location file="Engine/inc/Engine/World/VisualChunk.h" line="24" column="5" bodyfile="Engine/inc/Engine/World/VisualChunk.h" bodystart="24" bodyend="48"/>
     <listofallmembers>
       <member refid="classSR__WORLD__NS_1_1Chunk_1a4a7f8ca9d703d0249052f2710e11f3e6" prot="public" virt="virtual"><scope>SR_CORE_NS::VisualChunk</scope><name>Access</name></member>
       <member refid="classSR__WORLD__NS_1_1Chunk_1a12dce23e46a83b6ebbc4e77ff0b1351b" prot="public" virt="non-virtual"><scope>SR_CORE_NS::VisualChunk</scope><name>Allocate</name></member>

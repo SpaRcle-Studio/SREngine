@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="15" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="15" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="15" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="17" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="17" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="17" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="17" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="friend">
@@ -51,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="14" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="14" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="14" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="41" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="41" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="41" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1DebugLine_1a1effaa1d75829ffca7bedb36a74da009" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="42" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="42" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="42" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1DebugLine_1a1b70fbff57c2b85a3792674ecfdc2715" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector4</type>
@@ -95,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="43" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="43" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="43" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="43" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -111,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="20" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="20" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugLine_1a6cdf7e43be5f31c869c1ffdab0b2de2d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="21" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="21" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugLine_1a30e6421f5a1703cf639d3ce959d24ac8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -155,7 +155,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="24" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugLine_1a6bc56600c2ec4e23fb4853e926eeae97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -173,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="25" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="25" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugLine_1a9ca4a6ccc0759764445f628c63bcba67" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -191,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="26" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="26" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugLine_1a1e84e2042fe636781bd51cfe13265ca5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -206,7 +206,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="28" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="28" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugLine_1ab5d8ae9e3beef28a0a39f6c064a6699b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD MeshType</type>
@@ -221,7 +221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="30" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="30" bodyend="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="30" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="30" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugLine_1a7167883e6f72c2c37077224271c22b5d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -236,7 +236,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="32" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="32" bodyend="32"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="32" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="32" bodyend="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugLine_1a235809b6118c7d4813c649a55302d13c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -251,7 +251,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="33" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="33" bodyend="33"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="33" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="33" bodyend="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugLine_1aba982af88e0b4061c9d0fa4ac535a909" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -266,7 +266,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="35" column="46" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="35" bodyend="38"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="35" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="35" bodyend="38"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -384,7 +384,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="13" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="13" bodyend="45"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="13" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="13" bodyend="45"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>BaseComponent</name></member>

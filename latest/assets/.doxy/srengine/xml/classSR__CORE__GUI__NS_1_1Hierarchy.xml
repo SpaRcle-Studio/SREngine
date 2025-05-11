@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="48" column="33" bodyfile="Engine/Core/inc/Core/GUI/Hierarchy.h" bodystart="48" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="48" column="33" bodyfile="Engine/inc/Engine/GUI/Hierarchy.h" bodystart="48" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1ab78d66a50cb4fb66c63950ef3668bff9" prot="private" static="no" mutable="no">
         <type>std::list&lt; SR_UTILS_NS::SceneObject::Ptr &gt;</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="49" column="19" bodyfile="Engine/Core/inc/Core/GUI/Hierarchy.h" bodystart="49" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="49" column="19" bodyfile="Engine/inc/Engine/GUI/Hierarchy.h" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a9bda454833af0943f4e392f88df454e7" prot="private" static="no" mutable="no">
         <type>std::set&lt; SR_UTILS_NS::SceneObject::Ptr &gt;</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="50" column="18" bodyfile="Engine/Core/inc/Core/GUI/Hierarchy.h" bodystart="50" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="50" column="18" bodyfile="Engine/inc/Engine/GUI/Hierarchy.h" bodystart="50" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1ac32caa7cc57b8fafb37c77309a1b70b3" prot="private" static="no" mutable="no">
         <type>std::vector&lt; SR_UTILS_NS::SceneObject::Ptr &gt;</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="51" column="21" bodyfile="Engine/Core/inc/Core/GUI/Hierarchy.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="51" column="21" bodyfile="Engine/inc/Engine/GUI/Hierarchy.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1ae2bd31037251ddfe5f8e3d7c41e629c5" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="53" column="21" bodyfile="Engine/Core/inc/Core/GUI/Hierarchy.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="53" column="21" bodyfile="Engine/inc/Engine/GUI/Hierarchy.h" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a2514040a454d548280c8daa9e6670473" prot="private" static="no" mutable="no">
         <type>SR_GRAPH_NS::GUI::Widget *</type>
@@ -87,7 +87,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="55" column="34" bodyfile="Engine/Core/inc/Core/GUI/Hierarchy.h" bodystart="55" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="55" column="34" bodyfile="Engine/inc/Engine/GUI/Hierarchy.h" bodystart="55" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="18" column="9"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="18" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a4652509093f7f1ac0fc51bfaa0eff132" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -117,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="19" column="9"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="19" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1adb2d8d61191346b6472192bb8ec9f1b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -135,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="22" column="14"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="22" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1abd67e7b4ccceefcc7b9c0373b816ca68" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -153,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="24" column="14"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a17c0e685cb7754f0317b47b92985a59d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -171,7 +171,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="26" column="14"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="26" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1ae3c65fbc8ba1ab390ab61a232f678f45" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -189,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="27" column="14"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="27" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1aeae5c849f090fc083e01a22c78b9abd3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const std::set&lt; SR_UTILS_NS::SceneObject::Ptr &gt; &amp;</type>
@@ -203,7 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="29" column="37"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="29" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a0264f032de91a26b98d9b88ec69262b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -217,7 +217,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="31" column="14"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1aaa468ffb73149b2cdbc2278cae3a0165" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -235,7 +235,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="32" column="14"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a4a69d1a33fac10718dadb5a4af25ee75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -253,7 +253,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="34" column="14"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="34" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -273,7 +273,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="37" column="14"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="37" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a1e6716177a40eaea99616c7849df1d3a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -287,7 +287,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="38" column="14"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="38" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a51ed637960df07f8b633fea282b4caa8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -305,7 +305,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="39" column="14"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="39" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a63df9e56b7326553dd1e6c964b0bd06f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void SR_INLINE</type>
@@ -319,7 +319,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="40" column="24"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="40" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a1d1fb853e17c699bee3f18c899bc4dc7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -341,7 +341,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="41" column="14"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="41" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a15fcdf495d5a461c1e60d90f377b27a1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -363,7 +363,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="42" column="14"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="42" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a5bec53304ee03b7443d2687515578184" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void SR_INLINE</type>
@@ -377,7 +377,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="43" column="24"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="43" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1aa9defca7cb772425fe26f905fc5efabe" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void SR_INLINE</type>
@@ -399,7 +399,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="44" column="24"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="44" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a83d53bd642f454b320aca272af8f3217" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void SR_INLINE</type>
@@ -413,7 +413,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="45" column="24"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="45" column="24"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -442,7 +442,7 @@
         <label>SR_GRAPH_NS::GUI::Widget</label>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="16" column="5" bodyfile="Engine/Core/inc/Core/GUI/Hierarchy.h" bodystart="16" bodyend="57"/>
+    <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="16" column="5" bodyfile="Engine/inc/Engine/GUI/Hierarchy.h" bodystart="16" bodyend="57"/>
     <listofallmembers>
       <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a51ed637960df07f8b633fea282b4caa8" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>CheckSelected</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a1d1fb853e17c699bee3f18c899bc4dc7" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>ChildContextMenu</name></member>

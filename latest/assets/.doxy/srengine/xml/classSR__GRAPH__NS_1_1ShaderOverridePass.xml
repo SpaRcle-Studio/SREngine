@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="23" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="23" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" bodystart="23" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="44" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="44" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" bodystart="44" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -51,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="25" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="25" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShaderOverridePass_1ac9028c6a77bbdd5b470260c4e30e1e7e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="28" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="28" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShaderOverridePass_1a9653212e2cb0dbe328edaa9e6769082f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -87,7 +87,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="29" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="29" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShaderOverridePass_1a4f11276fea1c66e59b5fce6e760b5860" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="30" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="30" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShaderOverridePass_1adab347a3a3473dcf116f98cf87a694af" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="32" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShaderOverridePass_1a3d0a866ef17b7dfc8cdbac6d3ccf0ee2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -139,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="33" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="33" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -160,7 +160,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="36" column="32"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="36" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShaderOverridePass_1a8501f6acf557ecea21369325b39f072e" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD std::vector&lt; <ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">SR_GTYPES_NS::Framebuffer</ref> * &gt;</type>
@@ -175,7 +175,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="37" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="37" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShaderOverridePass_1a9a6ec7e03acb4cc95589475747ebcbed" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -195,7 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="39" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="39" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShaderOverridePass_1ac5135c41f6b7599168e4eabed152e1df" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> *</type>
@@ -210,7 +210,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="41" column="39" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" bodystart="41" bodyend="41"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="41" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" bodystart="41" bodyend="41"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -505,7 +505,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="21" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" bodystart="21" bodyend="46"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" line="21" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h" bodystart="21" bodyend="46"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ShaderOverridePass</scope><name>AddDependency</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ShaderOverridePass</scope><name>AddInputConnection</name></member>

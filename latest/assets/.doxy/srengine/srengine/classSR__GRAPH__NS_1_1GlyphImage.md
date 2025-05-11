@@ -269,5 +269,5 @@ static SR_NODISCARD GlyphImage::Ptr SR_GRAPH_NS::GlyphImage::Create (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Font/Glyph.h`
 

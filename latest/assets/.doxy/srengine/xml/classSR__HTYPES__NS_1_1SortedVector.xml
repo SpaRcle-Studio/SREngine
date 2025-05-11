@@ -24,7 +24,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="14" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="14" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="14" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__HTYPES__NS_1_1SortedVector_1a40572d9e163f30fda82029da39310754" prot="public" static="no">
         <type>typename std::vector&lt; T &gt;::const_iterator</type>
@@ -38,7 +38,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="15" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="15" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="15" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-attrib">
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="148" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="148" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="148" column="36" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="148" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="150" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="150" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="150" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="150" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -87,7 +87,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="17" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="17" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1a2820e408af88edc6e0534d318794d09e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="18" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="18" bodyend="20"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="18" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="18" bodyend="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1a4952cb4d07eb37269e5b4e599ca9e24e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classSR__HTYPES__NS_1_1SortedVector" kindref="compound">SortedVector</ref> &amp;</type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="22" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="22" bodyend="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="22" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="22" bodyend="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1a5c2c62ed041cdf502943637d4c46863a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_CONSTEXPR bool</type>
@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="29" column="40" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="29" bodyend="29"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="29" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="29" bodyend="29"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1a7a33639247ebc859cc39bbfabd1c345f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_CONSTEXPR bool</type>
@@ -151,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="30" column="40" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="30" bodyend="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="30" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="30" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1aecc5dd109fd7249352b3945a010262d2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_CONSTEXPR uint64_t</type>
@@ -165,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="32" column="44" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="32" bodyend="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="32" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="32" bodyend="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1a1de963fcea60663e516d4a1f851aee28" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_CONSTEXPR uint64_t</type>
@@ -179,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="33" column="44" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="33" bodyend="33"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="33" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="33" bodyend="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1a150d51ff5d944d1fe6e978dd0ca0c00f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_CONSTEXPR uint64_t</type>
@@ -193,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="35" column="44" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="35" bodyend="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="35" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="35" bodyend="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1a19a7049c77a611051e4971c64917c52b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_CONSTEXPR uint64_t</type>
@@ -207,7 +207,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="36" column="44" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="36" bodyend="36"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="36" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="36" bodyend="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1a1a08a8835c61ee3b10b601bd05745d1d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_CONSTEXPR T *</type>
@@ -221,7 +221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="38" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="38" bodyend="38"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="38" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="38" bodyend="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1a2037c4b660738baa3ed84e87013e4989" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_CONSTEXPR const T *</type>
@@ -235,7 +235,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="39" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="39" bodyend="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="39" column="43" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="39" bodyend="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1ab39c3e2429d4f0558d40c7febd8f567d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_CONSTEXPR T *</type>
@@ -249,7 +249,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="41" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="41" bodyend="41"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="41" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="41" bodyend="41"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1a01f4250a1f3342b648227ccef216a7bf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_CONSTEXPR const T *</type>
@@ -263,7 +263,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="42" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="42" bodyend="42"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="42" column="43" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="42" bodyend="42"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1a15edae0a2717ca090cba7a5aa8425ea3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_CONSTEXPR T &amp;</type>
@@ -281,7 +281,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="44" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="44" bodyend="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="44" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="44" bodyend="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1a743cbbfb8069d15db5f416df9a5d3bc4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_CONSTEXPR const T &amp;</type>
@@ -299,7 +299,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="48" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="48" bodyend="50"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="48" column="43" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="48" bodyend="50"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1ac4e1913a82930c4fecc349f94fa18a0c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -343,7 +343,7 @@
         <inbodydescription>
 <para>return std::upper_bound(pStart, pEnd, value, predicate);</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="52" column="41" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="52" bodyend="68"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="52" column="41" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="52" bodyend="68"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1aca1d74f9a8de9a43922a83ba82dd272f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -366,7 +366,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="70" column="42" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="70" bodyend="72"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="70" column="42" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="70" bodyend="72"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1ab007da88e74f67adcee215b10f54a771" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -397,7 +397,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="74" column="46" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="74" bodyend="76"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="74" column="46" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="74" bodyend="76"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1aae81a83cecf3df4f65854eb331732aae" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -419,7 +419,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="78" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="78" bodyend="80"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="78" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="78" bodyend="80"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1a9457c4a3fb8906c3b25f5f8418c0fa2e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -437,7 +437,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="82" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="82" bodyend="84"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="82" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="82" bodyend="84"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1a16aa8c4a9dfb5c565857c590c18c7e57" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_CONSTEXPR Iterator</type>
@@ -451,7 +451,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="86" column="44" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="86" bodyend="86"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="86" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="86" bodyend="86"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1a6baff24a1078f63864a4db0c2d4322c0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_CONSTEXPR ConstIterator</type>
@@ -465,7 +465,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="87" column="49" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="87" bodyend="87"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="87" column="49" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="87" bodyend="87"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1a2fe8e326582cd32e16a558a222a3bcab" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_CONSTEXPR Iterator</type>
@@ -479,7 +479,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="89" column="44" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="89" bodyend="89"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="89" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="89" bodyend="89"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1a85257e2d424e89596e6a29c169864fc8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_CONSTEXPR ConstIterator</type>
@@ -493,7 +493,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="90" column="49" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="90" bodyend="90"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="90" column="49" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="90" bodyend="90"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1a689cfbf3f7d3055c521878e775233060" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -511,7 +511,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="92" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="92" bodyend="100"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="92" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="92" bodyend="100"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1ac0e3e92790cbe2d3a2e7d591eb6ff8d7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -529,7 +529,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="102" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="102" bodyend="110"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="102" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="102" bodyend="110"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1aba3bfef74eacfdd020ffc6e7cbf59d6f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -560,7 +560,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="112" column="46" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="112" bodyend="118"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="112" column="46" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="112" bodyend="118"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1a415ba78edbae91f266ff77395e711980" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -578,7 +578,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="120" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="120" bodyend="132"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="120" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="120" bodyend="132"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1afd6483c7ee1737cf9a5ac24b3268924f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -596,7 +596,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="134" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="134" bodyend="136"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="134" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="134" bodyend="136"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1afd06237c2848f3ea5f56f392cefdcc8e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -610,7 +610,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="138" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="138" bodyend="141"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="138" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="138" bodyend="141"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SortedVector_1a6dcb3b1a014923e042d73351710e8f56" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -624,14 +624,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="143" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="143" bodyend="145"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="143" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="143" bodyend="145"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" line="12" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="12" bodyend="152"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" line="12" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Types/SortedVector.h" bodystart="12" bodyend="152"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1SortedVector_1a689cfbf3f7d3055c521878e775233060" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SortedVector</scope><name>Add</name></member>
       <member refid="classSR__HTYPES__NS_1_1SortedVector_1ac0e3e92790cbe2d3a2e7d591eb6ff8d7" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SortedVector</scope><name>Add</name></member>

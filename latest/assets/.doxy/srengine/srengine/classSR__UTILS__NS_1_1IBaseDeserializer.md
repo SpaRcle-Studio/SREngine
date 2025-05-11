@@ -622,5 +622,5 @@ Implements [*SR\_UTILS\_NS::IDeserializer::SaveToFile*](classSR__UTILS__NS_1_1ID
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Serialization/BaseSerialization.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h`
 

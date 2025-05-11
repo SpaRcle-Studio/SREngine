@@ -936,5 +936,5 @@ virtual void SR_GRAPH_GUI_NS::NodeWidget::UpdateTouch ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeWidget.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/GUI/NodeWidget.h`
 

@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_6a9921db89a56a1548d450ac0e56d87b" kind="dir">
+    <compoundname>Engine/libs/Utils/inc/Utils/UI</compoundname>
+    <innerfile refid="UIModifier_8h">UIModifier.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Utils/inc/Utils/UI/"/>
+  </compounddef>
+</doxygen>

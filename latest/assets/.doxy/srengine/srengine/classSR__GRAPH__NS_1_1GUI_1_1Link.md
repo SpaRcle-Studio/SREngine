@@ -327,5 +327,5 @@ SR_GRAPH_NS::GUI::Link::~Link () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/GUI/Link.h`
 

@@ -1417,5 +1417,5 @@ static Matrix4x4 SR_MATH_NS::Matrix4x4::RotationYawPitchRoll (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h`
 

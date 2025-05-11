@@ -29,7 +29,7 @@
         <label>SR_GRAPH_NS::GUI::Widget</label>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/inc/Core/GUI/MaterialEditor.h" line="9" column="5" bodyfile="Engine/Core/inc/Core/GUI/MaterialEditor.h" bodystart="9" bodyend="11"/>
+    <location file="Engine/inc/Engine/GUI/MaterialEditor.h" line="9" column="5" bodyfile="Engine/inc/Engine/GUI/MaterialEditor.h" bodystart="9" bodyend="11"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

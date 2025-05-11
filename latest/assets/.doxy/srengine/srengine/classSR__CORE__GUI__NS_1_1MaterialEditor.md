@@ -78,5 +78,5 @@ Inherits the following classes: SR_GRAPH_NS::GUI::Widget
 
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/GUI/MaterialEditor.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/GUI/MaterialEditor.h`
 

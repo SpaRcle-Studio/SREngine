@@ -36,6 +36,6 @@
 <codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment">//#endif<sp/>//SR_ENGINE_BLUEPRINTPARSER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/inc/Core/Parsers/BlueprintParser.h"/>
+    <location file="Engine/inc/Engine/Parsers/BlueprintParser.h"/>
   </compounddef>
 </doxygen>

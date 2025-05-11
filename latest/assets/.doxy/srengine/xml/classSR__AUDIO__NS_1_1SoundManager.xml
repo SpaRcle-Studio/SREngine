@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="38" column="9" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="38" bodyend="40"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="38" column="9" bodyfile="Engine/libs/Audio/inc/Audio/SoundManager.h" bodystart="38" bodyend="40"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__AUDIO__NS_1_1SoundManager_1a3a9677cf7bcf57e96e8d66dd327eb1c2" prot="public" static="no">
         <type>void *</type>
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="41" column="9" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="41" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="41" column="9" bodyfile="Engine/libs/Audio/inc/Audio/SoundManager.h" bodystart="41" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="99" column="21" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="99" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="99" column="21" bodyfile="Engine/libs/Audio/inc/Audio/SoundManager.h" bodystart="99" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1SoundManager_1a13852cae7d1a39477f1d08c600477034" prot="private" static="no" mutable="no">
         <type>std::set&lt; <ref refid="classSR__AUDIO__NS_1_1SoundListener" kindref="compound">SoundListener</ref> * &gt;</type>
@@ -80,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="100" column="18" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="100" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="100" column="18" bodyfile="Engine/libs/Audio/inc/Audio/SoundManager.h" bodystart="100" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1SoundManager_1a8a704c02844d4b16eebc0bd79604b3b4" prot="private" static="no" mutable="no">
         <type>SR_HTYPES_NS::Thread::Ptr</type>
@@ -95,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="101" column="35" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="101" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="101" column="35" bodyfile="Engine/libs/Audio/inc/Audio/SoundManager.h" bodystart="101" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1SoundManager_1a1c093c02deba7c1083b1dd2f31e657dd" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; State &gt;</type>
@@ -110,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="102" column="21" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="102" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="102" column="21" bodyfile="Engine/libs/Audio/inc/Audio/SoundManager.h" bodystart="102" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1SoundManager_1ae89f20d6ba7e87b3cfe154a416d16149" prot="private" static="no" mutable="no">
         <type>std::list&lt; <ref refid="structSR__AUDIO__NS_1_1PlayData" kindref="compound">PlayData</ref> * &gt;</type>
@@ -124,7 +124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="103" column="19" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="103" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="103" column="19" bodyfile="Engine/libs/Audio/inc/Audio/SoundManager.h" bodystart="103" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1SoundManager_1a9a06ce395668dc61f6d33ec2074a2fbe" prot="private" static="no" mutable="no">
         <type>std::set&lt; <ref refid="structSR__AUDIO__NS_1_1PlayData" kindref="compound">PlayData</ref> * &gt;</type>
@@ -138,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="104" column="18" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="104" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="104" column="18" bodyfile="Engine/libs/Audio/inc/Audio/SoundManager.h" bodystart="104" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1SoundManager_1ac54adff500b4f9cce1b8a2b2eafa90b5" prot="private" static="no" mutable="no">
         <type>std::map&lt; AudioLibrary, std::map&lt; AudioDeviceName, <ref refid="classSR__AUDIO__NS_1_1SoundContext" kindref="compound">SoundContext</ref> * &gt; &gt;</type>
@@ -152,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="105" column="18" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="105" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="105" column="18" bodyfile="Engine/libs/Audio/inc/Audio/SoundManager.h" bodystart="105" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -168,7 +168,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="43" column="9"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="43" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1a96082ea123f88254bef33a503fedbc67" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -182,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="44" column="9"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="44" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1ad65d4bb15fa6384051bf9dc9f9dca711" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -196,7 +196,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="96" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="96" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -212,7 +212,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="47" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="47" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1a3563daab19f2ad7ee4334d4778dc228a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::optional&lt; <ref refid="structSR__AUDIO__NS_1_1PlayParams" kindref="compound">PlayParams</ref> &gt;</type>
@@ -230,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="49" column="36"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="49" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1a0afe1be1b58c3b62df3818eb2e0077f8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::optional&lt; <ref refid="structSR__AUDIO__NS_1_1ListenerData" kindref="compound">ListenerData</ref> &gt;</type>
@@ -248,7 +248,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="50" column="36"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="50" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1abd141d6bd446f3b536bbdd6054a797c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Handle</type>
@@ -266,7 +266,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="52" column="16"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="52" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1afb7cf8f1291b43a2dd2fc018a0282307" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Handle</type>
@@ -288,7 +288,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="53" column="16"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="53" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1a6e0652fb2029410ef48dedace3dc1337" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Handle</type>
@@ -310,7 +310,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="54" column="16"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="54" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1acd678575514ed765265af3bf272fda4b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -328,7 +328,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="56" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="56" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1a5858377da7cdd2048e2bccc4dfc50bbc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -346,7 +346,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="57" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="57" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1ab13d9bc091a614280c268045ce96e60f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -364,7 +364,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="58" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="58" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1a618dcda6c8abafc38b7c40f42bfe1cfb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -382,7 +382,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="59" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="59" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1a3e4f298519e10c74aaa50940ce5768ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -404,7 +404,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="61" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="61" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1a2ad9d50b4a27174d2820fdac14283612" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -422,7 +422,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="62" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="62" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1a6f092f15e99cc871303275bd20a74b5f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structSR__AUDIO__NS_1_1SoundData" kindref="compound">SoundData</ref> *</type>
@@ -440,7 +440,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="64" column="19"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="64" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1a92580eedf5ade2bdd000461e6767fe08" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -458,7 +458,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="65" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="65" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1ac5da2a54be0b0043e3ebc1f45b83746a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -480,7 +480,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="67" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="67" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1a24aee3ebbd2e8738ad63ff897db69a0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -502,7 +502,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="68" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="68" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1a881df56542ef6079e4ff1287ba903971" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -524,7 +524,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="69" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="69" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1ae6cecbdd11d8364e6f6e7de78c0b80e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -550,7 +550,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="70" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="70" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1a96bb0cfd0703dfeb59472e573384892b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const std::set&lt; <ref refid="classSR__AUDIO__NS_1_1SoundListener" kindref="compound">SoundListener</ref> * &gt; &amp;</type>
@@ -564,7 +564,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="72" column="37" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="72" bodyend="72"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="72" column="37" bodyfile="Engine/libs/Audio/inc/Audio/SoundManager.h" bodystart="72" bodyend="72"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1a4ad8e88d06b11fc6bd210020daee1a14" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const std::list&lt; <ref refid="structSR__AUDIO__NS_1_1PlayData" kindref="compound">PlayData</ref> * &gt; &amp;</type>
@@ -578,7 +578,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="73" column="38" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="73" bodyend="73"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="73" column="38" bodyfile="Engine/libs/Audio/inc/Audio/SoundManager.h" bodystart="73" bodyend="73"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1a6953eb9a7088d0f726be38687207207d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_HTYPES_NS::Thread::ThreadId</type>
@@ -592,7 +592,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="75" column="53" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="75" bodyend="75"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="75" column="53" bodyfile="Engine/libs/Audio/inc/Audio/SoundManager.h" bodystart="75" bodyend="75"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1ad976f47d6ff75727d0270978c1889047" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__AUDIO__NS_1_1SoundListener" kindref="compound">SoundListener</ref> *</type>
@@ -606,7 +606,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="76" column="36"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="76" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1abea7fe6cfeee2a92f034e0af7692e194" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__AUDIO__NS_1_1SoundListener" kindref="compound">SoundListener</ref> *</type>
@@ -624,7 +624,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="77" column="36"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="77" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1ad06a52a32c360b561d85ea7281b30cfa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -642,7 +642,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="78" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="78" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -662,7 +662,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="81" column="35"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="81" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1a50f30aa5e34cada951c5ffdb37180723" prot="protected" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD AudioLibrary</type>
@@ -676,7 +676,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="82" column="35"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="82" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1ab575c91a4d247e3f28cbd590d2181715" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -694,7 +694,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="84" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="84" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1a91ea16413b956f7fe0c1d993c156e68e" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -712,7 +712,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="86" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="86" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1af931514dbf9a55c7d86720ff6719ff54" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -730,7 +730,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="87" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="87" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1a23f0e6b01ba1128b419587fc2413c81d" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -745,7 +745,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="89" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="89" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1a693363578e090c13fe124cc3888270a1" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -760,7 +760,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="90" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="90" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1a39f0e1ae804f67a7e01f16a4084f070a" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -774,7 +774,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="92" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="92" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundManager_1a470d11837507f89762cb06ec4c2c5649" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -788,7 +788,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="93" column="14"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="93" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -843,7 +843,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="35" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="35" bodyend="107"/>
+    <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="35" column="5" bodyfile="Engine/libs/Audio/inc/Audio/SoundManager.h" bodystart="35" bodyend="107"/>
     <listofallmembers>
       <member refid="classSR__AUDIO__NS_1_1SoundManager_1a3e4f298519e10c74aaa50940ce5768ba" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::SoundManager</scope><name>ApplyParams</name></member>
       <member refid="classSR__AUDIO__NS_1_1SoundManager_1ad976f47d6ff75727d0270978c1889047" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::SoundManager</scope><name>CreateListener</name></member>

@@ -396,5 +396,5 @@ static SR_MAYBE_UNUSED SR_MATH_NS::FVector3 SR_PHYSICS_UTILS_NS::PxV3ToFV3 (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h`
+The documentation for this class was generated from the following file `Engine/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h`
 

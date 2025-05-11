@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="27" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/LibraryImpl.h" line="27" column="9" bodyfile="Engine/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__PHYSICS__NS_1_1LibraryImpl_1a9eacebf62880b4e50958f8224961eed4" prot="public" static="no">
         <type>SR_UTILS_NS::Measurement</type>
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="28" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/LibraryImpl.h" line="28" column="9" bodyfile="Engine/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="28" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="55" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="55" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/LibraryImpl.h" line="55" column="14" bodyfile="Engine/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="55" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="30" column="9"/>
+        <location file="Engine/libs/Physics/inc/Physics/LibraryImpl.h" line="30" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1a60e7fcdb1afbad64b55483d699445b72" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -80,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="31" column="9"/>
+        <location file="Engine/libs/Physics/inc/Physics/LibraryImpl.h" line="31" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1a796df622eed459d1e4279933b59bd7dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -97,7 +97,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="34" column="35"/>
+        <location file="Engine/libs/Physics/inc/Physics/LibraryImpl.h" line="34" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1a905dee5a7955426bd66b1a27f35848f1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -112,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="36" column="22" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="36" bodyend="36"/>
+        <location file="Engine/libs/Physics/inc/Physics/LibraryImpl.h" line="36" column="22" bodyfile="Engine/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="36" bodyend="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1a831472e4b25affa6cfd2780e40ba4edb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="38" column="35" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="38" bodyend="38"/>
+        <location file="Engine/libs/Physics/inc/Physics/LibraryImpl.h" line="38" column="35" bodyfile="Engine/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="38" bodyend="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1a60dd183725be8535fc6cdecfbd4ae57e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD ShapeType</type>
@@ -150,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="39" column="40" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="39" bodyend="39"/>
+        <location file="Engine/libs/Physics/inc/Physics/LibraryImpl.h" line="39" column="40" bodyfile="Engine/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="39" bodyend="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1a959aa5000ab95fbd538b50591f4e215c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__PTYPES__NS_1_1CollisionShapeImpl" kindref="compound">SR_PTYPES_NS::CollisionShapeImpl</ref> *</type>
@@ -165,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="41" column="63" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="41" bodyend="41"/>
+        <location file="Engine/libs/Physics/inc/Physics/LibraryImpl.h" line="41" column="63" bodyfile="Engine/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="41" bodyend="41"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1a6aa63ba462bf783536d951cd987093ba" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__PTYPES__NS_1_1Rigidbody2DImpl" kindref="compound">SR_PTYPES_NS::Rigidbody2DImpl</ref> *</type>
@@ -179,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="43" column="60" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="43" bodyend="43"/>
+        <location file="Engine/libs/Physics/inc/Physics/LibraryImpl.h" line="43" column="60" bodyfile="Engine/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="43" bodyend="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1aa5a978b0ec3aa665f31f1cf64344cb6f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__PTYPES__NS_1_1Rigidbody3DImpl" kindref="compound">SR_PTYPES_NS::Rigidbody3DImpl</ref> *</type>
@@ -194,7 +194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="44" column="60" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="44" bodyend="44"/>
+        <location file="Engine/libs/Physics/inc/Physics/LibraryImpl.h" line="44" column="60" bodyfile="Engine/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="44" bodyend="44"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1aeaae479e013a93a38b26f85957dc5f2c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__PTYPES__NS_1_1Vehicle4W3D" kindref="compound">SR_PTYPES_NS::Vehicle4W3D</ref> *</type>
@@ -209,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="46" column="56" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="46" bodyend="46"/>
+        <location file="Engine/libs/Physics/inc/Physics/LibraryImpl.h" line="46" column="56" bodyfile="Engine/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="46" bodyend="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1a226db5c203a8ee59515f8ac48f5f1e42" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__PHYSICS__NS_1_1PhysicsWorld" kindref="compound">SR_PHYSICS_NS::PhysicsWorld</ref> *</type>
@@ -230,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="48" column="58" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="48" bodyend="48"/>
+        <location file="Engine/libs/Physics/inc/Physics/LibraryImpl.h" line="48" column="58" bodyfile="Engine/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="48" bodyend="48"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1ae1cb3d6fcb23faf0868f1135c2d63c3a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__PTYPES__NS_1_1PhysicsMaterialImpl" kindref="compound">SR_PTYPES_NS::PhysicsMaterialImpl</ref> *</type>
@@ -245,7 +245,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="50" column="64" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="50" bodyend="50"/>
+        <location file="Engine/libs/Physics/inc/Physics/LibraryImpl.h" line="50" column="64" bodyfile="Engine/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="50" bodyend="50"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1aef3ea6e1dd14497f3d7a47f6bd61d76b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -259,7 +259,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="52" column="27" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="52" bodyend="52"/>
+        <location file="Engine/libs/Physics/inc/Physics/LibraryImpl.h" line="52" column="27" bodyfile="Engine/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="52" bodyend="52"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -308,7 +308,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="25" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="25" bodyend="56"/>
+    <location file="Engine/libs/Physics/inc/Physics/LibraryImpl.h" line="25" column="5" bodyfile="Engine/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="25" bodyend="56"/>
     <listofallmembers>
       <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1a905dee5a7955426bd66b1a27f35848f1" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::LibraryImpl</scope><name>ConnectPVD</name></member>
       <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1a959aa5000ab95fbd538b50591f4e215c" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::LibraryImpl</scope><name>CreateCollisionShapeImpl</name></member>

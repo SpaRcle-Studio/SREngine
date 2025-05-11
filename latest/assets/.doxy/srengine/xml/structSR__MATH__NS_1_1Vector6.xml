@@ -20,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="16" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="16" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="16" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__MATH__NS_1_1Vector6_1a96eb9db303ad32bf48cafe0486181182" prot="public" static="no" mutable="no">
         <type>T</type>
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="17" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="17" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="17" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="17" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__MATH__NS_1_1Vector6_1afd9b6fe16528d1c263328cf62fbf7aaf" prot="public" static="no" mutable="no">
         <type>T</type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="18" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="18" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="18" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="18" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__MATH__NS_1_1Vector6_1a8d82071ad4684980262741919518ccfa" prot="public" static="no" mutable="no">
         <type>T</type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="19" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="19" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="19" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="19" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__MATH__NS_1_1Vector6_1a7a71a336bd1ac85b5a309fed86be2715" prot="public" static="no" mutable="no">
         <type>T</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="20" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="20" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="20" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="20" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__MATH__NS_1_1Vector6_1a2bde629c2df6d78c4508de3c51f6db78" prot="public" static="no" mutable="no">
         <type>T</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="21" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="21" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="21" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="21" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__MATH__NS_1_1Vector6_1a7e1bf4aab80cc26b161cdb55345a8a5c" prot="public" static="no" mutable="no">
         <type>T</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="24" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="24" bodyend="24"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="24" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="24" bodyend="24"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__MATH__NS_1_1Vector6_1a7ff408eec3611e912873923e9b51db25" prot="public" static="no" mutable="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">SR_MATH_NS::Vector3</ref>&lt; T &gt;</type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="27" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="27" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__MATH__NS_1_1Vector6_1ad6a9407282479ca51cd01fe9643a1ede" prot="public" static="no" mutable="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">SR_MATH_NS::Vector3</ref>&lt; T &gt;</type>
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="28" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="28" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__MATH__NS_1_1Vector6_1a826081ee0cf772e931c2d692414f0418" prot="public" static="no" mutable="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">SR_MATH_NS::Vector2</ref>&lt; T &gt;</type>
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="32" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="32" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__MATH__NS_1_1Vector6_1a85c31fd88996c7e3376ede3d3c9967e1" prot="public" static="no" mutable="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">SR_MATH_NS::Vector2</ref>&lt; T &gt;</type>
@@ -161,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="33" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="33" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__MATH__NS_1_1Vector6_1a0dd89c54210647f8d7bd0e3977bb169a" prot="public" static="no" mutable="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">SR_MATH_NS::Vector2</ref>&lt; T &gt;</type>
@@ -175,7 +175,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="34" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="34" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="34" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__MATH__NS_1_1Vector6_1a26d76e82442efc958f4cb3d14f1dc80b" prot="public" static="no" mutable="no">
         <type>union <ref refid="structSR__MATH__NS_1_1Vector6" kindref="compound">SR_MATH_NS::Vector6</ref></type>
@@ -189,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="36" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="36" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -205,7 +205,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="38" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="51" bodyend="53"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="38" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="51" bodyend="53"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1a3492f1bd3ff9ca0a53a7f19f0f2354b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -243,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="39" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="104" bodyend="111"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="39" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="104" bodyend="111"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1ae453798430d6cf17feeae4c5d76aea29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -261,7 +261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="40" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="55" bodyend="62"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="40" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="55" bodyend="62"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1ae978dccb4f3eb07d2ffb02c6e1f6fcf9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -283,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="41" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="64" bodyend="67"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="41" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="64" bodyend="67"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1a5cbef8db04703eef7808990234321e24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -301,7 +301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="42" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="69" bodyend="71"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="42" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="69" bodyend="71"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1ae4cbce8f34ea14fea313204e159df462" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -319,7 +319,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="44" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="73" bodyend="80"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="44" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="73" bodyend="80"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1a69b77e11229b10188d0db9f64b1eb4f6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -337,7 +337,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="45" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="82" bodyend="84"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="45" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="82" bodyend="84"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1aa8e54f263b75c98ce556d9207e5ec2f3" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -360,7 +360,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="47" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="86" bodyend="93"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="47" column="29" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="86" bodyend="93"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1afeb45026ad08cff5c0b1e23d77cd6c1e" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -387,14 +387,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="48" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="95" bodyend="102"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="48" column="29" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="95" bodyend="102"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="12" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="12" bodyend="49"/>
+    <location file="Engine/libs/Utils/inc/Utils/Math/Vector6.h" line="12" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="12" bodyend="49"/>
     <listofallmembers>
       <member refid="structSR__MATH__NS_1_1Vector6_1a7e1bf4aab80cc26b161cdb55345a8a5c" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>coord</name></member>
       <member refid="structSR__MATH__NS_1_1Vector6_1a69b77e11229b10188d0db9f64b1eb4f6" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>operator!=</name></member>

@@ -6,7 +6,7 @@
     <includes refid="Utils_2inc_2Utils_2macros_8h" local="no">Utils/macros.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Font/SDF.h</label>
         <link refid="SDF_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h" line="19" column="13" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h" bodystart="19" bodyend="49"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/SDF.h" line="19" column="13" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/SDF.h" bodystart="19" bodyend="49"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -198,6 +198,6 @@
 <codeline lineno="107"><highlight class="normal"></highlight></codeline>
 <codeline lineno="108"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_SDFL_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/SDF.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Font/SDF.h"/>
   </compounddef>
 </doxygen>

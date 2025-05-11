@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="13" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="13" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="13" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="15" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="15" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="15" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="friend">
@@ -52,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="12" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="12" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="12" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="12" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -69,7 +69,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="55" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="55" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="55" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="55" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Acceptor_1a625c00f9b83b89280af7b0705a131cb8" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="56" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="56" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="56" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Acceptor_1aa19c176289d1de5481d5466fa8c78c98" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="60" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="60" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="60" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Acceptor_1a6bbe853164c0c27193932b58a2277099" prot="protected" static="no" mutable="no">
         <type>const SocketType</type>
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="62" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="62" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="62" column="26" bodyfile="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="62" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Acceptor_1a580bb6f8ae5f05f6171b8b072de04450" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Context::Ptr</ref></type>
@@ -129,7 +129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="64" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="64" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="64" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="64" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Acceptor_1aac63b45202f390d859d39cc3a1c500fe" prot="protected" static="no" mutable="no">
         <type>Callback</type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="65" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="65" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="65" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Acceptor_1ad8af1cb395a0962a21e5c86df2262abc" prot="protected" static="no" mutable="no">
         <type>std::string</type>
@@ -157,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="66" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="66" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="66" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="66" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Acceptor_1a12fe4687ac2cfbfb1f6ebcf8eb0fa7d7" prot="protected" static="no" mutable="no">
         <type>uint16_t</type>
@@ -172,7 +172,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="67" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="67" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="67" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="67" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -204,7 +204,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="18" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="18" bodyend="24"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="18" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="18" bodyend="24"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Acceptor_1ac5179b8eb643e3c2464a4dc288180cf6" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -223,7 +223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="52" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="52" column="22"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -239,7 +239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="27" column="17"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="27" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Acceptor_1a19740174b11c9ae202541e7579546954" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -254,7 +254,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="29" column="42"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="29" column="42"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Acceptor_1a0aab0e1c2de5f18c059db2c68aa7ef15" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -269,7 +269,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="30" column="42"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="30" column="42"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Acceptor_1a9c6f70799318dbc053b50742678158b5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD uint16_t</type>
@@ -284,7 +284,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="32" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="32" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Acceptor_1ac0759697303c24e00fd2a270ece205b2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD uint16_t</type>
@@ -299,7 +299,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="33" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="33" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Acceptor_1afe2a2da3afbac1ecb1bf847205b19971" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD bool</type>
@@ -314,7 +314,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="35" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="35" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Acceptor_1a6c30e80d1d883db7294acce2a72bc106" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -328,7 +328,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="37" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="37" bodyend="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="37" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="37" bodyend="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Acceptor_1a373d870835c50dc593db91551fa80fab" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -342,7 +342,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="38" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="38" bodyend="38"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="38" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="38" bodyend="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Acceptor_1aaa85b1cf32906ab41c144752de6ac2f1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -356,7 +356,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="39" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="39" bodyend="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="39" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="39" bodyend="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Acceptor_1a277d57c869ef48e9a723fedad232dd4e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -374,7 +374,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="41" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="41" bodyend="41"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="41" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="41" bodyend="41"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Acceptor_1a622b5db710aa09b74ca2034f53c37355" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -392,7 +392,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="42" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="42" bodyend="42"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="42" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="42" bodyend="42"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Acceptor_1a6834498422bc734c1090071f0cc45da4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -406,7 +406,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="44" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="44" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Acceptor_1a149c3dc7b665232235a53fd3e97b228f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -420,7 +420,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="45" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="45" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Acceptor_1ae659bb6d6d369b6202692ec60fdcf306" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -435,7 +435,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="47" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="47" bodyend="49"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="47" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="47" bodyend="49"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -491,7 +491,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" line="11" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="11" bodyend="69"/>
+    <location file="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" line="11" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Network/Acceptor.h" bodystart="11" bodyend="69"/>
     <listofallmembers>
       <member refid="classSR__NETWORK__NS_1_1Acceptor_1a55368b1b1c1a8946093e27754224bea2" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::Acceptor</scope><name>Acceptor</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Acceptor</scope><name>AutoFree</name></member>

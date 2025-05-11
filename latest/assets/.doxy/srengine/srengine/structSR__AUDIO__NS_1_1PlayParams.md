@@ -389,5 +389,5 @@ static PlayParams SR_AUDIO_NS::PlayParams::GetDefault ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Audio/inc/Audio/PlayParams.h`
+The documentation for this class was generated from the following file `Engine/libs/Audio/inc/Audio/PlayParams.h`
 

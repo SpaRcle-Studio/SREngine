@@ -165,5 +165,5 @@ SR_MAYBE_UNUSED SR_UTILS_NS::EntityRefUtils::OwnerRef::OwnerRef (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h`
 

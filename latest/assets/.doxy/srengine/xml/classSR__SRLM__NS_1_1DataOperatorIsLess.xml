@@ -27,7 +27,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataOperators.h" line="63" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataOperators.h" line="63" column="31"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -88,7 +88,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataOperators.h" line="61" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataOperators.h" bodystart="61" bodyend="65"/>
+    <location file="Engine/libs/Utils/inc/Utils/SRLM/DataOperators.h" line="61" column="5" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/DataOperators.h" bodystart="61" bodyend="65"/>
     <listofallmembers>
       <member refid="classSR__SRLM__NS_1_1DataOperatorIsLess_1ac680c70ff70b419096225e18ad58fe60" prot="protected" virt="virtual"><scope>SR_SRLM_NS::DataOperatorIsLess</scope><name>Calculate</name></member>
     </listofallmembers>

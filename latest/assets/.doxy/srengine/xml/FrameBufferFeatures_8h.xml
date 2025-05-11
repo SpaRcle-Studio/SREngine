@@ -4,12 +4,12 @@
     <compoundname>FrameBufferFeatures.h</compoundname>
     <includes refid="Graphics_2inc_2Graphics_2macros_8h" local="no">Graphics/macros.h</includes>
     <includes refid="Debug_8h" local="no">Utils/Debug.h</includes>
-    <includedby refid="PipelineState_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h</includedby>
-    <includedby refid="FrameBufferController_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Render/FrameBufferController.h</includedby>
-    <includedby refid="Framebuffer_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Types/Framebuffer.h</includedby>
+    <includedby refid="PipelineState_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h</includedby>
+    <includedby refid="FrameBufferController_8h" local="no">Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h</includedby>
+    <includedby refid="Framebuffer_8h" local="no">Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h</label>
         <link refid="FrameBufferFeatures_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -624,25 +624,25 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="15">
-        <label>Engine/Core/inc/Core/GUI/EditorGizmo.h</label>
+        <label>Engine/inc/Engine/GUI/EditorGizmo.h</label>
         <link refid="EditorGizmo_8h_source"/>
         <childnode refid="16" relation="include">
         </childnode>
       </node>
       <node id="16">
-        <label>Engine/Core/inc/Core/GUI/SceneTools.h</label>
+        <label>Engine/inc/Engine/GUI/SceneTools.h</label>
         <link refid="SceneTools_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Lighting/LightSystem.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h</label>
         <link refid="LightSystem_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/EmptyPipeline.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pipeline/EmptyPipeline.h</label>
         <link refid="EmptyPipeline_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h</label>
         <link refid="FrameBufferFeatures_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -652,7 +652,7 @@
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h</label>
         <link refid="Pipeline_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
@@ -664,29 +664,29 @@
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h</label>
         <link refid="PipelineState_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="6">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanPipeline.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanPipeline.h</label>
         <link refid="VulkanPipeline_8h_source"/>
       </node>
       <node id="17">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/FrameBufferController.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h</label>
         <link refid="FrameBufferController_8h_source"/>
       </node>
       <node id="18">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Framebuffer.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h</label>
         <link refid="Framebuffer_8h_source"/>
       </node>
       <node id="8">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</label>
         <link refid="DebugWireframeMesh_8h_source"/>
       </node>
       <node id="7">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h</label>
         <link refid="IndexedMesh_8h_source"/>
         <childnode refid="8" relation="include">
         </childnode>
@@ -694,11 +694,11 @@
         </childnode>
       </node>
       <node id="10">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</label>
         <link refid="Mesh3D_8h_source"/>
       </node>
       <node id="9">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/MeshComponent.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/MeshComponent.h</label>
         <link refid="MeshComponent_8h_source"/>
         <childnode refid="10" relation="include">
         </childnode>
@@ -712,19 +712,19 @@
         </childnode>
       </node>
       <node id="11">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h</label>
         <link refid="ProceduralMesh_8h_source"/>
       </node>
       <node id="12">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
         <link refid="SkinnedMesh_8h_source"/>
       </node>
       <node id="13">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h</label>
         <link refid="Sprite_8h_source"/>
       </node>
       <node id="14">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h</label>
         <link refid="Gizmo_8h_source"/>
         <childnode refid="15" relation="include">
         </childnode>
@@ -763,6 +763,6 @@
 <codeline lineno="24"><highlight class="normal"></highlight></codeline>
 <codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_FRAME_BUFFER_FEATURES_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h"/>
   </compounddef>
 </doxygen>

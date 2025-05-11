@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="15" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="15" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="15" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structEvoScript_1_1EvoEnum_1a65db45296b39310aaa4e50551ffee1f1" prot="public" static="no" mutable="no">
         <type>std::string</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="16" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="16" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="16" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structEvoScript_1_1EvoEnum_1afd145d56c65652ab5d2b22f5c3118977" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="17" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="17" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="17" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="17" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structEvoScript_1_1EvoEnum_1a548de5cc276258ff31198f44bca42e69" prot="public" static="no" mutable="no">
         <type>std::vector&lt; std::pair&lt; std::string, int32_t &gt; &gt;</type>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="18" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="18" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="18" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="18" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -73,14 +73,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="20" column="22" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="20" bodyend="33"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="20" column="22" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="20" bodyend="33"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="14" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="14" bodyend="34"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="14" column="5" bodyfile="Engine/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="14" bodyend="34"/>
     <listofallmembers>
       <member refid="structEvoScript_1_1EvoEnum_1afd145d56c65652ab5d2b22f5c3118977" prot="public" virt="non-virtual"><scope>EvoScript::EvoEnum</scope><name>m_asClass</name></member>
       <member refid="structEvoScript_1_1EvoEnum_1a65db45296b39310aaa4e50551ffee1f1" prot="public" virt="non-virtual"><scope>EvoScript::EvoEnum</scope><name>m_header</name></member>

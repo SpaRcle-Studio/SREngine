@@ -496,5 +496,5 @@ Implements [*SR\_CORE\_GUI\_NS::PointerPropertyDrawer::OnObjectReplaced*](classS
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialPropertyDrawer.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/GUI/PropertyDrawers/MaterialPropertyDrawer.h`
 

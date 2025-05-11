@@ -7,10 +7,10 @@
     <includes refid="NonCopyable_8h" local="no">Utils/Common/NonCopyable.h</includes>
     <includes refid="Map_8h" local="no">Utils/Types/Map.h</includes>
     <includes refid="Function_8h" local="no">Utils/Types/Function.h</includes>
-    <includedby refid="RenderScene_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h</includedby>
+    <includedby refid="RenderScene_8h" local="no">Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h</label>
         <link refid="FlatCluster_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -631,17 +631,17 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="3">
-        <label>Engine/Core/inc/Core/World/EngineScene.h</label>
+        <label>Engine/inc/Engine/World/EngineScene.h</label>
         <link refid="EngineScene_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h</label>
         <link refid="FlatCluster_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h</label>
         <link refid="RenderScene_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -649,7 +649,7 @@
         </childnode>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/UI/Canvas.h</label>
         <link refid="Canvas_8h_source"/>
       </node>
     </invincdepgraph>
@@ -726,6 +726,6 @@
 <codeline lineno="63"><highlight class="normal"></highlight></codeline>
 <codeline lineno="64"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GRAPHICS_FLAT_CLUSTER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FlatCluster.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/FlatCluster.h"/>
   </compounddef>
 </doxygen>

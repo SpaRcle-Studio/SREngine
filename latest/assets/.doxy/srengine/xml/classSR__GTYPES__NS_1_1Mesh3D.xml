@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="15" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="15" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" bodystart="15" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="21" column="44" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" bodystart="21" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="21" column="44" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" bodystart="21" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="18" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="18" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh3D_1a1b509feae0e3e482b6e5bbaea1eb0167" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="24" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh3D_1a7111593ce28ac6d3f8635271c660a32d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="25" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="25" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh3D_1a08bd11faeb76d0d9d3ecdcb03cf03b3e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="27" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="27" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh3D_1af920e1a41c39c02af0db823ae29caa9b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -113,7 +113,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="28" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="28" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh3D_1a6e4f14eb69451418d19b4347e3bec2d5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD MeshType</type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="30" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" bodystart="30" bodyend="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="30" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" bodystart="30" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh3D_1a725199ac6ffd3df2bd2f9caad2ab7fce" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="32" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="32" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh3D_1aafdc337069a9fcbe4ea14bb71af39fc6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD std::vector&lt; uint32_t &gt;</type>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="33" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="33" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh3D_1a8cca4275124f373d73a0c54f4ac2f5c5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD std::string</type>
@@ -173,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="34" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="34" column="34"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -190,7 +190,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="37" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="37" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -332,7 +332,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="14" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" bodystart="14" bodyend="49"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="14" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" bodystart="14" bodyend="49"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>BaseComponent</name></member>

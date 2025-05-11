@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_1edd94f8cff42d6094453f2baf1e13fd" kind="dir">
+    <compoundname>Engine/libs/Utils/inc/Utils/Web</compoundname>
+    <innerdir refid="dir_8392c415e30628e2ce7c2879273a6118">Engine/libs/Utils/inc/Utils/Web/CSS</innerdir>
+    <innerdir refid="dir_cb6460e35697e7553b43ae6c998f1fd7">Engine/libs/Utils/inc/Utils/Web/HTML</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Utils/inc/Utils/Web/"/>
+  </compounddef>
+</doxygen>

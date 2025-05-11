@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_dc778743e05f6f13753dd9bf5a4bd428" kind="dir">
+    <compoundname>Engine/libs/Graphics/inc/Graphics/Memory</compoundname>
+    <innerfile refid="CameraManager_8h">CameraManager.h</innerfile>
+    <innerfile refid="DescriptorManager_8h">DescriptorManager.h</innerfile>
+    <innerfile refid="IGraphicsResource_8h">IGraphicsResource.h</innerfile>
+    <innerfile refid="MeshAllocator_8h">MeshAllocator.h</innerfile>
+    <innerfile refid="MeshManager_8h">MeshManager.h</innerfile>
+    <innerfile refid="ShaderProgramManager_8h">ShaderProgramManager.h</innerfile>
+    <innerfile refid="ShaderUBOBlock_8h">ShaderUBOBlock.h</innerfile>
+    <innerfile refid="SSBOManager_8h">SSBOManager.h</innerfile>
+    <innerfile refid="TextureConfigs_8h">TextureConfigs.h</innerfile>
+    <innerfile refid="UBOManager_8h">UBOManager.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Graphics/inc/Graphics/Memory/"/>
+  </compounddef>
+</doxygen>

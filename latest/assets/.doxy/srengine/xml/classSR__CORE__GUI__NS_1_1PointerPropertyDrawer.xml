@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="14" column="9" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="14" column="9" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="14" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="22" column="33" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="22" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="22" column="33" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="22" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer_1a40855c43c8d91e7313bc5cf42b41b92a" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="23" column="21" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="23" column="21" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer_1a0173ab9b8c5167d7c54a011b8a61b2db" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="24" column="21" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="24" column="21" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer_1a23332349b80e6275138444cc7d5ec420" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="25" column="14" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="25" column="14" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer_1aa2c4d0180bcfe433d7c3596bb7342c63" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="26" column="14" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="26" column="14" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="26" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer_1a35f5e818a52a7044ee956d8c5a7fa780" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="27" column="14" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="27" column="14" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer_1ae659805245d34ee43a2052030ff13825" prot="private" static="no" mutable="no">
         <type>ObjectPropertyDrawer::Ptr</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="28" column="35" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="28" column="35" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer_1ad176f14fa08d5d10538cb4beaccc9974" prot="private" static="no" mutable="no">
         <type>std::vector&lt; std::string &gt;</type>
@@ -134,7 +134,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="29" column="21" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="29" column="21" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="29" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -155,7 +155,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="17" column="32"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="17" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer_1a9cbfc1f938c81e97cd5c44285be2f85d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -178,7 +178,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="19" column="22" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="19" bodyend="19"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="19" column="22" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="19" bodyend="19"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -258,7 +258,7 @@
         <link refid="classSR__UTILS__NS_1_1SRClass"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="11" column="5" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="11" bodyend="31"/>
+    <location file="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="11" column="5" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="11" bodyend="31"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>AllocateStatic</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>AutoFree</name></member>

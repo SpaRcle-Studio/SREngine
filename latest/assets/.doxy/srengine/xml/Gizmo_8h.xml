@@ -4,7 +4,7 @@
     <compoundname>Gizmo.h</compoundname>
     <includes refid="MeshComponent_8h" local="no">Graphics/Types/Geometry/MeshComponent.h</includes>
     <includes refid="IRenderComponent_8h" local="no">Graphics/Types/IRenderComponent.h</includes>
-    <includedby refid="EditorGizmo_8h" local="no">Engine/Core/inc/Core/GUI/EditorGizmo.h</includedby>
+    <includedby refid="EditorGizmo_8h" local="no">Engine/inc/Engine/GUI/EditorGizmo.h</includedby>
     <incdepgraph>
       <node id="148">
         <label>Graphics/Loaders/ShaderProperties.h</label>
@@ -295,7 +295,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h</label>
         <link refid="Gizmo_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1497,17 +1497,17 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/inc/Core/GUI/EditorGizmo.h</label>
+        <label>Engine/inc/Engine/GUI/EditorGizmo.h</label>
         <link refid="EditorGizmo_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/inc/Core/GUI/SceneTools.h</label>
+        <label>Engine/inc/Engine/GUI/SceneTools.h</label>
         <link refid="SceneTools_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h</label>
         <link refid="Gizmo_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1679,6 +1679,6 @@
 <codeline lineno="159"><highlight class="normal"></highlight></codeline>
 <codeline lineno="160"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GRAPHICS_MANIPULATION_TOOL_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h"/>
   </compounddef>
 </doxygen>

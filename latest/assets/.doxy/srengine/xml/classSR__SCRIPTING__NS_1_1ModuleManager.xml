@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="86" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="86" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="86" column="9" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="86" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="114" column="27" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="114" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="114" column="27" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="114" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ModuleManager_1a4d0b34bbfdedd690bdc037702969538f" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="115" column="27" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="115" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="115" column="27" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="115" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ModuleManager_1a6adaece4f0ed481bb04f47d07ca16f85" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="117" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="117" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="117" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="117" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ModuleManager_1a5d4f5f3a208a0f41b72d963029ed3a7b" prot="private" static="no" mutable="no">
         <type>std::set&lt; <ref refid="classSR__SCRIPTING__NS_1_1CppBehaviourInstance" kindref="compound">CppBehaviourInstance</ref> * &gt;</type>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="119" column="18" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="119" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="119" column="18" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="119" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ModuleManager_1a027c1c957089b380f6b7a0d5e1fca4d7" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classSR__SCRIPTING__NS_1_1ScriptModule" kindref="compound">ScriptModule</ref> &gt;</type>
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="121" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="121" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="121" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="121" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ModuleManager_1a026b02e6f879fbb70b88515c4a11652c" prot="private" static="no" mutable="no">
         <type>std::recursive_mutex</type>
@@ -102,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="122" column="30" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="122" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="122" column="30" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="122" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ModuleManager_1ab460bb08282b332a31ab577e5806acd5" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__SCRIPTING__NS_1_1ScriptSystem" kindref="compound">ScriptSystem</ref> *</type>
@@ -117,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="123" column="22" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="123" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="123" column="22" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="123" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="88" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="88" bodyend="91"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="88" column="9" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="88" bodyend="91"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ModuleManager_1af51897c1400eade13a707951f1dcf11d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -151,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="93" column="9"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="93" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ModuleManager_1a66aa67865098251d903720ba31b27823" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -165,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="96" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="96" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ModuleManager_1a97b918658085ca0900e39e73c632f11e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -183,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="98" column="27"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="98" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ModuleManager_1a4c7be700ceb3071e5038563718522438" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__SCRIPTING__NS_1_1CppBehaviourInstance" kindref="compound">CppBehaviourInstance</ref> *</type>
@@ -201,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="100" column="43"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="100" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ModuleManager_1a812ddd62c8a2c4d91b64698cde68e377" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -219,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="101" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="101" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -239,7 +239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="104" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="104" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ModuleManager_1aafab614a83636026eacad8667e17e7f4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -257,7 +257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="105" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="105" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ModuleManager_1afd3065ef1c39434193221dc7c1704a0f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD void *</type>
@@ -275,7 +275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="107" column="27"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="107" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ModuleManager_1acf1a36e84dafa1b45ba3a0b71788d4cc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -297,7 +297,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="108" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="108" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ModuleManager_1ab22cad59fade7f16e09c4a4b6b68be95" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -315,7 +315,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="109" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="109" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ModuleManager_1ab66b5d0b9bd5eb73de8f228ea8bfd649" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__SCRIPTING__NS_1_1ScriptModule" kindref="compound">ScriptModule</ref> *</type>
@@ -333,7 +333,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="111" column="35"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="111" column="35"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -383,7 +383,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="85" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="85" bodyend="125"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="85" column="5" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="85" bodyend="125"/>
     <listofallmembers>
       <member refid="classSR__SCRIPTING__NS_1_1ModuleManager_1a4c7be700ceb3071e5038563718522438" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>AllocateBehaviourInstance</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1ModuleManager_1ac8f1103d81a76c7453a5b52007e9b426" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>AllocateBehaviourInternalInstance</name></member>

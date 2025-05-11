@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="126" column="17"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="126" column="17"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1EnumReflector_1ac6acaa281e8e83a413f4080eca544ef0" prot="private" static="no" mutable="no">
         <type>uint64_t</type>
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="128" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="128" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="128" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="128" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1EnumReflector_1ae2992378acac693f72a03a2b9402bff9" prot="private" static="no" mutable="no">
         <type>EnumVariant</type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="129" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="129" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="129" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="129" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="76" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="134" bodyend="210"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="76" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="134" bodyend="210"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1aaa83e253dbb51d181b95caec6e4431f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="77" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="77" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a2dbb5a7639f7a2f5b275bc1e6e4135df" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MAYBE_UNUSED std::optional&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="102" column="52"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="102" column="52"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1aad4eb40f9af9e9caba5396df35a3d1ff" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MAYBE_UNUSED std::optional&lt; int64_t &gt;</type>
@@ -139,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="103" column="52"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="103" column="52"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1aa409c7d867e4a8ccb21acc252088de92" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MAYBE_UNUSED std::optional&lt; int64_t &gt;</type>
@@ -157,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="104" column="52"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="104" column="52"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1aebc0858478ac5279b199eedc95adbdcf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MAYBE_UNUSED std::optional&lt; int64_t &gt;</type>
@@ -175,7 +175,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="105" column="52"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="105" column="52"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a9d19bee71aaec666f8d64abe203465f7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MAYBE_UNUSED std::optional&lt; int64_t &gt;</type>
@@ -193,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="106" column="52"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="106" column="52"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a583b80aab4c51967fe70b71753139b3a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MAYBE_UNUSED const std::vector&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt; &amp;</type>
@@ -207,7 +207,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="107" column="56"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="107" column="56"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a33fc335476e5efaa77424468b32a3db7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MAYBE_UNUSED const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &amp;</type>
@@ -221,7 +221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="108" column="68"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="108" column="68"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a16813b28d344bdb1d79737a8f6ea16b3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MAYBE_UNUSED uint64_t</type>
@@ -235,7 +235,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="109" column="47"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="109" column="47"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a548f67ce51ff8ccb2d3fa391413480fd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MAYBE_UNUSED uint64_t</type>
@@ -249,7 +249,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="110" column="47"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="110" column="47"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1ab8e37f3ab845657830c10fa8b00b025f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MAYBE_UNUSED int64_t</type>
@@ -267,7 +267,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="111" column="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="111" column="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a03fd806f8867c233df484421514bee8e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MAYBE_UNUSED void</type>
@@ -289,7 +289,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="112" column="43"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="112" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a7a81182c5a0cfe68a9bc93e2b3e48aec" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MAYBE_UNUSED EnumVariant</type>
@@ -303,7 +303,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="113" column="50"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="113" column="50"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a737a838c412ab630e73bf06db54bdeb4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -327,7 +327,7 @@
         <inbodydescription>
 <para>NOLINT</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="212" column="40" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="212" bodyend="220"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="212" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="212" bodyend="220"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1af074fa474a5bf676d30aed7187b00a7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -351,7 +351,7 @@
         <inbodydescription>
 <para>NOLINT</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="222" column="40" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="222" bodyend="230"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="222" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="222" bodyend="230"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a94bd974e0f84d87206ad1c7cd0bb1423" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -374,7 +374,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="232" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="232" bodyend="240"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="232" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="232" bodyend="240"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a2014f14789be10720bf73df870743303" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -401,7 +401,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="242" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="242" bodyend="248"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="242" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="242" bodyend="248"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a5704360ca3c5d76d17f0978fba7920f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -420,7 +420,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="250" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="250" bodyend="252"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="250" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="250" bodyend="252"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a5f11304b6a2e6a71f94a2c07518d3822" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -439,7 +439,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="254" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="254" bodyend="256"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="254" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="254" bodyend="256"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a3bd1075ff3a1cf27cb881c18a6e17e57" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -462,7 +462,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="258" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="258" bodyend="270"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="258" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="258" bodyend="270"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a36e778f1bb4eaa0f57f96485b7ec5fa0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -485,7 +485,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="272" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="272" bodyend="274"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="272" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="272" bodyend="274"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a2402f33ced4deb29689e77dda55a6f4b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -508,7 +508,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="276" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="276" bodyend="284"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="276" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="276" bodyend="284"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a377638951eca21be68c6cb7e53d725f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -527,7 +527,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="286" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="286" bodyend="288"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="286" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="286" bodyend="288"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a650206803558976fd54f6ca49e28a7c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -550,7 +550,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="290" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="290" bodyend="298"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="290" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="290" bodyend="298"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a01de6892a0dd1d3e437e610197502465" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -573,7 +573,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="300" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="300" bodyend="302"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="300" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="300" bodyend="302"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1ae288df3c06cad029a8927c703b040bf7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -596,7 +596,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="304" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="304" bodyend="312"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="304" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="304" bodyend="312"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a6a9aa25433f6f886bc8a9fadaa7f2aa3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -615,7 +615,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="314" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="314" bodyend="316"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="314" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="314" bodyend="316"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1af5939234009d4293cd75bfd0d92b8fbd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -634,7 +634,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="318" column="40" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="318" bodyend="320"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="318" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="318" bodyend="320"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a3c322b3f55a983359e876cfa199e2423" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -653,7 +653,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="322" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="322" bodyend="324"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="322" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="322" bodyend="324"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1ae7813ba7e9607a1000e74bf48dad0f20" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -676,7 +676,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="327" column="10" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="327" bodyend="331"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="327" column="10" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="327" bodyend="331"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1abccd71ca74107e84bc9d2d54770cc5d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -695,7 +695,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="333" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="333" bodyend="349"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="333" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="333" bodyend="349"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -720,7 +720,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="80" column="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="80" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1aacfa232f0557fe06a152ca935bd2220d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -739,7 +739,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="82" column="54"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="82" column="54"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a5ede81cdb4d1a61ba3decf06693f1ede" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -758,7 +758,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="83" column="49"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="83" column="49"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a36e37ce913c3b44d5fded790a3a421db" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -781,7 +781,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="84" column="64"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="84" column="64"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a35891b9bd19030f6c1d10bd3856b2abd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -804,7 +804,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="85" column="64"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="85" column="64"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a6b875ef34f51062fd8182a20a7bfaa4a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -827,7 +827,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="86" column="49"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="86" column="49"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a6a1f80cb8892091eef0c846ea091602f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -854,7 +854,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="87" column="45"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="87" column="45"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a181a18b43200d76dabdd29b990967bd5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -877,7 +877,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="88" column="49"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="88" column="49"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a1e6386bb8b340d9ced7107bc6c648fa1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -896,7 +896,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="89" column="49"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="89" column="49"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1aa4d0dfbca5cd17ca11bfbb158ede1815" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -915,7 +915,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="91" column="58"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="91" column="58"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a0625bdd53f33ab85f280a3ca3d56601a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -934,7 +934,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="92" column="58"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="92" column="58"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1acda6a9b7bbe8259c38c3926de3d16e8c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -957,7 +957,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="93" column="52"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="93" column="52"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1ab99bf284175b47a3ed6b581f8ee2c450" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -980,7 +980,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="95" column="48"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="95" column="48"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a1ba405211eca65a0cdd131eb7fea1791" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1003,7 +1003,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="96" column="48"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="96" column="48"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a2be9b1cbd783ca438785831b4006639f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1026,7 +1026,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="97" column="49"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="97" column="49"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1acfe699480d6af1adfdaa3d3a1729dd39" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1049,7 +1049,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="98" column="48"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="98" column="48"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1ab881159ecc038255131cede2ec2899a6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1068,7 +1068,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="99" column="64"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="99" column="64"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a4885e5805f94656ee380b22888f6c9b5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1087,7 +1087,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="100" column="52"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="100" column="52"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-func">
@@ -1107,7 +1107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="116" column="21"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="116" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a8504a6e59d04aafa37b4d68d51ea9e98" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1125,7 +1125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="117" column="21"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="117" column="21"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1156,7 +1156,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="67" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="67" bodyend="130"/>
+    <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="67" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="67" bodyend="130"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a2be9b1cbd783ca438785831b4006639f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>At</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a01de6892a0dd1d3e437e610197502465" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>At</name></member>

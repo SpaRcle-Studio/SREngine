@@ -273,5 +273,5 @@ void SR_GRAPH_NS::IColorBufferPass::SetMeshIndex (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h`
 

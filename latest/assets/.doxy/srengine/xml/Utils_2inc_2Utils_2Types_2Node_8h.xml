@@ -3,8 +3,8 @@
   <compounddef id="Utils_2inc_2Utils_2Types_2Node_8h" kind="file" language="C++">
     <compoundname>Node.h</compoundname>
     <includes refid="NonCopyable_8h" local="no">Utils/Common/NonCopyable.h</includes>
-    <includedby refid="BinarySearchTree_8h" local="no">Engine/Core/libs/Utils/inc/Utils/Types/BinarySearchTree.h</includedby>
-    <includedby refid="LinkedList_8h" local="no">Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h</includedby>
+    <includedby refid="BinarySearchTree_8h" local="no">Engine/libs/Utils/inc/Utils/Types/BinarySearchTree.h</includedby>
+    <includedby refid="LinkedList_8h" local="no">Engine/libs/Utils/inc/Utils/Types/LinkedList.h</includedby>
     <incdepgraph>
       <node id="2">
         <label>Utils/Common/NonCopyable.h</label>
@@ -17,7 +17,7 @@
         <link refid="Allocator_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/Types/Node.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Types/Node.h</label>
         <link refid="Utils_2inc_2Utils_2Types_2Node_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -337,29 +337,29 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="5">
-        <label>Engine/Core/libs/Utils/inc/Utils/Network/Client.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Network/Client.h</label>
         <link refid="Client_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Utils/inc/Utils/Network/Server.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Network/Server.h</label>
         <link refid="Server_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Utils/inc/Utils/Types/BinarySearchTree.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Types/BinarySearchTree.h</label>
         <link refid="BinarySearchTree_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="6">
-        <label>Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Types/LinkedList.h</label>
         <link refid="LinkedList_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Utils/inc/Utils/Types/Node.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Types/Node.h</label>
         <link refid="Utils_2inc_2Utils_2Types_2Node_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -367,7 +367,7 @@
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Utils/inc/Utils/Types/NodeDictionary.h</label>
+        <label>Engine/libs/Utils/inc/Utils/Types/NodeDictionary.h</label>
         <link refid="NodeDictionary_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
@@ -421,6 +421,6 @@
 <codeline lineno="39"><highlight class="normal"></highlight></codeline>
 <codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_UTILS_TYPES_NODE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Types/Node.h"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/Node.h"/>
   </compounddef>
 </doxygen>

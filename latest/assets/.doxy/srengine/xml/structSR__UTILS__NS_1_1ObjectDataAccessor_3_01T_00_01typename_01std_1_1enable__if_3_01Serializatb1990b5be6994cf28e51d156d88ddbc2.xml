@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Serializable.h" line="43" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/Serializable.h" bodystart="43" bodyend="47"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/Serializable.h" line="43" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/Serializable.h" bodystart="43" bodyend="47"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01Serializatb1990b5be6994cf28e51d156d88ddbc2_1a278afe1e8a63c593b526c8bc5ff87824" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -58,14 +58,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Serializable.h" line="49" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/Serializable.h" bodystart="49" bodyend="55"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/Serializable.h" line="49" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/Serializable.h" bodystart="49" bodyend="55"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Serializable.h" line="42" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/Serializable.h" bodystart="42" bodyend="56"/>
+    <location file="Engine/libs/Utils/inc/Utils/Serialization/Serializable.h" line="42" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/Serializable.h" bodystart="42" bodyend="56"/>
     <listofallmembers>
       <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01Serializatb1990b5be6994cf28e51d156d88ddbc2_1a278afe1e8a63c593b526c8bc5ff87824" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ObjectDataAccessor&lt; T, typename std::enable_if&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt;::type &gt;</scope><name>Load</name></member>
       <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01Serializatb1990b5be6994cf28e51d156d88ddbc2_1ae138657ccc104fec0dd90c256d1cc126" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ObjectDataAccessor&lt; T, typename std::enable_if&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt;::type &gt;</scope><name>Save</name></member>

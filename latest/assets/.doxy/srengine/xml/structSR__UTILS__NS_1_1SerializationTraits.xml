@@ -21,7 +21,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Serialization.h" line="28" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" line="28" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1SerializationTraits_1a9c9639a70c2faca2661faea88bff8944" prot="public" static="yes" constexpr="yes" mutable="no">
         <type>constexpr bool</type>
@@ -36,14 +36,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Serialization.h" line="29" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" line="29" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="29" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Serialization.h" line="26" column="1" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="27" bodyend="30"/>
+    <location file="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" line="26" column="1" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="27" bodyend="30"/>
     <listofallmembers>
       <member refid="structSR__UTILS__NS_1_1SerializationTraits_1aa7c2717254228fedcdcbab98bbf90676" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationTraits</scope><name>HasEmpty</name></member>
       <member refid="structSR__UTILS__NS_1_1SerializationTraits_1a9c9639a70c2faca2661faea88bff8944" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationTraits</scope><name>IsSerializable</name></member>

@@ -347,5 +347,5 @@ SR_PHYSICS_NS::Bullet3LibraryImpl::~Bullet3LibraryImpl () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3LibraryImpl.h`
+The documentation for this class was generated from the following file `Engine/libs/Physics/inc/Physics/Bullet3/Bullet3LibraryImpl.h`
 

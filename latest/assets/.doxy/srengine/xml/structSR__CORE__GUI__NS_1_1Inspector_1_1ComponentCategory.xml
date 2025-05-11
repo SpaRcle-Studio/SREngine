@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="29" column="25" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/Inspector.h" line="29" column="25" bodyfile="Engine/inc/Engine/GUI/Inspector.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory_1a3a36414e18d88ef17d4549655fd88565" prot="public" static="no" mutable="no">
         <type>std::map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, ComponentCategory &gt;</type>
@@ -29,14 +29,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="30" column="22" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="30" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/Inspector.h" line="30" column="22" bodyfile="Engine/inc/Engine/GUI/Inspector.h" bodystart="30" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="28" column="9" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="28" bodyend="31"/>
+    <location file="Engine/inc/Engine/GUI/Inspector.h" line="28" column="9" bodyfile="Engine/inc/Engine/GUI/Inspector.h" bodystart="28" bodyend="31"/>
     <listofallmembers>
       <member refid="structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory_1a3a36414e18d88ef17d4549655fd88565" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector::ComponentCategory</scope><name>categories</name></member>
       <member refid="structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory_1a1082e09497fd8ebb4ae2e27ed0bd8b82" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector::ComponentCategory</scope><name>components</name></member>

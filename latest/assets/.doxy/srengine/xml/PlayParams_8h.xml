@@ -7,9 +7,9 @@
     <includes refid="Vector6_8h" local="no">Utils/Math/Vector6.h</includes>
     <includes refid="AudioLibrary_8h" local="no">Audio/AudioLibrary.h</includes>
     <includes refid="SoundFormat_8h" local="no">Audio/SoundFormat.h</includes>
-    <includedby refid="Sound_8h" local="no">Engine/Core/libs/Audio/inc/Audio/Sound.h</includedby>
-    <includedby refid="SoundManager_8h" local="no">Engine/Core/libs/Audio/inc/Audio/SoundManager.h</includedby>
-    <includedby refid="AudioSource_8h" local="no">Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h</includedby>
+    <includedby refid="Sound_8h" local="no">Engine/libs/Audio/inc/Audio/Sound.h</includedby>
+    <includedby refid="SoundManager_8h" local="no">Engine/libs/Audio/inc/Audio/SoundManager.h</includedby>
+    <includedby refid="AudioSource_8h" local="no">Engine/libs/Audio/inc/Audio/Types/AudioSource.h</includedby>
     <incdepgraph>
       <node id="92">
         <label>Audio/AudioLibrary.h</label>
@@ -20,7 +20,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Audio/inc/Audio/PlayParams.h</label>
+        <label>Engine/libs/Audio/inc/Audio/PlayParams.h</label>
         <link refid="PlayParams_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -547,7 +547,7 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Audio/inc/Audio/PlayParams.h</label>
+        <label>Engine/libs/Audio/inc/Audio/PlayParams.h</label>
         <link refid="PlayParams_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -557,15 +557,15 @@
         </childnode>
       </node>
       <node id="2">
-        <label>Engine/Core/libs/Audio/inc/Audio/Sound.h</label>
+        <label>Engine/libs/Audio/inc/Audio/Sound.h</label>
         <link refid="Sound_8h_source"/>
       </node>
       <node id="3">
-        <label>Engine/Core/libs/Audio/inc/Audio/SoundManager.h</label>
+        <label>Engine/libs/Audio/inc/Audio/SoundManager.h</label>
         <link refid="SoundManager_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h</label>
+        <label>Engine/libs/Audio/inc/Audio/Types/AudioSource.h</label>
         <link refid="AudioSource_8h_source"/>
       </node>
     </invincdepgraph>
@@ -693,6 +693,6 @@
 <codeline lineno="114"><highlight class="normal"></highlight></codeline>
 <codeline lineno="115"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_PLAYPARAMS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h"/>
+    <location file="Engine/libs/Audio/inc/Audio/PlayParams.h"/>
   </compounddef>
 </doxygen>

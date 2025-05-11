@@ -1027,5 +1027,5 @@ static Vector4 < T > SR_MATH_NS::Vector4::UnitZ ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Math/Vector4.h`
 

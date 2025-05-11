@@ -905,5 +905,5 @@ static inline MemoryManager * SR_GRAPH_NS::VulkanTools::MemoryManager::Create (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h`
 

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" line="14" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" line="14" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" bodystart="14" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="friend">
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" line="12" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" line="12" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" bodystart="13" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -51,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" line="32" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" line="32" column="21" bodyfile="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1LayerManager_1a9ab1ed3e1b887763169dcda9ee0f25c3" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &gt;</type>
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" line="33" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" line="33" column="21" bodyfile="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1LayerManager_1a3d7d5bf3fa23b0f258eb71bde720634b" prot="private" static="no" mutable="no">
         <type>uint64_t</type>
@@ -80,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" line="34" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" bodystart="34" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" line="34" column="18" bodyfile="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" bodystart="34" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -99,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" line="12" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" line="12" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" line="17" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" line="17" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LayerManager_1a6885a4de464422f260c0dff71f3b10bf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint16_t</type>
@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" line="18" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" line="18" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LayerManager_1abfde527a70ceff07da57c6d905d65f01" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD std::vector&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &gt;</type>
@@ -151,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" line="19" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" bodystart="19" bodyend="19"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" line="19" column="34" bodyfile="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" bodystart="19" bodyend="19"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LayerManager_1a82e7869a4000b4a102995a825b77660a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -165,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" line="23" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" bodystart="23" bodyend="23"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" line="23" column="31" bodyfile="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" bodystart="23" bodyend="23"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -181,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" line="21" column="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" line="21" column="40"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -197,7 +197,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" line="26" column="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" line="26" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LayerManager_1af201000e55154886e7d5be0bbbd70d2a" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -211,7 +211,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" line="28" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" line="28" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LayerManager_1a7f0e493e756430f104f9311621ee6bbc" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -229,7 +229,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" line="29" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" line="29" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -306,7 +306,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" line="11" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h" bodystart="11" bodyend="36"/>
+    <location file="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" line="11" column="5" bodyfile="Engine/libs/Utils/inc/Utils/ECS/LayerManager.h" bodystart="11" bodyend="36"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1LayerManager_1af201000e55154886e7d5be0bbbd70d2a" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::LayerManager</scope><name>ClearSettings</name></member>
       <member refid="classSR__UTILS__NS_1_1GlobalSettings_1a7c384beb02cf67610f00e1d2e0da6f15" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LayerManager</scope><name>DestroySettings</name></member>

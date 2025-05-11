@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="13" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="13" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Network/Socket.h" bodystart="13" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__NETWORK__NS_1_1Socket_1a68c5acbe3387e34db8899bcd7c7a515b" prot="private" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Socket::Ptr</ref> &amp;, const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">DataPackage::Ptr</ref> &amp;, uint64_t size)&gt;</type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="14" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="14" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Network/Socket.h" bodystart="14" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="friend">
@@ -51,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="12" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" bodystart="12" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="12" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Network/Socket.h" bodystart="12" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="55" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" bodystart="55" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="55" column="26" bodyfile="Engine/libs/Utils/inc/Utils/Network/Socket.h" bodystart="55" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Socket_1af5c559c1192f8bd8a47cff4d72ad6683" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Context::Ptr</ref></type>
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="56" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" bodystart="56" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="56" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Network/Socket.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Socket_1a9ecc078bc50c75a545447434dd2bf0d0" prot="protected" static="no" mutable="no">
         <type>ReceiveCallback</type>
@@ -96,7 +96,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="58" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" bodystart="58" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="58" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Network/Socket.h" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Socket_1a9efaea9e53782823dfc8a71f90b2605f" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">DataPackage::Ptr</ref></type>
@@ -110,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="60" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" bodystart="60" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="60" column="26" bodyfile="Engine/libs/Utils/inc/Utils/Network/Socket.h" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Socket_1ac3258ef9dd4a4c4616f9ba038a1606b5" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">DataPackage::Ptr</ref></type>
@@ -124,7 +124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="61" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" bodystart="61" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="61" column="26" bodyfile="Engine/libs/Utils/inc/Utils/Network/Socket.h" bodystart="61" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Socket_1a7ba07eb77e7508724d3f5dd210e5f445" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -139,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="63" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" bodystart="63" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="63" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Network/Socket.h" bodystart="63" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Socket_1acfa358ce7f027380f0609efb5c300f98" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -154,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="64" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" bodystart="64" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="64" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Network/Socket.h" bodystart="64" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -178,7 +178,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="16" column="18"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="16" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Socket_1af0a80993b5ed9e0777202b7c69402550" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -194,7 +194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="52" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="52" column="22"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -210,7 +210,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="19" column="17"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="19" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Socket_1a5bc9d3ab9096438ce3aef141ed2b4440" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -228,7 +228,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="22" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" bodystart="22" bodyend="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="22" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Network/Socket.h" bodystart="22" bodyend="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Socket_1ac4776196cc18c651534d5c943eaf8c8f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">DataPackage::Ptr</ref></type>
@@ -246,7 +246,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="24" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="24" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Socket_1a2f8cc368aa3672dccffbc3f7387fb1a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -264,7 +264,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="25" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="25" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Socket_1a5a1d274e57d9bd7b202196bc1317af1f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -288,7 +288,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="27" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="27" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Socket_1ae7206a3be6593f45e62bc582b1c92a05" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -320,7 +320,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="28" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="28" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Socket_1ae3ccd8c56515ecd9fba6c686db169d96" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -344,7 +344,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="29" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="29" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Socket_1a60af01df7b0c8ebad0ed6d055c88874b" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -368,7 +368,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="30" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="30" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Socket_1ace31b82af40f8134115b7c53da5d207a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD bool</type>
@@ -392,7 +392,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="31" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="31" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Socket_1af5f0c27ddf66ee54874f9ea1bb526f46" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD bool</type>
@@ -408,7 +408,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="32" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="32" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Socket_1a9acb7d23ab906b0701393bc94ff1615b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -424,7 +424,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="34" column="42"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="34" column="42"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Socket_1a043cc9d754e50c5a4eb43c97582aae6a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -440,7 +440,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="35" column="42"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="35" column="42"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Socket_1a097340f1f608ec8e3262c6de6f63790b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD uint16_t</type>
@@ -456,7 +456,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="37" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="37" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Socket_1a54a824bac7a1f38e9559a5a5c93db16e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD uint16_t</type>
@@ -472,7 +472,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="38" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="38" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Socket_1a03e1452766f04459496526bfd033545c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -488,7 +488,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="40" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="40" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Socket_1ae14cb0800b4213d9bf1b0b2c0f6ea994" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SocketType</type>
@@ -502,7 +502,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="42" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" bodystart="42" bodyend="42"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="42" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Network/Socket.h" bodystart="42" bodyend="42"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Socket_1a856b84796c861b03e9808171be3d00f8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -516,7 +516,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="43" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" bodystart="43" bodyend="43"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="43" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Network/Socket.h" bodystart="43" bodyend="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Socket_1ad34c929025d8ed37ac57ded4ef9c8e36" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">DataPackage::Ptr</ref> &amp;</type>
@@ -530,7 +530,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="44" column="45" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" bodystart="44" bodyend="44"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="44" column="45" bodyfile="Engine/libs/Utils/inc/Utils/Network/Socket.h" bodystart="44" bodyend="44"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Socket_1ad4190b116c70015bac83ffe014e47d40" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">DataPackage::Ptr</ref> &amp;</type>
@@ -544,7 +544,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="45" column="45" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" bodystart="45" bodyend="45"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="45" column="45" bodyfile="Engine/libs/Utils/inc/Utils/Network/Socket.h" bodystart="45" bodyend="45"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Socket_1a6fa83f1bb23616396833f965e7c58751" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const ReceiveCallback &amp;</type>
@@ -558,7 +558,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="46" column="44" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" bodystart="46" bodyend="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="46" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Network/Socket.h" bodystart="46" bodyend="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Socket_1abd2a2384e44ec0f12503b03ead52d1da" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Context::Ptr</ref> &amp;</type>
@@ -572,7 +572,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="47" column="41" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" bodystart="47" bodyend="47"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="47" column="41" bodyfile="Engine/libs/Utils/inc/Utils/Network/Socket.h" bodystart="47" bodyend="47"/>
       </memberdef>
       <memberdef kind="function" id="classSR__NETWORK__NS_1_1Socket_1aaeaf2f7b4efc8fce6a294673279e936b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -590,7 +590,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="49" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" bodystart="49" bodyend="49"/>
+        <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="49" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Network/Socket.h" bodystart="49" bodyend="49"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -652,7 +652,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" line="11" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Socket.h" bodystart="11" bodyend="66"/>
+    <location file="Engine/libs/Utils/inc/Utils/Network/Socket.h" line="11" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Network/Socket.h" bodystart="11" bodyend="66"/>
     <listofallmembers>
       <member refid="classSR__NETWORK__NS_1_1Socket_1a2f8cc368aa3672dccffbc3f7387fb1a6" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Socket</scope><name>AsyncReceive</name></member>
       <member refid="classSR__NETWORK__NS_1_1Socket_1a60af01df7b0c8ebad0ed6d055c88874b" prot="public" virt="pure-virtual"><scope>SR_NETWORK_NS::Socket</scope><name>AsyncReceive</name></member>

@@ -457,5 +457,5 @@ SR_NODISCARD ShaderVarType SR_SRSL_NS::SRSLTypeInfo::StringToType (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h`
 

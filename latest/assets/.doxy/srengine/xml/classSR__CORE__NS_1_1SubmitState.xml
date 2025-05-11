@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/States/SubmitState.h" line="13" column="9" bodyfile="Engine/Core/inc/Core/States/SubmitState.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/inc/Engine/States/SubmitState.h" line="13" column="9" bodyfile="Engine/inc/Engine/States/SubmitState.h" bodystart="13" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/States/SubmitState.h" line="15" column="41"/>
+        <location file="Engine/inc/Engine/States/SubmitState.h" line="15" column="41"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -95,7 +95,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/inc/Core/States/SubmitState.h" line="11" column="5" bodyfile="Engine/Core/inc/Core/States/SubmitState.h" bodystart="11" bodyend="17"/>
+    <location file="Engine/inc/Engine/States/SubmitState.h" line="11" column="5" bodyfile="Engine/inc/Engine/States/SubmitState.h" bodystart="11" bodyend="17"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase_1a3c35716b6fab3835eed68631240cd0cf" prot="public" virt="non-virtual"><scope>SR_CORE_NS::SubmitState</scope><name>AddFinishCondition</name></member>
       <member refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase_1af79ae06739433cd291a270b764243b94" prot="public" virt="non-virtual"><scope>SR_CORE_NS::SubmitState</scope><name>AddSkipCondition</name></member>

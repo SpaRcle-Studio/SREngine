@@ -131,5 +131,5 @@ inline std::string SR_SCRIPTING_NS::CppCodegenBehaviour::MakeNameWithNamespace (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h`
+The documentation for this class was generated from the following file `Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h`
 

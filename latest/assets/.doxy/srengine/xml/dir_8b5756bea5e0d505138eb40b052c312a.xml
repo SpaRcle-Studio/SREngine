@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_8b5756bea5e0d505138eb40b052c312a" kind="dir">
+    <compoundname>Engine/libs/Graphics/inc/Graphics/SRSL</compoundname>
+    <innerfile refid="AssignExpander_8h">AssignExpander.h</innerfile>
+    <innerfile refid="Evaluator_8h">Evaluator.h</innerfile>
+    <innerfile refid="GLSLCodeGenerator_8h">GLSLCodeGenerator.h</innerfile>
+    <innerfile refid="ICodeGenerator_8h">ICodeGenerator.h</innerfile>
+    <innerfile refid="Lexer_8h">Lexer.h</innerfile>
+    <innerfile refid="LexerUtils_8h">LexerUtils.h</innerfile>
+    <innerfile refid="LexicalAnalyzer_8h">LexicalAnalyzer.h</innerfile>
+    <innerfile refid="LexicalTree_8h">LexicalTree.h</innerfile>
+    <innerfile refid="MathExpression_8h">MathExpression.h</innerfile>
+    <innerfile refid="PreProcessor_8h">PreProcessor.h</innerfile>
+    <innerfile refid="PseudoCodeGenerator_8h">PseudoCodeGenerator.h</innerfile>
+    <innerfile refid="RefAnalyzer_8h">RefAnalyzer.h</innerfile>
+    <innerfile refid="SRSL_2Shader_8h">Shader.h</innerfile>
+    <innerfile refid="ShaderType_8h">ShaderType.h</innerfile>
+    <innerfile refid="ShaderVariables_8h">ShaderVariables.h</innerfile>
+    <innerfile refid="Graphics_2inc_2Graphics_2SRSL_2TypeInfo_8h">TypeInfo.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/"/>
+  </compounddef>
+</doxygen>

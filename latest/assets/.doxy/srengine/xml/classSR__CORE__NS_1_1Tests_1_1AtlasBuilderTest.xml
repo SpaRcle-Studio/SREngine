@@ -15,14 +15,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/Tests/AtlasBuilderTest.h" line="14" column="21" bodyfile="Engine/Core/inc/Core/Tests/AtlasBuilderTest.h" bodystart="14" bodyend="22"/>
+        <location file="Engine/inc/Engine/Tests/AtlasBuilderTest.h" line="14" column="21" bodyfile="Engine/inc/Engine/Tests/AtlasBuilderTest.h" bodystart="14" bodyend="22"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/inc/Core/Tests/AtlasBuilderTest.h" line="12" column="5" bodyfile="Engine/Core/inc/Core/Tests/AtlasBuilderTest.h" bodystart="12" bodyend="23"/>
+    <location file="Engine/inc/Engine/Tests/AtlasBuilderTest.h" line="12" column="5" bodyfile="Engine/inc/Engine/Tests/AtlasBuilderTest.h" bodystart="12" bodyend="23"/>
     <listofallmembers>
       <member refid="classSR__CORE__NS_1_1Tests_1_1AtlasBuilderTest_1a02e7f540b484cd1dadb5684037cd9546" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Tests::AtlasBuilderTest</scope><name>Run</name></member>
     </listofallmembers>

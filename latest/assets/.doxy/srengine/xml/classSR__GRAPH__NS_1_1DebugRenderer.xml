@@ -69,7 +69,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="33" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="33" bodyend="37"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="33" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="33" bodyend="37"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-type">
@@ -85,7 +85,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="30" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="30" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="30" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="30" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -102,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="79" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="79" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="79" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="79" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1DebugRenderer_1af1e9a4c72e094da6d6f1dfcba099a096" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1ObjectPool" kindref="compound">SR_HTYPES_NS::ObjectPool</ref>&lt; <ref refid="structSR__GRAPH__NS_1_1DebugRenderer_1_1DebugTimedObject" kindref="compound">DebugTimedObject</ref> &gt;</type>
@@ -116,7 +116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="81" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="81" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="81" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="81" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1DebugRenderer_1a5dca4762e3b9c5b1bfa2ed8134320261" prot="private" static="no" mutable="no">
         <type>std::vector&lt; Memory::BakedMesh::Ptr &gt;</type>
@@ -130,7 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="83" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="83" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="83" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="83" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="52" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="52" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugRenderer_1ae7aa3bd53a7f405f2fb1a5e45f5c5dea" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -161,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="54" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="54" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugRenderer_1af0b188afe319cbed1696ab30832f06e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -176,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="55" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="55" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugRenderer_1a55a75b3f71b7b806ea16ac0749041bd3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -191,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="56" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="56" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugRenderer_1aab854b67b35503c63dc2437d56311bad" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -206,7 +206,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="57" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="57" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugRenderer_1a1ef6d1d4337801bf8d5af641a117e5be" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -220,7 +220,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="59" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="59" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugRenderer_1af844c2a1ba03b72b9ebfbc54c22db04e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -235,7 +235,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="61" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="61" bodyend="61"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="61" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="61" bodyend="61"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugRenderer_1aaac6301ea164b916f08f98968ebec60b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -249,7 +249,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="62" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="62" bodyend="62"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="62" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="62" bodyend="62"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugRenderer_1a5c02d37c343e102ea98b9b280ced0efb" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -263,7 +263,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="63" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="63" bodyend="63"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="63" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="63" bodyend="63"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugRenderer_1af2621ba0e58df30f1f538d255ee219d0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1ObjectPool" kindref="compound">SR_HTYPES_NS::ObjectPool</ref>&lt; <ref refid="structSR__GRAPH__NS_1_1DebugRenderer_1_1DebugTimedObject" kindref="compound">DebugTimedObject</ref> &gt; &amp;</type>
@@ -277,7 +277,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="64" column="47" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="64" bodyend="64"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="64" column="47" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="64" bodyend="64"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugRenderer_1ad32c73806551d7461fc426125f8586a0" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE const <ref refid="classSR__GRAPH__NS_1_1Memory_1_1BakedMesh" kindref="compound">Memory::BakedMesh</ref> &amp;</type>
@@ -295,7 +295,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="65" column="62" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="65" bodyend="65"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="65" column="62" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="65" bodyend="65"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugRenderer_1a9841b0a001e59755ff5803d1286618c9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -309,7 +309,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="66" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="66" bodyend="66"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="66" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="66" bodyend="66"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -345,7 +345,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="69" column="18"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="69" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugRenderer_1a8afc58b535878f75ebc2dee9b35d2fbf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint64_t</type>
@@ -387,7 +387,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="70" column="18"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="70" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugRenderer_1ada2082f8d19bac5910a4f5cfbae04ec0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint64_t</type>
@@ -433,7 +433,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="71" column="18"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="71" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugRenderer_1a14d6d6f8151ade25f02d212643f39ce3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint64_t</type>
@@ -455,7 +455,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="74" column="18"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="74" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugRenderer_1a9f56afaca5e135bd69575f2a73bbd3ab" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -477,7 +477,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="75" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="75" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DebugRenderer_1ab989e38dda83e8fd0ba0aadffa5401ef" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -491,7 +491,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="76" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="76" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -565,7 +565,7 @@
         <link refid="classSR__UTILS__NS_1_1SRClass"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="29" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="29" bodyend="84"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="29" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="29" bodyend="84"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1DebugRenderer_1ada2082f8d19bac5910a4f5cfbae04ec0" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>AddCustomMesh</name></member>
       <member refid="classSR__GRAPH__NS_1_1DebugRenderer_1a41f4afcc8eae68995e13411d69705a8b" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>AddLine</name></member>

@@ -9,8 +9,8 @@
     <includes refid="SafePointer_8h" local="no">Utils/Types/SafePointer.h</includes>
     <includes refid="SharedPtr_8h" local="no">Utils/Types/SharedPtr.h</includes>
     <includes refid="BasicWindowImpl_8h" local="no">Graphics/Window/BasicWindowImpl.h</includes>
-    <includedby refid="Engine_8h" local="no">Engine/Core/inc/Core/Engine.h</includedby>
-    <includedby refid="World_8h" local="no">Engine/Core/inc/Core/World/World.h</includedby>
+    <includedby refid="Engine_8h" local="no">Engine/inc/Engine/Engine.h</includedby>
+    <includedby refid="World_8h" local="no">Engine/inc/Engine/World/World.h</includedby>
     <incdepgraph>
       <node id="122">
         <label>Graphics/Pipeline/PipelineType.h</label>
@@ -37,7 +37,7 @@
         </childnode>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Window/Window.h</label>
         <link refid="Window_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -879,7 +879,7 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>Engine/Core/inc/Core/Engine.h</label>
+        <label>Engine/inc/Engine/Engine.h</label>
         <link refid="Engine_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -889,19 +889,19 @@
         </childnode>
       </node>
       <node id="3">
-        <label>Engine/Core/inc/Core/EngineCommands.h</label>
+        <label>Engine/inc/Engine/EngineCommands.h</label>
         <link refid="EngineCommands_8h_source"/>
       </node>
       <node id="4">
-        <label>Engine/Core/inc/Core/Scripting/ScriptableContext.h</label>
+        <label>Engine/inc/Engine/Scripting/ScriptableContext.h</label>
         <link refid="ScriptableContext_8h_source"/>
       </node>
       <node id="5">
-        <label>Engine/Core/inc/Core/World/World.h</label>
+        <label>Engine/inc/Engine/World/World.h</label>
         <link refid="World_8h_source"/>
       </node>
       <node id="1">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h</label>
+        <label>Engine/libs/Graphics/inc/Graphics/Window/Window.h</label>
         <link refid="Window_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -1013,6 +1013,6 @@
 <codeline lineno="93"><highlight class="normal"></highlight></codeline>
 <codeline lineno="94"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_WINDOW_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Window/Window.h"/>
   </compounddef>
 </doxygen>

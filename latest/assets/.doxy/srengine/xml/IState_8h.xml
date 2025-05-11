@@ -5,7 +5,7 @@
     <includes refid="NonCopyable_8h" local="no">Utils/Common/NonCopyable.h</includes>
     <incdepgraph>
       <node id="1">
-        <label>Engine/Core/libs/Scripting/inc/Scripting/Old/IState.h</label>
+        <label>Engine/libs/Scripting/inc/Scripting/Old/IState.h</label>
         <link refid="IState_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -394,6 +394,6 @@
 <codeline lineno="53"><highlight class="normal"></highlight></codeline>
 <codeline lineno="54"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_SCRIPTING_I_STATE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/IState.h"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Old/IState.h"/>
   </compounddef>
 </doxygen>

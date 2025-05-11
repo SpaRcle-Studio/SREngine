@@ -84,5 +84,5 @@
 
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/Tests/AtlasBuilderTest.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/Tests/AtlasBuilderTest.h`
 

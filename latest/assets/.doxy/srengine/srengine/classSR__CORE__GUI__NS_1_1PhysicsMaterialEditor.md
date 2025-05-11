@@ -538,5 +538,5 @@ Implements [*SR\_GRAPH\_GUI\_NS::Widget::Draw*](classSR__GRAPH__GUI__NS_1_1Widge
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/GUI/PhysicsMaterialEditor.h`
 

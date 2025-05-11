@@ -97,5 +97,5 @@ static inline bool SR_CORE_NS::Tests::AtlasBuilderTest::Run ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/inc/Core/Tests/AtlasBuilderTest.h`
+The documentation for this class was generated from the following file `Engine/inc/Engine/Tests/AtlasBuilderTest.h`
 

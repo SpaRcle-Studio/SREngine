@@ -198,5 +198,5 @@ static inline ResourceEmbedder & SR_UTILS_NS::ResourceEmbedder::Instance ()
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h`
 

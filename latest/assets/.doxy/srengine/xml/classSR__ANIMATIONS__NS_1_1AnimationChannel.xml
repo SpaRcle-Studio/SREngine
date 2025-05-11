@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="24" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="24" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="24" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="64" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="64" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="64" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="64" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationChannel_1a27618607269bd0057ea087187cb802d7" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="65" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="65" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="65" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationChannel_1a796ee079f1d33b1ccae6eea7834f9765" prot="private" static="no" mutable="no">
         <type>Keys</type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="66" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="66" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="66" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="66" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="26" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="26" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationChannel_1a905f06132d11544783f7be3193174299" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__ANIMATIONS__NS_1_1AnimationChannel" kindref="compound">AnimationChannel</ref> *</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="31" column="39" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="31" bodyend="42"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="31" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="31" bodyend="42"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationChannel_1a64d5500d67cd3499ee3684cd3565023b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="44" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="44" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationChannel_1a381690a3a3c67cf923343e7813f88f72" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -126,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="45" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="45" bodyend="45"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="45" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="45" bodyend="45"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationChannel_1a0c99de8e30614e1684b89b8acb0a908b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -153,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="47" column="25" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="47" bodyend="51"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="47" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="47" bodyend="51"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationChannel_1a092f6604239fad97d7b96c2303ecc0f5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -183,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="53" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="53" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationChannel_1ac097e26ff0b6238a0b85a58cf5524b97" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -213,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="54" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="54" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationChannel_1a2a91f7e9783946a5a6dc5ca2d3cabaab" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const Keys &amp;</type>
@@ -227,7 +227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="57" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="57" bodyend="57"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="57" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="57" bodyend="57"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationChannel_1a3d4f117623c326e3942449334fc1cbd4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -241,7 +241,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="59" column="62" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="59" bodyend="59"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="59" column="62" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="59" bodyend="59"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationChannel_1a92efb553db12861c771b750a5c109bd1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE uint16_t</type>
@@ -255,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="60" column="47" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="60" bodyend="60"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="60" column="47" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="60" bodyend="60"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationChannel_1a9c2b3e053f1bdd76bb9033f69e1b57ab" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE bool</type>
@@ -269,7 +269,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="61" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="61" bodyend="61"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="61" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="61" bodyend="61"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -301,7 +301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="29" column="21"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="29" column="21"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -332,7 +332,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="23" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="23" bodyend="68"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" line="23" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h" bodystart="23" bodyend="68"/>
     <listofallmembers>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationChannel_1a0c99de8e30614e1684b89b8acb0a908b" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationChannel</scope><name>AddKey</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationChannel_1a905f06132d11544783f7be3193174299" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationChannel</scope><name>Copy</name></member>

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="76" column="14" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="76" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="76" column="14" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="76" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback_1aa95cf3e77efc7d632b6fd1953e7ceb5e" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -31,14 +31,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="77" column="14" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="77" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="77" column="14" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="77" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="75" column="5" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="75" bodyend="78"/>
+    <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="75" column="5" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="75" bodyend="78"/>
     <listofallmembers>
       <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback_1a3035eac376a70458c343007856ff75c6" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerFeedback</scope><name>isChanged</name></member>
       <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback_1aa95cf3e77efc7d632b6fd1953e7ceb5e" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerFeedback</scope><name>isDrag</name></member>

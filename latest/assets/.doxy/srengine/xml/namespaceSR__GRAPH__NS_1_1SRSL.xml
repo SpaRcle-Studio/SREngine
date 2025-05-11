@@ -22,7 +22,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="14" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="14" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="14" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="SRSL_8h_1ad02c7a167b395f1981d91f62c0535a00" prot="public" static="no">
         <type>uint32_t</type>
@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="15" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="15" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="15" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="SRSL_8h_1a822c4d1dd7a5a3ec2550bf2278b972d8" prot="public" static="no">
         <type>std::vector&lt; std::string &gt;::const_iterator</type>
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="16" column="42" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="16" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="16" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="SRSL_8h_1a25eec56ad9595db628525fd0f0841fa8" prot="public" static="no">
         <type>std::map&lt; std::string, <ref refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLVariable" kindref="compound">SRSLVariable</ref> &gt;</type>
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="24" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="24" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="SRSL_8h_1a1e6fa8cb2a571e0699fa20c3c3ffb1ce" prot="public" static="no">
         <type>std::map&lt; ShaderStage, <ref refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLStage" kindref="compound">SRSLStage</ref> &gt;</type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="30" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="30" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="30" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="SRSLParser_8h_1afe0a22334b1b11ae300157b2bbcf01b1" prot="public" static="no">
         <type>std::list&lt; <ref refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLStruct" kindref="compound">SRSLStruct</ref> &gt;</type>
@@ -92,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" line="28" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" line="28" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="SRSLParser_8h_1a1f76872f8580fd4cb5bba9037efe283a" prot="public" static="no">
         <type>std::list&lt; <ref refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLFunc" kindref="compound">SRSLFunc</ref> &gt;</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" line="29" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" line="29" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="SRSLParser_8h_1aaa67e26169936744d7f59b6502f1e8ce" prot="public" static="no">
         <type>std::list&lt; std::string &gt;</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" line="30" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" bodystart="30" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" line="30" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="SRSLParser_8h_1afc323689f4668bb22d90771bdbdcd303" prot="public" static="no">
         <type>std::vector&lt; std::string &gt;</type>
@@ -134,7 +134,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" line="31" column="25" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" bodystart="31" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" line="31" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" bodystart="31" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -154,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" line="41" column="10" declfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" declline="41" declcolumn="10"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" line="41" column="10" declfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" declline="41" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="SRSLParser_8h_1adb33c1594dead9ec636287beeb7ae3f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -176,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" line="42" column="10" declfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" declline="42" declcolumn="10"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" line="42" column="10" declfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" declline="42" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="SRSLParser_8h_1a2d2ce10d29e2b287381da89c8d004040" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::optional&lt; <ref refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLParseData" kindref="compound">SRSLParseData</ref> &gt;</type>
@@ -194,7 +194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" line="43" column="19" declfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" declline="43" declcolumn="19"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" line="43" column="19" declfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" declline="43" declcolumn="19"/>
       </memberdef>
       <memberdef kind="function" id="SRSLParser_8h_1a7821338a4b1455eb65f3a5ce24139b6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -216,13 +216,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" line="44" column="17" declfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" declline="44" declcolumn="17"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" line="44" column="17" declfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h" declline="44" declcolumn="17"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="13" column="1"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="13" column="1"/>
   </compounddef>
 </doxygen>

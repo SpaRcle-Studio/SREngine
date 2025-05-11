@@ -576,5 +576,5 @@ SR_PTYPES_NS::Bullet3Rigidbody3D::~Bullet3Rigidbody3D () override
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h`
+The documentation for this class was generated from the following file `Engine/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h`
 

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/2D/Rigidbody2D.h" line="18" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/2D/Rigidbody2D.h" bodystart="18" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/2D/Rigidbody2D.h" line="18" column="9" bodyfile="Engine/libs/Physics/inc/Physics/2D/Rigidbody2D.h" bodystart="18" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/2D/Rigidbody2D.h" line="20" column="47"/>
+        <location file="Engine/libs/Physics/inc/Physics/2D/Rigidbody2D.h" line="20" column="47"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -186,7 +186,7 @@
         <link refid="structSR__MATH__NS_1_1Vector3"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Physics/inc/Physics/2D/Rigidbody2D.h" line="16" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/2D/Rigidbody2D.h" bodystart="16" bodyend="22"/>
+    <location file="Engine/libs/Physics/inc/Physics/2D/Rigidbody2D.h" line="16" column="5" bodyfile="Engine/libs/Physics/inc/Physics/2D/Rigidbody2D.h" bodystart="16" bodyend="22"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody2D</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody2D</scope><name>BaseComponent</name></member>

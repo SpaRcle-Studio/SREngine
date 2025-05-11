@@ -237,5 +237,5 @@ uint8_t SR_UTILS_NS::StandardData::m_uint8;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Common/TypeInfo.h`
 

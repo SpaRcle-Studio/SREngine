@@ -162,5 +162,5 @@ static SR_NODISCARD CSSLinearGradient SR_UTILS_NS::Web::CSSLinearGradient::Parse
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSColor.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Web/CSS/CSSColor.h`
 

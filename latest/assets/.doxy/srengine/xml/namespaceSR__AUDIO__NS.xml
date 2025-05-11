@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" line="16" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" bodystart="16" bodyend="22"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundFormat.h" line="16" column="5" bodyfile="Engine/libs/Audio/inc/Audio/SoundFormat.h" bodystart="16" bodyend="22"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="typedef">
@@ -87,7 +87,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="11" column="25" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="11" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="11" column="25" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="11" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="IWaveDataProvider_8h_1ad6d6f1126e2c7ead79a9ba7f5d3c3489" prot="public" static="no">
         <type>std::shared_ptr&lt; RawSoundData &gt;</type>
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="12" column="29" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="12" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="12" column="29" bodyfile="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="12" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="OpenALTools_8h_1a51955f8627499b4915608d3f5e11c550" prot="public" static="no">
         <type>struct <ref refid="structSR__AUDIO__NS_1_1ALfVec3" kindref="compound">SR_AUDIO_NS::ALfVec3</ref></type>
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="14" column="34"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="14" column="34"/>
       </memberdef>
       <memberdef kind="typedef" id="OpenALTools_8h_1a91ce54d28b2e7e2ae8500d438061abf8" prot="public" static="no">
         <type>struct <ref refid="structSR__AUDIO__NS_1_1ALfVec6" kindref="compound">SR_AUDIO_NS::ALfVec6</ref></type>
@@ -129,7 +129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="15" column="34"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="15" column="34"/>
       </memberdef>
       <memberdef kind="typedef" id="SoundFormat_8h_1a8da403179f9cde4ecff3796a476e6307" prot="public" static="no">
         <type>void *</type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" line="13" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundFormat.h" line="13" column="5" bodyfile="Engine/libs/Audio/inc/Audio/SoundFormat.h" bodystart="13" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="SoundFormat_8h_1a22735a81fd5d0bd889561b3d3891ecf4" prot="public" static="no">
         <type>void *</type>
@@ -157,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" line="14" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundFormat.h" line="14" column="5" bodyfile="Engine/libs/Audio/inc/Audio/SoundFormat.h" bodystart="14" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="SoundManager_8h_1ad93e426f89b62b0045fd60bef1aa325a" prot="public" static="no">
         <type>std::string</type>
@@ -171,7 +171,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="23" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundManager.h" line="23" column="5" bodyfile="Engine/libs/Audio/inc/Audio/SoundManager.h" bodystart="23" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -188,7 +188,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="17" column="46" bodyfile="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" bodystart="17" bodyend="-1"/>
+        <location file="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" line="17" column="46" bodyfile="Engine/libs/Audio/inc/Audio/Types/AudioSource.h" bodystart="17" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -228,7 +228,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/AudioLibrary.h" line="13" column="5" declfile="Engine/Core/libs/Audio/inc/Audio/AudioLibrary.h" declline="13" declcolumn="5"/>
+        <location file="Engine/libs/Audio/inc/Audio/AudioLibrary.h" line="13" column="5" declfile="Engine/libs/Audio/inc/Audio/AudioLibrary.h" declline="13" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="IWaveDataProvider_8h_1a4bd0793c71902314f2652edb23155e20" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>IWaveDataProvider::Ptr</type>
@@ -250,7 +250,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="53" column="28" declfile="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" declline="53" declcolumn="28"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="53" column="28" declfile="Engine/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" declline="53" declcolumn="28"/>
       </memberdef>
       <memberdef kind="function" id="WAVDataProvider_8h_1aae57b18f2dc669e37d4a6c407495308b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>RawSoundDataPtr</type>
@@ -268,7 +268,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" line="31" column="21" declfile="Engine/Core/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" declline="31" declcolumn="21"/>
+        <location file="Engine/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" line="31" column="21" declfile="Engine/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h" declline="31" declcolumn="21"/>
       </memberdef>
       <memberdef kind="function" id="OpenALTools_8h_1aabe56bc6086aaf4298f9a412d5672ee2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>ListenerDistanceModel</type>
@@ -286,7 +286,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="37" column="27" bodyfile="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="37" bodyend="57"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="37" column="27" bodyfile="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="37" bodyend="57"/>
       </memberdef>
       <memberdef kind="function" id="OpenALTools_8h_1a46bf7a497717c2d283cd0b000979b5a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>ALenum</type>
@@ -304,7 +304,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="59" column="12" bodyfile="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="59" bodyend="79"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="59" column="12" bodyfile="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="59" bodyend="79"/>
       </memberdef>
       <memberdef kind="function" id="OpenALTools_8h_1a4585594d43aa004b7accffa0a7b6bb4b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED <ref refid="structSR__AUDIO__NS_1_1ALfVec6" kindref="compound">ALfVec6</ref></type>
@@ -322,7 +322,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="81" column="36" bodyfile="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="81" bodyend="84"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="81" column="36" bodyfile="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="81" bodyend="84"/>
       </memberdef>
       <memberdef kind="function" id="OpenALTools_8h_1a498297d9f12bb15b52bb2e28224fb05d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED <ref refid="structSR__AUDIO__NS_1_1ALfVec3" kindref="compound">ALfVec3</ref></type>
@@ -340,7 +340,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="86" column="36" bodyfile="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="86" bodyend="89"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="86" column="36" bodyfile="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="86" bodyend="89"/>
       </memberdef>
       <memberdef kind="function" id="OpenALTools_8h_1a22ed10c6cb17cb25a2848eff41d0c80a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -362,7 +362,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="91" column="10" bodyfile="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="91" bodyend="99"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="91" column="10" bodyfile="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="91" bodyend="99"/>
       </memberdef>
       <memberdef kind="function" id="OpenALTools_8h_1ac49bfe3f1c6af78eedd2c4dd57beec55" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -388,7 +388,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="102" column="10" bodyfile="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="102" bodyend="133"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="102" column="10" bodyfile="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="102" bodyend="133"/>
       </memberdef>
       <memberdef kind="function" id="OpenALTools_8h_1a568a726045698ddf1a4dad9501a46349" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -410,7 +410,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="135" column="10" bodyfile="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="135" bodyend="165"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="135" column="10" bodyfile="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="135" bodyend="165"/>
       </memberdef>
       <memberdef kind="function" id="OpenALTools_8h_1aa743db841f49174d08bd4d680cadcc41" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -450,7 +450,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="167" column="23" bodyfile="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="167" bodyend="177"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="167" column="23" bodyfile="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="167" bodyend="177"/>
       </memberdef>
       <memberdef kind="function" id="OpenALTools_8h_1a332fb5fb2791026a7bf454440b7ce682" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -494,7 +494,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="190" column="23" bodyfile="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="190" bodyend="200"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="190" column="23" bodyfile="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="190" bodyend="200"/>
       </memberdef>
       <memberdef kind="function" id="OpenALTools_8h_1a73db16d3bb5b79f83919945547e7ec13" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -545,7 +545,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="202" column="25" bodyfile="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="202" bodyend="213"/>
+        <location file="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="202" column="25" bodyfile="Engine/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="202" bodyend="213"/>
       </memberdef>
       <memberdef kind="function" id="ListenerData_8h_1a53950eaafa879ee10c94b5a74d55937f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -586,7 +586,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/ListenerData.h" line="15" column="5" declfile="Engine/Core/libs/Audio/inc/Audio/ListenerData.h" declline="15" declcolumn="5"/>
+        <location file="Engine/libs/Audio/inc/Audio/ListenerData.h" line="15" column="5" declfile="Engine/libs/Audio/inc/Audio/ListenerData.h" declline="15" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="PlayParams_8h_1a0ef26970615003fc522eaa82b0f80a3d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -669,7 +669,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="17" column="5" declfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" declline="17" declcolumn="5"/>
+        <location file="Engine/libs/Audio/inc/Audio/PlayParams.h" line="17" column="5" declfile="Engine/libs/Audio/inc/Audio/PlayParams.h" declline="17" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="PlayParams_8h_1aa5a54ad9500e6699ad25450514979d5b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -698,7 +698,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="61" column="5" declfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" declline="61" declcolumn="5"/>
+        <location file="Engine/libs/Audio/inc/Audio/PlayParams.h" line="61" column="5" declfile="Engine/libs/Audio/inc/Audio/PlayParams.h" declline="61" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="SoundFormat_8h_1a5aceca23c8f083039ae4fc7530431deb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SoundFormat</type>
@@ -720,13 +720,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" line="24" column="24" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" bodystart="24" bodyend="42"/>
+        <location file="Engine/libs/Audio/inc/Audio/SoundFormat.h" line="24" column="24" bodyfile="Engine/libs/Audio/inc/Audio/SoundFormat.h" bodystart="24" bodyend="42"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Audio/inc/Audio/AudioLibrary.h" line="12" column="1"/>
+    <location file="Engine/libs/Audio/inc/Audio/AudioLibrary.h" line="12" column="1"/>
   </compounddef>
 </doxygen>
