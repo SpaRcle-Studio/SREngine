@@ -51,3 +51,4 @@ site
 /Platform/Emscripten/emsdk
 /Resources/Engine/Utilities/engine-code-structure.pkl
 /Resources/Engine/Utilities/codegen
+Resources/**/*.so
