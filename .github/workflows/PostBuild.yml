@@ -76,6 +76,7 @@ jobs:
           commitMessage: ${{ inputs.commitMessage }}
           ciToken: ${{ secrets.CITOKEN }}
           commitSha: ${{ inputs.commitSha }}
+          runID: ${{ github.run_id }}
 
       #- name: Handling "#SR_CLOSE()" argument.
       #  if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'

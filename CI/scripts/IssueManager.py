@@ -30,6 +30,7 @@ commitAuthor = os.getenv('commitAuthor')
 commitMessage = os.getenv('commitMessage')
 commitBranch = os.getenv('commitBranch')
 commitSha = os.getenv('commitSha')
+runID = os.getenv('runID')
 token = os.getenv('ciToken')
 
 try:
@@ -53,7 +54,8 @@ body += f"Android Build State: `{androidBuildState}`\n"
 body += f"Flatpak Build State: `{flatpakBuildState}`\n"
 body += f"Commit: {commitSha}\n"
 body += f"Commit Branch: `{commitBranch}`\n"
-body += f"Commit Author: @{commitAuthor}."
+body += f"Commit Author: @{commitAuthor}.\n\n"
+body += f"Action Run Link: https://github.com/SpaRcle-Studio/SREngine/actions/runs/{runID}"
 
 existingIssueComment += body
 newIssueBody += body
