@@ -25,6 +25,7 @@ def getIssueBranch(issue):
 linuxBuildState = os.getenv('linuxBuildState')
 windowsBuildState = os.getenv('windowsBuildState')
 androidBuildState = os.getenv('androidBuildState')
+flatpakBuildState = os.getenv('flatpakBuildState')
 commitAuthor = os.getenv('commitAuthor')
 commitMessage = os.getenv('commitMessage')
 commitBranch = os.getenv('commitBranch')
@@ -49,6 +50,7 @@ newIssueBody = "This issue is created automatically by CI.\n\n"
 body = f"Linux Build State: `{linuxBuildState}`\n"
 body += f"Windows Build State: `{windowsBuildState}`\n"
 body += f"Android Build State: `{androidBuildState}`\n"
+body += f"Flatpak Build State: `{flatpakBuildState}`\n"
 body += f"Commit: {commitSha}\n"
 body += f"Commit Branch: `{commitBranch}`\n"
 body += f"Commit Author: @{commitAuthor}."
@@ -56,7 +58,7 @@ body += f"Commit Author: @{commitAuthor}."
 existingIssueComment += body
 newIssueBody += body
 
-if linuxBuildState != 'success' or windowsBuildState != 'success' or androidBuildState != 'success':
+if linuxBuildState != 'success' or windowsBuildState != 'success' or androidBuildState != 'success' or flatpakBuildState != 'success':
     buildFailed = True
 
 issueExists = False

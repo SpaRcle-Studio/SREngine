@@ -10,6 +10,9 @@ on:
       androidBuildState:
         required: true
         type: string
+      flatpakBuildState:
+        required: true
+        type: string
       commitActor:
         required: true
         type: string
@@ -67,6 +70,7 @@ jobs:
           linuxBuildState: ${{ inputs.linuxBuildState }}
           windowsBuildState: ${{ inputs.windowsBuildState }}
           androidBuildState: ${{ inputs.androidBuildState }}
+          flatpakBuildState: ${{ inputs.flatpakBuildState }}
           commitBranch: ${{ inputs.commitBranch }}
           commitAuthor: ${{ inputs.commitActor }}
           commitMessage: ${{ inputs.commitMessage }}
