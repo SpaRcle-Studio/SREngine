@@ -7,7 +7,7 @@
     <innerdir refid="dir_a09ad68eb0a32f84766b81c9859654b8">Engine/libs/Audio/inc/Audio/Types</innerdir>
     <innerfile refid="AudioLibrary_8h">AudioLibrary.h</innerfile>
     <innerfile refid="ListenerData_8h">ListenerData.h</innerfile>
-    <innerfile refid="Audio_2inc_2Audio_2macros_8h">macros.h</innerfile>
+    <innerfile refid="libs_2Audio_2inc_2Audio_2macros_8h">macros.h</innerfile>
     <innerfile refid="PlayParams_8h">PlayParams.h</innerfile>
     <innerfile refid="RawSound_8h">RawSound.h</innerfile>
     <innerfile refid="Sound_8h">Sound.h</innerfile>

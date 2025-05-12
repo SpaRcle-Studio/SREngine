@@ -36,7 +36,7 @@
       </node>
       <node id="3">
         <label>Audio/macros.h</label>
-        <link refid="Audio_2inc_2Audio_2macros_8h_source"/>
+        <link refid="libs_2Audio_2inc_2Audio_2macros_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
@@ -206,7 +206,7 @@
       </node>
       <node id="4">
         <label>Utils/macros.h</label>
-        <link refid="Utils_2inc_2Utils_2macros_8h_source"/>
+        <link refid="libs_2Utils_2inc_2Utils_2macros_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="6" relation="include">

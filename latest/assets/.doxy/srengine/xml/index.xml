@@ -9295,9 +9295,9 @@
     <member refid="classSR__WORLD__NS_1_1Scene_1af8e3633376d39698ceb5c0abbdb5bdae" kind="typedef"><name>SceneObjectPtr</name></member>
     <member refid="classSR__WORLD__NS_1_1Scene_1a3f26321b9211e9b403d4e8aefba86c0c" kind="typedef"><name>SceneObjects</name></member>
     <member refid="classSR__WORLD__NS_1_1Scene_1a6d3e423212bdc5c7128d0077e2348ae1" kind="typedef"><name>GameObjectPtr</name></member>
-    <member refid="classSR__WORLD__NS_1_1Scene_1a91402c4cdbfad8d390a763814543c9d0" kind="variable"><name>RuntimeScenePath</name></member>
-    <member refid="classSR__WORLD__NS_1_1Scene_1aee6b527e908d326361c6f132d6a65a47" kind="variable"><name>NewScenePath</name></member>
-    <member refid="classSR__WORLD__NS_1_1Scene_1abbb8a9c46b3e7b7784b925efd9f736c0" kind="variable"><name>NewPrefabPath</name></member>
+    <member refid="classSR__WORLD__NS_1_1Scene_1a9e9de288f125daddbe443e8216cf790c" kind="variable"><name>RuntimeScenePath</name></member>
+    <member refid="classSR__WORLD__NS_1_1Scene_1a327a2576df9eb2fcad087ee968413f3d" kind="variable"><name>NewScenePath</name></member>
+    <member refid="classSR__WORLD__NS_1_1Scene_1a1ab40b7e88d828d2801f23e5fce6592c" kind="variable"><name>NewPrefabPath</name></member>
     <member refid="classSR__WORLD__NS_1_1Scene_1abab8ba3414566c3d7c92f08a689479db" kind="variable"><name>m_registerEntityIdReplaceCache</name></member>
     <member refid="classSR__WORLD__NS_1_1Scene_1a7d42e2892e9b41f5ac00141399174293" kind="variable"><name>m_registerEntityCache</name></member>
     <member refid="classSR__WORLD__NS_1_1Scene_1a53ac2d2d4e1da221ab0cc3c3ea140d51" kind="variable"><name>m_sceneUpdater</name></member>
@@ -14998,6 +14998,9 @@
   </compound>
   <compound refid="EngineResources_8h" kind="file"><name>EngineResources.h</name>
   </compound>
+  <compound refid="EntryPoint_8h" kind="file"><name>EntryPoint.h</name>
+    <member refid="EntryPoint_8h_1afc756b5b5beed604da88c38e28cd1194" kind="function"><name>SREngineEntryPoint</name></member>
+  </compound>
   <compound refid="EvoScriptAPI_8h" kind="file"><name>EvoScriptAPI.h</name>
   </compound>
   <compound refid="About_8h" kind="file"><name>About.h</name>
@@ -15069,6 +15072,123 @@
   <compound refid="WorldEdit_8h" kind="file"><name>WorldEdit.h</name>
   </compound>
   <compound refid="Launcher_8h" kind="file"><name>Launcher.h</name>
+  </compound>
+  <compound refid="inc_2Engine_2macros_8h" kind="file"><name>macros.h</name>
+    <member refid="inc_2Engine_2macros_8h_1abc7f1e49c33ed9f32d3ec557925dbc3d" kind="define"><name>SR_ENGINE_DLL_API</name></member>
+  </compound>
+  <compound refid="libs_2Audio_2inc_2Audio_2macros_8h" kind="file"><name>macros.h</name>
+    <member refid="libs_2Audio_2inc_2Audio_2macros_8h_1a4f8d587c1f6eba31c5b7b467a07627a6" kind="define"><name>SR_AUDIO_DLL_API</name></member>
+  </compound>
+  <compound refid="libs_2Graphics_2inc_2Graphics_2macros_8h" kind="file"><name>macros.h</name>
+    <member refid="libs_2Graphics_2inc_2Graphics_2macros_8h_1ad943d9b010bf6be5fed929a5389726c2" kind="define"><name>SR_GRAPHICS_DLL_API</name></member>
+  </compound>
+  <compound refid="libs_2Physics_2inc_2Physics_2macros_8h" kind="file"><name>macros.h</name>
+    <member refid="libs_2Physics_2inc_2Physics_2macros_8h_1a7ac73e5e845d9f4bf768233b3182f572" kind="define"><name>SR_PHYSICS_DLL_API</name></member>
+  </compound>
+  <compound refid="libs_2Scripting_2inc_2Scripting_2macros_8h" kind="file"><name>macros.h</name>
+    <member refid="libs_2Scripting_2inc_2Scripting_2macros_8h_1a51cd7b48d580cc1dd99c60f77886b941" kind="define"><name>SR_SCRIPTING_DLL_API</name></member>
+  </compound>
+  <compound refid="libs_2Utils_2inc_2Utils_2macros_8h" kind="file"><name>macros.h</name>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a816ab7d5c2ce1f0a01216042837beb93" kind="define"><name>GLM_FORCE_RADIANS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aa53e0967978ad7a8792f6961156ec968" kind="define"><name>GLM_FORCE_DEPTH_ZERO_TO_ONE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a54a3814d1062a0be10e553faf30a8ef0" kind="define"><name>CRT_SECURE_NO_WARNINGS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ab327acd0a24a2ccb9dfc3af0a807172f" kind="define"><name>_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a599c03dc0e32c96863b3fbeca7bef935" kind="define"><name>_HAS_AUTO_PTR_ETC</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aa8cecfc5c5c054d2875c03e77b7be15d" kind="define"><name>TRUE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aa93f0eb578d23995850d61f7d61c55c1" kind="define"><name>FALSE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a36baea32c6788d2d164dc0eb74f7a34c" kind="define"><name>SR_HAS_ATTRIBUTE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a269d44eb38a17e1579d6008646119e1a" kind="define"><name>SR_LIKELY_ATTRIBUTE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1afcab8d12c6db8db15b5d7105859ed6ae" kind="define"><name>SR_UNLIKELY_ATTRIBUTE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a82f8fa01a35cd3019703b95ea7e803db" kind="define"><name>SR_LIKELY</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a3336e92e604978dffc5b057233423b59" kind="define"><name>SR_UNLIKELY</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a82af4d3cdbc171f7baf9567a7130fbe8" kind="define"><name>SR_SAFE_DELETE_PTR</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a1bd2754799ee160184f368b9ce1339aa" kind="define"><name>SR_SAFE_DELETE_ARRAY_PTR</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1afec1d4590305551d272212aa7496313b" kind="define"><name>SR_COMBINE_Utils</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ae7b963fb1c07c0b8df6bce4f4fdc4729" kind="define"><name>SR_COMBINE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a73e39319eb89901b5462394dfc308725" kind="define"><name>SR_FASTCALL_ATTRIBUTE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ae888130d972d0abf79927c3849f0b602" kind="define"><name>SR_CONSTEXPR</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a0aa792aeb9cc49c0c147cde87abdcc7a" kind="define"><name>SR_INLINE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ad4e3884dd6f5f9aef0843a2dcb78d2b5" kind="define"><name>SR_FASTCALL</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1af28f49e3d796382879e675917ad8f8b4" kind="define"><name>SR_FORCE_INLINE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a7e99847fb00b39f363ce87a554cc02b1" kind="define"><name>SR_CLOCKS_PER_SEC</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a5ed4ecb53271983f9f546867278c2c3a" kind="define"><name>SR_NODISCARD</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ae57e254b6bf4eae3590548092ecbf31c" kind="define"><name>SR_FALLTHROUGH</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a5ed4630e2bcf2c8168a8f4cb806022b3" kind="define"><name>SR_DEPRECATED</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ab480da21ad07010bf19f94707f896bcd" kind="define"><name>SR_DEPRECATED_EX</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a4927892346728e324508bcb1943536d4" kind="define"><name>SR_MAYBE_UNUSED</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a03e5d0d1872131df12bef49d4fa2bca0" kind="define"><name>SR_MAYBE_UNUSED_VAR</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a6bd3bcd09f90af6f0648791b598dba27" kind="define"><name>SR_INLINE_STATIC</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a57fad190a3dadff42987f408685255d7" kind="define"><name>SR_NULL</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a90d32338b66c081bdefe5efcdef2adf0" kind="define"><name>SR_MARSHAL_USE_LIST</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a5d917c412008f1ef22f4b13cb9fd45fb" kind="define"><name>SR_MARSHAL_ENCODE_AND_DECODE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ab0a9f8483bfcea04a2adf34d136aab0b" kind="define"><name>SR_INVALID_STR_POS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ac0e82a756dcc374f5aa21729f6701d91" kind="define"><name>SR_ID_INVALID</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a88ea964e413c77498c6cba2886545efc" kind="define"><name>SR_SHADER_PROGRAM</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a86607188aa700ba0c36b12b779790ff5" kind="define"><name>SR_NULL_SHADER</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a15e82f15c3d7dbf323b6c5258e2e47b3" kind="define"><name>SR_VERTEX_DESCRIPTION</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1abd75661fe7969e19439052a5f69ba5d1" kind="define"><name>GLM_ENABLE_EXPERIMENTAL</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a00502f698de5bf20e6d979d0cdb00765" kind="define"><name>SR_NOOP</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a9635bf9d5897ba7f5f02f8bd4b324a74" kind="define"><name>SR_FLT_EPSILON</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ac8d27c03feecf16430debe4b495b8c4e" kind="define"><name>SR_NORETURN</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a819a2273e0e6fea4e84c5046a4860c5e" kind="define"><name>SR_MAX_BONES_ON_VERTEX</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1affc597af11259f495bdd804566dbc1d2" kind="define"><name>SR_HUMANOID_MAX_BONES</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a0d9c5465ae4bfd0873d409539114919f" kind="define"><name>SR_FAST_CONSTRUCTOR</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a8a222dd5c009d13644e0fb5b4f96013d" kind="define"><name>SR_UNUSED_VARIABLE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ae60710434468ed7b7e0d0b7e9258d42f" kind="define"><name>SR_WIN32_BOOL</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a2774df9818d72a6be270ea375bf9650b" kind="define"><name>SR_SIMD_SUPPORT</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aaceb6c766e952dcd626fb0b944fc47a5" kind="define"><name>SR_MACRO_CONCAT_UTIL</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aaedcdfbfafeeec1634e2d4ddb40e11a6" kind="define"><name>SR_MACRO_CONCAT</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a8205a64da40fa9df39a2432561116d0d" kind="define"><name>SR_STRINGIFY</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1afff02dfb9b1ceac78eeb06fee6c76cbd" kind="define"><name>SR_EXPAND_AND_STRINGIFY</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a85be71c7a7d0066e3c7d1373bc563763" kind="define"><name>SR_PROTECT</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ad68a0520ffad979c9546b30f6eb97a3e" kind="define"><name>SR_EXPAND</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1af6236fdef49652b3904e5c97417c7f15" kind="define"><name>SR_LINE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a6c7209aa879d2a79acd14d6458821ad2" kind="define"><name>SR_AF_INET</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a7b4115f749d66a20e8eaabc76af5e4bf" kind="define"><name>SR_SOCK_STREAM</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a5bece2d6d52e45af832a2b72b045324b" kind="define"><name>SR_INADDR_ANY</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a10ddbe4c51d33c325875196ef89c685b" kind="define"><name>SR_XML_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a050d4c5991eb39d026ef44e08f607bd7" kind="define"><name>SR_YAML_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a071a2e9d76180094796d980c1c9aea17" kind="define"><name>SR_PHYSICS_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ae69d521522be5f1e2a77d271b1b72991" kind="define"><name>SR_PTYPES_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a10f3816984e322927f26e3d258856743" kind="define"><name>SR_PHYSICS_UTILS_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ad435cd8ff2653f6f18232fff22d8a983" kind="define"><name>SR_UTILS_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ae5c50cb7ca1ab1b3e0904463d9060787" kind="define"><name>SR_SRLM_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aa22cc1609ccf32185836c25b7473acbe" kind="define"><name>SR_NETWORK_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ad48137f6b266a09652634fe6c475e8a2" kind="define"><name>SR_PLATFORM_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a1242779feef05131e72c86a892262f80" kind="define"><name>SR_MATH_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a424b80f0ecc4b98e95a2e592e83e4333" kind="define"><name>SR_GRAPH_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ac6f061f35fb40f50057a35bca0caaaad" kind="define"><name>SR_SRSL_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a9ad611b14cdb01f53ea00c2f32a05e12" kind="define"><name>SR_GRAPH_UI_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aa9a7d2658a527d59dd87642e8a175112" kind="define"><name>SR_GRAPH_GUI_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a05d1591858b5a562711e4cccecd8aefc" kind="define"><name>SR_ANIMATIONS_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a0014e080ea159193c4c6361dbd5b6f15" kind="define"><name>SR_HTYPES_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a21fe194564e3a4bbcbc0dcdbdc56e9c2" kind="define"><name>SR_GTYPES_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ab65e97039b6e8e5a9a9a7c6136b1038c" kind="define"><name>SR_WORLD_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ab1949e5415321dd829e9a3f44609bcba" kind="define"><name>SR_CORE_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a75d40e18bf07fa8f1bcc3073bb723163" kind="define"><name>SR_CORE_UI_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a1d4cea11e28ba600838cf71237c8ea6e" kind="define"><name>SR_CORE_GUI_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a4f0c0ef2f81e5f0c6c9bdf866f3dc9fc" kind="define"><name>SR_SCRIPTING_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a9e0f16862cffa3345985f16591c30714" kind="define"><name>SR_AUDIO_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a907d1ea4c8c3b9c91b3c57f3b00def3f" kind="define"><name>SR_UTILS_GUI_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aa134a6d1e33aaa41d3d0230315a0fb5f" kind="define"><name>SR_COUNT_ARGS_IMPL2</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a5c5cb0389ad7d23245af13997794b577" kind="define"><name>SR_COUNT_ARGS_IMPL</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aeb77752aad0b749ab4266bc2dd1970c2" kind="define"><name>SR_COUNT_ARGS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a514adad1320c745f8c7f6b9babb76d42" kind="define"><name>SR_GLOBAL_LOCK</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1abbd4b76667b7d7aa594aaf44d57ac83f" kind="define"><name>SR_STATIC_ASSERT2</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a22fa442b99a5d96433c10a5b67a3e7f3" kind="define"><name>SR_STATIC_ASSERT</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a295e7aec1eceffe473a297f46a4b4e71" kind="define"><name>SR_RENDERER_DLL_API</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a522703230a4e759b921e95958799fc14" kind="define"><name>SR_CORE_DLL_API</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a84af508d0e9e1c956bce88c776757849" kind="define"><name>SR_DLL_API_IMPORT</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a7ecb9b3834ba4c72e7c15fa192a48ebe" kind="define"><name>SR_DLL_API_EXPORT</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1afdd5d4651cde3b3141d03d993dbdcabc" kind="define"><name>SR_CODEGEN_DLL_API_IMPORT</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1abc5c96e0559f2dd941f6e318f8d44ac2" kind="define"><name>SR_CODEGEN_DLL_API_EXPORT</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1af6f55d5bc7a7a14d3cd2c10648d4f22b" kind="define"><name>SR_COMMON_DLL_API</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a29bf9b95e3d36b498d1c96f126b77340" kind="define"><name>SR_STRCMPI</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1af6d72565571625ce242f7b32ddfdd4b8" kind="define"><name>SR_STRNCPY</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a98f527cf0d63142b6b6dc4be01cdff14" kind="define"><name>SR_FUNCTION_SIGNATURE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1adba5c3290b0282780b1d6052dbfe8b15" kind="define"><name>SR_GCC_CLANG_REMOVE_PADDING_ATTRIB</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a074582c33e07e707faa8017cc5726ca3" kind="define"><name>SR_CODEGEN_HEADER_COMMENT</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a2f4af09115b4b3f8fe6c0bb412b005f3" kind="define"><name>SR_OFFSETOF</name></member>
   </compound>
   <compound refid="BlueprintParser_8h" kind="file"><name>BlueprintParser.h</name>
   </compound>
@@ -15623,120 +15743,6 @@
   <compound refid="CollisionShape_8h" kind="file"><name>CollisionShape.h</name>
   </compound>
   <compound refid="LibraryImpl_8h" kind="file"><name>LibraryImpl.h</name>
-  </compound>
-  <compound refid="Audio_2inc_2Audio_2macros_8h" kind="file"><name>macros.h</name>
-    <member refid="Audio_2inc_2Audio_2macros_8h_1a4f8d587c1f6eba31c5b7b467a07627a6" kind="define"><name>SR_AUDIO_DLL_API</name></member>
-  </compound>
-  <compound refid="Graphics_2inc_2Graphics_2macros_8h" kind="file"><name>macros.h</name>
-    <member refid="Graphics_2inc_2Graphics_2macros_8h_1ad943d9b010bf6be5fed929a5389726c2" kind="define"><name>SR_GRAPHICS_DLL_API</name></member>
-  </compound>
-  <compound refid="Physics_2inc_2Physics_2macros_8h" kind="file"><name>macros.h</name>
-    <member refid="Physics_2inc_2Physics_2macros_8h_1a7ac73e5e845d9f4bf768233b3182f572" kind="define"><name>SR_PHYSICS_DLL_API</name></member>
-  </compound>
-  <compound refid="Scripting_2inc_2Scripting_2macros_8h" kind="file"><name>macros.h</name>
-    <member refid="Scripting_2inc_2Scripting_2macros_8h_1a51cd7b48d580cc1dd99c60f77886b941" kind="define"><name>SR_SCRIPTING_DLL_API</name></member>
-  </compound>
-  <compound refid="Utils_2inc_2Utils_2macros_8h" kind="file"><name>macros.h</name>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a816ab7d5c2ce1f0a01216042837beb93" kind="define"><name>GLM_FORCE_RADIANS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1aa53e0967978ad7a8792f6961156ec968" kind="define"><name>GLM_FORCE_DEPTH_ZERO_TO_ONE</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a54a3814d1062a0be10e553faf30a8ef0" kind="define"><name>CRT_SECURE_NO_WARNINGS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1ab327acd0a24a2ccb9dfc3af0a807172f" kind="define"><name>_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a599c03dc0e32c96863b3fbeca7bef935" kind="define"><name>_HAS_AUTO_PTR_ETC</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1aa8cecfc5c5c054d2875c03e77b7be15d" kind="define"><name>TRUE</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1aa93f0eb578d23995850d61f7d61c55c1" kind="define"><name>FALSE</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a36baea32c6788d2d164dc0eb74f7a34c" kind="define"><name>SR_HAS_ATTRIBUTE</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a269d44eb38a17e1579d6008646119e1a" kind="define"><name>SR_LIKELY_ATTRIBUTE</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1afcab8d12c6db8db15b5d7105859ed6ae" kind="define"><name>SR_UNLIKELY_ATTRIBUTE</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a82f8fa01a35cd3019703b95ea7e803db" kind="define"><name>SR_LIKELY</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a3336e92e604978dffc5b057233423b59" kind="define"><name>SR_UNLIKELY</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a82af4d3cdbc171f7baf9567a7130fbe8" kind="define"><name>SR_SAFE_DELETE_PTR</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a1bd2754799ee160184f368b9ce1339aa" kind="define"><name>SR_SAFE_DELETE_ARRAY_PTR</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1afec1d4590305551d272212aa7496313b" kind="define"><name>SR_COMBINE_Utils</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1ae7b963fb1c07c0b8df6bce4f4fdc4729" kind="define"><name>SR_COMBINE</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a73e39319eb89901b5462394dfc308725" kind="define"><name>SR_FASTCALL_ATTRIBUTE</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1ae888130d972d0abf79927c3849f0b602" kind="define"><name>SR_CONSTEXPR</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a0aa792aeb9cc49c0c147cde87abdcc7a" kind="define"><name>SR_INLINE</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1ad4e3884dd6f5f9aef0843a2dcb78d2b5" kind="define"><name>SR_FASTCALL</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1af28f49e3d796382879e675917ad8f8b4" kind="define"><name>SR_FORCE_INLINE</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a7e99847fb00b39f363ce87a554cc02b1" kind="define"><name>SR_CLOCKS_PER_SEC</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a5ed4ecb53271983f9f546867278c2c3a" kind="define"><name>SR_NODISCARD</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1ae57e254b6bf4eae3590548092ecbf31c" kind="define"><name>SR_FALLTHROUGH</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a5ed4630e2bcf2c8168a8f4cb806022b3" kind="define"><name>SR_DEPRECATED</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1ab480da21ad07010bf19f94707f896bcd" kind="define"><name>SR_DEPRECATED_EX</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a4927892346728e324508bcb1943536d4" kind="define"><name>SR_MAYBE_UNUSED</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a03e5d0d1872131df12bef49d4fa2bca0" kind="define"><name>SR_MAYBE_UNUSED_VAR</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a6bd3bcd09f90af6f0648791b598dba27" kind="define"><name>SR_INLINE_STATIC</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a57fad190a3dadff42987f408685255d7" kind="define"><name>SR_NULL</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a90d32338b66c081bdefe5efcdef2adf0" kind="define"><name>SR_MARSHAL_USE_LIST</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a5d917c412008f1ef22f4b13cb9fd45fb" kind="define"><name>SR_MARSHAL_ENCODE_AND_DECODE</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1ab0a9f8483bfcea04a2adf34d136aab0b" kind="define"><name>SR_INVALID_STR_POS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1ac0e82a756dcc374f5aa21729f6701d91" kind="define"><name>SR_ID_INVALID</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a88ea964e413c77498c6cba2886545efc" kind="define"><name>SR_SHADER_PROGRAM</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a86607188aa700ba0c36b12b779790ff5" kind="define"><name>SR_NULL_SHADER</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a15e82f15c3d7dbf323b6c5258e2e47b3" kind="define"><name>SR_VERTEX_DESCRIPTION</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1abd75661fe7969e19439052a5f69ba5d1" kind="define"><name>GLM_ENABLE_EXPERIMENTAL</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a00502f698de5bf20e6d979d0cdb00765" kind="define"><name>SR_NOOP</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a9635bf9d5897ba7f5f02f8bd4b324a74" kind="define"><name>SR_FLT_EPSILON</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1ac8d27c03feecf16430debe4b495b8c4e" kind="define"><name>SR_NORETURN</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a819a2273e0e6fea4e84c5046a4860c5e" kind="define"><name>SR_MAX_BONES_ON_VERTEX</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1affc597af11259f495bdd804566dbc1d2" kind="define"><name>SR_HUMANOID_MAX_BONES</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a0d9c5465ae4bfd0873d409539114919f" kind="define"><name>SR_FAST_CONSTRUCTOR</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a8a222dd5c009d13644e0fb5b4f96013d" kind="define"><name>SR_UNUSED_VARIABLE</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1ae60710434468ed7b7e0d0b7e9258d42f" kind="define"><name>SR_WIN32_BOOL</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a2774df9818d72a6be270ea375bf9650b" kind="define"><name>SR_SIMD_SUPPORT</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1aaceb6c766e952dcd626fb0b944fc47a5" kind="define"><name>SR_MACRO_CONCAT_UTIL</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1aaedcdfbfafeeec1634e2d4ddb40e11a6" kind="define"><name>SR_MACRO_CONCAT</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a8205a64da40fa9df39a2432561116d0d" kind="define"><name>SR_STRINGIFY</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1afff02dfb9b1ceac78eeb06fee6c76cbd" kind="define"><name>SR_EXPAND_AND_STRINGIFY</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a85be71c7a7d0066e3c7d1373bc563763" kind="define"><name>SR_PROTECT</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1ad68a0520ffad979c9546b30f6eb97a3e" kind="define"><name>SR_EXPAND</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1af6236fdef49652b3904e5c97417c7f15" kind="define"><name>SR_LINE</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a6c7209aa879d2a79acd14d6458821ad2" kind="define"><name>SR_AF_INET</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a7b4115f749d66a20e8eaabc76af5e4bf" kind="define"><name>SR_SOCK_STREAM</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a5bece2d6d52e45af832a2b72b045324b" kind="define"><name>SR_INADDR_ANY</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a10ddbe4c51d33c325875196ef89c685b" kind="define"><name>SR_XML_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a050d4c5991eb39d026ef44e08f607bd7" kind="define"><name>SR_YAML_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a071a2e9d76180094796d980c1c9aea17" kind="define"><name>SR_PHYSICS_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1ae69d521522be5f1e2a77d271b1b72991" kind="define"><name>SR_PTYPES_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a10f3816984e322927f26e3d258856743" kind="define"><name>SR_PHYSICS_UTILS_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1ad435cd8ff2653f6f18232fff22d8a983" kind="define"><name>SR_UTILS_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1ae5c50cb7ca1ab1b3e0904463d9060787" kind="define"><name>SR_SRLM_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1aa22cc1609ccf32185836c25b7473acbe" kind="define"><name>SR_NETWORK_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1ad48137f6b266a09652634fe6c475e8a2" kind="define"><name>SR_PLATFORM_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a1242779feef05131e72c86a892262f80" kind="define"><name>SR_MATH_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a424b80f0ecc4b98e95a2e592e83e4333" kind="define"><name>SR_GRAPH_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1ac6f061f35fb40f50057a35bca0caaaad" kind="define"><name>SR_SRSL_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a9ad611b14cdb01f53ea00c2f32a05e12" kind="define"><name>SR_GRAPH_UI_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1aa9a7d2658a527d59dd87642e8a175112" kind="define"><name>SR_GRAPH_GUI_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a05d1591858b5a562711e4cccecd8aefc" kind="define"><name>SR_ANIMATIONS_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a0014e080ea159193c4c6361dbd5b6f15" kind="define"><name>SR_HTYPES_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a21fe194564e3a4bbcbc0dcdbdc56e9c2" kind="define"><name>SR_GTYPES_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1ab65e97039b6e8e5a9a9a7c6136b1038c" kind="define"><name>SR_WORLD_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1ab1949e5415321dd829e9a3f44609bcba" kind="define"><name>SR_CORE_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a75d40e18bf07fa8f1bcc3073bb723163" kind="define"><name>SR_CORE_UI_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a1d4cea11e28ba600838cf71237c8ea6e" kind="define"><name>SR_CORE_GUI_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a4f0c0ef2f81e5f0c6c9bdf866f3dc9fc" kind="define"><name>SR_SCRIPTING_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a9e0f16862cffa3345985f16591c30714" kind="define"><name>SR_AUDIO_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a907d1ea4c8c3b9c91b3c57f3b00def3f" kind="define"><name>SR_UTILS_GUI_NS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1aa134a6d1e33aaa41d3d0230315a0fb5f" kind="define"><name>SR_COUNT_ARGS_IMPL2</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a5c5cb0389ad7d23245af13997794b577" kind="define"><name>SR_COUNT_ARGS_IMPL</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1aeb77752aad0b749ab4266bc2dd1970c2" kind="define"><name>SR_COUNT_ARGS</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a514adad1320c745f8c7f6b9babb76d42" kind="define"><name>SR_GLOBAL_LOCK</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1abbd4b76667b7d7aa594aaf44d57ac83f" kind="define"><name>SR_STATIC_ASSERT2</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a22fa442b99a5d96433c10a5b67a3e7f3" kind="define"><name>SR_STATIC_ASSERT</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a295e7aec1eceffe473a297f46a4b4e71" kind="define"><name>SR_RENDERER_DLL_API</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a522703230a4e759b921e95958799fc14" kind="define"><name>SR_CORE_DLL_API</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a84af508d0e9e1c956bce88c776757849" kind="define"><name>SR_DLL_API_IMPORT</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a7ecb9b3834ba4c72e7c15fa192a48ebe" kind="define"><name>SR_DLL_API_EXPORT</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1afdd5d4651cde3b3141d03d993dbdcabc" kind="define"><name>SR_CODEGEN_DLL_API_IMPORT</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1abc5c96e0559f2dd941f6e318f8d44ac2" kind="define"><name>SR_CODEGEN_DLL_API_EXPORT</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1af6f55d5bc7a7a14d3cd2c10648d4f22b" kind="define"><name>SR_COMMON_DLL_API</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a29bf9b95e3d36b498d1c96f126b77340" kind="define"><name>SR_STRCMPI</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1af6d72565571625ce242f7b32ddfdd4b8" kind="define"><name>SR_STRNCPY</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a98f527cf0d63142b6b6dc4be01cdff14" kind="define"><name>SR_FUNCTION_SIGNATURE</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1adba5c3290b0282780b1d6052dbfe8b15" kind="define"><name>SR_GCC_CLANG_REMOVE_PADDING_ATTRIB</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a074582c33e07e707faa8017cc5726ca3" kind="define"><name>SR_CODEGEN_HEADER_COMMENT</name></member>
-    <member refid="Utils_2inc_2Utils_2macros_8h_1a2f4af09115b4b3f8fe6c0bb412b005f3" kind="define"><name>SR_OFFSETOF</name></member>
   </compound>
   <compound refid="PhysicsLib_8h" kind="file"><name>PhysicsLib.h</name>
   </compound>

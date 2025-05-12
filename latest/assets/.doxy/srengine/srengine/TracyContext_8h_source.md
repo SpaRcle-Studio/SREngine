@@ -23,6 +23,12 @@
 #include <Utils/Types/Map.h>
 #include <Utils/Debug.h>
 
+// #ifdef SR_COMMON_DLL_EXPORTS
+//     #define TRACY_EXPORTS
+// #else
+//     #define TRACY_IMPORTS
+// #endif
+
 #ifndef SR_ENGINE_CODEGEN_CLANG_PARSE_MODE
     #include <Tracy.hpp>
 #endif
@@ -34,6 +40,9 @@ namespace SR_UTILS_NS {
 
         All
     );
+
+    extern SR_COMMON_DLL_API void StartupEngineProfiler();
+    extern SR_COMMON_DLL_API void ShutdownEngineProfiler();
 
     class TracyContextManager : public SR_UTILS_NS::Singleton<TracyContextManager> {
         SR_REGISTER_SINGLETON(TracyContextManager)

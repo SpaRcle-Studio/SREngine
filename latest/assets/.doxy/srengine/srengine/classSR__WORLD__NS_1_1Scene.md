@@ -60,9 +60,9 @@ See [SR\_UTILS\_NS::IComponentable](classSR__UTILS__NS_1_1IComponentable.md)
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_MAYBE\_UNUSED SR\_INLINE\_STATIC const Path | [**NewPrefabPath**](#variable-newprefabpath)   = `"Scenes/New-cache-prefab"`<br>_NOLINT._  |
-|  SR\_MAYBE\_UNUSED SR\_INLINE\_STATIC const Path | [**NewScenePath**](#variable-newscenepath)   = `"Scenes/New-cache-scene"`<br>_NOLINT._  |
-|  SR\_MAYBE\_UNUSED SR\_INLINE\_STATIC const Path | [**RuntimeScenePath**](#variable-runtimescenepath)   = `"Scenes/Runtime-cache-scene"`<br> |
+|  SR\_MAYBE\_UNUSED SR\_INLINE\_STATIC const std::string | [**NewPrefabPath**](#variable-newprefabpath)   = `"Scenes/New-cache-prefab"`<br>_NOLINT._  |
+|  SR\_MAYBE\_UNUSED SR\_INLINE\_STATIC const std::string | [**NewScenePath**](#variable-newscenepath)   = `"Scenes/New-cache-scene"`<br>_NOLINT._  |
+|  SR\_MAYBE\_UNUSED SR\_INLINE\_STATIC const std::string | [**RuntimeScenePath**](#variable-runtimescenepath)   = `"Scenes/Runtime-cache-scene"`<br> |
 
 
 
@@ -342,7 +342,7 @@ using SR_WORLD_NS::Scene::Super =  SR_UTILS_NS::IComponentable;
 
 _NOLINT._ 
 ```C++
-SR_MAYBE_UNUSED SR_INLINE_STATIC const Path SR_WORLD_NS::Scene::NewPrefabPath;
+SR_MAYBE_UNUSED SR_INLINE_STATIC const std::string SR_WORLD_NS::Scene::NewPrefabPath;
 ```
 
 
@@ -356,7 +356,7 @@ SR_MAYBE_UNUSED SR_INLINE_STATIC const Path SR_WORLD_NS::Scene::NewPrefabPath;
 
 _NOLINT._ 
 ```C++
-SR_MAYBE_UNUSED SR_INLINE_STATIC const Path SR_WORLD_NS::Scene::NewScenePath;
+SR_MAYBE_UNUSED SR_INLINE_STATIC const std::string SR_WORLD_NS::Scene::NewScenePath;
 ```
 
 
@@ -369,7 +369,7 @@ SR_MAYBE_UNUSED SR_INLINE_STATIC const Path SR_WORLD_NS::Scene::NewScenePath;
 ### variable RuntimeScenePath 
 
 ```C++
-SR_MAYBE_UNUSED SR_INLINE_STATIC const Path SR_WORLD_NS::Scene::RuntimeScenePath;
+SR_MAYBE_UNUSED SR_INLINE_STATIC const std::string SR_WORLD_NS::Scene::RuntimeScenePath;
 ```
 
 

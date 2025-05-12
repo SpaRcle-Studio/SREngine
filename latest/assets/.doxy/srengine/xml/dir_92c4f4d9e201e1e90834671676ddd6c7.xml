@@ -19,8 +19,10 @@
     <innerfile refid="EngineCommands_8h">EngineCommands.h</innerfile>
     <innerfile refid="EngineMigrators_8h">EngineMigrators.h</innerfile>
     <innerfile refid="EngineResources_8h">EngineResources.h</innerfile>
+    <innerfile refid="EntryPoint_8h">EntryPoint.h</innerfile>
     <innerfile refid="EvoScriptAPI_8h">EvoScriptAPI.h</innerfile>
     <innerfile refid="Launcher_8h">Launcher.h</innerfile>
+    <innerfile refid="inc_2Engine_2macros_8h">macros.h</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

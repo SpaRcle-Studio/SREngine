@@ -5,7 +5,7 @@
     <innerdir refid="dir_ae9b2f7fe7573db66ee183afae23951c">Engine/libs/Scripting/inc/Scripting/Base</innerdir>
     <innerdir refid="dir_b8cef419041e294130040bdf7c4c8d81">Engine/libs/Scripting/inc/Scripting/Cpp</innerdir>
     <innerdir refid="dir_b244a4bff51c9cedd445e3d7c2557c90">Engine/libs/Scripting/inc/Scripting/Old</innerdir>
-    <innerfile refid="Scripting_2inc_2Scripting_2macros_8h">macros.h</innerfile>
+    <innerfile refid="libs_2Scripting_2inc_2Scripting_2macros_8h">macros.h</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

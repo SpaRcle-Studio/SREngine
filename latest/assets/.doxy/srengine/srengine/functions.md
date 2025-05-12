@@ -25,6 +25,7 @@
 
 ## s
 
+* **SREngineEntryPoint** ([**EntryPoint.h**](EntryPoint_8h.md))
 * **SRDelete** ([**Allocator.h**](Allocator_8h.md))
 * **SRFree** ([**Allocator.h**](Allocator_8h.md))
 * **SRMalloc** ([**Allocator.h**](Allocator_8h.md))

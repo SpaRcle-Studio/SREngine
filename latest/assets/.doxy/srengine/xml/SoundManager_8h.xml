@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="SoundManager_8h" kind="file" language="C++">
     <compoundname>SoundManager.h</compoundname>
-    <includes refid="Audio_2inc_2Audio_2macros_8h" local="no">Audio/macros.h</includes>
+    <includes refid="libs_2Audio_2inc_2Audio_2macros_8h" local="no">Audio/macros.h</includes>
     <includes refid="Singleton_8h" local="no">Utils/Common/Singleton.h</includes>
     <includes refid="Thread_8h" local="no">Utils/Types/Thread.h</includes>
     <includes refid="ListenerData_8h" local="no">Audio/ListenerData.h</includes>
@@ -66,7 +66,7 @@
       </node>
       <node id="2">
         <label>Audio/macros.h</label>
-        <link refid="Audio_2inc_2Audio_2macros_8h_source"/>
+        <link refid="libs_2Audio_2inc_2Audio_2macros_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
@@ -350,7 +350,7 @@
       </node>
       <node id="3">
         <label>Utils/macros.h</label>
-        <link refid="Utils_2inc_2Utils_2macros_8h_source"/>
+        <link refid="libs_2Utils_2inc_2Utils_2macros_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="5" relation="include">

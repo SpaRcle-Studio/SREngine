@@ -21,7 +21,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| file | [**macros.h**](Graphics_2inc_2Graphics_2macros_8h.md) <br> |
+| file | [**macros.h**](libs_2Graphics_2inc_2Graphics_2macros_8h.md) <br> |
 
 
 ## Directories

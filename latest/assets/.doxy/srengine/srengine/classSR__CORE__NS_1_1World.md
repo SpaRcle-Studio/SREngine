@@ -69,9 +69,9 @@ See [SR\_WORLD\_NS::Scene](classSR__WORLD__NS_1_1Scene.md)
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_MAYBE\_UNUSED SR\_INLINE\_STATIC const Path | [**NewPrefabPath**](classSR__WORLD__NS_1_1Scene.md#variable-newprefabpath)   = `"Scenes/New-cache-prefab"`<br>_NOLINT._  |
-|  SR\_MAYBE\_UNUSED SR\_INLINE\_STATIC const Path | [**NewScenePath**](classSR__WORLD__NS_1_1Scene.md#variable-newscenepath)   = `"Scenes/New-cache-scene"`<br>_NOLINT._  |
-|  SR\_MAYBE\_UNUSED SR\_INLINE\_STATIC const Path | [**RuntimeScenePath**](classSR__WORLD__NS_1_1Scene.md#variable-runtimescenepath)   = `"Scenes/Runtime-cache-scene"`<br> |
+|  SR\_MAYBE\_UNUSED SR\_INLINE\_STATIC const std::string | [**NewPrefabPath**](classSR__WORLD__NS_1_1Scene.md#variable-newprefabpath)   = `"Scenes/New-cache-prefab"`<br>_NOLINT._  |
+|  SR\_MAYBE\_UNUSED SR\_INLINE\_STATIC const std::string | [**NewScenePath**](classSR__WORLD__NS_1_1Scene.md#variable-newscenepath)   = `"Scenes/New-cache-scene"`<br>_NOLINT._  |
+|  SR\_MAYBE\_UNUSED SR\_INLINE\_STATIC const std::string | [**RuntimeScenePath**](classSR__WORLD__NS_1_1Scene.md#variable-runtimescenepath)   = `"Scenes/Runtime-cache-scene"`<br> |
 
 
 

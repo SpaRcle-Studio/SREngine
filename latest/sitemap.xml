@@ -5045,6 +5045,14 @@
          <lastmod>2025-05-12</lastmod>
     </url>
     <url>
+         <loc>https://docs.sparcles.dev/latest/srengine/EntryPoint_8h/</loc>
+         <lastmod>2025-05-12</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.sparcles.dev/latest/srengine/EntryPoint_8h_source/</loc>
+         <lastmod>2025-05-12</lastmod>
+    </url>
+    <url>
          <loc>https://docs.sparcles.dev/latest/srengine/EvoScriptAPI_8h/</loc>
          <lastmod>2025-05-12</lastmod>
     </url>
@@ -5058,6 +5066,14 @@
     </url>
     <url>
          <loc>https://docs.sparcles.dev/latest/srengine/Launcher_8h_source/</loc>
+         <lastmod>2025-05-12</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.sparcles.dev/latest/srengine/inc_2Engine_2macros_8h/</loc>
+         <lastmod>2025-05-12</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.sparcles.dev/latest/srengine/inc_2Engine_2macros_8h_source/</loc>
          <lastmod>2025-05-12</lastmod>
     </url>
     <url>
@@ -5257,11 +5273,11 @@
          <lastmod>2025-05-12</lastmod>
     </url>
     <url>
-         <loc>https://docs.sparcles.dev/latest/srengine/Audio_2inc_2Audio_2macros_8h/</loc>
+         <loc>https://docs.sparcles.dev/latest/srengine/libs_2Audio_2inc_2Audio_2macros_8h/</loc>
          <lastmod>2025-05-12</lastmod>
     </url>
     <url>
-         <loc>https://docs.sparcles.dev/latest/srengine/Audio_2inc_2Audio_2macros_8h_source/</loc>
+         <loc>https://docs.sparcles.dev/latest/srengine/libs_2Audio_2inc_2Audio_2macros_8h_source/</loc>
          <lastmod>2025-05-12</lastmod>
     </url>
     <url>
@@ -6941,11 +6957,11 @@
          <lastmod>2025-05-12</lastmod>
     </url>
     <url>
-         <loc>https://docs.sparcles.dev/latest/srengine/Graphics_2inc_2Graphics_2macros_8h/</loc>
+         <loc>https://docs.sparcles.dev/latest/srengine/libs_2Graphics_2inc_2Graphics_2macros_8h/</loc>
          <lastmod>2025-05-12</lastmod>
     </url>
     <url>
-         <loc>https://docs.sparcles.dev/latest/srengine/Graphics_2inc_2Graphics_2macros_8h_source/</loc>
+         <loc>https://docs.sparcles.dev/latest/srengine/libs_2Graphics_2inc_2Graphics_2macros_8h_source/</loc>
          <lastmod>2025-05-12</lastmod>
     </url>
     <url>
@@ -7257,11 +7273,11 @@
          <lastmod>2025-05-12</lastmod>
     </url>
     <url>
-         <loc>https://docs.sparcles.dev/latest/srengine/Physics_2inc_2Physics_2macros_8h/</loc>
+         <loc>https://docs.sparcles.dev/latest/srengine/libs_2Physics_2inc_2Physics_2macros_8h/</loc>
          <lastmod>2025-05-12</lastmod>
     </url>
     <url>
-         <loc>https://docs.sparcles.dev/latest/srengine/Physics_2inc_2Physics_2macros_8h_source/</loc>
+         <loc>https://docs.sparcles.dev/latest/srengine/libs_2Physics_2inc_2Physics_2macros_8h_source/</loc>
          <lastmod>2025-05-12</lastmod>
     </url>
     <url>
@@ -7525,11 +7541,11 @@
          <lastmod>2025-05-12</lastmod>
     </url>
     <url>
-         <loc>https://docs.sparcles.dev/latest/srengine/Scripting_2inc_2Scripting_2macros_8h/</loc>
+         <loc>https://docs.sparcles.dev/latest/srengine/libs_2Scripting_2inc_2Scripting_2macros_8h/</loc>
          <lastmod>2025-05-12</lastmod>
     </url>
     <url>
-         <loc>https://docs.sparcles.dev/latest/srengine/Scripting_2inc_2Scripting_2macros_8h_source/</loc>
+         <loc>https://docs.sparcles.dev/latest/srengine/libs_2Scripting_2inc_2Scripting_2macros_8h_source/</loc>
          <lastmod>2025-05-12</lastmod>
     </url>
     <url>
@@ -9529,11 +9545,11 @@
          <lastmod>2025-05-12</lastmod>
     </url>
     <url>
-         <loc>https://docs.sparcles.dev/latest/srengine/Utils_2inc_2Utils_2macros_8h/</loc>
+         <loc>https://docs.sparcles.dev/latest/srengine/libs_2Utils_2inc_2Utils_2macros_8h/</loc>
          <lastmod>2025-05-12</lastmod>
     </url>
     <url>
-         <loc>https://docs.sparcles.dev/latest/srengine/Utils_2inc_2Utils_2macros_8h_source/</loc>
+         <loc>https://docs.sparcles.dev/latest/srengine/libs_2Utils_2inc_2Utils_2macros_8h_source/</loc>
          <lastmod>2025-05-12</lastmod>
     </url>
     <url>

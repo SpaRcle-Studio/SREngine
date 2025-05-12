@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="WheelInternalData_8h" kind="file" language="C++">
     <compoundname>WheelInternalData.h</compoundname>
-    <includes refid="Physics_2inc_2Physics_2macros_8h" local="no">Physics/macros.h</includes>
+    <includes refid="libs_2Physics_2inc_2Physics_2macros_8h" local="no">Physics/macros.h</includes>
     <includes refid="Enumerations_8h" local="no">Utils/Common/Enumerations.h</includes>
     <includedby refid="Vehicle4W3D_8h" local="no">Engine/libs/Physics/inc/Physics/3D/Vehicle4W3D.h</includedby>
     <incdepgraph>
@@ -16,7 +16,7 @@
       </node>
       <node id="2">
         <label>Physics/macros.h</label>
-        <link refid="Physics_2inc_2Physics_2macros_8h_source"/>
+        <link refid="libs_2Physics_2inc_2Physics_2macros_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
@@ -136,7 +136,7 @@
       </node>
       <node id="3">
         <label>Utils/macros.h</label>
-        <link refid="Utils_2inc_2Utils_2macros_8h_source"/>
+        <link refid="libs_2Utils_2inc_2Utils_2macros_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
