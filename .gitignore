@@ -52,3 +52,4 @@ site
 /Resources/Engine/Utilities/engine-code-structure.pkl
 /Resources/Engine/Utilities/codegen
 Resources/**/*.so
+.flatpak-builder/

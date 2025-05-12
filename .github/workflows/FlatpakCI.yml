@@ -1,0 +1,36 @@
+name: SpaRcle Engine Flatpak CI
+
+on:
+  workflow_call:
+
+jobs:
+  Build:
+    name: Build.
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Fetching repository.
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Installing dependencies.
+        run: |
+          sudo apt-get update
+          sudo apt-get install flatpak flatpak-builder
+          flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+      #- name: Building Flatpak.
+      #  shell: bash
+      #  run: |
+      #    flatpak-builder --force-clean --user --install-deps-from=flathub --repo=repo --install builddir CI/dev.sparcles.srengine.yml
+      #
+      #- name: Bundle the Flatpak.
+      #  shell: bash
+      #  run: |
+      #    flatpak build-bundle repo srengine.flatpak dev.sparcles.srengine
+
+      - name: Upload Flatpak artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: srengine.flatpak
+          path: srengine.flatpak

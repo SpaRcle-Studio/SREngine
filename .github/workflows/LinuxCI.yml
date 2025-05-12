@@ -2,21 +2,14 @@ name: SpaRcle Engine Linux CI
 
 on:
   workflow_call:
-    inputs:
-      buildDebug:
-        required: true
-        type: string
-      buildRelease:
-        required: true
-        type: string
-      artifactPush:
-        required: true
-        type: string
 
 jobs:
   Build:
     name: Build.
     runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        buildType: [Debug, Release]
     steps:
       - name: Fetching repository.
         uses: actions/checkout@v4
@@ -65,96 +58,46 @@ jobs:
 
       - name: Creating Building Environment.
         run: |
-          cmake -E make_directory ${{github.workspace}}/build-debug
-          cmake -E make_directory ${{github.workspace}}/build-release
+          cmake -E make_directory ${{github.workspace}}/build
 
-      - if: inputs.buildRelease == 'true'
-        name: Building Release.
+      - name: Building ${{ matrix.buildType }}.
         shell: bash
-        working-directory: ${{github.workspace}}/build-release
+        working-directory: ${{github.workspace}}/build
         run: |
-          echo "releaseSuccessful=false" >> "$GITHUB_ENV"
-          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Release
+          echo "buildSuccessful=false" >> "$GITHUB_ENV"
+          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=${{ matrix.buildType }}
           cmake --build . -j 4
-          echo "releaseSuccessful=true" >> "$GITHUB_ENV"
+          echo "buildSuccessful=true" >> "$GITHUB_ENV"
 
-      - if: inputs.buildDebug == 'true'
-        name: Building Debug.
-        shell: bash
-        working-directory: ${{github.workspace}}/build-debug
-        run: |
-          echo "debugSuccessful=false" >> "$GITHUB_ENV"
-          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Debug
-          cmake --build . -j 4
-          echo "debugSuccessful=true" >> "$GITHUB_ENV"
-
-      - if: inputs.buildDebug == 'true'
-        name: Creating a Debug build trace.
+      - name: Creating a ${{ matrix.buildType }} build trace.
         shell: bash
         working-directory: ${{github.workspace}}/CI
-        run: python ninjatracing.py ../build-debug/.ninja_log > trace-debug.json
+        run: python ninjatracing.py ../build/.ninja_log > trace.json
 
-      - if: inputs.buildRelease == 'true'
-        name: Creating a Release build trace.
-        shell: bash
-        working-directory: ${{github.workspace}}/CI
-        run: python ninjatracing.py ../build-release/.ninja_log > trace-release.json
-
-      - if: inputs.buildDebug == 'true'
-        name: Uploading a Debug build trace artifact.
+      - name: Uploading a ${{ matrix.buildType }} build trace artifact.
         uses: actions/upload-artifact@v4
         with:
-          name: "SREngine Debug Linux Build Trace Artifact"
-          path: "${{github.workspace}}/CI/trace-debug.json"
+          name: "SREngine ${{ matrix.buildType }} Linux Build Trace Artifact"
+          path: "${{github.workspace}}/CI/trace.json"
 
-      - if: inputs.buildRelease == 'true'
-        name: Uploading a Release build trace artifact.
-        uses: actions/upload-artifact@v4
-        with:
-          name: "SREngine Release Linux Build Trace Artifact"
-          path: "${{github.workspace}}/CI/trace-release.json"
-
-      - if: env.debugSuccessful == 'true'
-        name: Creating Debug artifact.
-        working-directory: ${{github.workspace}}/build-debug/Engine
+      - name: Creating ${{ matrix.buildType }} artifact.
+        working-directory: ${{github.workspace}}/build/Engine
         shell: bash
         run: |
-          mkdir -p SREngineDebugBuild
-          find . -maxdepth 1 -name "SREngine_*" -exec cp {} SREngineDebugBuild/ \;
-          ls -la SREngineDebugBuild
+          mkdir -p SREngineBuild
+          find . -maxdepth 1 -name "SREngine_*" -exec cp {} SREngineBuild/ \;
+          ls -la SREngineBuild
 
-      - if: env.releaseSuccessful == 'true'
-        name: Creating Release artifact.
-        working-directory: ${{github.workspace}}/build-release/Engine
-        shell: bash
-        run: |
-          mkdir -p SREngineReleaseBuild
-          find . -maxdepth 1 -name "SREngine_*" -exec cp {} SREngineReleaseBuild/ \;
-          ls -la SREngineReleaseBuild
-
-      - if: env.debugSuccessful == 'true'
-        name: Uploading a successful Debug build artifact.
+      - if: env.buildSuccessful == 'true'
+        name: Uploading a successful ${{ matrix.buildType }} build artifact.
         uses: actions/upload-artifact@v4
         with:
-          name: SREngine Linux Debug
-          path: "${{github.workspace}}/build-debug/Engine/SREngineDebugBuild"
-      - if: env.releaseSuccessful == 'true'
-        name: Uploading a successful Release build artifact.
-        uses: actions/upload-artifact@v4
-        with:
-          name: SREngine Linux Release
-          path: "${{github.workspace}}/build-release/Engine/SREngineReleaseBuild"
+          name: "Linux ${{ matrix.buildType }} Executable"
+          path: "${{github.workspace}}/build/Engine/SREngineBuild"
 
-      - if: env.debugSuccessful == 'false' || inputs.artifactPush == 'true'
-        name: Uploading a failed Debug build artifact.
-        uses: actions/upload-artifact@v4
-        with:
-          name: "SREngine Linux Failed Debug"
-          path: "${{github.workspace}}/build-debug"
-
-      - if: env.releaseSuccessful == 'false' || inputs.artifactPush == 'true'
-        name: Uploading a failed Release build artifact.
-        uses: actions/upload-artifact@v4
-        with:
-          name: "SREngine Linux Failed Release"
-          path: "${{github.workspace}}/build-release"
+      #- if: env.buildSuccessful == 'false'
+      #  name: Linux ${{ matrix.buildType }} Build Directory Artifact.
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: "Linux ${{ matrix.buildType }} Build Directory Artifact"
+      #    path: "${{github.workspace}}/build"

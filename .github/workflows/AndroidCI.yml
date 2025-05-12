@@ -2,13 +2,6 @@ name: SpaRcle Engine Android CI
 
 on:
   workflow_call:
-    inputs:
-      buildRelease:
-        required: true
-        type: string
-      artifactPush:
-        required: true
-        type: string
 
 jobs:
   build:
@@ -32,18 +25,17 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          distribution: "temurin"
+          java-version: "17"
 
       - name: Updating submodules.
         run: git submodule --quiet update --init --recursive --depth 1 --jobs 4
 
-      - if: inputs.buildRelease == 'true'
-        name: Building Release (${{ matrix.arch }})
+      - name: Building Release (${{ matrix.arch }})
         shell: powershell
         working-directory: ${{ github.workspace }}
         run: |
-          echo "releaseSuccessful=false" | Out-File -FilePath $env:GITHUB_ENV -Append
+          echo "buildSuccessful=false" | Out-File -FilePath $env:GITHUB_ENV -Append
           cd Platform/Android
           echo "Install android SDK..."
           dir
@@ -53,8 +45,8 @@ jobs:
           ./build.bat ${{ matrix.arch }}
 
           if ($LASTEXITCODE -eq 0) {
-              echo "releaseSuccessful=true" | Out-File -FilePath $env:GITHUB_ENV -Append
-          } 
+              echo "buildSuccessful=true" | Out-File -FilePath $env:GITHUB_ENV -Append
+          }
           else {
               Write-Error "Build failed with exit code $LASTEXITCODE"
               exit 1
