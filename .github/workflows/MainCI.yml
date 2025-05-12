@@ -21,20 +21,31 @@ on:
       - features/*
 
 jobs:
+  Main:
+    name: Main.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Main CI.
+        run: echo "Main CI is running."
+
   BuildWindowsJob:
     name: Windows.
+    needs: [Main]
     uses: ./.github/workflows/WindowsCI.yml
 
   BuildLinuxJob:
     name: Linux.
+    needs: [Main]
     uses: ./.github/workflows/LinuxCI.yml
 
   BuildAndroidJob:
     name: Android.
+    needs: [Main]
     uses: ./.github/workflows/AndroidCI.yml
 
   BuildFlatpakJob:
     name: Flatpak.
+    needs: [Main]
     uses: ./.github/workflows/FlatpakCI.yml
 
   PostBuild:
