@@ -1,9 +1,8 @@
 //
-// Created by Nikita on 29.12.2020.
-// Looked by Drakeme on 26.06.2022.
-// Changed by Monika on 20.11.2022
-// Approved and improved by innerviewer on 2023-03-09.
+// Created by Monika on 12.05.2025.
 //
+
+#include <Engine/EntryPoint.h>
 
 #include <Engine/Launcher.h>
 #include <Engine/Tests/TestManager.h>
@@ -17,7 +16,9 @@
 
 #include <Codegen/SpaRcleModuleApplicationCore.generated.hpp>
 
-int main(int argc, char** argv) {
+int SREngineEntryPoint(int argc, char** argv) {
+    SR_UTILS_NS::StartupEngineProfiler();
+
     Codegen::RegisterModule_Application();
 
     if (!SR_UTILS_NS::RunTestSharedPtr()) {
@@ -80,6 +81,8 @@ int main(int argc, char** argv) {
     }
 
     SR_HTYPES_NS::SharedPtrDynamicDataCounter::CheckMemoryLeaks();
+
+    SR_UTILS_NS::ShutdownEngineProfiler();
 
     return code;
 }

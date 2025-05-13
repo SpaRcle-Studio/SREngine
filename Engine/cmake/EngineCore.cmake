@@ -1,3 +1,21 @@
+if (ANDROID_NDK)
+    add_compile_options(-femulated-tls)
+    add_link_options(-femulated-tls)
+endif()
+
+set(SR_UTILS_ASSIMP ON CACHE INTERNAL "" FORCE)
+set(SR_UTILS_DLL_EXPORTS ON CACHE INTERNAL "" FORCE)
+
+if (SR_TRACY_ENABLE)
+    add_definitions(
+        -DSR_TRACY_ENABLE
+        -DTRACY_ON_DEMAND
+        -DTRACY_ENABLE
+    )
+endif()
+
+option(SR_ENGINE_DLL_EXPORTS "" ON)
+
 set(CORE_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
@@ -55,23 +73,43 @@ set(SR_COMMON_GIT_METADATA ON)
 
 add_compile_definitions(SR_COMMON_GIT_METADATA)
 
-message(STATUS "CONFIGURING Utils -----------------")
+message(STATUS "SpaRcle Engine: CONFIGURING Utils")
 add_subdirectory(libs/Utils)
-message(STATUS "CONFIGURING Audio -----------------")
+message(STATUS "SpaRcle Engine: CONFIGURING Audio")
 add_subdirectory(libs/Audio)
-message(STATUS "CONFIGURING Physics -----------------")
+message(STATUS "SpaRcle Engine: CONFIGURING Physics")
 add_subdirectory(libs/Physics)
-message(STATUS "CONFIGURING Graphics -----------------")
+message(STATUS "SpaRcle Engine: CONFIGURING Graphics")
 add_subdirectory(libs/Graphics)
-message(STATUS "CONFIGURING Scripting -----------------")
+message(STATUS "SpaRcle Engine: CONFIGURING Scripting")
 add_subdirectory(libs/Scripting)
 
-add_library(Engine STATIC
+set(SR_ENGINE_CORE_SOURCES
     ${CORE_ROOT_DIR}/cxx/Core.cxx
     ${CORE_ROOT_DIR}/cxx/GUI.cxx
     ${CORE_ROOT_DIR}/cxx/Codegen.cxx
     ${CORE_ROOT_DIR}/cxx/States.cxx
+    ${CORE_ROOT_DIR}/src/Engine/EntryPoint.cpp
 )
+
+if (SR_ENGINE_STATIC_LIBRARY)
+    add_library(Engine STATIC ${SR_ENGINE_CORE_SOURCES})
+else()
+    add_library(Engine SHARED ${SR_ENGINE_CORE_SOURCES})
+    add_library(Engine::lib ALIAS Engine)
+
+    if (UNIX)
+        target_compile_options(Graphics PRIVATE -fPIC)
+    endif()
+
+    SR_COPY_SHARED_MODULE_TO_EXECUTABLE_FOLDER(Engine)
+    SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(Engine)
+endif()
+
+if (SR_ENGINE_DLL_EXPORTS)
+    message("Engine will be using DLL exports")
+    target_compile_definitions(Engine PUBLIC SR_ENGINE_DLL_EXPORTS)
+endif()
 
 list(APPEND SR_CORE_LINK_LIBRARIES Utils)
 list(APPEND SR_CORE_LINK_LIBRARIES Physics)
@@ -87,7 +125,6 @@ target_include_directories(Engine PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
 target_include_directories(Engine PUBLIC ${SR_CMAKE_ROOT_BUILD_DIRECTORY}/Codegen)
 target_include_directories(Engine PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/Utils/include)
 target_include_directories(Engine PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/Utils/libs/assimp/include)
-target_include_directories(Engine PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/Utils/libs/FQHSA/header)
 
 target_include_directories(Engine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Utils/libs)
 target_include_directories(Engine PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Utils/libs/assimp/include)

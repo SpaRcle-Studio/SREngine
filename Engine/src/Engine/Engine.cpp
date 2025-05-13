@@ -381,7 +381,7 @@ namespace SR_CORE_NS {
         SR_LOG("Engine::LoadStartupScene() : loading startup scene...");
 
         if (!m_engineScene && (m_editor && !m_editor->LoadSceneFromCachedPath())) {
-            auto&& scenePath = SR_WORLD_NS::Scene::NewScenePath.ConcatExt("scene");
+            auto&& scenePath = SR_UTILS_NS::Path(SR_WORLD_NS::Scene::NewScenePath).ConcatExt("scene");
 
             if (SR_WORLD_NS::Scene::IsExists(scenePath)) {
                 auto&& pScene = SR_WORLD_NS::Scene::LoadScene(scenePath);

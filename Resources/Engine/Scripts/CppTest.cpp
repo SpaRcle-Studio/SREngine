@@ -18,18 +18,15 @@ namespace SpaRcle::Scripts::SREngine {
         SR_NODISCARD bool ExecuteInEditMode() const noexcept override { return true; }
 
     public:
-        void Start() override {
-            //auto sound = SR_AUDIO_NS::Sound::Load("Editor/Audio/music.mp3");
-            //sound->Play();
-            //sound->CheckResourceUsage();
-        }
+        void Start() override { }
+
         void Update(float_t dt) override {
             if (deltaTime > 0.f) {
                 deltaTime -= dt;
                 return;
             }
             deltaTime = logInterval;
-            SR_DEBUG_LOG("TestBehaviour::Update() : dt log 2 = {}", dt);
+            SR_DEBUG_LOG("TestBehaviour::Update() : dt log = {}", dt);
         }
 
     private:

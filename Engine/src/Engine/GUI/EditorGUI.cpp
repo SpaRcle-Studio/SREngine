@@ -38,11 +38,11 @@
 
 namespace SR_CORE_GUI_NS {
     static SR_UTILS_NS::Path GetNewScenePath() {
-        auto&& scenePath = SR_WORLD_NS::Scene::NewScenePath.ConcatExt("scene");
+        auto&& scenePath = SR_UTILS_NS::Path(SR_WORLD_NS::Scene::NewScenePath).ConcatExt("scene");
 
         uint64_t index = 0;
         while (SR_WORLD_NS::Scene::IsExists(scenePath)) {
-            scenePath = SR_FORMAT("{}-{}.scene", SR_WORLD_NS::Scene::NewScenePath.CStr(), index);
+            scenePath = SR_FORMAT("{}-{}.scene", SR_WORLD_NS::Scene::NewScenePath, index);
             ++index;
         }
 
@@ -50,11 +50,11 @@ namespace SR_CORE_GUI_NS {
     }
 
     static SR_UTILS_NS::Path GetNewPrefabPath() {
-        auto&& scenePath = SR_WORLD_NS::Scene::NewPrefabPath.ConcatExt("prefab");
+        auto&& scenePath = SR_UTILS_NS::Path(SR_WORLD_NS::Scene::NewPrefabPath).ConcatExt("prefab");
 
         uint64_t index = 0;
         while (SR_WORLD_NS::Scene::IsExists(scenePath)) {
-            scenePath = SR_FORMAT("{}-{}.prefab", SR_WORLD_NS::Scene::NewPrefabPath.CStr(), index);
+            scenePath = SR_FORMAT("{}-{}.prefab", SR_WORLD_NS::Scene::NewPrefabPath, index);
             ++index;
         }
 
@@ -354,7 +354,7 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        if (scenePath.Contains(SR_WORLD_NS::Scene::RuntimeScenePath.ToStringRef())) {
+        if (scenePath.Contains(SR_WORLD_NS::Scene::RuntimeScenePath)) {
             return;
         }
 
@@ -396,7 +396,7 @@ namespace SR_CORE_GUI_NS {
 
         if (!SR_WORLD_NS::Scene::IsExists(scenePath)) {
             SR_WARN("EditorGUI::LoadSceneFromCachedPath() : cached path is not usable! \n\tPath: " + scenePath.ToStringRef() + "\n\tUsing default scene.");
-            scenePath = SR_WORLD_NS::Scene::NewScenePath.ConcatExt("scene");
+            scenePath = SR_UTILS_NS::Path(SR_WORLD_NS::Scene::NewScenePath).ConcatExt("scene");
         }
 
         if (!SR_WORLD_NS::Scene::IsExists(scenePath)) {

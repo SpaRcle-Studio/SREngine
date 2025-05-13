@@ -138,7 +138,7 @@ namespace SR_CORE_NS::GUI {
 
         const std::string extension = m_scene->GetPath().GetExtension();
 
-        auto&& runtimePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_WORLD_NS::Scene::RuntimeScenePath.ConcatExt(extension));
+        auto&& runtimePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_UTILS_NS::Path(SR_WORLD_NS::Scene::RuntimeScenePath).ConcatExt(extension));
         auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
 
         if (runtimePath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
@@ -156,7 +156,7 @@ namespace SR_CORE_NS::GUI {
             return false;
         }
 
-        if (auto&& runtimeScene = SR_WORLD_NS::Scene::LoadScene(SR_WORLD_NS::Scene::RuntimeScenePath.ConcatExt(extension))) {
+        if (auto&& runtimeScene = SR_WORLD_NS::Scene::LoadScene(SR_UTILS_NS::Path(SR_WORLD_NS::Scene::RuntimeScenePath).ConcatExt(extension))) {
             pEngine->AddSceneToQueue(runtimeScene);
             return true;
         }

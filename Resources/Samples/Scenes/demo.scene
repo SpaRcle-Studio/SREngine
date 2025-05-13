@@ -723,7 +723,6 @@ sra format
 										10-i:4396283777552644742
 									9-v:behaviourName
 										10-s:TestBehaviour
-									9-o:data
 						6-k:i
 							7-o:d
 								8-v:type
@@ -733,7 +732,6 @@ sra format
 										10-i:3943996598505795885
 									9-v:behaviourName
 										10-s:TestBehaviour
-									9-o:data
 					5-v:name
 						6-s:Cube
 					5-o:transform
