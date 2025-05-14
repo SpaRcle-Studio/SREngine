@@ -15,82 +15,45 @@ namespace SR_CORE_NS {
         }
 
     #ifdef SR_ENGINE_FLATPAK_BUILD
-        if (Super::InitializeResourcesFolder(argc, argv)) {
+        if (InitializeResourcesFolder(argc, argv)) {
             return LauncherInitStatus::Success;
         }
 
         SR_ERROR("Launcher::InitLauncher() : failed to initialize resources folder!\n");
         return LauncherInitStatus::Error;
     #else
-        if (Super::InitializeResourcesFolder()) {
-            SR_LOG("Launcher::InitLauncher() : resources folder found.");
-            if (CLIManager::Instance().IsFlagPresent(CLIFlags::DeleteOldApp)) {
-                DeleteOldApplication();
-                CloneResources();
-            }
-
+        if (InitializeResourcesFolder()) {
             return LauncherInitStatus::Success;
         }
 
-        if (!UnpackAndExecute()) {
-            SR_ERROR("Launcher::InitLauncher() : failed to unpack and execute new application.");
+        SR_LOG("Launcher::InitLauncher() : resources folder found.");
+
+        if (UnpackEmbedded()) {
+            SR_LOG("Launcher::InitLauncher() : embedded resources unpacked.");
+        }
+
+        if (!InitializeResourcesFolder()) {
+            SR_ERROR("Launcher::InitLauncher() : failed to initialize resources folder!\n");
             return LauncherInitStatus::Error;
         }
 
-        return LauncherInitStatus::Unpacking;
+        if (CloneResources()) {
+            SR_LOG("Launcher::InitLauncher() : resources cloned.");
+            return LauncherInitStatus::Success;
+        }
+        else {
+            SR_ERROR("Launcher::InitLauncher() : failed to clone resources!\n");
+            return LauncherInitStatus::Error;
+        }
     #endif
     }
 
-    bool Launcher::UnpackAndExecute() {
-        SR_LOG("Launcher::UnpackAndExecute() : trying to unpack the application.");
+    bool Launcher::UnpackEmbedded() {
+        SR_LOG("Launcher::UnpackEmbedded() : unpacking embedded resources...");
 
         auto&& applicationPath = SR_PLATFORM_NS::GetApplicationPath();
-        SR_UTILS_NS::Path unpackDirectory = applicationPath.GetFolder().Concat( "SREngine");
-
-        if (!unpackDirectory.CreateIfNotExists()) {
-            SR_ERROR("Launcher::Unpack() : failed to create new application directory.");
-            return false;
-        }
-
-        SR_UTILS_NS::Path newApplicationPath = unpackDirectory.Concat(applicationPath.GetBaseNameAndExt());
-        bool copyResult = SR_PLATFORM_NS::Copy(applicationPath, newApplicationPath);
-        bool exportResult = SR_UTILS_NS::ResourceEmbedder::Instance().ExportAllResources(unpackDirectory.Concat("Resources"));
-
-        if (copyResult && exportResult) {
-            /*char *c_path = const_cast<char*>(newApplicationPath.c_str());
-            const char *c_arg = "--delete-old-app";
-            char *const argv[] = {c_path, const_cast<char*>(c_arg), nullptr};
-            char *const envp[] = { nullptr };
-            execve(newApplicationPath.c_str(), argv, envp);*/
-
-            SR_LOG("Launcher::UnpackAndExecute() : successfully copied the current executable and exported embedded resources.");
-            SR_LOG("Launcher::UnpackAndExecute() : trying to execute the copied application.");
-
-            /// TODO: Should we use execve/smth else for Linux here?
-            /// P.S. The current process waits till the new one is finished, so we should come up with something else.
-            SR_PLATFORM_NS::OpenFile(newApplicationPath, "--delete-old-app");
-        }
-
-        return true;
-    }
-
-    void Launcher::DeleteOldApplication() {
-        auto&& applicationPath = SR_PLATFORM_NS::GetApplicationPath();
-        auto&& oldApplicationPath = applicationPath.GetFolder().Concat("../" + applicationPath.GetBaseNameAndExt());
-
-        if (oldApplicationPath.Exists()) {
-            SR_LOG("Launcher::DeleteOldApplication() : old application found, trying to delete...");
-        }
-        else {
-            SR_LOG("Launcher::DeleteOldApplication() : old application not found.");
-            return;
-        }
-
-        SR_PLATFORM_NS::WaitAndDelete(oldApplicationPath);
-        SR_PLATFORM_NS::WaitAndDelete(applicationPath.GetFolder().Concat("../srengine.log"));
-        SR_PLATFORM_NS::WaitAndDelete(applicationPath.GetFolder().Concat("../successful"));
-
-        SR_LOG("Launcher::DeleteOldApplication() : old application deleted successfully.");
+        SR_UTILS_NS::Path unpackDirectory = applicationPath.GetFolder().GetPrevious().GetPrevious();
+        return SR_UTILS_NS::ResourceEmbedder::Instance().ExportAllResources(unpackDirectory.Concat("Resources"));
     }
 
     bool Launcher::CloneResources() {

@@ -33,11 +33,6 @@ namespace SR_CORE_NS {
             return;
         }
 
-        if (launcherInitStatus == SR_CORE_NS::LauncherInitStatus::Unpacking) {
-            SR_PLATFORM_NS::WriteConsoleError("TestManager::RunAll() : run the application at least once without tests!\n");
-            return;
-        }
-
         if (!pLauncher->EarlyInit()) {
             SR_ERROR("TestManager::RunAll() : failed to early initialize application!");
             return;

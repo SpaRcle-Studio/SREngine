@@ -37,6 +37,9 @@ if (SR_ENGINE_STATIC_LIBRARY)
     target_link_libraries(${SR_EXECUTABLE_NAME} Engine)
 else()
     add_dependencies(${SR_EXECUTABLE_NAME} Engine)
+
+    target_link_libraries(${SR_EXECUTABLE_NAME} zlibstatic)
+    target_include_directories(${SR_EXECUTABLE_NAME} PRIVATE ${SR_ZLIB_INCLUDE_DIRS})
 endif()
 
 if (NOT ANDROID_NDK)

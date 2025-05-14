@@ -56,9 +56,6 @@ int SREngineEntryPoint(int argc, char** argv) {
             SR_PLATFORM_NS::WriteConsoleError("Failed to initialize launcher!\n");
             code = 1;
         }
-        else if (launcherInitStatus == SR_CORE_NS::LauncherInitStatus::Unpacking) {
-            return code;
-        }
 
         if (code == 0 && !pLauncher->EarlyInit()) {
             SR_ERROR("Failed to early initialize application!");

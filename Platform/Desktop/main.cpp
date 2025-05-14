@@ -10,50 +10,37 @@
     #include <Engine/EntryPoint.h>
 #else
     #include "DesktopUtils.h"
+    #include "PackUtils.h"
+    #include "UnpackUtils.h"
+    #include "UnpackedRunner.h"
 #endif
 
 int main(int argc, char** argv) {
-#ifdef SR_ENGINE_STATIC_LIBRARY
+#if defined(SR_ENGINE_STATIC_LIBRARY)
     return SREngineEntryPoint(argc, argv);
 #else
-    void* pModuleHandle = nullptr;
-    namespace fs = std::filesystem;
-
-    for (const auto& entry : fs::directory_iterator(fs::current_path())) {
-        if (!entry.is_regular_file() || entry.path().extension() != DYNAMIC_MODULE_EXTENSION) {
-            continue;
+    const std::string executablePath = argv[0];
+    for (int i = 1; i < argc; ++i) {
+        if (strcmp(argv[i], "--pack") == 0) {
+            return PackFiles(executablePath, GetPackFiles(executablePath), {});
         }
-
-        if (entry.path().filename().string().find("Engine") != std::string::npos) {
-            pModuleHandle = LoadDynamicModule(entry.path().string().c_str());
-            if (!pModuleHandle) {
-                std::cerr << "Failed to load engine library: " << entry.path() << std::endl;
-                return ERROR_MODULE_LOAD_FAILED;
-            }
+        if (strcmp(argv[i], "--pack-with-res") == 0) {
+            return PackFiles(executablePath, GetPackFiles(executablePath), GetResourcesPackFiles());
+        }
+        if (strcmp(argv[i], "--delete-packed") == 0) {
+            DeletePackedFile(argv[i + 1]);
         }
     }
 
-    if (!pModuleHandle) {
-        std::cerr << "Engine library not found!" << std::endl;
-        return ERROR_MODULE_NOT_FOUND;
+    const int unpackResult = TryUnpackFiles(executablePath);
+    if (unpackResult == UNPACK_SUCCESS) {
+        return RunUnpackedApplication(executablePath);
     }
 
-    auto&& pEntryPointFunction = FindEngineEntryPoint(pModuleHandle);
-    if (!pEntryPointFunction) {
-        std::cerr << "Failed to find entry point in Engine library!" << std::endl;
-        return ERROR_MODULE_ENTRY_POINT_NOT_FOUND;
+    if (unpackResult == UNPACK_NO_PACKED_DATA) {
+        return SREngineEntryPointFromExternalModule(argc, argv);
     }
 
-    const int code = pEntryPointFunction(argc, argv);
-    if (code != 0) {
-        std::cerr << "Engine entry point failed with code: " << code << std::endl;
-    }
-
-    if (!UnloadDynamicModule(pModuleHandle)) {
-        std::cerr << "Failed to unload engine library!" << std::endl;
-        return ERROR_MODULE_UNLOAD_FAILED;
-    }
-
-    return code != 0 ? code : SUCCESS;
+    return unpackResult;
 #endif
 }
