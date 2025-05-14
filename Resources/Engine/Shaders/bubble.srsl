@@ -24,7 +24,7 @@ void fragment() {
 }
 
 void vertex() {
-	float height = texture(NoiseTex, VERTEX.xz * NoiseSampleSize + vec2(TIME) * AnimationSpeed).r;
-	VERTEX += height * HeightMultiplier;
+	float height = texture(NoiseTex, VERTEX.xz * (NoiseSampleSize / 100.0) + vec2(TIME) * (AnimationSpeed / 1000.0)).r;
+	VERTEX += VERTEX * height * HeightMultiplier;
     OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
 }

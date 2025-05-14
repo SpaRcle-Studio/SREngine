@@ -60,6 +60,9 @@ sra format
 						6-v:type
 							7-s:Transform3D
 						6-o:ptr
+							7-o:translation
+								8-v:y
+									9-f:0.008328
 							7-o:scale
 								8-v:x
 									9-f:20.000000
@@ -591,7 +594,6 @@ sra format
 										10-i:4396283777552644742
 									9-v:behaviourName
 										10-s:TestBehaviour
-									9-o:data
 						6-k:i
 							7-o:d
 								8-v:type
@@ -601,7 +603,6 @@ sra format
 										10-i:3943996598505795885
 									9-v:behaviourName
 										10-s:TestBehaviour
-									9-o:data
 					5-v:name
 						6-s:Cube
 					5-o:transform
@@ -1007,3 +1008,25 @@ ddddцццゔぅヾボ
 									9-f:1.000000
 								8-v:z
 									9-f:1.000000
+		2-k:i
+			3-o:d
+				4-v:type
+					5-s:GameObject
+				4-o:ptr
+					5-v:entityId
+						6-i:4346395937349541038
+					5-v:name
+						6-s:Bubble
+					5-v:prefab
+						6-s:Samples/Bubble.prefab
+					5-o:transform
+						6-v:type
+							7-s:Transform3D
+						6-o:ptr
+							7-o:translation
+								8-v:x
+									9-f:-3.516159
+								8-v:y
+									9-f:1.553687
+								8-v:z
+									9-f:-2.240667

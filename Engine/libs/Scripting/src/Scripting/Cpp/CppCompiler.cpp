@@ -345,15 +345,15 @@ namespace SR_SCRIPTING_NS {
         #endif
         };
 
-        auto&& buildDir = m_pScriptSystem->GetBuildFolderPath().Concat("Lib");
+        auto&& libDir = SR_PLATFORM_NS::GetApplicationDirectory().GetPrevious().Concat("Lib");
 
         for (auto&& libName : libs) {
         #ifdef SR_WIN32
-            auto&& pathDebug = buildDir.Concat("{}d.lib"_format(libName));
-            auto&& pathRelease = buildDir.Concat("{}.lib"_format(libName));
+            auto&& pathDebug = libDir.Concat("{}d.lib"_format(libName));
+            auto&& pathRelease = libDir.Concat("{}.lib"_format(libName));
         #else
-            auto&& pathDebug = buildDir.Concat("lib{}d.a"_format(libName));
-            auto&& pathRelease = buildDir.Concat("lib{}.a"_format(libName));
+            auto&& pathDebug = libDir.Concat("lib{}d.a"_format(libName));
+            auto&& pathRelease = libDir.Concat("lib{}.a"_format(libName));
         #endif
 
             if (SR_PLATFORM_NS::IsExists(pathRelease)) {
