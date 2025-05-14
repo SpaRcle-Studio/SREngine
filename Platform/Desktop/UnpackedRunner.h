@@ -8,19 +8,14 @@ int RunUnpackedApplication(const std::string& mainExecutablePath) {
     std::string fileName = fs::path(mainExecutablePath).filename().string();
     fileName.erase(fileName.find("-packed"), sizeof("-packed") - 1);
 
-    auto&& targetPath = fs::absolute(fs::path(mainExecutablePath).remove_filename() / "SREngine" / "Engine" / "Bin" / fileName);
-
-    if (!fs::exists(targetPath)) {
-        std::cerr << "RunUnpackedApplication() : unpacked application not found: " << targetPath.string() << std::endl;
-        return -1;
-    }
-
+    auto&& targetPath = fs::absolute(fs::path(mainExecutablePath).remove_filename() / SR_APPLICATION_NAME / "Engine" / "Bin").generic_string();
     const std::string packedPath = absolute(fs::path(mainExecutablePath)).string();
 
 #ifdef WIN32
-    const std::string command = "cmd.exe /c " + targetPath.string() + " --delete-packed \"" + packedPath + "\"";
+    const std::string command = "cmd.exe /c \"cd \"" + targetPath + "\" && " + fileName + " --delete-packed \"" + packedPath + "\"\"";
+    //const std::string command = "cd \"" + targetPath + "\" && cmd.exe /c \"" + fileName + " --delete-packed \"" + packedPath + "\"\"";
 #else
-    const std::string command = "targetPath.string() + " --delete-packed \"" + packedPath + "\"";
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!! const std::string command = "targetPath.string() + " --delete-packed \"" + packedPath + "\"";
 #endif
 
     std::cout << "RunUnpackedApplication() : running command: " << command << std::endl;

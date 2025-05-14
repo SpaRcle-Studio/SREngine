@@ -46,14 +46,12 @@ std::vector<char> DecompressData(uint64_t decompressedSize, const std::vector<ch
     return decompressedData;
 }
 
-int ParseData(const std::vector<char>& data) {
+int ParseData(const std::vector<char>& data, const std::string& executablePath) {
     std::istringstream stream(std::string(data.begin(), data.end()));
     uint16_t fileCount = 0;
     stream.read(reinterpret_cast<char*>(&fileCount), sizeof(fileCount));
 
     std::cout << "ParseData() : unpacking " << fileCount << " files...\n";
-
-    std::string applicationName = "SREngine";
 
     for (uint32_t i = 0; i < fileCount; ++i) {
         uint16_t nameLen = 0;
@@ -71,12 +69,12 @@ int ParseData(const std::vector<char>& data) {
         std::filesystem::path path(filename);
         std::string ext = path.extension().string();
 
-        std::filesystem::path outputDir;
+        std::filesystem::path outputDir = std::filesystem::path(executablePath).parent_path();
         if (ext == ".dll" || ext == ".so" || ext == ".dylib" || ext == ".exe" || ext.empty()) {
-            outputDir = applicationName + "/Engine/Bin";
+            outputDir /= SR_APPLICATION_NAME + "/Engine/Bin";
         }
         else if (ext == ".lib") {
-            outputDir = applicationName + "/Engine/Lib";
+            outputDir /= SR_APPLICATION_NAME + "/Engine/Lib";
         }
         else {
             std::cerr << "ParseData() : unknown file type: " << ext << "\n";
@@ -116,7 +114,7 @@ int ParseData(const std::vector<char>& data) {
 
         std::filesystem::path path(filename);
 
-        std::filesystem::path outputDir = applicationName + "/Resources";
+        std::filesystem::path outputDir = std::filesystem::path(executablePath).parent_path() / SR_APPLICATION_NAME / "Resources";
         std::filesystem::path outputPath = absolute(outputDir / path);
         std::filesystem::create_directories(outputPath.parent_path());
 
@@ -179,7 +177,7 @@ int TryUnpackFiles(const std::string& executablePath) {
     std::cout << "TryUnpackFiles() : decompressing data...\n";
     data = DecompressData(decompressedSize, data);
 
-    return ParseData(data);
+    return ParseData(data, executablePath);
 }
 
 void DeletePackedFile(const std::string& executablePath) {

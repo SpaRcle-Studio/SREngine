@@ -14,6 +14,8 @@ constexpr uint64_t constexpr_strlen(const char* str) {
     return *str ? 1 + constexpr_strlen(str + 1) : 0;
 }
 
+static std::string SR_APPLICATION_NAME = "SREngine";
+
 constexpr const char* ENTRY_POINT_MODULE_NAME = "SREngineEntryPoint";
 constexpr const char* MAGIC = "MAGIC_ENGINE_MODULE_DATA";
 constexpr uint64_t MAGIC_SIZE = constexpr_strlen(MAGIC);
@@ -90,6 +92,8 @@ int SREngineEntryPointFromExternalModule(int argc, char** argv) {
             pModuleHandle = LoadDynamicModule(entry.path().string().c_str());
             if (!pModuleHandle) {
                 std::cerr << "Failed to load engine library: " << entry.path() << std::endl;
+                std::cerr << "Enter any key to continue..." << std::endl;
+                std::cin.get();
                 return ERROR_MODULE_LOAD_FAILED;
             }
         }
@@ -97,12 +101,16 @@ int SREngineEntryPointFromExternalModule(int argc, char** argv) {
 
     if (!pModuleHandle) {
         std::cerr << "Engine library not found!" << std::endl;
+        std::cerr << "Enter any key to continue..." << std::endl;
+        std::cin.get();
         return ERROR_MODULE_NOT_FOUND;
     }
 
     auto&& pEntryPointFunction = FindEngineEntryPoint(pModuleHandle);
     if (!pEntryPointFunction) {
         std::cerr << "Failed to find entry point in Engine library!" << std::endl;
+        std::cerr << "Enter any key to continue..." << std::endl;
+        std::cin.get();
         return ERROR_MODULE_ENTRY_POINT_NOT_FOUND;
     }
 
