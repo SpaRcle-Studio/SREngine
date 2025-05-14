@@ -13,9 +13,8 @@ int RunUnpackedApplication(const std::string& mainExecutablePath) {
 
 #ifdef WIN32
     const std::string command = "cmd.exe /c \"cd \"" + targetPath + "\" && " + fileName + " --delete-packed \"" + packedPath + "\"\"";
-    //const std::string command = "cd \"" + targetPath + "\" && cmd.exe /c \"" + fileName + " --delete-packed \"" + packedPath + "\"\"";
 #else
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!! const std::string command = "targetPath.string() + " --delete-packed \"" + packedPath + "\"";
+    const std::string command = "cd \"" + targetPath + "\" && " + fileName + " --delete-packed \"" + packedPath + "\"";
 #endif
 
     std::cout << "RunUnpackedApplication() : running command: " << command << std::endl;
