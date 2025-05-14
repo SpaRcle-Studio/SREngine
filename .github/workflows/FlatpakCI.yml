@@ -13,11 +13,11 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Installing dependencies.
-        run: |
-          sudo apt-get update
-          sudo apt-get install flatpak flatpak-builder
-          flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+      #- name: Installing dependencies.
+      #  run: |
+      #    sudo apt-get update
+      #    sudo apt-get install flatpak flatpak-builder
+      #    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
       #- name: Building Flatpak.
       #  shell: bash
@@ -29,8 +29,8 @@ jobs:
       #  run: |
       #    flatpak build-bundle repo srengine.flatpak dev.sparcles.srengine
 
-      - name: Upload Flatpak artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: srengine.flatpak
-          path: srengine.flatpak
+      #- name: Upload Flatpak artifact
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: srengine.flatpak
+      #    path: srengine.flatpak
