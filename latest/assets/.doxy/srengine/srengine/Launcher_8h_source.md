@@ -21,8 +21,7 @@
 namespace SR_CORE_NS {
     SR_ENUM_NS_CLASS_T(LauncherInitStatus, uint8_t,
         Success,
-        Error,
-        Unpacking
+        Error
     )
 
     class Launcher : public SR_CORE_NS::Application {
@@ -30,12 +29,8 @@ namespace SR_CORE_NS {
     public:
         LauncherInitStatus InitLauncher();
 
-    protected:
-        bool InitializeResourcesFolder() override { return true; }
-
     private:
-        static bool UnpackAndExecute();
-        static void DeleteOldApplication();
+        static bool UnpackEmbedded();
         bool CloneResources();
 
     };

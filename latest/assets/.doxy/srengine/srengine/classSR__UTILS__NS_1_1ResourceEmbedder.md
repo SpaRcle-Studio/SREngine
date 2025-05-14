@@ -189,7 +189,7 @@ static bool SR_UTILS_NS::ResourceEmbedder::ExportToMemory (
 ### function Instance 
 
 ```C++
-static inline ResourceEmbedder & SR_UTILS_NS::ResourceEmbedder::Instance () 
+static ResourceEmbedder & SR_UTILS_NS::ResourceEmbedder::Instance () 
 ```
 
 

@@ -26,10 +26,7 @@ namespace SR_UTILS_NS {
             uint64_t decompressedSize = 0;
         };
     public:
-        static ResourceEmbedder& Instance() {
-            static ResourceEmbedder instance;
-            return instance;
-        }
+        static ResourceEmbedder& Instance();
 
     public:
         template<class T> bool RegisterResource() {
