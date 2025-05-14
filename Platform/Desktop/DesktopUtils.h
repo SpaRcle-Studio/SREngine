@@ -7,6 +7,7 @@
 #include <fstream>
 #include <filesystem>
 #include <regex>
+#include <atomic>
 
 #include <zlib.h>
 
