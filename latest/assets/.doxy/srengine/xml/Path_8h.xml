@@ -528,7 +528,7 @@
         <label>span</label>
       </node>
       <node id="82">
-        <label>sparsehash/dense_hash_map</label>
+        <label>sparsehash/dense_hash_map.h</label>
       </node>
       <node id="49">
         <label>sstream</label>

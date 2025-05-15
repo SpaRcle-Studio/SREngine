@@ -124,7 +124,6 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & | [**GetBuildFolderPath**](#function-getbuildfolderpath) () const<br> |
 |  SR\_NODISCARD const std::vector&lt; [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) &gt; & | [**GetEngineSourcesIncludePaths**](#function-getenginesourcesincludepaths) () const<br> |
 |  SR\_NODISCARD const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & | [**GetEngineSourcesPath**](#function-getenginesourcespath) () const<br> |
 |  SR\_NODISCARD const [**ModuleManager**](classSR__SCRIPTING__NS_1_1ModuleManager.md) \* | [**GetModuleManager**](#function-getmodulemanager-12) () const<br> |
@@ -369,19 +368,6 @@ const SR_UTILS_NS::StringAtom SR_SCRIPTING_NS::ScriptSystem::ENGINE_MODULE_FILE_
 <hr>
 ## Public Functions Documentation
 
-
-
-
-### function GetBuildFolderPath 
-
-```C++
-inline SR_NODISCARD const SR_UTILS_NS::Path & SR_SCRIPTING_NS::ScriptSystem::GetBuildFolderPath () const
-```
-
-
-
-
-<hr>
 
 
 

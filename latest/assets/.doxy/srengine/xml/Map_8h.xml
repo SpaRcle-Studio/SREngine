@@ -3,7 +3,7 @@
   <compounddef id="Map_8h" kind="file" language="C++">
     <compoundname>Map.h</compoundname>
     <includes refid="stdInclude_8h" local="no">Utils/stdInclude.h</includes>
-    <includes local="no">sparsehash/dense_hash_map</includes>
+    <includes local="no">sparsehash/dense_hash_map.h</includes>
     <includes local="no">flat_hash_map/flat_hash_map.hpp</includes>
     <includedby refid="AnimationCommon_8h" local="no">Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h</includedby>
     <includedby refid="ShaderProgramManager_8h" local="no">Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h</includedby>
@@ -315,7 +315,7 @@
         <label>span</label>
       </node>
       <node id="65">
-        <label>sparsehash/dense_hash_map</label>
+        <label>sparsehash/dense_hash_map.h</label>
       </node>
       <node id="49">
         <label>sstream</label>
@@ -4372,7 +4372,7 @@
 <codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SR_ENGINE_CODEGEN_CLANG_PARSE_MODE</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#include<sp/>&lt;sparsehash/dense_hash_map&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#include<sp/>&lt;sparsehash/dense_hash_map.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#include<sp/>&lt;flat_hash_map/flat_hash_map.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight></codeline>

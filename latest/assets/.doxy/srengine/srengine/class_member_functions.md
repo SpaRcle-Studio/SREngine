@@ -1300,7 +1300,6 @@
 * **GlobalEvoCompiler** ([**SR\_SCRIPTING\_NS::GlobalEvoCompiler**](classSR__SCRIPTING__NS_1_1GlobalEvoCompiler.md))
 * **GetScript** ([**SR\_SCRIPTING\_NS::ScriptHolder**](classSR__SCRIPTING__NS_1_1ScriptHolder.md))
 * **GetModuleHandle** ([**SR\_SCRIPTING\_NS::ScriptModule**](classSR__SCRIPTING__NS_1_1ScriptModule.md))
-* **GetBuildFolderPath** ([**SR\_SCRIPTING\_NS::ScriptSystem**](classSR__SCRIPTING__NS_1_1ScriptSystem.md))
 * **GetDynamicLibraryExtension** ([**SR\_SCRIPTING\_NS::ScriptSystem**](classSR__SCRIPTING__NS_1_1ScriptSystem.md))
 * **GetEngineSourcesIncludePaths** ([**SR\_SCRIPTING\_NS::ScriptSystem**](classSR__SCRIPTING__NS_1_1ScriptSystem.md))
 * **GetEngineSourcesPath** ([**SR\_SCRIPTING\_NS::ScriptSystem**](classSR__SCRIPTING__NS_1_1ScriptSystem.md))

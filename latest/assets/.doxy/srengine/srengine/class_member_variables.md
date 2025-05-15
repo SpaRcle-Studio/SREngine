@@ -1291,7 +1291,6 @@
 * **m\_lastFileSystemEvent** ([**SR\_SCRIPTING\_NS::ScriptSystem**](classSR__SCRIPTING__NS_1_1ScriptSystem.md))
 * **m\_moduleManager** ([**SR\_SCRIPTING\_NS::ScriptSystem**](classSR__SCRIPTING__NS_1_1ScriptSystem.md))
 * **m\_modulesToCopy** ([**SR\_SCRIPTING\_NS::ScriptSystem**](classSR__SCRIPTING__NS_1_1ScriptSystem.md))
-* **m\_pathToEngineBuildRoot** ([**SR\_SCRIPTING\_NS::ScriptSystem**](classSR__SCRIPTING__NS_1_1ScriptSystem.md))
 * **m\_pathToEngineSourcesRoot** ([**SR\_SCRIPTING\_NS::ScriptSystem**](classSR__SCRIPTING__NS_1_1ScriptSystem.md))
 * **m\_threadRunning** ([**SR\_SCRIPTING\_NS::ScriptSystem**](classSR__SCRIPTING__NS_1_1ScriptSystem.md))
 * **m\_structHashName** ([**SR\_SRLM\_NS::BreakStructNode**](classSR__SRLM__NS_1_1BreakStructNode.md), [**SR\_SRLM\_NS::CreateStructNode**](classSR__SRLM__NS_1_1CreateStructNode.md))

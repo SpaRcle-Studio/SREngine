@@ -9692,7 +9692,6 @@
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a62fd35c4c5743efd1cf3e9ac29395557" kind="variable"><name>m_fileCreatedSubscription</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a06dc6e078da00f2e13ecbbc3d9b53c7b" kind="variable"><name>m_fileDeletedSubscription</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a1e44ab3cc4f56b07b9e23959bf9043f1" kind="variable"><name>m_pathToEngineSourcesRoot</name></member>
-    <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a465bb3c96fdb74e494b74b130fa00e1c" kind="variable"><name>m_pathToEngineBuildRoot</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a8d7f6e3eab9dda95b172ca26f5461599" kind="variable"><name>m_resourcesFolder</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a4190d4f26339fbf2faa10e741b84f262" kind="variable"><name>m_cacheFolder</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a7f6bf9dde83bcc6688c8b893fe3efa48" kind="variable"><name>m_apiFolder</name></member>
@@ -9727,7 +9726,6 @@
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1ae2fa5669f4342cf044ae61662ae246ff" kind="function"><name>GetModuleManager</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a12e298ef97423c477e698859c3ef8275" kind="function"><name>GetModuleManager</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a707955a08e2d7e2cea1ad0abd63c376e" kind="function"><name>GetEngineSourcesIncludePaths</name></member>
-    <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a6aa1cf94a151439af0c9eefe8e362b8e" kind="function"><name>GetBuildFolderPath</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1af4e135850566cb6f313d12f370422ded" kind="function"><name>GetEngineSourcesPath</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a65c87a598484baa44f29dab43bc17fdd" kind="function"><name>ReloadModulesIfNeeded</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1ace2d87e558dfd99248921e8c206fc3d7" kind="function"><name>GetDynamicLibraryExtension</name></member>

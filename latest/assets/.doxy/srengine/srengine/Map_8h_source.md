@@ -25,7 +25,7 @@
 #endif
 
 #ifndef SR_ENGINE_CODEGEN_CLANG_PARSE_MODE
-    #include <sparsehash/dense_hash_map>
+    #include <sparsehash/dense_hash_map.h>
     #include <flat_hash_map/flat_hash_map.hpp>
 #endif
 
