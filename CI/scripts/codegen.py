@@ -8,6 +8,7 @@ import codegen_context
 import logger_utils
 import meta_code_generator
 import all_includes_generator
+import copy_engine_api
 
 
 def main(logger: logger_utils.Logger, context: codegen_context.CodegenContext) -> bool:
@@ -38,8 +39,9 @@ def main(logger: logger_utils.Logger, context: codegen_context.CodegenContext) -
     end = perf_counter()
     logger.log_info(f'Enums code generation time: {end - start:.2f} sec')
 
-    #script_api_code_generator.generate_api(logger, repo_dir, codegen_dir, code_structures)
-    #script_library_code_generator.generate_library(logger, repo_dir, script_api_library_dir, code_structures)
+    if not context.is_script:
+        copy_engine_api.copy_files(logger, context)
+
     return True
 
 

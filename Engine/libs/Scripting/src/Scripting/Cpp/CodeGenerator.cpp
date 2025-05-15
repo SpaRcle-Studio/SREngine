@@ -208,7 +208,6 @@ namespace SR_SCRIPTING_NS {
                 cmakeContent += "target_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, engineIncludeDir);
             }
 
-            cmakeContent += "target_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, m_pScriptSystem->GetBuildFolderPath().Concat("Codegen"));
             cmakeContent += "target_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, m_cacheFolder.Concat("Scripts/Modules/{}/Codegen"_format(module.moduleInfo.moduleName)));
         }
 

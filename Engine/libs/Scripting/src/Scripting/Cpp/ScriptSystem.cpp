@@ -301,7 +301,6 @@ namespace SR_SCRIPTING_NS {
             for (auto&& path : m_engineSourcesIncludePaths) {
                 context.includePaths.emplace_back(path);
             }
-            context.includePaths.emplace_back(m_pathToEngineBuildRoot.Concat("Codegen"));
 
             context.includePaths.emplace_back(module.path.GetFolder());
             context.includePaths.emplace_back(context.outFolder.Concat("Codegen"));
@@ -437,35 +436,15 @@ namespace SR_SCRIPTING_NS {
     }
 
     bool ScriptSystem::InitEngineSources() {
-        if (m_resourcesFolder.GetPrevious().Concat("Engine").IsDir()) {
-            m_pathToEngineSourcesRoot = m_resourcesFolder.GetPrevious();
-        }
-        else {
-            SR_ERROR("ScriptSystem::InitEngineSources() : engine sources root not found!");
+        m_pathToEngineSourcesRoot = m_resourcesFolder.Concat("API");
+        if (!m_pathToEngineSourcesRoot.IsDir()) {
+            SR_ERROR("ScriptSystem::InitEngineSources() : engine sources folder not found!\n\tPath: {}", m_pathToEngineSourcesRoot);
             return false;
         }
 
         SR_LOG("ScriptSystem::InitEngineSources() : engine sources root: {}", m_pathToEngineSourcesRoot);
 
-        static std::vector<std::string_view> POSSIBLE_BUILD_FOLDER_NAMES = {
-            "cmake-build-debug", "cmake-build-release", "cmake-build", "build"
-        };
-
-        for (auto&& folderName : POSSIBLE_BUILD_FOLDER_NAMES) {
-            auto&& buildFolder = m_resourcesFolder.GetPrevious().Concat(folderName);
-            if (buildFolder.IsDir()) {
-                m_pathToEngineBuildRoot = buildFolder;
-                break;
-            }
-        }
-
-        if (!m_pathToEngineBuildRoot.IsDir()) {
-            SR_ERROR("ScriptSystem::InitEngineSources() : engine build folder not found!");
-            return false;
-        }
-
-        SR_LOG("ScriptSystem::InitEngineSources() : engine build folder: {}", m_pathToEngineBuildRoot);
-
+        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Codegen"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/inc"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Audio/inc"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Graphics/inc"));
@@ -474,6 +453,7 @@ namespace SR_SCRIPTING_NS {
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs/entt/src"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs/icu"));
+        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs/fmt/include"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs/fmt/include"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Scripting/inc"));
 

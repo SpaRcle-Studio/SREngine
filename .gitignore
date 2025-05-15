@@ -53,3 +53,4 @@ site
 /Resources/Engine/Utilities/codegen
 Resources/**/*.so
 .flatpak-builder/
+/Resources/API

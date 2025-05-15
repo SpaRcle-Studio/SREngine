@@ -14,48 +14,13 @@ def load_config(config_path):
     with open(config_path, 'r', encoding='utf-8') as f:
         return json.load(f)
 
+
 def match_patterns(path, patterns):
     path_str = str(path).replace(os.sep, '/')
     return any(fnmatch.fnmatch(path_str, pattern) for pattern in patterns)
 
 
-def expand_globs(root: Path, patterns: List[str]) -> set:
-    files = set()
-    for pattern in patterns:
-        for path in root.glob(pattern):
-            if path.is_file():
-                files.add(path.resolve())
-            elif path.is_dir():
-                # Вдруг пользователь указал "folder/**"
-                files.update(p for p in path.rglob("*") if p.is_file())
-    return files
-
-
 TARGET_TOKENS = ("SR_CLASS", "SR_STRUCT", "SR_ENUM")
-
-
-#def collect_files(context: codegen_context.CodegenContext):
-#    config_path = Path(context.config_dir) / 'codegen-mask.json'
-#    config = load_config(config_path)
-#
-#    include_key = 'scripts-include' if context.is_script else 'engine-include'
-#    exclude_key = 'scripts-exclude' if context.is_script else 'engine-exclude'
-#
-#    includes = config.get(include_key, [])
-#    excludes = config.get(exclude_key, [])
-#
-#    root = Path(context.analyze_dir).resolve()
-#    result = []
-#
-#    for file in root.rglob('*'):
-#        if not file.is_file():
-#            continue
-#        rel_path = file.relative_to(root).as_posix()  # UNIX-формат для fnmatch
-#        if match_patterns(rel_path, includes) and not match_patterns(rel_path, excludes):
-#            abs_path = sparcle_utils.normalize_path(file.resolve()).replace('\\', '/')
-#            result.append(abs_path)
-#
-#    return result
 
 def collect_files(logger: logger_utils.Logger, context: codegen_context.CodegenContext):
     start = perf_counter()

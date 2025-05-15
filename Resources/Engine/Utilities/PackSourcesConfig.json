@@ -1,0 +1,25 @@
+{
+	"include": [
+		"/Engine/libs/Graphics/inc/Graphics/",
+		"/Engine/libs/Audio/inc/Audio/",
+		"/Engine/libs/Physics/inc/Physics/",
+		"/Engine/libs/Scripting/inc/Scripting/",
+		"/Engine/libs/Utils/inc/Utils/",
+		"/Engine/libs/Utils/libs/entt/src/",
+		"/Engine/libs/Utils/libs/glm/",
+		"/Engine/libs/Utils/libs/icu/*.h",
+		"/Engine/libs/Utils/libs/sparsehash/",
+		"/Engine/libs/Utils/libs/flat_hash_map/",
+		"/Engine/libs/Utils/libs/fmt/include/",
+		"/Engine/inc/Engine/",
+		"/Engine/libs/Utils/libs/assimp/contrib/pugixml/src"
+	],
+	"exclude": [
+		"/cmake-build-debug/",
+		"/cmake-build-release/",
+		"/build/",
+		"/Build/",
+		"/Resources/",
+		"*.cxx"
+	]
+}
