@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <ostream>
 #include <filesystem>
 #include <regex>
 #include <atomic>
@@ -80,7 +81,7 @@ enum ERROR_CODES {
     #error "Unsupported platform"
 #endif
 
-int SREngineEntryPointFromExternalModule(int argc, char** argv) {
+int SREngineEntryPointFromExternalModule(int argc, char** argv, bool notFoundAsError) {
     void* pModuleHandle = nullptr;
     namespace fs = std::filesystem;
 
@@ -101,9 +102,11 @@ int SREngineEntryPointFromExternalModule(int argc, char** argv) {
     }
 
     if (!pModuleHandle) {
-        std::cerr << "Engine library not found!" << std::endl;
-        std::cerr << "Enter any key to continue..." << std::endl;
-        std::cin.get();
+        if (notFoundAsError) {
+            std::cerr << "Engine library not found!" << std::endl;
+            std::cerr << "Enter any key to continue..." << std::endl;
+            std::cin.get();
+        }
         return ERROR_MODULE_NOT_FOUND;
     }
 

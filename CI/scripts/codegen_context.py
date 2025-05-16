@@ -1,5 +1,6 @@
 class CodegenContext:
     def __init__(self):
+        self.resources_dir = ''
         self.config_dir = ''
         self.module_name = ''
         self.codegen_dir = ''

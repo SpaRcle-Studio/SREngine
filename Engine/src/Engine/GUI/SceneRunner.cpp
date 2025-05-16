@@ -150,6 +150,11 @@ namespace SR_CORE_NS::GUI {
 
         SR_LOG("SceneRunner::PlayScene() : copying scene: \n\tFrom: " + m_scene->GetAbsPath().ToString() + "\n\tTo: " + runtimePath.ToString());
 
+        if (!runtimePath.Create()) {
+            SR_ERROR("SceneRunner::PlayScene() : failed to create runtime scene folder!");
+            return false;
+        }
+
         if (!m_scene->GetAbsPath().Copy(runtimePath)) {
             SR_ERROR("SceneRunner::PlayScene() : failed to copy scene!\n\tSource: "
                 + m_scene->GetPath().ToString() + "\n\tDestination: " + runtimePath.ToString());

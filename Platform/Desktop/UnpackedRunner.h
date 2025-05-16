@@ -6,7 +6,11 @@ int RunUnpackedApplication(const std::string& mainExecutablePath) {
     namespace fs = std::filesystem;
 
     std::string fileName = fs::path(mainExecutablePath).filename().string();
-    fileName.erase(fileName.find("-packed"), sizeof("-packed") - 1);
+
+    if (const auto pos = fileName.find("-packed"); pos != std::string::npos) {
+        fileName.erase(pos, sizeof("-packed") - 1);
+    }
+    std::cout << "RunUnpackedApplication() : running file: " << fileName << std::endl;
 
     auto&& targetPath = fs::absolute(fs::path(mainExecutablePath).remove_filename() / SR_APPLICATION_NAME / "Engine" / "Bin").generic_string();
     const std::string packedPath = absolute(fs::path(mainExecutablePath)).string();

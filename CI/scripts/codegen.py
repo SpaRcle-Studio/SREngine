@@ -9,6 +9,7 @@ import logger_utils
 import meta_code_generator
 import all_includes_generator
 import copy_engine_api
+import create_packing_mask_file
 
 
 def main(logger: logger_utils.Logger, context: codegen_context.CodegenContext) -> bool:
@@ -41,6 +42,7 @@ def main(logger: logger_utils.Logger, context: codegen_context.CodegenContext) -
 
     if not context.is_script:
         copy_engine_api.copy_files(logger, context)
+        #create_packing_mask_file.create_mask(logger, context)
 
     return True
 
@@ -57,6 +59,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     context = codegen_context.CodegenContext()
+    context.resources_dir = os.path.abspath(args.repo_dir.replace('\"', '')).replace("\\", "/") + '/Resources'
     context.config_dir = os.path.abspath(args.config_dir.replace('\"', '')).replace("\\", "/")
     context.build_dir = os.path.abspath(args.root_build_dir.replace('\"', '')).replace("\\", "/")
     context.module_name = args.module_name.replace('\"', '')

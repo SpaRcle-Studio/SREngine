@@ -39,6 +39,11 @@ else()
     add_dependencies(${SR_EXECUTABLE_NAME} Engine)
 
     target_link_libraries(${SR_EXECUTABLE_NAME} zlibstatic)
+
+    if (WIN32)
+        target_link_libraries(${SR_EXECUTABLE_NAME} Wininet)
+    endif()
+
     target_include_directories(${SR_EXECUTABLE_NAME} PRIVATE ${SR_ZLIB_INCLUDE_DIRS})
 endif()
 

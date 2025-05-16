@@ -13,6 +13,7 @@
     #include "PackUtils.h"
     #include "UnpackUtils.h"
     #include "UnpackedRunner.h"
+    #include "OnlineDownloader.h"
 #endif
 
 int main(int argc, char** argv) {
@@ -20,16 +21,26 @@ int main(int argc, char** argv) {
     return SREngineEntryPoint(argc, argv);
 #else
     const std::string executablePath = argv[0];
+    bool allowToUnpack = true;
+
     for (int i = 1; i < argc; ++i) {
         if (strcmp(argv[i], "--pack") == 0) {
-            return PackFiles(executablePath, GetPackFiles(executablePath), {});
+            return PackFiles(executablePath, GetPackFiles(executablePath), {}, false);
         }
         if (strcmp(argv[i], "--pack-with-res") == 0) {
-            return PackFiles(executablePath, GetPackFiles(executablePath), GetResourcesPackFiles());
+            return PackFiles(executablePath, GetPackFiles(executablePath), GetResourcesPackFiles(), false);
+        }
+        if (strcmp(argv[i], "--pack-online-data") == 0) {
+            return PackFiles(executablePath, GetPackFiles(executablePath), GetResourcesPackFiles(), true);
         }
         if (strcmp(argv[i], "--delete-packed") == 0) {
+            allowToUnpack = false;
             DeletePackedFile(argv[i + 1]);
         }
+    }
+
+    if (!allowToUnpack) {
+        return SREngineEntryPointFromExternalModule(argc, argv, true);
     }
 
     const int unpackResult = TryUnpackFiles(executablePath);
@@ -38,7 +49,19 @@ int main(int argc, char** argv) {
     }
 
     if (unpackResult == UNPACK_NO_PACKED_DATA) {
-        return SREngineEntryPointFromExternalModule(argc, argv);
+        const int runResult = SREngineEntryPointFromExternalModule(argc, argv, false);
+        if (runResult == 0) {
+            return 0;
+        }
+
+        if (runResult == ERROR_MODULE_NOT_FOUND) {
+            if (int downloadResult = DownloadEngineDataFromGithub(executablePath); downloadResult != 0) {
+                std::cerr << "Failed to download engine data from GitHub!" << std::endl;
+                return downloadResult;
+            }
+        }
+
+        return RunUnpackedApplication(executablePath);
     }
 
     return unpackResult;

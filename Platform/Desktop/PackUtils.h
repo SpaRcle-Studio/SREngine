@@ -183,7 +183,7 @@ bool PackFile(std::vector<char>& archive, const std::string& path, bool isResour
     return true;
 }
 
-int PackFiles(const std::string& executablePath, const std::vector<std::string>& filesToEmbed, const std::vector<std::string>& resourcesToEmbed) {
+int PackFiles(const std::string& executablePath, const std::vector<std::string>& filesToEmbed, const std::vector<std::string>& resourcesToEmbed, bool onlineData) {
     std::cout << "PackFiles() : packing files...\n";
 
     std::vector<char> archive;
@@ -216,15 +216,19 @@ int PackFiles(const std::string& executablePath, const std::vector<std::string>&
     }
 
 #if defined(WIN32)
-    const std::string packedFileName = executablePath.substr(0, executablePath.find_last_of('.')) + "-packed.exe";
+    std::string packedFileName = executablePath.substr(0, executablePath.find_last_of('.')) + "-packed.exe";
 #elif defined(__linux__)
-    const std::string packedFileName = executablePath.substr(0, executablePath.find_last_of('.')) + "-packed";
+    std::string packedFileName = executablePath.substr(0, executablePath.find_last_of('.')) + "-packed";
 #elif defined(__APPLE__)
-    const std::string packedFileName = executablePath.substr(0, executablePath.find_last_of('.')) + "-packed";
+    std::string packedFileName = executablePath.substr(0, executablePath.find_last_of('.')) + "-packed";
 #else
     std::cerr << "Unsupported platform.\n";
     return -1;
 #endif
+
+    if (onlineData) {
+        packedFileName = "engine-online-data.dmp";
+    }
 
     std::cout << "PackFiles() : compressing archive...\n";
 
@@ -248,7 +252,7 @@ int PackFiles(const std::string& executablePath, const std::vector<std::string>&
         return -1;
     }
 
-    {
+    if (!onlineData) {
         std::cout << "PackFiles() : pack executable: " << executablePath << "\n";
 
         std::ifstream exeFile(executablePath, std::ios::binary | std::ios::ate);

@@ -131,33 +131,27 @@ int ParseData(const std::vector<char>& data, const std::string& executablePath) 
     return UNPACK_SUCCESS;
 }
 
-int TryUnpackFiles(const std::string& executablePath) {
-    std::ifstream exeFile(executablePath, std::ios::binary | std::ios::ate);
-    if (!exeFile) {
-        std::cerr << "TryUnpackFiles() : failed to open file: " << executablePath << "\n";
-        return UNPACK_FILE_NOT_FOUND;
-    }
-
-    const uint64_t fileSize = exeFile.tellg();
+int TryUnpackFiles(const std::string& executablePath, std::ifstream& fileStream) {
+    const uint64_t fileSize = fileStream.tellg();
     if (fileSize < MAGIC_SIZE + sizeof(uint64_t) + sizeof(uint64_t)) {
         std::cerr << "TryUnpackFiles() : file is too small to contain packed data!\n";
         return UNPACK_FILE_TOO_SMALL;
     }
 
-    exeFile.seekg(static_cast<std::streamsize>(fileSize - MAGIC_SIZE - sizeof(uint64_t) - sizeof(uint64_t)), std::ios::beg);
+    fileStream.seekg(static_cast<std::streamsize>(fileSize - MAGIC_SIZE - sizeof(uint64_t) - sizeof(uint64_t)), std::ios::beg);
 
     char magicBuf[MAGIC_SIZE];
-    exeFile.read(magicBuf, MAGIC_SIZE);
+    fileStream.read(magicBuf, MAGIC_SIZE);
     if (std::string(magicBuf, MAGIC_SIZE) != MAGIC) {
         return UNPACK_NO_PACKED_DATA;
     }
 
     uint64_t decompressedSize = 0;
-    exeFile.read(reinterpret_cast<char*>(&decompressedSize), sizeof(decompressedSize));
+    fileStream.read(reinterpret_cast<char*>(&decompressedSize), sizeof(decompressedSize));
     std::cout << "TryUnpackFiles() : decompressed size: " << decompressedSize << "\n";
 
     uint64_t dataSize = 0;
-    exeFile.read(reinterpret_cast<char*>(&dataSize), sizeof(dataSize));
+    fileStream.read(reinterpret_cast<char*>(&dataSize), sizeof(dataSize));
     if (dataSize == 0 || fileSize < static_cast<std::streamoff>(dataSize + MAGIC_SIZE + sizeof(uint64_t) + sizeof(uint64_t))) {
         std::cerr << "TryUnpackFiles() : invalid data size!\n";
         return UNPACK_INVALID_DATA_SIZE;
@@ -165,11 +159,11 @@ int TryUnpackFiles(const std::string& executablePath) {
 
     std::cout << "TryUnpackFiles() : packed data size: " << dataSize << "\n";
 
-    exeFile.seekg(static_cast<std::streamsize>(fileSize - dataSize - MAGIC_SIZE - sizeof(uint64_t) - sizeof(uint64_t)), std::ios::beg);
+    fileStream.seekg(static_cast<std::streamsize>(fileSize - dataSize - MAGIC_SIZE - sizeof(uint64_t) - sizeof(uint64_t)), std::ios::beg);
 
     std::vector<char> data(dataSize);
-    exeFile.read(data.data(), static_cast<std::streamsize>(dataSize));
-    if (exeFile.gcount() != static_cast<std::streamsize>(dataSize)) {
+    fileStream.read(data.data(), static_cast<std::streamsize>(dataSize));
+    if (fileStream.gcount() != static_cast<std::streamsize>(dataSize)) {
         std::cerr << "TryUnpackFiles() : failed to read packed data!\n";
         return UNPACK_FAILED_TO_READ_DATA;
     }
@@ -178,6 +172,15 @@ int TryUnpackFiles(const std::string& executablePath) {
     data = DecompressData(decompressedSize, data);
 
     return ParseData(data, executablePath);
+}
+
+int TryUnpackFiles(const std::string& executablePath) {
+    std::ifstream exeFile(executablePath, std::ios::binary | std::ios::ate);
+    if (!exeFile) {
+        std::cerr << "TryUnpackFiles() : failed to open file: " << executablePath << "\n";
+        return UNPACK_FILE_NOT_FOUND;
+    }
+    return TryUnpackFiles(executablePath, exeFile);
 }
 
 void DeletePackedFile(const std::string& executablePath) {
