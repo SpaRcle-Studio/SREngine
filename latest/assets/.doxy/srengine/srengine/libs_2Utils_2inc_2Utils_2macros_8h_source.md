@@ -323,7 +323,7 @@
 #define SR_RENDERER_DLL_API
 #define SR_CORE_DLL_API
 
-#if defined(SR_ANDROID)
+#if defined(SR_ANDROID) || defined(SR_EMSCRIPTEN)
     #define SR_DLL_API_IMPORT
     #define SR_DLL_API_EXPORT
 #elif defined(SR_LINUX)

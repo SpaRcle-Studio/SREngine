@@ -313,7 +313,7 @@
 </span><span id=__span-0-313><a id=__codelineno-0-313 name=__codelineno-0-313 href=#__codelineno-0-313></a><span class=cp>#define SR_RENDERER_DLL_API</span>
 </span><span id=__span-0-314><a id=__codelineno-0-314 name=__codelineno-0-314 href=#__codelineno-0-314></a><span class=cp>#define SR_CORE_DLL_API</span>
 </span><span id=__span-0-315><a id=__codelineno-0-315 name=__codelineno-0-315 href=#__codelineno-0-315></a>
-</span><span id=__span-0-316><a id=__codelineno-0-316 name=__codelineno-0-316 href=#__codelineno-0-316></a><span class=cp>#if defined(SR_ANDROID)</span>
+</span><span id=__span-0-316><a id=__codelineno-0-316 name=__codelineno-0-316 href=#__codelineno-0-316></a><span class=cp>#if defined(SR_ANDROID) || defined(SR_EMSCRIPTEN)</span>
 </span><span id=__span-0-317><a id=__codelineno-0-317 name=__codelineno-0-317 href=#__codelineno-0-317></a><span class=w>    </span><span class=cp>#define SR_DLL_API_IMPORT</span>
 </span><span id=__span-0-318><a id=__codelineno-0-318 name=__codelineno-0-318 href=#__codelineno-0-318></a><span class=w>    </span><span class=cp>#define SR_DLL_API_EXPORT</span>
 </span><span id=__span-0-319><a id=__codelineno-0-319 name=__codelineno-0-319 href=#__codelineno-0-319></a><span class=cp>#elif defined(SR_LINUX)</span>

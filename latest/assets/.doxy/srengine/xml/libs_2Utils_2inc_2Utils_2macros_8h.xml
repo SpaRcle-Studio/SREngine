@@ -6665,7 +6665,7 @@
 <codeline lineno="318"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_RENDERER_DLL_API</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="319"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_CORE_DLL_API</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="320"><highlight class="normal"></highlight></codeline>
-<codeline lineno="321"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(SR_ANDROID)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="321"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(SR_ANDROID)<sp/>||<sp/>defined(SR_EMSCRIPTEN)</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="322"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_DLL_API_IMPORT</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="323"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_DLL_API_EXPORT</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="324"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(SR_LINUX)</highlight><highlight class="normal"></highlight></codeline>
