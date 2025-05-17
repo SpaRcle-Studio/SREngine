@@ -1,4 +1,4 @@
-if (ANDROID_NDK)
+if (ANDROID_NDK OR SR_EMSCRIPTEN)
     set(SR_ENGINE_USE_MODULAR_BUILD OFF)
 else()
     option(SR_ENGINE_USE_MODULAR_BUILD "Separate the engine into modular libraries" ON)

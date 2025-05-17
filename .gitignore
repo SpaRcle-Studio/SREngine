@@ -54,3 +54,5 @@ site
 Resources/**/*.so
 .flatpak-builder/
 /Resources/API
+/Platform/Emscripten/codegen.spec
+/Platform/Emscripten/ninja.exe

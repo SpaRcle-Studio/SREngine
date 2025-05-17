@@ -25,11 +25,14 @@ endif()
 
 set(LIBTYPE STATIC)
 
-add_subdirectory(libs/OpenAL)
-add_subdirectory(libs/libmodplug)
+if (NOT SR_EMSCRIPTEN)
+    add_subdirectory(libs/OpenAL)
 
-if(MSVC)
-    target_compile_options(modplug PRIVATE "/wd5033;")
+    add_subdirectory(libs/libmodplug)
+
+    if(MSVC)
+        target_compile_options(modplug PRIVATE "/wd5033;")
+    endif()
 endif()
 
 if (SR_AUDIO_STATIC_LIBRARY)
@@ -59,12 +62,16 @@ if (SR_AUDIO_DLL_EXPORTS)
     target_compile_definitions(Audio PUBLIC SR_AUDIO_DLL_EXPORTS)
 endif()
 
-target_link_libraries(Audio PUBLIC modplug OpenAL)
+if (NOT SR_EMSCRIPTEN)
+    target_link_libraries(Audio PUBLIC OpenAL)
+    target_include_directories(Audio PUBLIC libs/OpenAL/include)
+
+    target_link_libraries(Audio PUBLIC modplug)
+    target_include_directories(Audio PUBLIC libs/libmodplug/src)
+endif()
 
 target_include_directories(Audio PUBLIC inc)
 target_include_directories(Audio PUBLIC libs)
-target_include_directories(Audio PUBLIC libs/OpenAL/include)
-target_include_directories(Audio PUBLIC libs/libmodplug/src)
 
 get_property(SR_UTILS_INCLUDE_DIRECTORIES_CONTENT GLOBAL PROPERTY SR_UTILS_INCLUDE_DIRECTORIES)
 target_include_directories(Audio PUBLIC ${SR_UTILS_INCLUDE_DIRECTORIES_CONTENT})

@@ -13,7 +13,7 @@ foreach(line ${__PYTHON_REQUIREMENTS})
     endif()
 endforeach()
 
-if (UNIX AND NOT ANDROID_NDK)
+if (SR_HOST_SYSTEM_UNIX)
     find_program(PYTHON_EXECUTABLE NAMES python3 python)
 
     if (PYTHON_EXECUTABLE)

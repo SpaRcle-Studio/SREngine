@@ -8,7 +8,28 @@ set_property(GLOBAL PROPERTY SR_ENGINE_PATCH_VERSION_PROPERTY ${PROJECT_VERSION_
 
 set(SR_ENGINE_EXTENDED_NAME ON)
 
-if (CMAKE_SIZEOF_VOID_P EQUAL 4)
+if (EMSCRIPTEN)
+    set(SR_EMSCRIPTEN ON)
+    message(STATUS "SpaRcle Engine: Emscripten build mode enabled")
+else()
+    set(SR_EMSCRIPTEN OFF)
+endif()
+
+message(STATUS "SpaRcle Engine: Host system: ${CMAKE_HOST_SYSTEM_NAME}")
+
+if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows")
+    set(SR_HOST_SYSTEM_WINDOWS ON)
+elseif(CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
+    set(SR_HOST_SYSTEM_LINUX ON)
+    set(SR_HOST_SYSTEM_UNIX ON)
+elseif(CMAKE_HOST_SYSTEM_NAME STREQUAL "Darwin")
+    set(SR_HOST_SYSTEM_MAC ON)
+    set(SR_HOST_SYSTEM_UNIX ON)
+else()
+    message(FATAL_ERROR "SpaRcle Engine: unsupported host system!")
+endif()
+
+if (NOT SR_EMSCRIPTEN AND NOT CMAKE_SIZEOF_VOID_P EQUAL 8)
     message(FATAL_ERROR "SpaRcle Engine supports only x64 systems!")
 endif()
 

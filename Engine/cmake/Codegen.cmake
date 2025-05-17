@@ -37,7 +37,7 @@ macro(SRCodegen)
         message(FATAL_ERROR "Codegen script compilation failed with error:\n${error_output}")
     endif()
 
-    if (UNIX AND NOT ANDROID_NDK)
+    if (SR_HOST_SYSTEM_UNIX)
         set(SR_CODEGEN_EXECUTABLE_SCRIPT "${SR_CMAKE_RESOURCES_DIRECTORY}/Engine/Utilities/codegen")
     else()
         set(SR_CODEGEN_EXECUTABLE_SCRIPT "${SR_CMAKE_RESOURCES_DIRECTORY}/Engine/Utilities/codegen.exe")
