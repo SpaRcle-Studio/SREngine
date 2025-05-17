@@ -373,7 +373,7 @@
 #define SR_OFFSETOF(s,m) ((::size_t)&reinterpret_cast<char const volatile&>((((s*)0)->m)))
 
 namespace SR_UTILS_NS {
-#if defined(SR_ANDROID)
+#if defined(SR_ANDROID) || defined(SR_EMSCRIPTEN)
     using SizeType = unsigned long;
 #elif defined(SR_LINUX)
     using SizeType = long unsigned int;
