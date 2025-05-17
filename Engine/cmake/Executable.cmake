@@ -20,6 +20,8 @@ if (ANDROID_NDK)
         EGL
         GLESv1_CM
     )
+elseif(SR_EMSCRIPTEN)
+
 else()
     set_property(GLOBAL APPEND PROPERTY SR_EXECUTABLE_ARGS "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Platform/Desktop/main.cpp")
 
@@ -33,21 +35,23 @@ else()
     set_target_properties(${SR_EXECUTABLE_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SR_EXECUTABLE_DIR})
 endif()
 
-if (SR_ENGINE_STATIC_LIBRARY)
-    target_link_libraries(${SR_EXECUTABLE_NAME} Engine)
-else()
-    add_dependencies(${SR_EXECUTABLE_NAME} Engine)
+if (NOT SR_EMSCRIPTEN)
+    if (SR_ENGINE_STATIC_LIBRARY)
+        target_link_libraries(${SR_EXECUTABLE_NAME} Engine)
+    else()
+        add_dependencies(${SR_EXECUTABLE_NAME} Engine)
 
-    target_link_libraries(${SR_EXECUTABLE_NAME} zlibstatic)
+        target_link_libraries(${SR_EXECUTABLE_NAME} zlibstatic)
 
-    if (WIN32)
-        target_link_libraries(${SR_EXECUTABLE_NAME} Wininet)
+        if (WIN32)
+            target_link_libraries(${SR_EXECUTABLE_NAME} Wininet)
+        endif()
+
+        target_include_directories(${SR_EXECUTABLE_NAME} PRIVATE ${SR_ZLIB_INCLUDE_DIRS})
     endif()
-
-    target_include_directories(${SR_EXECUTABLE_NAME} PRIVATE ${SR_ZLIB_INCLUDE_DIRS})
 endif()
 
-if (NOT ANDROID_NDK)
+if (NOT ANDROID_NDK AND NOT SR_EMSCRIPTEN)
     # TODO: implement an easy way to set if a build is 'stable' or 'latest'
     if (${CMAKE_BUILD_TYPE} STREQUAL "Release")
         set(executableType "stable")

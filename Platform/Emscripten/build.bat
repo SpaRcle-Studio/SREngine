@@ -41,6 +41,9 @@ if not exist "%NINJA_EXE%" (
 )
 set PATH=%NINJA_DIR%;%PATH%
 
+echo Ninja version:
+ninja --version
+
 rem === Проверка наличия Emscripten ===
 if not exist "%EMSDK_DIR%" (
 	echo emsdk not exists. Clone it...
@@ -67,12 +70,15 @@ if not exist "%BUILD_DIR%" (
 rem === Генерация сборки через emcmake ===
 echo:
 echo Generating CMake build for Emscripten...
-emcmake cmake -G "Visual Studio 17 2022" -S "%SR_ENGINE_DIR%" -B "%BUILD_DIR%" -DCMAKE_BUILD_TYPE=%CONFIG% -DSR_PLATFORM=%PLATFORM%
+call emcmake cmake -G Ninja -S "%SR_ENGINE_DIR%" -B "%BUILD_DIR%" -DCMAKE_BUILD_TYPE=%CONFIG% -DSR_PLATFORM=%PLATFORM% -DCMAKE_MAKE_PROGRAM=%NINJA_EXE%
 if errorlevel 1 goto :error
+
+echo:
+echo === CMake configuration completed successfully ===
 
 rem === Сборка проекта ===
 echo:
-echo Building project...
+echo === Building project for Emscripten ===
 emmake cmake --build "%BUILD_DIR%" --config %CONFIG%
 if errorlevel 1 goto :error
 

@@ -10,6 +10,7 @@ set(SR_ENGINE_EXTENDED_NAME ON)
 
 if (EMSCRIPTEN)
     set(SR_EMSCRIPTEN ON)
+    add_definitions(-DSR_EMSCRIPTEN)
     message(STATUS "SpaRcle Engine: Emscripten build mode enabled")
 else()
     set(SR_EMSCRIPTEN OFF)
@@ -111,8 +112,12 @@ if (ANDROID_NDK)
     add_definitions(-Wno-c++20-attribute-extensions)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-c++20-attribute-extensions")
 else()
+    if (UNIX AND NOT SR_EMSCRIPTEN)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcompare-debug-second")
+    endif()
+
     if (UNIX)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcompare-debug-second -w -Wno-deprecated -fPIC")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w -Wno-deprecated -fPIC")
     endif()
 
     if (UNIX AND SR_BUILD_DEBUG_MODE)
@@ -142,8 +147,13 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSR_UTILS_ASSIMP")
 include(Engine/cmake/ModularBuild.cmake)
 
 set(SR_PHYSICS_USE_BULLET3 OFF)
-set(SR_PHYSICS_USE_PHYSX ON)
 set(SR_PHYSICS_USE_BOX2D OFF)
+
+if (NOT SR_EMSCRIPTEN)
+    set(SR_PHYSICS_USE_PHYSX ON)
+else()
+    set(SR_PHYSICS_USE_PHYSX OFF)
+endif()
 
 set(EVO_VULKAN_STATIC_LIBRARY ON)
 
