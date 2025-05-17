@@ -103,9 +103,12 @@ add_definitions(
     -DSR_ICU
     -DSR_USE_IMGUI
     -DSR_USE_VULKAN
-    -DSR_SUPPORT_PARALLEL
     -DSR_CXX_20
 )
+
+if (NOT SR_EMSCRIPTEN)
+    add_definitions(-DSR_SUPPORT_PARALLEL)
+endif()
 
 if (ANDROID_NDK)
     add_compile_options(-Wno-c++20-attribute-extensions)

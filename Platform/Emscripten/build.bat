@@ -48,6 +48,9 @@ rem === Проверка наличия Emscripten ===
 if not exist "%EMSDK_DIR%" (
 	echo emsdk not exists. Clone it...
 	git clone https://github.com/emscripten-core/emsdk.git
+	cd emsdk
+	git checkout win_on_arm64
+	cd ../
 	echo Activate emsdk...
 	cd emsdk
 	call .\emsdk install latest
