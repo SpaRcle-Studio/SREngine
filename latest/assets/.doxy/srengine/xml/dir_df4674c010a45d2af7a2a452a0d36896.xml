@@ -11,6 +11,7 @@
     <innerfile refid="GameObject_8h">GameObject.h</innerfile>
     <innerfile refid="IComponentable_8h">IComponentable.h</innerfile>
     <innerfile refid="LayerManager_8h">LayerManager.h</innerfile>
+    <innerfile refid="Utils_2inc_2Utils_2ECS_2Node_8h">Node.h</innerfile>
     <innerfile refid="Prefab_8h">Prefab.h</innerfile>
     <innerfile refid="SceneObject_8h">SceneObject.h</innerfile>
     <innerfile refid="TagManager_8h">TagManager.h</innerfile>

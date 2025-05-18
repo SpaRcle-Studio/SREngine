@@ -76,7 +76,7 @@ Inherited by the following classes: [SR\_ANIMATIONS\_NS::Animator](classSR__ANIM
 |  SR\_NODISCARD [**IComponentable**](classSR__UTILS__NS_1_1IComponentable.md) \* | [**GetParent**](#function-getparent) () const<br> |
 |  SR\_NODISCARD SceneObjectPtr | [**GetRoot**](#function-getroot) () const<br> |
 |  SR\_NODISCARD ScenePtr | [**GetScene**](#function-getscene) () const<br> |
-|  SR\_NODISCARD SceneObjectPtr | [**GetSceneObject**](#function-getsceneobject) () const<br> |
+|  SR\_NODISCARD const SceneObjectPtr & | [**GetSceneObject**](#function-getsceneobject) () const<br> |
 |  SR\_NODISCARD [**Transform**](classSR__UTILS__NS_1_1Transform.md) \* | [**GetTransform**](#function-gettransform) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**HasParent**](#function-hasparent) () const<br> |
 |  SR\_NODISCARD bool | [**HasScene**](#function-hasscene) () const<br> |
@@ -104,7 +104,6 @@ Inherited by the following classes: [SR\_ANIMATIONS\_NS::Animator](classSR__ANIM
 | virtual void | [**OnLoaded**](#function-onloaded) () <br>_Вызывается при загрузке компонента на игровой объект_  |
 | virtual void | [**OnMatrixDirty**](#function-onmatrixdirty) () <br> |
 | virtual void | [**OnPriorityChanged**](#function-onprioritychanged) () <br> |
-| virtual void | [**OnTransformSet**](#function-ontransformset) () <br> |
 | virtual void | [**OnTriggerEnter**](#function-ontriggerenter) (const [**CollisionData**](structSR__UTILS__NS_1_1CollisionData.md) & data) <br> |
 | virtual void | [**OnTriggerExit**](#function-ontriggerexit) (const [**CollisionData**](structSR__UTILS__NS_1_1CollisionData.md) & data) <br> |
 | virtual void | [**OnTriggerStay**](#function-ontriggerstay) (const [**CollisionData**](structSR__UTILS__NS_1_1CollisionData.md) & data) <br> |
@@ -419,7 +418,7 @@ SR_NODISCARD ScenePtr SR_UTILS_NS::Component::GetScene () const
 ### function GetSceneObject 
 
 ```C++
-SR_NODISCARD SceneObjectPtr SR_UTILS_NS::Component::GetSceneObject () const
+SR_NODISCARD const SceneObjectPtr & SR_UTILS_NS::Component::GetSceneObject () const
 ```
 
 
@@ -786,19 +785,6 @@ virtual void SR_UTILS_NS::Component::OnMatrixDirty ()
 
 ```C++
 virtual void SR_UTILS_NS::Component::OnPriorityChanged () 
-```
-
-
-
-
-<hr>
-
-
-
-### function OnTransformSet 
-
-```C++
-virtual void SR_UTILS_NS::Component::OnTransformSet () 
 ```
 
 

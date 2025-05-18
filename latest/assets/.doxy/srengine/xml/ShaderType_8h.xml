@@ -244,7 +244,7 @@
         </childnode>
         <childnode refid="119" relation="include">
         </childnode>
-        <childnode refid="135" relation="include">
+        <childnode refid="136" relation="include">
         </childnode>
         <childnode refid="128" relation="include">
         </childnode>
@@ -287,6 +287,16 @@
         <label>Utils/Math/Quaternion.h</label>
         <link refid="Quaternion_8h_source"/>
         <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="130">
+        <label>Utils/Math/Rect.h</label>
+        <link refid="Rect_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
         </childnode>
       </node>
       <node id="110">
@@ -349,7 +359,7 @@
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="136">
+      <node id="137">
         <label>Utils/Profile/TracyContext.h</label>
         <link refid="TracyContext_8h_source"/>
       </node>
@@ -371,11 +381,11 @@
         <childnode refid="104" relation="include">
         </childnode>
       </node>
-      <node id="133">
+      <node id="134">
         <label>Utils/Serialization/DefaultCheckers.inl.h</label>
         <link refid="DefaultCheckers_8inl_8h_source"/>
       </node>
-      <node id="131">
+      <node id="132">
         <label>Utils/Serialization/DefaultObjectMakers.inl.h</label>
         <link refid="DefaultObjectMakers_8inl_8h_source"/>
       </node>
@@ -391,11 +401,11 @@
         <childnode refid="93" relation="include">
         </childnode>
       </node>
-      <node id="134">
+      <node id="135">
         <label>Utils/Serialization/ObjectDataAccessors.inl.h</label>
         <link refid="ObjectDataAccessors_8inl_8h_source"/>
       </node>
-      <node id="132">
+      <node id="133">
         <label>Utils/Serialization/SaveCheckers.inl.h</label>
         <link refid="SaveCheckers_8inl_8h_source"/>
       </node>
@@ -426,9 +436,9 @@
         </childnode>
         <childnode refid="110" relation="include">
         </childnode>
-        <childnode refid="127" relation="include">
-        </childnode>
         <childnode refid="130" relation="include">
+        </childnode>
+        <childnode refid="127" relation="include">
         </childnode>
         <childnode refid="131" relation="include">
         </childnode>
@@ -437,6 +447,8 @@
         <childnode refid="133" relation="include">
         </childnode>
         <childnode refid="134" relation="include">
+        </childnode>
+        <childnode refid="135" relation="include">
         </childnode>
       </node>
       <node id="124">
@@ -583,14 +595,14 @@
         <childnode refid="78" relation="include">
         </childnode>
       </node>
-      <node id="135">
+      <node id="136">
         <label>Utils/Types/SafePointer.h</label>
         <link refid="SafePointer_8h_source"/>
         <childnode refid="100" relation="include">
         </childnode>
         <childnode refid="87" relation="include">
         </childnode>
-        <childnode refid="136" relation="include">
+        <childnode refid="137" relation="include">
         </childnode>
         <childnode refid="128" relation="include">
         </childnode>
@@ -771,7 +783,7 @@
         <childnode refid="68" relation="include">
         </childnode>
       </node>
-      <node id="130">
+      <node id="131">
         <label>Codegen/Enums.generated.hpp</label>
       </node>
       <node id="88">
@@ -1005,6 +1017,8 @@
         </childnode>
         <childnode refid="18" relation="include">
         </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
       </node>
       <node id="8">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/BehaviourNamePropertyDrawer.h</label>
@@ -1053,10 +1067,14 @@
         </childnode>
       </node>
       <node id="17">
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/RectPropertyDrawer.h</label>
+        <link refid="RectPropertyDrawer_8h_source"/>
+      </node>
+      <node id="18">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/StringPropertyDrawer.h</label>
         <link refid="StringPropertyDrawer_8h_source"/>
       </node>
-      <node id="18">
+      <node id="19">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/VectorPropertyDrawer.h</label>
         <link refid="VectorPropertyDrawer_8h_source"/>
       </node>
@@ -1071,12 +1089,12 @@
         <link refid="BaseMaterial_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
         <childnode refid="20" relation="include">
         </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
       </node>
-      <node id="19">
+      <node id="20">
         <label>Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h</label>
         <link refid="FileMaterial_8h_source"/>
       </node>
@@ -1086,73 +1104,73 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="20">
+      <node id="21">
         <label>Engine/libs/Graphics/inc/Graphics/Material/UniqueMaterial.h</label>
         <link refid="UniqueMaterial_8h_source"/>
       </node>
-      <node id="28">
+      <node id="29">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h</label>
         <link refid="CascadedShadowMapPass_8h_source"/>
-        <childnode refid="29" relation="include">
-        </childnode>
-      </node>
-      <node id="30">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
-        <link refid="ColorBufferPass_8h_source"/>
-      </node>
-      <node id="22">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
-        <link refid="DebugPass_8h_source"/>
-      </node>
-      <node id="25">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
-        <link refid="HTMLDrawerPass_8h_source"/>
-      </node>
-      <node id="26">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
-        <link refid="MeshDrawerPass_8h_source"/>
-        <childnode refid="27" relation="include">
-        </childnode>
-      </node>
-      <node id="27">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
-        <link refid="OffScreenMeshDrawerPass_8h_source"/>
-        <childnode refid="28" relation="include">
-        </childnode>
         <childnode refid="30" relation="include">
         </childnode>
       </node>
-      <node id="29">
+      <node id="31">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
+        <link refid="ColorBufferPass_8h_source"/>
+      </node>
+      <node id="23">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
+        <link refid="DebugPass_8h_source"/>
+      </node>
+      <node id="26">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
+        <link refid="HTMLDrawerPass_8h_source"/>
+      </node>
+      <node id="27">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
+        <link refid="MeshDrawerPass_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
+        <link refid="OffScreenMeshDrawerPass_8h_source"/>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h</label>
         <link refid="VarianceShadowMapPass_8h_source"/>
       </node>
-      <node id="21">
+      <node id="22">
         <label>Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</label>
         <link refid="DebugRenderer_8h_source"/>
-        <childnode refid="22" relation="include">
-        </childnode>
-      </node>
-      <node id="23">
-        <label>Engine/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
-        <link refid="HTMLDrawableElement_8h_source"/>
-        <childnode refid="24" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
       </node>
       <node id="24">
-        <label>Engine/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
-        <link refid="HTMLRenderer_8h_source"/>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
+        <link refid="HTMLDrawableElement_8h_source"/>
         <childnode refid="25" relation="include">
         </childnode>
       </node>
-      <node id="31">
+      <node id="25">
+        <label>Engine/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
+        <link refid="HTMLRenderer_8h_source"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
         <label>Engine/libs/Graphics/inc/Graphics/SRSL/Evaluator.h</label>
         <link refid="Evaluator_8h_source"/>
       </node>
-      <node id="32">
+      <node id="33">
         <label>Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h</label>
         <link refid="GLSLCodeGenerator_8h_source"/>
       </node>
-      <node id="33">
+      <node id="34">
         <label>Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h</label>
         <link refid="SRSL_2Shader_8h_source"/>
       </node>
@@ -1161,9 +1179,7 @@
         <link refid="ShaderType_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="26" relation="include">
-        </childnode>
-        <childnode refid="31" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
         <childnode refid="32" relation="include">
         </childnode>
@@ -1173,12 +1189,14 @@
         </childnode>
         <childnode refid="35" relation="include">
         </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
       </node>
-      <node id="34">
+      <node id="35">
         <label>Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h</label>
         <link refid="ShaderVariables_8h_source"/>
       </node>
-      <node id="35">
+      <node id="36">
         <label>Engine/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h</label>
         <link refid="Graphics_2inc_2Graphics_2SRSL_2TypeInfo_8h_source"/>
       </node>
@@ -1187,9 +1205,9 @@
         <link refid="Types_2Shader_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
-        <childnode refid="23" relation="include">
+        <childnode refid="24" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

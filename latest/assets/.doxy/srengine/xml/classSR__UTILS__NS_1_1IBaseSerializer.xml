@@ -514,13 +514,16 @@
     </collaborationgraph>
     <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="106" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="106" bodyend="146"/>
     <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1ISerializer_1a1d2d760b1cfad5b8ec41245c0c5c2750" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IBaseSerializer</scope><name>AddDontSaveTag</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1afc593da47599b35d268512476ff82c6e" prot="public" virt="virtual"><scope>SR_UTILS_NS::IBaseSerializer</scope><name>BeginArray</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a6fb5a5919bf96edbfa2d6033aebc9aeb" prot="public" virt="virtual"><scope>SR_UTILS_NS::IBaseSerializer</scope><name>BeginItem</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a277fe3c1f948403e0f29549e6c533b8c" prot="public" virt="virtual"><scope>SR_UTILS_NS::IBaseSerializer</scope><name>BeginObject</name></member>
+      <member refid="classSR__UTILS__NS_1_1ISerializer_1a3a1935a22b5960ca47ef02b8e5427804" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IBaseSerializer</scope><name>CanSaveByTags</name></member>
       <member refid="classSR__UTILS__NS_1_1ISerializer_1ab97851c439d1f82af99e1489abb0498e" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IBaseSerializer</scope><name>CreateDeserializer</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a8e0143d0bcaa9e38f4d4a48f41c3fffc" prot="public" virt="virtual"><scope>SR_UTILS_NS::IBaseSerializer</scope><name>EndArray</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1ab0342a1dda4c59d72c92f73df578c140" prot="public" virt="virtual"><scope>SR_UTILS_NS::IBaseSerializer</scope><name>EndItem</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a6b3a9e740546990c39f91bbbf1236fdb" prot="public" virt="virtual"><scope>SR_UTILS_NS::IBaseSerializer</scope><name>EndObject</name></member>
+      <member refid="classSR__UTILS__NS_1_1ISerializer_1af18eff7354ce1f620d499e6754388737" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IBaseSerializer</scope><name>GetDontSaveTags</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1af34b0c4f39f6019cb0dcda171be6f50b" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::IBaseSerializer</scope><name>GetImpl</name></member>
       <member refid="classSR__UTILS__NS_1_1ISerializer_1ae4b033390c22e8da5dc2fef7ca2f2a81" prot="public" virt="virtual"><scope>SR_UTILS_NS::IBaseSerializer</scope><name>IsAllowEmptyElementsInArray</name></member>
       <member refid="classSR__UTILS__NS_1_1ISerializer_1af1665ef0d8643f2265738be86e6a642e" prot="public" virt="virtual"><scope>SR_UTILS_NS::IBaseSerializer</scope><name>IsEditorAllowed</name></member>

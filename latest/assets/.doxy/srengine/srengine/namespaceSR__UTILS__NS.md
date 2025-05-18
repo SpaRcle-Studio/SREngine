@@ -99,7 +99,7 @@
 | class | [**FileSystem**](classSR__UTILS__NS_1_1FileSystem.md) <br> |
 | class | [**FileSystemWatcher**](classSR__UTILS__NS_1_1FileSystemWatcher.md) <br> |
 | class | [**FileWatcher**](classSR__UTILS__NS_1_1FileWatcher.md) <br> |
-| class | [**GameObject**](classSR__UTILS__NS_1_1GameObject.md) <br>_@scriptableClass_  |
+| class | [**GameObject**](classSR__UTILS__NS_1_1GameObject.md) <br> |
 | struct | [**GetFirstOfTypeFromSequence**](structSR__UTILS__NS_1_1GetFirstOfTypeFromSequence.md) &lt;class T, class Pair, Pairs&gt;<br> |
 | struct | [**GetFirstOfTypeFromSequence&lt; T, Pair &gt;**](structSR__UTILS__NS_1_1GetFirstOfTypeFromSequence_3_01T_00_01Pair_01_4.md) &lt;class T, class Pair&gt;<br> |
 | struct | [**GetFirstOfTypeFromSequenceAssert**](structSR__UTILS__NS_1_1GetFirstOfTypeFromSequenceAssert.md) &lt;class T&gt;<br> |

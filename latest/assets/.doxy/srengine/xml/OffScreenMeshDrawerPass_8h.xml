@@ -533,6 +533,16 @@
         <childnode refid="87" relation="include">
         </childnode>
       </node>
+      <node id="168">
+        <label>Utils/Math/Rect.h</label>
+        <link refid="Rect_8h_source"/>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+      </node>
       <node id="112">
         <label>Utils/Math/Size.h</label>
         <link refid="Size_8h_source"/>
@@ -749,11 +759,11 @@
         <childnode refid="137" relation="include">
         </childnode>
       </node>
-      <node id="170">
+      <node id="171">
         <label>Utils/Serialization/DefaultCheckers.inl.h</label>
         <link refid="DefaultCheckers_8inl_8h_source"/>
       </node>
-      <node id="168">
+      <node id="169">
         <label>Utils/Serialization/DefaultObjectMakers.inl.h</label>
         <link refid="DefaultObjectMakers_8inl_8h_source"/>
       </node>
@@ -769,11 +779,11 @@
         <childnode refid="93" relation="include">
         </childnode>
       </node>
-      <node id="171">
+      <node id="172">
         <label>Utils/Serialization/ObjectDataAccessors.inl.h</label>
         <link refid="ObjectDataAccessors_8inl_8h_source"/>
       </node>
-      <node id="169">
+      <node id="170">
         <label>Utils/Serialization/SaveCheckers.inl.h</label>
         <link refid="SaveCheckers_8inl_8h_source"/>
       </node>
@@ -804,17 +814,19 @@
         </childnode>
         <childnode refid="112" relation="include">
         </childnode>
+        <childnode refid="168" relation="include">
+        </childnode>
         <childnode refid="166" relation="include">
         </childnode>
         <childnode refid="133" relation="include">
-        </childnode>
-        <childnode refid="168" relation="include">
         </childnode>
         <childnode refid="169" relation="include">
         </childnode>
         <childnode refid="170" relation="include">
         </childnode>
         <childnode refid="171" relation="include">
+        </childnode>
+        <childnode refid="172" relation="include">
         </childnode>
       </node>
       <node id="123">

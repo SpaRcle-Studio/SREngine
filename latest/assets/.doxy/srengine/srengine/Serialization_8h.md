@@ -17,6 +17,7 @@
 * `#include <Utils/Types/UnicodeString.h>`
 * `#include <Utils/Types/SharedPtr.h>`
 * `#include <Utils/Math/Size.h>`
+* `#include <Utils/Math/Rect.h>`
 * `#include <Utils/Common/StringAtomLiterals.h>`
 * `#include <Codegen/Enums.generated.hpp>`
 * `#include <Utils/Serialization/DefaultObjectMakers.inl.h>`

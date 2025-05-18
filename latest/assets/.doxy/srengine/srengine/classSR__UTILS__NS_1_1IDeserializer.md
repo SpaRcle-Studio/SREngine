@@ -58,11 +58,13 @@ Inherited by the following classes: [SR\_UTILS\_NS::IBaseDeserializer](classSR__
 
 | Type | Name |
 | ---: | :--- |
+|  void | [**AddDontLoadTag**](#function-adddontloadtag) (const [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & tag) <br> |
 | virtual SR\_NODISCARD bool | [**AllowNewMapKeys**](#function-allownewmapkeys) () noexcept const = 0<br> |
 | virtual SR\_NODISCARD bool | [**AllowReAllocPointer**](#function-allowreallocpointer) ([**ReAllocPointerReason**](classSR__UTILS__NS_1_1IDeserializer.md#enum-reallocpointerreason) reason) noexcept const = 0<br> |
 | virtual uint64\_t | [**BeginArray**](#function-beginarray) (const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & id) = 0<br> |
 | virtual bool | [**BeginItem**](#function-beginitem) (const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & id, uint32\_t index) = 0<br> |
 | virtual bool | [**BeginObject**](#function-beginobject) (const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & id) = 0<br> |
+|  SR\_NODISCARD bool | [**CanLoadByTags**](#function-canloadbytags) (const std::set&lt; [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; & tags) const<br> |
 | virtual void | [**EndArray**](#function-endarray) () = 0<br> |
 | virtual void | [**EndItem**](#function-enditem) () = 0<br> |
 | virtual void | [**EndObject**](#function-endobject) () = 0<br> |
@@ -89,6 +91,7 @@ Inherited by the following classes: [SR\_UTILS\_NS::IBaseDeserializer](classSR__
 | virtual void | [**ReportError**](#function-reporterror) (const std::string & message) = 0<br> |
 | virtual void | [**ResetWalker**](#function-resetwalker) () = 0<br> |
 | virtual SR\_NODISCARD bool | [**SaveToFile**](#function-savetofile) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) const = 0<br> |
+|  void | [**SetDontLoadTags**](#function-setdontloadtags) (const std::set&lt; [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; & tags) <br> |
 | virtual SR\_NODISCARD bool | [**ShouldSetDefaults**](#function-shouldsetdefaults-12) (const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & name) noexcept const = 0<br> |
 | virtual SR\_NODISCARD bool | [**ShouldSetDefaults**](#function-shouldsetdefaults-22) () noexcept const = 0<br> |
 | virtual SR\_NODISCARD std::string | [**ToString**](#function-tostring) () noexcept const<br> |
@@ -159,6 +162,21 @@ using SR_UTILS_NS::IDeserializer::UniquePtr =  std::unique_ptr<IDeserializer>;
 
 
 
+### function AddDontLoadTag 
+
+```C++
+inline void SR_UTILS_NS::IDeserializer::AddDontLoadTag (
+    const StringAtom & tag
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function AllowNewMapKeys 
 
 ```C++
@@ -224,6 +242,21 @@ virtual bool SR_UTILS_NS::IDeserializer::BeginItem (
 virtual bool SR_UTILS_NS::IDeserializer::BeginObject (
     const SerializationId & id
 ) = 0
+```
+
+
+
+
+<hr>
+
+
+
+### function CanLoadByTags 
+
+```C++
+inline SR_NODISCARD bool SR_UTILS_NS::IDeserializer::CanLoadByTags (
+    const std::set< StringAtom > & tags
+) const
 ```
 
 
@@ -620,6 +653,21 @@ virtual void SR_UTILS_NS::IDeserializer::ResetWalker () = 0
 virtual SR_NODISCARD bool SR_UTILS_NS::IDeserializer::SaveToFile (
     const SR_UTILS_NS::Path & path
 ) const = 0
+```
+
+
+
+
+<hr>
+
+
+
+### function SetDontLoadTags 
+
+```C++
+inline void SR_UTILS_NS::IDeserializer::SetDontLoadTags (
+    const std::set< StringAtom > & tags
+) 
 ```
 
 

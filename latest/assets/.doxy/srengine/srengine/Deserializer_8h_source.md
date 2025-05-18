@@ -75,6 +75,26 @@ namespace SR_UTILS_NS {
 
         virtual void ReportError(const std::string& message) = 0;
 
+        void AddDontLoadTag(const StringAtom& tag) {
+            m_dontLoadTags.insert(tag);
+        }
+
+        void SetDontLoadTags(const std::set<StringAtom>& tags) {
+            m_dontLoadTags = tags;
+        }
+
+        SR_NODISCARD bool CanLoadByTags(const std::set<StringAtom>& tags) const {
+            for (const auto& tag : m_dontLoadTags) {
+                if (tags.find(tag) != tags.end()) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+    private:
+        std::set<StringAtom> m_dontLoadTags;
+
     };
 }
 

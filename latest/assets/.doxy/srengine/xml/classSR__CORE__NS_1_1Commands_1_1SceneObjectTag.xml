@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/EngineCommands.h" line="165" column="9" bodyfile="Engine/inc/Engine/EngineCommands.h" bodystart="165" bodyend="-1"/>
+        <location file="Engine/inc/Engine/EngineCommands.h" line="187" column="9" bodyfile="Engine/inc/Engine/EngineCommands.h" bodystart="187" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/EngineCommands.h" line="173" column="31" bodyfile="Engine/inc/Engine/EngineCommands.h" bodystart="173" bodyend="-1"/>
+        <location file="Engine/inc/Engine/EngineCommands.h" line="195" column="31" bodyfile="Engine/inc/Engine/EngineCommands.h" bodystart="195" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag_1af8af242c7e33a631b7c775431a0b8633" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/EngineCommands.h" line="174" column="33" bodyfile="Engine/inc/Engine/EngineCommands.h" bodystart="174" bodyend="-1"/>
+        <location file="Engine/inc/Engine/EngineCommands.h" line="196" column="33" bodyfile="Engine/inc/Engine/EngineCommands.h" bodystart="196" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag_1af619aec60606600662661af6b776a5ff" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/EngineCommands.h" line="175" column="33" bodyfile="Engine/inc/Engine/EngineCommands.h" bodystart="175" bodyend="-1"/>
+        <location file="Engine/inc/Engine/EngineCommands.h" line="197" column="33" bodyfile="Engine/inc/Engine/EngineCommands.h" bodystart="197" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/EngineCommands.h" line="167" column="9"/>
+        <location file="Engine/inc/Engine/EngineCommands.h" line="189" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag_1acf3ae0036dadf0aa873bbbc8047c4e59" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/EngineCommands.h" line="169" column="14"/>
+        <location file="Engine/inc/Engine/EngineCommands.h" line="191" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag_1aaf710f029a1825107d53db915dc16985" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/EngineCommands.h" line="170" column="14"/>
+        <location file="Engine/inc/Engine/EngineCommands.h" line="192" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -177,7 +177,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/inc/Engine/EngineCommands.h" line="164" column="5" bodyfile="Engine/inc/Engine/EngineCommands.h" bodystart="164" bodyend="177"/>
+    <location file="Engine/inc/Engine/EngineCommands.h" line="186" column="5" bodyfile="Engine/inc/Engine/EngineCommands.h" bodystart="186" bodyend="199"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ICommand_1aa10d7b2a972b838d5f49352e3d79dc5d" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectTag</scope><name>DATA_ID</name></member>
       <member refid="classSR__CORE__NS_1_1Commands_1_1IEngineReversibleCommand_1a2e54bd8e825887ff963cefbee2d04b37" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectTag</scope><name>EnginePtr</name></member>

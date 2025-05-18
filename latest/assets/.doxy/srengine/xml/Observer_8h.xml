@@ -849,6 +849,8 @@
         </childnode>
         <childnode refid="27" relation="include">
         </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
       </node>
       <node id="17">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/BehaviourNamePropertyDrawer.h</label>
@@ -897,10 +899,14 @@
         </childnode>
       </node>
       <node id="26">
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/RectPropertyDrawer.h</label>
+        <link refid="RectPropertyDrawer_8h_source"/>
+      </node>
+      <node id="27">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/StringPropertyDrawer.h</label>
         <link refid="StringPropertyDrawer_8h_source"/>
       </node>
-      <node id="27">
+      <node id="28">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/VectorPropertyDrawer.h</label>
         <link refid="VectorPropertyDrawer_8h_source"/>
       </node>

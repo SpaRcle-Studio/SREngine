@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structObjectDataAccessor_3_01SR__MATH__NS_1_1IRect_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>ObjectDataAccessor&lt; SR_MATH_NS::IRect &gt;</compoundname>
+    <templateparamlist>
+    </templateparamlist>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structObjectDataAccessor_3_01SR__MATH__NS_1_1IRect_01_4_1a2403d493fac969b5a0d61259830e6cc7" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void ObjectDataAccessor&lt; SR_MATH_NS::IRect &gt;::Save</definition>
+        <argsstring>(ISerializer &amp;serializer, const SR_MATH_NS::IRect &amp;value, const SerializationId &amp;id)</argsstring>
+        <name>Save</name>
+        <qualifiedname>ObjectDataAccessor&lt; SR_MATH_NS::IRect &gt;::Save</qualifiedname>
+        <param>
+          <type>ISerializer &amp;</type>
+          <declname>serializer</declname>
+        </param>
+        <param>
+          <type>const SR_MATH_NS::IRect &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const SerializationId &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="605" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="605" bodyend="612"/>
+      </memberdef>
+      <memberdef kind="function" id="structObjectDataAccessor_3_01SR__MATH__NS_1_1IRect_01_4_1a4e4aa55d813448c1848e6e89c5098b03" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void ObjectDataAccessor&lt; SR_MATH_NS::IRect &gt;::Load</definition>
+        <argsstring>(IDeserializer &amp;deserializer, SR_MATH_NS::IRect &amp;value, const SerializationId &amp;id)</argsstring>
+        <name>Load</name>
+        <qualifiedname>ObjectDataAccessor&lt; SR_MATH_NS::IRect &gt;::Load</qualifiedname>
+        <param>
+          <type>IDeserializer &amp;</type>
+          <declname>deserializer</declname>
+        </param>
+        <param>
+          <type>SR_MATH_NS::IRect &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const SerializationId &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="614" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="614" bodyend="623"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="604" column="10" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="604" bodyend="624"/>
+    <listofallmembers>
+      <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1IRect_01_4_1a4e4aa55d813448c1848e6e89c5098b03" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; SR_MATH_NS::IRect &gt;</scope><name>Load</name></member>
+      <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1IRect_01_4_1a2403d493fac969b5a0d61259830e6cc7" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; SR_MATH_NS::IRect &gt;</scope><name>Save</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -6,7 +6,13 @@
     <innerfile refid="Canvas_8h">Canvas.h</innerfile>
     <innerfile refid="Gizmo_8h">Gizmo.h</innerfile>
     <innerfile refid="UICanvasComponent_8h">UICanvasComponent.h</innerfile>
+    <innerfile refid="UIContainerNode_8h">UIContainerNode.h</innerfile>
+    <innerfile refid="UIControlNode_8h">UIControlNode.h</innerfile>
+    <innerfile refid="UIHBoxContainerNode_8h">UIHBoxContainerNode.h</innerfile>
+    <innerfile refid="UINode_8h">UINode.h</innerfile>
     <innerfile refid="UISizeComponent_8h">UISizeComponent.h</innerfile>
+    <innerfile refid="UIVBoxContainerNode_8h">UIVBoxContainerNode.h</innerfile>
+    <innerfile refid="UIViewportNode_8h">UIViewportNode.h</innerfile>
     <innerfile refid="UIWindow_8h">UIWindow.h</innerfile>
     <briefdescription>
     </briefdescription>

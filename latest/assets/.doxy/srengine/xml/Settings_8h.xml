@@ -1062,6 +1062,40 @@
         <label>Engine/libs/Graphics/inc/Graphics/Types/RenderTexture.h</label>
         <link refid="RenderTexture_8h_source"/>
       </node>
+      <node id="37">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UIContainerNode.h</label>
+        <link refid="UIContainerNode_8h_source"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h</label>
+        <link refid="UIControlNode_8h_source"/>
+        <childnode refid="37" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UIHBoxContainerNode.h</label>
+        <link refid="UIHBoxContainerNode_8h_source"/>
+      </node>
+      <node id="35">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UINode.h</label>
+        <link refid="UINode_8h_source"/>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UIVBoxContainerNode.h</label>
+        <link refid="UIVBoxContainerNode_8h_source"/>
+      </node>
+      <node id="40">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h</label>
+        <link refid="UIViewportNode_8h_source"/>
+      </node>
       <node id="12">
         <label>Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h</label>
         <link refid="Behaviour_8h_source"/>
@@ -1124,6 +1158,12 @@
         <childnode refid="9" relation="include">
         </childnode>
       </node>
+      <node id="34">
+        <label>Engine/libs/Utils/inc/Utils/ECS/Node.h</label>
+        <link refid="Utils_2inc_2Utils_2ECS_2Node_8h_source"/>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
       <node id="9">
         <label>Engine/libs/Utils/inc/Utils/ECS/SceneObject.h</label>
         <link refid="SceneObject_8h_source"/>
@@ -1135,8 +1175,10 @@
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
       </node>
-      <node id="35">
+      <node id="42">
         <label>Engine/libs/Utils/inc/Utils/ECS/TagManager.h</label>
         <link refid="TagManager_8h_source"/>
         <childnode refid="19" relation="include">
@@ -1161,10 +1203,10 @@
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="35" relation="include">
+        <childnode refid="42" relation="include">
         </childnode>
       </node>
-      <node id="34">
+      <node id="41">
         <label>Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h</label>
         <link refid="SceneCubeChunkLogic_8h_source"/>
       </node>

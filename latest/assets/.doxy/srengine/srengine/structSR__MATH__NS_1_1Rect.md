@@ -38,7 +38,13 @@
 | Type | Name |
 | ---: | :--- |
 |  union [**SR\_MATH\_NS::Rect**](structSR__MATH__NS_1_1Rect.md) | [**Rect**](#variable-rect)  <br> |
+|  T | [**bottom**](#variable-bottom)  <br> |
 |  T | [**h**](#variable-h)  <br> |
+|  T | [**left**](#variable-left)  <br> |
+|  [**SR\_MATH\_NS::Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; | [**position**](#variable-position)  <br> |
+|  T | [**right**](#variable-right)  <br> |
+|  [**SR\_MATH\_NS::Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; | [**size**](#variable-size)  <br> |
+|  T | [**top**](#variable-top)  <br> |
 |  T | [**w**](#variable-w)  <br> |
 |  [**SR\_MATH\_NS::Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; | [**wh**](#variable-wh)  <br> |
 |  T | [**x**](#variable-x)  <br> |
@@ -67,9 +73,11 @@
 |  SR\_NODISCARD T | [**Bottom**](#function-bottom) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**Contains**](#function-contains) (const [**SR\_MATH\_NS::Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; & point) noexcept const<br> |
 |  SR\_NODISCARD T | [**Height**](#function-height) () noexcept const<br> |
+|  SR\_NODISCARD T | [**Horizontal**](#function-horizontal) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsInside**](#function-isinside) (const [**SR\_MATH\_NS::Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & point) noexcept const<br> |
 |  SR\_NODISCARD T | [**Left**](#function-left) () noexcept const<br> |
-|   | [**Rect**](#function-rect-15) (T \_x, T \_y, T \_w, T \_h) <br> |
+|  SR\_NODISCARD [**SR\_MATH\_NS::Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; | [**LeftRight**](#function-leftright) () noexcept const<br> |
+|   | [**Rect**](#function-rect-15) (T \_x, T \_y, T \_w, T \_h) <br>_left, top, right, bottom_  |
 |   | [**Rect**](#function-rect-25) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; & position, const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; & size) <br> |
 |   | [**Rect**](#function-rect-35) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; & position, T width, T height) <br> |
 |   | [**Rect**](#function-rect-45) (T x, T y, const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; & size) <br> |
@@ -79,7 +87,11 @@
 |  void | [**SetLeft**](#function-setleft) (const T & value) <br>_============================================== Rect&lt;T&gt; =========================================================_  |
 |  void | [**SetRight**](#function-setright) (const T & value) <br> |
 |  void | [**SetTop**](#function-settop) (const T & value) <br> |
+|  void | [**Shrink**](#function-shrink-12) (const [**Rect**](structSR__MATH__NS_1_1Rect.md)&lt; T &gt; & margin) noexcept<br> |
+|  SR\_NODISCARD [**Rect**](structSR__MATH__NS_1_1Rect.md)&lt; T &gt; | [**Shrink**](#function-shrink-22) (const [**Rect**](structSR__MATH__NS_1_1Rect.md)&lt; T &gt; & margin) noexcept const<br> |
 |  SR\_NODISCARD T | [**Top**](#function-top) () noexcept const<br> |
+|  SR\_NODISCARD [**SR\_MATH\_NS::Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; | [**TopBottom**](#function-topbottom) () noexcept const<br> |
+|  SR\_NODISCARD T | [**Vertical**](#function-vertical) () noexcept const<br> |
 |  SR\_NODISCARD [**SR\_MATH\_NS::Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; | [**WH**](#function-wh) () noexcept const<br> |
 |  SR\_NODISCARD [**SR\_MATH\_NS::Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**WH0**](#function-wh0) () noexcept const<br> |
 |  SR\_NODISCARD [**SR\_MATH\_NS::Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**WH1**](#function-wh1) () noexcept const<br> |
@@ -149,10 +161,88 @@ union SR_MATH_NS::Rect SR_MATH_NS::Rect< T >;
 
 
 
+### variable bottom 
+
+```C++
+T SR_MATH_NS::Rect< T >::bottom;
+```
+
+
+
+
+<hr>
+
+
+
 ### variable h 
 
 ```C++
 T SR_MATH_NS::Rect< T >::h;
+```
+
+
+
+
+<hr>
+
+
+
+### variable left 
+
+```C++
+T SR_MATH_NS::Rect< T >::left;
+```
+
+
+
+
+<hr>
+
+
+
+### variable position 
+
+```C++
+SR_MATH_NS::Vector2<T> SR_MATH_NS::Rect< T >::position;
+```
+
+
+
+
+<hr>
+
+
+
+### variable right 
+
+```C++
+T SR_MATH_NS::Rect< T >::right;
+```
+
+
+
+
+<hr>
+
+
+
+### variable size 
+
+```C++
+SR_MATH_NS::Vector2<T> SR_MATH_NS::Rect< T >::size;
+```
+
+
+
+
+<hr>
+
+
+
+### variable top 
+
+```C++
+T SR_MATH_NS::Rect< T >::top;
 ```
 
 
@@ -270,6 +360,19 @@ SR_NODISCARD T SR_MATH_NS::Rect::Height () noexcept const
 
 
 
+### function Horizontal 
+
+```C++
+SR_NODISCARD T SR_MATH_NS::Rect::Horizontal () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
 ### function IsInside 
 
 ```C++
@@ -299,8 +402,22 @@ SR_NODISCARD T SR_MATH_NS::Rect::Left () noexcept const
 
 
 
+### function LeftRight 
+
+```C++
+SR_NODISCARD SR_MATH_NS::Vector2 < T > SR_MATH_NS::Rect::LeftRight () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
 ### function Rect [1/5]
 
+_left, top, right, bottom_ 
 ```C++
 SR_MATH_NS::Rect::Rect (
     T _x,
@@ -454,10 +571,66 @@ void SR_MATH_NS::Rect::SetTop (
 
 
 
+### function Shrink [1/2]
+
+```C++
+void SR_MATH_NS::Rect::Shrink (
+    const Rect < T > & margin
+) noexcept
+```
+
+
+
+
+<hr>
+
+
+
+### function Shrink [2/2]
+
+```C++
+SR_NODISCARD Rect < T > SR_MATH_NS::Rect::Shrink (
+    const Rect < T > & margin
+) noexcept const
+```
+
+
+
+
+<hr>
+
+
+
 ### function Top 
 
 ```C++
 SR_NODISCARD T SR_MATH_NS::Rect::Top () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function TopBottom 
+
+```C++
+SR_NODISCARD SR_MATH_NS::Vector2 < T > SR_MATH_NS::Rect::TopBottom () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function Vertical 
+
+```C++
+SR_NODISCARD T SR_MATH_NS::Rect::Vertical () noexcept const
 ```
 
 

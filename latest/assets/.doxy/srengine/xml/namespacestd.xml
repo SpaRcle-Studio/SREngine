@@ -114,7 +114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="257" column="36" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="257" bodyend="260"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="261" column="36" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="261" bodyend="264"/>
       </memberdef>
       <memberdef kind="function" id="Vector3_8h_1a7441aa202abe1f2090dadeae987a604b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>

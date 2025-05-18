@@ -653,7 +653,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" line="23" column="1" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" line="24" column="1" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1af7366c17501e538017fa0af55a860083" prot="public" static="no">
         <templateparamlist>
@@ -1130,7 +1130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" line="51" column="26" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" line="52" column="26" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1a7a819ab7e20de36555bcbeac8aba4998" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -3795,7 +3795,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" line="46" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="46" bodyend="48"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" line="47" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="47" bodyend="49"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a63d3d557414439d4e6ff0933f5bfee31" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>

@@ -1,0 +1,305 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classSR__GRAPH__UI__NS_1_1UINode" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>SR_GRAPH_UI_NS::UINode</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">SR_UTILS_NS::Node</basecompoundref>
+    <derivedcompoundref refid="classSR__GRAPH__UI__NS_1_1UIControlNode" prot="public" virt="non-virtual">SR_GRAPH_UI_NS::UIControlNode</derivedcompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__GRAPH__UI__NS_1_1UINode_1afc3532de7c9b0a3cb03bdbd46cda82b5" prot="private" static="no">
+        <type>SR_UTILS_NS::Node</type>
+        <definition>using SR_GRAPH_UI_NS::UINode::Super =  SR_UTILS_NS::Node</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_GRAPH_UI_NS::UINode::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UINode.h" line="24" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UINode.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__GRAPH__UI__NS_1_1UINode_1aeaaa584f79d65e8c4012794dd852446b" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__UI__NS_1_1UINode" kindref="compound">UINode</ref> &gt;</type>
+        <definition>using SR_GRAPH_UI_NS::UINode::Ptr =  SR_HTYPES_NS::SharedPtr&lt;UINode&gt;</definition>
+        <argsstring></argsstring>
+        <name>Ptr</name>
+        <qualifiedname>SR_GRAPH_UI_NS::UINode::Ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UINode.h" line="26" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UINode.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1UINode_1a60730e2ab135d14e56b1b0471059202b" prot="protected" static="no" mutable="no">
+        <type>SR_MATH_NS::FRect</type>
+        <definition>SR_MATH_NS::FRect SR_GRAPH_UI_NS::UINode::m_finalRect</definition>
+        <argsstring></argsstring>
+        <name>m_finalRect</name>
+        <qualifiedname>SR_GRAPH_UI_NS::UINode::m_finalRect</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UINode.h" line="44" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UINode.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1UINode_1aeebfcb6e25dea793ca79512e6167c0ac" prot="protected" static="no" mutable="yes">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref></type>
+        <definition>SR_MATH_NS::Matrix4x4 SR_GRAPH_UI_NS::UINode::m_matrix</definition>
+        <argsstring></argsstring>
+        <name>m_matrix</name>
+        <qualifiedname>SR_GRAPH_UI_NS::UINode::m_matrix</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UINode.h" line="46" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UINode.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1UINode_1a73358113c9f9257343fbf77d9d738194" prot="protected" static="no" mutable="yes">
+        <type>RenderScene *</type>
+        <definition>RenderScene* SR_GRAPH_UI_NS::UINode::m_renderScene</definition>
+        <argsstring></argsstring>
+        <name>m_renderScene</name>
+        <qualifiedname>SR_GRAPH_UI_NS::UINode::m_renderScene</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UINode.h" line="49" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UINode.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UINode_1afa28f86b2bc5b8c0272844a53191b180" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_UI_NS::UINode::UINode</definition>
+        <argsstring>()</argsstring>
+        <name>UINode</name>
+        <qualifiedname>SR_GRAPH_UI_NS::UINode::UINode</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UINode.h" line="29" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UINode_1a5b68db17f552224f97d860cc2d32131a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_GRAPH_UI_NS::UINode::Layout</definition>
+        <argsstring>(const SR_MATH_NS::FRect &amp;available)=0</argsstring>
+        <name>Layout</name>
+        <qualifiedname>SR_GRAPH_UI_NS::UINode::Layout</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1ad8cc144f617d08aafb6bd7b82bc301a1">Layout</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__UI__NS_1_1UIContainerNode_1a73e99cbd3f691d045470e967399f617e">Layout</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__UI__NS_1_1UIControlNode_1a8fba6053255bf4544d5b68ca63782910">Layout</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__UI__NS_1_1UIHBoxContainerNode_1a686c92da403265a69cb91d560929964a">Layout</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__UI__NS_1_1UIVBoxContainerNode_1a0cc863ddd9e910c287878a5095573473">Layout</reimplementedby>
+        <param>
+          <type>const SR_MATH_NS::FRect &amp;</type>
+          <declname>available</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UINode.h" line="32" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UINode_1a6acd81e1f9f7866bc1fcf3d7d80921d0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FVector2</type>
+        <definition>virtual SR_NODISCARD SR_MATH_NS::FVector2 SR_GRAPH_UI_NS::UINode::CalculateContentSize</definition>
+        <argsstring>() const =0</argsstring>
+        <name>CalculateContentSize</name>
+        <qualifiedname>SR_GRAPH_UI_NS::UINode::CalculateContentSize</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__UI__NS_1_1UIControlNode_1ab78663350fcbcc13710c5eb70a328689">CalculateContentSize</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__UI__NS_1_1UIHBoxContainerNode_1aa0b8b0ec56aee45e2828ae48a67bf6c9">CalculateContentSize</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__UI__NS_1_1UIVBoxContainerNode_1af85fcdd0cf8ded0ce5f2de6d23c30492">CalculateContentSize</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UINode.h" line="33" column="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UINode_1a32326e8f9147f75954d4aaae79e7e648" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_UTILS_NS::ECSNodeType</type>
+        <definition>SR_NODISCARD SR_UTILS_NS::ECSNodeType SR_GRAPH_UI_NS::UINode::GetNodeType</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>GetNodeType</name>
+        <qualifiedname>SR_GRAPH_UI_NS::UINode::GetNodeType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UINode.h" line="34" column="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UINode_1a1f204d10872ef370d07a1c3385f7fce4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const SR_MATH_NS::FRect &amp;</type>
+        <definition>SR_NODISCARD const SR_MATH_NS::FRect &amp; SR_GRAPH_UI_NS::UINode::GetFinalRect</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetFinalRect</name>
+        <qualifiedname>SR_GRAPH_UI_NS::UINode::GetFinalRect</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UINode.h" line="35" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UINode.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UINode_1a03b4058c2727ed5f708a00f867621862" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
+        <definition>SR_NODISCARD const SR_MATH_NS::Matrix4x4 &amp; SR_GRAPH_UI_NS::UINode::GetMatrix</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>GetMatrix</name>
+        <qualifiedname>SR_GRAPH_UI_NS::UINode::GetMatrix</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UINode.h" line="36" column="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UINode_1a2c89158cfe3a5019a08fda9440e69104" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__GTYPES__NS_1_1Camera" kindref="compound">SR_GTYPES_NS::Camera</ref> *</type>
+        <definition>SR_NODISCARD SR_GTYPES_NS::Camera * SR_GRAPH_UI_NS::UINode::GetCamera</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCamera</name>
+        <qualifiedname>SR_GRAPH_UI_NS::UINode::GetCamera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UINode.h" line="38" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UINode_1a792200f60743277772b4eb1139162259" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD RenderScene *</type>
+        <definition>SR_NODISCARD RenderScene * SR_GRAPH_UI_NS::UINode::TryGetRenderScene</definition>
+        <argsstring>() const</argsstring>
+        <name>TryGetRenderScene</name>
+        <qualifiedname>SR_GRAPH_UI_NS::UINode::TryGetRenderScene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UINode.h" line="39" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UINode_1a9f32b99709b6c697fcf372c084335dd1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD RenderScene *</type>
+        <definition>SR_NODISCARD RenderScene * SR_GRAPH_UI_NS::UINode::GetRenderScene</definition>
+        <argsstring>() const</argsstring>
+        <name>GetRenderScene</name>
+        <qualifiedname>SR_GRAPH_UI_NS::UINode::GetRenderScene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UINode.h" line="40" column="34"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>SR_GRAPH_UI_NS::UIContainerNode</label>
+        <link refid="classSR__GRAPH__UI__NS_1_1UIContainerNode"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_GRAPH_UI_NS::UIControlNode</label>
+        <link refid="classSR__GRAPH__UI__NS_1_1UIControlNode"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_GRAPH_UI_NS::UIHBoxContainerNode</label>
+        <link refid="classSR__GRAPH__UI__NS_1_1UIHBoxContainerNode"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_GRAPH_UI_NS::UINode</label>
+        <link refid="classSR__GRAPH__UI__NS_1_1UINode"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_GRAPH_UI_NS::UIVBoxContainerNode</label>
+        <link refid="classSR__GRAPH__UI__NS_1_1UIVBoxContainerNode"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_GRAPH_UI_NS::UIViewportNode</label>
+        <link refid="classSR__GRAPH__UI__NS_1_1UIViewportNode"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Node</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_GRAPH_UI_NS::UINode</label>
+        <link refid="classSR__GRAPH__UI__NS_1_1UINode"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_matrix</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_MATH_NS::Matrix4x4</label>
+        <link refid="classSR__MATH__NS_1_1Matrix4x4"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Node</label>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/libs/Graphics/inc/Graphics/UI/UINode.h" line="22" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UINode.h" bodystart="22" bodyend="51"/>
+    <listofallmembers>
+      <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a6acd81e1f9f7866bc1fcf3d7d80921d0" prot="public" virt="pure-virtual"><scope>SR_GRAPH_UI_NS::UINode</scope><name>CalculateContentSize</name></member>
+      <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a2c89158cfe3a5019a08fda9440e69104" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UINode</scope><name>GetCamera</name></member>
+      <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a1f204d10872ef370d07a1c3385f7fce4" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UINode</scope><name>GetFinalRect</name></member>
+      <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a03b4058c2727ed5f708a00f867621862" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UINode</scope><name>GetMatrix</name></member>
+      <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a32326e8f9147f75954d4aaae79e7e648" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UINode</scope><name>GetNodeType</name></member>
+      <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a9f32b99709b6c697fcf372c084335dd1" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UINode</scope><name>GetRenderScene</name></member>
+      <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a5b68db17f552224f97d860cc2d32131a" prot="public" virt="pure-virtual"><scope>SR_GRAPH_UI_NS::UINode</scope><name>Layout</name></member>
+      <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a60730e2ab135d14e56b1b0471059202b" prot="protected" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UINode</scope><name>m_finalRect</name></member>
+      <member refid="classSR__GRAPH__UI__NS_1_1UINode_1aeebfcb6e25dea793ca79512e6167c0ac" prot="protected" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UINode</scope><name>m_matrix</name></member>
+      <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a73358113c9f9257343fbf77d9d738194" prot="protected" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UINode</scope><name>m_renderScene</name></member>
+      <member refid="classSR__GRAPH__UI__NS_1_1UINode_1aeaaa584f79d65e8c4012794dd852446b" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UINode</scope><name>Ptr</name></member>
+      <member refid="classSR__GRAPH__UI__NS_1_1UINode_1afc3532de7c9b0a3cb03bdbd46cda82b5" prot="private" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UINode</scope><name>Super</name></member>
+      <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a792200f60743277772b4eb1139162259" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UINode</scope><name>TryGetRenderScene</name></member>
+      <member refid="classSR__GRAPH__UI__NS_1_1UINode_1afa28f86b2bc5b8c0272844a53191b180" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UINode</scope><name>UINode</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

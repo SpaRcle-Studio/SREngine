@@ -158,10 +158,8 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 | virtual bool | [**IsSupportVBO**](#function-issupportvbo) () override const<br> |
 |  void | [**SetTextureBorder**](#function-settextureborder) (const SR\_MATH\_NS::FVector2 & border) <br> |
 |  void | [**SetWindowBorder**](#function-setwindowborder) (const SR\_MATH\_NS::FVector2 & border) <br> |
-|   | [**Sprite**](#function-sprite) () = default<br> |
 | virtual void | [**UseMaterial**](#function-usematerial) () override<br> |
 | virtual void | [**UseModelMatrix**](#function-usemodelmatrix) () override<br> |
-|   | [**~Sprite**](#function-sprite) () override<br> |
 
 
 ## Public Functions inherited from SR_GTYPES_NS::Mesh
@@ -257,7 +255,7 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |  SR\_NODISCARD [**IComponentable**](classSR__UTILS__NS_1_1IComponentable.md) \* | [**GetParent**](classSR__UTILS__NS_1_1Component.md#function-getparent) () const<br> |
 |  SR\_NODISCARD SceneObjectPtr | [**GetRoot**](classSR__UTILS__NS_1_1Component.md#function-getroot) () const<br> |
 |  SR\_NODISCARD ScenePtr | [**GetScene**](classSR__UTILS__NS_1_1Component.md#function-getscene) () const<br> |
-|  SR\_NODISCARD SceneObjectPtr | [**GetSceneObject**](classSR__UTILS__NS_1_1Component.md#function-getsceneobject) () const<br> |
+|  SR\_NODISCARD const SceneObjectPtr & | [**GetSceneObject**](classSR__UTILS__NS_1_1Component.md#function-getsceneobject) () const<br> |
 |  SR\_NODISCARD [**Transform**](classSR__UTILS__NS_1_1Transform.md) \* | [**GetTransform**](classSR__UTILS__NS_1_1Component.md#function-gettransform) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**HasParent**](classSR__UTILS__NS_1_1Component.md#function-hasparent) () const<br> |
 |  SR\_NODISCARD bool | [**HasScene**](classSR__UTILS__NS_1_1Component.md#function-hasscene) () const<br> |
@@ -285,7 +283,6 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 | virtual void | [**OnLoaded**](classSR__UTILS__NS_1_1Component.md#function-onloaded) () <br>_Вызывается при загрузке компонента на игровой объект_  |
 | virtual void | [**OnMatrixDirty**](classSR__UTILS__NS_1_1Component.md#function-onmatrixdirty) () <br> |
 | virtual void | [**OnPriorityChanged**](classSR__UTILS__NS_1_1Component.md#function-onprioritychanged) () <br> |
-| virtual void | [**OnTransformSet**](classSR__UTILS__NS_1_1Component.md#function-ontransformset) () <br> |
 | virtual void | [**OnTriggerEnter**](classSR__UTILS__NS_1_1Component.md#function-ontriggerenter) (const [**CollisionData**](structSR__UTILS__NS_1_1CollisionData.md) & data) <br> |
 | virtual void | [**OnTriggerExit**](classSR__UTILS__NS_1_1Component.md#function-ontriggerexit) (const [**CollisionData**](structSR__UTILS__NS_1_1CollisionData.md) & data) <br> |
 | virtual void | [**OnTriggerStay**](classSR__UTILS__NS_1_1Component.md#function-ontriggerstay) (const [**CollisionData**](structSR__UTILS__NS_1_1CollisionData.md) & data) <br> |
@@ -518,7 +515,7 @@ Implements [*SR\_GTYPES\_NS::Mesh::BindMesh*](classSR__GTYPES__NS_1_1Mesh.md#fun
 ### function GetIndicesCount 
 
 ```C++
-inline virtual SR_NODISCARD uint32_t SR_GTYPES_NS::Sprite::GetIndicesCount () override const
+virtual SR_NODISCARD uint32_t SR_GTYPES_NS::Sprite::GetIndicesCount () override const
 ```
 
 
@@ -548,7 +545,7 @@ Implements [*SR\_GTYPES\_NS::Mesh::GetMeshIdentifier*](classSR__GTYPES__NS_1_1Me
 ### function GetMeshType 
 
 ```C++
-inline virtual SR_NODISCARD MeshType SR_GTYPES_NS::Sprite::GetMeshType () noexcept override const
+virtual SR_NODISCARD MeshType SR_GTYPES_NS::Sprite::GetMeshType () noexcept override const
 ```
 
 
@@ -563,7 +560,7 @@ Implements [*SR\_GTYPES\_NS::Mesh::GetMeshType*](classSR__GTYPES__NS_1_1Mesh.md#
 ### function GetTextureBorder 
 
 ```C++
-inline SR_NODISCARD SR_MATH_NS::FVector2 SR_GTYPES_NS::Sprite::GetTextureBorder () const
+SR_NODISCARD SR_MATH_NS::FVector2 SR_GTYPES_NS::Sprite::GetTextureBorder () const
 ```
 
 
@@ -576,7 +573,7 @@ inline SR_NODISCARD SR_MATH_NS::FVector2 SR_GTYPES_NS::Sprite::GetTextureBorder 
 ### function GetWindowBorder 
 
 ```C++
-inline SR_NODISCARD SR_MATH_NS::FVector2 SR_GTYPES_NS::Sprite::GetWindowBorder () const
+SR_NODISCARD SR_MATH_NS::FVector2 SR_GTYPES_NS::Sprite::GetWindowBorder () const
 ```
 
 
@@ -602,7 +599,7 @@ SR_NODISCARD bool SR_GTYPES_NS::Sprite::InitializeEntity () noexcept override
 ### function IsFlatMesh 
 
 ```C++
-inline virtual SR_NODISCARD bool SR_GTYPES_NS::Sprite::IsFlatMesh () noexcept override const
+virtual SR_NODISCARD bool SR_GTYPES_NS::Sprite::IsFlatMesh () noexcept override const
 ```
 
 
@@ -617,7 +614,7 @@ Implements [*SR\_GTYPES\_NS::Mesh::IsFlatMesh*](classSR__GTYPES__NS_1_1Mesh.md#f
 ### function IsSupportVBO 
 
 ```C++
-inline virtual bool SR_GTYPES_NS::Sprite::IsSupportVBO () override const
+virtual bool SR_GTYPES_NS::Sprite::IsSupportVBO () override const
 ```
 
 
@@ -632,7 +629,7 @@ Implements [*SR\_GTYPES\_NS::Mesh::IsSupportVBO*](classSR__GTYPES__NS_1_1Mesh.md
 ### function SetTextureBorder 
 
 ```C++
-inline void SR_GTYPES_NS::Sprite::SetTextureBorder (
+void SR_GTYPES_NS::Sprite::SetTextureBorder (
     const SR_MATH_NS::FVector2 & border
 ) 
 ```
@@ -647,22 +644,9 @@ inline void SR_GTYPES_NS::Sprite::SetTextureBorder (
 ### function SetWindowBorder 
 
 ```C++
-inline void SR_GTYPES_NS::Sprite::SetWindowBorder (
+void SR_GTYPES_NS::Sprite::SetWindowBorder (
     const SR_MATH_NS::FVector2 & border
 ) 
-```
-
-
-
-
-<hr>
-
-
-
-### function Sprite 
-
-```C++
-SR_GTYPES_NS::Sprite::Sprite () = default
 ```
 
 
@@ -696,19 +680,6 @@ virtual void SR_GTYPES_NS::Sprite::UseModelMatrix () override
 
 
 Implements [*SR\_GTYPES\_NS::Mesh::UseModelMatrix*](classSR__GTYPES__NS_1_1Mesh.md#function-usemodelmatrix)
-
-
-<hr>
-
-
-
-### function ~Sprite 
-
-```C++
-SR_GTYPES_NS::Sprite::~Sprite () override
-```
-
-
 
 
 <hr>

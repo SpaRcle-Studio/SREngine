@@ -267,11 +267,13 @@
     </collaborationgraph>
     <location file="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="39" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="39" bodyend="54"/>
     <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a6519dc44ffc28952180e63430bf2ad69" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>AddDontLoadTag</name></member>
       <member refid="classSR__UTILS__NS_1_1SRADeserializer_1a67181fd654516e454c45e063e5f4bbd9" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>AllowNewMapKeys</name></member>
       <member refid="classSR__UTILS__NS_1_1SRADeserializer_1a738a00dcd6015aaa7f11d45f8c06f4f6" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>AllowReAllocPointer</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a288a3d56ac47bd979c2c851c1273c601" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>BeginArray</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a0d3298539c157d8ec4b8f9fb2fb34824" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>BeginItem</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a9ef5e296def19ffc466bf77d9787c633" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>BeginObject</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a838c72ce3981ac0c1a131dc575219e57" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>CanLoadByTags</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a78fe121da536bcc3766bf23d6cc9b09f" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>EndArray</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a4d18c6a2b0437ba0ec69d241819d4a42" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>EndItem</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a6095a9c03e5caef545618b09c1085fe6" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>EndObject</name></member>
@@ -312,6 +314,7 @@
       <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a7886e3df1897f3be8f32f9366eff5e1f" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ResetWalker</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a5180495b760dc6af6944549e49b9011c" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>SaveToFile</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1aabb53dc9898915e869ce8da89e8505a3" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>SaveToFileImpl</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a41aa84c504a8dc9dda4f8e8fc85972b6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>SetDontLoadTags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRAISerialization_1a929313320a3ebbf7e5dcb9fc6c364e38" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>SetUseTabs</name></member>
       <member refid="classSR__UTILS__NS_1_1SRADeserializer_1a257c7731126b9614f4510f37bf6748d1" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ShouldSetDefaults</name></member>
       <member refid="classSR__UTILS__NS_1_1SRADeserializer_1ab73b63cd98a4bfa60783be61ea424027" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ShouldSetDefaults</name></member>

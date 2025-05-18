@@ -75,8 +75,6 @@ namespace SR_UTILS_NS::UI {
         void OnDetached() override;
         void OnDestroy() override;
 
-        void OnTransformSet() override;
-
         virtual void Prepare(UIModifierContext& context) const { }
         virtual void PostProcess(UIModifierContext& context) const { }
         virtual void ApplyChild(UIModifierContext& context) const { }

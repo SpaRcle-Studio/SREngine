@@ -4,6 +4,20 @@
     <compoundname>SR_CORE_GUI_NS::Hierarchy</compoundname>
     <basecompoundref prot="public" virt="non-virtual">SR_GRAPH_NS::GUI::Widget</basecompoundref>
     <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a5d3ed77418e9c5c85b90c1570c91d608" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
+        <definition>std::vector&lt;SR_UTILS_NS::StringAtom&gt; SR_CORE_GUI_NS::Hierarchy::m_availableUINodes</definition>
+        <argsstring></argsstring>
+        <name>m_availableUINodes</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::m_availableUINodes</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="48" column="21" bodyfile="Engine/inc/Engine/GUI/Hierarchy.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1aa87072ea55fd69d87164f5da18ed13e3" prot="private" static="no" mutable="no">
         <type>SR_WORLD_NS::Scene::Ptr</type>
         <definition>SR_WORLD_NS::Scene::Ptr SR_CORE_GUI_NS::Hierarchy::m_scene</definition>
@@ -16,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="48" column="33" bodyfile="Engine/inc/Engine/GUI/Hierarchy.h" bodystart="48" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="49" column="33" bodyfile="Engine/inc/Engine/GUI/Hierarchy.h" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1ab78d66a50cb4fb66c63950ef3668bff9" prot="private" static="no" mutable="no">
         <type>std::list&lt; SR_UTILS_NS::SceneObject::Ptr &gt;</type>
@@ -30,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="49" column="19" bodyfile="Engine/inc/Engine/GUI/Hierarchy.h" bodystart="49" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="50" column="19" bodyfile="Engine/inc/Engine/GUI/Hierarchy.h" bodystart="50" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a9bda454833af0943f4e392f88df454e7" prot="private" static="no" mutable="no">
         <type>std::set&lt; SR_UTILS_NS::SceneObject::Ptr &gt;</type>
@@ -44,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="50" column="18" bodyfile="Engine/inc/Engine/GUI/Hierarchy.h" bodystart="50" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="51" column="18" bodyfile="Engine/inc/Engine/GUI/Hierarchy.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1ac32caa7cc57b8fafb37c77309a1b70b3" prot="private" static="no" mutable="no">
         <type>std::vector&lt; SR_UTILS_NS::SceneObject::Ptr &gt;</type>
@@ -58,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="51" column="21" bodyfile="Engine/inc/Engine/GUI/Hierarchy.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="52" column="21" bodyfile="Engine/inc/Engine/GUI/Hierarchy.h" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1ae2bd31037251ddfe5f8e3d7c41e629c5" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -72,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="53" column="21" bodyfile="Engine/inc/Engine/GUI/Hierarchy.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="54" column="21" bodyfile="Engine/inc/Engine/GUI/Hierarchy.h" bodystart="54" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a2514040a454d548280c8daa9e6670473" prot="private" static="no" mutable="no">
         <type>SR_GRAPH_NS::GUI::Widget *</type>
@@ -87,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="55" column="34" bodyfile="Engine/inc/Engine/GUI/Hierarchy.h" bodystart="55" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="56" column="34" bodyfile="Engine/inc/Engine/GUI/Hierarchy.h" bodystart="56" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -442,7 +456,7 @@
         <label>SR_GRAPH_NS::GUI::Widget</label>
       </node>
     </collaborationgraph>
-    <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="16" column="5" bodyfile="Engine/inc/Engine/GUI/Hierarchy.h" bodystart="16" bodyend="57"/>
+    <location file="Engine/inc/Engine/GUI/Hierarchy.h" line="16" column="5" bodyfile="Engine/inc/Engine/GUI/Hierarchy.h" bodystart="16" bodyend="58"/>
     <listofallmembers>
       <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a51ed637960df07f8b633fea282b4caa8" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>CheckSelected</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a1d1fb853e17c699bee3f18c899bc4dc7" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>ChildContextMenu</name></member>
@@ -455,6 +469,7 @@
       <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1aad2240464f828673492726aa78e8c8f8" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>ExpandPath</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1aeae5c849f090fc083e01a22c78b9abd3" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>GetSelected</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a7b75614fee4522621c7f0769aa22687a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>Hierarchy</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a5d3ed77418e9c5c85b90c1570c91d608" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>m_availableUINodes</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1ab78d66a50cb4fb66c63950ef3668bff9" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>m_pointersHolder</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1aa87072ea55fd69d87164f5da18ed13e3" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>m_scene</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a2514040a454d548280c8daa9e6670473" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>m_sceneRunnerWidget</name></member>

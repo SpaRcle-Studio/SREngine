@@ -589,6 +589,72 @@ template<> struct ObjectDataAccessor<SR_MATH_NS::Quaternion> {
     }
 };
 
+template<> struct ObjectDataAccessor<SR_MATH_NS::FRect> {
+    static void Save(ISerializer& serializer, const SR_MATH_NS::FRect& value, const SerializationId& id) {
+        serializer.BeginObject(id);
+        Serialization::SaveCheckDefault(serializer, value.x, SerializationId::Create("x"));
+        Serialization::SaveCheckDefault(serializer, value.y, SerializationId::Create("y"));
+        Serialization::SaveCheckDefault(serializer, value.w, SerializationId::Create("w"));
+        Serialization::SaveCheckDefault(serializer, value.h, SerializationId::Create("h"));
+        serializer.EndObject();
+    }
+
+    static void Load(IDeserializer& deserializer, SR_MATH_NS::FRect& value, const SerializationId& id) {
+        if (!deserializer.BeginObject(id)) {
+            return;
+        }
+        Serialization::Load(deserializer, value.x, SerializationId::Create("x"));
+        Serialization::Load(deserializer, value.y, SerializationId::Create("y"));
+        Serialization::Load(deserializer, value.w, SerializationId::Create("w"));
+        Serialization::Load(deserializer, value.h, SerializationId::Create("h"));
+        deserializer.EndObject();
+    }
+};
+
+template<> struct ObjectDataAccessor<SR_MATH_NS::IRect> {
+    static void Save(ISerializer& serializer, const SR_MATH_NS::IRect& value, const SerializationId& id) {
+        serializer.BeginObject(id);
+        Serialization::SaveCheckDefault(serializer, value.x, SerializationId::Create("x"));
+        Serialization::SaveCheckDefault(serializer, value.y, SerializationId::Create("y"));
+        Serialization::SaveCheckDefault(serializer, value.w, SerializationId::Create("w"));
+        Serialization::SaveCheckDefault(serializer, value.h, SerializationId::Create("h"));
+        serializer.EndObject();
+    }
+
+    static void Load(IDeserializer& deserializer, SR_MATH_NS::IRect& value, const SerializationId& id) {
+        if (!deserializer.BeginObject(id)) {
+            return;
+        }
+        Serialization::Load(deserializer, value.x, SerializationId::Create("x"));
+        Serialization::Load(deserializer, value.y, SerializationId::Create("y"));
+        Serialization::Load(deserializer, value.w, SerializationId::Create("w"));
+        Serialization::Load(deserializer, value.h, SerializationId::Create("h"));
+        deserializer.EndObject();
+    }
+};
+
+template<> struct ObjectDataAccessor<SR_MATH_NS::URect> {
+    static void Save(ISerializer& serializer, const SR_MATH_NS::URect& value, const SerializationId& id) {
+        serializer.BeginObject(id);
+        Serialization::SaveCheckDefault(serializer, value.x, SerializationId::Create("x"));
+        Serialization::SaveCheckDefault(serializer, value.y, SerializationId::Create("y"));
+        Serialization::SaveCheckDefault(serializer, value.w, SerializationId::Create("w"));
+        Serialization::SaveCheckDefault(serializer, value.h, SerializationId::Create("h"));
+        serializer.EndObject();
+    }
+
+    static void Load(IDeserializer& deserializer, SR_MATH_NS::URect& value, const SerializationId& id) {
+        if (!deserializer.BeginObject(id)) {
+            return;
+        }
+        Serialization::Load(deserializer, value.x, SerializationId::Create("x"));
+        Serialization::Load(deserializer, value.y, SerializationId::Create("y"));
+        Serialization::Load(deserializer, value.w, SerializationId::Create("w"));
+        Serialization::Load(deserializer, value.h, SerializationId::Create("h"));
+        deserializer.EndObject();
+    }
+};
+
 template<typename T> struct ObjectDataAccessor<std::optional<T>> {
     static void Save(ISerializer& serializer, const std::optional<T>& value, const SerializationId& id) {
         if (value.is_initialized()) {

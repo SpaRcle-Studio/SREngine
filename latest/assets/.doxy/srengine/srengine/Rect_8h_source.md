@@ -30,8 +30,18 @@ namespace SR_MATH_NS {
                 T h;
             };
             struct {
+                T left;
+                T top;
+                T right;
+                T bottom;
+            };
+            struct {
                 SR_MATH_NS::Vector2<T> xy;
                 SR_MATH_NS::Vector2<T> wh;
+            };
+            struct {
+                SR_MATH_NS::Vector2<T> position;
+                SR_MATH_NS::Vector2<T> size;
             };
         };
 
@@ -43,6 +53,9 @@ namespace SR_MATH_NS {
         Rect();
 
     public:
+        void Shrink(const Rect<T>& margin) noexcept;
+        SR_NODISCARD Rect<T> Shrink(const Rect<T>& margin) const noexcept;
+
         SR_NODISCARD T X() const noexcept;
         SR_NODISCARD T Y() const noexcept;
 
@@ -55,8 +68,14 @@ namespace SR_MATH_NS {
         SR_NODISCARD T Bottom() const noexcept;
         SR_NODISCARD T Top() const noexcept;
 
+        SR_NODISCARD T Horizontal() const noexcept;
+        SR_NODISCARD T Vertical() const noexcept;
+
         SR_NODISCARD SR_MATH_NS::Vector2<T> XY() const noexcept;
         SR_NODISCARD SR_MATH_NS::Vector2<T> WH() const noexcept;
+
+        SR_NODISCARD SR_MATH_NS::Vector2<T> TopBottom() const noexcept;
+        SR_NODISCARD SR_MATH_NS::Vector2<T> LeftRight() const noexcept;
 
         SR_NODISCARD SR_MATH_NS::Vector3<T> XY0() const noexcept;
         SR_NODISCARD SR_MATH_NS::Vector3<T> WH0() const noexcept;
@@ -103,6 +122,17 @@ namespace SR_MATH_NS {
 
     template<typename T> void Rect<T>::SetTop(const T& value) {
         h = value - y;
+    }
+
+    template<typename T> void Rect<T>::Shrink(const Rect<T>& margin) noexcept {
+        x += margin.x;
+        y += margin.y;
+        w -= margin.x + margin.w;
+        h -= margin.y + margin.h;
+    }
+
+    template<typename T> Rect<T> Rect<T>::Shrink(const Rect<T>& margin) const noexcept {
+        return Rect<T>(x + margin.x, y + margin.y, w - margin.x - margin.w, h - margin.y - margin.h);
     }
 
     template<typename T> bool Rect<T>::Contains(const Vector2<T> &point) const noexcept {
@@ -152,6 +182,12 @@ namespace SR_MATH_NS {
 
     template<typename T> SR_NODISCARD T Rect<T>::Bottom() const noexcept { return y;  }
     template<typename T> SR_NODISCARD T Rect<T>::Top() const noexcept { return Bottom() + Height(); }
+
+    template<typename T> SR_NODISCARD T Rect<T>::Vertical() const noexcept { return top + bottom; }
+    template<typename T> SR_NODISCARD T Rect<T>::Horizontal() const noexcept { return left + right; }
+
+    template<typename T> SR_NODISCARD SR_MATH_NS::Vector2<T> Rect<T>::TopBottom() const noexcept { return SR_MATH_NS::Vector2<T>(Top(), Bottom()); }
+    template<typename T> SR_NODISCARD SR_MATH_NS::Vector2<T> Rect<T>::LeftRight() const noexcept { return SR_MATH_NS::Vector2<T>(Left(), Right()); }
 
     template<typename T> SR_NODISCARD SR_MATH_NS::Vector2<T> Rect<T>::XY() const noexcept { return SR_MATH_NS::Vector2<T>(x, y); }
     template<typename T> SR_NODISCARD SR_MATH_NS::Vector2<T> Rect<T>::WH() const noexcept { return SR_MATH_NS::Vector2<T>(w, h); }

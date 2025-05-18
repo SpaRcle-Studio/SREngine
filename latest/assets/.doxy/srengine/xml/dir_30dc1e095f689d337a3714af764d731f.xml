@@ -11,6 +11,7 @@
     <innerfile refid="ObjectPropertyDrawer_8h">ObjectPropertyDrawer.h</innerfile>
     <innerfile refid="PathPropertyDrawer_8h">PathPropertyDrawer.h</innerfile>
     <innerfile refid="PointerPropertyDrawer_8h">PointerPropertyDrawer.h</innerfile>
+    <innerfile refid="RectPropertyDrawer_8h">RectPropertyDrawer.h</innerfile>
     <innerfile refid="StringPropertyDrawer_8h">StringPropertyDrawer.h</innerfile>
     <innerfile refid="VectorPropertyDrawer_8h">VectorPropertyDrawer.h</innerfile>
     <briefdescription>

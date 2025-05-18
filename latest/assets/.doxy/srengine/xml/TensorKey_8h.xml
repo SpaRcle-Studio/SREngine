@@ -826,6 +826,8 @@
         </childnode>
         <childnode refid="23" relation="include">
         </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
       </node>
       <node id="13">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/BehaviourNamePropertyDrawer.h</label>
@@ -874,10 +876,14 @@
         </childnode>
       </node>
       <node id="22">
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/RectPropertyDrawer.h</label>
+        <link refid="RectPropertyDrawer_8h_source"/>
+      </node>
+      <node id="23">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/StringPropertyDrawer.h</label>
         <link refid="StringPropertyDrawer_8h_source"/>
       </node>
-      <node id="23">
+      <node id="24">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/VectorPropertyDrawer.h</label>
         <link refid="VectorPropertyDrawer_8h_source"/>
       </node>
@@ -931,7 +937,7 @@
         <childnode refid="11" relation="include">
         </childnode>
       </node>
-      <node id="24">
+      <node id="25">
         <label>Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h</label>
         <link refid="SceneCubeChunkLogic_8h_source"/>
       </node>
@@ -940,7 +946,7 @@
         <link refid="TensorKey_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="24" relation="include">
+        <childnode refid="25" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

@@ -207,7 +207,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1a499a53cb08f173222c9a0bbc06af98fd" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetRoot</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1a418836a2a691249d942b88437b58d33c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetRotation</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a0baa97c9e541c9150845fcd338b6f4f8" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetScene</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1afa3d93c2126fa899ebbcc8ab7b752291" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetSceneObject</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a95a4325a27a80c7fbbf65c8ab86579a5" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetSceneObject</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1ae0cfb85dc121a617331069bfd291ebff" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetScreenRay</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1a8feef148afcbadac678bffcffe25514e" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetScreenRay</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1ae677337d7264a0b069d02bf136d89570" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetSize</name></member>
@@ -255,7 +255,6 @@
       <member refid="classSR__UTILS__NS_1_1Component_1af7e2ecd6bef36595ac12274d6a6cc77c" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnLoaded</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1a08a31e8f19278cf24c8d370612983b4f" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnMatrixDirty</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aee0027f96ce5bec8a30edf069fa4dc10" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnPriorityChanged</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1adb3637af3274c542b44b17a27bebd5a0" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnTransformSet</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aac7babfab0aaf8e811e05f8f55dbebb1" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnTriggerEnter</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a54e04b235d9aaa0f027996b71362242b" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnTriggerExit</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a9bb3f2e63ed778951c409dba0bd1915f" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnTriggerStay</name></member>

@@ -5,8 +5,74 @@
     <innerclass refid="classSR__GRAPH__UI__NS_1_1Canvas" prot="public">SR_GRAPH_UI_NS::Canvas</innerclass>
     <innerclass refid="classSR__GRAPH__UI__NS_1_1Gizmo" prot="public">SR_GRAPH_UI_NS::Gizmo</innerclass>
     <innerclass refid="classSR__GRAPH__UI__NS_1_1UICanvasComponent" prot="public">SR_GRAPH_UI_NS::UICanvasComponent</innerclass>
+    <innerclass refid="classSR__GRAPH__UI__NS_1_1UIContainerNode" prot="public">SR_GRAPH_UI_NS::UIContainerNode</innerclass>
+    <innerclass refid="classSR__GRAPH__UI__NS_1_1UIControlNode" prot="public">SR_GRAPH_UI_NS::UIControlNode</innerclass>
+    <innerclass refid="classSR__GRAPH__UI__NS_1_1UIHBoxContainerNode" prot="public">SR_GRAPH_UI_NS::UIHBoxContainerNode</innerclass>
+    <innerclass refid="classSR__GRAPH__UI__NS_1_1UINode" prot="public">SR_GRAPH_UI_NS::UINode</innerclass>
     <innerclass refid="classSR__GRAPH__UI__NS_1_1UISizeComponent" prot="public">SR_GRAPH_UI_NS::UISizeComponent</innerclass>
+    <innerclass refid="classSR__GRAPH__UI__NS_1_1UIVBoxContainerNode" prot="public">SR_GRAPH_UI_NS::UIVBoxContainerNode</innerclass>
+    <innerclass refid="classSR__GRAPH__UI__NS_1_1UIViewportNode" prot="public">SR_GRAPH_UI_NS::UIViewportNode</innerclass>
     <innerclass refid="classSR__GRAPH__UI__NS_1_1UIWindow" prot="public">SR_GRAPH_UI_NS::UIWindow</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="UIControlNode_8h_1a3066db1ca260fb3ed40b9d0de590ee70" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>SR_GRAPH_UI_NS::uint8_t</definition>
+        <argsstring></argsstring>
+        <name>uint8_t</name>
+        <qualifiedname>SR_GRAPH_UI_NS::uint8_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" line="16" column="6" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="UIControlNode_8h_1adb38c67ceecd0dda1181c5ecad3f3be4" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>SR_GRAPH_UI_NS::Fixed</definition>
+        <argsstring></argsstring>
+        <name>Fixed</name>
+        <qualifiedname>SR_GRAPH_UI_NS::Fixed</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" line="17" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="UIControlNode_8h_1a1692bea21715730edf970231492b27ed" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>SR_GRAPH_UI_NS::Percent</definition>
+        <argsstring></argsstring>
+        <name>Percent</name>
+        <qualifiedname>SR_GRAPH_UI_NS::Percent</qualifiedname>
+        <briefdescription>
+<para>размер задаётся явно </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" line="18" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="UIControlNode_8h_1a7681c6fc17c10355c30832b78d3c5876" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>SR_GRAPH_UI_NS::Content</definition>
+        <argsstring></argsstring>
+        <name>Content</name>
+        <qualifiedname>SR_GRAPH_UI_NS::Content</qualifiedname>
+        <briefdescription>
+<para>размер в % от доступного пространства </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" line="19" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="func">
       <memberdef kind="function" id="Gizmo_8h_1a7dac85f6cc74cf1ddfe352e1b3d5876c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -189,6 +255,32 @@
         <inbodydescription>
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="14" column="5" declfile="Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h" declline="14" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="UIControlNode_8h_1aa5b4e7932f5177fbf27735c7db96c805" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_UI_NS::SR_ENUM_NS_CLASS_T</definition>
+        <argsstring>(UIPositionType, uint8_t, Relative, Absolute) SR_ENUM_NS_CLASS_T(UISizePolicy</argsstring>
+        <name>SR_ENUM_NS_CLASS_T</name>
+        <qualifiedname>SR_GRAPH_UI_NS::SR_ENUM_NS_CLASS_T</qualifiedname>
+        <param>
+          <type>UIPositionType</type>
+        </param>
+        <param>
+          <type>uint8_t</type>
+        </param>
+        <param>
+          <type>Relative</type>
+        </param>
+        <param>
+          <type>Absolute</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" line="11" column="5"/>
       </memberdef>
       <memberdef kind="function" id="UIWindow_8h_1af8332c5d96379e836088713a7362370d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>

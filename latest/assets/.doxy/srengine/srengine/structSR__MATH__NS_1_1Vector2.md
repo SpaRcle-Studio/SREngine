@@ -72,6 +72,9 @@
 |  SR\_NODISCARD Unit | [**Aspect**](#function-aspect) () const<br> |
 |  SR\_NODISCARD Unit | [**AspectInv**](#function-aspectinv) () const<br> |
 |  SR\_NODISCARD [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; SR\_FASTCALL | [**Cast**](#function-cast) () noexcept const<br> |
+|  SR\_NODISCARD [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; float\_t &gt; | [**CastToFloat**](#function-casttofloat) () noexcept const<br> |
+|  SR\_NODISCARD [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; int32\_t &gt; | [**CastToInt**](#function-casttoint) () noexcept const<br> |
+|  SR\_NODISCARD [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; uint32\_t &gt; | [**CastToUInt**](#function-casttouint) () noexcept const<br> |
 |  SR\_NODISCARD [**Vector2**](structSR__MATH__NS_1_1Vector2.md) | [**Clamp**](#function-clamp) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md) & min, const [**Vector2**](structSR__MATH__NS_1_1Vector2.md) & max) const<br> |
 |  SR\_NODISCARD bool | [**Contains**](#function-contains) (U value) const<br> |
 |  SR\_NODISCARD [**Vector2**](structSR__MATH__NS_1_1Vector2.md) | [**DeSingular**](#function-desingular) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md) & segment) const<br> |
@@ -297,6 +300,45 @@ inline SR_NODISCARD Unit SR_MATH_NS::Vector2::AspectInv () const
 ```C++
 template<typename U>
 inline SR_NODISCARD Vector2 < U > SR_FASTCALL SR_MATH_NS::Vector2::Cast () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function CastToFloat 
+
+```C++
+inline SR_NODISCARD Vector2 < float_t > SR_MATH_NS::Vector2::CastToFloat () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function CastToInt 
+
+```C++
+inline SR_NODISCARD Vector2 < int32_t > SR_MATH_NS::Vector2::CastToInt () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function CastToUInt 
+
+```C++
+inline SR_NODISCARD Vector2 < uint32_t > SR_MATH_NS::Vector2::CastToUInt () noexcept const
 ```
 
 

@@ -27,12 +27,9 @@ namespace SR_GTYPES_NS {
         { {  1.000000, -1.000000,  0.000000 }, { 0.000000, 0.000000 } }
     };
 
-    class Sprite : public SR_GTYPES_NS::Mesh {
+    class SR_RENDERER_DLL_API Sprite : public SR_GTYPES_NS::Mesh {
+        SR_CLASS()
         using Super = SR_GTYPES_NS::Mesh;
-    public:
-        Sprite() = default;
-        ~Sprite() override = default;
-
     public:
         typedef Vertices::UIVertex VertexType;
 
@@ -40,30 +37,23 @@ namespace SR_GTYPES_NS {
         void UseMaterial() override;
         void UseModelMatrix() override;
 
-        bool IsSupportVBO() const override { return false; }
+        bool IsSupportVBO() const override;
 
         bool BindMesh() override;
 
-        SR_NODISCARD MeshType GetMeshType() const noexcept override { return MeshType::Sprite; }
+        SR_NODISCARD MeshType GetMeshType() const noexcept override;
 
         SR_NODISCARD bool InitializeEntity() noexcept override;
 
-        SR_NODISCARD uint32_t GetIndicesCount() const override { return 4; }
-        SR_NODISCARD bool IsFlatMesh() const noexcept override { return true; }
+        SR_NODISCARD uint32_t GetIndicesCount() const override;
+        SR_NODISCARD bool IsFlatMesh() const noexcept override;
         SR_NODISCARD std::string GetMeshIdentifier() const override;
 
-        SR_NODISCARD SR_MATH_NS::FVector2 GetTextureBorder() const { return m_textureBorder; }
-        SR_NODISCARD SR_MATH_NS::FVector2 GetWindowBorder() const { return m_windowBorder; }
+        SR_NODISCARD SR_MATH_NS::FVector2 GetTextureBorder() const;
+        SR_NODISCARD SR_MATH_NS::FVector2 GetWindowBorder() const;
 
-        void SetTextureBorder(const SR_MATH_NS::FVector2& border) {
-            m_textureBorder = border;
-            MarkUniformsDirty();
-        }
-
-        void SetWindowBorder(const SR_MATH_NS::FVector2& border) {
-            m_windowBorder = border;
-            MarkUniformsDirty();
-        }
+        void SetTextureBorder(const SR_MATH_NS::FVector2& border);
+        void SetWindowBorder(const SR_MATH_NS::FVector2& border);
 
     protected:
         bool Calculate() override;

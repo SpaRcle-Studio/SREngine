@@ -234,6 +234,16 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
+      <node id="122">
+        <label>Utils/Math/Rect.h</label>
+        <link refid="Rect_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+      </node>
       <node id="103">
         <label>Utils/Math/Size.h</label>
         <link refid="Size_8h_source"/>
@@ -294,11 +304,11 @@
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="125">
+      <node id="126">
         <label>Utils/Serialization/DefaultCheckers.inl.h</label>
         <link refid="DefaultCheckers_8inl_8h_source"/>
       </node>
-      <node id="123">
+      <node id="124">
         <label>Utils/Serialization/DefaultObjectMakers.inl.h</label>
         <link refid="DefaultObjectMakers_8inl_8h_source"/>
       </node>
@@ -314,11 +324,11 @@
         <childnode refid="98" relation="include">
         </childnode>
       </node>
-      <node id="126">
+      <node id="127">
         <label>Utils/Serialization/ObjectDataAccessors.inl.h</label>
         <link refid="ObjectDataAccessors_8inl_8h_source"/>
       </node>
-      <node id="124">
+      <node id="125">
         <label>Utils/Serialization/SaveCheckers.inl.h</label>
         <link refid="SaveCheckers_8inl_8h_source"/>
       </node>
@@ -349,9 +359,9 @@
         </childnode>
         <childnode refid="103" relation="include">
         </childnode>
-        <childnode refid="120" relation="include">
-        </childnode>
         <childnode refid="122" relation="include">
+        </childnode>
+        <childnode refid="120" relation="include">
         </childnode>
         <childnode refid="123" relation="include">
         </childnode>
@@ -360,6 +370,8 @@
         <childnode refid="125" relation="include">
         </childnode>
         <childnode refid="126" relation="include">
+        </childnode>
+        <childnode refid="127" relation="include">
         </childnode>
       </node>
       <node id="116">
@@ -531,10 +543,10 @@
         </childnode>
         <childnode refid="118" relation="include">
         </childnode>
-        <childnode refid="127" relation="include">
+        <childnode refid="128" relation="include">
         </childnode>
       </node>
-      <node id="127">
+      <node id="128">
         <label>Utils/World/SceneLogicType.h</label>
         <link refid="SceneLogicType_8h_source"/>
         <childnode refid="81" relation="include">
@@ -672,7 +684,7 @@
         <childnode refid="68" relation="include">
         </childnode>
       </node>
-      <node id="122">
+      <node id="123">
         <label>Codegen/Enums.generated.hpp</label>
       </node>
       <node id="92">

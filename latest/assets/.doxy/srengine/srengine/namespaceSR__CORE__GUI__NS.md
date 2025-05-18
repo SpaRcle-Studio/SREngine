@@ -56,6 +56,7 @@
 | class | [**PropertyDrawerBase**](classSR__CORE__GUI__NS_1_1PropertyDrawerBase.md) <br> |
 | struct | [**PropertyDrawerContext**](structSR__CORE__GUI__NS_1_1PropertyDrawerContext.md) <br> |
 | struct | [**PropertyDrawerFeedback**](structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback.md) <br> |
+| class | [**RectPropertyDrawer**](classSR__CORE__GUI__NS_1_1RectPropertyDrawer.md) <br> |
 | class | [**RenderTechniqueEditor**](classSR__CORE__GUI__NS_1_1RenderTechniqueEditor.md) <br> |
 | class | [**SceneRunner**](classSR__CORE__GUI__NS_1_1SceneRunner.md) <br> |
 | class | [**SceneTools**](classSR__CORE__GUI__NS_1_1SceneTools.md) <br> |

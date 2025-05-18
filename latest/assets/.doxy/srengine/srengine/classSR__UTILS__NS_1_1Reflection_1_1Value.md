@@ -76,6 +76,7 @@
 |  SR\_NODISCARD bool | [**IsMathVector**](#function-ismathvector) () const<br> |
 |  SR\_NODISCARD bool | [**IsPath**](#function-ispath) () const<br> |
 |  SR\_NODISCARD bool | [**IsPointer**](#function-ispointer) () const<br> |
+|  SR\_NODISCARD bool | [**IsRect**](#function-isrect) () const<br> |
 |  SR\_NODISCARD bool | [**IsRef**](#function-isref) () const<br> |
 |  SR\_NODISCARD bool | [**IsSequenceContainer**](#function-issequencecontainer) () const<br> |
 |  SR\_NODISCARD bool | [**IsSigned**](#function-issigned) () const<br> |
@@ -446,6 +447,19 @@ SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsPath () const
 
 ```C++
 SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsPointer () const
+```
+
+
+
+
+<hr>
+
+
+
+### function IsRect 
+
+```C++
+SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsRect () const
 ```
 
 

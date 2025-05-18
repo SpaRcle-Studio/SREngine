@@ -4,43 +4,43 @@
     <compoundname>ObjectDataAccessors.inl.h</compoundname>
     <includedby refid="Serialization_8h" local="no">Engine/libs/Utils/inc/Utils/Serialization/Serialization.h</includedby>
     <invincdepgraph>
-      <node id="34">
+      <node id="35">
         <label>Engine/inc/Engine/Engine.h</label>
         <link refid="Engine_8h_source"/>
-        <childnode refid="35" relation="include">
-        </childnode>
         <childnode refid="36" relation="include">
         </childnode>
         <childnode refid="37" relation="include">
         </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
       </node>
-      <node id="35">
+      <node id="36">
         <label>Engine/inc/Engine/EngineCommands.h</label>
         <link refid="EngineCommands_8h_source"/>
       </node>
-      <node id="109">
+      <node id="117">
         <label>Engine/inc/Engine/GUI/DragNDropHelper.h</label>
         <link refid="DragNDropHelper_8h_source"/>
       </node>
-      <node id="50">
+      <node id="51">
         <label>Engine/inc/Engine/GUI/EditorCamera.h</label>
         <link refid="EditorCamera_8h_source"/>
       </node>
-      <node id="84">
+      <node id="85">
         <label>Engine/inc/Engine/GUI/EditorGUI.h</label>
         <link refid="EditorGUI_8h_source"/>
       </node>
-      <node id="68">
+      <node id="69">
         <label>Engine/inc/Engine/GUI/EditorGizmo.h</label>
         <link refid="EditorGizmo_8h_source"/>
-        <childnode refid="69" relation="include">
+        <childnode refid="70" relation="include">
         </childnode>
       </node>
-      <node id="86">
+      <node id="87">
         <label>Engine/inc/Engine/GUI/Guizmo.h</label>
         <link refid="Guizmo_8h_source"/>
       </node>
-      <node id="87">
+      <node id="88">
         <label>Engine/inc/Engine/GUI/Hierarchy.h</label>
         <link refid="Hierarchy_8h_source"/>
       </node>
@@ -68,6 +68,8 @@
         <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
         </childnode>
       </node>
       <node id="7">
@@ -117,120 +119,122 @@
         </childnode>
       </node>
       <node id="16">
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/RectPropertyDrawer.h</label>
+        <link refid="RectPropertyDrawer_8h_source"/>
+      </node>
+      <node id="17">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/StringPropertyDrawer.h</label>
         <link refid="StringPropertyDrawer_8h_source"/>
       </node>
-      <node id="17">
+      <node id="18">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/VectorPropertyDrawer.h</label>
         <link refid="VectorPropertyDrawer_8h_source"/>
       </node>
-      <node id="96">
+      <node id="104">
         <label>Engine/inc/Engine/GUI/SceneRunner.h</label>
         <link refid="SceneRunner_8h_source"/>
       </node>
-      <node id="69">
+      <node id="70">
         <label>Engine/inc/Engine/GUI/SceneTools.h</label>
         <link refid="SceneTools_8h_source"/>
       </node>
-      <node id="88">
+      <node id="89">
         <label>Engine/inc/Engine/GUI/SceneViewer.h</label>
         <link refid="SceneViewer_8h_source"/>
       </node>
-      <node id="97">
+      <node id="105">
         <label>Engine/inc/Engine/GUI/WorldEdit.h</label>
         <link refid="WorldEdit_8h_source"/>
       </node>
-      <node id="36">
+      <node id="37">
         <label>Engine/inc/Engine/Scripting/ScriptableContext.h</label>
         <link refid="ScriptableContext_8h_source"/>
       </node>
-      <node id="56">
+      <node id="57">
         <label>Engine/inc/Engine/UI/Button.h</label>
         <link refid="Button_8h_source"/>
       </node>
-      <node id="55">
+      <node id="56">
         <label>Engine/inc/Engine/UI/IButton.h</label>
         <link refid="IButton_8h_source"/>
-        <childnode refid="56" relation="include">
+        <childnode refid="57" relation="include">
         </childnode>
       </node>
-      <node id="98">
+      <node id="106">
         <label>Engine/inc/Engine/World/EngineScene.h</label>
         <link refid="EngineScene_8h_source"/>
       </node>
-      <node id="37">
+      <node id="38">
         <label>Engine/inc/Engine/World/World.h</label>
         <link refid="World_8h_source"/>
       </node>
-      <node id="42">
+      <node id="43">
         <label>Engine/libs/Audio/inc/Audio/Types/AudioListener.h</label>
         <link refid="AudioListener_8h_source"/>
       </node>
-      <node id="43">
+      <node id="44">
         <label>Engine/libs/Audio/inc/Audio/Types/AudioSource.h</label>
         <link refid="AudioSource_8h_source"/>
       </node>
-      <node id="91">
+      <node id="92">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h</label>
         <link refid="AnimationChannel_8h_source"/>
       </node>
-      <node id="90">
+      <node id="91">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h</label>
         <link refid="AnimationKey_8h_source"/>
-        <childnode refid="91" relation="include">
+        <childnode refid="92" relation="include">
         </childnode>
-        <childnode refid="44" relation="include">
+        <childnode refid="45" relation="include">
         </childnode>
       </node>
-      <node id="89">
+      <node id="90">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationPose.h</label>
         <link refid="AnimationPose_8h_source"/>
-        <childnode refid="90" relation="include">
+        <childnode refid="91" relation="include">
         </childnode>
       </node>
-      <node id="44">
+      <node id="45">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
         <link refid="Animator_8h_source"/>
       </node>
-      <node id="45">
+      <node id="46">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/Bone.h</label>
         <link refid="Bone_8h_source"/>
-        <childnode refid="46" relation="include">
-        </childnode>
-      </node>
-      <node id="48">
-        <label>Engine/libs/Graphics/inc/Graphics/Animations/BoneComponent.h</label>
-        <link refid="BoneComponent_8h_source"/>
-      </node>
-      <node id="46">
-        <label>Engine/libs/Graphics/inc/Graphics/Animations/Skeleton.h</label>
-        <link refid="Skeleton_8h_source"/>
-        <childnode refid="44" relation="include">
-        </childnode>
         <childnode refid="47" relation="include">
         </childnode>
       </node>
-      <node id="71">
+      <node id="49">
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/BoneComponent.h</label>
+        <link refid="BoneComponent_8h_source"/>
+      </node>
+      <node id="47">
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/Skeleton.h</label>
+        <link refid="Skeleton_8h_source"/>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+      </node>
+      <node id="72">
         <label>Engine/libs/Graphics/inc/Graphics/Font/Text.h</label>
         <link refid="Text_8h_source"/>
       </node>
-      <node id="111">
+      <node id="119">
         <label>Engine/libs/Graphics/inc/Graphics/GUI/Utils.h</label>
         <link refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_source"/>
       </node>
-      <node id="58">
+      <node id="59">
         <label>Engine/libs/Graphics/inc/Graphics/Lighting/AreaLight.h</label>
         <link refid="AreaLight_8h_source"/>
       </node>
-      <node id="59">
+      <node id="60">
         <label>Engine/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h</label>
         <link refid="DirectionalLight_8h_source"/>
       </node>
-      <node id="57">
+      <node id="58">
         <label>Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h</label>
         <link refid="ILightComponent_8h_source"/>
-        <childnode refid="58" relation="include">
-        </childnode>
         <childnode refid="59" relation="include">
         </childnode>
         <childnode refid="60" relation="include">
@@ -239,179 +243,33 @@
         </childnode>
         <childnode refid="62" relation="include">
         </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
       </node>
-      <node id="60">
+      <node id="61">
         <label>Engine/libs/Graphics/inc/Graphics/Lighting/PointLight.h</label>
         <link refid="PointLight_8h_source"/>
       </node>
-      <node id="61">
+      <node id="62">
         <label>Engine/libs/Graphics/inc/Graphics/Lighting/ProbeLight.h</label>
         <link refid="ProbeLight_8h_source"/>
       </node>
-      <node id="62">
+      <node id="63">
         <label>Engine/libs/Graphics/inc/Graphics/Lighting/SpotLight.h</label>
         <link refid="SpotLight_8h_source"/>
       </node>
-      <node id="113">
+      <node id="121">
         <label>Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h</label>
         <link refid="SRSL_8h_source"/>
-        <childnode refid="114" relation="include">
-        </childnode>
-      </node>
-      <node id="112">
-        <label>Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h</label>
-        <link refid="ShaderProperties_8h_source"/>
-        <childnode refid="113" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="117" relation="include">
-        </childnode>
-        <childnode refid="118" relation="include">
-        </childnode>
-        <childnode refid="119" relation="include">
-        </childnode>
-        <childnode refid="129" relation="include">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h</label>
-        <link refid="BaseMaterial_8h_source"/>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-      </node>
-      <node id="18">
-        <label>Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h</label>
-        <link refid="FileMaterial_8h_source"/>
-      </node>
-      <node id="20">
-        <label>Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h</label>
-        <link refid="MaterialData_8h_source"/>
-        <childnode refid="4" relation="include">
-        </childnode>
-      </node>
-      <node id="117">
-        <label>Engine/libs/Graphics/inc/Graphics/Material/MaterialProperty.h</label>
-        <link refid="MaterialProperty_8h_source"/>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="70" relation="include">
-        </childnode>
-      </node>
-      <node id="130">
-        <label>Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h</label>
-        <link refid="MeshMaterialProperty_8h_source"/>
-        <childnode refid="70" relation="include">
-        </childnode>
-      </node>
-      <node id="19">
-        <label>Engine/libs/Graphics/inc/Graphics/Material/UniqueMaterial.h</label>
-        <link refid="UniqueMaterial_8h_source"/>
-      </node>
-      <node id="118">
-        <label>Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h</label>
-        <link refid="ShaderUBOBlock_8h_source"/>
-        <childnode refid="114" relation="include">
-        </childnode>
-      </node>
-      <node id="122">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h</label>
-        <link refid="CascadedShadowMapPass_8h_source"/>
-        <childnode refid="123" relation="include">
-        </childnode>
-      </node>
-      <node id="124">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
-        <link refid="ColorBufferPass_8h_source"/>
-      </node>
-      <node id="116">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
-        <link refid="DebugPass_8h_source"/>
-      </node>
-      <node id="53">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
-        <link refid="HTMLDrawerPass_8h_source"/>
-      </node>
-      <node id="120">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
-        <link refid="MeshDrawerPass_8h_source"/>
-        <childnode refid="121" relation="include">
-        </childnode>
-      </node>
-      <node id="121">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
-        <link refid="OffScreenMeshDrawerPass_8h_source"/>
         <childnode refid="122" relation="include">
         </childnode>
-        <childnode refid="124" relation="include">
+      </node>
+      <node id="120">
+        <label>Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h</label>
+        <link refid="ShaderProperties_8h_source"/>
+        <childnode refid="121" relation="include">
         </childnode>
-      </node>
-      <node id="123">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h</label>
-        <link refid="VarianceShadowMapPass_8h_source"/>
-      </node>
-      <node id="115">
-        <label>Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</label>
-        <link refid="DebugRenderer_8h_source"/>
-        <childnode refid="116" relation="include">
-        </childnode>
-      </node>
-      <node id="51">
-        <label>Engine/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
-        <link refid="HTMLDrawableElement_8h_source"/>
-        <childnode refid="52" relation="include">
-        </childnode>
-      </node>
-      <node id="52">
-        <label>Engine/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
-        <link refid="HTMLRenderer_8h_source"/>
-        <childnode refid="53" relation="include">
-        </childnode>
-      </node>
-      <node id="99">
-        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderContext.h</label>
-        <link refid="RenderContext_8h_source"/>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="98" relation="include">
-        </childnode>
-      </node>
-      <node id="133">
-        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h</label>
-        <link refid="RenderScene_8h_source"/>
-        <childnode refid="98" relation="include">
-        </childnode>
-        <childnode refid="76" relation="include">
-        </childnode>
-      </node>
-      <node id="132">
-        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderStrategy.h</label>
-        <link refid="RenderStrategy_8h_source"/>
-        <childnode refid="133" relation="include">
-        </childnode>
-      </node>
-      <node id="125">
-        <label>Engine/libs/Graphics/inc/Graphics/SRSL/Evaluator.h</label>
-        <link refid="Evaluator_8h_source"/>
-      </node>
-      <node id="126">
-        <label>Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h</label>
-        <link refid="GLSLCodeGenerator_8h_source"/>
-      </node>
-      <node id="127">
-        <label>Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h</label>
-        <link refid="SRSL_2Shader_8h_source"/>
-      </node>
-      <node id="119">
-        <label>Engine/libs/Graphics/inc/Graphics/SRSL/ShaderType.h</label>
-        <link refid="ShaderType_8h_source"/>
-        <childnode refid="113" relation="include">
-        </childnode>
-        <childnode refid="120" relation="include">
+        <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="125" relation="include">
         </childnode>
@@ -419,440 +277,630 @@
         </childnode>
         <childnode refid="127" relation="include">
         </childnode>
-        <childnode refid="128" relation="include">
-        </childnode>
-        <childnode refid="129" relation="include">
+        <childnode refid="137" relation="include">
         </childnode>
       </node>
-      <node id="128">
-        <label>Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h</label>
-        <link refid="ShaderVariables_8h_source"/>
-      </node>
-      <node id="129">
-        <label>Engine/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h</label>
-        <link refid="Graphics_2inc_2Graphics_2SRSL_2TypeInfo_8h_source"/>
-      </node>
-      <node id="49">
-        <label>Engine/libs/Graphics/inc/Graphics/Types/Camera.h</label>
-        <link refid="Camera_8h_source"/>
-        <childnode refid="50" relation="include">
+      <node id="4">
+        <label>Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h</label>
+        <link refid="BaseMaterial_8h_source"/>
+        <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="51" relation="include">
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
         </childnode>
       </node>
-      <node id="72">
-        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h</label>
-        <link refid="DebugLine_8h_source"/>
+      <node id="19">
+        <label>Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h</label>
+        <link refid="FileMaterial_8h_source"/>
       </node>
-      <node id="74">
-        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</label>
-        <link refid="DebugWireframeMesh_8h_source"/>
-      </node>
-      <node id="73">
-        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h</label>
-        <link refid="IndexedMesh_8h_source"/>
-        <childnode refid="74" relation="include">
-        </childnode>
-        <childnode refid="63" relation="include">
+      <node id="21">
+        <label>Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h</label>
+        <link refid="MaterialData_8h_source"/>
+        <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="64">
-        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</label>
-        <link refid="Mesh3D_8h_source"/>
-      </node>
-      <node id="63">
-        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/MeshComponent.h</label>
-        <link refid="MeshComponent_8h_source"/>
-        <childnode refid="64" relation="include">
-        </childnode>
-        <childnode refid="65" relation="include">
-        </childnode>
-        <childnode refid="47" relation="include">
-        </childnode>
-        <childnode refid="66" relation="include">
-        </childnode>
-        <childnode refid="67" relation="include">
-        </childnode>
-      </node>
-      <node id="65">
-        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h</label>
-        <link refid="ProceduralMesh_8h_source"/>
-      </node>
-      <node id="47">
-        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
-        <link refid="SkinnedMesh_8h_source"/>
-      </node>
-      <node id="66">
-        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h</label>
-        <link refid="Sprite_8h_source"/>
-      </node>
-      <node id="54">
-        <label>Engine/libs/Graphics/inc/Graphics/Types/IRenderComponent.h</label>
-        <link refid="IRenderComponent_8h_source"/>
-        <childnode refid="55" relation="include">
-        </childnode>
-        <childnode refid="57" relation="include">
-        </childnode>
-        <childnode refid="63" relation="include">
-        </childnode>
-        <childnode refid="70" relation="include">
-        </childnode>
-        <childnode refid="67" relation="include">
-        </childnode>
-      </node>
-      <node id="70">
-        <label>Engine/libs/Graphics/inc/Graphics/Types/Mesh.h</label>
-        <link refid="Mesh_8h_source"/>
-        <childnode refid="45" relation="include">
+      <node id="125">
+        <label>Engine/libs/Graphics/inc/Graphics/Material/MaterialProperty.h</label>
+        <link refid="MaterialProperty_8h_source"/>
+        <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="71" relation="include">
         </childnode>
-        <childnode refid="72" relation="include">
-        </childnode>
-        <childnode refid="73" relation="include">
+      </node>
+      <node id="138">
+        <label>Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h</label>
+        <link refid="MeshMaterialProperty_8h_source"/>
+        <childnode refid="71" relation="include">
         </childnode>
       </node>
-      <node id="114">
-        <label>Engine/libs/Graphics/inc/Graphics/Types/Shader.h</label>
-        <link refid="Types_2Shader_8h_source"/>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="115" relation="include">
-        </childnode>
-        <childnode refid="51" relation="include">
+      <node id="20">
+        <label>Engine/libs/Graphics/inc/Graphics/Material/UniqueMaterial.h</label>
+        <link refid="UniqueMaterial_8h_source"/>
+      </node>
+      <node id="126">
+        <label>Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h</label>
+        <link refid="ShaderUBOBlock_8h_source"/>
+        <childnode refid="122" relation="include">
         </childnode>
       </node>
-      <node id="75">
-        <label>Engine/libs/Graphics/inc/Graphics/UI/Anchor.h</label>
-        <link refid="Anchor_8h_source"/>
-      </node>
-      <node id="76">
-        <label>Engine/libs/Graphics/inc/Graphics/UI/Canvas.h</label>
-        <link refid="Canvas_8h_source"/>
-      </node>
-      <node id="67">
-        <label>Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h</label>
-        <link refid="Gizmo_8h_source"/>
-        <childnode refid="68" relation="include">
+      <node id="130">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h</label>
+        <link refid="CascadedShadowMapPass_8h_source"/>
+        <childnode refid="131" relation="include">
         </childnode>
       </node>
-      <node id="103">
-        <label>Engine/libs/Graphics/inc/Graphics/UI/UICanvasComponent.h</label>
-        <link refid="UICanvasComponent_8h_source"/>
+      <node id="132">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
+        <link refid="ColorBufferPass_8h_source"/>
       </node>
-      <node id="104">
-        <label>Engine/libs/Graphics/inc/Graphics/UI/UISizeComponent.h</label>
-        <link refid="UISizeComponent_8h_source"/>
+      <node id="124">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
+        <link refid="DebugPass_8h_source"/>
       </node>
-      <node id="77">
-        <label>Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h</label>
-        <link refid="UIWindow_8h_source"/>
+      <node id="54">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
+        <link refid="HTMLDrawerPass_8h_source"/>
       </node>
-      <node id="25">
-        <label>Engine/libs/Physics/inc/Physics/2D/Rigidbody2D.h</label>
-        <link refid="Rigidbody2D_8h_source"/>
-      </node>
-      <node id="26">
-        <label>Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h</label>
-        <link refid="Rigidbody3D_8h_source"/>
-        <childnode refid="27" relation="include">
-        </childnode>
-        <childnode refid="28" relation="include">
+      <node id="128">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
+        <link refid="MeshDrawerPass_8h_source"/>
+        <childnode refid="129" relation="include">
         </childnode>
       </node>
-      <node id="79">
-        <label>Engine/libs/Physics/inc/Physics/3D/Vehicle4W3D.h</label>
-        <link refid="Vehicle4W3D_8h_source"/>
-        <childnode refid="80" relation="include">
-        </childnode>
-      </node>
-      <node id="22">
-        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h</label>
-        <link refid="Bullet3CollisionShape_8h_source"/>
-      </node>
-      <node id="27">
-        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h</label>
-        <link refid="Bullet3Rigidbody3D_8h_source"/>
-      </node>
-      <node id="21">
-        <label>Engine/libs/Physics/inc/Physics/CollisionShape.h</label>
-        <link refid="CollisionShape_8h_source"/>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="23" relation="include">
-        </childnode>
-        <childnode refid="24" relation="include">
-        </childnode>
-      </node>
-      <node id="23">
-        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h</label>
-        <link refid="PhysXCollisionShape_8h_source"/>
-      </node>
-      <node id="28">
-        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h</label>
-        <link refid="PhysXRigidbody3D_8h_source"/>
-      </node>
-      <node id="80">
-        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXVehicle4W3D.h</label>
-        <link refid="PhysXVehicle4W3D_8h_source"/>
-      </node>
-      <node id="24">
-        <label>Engine/libs/Physics/inc/Physics/Rigidbody.h</label>
-        <link refid="Rigidbody_8h_source"/>
-        <childnode refid="25" relation="include">
-        </childnode>
-        <childnode refid="26" relation="include">
-        </childnode>
-      </node>
-      <node id="78">
-        <label>Engine/libs/Physics/inc/Physics/Vehicle.h</label>
-        <link refid="Vehicle_8h_source"/>
-        <childnode refid="79" relation="include">
-        </childnode>
-      </node>
-      <node id="31">
-        <label>Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h</label>
-        <link refid="Behaviour_8h_source"/>
-        <childnode refid="32" relation="include">
-        </childnode>
-      </node>
-      <node id="39">
-        <label>Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h</label>
-        <link refid="CodeGenerator_8h_source"/>
-        <childnode refid="33" relation="include">
-        </childnode>
-      </node>
-      <node id="29">
-        <label>Engine/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h</label>
-        <link refid="CppBehaviour_8h_source"/>
-        <childnode refid="30" relation="include">
-        </childnode>
-      </node>
-      <node id="30">
-        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h</label>
-        <link refid="ModuleManager_8h_source"/>
-        <childnode refid="31" relation="include">
-        </childnode>
-        <childnode refid="33" relation="include">
-        </childnode>
-      </node>
-      <node id="38">
-        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ScriptModuleInfo.h</label>
-        <link refid="ScriptModuleInfo_8h_source"/>
-        <childnode refid="39" relation="include">
-        </childnode>
-      </node>
-      <node id="33">
-        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h</label>
-        <link refid="ScriptSystem_8h_source"/>
-        <childnode refid="34" relation="include">
-        </childnode>
-      </node>
-      <node id="32">
-        <label>Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h</label>
-        <link refid="EvoBehaviour_8h_source"/>
-      </node>
-      <node id="41">
-        <label>Engine/libs/Utils/inc/Utils/ECS/Component.h</label>
-        <link refid="Component_8h_source"/>
-        <childnode refid="37" relation="include">
-        </childnode>
-        <childnode refid="42" relation="include">
-        </childnode>
-        <childnode refid="43" relation="include">
-        </childnode>
-        <childnode refid="44" relation="include">
-        </childnode>
-        <childnode refid="45" relation="include">
-        </childnode>
-        <childnode refid="48" relation="include">
-        </childnode>
-        <childnode refid="49" relation="include">
-        </childnode>
-        <childnode refid="54" relation="include">
-        </childnode>
-        <childnode refid="75" relation="include">
-        </childnode>
-        <childnode refid="76" relation="include">
-        </childnode>
-        <childnode refid="77" relation="include">
-        </childnode>
-        <childnode refid="24" relation="include">
-        </childnode>
-        <childnode refid="78" relation="include">
-        </childnode>
-        <childnode refid="31" relation="include">
-        </childnode>
-        <childnode refid="81" relation="include">
-        </childnode>
-        <childnode refid="82" relation="include">
-        </childnode>
-        <childnode refid="101" relation="include">
-        </childnode>
-        <childnode refid="92" relation="include">
-        </childnode>
-        <childnode refid="93" relation="include">
-        </childnode>
-        <childnode refid="100" relation="include">
-        </childnode>
-        <childnode refid="102" relation="include">
-        </childnode>
-      </node>
-      <node id="81">
-        <label>Engine/libs/Utils/inc/Utils/ECS/ComponentManager.h</label>
-        <link refid="ComponentManager_8h_source"/>
-        <childnode refid="43" relation="include">
-        </childnode>
-        <childnode refid="44" relation="include">
-        </childnode>
-        <childnode refid="49" relation="include">
-        </childnode>
-        <childnode refid="24" relation="include">
-        </childnode>
-        <childnode refid="82" relation="include">
-        </childnode>
-        <childnode refid="100" relation="include">
-        </childnode>
-      </node>
-      <node id="40">
-        <label>Engine/libs/Utils/inc/Utils/ECS/Entity.h</label>
-        <link refid="Entity_8h_source"/>
-        <childnode refid="41" relation="include">
-        </childnode>
-        <childnode refid="106" relation="include">
-        </childnode>
-        <childnode refid="82" relation="include">
-        </childnode>
-      </node>
-      <node id="106">
-        <label>Engine/libs/Utils/inc/Utils/ECS/EntityController.h</label>
-        <link refid="EntityController_8h_source"/>
-        <childnode refid="35" relation="include">
-        </childnode>
-        <childnode refid="81" relation="include">
-        </childnode>
-        <childnode refid="83" relation="include">
-        </childnode>
-      </node>
-      <node id="108">
-        <label>Engine/libs/Utils/inc/Utils/ECS/EntityRef.h</label>
-        <link refid="EntityRef_8h_source"/>
-        <childnode refid="109" relation="include">
-        </childnode>
-        <childnode refid="91" relation="include">
-        </childnode>
-        <childnode refid="48" relation="include">
-        </childnode>
-        <childnode refid="47" relation="include">
-        </childnode>
-        <childnode refid="40" relation="include">
-        </childnode>
-        <childnode refid="92" relation="include">
-        </childnode>
-        <childnode refid="93" relation="include">
-        </childnode>
-        <childnode refid="110" relation="include">
-        </childnode>
-      </node>
-      <node id="107">
-        <label>Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h</label>
-        <link refid="EntityRefUtils_8h_source"/>
-        <childnode refid="108" relation="include">
-        </childnode>
-      </node>
-      <node id="85">
-        <label>Engine/libs/Utils/inc/Utils/ECS/GameObject.h</label>
-        <link refid="GameObject_8h_source"/>
-        <childnode refid="35" relation="include">
-        </childnode>
-        <childnode refid="86" relation="include">
-        </childnode>
-        <childnode refid="87" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="88" relation="include">
-        </childnode>
-        <childnode refid="37" relation="include">
-        </childnode>
-        <childnode refid="89" relation="include">
-        </childnode>
-        <childnode refid="45" relation="include">
-        </childnode>
-        <childnode refid="29" relation="include">
-        </childnode>
-        <childnode refid="92" relation="include">
-        </childnode>
-        <childnode refid="93" relation="include">
-        </childnode>
-      </node>
-      <node id="82">
-        <label>Engine/libs/Utils/inc/Utils/ECS/IComponentable.h</label>
-        <link refid="IComponentable_8h_source"/>
-        <childnode refid="83" relation="include">
-        </childnode>
-        <childnode refid="95" relation="include">
-        </childnode>
-      </node>
-      <node id="83">
-        <label>Engine/libs/Utils/inc/Utils/ECS/SceneObject.h</label>
-        <link refid="SceneObject_8h_source"/>
-        <childnode refid="84" relation="include">
-        </childnode>
-        <childnode refid="30" relation="include">
-        </childnode>
-        <childnode refid="85" relation="include">
-        </childnode>
-        <childnode refid="94" relation="include">
+      <node id="129">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
+        <link refid="OffScreenMeshDrawerPass_8h_source"/>
+        <childnode refid="130" relation="include">
+        </childnode>
+        <childnode refid="132" relation="include">
         </childnode>
       </node>
       <node id="131">
-        <label>Engine/libs/Utils/inc/Utils/ECS/Transform.h</label>
-        <link refid="Transform_8h_source"/>
-        <childnode refid="132" relation="include">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h</label>
+        <link refid="VarianceShadowMapPass_8h_source"/>
+      </node>
+      <node id="123">
+        <label>Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</label>
+        <link refid="DebugRenderer_8h_source"/>
+        <childnode refid="124" relation="include">
         </childnode>
-        <childnode refid="29" relation="include">
+      </node>
+      <node id="52">
+        <label>Engine/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
+        <link refid="HTMLDrawableElement_8h_source"/>
+        <childnode refid="53" relation="include">
         </childnode>
-        <childnode refid="85" relation="include">
+      </node>
+      <node id="53">
+        <label>Engine/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
+        <link refid="HTMLRenderer_8h_source"/>
+        <childnode refid="54" relation="include">
         </childnode>
-        <childnode refid="105" relation="include">
+      </node>
+      <node id="107">
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderContext.h</label>
+        <link refid="RenderContext_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="106" relation="include">
+        </childnode>
+      </node>
+      <node id="141">
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h</label>
+        <link refid="RenderScene_8h_source"/>
+        <childnode refid="106" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+      </node>
+      <node id="140">
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderStrategy.h</label>
+        <link refid="RenderStrategy_8h_source"/>
+        <childnode refid="141" relation="include">
+        </childnode>
+      </node>
+      <node id="133">
+        <label>Engine/libs/Graphics/inc/Graphics/SRSL/Evaluator.h</label>
+        <link refid="Evaluator_8h_source"/>
+      </node>
+      <node id="134">
+        <label>Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h</label>
+        <link refid="GLSLCodeGenerator_8h_source"/>
+      </node>
+      <node id="135">
+        <label>Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h</label>
+        <link refid="SRSL_2Shader_8h_source"/>
+      </node>
+      <node id="127">
+        <label>Engine/libs/Graphics/inc/Graphics/SRSL/ShaderType.h</label>
+        <link refid="ShaderType_8h_source"/>
+        <childnode refid="121" relation="include">
+        </childnode>
+        <childnode refid="128" relation="include">
+        </childnode>
+        <childnode refid="133" relation="include">
         </childnode>
         <childnode refid="134" relation="include">
         </childnode>
         <childnode refid="135" relation="include">
         </childnode>
-        <childnode refid="92" relation="include">
+        <childnode refid="136" relation="include">
+        </childnode>
+        <childnode refid="137" relation="include">
+        </childnode>
+      </node>
+      <node id="136">
+        <label>Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h</label>
+        <link refid="ShaderVariables_8h_source"/>
+      </node>
+      <node id="137">
+        <label>Engine/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h</label>
+        <link refid="Graphics_2inc_2Graphics_2SRSL_2TypeInfo_8h_source"/>
+      </node>
+      <node id="50">
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Camera.h</label>
+        <link refid="Camera_8h_source"/>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+      </node>
+      <node id="73">
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h</label>
+        <link refid="DebugLine_8h_source"/>
+      </node>
+      <node id="75">
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</label>
+        <link refid="DebugWireframeMesh_8h_source"/>
+      </node>
+      <node id="74">
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h</label>
+        <link refid="IndexedMesh_8h_source"/>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</label>
+        <link refid="Mesh3D_8h_source"/>
+      </node>
+      <node id="64">
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/MeshComponent.h</label>
+        <link refid="MeshComponent_8h_source"/>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+      </node>
+      <node id="66">
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h</label>
+        <link refid="ProceduralMesh_8h_source"/>
+      </node>
+      <node id="48">
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
+        <link refid="SkinnedMesh_8h_source"/>
+      </node>
+      <node id="67">
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h</label>
+        <link refid="Sprite_8h_source"/>
+      </node>
+      <node id="55">
+        <label>Engine/libs/Graphics/inc/Graphics/Types/IRenderComponent.h</label>
+        <link refid="IRenderComponent_8h_source"/>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+      </node>
+      <node id="71">
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Mesh.h</label>
+        <link refid="Mesh_8h_source"/>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+      </node>
+      <node id="122">
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Shader.h</label>
+        <link refid="Types_2Shader_8h_source"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="123" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+      </node>
+      <node id="76">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/Anchor.h</label>
+        <link refid="Anchor_8h_source"/>
+      </node>
+      <node id="77">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/Canvas.h</label>
+        <link refid="Canvas_8h_source"/>
+      </node>
+      <node id="68">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h</label>
+        <link refid="Gizmo_8h_source"/>
+        <childnode refid="69" relation="include">
+        </childnode>
+      </node>
+      <node id="111">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UICanvasComponent.h</label>
+        <link refid="UICanvasComponent_8h_source"/>
+      </node>
+      <node id="98">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UIContainerNode.h</label>
+        <link refid="UIContainerNode_8h_source"/>
+        <childnode refid="99" relation="include">
+        </childnode>
+        <childnode refid="100" relation="include">
+        </childnode>
+        <childnode refid="101" relation="include">
+        </childnode>
+      </node>
+      <node id="97">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h</label>
+        <link refid="UIControlNode_8h_source"/>
+        <childnode refid="98" relation="include">
+        </childnode>
+      </node>
+      <node id="99">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UIHBoxContainerNode.h</label>
+        <link refid="UIHBoxContainerNode_8h_source"/>
+      </node>
+      <node id="96">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UINode.h</label>
+        <link refid="UINode_8h_source"/>
+        <childnode refid="97" relation="include">
+        </childnode>
+      </node>
+      <node id="112">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UISizeComponent.h</label>
+        <link refid="UISizeComponent_8h_source"/>
+      </node>
+      <node id="100">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UIVBoxContainerNode.h</label>
+        <link refid="UIVBoxContainerNode_8h_source"/>
+      </node>
+      <node id="101">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h</label>
+        <link refid="UIViewportNode_8h_source"/>
+      </node>
+      <node id="78">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h</label>
+        <link refid="UIWindow_8h_source"/>
+      </node>
+      <node id="26">
+        <label>Engine/libs/Physics/inc/Physics/2D/Rigidbody2D.h</label>
+        <link refid="Rigidbody2D_8h_source"/>
+      </node>
+      <node id="27">
+        <label>Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h</label>
+        <link refid="Rigidbody3D_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="80">
+        <label>Engine/libs/Physics/inc/Physics/3D/Vehicle4W3D.h</label>
+        <link refid="Vehicle4W3D_8h_source"/>
+        <childnode refid="81" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h</label>
+        <link refid="Bullet3CollisionShape_8h_source"/>
+      </node>
+      <node id="28">
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h</label>
+        <link refid="Bullet3Rigidbody3D_8h_source"/>
+      </node>
+      <node id="22">
+        <label>Engine/libs/Physics/inc/Physics/CollisionShape.h</label>
+        <link refid="CollisionShape_8h_source"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h</label>
+        <link refid="PhysXCollisionShape_8h_source"/>
+      </node>
+      <node id="29">
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h</label>
+        <link refid="PhysXRigidbody3D_8h_source"/>
+      </node>
+      <node id="81">
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXVehicle4W3D.h</label>
+        <link refid="PhysXVehicle4W3D_8h_source"/>
+      </node>
+      <node id="25">
+        <label>Engine/libs/Physics/inc/Physics/Rigidbody.h</label>
+        <link refid="Rigidbody_8h_source"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="79">
+        <label>Engine/libs/Physics/inc/Physics/Vehicle.h</label>
+        <link refid="Vehicle_8h_source"/>
+        <childnode refid="80" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h</label>
+        <link refid="Behaviour_8h_source"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h</label>
+        <link refid="CodeGenerator_8h_source"/>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h</label>
+        <link refid="CppBehaviour_8h_source"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h</label>
+        <link refid="ModuleManager_8h_source"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ScriptModuleInfo.h</label>
+        <link refid="ScriptModuleInfo_8h_source"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h</label>
+        <link refid="ScriptSystem_8h_source"/>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h</label>
+        <link refid="EvoBehaviour_8h_source"/>
+      </node>
+      <node id="42">
+        <label>Engine/libs/Utils/inc/Utils/ECS/Component.h</label>
+        <link refid="Component_8h_source"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="109" relation="include">
         </childnode>
         <childnode refid="93" relation="include">
         </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="108" relation="include">
+        </childnode>
+        <childnode refid="110" relation="include">
+        </childnode>
       </node>
-      <node id="105">
+      <node id="82">
+        <label>Engine/libs/Utils/inc/Utils/ECS/ComponentManager.h</label>
+        <link refid="ComponentManager_8h_source"/>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="108" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>Engine/libs/Utils/inc/Utils/ECS/Entity.h</label>
+        <link refid="Entity_8h_source"/>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="114" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
+      </node>
+      <node id="114">
+        <label>Engine/libs/Utils/inc/Utils/ECS/EntityController.h</label>
+        <link refid="EntityController_8h_source"/>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
+      </node>
+      <node id="116">
+        <label>Engine/libs/Utils/inc/Utils/ECS/EntityRef.h</label>
+        <link refid="EntityRef_8h_source"/>
+        <childnode refid="117" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="118" relation="include">
+        </childnode>
+      </node>
+      <node id="115">
+        <label>Engine/libs/Utils/inc/Utils/ECS/EntityRefUtils.h</label>
+        <link refid="EntityRefUtils_8h_source"/>
+        <childnode refid="116" relation="include">
+        </childnode>
+      </node>
+      <node id="86">
+        <label>Engine/libs/Utils/inc/Utils/ECS/GameObject.h</label>
+        <link refid="GameObject_8h_source"/>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+      </node>
+      <node id="83">
+        <label>Engine/libs/Utils/inc/Utils/ECS/IComponentable.h</label>
+        <link refid="IComponentable_8h_source"/>
+        <childnode refid="84" relation="include">
+        </childnode>
+        <childnode refid="103" relation="include">
+        </childnode>
+      </node>
+      <node id="95">
+        <label>Engine/libs/Utils/inc/Utils/ECS/Node.h</label>
+        <link refid="Utils_2inc_2Utils_2ECS_2Node_8h_source"/>
+        <childnode refid="96" relation="include">
+        </childnode>
+      </node>
+      <node id="84">
+        <label>Engine/libs/Utils/inc/Utils/ECS/SceneObject.h</label>
+        <link refid="SceneObject_8h_source"/>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="102" relation="include">
+        </childnode>
+      </node>
+      <node id="139">
+        <label>Engine/libs/Utils/inc/Utils/ECS/Transform.h</label>
+        <link refid="Transform_8h_source"/>
+        <childnode refid="140" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="113" relation="include">
+        </childnode>
+        <childnode refid="142" relation="include">
+        </childnode>
+        <childnode refid="143" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+      </node>
+      <node id="113">
         <label>Engine/libs/Utils/inc/Utils/ECS/Transform2D.h</label>
         <link refid="Transform2D_8h_source"/>
-        <childnode refid="86" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
       </node>
-      <node id="134">
+      <node id="142">
         <label>Engine/libs/Utils/inc/Utils/ECS/Transform3D.h</label>
         <link refid="Transform3D_8h_source"/>
-        <childnode refid="86" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
-        <childnode refid="37" relation="include">
+        <childnode refid="38" relation="include">
         </childnode>
       </node>
-      <node id="135">
+      <node id="143">
         <label>Engine/libs/Utils/inc/Utils/ECS/TransformZero.h</label>
         <link refid="TransformZero_8h_source"/>
       </node>
-      <node id="101">
+      <node id="109">
         <label>Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h</label>
         <link refid="CameraFlyMover_8h_source"/>
       </node>
-      <node id="92">
+      <node id="93">
         <label>Engine/libs/Utils/inc/Utils/Game/DebugLogComponent.h</label>
         <link refid="DebugLogComponent_8h_source"/>
       </node>
-      <node id="93">
+      <node id="94">
         <label>Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h</label>
         <link refid="LookAtComponent_8h_source"/>
       </node>
@@ -867,23 +915,23 @@
         <link refid="Serializable_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
         <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="29" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
-        <childnode refid="38" relation="include">
+        <childnode refid="30" relation="include">
         </childnode>
-        <childnode refid="40" relation="include">
+        <childnode refid="39" relation="include">
         </childnode>
-        <childnode refid="107" relation="include">
+        <childnode refid="41" relation="include">
         </childnode>
-        <childnode refid="131" relation="include">
+        <childnode refid="115" relation="include">
         </childnode>
-        <childnode refid="136" relation="include">
+        <childnode refid="139" relation="include">
         </childnode>
-        <childnode refid="137" relation="include">
+        <childnode refid="144" relation="include">
+        </childnode>
+        <childnode refid="145" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -892,87 +940,87 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="100">
+      <node id="108">
         <label>Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h</label>
         <link refid="ReflectionTestComponent_8h_source"/>
       </node>
-      <node id="110">
+      <node id="118">
         <label>Engine/libs/Utils/inc/Utils/TypeTraits/Properties.h</label>
         <link refid="Properties_8h_source"/>
+        <childnode refid="119" relation="include">
+        </childnode>
+        <childnode refid="120" relation="include">
+        </childnode>
+        <childnode refid="138" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="144">
+        <label>Engine/libs/Utils/inc/Utils/TypeTraits/SRProperty.h</label>
+        <link refid="SRProperty_8h_source"/>
+      </node>
+      <node id="110">
+        <label>Engine/libs/Utils/inc/Utils/UI/UIModifier.h</label>
+        <link refid="UIModifier_8h_source"/>
         <childnode refid="111" relation="include">
         </childnode>
         <childnode refid="112" relation="include">
         </childnode>
-        <childnode refid="130" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="41" relation="include">
-        </childnode>
-        <childnode refid="40" relation="include">
+        <childnode refid="113" relation="include">
         </childnode>
       </node>
-      <node id="136">
-        <label>Engine/libs/Utils/inc/Utils/TypeTraits/SRProperty.h</label>
-        <link refid="SRProperty_8h_source"/>
-      </node>
-      <node id="102">
-        <label>Engine/libs/Utils/inc/Utils/UI/UIModifier.h</label>
-        <link refid="UIModifier_8h_source"/>
-        <childnode refid="103" relation="include">
-        </childnode>
-        <childnode refid="104" relation="include">
-        </childnode>
-        <childnode refid="105" relation="include">
-        </childnode>
-      </node>
-      <node id="95">
+      <node id="103">
         <label>Engine/libs/Utils/inc/Utils/World/Scene.h</label>
         <link refid="Scene_8h_source"/>
-        <childnode refid="35" relation="include">
-        </childnode>
-        <childnode refid="87" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="96" relation="include">
+        <childnode refid="36" relation="include">
         </childnode>
         <childnode refid="88" relation="include">
         </childnode>
-        <childnode refid="97" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="98" relation="include">
+        <childnode refid="104" relation="include">
         </childnode>
-        <childnode refid="37" relation="include">
+        <childnode refid="89" relation="include">
         </childnode>
-        <childnode refid="99" relation="include">
+        <childnode refid="105" relation="include">
+        </childnode>
+        <childnode refid="106" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="107" relation="include">
         </childnode>
       </node>
-      <node id="138">
+      <node id="146">
         <label>Engine/libs/Utils/inc/Utils/World/SceneAssetLogic.h</label>
         <link refid="SceneAssetLogic_8h_source"/>
       </node>
-      <node id="94">
+      <node id="102">
         <label>Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h</label>
         <link refid="SceneCubeChunkLogic_8h_source"/>
       </node>
-      <node id="139">
+      <node id="147">
         <label>Engine/libs/Utils/inc/Utils/World/SceneDefaultLogic.h</label>
         <link refid="SceneDefaultLogic_8h_source"/>
       </node>
-      <node id="137">
+      <node id="145">
         <label>Engine/libs/Utils/inc/Utils/World/SceneLogic.h</label>
         <link refid="SceneLogic_8h_source"/>
-        <childnode refid="138" relation="include">
+        <childnode refid="146" relation="include">
         </childnode>
-        <childnode refid="94" relation="include">
+        <childnode refid="102" relation="include">
         </childnode>
-        <childnode refid="139" relation="include">
+        <childnode refid="147" relation="include">
         </childnode>
-        <childnode refid="140" relation="include">
+        <childnode refid="148" relation="include">
         </childnode>
       </node>
-      <node id="140">
+      <node id="148">
         <label>Engine/libs/Utils/inc/Utils/World/ScenePrefabLogic.h</label>
         <link refid="ScenePrefabLogic_8h_source"/>
       </node>
@@ -1015,6 +1063,9 @@
     <innerclass refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1IVector6_01_4" prot="public">ObjectDataAccessor&lt; SR_MATH_NS::IVector6 &gt;</innerclass>
     <innerclass refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1UVector6_01_4" prot="public">ObjectDataAccessor&lt; SR_MATH_NS::UVector6 &gt;</innerclass>
     <innerclass refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1Quaternion_01_4" prot="public">ObjectDataAccessor&lt; SR_MATH_NS::Quaternion &gt;</innerclass>
+    <innerclass refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1FRect_01_4" prot="public">ObjectDataAccessor&lt; SR_MATH_NS::FRect &gt;</innerclass>
+    <innerclass refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1IRect_01_4" prot="public">ObjectDataAccessor&lt; SR_MATH_NS::IRect &gt;</innerclass>
+    <innerclass refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1URect_01_4" prot="public">ObjectDataAccessor&lt; SR_MATH_NS::URect &gt;</innerclass>
     <innerclass refid="structObjectDataAccessor_3_01std_1_1optional_3_01T_01_4_01_4" prot="public">ObjectDataAccessor&lt; std::optional&lt; T &gt; &gt;</innerclass>
     <innerclass refid="structObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01IsSREnumV_3_01T_01_4_01_4_1_1type_01_4" prot="public">ObjectDataAccessor&lt; T, typename std::enable_if&lt; IsSREnumV&lt; T &gt; &gt;::type &gt;</innerclass>
     <innerclass refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_32bd86362c60b521e671c70984ad6674" prot="public">ObjectDataAccessor&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt;, std::enable_if_t&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt; &gt;</innerclass>
@@ -1605,127 +1656,193 @@
 <codeline lineno="579"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="580"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="581"><highlight class="normal"></highlight></codeline>
-<codeline lineno="582" refid="structObjectDataAccessor_3_01std_1_1optional_3_01T_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ObjectDataAccessor&lt;std::optional&lt;T&gt;&gt;<sp/>{</highlight></codeline>
-<codeline lineno="583"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Save(ISerializer&amp;<sp/>serializer,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::optional&lt;T&gt;&amp;<sp/>value,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SerializationId&amp;<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="584"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(value.is_initialized())<sp/>{</highlight></codeline>
-<codeline lineno="585"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::Save(serializer,<sp/>value.get(),<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="586"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="587"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="588"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Load(IDeserializer&amp;<sp/>deserializer,<sp/>std::optional&lt;T&gt;&amp;<sp/>value,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SerializationId&amp;<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="589"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!value.is_initialized())<sp/>{</highlight></codeline>
-<codeline lineno="590"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>value<sp/>=<sp/>T();</highlight></codeline>
-<codeline lineno="591"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="592"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::Load(deserializer,<sp/>value.get(),<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="593"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="594"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="595"><highlight class="normal"></highlight></codeline>
-<codeline lineno="596"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="597" refid="structObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01IsSREnumV_3_01T_01_4_01_4_1_1type_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ObjectDataAccessor&lt;T,<sp/>typename<sp/>std::enable_if&lt;IsSREnumV&lt;T&gt;&gt;::type&gt;<sp/>{</highlight></codeline>
-<codeline lineno="598"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Save(ISerializer&amp;<sp/>serializer,<sp/>T<sp/>value,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SerializationId&amp;<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="599"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serializer.WriteString(SR_UTILS_NS::EnumReflector::ToStringAtom&lt;T&gt;(value).ToStringView(),<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="600"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="601"><highlight class="normal"></highlight></codeline>
-<codeline lineno="602"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Load(IDeserializer&amp;<sp/>deserializer,<sp/>T&amp;<sp/>value,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SerializationId&amp;<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="603"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>enumName;</highlight></codeline>
-<codeline lineno="604"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>deserializer.ReadString(enumName,<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="605"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(enumName.empty())<sp/>{</highlight></codeline>
-<codeline lineno="606"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;<sp/></highlight><highlight class="comment">//<sp/>Default<sp/>value</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="607"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="608"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!SR_UTILS_NS::EnumReflector::FromString&lt;T&gt;(enumName.c_str(),<sp/>value))<sp/>{</highlight></codeline>
-<codeline lineno="609"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>deserializer.ReportError(</highlight><highlight class="stringliteral">&quot;Invalid<sp/>enum<sp/>value<sp/>\&quot;&quot;</highlight><highlight class="normal"><sp/>+<sp/>enumName<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;<sp/>for<sp/>type:<sp/>{},<sp/>id:<sp/>{}&quot;</highlight><highlight class="normal">_format(</highlight><highlight class="keyword">typeid</highlight><highlight class="normal">(T).name(),<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">.GetName()));</highlight></codeline>
-<codeline lineno="610"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="611"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="612"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="582" refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1FRect_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;&gt;<sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ObjectDataAccessor&lt;SR_MATH_NS::FRect&gt;<sp/>{</highlight></codeline>
+<codeline lineno="583"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Save(ISerializer&amp;<sp/>serializer,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FRect&amp;<sp/>value,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SerializationId&amp;<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="584"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serializer.BeginObject(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="585"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::SaveCheckDefault(serializer,<sp/>value.x,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;x&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="586"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::SaveCheckDefault(serializer,<sp/>value.y,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;y&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="587"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::SaveCheckDefault(serializer,<sp/>value.w,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;w&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="588"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::SaveCheckDefault(serializer,<sp/>value.h,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;h&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="589"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serializer.EndObject();</highlight></codeline>
+<codeline lineno="590"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="591"><highlight class="normal"></highlight></codeline>
+<codeline lineno="592"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Load(IDeserializer&amp;<sp/>deserializer,<sp/>SR_MATH_NS::FRect&amp;<sp/>value,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SerializationId&amp;<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="593"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!deserializer.BeginObject(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">))<sp/>{</highlight></codeline>
+<codeline lineno="594"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="595"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="596"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::Load(deserializer,<sp/>value.x,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;x&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="597"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::Load(deserializer,<sp/>value.y,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;y&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="598"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::Load(deserializer,<sp/>value.w,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;w&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="599"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::Load(deserializer,<sp/>value.h,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;h&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="600"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>deserializer.EndObject();</highlight></codeline>
+<codeline lineno="601"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="602"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="603"><highlight class="normal"></highlight></codeline>
+<codeline lineno="604" refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1IRect_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;&gt;<sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ObjectDataAccessor&lt;SR_MATH_NS::IRect&gt;<sp/>{</highlight></codeline>
+<codeline lineno="605"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Save(ISerializer&amp;<sp/>serializer,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::IRect&amp;<sp/>value,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SerializationId&amp;<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="606"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serializer.BeginObject(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="607"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::SaveCheckDefault(serializer,<sp/>value.x,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;x&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="608"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::SaveCheckDefault(serializer,<sp/>value.y,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;y&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="609"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::SaveCheckDefault(serializer,<sp/>value.w,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;w&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="610"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::SaveCheckDefault(serializer,<sp/>value.h,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;h&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="611"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serializer.EndObject();</highlight></codeline>
+<codeline lineno="612"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="613"><highlight class="normal"></highlight></codeline>
-<codeline lineno="614"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="615" refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_32bd86362c60b521e671c70984ad6674" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ObjectDataAccessor&lt;<ref refid="namespaceSR__HTYPES__NS" kindref="compound">SR_HTYPES_NS</ref>::SharedPtr&lt;T&gt;,<sp/>std::enable_if_t&lt;SerializationTraits&lt;T&gt;::IsSerializable&gt;&gt;<sp/>{</highlight></codeline>
-<codeline lineno="616"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Save(ISerializer&amp;<sp/>serializer,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;T&gt;</ref>&amp;<sp/>value,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SerializationId&amp;<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="617"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!value)<sp/>{</highlight></codeline>
-<codeline lineno="618"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="619"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="620"><highlight class="normal"></highlight></codeline>
-<codeline lineno="621"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(value-&gt;GetMeta()-&gt;IsEditorOnly())<sp/>{</highlight></codeline>
-<codeline lineno="622"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!serializer.IsEditorAllowed())<sp/>{</highlight></codeline>
-<codeline lineno="623"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="624"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="625"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="626"><highlight class="normal"></highlight></codeline>
-<codeline lineno="627"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SRClassMeta*<sp/>pMeta<sp/>=<sp/>value-&gt;GetMeta();</highlight></codeline>
-<codeline lineno="628"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;&amp;<sp/>typeName<sp/>=<sp/>pMeta-&gt;GetFactoryName();</highlight></codeline>
-<codeline lineno="629"><highlight class="normal"></highlight></codeline>
-<codeline lineno="630"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(pMeta-&gt;IsAbstract())<sp/>{</highlight></codeline>
-<codeline lineno="631"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_ERROR(</highlight><highlight class="stringliteral">&quot;ObjectDataAccessor::Save()<sp/>:<sp/>abstract<sp/>class<sp/>can&apos;t<sp/>be<sp/>saved!<sp/>Factory<sp/>name:<sp/>{}&quot;</highlight><highlight class="normal">,<sp/>typeName);</highlight></codeline>
-<codeline lineno="632"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="633"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="634"><highlight class="normal"></highlight></codeline>
-<codeline lineno="635"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serializer.BeginObject(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="636"><highlight class="normal"></highlight></codeline>
-<codeline lineno="637"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serializer.WriteString(typeName,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;type&quot;</highlight><highlight class="normal">));</highlight></codeline>
-<codeline lineno="638"><highlight class="normal"></highlight></codeline>
-<codeline lineno="639"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::Save(serializer,<sp/>*value,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;ptr&quot;</highlight><highlight class="normal">));</highlight></codeline>
-<codeline lineno="640"><highlight class="normal"></highlight></codeline>
-<codeline lineno="641"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serializer.EndObject();</highlight></codeline>
-<codeline lineno="642"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="643"><highlight class="normal"></highlight></codeline>
-<codeline lineno="644"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Load(IDeserializer&amp;<sp/>deserializer,<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;T&gt;</ref>&amp;<sp/>value,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SerializationId&amp;<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="645"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!deserializer.BeginObject(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">))<sp/>{</highlight></codeline>
-<codeline lineno="646"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="647"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="648"><highlight class="normal"></highlight></codeline>
-<codeline lineno="649"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>type;</highlight></codeline>
-<codeline lineno="650"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>deserializer.ReadString(type,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;type&quot;</highlight><highlight class="normal">));</highlight></codeline>
-<codeline lineno="651"><highlight class="normal"></highlight></codeline>
-<codeline lineno="652"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(deserializer.IsDefault(SerializationId::Create(</highlight><highlight class="stringliteral">&quot;ptr&quot;</highlight><highlight class="normal">)))<sp/>{</highlight></codeline>
-<codeline lineno="653"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>deserializer.EndObject();</highlight></codeline>
-<codeline lineno="654"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="655"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="656"><highlight class="normal"></highlight></codeline>
-<codeline lineno="657"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!type.empty())<sp/>{</highlight></codeline>
-<codeline lineno="658"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!deserializer.IsPreserveMode())<sp/>{</highlight></codeline>
-<codeline lineno="659"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>value<sp/>=<sp/>SR_UTILS_NS::Factory::Instance().Create&lt;T&gt;(type);</highlight></codeline>
-<codeline lineno="660"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!value)<sp/>{</highlight></codeline>
-<codeline lineno="661"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_ERROR(</highlight><highlight class="stringliteral">&quot;ObjectDataAccessor::Load()<sp/>:<sp/>unknown<sp/>object&apos;s<sp/>type:<sp/>{}&quot;</highlight><highlight class="normal">,<sp/>type);</highlight></codeline>
-<codeline lineno="662"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="663"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="664"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="665"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isNeedReAlloc<sp/>=<sp/>!value<sp/>||<sp/>type<sp/>!=<sp/>SR_UTILS_NS::Factory::Instance().GetName(value.Get());</highlight></codeline>
-<codeline lineno="666"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(isNeedReAlloc<sp/>&amp;&amp;<sp/>deserializer.AllowReAllocPointer(value<sp/>?<sp/>IDeserializer::ReAllocPointerReason::HasDifferentType<sp/>:<sp/>IDeserializer::ReAllocPointerReason::IsNull))<sp/>{</highlight></codeline>
-<codeline lineno="667"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>value<sp/>=<sp/>SR_UTILS_NS::Factory::Instance().Create&lt;T&gt;(type);</highlight></codeline>
-<codeline lineno="668"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!value)<sp/>{</highlight></codeline>
-<codeline lineno="669"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_ERROR(</highlight><highlight class="stringliteral">&quot;ObjectDataAccessor::Load()<sp/>:<sp/>unknown<sp/>object&apos;s<sp/>type:<sp/>{}&quot;</highlight><highlight class="normal">,<sp/>type);</highlight></codeline>
-<codeline lineno="670"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="671"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="672"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="614"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Load(IDeserializer&amp;<sp/>deserializer,<sp/>SR_MATH_NS::IRect&amp;<sp/>value,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SerializationId&amp;<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="615"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!deserializer.BeginObject(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">))<sp/>{</highlight></codeline>
+<codeline lineno="616"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="617"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="618"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::Load(deserializer,<sp/>value.x,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;x&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="619"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::Load(deserializer,<sp/>value.y,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;y&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="620"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::Load(deserializer,<sp/>value.w,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;w&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="621"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::Load(deserializer,<sp/>value.h,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;h&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="622"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>deserializer.EndObject();</highlight></codeline>
+<codeline lineno="623"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="624"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="625"><highlight class="normal"></highlight></codeline>
+<codeline lineno="626" refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1URect_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;&gt;<sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ObjectDataAccessor&lt;SR_MATH_NS::URect&gt;<sp/>{</highlight></codeline>
+<codeline lineno="627"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Save(ISerializer&amp;<sp/>serializer,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::URect&amp;<sp/>value,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SerializationId&amp;<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="628"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serializer.BeginObject(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="629"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::SaveCheckDefault(serializer,<sp/>value.x,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;x&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="630"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::SaveCheckDefault(serializer,<sp/>value.y,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;y&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="631"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::SaveCheckDefault(serializer,<sp/>value.w,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;w&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="632"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::SaveCheckDefault(serializer,<sp/>value.h,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;h&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="633"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serializer.EndObject();</highlight></codeline>
+<codeline lineno="634"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="635"><highlight class="normal"></highlight></codeline>
+<codeline lineno="636"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Load(IDeserializer&amp;<sp/>deserializer,<sp/>SR_MATH_NS::URect&amp;<sp/>value,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SerializationId&amp;<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="637"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!deserializer.BeginObject(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">))<sp/>{</highlight></codeline>
+<codeline lineno="638"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="639"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="640"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::Load(deserializer,<sp/>value.x,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;x&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="641"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::Load(deserializer,<sp/>value.y,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;y&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="642"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::Load(deserializer,<sp/>value.w,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;w&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="643"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::Load(deserializer,<sp/>value.h,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;h&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="644"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>deserializer.EndObject();</highlight></codeline>
+<codeline lineno="645"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="646"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="647"><highlight class="normal"></highlight></codeline>
+<codeline lineno="648" refid="structObjectDataAccessor_3_01std_1_1optional_3_01T_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ObjectDataAccessor&lt;std::optional&lt;T&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="649"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Save(ISerializer&amp;<sp/>serializer,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::optional&lt;T&gt;&amp;<sp/>value,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SerializationId&amp;<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="650"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(value.is_initialized())<sp/>{</highlight></codeline>
+<codeline lineno="651"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::Save(serializer,<sp/>value.get(),<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="652"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="653"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="654"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Load(IDeserializer&amp;<sp/>deserializer,<sp/>std::optional&lt;T&gt;&amp;<sp/>value,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SerializationId&amp;<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="655"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!value.is_initialized())<sp/>{</highlight></codeline>
+<codeline lineno="656"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>value<sp/>=<sp/>T();</highlight></codeline>
+<codeline lineno="657"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="658"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::Load(deserializer,<sp/>value.get(),<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="659"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="660"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="661"><highlight class="normal"></highlight></codeline>
+<codeline lineno="662"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="663" refid="structObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01IsSREnumV_3_01T_01_4_01_4_1_1type_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ObjectDataAccessor&lt;T,<sp/>typename<sp/>std::enable_if&lt;IsSREnumV&lt;T&gt;&gt;::type&gt;<sp/>{</highlight></codeline>
+<codeline lineno="664"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Save(ISerializer&amp;<sp/>serializer,<sp/>T<sp/>value,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SerializationId&amp;<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="665"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serializer.WriteString(SR_UTILS_NS::EnumReflector::ToStringAtom&lt;T&gt;(value).ToStringView(),<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="666"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="667"><highlight class="normal"></highlight></codeline>
+<codeline lineno="668"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Load(IDeserializer&amp;<sp/>deserializer,<sp/>T&amp;<sp/>value,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SerializationId&amp;<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="669"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>enumName;</highlight></codeline>
+<codeline lineno="670"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>deserializer.ReadString(enumName,<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="671"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(enumName.empty())<sp/>{</highlight></codeline>
+<codeline lineno="672"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;<sp/></highlight><highlight class="comment">//<sp/>Default<sp/>value</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="673"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="674"><highlight class="normal"></highlight></codeline>
-<codeline lineno="675"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(value)<sp/>{</highlight></codeline>
-<codeline lineno="676"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::Load(deserializer,<sp/>*value,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;ptr&quot;</highlight><highlight class="normal">));</highlight></codeline>
-<codeline lineno="677"><highlight class="normal"></highlight></codeline>
-<codeline lineno="678"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_UTILS_NS::SerializableVerifyContext<sp/>context;</highlight></codeline>
-<codeline lineno="679"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>value-&gt;VerifyAfterLoad(context);</highlight></codeline>
-<codeline lineno="680"><highlight class="normal"></highlight></codeline>
-<codeline lineno="681"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;&amp;<sp/>warning<sp/>:<sp/>context.GetWarnings())<sp/>{</highlight></codeline>
-<codeline lineno="682"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_WARN(</highlight><highlight class="stringliteral">&quot;ObjectDataAccessor::Load()<sp/>:<sp/>warning:<sp/>{}&quot;</highlight><highlight class="normal">,<sp/>warning);</highlight></codeline>
-<codeline lineno="683"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="684"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;&amp;<sp/>error<sp/>:<sp/>context.GetErrors())<sp/>{</highlight></codeline>
-<codeline lineno="685"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_ERROR(</highlight><highlight class="stringliteral">&quot;ObjectDataAccessor::Load()<sp/>:<sp/>error:<sp/>{}&quot;</highlight><highlight class="normal">,<sp/>error);</highlight></codeline>
-<codeline lineno="686"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="687"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="688"><highlight class="normal"></highlight></codeline>
-<codeline lineno="689"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>deserializer.EndObject();</highlight></codeline>
-<codeline lineno="690"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="691"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="674"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!SR_UTILS_NS::EnumReflector::FromString&lt;T&gt;(enumName.c_str(),<sp/>value))<sp/>{</highlight></codeline>
+<codeline lineno="675"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>deserializer.ReportError(</highlight><highlight class="stringliteral">&quot;Invalid<sp/>enum<sp/>value<sp/>\&quot;&quot;</highlight><highlight class="normal"><sp/>+<sp/>enumName<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;<sp/>for<sp/>type:<sp/>{},<sp/>id:<sp/>{}&quot;</highlight><highlight class="normal">_format(</highlight><highlight class="keyword">typeid</highlight><highlight class="normal">(T).name(),<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">.GetName()));</highlight></codeline>
+<codeline lineno="676"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="677"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="678"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="679"><highlight class="normal"></highlight></codeline>
+<codeline lineno="680"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="681" refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_32bd86362c60b521e671c70984ad6674" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ObjectDataAccessor&lt;<ref refid="namespaceSR__HTYPES__NS" kindref="compound">SR_HTYPES_NS</ref>::SharedPtr&lt;T&gt;,<sp/>std::enable_if_t&lt;SerializationTraits&lt;T&gt;::IsSerializable&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="682"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Save(ISerializer&amp;<sp/>serializer,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;T&gt;</ref>&amp;<sp/>value,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SerializationId&amp;<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="683"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!value)<sp/>{</highlight></codeline>
+<codeline lineno="684"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="685"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="686"><highlight class="normal"></highlight></codeline>
+<codeline lineno="687"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(value-&gt;GetMeta()-&gt;IsEditorOnly())<sp/>{</highlight></codeline>
+<codeline lineno="688"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!serializer.IsEditorAllowed())<sp/>{</highlight></codeline>
+<codeline lineno="689"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="690"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="691"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="692"><highlight class="normal"></highlight></codeline>
-<codeline lineno="693"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="694" refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_bb92e27d691c2f87c93122b3b271db79" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ObjectDataAccessor&lt;<ref refid="namespaceSR__HTYPES__NS" kindref="compound">SR_HTYPES_NS</ref>::SharedPtr&lt;T&gt;,<sp/>std::enable_if_t&lt;!SerializationTraits&lt;T&gt;::HasOriginType&gt;&gt;<sp/>{</highlight></codeline>
-<codeline lineno="695"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Load(ISerializer&amp;,<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;T&gt;</ref>&amp;,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SerializationId&amp;)<sp/>{</highlight></codeline>
-<codeline lineno="696"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(std::is_same_v&lt;void,<sp/>T&gt;,<sp/></highlight><highlight class="stringliteral">&quot;Serialization<sp/>of<sp/>pointers<sp/>without<sp/>T::OriginType<sp/>error<sp/>prone<sp/>and<sp/>forbidden!&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="697"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="698"><highlight class="normal"></highlight></codeline>
-<codeline lineno="699"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Save(IDeserializer&amp;,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;T&gt;</ref>&amp;,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SerializationId&amp;)<sp/>{</highlight></codeline>
-<codeline lineno="700"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(std::is_same_v&lt;void,<sp/>T&gt;,<sp/></highlight><highlight class="stringliteral">&quot;Serialization<sp/>of<sp/>pointers<sp/>without<sp/>T::OriginType<sp/>error<sp/>prone<sp/>and<sp/>forbidden!&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="701"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="702"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="693"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SRClassMeta*<sp/>pMeta<sp/>=<sp/>value-&gt;GetMeta();</highlight></codeline>
+<codeline lineno="694"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;&amp;<sp/>typeName<sp/>=<sp/>pMeta-&gt;GetFactoryName();</highlight></codeline>
+<codeline lineno="695"><highlight class="normal"></highlight></codeline>
+<codeline lineno="696"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(pMeta-&gt;IsAbstract())<sp/>{</highlight></codeline>
+<codeline lineno="697"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_ERROR(</highlight><highlight class="stringliteral">&quot;ObjectDataAccessor::Save()<sp/>:<sp/>abstract<sp/>class<sp/>can&apos;t<sp/>be<sp/>saved!<sp/>Factory<sp/>name:<sp/>{}&quot;</highlight><highlight class="normal">,<sp/>typeName);</highlight></codeline>
+<codeline lineno="698"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="699"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="700"><highlight class="normal"></highlight></codeline>
+<codeline lineno="701"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serializer.BeginObject(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="702"><highlight class="normal"></highlight></codeline>
+<codeline lineno="703"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serializer.WriteString(typeName,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;type&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="704"><highlight class="normal"></highlight></codeline>
+<codeline lineno="705"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::Save(serializer,<sp/>*value,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;ptr&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="706"><highlight class="normal"></highlight></codeline>
+<codeline lineno="707"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serializer.EndObject();</highlight></codeline>
+<codeline lineno="708"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="709"><highlight class="normal"></highlight></codeline>
+<codeline lineno="710"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Load(IDeserializer&amp;<sp/>deserializer,<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;T&gt;</ref>&amp;<sp/>value,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SerializationId&amp;<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="711"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!deserializer.BeginObject(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">))<sp/>{</highlight></codeline>
+<codeline lineno="712"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="713"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="714"><highlight class="normal"></highlight></codeline>
+<codeline lineno="715"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>type;</highlight></codeline>
+<codeline lineno="716"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>deserializer.ReadString(type,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;type&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="717"><highlight class="normal"></highlight></codeline>
+<codeline lineno="718"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(deserializer.IsDefault(SerializationId::Create(</highlight><highlight class="stringliteral">&quot;ptr&quot;</highlight><highlight class="normal">)))<sp/>{</highlight></codeline>
+<codeline lineno="719"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>deserializer.EndObject();</highlight></codeline>
+<codeline lineno="720"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="721"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="722"><highlight class="normal"></highlight></codeline>
+<codeline lineno="723"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!type.empty())<sp/>{</highlight></codeline>
+<codeline lineno="724"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!deserializer.IsPreserveMode())<sp/>{</highlight></codeline>
+<codeline lineno="725"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>value<sp/>=<sp/>SR_UTILS_NS::Factory::Instance().Create&lt;T&gt;(type);</highlight></codeline>
+<codeline lineno="726"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!value)<sp/>{</highlight></codeline>
+<codeline lineno="727"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_ERROR(</highlight><highlight class="stringliteral">&quot;ObjectDataAccessor::Load()<sp/>:<sp/>unknown<sp/>object&apos;s<sp/>type:<sp/>{}&quot;</highlight><highlight class="normal">,<sp/>type);</highlight></codeline>
+<codeline lineno="728"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="729"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="730"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="731"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isNeedReAlloc<sp/>=<sp/>!value<sp/>||<sp/>type<sp/>!=<sp/>SR_UTILS_NS::Factory::Instance().GetName(value.Get());</highlight></codeline>
+<codeline lineno="732"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(isNeedReAlloc<sp/>&amp;&amp;<sp/>deserializer.AllowReAllocPointer(value<sp/>?<sp/>IDeserializer::ReAllocPointerReason::HasDifferentType<sp/>:<sp/>IDeserializer::ReAllocPointerReason::IsNull))<sp/>{</highlight></codeline>
+<codeline lineno="733"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>value<sp/>=<sp/>SR_UTILS_NS::Factory::Instance().Create&lt;T&gt;(type);</highlight></codeline>
+<codeline lineno="734"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!value)<sp/>{</highlight></codeline>
+<codeline lineno="735"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_ERROR(</highlight><highlight class="stringliteral">&quot;ObjectDataAccessor::Load()<sp/>:<sp/>unknown<sp/>object&apos;s<sp/>type:<sp/>{}&quot;</highlight><highlight class="normal">,<sp/>type);</highlight></codeline>
+<codeline lineno="736"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="737"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="738"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="739"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="740"><highlight class="normal"></highlight></codeline>
+<codeline lineno="741"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(value)<sp/>{</highlight></codeline>
+<codeline lineno="742"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serialization::Load(deserializer,<sp/>*value,<sp/>SerializationId::Create(</highlight><highlight class="stringliteral">&quot;ptr&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="743"><highlight class="normal"></highlight></codeline>
+<codeline lineno="744"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_UTILS_NS::SerializableVerifyContext<sp/>context;</highlight></codeline>
+<codeline lineno="745"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>value-&gt;VerifyAfterLoad(context);</highlight></codeline>
+<codeline lineno="746"><highlight class="normal"></highlight></codeline>
+<codeline lineno="747"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;&amp;<sp/>warning<sp/>:<sp/>context.GetWarnings())<sp/>{</highlight></codeline>
+<codeline lineno="748"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_WARN(</highlight><highlight class="stringliteral">&quot;ObjectDataAccessor::Load()<sp/>:<sp/>warning:<sp/>{}&quot;</highlight><highlight class="normal">,<sp/>warning);</highlight></codeline>
+<codeline lineno="749"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="750"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;&amp;<sp/>error<sp/>:<sp/>context.GetErrors())<sp/>{</highlight></codeline>
+<codeline lineno="751"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_ERROR(</highlight><highlight class="stringliteral">&quot;ObjectDataAccessor::Load()<sp/>:<sp/>error:<sp/>{}&quot;</highlight><highlight class="normal">,<sp/>error);</highlight></codeline>
+<codeline lineno="752"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="753"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="754"><highlight class="normal"></highlight></codeline>
+<codeline lineno="755"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>deserializer.EndObject();</highlight></codeline>
+<codeline lineno="756"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="757"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="758"><highlight class="normal"></highlight></codeline>
+<codeline lineno="759"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="760" refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_bb92e27d691c2f87c93122b3b271db79" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ObjectDataAccessor&lt;<ref refid="namespaceSR__HTYPES__NS" kindref="compound">SR_HTYPES_NS</ref>::SharedPtr&lt;T&gt;,<sp/>std::enable_if_t&lt;!SerializationTraits&lt;T&gt;::HasOriginType&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="761"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Load(ISerializer&amp;,<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;T&gt;</ref>&amp;,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SerializationId&amp;)<sp/>{</highlight></codeline>
+<codeline lineno="762"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(std::is_same_v&lt;void,<sp/>T&gt;,<sp/></highlight><highlight class="stringliteral">&quot;Serialization<sp/>of<sp/>pointers<sp/>without<sp/>T::OriginType<sp/>error<sp/>prone<sp/>and<sp/>forbidden!&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="763"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="764"><highlight class="normal"></highlight></codeline>
+<codeline lineno="765"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Save(IDeserializer&amp;,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;T&gt;</ref>&amp;,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SerializationId&amp;)<sp/>{</highlight></codeline>
+<codeline lineno="766"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(std::is_same_v&lt;void,<sp/>T&gt;,<sp/></highlight><highlight class="stringliteral">&quot;Serialization<sp/>of<sp/>pointers<sp/>without<sp/>T::OriginType<sp/>error<sp/>prone<sp/>and<sp/>forbidden!&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="767"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="768"><highlight class="normal">};</highlight></codeline>
     </programlisting>
     <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h"/>
   </compounddef>

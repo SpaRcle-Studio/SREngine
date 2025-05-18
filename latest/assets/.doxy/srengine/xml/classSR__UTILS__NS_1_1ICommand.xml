@@ -98,36 +98,42 @@
         </childnode>
       </node>
       <node id="10">
+        <label>SR_CORE_NS::Commands::SceneObjectChangeProperties</label>
+        <link refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
         <label>SR_CORE_NS::Commands::SceneObjectDelete</label>
         <link refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectDelete"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="11">
+      <node id="12">
         <label>SR_CORE_NS::Commands::SceneObjectInstance</label>
         <link refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectInstance"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="12">
+      <node id="13">
         <label>SR_CORE_NS::Commands::SceneObjectLayer</label>
         <link refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectLayer"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="13">
+      <node id="14">
         <label>SR_CORE_NS::Commands::SceneObjectRename</label>
         <link refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectRename"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="14">
+      <node id="15">
         <label>SR_CORE_NS::Commands::SceneObjectTag</label>
         <link refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="15">
+      <node id="16">
         <label>SR_UTILS_NS::GroupCommand</label>
         <link refid="classSR__UTILS__NS_1_1GroupCommand"/>
         <childnode refid="2" relation="public-inheritance">

@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties" kind="class" language="C++" prot="public">
+    <compoundname>SR_CORE_NS::Commands::SceneObjectChangeProperties</compoundname>
+    <basecompoundref refid="classSR__CORE__NS_1_1Commands_1_1IEngineReversibleCommand" prot="public" virt="non-virtual">SR_CORE_NS::Commands::IEngineReversibleCommand</basecompoundref>
+    <includes refid="EngineCommands_8h" local="no">EngineCommands.h</includes>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1a14a4470491917f943a6712808dec0aa3" prot="private" static="no">
+        <type><ref refid="classSR__CORE__NS_1_1Commands_1_1IEngineReversibleCommand" kindref="compound">IEngineReversibleCommand</ref></type>
+        <definition>using SR_CORE_NS::Commands::SceneObjectChangeProperties::Super =  IEngineReversibleCommand</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_CORE_NS::Commands::SceneObjectChangeProperties::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/EngineCommands.h" line="100" column="9" bodyfile="Engine/inc/Engine/EngineCommands.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1aeeae726d97e288be7e29eb9922c9f52d" prot="private" static="no" mutable="no">
+        <type>SR_UTILS_NS::EntityId</type>
+        <definition>SR_UTILS_NS::EntityId SR_CORE_NS::Commands::SceneObjectChangeProperties::m_entityId</definition>
+        <argsstring></argsstring>
+        <name>m_entityId</name>
+        <qualifiedname>SR_CORE_NS::Commands::SceneObjectChangeProperties::m_entityId</qualifiedname>
+        <initializer>= SR_ID_INVALID</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/EngineCommands.h" line="113" column="31" bodyfile="Engine/inc/Engine/EngineCommands.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1ad2d36c09ea136ac31eb67929b6888e20" prot="private" static="no" mutable="no">
+        <type>SR_UTILS_NS::ISerializer::UniquePtr</type>
+        <definition>SR_UTILS_NS::ISerializer::UniquePtr SR_CORE_NS::Commands::SceneObjectChangeProperties::m_pNew</definition>
+        <argsstring></argsstring>
+        <name>m_pNew</name>
+        <qualifiedname>SR_CORE_NS::Commands::SceneObjectChangeProperties::m_pNew</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/EngineCommands.h" line="114" column="45" bodyfile="Engine/inc/Engine/EngineCommands.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1a467c0345d1af637f1ecf854044651792" prot="private" static="no" mutable="no">
+        <type>SR_UTILS_NS::ISerializer::UniquePtr</type>
+        <definition>SR_UTILS_NS::ISerializer::UniquePtr SR_CORE_NS::Commands::SceneObjectChangeProperties::m_pOld</definition>
+        <argsstring></argsstring>
+        <name>m_pOld</name>
+        <qualifiedname>SR_CORE_NS::Commands::SceneObjectChangeProperties::m_pOld</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/EngineCommands.h" line="115" column="45" bodyfile="Engine/inc/Engine/EngineCommands.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1a1b714e480c6396bfe2dfdd19cc0c1f8c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_CORE_NS::Commands::SceneObjectChangeProperties::SceneObjectChangeProperties</definition>
+        <argsstring>(const EnginePtr &amp;pEngine, const SR_UTILS_NS::SceneObject::Ptr &amp;pSO, SR_UTILS_NS::ISerializer::UniquePtr pOld, SR_UTILS_NS::ISerializer::UniquePtr pNew)</argsstring>
+        <name>SceneObjectChangeProperties</name>
+        <qualifiedname>SR_CORE_NS::Commands::SceneObjectChangeProperties::SceneObjectChangeProperties</qualifiedname>
+        <param>
+          <type>const EnginePtr &amp;</type>
+          <declname>pEngine</declname>
+        </param>
+        <param>
+          <type>const SR_UTILS_NS::SceneObject::Ptr &amp;</type>
+          <declname>pSO</declname>
+        </param>
+        <param>
+          <type>SR_UTILS_NS::ISerializer::UniquePtr</type>
+          <declname>pOld</declname>
+        </param>
+        <param>
+          <type>SR_UTILS_NS::ISerializer::UniquePtr</type>
+          <declname>pNew</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/EngineCommands.h" line="102" column="9" bodyfile="Engine/inc/Engine/EngineCommands.h" bodystart="102" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1a46e78ae204097983b1ea524975847b42" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_CORE_NS::Commands::SceneObjectChangeProperties::Redo</definition>
+        <argsstring>() override</argsstring>
+        <name>Redo</name>
+        <qualifiedname>SR_CORE_NS::Commands::SceneObjectChangeProperties::Redo</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1ReversibleCommand_1a7f99f1ed7cfe3fd646462fbbeed48683">Redo</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/EngineCommands.h" line="109" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1afd2565a93ff792731bcff5dfe82d414e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_CORE_NS::Commands::SceneObjectChangeProperties::Undo</definition>
+        <argsstring>() override</argsstring>
+        <name>Undo</name>
+        <qualifiedname>SR_CORE_NS::Commands::SceneObjectChangeProperties::Undo</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1ReversibleCommand_1a970cd668a7a4a7e5dee7602c9fa72cc4">Undo</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/EngineCommands.h" line="110" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_CORE_NS::Commands::IEngineReversibleCommand</label>
+        <link refid="classSR__CORE__NS_1_1Commands_1_1IEngineReversibleCommand"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_CORE_NS::Commands::SceneObjectChangeProperties</label>
+        <link refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::ICommand</label>
+        <link refid="classSR__UTILS__NS_1_1ICommand"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::ReversibleCommand</label>
+        <link refid="classSR__UTILS__NS_1_1ReversibleCommand"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>SR_CORE_NS::Commands::IEngineReversibleCommand</label>
+        <link refid="classSR__CORE__NS_1_1Commands_1_1IEngineReversibleCommand"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_CORE_NS::Commands::SceneObjectChangeProperties</label>
+        <link refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::ICommand</label>
+        <link refid="classSR__UTILS__NS_1_1ICommand"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::ReversibleCommand</label>
+        <link refid="classSR__UTILS__NS_1_1ReversibleCommand"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/inc/Engine/EngineCommands.h" line="99" column="5" bodyfile="Engine/inc/Engine/EngineCommands.h" bodystart="99" bodyend="117"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1ICommand_1aa10d7b2a972b838d5f49352e3d79dc5d" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectChangeProperties</scope><name>DATA_ID</name></member>
+      <member refid="classSR__CORE__NS_1_1Commands_1_1IEngineReversibleCommand_1a2e54bd8e825887ff963cefbee2d04b37" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectChangeProperties</scope><name>EnginePtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1ReversibleCommand_1afa1a887469cc778c0977b1909e05c9cf" prot="public" virt="virtual"><scope>SR_CORE_NS::Commands::SceneObjectChangeProperties</scope><name>GetName</name></member>
+      <member refid="classSR__UTILS__NS_1_1ICommand_1ac995871c5e810a021558bc0c974a2604" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectChangeProperties</scope><name>ICommand</name></member>
+      <member refid="classSR__CORE__NS_1_1Commands_1_1IEngineReversibleCommand_1a388e504efe0d60e2f1d17aa967ac62f0" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectChangeProperties</scope><name>IEngineReversibleCommand</name></member>
+      <member refid="classSR__UTILS__NS_1_1ReversibleCommand_1a288f4ab309c0575fa3ba86cfde41b297" prot="public" virt="virtual"><scope>SR_CORE_NS::Commands::SceneObjectChangeProperties</scope><name>Load</name></member>
+      <member refid="classSR__CORE__NS_1_1Commands_1_1IEngineReversibleCommand_1a122f548f2e3431a0b746a6d77f5ecb03" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectChangeProperties</scope><name>m_engine</name></member>
+      <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1aeeae726d97e288be7e29eb9922c9f52d" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectChangeProperties</scope><name>m_entityId</name></member>
+      <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1ad2d36c09ea136ac31eb67929b6888e20" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectChangeProperties</scope><name>m_pNew</name></member>
+      <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1a467c0345d1af637f1ecf854044651792" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectChangeProperties</scope><name>m_pOld</name></member>
+      <member refid="classSR__CORE__NS_1_1Commands_1_1IEngineReversibleCommand_1a057d071b0218031d89c79ff3f16817c4" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectChangeProperties</scope><name>m_scene</name></member>
+      <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1a46e78ae204097983b1ea524975847b42" prot="public" virt="virtual"><scope>SR_CORE_NS::Commands::SceneObjectChangeProperties</scope><name>Redo</name></member>
+      <member refid="classSR__UTILS__NS_1_1ReversibleCommand_1a8ec2f757fc0402ac760c35cbe6217239" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectChangeProperties</scope><name>ReversibleCommand</name></member>
+      <member refid="classSR__UTILS__NS_1_1ReversibleCommand_1a0ac1c0ad5dcc808207c4380c7b6cce90" prot="public" virt="virtual"><scope>SR_CORE_NS::Commands::SceneObjectChangeProperties</scope><name>Save</name></member>
+      <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1a1b714e480c6396bfe2dfdd19cc0c1f8c" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectChangeProperties</scope><name>SceneObjectChangeProperties</name></member>
+      <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1a14a4470491917f943a6712808dec0aa3" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectChangeProperties</scope><name>Super</name></member>
+      <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1afd2565a93ff792731bcff5dfe82d414e" prot="public" virt="virtual"><scope>SR_CORE_NS::Commands::SceneObjectChangeProperties</scope><name>Undo</name></member>
+      <member refid="classSR__UTILS__NS_1_1ICommand_1ac789effbfbda10305e9cc24ebbf284af" prot="public" virt="virtual"><scope>SR_CORE_NS::Commands::SceneObjectChangeProperties</scope><name>~ICommand</name></member>
+      <member refid="classSR__UTILS__NS_1_1ReversibleCommand_1ab7993ecf8325bffccd3a46bd4973a153" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectChangeProperties</scope><name>~ReversibleCommand</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -61,6 +61,7 @@
         <qualifiedname>SR_UTILS_NS::ReversibleCommand::Redo</qualifiedname>
         <reimplementedby refid="classSR__CORE__NS_1_1Commands_1_1ChangeHierarchySelected_1a382fb6e6b2f2c930e17146600c66e4fd">Redo</reimplementedby>
         <reimplementedby refid="classSR__CORE__NS_1_1Commands_1_1GameObjectTransform_1abc07f7ea5847d01723064eac080cfa42">Redo</reimplementedby>
+        <reimplementedby refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1a46e78ae204097983b1ea524975847b42">Redo</reimplementedby>
         <reimplementedby refid="classSR__CORE__NS_1_1Commands_1_1ComponentsChange_1ab6347ecb2e81af475b27a621184935bd">Redo</reimplementedby>
         <reimplementedby refid="classSR__CORE__NS_1_1Commands_1_1ComponentChange_1a9f3b86ab39186f36a6f802bab16a6d5d">Redo</reimplementedby>
         <reimplementedby refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectRename_1a46bafaa4b37040b28737500e00a681b4">Redo</reimplementedby>
@@ -87,6 +88,7 @@
         <qualifiedname>SR_UTILS_NS::ReversibleCommand::Undo</qualifiedname>
         <reimplementedby refid="classSR__CORE__NS_1_1Commands_1_1ChangeHierarchySelected_1afa0bdb15b3af5fe3433135d8dcf6cd68">Undo</reimplementedby>
         <reimplementedby refid="classSR__CORE__NS_1_1Commands_1_1GameObjectTransform_1ac77f8675c4b9de7931983f587a8da1e8">Undo</reimplementedby>
+        <reimplementedby refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1afd2565a93ff792731bcff5dfe82d414e">Undo</reimplementedby>
         <reimplementedby refid="classSR__CORE__NS_1_1Commands_1_1ComponentsChange_1aa7aba71e0a4db3e4f5e2defcadda3aa6">Undo</reimplementedby>
         <reimplementedby refid="classSR__CORE__NS_1_1Commands_1_1ComponentChange_1a33ee59bd8f3c82eb95373f22886c6c9c">Undo</reimplementedby>
         <reimplementedby refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectRename_1a2c2ab8d39cb20b7ab673ab1a98eff957">Undo</reimplementedby>
@@ -203,36 +205,42 @@
         </childnode>
       </node>
       <node id="10">
+        <label>SR_CORE_NS::Commands::SceneObjectChangeProperties</label>
+        <link refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
         <label>SR_CORE_NS::Commands::SceneObjectDelete</label>
         <link refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectDelete"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="11">
+      <node id="12">
         <label>SR_CORE_NS::Commands::SceneObjectInstance</label>
         <link refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectInstance"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="12">
+      <node id="13">
         <label>SR_CORE_NS::Commands::SceneObjectLayer</label>
         <link refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectLayer"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="13">
+      <node id="14">
         <label>SR_CORE_NS::Commands::SceneObjectRename</label>
         <link refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectRename"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="14">
+      <node id="15">
         <label>SR_CORE_NS::Commands::SceneObjectTag</label>
         <link refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="15">
+      <node id="16">
         <label>SR_UTILS_NS::GroupCommand</label>
         <link refid="classSR__UTILS__NS_1_1GroupCommand"/>
         <childnode refid="1" relation="public-inheritance">

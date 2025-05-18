@@ -57,13 +57,16 @@ Inherited by the following classes: [SR\_UTILS\_NS::IBaseSerializer](classSR__UT
 
 | Type | Name |
 | ---: | :--- |
+|  void | [**AddDontSaveTag**](#function-adddontsavetag) (const [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & tag) <br> |
 | virtual void | [**BeginArray**](#function-beginarray) (uint64\_t size, const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & id) = 0<br> |
 | virtual void | [**BeginItem**](#function-beginitem) (const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & id) = 0<br> |
 | virtual void | [**BeginObject**](#function-beginobject) (const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & id) = 0<br> |
+|  SR\_NODISCARD bool | [**CanSaveByTags**](#function-cansavebytags) (const std::set&lt; [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; & tags) const<br> |
 | virtual SR\_NODISCARD std::unique\_ptr&lt; [**IDeserializer**](classSR__UTILS__NS_1_1IDeserializer.md) &gt; | [**CreateDeserializer**](#function-createdeserializer) () const = 0<br> |
 | virtual void | [**EndArray**](#function-endarray) () = 0<br> |
 | virtual void | [**EndItem**](#function-enditem) () = 0<br> |
 | virtual void | [**EndObject**](#function-endobject) () = 0<br> |
+|  SR\_NODISCARD const std::set&lt; [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; & | [**GetDontSaveTags**](#function-getdontsavetags) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsAllowEmptyElementsInArray**](#function-isallowemptyelementsinarray) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsEditorAllowed**](#function-iseditorallowed) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsWriteDefaults**](#function-iswritedefaults) () noexcept const<br> |
@@ -137,6 +140,21 @@ using SR_UTILS_NS::ISerializer::UniquePtr =  std::unique_ptr<ISerializer>;
 
 
 
+### function AddDontSaveTag 
+
+```C++
+inline void SR_UTILS_NS::ISerializer::AddDontSaveTag (
+    const StringAtom & tag
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function BeginArray 
 
 ```C++
@@ -174,6 +192,21 @@ virtual void SR_UTILS_NS::ISerializer::BeginItem (
 virtual void SR_UTILS_NS::ISerializer::BeginObject (
     const SerializationId & id
 ) = 0
+```
+
+
+
+
+<hr>
+
+
+
+### function CanSaveByTags 
+
+```C++
+inline SR_NODISCARD bool SR_UTILS_NS::ISerializer::CanSaveByTags (
+    const std::set< StringAtom > & tags
+) const
 ```
 
 
@@ -226,6 +259,19 @@ virtual void SR_UTILS_NS::ISerializer::EndItem () = 0
 
 ```C++
 virtual void SR_UTILS_NS::ISerializer::EndObject () = 0
+```
+
+
+
+
+<hr>
+
+
+
+### function GetDontSaveTags 
+
+```C++
+inline SR_NODISCARD const std::set< StringAtom > & SR_UTILS_NS::ISerializer::GetDontSaveTags () noexcept const
 ```
 
 

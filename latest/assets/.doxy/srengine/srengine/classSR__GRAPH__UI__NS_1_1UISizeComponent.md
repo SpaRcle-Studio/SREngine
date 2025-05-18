@@ -117,7 +117,6 @@ See [SR\_UTILS\_NS::UI::UIModifierComponent](classSR__UTILS__NS_1_1UI_1_1UIModif
 | virtual void | [**OnAttached**](classSR__UTILS__NS_1_1UI_1_1UIModifierComponent.md#function-onattached) () override<br>_Вызывается после добавления компонента к игровому объекту_  |
 | virtual void | [**OnDestroy**](classSR__UTILS__NS_1_1UI_1_1UIModifierComponent.md#function-ondestroy) () override<br>_Вызывается когда компонент убирается с объекта, либо объект уничтожается. Может произойти отложенно._  |
 | virtual void | [**OnDetached**](classSR__UTILS__NS_1_1UI_1_1UIModifierComponent.md#function-ondetached) () override<br>_Вызывается когда компонент убирается с объекта, но до OnDestroy и только если был OnAttached._  |
-| virtual void | [**OnTransformSet**](classSR__UTILS__NS_1_1UI_1_1UIModifierComponent.md#function-ontransformset) () override<br> |
 | virtual void | [**PostProcess**](classSR__UTILS__NS_1_1UI_1_1UIModifierComponent.md#function-postprocess) ([**UIModifierContext**](structSR__UTILS__NS_1_1UI_1_1UIModifierContext.md) & context) const<br> |
 | virtual void | [**Prepare**](classSR__UTILS__NS_1_1UI_1_1UIModifierComponent.md#function-prepare) ([**UIModifierContext**](structSR__UTILS__NS_1_1UI_1_1UIModifierContext.md) & context) const<br> |
 |   | [**~UIModifierComponent**](classSR__UTILS__NS_1_1UI_1_1UIModifierComponent.md#function-uimodifiercomponent) () override<br> |
@@ -143,7 +142,7 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |  SR\_NODISCARD [**IComponentable**](classSR__UTILS__NS_1_1IComponentable.md) \* | [**GetParent**](classSR__UTILS__NS_1_1Component.md#function-getparent) () const<br> |
 |  SR\_NODISCARD SceneObjectPtr | [**GetRoot**](classSR__UTILS__NS_1_1Component.md#function-getroot) () const<br> |
 |  SR\_NODISCARD ScenePtr | [**GetScene**](classSR__UTILS__NS_1_1Component.md#function-getscene) () const<br> |
-|  SR\_NODISCARD SceneObjectPtr | [**GetSceneObject**](classSR__UTILS__NS_1_1Component.md#function-getsceneobject) () const<br> |
+|  SR\_NODISCARD const SceneObjectPtr & | [**GetSceneObject**](classSR__UTILS__NS_1_1Component.md#function-getsceneobject) () const<br> |
 |  SR\_NODISCARD [**Transform**](classSR__UTILS__NS_1_1Transform.md) \* | [**GetTransform**](classSR__UTILS__NS_1_1Component.md#function-gettransform) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**HasParent**](classSR__UTILS__NS_1_1Component.md#function-hasparent) () const<br> |
 |  SR\_NODISCARD bool | [**HasScene**](classSR__UTILS__NS_1_1Component.md#function-hasscene) () const<br> |
@@ -171,7 +170,6 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 | virtual void | [**OnLoaded**](classSR__UTILS__NS_1_1Component.md#function-onloaded) () <br>_Вызывается при загрузке компонента на игровой объект_  |
 | virtual void | [**OnMatrixDirty**](classSR__UTILS__NS_1_1Component.md#function-onmatrixdirty) () <br> |
 | virtual void | [**OnPriorityChanged**](classSR__UTILS__NS_1_1Component.md#function-onprioritychanged) () <br> |
-| virtual void | [**OnTransformSet**](classSR__UTILS__NS_1_1Component.md#function-ontransformset) () <br> |
 | virtual void | [**OnTriggerEnter**](classSR__UTILS__NS_1_1Component.md#function-ontriggerenter) (const [**CollisionData**](structSR__UTILS__NS_1_1CollisionData.md) & data) <br> |
 | virtual void | [**OnTriggerExit**](classSR__UTILS__NS_1_1Component.md#function-ontriggerexit) (const [**CollisionData**](structSR__UTILS__NS_1_1CollisionData.md) & data) <br> |
 | virtual void | [**OnTriggerStay**](classSR__UTILS__NS_1_1Component.md#function-ontriggerstay) (const [**CollisionData**](structSR__UTILS__NS_1_1CollisionData.md) & data) <br> |

@@ -139,15 +139,18 @@
     </collaborationgraph>
     <location file="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="27" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="27" bodyend="37"/>
     <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1ISerializer_1a1d2d760b1cfad5b8ec41245c0c5c2750" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>AddDontSaveTag</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1afc593da47599b35d268512476ff82c6e" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>BeginArray</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a6fb5a5919bf96edbfa2d6033aebc9aeb" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>BeginItem</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a277fe3c1f948403e0f29549e6c533b8c" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>BeginObject</name></member>
+      <member refid="classSR__UTILS__NS_1_1ISerializer_1a3a1935a22b5960ca47ef02b8e5427804" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>CanSaveByTags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRASerializer_1a0d16ba9747152037877e2fcdff618eea" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>CreateDeserializer</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a8e0143d0bcaa9e38f4d4a48f41c3fffc" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>EndArray</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1ab0342a1dda4c59d72c92f73df578c140" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>EndItem</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a6b3a9e740546990c39f91bbbf1236fdb" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>EndObject</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a6c2ed40e88068d5558157bb4238fc2c9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>GetCurrentNode</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a4db644f026964230f3933efe8655f8f2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>GetCurrentNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1ISerializer_1af18eff7354ce1f620d499e6754388737" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>GetDontSaveTags</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a44738c1f287d67625d1e757b1bff1b5c" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>GetNode</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a3ada5c5722382f3ba36fbeb607a4017a" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>GetNode</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1ad4afdab87bcec0fc25bf96c7490d10fe" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>GetWalkNode</name></member>

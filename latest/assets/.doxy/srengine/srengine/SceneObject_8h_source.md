@@ -28,10 +28,10 @@ namespace SR_UTILS_NS {
 
     SR_ENUM_NS_CLASS_T(SceneObjectType, int16_t,
         Invalid = -1,
-        GameObject = 0
+        GameObject = 0,
+        Node
     )
 
-    
     class SceneObject : public IComponentable {
         SR_CLASS()
         using Super = IComponentable;

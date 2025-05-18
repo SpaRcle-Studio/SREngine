@@ -178,13 +178,16 @@ See [SR\_UTILS\_NS::ISerializer](classSR__UTILS__NS_1_1ISerializer.md)
 
 | Type | Name |
 | ---: | :--- |
+|  void | [**AddDontSaveTag**](classSR__UTILS__NS_1_1ISerializer.md#function-adddontsavetag) (const [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & tag) <br> |
 | virtual void | [**BeginArray**](classSR__UTILS__NS_1_1ISerializer.md#function-beginarray) (uint64\_t size, const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & id) = 0<br> |
 | virtual void | [**BeginItem**](classSR__UTILS__NS_1_1ISerializer.md#function-beginitem) (const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & id) = 0<br> |
 | virtual void | [**BeginObject**](classSR__UTILS__NS_1_1ISerializer.md#function-beginobject) (const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & id) = 0<br> |
+|  SR\_NODISCARD bool | [**CanSaveByTags**](classSR__UTILS__NS_1_1ISerializer.md#function-cansavebytags) (const std::set&lt; [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; & tags) const<br> |
 | virtual SR\_NODISCARD std::unique\_ptr&lt; [**IDeserializer**](classSR__UTILS__NS_1_1IDeserializer.md) &gt; | [**CreateDeserializer**](classSR__UTILS__NS_1_1ISerializer.md#function-createdeserializer) () const = 0<br> |
 | virtual void | [**EndArray**](classSR__UTILS__NS_1_1ISerializer.md#function-endarray) () = 0<br> |
 | virtual void | [**EndItem**](classSR__UTILS__NS_1_1ISerializer.md#function-enditem) () = 0<br> |
 | virtual void | [**EndObject**](classSR__UTILS__NS_1_1ISerializer.md#function-endobject) () = 0<br> |
+|  SR\_NODISCARD const std::set&lt; [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; & | [**GetDontSaveTags**](classSR__UTILS__NS_1_1ISerializer.md#function-getdontsavetags) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsAllowEmptyElementsInArray**](classSR__UTILS__NS_1_1ISerializer.md#function-isallowemptyelementsinarray) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsEditorAllowed**](classSR__UTILS__NS_1_1ISerializer.md#function-iseditorallowed) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsWriteDefaults**](classSR__UTILS__NS_1_1ISerializer.md#function-iswritedefaults) () noexcept const<br> |

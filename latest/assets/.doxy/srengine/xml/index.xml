@@ -976,7 +976,6 @@
     <member refid="classSR__SCRIPTING__NS_1_1Behaviour_1a81e6329898ec5e3ab200c8186e7afa3e" kind="function"><name>Start</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1Behaviour_1a317c3a1d17d3e1255b86fcfe10d0b976" kind="function"><name>Update</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1Behaviour_1ab1af6da65d85b2cc766284611b21fee6" kind="function"><name>FixedUpdate</name></member>
-    <member refid="classSR__SCRIPTING__NS_1_1Behaviour_1a71dc3c9caddcd82f5cb7456aa5c15b98" kind="function"><name>OnTransformSet</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1Behaviour_1a89a8feafdad35eb9d09ba5f78d0736d0" kind="function"><name>OnCollisionEnter</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1Behaviour_1ae0c115da3228a5b7fc17e87561cd5918" kind="function"><name>OnCollisionStay</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1Behaviour_1a7d763f010b8e6760d95081c776e6e2de" kind="function"><name>OnCollisionExit</name></member>
@@ -1620,7 +1619,6 @@
     <member refid="classSR__UTILS__NS_1_1Component_1a135465a44a99fa3e946782dbc11f56c7" kind="function"><name>~Component</name></member>
     <member refid="classSR__UTILS__NS_1_1Component_1a6e4032583aabcd6cfebed3e13f39a1a2" kind="function"><name>OnMatrixDirty</name></member>
     <member refid="classSR__UTILS__NS_1_1Component_1aee0027f96ce5bec8a30edf069fa4dc10" kind="function"><name>OnPriorityChanged</name></member>
-    <member refid="classSR__UTILS__NS_1_1Component_1adb3637af3274c542b44b17a27bebd5a0" kind="function"><name>OnTransformSet</name></member>
     <member refid="classSR__UTILS__NS_1_1Component_1af7e2ecd6bef36595ac12274d6a6cc77c" kind="function"><name>OnLoaded</name></member>
     <member refid="classSR__UTILS__NS_1_1Component_1a6e3f39cd7894486df8af8336c6778036" kind="function"><name>OnAttached</name></member>
     <member refid="classSR__UTILS__NS_1_1Component_1aba0d2511d0fb2342ae68f97c24f05ffc" kind="function"><name>OnDetached</name></member>
@@ -1662,7 +1660,7 @@
     <member refid="classSR__UTILS__NS_1_1Component_1a0baa97c9e541c9150845fcd338b6f4f8" kind="function"><name>GetScene</name></member>
     <member refid="classSR__UTILS__NS_1_1Component_1a5dc93a6f5bb2867f7a20476c569451ed" kind="function"><name>HasScene</name></member>
     <member refid="classSR__UTILS__NS_1_1Component_1a9d72186be6f9c2f138a8ad989b440c01" kind="function"><name>GetGameObject</name></member>
-    <member refid="classSR__UTILS__NS_1_1Component_1afa3d93c2126fa899ebbcc8ab7b752291" kind="function"><name>GetSceneObject</name></member>
+    <member refid="classSR__UTILS__NS_1_1Component_1a95a4325a27a80c7fbbf65c8ab86579a5" kind="function"><name>GetSceneObject</name></member>
     <member refid="classSR__UTILS__NS_1_1Component_1a02cdaa6ae8c728a1f66192c9e6f54322" kind="function"><name>TryGetScene</name></member>
     <member refid="classSR__UTILS__NS_1_1Component_1a499a53cb08f173222c9a0bbc06af98fd" kind="function"><name>GetRoot</name></member>
     <member refid="classSR__UTILS__NS_1_1Component_1ab6d313e3075c5dabf5b41189b10f236e" kind="function"><name>GetTransform</name></member>
@@ -1965,7 +1963,7 @@
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection_1aaeda44b670fe0b20aad9e1b392e00393" kind="variable"><name>type</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection_1a94f2bc7d29e9c42e28bab70275017378" kind="variable"><name>direction</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection_1a91f59540be25dfa4adc532f6e4cceb0c" kind="variable"><name>degree</name></member>
-    <member refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection_1a7a960f36ea3688846ea303ea59a7e35a" kind="variable"><name></name></member>
+    <member refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection_1a0f670c7b37027352bfbf77ecc6d36338" kind="variable"><name></name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1Web_1_1CSSGradientColor" kind="struct"><name>SR_UTILS_NS::Web::CSSGradientColor</name>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSGradientColor_1a49b905f66d5b3d3ba91af4dffc67428d" kind="variable"><name>color</name></member>
@@ -2068,7 +2066,7 @@
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1ad3579d47e3f497ca3d4152eb15bb3478" kind="variable"><name>percent</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a52001a76a637197e9937f1b5f58d7330" kind="variable"><name>dpi</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a091cd7f8d1d79db1a4332834add1efa9" kind="variable"><name>deg</name></member>
-    <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a99ce101da7dddc73e804e4232a87eada" kind="variable"><name></name></member>
+    <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a1a3300e87d8b2970063346a870a343f4" kind="variable"><name></name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a248defadfbdae30a585a521b88acb427" kind="function"><name>CSSSizeValue</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a5e2d6b1465a1b725206848946d49b41c" kind="function"><name>CSSSizeValue</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1aaf98edc7b6d691eeef454ce75196ccef" kind="function"><name>CSSSizeValue</name></member>
@@ -3563,7 +3561,7 @@
     <member refid="classSR__MATH__NS_1_1FColor_1ad84bb8e1543675f473971257b653aefb" kind="variable"><name>b</name></member>
     <member refid="classSR__MATH__NS_1_1FColor_1ac5096048b42774f3cc2e1740f8484033" kind="variable"><name>a</name></member>
     <member refid="classSR__MATH__NS_1_1FColor_1ae04e4e4dcf5b40d938fde5064ad6e0f1" kind="variable"><name>coord</name></member>
-    <member refid="classSR__MATH__NS_1_1FColor_1a24b98b89703fcce5d98e87abcbc89313" kind="variable"><name></name></member>
+    <member refid="classSR__MATH__NS_1_1FColor_1aeb052aa1c0e9cff1c97c20ecf7cd95c1" kind="variable"><name></name></member>
     <member refid="classSR__MATH__NS_1_1FColor_1ab46897f38de7a6c15c5ca80a2444453d" kind="function"><name>FColor</name></member>
     <member refid="classSR__MATH__NS_1_1FColor_1a0959cda756be7ea55274b7ac2a2237bd" kind="function"><name>FColor</name></member>
     <member refid="classSR__MATH__NS_1_1FColor_1a90ea0acb67cfefccd7ea28439b1cbc2a" kind="function"><name>FColor</name></member>
@@ -4423,6 +4421,7 @@
     <member refid="structEvoScript_1_1Header_1a3d6e8228d815dec253f6abc3cffea694" kind="function"><name>ToString</name></member>
   </compound>
   <compound refid="classSR__CORE__GUI__NS_1_1Hierarchy" kind="class"><name>SR_CORE_GUI_NS::Hierarchy</name>
+    <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a5d3ed77418e9c5c85b90c1570c91d608" kind="variable"><name>m_availableUINodes</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1aa87072ea55fd69d87164f5da18ed13e3" kind="variable"><name>m_scene</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1ab78d66a50cb4fb66c63950ef3668bff9" kind="variable"><name>m_pointersHolder</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a9bda454833af0943f4e392f88df454e7" kind="variable"><name>m_selected</name></member>
@@ -4687,6 +4686,7 @@
     <member refid="classSR__UTILS__NS_1_1IDeserializer_1afff9a5dd6dd23fd254378b08558878a1af0050362b45a1bdf34a9b8ab6c97a433" kind="enumvalue"><name>IsNull</name></member>
     <member refid="classSR__UTILS__NS_1_1IDeserializer_1afff9a5dd6dd23fd254378b08558878a1a78765241e9f1dad027b6e078afb94cde" kind="enumvalue"><name>HasDifferentType</name></member>
     <member refid="classSR__UTILS__NS_1_1IDeserializer_1ae91b8af83592f3a9e46f46e953a292a9" kind="typedef"><name>UniquePtr</name></member>
+    <member refid="classSR__UTILS__NS_1_1IDeserializer_1a51ee4eadfdc11c5096a92037efc36a22" kind="variable"><name>m_dontLoadTags</name></member>
     <member refid="classSR__UTILS__NS_1_1IDeserializer_1aa8f3b9a70102c6be70594dec1046ae87" kind="function"><name>~IDeserializer</name></member>
     <member refid="classSR__UTILS__NS_1_1IDeserializer_1abca544b939d0bcf0dba8055f84c499f9" kind="function"><name>SaveToFile</name></member>
     <member refid="classSR__UTILS__NS_1_1IDeserializer_1a77e37dee1649da24ce52a95bbcaa4c3b" kind="function"><name>LoadFromFile</name></member>
@@ -4722,6 +4722,9 @@
     <member refid="classSR__UTILS__NS_1_1IDeserializer_1aa11c6c2d723190bc4cc7242ee8e729bf" kind="function"><name>ReadFloat</name></member>
     <member refid="classSR__UTILS__NS_1_1IDeserializer_1ac65478e14e08ce935b91f52fc57f8a6f" kind="function"><name>ReadDouble</name></member>
     <member refid="classSR__UTILS__NS_1_1IDeserializer_1a7603f7f0fbbd7df02079b32dc5cb5541" kind="function"><name>ReportError</name></member>
+    <member refid="classSR__UTILS__NS_1_1IDeserializer_1a6519dc44ffc28952180e63430bf2ad69" kind="function"><name>AddDontLoadTag</name></member>
+    <member refid="classSR__UTILS__NS_1_1IDeserializer_1a41aa84c504a8dc9dda4f8e8fc85972b6" kind="function"><name>SetDontLoadTags</name></member>
+    <member refid="classSR__UTILS__NS_1_1IDeserializer_1a838c72ce3981ac0c1a131dc575219e57" kind="function"><name>CanLoadByTags</name></member>
   </compound>
   <compound refid="classSR__CORE__NS_1_1Commands_1_1IEngineReversibleCommand" kind="class"><name>SR_CORE_NS::Commands::IEngineReversibleCommand</name>
     <member refid="classSR__CORE__NS_1_1Commands_1_1IEngineReversibleCommand_1a2e54bd8e825887ff963cefbee2d04b37" kind="typedef"><name>EnginePtr</name></member>
@@ -5048,6 +5051,7 @@
     <member refid="classSR__CORE__GUI__NS_1_1Inspector_1aed09ddc67d81f70275d1a423f832a732" kind="variable"><name>m_scrollBarWidth</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1Inspector_1aff0a2530393b2b7d2d25a944f025de5d" kind="variable"><name>m_isDragMode</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1Inspector_1abb5f789da766eb740e9599053341151e" kind="variable"><name>m_onBeforeChangeCallback</name></member>
+    <member refid="classSR__CORE__GUI__NS_1_1Inspector_1ac5d118daa70f8393fc51912c98e78f22" kind="variable"><name>m_pSOSerializer</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1Inspector_1aab163a3ff458fd8832d0fbfcf71ad1ad" kind="variable"><name>m_pTransformSerializer</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a8002a8fd248ab6909e91c6e9d4f2ac42" kind="variable"><name>m_pComponentsSerializer</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a2ad69374d5366d017bd23e7cbb383028" kind="variable"><name>m_pComponentSerializer</name></member>
@@ -5066,6 +5070,8 @@
     <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a08f6061986fc3eb0ea8e22aaa9e48f33" kind="function"><name>InspectLayer</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1Inspector_1add4a5f16b651574120837e39704469ba" kind="function"><name>DrawComponent</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1Inspector_1ac7db74b38296421d6d6fa8beb4e0b5d3" kind="function"><name>InitCategories</name></member>
+    <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a2f2eddc269dc057f5cbd30f2e52bb3cc" kind="function"><name>DrawGameObject</name></member>
+    <member refid="classSR__CORE__GUI__NS_1_1Inspector_1ad168a8ea4bf364ae2b85bfe98bc593dc" kind="function"><name>DrawSceneObject</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a252868a6037c6272e0ae3d3696064420" kind="function"><name>DrawComponentCategory</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1Inspector_1aefa9ce54f0181c271726e74c98648a7e" kind="function"><name>CreateDrawerContext</name></member>
   </compound>
@@ -5341,6 +5347,7 @@
   </compound>
   <compound refid="classSR__UTILS__NS_1_1ISerializer" kind="class"><name>SR_UTILS_NS::ISerializer</name>
     <member refid="classSR__UTILS__NS_1_1ISerializer_1af9e595d543868d640dd236cf1e4ff58a" kind="typedef"><name>UniquePtr</name></member>
+    <member refid="classSR__UTILS__NS_1_1ISerializer_1a730854d0574854295fd0569cc343bfc4" kind="variable"><name>m_dontSaveTags</name></member>
     <member refid="classSR__UTILS__NS_1_1ISerializer_1a7438185473bbe41414fe8ecb252cdc7a" kind="variable"><name>m_isAllowEmptyElementsInArray</name></member>
     <member refid="classSR__UTILS__NS_1_1ISerializer_1ac3ff4cacfebdc6dd377ab8fc4745f46d" kind="variable"><name>m_isNeedWriteDefaults</name></member>
     <member refid="classSR__UTILS__NS_1_1ISerializer_1a67759b1aefa7644b01ab8405b83ab11a" kind="variable"><name>m_isEditorAllowed</name></member>
@@ -5376,6 +5383,9 @@
     <member refid="classSR__UTILS__NS_1_1ISerializer_1a4e80224378de63bb9d2c20a563770e45" kind="function"><name>EndObject</name></member>
     <member refid="classSR__UTILS__NS_1_1ISerializer_1ac3fec9c9b5711d6747b803971e22a98e" kind="function"><name>BeginArray</name></member>
     <member refid="classSR__UTILS__NS_1_1ISerializer_1a2e9e9e2fdfa0be68e4b53dd553540302" kind="function"><name>EndArray</name></member>
+    <member refid="classSR__UTILS__NS_1_1ISerializer_1af18eff7354ce1f620d499e6754388737" kind="function"><name>GetDontSaveTags</name></member>
+    <member refid="classSR__UTILS__NS_1_1ISerializer_1a1d2d760b1cfad5b8ec41245c0c5c2750" kind="function"><name>AddDontSaveTag</name></member>
+    <member refid="classSR__UTILS__NS_1_1ISerializer_1a3a1935a22b5960ca47ef02b8e5427804" kind="function"><name>CanSaveByTags</name></member>
     <member refid="classSR__UTILS__NS_1_1ISerializer_1a82837f9312babc8ce2919775b05b415a" kind="function"><name>SaveToFile</name></member>
   </compound>
   <compound refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator" kind="class"><name>SR_SRSL_NS::ISRSLCodeGenerator</name>
@@ -6819,6 +6829,10 @@
   </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1BVector4_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::BVector4 &gt;</name>
   </compound>
+  <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1FRect_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::FRect &gt;</name>
+    <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1FRect_01_4_1a9b06fe82dac05c63b37488b8ecc3e7f6" kind="function"><name>Save</name></member>
+    <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1FRect_01_4_1a0ecb66a80cb336c257beeaecc729261f" kind="function"><name>Load</name></member>
+  </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1FSize_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::FSize &gt;</name>
     <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1FSize_01_4_1a11dd7c4b1ed8b5fe12c61b707e0456e5" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1FSize_01_4_1a4df9c6c1976a5edcbbaf4f64366ee458" kind="function"><name>Load</name></member>
@@ -6835,6 +6849,10 @@
   </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1FVector6_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::FVector6 &gt;</name>
   </compound>
+  <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1IRect_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::IRect &gt;</name>
+    <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1IRect_01_4_1a2403d493fac969b5a0d61259830e6cc7" kind="function"><name>Save</name></member>
+    <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1IRect_01_4_1a4e4aa55d813448c1848e6e89c5098b03" kind="function"><name>Load</name></member>
+  </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1IVector2_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::IVector2 &gt;</name>
   </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1IVector3_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::IVector3 &gt;</name>
@@ -6846,6 +6864,10 @@
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1Quaternion_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::Quaternion &gt;</name>
     <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1Quaternion_01_4_1a5c5b24a7e8e7d080013a327e3b66783c" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1Quaternion_01_4_1ab18eb8a6d95e96df54a64fa8ba0298f4" kind="function"><name>Load</name></member>
+  </compound>
+  <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1URect_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::URect &gt;</name>
+    <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1URect_01_4_1a2dc55095e7ef049c96c6fb92f342df56" kind="function"><name>Save</name></member>
+    <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1URect_01_4_1a579d0aa4bc5683a82e499015208d47fc" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1UVector2_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::UVector2 &gt;</name>
   </compound>
@@ -8377,14 +8399,22 @@
     <member refid="structSR__MATH__NS_1_1Rect_1adc22b9cfb78813df1f1f007180bedf1d" kind="variable"><name>y</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a7e13bd594ab338f0901e163bbe27283f" kind="variable"><name>w</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a9aede93f101b42c6c96837e35f77248a" kind="variable"><name>h</name></member>
+    <member refid="structSR__MATH__NS_1_1Rect_1af41edcca9d35b665442801c9cd85401d" kind="variable"><name>left</name></member>
+    <member refid="structSR__MATH__NS_1_1Rect_1afac79f733c570338f92bdacb7f8a739a" kind="variable"><name>top</name></member>
+    <member refid="structSR__MATH__NS_1_1Rect_1ada73e52fdaec11e58f0146a049968b03" kind="variable"><name>right</name></member>
+    <member refid="structSR__MATH__NS_1_1Rect_1a6b5601b73299fa9f34974537938a5540" kind="variable"><name>bottom</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a291917b262fd3db63af18713e0142a94" kind="variable"><name>xy</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a876d951a1851731af35458cc261b55ff" kind="variable"><name>wh</name></member>
+    <member refid="structSR__MATH__NS_1_1Rect_1ab6fda76a25854c3dc125935f66485ef3" kind="variable"><name>position</name></member>
+    <member refid="structSR__MATH__NS_1_1Rect_1a45b0d34ad00b2121777a034bef7eeb8f" kind="variable"><name>size</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a406e1b6ebb516602a7c98cb5dc2f2ff8" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a89b07119c3fa0a19fa63b2179d1327c7" kind="function"><name>Rect</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1afc07cf71e559d2acbe5ab00acc7fe65d" kind="function"><name>Rect</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a6ef063c8e43e96d191d5b7b27e721ba6" kind="function"><name>Rect</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a1a4d58a21c5dba425598316dce72fd56" kind="function"><name>Rect</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a205aa16502a6e2cd1fdc07f2470a498f" kind="function"><name>Rect</name></member>
+    <member refid="structSR__MATH__NS_1_1Rect_1a640e7aa37b033710c932dc549572fb09" kind="function"><name>Shrink</name></member>
+    <member refid="structSR__MATH__NS_1_1Rect_1a366fe9f571a082b89affd471b846372a" kind="function"><name>Shrink</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a324801493494b47583ab2b0619115706" kind="function"><name>X</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a7c71987a27bf70bfeabf5f0045488183" kind="function"><name>Y</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a21c722de5d7dc33d91d3fe80739763c3" kind="function"><name>Width</name></member>
@@ -8393,8 +8423,12 @@
     <member refid="structSR__MATH__NS_1_1Rect_1ac44c0d23925ce200d72d10e331a59537" kind="function"><name>Right</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1ac4a09edf4875060eb2208db5e8d8f0ec" kind="function"><name>Bottom</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a8bfa0261373bf73cb46d2d7bc7a47747" kind="function"><name>Top</name></member>
+    <member refid="structSR__MATH__NS_1_1Rect_1acf14fb0d2f4fbf6df3e8f1eba67ead34" kind="function"><name>Horizontal</name></member>
+    <member refid="structSR__MATH__NS_1_1Rect_1a965ab8945fd17c5cba4d7bafccc82836" kind="function"><name>Vertical</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1aa06964911a225f92cce7ac1476331fa3" kind="function"><name>XY</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a36d7b28462ec37ac7426c4802956bdc4" kind="function"><name>WH</name></member>
+    <member refid="structSR__MATH__NS_1_1Rect_1ac412ed9919879ff897d2708604ac4f85" kind="function"><name>TopBottom</name></member>
+    <member refid="structSR__MATH__NS_1_1Rect_1a98d32fbf083a129317cfa087395dd7a0" kind="function"><name>LeftRight</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a3d5eb72fbe410c5608f3ba54835b5ef0" kind="function"><name>XY0</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a211f67c0ca8c80a3df0158f32805e277" kind="function"><name>WH0</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1ac7a106f7da3c19300696dcc5a8770809" kind="function"><name>WH1</name></member>
@@ -8415,6 +8449,11 @@
     <member refid="structSR__MATH__NS_1_1Rect_1a1adaf44c61d5e8362101ff401289af24" kind="function"><name>SetRight</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a0b48299514a2587622e6569875c5ff2f" kind="function"><name>SetTop</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a08f5890807d95e8430f25fadda7b673e" kind="function"><name>FromTranslationAndScale</name></member>
+  </compound>
+  <compound refid="classSR__CORE__GUI__NS_1_1RectPropertyDrawer" kind="class"><name>SR_CORE_GUI_NS::RectPropertyDrawer</name>
+    <member refid="classSR__CORE__GUI__NS_1_1RectPropertyDrawer_1acc778adbbaad6032fad2c2c0ec9c5059" kind="typedef"><name>Ptr</name></member>
+    <member refid="classSR__CORE__GUI__NS_1_1RectPropertyDrawer_1ad15122d1e3c7e898366c50e1afedf24a" kind="variable"><name>m_numberTempData</name></member>
+    <member refid="classSR__CORE__GUI__NS_1_1RectPropertyDrawer_1ae449c00b682f468e42881b5814d5f790" kind="function"><name>Draw</name></member>
   </compound>
   <compound refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent" kind="class"><name>SR_UTILS_NS::Tests::ReflectionTestComponent</name>
     <member refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1add9657d596c47c9679e668637db0c914" kind="typedef"><name>Super</name></member>
@@ -9450,6 +9489,15 @@
     <member refid="classSR__WORLD__NS_1_1SceneLogic_1a05c469fa255f48e4f7b3588ffe285735" kind="function"><name>LoadLogic</name></member>
     <member refid="classSR__WORLD__NS_1_1SceneLogic_1a8d989f46c40b47c7fb25afc481e84fc4" kind="function"><name>Reload</name></member>
   </compound>
+  <compound refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties" kind="class"><name>SR_CORE_NS::Commands::SceneObjectChangeProperties</name>
+    <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1a14a4470491917f943a6712808dec0aa3" kind="typedef"><name>Super</name></member>
+    <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1aeeae726d97e288be7e29eb9922c9f52d" kind="variable"><name>m_entityId</name></member>
+    <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1ad2d36c09ea136ac31eb67929b6888e20" kind="variable"><name>m_pNew</name></member>
+    <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1a467c0345d1af637f1ecf854044651792" kind="variable"><name>m_pOld</name></member>
+    <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1a1b714e480c6396bfe2dfdd19cc0c1f8c" kind="function"><name>SceneObjectChangeProperties</name></member>
+    <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1a46e78ae204097983b1ea524975847b42" kind="function"><name>Redo</name></member>
+    <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties_1afd2565a93ff792731bcff5dfe82d414e" kind="function"><name>Undo</name></member>
+  </compound>
   <compound refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectDelete" kind="class"><name>SR_CORE_NS::Commands::SceneObjectDelete</name>
     <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectDelete_1af5dcae5b5d0ba1e0f0e0624a8d9d15ab" kind="typedef"><name>Super</name></member>
     <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectDelete_1a9c4eda104dff30ab1beb1e72d98fed5a" kind="variable"><name>m_entityId</name></member>
@@ -10195,7 +10243,7 @@
   <compound refid="structSR__MATH__NS_1_1Size" kind="struct"><name>SR_MATH_NS::Size</name>
     <member refid="structSR__MATH__NS_1_1Size_1aca993cc4f087238f52af9401d5a4c075" kind="variable"><name>value</name></member>
     <member refid="structSR__MATH__NS_1_1Size_1a22fb4d151dfcbad7ef2dd298ab816a6b" kind="variable"><name>v</name></member>
-    <member refid="structSR__MATH__NS_1_1Size_1a368cbda216a5cc8b8ada90f8a70d0a6d" kind="variable"><name></name></member>
+    <member refid="structSR__MATH__NS_1_1Size_1abf31eb7a8bbd94abc63940a91f7a512f" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1Size_1acaedcbaca354b1bc1fefb28af1b48d99" kind="variable"><name>metric</name></member>
     <member refid="structSR__MATH__NS_1_1Size_1a3b286d50f061414353b23b287c0b64b8" kind="function"><name>Size</name></member>
     <member refid="structSR__MATH__NS_1_1Size_1aafc6c9612b22c422e319732be1bd87ba" kind="function"><name>Size</name></member>
@@ -10209,7 +10257,7 @@
     <member refid="structSR__MATH__NS_1_1Size2_1a9948760c262a06fbf0119030859c988d" kind="variable"><name>height</name></member>
     <member refid="structSR__MATH__NS_1_1Size2_1aff1b84fa79efc11cd510f87baa635d0f" kind="variable"><name>w</name></member>
     <member refid="structSR__MATH__NS_1_1Size2_1a03cfbc0b7cee36bb92b19542f26b47f4" kind="variable"><name>h</name></member>
-    <member refid="structSR__MATH__NS_1_1Size2_1a16468e58e7b04652a31275016b0a86d2" kind="variable"><name></name></member>
+    <member refid="structSR__MATH__NS_1_1Size2_1af8ab9b37f3913c08db841e18b336b031" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1Size2_1ac69c88691e5a5f4f53b10ed9009d3ef2" kind="function"><name>Size2</name></member>
     <member refid="structSR__MATH__NS_1_1Size2_1a7d41c28a249ee1bf919a7eef9c87e894" kind="function"><name>HasPercent</name></member>
     <member refid="structSR__MATH__NS_1_1Size2_1affafdef3eacd39d59c2b3e83fba3e746" kind="function"><name>ToPixels</name></member>
@@ -10598,8 +10646,6 @@
     <member refid="classSR__GTYPES__NS_1_1Sprite_1a9a986ce1c823ab1f0a6f21b4c5830195" kind="variable"><name>m_sliced</name></member>
     <member refid="classSR__GTYPES__NS_1_1Sprite_1af4b23b254f86aeae9c29625bb19dc773" kind="variable"><name>m_textureBorder</name></member>
     <member refid="classSR__GTYPES__NS_1_1Sprite_1afcb9cf60828b7b03dd5b224ec6ee3da9" kind="variable"><name>m_windowBorder</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Sprite_1a0d2860f38e8a3a69cb77467843250638" kind="function"><name>Sprite</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Sprite_1ad83ec7b0f5e1844e07658fa0f84ec58d" kind="function"><name>~Sprite</name></member>
     <member refid="classSR__GTYPES__NS_1_1Sprite_1a73ebdc87ce357476550d5b5f1ac7c64f" kind="function"><name>UseMaterial</name></member>
     <member refid="classSR__GTYPES__NS_1_1Sprite_1a45824885d9aa2fa19632d774c5a1c3c3" kind="function"><name>UseModelMatrix</name></member>
     <member refid="classSR__GTYPES__NS_1_1Sprite_1adc6b23cd26da870ee3ff8eb1fc408353" kind="function"><name>IsSupportVBO</name></member>
@@ -12311,6 +12357,27 @@
     <member refid="classSR__GRAPH__UI__NS_1_1UICanvasComponent_1a2c5f339dfea54ec0e7212354bba6bcf2" kind="typedef"><name>Super</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UICanvasComponent_1a3bc8103729ea0addedc08a9d4a539ced" kind="function"><name>Prepare</name></member>
   </compound>
+  <compound refid="classSR__GRAPH__UI__NS_1_1UIContainerNode" kind="class"><name>SR_GRAPH_UI_NS::UIContainerNode</name>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIContainerNode_1a5be3a119f7276950783129aecf80fb51" kind="typedef"><name>Super</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIContainerNode_1a8d879401c41a2576ebb2bb877e3058b8" kind="typedef"><name>Ptr</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIContainerNode_1ad4d02c4b552de0afadbc03dede42c006" kind="function"><name>GetNodeType</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIContainerNode_1a73e99cbd3f691d045470e967399f617e" kind="function"><name>Layout</name></member>
+  </compound>
+  <compound refid="classSR__GRAPH__UI__NS_1_1UIControlNode" kind="class"><name>SR_GRAPH_UI_NS::UIControlNode</name>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIControlNode_1a65d49c13f7fe6f139dd544e6169812b2" kind="typedef"><name>Super</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIControlNode_1ac13f2b0bcccbc75b7f6f92175131b4bb" kind="typedef"><name>Ptr</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIControlNode_1aed9e0fdaf515e46bd313c6e8ba6e5f55" kind="variable"><name>m_layout</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIControlNode_1a8fba6053255bf4544d5b68ca63782910" kind="function"><name>Layout</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIControlNode_1ab78663350fcbcc13710c5eb70a328689" kind="function"><name>CalculateContentSize</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIControlNode_1a8a419ef8e6027d2aa865af619e0444ec" kind="function"><name>GetLayout</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIControlNode_1a3c4273fc4e2d0b941e3dbf50e7685cf1" kind="function"><name>GetNodeType</name></member>
+  </compound>
+  <compound refid="classSR__GRAPH__UI__NS_1_1UIHBoxContainerNode" kind="class"><name>SR_GRAPH_UI_NS::UIHBoxContainerNode</name>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIHBoxContainerNode_1acba82461e4702289279dac6096444b6b" kind="typedef"><name>Super</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIHBoxContainerNode_1a9d46c486db8a32b3a82201a132d4da09" kind="typedef"><name>Ptr</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIHBoxContainerNode_1aa0b8b0ec56aee45e2828ae48a67bf6c9" kind="function"><name>CalculateContentSize</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIHBoxContainerNode_1a686c92da403265a69cb91d560929964a" kind="function"><name>Layout</name></member>
+  </compound>
   <compound refid="classSR__UTILS__NS_1_1UI_1_1UIModifierComponent" kind="class"><name>SR_UTILS_NS::UI::UIModifierComponent</name>
     <member refid="classSR__UTILS__NS_1_1UI_1_1UIModifierComponent_1aa098e4c244dc60ddddc40c0ef07ca1d3" kind="typedef"><name>Super</name></member>
     <member refid="classSR__UTILS__NS_1_1UI_1_1UIModifierComponent_1aff224ddb3228e0b430f171daf127ba56" kind="variable"><name>m_connected</name></member>
@@ -12319,7 +12386,6 @@
     <member refid="classSR__UTILS__NS_1_1UI_1_1UIModifierComponent_1ab4fb1f64218f317ea9a1119f81e7afb8" kind="function"><name>OnAttached</name></member>
     <member refid="classSR__UTILS__NS_1_1UI_1_1UIModifierComponent_1a670cae14956d5e918778051a2f28dc28" kind="function"><name>OnDetached</name></member>
     <member refid="classSR__UTILS__NS_1_1UI_1_1UIModifierComponent_1a6c173d591284a7595318939dd6d091ed" kind="function"><name>OnDestroy</name></member>
-    <member refid="classSR__UTILS__NS_1_1UI_1_1UIModifierComponent_1a00c49d45f26c1d382a212578777c16dc" kind="function"><name>OnTransformSet</name></member>
     <member refid="classSR__UTILS__NS_1_1UI_1_1UIModifierComponent_1a43010353b78390de8d227ded904efad3" kind="function"><name>Prepare</name></member>
     <member refid="classSR__UTILS__NS_1_1UI_1_1UIModifierComponent_1a2320e39639bffe15f02aad46c8165ac4" kind="function"><name>PostProcess</name></member>
     <member refid="classSR__UTILS__NS_1_1UI_1_1UIModifierComponent_1ac3ac5ebcdd3250663e81b4051c040b36" kind="function"><name>ApplyChild</name></member>
@@ -12335,6 +12401,22 @@
     <member refid="structSR__UTILS__NS_1_1UI_1_1UIModifierContext_1aafc93b94535c532762bda7211ca6f2e5" kind="variable"><name>ocuppiedSize</name></member>
     <member refid="structSR__UTILS__NS_1_1UI_1_1UIModifierContext_1a30f0db6ba647218c82d7e00fe0fec337" kind="variable"><name>childTranslation</name></member>
     <member refid="structSR__UTILS__NS_1_1UI_1_1UIModifierContext_1a10e59043a6a04bcef988e1278a7db896" kind="variable"><name>childSize</name></member>
+  </compound>
+  <compound refid="classSR__GRAPH__UI__NS_1_1UINode" kind="class"><name>SR_GRAPH_UI_NS::UINode</name>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1afc3532de7c9b0a3cb03bdbd46cda82b5" kind="typedef"><name>Super</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1aeaaa584f79d65e8c4012794dd852446b" kind="typedef"><name>Ptr</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a60730e2ab135d14e56b1b0471059202b" kind="variable"><name>m_finalRect</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1aeebfcb6e25dea793ca79512e6167c0ac" kind="variable"><name>m_matrix</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a73358113c9f9257343fbf77d9d738194" kind="variable"><name>m_renderScene</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1afa28f86b2bc5b8c0272844a53191b180" kind="function"><name>UINode</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a5b68db17f552224f97d860cc2d32131a" kind="function"><name>Layout</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a6acd81e1f9f7866bc1fcf3d7d80921d0" kind="function"><name>CalculateContentSize</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a32326e8f9147f75954d4aaae79e7e648" kind="function"><name>GetNodeType</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a1f204d10872ef370d07a1c3385f7fce4" kind="function"><name>GetFinalRect</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a03b4058c2727ed5f708a00f867621862" kind="function"><name>GetMatrix</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a2c89158cfe3a5019a08fda9440e69104" kind="function"><name>GetCamera</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a792200f60743277772b4eb1139162259" kind="function"><name>TryGetRenderScene</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a9f32b99709b6c697fcf372c084335dd1" kind="function"><name>GetRenderScene</name></member>
   </compound>
   <compound refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper" kind="struct"><name>SR_TYPES_NS::detail::uint_type_helper</name>
     <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1ac996f5b927bc83637b48ffd0c2eb5def" kind="typedef"><name>exact_unsigned_type</name></member>
@@ -12496,6 +12578,12 @@
     <member refid="classSR__GRAPH__UI__NS_1_1UISizeComponent_1abe4c0285bc80dff19d3e8757f7cfd60b" kind="function"><name>Prepare</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UISizeComponent_1ae0e1b13ab28931658adc04a5226f83db" kind="function"><name>OnChanged</name></member>
   </compound>
+  <compound refid="classSR__GRAPH__UI__NS_1_1UIVBoxContainerNode" kind="class"><name>SR_GRAPH_UI_NS::UIVBoxContainerNode</name>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIVBoxContainerNode_1ab63545a57721a06b7b8df085a65e7bc4" kind="typedef"><name>Super</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIVBoxContainerNode_1ac87f567b3d5beaf366b6d07dcc017b3f" kind="typedef"><name>Ptr</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIVBoxContainerNode_1af85fcdd0cf8ded0ce5f2de6d23c30492" kind="function"><name>CalculateContentSize</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIVBoxContainerNode_1a0cc863ddd9e910c287878a5095573473" kind="function"><name>Layout</name></member>
+  </compound>
   <compound refid="structSR__GRAPH__NS_1_1Vertices_1_1UIVertex" kind="struct"><name>SR_GRAPH_NS::Vertices::UIVertex</name>
     <member refid="structSR__GRAPH__NS_1_1Vertices_1_1UIVertex_1a0c709d67c4f84dd6d9fa491a1f9c2d85" kind="variable"><name>pos</name></member>
     <member refid="structSR__GRAPH__NS_1_1Vertices_1_1UIVertex_1a062d156dc700761f8a348bedf85ae256" kind="variable"><name>uv</name></member>
@@ -12504,6 +12592,11 @@
     <member refid="structSR__GRAPH__NS_1_1Vertices_1_1UIVertex_1a2c6bbd1c4e08a1180c030c27acbc7a69" kind="function"><name>GetAttributes</name></member>
     <member refid="structSR__GRAPH__NS_1_1Vertices_1_1UIVertex_1a07df2e07c4f56b1b5aba1e89cdd6a7aa" kind="function"><name>operator==</name></member>
     <member refid="structSR__GRAPH__NS_1_1Vertices_1_1UIVertex_1a0a2372d08fb19cc23d84f155b48e94eb" kind="function"><name>ToString</name></member>
+  </compound>
+  <compound refid="classSR__GRAPH__UI__NS_1_1UIViewportNode" kind="class"><name>SR_GRAPH_UI_NS::UIViewportNode</name>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1a6c7a9e7fd46277280d28123eab070d7e" kind="typedef"><name>Super</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1a7dee1c349e7d1644ac4625740a6b4290" kind="typedef"><name>Ptr</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1ad8cc144f617d08aafb6bd7b82bc301a1" kind="function"><name>Layout</name></member>
   </compound>
   <compound refid="classSR__GRAPH__UI__NS_1_1UIWindow" kind="class"><name>SR_GRAPH_UI_NS::UIWindow</name>
     <member refid="classSR__GRAPH__UI__NS_1_1UIWindow_1a248ba71be3b29a10d58e2153661e8339" kind="typedef"><name>Super</name></member>
@@ -12691,6 +12784,7 @@
     <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a0c0812bad97ceaa8a5c5d019ad6dea93" kind="function"><name>IsStringAtom</name></member>
     <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a029a8ca52194b4aabceb97d4f80b6607" kind="function"><name>IsUnicodeString</name></member>
     <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a128679afe6ca6f5ded454d50226621f4" kind="function"><name>IsPath</name></member>
+    <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a41cccb6b008269bce0b795ac84821042" kind="function"><name>IsRect</name></member>
     <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1ac1c40fe0568d44758b954ffc8a729980" kind="function"><name>IsMathVector</name></member>
     <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1ae4ad4c70eb838ee1ea9e1d9ab6b57293" kind="function"><name>IsMathSize</name></member>
     <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a9d313bec53fefd4cdad9f04eb9ef5975" kind="function"><name>IsBool</name></member>
@@ -12767,7 +12861,7 @@
     <member refid="structSR__MATH__NS_1_1Vector2_1a2bfe28e835809dde9ba5de30b1edc885" kind="variable"><name>top</name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1a2ced756008cc2560c48ecc238b18d0f9" kind="variable"><name>bottom</name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1a06e26740d9709f430b9be0efdff8707d" kind="variable"><name>coord</name></member>
-    <member refid="structSR__MATH__NS_1_1Vector2_1ae038b0463a0219c82f4a2fc13d3fbf68" kind="variable"><name></name></member>
+    <member refid="structSR__MATH__NS_1_1Vector2_1a341d7ffe2d3d45039f239282d390a8a8" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1a5ce4f26dfc0d47494da2230666490755" kind="function"><name>Vector2</name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1ace2dd6f9df99300d725ad70a2fa30260" kind="function"><name>Vector2</name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1a5d8ffa6d4410610bdf195031f34fdd2b" kind="function"><name>Vector2</name></member>
@@ -12782,6 +12876,9 @@
     <member refid="structSR__MATH__NS_1_1Vector2_1ae81e0b7296fecb9213edd1aebebfbdaf" kind="function"><name>Sum</name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1a66bb307d3bd64aee02cd2095c5dbf481" kind="function"><name>Aspect</name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1a73b0936804d179bd0f0334d6e1c25789" kind="function"><name>AspectInv</name></member>
+    <member refid="structSR__MATH__NS_1_1Vector2_1af15fdf64030f1d756196ea55d2f59539" kind="function"><name>CastToInt</name></member>
+    <member refid="structSR__MATH__NS_1_1Vector2_1aaa478146a9c940145c933c2ff178c9e1" kind="function"><name>CastToFloat</name></member>
+    <member refid="structSR__MATH__NS_1_1Vector2_1a9c82ca63f723532c2c1089034c700505" kind="function"><name>CastToUInt</name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1a812f2ebf69cf3bb55bfde530d985152d" kind="function"><name>operator-</name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1a296aa4ededf19069e2d9f30f52297710" kind="function"><name>operator+</name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1a068e21fc796b7db53ddefdf82dce099d" kind="function"><name>operator&lt;=</name></member>
@@ -12828,7 +12925,7 @@
     <member refid="structSR__MATH__NS_1_1Vector3_1a8514956322972f72b626db5f1f6a3839" kind="variable"><name>y</name></member>
     <member refid="structSR__MATH__NS_1_1Vector3_1a23257d25f7b83bf9bbfa7c2522746b26" kind="variable"><name>z</name></member>
     <member refid="structSR__MATH__NS_1_1Vector3_1a38cc2c1f6b96c858cde44a912541d43c" kind="variable"><name>coord</name></member>
-    <member refid="structSR__MATH__NS_1_1Vector3_1abaab65c9793e017c86ccbddc209cccad" kind="variable"><name></name></member>
+    <member refid="structSR__MATH__NS_1_1Vector3_1aaf2f67b0fb0232bf8219f2c0031b3529" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1Vector3_1a05e74cab417518e2ede289594cad895b" kind="function"><name>Vector3</name></member>
     <member refid="structSR__MATH__NS_1_1Vector3_1a9448d16133b5b75cd70c86de7c30fe07" kind="function"><name>Vector3</name></member>
     <member refid="structSR__MATH__NS_1_1Vector3_1a0faf157a65a4d0f36e071b9a28cb463b" kind="function"><name>Vector3</name></member>
@@ -12967,7 +13064,7 @@
     <member refid="structSR__MATH__NS_1_1Vector4_1ac0a985978a004760cc821ec58ddb5fbc" kind="variable"><name>b</name></member>
     <member refid="structSR__MATH__NS_1_1Vector4_1a6e8e42f98e3cb7a416345b11e73dde68" kind="variable"><name>a</name></member>
     <member refid="structSR__MATH__NS_1_1Vector4_1aa936b71f8716a27728ba6dcd604646f0" kind="variable"><name>coord</name></member>
-    <member refid="structSR__MATH__NS_1_1Vector4_1a06dcaacb9ce3c110045077fdd8a96fc6" kind="variable"><name></name></member>
+    <member refid="structSR__MATH__NS_1_1Vector4_1a7986b72cc91ae165110d50c8c87fe656" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1Vector4_1a2089fccb699e16a6034146024413367b" kind="function"><name>Vector4</name></member>
     <member refid="structSR__MATH__NS_1_1Vector4_1a600cff8c25611028271161199ea7d892" kind="function"><name>Vector4</name></member>
     <member refid="structSR__MATH__NS_1_1Vector4_1ad3471d835f1104ad27fb26f56f25e412" kind="function"><name>Vector4</name></member>
@@ -13030,7 +13127,7 @@
     <member refid="structSR__MATH__NS_1_1Vector6_1a826081ee0cf772e931c2d692414f0418" kind="variable"><name>vec2d1</name></member>
     <member refid="structSR__MATH__NS_1_1Vector6_1a85c31fd88996c7e3376ede3d3c9967e1" kind="variable"><name>vec2d2</name></member>
     <member refid="structSR__MATH__NS_1_1Vector6_1a0dd89c54210647f8d7bd0e3977bb169a" kind="variable"><name>vec2d3</name></member>
-    <member refid="structSR__MATH__NS_1_1Vector6_1a26d76e82442efc958f4cb3d14f1dc80b" kind="variable"><name></name></member>
+    <member refid="structSR__MATH__NS_1_1Vector6_1a13a5f8db92a7462bc4c75c0fee7a287e" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1Vector6_1a6d936b56e9470e45c1350ec921083347" kind="function"><name>Vector6</name></member>
     <member refid="structSR__MATH__NS_1_1Vector6_1a3492f1bd3ff9ca0a53a7f19f0f2354b4" kind="function"><name>Vector6</name></member>
     <member refid="structSR__MATH__NS_1_1Vector6_1ae453798430d6cf17feeae4c5d76aea29" kind="function"><name>Vector6</name></member>
@@ -14042,8 +14139,13 @@
     <member refid="namespaceSR__GRAPH__NS_1_1WinAPI_1a5a03c74b679f01b862662ab3b7f46e27a820dbd2b8f606aff866c0bbfb6b737c1" kind="enumvalue"><name>Changed</name></member>
   </compound>
   <compound refid="namespaceSR__GRAPH__UI__NS" kind="namespace"><name>SR_GRAPH_UI_NS</name>
+    <member refid="UIControlNode_8h_1a3066db1ca260fb3ed40b9d0de590ee70" kind="variable"><name>uint8_t</name></member>
+    <member refid="UIControlNode_8h_1adb38c67ceecd0dda1181c5ecad3f3be4" kind="variable"><name>Fixed</name></member>
+    <member refid="UIControlNode_8h_1a1692bea21715730edf970231492b27ed" kind="variable"><name>Percent</name></member>
+    <member refid="UIControlNode_8h_1a7681c6fc17c10355c30832b78d3c5876" kind="variable"><name>Content</name></member>
     <member refid="Gizmo_8h_1a7dac85f6cc74cf1ddfe352e1b3d5876c" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="Gizmo_8h_1a18016035e921f0f2240c442b0d806101" kind="function"><name>SR_ENUM_NS_STRUCT_T</name></member>
+    <member refid="UIControlNode_8h_1aa5b4e7932f5177fbf27735c7db96c805" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="UIWindow_8h_1af8332c5d96379e836088713a7362370d" kind="function"><name>SR_ENUM_NS_STRUCT_T</name></member>
   </compound>
   <compound refid="namespaceSR__GTYPES__NS" kind="namespace"><name>SR_GTYPES_NS</name>
@@ -15051,6 +15153,8 @@
   </compound>
   <compound refid="PointerPropertyDrawer_8h" kind="file"><name>PointerPropertyDrawer.h</name>
   </compound>
+  <compound refid="RectPropertyDrawer_8h" kind="file"><name>RectPropertyDrawer.h</name>
+  </compound>
   <compound refid="StringPropertyDrawer_8h" kind="file"><name>StringPropertyDrawer.h</name>
   </compound>
   <compound refid="VectorPropertyDrawer_8h" kind="file"><name>VectorPropertyDrawer.h</name>
@@ -15395,6 +15499,8 @@
   </compound>
   <compound refid="Graphics_2inc_2Graphics_2GUI_2Node_8h" kind="file"><name>Node.h</name>
   </compound>
+  <compound refid="Utils_2inc_2Utils_2ECS_2Node_8h" kind="file"><name>Node.h</name>
+  </compound>
   <compound refid="Utils_2inc_2Utils_2Types_2Node_8h" kind="file"><name>Node.h</name>
   </compound>
   <compound refid="NodeBuilder_8h" kind="file"><name>NodeBuilder.h</name>
@@ -15725,7 +15831,19 @@
   </compound>
   <compound refid="UICanvasComponent_8h" kind="file"><name>UICanvasComponent.h</name>
   </compound>
+  <compound refid="UIContainerNode_8h" kind="file"><name>UIContainerNode.h</name>
+  </compound>
+  <compound refid="UIControlNode_8h" kind="file"><name>UIControlNode.h</name>
+  </compound>
+  <compound refid="UIHBoxContainerNode_8h" kind="file"><name>UIHBoxContainerNode.h</name>
+  </compound>
+  <compound refid="UINode_8h" kind="file"><name>UINode.h</name>
+  </compound>
   <compound refid="UISizeComponent_8h" kind="file"><name>UISizeComponent.h</name>
+  </compound>
+  <compound refid="UIVBoxContainerNode_8h" kind="file"><name>UIVBoxContainerNode.h</name>
+  </compound>
+  <compound refid="UIViewportNode_8h" kind="file"><name>UIViewportNode.h</name>
   </compound>
   <compound refid="UIWindow_8h" kind="file"><name>UIWindow.h</name>
   </compound>
@@ -16271,27 +16389,27 @@
   <compound refid="Socket_8h" kind="file"><name>Socket.h</name>
   </compound>
   <compound refid="AndroidNativeAppGlue_8h" kind="file"><name>AndroidNativeAppGlue.h</name>
-    <member refid="AndroidNativeAppGlue_8h_1ae6dceca96ec2c7a1b4aa211264a87ef6" kind="enum"><name></name></member>
-    <member refid="AndroidNativeAppGlue_8h_1ae6dceca96ec2c7a1b4aa211264a87ef6a66661a2e57566ddd214710ca3494b0b9" kind="enumvalue"><name>LOOPER_ID_MAIN</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1ae6dceca96ec2c7a1b4aa211264a87ef6a5e50c78fcf09cc1b0ab723f71aa7004a" kind="enumvalue"><name>LOOPER_ID_INPUT</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1ae6dceca96ec2c7a1b4aa211264a87ef6a9310453935dbed3c38ca54243f8d1114" kind="enumvalue"><name>LOOPER_ID_USER</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a56a0f36da7f9eaaf54bd05cc2bf49173" kind="enum"><name></name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a56a0f36da7f9eaaf54bd05cc2bf49173a7819d1cf24caefafd27bc595faa90cff" kind="enumvalue"><name>APP_CMD_INPUT_CHANGED</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a56a0f36da7f9eaaf54bd05cc2bf49173a0d6fca4488718da1af972b5eb76b4e70" kind="enumvalue"><name>APP_CMD_INIT_WINDOW</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a56a0f36da7f9eaaf54bd05cc2bf49173ae4454163b5148d7feb2c1398e87f1bd5" kind="enumvalue"><name>APP_CMD_TERM_WINDOW</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a56a0f36da7f9eaaf54bd05cc2bf49173a448514d4220320ec7a7e7324e019f42c" kind="enumvalue"><name>APP_CMD_WINDOW_RESIZED</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a56a0f36da7f9eaaf54bd05cc2bf49173a1b0e01d7dd6e8ca91e8a51033ca3e59a" kind="enumvalue"><name>APP_CMD_WINDOW_REDRAW_NEEDED</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a56a0f36da7f9eaaf54bd05cc2bf49173a867d94e17fcae1afb7a1518b7716f3f4" kind="enumvalue"><name>APP_CMD_CONTENT_RECT_CHANGED</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a56a0f36da7f9eaaf54bd05cc2bf49173a185c97bb056e5f4b95ddadecbec20e7e" kind="enumvalue"><name>APP_CMD_GAINED_FOCUS</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a56a0f36da7f9eaaf54bd05cc2bf49173a0288cde5cba1809643528f87a08b7652" kind="enumvalue"><name>APP_CMD_LOST_FOCUS</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a56a0f36da7f9eaaf54bd05cc2bf49173a1e522859766d39850cbc3f1c015b632c" kind="enumvalue"><name>APP_CMD_CONFIG_CHANGED</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a56a0f36da7f9eaaf54bd05cc2bf49173a81f8fd5d321c73ce40ac190c097dfc07" kind="enumvalue"><name>APP_CMD_LOW_MEMORY</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a56a0f36da7f9eaaf54bd05cc2bf49173af3fe7e75c6650752c617380c1dae3e5a" kind="enumvalue"><name>APP_CMD_START</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a56a0f36da7f9eaaf54bd05cc2bf49173ae74474be4b21cdcde2ef833e6e8cd239" kind="enumvalue"><name>APP_CMD_RESUME</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a56a0f36da7f9eaaf54bd05cc2bf49173a90c4a6ced7ede689613ce2b1e0f95d66" kind="enumvalue"><name>APP_CMD_SAVE_STATE</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a56a0f36da7f9eaaf54bd05cc2bf49173a074614e1c74af041e42a982d85a22fee" kind="enumvalue"><name>APP_CMD_PAUSE</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a56a0f36da7f9eaaf54bd05cc2bf49173a85fd01d255415043aeb43f552ae1c970" kind="enumvalue"><name>APP_CMD_STOP</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a56a0f36da7f9eaaf54bd05cc2bf49173af816e28d8f833b5e9597b40ce725974f" kind="enumvalue"><name>APP_CMD_DESTROY</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a2f80701c36e79c0640d91c788feee0b3" kind="enum"><name></name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a2f80701c36e79c0640d91c788feee0b3a66661a2e57566ddd214710ca3494b0b9" kind="enumvalue"><name>LOOPER_ID_MAIN</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a2f80701c36e79c0640d91c788feee0b3a5e50c78fcf09cc1b0ab723f71aa7004a" kind="enumvalue"><name>LOOPER_ID_INPUT</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a2f80701c36e79c0640d91c788feee0b3a9310453935dbed3c38ca54243f8d1114" kind="enumvalue"><name>LOOPER_ID_USER</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493" kind="enum"><name></name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a7819d1cf24caefafd27bc595faa90cff" kind="enumvalue"><name>APP_CMD_INPUT_CHANGED</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a0d6fca4488718da1af972b5eb76b4e70" kind="enumvalue"><name>APP_CMD_INIT_WINDOW</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493ae4454163b5148d7feb2c1398e87f1bd5" kind="enumvalue"><name>APP_CMD_TERM_WINDOW</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a448514d4220320ec7a7e7324e019f42c" kind="enumvalue"><name>APP_CMD_WINDOW_RESIZED</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a1b0e01d7dd6e8ca91e8a51033ca3e59a" kind="enumvalue"><name>APP_CMD_WINDOW_REDRAW_NEEDED</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a867d94e17fcae1afb7a1518b7716f3f4" kind="enumvalue"><name>APP_CMD_CONTENT_RECT_CHANGED</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a185c97bb056e5f4b95ddadecbec20e7e" kind="enumvalue"><name>APP_CMD_GAINED_FOCUS</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a0288cde5cba1809643528f87a08b7652" kind="enumvalue"><name>APP_CMD_LOST_FOCUS</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a1e522859766d39850cbc3f1c015b632c" kind="enumvalue"><name>APP_CMD_CONFIG_CHANGED</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a81f8fd5d321c73ce40ac190c097dfc07" kind="enumvalue"><name>APP_CMD_LOW_MEMORY</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493af3fe7e75c6650752c617380c1dae3e5a" kind="enumvalue"><name>APP_CMD_START</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493ae74474be4b21cdcde2ef833e6e8cd239" kind="enumvalue"><name>APP_CMD_RESUME</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a90c4a6ced7ede689613ce2b1e0f95d66" kind="enumvalue"><name>APP_CMD_SAVE_STATE</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a074614e1c74af041e42a982d85a22fee" kind="enumvalue"><name>APP_CMD_PAUSE</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a85fd01d255415043aeb43f552ae1c970" kind="enumvalue"><name>APP_CMD_STOP</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493af816e28d8f833b5e9597b40ce725974f" kind="enumvalue"><name>APP_CMD_DESTROY</name></member>
     <member refid="AndroidNativeAppGlue_8h_1a05d3cc727656e360f4d2bb290ceec365" kind="function"><name>android_app_read_cmd</name></member>
     <member refid="AndroidNativeAppGlue_8h_1a19fcc2ceab1c8d7f0664f9436950bf18" kind="function"><name>android_app_pre_exec_cmd</name></member>
     <member refid="AndroidNativeAppGlue_8h_1af0b682de686fba098479227bc5a2f044" kind="function"><name>android_app_post_exec_cmd</name></member>

@@ -9,6 +9,7 @@
     <innerclass refid="classSR__CORE__NS_1_1Commands_1_1GameObjectMove" prot="public">SR_CORE_NS::Commands::GameObjectMove</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1Commands_1_1GameObjectTransform" prot="public">SR_CORE_NS::Commands::GameObjectTransform</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1Commands_1_1IEngineReversibleCommand" prot="public">SR_CORE_NS::Commands::IEngineReversibleCommand</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties" prot="public">SR_CORE_NS::Commands::SceneObjectChangeProperties</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectDelete" prot="public">SR_CORE_NS::Commands::SceneObjectDelete</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectInstance" prot="public">SR_CORE_NS::Commands::SceneObjectInstance</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectLayer" prot="public">SR_CORE_NS::Commands::SceneObjectLayer</innerclass>

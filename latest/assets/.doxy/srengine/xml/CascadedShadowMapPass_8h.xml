@@ -109,7 +109,7 @@
         <link refid="CascadedShadowMapPass_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="173" relation="include">
+        <childnode refid="174" relation="include">
         </childnode>
       </node>
       <node id="3">
@@ -534,7 +534,7 @@
         <childnode refid="92" relation="include">
         </childnode>
       </node>
-      <node id="173">
+      <node id="174">
         <label>Utils/Math/Matrix4x4.h</label>
         <link refid="Matrix4x4_8h_source"/>
         <childnode refid="98" relation="include">
@@ -543,13 +543,23 @@
         </childnode>
         <childnode refid="99" relation="include">
         </childnode>
-        <childnode refid="174" relation="include">
+        <childnode refid="175" relation="include">
         </childnode>
       </node>
       <node id="98">
         <label>Utils/Math/Quaternion.h</label>
         <link refid="Quaternion_8h_source"/>
         <childnode refid="88" relation="include">
+        </childnode>
+      </node>
+      <node id="169">
+        <label>Utils/Math/Rect.h</label>
+        <link refid="Rect_8h_source"/>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
         </childnode>
       </node>
       <node id="113">
@@ -768,11 +778,11 @@
         <childnode refid="138" relation="include">
         </childnode>
       </node>
-      <node id="171">
+      <node id="172">
         <label>Utils/Serialization/DefaultCheckers.inl.h</label>
         <link refid="DefaultCheckers_8inl_8h_source"/>
       </node>
-      <node id="169">
+      <node id="170">
         <label>Utils/Serialization/DefaultObjectMakers.inl.h</label>
         <link refid="DefaultObjectMakers_8inl_8h_source"/>
       </node>
@@ -788,11 +798,11 @@
         <childnode refid="94" relation="include">
         </childnode>
       </node>
-      <node id="172">
+      <node id="173">
         <label>Utils/Serialization/ObjectDataAccessors.inl.h</label>
         <link refid="ObjectDataAccessors_8inl_8h_source"/>
       </node>
-      <node id="170">
+      <node id="171">
         <label>Utils/Serialization/SaveCheckers.inl.h</label>
         <link refid="SaveCheckers_8inl_8h_source"/>
       </node>
@@ -823,17 +833,19 @@
         </childnode>
         <childnode refid="113" relation="include">
         </childnode>
+        <childnode refid="169" relation="include">
+        </childnode>
         <childnode refid="167" relation="include">
         </childnode>
         <childnode refid="134" relation="include">
-        </childnode>
-        <childnode refid="169" relation="include">
         </childnode>
         <childnode refid="170" relation="include">
         </childnode>
         <childnode refid="171" relation="include">
         </childnode>
         <childnode refid="172" relation="include">
+        </childnode>
+        <childnode refid="173" relation="include">
         </childnode>
       </node>
       <node id="124">
@@ -1304,7 +1316,7 @@
       <node id="90">
         <label>glm/gtc/type_ptr.hpp</label>
       </node>
-      <node id="174">
+      <node id="175">
         <label>glm/gtx/matrix_decompose.hpp</label>
       </node>
       <node id="91">

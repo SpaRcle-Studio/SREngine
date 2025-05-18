@@ -151,7 +151,7 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="33" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="33" bodyend="33"/>
       </memberdef>
-      <memberdef kind="variable" id="structSR__MATH__NS_1_1Vector4_1a06dcaacb9ce3c110045077fdd8a96fc6" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="structSR__MATH__NS_1_1Vector4_1a7986b72cc91ae165110d50c8c87fe656" prot="public" static="no" mutable="no">
         <type>union <ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">SR_MATH_NS::Vector4</ref></type>
         <definition>union SR_MATH_NS::Vector4 SR_MATH_NS::Vector4&lt; T &gt;</definition>
         <argsstring></argsstring>

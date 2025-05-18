@@ -3,7 +3,6 @@
   <compounddef id="classSR__UTILS__NS_1_1GameObject" kind="class" language="C++" prot="public" final="yes">
     <compoundname>SR_UTILS_NS::GameObject</compoundname>
     <basecompoundref prot="public" virt="non-virtual">SceneObject</basecompoundref>
-    <includes refid="GameObject_8h" local="no">GameObject.h</includes>
     <sectiondef kind="private-type">
       <memberdef kind="typedef" id="classSR__UTILS__NS_1_1GameObject_1a2a77f358b226df426a61679796897cf1" prot="private" static="no">
         <type>SceneObject</type>
@@ -17,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="26" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="25" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" bodystart="25" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -33,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="28" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="27" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" bodystart="27" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -49,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="51" column="33" bodyfile="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="50" column="33" bodyfile="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" bodystart="50" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -65,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="31" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="30" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1GameObject_1afe46dbd74fc22dc7733df81682e47fab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -79,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="32" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="31" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1GameObject_1ab82b3c4e515c0c75a965c1ce3a9b3970" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SceneObjectType</type>
@@ -93,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="35" column="38" bodyfile="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" bodystart="35" bodyend="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="34" column="38" bodyfile="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" bodystart="34" bodyend="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1GameObject_1a0f9e853804f190444e064f4d9ecc9b5f" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__UTILS__NS_1_1Transform" kindref="compound">Transform</ref> &gt;</type>
@@ -107,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="36" column="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="35" column="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1GameObject_1a9e2e7e3130259bf72368ef8ea81eaae0" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__UTILS__NS_1_1Transform" kindref="compound">Transform</ref> &gt;</type>
@@ -121,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="37" column="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="36" column="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1GameObject_1a15c305becf732cd4e047d717303d7822" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD GameObject::Ptr</type>
@@ -139,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="39" column="38"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="38" column="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1GameObject_1a103f6199f7e970f5aa1c21dacddeb21a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD GameObject::Ptr</type>
@@ -157,7 +156,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="40" column="38"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="39" column="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1GameObject_1a0c4eb194bd17baa4a03f196ef033bede" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -171,7 +170,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="42" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="41" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1GameObject_1aeae41410eb6bf8a14add6ecebf73d9bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -189,7 +188,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="43" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="42" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -205,11 +204,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="46" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="45" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>@scriptableClass </para>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
@@ -235,7 +233,7 @@
         <label>SceneObject</label>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="24" column="5" bodyfile="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" bodystart="24" bodyend="53"/>
+    <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="23" column="5" bodyfile="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" bodystart="23" bodyend="52"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1GameObject_1a15c305becf732cd4e047d717303d7822" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GameObject</scope><name>CreateChild</name></member>
       <member refid="classSR__UTILS__NS_1_1GameObject_1a4a924800254de314a98a83bf5f292333" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GameObject</scope><name>GameObject</name></member>

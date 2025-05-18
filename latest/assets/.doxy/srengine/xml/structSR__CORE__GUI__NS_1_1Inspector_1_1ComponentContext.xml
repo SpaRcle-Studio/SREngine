@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/Inspector.h" line="74" column="40" bodyfile="Engine/inc/Engine/GUI/Inspector.h" bodystart="74" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/Inspector.h" line="77" column="40" bodyfile="Engine/inc/Engine/GUI/Inspector.h" bodystart="77" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentContext_1a0d76914cbc541bebdc7b3a00c2b721df" prot="public" static="no" mutable="no">
         <type>ObjectPropertyDrawer::Ptr</type>
@@ -29,14 +29,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/Inspector.h" line="75" column="39" bodyfile="Engine/inc/Engine/GUI/Inspector.h" bodystart="75" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/Inspector.h" line="78" column="39" bodyfile="Engine/inc/Engine/GUI/Inspector.h" bodystart="78" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/inc/Engine/GUI/Inspector.h" line="73" column="9" bodyfile="Engine/inc/Engine/GUI/Inspector.h" bodystart="73" bodyend="76"/>
+    <location file="Engine/inc/Engine/GUI/Inspector.h" line="76" column="9" bodyfile="Engine/inc/Engine/GUI/Inspector.h" bodystart="76" bodyend="79"/>
     <listofallmembers>
       <member refid="structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentContext_1a22ec9669e6c2b92ad1bf390997ff698d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector::ComponentContext</scope><name>lastUsage</name></member>
       <member refid="structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentContext_1a0d76914cbc541bebdc7b3a00c2b721df" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector::ComponentContext</scope><name>pObjectDrawer</name></member>

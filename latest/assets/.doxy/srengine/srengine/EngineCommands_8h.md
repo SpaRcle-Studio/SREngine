@@ -51,6 +51,7 @@
 | class | [**GameObjectMove**](classSR__CORE__NS_1_1Commands_1_1GameObjectMove.md) <br> |
 | class | [**GameObjectTransform**](classSR__CORE__NS_1_1Commands_1_1GameObjectTransform.md) <br> |
 | class | [**IEngineReversibleCommand**](classSR__CORE__NS_1_1Commands_1_1IEngineReversibleCommand.md) <br> |
+| class | [**SceneObjectChangeProperties**](classSR__CORE__NS_1_1Commands_1_1SceneObjectChangeProperties.md) <br> |
 | class | [**SceneObjectDelete**](classSR__CORE__NS_1_1Commands_1_1SceneObjectDelete.md) <br> |
 | class | [**SceneObjectInstance**](classSR__CORE__NS_1_1Commands_1_1SceneObjectInstance.md) <br> |
 | class | [**SceneObjectLayer**](classSR__CORE__NS_1_1Commands_1_1SceneObjectLayer.md) <br> |

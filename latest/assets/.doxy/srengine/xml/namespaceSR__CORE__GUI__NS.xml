@@ -29,6 +29,7 @@
     <innerclass refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" prot="public">SR_CORE_GUI_NS::PropertyDrawerBase</innerclass>
     <innerclass refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" prot="public">SR_CORE_GUI_NS::PropertyDrawerContext</innerclass>
     <innerclass refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" prot="public">SR_CORE_GUI_NS::PropertyDrawerFeedback</innerclass>
+    <innerclass refid="classSR__CORE__GUI__NS_1_1RectPropertyDrawer" prot="public">SR_CORE_GUI_NS::RectPropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor" prot="public">SR_CORE_GUI_NS::RenderTechniqueEditor</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1SceneRunner" prot="public">SR_CORE_GUI_NS::SceneRunner</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1SceneTools" prot="public">SR_CORE_GUI_NS::SceneTools</innerclass>

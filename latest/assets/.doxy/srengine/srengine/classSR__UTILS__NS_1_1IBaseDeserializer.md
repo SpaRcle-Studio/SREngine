@@ -113,11 +113,13 @@ See [SR\_UTILS\_NS::IDeserializer](classSR__UTILS__NS_1_1IDeserializer.md)
 
 | Type | Name |
 | ---: | :--- |
+|  void | [**AddDontLoadTag**](classSR__UTILS__NS_1_1IDeserializer.md#function-adddontloadtag) (const [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & tag) <br> |
 | virtual SR\_NODISCARD bool | [**AllowNewMapKeys**](classSR__UTILS__NS_1_1IDeserializer.md#function-allownewmapkeys) () noexcept const = 0<br> |
 | virtual SR\_NODISCARD bool | [**AllowReAllocPointer**](classSR__UTILS__NS_1_1IDeserializer.md#function-allowreallocpointer) ([**ReAllocPointerReason**](classSR__UTILS__NS_1_1IDeserializer.md#enum-reallocpointerreason) reason) noexcept const = 0<br> |
 | virtual uint64\_t | [**BeginArray**](classSR__UTILS__NS_1_1IDeserializer.md#function-beginarray) (const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & id) = 0<br> |
 | virtual bool | [**BeginItem**](classSR__UTILS__NS_1_1IDeserializer.md#function-beginitem) (const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & id, uint32\_t index) = 0<br> |
 | virtual bool | [**BeginObject**](classSR__UTILS__NS_1_1IDeserializer.md#function-beginobject) (const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & id) = 0<br> |
+|  SR\_NODISCARD bool | [**CanLoadByTags**](classSR__UTILS__NS_1_1IDeserializer.md#function-canloadbytags) (const std::set&lt; [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; & tags) const<br> |
 | virtual void | [**EndArray**](classSR__UTILS__NS_1_1IDeserializer.md#function-endarray) () = 0<br> |
 | virtual void | [**EndItem**](classSR__UTILS__NS_1_1IDeserializer.md#function-enditem) () = 0<br> |
 | virtual void | [**EndObject**](classSR__UTILS__NS_1_1IDeserializer.md#function-endobject) () = 0<br> |
@@ -144,6 +146,7 @@ See [SR\_UTILS\_NS::IDeserializer](classSR__UTILS__NS_1_1IDeserializer.md)
 | virtual void | [**ReportError**](classSR__UTILS__NS_1_1IDeserializer.md#function-reporterror) (const std::string & message) = 0<br> |
 | virtual void | [**ResetWalker**](classSR__UTILS__NS_1_1IDeserializer.md#function-resetwalker) () = 0<br> |
 | virtual SR\_NODISCARD bool | [**SaveToFile**](classSR__UTILS__NS_1_1IDeserializer.md#function-savetofile) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) const = 0<br> |
+|  void | [**SetDontLoadTags**](classSR__UTILS__NS_1_1IDeserializer.md#function-setdontloadtags) (const std::set&lt; [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; & tags) <br> |
 | virtual SR\_NODISCARD bool | [**ShouldSetDefaults**](classSR__UTILS__NS_1_1IDeserializer.md#function-shouldsetdefaults-12) (const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & name) noexcept const = 0<br> |
 | virtual SR\_NODISCARD bool | [**ShouldSetDefaults**](classSR__UTILS__NS_1_1IDeserializer.md#function-shouldsetdefaults-22) () noexcept const = 0<br> |
 | virtual SR\_NODISCARD std::string | [**ToString**](classSR__UTILS__NS_1_1IDeserializer.md#function-tostring) () noexcept const<br> |
