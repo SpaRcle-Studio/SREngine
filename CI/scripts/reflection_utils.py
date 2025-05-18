@@ -98,6 +98,7 @@ class CPPProperty:
         self.hidden = False
         self.private = False
         self.dontLoad = False
+        self.dont_save_tags = []
         self.virtual = False
 
     def __str__(self):

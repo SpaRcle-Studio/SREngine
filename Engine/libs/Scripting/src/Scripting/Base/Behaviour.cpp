@@ -92,10 +92,6 @@ namespace SR_SCRIPTING_NS {
         Super::FixedUpdate();
     }
 
-    void Behaviour::OnTransformSet() {
-        Super::OnTransformSet();
-    }
-
     void Behaviour::OnCollisionEnter(const SR_UTILS_NS::CollisionData& data) {
         Super::OnCollisionEnter(data);
     }

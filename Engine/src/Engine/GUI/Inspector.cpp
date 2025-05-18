@@ -49,23 +49,28 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::FrameRounding, 0.0f);
 
         if (SR_GRAPH_GUI_NS::Immediate::BeginTabBar("Inspector#TabBar")) {
-            std::string_view gameObjectPage = "GameObject";
+            std::string gameObjectPage = "No object selected";
+
+            if (m_sceneObject) {
+                gameObjectPage = m_sceneObject->GetMeta()->GetFactoryName();
+            }
+
             SR_MATH_NS::FColor color = SR_MATH_NS::FColor(1, 1, 1, 1);
 
             if (m_sceneObject) {
                 if (m_sceneObject->IsPrefab()) {
                     color = SR_MATH_NS::FColor(0, 1, 1, 1);
-                    gameObjectPage = "GameObject (Changes won't be saved)";
+                    gameObjectPage += " (Changes won't be saved)";
                 }
 
                 if (m_sceneObject->IsDirty()) {
                     color = SR_MATH_NS::FColor(1, 1, 0, 1);
-                    gameObjectPage = "GameObject (Is dirty)";
+                    gameObjectPage += " (Is dirty)";
                 }
 
                 if (m_sceneObject->HasSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave)) {
                     color = SR_MATH_NS::FColor(1, 1, 0, 1);
-                    gameObjectPage = "GameObject (Dont Save)";
+                    gameObjectPage += " (Dont Save)";
                 }
             }
 
@@ -146,43 +151,11 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::Separator();
 
-        if (auto&& pGameObject = m_sceneObject.DynamicCast<SR_UTILS_NS::GameObject>()) {
-            SR_UTILS_NS::Transform::Ptr pTransform = pGameObject->GetTransform();
+        //if (auto&& pGameObject = m_sceneObject.DynamicCast<SR_UTILS_NS::GameObject>()) {
+        //    DrawGameObject(pGameObject);
+        //}
 
-            m_onBeforeChangeCallback = [&](bool drag) {
-                if (!m_pTransformSerializer) {
-                    m_isDragMode = drag;
-                    m_pTransformSerializer = SR_CORE_NS::Commands::CreateSerializer();
-                    SR_UTILS_NS::Serialization::Save(*m_pTransformSerializer, pTransform, SR_UTILS_NS::ICommand::DATA_ID);
-                }
-            };
-
-            auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(pTransform);
-            auto&& context = CreateDrawerContext(&value);
-
-            context.fieldWidth += context.fieldTitleWidth;
-            context.fieldTitleWidth = 0.f;
-            context.noHeader = false;
-            context.openedByDefault = true;
-            context.editorPropertyParams.SetNotNull();
-            m_pPointerDrawer->Draw(context);
-
-            if (m_isDragMode && pTransform) {
-                pTransform->UpdateTree();
-            }
-
-            if (m_pTransformSerializer && (!m_isDragMode || !SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseLeft))) {
-                auto&& pNewSerializer = SR_CORE_NS::Commands::CreateSerializer();
-                SR_UTILS_NS::Serialization::Save(*pNewSerializer, pTransform, SR_UTILS_NS::ICommand::DATA_ID);
-
-                auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(pEngine, pGameObject, std::move(m_pTransformSerializer), std::move(pNewSerializer));
-                pEngine->GetCmdManager()->Store(cmd);
-
-                if (pTransform != pGameObject->GetTransform()) {
-                    pGameObject->SetTransform(pTransform);
-                }
-            }
-        }
+        DrawSceneObject(m_sceneObject);
 
         DrawComponents(m_sceneObject.Get());
     }
@@ -387,12 +360,12 @@ namespace SR_CORE_GUI_NS {
 
             auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(*pComponent);
 
-            m_onBeforeChangeCallback = [&](bool drag) {
+            m_onBeforeChangeCallback = [this, pStrongComponent = SR_HTYPES_NS::SharedPtr(pComponent)](bool drag) {
                 if (!m_pComponentSerializer) {
                     m_isDragMode = drag;
-                    m_editableComponent = pComponent;
+                    m_editableComponent = pStrongComponent;
                     m_pComponentSerializer = SR_CORE_NS::Commands::CreateSerializer();
-                    SR_UTILS_NS::Serialization::Save(*m_pComponentSerializer, *pComponent, SR_UTILS_NS::ICommand::DATA_ID);
+                    SR_UTILS_NS::Serialization::Save(*m_pComponentSerializer, *pStrongComponent, SR_UTILS_NS::ICommand::DATA_ID);
                 }
             };
 
@@ -499,6 +472,78 @@ namespace SR_CORE_GUI_NS {
         }
 
         SR_GRAPH_GUI_NS::Immediate::PopID();
+    }
+
+    void Inspector::DrawSceneObject(const SR_UTILS_NS::SceneObject::Ptr& pSceneObject) {
+        m_onBeforeChangeCallback = [&](bool drag) {
+            if (!m_pSOSerializer) {
+                m_isDragMode = drag;
+                m_pSOSerializer = SR_CORE_NS::Commands::CreateSerializer();
+                m_pSOSerializer->AddDontSaveTag("Inspector");
+                SR_UTILS_NS::Serialization::Save(*m_pSOSerializer, *pSceneObject, SR_UTILS_NS::ICommand::DATA_ID);
+            }
+        };
+
+        auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(pSceneObject);
+        auto&& context = CreateDrawerContext(&value);
+
+        context.fieldWidth += context.fieldTitleWidth;
+        context.fieldTitleWidth = 0.f;
+        context.noHeader = true;
+        context.openedByDefault = true;
+        context.editorPropertyParams.SetNotNull();
+        m_pPointerDrawer->Draw(context);
+
+        if (m_pSOSerializer && (!m_isDragMode || !SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseLeft))) {
+            auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+
+            auto&& pNewSerializer = SR_CORE_NS::Commands::CreateSerializer();
+            pNewSerializer->AddDontSaveTag("Inspector");
+            SR_UTILS_NS::Serialization::Save(*pNewSerializer, *pSceneObject, SR_UTILS_NS::ICommand::DATA_ID);
+
+            auto&& cmd = new SR_CORE_NS::Commands::SceneObjectChangeProperties(pEngine, pSceneObject, std::move(m_pSOSerializer), std::move(pNewSerializer));
+            pEngine->GetCmdManager()->Store(cmd);
+        }
+    }
+
+    void Inspector::DrawGameObject(const SR_UTILS_NS::GameObject::Ptr& pGameObject) {
+        SR_UTILS_NS::Transform::Ptr pTransform = pGameObject->GetTransform();
+
+        m_onBeforeChangeCallback = [&](bool drag) {
+            if (!m_pTransformSerializer) {
+                m_isDragMode = drag;
+                m_pTransformSerializer = SR_CORE_NS::Commands::CreateSerializer();
+                SR_UTILS_NS::Serialization::Save(*m_pTransformSerializer, pTransform, SR_UTILS_NS::ICommand::DATA_ID);
+            }
+        };
+
+        auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(pTransform);
+        auto&& context = CreateDrawerContext(&value);
+
+        context.fieldWidth += context.fieldTitleWidth;
+        context.fieldTitleWidth = 0.f;
+        context.noHeader = false;
+        context.openedByDefault = true;
+        context.editorPropertyParams.SetNotNull();
+        m_pPointerDrawer->Draw(context);
+
+        if (m_isDragMode && pTransform) {
+            pTransform->UpdateTree();
+        }
+
+        if (m_pTransformSerializer && (!m_isDragMode || !SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseLeft))) {
+            auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+
+            auto&& pNewSerializer = SR_CORE_NS::Commands::CreateSerializer();
+            SR_UTILS_NS::Serialization::Save(*pNewSerializer, pTransform, SR_UTILS_NS::ICommand::DATA_ID);
+
+            auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(pEngine, pGameObject, std::move(m_pTransformSerializer), std::move(pNewSerializer));
+            pEngine->GetCmdManager()->Store(cmd);
+
+            if (pTransform != pGameObject->GetTransform()) {
+                pGameObject->SetTransform(pTransform);
+            }
+        }
     }
 
     void Inspector::DrawComponentCategory(SR_UTILS_NS::IComponentable* pComponentable, ComponentCategory& category, SR_UTILS_NS::StringAtom categoryName) {

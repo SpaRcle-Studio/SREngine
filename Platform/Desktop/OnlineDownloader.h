@@ -22,10 +22,18 @@ bool DownloadFile(const std::string& url, const std::string& outputPath) {
     }
 
     std::ofstream file(outputPath, std::ios::binary);
-    char buffer[4096];
+    char buffer[4096]; // 4 КБ buffer
     DWORD bytesRead;
+    uint64_t totalBytesRead = 0;
+    uint64_t packetInterval = 0;
 
     while (InternetReadFile(hUrl, buffer, sizeof(buffer), &bytesRead) && bytesRead) {
+        ++packetInterval;
+        totalBytesRead += bytesRead;
+        if (packetInterval % 200 == 0) {
+            std::cout << "Total MBytes read: " << static_cast<uint64_t>(totalBytesRead / 1024.f / 1024.f) << std::endl;
+            packetInterval = 0;
+        }
         file.write(buffer, bytesRead);
     }
 

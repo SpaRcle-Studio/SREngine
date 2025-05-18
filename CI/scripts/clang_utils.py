@@ -6,6 +6,7 @@ import sparcle_utils
 import cpp_operator
 import codegen_context
 import pickle
+import re
 
 from pathlib import Path
 from time import perf_counter
@@ -89,20 +90,18 @@ def preprocess_cpp(source, output, include_args):
         raise Exception(f'Failed to preprocess file: {source}, error: {result.stderr}, command: {command}')
 
 
-def is_property_comment(node):
-    """Извлекаем комментарий, если он есть."""
-    raw_comment = node.raw_comment
-    if raw_comment and "@property" in raw_comment:
-        return True
-    return False
-
-
 def has_special_tag_comment(node, tag):
     """Извлекаем комментарий, если он есть."""
     raw_comment = node.raw_comment
-    if raw_comment and f"@{tag}" in raw_comment:
-        return True
-    return False
+    if not raw_comment:
+        return False
+
+    pattern = rf'(?<!\w)@{re.escape(tag)}(?!\w)'
+    return re.search(pattern, raw_comment) is not None
+
+
+def is_property_comment(node):
+    return has_special_tag_comment(node, 'property')
 
 
 def extract_special_tag_comment_data(node, tag):
@@ -273,6 +272,10 @@ def process_property(property_obj: reflection_utils.CPPProperty, clang_child):
     property_obj.drag_value = extract_special_tag_comment_data(clang_child, 'drag')
     property_obj.editor_width = extract_special_tag_comment_data(clang_child, 'editorWidth')
     property_obj.inspector = extract_special_tag_comment_data(clang_child, 'inspector')
+
+    if dont_save_tags := extract_special_tag_comment_data(clang_child, 'dontSaveTags'):
+        for tag in dont_save_tags.split(','):
+            property_obj.dont_save_tags.append(tag.strip())
 
     if custom_args_list := extract_all_special_tags_comment_data(clang_child, 'customArgs'):
         for custom_args in custom_args_list:

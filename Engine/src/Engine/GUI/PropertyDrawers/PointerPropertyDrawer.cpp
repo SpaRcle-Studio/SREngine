@@ -11,6 +11,7 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerFeedback feedback;
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
+        SR_UTILS_NS::SRClass* pClassValue = value.GetSRClass();
 
         auto&& editorParams = context.GetEditorParams();
 
@@ -68,7 +69,6 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
         }
 
-        SR_UTILS_NS::SRClass* pClassValue = value.GetSRClass();
         SR_HTYPES_NS::SharedPtrBase* pSharedPtrBase = value.GetSharedPtrBase();
 
         SRAssert(pSharedPtrBase);

@@ -33,6 +33,10 @@ namespace SR_CORE_GUI_NS {
             return "MathVectorPropertyDrawer";
         }
 
+        if (value.IsRect()) {
+            return "RectPropertyDrawer";
+        }
+
         if (value.IsEnum()) {
             return "EnumPropertyDrawer";
         }

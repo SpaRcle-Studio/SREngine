@@ -39,3 +39,4 @@
 #include "../src/Engine/GUI/PropertyDrawers/MaterialPropertyDrawer.cpp"
 #include "../src/Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.cpp"
 #include "../src/Engine/GUI/PropertyDrawers/BehaviourNamePropertyDrawer.cpp"
+#include "../src/Engine/GUI/PropertyDrawers/RectPropertyDrawer.cpp"

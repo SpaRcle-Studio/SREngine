@@ -58,8 +58,6 @@ namespace SR_SCRIPTING_NS {
         void Update(float_t dt) override;
         void FixedUpdate() override;
 
-        void OnTransformSet() override;
-
         void OnCollisionEnter(const SR_UTILS_NS::CollisionData& data) override;
         void OnCollisionStay(const SR_UTILS_NS::CollisionData& data) override;
         void OnCollisionExit(const SR_UTILS_NS::CollisionData& data) override;

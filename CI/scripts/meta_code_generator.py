@@ -156,18 +156,32 @@ def generate_class_meta_save(f, class_obj: reflection_utils.SpaRcleClass, tabs):
         if not prop.getter and prop.virtual:
             continue
 
+        base_condition_str = 'serializer.IsWriteDefaults()'
+        can_save_conditions = []
+
+        if len(prop.dont_save_tags) > 0:
+            f.write('\t' * tabs + f'const static std::set<SR_UTILS_NS::StringAtom> {prop.serialize_name}_dontSaveTags = {{')
+            for tag in prop.dont_save_tags:
+                f.write(f'"{tag}", ')
+            f.write('};\n')
+            can_save_conditions.append(f'serializer.CanSaveByTags({prop.serialize_name}_dontSaveTags)')
+
         if prop.property_condition:
-            f.write('\t' * tabs + f'if (IsPropertyActive_{prop.serialize_name}(&value)) {{\n')
-        else:
+            can_save_conditions.append(f'IsPropertyActive_{prop.serialize_name}(&value)')
+
+        if len(can_save_conditions) == 0:
             f.write('\t' * tabs + f'{{\n')
+        else:
+            cond_str = " && ".join(can_save_conditions)
+            f.write('\t' * tabs + f'if ({cond_str}) {{\n')
 
         if prop.getter:
             f.write('\t' * (tabs + 1) + f'auto&& propValue = value.{prop.getter}();\n')
 
             if prop.default_value:
-                f.write('\t' * (tabs + 1) + f'if ((serializer.IsWriteDefaults() || propValue != GetDefault_{prop.serialize_name}())) {{\n')
+                f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || propValue != GetDefault_{prop.serialize_name}())) {{\n')
             else:
-                f.write('\t' * (tabs + 1) + f'if ((serializer.IsWriteDefaults() || !SR_UTILS_NS::IsDefault(propValue))) {{\n')
+                f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || !SR_UTILS_NS::IsDefault(propValue))) {{\n')
 
             f.write('\t' * (tabs + 2) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::Create("{prop.serialize_name}");\n')
             f.write('\t' * (tabs + 2) + f'SR_UTILS_NS::Serialization::Save(serializer, propValue, keyName_{prop.serialize_name});\n')
@@ -175,9 +189,9 @@ def generate_class_meta_save(f, class_obj: reflection_utils.SpaRcleClass, tabs):
             f.write('\t' * (tabs + 1) + f'}}\n')
         else:
             if prop.default_value:
-                f.write('\t' * (tabs + 1) + f'if ((serializer.IsWriteDefaults() || value.{prop.name} != GetDefault_{prop.serialize_name}())) {{\n')
+                f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || value.{prop.name} != GetDefault_{prop.serialize_name}())) {{\n')
             else:
-                f.write('\t' * (tabs + 1) + f'if ((serializer.IsWriteDefaults() || !SR_UTILS_NS::IsDefault(value.{prop.name}))) {{\n')
+                f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || !SR_UTILS_NS::IsDefault(value.{prop.name}))) {{\n')
             f.write('\t' * (tabs + 2) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::Create("{prop.serialize_name}");\n')
             f.write('\t' * (tabs + 2) + f'SR_UTILS_NS::Serialization::Save(serializer, value.{prop.name}, keyName_{prop.serialize_name});\n')
             f.write('\t' * (tabs + 1) + f'}}\n')
@@ -228,10 +242,23 @@ def generate_class_meta_load(f, class_obj, tabs):
         if (not prop.setter or not prop.getter) and prop.virtual:
             continue
 
+        can_load_conditions = []
+
+        if len(prop.dont_save_tags) > 0:
+            f.write('\t' * tabs + f'const static std::set<SR_UTILS_NS::StringAtom> {prop.serialize_name}_dontLoadTags = {{')
+            for tag in prop.dont_save_tags:
+                f.write(f'"{tag}", ')
+            f.write('};\n')
+            can_load_conditions.append(f'deserializer.CanLoadByTags({prop.serialize_name}_dontLoadTags)')
+
         if prop.load_condition:
-            f.write('\t' * tabs + f'if (IsPropertyLoadAllowed_{prop.serialize_name}(&value)) {{' + '\n')
+            can_load_conditions.append(f'IsPropertyLoadAllowed_{prop.serialize_name}(&value)')
+
+        if len(can_load_conditions) == 0:
+            f.write('\t' * tabs + f'{{\n')
         else:
-            f.write('\t' * tabs + '{\n')
+            cond_str = " && ".join(can_load_conditions)
+            f.write('\t' * tabs + f'if ({cond_str}) {{\n')
 
         f.write('\t' * (tabs + 1) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::Create("{prop.serialize_name}");' + '\n')
 

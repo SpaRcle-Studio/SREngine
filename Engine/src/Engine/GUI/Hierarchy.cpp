@@ -11,6 +11,7 @@
 #include <Utils/TaskManager/TaskManager.h>
 
 #include <Graphics/GUI/Icons.h>
+#include <Graphics/UI/UINode.h>
 
 namespace SR_CORE_GUI_NS {
     const SR_MATH_NS::FColor SR_PREFAB_COLOR_FIRST = SR_MATH_NS::FColor(39.f / 255.f, 225 / 255.f, 193.f / 255.f, 1.f);
@@ -24,6 +25,16 @@ namespace SR_CORE_GUI_NS {
         m_sceneRunnerWidget = new SceneRunner();
 
         SetFlags(SR_GRAPH_GUI_NS::WindowFlags::HorizontalScrollbar);
+
+        auto&& factory = SR_UTILS_NS::Factory::Instance();
+
+        static const SR_UTILS_NS::StringAtom uiNodeName = SR_GRAPH_UI_NS::UINode::GetClassStaticName();
+        for (auto&& className : SR_UTILS_NS::Factory::Instance().GetInheritances(uiNodeName)) {
+            if (factory.IsAbstract(className)) {
+                continue;
+            }
+            m_availableUINodes.emplace_back(className);
+        }
     }
 
     Hierarchy::~Hierarchy() {
@@ -121,6 +132,19 @@ namespace SR_CORE_GUI_NS {
                 auto&& pNewSO = pEngine->GetScene()->InstanceGameObject("New GameObject"_atom).StaticCast<SR_UTILS_NS::SceneObject>();
                 auto&& pCmd = new SR_CORE_NS::Commands::SceneObjectInstance(pEngine, pNewSO);
                 pEngine->GetCmdManager()->Store(pCmd);
+            }
+
+            if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Add New UI Node")) {
+                for (auto&& className : m_availableUINodes) {
+                    if (SR_GRAPH_GUI_NS::Immediate::MenuItem(className.c_str())) {
+                        auto&& pNewSO = SR_UTILS_NS::Factory::Instance().Create<SR_UTILS_NS::SceneObject>(className);
+                        pNewSO->SetName(className);
+                        pEngine->GetScene()->RegisterSceneObject(pNewSO);
+                        auto&& pCmd = new SR_CORE_NS::Commands::SceneObjectInstance(pEngine, pNewSO);
+                        pEngine->GetCmdManager()->Store(pCmd);
+                    }
+                }
+                SR_GRAPH_GUI_NS::Immediate::EndMenu();
             }
 
             Paste(nullptr, true);

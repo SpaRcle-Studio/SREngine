@@ -54,6 +54,9 @@ namespace SR_CORE_GUI_NS {
         void InitCategories();
 
     private:
+        void DrawGameObject(const SR_UTILS_NS::GameObject::Ptr& pGameObject);
+        void DrawSceneObject(const SR_UTILS_NS::SceneObject::Ptr& pSceneObject);
+
         void DrawComponentCategory(SR_UTILS_NS::IComponentable* pComponentable, ComponentCategory& category, SR_UTILS_NS::StringAtom categoryName);
 
         SR_NODISCARD PropertyDrawerContext CreateDrawerContext(SR_UTILS_NS::Reflection::Value* pValue);
@@ -83,6 +86,7 @@ namespace SR_CORE_GUI_NS {
 
         bool m_isDragMode = false;
         SR_HTYPES_NS::Function<void(bool drag)> m_onBeforeChangeCallback;
+        std::unique_ptr<SR_UTILS_NS::ISerializer> m_pSOSerializer;
         std::unique_ptr<SR_UTILS_NS::ISerializer> m_pTransformSerializer;
         std::unique_ptr<SR_UTILS_NS::ISerializer> m_pComponentsSerializer;
         std::unique_ptr<SR_UTILS_NS::ISerializer> m_pComponentSerializer;

@@ -107,6 +107,38 @@ namespace SR_CORE_NS::Commands {
 
     //! ----------------------------------------------------------------------------------------------------------------
 
+    bool SceneObjectChangeProperties::Redo() {
+        auto&& pEntity = m_scene->GetEntityController()->FindById(m_entityId);
+
+        if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
+            auto&& pDeserializer = m_pNew->CreateDeserializer();
+
+            SR_UTILS_NS::Serialization::Load(*pDeserializer, *pObject, DATA_ID);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    bool SceneObjectChangeProperties::Undo() {
+        auto&& pEntity = m_scene->GetEntityController()->FindById(m_entityId);
+
+        if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
+            SR_DEBUG_LOG(m_pOld->ToString());
+
+            auto&& pDeserializer = m_pOld->CreateDeserializer();
+
+            SR_UTILS_NS::Serialization::Load(*pDeserializer, *pObject, DATA_ID);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    //! ----------------------------------------------------------------------------------------------------------------
+
     bool ComponentsChange::Redo() {
         SR_TRACY_ZONE;
 

@@ -76,26 +76,6 @@ sra format
 					5-s:GameObject
 				4-o:ptr
 					5-v:entityId
-						6-i:2399801880039732294
-					5-v:name
-						6-s:Tree
-					5-v:prefab
-						6-s:Samples/Oak/oak.prefab
-					5-o:transform
-						6-v:type
-							7-s:Transform3D
-						6-o:ptr
-							7-o:translation
-								8-v:x
-									9-f:-7.003961
-								8-v:z
-									9-f:4.541386
-		2-k:i
-			3-o:d
-				4-v:type
-					5-s:GameObject
-				4-o:ptr
-					5-v:entityId
 						6-i:4029274569472564176
 					5-a:components
 						6-k:i
@@ -594,6 +574,7 @@ sra format
 										10-i:4396283777552644742
 									9-v:behaviourName
 										10-s:TestBehaviour
+									9-o:data
 						6-k:i
 							7-o:d
 								8-v:type
@@ -603,6 +584,7 @@ sra format
 										10-i:3943996598505795885
 									9-v:behaviourName
 										10-s:TestBehaviour
+									9-o:data
 					5-v:name
 						6-s:Cube
 					5-o:transform
@@ -611,16 +593,16 @@ sra format
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:-2.922108
+									9-f:-5.012000
 								8-v:y
-									9-f:2.412665
+									9-f:4.683000
 								8-v:z
-									9-f:1.719714
+									9-f:-5.800000
 							7-o:quaternion
 								8-v:x
-									9-f:0.034899
+									9-f:0.213030
 								8-v:w
-									9-f:0.999391
+									9-f:0.977046
 		2-k:i
 			3-o:d
 				4-v:type
@@ -1030,3 +1012,41 @@ ddddцццゔぅヾボ
 									9-f:1.553687
 								8-v:z
 									9-f:-2.240667
+		2-k:i
+			3-o:d
+				4-v:type
+					5-s:UIControlNode
+				4-o:ptr
+					5-v:entityId
+						6-i:3652299368691628898
+					5-a:components
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Sprite
+								8-o:ptr
+									9-v:entityId
+										10-i:4407960888248543126
+									9-v:isEnabled
+										10-b:false
+									9-o:material
+										10-v:type
+											11-s:FileMaterial
+										10-o:ptr
+											11-v:materialPath
+												12-s:Engine/Materials/UI/ui.mat
+									9-o:textureBorder
+										10-v:x
+											11-f:0.150000
+										10-v:y
+											11-f:0.150000
+									9-o:windowBorder
+										10-v:x
+											11-f:0.150000
+										10-v:y
+											11-f:0.150000
+					5-v:name
+						6-s:UIControlNode
+					5-v:layer
+						6-s:UI
+					5-o:layout

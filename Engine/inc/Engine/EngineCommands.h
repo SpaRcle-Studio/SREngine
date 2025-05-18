@@ -96,6 +96,28 @@ namespace SR_CORE_NS::Commands {
 
     //! ----------------------------------------------------------------------------------------------------------------
 
+    class SceneObjectChangeProperties : public IEngineReversibleCommand {
+        using Super = IEngineReversibleCommand;
+    public:
+        SceneObjectChangeProperties(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO, SR_UTILS_NS::ISerializer::UniquePtr pOld, SR_UTILS_NS::ISerializer::UniquePtr pNew)
+            : Super(pEngine)
+            , m_entityId(pSO->GetEntityId())
+            , m_pOld(std::move(pOld))
+            , m_pNew(std::move(pNew))
+        { }
+
+        bool Redo() override;
+        bool Undo() override;
+
+    private:
+        SR_UTILS_NS::EntityId m_entityId = SR_ID_INVALID;
+        SR_UTILS_NS::ISerializer::UniquePtr m_pNew;
+        SR_UTILS_NS::ISerializer::UniquePtr m_pOld;
+
+    };
+
+    //! ----------------------------------------------------------------------------------------------------------------
+
     class ComponentsChange : public IEngineReversibleCommand {
         using Super = IEngineReversibleCommand;
     public:
