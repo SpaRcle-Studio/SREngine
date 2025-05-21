@@ -13,6 +13,12 @@
 #include <Physics/PhysX/PhysXVehicle4W3D.h>
 
 namespace SR_PHYSICS_NS {
+    class PhysXAssertHandler : public physx::PxAssertHandler {
+        void operator()(const char* exp, const char* file, int line, bool& ignore) override {
+            SRAssert2(false, "PhysX assertion failed. \n\tFile: file:///{}:{}:1\n\tExpression: {}"_format(file, line, exp));
+        }
+    };
+
     bool PhysXLibraryImpl::Initialize() {
         SR_TRACY_ZONE;
 
@@ -22,6 +28,9 @@ namespace SR_PHYSICS_NS {
 
         m_allocatorCallback = new physx::PxDefaultAllocator();
         m_errorCallback = new physx::PxDefaultErrorCallback();
+
+        static PhysXAssertHandler assertHandler;
+        PxSetAssertHandler(assertHandler);
 
         m_foundation = PxCreateFoundation(SR_PHYSX_FOUNDATION_VERSION, *m_allocatorCallback, *m_errorCallback);
         if (!m_foundation) {

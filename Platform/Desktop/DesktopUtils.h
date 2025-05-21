@@ -51,6 +51,7 @@ enum ERROR_CODES {
     constexpr bool SR_IS_MACOS = false;
     #include <dlfcn.h>
     #include <unistd.h>
+    #include <cstring>
     const char* DYNAMIC_MODULE_EXTENSION = ".so";
     void* LoadDynamicModule(const char* moduleName) {
         return dlopen(moduleName, RTLD_NOW);
