@@ -37,6 +37,7 @@
 
 | Type | Name |
 | ---: | :--- |
+|  const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**EVENT\_ON\_ENGINE\_UPDATE\_ID**](#variable-event_on_engine_update_id)   = `"OnEngineUpdate"`<br> |
 |  const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**EVENT\_ON\_SCRIPT\_MODULE\_RELOADED\_ID**](#variable-event_on_script_module_reloaded_id)   = `"OnScriptModuleReloaded"`<br> |
 
 
@@ -82,6 +83,19 @@
 
 ## Public Static Attributes Documentation
 
+
+
+
+### variable EVENT\_ON\_ENGINE\_UPDATE\_ID 
+
+```C++
+const SR_UTILS_NS::StringAtom SR_UTILS_NS::Events::EVENT_ON_ENGINE_UPDATE_ID;
+```
+
+
+
+
+<hr>
 
 
 

@@ -1647,6 +1647,7 @@
       </node>
     </incdepgraph>
     <innerclass refid="classSR__CORE__GUI__NS_1_1RectPropertyDrawer" prot="public">SR_CORE_GUI_NS::RectPropertyDrawer</innerclass>
+    <innerclass refid="classSR__CORE__GUI__NS_1_1MarginPropertyDrawer" prot="public">SR_CORE_GUI_NS::MarginPropertyDrawer</innerclass>
     <innernamespace refid="namespaceSR__CORE__GUI__NS">SR_CORE_GUI_NS</innernamespace>
     <briefdescription>
     </briefdescription>
@@ -1671,13 +1672,20 @@
 <codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref><sp/>Draw(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>&amp;<sp/>context)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight></codeline>
-<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>m_numberTempData<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"></highlight></codeline>
-<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="23"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"></highlight></codeline>
-<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GUI_RECT_PROPERTY_DRAWER_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21" refid="classSR__CORE__GUI__NS_1_1MarginPropertyDrawer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__CORE__GUI__NS_1_1MarginPropertyDrawer" kindref="compound">MarginPropertyDrawer</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" kindref="compound">PropertyDrawerBase</ref><sp/>{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_CLASS()</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Ptr<sp/>=<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;MarginPropertyDrawer&gt;</ref>;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref><sp/>Draw(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>&amp;<sp/>context)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="30"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GUI_RECT_PROPERTY_DRAWER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="Engine/inc/Engine/GUI/PropertyDrawers/RectPropertyDrawer.h"/>
   </compounddef>

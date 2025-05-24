@@ -24,7 +24,6 @@ namespace SR_CORE_UI_NS {
         SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_BUTTON_HOVERED_PROP_NAME = "Hovered";
         SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_BUTTON_PRESSED_PROP_NAME = "Pressed";
     public:
-        bool InitializeEntity() noexcept override;
         void OnDestroy() override;
         void Update(float_t dt) override;
 

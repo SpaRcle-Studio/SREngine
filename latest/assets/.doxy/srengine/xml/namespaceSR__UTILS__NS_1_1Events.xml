@@ -18,6 +18,21 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Events/Broadcaster.h" line="19" column="53" bodyfile="Engine/libs/Utils/inc/Utils/Events/Broadcaster.h" bodystart="19" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="Broadcaster_8h_1a3c474057c9a24daf6db122abe7b06a68" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>const SR_UTILS_NS::StringAtom SR_UTILS_NS::Events::EVENT_ON_ENGINE_UPDATE_ID</definition>
+        <argsstring></argsstring>
+        <name>EVENT_ON_ENGINE_UPDATE_ID</name>
+        <qualifiedname>SR_UTILS_NS::Events::EVENT_ON_ENGINE_UPDATE_ID</qualifiedname>
+        <initializer>= &quot;OnEngineUpdate&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Events/Broadcaster.h" line="20" column="53" bodyfile="Engine/libs/Utils/inc/Utils/Events/Broadcaster.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>

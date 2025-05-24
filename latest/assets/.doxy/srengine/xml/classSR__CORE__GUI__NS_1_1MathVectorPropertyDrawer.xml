@@ -19,23 +19,6 @@
         <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="177" column="9" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="177" bodyend="-1"/>
       </memberdef>
     </sectiondef>
-    <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1MathVectorPropertyDrawer_1a49d7fe39dbe73def17d9f0fa648e6d61" prot="private" static="no" mutable="no">
-        <type>uint64_t</type>
-        <definition>uint64_t SR_CORE_GUI_NS::MathVectorPropertyDrawer::m_numberTempData</definition>
-        <argsstring></argsstring>
-        <name>m_numberTempData</name>
-        <qualifiedname>SR_CORE_GUI_NS::MathVectorPropertyDrawer::m_numberTempData</qualifiedname>
-        <initializer>= 0</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="182" column="18" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="182" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
     <sectiondef kind="public-func">
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1MathVectorPropertyDrawer_1ac951443f89e4bb3a02fba83e787ef01a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref></type>
@@ -128,7 +111,7 @@
         <link refid="classSR__UTILS__NS_1_1SRClass"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="174" column="5" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="174" bodyend="184"/>
+    <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="174" column="5" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="174" bodyend="181"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::MathVectorPropertyDrawer</scope><name>AllocateStatic</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::MathVectorPropertyDrawer</scope><name>AutoFree</name></member>
@@ -155,7 +138,6 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::MathVectorPropertyDrawer</scope><name>IncrementPointer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::MathVectorPropertyDrawer</scope><name>m_basicManually</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::MathVectorPropertyDrawer</scope><name>m_data</name></member>
-      <member refid="classSR__CORE__GUI__NS_1_1MathVectorPropertyDrawer_1a49d7fe39dbe73def17d9f0fa648e6d61" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::MathVectorPropertyDrawer</scope><name>m_numberTempData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::MathVectorPropertyDrawer</scope><name>MakeShared</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::MathVectorPropertyDrawer</scope><name>operator bool</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::MathVectorPropertyDrawer</scope><name>operator!=</name></member>

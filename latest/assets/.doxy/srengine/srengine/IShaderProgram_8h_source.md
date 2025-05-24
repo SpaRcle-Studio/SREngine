@@ -92,6 +92,7 @@ namespace SR_GRAPH_NS {
     SR_INLINE_STATIC SR_UTILS_NS::StringAtom SHADER_SSAO_NOISE = "SSAO_NOISE";
     SR_INLINE_STATIC SR_UTILS_NS::StringAtom SHADER_RGBA_VALUE = "RGBA_VALUE";
     SR_INLINE_STATIC SR_UTILS_NS::StringAtom SHADER_TEXT_ATLAS_TEXTURE = "TEXT_ATLAS_TEXTURE";
+    SR_INLINE_STATIC SR_UTILS_NS::StringAtom SHADER_NDC_RECT = "NDC_RECT";
 
     typedef std::vector<std::pair<Vertices::Attribute, size_t>> VertexAttributes;
     typedef std::vector<SR_VERTEX_DESCRIPTION> VertexDescriptions;

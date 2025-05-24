@@ -400,6 +400,7 @@ namespace SR_GRAPH_GUI_NS {
         SR_RENDERER_DLL_API extern void EndMenuBar();
         SR_RENDERER_DLL_API extern void End();
         SR_RENDERER_DLL_API extern bool IsMouseDragging(MouseButton button);
+        SR_RENDERER_DLL_API extern bool IsMouseDown(MouseButton button);
         SR_RENDERER_DLL_API extern bool IsMouseReleased(MouseButton button);
         SR_RENDERER_DLL_API extern bool IsItemClicked(MouseButton button = MouseButton::Left);
         SR_RENDERER_DLL_API extern bool IsMouseDoubleClicked(MouseButton button);

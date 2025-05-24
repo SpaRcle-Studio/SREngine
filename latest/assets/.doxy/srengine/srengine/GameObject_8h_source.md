@@ -48,7 +48,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD GameObject::Ptr CreateChild(StringAtom name);
         SR_NODISCARD GameObject::Ptr GetOrCreateChild(StringAtom name);
 
-        void OnAttached() override;
+        void OnAttachedToParent() override;
         void SetTransform(const SR_HTYPES_NS::SharedPtr<Transform>& pTransform);
 
     protected:

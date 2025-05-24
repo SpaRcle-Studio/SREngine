@@ -306,21 +306,6 @@
         </inbodydescription>
         <location file="Engine/inc/Engine/GUI/SceneViewer.h" line="87" column="30" bodyfile="Engine/inc/Engine/GUI/SceneViewer.h" bodystart="87" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1SceneViewer_1ab32999025a12355837e00c2114a031aa" prot="private" static="no" mutable="no">
-        <type>std::optional&lt; Utils::CursorLock &gt;</type>
-        <definition>std::optional&lt;Utils::CursorLock&gt; SR_CORE_GUI_NS::SceneViewer::m_cursorLockOpt</definition>
-        <argsstring></argsstring>
-        <name>m_cursorLockOpt</name>
-        <qualifiedname>SR_CORE_GUI_NS::SceneViewer::m_cursorLockOpt</qualifiedname>
-        <initializer>= std::nullopt</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/SceneViewer.h" line="88" column="23" bodyfile="Engine/inc/Engine/GUI/SceneViewer.h" bodystart="88" bodyend="-1"/>
-      </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1SceneViewer_1a078a3633e33b1c60a186062f1932417b" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector2</type>
         <definition>SR_MATH_NS::FVector2 SR_CORE_GUI_NS::SceneViewer::m_mousePos</definition>
@@ -860,7 +845,6 @@
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a69d2fe664c36130dc571ee2529a92ca5" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>m_camera</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1ab9a4bc3615ab2d0c1ed1b2440cfbd591" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>m_cameraRotation</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a8b19d5bb583b8751b29a97f2f90cac9c" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>m_cameraTranslation</name></member>
-      <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1ab32999025a12355837e00c2114a031aa" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>m_cursorLockOpt</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a87bf9d2155e07b1fbc082bba7a5ae975" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>m_enabled</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a994fc6bcc9a92fe58bcb5e0cae4113b3" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>m_engine</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1abeb3023d53be0dda6983476e68427134" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>m_gizmo</name></member>

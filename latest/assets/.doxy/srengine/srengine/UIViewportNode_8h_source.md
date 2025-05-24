@@ -25,7 +25,17 @@ namespace SR_GRAPH_UI_NS {
         using Ptr = SR_HTYPES_NS::SharedPtr<UIViewportNode>;
 
     public:
+        UIViewportNode();
+
+    public:
         void Layout(const SR_MATH_NS::FRect&) override;
+
+    private:
+        SR_UTILS_NS::Subscription m_onEngineUpdate;
+        SR_UTILS_NS::Subscription m_keyDown;
+
+        bool m_manualLayoutRecalc = false;
+        bool m_doRecalcLayout = false;
 
     };
 }

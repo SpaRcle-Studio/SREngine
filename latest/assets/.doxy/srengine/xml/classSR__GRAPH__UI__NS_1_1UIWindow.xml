@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="42" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" bodystart="42" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="40" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1UIWindow_1a911ea1588cbf5b6b5ef19b7c37f03f18" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::UVector2</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="43" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" bodystart="43" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="41" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1UIWindow_1aa78c63427f7c53a8108f0ab9cf7998c7" prot="private" static="no" mutable="no">
         <type>SR_UTILS_NS::GameObject::Ptr</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="44" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="42" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1UIWindow_1ad5d9c181857ee16471b18979b2bb7b38" prot="private" static="no" mutable="no">
         <type>SR_UTILS_NS::GameObject::Ptr</type>
@@ -75,24 +75,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="45" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" bodystart="45" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="43" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" bodystart="43" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UIWindow_1a675276a386d89dcd3f1a112c2d03a94d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool SR_GRAPH_UI_NS::UIWindow::InitializeEntity</definition>
-        <argsstring>() noexcept override</argsstring>
-        <name>InitializeEntity</name>
-        <qualifiedname>SR_GRAPH_UI_NS::UIWindow::InitializeEntity</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="24" column="14"/>
-      </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UIWindow_1ad2365d7b5e9b71e6ae7f4d017eb92ca5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
         <definition>SR_NODISCARD bool SR_GRAPH_UI_NS::UIWindow::IsResizable</definition>
@@ -105,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="26" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" bodystart="26" bodyend="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="24" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" bodystart="24" bodyend="24"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UIWindow_1aa6f050bb425c77bc0522a999b837cbb2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -119,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="27" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" bodystart="27" bodyend="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="25" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" bodystart="25" bodyend="25"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UIWindow_1ac892c70001f36a35842207f899750790" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -133,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="28" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" bodystart="28" bodyend="28"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="26" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" bodystart="26" bodyend="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UIWindow_1ac65c50e4b6a8485b0209582e1c807357" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -147,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="29" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" bodystart="29" bodyend="29"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="27" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" bodystart="27" bodyend="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UIWindow_1a53ab66edefbd7ee8f2a4e30551f84f84" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -161,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="30" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" bodystart="30" bodyend="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="28" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" bodystart="28" bodyend="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UIWindow_1acbfd7ebc4ae9503116fd288e84e872ca" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -175,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="31" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" bodystart="31" bodyend="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="29" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" bodystart="29" bodyend="29"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UIWindow_1afffa796a51220239b98dd52944bbe334" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -193,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="33" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UIWindow_1a8b624499986db759225dbbab661ddae5" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -211,7 +197,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="34" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UIWindow_1a3f47fca1971886545d6d23e6038cfd21" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -229,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="35" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="33" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UIWindow_1a98c193e2d0899a5da7b6173ad42ca4f9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -247,7 +233,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="36" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="34" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UIWindow_1a1e53906650aaad21b6564cb05769a773" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -265,7 +251,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="37" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="35" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UIWindow_1a05401e7034fdf266f9027f130a44837f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -283,7 +269,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="38" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="36" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UIWindow_1a312b68779bdc1e581f8354e37209e2c0" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -301,7 +287,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="39" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="37" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -360,7 +346,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="21" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" bodystart="21" bodyend="47"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="21" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" bodystart="21" bodyend="45"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GRAPH_UI_NS::UIWindow</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UIWindow</scope><name>BaseComponent</name></member>
@@ -381,7 +367,6 @@
       <member refid="classSR__UTILS__NS_1_1Component_1ab6d313e3075c5dabf5b41189b10f236e" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UIWindow</scope><name>GetTransform</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a0255fd473a25f237c833df1d507bdbfb" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UIWindow</scope><name>HasParent</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a5dc93a6f5bb2867f7a20476c569451ed" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UIWindow</scope><name>HasScene</name></member>
-      <member refid="classSR__GRAPH__UI__NS_1_1UIWindow_1a675276a386d89dcd3f1a112c2d03a94d" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UIWindow</scope><name>InitializeEntity</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a1601529fb5946634c4e4d235769b4b80" prot="public" virt="virtual"><scope>SR_GRAPH_UI_NS::UIWindow</scope><name>IsActive</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a1d7984f57df2fb1519bca8e2346cbcdd" prot="public" virt="virtual"><scope>SR_GRAPH_UI_NS::UIWindow</scope><name>IsAttached</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aaa40b9cae6a7b9c771bcf20671f80455" prot="public" virt="virtual"><scope>SR_GRAPH_UI_NS::UIWindow</scope><name>IsAwake</name></member>

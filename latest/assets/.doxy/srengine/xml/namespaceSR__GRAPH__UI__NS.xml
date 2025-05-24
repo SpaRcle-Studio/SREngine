@@ -5,18 +5,18 @@
     <innerclass refid="classSR__GRAPH__UI__NS_1_1Canvas" prot="public">SR_GRAPH_UI_NS::Canvas</innerclass>
     <innerclass refid="classSR__GRAPH__UI__NS_1_1Gizmo" prot="public">SR_GRAPH_UI_NS::Gizmo</innerclass>
     <innerclass refid="classSR__GRAPH__UI__NS_1_1UICanvasComponent" prot="public">SR_GRAPH_UI_NS::UICanvasComponent</innerclass>
-    <innerclass refid="classSR__GRAPH__UI__NS_1_1UIContainerNode" prot="public">SR_GRAPH_UI_NS::UIContainerNode</innerclass>
     <innerclass refid="classSR__GRAPH__UI__NS_1_1UIControlNode" prot="public">SR_GRAPH_UI_NS::UIControlNode</innerclass>
     <innerclass refid="classSR__GRAPH__UI__NS_1_1UIHBoxContainerNode" prot="public">SR_GRAPH_UI_NS::UIHBoxContainerNode</innerclass>
+    <innerclass refid="structSR__GRAPH__UI__NS_1_1UILayout" prot="public">SR_GRAPH_UI_NS::UILayout</innerclass>
     <innerclass refid="classSR__GRAPH__UI__NS_1_1UINode" prot="public">SR_GRAPH_UI_NS::UINode</innerclass>
     <innerclass refid="classSR__GRAPH__UI__NS_1_1UISizeComponent" prot="public">SR_GRAPH_UI_NS::UISizeComponent</innerclass>
     <innerclass refid="classSR__GRAPH__UI__NS_1_1UIVBoxContainerNode" prot="public">SR_GRAPH_UI_NS::UIVBoxContainerNode</innerclass>
     <innerclass refid="classSR__GRAPH__UI__NS_1_1UIViewportNode" prot="public">SR_GRAPH_UI_NS::UIViewportNode</innerclass>
     <innerclass refid="classSR__GRAPH__UI__NS_1_1UIWindow" prot="public">SR_GRAPH_UI_NS::UIWindow</innerclass>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="UIControlNode_8h_1a3066db1ca260fb3ed40b9d0de590ee70" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="UIControlNode_8h_1a64ac4a61ee9d5532b3a52625a96e9912" prot="public" static="no" mutable="no">
         <type></type>
-        <definition>SR_GRAPH_UI_NS::uint8_t</definition>
+        <definition>Percent SR_GRAPH_UI_NS::uint8_t</definition>
         <argsstring></argsstring>
         <name>uint8_t</name>
         <qualifiedname>SR_GRAPH_UI_NS::uint8_t</qualifiedname>
@@ -27,6 +27,20 @@
         <inbodydescription>
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" line="16" column="6" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="UIControlNode_8h_1a68b2bb1f5df56fdb9df384df9a252250" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>Percent SR_GRAPH_UI_NS::Auto</definition>
+        <argsstring></argsstring>
+        <name>Auto</name>
+        <qualifiedname>SR_GRAPH_UI_NS::Auto</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" line="17" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" bodystart="17" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="UIControlNode_8h_1adb38c67ceecd0dda1181c5ecad3f3be4" prot="public" static="no" mutable="no">
         <type></type>
@@ -40,37 +54,105 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" line="17" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" bodystart="17" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="UIControlNode_8h_1a1692bea21715730edf970231492b27ed" prot="public" static="no" mutable="no">
-        <type></type>
-        <definition>SR_GRAPH_UI_NS::Percent</definition>
-        <argsstring></argsstring>
-        <name>Percent</name>
-        <qualifiedname>SR_GRAPH_UI_NS::Percent</qualifiedname>
-        <briefdescription>
-<para>размер задаётся явно </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" line="18" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" bodystart="18" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="UIControlNode_8h_1a7681c6fc17c10355c30832b78d3c5876" prot="public" static="no" mutable="no">
-        <type></type>
-        <definition>SR_GRAPH_UI_NS::Content</definition>
+      <memberdef kind="variable" id="UIControlNode_8h_1a33212384207d42f0963e4a69225890c7" prot="public" static="no" mutable="no">
+        <type>Percent</type>
+        <definition>Percent SR_GRAPH_UI_NS::Start</definition>
         <argsstring></argsstring>
-        <name>Content</name>
-        <qualifiedname>SR_GRAPH_UI_NS::Content</qualifiedname>
+        <name>Start</name>
+        <qualifiedname>SR_GRAPH_UI_NS::Start</qualifiedname>
         <briefdescription>
-<para>размер в % от доступного пространства </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" line="19" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" bodystart="19" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" line="34" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="UIControlNode_8h_1ad589792db6e72772fc78cc30e3f421c0" prot="public" static="no" mutable="no">
+        <type>Percent</type>
+        <definition>Percent SR_GRAPH_UI_NS::Center</definition>
+        <argsstring></argsstring>
+        <name>Center</name>
+        <qualifiedname>SR_GRAPH_UI_NS::Center</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" line="35" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="UIControlNode_8h_1ab9019f7bed3f403928d3c288ab5ebc39" prot="public" static="no" mutable="no">
+        <type>Percent</type>
+        <definition>Percent SR_GRAPH_UI_NS::End</definition>
+        <argsstring></argsstring>
+        <name>End</name>
+        <qualifiedname>SR_GRAPH_UI_NS::End</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" line="36" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="UIControlNode_8h_1aaa27495dfdc3755fe67bd52cfb1d4306" prot="public" static="no" mutable="no">
+        <type>Percent</type>
+        <definition>Percent SR_GRAPH_UI_NS::Stretch</definition>
+        <argsstring></argsstring>
+        <name>Stretch</name>
+        <qualifiedname>SR_GRAPH_UI_NS::Stretch</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" line="37" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="UIControlNode_8h_1a7382f2e0cdb586c7bd8d204c38bcca85" prot="public" static="no" mutable="no">
+        <type>Percent</type>
+        <definition>Percent SR_GRAPH_UI_NS::Baseline</definition>
+        <argsstring></argsstring>
+        <name>Baseline</name>
+        <qualifiedname>SR_GRAPH_UI_NS::Baseline</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" line="38" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="UIControlNode_8h_1a8dda12918914edde79380649fcec2d2f" prot="public" static="no" mutable="no">
+        <type>Percent</type>
+        <definition>Percent SR_GRAPH_UI_NS::SpaceBetween</definition>
+        <argsstring></argsstring>
+        <name>SpaceBetween</name>
+        <qualifiedname>SR_GRAPH_UI_NS::SpaceBetween</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" line="39" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="UIControlNode_8h_1a670a9f9aae26d178c3da8247b0021d94" prot="public" static="no" mutable="no">
+        <type>Percent</type>
+        <definition>Percent SR_GRAPH_UI_NS::SpaceAround</definition>
+        <argsstring></argsstring>
+        <name>SpaceAround</name>
+        <qualifiedname>SR_GRAPH_UI_NS::SpaceAround</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" line="40" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" bodystart="40" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -281,6 +363,47 @@
         <inbodydescription>
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" line="11" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="UIControlNode_8h_1a406c2a47325d0363a92daeb3b05dda51" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Percent</type>
+        <definition>Percent SR_GRAPH_UI_NS::SR_ENUM_NS_CLASS_T</definition>
+        <argsstring>(UIJustify, uint8_t, Auto, FlexStart, Center, FlexEnd, SpaceBetween, SpaceAround, SpaceEvenly) SR_ENUM_NS_CLASS_T(UIAlign</argsstring>
+        <name>SR_ENUM_NS_CLASS_T</name>
+        <qualifiedname>SR_GRAPH_UI_NS::SR_ENUM_NS_CLASS_T</qualifiedname>
+        <param>
+          <type>UIJustify</type>
+        </param>
+        <param>
+          <type>uint8_t</type>
+        </param>
+        <param>
+          <type>Auto</type>
+        </param>
+        <param>
+          <type>FlexStart</type>
+        </param>
+        <param>
+          <type>Center</type>
+        </param>
+        <param>
+          <type>FlexEnd</type>
+        </param>
+        <param>
+          <type>SpaceBetween</type>
+        </param>
+        <param>
+          <type>SpaceAround</type>
+        </param>
+        <param>
+          <type>SpaceEvenly</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" line="22" column="5"/>
       </memberdef>
       <memberdef kind="function" id="UIWindow_8h_1af8332c5d96379e836088713a7362370d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>

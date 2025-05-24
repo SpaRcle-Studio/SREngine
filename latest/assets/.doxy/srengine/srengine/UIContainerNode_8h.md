@@ -31,11 +31,6 @@
 | namespace | [**SR\_GRAPH\_UI\_NS**](namespaceSR__GRAPH__UI__NS.md) <br> |
 
 
-## Classes
-
-| Type | Name |
-| ---: | :--- |
-| class | [**UIContainerNode**](classSR__GRAPH__UI__NS_1_1UIContainerNode.md) <br> |
 
 
 

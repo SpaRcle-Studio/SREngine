@@ -1935,19 +1935,16 @@
 <codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref><sp/>Draw(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>&amp;<sp/>context)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="180"><highlight class="normal"></highlight></codeline>
-<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>m_numberTempData<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="183"><highlight class="normal"></highlight></codeline>
-<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="185"><highlight class="normal"></highlight></codeline>
-<codeline lineno="186" refid="classSR__CORE__GUI__NS_1_1MathSizePropertyDrawer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__CORE__GUI__NS_1_1MathSizePropertyDrawer" kindref="compound">MathSizePropertyDrawer</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" kindref="compound">PropertyDrawerBase</ref><sp/>{</highlight></codeline>
-<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_CLASS()</highlight></codeline>
-<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref><sp/>Draw(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>&amp;<sp/>context)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="191"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="192"><highlight class="normal"></highlight></codeline>
-<codeline lineno="193"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_CORE_PROPERTY_DRAWER_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight></codeline>
+<codeline lineno="183" refid="classSR__CORE__GUI__NS_1_1MathSizePropertyDrawer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__CORE__GUI__NS_1_1MathSizePropertyDrawer" kindref="compound">MathSizePropertyDrawer</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" kindref="compound">PropertyDrawerBase</ref><sp/>{</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_CLASS()</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref><sp/>Draw(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>&amp;<sp/>context)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="188"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_CORE_PROPERTY_DRAWER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="Engine/inc/Engine/GUI/PropertyDrawer.h"/>
   </compounddef>

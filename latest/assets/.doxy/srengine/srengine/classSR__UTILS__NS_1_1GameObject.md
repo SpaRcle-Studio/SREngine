@@ -63,7 +63,7 @@ Inherits the following classes: SceneObject
 |  SR\_NODISCARD [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Transform**](classSR__UTILS__NS_1_1Transform.md) &gt; | [**GetParentTransform**](#function-getparenttransform) () noexcept const<br> |
 |  SR\_NODISCARD SceneObjectType | [**GetSceneObjectType**](#function-getsceneobjecttype) () noexcept override const<br> |
 |  SR\_NODISCARD [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Transform**](classSR__UTILS__NS_1_1Transform.md) &gt; | [**GetTransform**](#function-gettransform) () noexcept const<br> |
-|  void | [**OnAttached**](#function-onattached) () override<br> |
+|  void | [**OnAttachedToParent**](#function-onattachedtoparent) () override<br> |
 |  void | [**SetTransform**](#function-settransform) (const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Transform**](classSR__UTILS__NS_1_1Transform.md) &gt; & pTransform) <br> |
 |   | [**~GameObject**](#function-gameobject) () override<br> |
 
@@ -201,10 +201,10 @@ SR_NODISCARD SR_HTYPES_NS::SharedPtr < Transform > SR_UTILS_NS::GameObject::GetT
 
 
 
-### function OnAttached 
+### function OnAttachedToParent 
 
 ```C++
-void SR_UTILS_NS::GameObject::OnAttached () override
+void SR_UTILS_NS::GameObject::OnAttachedToParent () override
 ```
 
 

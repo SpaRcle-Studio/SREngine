@@ -1130,7 +1130,6 @@
     <member refid="classSR__CORE__UI__NS_1_1Button_1a955ae1117dc735164a3cfec89d0e419b" kind="variable"><name>SR_BUTTON_IDLE_PROP_NAME</name></member>
     <member refid="classSR__CORE__UI__NS_1_1Button_1ab3130dbab6c2771a3b6a3b1cab969999" kind="variable"><name>SR_BUTTON_HOVERED_PROP_NAME</name></member>
     <member refid="classSR__CORE__UI__NS_1_1Button_1a7c9d602092142a5b72b79ffdb3e20ca0" kind="variable"><name>SR_BUTTON_PRESSED_PROP_NAME</name></member>
-    <member refid="classSR__CORE__UI__NS_1_1Button_1ad3b650fbd8ba3fd66a3e93e0d1532467" kind="function"><name>InitializeEntity</name></member>
     <member refid="classSR__CORE__UI__NS_1_1Button_1ada41d0409ffbf999d95613fcc685bd33" kind="function"><name>OnDestroy</name></member>
     <member refid="classSR__CORE__UI__NS_1_1Button_1a99fab8cb20f560173e8d6f9718c81984" kind="function"><name>Update</name></member>
   </compound>
@@ -3093,7 +3092,6 @@
     <member refid="classSR__CORE__NS_1_1Engine_1a72babce9f71c513b2741e8cd8f18c430" kind="variable"><name>m_editor</name></member>
     <member refid="classSR__CORE__NS_1_1Engine_1a891fce8af8ec98ffef618892d33ee0d1" kind="variable"><name>m_renderContext</name></member>
     <member refid="classSR__CORE__NS_1_1Engine_1a888a280aa52e9df93d5d3983fe8939e1" kind="variable"><name>m_windows</name></member>
-    <member refid="classSR__CORE__NS_1_1Engine_1ae050b2c9b307efa994946488b154c1b9" kind="variable"><name>m_cursorLockOpt</name></member>
     <member refid="classSR__CORE__NS_1_1Engine_1a87b05408e53f2fd11e49cdb2aca932b0" kind="function"><name>Engine</name></member>
     <member refid="classSR__CORE__NS_1_1Engine_1ad070284f29f59eb82922edae879b03dd" kind="function"><name>~Engine</name></member>
     <member refid="classSR__CORE__NS_1_1Engine_1abc7a82809662be98c2587e694f21a058" kind="function"><name>Execute</name></member>
@@ -4066,7 +4064,7 @@
     <member refid="classSR__UTILS__NS_1_1GameObject_1a9e2e7e3130259bf72368ef8ea81eaae0" kind="function"><name>GetParentTransform</name></member>
     <member refid="classSR__UTILS__NS_1_1GameObject_1a15c305becf732cd4e047d717303d7822" kind="function"><name>CreateChild</name></member>
     <member refid="classSR__UTILS__NS_1_1GameObject_1a103f6199f7e970f5aa1c21dacddeb21a" kind="function"><name>GetOrCreateChild</name></member>
-    <member refid="classSR__UTILS__NS_1_1GameObject_1a0c4eb194bd17baa4a03f196ef033bede" kind="function"><name>OnAttached</name></member>
+    <member refid="classSR__UTILS__NS_1_1GameObject_1a288871a4299d57b9024079e016d67907" kind="function"><name>OnAttachedToParent</name></member>
     <member refid="classSR__UTILS__NS_1_1GameObject_1aeae41410eb6bf8a14add6ecebf73d9bf" kind="function"><name>SetTransform</name></member>
     <member refid="classSR__UTILS__NS_1_1GameObject_1a6f90410d91168d623a2a94f65388cce9" kind="function"><name>OnHierarchyChanged</name></member>
   </compound>
@@ -4582,7 +4580,6 @@
     <member refid="classSR__CORE__UI__NS_1_1IButton_1aa53710a7c1df027fff11a3a2b37dc122" kind="function"><name>OnKeyDown</name></member>
     <member refid="classSR__CORE__UI__NS_1_1IButton_1a7aa45e569de321decbf30648c5fbed90" kind="function"><name>OnKeyUp</name></member>
     <member refid="classSR__CORE__UI__NS_1_1IButton_1a702ca467575b79a375333756cb3f8bec" kind="function"><name>ExecuteInEditMode</name></member>
-    <member refid="classSR__CORE__UI__NS_1_1IButton_1a2abe8e6194b4538b4985dcbd607ecbd5" kind="function"><name>InitializeEntity</name></member>
   </compound>
   <compound refid="classSR__UTILS__NS_1_1ICloneable" kind="class"><name>SR_UTILS_NS::ICloneable</name>
     <member refid="classSR__UTILS__NS_1_1ICloneable_1a85dd1af63e29bc00b2913f25ded64751" kind="function"><name>ICloneable</name></member>
@@ -5778,6 +5775,10 @@
   <compound refid="classSR__UTILS__NS_1_1AutoTests_1_1ManuallySharedPtrTestClassInherit" kind="class"><name>SR_UTILS_NS::AutoTests::ManuallySharedPtrTestClassInherit</name>
     <member refid="classSR__UTILS__NS_1_1AutoTests_1_1ManuallySharedPtrTestClassInherit_1a7ac028189fb658d491e57325f711fc22" kind="function"><name>~ManuallySharedPtrTestClassInherit</name></member>
   </compound>
+  <compound refid="classSR__CORE__GUI__NS_1_1MarginPropertyDrawer" kind="class"><name>SR_CORE_GUI_NS::MarginPropertyDrawer</name>
+    <member refid="classSR__CORE__GUI__NS_1_1MarginPropertyDrawer_1a1d19da10479082c471a5999e3e5163ed" kind="typedef"><name>Ptr</name></member>
+    <member refid="classSR__CORE__GUI__NS_1_1MarginPropertyDrawer_1a4ea7eb8dc6a27d246e7bee9491015b5e" kind="function"><name>Draw</name></member>
+  </compound>
   <compound refid="classSR__HTYPES__NS_1_1Marshal" kind="class"><name>SR_HTYPES_NS::Marshal</name>
     <member refid="classSR__HTYPES__NS_1_1Marshal_1adecf56dc0e35dd44f51afb0c73448330" kind="typedef"><name>Super</name></member>
     <member refid="classSR__HTYPES__NS_1_1Marshal_1a8d5a10a4c57948eba87d30c5e9661002" kind="typedef"><name>Ptr</name></member>
@@ -5929,7 +5930,6 @@
   </compound>
   <compound refid="classSR__CORE__GUI__NS_1_1MathVectorPropertyDrawer" kind="class"><name>SR_CORE_GUI_NS::MathVectorPropertyDrawer</name>
     <member refid="classSR__CORE__GUI__NS_1_1MathVectorPropertyDrawer_1a16368240e942c33fb1e470faa3cb25dc" kind="typedef"><name>Ptr</name></member>
-    <member refid="classSR__CORE__GUI__NS_1_1MathVectorPropertyDrawer_1a49d7fe39dbe73def17d9f0fa648e6d61" kind="variable"><name>m_numberTempData</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1MathVectorPropertyDrawer_1ac951443f89e4bb3a02fba83e787ef01a" kind="function"><name>Draw</name></member>
   </compound>
   <compound refid="classSR__MATH__NS_1_1Matrix3x3" kind="class"><name>SR_MATH_NS::Matrix3x3</name>
@@ -8452,7 +8452,6 @@
   </compound>
   <compound refid="classSR__CORE__GUI__NS_1_1RectPropertyDrawer" kind="class"><name>SR_CORE_GUI_NS::RectPropertyDrawer</name>
     <member refid="classSR__CORE__GUI__NS_1_1RectPropertyDrawer_1acc778adbbaad6032fad2c2c0ec9c5059" kind="typedef"><name>Ptr</name></member>
-    <member refid="classSR__CORE__GUI__NS_1_1RectPropertyDrawer_1ad15122d1e3c7e898366c50e1afedf24a" kind="variable"><name>m_numberTempData</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1RectPropertyDrawer_1ae449c00b682f468e42881b5814d5f790" kind="function"><name>Draw</name></member>
   </compound>
   <compound refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent" kind="class"><name>SR_UTILS_NS::Tests::ReflectionTestComponent</name>
@@ -9635,7 +9634,6 @@
     <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a87bf9d2155e07b1fbc082bba7a5ae975" kind="variable"><name>m_enabled</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a4b786e1f905e6eecef594158da490b2c" kind="variable"><name>m_updateNonHoveredSceneViewer</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a80173e977e3b15f3e1357a69b6211547" kind="variable"><name>m_windowSize</name></member>
-    <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1ab32999025a12355837e00c2114a031aa" kind="variable"><name>m_cursorLockOpt</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a078a3633e33b1c60a186062f1932417b" kind="variable"><name>m_mousePos</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a7b551ba9206eceadcf3bcf248b86ff6b" kind="function"><name>SceneViewer</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1acc1ed783ff52fb07a4db8b72a9261846" kind="function"><name>SceneViewer</name></member>
@@ -10651,7 +10649,6 @@
     <member refid="classSR__GTYPES__NS_1_1Sprite_1adc6b23cd26da870ee3ff8eb1fc408353" kind="function"><name>IsSupportVBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1Sprite_1aec9600fdfa7a48db287ac01f6cea5c92" kind="function"><name>BindMesh</name></member>
     <member refid="classSR__GTYPES__NS_1_1Sprite_1a38f07065d9371ae532607f8f589ab759" kind="function"><name>GetMeshType</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Sprite_1a174d540673083581c5d55b8455286cc0" kind="function"><name>InitializeEntity</name></member>
     <member refid="classSR__GTYPES__NS_1_1Sprite_1a42a8a19c0ce2e1f5b1d940c748d4cb70" kind="function"><name>GetIndicesCount</name></member>
     <member refid="classSR__GTYPES__NS_1_1Sprite_1a10a7ae0ece4fde741b8107d9063ab42e" kind="function"><name>IsFlatMesh</name></member>
     <member refid="classSR__GTYPES__NS_1_1Sprite_1a4e17429eecedb5e0c10db5a67e25d6bb" kind="function"><name>GetMeshIdentifier</name></member>
@@ -12357,19 +12354,15 @@
     <member refid="classSR__GRAPH__UI__NS_1_1UICanvasComponent_1a2c5f339dfea54ec0e7212354bba6bcf2" kind="typedef"><name>Super</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UICanvasComponent_1a3bc8103729ea0addedc08a9d4a539ced" kind="function"><name>Prepare</name></member>
   </compound>
-  <compound refid="classSR__GRAPH__UI__NS_1_1UIContainerNode" kind="class"><name>SR_GRAPH_UI_NS::UIContainerNode</name>
-    <member refid="classSR__GRAPH__UI__NS_1_1UIContainerNode_1a5be3a119f7276950783129aecf80fb51" kind="typedef"><name>Super</name></member>
-    <member refid="classSR__GRAPH__UI__NS_1_1UIContainerNode_1a8d879401c41a2576ebb2bb877e3058b8" kind="typedef"><name>Ptr</name></member>
-    <member refid="classSR__GRAPH__UI__NS_1_1UIContainerNode_1ad4d02c4b552de0afadbc03dede42c006" kind="function"><name>GetNodeType</name></member>
-    <member refid="classSR__GRAPH__UI__NS_1_1UIContainerNode_1a73e99cbd3f691d045470e967399f617e" kind="function"><name>Layout</name></member>
-  </compound>
   <compound refid="classSR__GRAPH__UI__NS_1_1UIControlNode" kind="class"><name>SR_GRAPH_UI_NS::UIControlNode</name>
     <member refid="classSR__GRAPH__UI__NS_1_1UIControlNode_1a65d49c13f7fe6f139dd544e6169812b2" kind="typedef"><name>Super</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UIControlNode_1ac13f2b0bcccbc75b7f6f92175131b4bb" kind="typedef"><name>Ptr</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UIControlNode_1aed9e0fdaf515e46bd313c6e8ba6e5f55" kind="variable"><name>m_layout</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIControlNode_1a70ce90ac80849f47f9da5e729696daeb" kind="function"><name>Prepare</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UIControlNode_1a8fba6053255bf4544d5b68ca63782910" kind="function"><name>Layout</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UIControlNode_1ab78663350fcbcc13710c5eb70a328689" kind="function"><name>CalculateContentSize</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UIControlNode_1a8a419ef8e6027d2aa865af619e0444ec" kind="function"><name>GetLayout</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIControlNode_1a1e9e259f8882d464c2f699dbcab63a54" kind="function"><name>GetLayout</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UIControlNode_1a3c4273fc4e2d0b941e3dbf50e7685cf1" kind="function"><name>GetNodeType</name></member>
   </compound>
   <compound refid="classSR__GRAPH__UI__NS_1_1UIHBoxContainerNode" kind="class"><name>SR_GRAPH_UI_NS::UIHBoxContainerNode</name>
@@ -12377,6 +12370,19 @@
     <member refid="classSR__GRAPH__UI__NS_1_1UIHBoxContainerNode_1a9d46c486db8a32b3a82201a132d4da09" kind="typedef"><name>Ptr</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UIHBoxContainerNode_1aa0b8b0ec56aee45e2828ae48a67bf6c9" kind="function"><name>CalculateContentSize</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UIHBoxContainerNode_1a686c92da403265a69cb91d560929964a" kind="function"><name>Layout</name></member>
+  </compound>
+  <compound refid="structSR__GRAPH__UI__NS_1_1UILayout" kind="struct"><name>SR_GRAPH_UI_NS::UILayout</name>
+    <member refid="structSR__GRAPH__UI__NS_1_1UILayout_1ab4129de35c7ffeb2245b7427b2207a15" kind="variable"><name>widthPolicy</name></member>
+    <member refid="structSR__GRAPH__UI__NS_1_1UILayout_1a0d48614a25275ed7cc4df26394d7935d" kind="variable"><name>heightPolicy</name></member>
+    <member refid="structSR__GRAPH__UI__NS_1_1UILayout_1acf0cafbc48f709ec5aa677ceb1ffad7c" kind="variable"><name>width</name></member>
+    <member refid="structSR__GRAPH__UI__NS_1_1UILayout_1a84844e1b9fe21eeda96850632d6ceb80" kind="variable"><name>height</name></member>
+    <member refid="structSR__GRAPH__UI__NS_1_1UILayout_1a8290830417fb5a2ac20c33e9f6c7699e" kind="variable"><name>aspectRatio</name></member>
+    <member refid="structSR__GRAPH__UI__NS_1_1UILayout_1a0b6cadce894f0b0bea6dad401de35494" kind="variable"><name>positionType</name></member>
+    <member refid="structSR__GRAPH__UI__NS_1_1UILayout_1ac08c2004fc40440922dcb6f3f6ef8349" kind="variable"><name>absolutePosition</name></member>
+    <member refid="structSR__GRAPH__UI__NS_1_1UILayout_1ad13cf7a79bb32b3f28599488bce36138" kind="variable"><name>offset</name></member>
+    <member refid="structSR__GRAPH__UI__NS_1_1UILayout_1a46bca12b33f5ca3513cd985d0081997b" kind="variable"><name>margin</name></member>
+    <member refid="structSR__GRAPH__UI__NS_1_1UILayout_1a3fa0e4ed8de44ebcc618192a6f3f4b5d" kind="variable"><name>padding</name></member>
+    <member refid="structSR__GRAPH__UI__NS_1_1UILayout_1a0d58e76dd93f110355d8d67bb89cd57a" kind="variable"><name>align</name></member>
   </compound>
   <compound refid="classSR__UTILS__NS_1_1UI_1_1UIModifierComponent" kind="class"><name>SR_UTILS_NS::UI::UIModifierComponent</name>
     <member refid="classSR__UTILS__NS_1_1UI_1_1UIModifierComponent_1aa098e4c244dc60ddddc40c0ef07ca1d3" kind="typedef"><name>Super</name></member>
@@ -12405,18 +12411,32 @@
   <compound refid="classSR__GRAPH__UI__NS_1_1UINode" kind="class"><name>SR_GRAPH_UI_NS::UINode</name>
     <member refid="classSR__GRAPH__UI__NS_1_1UINode_1afc3532de7c9b0a3cb03bdbd46cda82b5" kind="typedef"><name>Super</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UINode_1aeaaa584f79d65e8c4012794dd852446b" kind="typedef"><name>Ptr</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1ae2c0f06d2ee9ef63c5142908d6d1686a" kind="variable"><name>m_implNode</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a5b93b44cbf52f8807425616b9d4dcd89" kind="variable"><name>m_priority</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a60730e2ab135d14e56b1b0471059202b" kind="variable"><name>m_finalRect</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1ae4200da9fdf725c7099083cb268cf0d4" kind="variable"><name>m_hasParent</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a73e6b6b2f60efd1f3c269c5e726a9fb0" kind="variable"><name>m_parentName</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a8b6a88c7ee40a365528ab15c59865566" kind="variable"><name>m_viewportSize</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UINode_1aeebfcb6e25dea793ca79512e6167c0ac" kind="variable"><name>m_matrix</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a73358113c9f9257343fbf77d9d738194" kind="variable"><name>m_renderScene</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UINode_1afa28f86b2bc5b8c0272844a53191b180" kind="function"><name>UINode</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1afd8885332b0613bb5f3b414ef5bf05c9" kind="function"><name>~UINode</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a0960c513d3ae0dbde57b2f59da1fa2f4" kind="function"><name>Prepare</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a5b68db17f552224f97d860cc2d32131a" kind="function"><name>Layout</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1af4b22c40b924c989a86a217b08fe4a1e" kind="function"><name>Compile</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1ab70f1e1e3a8915b5dd180ca2d06d3690" kind="function"><name>OnParentChanged</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a6acd81e1f9f7866bc1fcf3d7d80921d0" kind="function"><name>CalculateContentSize</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a32326e8f9147f75954d4aaae79e7e648" kind="function"><name>GetNodeType</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a1f204d10872ef370d07a1c3385f7fce4" kind="function"><name>GetFinalRect</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a03b4058c2727ed5f708a00f867621862" kind="function"><name>GetMatrix</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1aa7e7b2796d85392ca8ed7c33f462651f" kind="function"><name>GetNDCVector</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a5d84dc9b11a3cf4fb3e6cfd3d480ba02" kind="function"><name>GetNodePriority</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a2c89158cfe3a5019a08fda9440e69104" kind="function"><name>GetCamera</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a792200f60743277772b4eb1139162259" kind="function"><name>TryGetRenderScene</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a9f32b99709b6c697fcf372c084335dd1" kind="function"><name>GetRenderScene</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a853cb66a906f1fb616e9c1df0c8c657c" kind="function"><name>GetViewportSize</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a4ba798a4d7188b103f3851302761c8cd" kind="function"><name>SetViewportSize</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UINode_1a93aea0bb78ab6140a7c2eca116c166fb" kind="function"><name>GetYGNode</name></member>
   </compound>
   <compound refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper" kind="struct"><name>SR_TYPES_NS::detail::uint_type_helper</name>
     <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1ac996f5b927bc83637b48ffd0c2eb5def" kind="typedef"><name>exact_unsigned_type</name></member>
@@ -12596,6 +12616,11 @@
   <compound refid="classSR__GRAPH__UI__NS_1_1UIViewportNode" kind="class"><name>SR_GRAPH_UI_NS::UIViewportNode</name>
     <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1a6c7a9e7fd46277280d28123eab070d7e" kind="typedef"><name>Super</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1a7dee1c349e7d1644ac4625740a6b4290" kind="typedef"><name>Ptr</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1aa93d3080aebc86abf6d56b1488f992f3" kind="variable"><name>m_onEngineUpdate</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1a58cb3960294f7bc1a7cd49201fac15c6" kind="variable"><name>m_keyDown</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1ae1d760b4cefa79104684dddca20798cf" kind="variable"><name>m_manualLayoutRecalc</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1ab67b939ccc393932365ef5dc9caf63c6" kind="variable"><name>m_doRecalcLayout</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1a6ee2f58d0015b3bd5ee6c1cd4500613b" kind="function"><name>UIViewportNode</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1ad8cc144f617d08aafb6bd7b82bc301a1" kind="function"><name>Layout</name></member>
   </compound>
   <compound refid="classSR__GRAPH__UI__NS_1_1UIWindow" kind="class"><name>SR_GRAPH_UI_NS::UIWindow</name>
@@ -12604,7 +12629,6 @@
     <member refid="classSR__GRAPH__UI__NS_1_1UIWindow_1a911ea1588cbf5b6b5ef19b7c37f03f18" kind="variable"><name>m_windowSize</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UIWindow_1aa78c63427f7c53a8108f0ab9cf7998c7" kind="variable"><name>m_content</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UIWindow_1ad5d9c181857ee16471b18979b2bb7b38" kind="variable"><name>m_titleBar</name></member>
-    <member refid="classSR__GRAPH__UI__NS_1_1UIWindow_1a675276a386d89dcd3f1a112c2d03a94d" kind="function"><name>InitializeEntity</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UIWindow_1ad2365d7b5e9b71e6ae7f4d017eb92ca5" kind="function"><name>IsResizable</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UIWindow_1aa6f050bb425c77bc0522a999b837cbb2" kind="function"><name>IsMovable</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UIWindow_1ac892c70001f36a35842207f899750790" kind="function"><name>IsClosable</name></member>
@@ -13982,6 +14006,7 @@
     <member refid="IShaderProgram_8h_1a3d37b3771a5799d0d2232218c782cc57" kind="variable"><name>SHADER_SSAO_NOISE</name></member>
     <member refid="IShaderProgram_8h_1aed523686a192d8529624fa28c7554967" kind="variable"><name>SHADER_RGBA_VALUE</name></member>
     <member refid="IShaderProgram_8h_1aff6c2c9c4677897ec0714d93964e7a09" kind="variable"><name>SHADER_TEXT_ATLAS_TEXTURE</name></member>
+    <member refid="IShaderProgram_8h_1a917e255895c5ecd4c680cac2c948e693" kind="variable"><name>SHADER_NDC_RECT</name></member>
     <member refid="IShaderProgram_8h_1a1ee033c7649c329679583bfab3d5214b" kind="variable"><name>Unknown</name></member>
     <member refid="IShaderProgram_8h_1a2e068e70edf0de623175e688ff5c57d6" kind="variable"><name>Never</name></member>
     <member refid="IShaderProgram_8h_1a7d45f13d85fe867bfcb3f95aaee7e2d0" kind="variable"><name>Less</name></member>
@@ -14139,13 +14164,20 @@
     <member refid="namespaceSR__GRAPH__NS_1_1WinAPI_1a5a03c74b679f01b862662ab3b7f46e27a820dbd2b8f606aff866c0bbfb6b737c1" kind="enumvalue"><name>Changed</name></member>
   </compound>
   <compound refid="namespaceSR__GRAPH__UI__NS" kind="namespace"><name>SR_GRAPH_UI_NS</name>
-    <member refid="UIControlNode_8h_1a3066db1ca260fb3ed40b9d0de590ee70" kind="variable"><name>uint8_t</name></member>
+    <member refid="UIControlNode_8h_1a64ac4a61ee9d5532b3a52625a96e9912" kind="variable"><name>uint8_t</name></member>
+    <member refid="UIControlNode_8h_1a68b2bb1f5df56fdb9df384df9a252250" kind="variable"><name>Auto</name></member>
     <member refid="UIControlNode_8h_1adb38c67ceecd0dda1181c5ecad3f3be4" kind="variable"><name>Fixed</name></member>
-    <member refid="UIControlNode_8h_1a1692bea21715730edf970231492b27ed" kind="variable"><name>Percent</name></member>
-    <member refid="UIControlNode_8h_1a7681c6fc17c10355c30832b78d3c5876" kind="variable"><name>Content</name></member>
+    <member refid="UIControlNode_8h_1a33212384207d42f0963e4a69225890c7" kind="variable"><name>Start</name></member>
+    <member refid="UIControlNode_8h_1ad589792db6e72772fc78cc30e3f421c0" kind="variable"><name>Center</name></member>
+    <member refid="UIControlNode_8h_1ab9019f7bed3f403928d3c288ab5ebc39" kind="variable"><name>End</name></member>
+    <member refid="UIControlNode_8h_1aaa27495dfdc3755fe67bd52cfb1d4306" kind="variable"><name>Stretch</name></member>
+    <member refid="UIControlNode_8h_1a7382f2e0cdb586c7bd8d204c38bcca85" kind="variable"><name>Baseline</name></member>
+    <member refid="UIControlNode_8h_1a8dda12918914edde79380649fcec2d2f" kind="variable"><name>SpaceBetween</name></member>
+    <member refid="UIControlNode_8h_1a670a9f9aae26d178c3da8247b0021d94" kind="variable"><name>SpaceAround</name></member>
     <member refid="Gizmo_8h_1a7dac85f6cc74cf1ddfe352e1b3d5876c" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="Gizmo_8h_1a18016035e921f0f2240c442b0d806101" kind="function"><name>SR_ENUM_NS_STRUCT_T</name></member>
     <member refid="UIControlNode_8h_1aa5b4e7932f5177fbf27735c7db96c805" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
+    <member refid="UIControlNode_8h_1a406c2a47325d0363a92daeb3b05dda51" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="UIWindow_8h_1af8332c5d96379e836088713a7362370d" kind="function"><name>SR_ENUM_NS_STRUCT_T</name></member>
   </compound>
   <compound refid="namespaceSR__GTYPES__NS" kind="namespace"><name>SR_GTYPES_NS</name>
@@ -14763,6 +14795,7 @@
   </compound>
   <compound refid="namespaceSR__UTILS__NS_1_1Events" kind="namespace"><name>SR_UTILS_NS::Events</name>
     <member refid="Broadcaster_8h_1acbbfd3f2979ab1c52e8346d90165a8f2" kind="variable"><name>EVENT_ON_SCRIPT_MODULE_RELOADED_ID</name></member>
+    <member refid="Broadcaster_8h_1a3c474057c9a24daf6db122abe7b06a68" kind="variable"><name>EVENT_ON_ENGINE_UPDATE_ID</name></member>
   </compound>
   <compound refid="namespaceSR__UTILS__NS_1_1Graph" kind="namespace"><name>SR_UTILS_NS::Graph</name>
     <member refid="GraphUtils_8h_1a76a321a58a3a61d11b0db3c1b7a2d6af" kind="enum"><name>PipeLine</name></member>

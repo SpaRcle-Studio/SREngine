@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="53" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="51" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Sprite_1af4b23b254f86aeae9c29625bb19dc773" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::FVector2</type>
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="55" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" bodystart="55" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="53" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Sprite_1afcb9cf60828b7b03dd5b224ec6ee3da9" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::FVector2</type>
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="57" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" bodystart="57" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="55" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" bodystart="55" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -158,20 +158,6 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="34" column="31"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Sprite_1a174d540673083581c5d55b8455286cc0" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD bool</type>
-        <definition>SR_NODISCARD bool SR_GTYPES_NS::Sprite::InitializeEntity</definition>
-        <argsstring>() noexcept override</argsstring>
-        <name>InitializeEntity</name>
-        <qualifiedname>SR_GTYPES_NS::Sprite::InitializeEntity</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="36" column="27"/>
-      </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Sprite_1a42a8a19c0ce2e1f5b1d940c748d4cb70" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD uint32_t</type>
         <definition>SR_NODISCARD uint32_t SR_GTYPES_NS::Sprite::GetIndicesCount</definition>
@@ -185,7 +171,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="38" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="36" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Sprite_1a10a7ae0ece4fde741b8107d9063ab42e" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -200,7 +186,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="39" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="37" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Sprite_1a4e17429eecedb5e0c10db5a67e25d6bb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD std::string</type>
@@ -215,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="40" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="38" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Sprite_1acde8cd37a1ff0a4d1a61a3586e9a4a81" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector2</type>
@@ -229,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="42" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="40" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Sprite_1a75dd15bdc677e3256819eda3d569aa85" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector2</type>
@@ -243,7 +229,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="43" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="41" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Sprite_1a5e7dd0111acb5296a94721e9f4ad2ea9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -261,7 +247,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="45" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="43" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Sprite_1a32bc1deebd32dddd217073226e8e60c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -279,7 +265,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="46" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="44" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -296,7 +282,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="49" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="47" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -414,7 +400,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="20" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" bodystart="20" bodyend="59"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="20" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" bodystart="20" bodyend="57"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>BaseComponent</name></member>
@@ -461,7 +447,6 @@
       <member refid="classSR__UTILS__NS_1_1Component_1a0255fd473a25f237c833df1d507bdbfb" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>HasParent</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a5dc93a6f5bb2867f7a20476c569451ed" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>HasScene</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1ab13165b3e9a49610b34cda27b2ca1b72" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>HasSortingPriority</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Sprite_1a174d540673083581c5d55b8455286cc0" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>InitializeEntity</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a6dbb5d1a94533162f27ebed42894eb29" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>IsActive</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a1d7984f57df2fb1519bca8e2346cbcdd" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>IsAttached</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aaa40b9cae6a7b9c771bcf20671f80455" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>IsAwake</name></member>

@@ -8,6 +8,7 @@
     <derivedcompoundref refid="classSR__CORE__GUI__NS_1_1BitMapPropertyDrawer" prot="public" virt="non-virtual">SR_CORE_GUI_NS::BitMapPropertyDrawer</derivedcompoundref>
     <derivedcompoundref refid="classSR__CORE__GUI__NS_1_1BoolPropertyDrawer" prot="public" virt="non-virtual">SR_CORE_GUI_NS::BoolPropertyDrawer</derivedcompoundref>
     <derivedcompoundref refid="classSR__CORE__GUI__NS_1_1EnumPropertyDrawer" prot="public" virt="non-virtual">SR_CORE_GUI_NS::EnumPropertyDrawer</derivedcompoundref>
+    <derivedcompoundref refid="classSR__CORE__GUI__NS_1_1MarginPropertyDrawer" prot="public" virt="non-virtual">SR_CORE_GUI_NS::MarginPropertyDrawer</derivedcompoundref>
     <derivedcompoundref refid="classSR__CORE__GUI__NS_1_1MathSizePropertyDrawer" prot="public" virt="non-virtual">SR_CORE_GUI_NS::MathSizePropertyDrawer</derivedcompoundref>
     <derivedcompoundref refid="classSR__CORE__GUI__NS_1_1MathVectorPropertyDrawer" prot="public" virt="non-virtual">SR_CORE_GUI_NS::MathVectorPropertyDrawer</derivedcompoundref>
     <derivedcompoundref refid="classSR__CORE__GUI__NS_1_1NumericPropertyDrawer" prot="public" virt="non-virtual">SR_CORE_GUI_NS::NumericPropertyDrawer</derivedcompoundref>
@@ -81,6 +82,7 @@
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1PathPropertyDrawer_1a4d4009f0f7b1932c912fad13c340ee37">Draw</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer_1a1f6436c015b1548f50620d713cbfa78d">Draw</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1RectPropertyDrawer_1ae449c00b682f468e42881b5814d5f790">Draw</reimplementedby>
+        <reimplementedby refid="classSR__CORE__GUI__NS_1_1MarginPropertyDrawer_1a4ea7eb8dc6a27d246e7bee9491015b5e">Draw</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1StringPropertyDrawer_1a7142b87c325d9b297e6b5ed959300ec4">Draw</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1VectorPropertyDrawer_1a0eab0ca601fdad6009a65a6db0f60e2a">Draw</reimplementedby>
         <param>
@@ -249,10 +251,10 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="13">
+      <node id="14">
         <label>SR_CORE_GUI_NS::BehaviourPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1BehaviourPropertyDrawer"/>
-        <childnode refid="12" relation="public-inheritance">
+        <childnode refid="13" relation="public-inheritance">
         </childnode>
       </node>
       <node id="6">
@@ -273,49 +275,55 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="14">
+      <node id="9">
+        <label>SR_CORE_GUI_NS::MarginPropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1MarginPropertyDrawer"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
         <label>SR_CORE_GUI_NS::MaterialDataPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer"/>
-        <childnode refid="12" relation="public-inheritance">
+        <childnode refid="13" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="17">
+      <node id="18">
         <label>SR_CORE_GUI_NS::MaterialPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1MaterialPropertyDrawer"/>
-        <childnode refid="16" relation="public-inheritance">
+        <childnode refid="17" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="9">
+      <node id="10">
         <label>SR_CORE_GUI_NS::MathSizePropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1MathSizePropertyDrawer"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="10">
+      <node id="11">
         <label>SR_CORE_GUI_NS::MathVectorPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1MathVectorPropertyDrawer"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="11">
+      <node id="12">
         <label>SR_CORE_GUI_NS::NumericPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1NumericPropertyDrawer"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="12">
+      <node id="13">
         <label>SR_CORE_GUI_NS::ObjectPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1ObjectPropertyDrawer"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="15">
+      <node id="16">
         <label>SR_CORE_GUI_NS::PathPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1PathPropertyDrawer"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="16">
+      <node id="17">
         <label>SR_CORE_GUI_NS::PointerPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer"/>
         <childnode refid="1" relation="public-inheritance">
@@ -329,19 +337,19 @@
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="18">
+      <node id="19">
         <label>SR_CORE_GUI_NS::RectPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1RectPropertyDrawer"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="19">
+      <node id="20">
         <label>SR_CORE_GUI_NS::StringPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1StringPropertyDrawer"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="20">
+      <node id="21">
         <label>SR_CORE_GUI_NS::VectorPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1VectorPropertyDrawer"/>
         <childnode refid="1" relation="public-inheritance">

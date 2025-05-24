@@ -95,7 +95,7 @@ namespace SR_CORE_GUI_NS {
         std::atomic<bool> m_enabled = true;
         bool m_updateNonHoveredSceneViewer = false;
         SR_MATH_NS::IVector2 m_windowSize;
-        std::optional<Utils::CursorLock> m_cursorLockOpt = std::nullopt;
+        //std::optional<Utils::CursorLock> m_cursorLockOpt = std::nullopt;
         SR_MATH_NS::FVector2 m_mousePos;
 
     };

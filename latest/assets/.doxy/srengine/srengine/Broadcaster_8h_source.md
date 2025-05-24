@@ -27,6 +27,7 @@ namespace SR_UTILS_NS {
 
     namespace Events {
         static inline const SR_UTILS_NS::StringAtom EVENT_ON_SCRIPT_MODULE_RELOADED_ID = "OnScriptModuleReloaded";
+        static inline const SR_UTILS_NS::StringAtom EVENT_ON_ENGINE_UPDATE_ID = "OnEngineUpdate";
     }
 }
 

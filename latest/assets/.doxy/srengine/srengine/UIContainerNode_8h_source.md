@@ -18,6 +18,10 @@
 #include <Graphics/UI/UIControlNode.h>
 
 namespace SR_GRAPH_UI_NS {
+    SR_ENUM_NS_CLASS_T(UIContainerDirection, uint8_t,
+        Row, Column, RowReverse, ColumnReverse
+    )
+
     class UIContainerNode : public UIControlNode {
         SR_CLASS()
         using Super = UIControlNode;
@@ -27,7 +31,13 @@ namespace SR_GRAPH_UI_NS {
     public:
         SR_NODISCARD SR_UTILS_NS::ECSNodeType GetNodeType() const noexcept override;
 
+        void Prepare(uint64_t& priority) override;
         void Layout(const SR_MATH_NS::FRect& available) override;
+
+    private:
+        UIContainerDirection m_direction = UIContainerDirection::Row;
+        UIAlign m_containerAlign = UIAlign::Auto;
+        UIJustify m_justify = UIJustify::Auto;
 
     };
 }

@@ -158,12 +158,12 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="39" column="38"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1GameObject_1a0c4eb194bd17baa4a03f196ef033bede" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1GameObject_1a288871a4299d57b9024079e016d67907" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
-        <definition>void SR_UTILS_NS::GameObject::OnAttached</definition>
+        <definition>void SR_UTILS_NS::GameObject::OnAttachedToParent</definition>
         <argsstring>() override</argsstring>
-        <name>OnAttached</name>
-        <qualifiedname>SR_UTILS_NS::GameObject::OnAttached</qualifiedname>
+        <name>OnAttachedToParent</name>
+        <qualifiedname>SR_UTILS_NS::GameObject::OnAttachedToParent</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -242,7 +242,7 @@
       <member refid="classSR__UTILS__NS_1_1GameObject_1ab82b3c4e515c0c75a965c1ce3a9b3970" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GameObject</scope><name>GetSceneObjectType</name></member>
       <member refid="classSR__UTILS__NS_1_1GameObject_1a0f9e853804f190444e064f4d9ecc9b5f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GameObject</scope><name>GetTransform</name></member>
       <member refid="classSR__UTILS__NS_1_1GameObject_1ac4e4f0231a3202ed69ed43018773b945" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::GameObject</scope><name>m_transform</name></member>
-      <member refid="classSR__UTILS__NS_1_1GameObject_1a0c4eb194bd17baa4a03f196ef033bede" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GameObject</scope><name>OnAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1GameObject_1a288871a4299d57b9024079e016d67907" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GameObject</scope><name>OnAttachedToParent</name></member>
       <member refid="classSR__UTILS__NS_1_1GameObject_1a6f90410d91168d623a2a94f65388cce9" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::GameObject</scope><name>OnHierarchyChanged</name></member>
       <member refid="classSR__UTILS__NS_1_1GameObject_1a238b5e0a389469a821114607f2963794" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GameObject</scope><name>Ptr</name></member>
       <member refid="classSR__UTILS__NS_1_1GameObject_1aeae41410eb6bf8a14add6ecebf73d9bf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GameObject</scope><name>SetTransform</name></member>

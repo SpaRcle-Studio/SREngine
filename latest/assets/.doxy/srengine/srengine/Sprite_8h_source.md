@@ -43,8 +43,6 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD MeshType GetMeshType() const noexcept override;
 
-        SR_NODISCARD bool InitializeEntity() noexcept override;
-
         SR_NODISCARD uint32_t GetIndicesCount() const override;
         SR_NODISCARD bool IsFlatMesh() const noexcept override;
         SR_NODISCARD std::string GetMeshIdentifier() const override;

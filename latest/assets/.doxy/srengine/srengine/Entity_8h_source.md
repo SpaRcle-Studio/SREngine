@@ -55,8 +55,6 @@ namespace SR_UTILS_NS {
         SR_NODISCARD EntityRef GetRef() const noexcept { return EntityRef(GetThis()); }
         SR_NODISCARD Entity::Ptr GetEntity() const noexcept { return GetThis(); }
 
-        SR_NODISCARD virtual bool InitializeEntity() noexcept;
-
         void SetEntityController(EntityController* pEntityController);
         void SetEntityId(EntityId id);
         void UnregisterEntity();

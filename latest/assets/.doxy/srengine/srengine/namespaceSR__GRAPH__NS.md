@@ -219,6 +219,7 @@
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_LINE\_START\_POINT**](#variable-shader_line_start_point)   = `"LINE\_START\_POINT"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_MODEL\_MATRIX**](#variable-shader_model_matrix)   = `"MODEL\_MATRIX"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_MODEL\_NO\_SCALE\_MATRIX**](#variable-shader_model_no_scale_matrix)   = `"MODEL\_NO\_SCALE\_MATRIX"`<br> |
+|  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_NDC\_RECT**](#variable-shader_ndc_rect)   = `"NDC\_RECT"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_ORTHOGONAL\_MATRIX**](#variable-shader_orthogonal_matrix)   = `"ORTHOGONAL\_MATRIX"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_PC\_COLOR\_BUFFER\_MODE**](#variable-shader_pc_color_buffer_mode)   = `"PC\_COLOR\_BUFFER\_MODE"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_PC\_COLOR\_BUFFER\_VALUE**](#variable-shader_pc_color_buffer_value)   = `"PC\_COLOR\_BUFFER\_VALUE"`<br> |
@@ -837,6 +838,19 @@ SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_MODEL_MATRIX;
 
 ```C++
 SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_MODEL_NO_SCALE_MATRIX;
+```
+
+
+
+
+<hr>
+
+
+
+### variable SHADER\_NDC\_RECT 
+
+```C++
+SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_NDC_RECT;
 ```
 
 

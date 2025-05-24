@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="136" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="136" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="137" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="137" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Uniform_1ad54c80a66f7210d84afecc7eb2b66ca2" prot="public" static="no" mutable="no">
         <type>ShaderStage</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="137" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="137" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="138" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="138" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Uniform_1a40f0ea754b87b44b60c7d62c765f0042" prot="public" static="no" mutable="no">
         <type>uint64_t</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="138" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="138" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="139" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="139" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Uniform_1a711ee7565ff3f4c61565e89faf712e13" prot="public" static="no" mutable="no">
         <type>uint64_t</type>
@@ -61,14 +61,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="139" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="139" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="140" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="140" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="135" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="135" bodyend="140"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="136" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="136" bodyend="141"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1Uniform_1a40f0ea754b87b44b60c7d62c765f0042" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Uniform</scope><name>binding</name></member>
       <member refid="structSR__GRAPH__NS_1_1Uniform_1a711ee7565ff3f4c61565e89faf712e13" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Uniform</scope><name>size</name></member>

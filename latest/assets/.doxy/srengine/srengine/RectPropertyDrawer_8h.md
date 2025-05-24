@@ -35,6 +35,7 @@
 
 | Type | Name |
 | ---: | :--- |
+| class | [**MarginPropertyDrawer**](classSR__CORE__GUI__NS_1_1MarginPropertyDrawer.md) <br> |
 | class | [**RectPropertyDrawer**](classSR__CORE__GUI__NS_1_1RectPropertyDrawer.md) <br> |
 
 

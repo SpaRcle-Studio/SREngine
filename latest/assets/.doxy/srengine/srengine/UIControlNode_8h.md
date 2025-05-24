@@ -35,7 +35,8 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**UIControlNode**](classSR__GRAPH__UI__NS_1_1UIControlNode.md) <br>_подстраивается под содержимое (например, текст)_  |
+| class | [**UIControlNode**](classSR__GRAPH__UI__NS_1_1UIControlNode.md) <br> |
+| struct | [**UILayout**](structSR__GRAPH__UI__NS_1_1UILayout.md) <br> |
 
 
 

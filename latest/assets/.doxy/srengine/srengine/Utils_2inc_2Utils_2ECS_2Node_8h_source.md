@@ -39,9 +39,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_UTILS_NS::SceneObjectType GetSceneObjectType() const noexcept override;
         SR_NODISCARD virtual ECSNodeType GetNodeType() const noexcept = 0;
         SR_NODISCARD virtual const SR_MATH_NS::Matrix4x4& GetMatrix() const noexcept = 0;
-
-    public:
-        void OnAttached() override;
+        SR_NODISCARD virtual uint64_t GetNodePriority() const noexcept { return 0; }
 
     protected:
         void OnHierarchyChanged() override;

@@ -292,7 +292,6 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 | ---: | :--- |
 |  bool | [**CompareObject**](#function-compareobject) (GameObjectPtr pObject) const<br> |
 | virtual SR\_NODISCARD SR\_FORCE\_INLINE bool | [**ExecuteInEditMode**](#function-executeineditmode) () override const<br> |
-|  SR\_NODISCARD bool | [**InitializeEntity**](#function-initializeentity) () noexcept override<br> |
 | virtual void | [**OnHover**](#function-onhover) () <br> |
 | virtual void | [**OnIdle**](#function-onidle) () <br> |
 | virtual void | [**OnKeyDown**](#function-onkeydown) () <br> |
@@ -489,19 +488,6 @@ inline virtual SR_NODISCARD SR_FORCE_INLINE bool SR_CORE_UI_NS::IButton::Execute
 
 
 Implements [*SR\_UTILS\_NS::Component::ExecuteInEditMode*](classSR__UTILS__NS_1_1Component.md#function-executeineditmode)
-
-
-<hr>
-
-
-
-### function InitializeEntity 
-
-```C++
-SR_NODISCARD bool SR_CORE_UI_NS::IButton::InitializeEntity () noexcept override
-```
-
-
 
 
 <hr>

@@ -24,17 +24,31 @@ namespace SR_GRAPH_UI_NS {
     )
 
     SR_ENUM_NS_CLASS_T(UISizePolicy, uint8_t,
-        Fixed,   
-        Percent, 
-        Content, 
-        Fill     
+        Auto,
+        Fixed,
+        Percent
+    )
+
+    SR_ENUM_NS_CLASS_T(UIJustify, uint8_t,
+        Auto,
+        FlexStart,
+        Center,
+        FlexEnd,
+        SpaceBetween,
+        SpaceAround,
+        SpaceEvenly
     )
 
     SR_ENUM_NS_CLASS_T(UIAlign, uint8_t,
+        Auto,
         Start,
         Center,
         End,
-        Stretch
+        Stretch,
+        Baseline,
+        SpaceBetween,
+        SpaceAround,
+        SpaceEvenly
     )
 
     struct UILayout : public SR_UTILS_NS::Serializable {
@@ -43,10 +57,11 @@ namespace SR_GRAPH_UI_NS {
         
 
         
-        UISizePolicy widthPolicy = UISizePolicy::Fixed;
-        UISizePolicy heightPolicy = UISizePolicy::Fixed;
+        UISizePolicy widthPolicy = UISizePolicy::Auto;
+        UISizePolicy heightPolicy = UISizePolicy::Auto;
         float_t width = 0.0f; 
         float_t height = 0.0f;
+        float_t aspectRatio = 0.0f;
 
 
         UIPositionType positionType = UIPositionType::Relative;
@@ -58,8 +73,7 @@ namespace SR_GRAPH_UI_NS {
         SR_MATH_NS::FRect padding;
 
 
-        UIAlign horizontalAlign = UIAlign::Start;
-        UIAlign verticalAlign = UIAlign::Start;
+        UIAlign align = UIAlign::Auto;
     };
 
     class UIControlNode : public UINode {
@@ -69,10 +83,12 @@ namespace SR_GRAPH_UI_NS {
         using Ptr = SR_HTYPES_NS::SharedPtr<UIControlNode>;
 
     public:
+        void Prepare(uint64_t& priority) override;
         void Layout(const SR_MATH_NS::FRect& available) override;
 
         SR_NODISCARD SR_MATH_NS::FVector2 CalculateContentSize() const override;
         SR_NODISCARD const UILayout& GetLayout() const noexcept;
+        SR_NODISCARD UILayout& GetLayout() noexcept;
         SR_NODISCARD SR_UTILS_NS::ECSNodeType GetNodeType() const noexcept override;
 
     private:

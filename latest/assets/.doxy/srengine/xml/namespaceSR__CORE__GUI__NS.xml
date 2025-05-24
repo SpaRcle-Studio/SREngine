@@ -16,6 +16,7 @@
     <innerclass refid="classSR__CORE__GUI__NS_1_1EnumPropertyDrawer" prot="public">SR_CORE_GUI_NS::EnumPropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1Hierarchy" prot="public">SR_CORE_GUI_NS::Hierarchy</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1Inspector" prot="public">SR_CORE_GUI_NS::Inspector</innerclass>
+    <innerclass refid="classSR__CORE__GUI__NS_1_1MarginPropertyDrawer" prot="public">SR_CORE_GUI_NS::MarginPropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer" prot="public">SR_CORE_GUI_NS::MaterialDataPropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1MaterialEditor" prot="public">SR_CORE_GUI_NS::MaterialEditor</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1MaterialPropertyDrawer" prot="public">SR_CORE_GUI_NS::MaterialPropertyDrawer</innerclass>

@@ -31,8 +31,6 @@ namespace SR_GRAPH_UI_NS {
     class UIWindow : public SR_UTILS_NS::Component {
         using Super = SR_UTILS_NS::Component;
     public:
-        bool InitializeEntity() noexcept override;
-
         SR_NODISCARD bool IsResizable() const noexcept { return m_flags & UIWindowAttributes::Resizable; }
         SR_NODISCARD bool IsMovable() const noexcept { return m_flags & UIWindowAttributes::Movable; }
         SR_NODISCARD bool IsClosable() const noexcept { return m_flags & UIWindowAttributes::Closable; }

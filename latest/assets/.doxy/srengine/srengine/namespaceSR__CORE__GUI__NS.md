@@ -43,6 +43,7 @@
 | class | [**EnumPropertyDrawer**](classSR__CORE__GUI__NS_1_1EnumPropertyDrawer.md) <br> |
 | class | [**Hierarchy**](classSR__CORE__GUI__NS_1_1Hierarchy.md) <br> |
 | class | [**Inspector**](classSR__CORE__GUI__NS_1_1Inspector.md) <br> |
+| class | [**MarginPropertyDrawer**](classSR__CORE__GUI__NS_1_1MarginPropertyDrawer.md) <br> |
 | class | [**MaterialDataPropertyDrawer**](classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer.md) <br> |
 | class | [**MaterialEditor**](classSR__CORE__GUI__NS_1_1MaterialEditor.md) <br> |
 | class | [**MaterialPropertyDrawer**](classSR__CORE__GUI__NS_1_1MaterialPropertyDrawer.md) <br> |

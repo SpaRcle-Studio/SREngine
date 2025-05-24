@@ -131,7 +131,6 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**InitializeEntity**](#function-initializeentity) () noexcept override<br> |
 | virtual void | [**OnDestroy**](#function-ondestroy) () override<br>_Вызывается когда компонент убирается с объекта, либо объект уничтожается. Может произойти отложенно._  |
 | virtual void | [**Update**](#function-update) (float\_t dt) override<br> |
 
@@ -348,7 +347,6 @@ See [SR\_CORE\_UI\_NS::IButton](classSR__CORE__UI__NS_1_1IButton.md)
 | ---: | :--- |
 |  bool | [**CompareObject**](classSR__CORE__UI__NS_1_1IButton.md#function-compareobject) (GameObjectPtr pObject) const<br> |
 | virtual SR\_NODISCARD SR\_FORCE\_INLINE bool | [**ExecuteInEditMode**](classSR__CORE__UI__NS_1_1IButton.md#function-executeineditmode) () override const<br> |
-|  SR\_NODISCARD bool | [**InitializeEntity**](classSR__CORE__UI__NS_1_1IButton.md#function-initializeentity) () noexcept override<br> |
 | virtual void | [**OnHover**](classSR__CORE__UI__NS_1_1IButton.md#function-onhover) () <br> |
 | virtual void | [**OnIdle**](classSR__CORE__UI__NS_1_1IButton.md#function-onidle) () <br> |
 | virtual void | [**OnKeyDown**](classSR__CORE__UI__NS_1_1IButton.md#function-onkeydown) () <br> |
@@ -376,19 +374,6 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 
 ## Public Functions Documentation
 
-
-
-
-### function InitializeEntity 
-
-```C++
-bool SR_CORE_UI_NS::Button::InitializeEntity () noexcept override
-```
-
-
-
-
-<hr>
 
 
 

@@ -83,7 +83,6 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**InitializeEntity**](#function-initializeentity) () noexcept override<br> |
 |  SR\_NODISCARD bool | [**IsClosable**](#function-isclosable) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsDockable**](#function-isdockable) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsMaximizable**](#function-ismaximizable) () noexcept const<br> |
@@ -236,19 +235,6 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 
 ## Public Functions Documentation
 
-
-
-
-### function InitializeEntity 
-
-```C++
-bool SR_GRAPH_UI_NS::UIWindow::InitializeEntity () noexcept override
-```
-
-
-
-
-<hr>
 
 
 

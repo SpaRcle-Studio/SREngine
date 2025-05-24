@@ -153,7 +153,6 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 | virtual SR\_NODISCARD MeshType | [**GetMeshType**](#function-getmeshtype) () noexcept override const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector2 | [**GetTextureBorder**](#function-gettextureborder) () const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector2 | [**GetWindowBorder**](#function-getwindowborder) () const<br> |
-|  SR\_NODISCARD bool | [**InitializeEntity**](#function-initializeentity) () noexcept override<br> |
 | virtual SR\_NODISCARD bool | [**IsFlatMesh**](#function-isflatmesh) () noexcept override const<br> |
 | virtual bool | [**IsSupportVBO**](#function-issupportvbo) () override const<br> |
 |  void | [**SetTextureBorder**](#function-settextureborder) (const SR\_MATH\_NS::FVector2 & border) <br> |
@@ -574,19 +573,6 @@ SR_NODISCARD SR_MATH_NS::FVector2 SR_GTYPES_NS::Sprite::GetTextureBorder () cons
 
 ```C++
 SR_NODISCARD SR_MATH_NS::FVector2 SR_GTYPES_NS::Sprite::GetWindowBorder () const
-```
-
-
-
-
-<hr>
-
-
-
-### function InitializeEntity 
-
-```C++
-SR_NODISCARD bool SR_GTYPES_NS::Sprite::InitializeEntity () noexcept override
 ```
 
 

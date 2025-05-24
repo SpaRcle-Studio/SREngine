@@ -56,7 +56,6 @@ namespace SR_CORE_UI_NS {
         virtual void OnKeyUp();
 
         SR_NODISCARD SR_FORCE_INLINE bool ExecuteInEditMode() const override { return true; }
-        SR_NODISCARD bool InitializeEntity() noexcept override;
 
     private:
         ButtonState m_state = ButtonState::Idle;
