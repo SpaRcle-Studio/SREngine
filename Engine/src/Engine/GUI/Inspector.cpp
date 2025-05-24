@@ -494,7 +494,7 @@ namespace SR_CORE_GUI_NS {
         context.editorPropertyParams.SetNotNull();
         m_pPointerDrawer->Draw(context);
 
-        if (m_pSOSerializer && (!m_isDragMode || !SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseLeft))) {
+        if (m_pSOSerializer && (!m_isDragMode || !SR_GRAPH_GUI_NS::Immediate::IsMouseDown(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left))) {
             auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
 
             auto&& pNewSerializer = SR_CORE_NS::Commands::CreateSerializer();
@@ -531,7 +531,7 @@ namespace SR_CORE_GUI_NS {
             pTransform->UpdateTree();
         }
 
-        if (m_pTransformSerializer && (!m_isDragMode || !SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseLeft))) {
+        if (m_pTransformSerializer && (!m_isDragMode || !SR_GRAPH_GUI_NS::Immediate::IsMouseDown(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left))) {
             auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
 
             auto&& pNewSerializer = SR_CORE_NS::Commands::CreateSerializer();

@@ -256,7 +256,7 @@ namespace SR_CORE_GUI_NS {
 
     void SceneViewer::OnMouseDown(const SR_UTILS_NS::MouseInputData *data) {
         if(data->m_code == SR_UTILS_NS::MouseCode::MouseRight) {
-            m_cursorLockOpt.emplace();
+            //m_cursorLockOpt.emplace();
         }
     }
 
@@ -267,7 +267,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (data->m_code == SR_UTILS_NS::MouseCode::MouseRight) {
-            m_cursorLockOpt = std::nullopt;
+            //m_cursorLockOpt = std::nullopt;
             Super::OnMouseUp(data);
             return;
         }

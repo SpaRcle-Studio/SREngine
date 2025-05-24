@@ -14,6 +14,7 @@
 #include <Utils/DebugDraw.h>
 #include <Utils/Common/Features.h>
 #include <Utils/World/SceneCubeChunkLogic.h>
+#include <Utils/Events/Broadcaster.h>
 
 namespace SR_CORE_NS {
     EngineScene::EngineScene(const EngineScene::ScenePtr& pScene, Engine* pEngine)
@@ -178,6 +179,8 @@ namespace SR_CORE_NS {
 
         pSceneUpdater->Build(isPaused);
         pSceneUpdater->Update(dt, isPaused);
+
+        SR_UTILS_NS::Broadcaster::Instance().Broadcast(SR_UTILS_NS::Events::EVENT_ON_ENGINE_UPDATE_ID);
 
         UpdateFrequency();
 
