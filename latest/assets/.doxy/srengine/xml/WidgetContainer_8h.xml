@@ -12,6 +12,8 @@
         </childnode>
         <childnode refid="135" relation="include">
         </childnode>
+        <childnode refid="136" relation="include">
+        </childnode>
       </node>
       <node id="2">
         <label>Graphics/GUI/Widget.h</label>
@@ -34,7 +36,7 @@
         </childnode>
         <childnode refid="131" relation="include">
         </childnode>
-        <childnode refid="136" relation="include">
+        <childnode refid="137" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -769,6 +771,9 @@
         <label>Codegen/EnumsFwd.generated.hpp</label>
       </node>
       <node id="136">
+        <label>Enum/TreeNodeFlags.hpp</label>
+      </node>
+      <node id="137">
         <label>Enum/WindowFlags.hpp</label>
       </node>
       <node id="49">

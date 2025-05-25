@@ -26,6 +26,8 @@
         </childnode>
         <childnode refid="138" relation="include">
         </childnode>
+        <childnode refid="139" relation="include">
+        </childnode>
       </node>
       <node id="82">
         <label>Graphics/GUI/NodeBuilder.h</label>
@@ -40,12 +42,12 @@
         </childnode>
         <childnode refid="85" relation="include">
         </childnode>
-        <childnode refid="140" relation="include">
-        </childnode>
         <childnode refid="141" relation="include">
         </childnode>
+        <childnode refid="142" relation="include">
+        </childnode>
       </node>
-      <node id="140">
+      <node id="141">
         <label>Graphics/GUI/PopupMenu.h</label>
         <link refid="PopupMenu_8h_source"/>
         <childnode refid="84" relation="include">
@@ -72,7 +74,7 @@
         </childnode>
         <childnode refid="134" relation="include">
         </childnode>
-        <childnode refid="139" relation="include">
+        <childnode refid="140" relation="include">
         </childnode>
       </node>
       <node id="135">
@@ -469,7 +471,7 @@
         <label>Utils/Profile/TracyContext.h</label>
         <link refid="TracyContext_8h_source"/>
       </node>
-      <node id="141">
+      <node id="142">
         <label>Utils/Resources/Xml.h</label>
         <link refid="Xml_8h_source"/>
         <childnode refid="87" relation="include">
@@ -484,7 +486,7 @@
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="142" relation="include">
+        <childnode refid="143" relation="include">
         </childnode>
       </node>
       <node id="124">
@@ -819,6 +821,9 @@
         <label>Codegen/EnumsFwd.generated.hpp</label>
       </node>
       <node id="139">
+        <label>Enum/TreeNodeFlags.hpp</label>
+      </node>
+      <node id="140">
         <label>Enum/WindowFlags.hpp</label>
       </node>
       <node id="50">
@@ -830,7 +835,7 @@
       <node id="11">
         <label>array</label>
       </node>
-      <node id="142">
+      <node id="143">
         <label>assimp/contrib/pugixml/src/pugixml.hpp</label>
       </node>
       <node id="45">

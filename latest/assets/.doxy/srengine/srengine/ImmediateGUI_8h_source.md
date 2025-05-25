@@ -18,6 +18,8 @@
 #include <Graphics/Pipeline/PipelineType.h>
 #include <Utils/Math/Rect.h>
 
+#include <Enum/TreeNodeFlags.hpp>
+
 namespace SR_GRAPH_NS {
     class Pipeline;
 }
@@ -262,6 +264,9 @@ namespace SR_GRAPH_GUI_NS {
             CollapsingHeader     = Framed | NoTreePushOnOpen | NoAutoOpenOnLog
         )
 
+        const auto SR_NODE_FLAGS_WITH_CHILD = SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::OpenOnArrow | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::OpenOnDoubleClick;
+        const auto SR_NODE_FLAGS_WITHOUT_CHILD = SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::NoTreePushOnOpen | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::Leaf;
+
         SR_ENUM_NS_STRUCT_T(Condition, uint32_t,
             None          = 0,        // No condition (always set the variable), same as _Always
             Always        = 1 << 0,   // No condition (always set the variable)
@@ -397,8 +402,14 @@ namespace SR_GRAPH_GUI_NS {
         SR_RENDERER_DLL_API extern bool BeginMainMenuBar();
         SR_RENDERER_DLL_API extern bool IsItemToggledOpen();
         SR_RENDERER_DLL_API extern bool IsItemDeactivatedAfterEdit();
+        SR_RENDERER_DLL_API extern void TableNextRow();
         SR_RENDERER_DLL_API extern void EndMenuBar();
         SR_RENDERER_DLL_API extern void End();
+        SR_RENDERER_DLL_API extern bool BeginListBox(const char* label, const SR_MATH_NS::FVector2& size = { 0.f, 0.f });
+        SR_RENDERER_DLL_API extern void EndListBox();
+        SR_RENDERER_DLL_API extern bool BeginTable(const char* str_id, int columns);
+        SR_RENDERER_DLL_API extern void EndTable();
+        SR_RENDERER_DLL_API extern void TableSetColumnIndex(int column_n);
         SR_RENDERER_DLL_API extern bool IsMouseDragging(MouseButton button);
         SR_RENDERER_DLL_API extern bool IsMouseDown(MouseButton button);
         SR_RENDERER_DLL_API extern bool IsMouseReleased(MouseButton button);
