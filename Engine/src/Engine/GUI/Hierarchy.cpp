@@ -16,8 +16,6 @@
 namespace SR_CORE_GUI_NS {
     const SR_MATH_NS::FColor SR_PREFAB_COLOR_FIRST = SR_MATH_NS::FColor(39.f / 255.f, 225 / 255.f, 193.f / 255.f, 1.f);
     const SR_MATH_NS::FColor SR_PREFAB_COLOR_SECOND = SR_MATH_NS::FColor(1.f, 140.f / 255.f, 0.f, 1.f);
-    const auto SR_NODE_FLAGS_WITH_CHILD = SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::OpenOnArrow | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::OpenOnDoubleClick;
-    const auto SR_NODE_FLAGS_WITHOUT_CHILD = SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::NoTreePushOnOpen | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::Leaf;
 
     Hierarchy::Hierarchy()
         : Widget("Hierarchy")
@@ -175,7 +173,7 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        const SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags flags = (hasChild ? SR_NODE_FLAGS_WITH_CHILD : SR_NODE_FLAGS_WITHOUT_CHILD) |
+        const SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags flags = (hasChild ? SR_GRAPH_GUI_NS::Immediate::SR_NODE_FLAGS_WITH_CHILD : SR_GRAPH_GUI_NS::Immediate::SR_NODE_FLAGS_WITHOUT_CHILD) |
                                          ((m_selected.count(pRoot) == 1) ? SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::Selected : SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::None);
 
         if (pRoot->IsPrefabOwner()) {

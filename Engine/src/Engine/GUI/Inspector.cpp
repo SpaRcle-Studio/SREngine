@@ -312,7 +312,17 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::SameLine();
 
+        const bool isComponentActive = pComponent->IsActive();
+
+        if (!isComponentActive) {
+            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(0.5f, 0.5f, 0.5f));
+        }
+
         const bool isOpened = SR_GRAPH_GUI_NS::Immediate::CollapsingHeader(pComponent->GetMeta()->GetFactoryName().c_str());
+
+        if (!isComponentActive) {
+            SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
+        }
 
         if (SR_GRAPH_GUI_NS::Immediate::IsItemClicked(SR_GRAPH_GUI_NS::Immediate::MouseButton::Right)) {
             SR_GRAPH_GUI_NS::Immediate::OpenPopup(headerName.c_str());
