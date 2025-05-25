@@ -40,11 +40,16 @@ namespace SR_UTILS_NS {
 
     public:
         SR_NODISCARD std::string GetLastCmdName() const;
+        SR_NODISCARD uint32_t GetHistorySize() const;
+        SR_NODISCARD uint32_t GetMaxHistorySize() const;
+        SR_NODISCARD uint32_t GetHistoryPC() const;
 
         bool Execute(ReversibleCommand* cmd, SyncType sync);
         void Store(ReversibleCommand* cmd);
         bool Redo();
         bool Cancel();
+
+        void SetMaxHistorySize(uint32_t size);
 
         void Update();
 

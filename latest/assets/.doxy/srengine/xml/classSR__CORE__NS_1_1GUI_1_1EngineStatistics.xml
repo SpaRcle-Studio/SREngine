@@ -51,6 +51,20 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1ab4cb8ba317ea3dc3682e20e571042309" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::GUI::EngineStatistics::CommonPage</definition>
+        <argsstring>()</argsstring>
+        <name>CommonPage</name>
+        <qualifiedname>SR_CORE_NS::GUI::EngineStatistics::CommonPage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="29" column="14"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1a68246eff641e8cb4655b0cc971675e58" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void SR_CORE_NS::GUI::EngineStatistics::ResourcesPage</definition>
@@ -63,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="29" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="30" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1a766b5901c7ec8147a6fd1fec7b5e340c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -77,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="30" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1ab911192fbc73807eeff256ea45a700dc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -91,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="31" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1a0456c343330cf8707b6b741281f92c32" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -105,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="32" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="33" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1a99dd1c1e2334ea1f6512fd681e5ce8f4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -119,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="33" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="34" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1aa086f3ced3193ed9c38cf117514f9a88" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -133,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="34" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="35" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1ae0a850ec6d6a9e88cad8beb658ac6033" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -147,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="35" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="36" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1a191a6f9d4f83f56f0fed742df1aaae2b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -165,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="37" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="38" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1a521ce44e053c9bc6103cb8d8a6e9f2bd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -183,7 +197,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="38" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="39" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1a1a5e95e42c4b3517af8041e46b937e8d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -201,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="39" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="40" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1a3acc05a31fe15e0c18ede8f18207ebd4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -219,7 +233,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="40" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="41" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -298,13 +312,14 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="20" column="5" bodyfile="Engine/inc/Engine/GUI/EngineStatistics.h" bodystart="20" bodyend="42"/>
+    <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="20" column="5" bodyfile="Engine/inc/Engine/GUI/EngineStatistics.h" bodystart="20" bodyend="43"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a4a04e0628b5729444eca1c24a9011fa2" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::EngineStatistics</scope><name>AddFlags</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1adb2cb15cb7a11b055f8659f1db8c5521" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::EngineStatistics</scope><name>AddSubWidget</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1abe2d33de27ab9ac621ec9a1c215a09be" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::EngineStatistics</scope><name>CheckFocused</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a354cc7474ff0b80508a170aaa7cdd842" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::EngineStatistics</scope><name>CheckHovered</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a1c39213178a2434ac3088d4b1dc2c14f" prot="public" virt="virtual"><scope>SR_CORE_NS::GUI::EngineStatistics</scope><name>Close</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1ab4cb8ba317ea3dc3682e20e571042309" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::EngineStatistics</scope><name>CommonPage</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aba6d1657b1057318338eb150c404a4de" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::EngineStatistics</scope><name>ContextPtr</name></member>
       <member refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1a4e3e6e73b001338101a0fb76ba6de98c" prot="protected" virt="virtual"><scope>SR_CORE_NS::GUI::EngineStatistics</scope><name>Draw</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a60366ac8c85837e5c043d9ba80ea2a5a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::EngineStatistics</scope><name>DrawAsSubWindow</name></member>

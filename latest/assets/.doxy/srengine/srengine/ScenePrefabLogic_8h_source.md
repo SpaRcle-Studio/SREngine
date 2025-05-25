@@ -34,6 +34,16 @@ namespace SR_WORLD_NS {
         SR_NODISCARD bool IsAllowedRootSave() const noexcept override { return false; }
         SR_NODISCARD SR_HTYPES_NS::SharedPtr<SceneObject> GetPrefabRoot() const noexcept;
 
+        static bool SaveSOAsPrefab(ISerializer& serializer, const SR_HTYPES_NS::SharedPtr<SceneObject>& pSO);
+
+        void SetCustomSOData(IDeserializer::UniquePtr pCustomData);
+
+    private:
+        bool LoadSOData(IDeserializer& deserializer);
+
+    private:
+        IDeserializer::UniquePtr m_pSOCustomData;
+
     };
 }
 

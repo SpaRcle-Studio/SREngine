@@ -1637,6 +1637,7 @@
 * **m\_shiftEnabled** ([**SR\_WORLD\_NS::SceneCubeChunkLogic**](classSR__WORLD__NS_1_1SceneCubeChunkLogic.md))
 * **m\_tensor** ([**SR\_WORLD\_NS::SceneCubeChunkLogic**](classSR__WORLD__NS_1_1SceneCubeChunkLogic.md))
 * **m\_updateContainer** ([**SR\_WORLD\_NS::SceneCubeChunkLogic**](classSR__WORLD__NS_1_1SceneCubeChunkLogic.md))
+* **m\_pSOCustomData** ([**SR\_WORLD\_NS::ScenePrefabLogic**](classSR__WORLD__NS_1_1ScenePrefabLogic.md))
 * **m\_componentsPoolSize** ([**SR\_WORLD\_NS::SceneUpdater**](classSR__WORLD__NS_1_1SceneUpdater.md))
 * **m\_freeComponentIds** ([**SR\_WORLD\_NS::SceneUpdater**](classSR__WORLD__NS_1_1SceneUpdater.md))
 * **m\_lastBuildTimePoint** ([**SR\_WORLD\_NS::SceneUpdater**](classSR__WORLD__NS_1_1SceneUpdater.md))

@@ -190,6 +190,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual SR\_NODISCARD bool | [**IsAllowedRootSave**](#function-isallowedrootsave) () noexcept override const<br> |
 | virtual bool | [**LoadLogic**](#function-loadlogic) (IDeserializer & deserializer, const Path & path) override<br> |
 | virtual bool | [**SaveLogic**](#function-savelogic) (ISerializer & serializer, const Path & path) override<br> |
+|  void | [**SetCustomSOData**](#function-setcustomsodata) (IDeserializer::UniquePtr pCustomData) <br> |
 
 
 ## Public Functions inherited from SR_WORLD_NS::SceneLogic
@@ -304,6 +305,11 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 | virtual  | [**~SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase) () <br> |
 
 
+## Public Static Functions
+
+| Type | Name |
+| ---: | :--- |
+|  bool | [**SaveSOAsPrefab**](#function-savesoasprefab) (ISerializer & serializer, const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; SceneObject &gt; & pSO) <br> |
 
 
 
@@ -617,6 +623,39 @@ virtual bool SR_WORLD_NS::ScenePrefabLogic::SaveLogic (
 
 
 Implements [*SR\_WORLD\_NS::SceneLogic::SaveLogic*](classSR__WORLD__NS_1_1SceneLogic.md#function-savelogic)
+
+
+<hr>
+
+
+
+### function SetCustomSOData 
+
+```C++
+void SR_WORLD_NS::ScenePrefabLogic::SetCustomSOData (
+    IDeserializer::UniquePtr pCustomData
+) 
+```
+
+
+
+
+<hr>
+## Public Static Functions Documentation
+
+
+
+
+### function SaveSOAsPrefab 
+
+```C++
+static bool SR_WORLD_NS::ScenePrefabLogic::SaveSOAsPrefab (
+    ISerializer & serializer,
+    const SR_HTYPES_NS::SharedPtr < SceneObject > & pSO
+) 
+```
+
+
 
 
 <hr>

@@ -35,6 +35,22 @@
         <location file="Engine/libs/Utils/inc/Utils/World/ScenePrefabLogic.h" line="15" column="9" bodyfile="Engine/libs/Utils/inc/Utils/World/ScenePrefabLogic.h" bodystart="15" bodyend="-1"/>
       </memberdef>
     </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1ScenePrefabLogic_1acec0b46fe3715077444c240ea873d7f0" prot="private" static="no" mutable="no">
+        <type>IDeserializer::UniquePtr</type>
+        <definition>IDeserializer::UniquePtr SR_WORLD_NS::ScenePrefabLogic::m_pSOCustomData</definition>
+        <argsstring></argsstring>
+        <name>m_pSOCustomData</name>
+        <qualifiedname>SR_WORLD_NS::ScenePrefabLogic::m_pSOCustomData</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/World/ScenePrefabLogic.h" line="35" column="34" bodyfile="Engine/libs/Utils/inc/Utils/World/ScenePrefabLogic.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="public-func">
       <memberdef kind="function" id="classSR__WORLD__NS_1_1ScenePrefabLogic_1adb6f57c348ee7eca14df7eaffa265dba" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -156,6 +172,68 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/World/ScenePrefabLogic.h" line="25" column="46"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1ScenePrefabLogic_1ad7da9bed9d5bb0ab5250e710fd7c65c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_WORLD_NS::ScenePrefabLogic::SetCustomSOData</definition>
+        <argsstring>(IDeserializer::UniquePtr pCustomData)</argsstring>
+        <name>SetCustomSOData</name>
+        <qualifiedname>SR_WORLD_NS::ScenePrefabLogic::SetCustomSOData</qualifiedname>
+        <param>
+          <type>IDeserializer::UniquePtr</type>
+          <declname>pCustomData</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/World/ScenePrefabLogic.h" line="29" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1ScenePrefabLogic_1a69276db1abe8d5c185a40c4967ef8db5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool SR_WORLD_NS::ScenePrefabLogic::SaveSOAsPrefab</definition>
+        <argsstring>(ISerializer &amp;serializer, const SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt; &amp;pSO)</argsstring>
+        <name>SaveSOAsPrefab</name>
+        <qualifiedname>SR_WORLD_NS::ScenePrefabLogic::SaveSOAsPrefab</qualifiedname>
+        <param>
+          <type>ISerializer &amp;</type>
+          <declname>serializer</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; SceneObject &gt; &amp;</type>
+          <declname>pSO</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/World/ScenePrefabLogic.h" line="27" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1ScenePrefabLogic_1ad0e05d737b3377bfdce9b7628e337631" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_WORLD_NS::ScenePrefabLogic::LoadSOData</definition>
+        <argsstring>(IDeserializer &amp;deserializer)</argsstring>
+        <name>LoadSOData</name>
+        <qualifiedname>SR_WORLD_NS::ScenePrefabLogic::LoadSOData</qualifiedname>
+        <param>
+          <type>IDeserializer &amp;</type>
+          <declname>deserializer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/World/ScenePrefabLogic.h" line="32" column="14"/>
+      </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
@@ -240,7 +318,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/World/ScenePrefabLogic.h" line="11" column="5" bodyfile="Engine/libs/Utils/inc/Utils/World/ScenePrefabLogic.h" bodystart="11" bodyend="27"/>
+    <location file="Engine/libs/Utils/inc/Utils/World/ScenePrefabLogic.h" line="11" column="5" bodyfile="Engine/libs/Utils/inc/Utils/World/ScenePrefabLogic.h" bodystart="11" bodyend="37"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>AllocateStatic</name></member>
@@ -274,9 +352,11 @@
       <member refid="classSR__WORLD__NS_1_1ScenePrefabLogic_1a38acb178bf911b70d7b0c7ef68090a2c" prot="public" virt="virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>IsAllowedRootSave</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1afbc9947b694481f8478c1a75a2fc465e" prot="public" virt="virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>Load</name></member>
       <member refid="classSR__WORLD__NS_1_1ScenePrefabLogic_1a2bba385f6729534bd21a9fd0f88f04d0" prot="public" virt="virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>LoadLogic</name></member>
+      <member refid="classSR__WORLD__NS_1_1ScenePrefabLogic_1ad0e05d737b3377bfdce9b7628e337631" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>LoadSOData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>m_basicManually</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>m_data</name></member>
       <member refid="classSR__WORLD__NS_1_1SceneLogic_1aea36f9b5819c54a5e7aaa59a43c90db6" prot="protected" virt="non-virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>m_mutex</name></member>
+      <member refid="classSR__WORLD__NS_1_1ScenePrefabLogic_1acec0b46fe3715077444c240ea873d7f0" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>m_pSOCustomData</name></member>
       <member refid="classSR__WORLD__NS_1_1SceneLogic_1a5243ae73ab4754fe04cbe62a1dc6d0ee" prot="protected" virt="non-virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>m_scene</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>MakeShared</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a27569f8d47ee0c52ed5e385253e14460" prot="public" virt="virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>OnPostLoad</name></member>
@@ -303,10 +383,12 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>Reset</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>Save</name></member>
       <member refid="classSR__WORLD__NS_1_1ScenePrefabLogic_1a62a1af401ead7d83716251cd80c2f47e" prot="public" virt="virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>SaveLogic</name></member>
+      <member refid="classSR__WORLD__NS_1_1ScenePrefabLogic_1a69276db1abe8d5c185a40c4967ef8db5" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>SaveSOAsPrefab</name></member>
       <member refid="classSR__WORLD__NS_1_1SceneLogic_1aa0aa6e356f1226bd88cab39f29b17617" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>SceneLogic</name></member>
       <member refid="classSR__WORLD__NS_1_1SceneLogic_1a34b793cc93ce2021ff3b54d10ecb3ac4" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>SceneObjectPtr</name></member>
       <member refid="classSR__WORLD__NS_1_1SceneLogic_1afb47975291cd9be8b5bad3a30fd4488b" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>SceneObjects</name></member>
       <member refid="classSR__WORLD__NS_1_1SceneLogic_1ad785cec52c92350c95bb746c28e38c8d" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>ScenePtr</name></member>
+      <member refid="classSR__WORLD__NS_1_1ScenePrefabLogic_1ad7da9bed9d5bb0ab5250e710fd7c65c7" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>SetCustomSOData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>SetPointerFromBase</name></member>
       <member refid="classSR__WORLD__NS_1_1SceneLogic_1a5b6feef053ddd3245d347a7004f7d540" prot="public" virt="virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>SetScene</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::ScenePrefabLogic</scope><name>SharedPointerType</name></member>

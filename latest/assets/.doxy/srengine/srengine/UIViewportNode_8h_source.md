@@ -31,6 +31,9 @@ namespace SR_GRAPH_UI_NS {
         void Layout(const SR_MATH_NS::FRect&) override;
 
     private:
+        void CalculateLayout();
+
+    private:
         SR_UTILS_NS::Subscription m_onEngineUpdate;
         SR_UTILS_NS::Subscription m_keyDown;
 

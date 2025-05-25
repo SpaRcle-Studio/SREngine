@@ -1466,10 +1466,14 @@
     <member refid="classSR__UTILS__NS_1_1CmdManager_1a06491c91f84d65e596ede0ec92672ac8" kind="function"><name>CmdManager</name></member>
     <member refid="classSR__UTILS__NS_1_1CmdManager_1a8398e6229e5cac106012b560eb669631" kind="function"><name>~CmdManager</name></member>
     <member refid="classSR__UTILS__NS_1_1CmdManager_1a99ad406b6e6aa72091488cdf220f5675" kind="function"><name>GetLastCmdName</name></member>
+    <member refid="classSR__UTILS__NS_1_1CmdManager_1aaf951a6f28a9f872507548737db214b9" kind="function"><name>GetHistorySize</name></member>
+    <member refid="classSR__UTILS__NS_1_1CmdManager_1ad7431db5927bc3a3f0b11738513dde6f" kind="function"><name>GetMaxHistorySize</name></member>
+    <member refid="classSR__UTILS__NS_1_1CmdManager_1a74f0503f522f30813dcf8f09ed6463c8" kind="function"><name>GetHistoryPC</name></member>
     <member refid="classSR__UTILS__NS_1_1CmdManager_1a01059c8c960224346e178f8b02651a17" kind="function"><name>Execute</name></member>
     <member refid="classSR__UTILS__NS_1_1CmdManager_1a693d6be44acb96b2eddbd934349dc22f" kind="function"><name>Store</name></member>
     <member refid="classSR__UTILS__NS_1_1CmdManager_1a0497a422ac4d10a3f2ffe6df960bd952" kind="function"><name>Redo</name></member>
     <member refid="classSR__UTILS__NS_1_1CmdManager_1aa9c4dc1ab3d731a69859b793bc38ddf3" kind="function"><name>Cancel</name></member>
+    <member refid="classSR__UTILS__NS_1_1CmdManager_1a72c3593cde6770702aa87d3fae8b269c" kind="function"><name>SetMaxHistorySize</name></member>
     <member refid="classSR__UTILS__NS_1_1CmdManager_1a47a5dd7a4ce54b475636b1ae95ce207a" kind="function"><name>Update</name></member>
     <member refid="classSR__UTILS__NS_1_1CmdManager_1ad33c4d29076bb2d9136873bb92302237" kind="function"><name>Clear</name></member>
     <member refid="classSR__UTILS__NS_1_1CmdManager_1a1aef9fdaa5a24da3a2c847a65a5288a7" kind="function"><name>Execute</name></member>
@@ -3173,6 +3177,7 @@
     <member refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1af0fd71fb613f9622c250adb9f56fe026" kind="function"><name>EngineStatistics</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1a503dcea7efdf4db771623bb9e9551a29" kind="function"><name>~EngineStatistics</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1a4e3e6e73b001338101a0fb76ba6de98c" kind="function"><name>Draw</name></member>
+    <member refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1ab4cb8ba317ea3dc3682e20e571042309" kind="function"><name>CommonPage</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1a68246eff641e8cb4655b0cc971675e58" kind="function"><name>ResourcesPage</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1a766b5901c7ec8147a6fd1fec7b5e340c" kind="function"><name>ThreadsPage</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1ab911192fbc73807eeff256ea45a700dc" kind="function"><name>WidgetsPage</name></member>
@@ -9549,6 +9554,7 @@
   <compound refid="classSR__WORLD__NS_1_1ScenePrefabLogic" kind="class"><name>SR_WORLD_NS::ScenePrefabLogic</name>
     <member refid="classSR__WORLD__NS_1_1ScenePrefabLogic_1ab39581aea6e4533491923bc9d72b3d93" kind="typedef"><name>Super</name></member>
     <member refid="classSR__WORLD__NS_1_1ScenePrefabLogic_1aedccc4d4b3ed6474eb867dcae3d0c6b7" kind="typedef"><name>Ptr</name></member>
+    <member refid="classSR__WORLD__NS_1_1ScenePrefabLogic_1acec0b46fe3715077444c240ea873d7f0" kind="variable"><name>m_pSOCustomData</name></member>
     <member refid="classSR__WORLD__NS_1_1ScenePrefabLogic_1adb6f57c348ee7eca14df7eaffa265dba" kind="function"><name>InitLogic</name></member>
     <member refid="classSR__WORLD__NS_1_1ScenePrefabLogic_1a62a1af401ead7d83716251cd80c2f47e" kind="function"><name>SaveLogic</name></member>
     <member refid="classSR__WORLD__NS_1_1ScenePrefabLogic_1a2bba385f6729534bd21a9fd0f88f04d0" kind="function"><name>LoadLogic</name></member>
@@ -9556,6 +9562,9 @@
     <member refid="classSR__WORLD__NS_1_1ScenePrefabLogic_1a1c65343761cb177324102974e4170ff1" kind="function"><name>GetSceneExtension</name></member>
     <member refid="classSR__WORLD__NS_1_1ScenePrefabLogic_1a38acb178bf911b70d7b0c7ef68090a2c" kind="function"><name>IsAllowedRootSave</name></member>
     <member refid="classSR__WORLD__NS_1_1ScenePrefabLogic_1aa949ebdd3c6a04081b652202ee818b2a" kind="function"><name>GetPrefabRoot</name></member>
+    <member refid="classSR__WORLD__NS_1_1ScenePrefabLogic_1ad7da9bed9d5bb0ab5250e710fd7c65c7" kind="function"><name>SetCustomSOData</name></member>
+    <member refid="classSR__WORLD__NS_1_1ScenePrefabLogic_1a69276db1abe8d5c185a40c4967ef8db5" kind="function"><name>SaveSOAsPrefab</name></member>
+    <member refid="classSR__WORLD__NS_1_1ScenePrefabLogic_1ad0e05d737b3377bfdce9b7628e337631" kind="function"><name>LoadSOData</name></member>
   </compound>
   <compound refid="classSR__CORE__GUI__NS_1_1SceneRunner" kind="class"><name>SR_CORE_GUI_NS::SceneRunner</name>
     <member refid="classSR__CORE__GUI__NS_1_1SceneRunner_1a49f87b39570501bcf0424a44d3c313e8" kind="variable"><name>m_isActive</name></member>
@@ -12622,6 +12631,7 @@
     <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1ab67b939ccc393932365ef5dc9caf63c6" kind="variable"><name>m_doRecalcLayout</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1a6ee2f58d0015b3bd5ee6c1cd4500613b" kind="function"><name>UIViewportNode</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1ad8cc144f617d08aafb6bd7b82bc301a1" kind="function"><name>Layout</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1ab356d49b829f6184c1944d0aefad3a2f" kind="function"><name>CalculateLayout</name></member>
   </compound>
   <compound refid="classSR__GRAPH__UI__NS_1_1UIWindow" kind="class"><name>SR_GRAPH_UI_NS::UIWindow</name>
     <member refid="classSR__GRAPH__UI__NS_1_1UIWindow_1a248ba71be3b29a10d58e2153661e8339" kind="typedef"><name>Super</name></member>

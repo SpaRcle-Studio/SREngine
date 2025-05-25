@@ -279,6 +279,7 @@
 * **ClearSettings** ([**SR\_CORE\_NS::EditorSettings**](classSR__CORE__NS_1_1EditorSettings.md), [**SR\_GRAPH\_NS::RenderTechnique**](classSR__GRAPH__NS_1_1RenderTechnique.md), [**SR\_GTYPES\_NS::RenderTexture**](classSR__GTYPES__NS_1_1RenderTexture.md), [**SR\_UTILS\_NS::LayerManager**](classSR__UTILS__NS_1_1LayerManager.md), [**SR\_UTILS\_NS::TagManager**](classSR__UTILS__NS_1_1TagManager.md))
 * **Create** ([**SR\_CORE\_NS::Engine**](classSR__CORE__NS_1_1Engine.md), [**SR\_GRAPH\_NS::AtlasBuilder**](classSR__GRAPH__NS_1_1AtlasBuilder.md), [**SR\_GRAPH\_NS::GlyphImage**](classSR__GRAPH__NS_1_1GlyphImage.md), [**SR\_GRAPH\_NS::TextureData**](classSR__GRAPH__NS_1_1TextureData.md), [**SR\_GRAPH\_NS::VulkanTools::MemoryManager**](classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager.md), [**SR\_GTYPES\_NS::Framebuffer**](classSR__GTYPES__NS_1_1Framebuffer.md), [**SR\_HTYPES\_NS::Thread::Factory**](classSR__HTYPES__NS_1_1Thread_1_1Factory.md), [**SR\_NETWORK\_NS::Context**](classSR__NETWORK__NS_1_1Context.md), [**SR\_UTILS\_NS::Factory**](classSR__UTILS__NS_1_1Factory.md), [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md), [**SR\_UTILS\_NS::Reflection::Value**](classSR__UTILS__NS_1_1Reflection_1_1Value.md), [**SR\_UTILS\_NS::SerializationId**](structSR__UTILS__NS_1_1SerializationId.md))
 * **CreateMainWindow** ([**SR\_CORE\_NS::Engine**](classSR__CORE__NS_1_1Engine.md))
+* **CommonPage** ([**SR\_CORE\_NS::GUI::EngineStatistics**](classSR__CORE__NS_1_1GUI_1_1EngineStatistics.md))
 * **CacheElements** ([**SR\_CORE\_NS::GUI::FileBrowser**](classSR__CORE__NS_1_1GUI_1_1FileBrowser.md))
 * **CurrentDirectoryContextMenu** ([**SR\_CORE\_NS::GUI::FileBrowser**](classSR__CORE__NS_1_1GUI_1_1FileBrowser.md))
 * **CurrentDirectoryPanel** ([**SR\_CORE\_NS::GUI::FileBrowser**](classSR__CORE__NS_1_1GUI_1_1FileBrowser.md))
@@ -319,6 +320,7 @@
 * **CreateNoise** ([**SR\_GRAPH\_NS::SSAOPass**](classSR__GRAPH__NS_1_1SSAOPass.md))
 * **CalculateTextWidth** ([**SR\_GRAPH\_NS::TextBuilder**](classSR__GRAPH__NS_1_1TextBuilder.md))
 * **CalculateContentSize** ([**SR\_GRAPH\_UI\_NS::UIControlNode**](classSR__GRAPH__UI__NS_1_1UIControlNode.md), [**SR\_GRAPH\_UI\_NS::UIHBoxContainerNode**](classSR__GRAPH__UI__NS_1_1UIHBoxContainerNode.md), [**SR\_GRAPH\_UI\_NS::UINode**](classSR__GRAPH__UI__NS_1_1UINode.md), [**SR\_GRAPH\_UI\_NS::UIVBoxContainerNode**](classSR__GRAPH__UI__NS_1_1UIVBoxContainerNode.md))
+* **CalculateLayout** ([**SR\_GRAPH\_UI\_NS::UIViewportNode**](classSR__GRAPH__UI__NS_1_1UIViewportNode.md))
 * **CalculateScreenFactor** ([**SR\_GTYPES\_NS::Camera**](classSR__GTYPES__NS_1_1Camera.md))
 * **Camera** ([**SR\_GTYPES\_NS::Camera**](classSR__GTYPES__NS_1_1Camera.md))
 * **CalculateIBO** ([**SR\_GTYPES\_NS::IndexedMesh**](classSR__GTYPES__NS_1_1IndexedMesh.md))
@@ -1398,7 +1400,10 @@
 * **get\_a** ([**SR\_TYPES\_NS::uniform\_int\_distribution::param\_type**](structSR__TYPES__NS_1_1uniform__int__distribution_1_1param__type.md))
 * **get\_b** ([**SR\_TYPES\_NS::uniform\_int\_distribution::param\_type**](structSR__TYPES__NS_1_1uniform__int__distribution_1_1param__type.md))
 * **generate** ([**SR\_TYPES\_NS::uniform\_int\_distribution**](classSR__TYPES__NS_1_1uniform__int__distribution.md))
+* **GetHistoryPC** ([**SR\_UTILS\_NS::CmdManager**](classSR__UTILS__NS_1_1CmdManager.md))
+* **GetHistorySize** ([**SR\_UTILS\_NS::CmdManager**](classSR__UTILS__NS_1_1CmdManager.md))
 * **GetLastCmdName** ([**SR\_UTILS\_NS::CmdManager**](classSR__UTILS__NS_1_1CmdManager.md))
+* **GetMaxHistorySize** ([**SR\_UTILS\_NS::CmdManager**](classSR__UTILS__NS_1_1CmdManager.md))
 * **GetBarycenter** ([**SR\_UTILS\_NS::Component**](classSR__UTILS__NS_1_1Component.md))
 * **GetGameObject** ([**SR\_UTILS\_NS::Component**](classSR__UTILS__NS_1_1Component.md), [**SR\_UTILS\_NS::EntityRef**](classSR__UTILS__NS_1_1EntityRef.md), [**SR\_UTILS\_NS::Transform**](classSR__UTILS__NS_1_1Transform.md))
 * **GetIndexInSceneUpdater** ([**SR\_UTILS\_NS::Component**](classSR__UTILS__NS_1_1Component.md))
@@ -2099,6 +2104,7 @@
 * **LockSingleton** ([**SR\_UTILS\_NS::Singleton**](classSR__UTILS__NS_1_1Singleton.md))
 * **LoadScene** ([**SR\_WORLD\_NS::Scene**](classSR__WORLD__NS_1_1Scene.md))
 * **LoadLogic** ([**SR\_WORLD\_NS::SceneCubeChunkLogic**](classSR__WORLD__NS_1_1SceneCubeChunkLogic.md), [**SR\_WORLD\_NS::SceneLogic**](classSR__WORLD__NS_1_1SceneLogic.md), [**SR\_WORLD\_NS::ScenePrefabLogic**](classSR__WORLD__NS_1_1ScenePrefabLogic.md))
+* **LoadSOData** ([**SR\_WORLD\_NS::ScenePrefabLogic**](classSR__WORLD__NS_1_1ScenePrefabLogic.md))
 
 
 ## m
@@ -3121,6 +3127,7 @@
 * **SetExecuteInEditMode** ([**SR\_UTILS\_NS::CameraFlyMover**](classSR__UTILS__NS_1_1CameraFlyMover.md), [**SR\_UTILS\_NS::LookAtComponent**](classSR__UTILS__NS_1_1LookAtComponent.md))
 * **SetRightMouseButtonToRotate** ([**SR\_UTILS\_NS::CameraFlyMover**](classSR__UTILS__NS_1_1CameraFlyMover.md))
 * **SetVelocityFactor** ([**SR\_UTILS\_NS::CameraFlyMover**](classSR__UTILS__NS_1_1CameraFlyMover.md))
+* **SetMaxHistorySize** ([**SR\_UTILS\_NS::CmdManager**](classSR__UTILS__NS_1_1CmdManager.md))
 * **Store** ([**SR\_UTILS\_NS::CmdManager**](classSR__UTILS__NS_1_1CmdManager.md))
 * **SetIndexIdSceneUpdater** ([**SR\_UTILS\_NS::Component**](classSR__UTILS__NS_1_1Component.md))
 * **ScriptError** ([**SR\_UTILS\_NS::Debug**](classSR__UTILS__NS_1_1Debug.md))
@@ -3265,6 +3272,8 @@
 * **SetObserver** ([**SR\_WORLD\_NS::SceneCubeChunkLogic**](classSR__WORLD__NS_1_1SceneCubeChunkLogic.md))
 * **SetWorldOffset** ([**SR\_WORLD\_NS::SceneCubeChunkLogic**](classSR__WORLD__NS_1_1SceneCubeChunkLogic.md))
 * **SceneLogic** ([**SR\_WORLD\_NS::SceneLogic**](classSR__WORLD__NS_1_1SceneLogic.md))
+* **SaveSOAsPrefab** ([**SR\_WORLD\_NS::ScenePrefabLogic**](classSR__WORLD__NS_1_1ScenePrefabLogic.md))
+* **SetCustomSOData** ([**SR\_WORLD\_NS::ScenePrefabLogic**](classSR__WORLD__NS_1_1ScenePrefabLogic.md))
 * **SceneUpdater** ([**SR\_WORLD\_NS::SceneUpdater**](classSR__WORLD__NS_1_1SceneUpdater.md))
 
 
