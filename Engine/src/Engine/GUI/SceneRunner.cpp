@@ -98,6 +98,13 @@ namespace SR_CORE_NS::GUI {
 
             if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(EditorIcon::Back)) {
                 if (SR_GRAPH_GUI_NS::Immediate::ImageButton("##imgSceneBackBtn", pDescriptor, SR_MATH_NS::FVector2(iconSize), framePadding)) {
+                    m_scene->SaveScene();
+
+                    auto&& resourcesManager = SR_UTILS_NS::ResourceManager::Instance();
+                    if (auto&& pPrefab = resourcesManager.Find<SR_UTILS_NS::Prefab>(m_scene->GetPath())) {
+                        pPrefab->Reload();
+                    }
+
                     pEngine->SetActive((active = false));
                     pEngine->GetEditor()->LoadSceneFromCachedPath();
                 }

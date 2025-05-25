@@ -326,6 +326,33 @@ namespace SR_CORE_GUI_NS {
                         }
                     }
                 }
+                else if (SR_GRAPH_GUI_NS::Immediate::Selectable("Make prefab")) {
+                    auto&& resPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+
+                    if (auto&& path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(resPath.ToString(), { { "Scene", "prefab" } }); !path.IsEmpty()) {
+                        path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetCachePath());
+                        path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+
+                        SR_UTILS_NS::SRASerializer serializer;
+                        SR_WORLD_NS::ScenePrefabLogic::SaveSOAsPrefab(serializer, pSceneObject);
+
+                        if (auto&& pPrefabScene = SR_WORLD_NS::Scene::NewScene(path, SR_WORLD_NS::SceneLogicType::Prefab)) {
+                            pPrefabScene->GetLogicBase().DynamicCast<SR_WORLD_NS::ScenePrefabLogic>()->SetCustomSOData(serializer.CreateDeserializer());
+                            pPrefabScene->SaveScene();
+
+                            pSceneObject->DestroyChildren();
+
+                            if (auto&& pPrefab = SR_UTILS_NS::Prefab::Load(path)) {
+                                pSceneObject->SetPrefab(pPrefab, true);
+                            }
+                            else {
+                                SR_ERROR("Hierarchy::ChildContextMenu() : failed to load prefab from path: {}", path.ToString());
+                            }
+
+                            pEngine->AddSceneToQueue(pPrefabScene);
+                        }
+                    }
+                }
 
                 if (pSceneObject->GetSceneObjectType() == SR_UTILS_NS::SceneObjectType::GameObject) {
                     SR_GRAPH_GUI_NS::Immediate::Separator();
@@ -418,9 +445,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (fromGUI) {
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-
-            if (!SR_GRAPH_GUI_NS::Immediate::Button("Paste")) {
+            if (!SR_GRAPH_GUI_NS::Immediate::Selectable("Paste")) {
                 return;
             }
         }

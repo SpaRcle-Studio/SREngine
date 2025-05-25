@@ -31,6 +31,7 @@ namespace SR_CORE_GUI_NS {
         if (SR_GRAPH_GUI_NS::Immediate::BeginTabBar("EngineStatsTabBar")) {
             SR_GRAPH_GUI_NS::Immediate::Separator();
 
+            CommonPage();
             ResourcesPage();
             ThreadsPage();
             WidgetsPage();
@@ -104,6 +105,25 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
             });
+
+            SR_GRAPH_GUI_NS::Immediate::EndTabItem();
+        }
+    }
+
+    void EngineStatistics::CommonPage() {
+        if (SR_GRAPH_GUI_NS::Immediate::BeginTabItem("Common")) {
+            auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+            auto&& pCommandManager = pEngine->GetCmdManager();
+
+            if (pCommandManager) {
+                std::string lastCmdName = pCommandManager->GetLastCmdName();
+
+                SR_GRAPH_GUI_NS::Immediate::Text("Command manager:");
+                SR_GRAPH_GUI_NS::Immediate::Text("  History PC: %i", pCommandManager->GetHistoryPC());
+                SR_GRAPH_GUI_NS::Immediate::Text("  History size: %i", pCommandManager->GetHistorySize());
+                SR_GRAPH_GUI_NS::Immediate::Text("  Max history size: %i", pCommandManager->GetMaxHistorySize());
+                SR_GRAPH_GUI_NS::Immediate::Text("  Last command: %s", lastCmdName.c_str());
+            }
 
             SR_GRAPH_GUI_NS::Immediate::EndTabItem();
         }
