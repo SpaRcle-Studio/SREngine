@@ -20,6 +20,6 @@ namespace EvoScript {
         static bool GenerateCMakeLists(const std::string& resourcesPath);
         static bool GenerateCxxFile(const std::string& resourcesPath);
     };
-}
+} // namespace EvoScript
 
-#endif //SR_ENGINE_CMAKE_CODEGEN_H
+#endif // SR_ENGINE_CMAKE_CODEGEN_H

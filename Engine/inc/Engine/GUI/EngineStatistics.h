@@ -10,7 +10,7 @@
 namespace SR_GRAPH_NS {
     class IRenderTechnique;
     class MeshDrawerPass;
-}
+} // namespace SR_GRAPH_NS
 
 namespace EvoVulkan {
     struct SubmitInfo;
@@ -39,8 +39,7 @@ namespace SR_CORE_NS::GUI {
         void DrawRenderTechnique(SR_GRAPH_NS::IRenderTechnique* pRenderTechnique);
         void DrawMeshDrawerPass(SR_GRAPH_NS::MeshDrawerPass* pMeshDrawerPass);
         void DrawRenderQueue(const SR_GRAPH_NS::RenderQueue* pRenderQueue);
-
     };
-}
+} // namespace SR_CORE_NS::GUI
 
-#endif //SR_ENGINE_ENGINESTATISTICS_H
+#endif // SR_ENGINE_ENGINESTATISTICS_H

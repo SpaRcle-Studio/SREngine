@@ -21,6 +21,6 @@ namespace SR_CORE_NS::Tests {
             return builder.Generate();
         }
     };
-}
+} // namespace SR_CORE_NS::Tests
 
-#endif //SR_ATLAS_BUILDER_TEST_H
+#endif // SR_ATLAS_BUILDER_TEST_H

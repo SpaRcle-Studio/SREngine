@@ -9,4 +9,4 @@ namespace SR_CORE_NS {
         GetThreadsWorker()->StopAsync();
         return SR_UTILS_NS::ThreadWorkerResult::Break;
     }
-}
+} // namespace SR_CORE_NS

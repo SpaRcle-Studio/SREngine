@@ -14,8 +14,9 @@
 class CharacterLoader : public Behaviour {
 public:
     void Awake() override {
-        auto&& pGameObject = scene->InstanceFromFile("Samples/CapsuleCharacter.prefab");
-        if (auto&& pTransform = pGameObject->GetTransform()) {
+        auto&& pGameObject =
+scene->InstanceFromFile("Samples/CapsuleCharacter.prefab"); if (auto&&
+pTransform = pGameObject->GetTransform()) {
             pTransform->SetTranslation({0.f, 5.f, 0.f});
         }
     }

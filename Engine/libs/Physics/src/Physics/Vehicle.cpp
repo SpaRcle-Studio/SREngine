@@ -7,18 +7,12 @@
 #include <Codegen/Vehicle.generated.hpp>
 
 namespace SR_PTYPES_NS {
-    SR_UTILS_NS::Measurement Vehicle::GetMeasurement() const {
-        return SR_UTILS_NS::Measurement::Unknown;
-    }
+    SR_UTILS_NS::Measurement Vehicle::GetMeasurement() const { return SR_UTILS_NS::Measurement::Unknown; }
 
-    bool Vehicle::InitVehicle() {
-        return false;
-    }
+    bool Vehicle::InitVehicle() { return false; }
 
     void Vehicle::OnDestroy() {
         Super::OnDestroy();
-        AutoFree([](auto&& pData) {
-            delete pData;
-        });
+        AutoFree([](auto&& pData) { delete pData; });
     }
-}
+} // namespace SR_PTYPES_NS

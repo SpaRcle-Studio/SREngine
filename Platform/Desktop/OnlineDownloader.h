@@ -3,7 +3,7 @@
 //
 
 #if defined(WIN32)
-#include <wininet.h>
+    #include <wininet.h>
 
 bool DownloadFile(const std::string& url, const std::string& outputPath) {
     std::cout << "Downloading file from: " << url << std::endl;
@@ -85,11 +85,14 @@ int DownloadEngineDataFromGithub(const std::string& executablePath) {
 #endif
 
     std::string branch = "dev";
-    std::string link = "https://github.com/SpaRcle-Studio/SRE2R/releases/download/" + branch + "-" + platform + "-" + buildType + "/engine-online-data.dmp";
+    std::string link = "https://github.com/SpaRcle-Studio/SRE2R/releases/download/" + branch + "-" + platform + "-" +
+                       buildType + "/engine-online-data.dmp";
 
     std::filesystem::path outputPath = std::filesystem::path(executablePath).parent_path() / "engine-online-data.dmp";
     if (!DownloadFile(link, outputPath.generic_string())) {
-        std::cerr << "DownloadEngineDataFromGithub() : failed to download engine data from GitHub." << std::endl;
+        std::cerr << "DownloadEngineDataFromGithub() : failed to download "
+                     "engine data from GitHub."
+                  << std::endl;
         return -1;
     }
 

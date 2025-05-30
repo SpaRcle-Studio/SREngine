@@ -5,16 +5,16 @@
 #ifndef SR_ENGINE_SCRIPTING_ADDRESS_TABLE_GEN_H
 #define SR_ENGINE_SCRIPTING_ADDRESS_TABLE_GEN_H
 
-#include <Scripting/Tools/SetUtils.h>
-#include <Scripting/Tools/StringUtils.h>
 #include <Scripting/Compilation/EvoClass.h>
 #include <Scripting/IState.h>
+#include <Scripting/Tools/SetUtils.h>
+#include <Scripting/Tools/StringUtils.h>
 
 namespace EvoScript {
     struct EvoEnum {
         std::string m_name;
         std::string m_header;
-        bool        m_asClass;
+        bool m_asClass;
         std::vector<std::pair<std::string, int32_t>> m_values;
 
         [[nodiscard]] std::string ToString() const {
@@ -34,13 +34,13 @@ namespace EvoScript {
     };
 
     struct Header {
-        std::string              m_name;
-        std::set<std::string>    m_includes;
+        std::string m_name;
+        std::set<std::string> m_includes;
         std::vector<std::string> m_incompleteTypes;
         std::vector<std::string> m_typedefs;
-        std::vector<EvoEnum>     m_enums;
-        std::vector<Class>       m_classes;
-        std::vector<Method>      m_functions;
+        std::vector<EvoEnum> m_enums;
+        std::vector<Class> m_classes;
+        std::vector<Method> m_functions;
 
         Class* FindClass(const std::string& name) {
             for (auto& _class : m_classes)
@@ -59,24 +59,25 @@ namespace EvoScript {
         [[nodiscard]] std::string ToString() const {
             std::string result;
 
-            result += "//\n// Created by Evo Script code generator on "
-                      + Tools::GetDate() + " | Author - Monika\n//\n\n";
+            result +=
+                "//\n// Created by Evo Script code generator on " + Tools::GetDate() + " | Author - Monika\n//\n\n";
 
             result += "#ifndef EVOSCRIPTLIB_" + Tools::ToUpper(m_name) + "_H\n";
             result += "#define EVOSCRIPTLIB_" + Tools::ToUpper(m_name) + "_H\n\n";
 
             result += "#ifndef EXTERN\n";
-        #ifdef ES_MSVC
+#ifdef ES_MSVC
             result += "#define EXTERN extern \"C\" __declspec(dllexport)\n";
-        #elif defined(ES_GCC)
-            result += "#define EXTERN extern \"C\" __attribute__((visibility(\"default\")))\n";
-        #endif
+#elif defined(ES_GCC)
+            result += "#define EXTERN extern \"C\" "
+                      "__attribute__((visibility(\"default\")))\n";
+#endif
             result += "#endif\n\n";
 
             result += "#include <functional>\n\n";
 
             if (std::string inc = GetIncludes(); !inc.empty())
-                result +=  inc + "\n";
+                result += inc + "\n";
 
             for (const auto& _enum : m_enums)
                 result += _enum.ToString() + "\n\n";
@@ -96,7 +97,7 @@ namespace EvoScript {
                 result += "\n";
 
             for (const auto& _class : m_classes) {
-                for (const auto &_method : _class.m_methods) {
+                for (const auto& _method : _class.m_methods) {
                     if (_method.m_type == Virtual) {
                         continue;
                     }
@@ -121,18 +122,17 @@ namespace EvoScript {
 
     class AddressTableGen {
         using SetterFn = std::function<void(EvoScript::IState*)>;
+
     public:
-        AddressTableGen()  = default;
+        AddressTableGen() = default;
         ~AddressTableGen() = default;
 
         AddressTableGen(const AddressTableGen&) = delete;
 
     public:
-        template<typename T> void SetPointer(T* pointer) {
-            m_pointers[typeid(T).hash_code()] = (void*)pointer;
-        }
+        template <typename T> void SetPointer(T* pointer) { m_pointers[typeid(T).hash_code()] = (void*)pointer; }
 
-        template<typename T> T* GetPointer() const {
+        template <typename T> T* GetPointer() const {
             auto&& pIt = m_pointers.find(typeid(T).hash_code());
             if (pIt == m_pointers.end()) {
                 return nullptr;
@@ -142,11 +142,13 @@ namespace EvoScript {
 
         SR_NODISCARD size_t GetApiHash() const { return m_hash; }
         SR_NODISCARD std::string GetApiVersion() const { return std::to_string(GetApiHash()); }
-        SR_NODISCARD std::vector<std::function<void(EvoScript::IState*)>> GetAddresses() const { return m_methodPointers; }
+        SR_NODISCARD std::vector<std::function<void(EvoScript::IState*)>> GetAddresses() const {
+            return m_methodPointers;
+        }
         SR_NODISCARD Header GetHeader(const std::string& name) const {
             if (auto f = m_headers.find(name); f == m_headers.end()) {
                 SR_ERROR("AddressTableGen::GetHeader() : header isn't exists!");
-                return { };
+                return {};
             } else
                 return m_headers.at(name);
         }
@@ -154,44 +156,33 @@ namespace EvoScript {
 
     public:
         bool RegisterMethod(
-                const SetterFn& setter,
-                const std::string& className,
-                const std::string& methodName,
-                const std::string& returnType,
-                const std::vector<std::string>& argTypes,
-                MethodType type,
-                const std::string& _overrideClass = "",
-                Publicity publicity = Publicity::Public);
+            const SetterFn& setter, const std::string& className, const std::string& methodName,
+            const std::string& returnType, const std::vector<std::string>& argTypes, MethodType type,
+            const std::string& _overrideClass = "", Publicity publicity = Publicity::Public
+        );
 
         bool RegisterFunction(
-                const SetterFn& setter,
-                const std::string& methodName,
-                const std::string& returnType,
-                const std::vector<std::string>& argTypes,
-                const std::string& header);
+            const SetterFn& setter, const std::string& methodName, const std::string& returnType,
+            const std::vector<std::string>& argTypes, const std::string& header
+        );
 
         bool RegisterMethod(
-                const std::string& className,
-                const std::string& methodName,
-                const std::string& returnType,
-                const std::vector<std::string>& argTypes,
-                MethodType type,
-                const std::string& _overrideClass = "",
-                Publicity publicity = Publicity::Public);
+            const std::string& className, const std::string& methodName, const std::string& returnType,
+            const std::vector<std::string>& argTypes, MethodType type, const std::string& _overrideClass = "",
+            Publicity publicity = Publicity::Public
+        );
 
         bool RegisterHeader(const std::string& name, const std::set<std::string>& includes = {});
 
         bool RegisterNewClass(
-                const std::string& name,
-                const std::string& header,
-                const std::set<std::string>& includes = {},
-                const std::vector<InheritClass>& inherit = {});
+            const std::string& name, const std::string& header, const std::set<std::string>& includes = {},
+            const std::vector<InheritClass>& inherit = {}
+        );
 
         bool RegisterEnum(
-                const std::string& name,
-                const std::string& header,
-                bool asClass,
-                const std::vector<std::pair<std::string, int32_t>>& values);
+            const std::string& name, const std::string& header, bool asClass,
+            const std::vector<std::pair<std::string, int32_t>>& values
+        );
 
         bool RegisterTypedef(const std::string& name, const std::string& header, const std::string& value);
         bool RegisterUsing(const std::string& name, const std::string& header, const std::string& value);
@@ -202,13 +193,12 @@ namespace EvoScript {
 
     private:
         //! key - class name, value - header name
-        std::map<std::string, std::string>                   m_classes;
-        std::map<std::string, Header>                        m_headers;
+        std::map<std::string, std::string> m_classes;
+        std::map<std::string, Header> m_headers;
         std::vector<std::function<void(EvoScript::IState*)>> m_methodPointers;
-        size_t                                               m_hash = 0;
+        size_t m_hash = 0;
         std::map<uint64_t, void*> m_pointers;
-
     };
-}
+} // namespace EvoScript
 
-#endif //SR_ENGINE_SCRIPTING_ADDRESS_TABLE_GEN_H
+#endif // SR_ENGINE_SCRIPTING_ADDRESS_TABLE_GEN_H

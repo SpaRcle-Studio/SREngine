@@ -6,24 +6,27 @@
 
 #include <Physics/PhysX/PhysXLibraryImpl.h>
 
-#include <Physics/PhysX/PhysXPhysicsWorld.h>
 #include <Physics/PhysX/PhysXCollisionShape.h>
-#include <Physics/PhysX/PhysXRigidbody3D.h>
 #include <Physics/PhysX/PhysXMaterialImpl.h>
+#include <Physics/PhysX/PhysXPhysicsWorld.h>
+#include <Physics/PhysX/PhysXRigidbody3D.h>
 #include <Physics/PhysX/PhysXVehicle4W3D.h>
 
 namespace SR_PHYSICS_NS {
     class PhysXAssertHandler : public physx::PxAssertHandler {
         void operator()(const char* exp, const char* file, int line, bool& ignore) override {
-            SRAssert2(false, "PhysX assertion failed. \n\tFile: file:///{}:{}:1\n\tExpression: {}"_format(file, line, exp));
+            SRAssert2(
+                false, "PhysX assertion failed. \n\tFile: file:///{}:{}:1\n\tExpression: {}"_format(file, line, exp)
+            );
         }
     };
 
     bool PhysXLibraryImpl::Initialize() {
         SR_TRACY_ZONE;
 
-        if (!Super::Initialize()){
-            SR_ERROR("PhysXLibraryImpl::Initialize() : failed to initialize basic library!");
+        if (!Super::Initialize()) {
+            SR_ERROR("PhysXLibraryImpl::Initialize() : failed to initialize "
+                     "basic library!");
         }
 
         m_allocatorCallback = new physx::PxDefaultAllocator();
@@ -40,7 +43,8 @@ namespace SR_PHYSICS_NS {
 
         m_pvd = PxCreatePvd(*m_foundation);
 
-        m_physics = PxCreatePhysics(SR_PHYSX_FOUNDATION_VERSION, *m_foundation, physx::PxTolerancesScale(), true, m_pvd);
+        m_physics =
+            PxCreatePhysics(SR_PHYSX_FOUNDATION_VERSION, *m_foundation, physx::PxTolerancesScale(), true, m_pvd);
         if (!m_physics) {
             SR_ERROR("PhysXLibraryImpl::Initialize() : failed to create physics!");
             return false;
@@ -49,11 +53,12 @@ namespace SR_PHYSICS_NS {
         if (IsVehicleSupported()) {
             SR_TRACY_ZONE_N("Init vechicle");
 
-            if (!physx::PxInitVehicleSDK(*m_physics)){
-                SR_ERROR("PhysXLibraryImpl::Initialize() : failed to initialize Vehicle SDK!");
+            if (!physx::PxInitVehicleSDK(*m_physics)) {
+                SR_ERROR("PhysXLibraryImpl::Initialize() : failed to "
+                         "initialize Vehicle SDK!");
                 return false;
             }
-            physx::PxVehicleSetBasisVectors(physx::PxVec3(0,1,0), physx::PxVec3(0,0,1));
+            physx::PxVehicleSetBasisVectors(physx::PxVec3(0, 1, 0), physx::PxVec3(0, 0, 1));
             physx::PxVehicleSetUpdateMode(physx::PxVehicleUpdateMode::eACCELERATION);
         }
 
@@ -61,7 +66,7 @@ namespace SR_PHYSICS_NS {
     }
 
     PhysXLibraryImpl::~PhysXLibraryImpl() {
-        if (IsVehicleSupported()){
+        if (IsVehicleSupported()) {
             physx::PxCloseVehicleSDK();
         }
 
@@ -91,14 +96,14 @@ namespace SR_PHYSICS_NS {
 
     bool PhysXLibraryImpl::IsShapeSupported(ShapeType type) const {
         switch (type) {
-            case ShapeType::Plane3D:
-            case ShapeType::Box3D:
-            case ShapeType::Capsule3D:
-            case ShapeType::Sphere3D:
-            case ShapeType::Convex3D:
-                return true;
-            default:
-                return false;
+        case ShapeType::Plane3D:
+        case ShapeType::Box3D:
+        case ShapeType::Capsule3D:
+        case ShapeType::Sphere3D:
+        case ShapeType::Convex3D:
+            return true;
+        default:
+            return false;
         }
     }
 
@@ -118,8 +123,8 @@ namespace SR_PHYSICS_NS {
         return new SR_PTYPES_NS::PhysXMaterialImpl(this);
     }
 
-    SR_PTYPES_NS::Vehicle4W3D *PhysXLibraryImpl::CreateVehicle4W3D() {
-        //return new SR_PTYPES_NS::PhysXVehicle4W3D(this);
+    SR_PTYPES_NS::Vehicle4W3D* PhysXLibraryImpl::CreateVehicle4W3D() {
+        // return new SR_PTYPES_NS::PhysXVehicle4W3D(this);
         return nullptr;
     }
 
@@ -141,4 +146,4 @@ namespace SR_PHYSICS_NS {
         m_pvdTransport = physx::PxDefaultPvdSocketTransportCreate("127.0.0.1", 5425, 1000);
         m_pvd->connect(*m_pvdTransport, physx::PxPvdInstrumentationFlag::eALL);
     }
-}
+} // namespace SR_PHYSICS_NS

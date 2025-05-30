@@ -57,8 +57,7 @@ namespace SR_CORE_GUI_NS {
             if (IsGizmo2DSpace()) {
                 const auto scale = pGameObject->GetTransform()->GetMatrix().GetScale();
                 pGameObject->GetTransform()->Translate((delta / scale));
-            }
-            else {
+            } else {
                 auto&& parentScale = SR_MATH_NS::FVector3::One();
 
                 auto&& pParentTransform = pGameObject->GetTransform()->GetParentTransform();
@@ -88,8 +87,7 @@ namespace SR_CORE_GUI_NS {
 
             if (IsLocal() || IsGizmo2DSpace()) {
                 pGameObject->GetTransform()->Rotate(delta);
-            }
-            else {
+            } else {
                 auto&& quaternion = pGameObject->GetTransform()->GetMatrix().GetQuat();
                 pGameObject->GetTransform()->Rotate(quaternion.Inverse() * delta * quaternion);
             }
@@ -127,8 +125,8 @@ namespace SR_CORE_GUI_NS {
 
             if (!is2D.has_value()) {
                 is2D = pGameObject->GetTransform()->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D;
-            }
-            else if (is2D.value() != (pGameObject->GetTransform()->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D)) {
+            } else if (is2D.value() !=
+                       (pGameObject->GetTransform()->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D)) {
                 return false;
             }
         }
@@ -156,30 +154,41 @@ namespace SR_CORE_GUI_NS {
                 pTransform->Scale(delta);
 
                 if (pTransform->GetScale().x <= SR_BIG_EPSILON) {
-                    pTransform->SetScale(SR_MATH_NS::FVector3(SR_BIG_EPSILON, pTransform->GetScale().y, pTransform->GetScale().z));
+                    pTransform->SetScale(
+                        SR_MATH_NS::FVector3(SR_BIG_EPSILON, pTransform->GetScale().y, pTransform->GetScale().z)
+                    );
                 }
 
                 if (pTransform->GetScale().y <= SR_BIG_EPSILON) {
-                    pTransform->SetScale(SR_MATH_NS::FVector3(pTransform->GetScale().x, SR_BIG_EPSILON, pTransform->GetScale().z));
+                    pTransform->SetScale(
+                        SR_MATH_NS::FVector3(pTransform->GetScale().x, SR_BIG_EPSILON, pTransform->GetScale().z)
+                    );
                 }
 
                 if (pTransform->GetScale().z <= SR_BIG_EPSILON) {
-                    pTransform->SetScale(SR_MATH_NS::FVector3(pTransform->GetScale().x, pTransform->GetScale().y, SR_BIG_EPSILON));
+                    pTransform->SetScale(
+                        SR_MATH_NS::FVector3(pTransform->GetScale().x, pTransform->GetScale().y, SR_BIG_EPSILON)
+                    );
                 }
-            }
-            else {
+            } else {
                 pGameObject->GetTransform()->GlobalSkew(delta);
 
                 if (pTransform->GetSkew().x <= SR_BIG_EPSILON) {
-                    pTransform->SetSkew(SR_MATH_NS::FVector3(SR_BIG_EPSILON, pTransform->GetSkew().y, pTransform->GetSkew().z));
+                    pTransform->SetSkew(
+                        SR_MATH_NS::FVector3(SR_BIG_EPSILON, pTransform->GetSkew().y, pTransform->GetSkew().z)
+                    );
                 }
 
                 if (pTransform->GetSkew().y <= SR_BIG_EPSILON) {
-                    pTransform->SetSkew(SR_MATH_NS::FVector3(pTransform->GetSkew().x, SR_BIG_EPSILON, pTransform->GetSkew().z));
+                    pTransform->SetSkew(
+                        SR_MATH_NS::FVector3(pTransform->GetSkew().x, SR_BIG_EPSILON, pTransform->GetSkew().z)
+                    );
                 }
 
                 if (pTransform->GetSkew().z <= SR_BIG_EPSILON) {
-                    pTransform->SetSkew(SR_MATH_NS::FVector3(pTransform->GetSkew().x, pTransform->GetSkew().y, SR_BIG_EPSILON));
+                    pTransform->SetSkew(
+                        SR_MATH_NS::FVector3(pTransform->GetSkew().x, pTransform->GetSkew().y, SR_BIG_EPSILON)
+                    );
                 }
             }
         }
@@ -227,9 +236,9 @@ namespace SR_CORE_GUI_NS {
 
         auto&& pEngine = dynamic_cast<EditorGUI*>(m_hierarchy->GetManager())->GetEngine();
 
-        pEngine->GetCmdManager()->Store(new SR_CORE_NS::Commands::GameObjectTransform(
-            pEngine, pGameObject, std::move(m_pSerializer)
-        ));
+        pEngine->GetCmdManager()->Store(
+            new SR_CORE_NS::Commands::GameObjectTransform(pEngine, pGameObject, std::move(m_pSerializer))
+        );
 
         Super::EndGizmo();
     }
@@ -247,31 +256,37 @@ namespace SR_CORE_GUI_NS {
 
         if (pGameObject->GetTransform()->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D) {
             if (SR_MATH_NS::IsMaskIncludedSubMask(GetOperation(), SR_GRAPH_UI_NS::GizmoOperation::Rotate)) {
-                SetOperation(GetOperation()
-                    & ~SR_GRAPH_UI_NS::GizmoOperation::X
-                    & ~SR_GRAPH_UI_NS::GizmoOperation::Y
-                    & ~SR_GRAPH_UI_NS::GizmoOperation::Center
-                    | SR_GRAPH_UI_NS::GizmoOperation::Rotate2D
+                SetOperation(
+                    GetOperation() & ~SR_GRAPH_UI_NS::GizmoOperation::X & ~SR_GRAPH_UI_NS::GizmoOperation::Y &
+                        ~SR_GRAPH_UI_NS::GizmoOperation::Center |
+                    SR_GRAPH_UI_NS::GizmoOperation::Rotate2D
                 );
 
-                SRAssert2(SR_MATH_NS::IsMaskIncludedSubMask(GetOperation(), SR_GRAPH_UI_NS::GizmoOperation::Rotate), "Rotate operation is not set");
-                SRAssert2(SR_MATH_NS::IsMaskIncludedSubMask(GetOperation(), SR_GRAPH_UI_NS::GizmoOperation::Rotate2D), "Rotate2D operation is not set");
-                SRAssert2(SR_MATH_NS::IsMaskIncludedSubMask(GetOperation(), SR_GRAPH_UI_NS::GizmoOperation::Z), "Z operation is not set");
+                SRAssert2(
+                    SR_MATH_NS::IsMaskIncludedSubMask(GetOperation(), SR_GRAPH_UI_NS::GizmoOperation::Rotate),
+                    "Rotate operation is not set"
+                );
+                SRAssert2(
+                    SR_MATH_NS::IsMaskIncludedSubMask(GetOperation(), SR_GRAPH_UI_NS::GizmoOperation::Rotate2D),
+                    "Rotate2D operation is not set"
+                );
+                SRAssert2(
+                    SR_MATH_NS::IsMaskIncludedSubMask(GetOperation(), SR_GRAPH_UI_NS::GizmoOperation::Z),
+                    "Z operation is not set"
+                );
+            } else {
+                SetOperation(
+                    GetOperation() & ~SR_GRAPH_UI_NS::GizmoOperation::Z | SR_GRAPH_UI_NS::GizmoOperation::Space2D
+                );
             }
-            else {
-                SetOperation(GetOperation() & ~SR_GRAPH_UI_NS::GizmoOperation::Z | SR_GRAPH_UI_NS::GizmoOperation::Space2D);
-            }
-        }
-        else {
-            SetOperation(GetOperation()
-                & ~SR_GRAPH_UI_NS::GizmoOperation::Space2D
-                | SR_GRAPH_UI_NS::GizmoOperation::Z
-                | SR_GRAPH_UI_NS::GizmoOperation::X
-                | SR_GRAPH_UI_NS::GizmoOperation::Y
-                | SR_GRAPH_UI_NS::GizmoOperation::Center
+        } else {
+            SetOperation(
+                GetOperation() & ~SR_GRAPH_UI_NS::GizmoOperation::Space2D | SR_GRAPH_UI_NS::GizmoOperation::Z |
+                SR_GRAPH_UI_NS::GizmoOperation::X | SR_GRAPH_UI_NS::GizmoOperation::Y |
+                SR_GRAPH_UI_NS::GizmoOperation::Center
             );
         }
 
         Super::PrepareGizmo();
     }
-}
+} // namespace SR_CORE_GUI_NS

@@ -7,40 +7,39 @@
 
 void EvoScript::Method::MathArguments() {
     for (uint32_t i = 0; i < m_args.size(); i++) {
-        m_stringArgs  += m_args[i];
+        m_stringArgs += m_args[i];
         m_argNames += EvoScript::Tools::BackReadTo(m_args[i], ' ');
         if (i + 1 != m_args.size()) {
-            m_stringArgs  += ", ";
+            m_stringArgs += ", ";
             m_argNames += ", ";
         }
     }
 }
 
-std::string EvoScript::Method::ToString() const  {
+std::string EvoScript::Method::ToString() const {
     std::string result;
     switch (m_type) {
-        case Normal:
-            result += m_return + " " + m_name + "(" + m_stringArgs + ") {\n";
-            break;
-        case Virtual:
-            result += "virtual " + m_return + " " + m_name + "(" + m_stringArgs + ")";
-            break;
-        case Override:
-            result += m_return + " " + m_name + "(" + m_stringArgs + ") override {\n";
-            break;
-        case Static:
-            result += "static " + m_return + " " + m_name + "(" + m_stringArgs + ") {\n";
-            break;
-        case VirtualOverride:
-            result += "virtual " + m_return + " " + m_name + "(" + m_stringArgs + ") override {\n";
-            break;
+    case Normal:
+        result += m_return + " " + m_name + "(" + m_stringArgs + ") {\n";
+        break;
+    case Virtual:
+        result += "virtual " + m_return + " " + m_name + "(" + m_stringArgs + ")";
+        break;
+    case Override:
+        result += m_return + " " + m_name + "(" + m_stringArgs + ") override {\n";
+        break;
+    case Static:
+        result += "static " + m_return + " " + m_name + "(" + m_stringArgs + ") {\n";
+        break;
+    case VirtualOverride:
+        result += "virtual " + m_return + " " + m_name + "(" + m_stringArgs + ") override {\n";
+        break;
     }
 
     if (m_type == Virtual) {
         if (m_return == "void") {
             result += " { }";
-        }
-        else {
+        } else {
             result += " = 0;";
         }
 
@@ -52,8 +51,7 @@ std::string EvoScript::Method::ToString() const  {
             result += "\treturn g_" + m_class + m_name + "FnPtr();\n";
         else
             result += "\treturn g_" + m_class + m_name + "FnPtr(" + m_argNames + ");\n";
-    }
-    else {
+    } else {
         if (m_argNames.empty())
             result += "\treturn g_" + m_class + m_name + "FnPtr(this);\n";
         else
@@ -86,18 +84,18 @@ std::string EvoScript::Method::GetSetter() const {
 
     if (m_type == Static) {
         if (m_stringArgs.empty())
-            return "EXTERN void " + _typedef + "Setter(const std::function<" + m_return +
-                   +"()>& fnPtr) { \n\tg_" + _typedef + " = fnPtr; \n}\n";
+            return "EXTERN void " + _typedef + "Setter(const std::function<" + m_return + +"()>& fnPtr) { \n\tg_" +
+                   _typedef + " = fnPtr; \n}\n";
         else
-            return "EXTERN void " + _typedef + "Setter(const std::function<" + m_return +
-                   +"(" + m_stringArgs + ")>& fnPtr) { \n\tg_" + _typedef + " = fnPtr; \n}\n";
+            return "EXTERN void " + _typedef + "Setter(const std::function<" + m_return + +"(" + m_stringArgs +
+                   ")>& fnPtr) { \n\tg_" + _typedef + " = fnPtr; \n}\n";
     } else {
         if (m_stringArgs.empty())
-            return "EXTERN void " + _typedef + "Setter(const std::function<" + m_return +
-                   +"(" + m_class + "*)>& fnPtr) { \n\tg_" + _typedef + " = fnPtr; \n}\n";
+            return "EXTERN void " + _typedef + "Setter(const std::function<" + m_return + +"(" + m_class +
+                   "*)>& fnPtr) { \n\tg_" + _typedef + " = fnPtr; \n}\n";
         else
-            return "EXTERN void " + _typedef + "Setter(const std::function<" + m_return +
-                   +"(" + m_class + "*, " + m_stringArgs + ")>& fnPtr) { \n\tg_" + _typedef + " = fnPtr; \n}\n";
+            return "EXTERN void " + _typedef + "Setter(const std::function<" + m_return + +"(" + m_class + "*, " +
+                   m_stringArgs + ")>& fnPtr) { \n\tg_" + _typedef + " = fnPtr; \n}\n";
     }
 }
 

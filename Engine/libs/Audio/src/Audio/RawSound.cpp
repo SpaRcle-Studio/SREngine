@@ -2,19 +2,17 @@
 // Created by Monika on 06.07.2022.
 //
 
-#include <Audio/RawSound.h>
-#include <Utils/Resources/ResourceManager.h>
-#include <Utils/FileSystem/FileSystem.h>
 #include <Audio/Decoders/IWaveDataProvider.h>
+#include <Audio/RawSound.h>
+#include <Utils/FileSystem/FileSystem.h>
+#include <Utils/Resources/ResourceManager.h>
 
 namespace SR_AUDIO_NS {
-    RawSound::RawSound()
-        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(RawSound))
-    { }
+    RawSound::RawSound() : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(RawSound)) {}
 
-    RawSound::~RawSound() { }
+    RawSound::~RawSound() {}
 
-    RawSound *RawSound::Load(const SR_UTILS_NS::Path& rawPath) {
+    RawSound* RawSound::Load(const SR_UTILS_NS::Path& rawPath) {
         auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
         SR_UTILS_NS::Path&& path = rawPath.RemoveSubPath(resourceManager.GetResPath());
@@ -134,4 +132,4 @@ namespace SR_AUDIO_NS {
 
         return 0;
     }
-}
+} // namespace SR_AUDIO_NS

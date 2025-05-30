@@ -8,9 +8,7 @@
 #include <Utils/Events/Broadcaster.h>
 
 namespace SR_SCRIPTING_NS {
-    void CppBehaviourInstance::OnBehaviourUnloaded(ManagerPasskey) {
-        m_pBehaviour.AutoFree();
-    }
+    void CppBehaviourInstance::OnBehaviourUnloaded(ManagerPasskey) { m_pBehaviour.AutoFree(); }
 
     void CppBehaviourInstance::SetSceneObject(const SR_UTILS_NS::SceneObject::Ptr& pSceneObject) {
         if (m_pBehaviour) {
@@ -23,16 +21,18 @@ namespace SR_SCRIPTING_NS {
         }
     }
 
-    bool CppBehaviourInstance::ExecuteInEditMode() const {
-        return m_pBehaviour && m_pBehaviour->ExecuteInEditMode();
-    }
+    bool CppBehaviourInstance::ExecuteInEditMode() const { return m_pBehaviour && m_pBehaviour->ExecuteInEditMode(); }
 
     ModuleManager::~ModuleManager() {
         SRAssert2(m_behaviourInstances.empty(), "ModuleManager::~ModuleManager() : behaviours not unloaded!");
 
         for (auto&& module : m_modules) {
             if (!UnloadModule(module, false)) {
-                SRHalt("ModuleManager::~ModuleManager() : failed to unload module!\n\tPath: " + module.GetPath().ToString());
+                SRHalt(
+                    "ModuleManager::~ModuleManager() : failed to unload "
+                    "module!\n\tPath: " +
+                    module.GetPath().ToString()
+                );
             }
         }
         m_modules.clear();
@@ -46,9 +46,7 @@ namespace SR_SCRIPTING_NS {
 
         const SR_UTILS_NS::StringAtom moduleName = path.GetBaseName();
 
-        auto&& pIt = std::ranges::find_if(m_modules, [&path](const auto& module) {
-            return module.GetPath() == path;
-        });
+        auto&& pIt = std::ranges::find_if(m_modules, [&path](const auto& module) { return module.GetPath() == path; });
 
         if (pIt == m_modules.end()) {
             ScriptModule module;
@@ -61,15 +59,22 @@ namespace SR_SCRIPTING_NS {
         ScriptModule& module = *pIt;
 
         if (!UnloadModule(module, true)) {
-            SR_ERROR("ModuleManager::ReloadModule() : failed to unload module!\n\tPath: " + path.ToString());
+            SR_ERROR(
+                "ModuleManager::ReloadModule() : failed to unload "
+                "module!\n\tPath: " +
+                path.ToString()
+            );
             return false;
         }
 
         if (auto&& pLibraryHandle = LoadModule(path)) {
             module.SetModuleHandle(pLibraryHandle);
-        }
-        else {
-            SR_ERROR("ModuleManager::ReloadModule() : failed to load module!\n\tPath: " + path.ToString());
+        } else {
+            SR_ERROR(
+                "ModuleManager::ReloadModule() : failed to load "
+                "module!\n\tPath: " +
+                path.ToString()
+            );
             return false;
         }
 
@@ -93,34 +98,56 @@ namespace SR_SCRIPTING_NS {
         SR_TRACY_ZONE;
 
         const SR_UTILS_NS::StringAtom moduleName = modulePath.GetBaseName();
-        auto&& runtimePath = m_cachePath.Concat("Scripts/Runtime/Modules/{}.{}"_format(moduleName, ScriptSystem::GetDynamicLibraryExtension()));
+        auto&& runtimePath = m_cachePath.Concat(
+            "Scripts/Runtime/Modules/{}.{}"_format(moduleName, ScriptSystem::GetDynamicLibraryExtension())
+        );
         auto&& pdbRuntimePath = m_cachePath.Concat("Scripts/Runtime/Modules/{}.pdb"_format(moduleName));
 
         if (runtimePath.IsFile() && !SR_PLATFORM_NS::Delete(runtimePath)) {
-            SR_ERROR("ModuleManager::LoadModule() : failed to delete module!\n\tPath: " + runtimePath.ToString());
+            SR_ERROR(
+                "ModuleManager::LoadModule() : failed to delete "
+                "module!\n\tPath: " +
+                runtimePath.ToString()
+            );
             return nullptr;
         }
 
         if (pdbRuntimePath.IsFile() && !SR_PLATFORM_NS::Delete(pdbRuntimePath)) {
-            SR_ERROR("ModuleManager::LoadModule() : failed to delete module pdb!\n\tPath: " + pdbRuntimePath.ToString());
+            SR_ERROR(
+                "ModuleManager::LoadModule() : failed to delete module "
+                "pdb!\n\tPath: " +
+                pdbRuntimePath.ToString()
+            );
             return nullptr;
         }
 
         if (!runtimePath.Create()) {
-            SR_ERROR("ModuleManager::LoadModule() : failed to create module path!\n\tPath: " + modulePath.ToString());
+            SR_ERROR(
+                "ModuleManager::LoadModule() : failed to create module "
+                "path!\n\tPath: " +
+                modulePath.ToString()
+            );
             return nullptr;
         }
 
         auto&& sourcePdbPath = modulePath.GetFolder().Concat("{}.pdb"_format(moduleName));
         if (SR_PLATFORM_NS::IsExists(sourcePdbPath)) {
             if (!SR_PLATFORM_NS::Copy(sourcePdbPath, pdbRuntimePath)) {
-                SR_ERROR("ModuleManager::LoadModule() : failed to copy module pdb!\n\tPath: " + sourcePdbPath.ToString());
+                SR_ERROR(
+                    "ModuleManager::LoadModule() : failed to copy module "
+                    "pdb!\n\tPath: " +
+                    sourcePdbPath.ToString()
+                );
                 return nullptr;
             }
         }
 
         if (!SR_PLATFORM_NS::Copy(modulePath, runtimePath)) {
-            SR_ERROR("ModuleManager::LoadModule() : failed to copy module!\n\tPath: " + modulePath.ToString());
+            SR_ERROR(
+                "ModuleManager::LoadModule() : failed to copy "
+                "module!\n\tPath: " +
+                modulePath.ToString()
+            );
             return nullptr;
         }
 
@@ -131,7 +158,11 @@ namespace SR_SCRIPTING_NS {
 
         auto&& pLibraryHandle = SR_PLATFORM_NS::LoadLibraryModule(runtimePath);
         if (!pLibraryHandle) {
-            SR_ERROR("ModuleManager::LoadModule() : failed to load module!\n\tPath: " + runtimePath.ToString());
+            SR_ERROR(
+                "ModuleManager::LoadModule() : failed to load "
+                "module!\n\tPath: " +
+                runtimePath.ToString()
+            );
             return nullptr;
         }
 
@@ -168,8 +199,7 @@ namespace SR_SCRIPTING_NS {
             FreeBehaviourInternalInstance(pInstance);
             delete *pIt;
             m_behaviourInstances.erase(pIt);
-        }
-        else {
+        } else {
             SRHalt("ModuleManager::FreeBehaviourInstance() : instance not found!");
         }
     }
@@ -197,10 +227,13 @@ namespace SR_SCRIPTING_NS {
         }
 
         if (!SR_PLATFORM_NS::UnloadLibraryModule(pLibraryHandle)) {
-            SRHalt("ModuleManager::UnloadModule() : failed to unload module! Something went wrong...\n\tPath: " + module.GetPath().ToString());
+            SRHalt(
+                "ModuleManager::UnloadModule() : failed to unload module! "
+                "Something went wrong...\n\tPath: " +
+                module.GetPath().ToString()
+            );
             return false;
-        }
-        else {
+        } else {
             SR_LOG("ModuleManager::UnloadModule() : module \"" + module.GetPath().ToString() + "\" unloaded.");
         }
 
@@ -216,7 +249,8 @@ namespace SR_SCRIPTING_NS {
 
     bool ModuleManager::AllocateBehaviourInternalInstance(CppBehaviourInstance* pInstance) {
         if (pInstance->IsValid()) {
-            SRHalt("ModuleManager::AllocateBehaviourInternalInstance() : instance already allocated!");
+            SRHalt("ModuleManager::AllocateBehaviourInternalInstance() : "
+                   "instance already allocated!");
             return false;
         }
 
@@ -263,4 +297,4 @@ namespace SR_SCRIPTING_NS {
 
         SR_UTILS_NS::Broadcaster::Instance().Broadcast(SR_UTILS_NS::Events::EVENT_ON_SCRIPT_MODULE_RELOADED_ID);
     }
-}
+} // namespace SR_SCRIPTING_NS

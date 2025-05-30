@@ -5,32 +5,31 @@
 #include <Engine/GUI/VisualScriptEditor.h>
 #include <Engine/Parsers/BlueprintParser.h>
 
-#include <Utils/Resources/ResourceManager.h>
 #include <Utils/FileSystem/FileSystem.h>
+#include <Utils/Resources/ResourceManager.h>
 #include <Utils/Resources/Xml.h>
 
-#include <Graphics/GUI/NodeManager.h>
 #include <Graphics/GUI/Link.h>
 #include <Graphics/GUI/Node.h>
+#include <Graphics/GUI/NodeManager.h>
 #include <Graphics/GUI/Pin.h>
 
-SR_CORE_GUI_NS::VisualScriptEditor::VisualScriptEditor()
-    : SR_GRAPH_GUI_NS::Widget("Evo Script Editor")
-{
+SR_CORE_GUI_NS::VisualScriptEditor::VisualScriptEditor() : SR_GRAPH_GUI_NS::Widget("Evo Script Editor") {
     /*auto config = new ax::NodeEditor::Config();
-    static std::string settingsFile = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("/NodeEditor.json");
+    static std::string settingsFile =
+    SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("/NodeEditor.json");
     config->SettingsFile = settingsFile.c_str();
 
     m_editor = ax::NodeEditor::CreateEditor(config);
     */
 
-    //LoadConfig();
+    // LoadConfig();
 
-    //AddNode(CreateBlueprint("Branch"));
+    // AddNode(CreateBlueprint("Branch"));
 
-    //AddNode(CreateBlueprint("X"));
+    // AddNode(CreateBlueprint("X"));
 
-    //AddNode(CreateBlueprint("OnStart"));
+    // AddNode(CreateBlueprint("OnStart"));
 
     /*AddNode(Node("Node A")
             .AddInput(Pin("Pin AAAA", PinType::Flow))
@@ -47,10 +46,10 @@ SR_CORE_GUI_NS::VisualScriptEditor::VisualScriptEditor()
 }
 
 SR_CORE_GUI_NS::VisualScriptEditor::~VisualScriptEditor() {
-    //if (m_editor) {
-    //    ax::NodeEditor::DestroyEditor(m_editor);
-    //    m_editor = nullptr;
-    //}
+    // if (m_editor) {
+    //     ax::NodeEditor::DestroyEditor(m_editor);
+    //     m_editor = nullptr;
+    // }
 
     for (auto& [id, ptr] : m_links)
         delete ptr;
@@ -77,26 +76,27 @@ void SR_CORE_GUI_NS::VisualScriptEditor::AddNode(SR_GRAPH_GUI_NS::Node* node) {
 }
 
 void SR_CORE_GUI_NS::VisualScriptEditor::Draw() {
-  //  ax::NodeEditor::SetCurrentEditor(m_editor);
+    //  ax::NodeEditor::SetCurrentEditor(m_editor);
 
-    //ax::NodeEditor::Begin("Evo Visual Script");
+    // ax::NodeEditor::Begin("Evo Visual Script");
 
-   //for (const auto& [id, node] : m_nodes)
-   //    node->Draw();
+    // for (const auto& [id, node] : m_nodes)
+    //     node->Draw();
 
-   //for (const auto& [id, link] : m_links)
-   //    link->Draw();
+    // for (const auto& [id, link] : m_links)
+    //     link->Draw();
 
-   //using namespace Framework::Graphics::GUI;
+    // using namespace Framework::Graphics::GUI;
 
     /*if (ax::NodeEditor::BeginCreate()) {
         ax::NodeEditor::PinId inputPinId, outputPinId;
-        if (ax::NodeEditor::QueryNewLink(&inputPinId, &outputPinId) && (inputPinId && outputPinId)) {
-            auto&& startPin = NodeManager::Instance().GetUnique<Pin>(inputPinId.Get());
-            auto&& endPin = NodeManager::Instance().GetUnique<Pin>(outputPinId.Get());
+        if (ax::NodeEditor::QueryNewLink(&inputPinId, &outputPinId) &&
+    (inputPinId && outputPinId)) { auto&& startPin =
+    NodeManager::Instance().GetUnique<Pin>(inputPinId.Get()); auto&& endPin =
+    NodeManager::Instance().GetUnique<Pin>(outputPinId.Get());
 
-            if (ValidateLink(startPin, endPin) && ax::NodeEditor::AcceptNewItem()) {
-                AddLink(new Link(startPin, endPin));
+            if (ValidateLink(startPin, endPin) &&
+    ax::NodeEditor::AcceptNewItem()) { AddLink(new Link(startPin, endPin));
             }
         }
     }
@@ -119,25 +119,31 @@ void SR_CORE_GUI_NS::VisualScriptEditor::LoadConfig() {
 
     if (Helper::FileSystem::FileExists(strPath)) {
         auto xml = SR_XML_NS::Document::Load(strPath);
-        for (const SR_XML_NS::Node& blueprintPath : xml.Root().GetNode("Configs").GetNode("BlueprintRefs").GetNodes()) {
-            auto nodes = Core::BlueprintParser::Instance().Parse(resManager.GetResPath().Concat(blueprintPath.GetAttribute("Value").ToStringAtom()));
+        for (const SR_XML_NS::Node& blueprintPath :
+    xml.Root().GetNode("Configs").GetNode("BlueprintRefs").GetNodes()) { auto
+    nodes =
+    Core::BlueprintParser::Instance().Parse(resManager.GetResPath().Concat(blueprintPath.GetAttribute("Value").ToStringAtom()));
             for (auto&& node : nodes) {
                 RegisterBlueprint(node);
             }
         }
     }
     else {
-        SR_ERROR("VisualScriptEditor::LoadConfig() : config file not found! \n\tPath: " + strPath);
+        SR_ERROR("VisualScriptEditor::LoadConfig() : config file not found!
+    \n\tPath: " + strPath);
     }*/
 }
 
-// SR_GRAPH_NS::GUI::Node* VisualScriptEditor::CreateBlueprint(const std::string &id) const {
-//     SRAssert2(false, Helper::Format("Blueprint \"%s\" is not found!", id.c_str()));
+// SR_GRAPH_NS::GUI::Node* VisualScriptEditor::CreateBlueprint(const std::string
+// &id) const {
+//     SRAssert2(false, Helper::Format("Blueprint \"%s\" is not found!",
+//     id.c_str()));
 //
 //     return nullptr;
 // }
 //
-// bool VisualScriptEditor::ValidateLink(SR_GRAPH_NS::GUI::Pin* start, SR_GRAPH_NS::GUI::Pin* end) const {
+// bool VisualScriptEditor::ValidateLink(SR_GRAPH_NS::GUI::Pin* start,
+// SR_GRAPH_NS::GUI::Pin* end) const {
 //     if (!start || !end || start == end)
 //         return false;
 //
@@ -150,15 +156,14 @@ void SR_CORE_GUI_NS::VisualScriptEditor::LoadConfig() {
 //     return start->GetType() == end->GetType();
 // }
 //
-// void VisualScriptEditor::RegisterBlueprint(SR_GRAPH_NS::GUI::Node* blueprint) {
+// void VisualScriptEditor::RegisterBlueprint(SR_GRAPH_NS::GUI::Node* blueprint)
+// {
 //     const std::string name = blueprint->GetName();
 //
 //     if (m_blueprints.count(name)) {
-//         SR_ERROR(Helper::Format("VisualScriptEditor::RegisterBlueprint() : blueprint \"%s\" already registered!"));
-//         return;
+//         SR_ERROR(Helper::Format("VisualScriptEditor::RegisterBlueprint() :
+//         blueprint \"%s\" already registered!")); return;
 //     }
 //
 //     m_blueprints.insert(std::make_pair(name, blueprint));
 // }
-
-

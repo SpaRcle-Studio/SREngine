@@ -8,9 +8,7 @@
 #include <Utils/Common/StoreUtils.h>
 
 namespace SR_CORE_GUI_NS {
-    EngineSettings::EngineSettings()
-        : SR_GRAPH_NS::GUI::Widget("Settings")
-    { }
+    EngineSettings::EngineSettings() : SR_GRAPH_NS::GUI::Widget("Settings") {}
 
     void EngineSettings::Draw() {
         DrawMultiSampling();
@@ -23,29 +21,19 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EngineSettings::DrawMultiSampling() {
-        static const char* SR_SAMPLE_COUNT_NAME_LIST = {
-                "Sample 1\0"
-                "Sample 2\0"
-                "Sample 4\0"
-                "Sample 8\0"
-                "Sample 16\0"
-                "Sample 32\0"
-                "Sample 64\0"
-        };
+        static const char* SR_SAMPLE_COUNT_NAME_LIST = {"Sample 1\0"
+                                                        "Sample 2\0"
+                                                        "Sample 4\0"
+                                                        "Sample 8\0"
+                                                        "Sample 16\0"
+                                                        "Sample 32\0"
+                                                        "Sample 64\0"};
 
         static std::map<uint8_t, int32_t> SR_SAMPLE_COUNT_KEY_LIST = {
-                { 1, 0 },
-                { 2, 1 },
-                { 4, 2 },
-                { 8, 3 },
-                { 16, 4 },
-                { 32, 5 },
-                { 64, 6 },
+            {1, 0}, {2, 1}, {4, 2}, {8, 3}, {16, 4}, {32, 5}, {64, 6},
         };
 
-        static std::vector<uint8_t> SR_SAMPLE_COUNT_VALUE_LIST = {
-                1, 2, 4, 8, 16, 32, 64
-        };
+        static std::vector<uint8_t> SR_SAMPLE_COUNT_VALUE_LIST = {1, 2, 4, 8, 16, 32, 64};
 
         auto&& pPipeline = GetContext()->GetPipeline();
         int32_t currentItem = SR_SAMPLE_COUNT_KEY_LIST.at(pPipeline->GetSamplesCount());
@@ -62,9 +50,10 @@ namespace SR_CORE_GUI_NS {
 
     void EngineSettings::DrawLighting() {
         SR_MATH_NS::FVector3 position = GetRenderScene()->GetLightSystem()->GetDirectionalLightPosition();
-        //if (SR_GRAPH_NS::GUI::DrawVec3Control("Directional light position", position)) {
-        //    GetRenderScene()->GetLightSystem()->SetDirectionalLightPosition(position);
-        //}
+        // if (SR_GRAPH_NS::GUI::DrawVec3Control("Directional light position",
+        // position)) {
+        //     GetRenderScene()->GetLightSystem()->SetDirectionalLightPosition(position);
+        // }
     }
 
     void EngineSettings::DrawVSync() {
@@ -85,11 +74,16 @@ namespace SR_CORE_GUI_NS {
         bool showEntityId = SR_UTILS_NS::StoreUtils::User::GetBool("ShowEntityId", false);
         bool showHiddenEntities = SR_UTILS_NS::StoreUtils::User::GetBool("ShowHiddenEntities", false);
 
-        if (SR_GRAPH_GUI_NS::Immediate::InputFloat("Font size", &fontSize, 1.0f, 1.0f, "%.1f", SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue)) {
+        if (SR_GRAPH_GUI_NS::Immediate::InputFloat(
+                "Font size", &fontSize, 1.0f, 1.0f, "%.1f", SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue
+            )) {
             SR_UTILS_NS::StoreUtils::User::SetFloat("ImGuiFontSize", fontSize);
         }
 
-        if (SR_GRAPH_GUI_NS::Immediate::InputFloat("Icon font size", &iconFontSize, 1.0f, 1.0f, "%.1f", SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue)) {
+        if (SR_GRAPH_GUI_NS::Immediate::InputFloat(
+                "Icon font size", &iconFontSize, 1.0f, 1.0f, "%.1f",
+                SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue
+            )) {
             SR_UTILS_NS::StoreUtils::User::SetFloat("ImGuiIconFontSize", iconFontSize);
         }
 
@@ -111,4 +105,4 @@ namespace SR_CORE_GUI_NS {
             SR_UTILS_NS::StoreUtils::Storage::Instance().Load();
         }
     }
-}
+} // namespace SR_CORE_GUI_NS

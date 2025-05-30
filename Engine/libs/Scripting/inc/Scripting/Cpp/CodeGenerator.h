@@ -42,11 +42,10 @@ namespace SR_SCRIPTING_NS {
     class CppCodeGenerator : public SR_HTYPES_NS::SharedPtr<CppCodeGenerator> {
         using Super = SR_HTYPES_NS::SharedPtr<CppCodeGenerator>;
         constexpr static uint32_t MAX_INCLUDE_DEPTH = 64;
+
     public:
         explicit CppCodeGenerator(ScriptSystem* pScriptSystem)
-            : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
-            , m_pScriptSystem(pScriptSystem)
-        { }
+            : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic), m_pScriptSystem(pScriptSystem) {}
 
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<CppCodeGenerator>;
@@ -74,7 +73,8 @@ namespace SR_SCRIPTING_NS {
         void OnModuleChanged(SR_UTILS_NS::StringAtom moduleName);
         void InitModuleSources(CppCodegenModule& module);
 
-        SR_NODISCARD std::vector<SR_UTILS_NS::StringAtom> GetDependenciesRecursive(SR_UTILS_NS::StringAtom moduleName) const;
+        SR_NODISCARD std::vector<SR_UTILS_NS::StringAtom> GetDependenciesRecursive(SR_UTILS_NS::StringAtom moduleName
+        ) const;
 
     private:
         ScriptSystem* m_pScriptSystem = nullptr;
@@ -83,8 +83,7 @@ namespace SR_SCRIPTING_NS {
         SR_UTILS_NS::Path m_resourcesFolder;
         SR_UTILS_NS::Path m_cacheFolder;
         SR_UTILS_NS::Path m_codegenExecutablePath;
-
     };
-}
+} // namespace SR_SCRIPTING_NS
 
-#endif //SR_ENGINE_SCRIPTING_CODE_GENERATOR_H
+#endif // SR_ENGINE_SCRIPTING_CODE_GENERATOR_H

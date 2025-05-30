@@ -2,11 +2,11 @@
 // Created by Monika on 07.07.2022.
 //
 
-#include <Audio/SoundManager.h>
+#include <Audio/SoundContext.h>
 #include <Audio/SoundData.h>
 #include <Audio/SoundDevice.h>
-#include <Audio/SoundContext.h>
 #include <Audio/SoundListener.h>
+#include <Audio/SoundManager.h>
 
 namespace SR_AUDIO_NS {
     void SoundManager::OnSingletonDestroy() {
@@ -67,7 +67,8 @@ namespace SR_AUDIO_NS {
 
             auto&& pContext = pPlayData->pData->pContext;
             if (!pContext) {
-                SR_ERROR("SoundManager::GetSourceParams() : sound context is nullptr!");
+                SR_ERROR("SoundManager::GetSourceParams() : sound context is "
+                         "nullptr!");
                 return false;
             }
 
@@ -109,20 +110,18 @@ namespace SR_AUDIO_NS {
 
         m_thread->Synchronize();
 
-        for (auto pIt = m_playStack.begin(); pIt != m_playStack.end(); ) {
+        for (auto pIt = m_playStack.begin(); pIt != m_playStack.end();) {
             auto&& pPlayData = *pIt;
 
             if (!PrepareData(pPlayData) || !PlayInternal(pPlayData)) {
                 DestroyPlayData(pPlayData);
                 m_playing.erase(pPlayData);
                 pIt = m_playStack.erase(pIt);
-            }
-            else if (pPlayData->pData->pContext->IsStopped(pPlayData->pSource)) {
+            } else if (pPlayData->pData->pContext->IsStopped(pPlayData->pSource)) {
                 DestroyPlayData(pPlayData);
                 m_playing.erase(pPlayData);
                 pIt = m_playStack.erase(pIt);
-            }
-            else {
+            } else {
                 ++pIt;
             }
         }
@@ -139,7 +138,8 @@ namespace SR_AUDIO_NS {
         auto&& pSound = pPlayData->pData->pSound;
 
         if (!pContext) {
-            SR_ERROR("SoundManager::PrepareData() : failed to allocate sound context!");
+            SR_ERROR("SoundManager::PrepareData() : failed to allocate sound "
+                     "context!");
             return false;
         }
 
@@ -249,7 +249,7 @@ namespace SR_AUDIO_NS {
         return false;
     }
 
-    SoundData* SoundManager::Register(Sound *pSound) {
+    SoundData* SoundManager::Register(Sound* pSound) {
         SR_TRACY_ZONE;
         SR_LOCK_GUARD;
 
@@ -307,7 +307,9 @@ namespace SR_AUDIO_NS {
         });
     }
 
-    void SoundManager::SetListenerTransform(SoundListener* pListenerContext, const SR_MATH_NS::FVector3& position, const SR_MATH_NS::Quaternion& quaternion) {
+    void SoundManager::SetListenerTransform(
+        SoundListener* pListenerContext, const SR_MATH_NS::FVector3& position, const SR_MATH_NS::Quaternion& quaternion
+    ) {
         m_thread->Execute([pListenerContext, position, quaternion]() {
             pListenerContext->Update(position, quaternion);
             return true;
@@ -373,7 +375,6 @@ namespace SR_AUDIO_NS {
         return false;
     }
 
-
     SoundContext* SoundManager::GetSoundContext(const PlayParams& params) noexcept {
         SR_TRACY_ZONE;
         SR_LOCK_GUARD;
@@ -393,26 +394,31 @@ namespace SR_AUDIO_NS {
                     return pDeviceIt->second;
                 }
             }
-        }
-        else {
-            SR_INFO("SoundManager::GetSoundContext() : initializing \"" + SR_UTILS_NS::EnumReflector::ToStringAtom(library).ToStringRef() + "\" library...");
+        } else {
+            SR_INFO(
+                "SoundManager::GetSoundContext() : initializing \"" +
+                SR_UTILS_NS::EnumReflector::ToStringAtom(library).ToStringRef() + "\" library..."
+            );
         }
 
         auto&& pDevice = SoundDevice::Allocate(library, device);
         if (!pDevice) {
-            SR_ERROR("SoundManager::GetSoundContext() : failed to allocate sound device!");
+            SR_ERROR("SoundManager::GetSoundContext() : failed to allocate "
+                     "sound device!");
             return nullptr;
         }
 
         if (!pDevice->Init()) {
-            SR_ERROR("SoundManager::GetSoundContext() : failed to initialize sound device!");
+            SR_ERROR("SoundManager::GetSoundContext() : failed to initialize "
+                     "sound device!");
             delete pDevice;
             return nullptr;
         }
 
         auto&& pContext = SoundContext::Allocate(pDevice);
         if (!pContext->Init()) {
-            SR_ERROR("SoundManager::GetSoundContext() : failed to initialize sound context!");
+            SR_ERROR("SoundManager::GetSoundContext() : failed to initialize "
+                     "sound context!");
             delete pContext;
             return nullptr;
         }
@@ -494,14 +500,13 @@ namespace SR_AUDIO_NS {
         SR_TRACY_ZONE;
 
         m_thread->Execute([this, pHandle]() {
-            for (auto pIt = m_playStack.begin(); pIt != m_playStack.end(); ) {
+            for (auto pIt = m_playStack.begin(); pIt != m_playStack.end();) {
                 if (pHandle == *pIt) {
                     DestroyPlayData(*pIt);
                     m_playing.erase(*pIt);
                     m_playStack.erase(pIt);
                     break;
-                }
-                else {
+                } else {
                     ++pIt;
                 }
             }
@@ -522,8 +527,7 @@ namespace SR_AUDIO_NS {
             if (audioLibrary == AudioLibrary::Unknown) {
                 if (m_contexts.empty()) {
                     audioLibrary = GetRelevantLibrary();
-                }
-                else {
+                } else {
                     audioLibrary = m_contexts.begin()->first;
                 }
             }
@@ -532,13 +536,15 @@ namespace SR_AUDIO_NS {
             params.library = audioLibrary;
             auto&& pSoundContext = GetSoundContext(params);
             if (!pSoundContext) {
-                SR_ERROR("SoundManager::CreateListenerContext() : failed to create sound context!");
+                SR_ERROR("SoundManager::CreateListenerContext() : failed to "
+                         "create sound context!");
                 return false;
             }
 
             pListener = pSoundContext->AllocateListener();
             if (!pListener) {
-                SR_ERROR("SoundManager::CreateListenerContext() : failed to allocate listener!");
+                SR_ERROR("SoundManager::CreateListenerContext() : failed to "
+                         "allocate listener!");
                 return false;
             }
 
@@ -557,12 +563,14 @@ namespace SR_AUDIO_NS {
                 for (auto&& [deviceName, pSoundContext] : deviceContexts) {
                     if (pSoundContext->FreeListener(pListener)) {
                         if (m_listeners.erase(pListener) == 0) {
-                            SR_ERROR("SoundManager::DestroyListenerContext() : failed to erase listener!");
+                            SR_ERROR("SoundManager::DestroyListenerContext() : "
+                                     "failed to erase listener!");
                             return false;
                         }
                         return true;
                     }
-                    SR_ERROR("SoundManager::DestroyListenerContext() : failed to free listener!");
+                    SR_ERROR("SoundManager::DestroyListenerContext() : failed "
+                             "to free listener!");
                     return false;
                 }
             }
@@ -570,4 +578,4 @@ namespace SR_AUDIO_NS {
             return false;
         });
     }
-}
+} // namespace SR_AUDIO_NS

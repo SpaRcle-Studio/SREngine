@@ -11,10 +11,10 @@ namespace SR_CORE_NS {
     class SubmitState : public SR_UTILS_NS::ThreadWorkerStateBase {
         SR_REGISTER_THREAD_STATE(SubmitState)
         using Super = SR_UTILS_NS::ThreadWorkerStateBase;
+
     public:
         SR_UTILS_NS::ThreadWorkerResult ExecuteImpl() override;
-
     };
-}
+} // namespace SR_CORE_NS
 
-#endif //SR_ENGINE_CORE_SUBMIT_STATE_H
+#endif // SR_ENGINE_CORE_SUBMIT_STATE_H

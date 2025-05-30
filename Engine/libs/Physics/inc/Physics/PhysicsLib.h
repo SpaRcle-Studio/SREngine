@@ -25,6 +25,7 @@ namespace SR_PHYSICS_NS {
         using Super = SR_UTILS_NS::Singleton<PhysicsLibrary>;
         using Space = SR_UTILS_NS::Measurement;
         using LibraryTypes = std::vector<LibraryType>;
+
     public:
         PhysicsLibrary();
         ~PhysicsLibrary() override;
@@ -47,6 +48,6 @@ namespace SR_PHYSICS_NS {
 
         SR_PTYPES_NS::PhysicsMaterial* m_defaultMaterial = nullptr;
     };
-}
+} // namespace SR_PHYSICS_NS
 
-#endif //SR_ENGINE_PHYSICSLIB_H
+#endif // SR_ENGINE_PHYSICSLIB_H

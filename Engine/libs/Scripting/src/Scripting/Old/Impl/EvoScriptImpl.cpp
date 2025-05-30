@@ -2,8 +2,8 @@
 // Created by Nikita on 11.07.2021.
 //
 
-#include <Scripting/Impl/EvoScriptImpl.h>
 #include <Scripting/Impl/EvoCompiler.h>
+#include <Scripting/Impl/EvoScriptImpl.h>
 
 #include <Utils/Common/Features.h>
 
@@ -26,4 +26,4 @@ namespace SR_SCRIPTING_NS {
 
         return true;
     }
-}
+} // namespace SR_SCRIPTING_NS

@@ -4,8 +4,8 @@
 
 #include <Engine/Launcher.h>
 
-#include <Utils/Resources/ResourceEmbedder.h>
 #include <Utils/Common/Compression.h>
+#include <Utils/Resources/ResourceEmbedder.h>
 
 namespace SR_CORE_NS {
     LauncherInitStatus Launcher::InitLauncher() {
@@ -14,14 +14,15 @@ namespace SR_CORE_NS {
             return LauncherInitStatus::Error;
         }
 
-    #ifdef SR_ENGINE_FLATPAK_BUILD
+#ifdef SR_ENGINE_FLATPAK_BUILD
         if (InitializeResourcesFolder(argc, argv)) {
             return LauncherInitStatus::Success;
         }
 
-        SR_ERROR("Launcher::InitLauncher() : failed to initialize resources folder!\n");
+        SR_ERROR("Launcher::InitLauncher() : failed to initialize resources "
+                 "folder!\n");
         return LauncherInitStatus::Error;
-    #else
+#else
         if (InitializeResourcesFolder()) {
             return LauncherInitStatus::Success;
         }
@@ -33,19 +34,19 @@ namespace SR_CORE_NS {
         }
 
         if (!InitializeResourcesFolder()) {
-            SR_ERROR("Launcher::InitLauncher() : failed to initialize resources folder!\n");
+            SR_ERROR("Launcher::InitLauncher() : failed to initialize "
+                     "resources folder!\n");
             return LauncherInitStatus::Error;
         }
 
         if (CloneResources()) {
             SR_LOG("Launcher::InitLauncher() : resources cloned.");
             return LauncherInitStatus::Success;
-        }
-        else {
+        } else {
             SR_ERROR("Launcher::InitLauncher() : failed to clone resources!\n");
             return LauncherInitStatus::Error;
         }
-    #endif
+#endif
     }
 
     bool Launcher::UnpackEmbedded() {
@@ -57,23 +58,21 @@ namespace SR_CORE_NS {
     }
 
     bool Launcher::CloneResources() {
-    #ifdef SR_LINUX
+#ifdef SR_LINUX
         auto&& git2path = GetResourcesPath().Concat("Engine/Utilities/git2");
-    #elif defined(SR_WIN32)
+#elif defined(SR_WIN32)
         auto&& git2path = GetResourcesPath().Concat("Engine/Utilities/git2.exe");
-    #endif
+#endif
 
-    #ifndef SR_ANDROID
+#ifndef SR_ANDROID
         auto&& cachePath = GetResourcesPath().Concat("Cache");
         if (!cachePath.Create()) {
             SR_ERROR("Launcher::CloneResources() : failed to create cache directory.");
             return false;
         }
 
-        std::string command =
-                git2path.ToStringRef() + " clone https://github.com/SpaRcle-Studio/SRE2R " +
-                cachePath.Concat("SRE2R").ToStringRef() +
-                " -b release/0.0.7 --depth 1";
+        std::string command = git2path.ToStringRef() + " clone https://github.com/SpaRcle-Studio/SRE2R " +
+                              cachePath.Concat("SRE2R").ToStringRef() + " -b release/0.0.7 --depth 1";
 
         SR_SYSTEM_LOG("Launcher::CloneResources() : cloning repository...\n" + command);
 
@@ -81,8 +80,8 @@ namespace SR_CORE_NS {
 
         SR_UTILS_NS::Path zipPath = cachePath.Concat("SRE2R/Resources.zip");
         SR_PLATFORM_NS::Unzip(zipPath, GetResourcesPath());
-    #endif
+#endif
 
         return true;
     }
-}
+} // namespace SR_CORE_NS

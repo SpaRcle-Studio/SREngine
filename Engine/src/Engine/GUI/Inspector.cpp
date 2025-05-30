@@ -2,43 +2,40 @@
 // Created by Monika on 14.02.2022.
 //
 
-#include <Engine/GUI/Inspector.h>
 #include <Engine/EngineCommands.h>
+#include <Engine/GUI/Inspector.h>
 
-#include <Utils/ECS/Transform3D.h>
-#include <Utils/ECS/Transform2D.h>
-#include <Utils/ECS/TransformZero.h>
+#include <Utils/Common/StoreUtils.h>
 #include <Utils/ECS/LayerManager.h>
+#include <Utils/ECS/Transform2D.h>
+#include <Utils/ECS/Transform3D.h>
+#include <Utils/ECS/TransformZero.h>
+#include <Utils/Events/Broadcaster.h>
 #include <Utils/Types/SafePtrLockGuard.h>
 #include <Utils/World/ScenePrefabLogic.h>
-#include <Utils/Common/StoreUtils.h>
-#include <Utils/Events/Broadcaster.h>
 
 #include <Scripting/Base/Behaviour.h>
 
-#include <Physics/3D/Rigidbody3D.h>
 #include <Physics/2D/Rigidbody2D.h>
+#include <Physics/3D/Rigidbody3D.h>
 
-#include <Graphics/Types/Geometry/Sprite.h>
 #include <Audio/Types/AudioSource.h>
-#include <Graphics/UI/Canvas.h>
-#include <Graphics/UI/Gizmo.h>
-#include <Graphics/Types/Geometry/ProceduralMesh.h>
-#include <Graphics/GUI/Utils.h>
-#include <Graphics/Types/Geometry/SkinnedMesh.h>
 #include <Graphics/Animations/Animator.h>
 #include <Graphics/Animations/BoneComponent.h>
+#include <Graphics/GUI/Utils.h>
+#include <Graphics/Types/Geometry/ProceduralMesh.h>
+#include <Graphics/Types/Geometry/SkinnedMesh.h>
+#include <Graphics/Types/Geometry/Sprite.h>
+#include <Graphics/UI/Canvas.h>
+#include <Graphics/UI/Gizmo.h>
 
 namespace SR_CORE_GUI_NS {
-    Inspector::Inspector(Hierarchy* hierarchy)
-        : SR_GRAPH_GUI_NS::Widget("Inspector")
-        , m_hierarchy(hierarchy)
-    {
+    Inspector::Inspector(Hierarchy* hierarchy) : SR_GRAPH_GUI_NS::Widget("Inspector"), m_hierarchy(hierarchy) {
         m_pPointerDrawer = SR_CORE_GUI_NS::PropertyDrawerBase::MakeShared<PointerPropertyDrawer>();
         InitCategories();
-        m_moduleReloadSubscription = SR_UTILS_NS::Broadcaster::Instance().Subscribe(SR_UTILS_NS::Events::EVENT_ON_SCRIPT_MODULE_RELOADED_ID, [this](auto&& msg) {
-            InitCategories();
-        });
+        m_moduleReloadSubscription = SR_UTILS_NS::Broadcaster::Instance().Subscribe(
+            SR_UTILS_NS::Events::EVENT_ON_SCRIPT_MODULE_RELOADED_ID, [this](auto&& msg) { InitCategories(); }
+        );
     }
 
     void Inspector::Draw() {
@@ -79,8 +76,7 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
                 InspectGameObject();
                 SR_GRAPH_GUI_NS::Immediate::EndTabItem();
-            }
-            else {
+            } else {
                 SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
             }
 
@@ -94,8 +90,7 @@ namespace SR_CORE_GUI_NS {
 
         if (SR_GRAPH_GUI_NS::Immediate::GetScrollMaxY() > 0) {
             m_scrollBarWidth = SR_GRAPH_GUI_NS::Immediate::GetScrollbarSize();
-        }
-        else {
+        } else {
             m_scrollBarWidth = 0;
         }
 
@@ -120,7 +115,9 @@ namespace SR_CORE_GUI_NS {
         std::string name = m_sceneObject->GetName();
         SR_GRAPH_GUI_NS::Immediate::InputText("##Name", &name);
         if (SR_GRAPH_GUI_NS::Immediate::IsItemDeactivatedAfterEdit()) {
-            pEngine->GetCmdManager()->Execute<SR_CORE_NS::Commands::SceneObjectRename>(SR_UTILS_NS::SyncType::Async, pEngine, m_sceneObject, name);
+            pEngine->GetCmdManager()->Execute<SR_CORE_NS::Commands::SceneObjectRename>(
+                SR_UTILS_NS::SyncType::Async, pEngine, m_sceneObject, name
+            );
         }
         SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
 
@@ -130,20 +127,29 @@ namespace SR_CORE_GUI_NS {
 
         /// --------------------------------------------------------------------------------------------------------
 
-        const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
+        const float_t lineHeight =
+            SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
         const float_t layerAndTagWidth = SR_GRAPH_GUI_NS::Immediate::GetContentRegionAvail().x - lineHeight;
 
-        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(layerAndTagWidth / 2.f - SR_GRAPH_GUI_NS::Immediate::CalcTextSize("Tag").x);
+        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(
+            layerAndTagWidth / 2.f - SR_GRAPH_GUI_NS::Immediate::CalcTextSize("Tag").x
+        );
         InspectTag(m_sceneObject->GetTag(), [&](auto&& tag) {
-            pEngine->GetCmdManager()->Execute<SR_CORE_NS::Commands::SceneObjectTag>(SR_UTILS_NS::SyncType::Async, pEngine, m_sceneObject, tag);
+            pEngine->GetCmdManager()->Execute<SR_CORE_NS::Commands::SceneObjectTag>(
+                SR_UTILS_NS::SyncType::Async, pEngine, m_sceneObject, tag
+            );
         });
         SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
 
         SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(layerAndTagWidth / 2.f - SR_GRAPH_GUI_NS::Immediate::CalcTextSize("Layer").x);
+        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(
+            layerAndTagWidth / 2.f - SR_GRAPH_GUI_NS::Immediate::CalcTextSize("Layer").x
+        );
         InspectLayer(m_sceneObject->GetLocalLayer(), [&](auto&& layer) {
-            pEngine->GetCmdManager()->Execute<SR_CORE_NS::Commands::SceneObjectLayer>(SR_UTILS_NS::SyncType::Async, pEngine, m_sceneObject, layer);
+            pEngine->GetCmdManager()->Execute<SR_CORE_NS::Commands::SceneObjectLayer>(
+                SR_UTILS_NS::SyncType::Async, pEngine, m_sceneObject, layer
+            );
         });
         SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
 
@@ -151,9 +157,10 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::Separator();
 
-        //if (auto&& pGameObject = m_sceneObject.DynamicCast<SR_UTILS_NS::GameObject>()) {
-        //    DrawGameObject(pGameObject);
-        //}
+        // if (auto&& pGameObject =
+        // m_sceneObject.DynamicCast<SR_UTILS_NS::GameObject>()) {
+        //     DrawGameObject(pGameObject);
+        // }
 
         DrawSceneObject(m_sceneObject);
 
@@ -183,9 +190,9 @@ namespace SR_CORE_GUI_NS {
             }
             if (oldestId != SR_ID_INVALID) {
                 m_componentContexts.erase(oldestId);
-            }
-            else {
-                SRHalt("Inspector::Update() : failed to find oldest component context!");
+            } else {
+                SRHalt("Inspector::Update() : failed to find oldest component "
+                       "context!");
             }
         }
 
@@ -195,8 +202,7 @@ namespace SR_CORE_GUI_NS {
             }
             m_sceneObject = *selected.begin();
             SRAssert(m_sceneObject);
-        }
-        else {
+        } else {
             m_sceneObject = SR_UTILS_NS::SceneObject::Ptr();
         }
     }
@@ -209,7 +215,10 @@ namespace SR_CORE_GUI_NS {
 
     void Inspector::DrawComponents(SR_UTILS_NS::IComponentable* pIComponentable) {
         SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
-        SR_GRAPH_GUI_NS::Immediate::CollapsingHeader("##header", SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::Leaf | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::NoTreePushOnOpen);
+        SR_GRAPH_GUI_NS::Immediate::CollapsingHeader(
+            "##header", SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::Leaf |
+                            SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::NoTreePushOnOpen
+        );
         SR_GRAPH_GUI_NS::Immediate::EndDisabled();
 
         static const char* text = "Components";
@@ -217,10 +226,12 @@ namespace SR_CORE_GUI_NS {
         const SR_MATH_NS::FVector2 headerPos = SR_GRAPH_GUI_NS::Immediate::GetItemRectMin();
         const SR_MATH_NS::FVector2 textSize = SR_GRAPH_GUI_NS::Immediate::CalcTextSize(text);
         const SR_MATH_NS::FVector2 textPos = SR_MATH_NS::FVector2(
-            headerPos.x + (headerSize.x - textSize.x) * 0.5f,
-            headerPos.y + (headerSize.y - textSize.y) * 0.5f
+            headerPos.x + (headerSize.x - textSize.x) * 0.5f, headerPos.y + (headerSize.y - textSize.y) * 0.5f
         );
-        SR_GRAPH_GUI_NS::Immediate::AddText(SR_GRAPH_GUI_NS::Immediate::GetWindowDrawList(), textPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), text);
+        SR_GRAPH_GUI_NS::Immediate::AddText(
+            SR_GRAPH_GUI_NS::Immediate::GetWindowDrawList(), textPos,
+            SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), text
+        );
 
         uint32_t index = 0;
 
@@ -242,11 +253,14 @@ namespace SR_CORE_GUI_NS {
             m_onBeforeChangeCallback = [&](bool drag) {
                 if (!m_pComponentsSerializer) {
                     m_pComponentsSerializer = SR_CORE_NS::Commands::CreateSerializer();
-                    SR_UTILS_NS::Serialization::Save(*m_pComponentsSerializer, pIComponentable->GetComponents(), SR_UTILS_NS::ICommand::DATA_ID);
+                    SR_UTILS_NS::Serialization::Save(
+                        *m_pComponentsSerializer, pIComponentable->GetComponents(), SR_UTILS_NS::ICommand::DATA_ID
+                    );
                 }
             };
 
-            const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
+            const float_t lineHeight =
+                SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
 
             SR_GRAPH_GUI_NS::Immediate::PushItemWidth(lineHeight * 5.f);
 
@@ -282,13 +296,15 @@ namespace SR_CORE_GUI_NS {
 
             if (m_pComponentsSerializer) {
                 auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
-                auto&& cmd = new SR_CORE_NS::Commands::ComponentsChange(pEngine, pIComponentable, std::move(m_pComponentsSerializer));
+                auto&& cmd = new SR_CORE_NS::Commands::ComponentsChange(
+                    pEngine, pIComponentable, std::move(m_pComponentsSerializer)
+                );
                 pEngine->GetCmdManager()->Store(cmd);
             }
         }
     }
 
-    void Inspector::DrawComponent(SR_UTILS_NS::Component* pComponent, uint32_t &index) {
+    void Inspector::DrawComponent(SR_UTILS_NS::Component* pComponent, uint32_t& index) {
         auto&& pContext = dynamic_cast<EditorGUI*>(GetManager());
         auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
 
@@ -315,10 +331,13 @@ namespace SR_CORE_GUI_NS {
         const bool isComponentActive = pComponent->IsActive();
 
         if (!isComponentActive) {
-            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(0.5f, 0.5f, 0.5f));
+            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(
+                SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(0.5f, 0.5f, 0.5f)
+            );
         }
 
-        const bool isOpened = SR_GRAPH_GUI_NS::Immediate::CollapsingHeader(pComponent->GetMeta()->GetFactoryName().c_str());
+        const bool isOpened =
+            SR_GRAPH_GUI_NS::Immediate::CollapsingHeader(pComponent->GetMeta()->GetFactoryName().c_str());
 
         if (!isComponentActive) {
             SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
@@ -328,14 +347,20 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::OpenPopup(headerName.c_str());
         }
 
-        if (!SR_GRAPH_GUI_NS::Immediate::GetDragDropPayload() && SR_GRAPH_GUI_NS::Immediate::BeginDragDropSource(SR_GRAPH_GUI_NS::Immediate::DragDropFlags::SourceAllowNullID)) {
-            m_pointersHolder = { pComponent->DynamicCast<SR_UTILS_NS::Component>() };
-            SR_GRAPH_GUI_NS::Immediate::SetDragDropPayload("InspectorComponent##Payload", &m_pointersHolder, sizeof(std::vector<SR_UTILS_NS::Component::Ptr>), SR_GRAPH_GUI_NS::Immediate::Condition::Once);
+        if (!SR_GRAPH_GUI_NS::Immediate::GetDragDropPayload() &&
+            SR_GRAPH_GUI_NS::Immediate::BeginDragDropSource(SR_GRAPH_GUI_NS::Immediate::DragDropFlags::SourceAllowNullID
+            )) {
+            m_pointersHolder = {pComponent->DynamicCast<SR_UTILS_NS::Component>()};
+            SR_GRAPH_GUI_NS::Immediate::SetDragDropPayload(
+                "InspectorComponent##Payload", &m_pointersHolder, sizeof(std::vector<SR_UTILS_NS::Component::Ptr>),
+                SR_GRAPH_GUI_NS::Immediate::Condition::Once
+            );
             SR_GRAPH_GUI_NS::Immediate::Text("%s ->", pComponent->GetMeta()->GetFactoryName().c_str());
             SR_GRAPH_GUI_NS::Immediate::EndDragDropSource();
         }
 
-        SR_GRAPH_GUI_NS::Immediate::SameLine(); SR_GRAPH_GUI_NS::Immediate::Text(" ");
+        SR_GRAPH_GUI_NS::Immediate::SameLine();
+        SR_GRAPH_GUI_NS::Immediate::Text(" ");
 
         if (pComponent->ExecuteInEditMode()) {
             SR_GRAPH_GUI_NS::Immediate::SameLine();
@@ -361,7 +386,8 @@ namespace SR_CORE_GUI_NS {
             if (m_componentContexts.count(pComponent->GetEntityId()) == 0) {
                 ComponentContext& componentContext = m_componentContexts[pComponent->GetEntityId()];
                 if (auto&& inspectorName = pComponent->GetMeta()->GetInspectorName(); !inspectorName.empty()) {
-                    componentContext.pObjectDrawer = SR_UTILS_NS::Factory::Instance().Create<ObjectPropertyDrawer>(inspectorName);
+                    componentContext.pObjectDrawer =
+                        SR_UTILS_NS::Factory::Instance().Create<ObjectPropertyDrawer>(inspectorName);
                 }
                 if (!componentContext.pObjectDrawer) {
                     componentContext.pObjectDrawer = SRNew<ObjectPropertyDrawer>();
@@ -375,7 +401,9 @@ namespace SR_CORE_GUI_NS {
                     m_isDragMode = drag;
                     m_editableComponent = pStrongComponent;
                     m_pComponentSerializer = SR_CORE_NS::Commands::CreateSerializer();
-                    SR_UTILS_NS::Serialization::Save(*m_pComponentSerializer, *pStrongComponent, SR_UTILS_NS::ICommand::DATA_ID);
+                    SR_UTILS_NS::Serialization::Save(
+                        *m_pComponentSerializer, *pStrongComponent, SR_UTILS_NS::ICommand::DATA_ID
+                    );
                 }
             };
 
@@ -387,9 +415,12 @@ namespace SR_CORE_GUI_NS {
             componentContext.lastUsage = SR_HTYPES_NS::Time::Instance().Now();
             componentContext.pObjectDrawer->Draw(context);
 
-            if (m_pComponentSerializer && (!m_isDragMode || !SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseLeft))) {
+            if (m_pComponentSerializer &&
+                (!m_isDragMode || !SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseLeft))) {
                 if (m_editableComponent) {
-                    auto&& cmd = new SR_CORE_NS::Commands::ComponentChange(pEngine, m_editableComponent, std::move(m_pComponentSerializer));
+                    auto&& cmd = new SR_CORE_NS::Commands::ComponentChange(
+                        pEngine, m_editableComponent, std::move(m_pComponentSerializer)
+                    );
                     pEngine->GetCmdManager()->Store(cmd);
                 }
             }
@@ -403,7 +434,9 @@ namespace SR_CORE_GUI_NS {
             m_onBeforeChangeCallback = [&](bool drag) {
                 if (!m_pComponentsSerializer) {
                     m_pComponentsSerializer = SR_CORE_NS::Commands::CreateSerializer();
-                    SR_UTILS_NS::Serialization::Save(*m_pComponentsSerializer, pParent->GetComponents(), SR_UTILS_NS::ICommand::DATA_ID);
+                    SR_UTILS_NS::Serialization::Save(
+                        *m_pComponentsSerializer, pParent->GetComponents(), SR_UTILS_NS::ICommand::DATA_ID
+                    );
                 }
             };
 
@@ -470,11 +503,12 @@ namespace SR_CORE_GUI_NS {
 
             if (pParent) {
                 if (m_pComponentsSerializer) {
-                    auto&& cmd = new SR_CORE_NS::Commands::ComponentsChange(pEngine, pParent, std::move(m_pComponentsSerializer));
+                    auto&& cmd = new SR_CORE_NS::Commands::ComponentsChange(
+                        pEngine, pParent, std::move(m_pComponentsSerializer)
+                    );
                     pEngine->GetCmdManager()->Store(cmd);
                 }
-            }
-            else {
+            } else {
                 m_pComponentsSerializer = nullptr;
             }
 
@@ -504,14 +538,18 @@ namespace SR_CORE_GUI_NS {
         context.editorPropertyParams.SetNotNull();
         m_pPointerDrawer->Draw(context);
 
-        if (m_pSOSerializer && (!m_isDragMode || !SR_GRAPH_GUI_NS::Immediate::IsMouseDown(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left))) {
+        if (m_pSOSerializer &&
+            (!m_isDragMode || !SR_GRAPH_GUI_NS::Immediate::IsMouseDown(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)
+            )) {
             auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
 
             auto&& pNewSerializer = SR_CORE_NS::Commands::CreateSerializer();
             pNewSerializer->AddDontSaveTag("Inspector");
             SR_UTILS_NS::Serialization::Save(*pNewSerializer, *pSceneObject, SR_UTILS_NS::ICommand::DATA_ID);
 
-            auto&& cmd = new SR_CORE_NS::Commands::SceneObjectChangeProperties(pEngine, pSceneObject, std::move(m_pSOSerializer), std::move(pNewSerializer));
+            auto&& cmd = new SR_CORE_NS::Commands::SceneObjectChangeProperties(
+                pEngine, pSceneObject, std::move(m_pSOSerializer), std::move(pNewSerializer)
+            );
             pEngine->GetCmdManager()->Store(cmd);
         }
     }
@@ -541,13 +579,17 @@ namespace SR_CORE_GUI_NS {
             pTransform->UpdateTree();
         }
 
-        if (m_pTransformSerializer && (!m_isDragMode || !SR_GRAPH_GUI_NS::Immediate::IsMouseDown(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left))) {
+        if (m_pTransformSerializer &&
+            (!m_isDragMode || !SR_GRAPH_GUI_NS::Immediate::IsMouseDown(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)
+            )) {
             auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
 
             auto&& pNewSerializer = SR_CORE_NS::Commands::CreateSerializer();
             SR_UTILS_NS::Serialization::Save(*pNewSerializer, pTransform, SR_UTILS_NS::ICommand::DATA_ID);
 
-            auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(pEngine, pGameObject, std::move(m_pTransformSerializer), std::move(pNewSerializer));
+            auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(
+                pEngine, pGameObject, std::move(m_pTransformSerializer), std::move(pNewSerializer)
+            );
             pEngine->GetCmdManager()->Store(cmd);
 
             if (pTransform != pGameObject->GetTransform()) {
@@ -556,15 +598,21 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
-    void Inspector::DrawComponentCategory(SR_UTILS_NS::IComponentable* pComponentable, ComponentCategory& category, SR_UTILS_NS::StringAtom categoryName) {
-        static auto&& addComponentFn = [](Inspector* pInspector, SR_UTILS_NS::IComponentable* pComponentable, SR_UTILS_NS::StringAtom name) {
+    void Inspector::DrawComponentCategory(
+        SR_UTILS_NS::IComponentable* pComponentable, ComponentCategory& category, SR_UTILS_NS::StringAtom categoryName
+    ) {
+        static auto&& addComponentFn = [](Inspector* pInspector, SR_UTILS_NS::IComponentable* pComponentable,
+                                          SR_UTILS_NS::StringAtom name) {
             if (SR_GRAPH_GUI_NS::Immediate::Selectable(name.c_str(), false)) {
                 if (auto&& pComponent = SR_UTILS_NS::Factory::Instance().Create<SR_UTILS_NS::Component>(name)) {
                     pInspector->m_onBeforeChangeCallback(false);
                     pComponentable->AddComponent(pComponent);
-                }
-                else {
-                    SRHalt("Inspector::DrawComponentCategory() : failed to create component! Name: {}", name);
+                } else {
+                    SRHalt(
+                        "Inspector::DrawComponentCategory() : failed to "
+                        "create component! Name: {}",
+                        name
+                    );
                 }
             }
             if (SR_GRAPH_GUI_NS::Immediate::IsItemFocused()) {
@@ -572,9 +620,12 @@ namespace SR_CORE_GUI_NS {
                     if (auto&& pComponent = SR_UTILS_NS::Factory::Instance().Create<SR_UTILS_NS::Component>(name)) {
                         pInspector->m_onBeforeChangeCallback(false);
                         pComponentable->AddComponent(pComponent);
-                    }
-                    else {
-                        SRHalt("Inspector::DrawComponentCategory() : failed to create component! Name: {}", name);
+                    } else {
+                        SRHalt(
+                            "Inspector::DrawComponentCategory() : failed "
+                            "to create component! Name: {}",
+                            name
+                        );
                     }
                     SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
                 }
@@ -589,8 +640,8 @@ namespace SR_CORE_GUI_NS {
                 return PropertyDrawerBase::CheckSearchMatch(search, name);
             });
             return hasComponents || std::ranges::any_of(checkCategory.categories, [&](auto&& pair) {
-                return checkMatch(pair.second, search);
-            });
+                       return checkMatch(pair.second, search);
+                   });
         };
 
         if (m_componentSearchBuffer.empty() || checkMatch(category, m_componentSearchBuffer)) {
@@ -600,7 +651,8 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 for (auto&& name : category.components) {
-                    if (!m_componentSearchBuffer.empty() && !PropertyDrawerBase::CheckSearchMatch(m_componentSearchBuffer, name)) {
+                    if (!m_componentSearchBuffer.empty() &&
+                        !PropertyDrawerBase::CheckSearchMatch(m_componentSearchBuffer, name)) {
                         continue;
                     }
                     addComponentFn(this, pComponentable, name);
@@ -619,7 +671,8 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerContext context(pValue);
         context.pEditor = dynamic_cast<EditorGUI*>(GetManager());
 
-        const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
+        const float_t lineHeight =
+            SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
         float_t windowWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x - m_scrollBarWidth;
         context.lineHeight = lineHeight;
         context.axisButtonWidth = context.lineHeight;
@@ -634,45 +687,58 @@ namespace SR_CORE_GUI_NS {
         return context;
     }
 
-    void Inspector::InspectTag(const SR_UTILS_NS::StringAtom tag, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)>& callback) {
-        /// вызываем в потокобезопасном контексте, так как теги могут быть изменены извне
+    void Inspector::InspectTag(
+        const SR_UTILS_NS::StringAtom tag, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)>& callback
+    ) {
+        /// вызываем в потокобезопасном контексте, так как теги могут быть
+        /// изменены извне
         SR_UTILS_NS::TagManager::Instance().Do([&](auto&& pSettings) {
             auto&& pTagManager = dynamic_cast<SR_UTILS_NS::TagManager*>(pSettings);
             auto&& tags = pTagManager->GetTags();
             auto&& tagIndex = static_cast<int>(pTagManager->GetTagIndex(tag));
             auto&& pTags = const_cast<std::vector<SR_UTILS_NS::StringAtom>*>(&tags);
 
-            if (SR_GRAPH_GUI_NS::Immediate::Combo("Tag", &tagIndex, [](void* vec, int idx, const char** out_text){
-                auto&& vector = reinterpret_cast<std::vector<SR_UTILS_NS::StringAtom>*>(vec);
-                if (idx < 0 || idx >= vector->size())
-                    return false;
+            if (SR_GRAPH_GUI_NS::Immediate::Combo(
+                    "Tag", &tagIndex,
+                    [](void* vec, int idx, const char** out_text) {
+                        auto&& vector = reinterpret_cast<std::vector<SR_UTILS_NS::StringAtom>*>(vec);
+                        if (idx < 0 || idx >= vector->size())
+                            return false;
 
-                *out_text = vector->at(idx).c_str();
+                        *out_text = vector->at(idx).c_str();
 
-                return true;
-            }, reinterpret_cast<void*>(pTags), tags.size())) {
+                        return true;
+                    },
+                    reinterpret_cast<void*>(pTags), tags.size()
+                )) {
                 /// TODO: переделать на комманды
                 callback(pTagManager->GetTagByIndex(tagIndex));
             }
         });
     }
 
-    void Inspector::InspectLayer(const SR_UTILS_NS::StringAtom layer, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)>& callback) {
+    void Inspector::InspectLayer(
+        const SR_UTILS_NS::StringAtom layer, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)>& callback
+    ) {
         SR_UTILS_NS::LayerManager::Instance().Do([&](auto&& pSettings) {
             auto&& pLayerManager = dynamic_cast<SR_UTILS_NS::LayerManager*>(pSettings);
             auto&& layers = pLayerManager->GetLayers();
             auto&& layerIndex = static_cast<int>(pLayerManager->GetLayerIndex(layer));
             auto&& pLayers = const_cast<std::vector<SR_UTILS_NS::StringAtom>*>(&layers);
 
-            if (SR_GRAPH_GUI_NS::Immediate::Combo("Layer", &layerIndex, [](void* vec, int idx, const char** out_text){
-                auto&& vector = reinterpret_cast<std::vector<SR_UTILS_NS::StringAtom>*>(vec);
-                if (idx < 0 || idx >= vector->size())
-                    return false;
+            if (SR_GRAPH_GUI_NS::Immediate::Combo(
+                    "Layer", &layerIndex,
+                    [](void* vec, int idx, const char** out_text) {
+                        auto&& vector = reinterpret_cast<std::vector<SR_UTILS_NS::StringAtom>*>(vec);
+                        if (idx < 0 || idx >= vector->size())
+                            return false;
 
-                *out_text = vector->at(idx).c_str();
+                        *out_text = vector->at(idx).c_str();
 
-                return true;
-            }, reinterpret_cast<void*>(pLayers), layers.size())) {
+                        return true;
+                    },
+                    reinterpret_cast<void*>(pLayers), layers.size()
+                )) {
                 /// TODO: переделать на комманды
                 callback(layers[layerIndex]);
             }
@@ -680,7 +746,8 @@ namespace SR_CORE_GUI_NS {
     }
 
     void Inspector::InitCategories() {
-        m_availableComponents = SR_UTILS_NS::Factory::Instance().GetInheritances(SR_UTILS_NS::Component::GetClassStaticName());
+        m_availableComponents =
+            SR_UTILS_NS::Factory::Instance().GetInheritances(SR_UTILS_NS::Component::GetClassStaticName());
 
         std::erase_if(m_availableComponents, [](auto&& name) {
             auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(name);
@@ -693,14 +760,12 @@ namespace SR_CORE_GUI_NS {
             auto&& category = SR_UTILS_NS::Factory::Instance().GetType(name)->GetCategory();
             if (category.empty()) {
                 m_componentsCategories.categories["Misc"].components.emplace_back(name);
-            }
-            else {
+            } else {
                 ComponentCategory* pCategory = nullptr;
                 for (auto&& cat : category) {
                     if (pCategory) {
                         pCategory = &pCategory->categories[cat];
-                    }
-                    else {
+                    } else {
                         pCategory = &m_componentsCategories.categories[cat];
                     }
                 }
@@ -709,4 +774,4 @@ namespace SR_CORE_GUI_NS {
             }
         }
     }
-}
+} // namespace SR_CORE_GUI_NS

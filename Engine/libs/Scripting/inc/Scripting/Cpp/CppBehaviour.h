@@ -7,15 +7,18 @@
 
 #include <Scripting/macros.h>
 
-#include <Utils/Serialization/Serializable.h>
+#include <Utils/Common/CollisionData.h>
 #include <Utils/ECS/GameObject.h>
 #include <Utils/ECS/Transform.h>
-#include <Utils/Common/CollisionData.h>
+#include <Utils/Serialization/Serializable.h>
 
 namespace SR_SCRIPTING_NS {
-    class CppBehaviour : public SR_UTILS_NS::Serializable, public SR_HTYPES_NS::SharedPtr<CppBehaviour>, public SR_UTILS_NS::NonCopyable {
+    class CppBehaviour : public SR_UTILS_NS::Serializable,
+                         public SR_HTYPES_NS::SharedPtr<CppBehaviour>,
+                         public SR_UTILS_NS::NonCopyable {
         SR_CLASS()
         using Super = SR_HTYPES_NS::SharedPtr<CppBehaviour>;
+
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<CppBehaviour>;
 
@@ -59,8 +62,7 @@ namespace SR_SCRIPTING_NS {
         SR_UTILS_NS::GameObject::Ptr gameObject;
         SR_UTILS_NS::SceneObject::Ptr sceneObject;
         SR_UTILS_NS::Transform::Ptr transform;
-
     };
-}
+} // namespace SR_SCRIPTING_NS
 
-#endif //SR_ENGINE_SCRIPTING_CPP_BEHAVIOUR_H
+#endif // SR_ENGINE_SCRIPTING_CPP_BEHAVIOUR_H

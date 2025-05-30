@@ -16,7 +16,7 @@ namespace SR_CORE_GUI_NS {
     public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
 
-        virtual void OnObjectReplaced(SRClass* pOld, SRClass* pNew) { }
+        virtual void OnObjectReplaced(SRClass* pOld, SRClass* pNew) {}
 
     private:
         SR_UTILS_NS::StringAtom m_lastTypeName;
@@ -27,9 +27,7 @@ namespace SR_CORE_GUI_NS {
         bool m_openedByDefault = false;
         ObjectPropertyDrawer::Ptr m_objectDrawer;
         std::vector<std::string> m_typeNames;
-
     };
-}
+} // namespace SR_CORE_GUI_NS
 
-#endif //SR_ENGINE_GUI_POINTER_PROPERTY_DRAWER_H
-
+#endif // SR_ENGINE_GUI_POINTER_PROPERTY_DRAWER_H

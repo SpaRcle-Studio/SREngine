@@ -2,8 +2,8 @@
 // Created by Monika on 22.05.2023.
 //
 
-#include <Engine/World/EngineScene.h>
 #include <Engine/GUI/EditorGUI.h>
+#include <Engine/World/EngineScene.h>
 
 #include <Physics/3D/Raycast3D.h>
 
@@ -11,17 +11,14 @@
 
 #include <Graphics/Types/Camera.h>
 
-#include <Utils/DebugDraw.h>
 #include <Utils/Common/Features.h>
-#include <Utils/World/SceneCubeChunkLogic.h>
+#include <Utils/DebugDraw.h>
 #include <Utils/Events/Broadcaster.h>
+#include <Utils/World/SceneCubeChunkLogic.h>
 
 namespace SR_CORE_NS {
     EngineScene::EngineScene(const EngineScene::ScenePtr& pScene, Engine* pEngine)
-        : Super()
-        , pEngine(pEngine)
-        , pScene(pScene)
-    { }
+        : Super(), pEngine(pEngine), pScene(pScene) {}
 
     EngineScene::~EngineScene() {
         if (pRenderScene) {
@@ -33,13 +30,9 @@ namespace SR_CORE_NS {
             pScene->Destroy();
         }
 
-        pPhysicsScene.AutoFree([](SR_PHYSICS_NS::PhysicsScene* pData) {
-            delete pData;
-        });
+        pPhysicsScene.AutoFree([](SR_PHYSICS_NS::PhysicsScene* pData) { delete pData; });
 
-        pScene.AutoFree([](SR_WORLD_NS::Scene* pData) {
-            delete pData;
-        });
+        pScene.AutoFree([](SR_WORLD_NS::Scene* pData) { delete pData; });
     }
 
     bool EngineScene::Init() {
@@ -55,8 +48,7 @@ namespace SR_CORE_NS {
             if (auto&& pContext = pEngine->GetRenderContext(); pContext.LockIfValid()) {
                 pRenderScene = pContext->CreateScene(pScene);
                 pContext.Unlock();
-            }
-            else {
+            } else {
                 SR_ERROR("EngineScene::Init() : failed to get render context!");
                 return false;
             }
@@ -95,9 +87,7 @@ namespace SR_CORE_NS {
         m_accumulator = m_updateFrequency;
     }
 
-    void EngineScene::SkipDraw() {
-        m_accumulator = 0.f;
-    }
+    void EngineScene::SkipDraw() { m_accumulator = 0.f; }
 
     void EngineScene::UpdateMainCamera() {
         SR_TRACY_ZONE;
@@ -106,13 +96,9 @@ namespace SR_CORE_NS {
         }
     }
 
-    void EngineScene::SetActive(bool active) {
-        pSceneUpdater->SetDirty();
-    }
+    void EngineScene::SetActive(bool active) { pSceneUpdater->SetDirty(); }
 
-    void EngineScene::SetPaused(bool pause) {
-        pSceneUpdater->SetDirty();
-    }
+    void EngineScene::SetPaused(bool pause) { pSceneUpdater->SetDirty(); }
 
     void EngineScene::SetGameMode(bool gameMode) {
         if (pRenderScene) {
@@ -168,7 +154,11 @@ namespace SR_CORE_NS {
         SR_TRACY_ZONE;
 
         if (dt < 0.f) {
-            SR_WARN("EngineScene::Update() : delta time is negative! Reset it... dt: {}", dt);
+            SR_WARN(
+                "EngineScene::Update() : delta time is negative! Reset it... "
+                "dt: {}",
+                dt
+            );
             dt = 0.f;
         }
 
@@ -186,27 +176,32 @@ namespace SR_CORE_NS {
 
         if (m_accumulateDt) {
             m_accumulator += dt;
-        }
-        else {
+        } else {
             m_accumulator += SR_MIN(dt, m_updateFrequency);
         }
 
         constexpr float_t maxDeltaTime = 60.f; /// seconds
         if (m_accumulator > maxDeltaTime) {
-            SR_WARN("EngineScene::Update() : delta time is too big! Reset it... Accumulator: {}. Max delta time: {}", m_accumulator, maxDeltaTime);
+            SR_WARN(
+                "EngineScene::Update() : delta time is too big! Reset it... "
+                "Accumulator: {}. Max delta time: {}",
+                m_accumulator, maxDeltaTime
+            );
             m_accumulator = 0.f;
         }
 
         if (m_accumulator < 0.f) {
-            SR_WARN("EngineScene::Update() : delta time is negative! Reset it... Accumulator: {}", m_accumulator);
+            SR_WARN(
+                "EngineScene::Update() : delta time is negative! Reset it... "
+                "Accumulator: {}",
+                m_accumulator
+            );
             m_accumulator = 0.f;
         }
 
         /// fixed update
-        if (m_accumulator >= m_updateFrequency)
-        {
-            while (m_accumulator >= m_updateFrequency)
-            {
+        if (m_accumulator >= m_updateFrequency) {
+            while (m_accumulator >= m_updateFrequency) {
                 FixedStep(isPaused);
                 m_accumulator -= m_updateFrequency;
             }
@@ -216,4 +211,4 @@ namespace SR_CORE_NS {
 
         pEngine->SetOneFramePauseSkip(false);
     }
-}
+} // namespace SR_CORE_NS

@@ -9,8 +9,7 @@
 
 namespace SR_PTYPES_NS {
     CollisionShape::CollisionShape()
-        : SR_HTYPES_NS::SharedPtr<CollisionShape>(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
-    { }
+        : SR_HTYPES_NS::SharedPtr<CollisionShape>(this, SR_UTILS_NS::SharedPtrPolicy::Automatic) {}
 
     CollisionShape::~CollisionShape() {
         RemoveDebugShape();
@@ -32,55 +31,35 @@ namespace SR_PTYPES_NS {
 
         if (SR_PHYSICS_UTILS_NS::IsBox(type)) {
             m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawCube(
-                    m_debugId,
-                    m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
-                    m_rigidbody->GetRotation(),
-                    m_rigidbody->GetScale() * GetSize(),
-                    SR_MATH_NS::FColor(0, 255, 200, 255),
-                    SR_FLOAT_MAX
+                m_debugId, m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
+                m_rigidbody->GetRotation(), m_rigidbody->GetScale() * GetSize(), SR_MATH_NS::FColor(0, 255, 200, 255),
+                SR_FLOAT_MAX
             );
-        }
-        else if (SR_PHYSICS_UTILS_NS::IsPlane(type)) {
+        } else if (SR_PHYSICS_UTILS_NS::IsPlane(type)) {
             m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawPlane(
-                    m_debugId,
-                    m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
-                    m_rigidbody->GetRotation(),
-                    m_rigidbody->GetScale() * SR_MATH_NS::FVector3(GetPlaneSize().x, 0.f, GetPlaneSize().y),
-                    SR_MATH_NS::FColor(0, 255, 200, 255),
-                    SR_FLOAT_MAX
+                m_debugId, m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
+                m_rigidbody->GetRotation(),
+                m_rigidbody->GetScale() * SR_MATH_NS::FVector3(GetPlaneSize().x, 0.f, GetPlaneSize().y),
+                SR_MATH_NS::FColor(0, 255, 200, 255), SR_FLOAT_MAX
             );
-        }
-        else if (SR_PHYSICS_UTILS_NS::IsSphere(type)) {
-                    m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawSphere(
-                    m_debugId,
-                    m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
-                    m_rigidbody->GetRotation(),
-                    (m_rigidbody->GetScale() * GetRadius()).Max3(),
-                    SR_MATH_NS::FColor(0, 255, 200, 255),
-                    SR_FLOAT_MAX
+        } else if (SR_PHYSICS_UTILS_NS::IsSphere(type)) {
+            m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawSphere(
+                m_debugId, m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
+                m_rigidbody->GetRotation(), (m_rigidbody->GetScale() * GetRadius()).Max3(),
+                SR_MATH_NS::FColor(0, 255, 200, 255), SR_FLOAT_MAX
             );
-        }
-        else if (SR_PHYSICS_UTILS_NS::IsCapsule(type)) {
+        } else if (SR_PHYSICS_UTILS_NS::IsCapsule(type)) {
             SR_MATH_NS::Unit width = (m_rigidbody->GetScale() * GetRadius()).ZeroAxis(SR_MATH_NS::Axis::Y).Max();
             SR_MATH_NS::FVector3 size = SR_MATH_NS::FVector3(width, GetHeight() * m_rigidbody->GetScale().y, width);
             m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawCapsule(
-                    m_debugId,
-                    m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
-                    m_rigidbody->GetRotation(),
-                    size,
-                    SR_MATH_NS::FColor(0, 255, 200, 255),
-                    SR_FLOAT_MAX
+                m_debugId, m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
+                m_rigidbody->GetRotation(), size, SR_MATH_NS::FColor(0, 255, 200, 255), SR_FLOAT_MAX
             );
-        }
-        else if (HasGeometry()) {
+        } else if (HasGeometry()) {
             m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawMesh(
-                    GetRawMesh(), GetMeshId(),
-                    m_debugId,
-                    m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
-                    m_rigidbody->GetRotation(),
-                    m_rigidbody->GetScale() * GetSize(),
-                    SR_MATH_NS::FColor(0, 255, 200, 255),
-                    SR_FLOAT_MAX
+                GetRawMesh(), GetMeshId(), m_debugId, m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
+                m_rigidbody->GetRotation(), m_rigidbody->GetScale() * GetSize(), SR_MATH_NS::FColor(0, 255, 200, 255),
+                SR_FLOAT_MAX
             );
         }
     }
@@ -95,8 +74,7 @@ namespace SR_PTYPES_NS {
         if (SR_PHYSICS_UTILS_NS::IsCylinder(m_type) || SR_PHYSICS_UTILS_NS::IsCapsule(m_type)) {
             m_bounds.x = radius;
             m_bounds.z = radius;
-        }
-        else if (SR_PHYSICS_UTILS_NS::IsSphere(m_type)) {
+        } else if (SR_PHYSICS_UTILS_NS::IsSphere(m_type)) {
             m_bounds = SR_MATH_NS::FVector3(radius);
         }
 
@@ -110,9 +88,7 @@ namespace SR_PTYPES_NS {
         UpdateMatrix();
     }
 
-    float_t CollisionShape::GetHeight() const {
-        return m_bounds.y;
-    }
+    float_t CollisionShape::GetHeight() const { return m_bounds.y; }
 
     float_t CollisionShape::GetRadius() const {
         if (SR_PHYSICS_UTILS_NS::IsCylinder(m_type) || SR_PHYSICS_UTILS_NS::IsCapsule(m_type)) {
@@ -132,21 +108,13 @@ namespace SR_PTYPES_NS {
         return SR_MATH_NS::FVector3::One();
     }
 
-    Rigidbody* CollisionShape::GetRigidbody() const {
-        return m_rigidbody;
-    }
+    Rigidbody* CollisionShape::GetRigidbody() const { return m_rigidbody; }
 
-    bool CollisionShape::HasGeometry() const noexcept {
-        return SR_PHYSICS_UTILS_NS::IsShapeHasGeometry(m_type);
-    }
+    bool CollisionShape::HasGeometry() const noexcept { return SR_PHYSICS_UTILS_NS::IsShapeHasGeometry(m_type); }
 
-    ShapeType CollisionShape::GetType() const noexcept {
-        return m_type;
-    }
+    ShapeType CollisionShape::GetType() const noexcept { return m_type; }
 
-    void* CollisionShape::GetHandle() const noexcept {
-        return m_impl ? m_impl->GetHandle() : nullptr;
-    }
+    void* CollisionShape::GetHandle() const noexcept { return m_impl ? m_impl->GetHandle() : nullptr; }
 
     SR_MATH_NS::FVector3 CollisionShape::CalculateLocalInertia(float_t mass) const {
         if (m_impl) {
@@ -200,8 +168,7 @@ namespace SR_PTYPES_NS {
 
         if (isDebugEnabled && m_debugId == SR_ID_INVALID) {
             UpdateDebugShape();
-        }
-        else if (!isDebugEnabled && m_debugId != SR_ID_INVALID) {
+        } else if (!isDebugEnabled && m_debugId != SR_ID_INVALID) {
             RemoveDebugShape();
         }
     }
@@ -233,12 +200,10 @@ namespace SR_PTYPES_NS {
         return m_impl && m_impl->UpdateShape();
     }
 
-    bool CollisionShape::UpdateMatrix() {
-        return m_impl && m_impl->UpdateMatrix();
-    }
+    bool CollisionShape::UpdateMatrix() { return m_impl && m_impl->UpdateMatrix(); }
 
     void CollisionShape::ReInitDebugShape() {
         RemoveDebugShape();
         UpdateDebugShape();
     }
-}
+} // namespace SR_PTYPES_NS

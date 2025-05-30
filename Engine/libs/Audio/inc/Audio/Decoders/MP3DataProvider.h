@@ -9,8 +9,7 @@
 
 namespace SR_AUDIO_NS {
     /// MPEG Layer-III decoder
-    class MP3DataProvider: public IWaveDataProvider
-    {
+    class MP3DataProvider : public IWaveDataProvider {
     public:
         explicit MP3DataProvider(const RawSoundDataPtr& data);
         ~MP3DataProvider() override;
@@ -38,8 +37,7 @@ namespace SR_AUDIO_NS {
 
         // minimp3 stuff
         struct DecoderData* m_decoderData;
-
     };
-}
+} // namespace SR_AUDIO_NS
 
-#endif //SR_ENGINE_MP3DATAPROVIDER_H
+#endif // SR_ENGINE_MP3DATAPROVIDER_H

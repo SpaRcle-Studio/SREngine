@@ -45,4 +45,4 @@ namespace SR_CORE_NS {
 
         return SR_UTILS_NS::ThreadWorkerResult::Success;
     }
-}
+} // namespace SR_CORE_NS

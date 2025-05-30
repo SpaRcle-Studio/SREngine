@@ -2,16 +2,17 @@
 // Created by Monika on 24.11.2022.
 //
 
-#include <Physics/PhysX/PhysXPhysicsWorld.h>
 #include <Physics/PhysX/PhysXLibraryImpl.h>
-#include <Physics/PhysX/PhysXSimulationCallback.h>
+#include <Physics/PhysX/PhysXPhysicsWorld.h>
 #include <Physics/PhysX/PhysXRaycast3DImpl.h>
+#include <Physics/PhysX/PhysXSimulationCallback.h>
 
 namespace SR_PHYSICS_NS {
-    physx::PxFilterFlags contactReportFilterShader(physx::PxFilterObjectAttributes attributes0, physx::PxFilterData filterData0,
-                                                   physx::PxFilterObjectAttributes attributes1, physx::PxFilterData filterData1,
-                                                   physx::PxPairFlags& pairFlags, const void* constantBlock, physx::PxU32 constantBlockSize)
-    {
+    physx::PxFilterFlags contactReportFilterShader(
+        physx::PxFilterObjectAttributes attributes0, physx::PxFilterData filterData0,
+        physx::PxFilterObjectAttributes attributes1, physx::PxFilterData filterData1, physx::PxPairFlags& pairFlags,
+        const void* constantBlock, physx::PxU32 constantBlockSize
+    ) {
         PX_UNUSED(attributes0);
         PX_UNUSED(attributes1);
         PX_UNUSED(filterData0);
@@ -19,18 +20,13 @@ namespace SR_PHYSICS_NS {
         PX_UNUSED(constantBlockSize);
         PX_UNUSED(constantBlock);
 
-
-        pairFlags = physx::PxPairFlag::eSOLVE_CONTACT | physx::PxPairFlag::eDETECT_DISCRETE_CONTACT
-                    | physx::PxPairFlag::eNOTIFY_TOUCH_FOUND
-                    | physx::PxPairFlag::eNOTIFY_TOUCH_PERSISTS
-                    | physx::PxPairFlag::eNOTIFY_CONTACT_POINTS
-                    | physx::PxPairFlag::eNOTIFY_TOUCH_LOST;
+        pairFlags = physx::PxPairFlag::eSOLVE_CONTACT | physx::PxPairFlag::eDETECT_DISCRETE_CONTACT |
+                    physx::PxPairFlag::eNOTIFY_TOUCH_FOUND | physx::PxPairFlag::eNOTIFY_TOUCH_PERSISTS |
+                    physx::PxPairFlag::eNOTIFY_CONTACT_POINTS | physx::PxPairFlag::eNOTIFY_TOUCH_LOST;
         return physx::PxFilterFlag::eDEFAULT;
     }
 
-    PhysXPhysicsWorld::PhysXPhysicsWorld(Super::LibraryPtr pLibrary, Space space)
-        : Super(pLibrary, space)
-    {
+    PhysXPhysicsWorld::PhysXPhysicsWorld(Super::LibraryPtr pLibrary, Space space) : Super(pLibrary, space) {
         m_contactCallback = new ContactReportCallback();
     }
 
@@ -62,7 +58,7 @@ namespace SR_PHYSICS_NS {
         sceneDesc.kineKineFilteringMode = physx::PxPairFilteringMode::eKEEP;
         sceneDesc.staticKineFilteringMode = physx::PxPairFilteringMode::eKEEP;
 
-        sceneDesc.filterShader	= contactReportFilterShader;
+        sceneDesc.filterShader = contactReportFilterShader;
         sceneDesc.simulationEventCallback = m_contactCallback;
 
         if (!sceneDesc.cpuDispatcher) {
@@ -70,7 +66,7 @@ namespace SR_PHYSICS_NS {
             sceneDesc.cpuDispatcher = m_cpuDispatcher;
         }
 
-        if(!sceneDesc.filterShader) {
+        if (!sceneDesc.filterShader) {
             sceneDesc.filterShader = physx::PxDefaultSimulationFilterShader;
         }
 
@@ -86,7 +82,7 @@ namespace SR_PHYSICS_NS {
         m_scene->setGravity(physx::PxVec3(0.f, -SR_EARTH_GRAVITY_CONST, 0.f));
 
         physx::PxPvdSceneClient* pPvdClient = m_scene->getScenePvdClient();
-        
+
         if (pPvdClient) {
             pPvdClient->setScenePvdFlag(physx::PxPvdSceneFlag::eTRANSMIT_CONSTRAINTS, true);
             pPvdClient->setScenePvdFlag(physx::PxPvdSceneFlag::eTRANSMIT_CONTACTS, true);
@@ -250,10 +246,9 @@ namespace SR_PHYSICS_NS {
         return true;
     }
 
-    void PhysXPhysicsWorld::ForEachRigidbody3D(const SR_HTYPES_NS::Function<void(SR_PTYPES_NS::Rigidbody3D *)> &fun) {
+    void PhysXPhysicsWorld::ForEachRigidbody3D(const SR_HTYPES_NS::Function<void(SR_PTYPES_NS::Rigidbody3D*)>& fun) {
         static const physx::PxActorTypeFlags flags =
-                physx::PxActorTypeFlag::Enum::eRIGID_DYNAMIC |
-                physx::PxActorTypeFlag::Enum::eRIGID_STATIC;
+            physx::PxActorTypeFlag::Enum::eRIGID_DYNAMIC | physx::PxActorTypeFlag::Enum::eRIGID_STATIC;
 
         const uint32_t count = m_scene->getNbActors(flags);
         if (count == 0) {
@@ -273,8 +268,9 @@ namespace SR_PHYSICS_NS {
                 continue;
             }
 
-            auto&& pRigidbody = dynamic_cast<SR_PTYPES_NS::Rigidbody3D*>((SR_PTYPES_NS::Rigidbody*)pRigidActor->userData);
+            auto&& pRigidbody =
+                dynamic_cast<SR_PTYPES_NS::Rigidbody3D*>((SR_PTYPES_NS::Rigidbody*)pRigidActor->userData);
             fun(pRigidbody);
         }
     }
-}
+} // namespace SR_PHYSICS_NS

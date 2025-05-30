@@ -5,8 +5,8 @@
 #ifndef SR_ENGINE_TESTMANAGER_H
 #define SR_ENGINE_TESTMANAGER_H
 
-#include <Utils/Common/Singleton.h>
 #include <Utils/Common/Coroutine.h>
+#include <Utils/Common/Singleton.h>
 #include <Utils/Types/Function.h>
 
 namespace SR_CORE_NS {
@@ -14,9 +14,12 @@ namespace SR_CORE_NS {
         SR_REGISTER_SINGLETON(TestManager)
         using TestFn = SR_HTYPES_NS::Function<bool()>;
         using Test = std::pair<std::string, TestFn>;
+
     public:
         void AddTest(const TestFn& test, const std::string& name) { m_tests.insert(std::make_pair(name, test)); }
-        void AddEngineTest(const TestFn& test, const std::string& name) { m_engineTests.insert(std::make_pair(name, test)); }
+        void AddEngineTest(const TestFn& test, const std::string& name) {
+            m_engineTests.insert(std::make_pair(name, test));
+        }
 
         void RunAll();
 
@@ -30,6 +33,6 @@ namespace SR_CORE_NS {
         std::map<std::string, TestFn> m_engineTests;
         std::map<std::string, TestFn> m_tests;
     };
-}
+} // namespace SR_CORE_NS
 
-#endif //SR_ENGINE_TESTMANAGER_H
+#endif // SR_ENGINE_TESTMANAGER_H

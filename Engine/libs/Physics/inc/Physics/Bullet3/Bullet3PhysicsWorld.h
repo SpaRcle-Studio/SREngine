@@ -11,6 +11,7 @@
 namespace SR_PHYSICS_NS {
     class Bullet3PhysicsWorld : public PhysicsWorld {
         using Super = PhysicsWorld;
+
     public:
         explicit Bullet3PhysicsWorld(LibraryPtr pLibrary, Space space);
         ~Bullet3PhysicsWorld() override;
@@ -32,8 +33,7 @@ namespace SR_PHYSICS_NS {
         btConstraintSolver* m_solver = nullptr;
         btDefaultCollisionConfiguration* m_collisionConfiguration = nullptr;
         btDiscreteDynamicsWorld* m_dynamicsWorld = nullptr;
-
     };
-}
+} // namespace SR_PHYSICS_NS
 
-#endif //SR_ENGINE_BULLET3PHYSICSWORLD_H
+#endif // SR_ENGINE_BULLET3PHYSICSWORLD_H

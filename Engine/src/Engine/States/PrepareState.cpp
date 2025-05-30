@@ -2,22 +2,22 @@
 // Created by Monika on 13.04.2024.
 //
 
+#include <Engine/Engine.h>
 #include <Engine/States/PrepareState.h>
 #include <Engine/World/EngineScene.h>
-#include <Engine/Engine.h>
 
-//#include <Scripting/Impl/EvoScriptManager.h>
+// #include <Scripting/Impl/EvoScriptManager.h>
 
 #include <Physics/3D/Raycast3D.h>
 #include <Physics/PhysicsScene.h>
 
-#include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/DebugRenderer.h>
+#include <Graphics/Render/RenderScene.h>
 
 #include <Utils/CommandManager/CmdManager.h>
-#include <Utils/Resources/ResourceManager.h>
-#include <Utils/DebugDraw.h>
 #include <Utils/Common/Features.h>
+#include <Utils/DebugDraw.h>
+#include <Utils/Resources/ResourceManager.h>
 
 namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult PrepareState::ExecuteImpl() {
@@ -25,7 +25,7 @@ namespace SR_CORE_NS {
 
         pEngine->FlushScene();
 
-        //SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(false);
+        // SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(false);
 
         if (auto&& pRenderContext = pEngine->GetRenderContext()) {
             pRenderContext->Update();
@@ -61,4 +61,4 @@ namespace SR_CORE_NS {
 
         return SR_UTILS_NS::ThreadWorkerResult::Success;
     }
-}
+} // namespace SR_CORE_NS

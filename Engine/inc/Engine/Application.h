@@ -5,14 +5,15 @@
 #ifndef SR_ENGINE_CORE_APPLICATION_H
 #define SR_ENGINE_CORE_APPLICATION_H
 
-#include <Utils/Types/SharedPtr.h>
 #include <Utils/FileSystem/Path.h>
+#include <Utils/Types/SharedPtr.h>
 
 namespace SR_CORE_NS {
     class Engine;
 
     class Application : public SR_HTYPES_NS::SharedPtr<Application> {
         using Super = SR_HTYPES_NS::SharedPtr<Application>;
+
     public:
         Application();
         ~Application();
@@ -37,7 +38,7 @@ namespace SR_CORE_NS {
         bool InitResourceTypes();
         bool InitLogger(const SR_UTILS_NS::Path& logDir);
         bool FindResourcesFolder();
-        //void TryPlayStartSound()
+        // void TryPlayStartSound()
 
     private:
         /// @property
@@ -49,8 +50,7 @@ namespace SR_CORE_NS {
         std::atomic<bool> m_isNeedReload = false;
 
         SR_HTYPES_NS::SharedPtr<Engine> m_engine;
-
     };
-}
+} // namespace SR_CORE_NS
 
-#endif //SR_ENGINE_CORE_APPLICATION_H
+#endif // SR_ENGINE_CORE_APPLICATION_H

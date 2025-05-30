@@ -13,11 +13,11 @@ namespace SR_CORE_UI_NS {
         SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_BUTTON_IDLE_PROP_NAME = "Idle";
         SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_BUTTON_HOVERED_PROP_NAME = "Hovered";
         SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_BUTTON_PRESSED_PROP_NAME = "Pressed";
+
     public:
         void OnDestroy() override;
         void Update(float_t dt) override;
-
     };
-}
+} // namespace SR_CORE_UI_NS
 
-#endif //SR_ENGINE_UI_BUTTON_H
+#endif // SR_ENGINE_UI_BUTTON_H

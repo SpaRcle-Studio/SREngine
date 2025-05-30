@@ -7,6 +7,4 @@
 
 #include <Codegen/Vehicle4W3D.generated.hpp>
 
-namespace SR_PTYPES_NS {
-
-}
+namespace SR_PTYPES_NS {}

@@ -5,11 +5,11 @@
 #ifndef SR_ENGINE_ENGINE_SCENE_H
 #define SR_ENGINE_ENGINE_SCENE_H
 
-#include <Utils/World/SceneUpdater.h>
 #include <Utils/World/Scene.h>
+#include <Utils/World/SceneUpdater.h>
 
-#include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/RenderContext.h>
+#include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/RenderTechnique.h>
 
 #include <Physics/PhysicsScene.h>
@@ -60,8 +60,7 @@ namespace SR_CORE_NS {
         float_t m_updateFrequency = 1.f;
         float_t m_accumulator = 1.f;
         bool m_accumulateDt = false;
-
     };
-}
+} // namespace SR_CORE_NS
 
-#endif //SR_ENGINE_ENGINESCENE_H
+#endif // SR_ENGINE_ENGINESCENE_H

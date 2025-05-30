@@ -8,8 +8,8 @@
 #include <Graphics/Material/BaseMaterial.h>
 #include <Graphics/Render/RenderContext.h>
 
-#include <Utils/TypeTraits/SRClass.h>
 #include <Utils/Reflection/Property.h>
+#include <Utils/TypeTraits/SRClass.h>
 
 namespace SR_CORE_GUI_NS {
     class EditorGUI;
@@ -21,13 +21,9 @@ namespace SR_CORE_GUI_NS {
     SR_MAYBE_UNUSED SR_UTILS_NS::StringAtom GetValueInspector(const SR_UTILS_NS::Reflection::Value& value);
 
     struct PropertyDrawerContext {
-        explicit PropertyDrawerContext(const SR_UTILS_NS::Reflection::Property& property)
-            : pProperty(&property)
-        { }
+        explicit PropertyDrawerContext(const SR_UTILS_NS::Reflection::Property& property) : pProperty(&property) {}
 
-        explicit PropertyDrawerContext(SR_UTILS_NS::Reflection::Value* pValue)
-            : pValue(pValue)
-        { }
+        explicit PropertyDrawerContext(SR_UTILS_NS::Reflection::Value* pValue) : pValue(pValue) {}
 
         bool noHeader = false;
         bool openedByDefault = false;
@@ -44,10 +40,19 @@ namespace SR_CORE_GUI_NS {
 
         SR_NODISCARD float_t GetArrowWidth() const { return lineHeight * 0.75f; }
 
-        SR_NODISCARD SR_UTILS_NS::Reflection::Property const& GetProperty() const { SRAssert(pProperty); return *pProperty; }
-        SR_NODISCARD SR_UTILS_NS::StringAtom GetPropertyName() const { return pProperty ? pProperty->GetName() : SR_UTILS_NS::StringAtom(); }
-        SR_NODISCARD SR_UTILS_NS::StringAtom GetPropertyDisplayName() const { return pProperty ? pProperty->GetEditorParams().GetDisplayName() : customDisplayName; }
-        SR_NODISCARD const SR_UTILS_NS::Reflection::EditorPropertyParams& GetEditorParams() const { return pProperty ? pProperty->GetEditorParams() : editorPropertyParams; }
+        SR_NODISCARD SR_UTILS_NS::Reflection::Property const& GetProperty() const {
+            SRAssert(pProperty);
+            return *pProperty;
+        }
+        SR_NODISCARD SR_UTILS_NS::StringAtom GetPropertyName() const {
+            return pProperty ? pProperty->GetName() : SR_UTILS_NS::StringAtom();
+        }
+        SR_NODISCARD SR_UTILS_NS::StringAtom GetPropertyDisplayName() const {
+            return pProperty ? pProperty->GetEditorParams().GetDisplayName() : customDisplayName;
+        }
+        SR_NODISCARD const SR_UTILS_NS::Reflection::EditorPropertyParams& GetEditorParams() const {
+            return pProperty ? pProperty->GetEditorParams() : editorPropertyParams;
+        }
 
         SR_NODISCARD SR_UTILS_NS::Reflection::Value GetValue() const {
             if (pValue) {
@@ -57,9 +62,7 @@ namespace SR_CORE_GUI_NS {
             return pProperty->Get(pOwner).DetachIfConst();
         }
 
-        SR_NODISCARD bool HasExplicitSetter() const {
-            return pProperty && pProperty->HasExplicitSetter();
-        }
+        SR_NODISCARD bool HasExplicitSetter() const { return pProperty && pProperty->HasExplicitSetter(); }
 
         SR_HTYPES_NS::Function<void(bool drag)> onBeforeChangeCallback;
         SR_UTILS_NS::Reflection::EditorPropertyParams editorPropertyParams;
@@ -82,9 +85,7 @@ namespace SR_CORE_GUI_NS {
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<PropertyDrawerBase>;
 
-        PropertyDrawerBase()
-            : Ptr(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
-        { }
+        PropertyDrawerBase() : Ptr(this, SR_UTILS_NS::SharedPtrPolicy::Automatic) {}
 
         virtual PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) = 0;
 
@@ -111,13 +112,19 @@ namespace SR_CORE_GUI_NS {
         }
 
     protected:
-        static void SetValue(const PropertyDrawerContext& context, const PropertyDrawerFeedback& feedback, const SR_UTILS_NS::Reflection::Value& value) {
+        static void SetValue(
+            const PropertyDrawerContext& context, const PropertyDrawerFeedback& feedback,
+            const SR_UTILS_NS::Reflection::Value& value
+        ) {
             if (!context.pValue && feedback.isChanged && (!value.IsRef() || context.HasExplicitSetter())) {
                 context.GetProperty().Set(context.pOwner, value);
             }
         }
 
-        static void SetReflectedValue(const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback, const SR_UTILS_NS::Reflection::Value& value, bool drag = false) {
+        static void SetReflectedValue(
+            const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback,
+            const SR_UTILS_NS::Reflection::Value& value, bool drag = false
+        ) {
             if (context.onBeforeChangeCallback) {
                 context.onBeforeChangeCallback(drag);
             }
@@ -126,14 +133,20 @@ namespace SR_CORE_GUI_NS {
 
             if (!context.pValue) {
                 context.GetProperty().Set(context.pOwner, value);
-            }
-            else {
-                SRAssert2(value.SizeOf() == context.pValue->SizeOf(), "PropertyDrawerBase::SetReflectedValue() : size mismatch!");
+            } else {
+                SRAssert2(
+                    value.SizeOf() == context.pValue->SizeOf(),
+                    "PropertyDrawerBase::SetReflectedValue() : size mismatch!"
+                );
                 std::memcpy(context.pValue->Data(), value.Data(), value.SizeOf());
             }
         }
 
-        template<typename MappedVal, typename NewVal> static void SetMappedValue(const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback, MappedVal pMapped, NewVal value, bool drag = false) {
+        template <typename MappedVal, typename NewVal>
+        static void SetMappedValue(
+            const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback, MappedVal pMapped, NewVal value,
+            bool drag = false
+        ) {
             if (context.onBeforeChangeCallback) {
                 context.onBeforeChangeCallback(drag);
             }
@@ -142,8 +155,7 @@ namespace SR_CORE_GUI_NS {
 
             if (!context.pValue) {
                 context.GetProperty().Set(context.pOwner, SR_UTILS_NS::Reflection::Value::Create(value));
-            }
-            else {
+            } else {
                 *pMapped = value;
             }
         }
@@ -152,13 +164,13 @@ namespace SR_CORE_GUI_NS {
 
     private:
         mutable SR_GRAPH_NS::RenderContext::Ptr m_context;
-
     };
 
     class BoolPropertyDrawer : public PropertyDrawerBase {
         SR_CLASS()
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<BoolPropertyDrawer>;
+
     public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
     };
@@ -167,6 +179,7 @@ namespace SR_CORE_GUI_NS {
         SR_CLASS()
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<NumericPropertyDrawer>;
+
     public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
     };
@@ -175,9 +188,9 @@ namespace SR_CORE_GUI_NS {
         SR_CLASS()
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<MathVectorPropertyDrawer>;
+
     public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
-
     };
 
     class MathSizePropertyDrawer : public PropertyDrawerBase {
@@ -185,6 +198,6 @@ namespace SR_CORE_GUI_NS {
     public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
     };
-}
+} // namespace SR_CORE_GUI_NS
 
-#endif //SR_ENGINE_CORE_PROPERTY_DRAWER_H
+#endif // SR_ENGINE_CORE_PROPERTY_DRAWER_H

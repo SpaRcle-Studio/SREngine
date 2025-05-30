@@ -11,9 +11,7 @@
 #include <Codegen/Rigidbody3D.generated.hpp>
 
 namespace SR_PTYPES_NS {
-    SR_UTILS_NS::Measurement Rigidbody3D::GetMeasurement() const {
-        return SR_UTILS_NS::Measurement::Space3D;
-    }
+    SR_UTILS_NS::Measurement Rigidbody3D::GetMeasurement() const { return SR_UTILS_NS::Measurement::Space3D; }
 
     void Rigidbody3D::SetLinearLock(const SR_MATH_NS::BVector3& lock) {
         m_linearLock = lock;
@@ -66,4 +64,4 @@ namespace SR_PTYPES_NS {
             return pImpl->SetAngularVelocity(velocity);
         }
     }
-}
+} // namespace SR_PTYPES_NS

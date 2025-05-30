@@ -13,9 +13,7 @@ namespace SR_CORE_GUI_NS {
         SR_CLASS()
     public:
         void OnObjectReplaced(SRClass* pOld, SRClass* pNew) override;
-
     };
-}
+} // namespace SR_CORE_GUI_NS
 
-
-#endif //SR_ENGINE_GUI_MATERIAL_PROPERTY_DRAWER_H
+#endif // SR_ENGINE_GUI_MATERIAL_PROPERTY_DRAWER_H

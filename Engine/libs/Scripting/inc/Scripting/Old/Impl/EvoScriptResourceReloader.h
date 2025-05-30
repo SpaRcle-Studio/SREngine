@@ -10,13 +10,13 @@
 namespace SR_SCRIPTING_NS {
     class SR_SCRIPTING_DLL_API EvoScriptResourceReloader final : public SR_UTILS_NS::IResourceReloader {
         using StashedProperties = std::vector<std::pair<IRawBehaviour*, SR_HTYPES_NS::Marshal::Ptr>>;
+
     public:
         SR_NODISCARD bool Reload(const SR_UTILS_NS::Path& path, SR_UTILS_NS::ResourceInfo* pResourceInfo) override;
 
     private:
         void FreeStashedProperties(const StashedProperties& properties);
-
     };
-}
+} // namespace SR_SCRIPTING_NS
 
-#endif //SR_ENGINE_EVOSCRIPTRESOURCERELOADER_H
+#endif // SR_ENGINE_EVOSCRIPTRESOURCERELOADER_H

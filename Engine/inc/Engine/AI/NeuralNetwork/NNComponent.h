@@ -5,4 +5,4 @@
 #ifndef NNCOMPONENT_H
 #define NNCOMPONENT_H
 
-#endif //NNCOMPONENT_H
+#endif // NNCOMPONENT_H

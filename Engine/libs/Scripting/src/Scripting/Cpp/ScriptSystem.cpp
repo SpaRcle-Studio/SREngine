@@ -67,25 +67,40 @@ namespace SR_SCRIPTING_NS {
             }
 
             if (!m_codeGenerator->Init()) {
-                SR_ERROR("ScriptSystem::Init() : failed to initialize code generator!");
+                SR_ERROR("ScriptSystem::Init() : failed to initialize code "
+                         "generator!");
                 return false;
             }
-        }
-        else {
+        } else {
             SR_LOG("ScriptSystem::Init() : script compilation is disabled!");
             return true;
         }
 
         auto&& pFileSystemWatcher = SR_UTILS_NS::ResourceManager::Instance().GetFileSystemWatcher();
 
-        m_fileChangedSubscription = pFileSystemWatcher->Subscribe(SR_UTILS_NS::FileSystemWatcher::MODIFIED_EVENT_ID,
-            std::bind(&ScriptSystem::HandleFileSystemEvent, this, std::placeholders::_1, SR_UTILS_NS::FileSystemWatcher::EventType::Modified));
+        m_fileChangedSubscription = pFileSystemWatcher->Subscribe(
+            SR_UTILS_NS::FileSystemWatcher::MODIFIED_EVENT_ID,
+            std::bind(
+                &ScriptSystem::HandleFileSystemEvent, this, std::placeholders::_1,
+                SR_UTILS_NS::FileSystemWatcher::EventType::Modified
+            )
+        );
 
-        m_fileCreatedSubscription = pFileSystemWatcher->Subscribe(SR_UTILS_NS::FileSystemWatcher::ADDED_EVENT_ID,
-            std::bind(&ScriptSystem::HandleFileSystemEvent, this, std::placeholders::_1, SR_UTILS_NS::FileSystemWatcher::EventType::Add));
+        m_fileCreatedSubscription = pFileSystemWatcher->Subscribe(
+            SR_UTILS_NS::FileSystemWatcher::ADDED_EVENT_ID,
+            std::bind(
+                &ScriptSystem::HandleFileSystemEvent, this, std::placeholders::_1,
+                SR_UTILS_NS::FileSystemWatcher::EventType::Add
+            )
+        );
 
-        m_fileDeletedSubscription = pFileSystemWatcher->Subscribe(SR_UTILS_NS::FileSystemWatcher::DELETED_EVENT_ID,
-            std::bind(&ScriptSystem::HandleFileSystemEvent, this, std::placeholders::_1, SR_UTILS_NS::FileSystemWatcher::EventType::Delete));
+        m_fileDeletedSubscription = pFileSystemWatcher->Subscribe(
+            SR_UTILS_NS::FileSystemWatcher::DELETED_EVENT_ID,
+            std::bind(
+                &ScriptSystem::HandleFileSystemEvent, this, std::placeholders::_1,
+                SR_UTILS_NS::FileSystemWatcher::EventType::Delete
+            )
+        );
 
         SR_LOG("ScriptSystem::Init() : creating script system thread...");
 
@@ -102,7 +117,9 @@ namespace SR_SCRIPTING_NS {
         return true;
     }
 
-    void ScriptSystem::HandleFileSystemEvent(const SR_UTILS_NS::SubscriptionMessage& message, SR_UTILS_NS::FileSystemWatcher::EventType eventType) {
+    void ScriptSystem::HandleFileSystemEvent(
+        const SR_UTILS_NS::SubscriptionMessage& message, SR_UTILS_NS::FileSystemWatcher::EventType eventType
+    ) {
         auto&& path = message.GetPathRef(SR_UTILS_NS::FileSystemWatcher::FILE_MSG_ID);
         if (path.IsSubPath(m_cacheFolder) || path.IsSubPath(m_apiFolder)) {
             return;
@@ -119,7 +136,8 @@ namespace SR_SCRIPTING_NS {
 
         SR_LOCK_GUARD;
 
-        if (m_changedCppFiles.count(path) > 0 || m_changedModules.count(path) > 0 || m_changedCppModules.count(path) > 0) {
+        if (m_changedCppFiles.count(path) > 0 || m_changedModules.count(path) > 0 ||
+            m_changedCppModules.count(path) > 0) {
             m_lastFileSystemEvent = SR_HTYPES_NS::Time::Instance().Now();
             return;
         }
@@ -127,14 +145,21 @@ namespace SR_SCRIPTING_NS {
         if (m_isCompilationEnabled) {
             if (path.GetBaseNameAndExt() == ENGINE_MODULE_FILE_NAME) {
                 if (m_state != State::InitialAnalyse) {
-                    SR_DEBUG_LOG("ScriptSystem::HandleFileSystemEvent() : engine module change detected!\n\tPath: {}", path);
+                    SR_DEBUG_LOG(
+                        "ScriptSystem::HandleFileSystemEvent() : engine module "
+                        "change detected!\n\tPath: {}",
+                        path
+                    );
                 }
                 m_lastFileSystemEvent = SR_HTYPES_NS::Time::Instance().Now();
                 m_changedModules.insert(path);
-            }
-            else if (ALLOWED_CPP_EXTENSIONS.find(path.GetExtensionView()) != ALLOWED_CPP_EXTENSIONS.end()) {
+            } else if (ALLOWED_CPP_EXTENSIONS.find(path.GetExtensionView()) != ALLOWED_CPP_EXTENSIONS.end()) {
                 if (m_state != State::InitialAnalyse) {
-                    SR_DEBUG_LOG("ScriptSystem::HandleFileSystemEvent() : c++ file change detected!\n\tPath: {}", path);
+                    SR_DEBUG_LOG(
+                        "ScriptSystem::HandleFileSystemEvent() : c++ file "
+                        "change detected!\n\tPath: {}",
+                        path
+                    );
                 }
                 m_lastFileSystemEvent = SR_HTYPES_NS::Time::Instance().Now();
                 m_changedCppFiles.insert(path);
@@ -143,7 +168,11 @@ namespace SR_SCRIPTING_NS {
 
         if (ALLOWED_CPP_MODULE_EXTENSIONS.find(path.GetExtensionView()) != ALLOWED_CPP_MODULE_EXTENSIONS.end()) {
             if (m_state != State::InitialAnalyse) {
-                SR_DEBUG_LOG("ScriptSystem::HandleFileSystemEvent() : c++ module change detected!\n\tPath: {}", path);
+                SR_DEBUG_LOG(
+                    "ScriptSystem::HandleFileSystemEvent() : c++ module change "
+                    "detected!\n\tPath: {}",
+                    path
+                );
             }
             m_lastFileSystemEvent = SR_HTYPES_NS::Time::Instance().Now();
             m_changedCppModules.insert(path);
@@ -167,50 +196,50 @@ namespace SR_SCRIPTING_NS {
             }
 
             switch (m_state) {
-                case State::InitialAnalyse:
-                    InitialAnalyse();
-                    m_state = State::Idle;
-                    break;
-                case State::Idle:
-                    ThreadIdle();
-                    break;
-                case State::CheckModules: {
-                    std::set<SR_UTILS_NS::Path> changedModules;
-                    {
-                        SR_LOCK_GUARD;
-                        changedModules = SR_EXCHANGE(m_changedModules, {});
-                    }
-                    m_codeGenerator->ProcessChangedModules(changedModules);
-                    m_state = State::Codegen;
-                    break;
+            case State::InitialAnalyse:
+                InitialAnalyse();
+                m_state = State::Idle;
+                break;
+            case State::Idle:
+                ThreadIdle();
+                break;
+            case State::CheckModules: {
+                std::set<SR_UTILS_NS::Path> changedModules;
+                {
+                    SR_LOCK_GUARD;
+                    changedModules = SR_EXCHANGE(m_changedModules, {});
                 }
-                case State::Codegen: {
-                    std::set<SR_UTILS_NS::Path> changedCppFiles;
-                    {
-                        SR_LOCK_GUARD;
-                        changedCppFiles = SR_EXCHANGE(m_changedCppFiles, {});
-                    }
-                    m_codeGenerator->ProcessChangedCodeFiles(changedCppFiles);
-                    if (m_codeGenerator->IsNeedRecompile()) {
-                        m_codeGenerator->RegenerateChangedModules();
-                        m_isCompiled = false;
-                    }
-                    m_state = State::Idle;
-                    break;
+                m_codeGenerator->ProcessChangedModules(changedModules);
+                m_state = State::Codegen;
+                break;
+            }
+            case State::Codegen: {
+                std::set<SR_UTILS_NS::Path> changedCppFiles;
+                {
+                    SR_LOCK_GUARD;
+                    changedCppFiles = SR_EXCHANGE(m_changedCppFiles, {});
                 }
-                case State::Compiling:
-                    CompileModules();
-                    if (!m_hasCompileErrors) {
-                        CopyModules();
-                    }
-                    m_state = State::Idle;
-                    m_isCompiled = true;
-                    break;
-                case State::Reloading:
-                    ReloadModules();
-                    m_state = State::Idle;
-                    m_hasModuleReloadRequest = false;
-                    break;
+                m_codeGenerator->ProcessChangedCodeFiles(changedCppFiles);
+                if (m_codeGenerator->IsNeedRecompile()) {
+                    m_codeGenerator->RegenerateChangedModules();
+                    m_isCompiled = false;
+                }
+                m_state = State::Idle;
+                break;
+            }
+            case State::Compiling:
+                CompileModules();
+                if (!m_hasCompileErrors) {
+                    CopyModules();
+                }
+                m_state = State::Idle;
+                m_isCompiled = true;
+                break;
+            case State::Reloading:
+                ReloadModules();
+                m_state = State::Idle;
+                m_hasModuleReloadRequest = false;
+                break;
             }
         }
 
@@ -237,8 +266,12 @@ namespace SR_SCRIPTING_NS {
 
         /// next, check if we have any changes in the cpp files
         if (!m_changedCppFiles.empty()) {
-            if (SRVerify2(m_isCompilationEnabled, "Script system thread detected file changes but compilation is disabled!")) {
-                SR_INFO("ScriptSystem::ThreadIdle() : script system thread detected file changes!");
+            if (SRVerify2(
+                    m_isCompilationEnabled, "Script system thread detected file changes but "
+                                            "compilation is disabled!"
+                )) {
+                SR_INFO("ScriptSystem::ThreadIdle() : script system thread "
+                        "detected file changes!");
                 m_state = State::Codegen;
             }
             m_hasModuleReloadRequest = false;
@@ -258,7 +291,8 @@ namespace SR_SCRIPTING_NS {
         }
 
         if (m_hasModuleReloadRequest) {
-            SR_INFO("ScriptSystem::ThreadIdle() : script system thread detected module reload request!");
+            SR_INFO("ScriptSystem::ThreadIdle() : script system thread "
+                    "detected module reload request!");
             m_state = State::Reloading;
             return;
         }
@@ -275,7 +309,8 @@ namespace SR_SCRIPTING_NS {
         SR_TRACY_ZONE;
 
         if (!m_isCompilationEnabled) {
-            SRHalt("ScriptSystem::CompileModules() : script compilation is disabled! But compilation was requested!");
+            SRHalt("ScriptSystem::CompileModules() : script compilation is "
+                   "disabled! But compilation was requested!");
             return;
         }
 
@@ -306,7 +341,8 @@ namespace SR_SCRIPTING_NS {
             context.includePaths.emplace_back(context.outFolder.Concat("Codegen"));
 
             if (!m_compiler->Compile(context)) {
-                SR_ERROR("ScriptSystem::CompileModules() : failed to compile modules!");
+                SR_ERROR("ScriptSystem::CompileModules() : failed to compile "
+                         "modules!");
                 m_hasCompileErrors = true;
                 return;
             }
@@ -318,12 +354,14 @@ namespace SR_SCRIPTING_NS {
 
     void ScriptSystem::CopyModules() {
         if (!m_isCompilationEnabled) {
-            SRHalt("ScriptSystem::CopyModules() : script compilation is disabled! But copy was requested!");
+            SRHalt("ScriptSystem::CopyModules() : script compilation is "
+                   "disabled! But copy was requested!");
             return;
         }
 
         if (m_hasCompileErrors) {
-            SRHalt("ScriptSystem::CopyModules() : cannot copy modules! Compilation errors detected!");
+            SRHalt("ScriptSystem::CopyModules() : cannot copy modules! "
+                   "Compilation errors detected!");
             return;
         }
 
@@ -337,8 +375,10 @@ namespace SR_SCRIPTING_NS {
 
         for (auto&& moduleName : m_modulesToCopy) {
             const std::string_view extension = ScriptSystem::GetDynamicLibraryExtension();
-            auto&& sourceModulePath = m_cacheFolder.Concat("Scripts/Modules/{}/{}.{}"_format(moduleName, moduleName, extension));
-            auto&& sourcePdbPath = m_cacheFolder.Concat("Scripts/Modules/{}/{}.pdb.protected"_format(moduleName, moduleName));
+            auto&& sourceModulePath =
+                m_cacheFolder.Concat("Scripts/Modules/{}/{}.{}"_format(moduleName, moduleName, extension));
+            auto&& sourcePdbPath =
+                m_cacheFolder.Concat("Scripts/Modules/{}/{}.pdb.protected"_format(moduleName, moduleName));
 
             if (auto&& pModule = m_codeGenerator->GetModule(moduleName)) {
                 auto&& destinationModulePath = pModule->path.GetFolder().Concat("{}.{}"_format(moduleName, extension));
@@ -354,26 +394,43 @@ namespace SR_SCRIPTING_NS {
 
                 if (sourcePdbPath.IsFile()) {
                     if (SR_PLATFORM_NS::Copy(sourcePdbPath, destinationPdbPath)) {
-                        SR_LOG("ScriptSystem::CopyModules() : pdb copied successfully!\n\tSource: {}\n\tDestination: {}", sourcePdbPath, destinationPdbPath);
-                    }
-                    else {
-                        SR_ERROR("ScriptSystem::CopyModules() : failed to copy pdb!\n\tSource: {}\n\tDestination: {}", sourcePdbPath, destinationPdbPath);
+                        SR_LOG(
+                            "ScriptSystem::CopyModules() : pdb copied "
+                            "successfully!\n\tSource: {}\n\tDestination: {}",
+                            sourcePdbPath, destinationPdbPath
+                        );
+                    } else {
+                        SR_ERROR(
+                            "ScriptSystem::CopyModules() : failed to copy "
+                            "pdb!\n\tSource: {}\n\tDestination: {}",
+                            sourcePdbPath, destinationPdbPath
+                        );
                         m_hasModuleCopyErrors = true;
                         return;
                     }
                 }
 
                 if (SR_PLATFORM_NS::Copy(sourceModulePath, destinationModulePath)) {
-                    SR_LOG("ScriptSystem::CopyModules() : module copied successfully!\n\tSource: {}\n\tDestination: {}", sourceModulePath, destinationModulePath);
-                }
-                else {
-                    SR_ERROR("ScriptSystem::CopyModules() : failed to copy module!\n\tSource: {}\n\tDestination: {}", sourceModulePath, destinationModulePath);
+                    SR_LOG(
+                        "ScriptSystem::CopyModules() : module copied "
+                        "successfully!\n\tSource: {}\n\tDestination: {}",
+                        sourceModulePath, destinationModulePath
+                    );
+                } else {
+                    SR_ERROR(
+                        "ScriptSystem::CopyModules() : failed to copy "
+                        "module!\n\tSource: {}\n\tDestination: {}",
+                        sourceModulePath, destinationModulePath
+                    );
                     m_hasModuleCopyErrors = true;
                     return;
                 }
-            }
-            else {
-                SR_WARN("ScriptSystem::CopyModules() : module not found!\n\tModule: {}", moduleName);
+            } else {
+                SR_WARN(
+                    "ScriptSystem::CopyModules() : module not "
+                    "found!\n\tModule: {}",
+                    moduleName
+                );
             }
         }
 
@@ -388,7 +445,11 @@ namespace SR_SCRIPTING_NS {
 
         for (auto&& modulePath : changedCppModules) {
             if (m_moduleManager->ReloadModule(modulePath)) {
-                SR_LOG("ScriptSystem::ReloadModules() : module reloaded successfully!\n\tPath: {}", modulePath);
+                SR_LOG(
+                    "ScriptSystem::ReloadModules() : module reloaded "
+                    "successfully!\n\tPath: {}",
+                    modulePath
+                );
             }
         }
 
@@ -399,14 +460,14 @@ namespace SR_SCRIPTING_NS {
         const SR_UTILS_NS::PlatformType platform = SR_PLATFORM_NS::GetType();
 
         switch (platform) {
-            case SR_UTILS_NS::PlatformType::Windows:
-                return "dll";
-            case SR_UTILS_NS::PlatformType::Linux:
-            case SR_UTILS_NS::PlatformType::Android:
-                return "so";
-            default:
-                SRHalt("CppCompiler::Compile() : unknown platform!");
-                return "";
+        case SR_UTILS_NS::PlatformType::Windows:
+            return "dll";
+        case SR_UTILS_NS::PlatformType::Linux:
+        case SR_UTILS_NS::PlatformType::Android:
+            return "so";
+        default:
+            SRHalt("CppCompiler::Compile() : unknown platform!");
+            return "";
         }
     }
 
@@ -432,13 +493,18 @@ namespace SR_SCRIPTING_NS {
 
         SR_TRACY_ZONE_N("Wait for module reload");
 
-        while (m_hasModuleReloadRequest);
+        while (m_hasModuleReloadRequest)
+            ;
     }
 
     bool ScriptSystem::InitEngineSources() {
         m_pathToEngineSourcesRoot = m_resourcesFolder.Concat("API");
         if (!m_pathToEngineSourcesRoot.IsDir()) {
-            SR_ERROR("ScriptSystem::InitEngineSources() : engine sources folder not found!\n\tPath: {}", m_pathToEngineSourcesRoot);
+            SR_ERROR(
+                "ScriptSystem::InitEngineSources() : engine sources folder not "
+                "found!\n\tPath: {}",
+                m_pathToEngineSourcesRoot
+            );
             return false;
         }
 
@@ -453,17 +519,23 @@ namespace SR_SCRIPTING_NS {
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs/entt/src"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs/icu"));
-        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs/fmt/include"));
-        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs/fmt/include"));
+        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs/fmt/include")
+        );
+        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs/fmt/include")
+        );
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Scripting/inc"));
 
         for (auto&& path : m_engineSourcesIncludePaths) {
             if (!path.IsDir()) {
-                SR_ERROR("ScriptSystem::InitEngineSources() : engine sources folder not found!\n\tPath: {}", path);
+                SR_ERROR(
+                    "ScriptSystem::InitEngineSources() : engine sources folder "
+                    "not found!\n\tPath: {}",
+                    path
+                );
                 return false;
             }
         }
 
         return true;
     }
-}
+} // namespace SR_SCRIPTING_NS

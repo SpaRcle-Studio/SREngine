@@ -10,7 +10,7 @@ namespace SR_SCRIPTING_NS {
         SR_LOCK_GUARD;
 
         if (force) {
-            for (auto pIt = m_scripts.begin(); pIt != m_scripts.end(); ) {
+            for (auto pIt = m_scripts.begin(); pIt != m_scripts.end();) {
                 auto&& pHolder = pIt->second;
 
                 if (!pHolder) {
@@ -62,7 +62,7 @@ namespace SR_SCRIPTING_NS {
             return;
         }*/
 
-        ++(m_checkIterator.value()); 
+        ++(m_checkIterator.value());
     }
 
     bool EvoScriptManager::ReloadScript(const SR_UTILS_NS::Path& localPath) {
@@ -70,15 +70,15 @@ namespace SR_SCRIPTING_NS {
 
         auto&& compiler = GlobalEvoCompiler::Instance();
 
-    #ifdef SR_WIN32
+#ifdef SR_WIN32
         if (m_compilerPath.empty()) {
             m_compilerPath = FindMSVCCompiler();
         }
-    #elif defined(SR_LINUX)
+#elif defined(SR_LINUX)
         if (m_compilerPath.empty()) {
             m_compilerPath = "/usr/bin/g++";
         }
-    #endif
+#endif
 
         compiler.SetCompilerPath(m_compilerPath.ToStringRef());
 
@@ -89,9 +89,15 @@ namespace SR_SCRIPTING_NS {
             pHolder->SetScript(nullptr);
         });
 
-        auto&& pEvoScript = EvoScript::Script::Allocate(localPath.GetWithoutExtension(), &compiler, compiler.GetGenerator()->GetAddresses());
+        auto&& pEvoScript = EvoScript::Script::Allocate(
+            localPath.GetWithoutExtension(), &compiler, compiler.GetGenerator()->GetAddresses()
+        );
         if (!pEvoScript) {
-            SR_ERROR("EvoScriptManager::Load() : failed to allocate evo script!\n\tPath: " + localPath.ToStringRef());
+            SR_ERROR(
+                "EvoScriptManager::Load() : failed to allocate evo "
+                "script!\n\tPath: " +
+                localPath.ToStringRef()
+            );
             return true;
         }
 
@@ -117,7 +123,11 @@ namespace SR_SCRIPTING_NS {
         SR_LOG("EvoScriptManager::Load() : load \"" + localPath.ToStringRef() + "\" script");
 
         if (!ReloadScript(localPath)) {
-            SR_ERROR("EvoScriptManager::Load() : failed to reload script!\n\tPath: " + localPath.ToStringRef());
+            SR_ERROR(
+                "EvoScriptManager::Load() : failed to reload "
+                "script!\n\tPath: " +
+                localPath.ToStringRef()
+            );
             return EvoScriptManager::ScriptPtr();
         }
 
@@ -130,7 +140,11 @@ namespace SR_SCRIPTING_NS {
         Update(true);
 
         if (!m_scripts.empty()) {
-            SR_ERROR("EvoScriptManager::OnSingletonDestroy() : not all scripts were deleted!\n\tCount: " + std::to_string(m_scripts.size()));
+            SR_ERROR(
+                "EvoScriptManager::OnSingletonDestroy() : not all scripts were "
+                "deleted!\n\tCount: " +
+                std::to_string(m_scripts.size())
+            );
         }
 
         Singleton::OnSingletonDestroy();
@@ -139,7 +153,9 @@ namespace SR_SCRIPTING_NS {
     SR_UTILS_NS::Path EvoScriptManager::FindMSVCCompiler() const {
         auto&& resourceDirectory = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
         auto&& vswherePath = resourceDirectory.Concat("Engine/Utilities/vswhere.exe");
-        std::string command = vswherePath.ToStringRef() + " -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -find VC/Tools/MSVC/**/bin/Hostx64/x64/cl.exe";
+        std::string command = vswherePath.ToStringRef() + " -latest -products * -requires "
+                                                          "Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -find "
+                                                          "VC/Tools/MSVC/**/bin/Hostx64/x64/cl.exe";
         command += " > vswhereOutput.txt";
         system(command.c_str());
 
@@ -149,4 +165,4 @@ namespace SR_SCRIPTING_NS {
         vswhereOutput.close();
         return result;
     }
-}
+} // namespace SR_SCRIPTING_NS

@@ -7,9 +7,9 @@
 
 #include <Graphics/GUI/Widget.h>
 
+#include <Utils/Input/InputEvents.h>
 #include <Utils/Types/SafePointer.h>
 #include <Utils/World/Scene.h>
-#include <Utils/Input/InputEvents.h>
 
 namespace SR_CORE_GUI_NS {
     class SceneRunner : public SR_GRAPH_NS::GUI::Widget {
@@ -18,7 +18,7 @@ namespace SR_CORE_GUI_NS {
         ~SceneRunner() override = default;
 
     public:
-        void SetScene(const SR_WORLD_NS::Scene::Ptr &scene);
+        void SetScene(const SR_WORLD_NS::Scene::Ptr& scene);
 
     private:
         void Draw() override;
@@ -35,8 +35,7 @@ namespace SR_CORE_GUI_NS {
         SR_WORLD_NS::Scene::Ptr m_scene;
         SR_UTILS_NS::Path m_lastPath;
         SR_UTILS_NS::Path m_scenePath;
-
     };
-}
+} // namespace SR_CORE_GUI_NS
 
-#endif //SR_ENGINE_SCENERUNNER_H
+#endif // SR_ENGINE_SCENERUNNER_H

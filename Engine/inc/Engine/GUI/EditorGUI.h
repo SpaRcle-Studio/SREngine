@@ -6,8 +6,8 @@
 #define SR_ENGINE_EDITOR_GUI_H
 
 #include <Utils/Common/Enumerations.h>
-#include <Utils/Types/SafePointer.h>
 #include <Utils/ECS/SceneObject.h>
+#include <Utils/Types/SafePointer.h>
 
 #include <Graphics/GUI/WidgetManager.h>
 
@@ -22,7 +22,7 @@ namespace SR_GTYPES_NS {
 namespace SR_GRAPH_NS {
     class Window;
     class RenderContext;
-}
+} // namespace SR_GRAPH_NS
 
 namespace SR_CORE_NS {
     class Engine;
@@ -45,9 +45,8 @@ namespace SR_CORE_GUI_NS {
         using WindowPtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::Window>;
         using ScenePtr = SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>;
         using EnginePtr = SR_HTYPES_NS::SharedPtr<SR_CORE_NS::Engine>;
-        enum class Click {
-            None, Drag, Miss
-        };
+        enum class Click { None, Drag, Miss };
+
     public:
         explicit EditorGUI(const EnginePtr& pEngine);
         ~EditorGUI() override;
@@ -55,11 +54,11 @@ namespace SR_CORE_GUI_NS {
     public:
         void Enable(bool value);
 
-        template<typename T> SR_DEPRECATED void AddWindow(T* widget) {
+        template <typename T> SR_DEPRECATED void AddWindow(T* widget) {
             m_widgets.insert(std::make_pair(typeid(T).hash_code(), widget));
         }
 
-        template<typename T> T& AddWidget(T* pWidget) {
+        template <typename T> T& AddWidget(T* pWidget) {
             if (m_widgets.count(typeid(T).hash_code()) == 1) {
                 SRHalt("Widget already was added!");
                 static T empty;
@@ -70,13 +69,11 @@ namespace SR_CORE_GUI_NS {
             return *pWidget;
         }
 
-        template<typename T> SR_DEPRECATED T* GetWindow() {
-            return GetWidget<T>();
-        }
+        template <typename T> SR_DEPRECATED T* GetWindow() { return GetWidget<T>(); }
 
         SR_NODISCARD SR_GRAPH_GUI_NS::Widget* GetWidget(const SR_UTILS_NS::StringAtom& name) const;
 
-        template<typename T> T* GetWidget() {
+        template <typename T> T* GetWidget() {
             if (auto&& pIt = m_widgets.find(typeid(T).hash_code()); pIt != m_widgets.end()) {
                 if (auto&& pWidget = dynamic_cast<T*>(pIt->second))
                     return pWidget;
@@ -87,7 +84,7 @@ namespace SR_CORE_GUI_NS {
             return nullptr;
         }
 
-        template<typename T> T* OpenWidget() {
+        template <typename T> T* OpenWidget() {
             if (auto&& pWidget = GetWidget<T>()) {
                 pWidget->Open();
                 return pWidget;
@@ -148,18 +145,16 @@ namespace SR_CORE_GUI_NS {
 
         Click m_click = Click::None;
 
-        std::atomic<bool> m_isInit     = false;
-        std::atomic<bool> m_hasErrors  = false;
-        std::atomic<bool> m_enabled    = false;
-        std::atomic<bool> m_loaded     = false;
+        std::atomic<bool> m_isInit = false;
+        std::atomic<bool> m_hasErrors = false;
+        std::atomic<bool> m_enabled = false;
+        std::atomic<bool> m_loaded = false;
 
         std::atomic<bool> m_useDocking = true;
         std::atomic<bool> m_dragWindow = false;
 
         bool m_imGuiDemo = false;
-
     };
-}
+} // namespace SR_CORE_GUI_NS
 
-#endif //SR_ENGINE_EDITOR_GUI_H
-
+#endif // SR_ENGINE_EDITOR_GUI_H

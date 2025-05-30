@@ -2,8 +2,8 @@
 // Created by innerviewer on 2/28/2023.
 //
 
-#include <Physics/PhysX/PhysXVehicle4W3D.h>
 #include <Physics/PhysX/PhysXMaterialImpl.h>
+#include <Physics/PhysX/PhysXVehicle4W3D.h>
 #include <Physics/PhysicsMaterial.h>
 
 namespace SR_PTYPES_NS {
@@ -25,10 +25,10 @@ namespace SR_PTYPES_NS {
         }
     }
 
-    physx::PxVehicleWheelsSimData* PhysXVehicle4W3D::SetupWheelsSimulationData() {
-        physx::PxVehicleWheelsSimData* wheelsSimData = physx::PxVehicleWheelsSimData::allocate(Vehicle4WWheelOrder::Size);
-        auto&& wheelsData = GetWheelsData();
-        auto&& vehicleData = GetVehicleData();
+    physx::PxVehicleWheelsSimData* PhysXVehicle4W3D::SetupWheelsSimulationData()
+    { physx::PxVehicleWheelsSimData* wheelsSimData =
+    physx::PxVehicleWheelsSimData::allocate(Vehicle4WWheelOrder::Size); auto&&
+    wheelsData = GetWheelsData(); auto&& vehicleData = GetVehicleData();
 
         //Set up the wheels.
         physx::PxVehicleWheelData wheels[Vehicle4WWheelOrder::Size];
@@ -42,11 +42,15 @@ namespace SR_PTYPES_NS {
             }
 
             //Enable the handbrake for the rear wheels only.
-            wheels[physx::PxVehicleDrive4WWheelOrder::eREAR_LEFT].mMaxHandBrakeTorque = wheelsData[Vehicle4WWheelOrder::RearLeft].m_maxHandBrakeTorque;
-            wheels[physx::PxVehicleDrive4WWheelOrder::eREAR_RIGHT].mMaxHandBrakeTorque = wheelsData[Vehicle4WWheelOrder::RearRight].m_maxHandBrakeTorque;
+            wheels[physx::PxVehicleDrive4WWheelOrder::eREAR_LEFT].mMaxHandBrakeTorque
+    = wheelsData[Vehicle4WWheelOrder::RearLeft].m_maxHandBrakeTorque;
+            wheels[physx::PxVehicleDrive4WWheelOrder::eREAR_RIGHT].mMaxHandBrakeTorque
+    = wheelsData[Vehicle4WWheelOrder::RearRight].m_maxHandBrakeTorque;
             //Enable steering for the front wheels only.
-            wheels[physx::PxVehicleDrive4WWheelOrder::eFRONT_LEFT].mMaxSteer = SR_PI * wheelsData[Vehicle4WWheelOrder::FrontLeft].m_maxSteer;
-            wheels[physx::PxVehicleDrive4WWheelOrder::eFRONT_RIGHT].mMaxSteer = SR_PI * wheelsData[Vehicle4WWheelOrder::FrontRight].m_maxSteer;
+            wheels[physx::PxVehicleDrive4WWheelOrder::eFRONT_LEFT].mMaxSteer =
+    SR_PI * wheelsData[Vehicle4WWheelOrder::FrontLeft].m_maxSteer;
+            wheels[physx::PxVehicleDrive4WWheelOrder::eFRONT_RIGHT].mMaxSteer =
+    SR_PI * wheelsData[Vehicle4WWheelOrder::FrontRight].m_maxSteer;
         }
 
         //Set up the tires.
@@ -59,10 +63,12 @@ namespace SR_PTYPES_NS {
         }
 
         physx::PxVec3 pxWheelCenterActorOffsets[Vehicle4WWheelOrder::Size];
-        physx::PxVec3 pxChassisCMOffset = SR_PHYSICS_UTILS_NS::FV3ToPxV3(vehicleData.m_chassisCMOffset);
+        physx::PxVec3 pxChassisCMOffset =
+    SR_PHYSICS_UTILS_NS::FV3ToPxV3(vehicleData.m_chassisCMOffset);
 
         for (uint32_t i = 0; i < Vehicle4WWheelOrder::Size; i++) {
-            pxWheelCenterActorOffsets[i] = SR_PHYSICS_UTILS_NS::FV3ToPxV3(wheelsData[i].m_wheelCenterActorOffset);
+            pxWheelCenterActorOffsets[i] =
+    SR_PHYSICS_UTILS_NS::FV3ToPxV3(wheelsData[i].m_wheelCenterActorOffset);
         }
 
         //Set up the suspensions
@@ -97,8 +103,9 @@ namespace SR_PTYPES_NS {
                 suspensions[i + 1].mCamberAtRest =  -camberAngleAtRest;
                 suspensions[i + 0].mCamberAtMaxDroop = camberAngleAtMaxDroop;
                 suspensions[i + 1].mCamberAtMaxDroop = -camberAngleAtMaxDroop;
-                suspensions[i + 0].mCamberAtMaxCompression = camberAngleAtMaxCompression;
-                suspensions[i + 1].mCamberAtMaxCompression = -camberAngleAtMaxCompression;
+                suspensions[i + 0].mCamberAtMaxCompression =
+    camberAngleAtMaxCompression; suspensions[i + 1].mCamberAtMaxCompression =
+    -camberAngleAtMaxCompression;
             }
         }
 
@@ -129,8 +136,8 @@ namespace SR_PTYPES_NS {
             }
         }
 
-        //Set up the filter data of the raycast that will be issued by each suspension.
-        physx::PxFilterData qryFilterData;
+        //Set up the filter data of the raycast that will be issued by each
+    suspension. physx::PxFilterData qryFilterData;
         ///setupNonDrivableSurface(qryFilterData);
         qryFilterData.word3 = 0; //TODO: based.
 
@@ -143,10 +150,10 @@ namespace SR_PTYPES_NS {
             wheelsSimData->setSuspensionData(i, suspensions[i]);
             wheelsSimData->setSuspTravelDirection(i, suspTravelDirections[i]);
             wheelsSimData->setWheelCentreOffset(i, wheelCentreCMOffsets[i]);
-            wheelsSimData->setSuspForceAppPointOffset(i, suspForceAppCMOffsets[i]);
-            wheelsSimData->setTireForceAppPointOffset(i, tireForceAppCMOffsets[i]);
-            wheelsSimData->setSceneQueryFilterData(i, qryFilterData);
-            wheelsSimData->setWheelShapeMapping(i, i);
+            wheelsSimData->setSuspForceAppPointOffset(i,
+    suspForceAppCMOffsets[i]); wheelsSimData->setTireForceAppPointOffset(i,
+    tireForceAppCMOffsets[i]); wheelsSimData->setSceneQueryFilterData(i,
+    qryFilterData); wheelsSimData->setWheelShapeMapping(i, i);
         }
 
         return wheelsSimData;
@@ -187,15 +194,18 @@ namespace SR_PTYPES_NS {
         ackermann.mAccuracy = vehicleData.m_accuracy;
 
         ackermann.mAxleSeparation =
-                m_wheelsSimData->getWheelCentreOffset(physx::PxVehicleDrive4WWheelOrder::eFRONT_LEFT).z -
+                m_wheelsSimData->getWheelCentreOffset(physx::PxVehicleDrive4WWheelOrder::eFRONT_LEFT).z
+    -
                 m_wheelsSimData->getWheelCentreOffset(physx::PxVehicleDrive4WWheelOrder::eREAR_LEFT).z;
 
         ackermann.mFrontWidth =
-                m_wheelsSimData->getWheelCentreOffset(physx::PxVehicleDrive4WWheelOrder::eFRONT_RIGHT).x -
+                m_wheelsSimData->getWheelCentreOffset(physx::PxVehicleDrive4WWheelOrder::eFRONT_RIGHT).x
+    -
                 m_wheelsSimData->getWheelCentreOffset(physx::PxVehicleDrive4WWheelOrder::eFRONT_LEFT).x;
 
         ackermann.mRearWidth =
-                m_wheelsSimData->getWheelCentreOffset(physx::PxVehicleDrive4WWheelOrder::eREAR_RIGHT).x -
+                m_wheelsSimData->getWheelCentreOffset(physx::PxVehicleDrive4WWheelOrder::eREAR_RIGHT).x
+    -
                 m_wheelsSimData->getWheelCentreOffset(physx::PxVehicleDrive4WWheelOrder::eREAR_LEFT).x;
 
         driveSimData->setAckermannGeometryData(ackermann);
@@ -215,8 +225,9 @@ namespace SR_PTYPES_NS {
             physx::PxPhysics &physics
     ) {
         //We need a rigid body actor for the vehicle.
-        //Don't forget to add the actor to the scene after setting up the associated vehicle.
-        physx::PxRigidDynamic* vehActor = physics.createRigidDynamic(physx::PxTransform(physx::PxIdentity));
+        //Don't forget to add the actor to the scene after setting up the
+    associated vehicle. physx::PxRigidDynamic* vehActor =
+    physics.createRigidDynamic(physx::PxTransform(physx::PxIdentity));
 
         auto&& wheelsData = GetWheelsData();
 
@@ -233,7 +244,9 @@ namespace SR_PTYPES_NS {
         for(uint32_t i = 0; i < 4; i++)
         {
             physx::PxConvexMeshGeometry geom(wheelConvexMeshes[i]);
-            physx::PxShape* wheelShape = physx::PxRigidActorExt::createExclusiveShape(*vehActor, geom, *wheelMaterials[i]); //TODO: CHANGE THE MATERIAL
+            physx::PxShape* wheelShape =
+    physx::PxRigidActorExt::createExclusiveShape(*vehActor, geom,
+    *wheelMaterials[i]); //TODO: CHANGE THE MATERIAL
             wheelShape->setQueryFilterData(wheelQryFilterData);
             wheelShape->setSimulationFilterData(wheelSimFilterData);
             wheelShape->setLocalPose(physx::PxTransform(physx::PxIdentity));
@@ -242,7 +255,10 @@ namespace SR_PTYPES_NS {
         //Add the chassis shapes to the actor.
         for(uint32_t i = 0; i < numChassisMeshes; i++)
         {
-            physx::PxShape* chassisShape = physx::PxRigidActorExt::createExclusiveShape(*vehActor, physx::PxConvexMeshGeometry(chassisConvexMeshes[i]), *chassisMaterials[i]); //TODO: CHANGE THE MATERIAL
+            physx::PxShape* chassisShape =
+    physx::PxRigidActorExt::createExclusiveShape(*vehActor,
+    physx::PxConvexMeshGeometry(chassisConvexMeshes[i]), *chassisMaterials[i]);
+    //TODO: CHANGE THE MATERIAL
             chassisShape->setQueryFilterData(chassisQryFilterData);
             chassisShape->setSimulationFilterData(chassisSimFilterData);
             chassisShape->setLocalPose(physx::PxTransform(physx::PxIdentity));
@@ -268,4 +284,4 @@ namespace SR_PTYPES_NS {
     void* PhysXVehicle4W3D::GetHandle() const noexcept {
         return nullptr;
     }*/
-}
+} // namespace SR_PTYPES_NS

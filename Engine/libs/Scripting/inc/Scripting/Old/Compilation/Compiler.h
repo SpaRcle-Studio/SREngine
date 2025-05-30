@@ -6,8 +6,8 @@
 #define SR_ENGINE_SCRIPTING_COMPILER_H
 
 #include <Scripting/Script.h>
-#include <Scripting/Tools/StringUtils.h>
 #include <Scripting/Tools/HashUtils.h>
+#include <Scripting/Tools/StringUtils.h>
 
 namespace EvoScript {
     typedef std::unordered_map<std::string, std::vector<uint32_t>> ModuleCopies;
@@ -53,13 +53,13 @@ namespace EvoScript {
         bool m_multiInstances = true;
 
         std::string m_apiVersion = "None";
-        std::string m_cachePath  = "None";
+        std::string m_cachePath = "None";
 
         std::recursive_mutex m_mutex;
         ModuleCopies m_moduleCopies;
 
         std::string m_compilerPath = "";
     };
-}
+} // namespace EvoScript
 
-#endif //SR_ENGINE_SCRIPTING_COMPILER_H
+#endif // SR_ENGINE_SCRIPTING_COMPILER_H

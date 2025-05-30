@@ -2,9 +2,9 @@
 // Created by innerviewer on 2024-03-18.
 //
 
+#include <Engine/Launcher.h>
 #include <Engine/Tests/TestManager.h>
 #include <Utils/Platform/Platform.h>
-#include <Engine/Launcher.h>
 
 namespace SR_CORE_NS {
     void TestManager::RunAll() {
@@ -20,7 +20,9 @@ namespace SR_CORE_NS {
             if (m_tests.empty()) {
                 SR_PLATFORM_NS::WriteConsoleLog("TestManager::RunAll() : no tests to run!\n");
             } else {
-                SR_PLATFORM_NS::WriteConsoleLog(SR_FORMAT("TestManager::RunAll() : unit tests passed: {}/{}.", successes, m_tests.size()));
+                SR_PLATFORM_NS::WriteConsoleLog(
+                    SR_FORMAT("TestManager::RunAll() : unit tests passed: {}/{}.", successes, m_tests.size())
+                );
             }
             return;
         }
@@ -34,7 +36,8 @@ namespace SR_CORE_NS {
         }
 
         if (!pLauncher->EarlyInit()) {
-            SR_ERROR("TestManager::RunAll() : failed to early initialize application!");
+            SR_ERROR("TestManager::RunAll() : failed to early initialize "
+                     "application!");
             return;
         }
 
@@ -43,7 +46,8 @@ namespace SR_CORE_NS {
             return;
         }
 
-        SR_LOG("TestManager::RunAll() : SpaRcle Engine is being run in unit test mode!");
+        SR_LOG("TestManager::RunAll() : SpaRcle Engine is being run in unit "
+               "test mode!");
 
         for (auto&& test : m_engineTests) {
             if (RunEngineTest(test)) {
@@ -54,9 +58,7 @@ namespace SR_CORE_NS {
         SR_LOG("TestManager::RunAll() : unit tests passed: {}/{}.", successes, m_tests.size());
         SR_LOG("TestManager::RunAll() : destroying test instances...");
 
-        pLauncher.AutoFree([](auto&& pData) {
-            delete pData;
-        });
+        pLauncher.AutoFree([](auto&& pData) { delete pData; });
     }
 
     bool TestManager::RunTest(const TestManager::Test& test) {
@@ -81,9 +83,7 @@ namespace SR_CORE_NS {
 
         auto&& result = test.second();
 
-        pApplication->AutoFree([](auto&& pData) {
-            delete pData;
-        });
+        pApplication->AutoFree([](auto&& pData) { delete pData; });
 
         return result;
     }
@@ -94,4 +94,4 @@ namespace SR_CORE_NS {
         auto&& result = test.second();
         return result;
     }
-}
+} // namespace SR_CORE_NS

@@ -13,7 +13,8 @@ namespace Samples {
             //SharedPtr<SpaRcle::Utils::SceneObject> m = handle;
             //m->GetScriptHandle();
             std::cerr << "BehaviourCallsTest::Start()" << std::endl;
-            std::cerr << "SceneObject: " << sceneObject->GetName().c_str() << std::endl;
+            std::cerr << "SceneObject: " << sceneObject->GetName().c_str() <<
+std::endl;
         }
 
         void Awake() override {

@@ -6,9 +6,7 @@
 #include <Utils/Common/Features.h>
 
 namespace SR_PHYSICS_NS {
-    LibraryImpl::LibraryImpl()
-        : Super()
-    { }
+    LibraryImpl::LibraryImpl() : Super() {}
 
     bool LibraryImpl::Initialize() {
         SR_TRACY_ZONE;
@@ -19,4 +17,4 @@ namespace SR_PHYSICS_NS {
 
         return true;
     }
-}
+} // namespace SR_PHYSICS_NS

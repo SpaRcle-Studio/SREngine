@@ -5,4 +5,4 @@
 #ifndef NNRENDERPASS_H
 #define NNRENDERPASS_H
 
-#endif //NNRENDERPASS_H
+#endif // NNRENDERPASS_H

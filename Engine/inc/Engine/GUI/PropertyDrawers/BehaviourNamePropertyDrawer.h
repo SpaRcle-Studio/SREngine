@@ -26,8 +26,7 @@ namespace SR_CORE_GUI_NS {
         std::vector<SR_UTILS_NS::StringAtom> m_existingNames;
         std::string m_searchBuffer;
         bool m_comboOpened = false;
-
     };
-}
+} // namespace SR_CORE_GUI_NS
 
-#endif //SR_ENGINE_GUI_BEHAVIOUR_NAME_PROPERTY_DRAWER_H
+#endif // SR_ENGINE_GUI_BEHAVIOUR_NAME_PROPERTY_DRAWER_H

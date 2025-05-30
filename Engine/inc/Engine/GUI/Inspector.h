@@ -18,7 +18,7 @@
 namespace SR_UTILS_NS {
     class Transform3D;
     class Transform2D;
-}
+} // namespace SR_UTILS_NS
 
 namespace SR_CORE_GUI_NS {
     class EditorGUI;
@@ -29,6 +29,7 @@ namespace SR_CORE_GUI_NS {
             std::vector<SR_UTILS_NS::StringAtom> components;
             std::map<SR_UTILS_NS::StringAtom, ComponentCategory> categories;
         };
+
     public:
         Inspector() = default;
         explicit Inspector(Hierarchy* hierarchy);
@@ -47,8 +48,11 @@ namespace SR_CORE_GUI_NS {
 
         void DrawComponents(SR_UTILS_NS::IComponentable* pIComponentable);
 
-        void InspectTag(SR_UTILS_NS::StringAtom tag, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)>& callback);
-        void InspectLayer(SR_UTILS_NS::StringAtom layer, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)>& callback);
+        void
+        InspectTag(SR_UTILS_NS::StringAtom tag, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)>& callback);
+        void InspectLayer(
+            SR_UTILS_NS::StringAtom layer, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)>& callback
+        );
         void DrawComponent(SR_UTILS_NS::Component* pComponent, uint32_t& index);
 
         void InitCategories();
@@ -57,7 +61,10 @@ namespace SR_CORE_GUI_NS {
         void DrawGameObject(const SR_UTILS_NS::GameObject::Ptr& pGameObject);
         void DrawSceneObject(const SR_UTILS_NS::SceneObject::Ptr& pSceneObject);
 
-        void DrawComponentCategory(SR_UTILS_NS::IComponentable* pComponentable, ComponentCategory& category, SR_UTILS_NS::StringAtom categoryName);
+        void DrawComponentCategory(
+            SR_UTILS_NS::IComponentable* pComponentable, ComponentCategory& category,
+            SR_UTILS_NS::StringAtom categoryName
+        );
 
         SR_NODISCARD PropertyDrawerContext CreateDrawerContext(SR_UTILS_NS::Reflection::Value* pValue);
 
@@ -92,8 +99,7 @@ namespace SR_CORE_GUI_NS {
         std::unique_ptr<SR_UTILS_NS::ISerializer> m_pComponentSerializer;
         SR_UTILS_NS::Component::Ptr m_editableComponent;
         SR_UTILS_NS::Subscription m_moduleReloadSubscription;
-
     };
-}
+} // namespace SR_CORE_GUI_NS
 
-#endif //SR_ENGINE_CORE_INSPECTOR_H
+#endif // SR_ENGINE_CORE_INSPECTOR_H

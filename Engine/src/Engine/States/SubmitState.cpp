@@ -4,9 +4,9 @@
 
 #include <Engine/States/SubmitState.h>
 
-#include <Graphics/Window/Window.h>
-#include <Graphics/Render/RenderScene.h>
 #include <Graphics/Pipeline/Pipeline.h>
+#include <Graphics/Render/RenderScene.h>
+#include <Graphics/Window/Window.h>
 
 #include <Engine/Engine.h>
 #include <Engine/World/EngineScene.h>
@@ -31,4 +31,4 @@ namespace SR_CORE_NS {
 
         return SR_UTILS_NS::ThreadWorkerResult::Success;
     }
-}
+} // namespace SR_CORE_NS

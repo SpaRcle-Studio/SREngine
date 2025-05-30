@@ -12,6 +12,7 @@
 namespace SR_PTYPES_NS {
     class PhysXCollisionShape : public CollisionShapeImpl {
         using Super = CollisionShape;
+
     public:
         ~PhysXCollisionShape() override;
 
@@ -28,8 +29,7 @@ namespace SR_PTYPES_NS {
 
     private:
         physx::PxShape* m_shape = nullptr;
-
     };
-}
+} // namespace SR_PTYPES_NS
 
-#endif //SR_ENGINE_PHYSX_COLLISION_SHAPE_H
+#endif // SR_ENGINE_PHYSX_COLLISION_SHAPE_H

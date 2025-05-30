@@ -16,8 +16,11 @@ namespace SR_ANIMATIONS_NS {
 }
 
 namespace SR_CORE_NS::Importers {
-    bool ImportSkeletonFromRawMesh(const SR_HTYPES_NS::RawMesh* pRawMesh, SR_HTYPES_NS::SharedPtr<SR_ANIMATIONS_NS::Skeleton> pSkeleton);
-    SR_HTYPES_NS::SharedPtr<SR_ANIMATIONS_NS::Skeleton> ImportSkeletonFromRawMesh(const SR_HTYPES_NS::RawMesh* pRawMesh);
-}
+    bool ImportSkeletonFromRawMesh(
+        const SR_HTYPES_NS::RawMesh* pRawMesh, SR_HTYPES_NS::SharedPtr<SR_ANIMATIONS_NS::Skeleton> pSkeleton
+    );
+    SR_HTYPES_NS::SharedPtr<SR_ANIMATIONS_NS::Skeleton> ImportSkeletonFromRawMesh(const SR_HTYPES_NS::RawMesh* pRawMesh
+    );
+} // namespace SR_CORE_NS::Importers
 
-#endif //SR_ENGINE_IMPORTERS_H
+#endif // SR_ENGINE_IMPORTERS_H

@@ -18,6 +18,6 @@ namespace SR_AUDIO_NS {
         Sound* pSound = nullptr;
         bool initialized = false;
     };
-}
+} // namespace SR_AUDIO_NS
 
-#endif //SR_ENGINE_SOUNDDATA_H
+#endif // SR_ENGINE_SOUNDDATA_H

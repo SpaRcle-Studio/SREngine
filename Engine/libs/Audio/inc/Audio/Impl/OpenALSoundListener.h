@@ -10,10 +10,9 @@
 namespace SR_AUDIO_NS {
     class OpenALSoundListener : public SoundListener {
         using Super = SoundListener;
+
     public:
-        explicit OpenALSoundListener(SoundDevice* pDevice)
-            : Super(pDevice)
-        { }
+        explicit OpenALSoundListener(SoundDevice* pDevice) : Super(pDevice) {}
 
         bool Init() override;
         bool Update(const SR_MATH_NS::FVector3& position, const SR_MATH_NS::Quaternion& quaternion) override;
@@ -29,5 +28,5 @@ namespace SR_AUDIO_NS {
         void SetVelocity(SR_MATH_NS::FVector3 velocity) override;
         void SetGain(float_t gain) override;
     };
-}
-#endif //SR_ENGINE_OPENALSOUNDLISTENER_H
+} // namespace SR_AUDIO_NS
+#endif // SR_ENGINE_OPENALSOUNDLISTENER_H

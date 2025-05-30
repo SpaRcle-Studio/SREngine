@@ -12,9 +12,10 @@
 
 namespace SR_CORE_GUI_NS {
     BehaviourPropertyDrawer::BehaviourPropertyDrawer() {
-        m_moduleReloadSubscription = SR_UTILS_NS::Broadcaster::Instance().Subscribe(SR_UTILS_NS::Events::EVENT_ON_SCRIPT_MODULE_RELOADED_ID, [this](auto&& msg) {
-            m_pObjectPropertyDrawer.Reset();
-        });
+        m_moduleReloadSubscription = SR_UTILS_NS::Broadcaster::Instance().Subscribe(
+            SR_UTILS_NS::Events::EVENT_ON_SCRIPT_MODULE_RELOADED_ID,
+            [this](auto&& msg) { m_pObjectPropertyDrawer.Reset(); }
+        );
     }
 
     PropertyDrawerFeedback BehaviourPropertyDrawer::DrawCustomProperties(const PropertyDrawerContext& context) {
@@ -27,7 +28,8 @@ namespace SR_CORE_GUI_NS {
             m_pObjectPropertyDrawer = SRNew<SR_CORE_GUI_NS::ObjectPropertyDrawer>();
         }
 
-        auto&& valueRef = SR_UTILS_NS::Reflection::Value::CreateRef(*dynamic_cast<SR_UTILS_NS::SRClass*>(pCppBehaviour));
+        auto&& valueRef =
+            SR_UTILS_NS::Reflection::Value::CreateRef(*dynamic_cast<SR_UTILS_NS::SRClass*>(pCppBehaviour));
 
         PropertyDrawerContext newContext = context;
         newContext.pValue = &valueRef;
@@ -35,4 +37,4 @@ namespace SR_CORE_GUI_NS {
 
         return m_pObjectPropertyDrawer->Draw(newContext);
     }
-}
+} // namespace SR_CORE_GUI_NS

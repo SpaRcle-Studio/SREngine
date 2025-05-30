@@ -72,11 +72,9 @@ int ParseData(const std::vector<char>& data, const std::string& executablePath) 
         std::filesystem::path outputDir = std::filesystem::path(executablePath).parent_path();
         if (ext == ".dll" || ext == ".so" || ext == ".dylib" || ext == ".exe" || ext.empty()) {
             outputDir /= SR_APPLICATION_NAME + "/Engine/Bin";
-        }
-        else if (ext == ".lib") {
+        } else if (ext == ".lib") {
             outputDir /= SR_APPLICATION_NAME + "/Engine/Lib";
-        }
-        else {
+        } else {
             std::cerr << "ParseData() : unknown file type: " << ext << "\n";
             return UNPACK_UNKNOWN_FILE_TYPE;
         }
@@ -92,7 +90,6 @@ int ParseData(const std::vector<char>& data, const std::string& executablePath) 
         outFile.write(fileData.data(), static_cast<std::streamsize>(fileData.size()));
         std::cout << "ParseData() : unpacked file: " << outputPath << "\n";
     }
-
 
     uint16_t resourceCount = 0;
     stream.read(reinterpret_cast<char*>(&resourceCount), sizeof(resourceCount));
@@ -114,7 +111,8 @@ int ParseData(const std::vector<char>& data, const std::string& executablePath) 
 
         std::filesystem::path path(filename);
 
-        std::filesystem::path outputDir = std::filesystem::path(executablePath).parent_path() / SR_APPLICATION_NAME / "Resources";
+        std::filesystem::path outputDir =
+            std::filesystem::path(executablePath).parent_path() / SR_APPLICATION_NAME / "Resources";
         std::filesystem::path outputPath = absolute(outputDir / path);
         std::filesystem::create_directories(outputPath.parent_path());
 
@@ -138,7 +136,9 @@ int TryUnpackFiles(const std::string& executablePath, std::ifstream& fileStream)
         return UNPACK_FILE_TOO_SMALL;
     }
 
-    fileStream.seekg(static_cast<std::streamsize>(fileSize - MAGIC_SIZE - sizeof(uint64_t) - sizeof(uint64_t)), std::ios::beg);
+    fileStream.seekg(
+        static_cast<std::streamsize>(fileSize - MAGIC_SIZE - sizeof(uint64_t) - sizeof(uint64_t)), std::ios::beg
+    );
 
     char magicBuf[MAGIC_SIZE];
     fileStream.read(magicBuf, MAGIC_SIZE);
@@ -152,14 +152,18 @@ int TryUnpackFiles(const std::string& executablePath, std::ifstream& fileStream)
 
     uint64_t dataSize = 0;
     fileStream.read(reinterpret_cast<char*>(&dataSize), sizeof(dataSize));
-    if (dataSize == 0 || fileSize < static_cast<std::streamoff>(dataSize + MAGIC_SIZE + sizeof(uint64_t) + sizeof(uint64_t))) {
+    if (dataSize == 0 ||
+        fileSize < static_cast<std::streamoff>(dataSize + MAGIC_SIZE + sizeof(uint64_t) + sizeof(uint64_t))) {
         std::cerr << "TryUnpackFiles() : invalid data size!\n";
         return UNPACK_INVALID_DATA_SIZE;
     }
 
     std::cout << "TryUnpackFiles() : packed data size: " << dataSize << "\n";
 
-    fileStream.seekg(static_cast<std::streamsize>(fileSize - dataSize - MAGIC_SIZE - sizeof(uint64_t) - sizeof(uint64_t)), std::ios::beg);
+    fileStream.seekg(
+        static_cast<std::streamsize>(fileSize - dataSize - MAGIC_SIZE - sizeof(uint64_t) - sizeof(uint64_t)),
+        std::ios::beg
+    );
 
     std::vector<char> data(dataSize);
     fileStream.read(data.data(), static_cast<std::streamsize>(dataSize));
@@ -187,7 +191,9 @@ void DeletePackedFile(const std::string& executablePath) {
     namespace fs = std::filesystem;
 
     if (!fs::exists(executablePath) || !fs::is_regular_file(executablePath)) {
-        std::cerr << "DeletePackedFile() : file does not exist or is not a regular file: " << executablePath << '\n';
+        std::cerr << "DeletePackedFile() : file does not exist or is not a "
+                     "regular file: "
+                  << executablePath << '\n';
         return;
     }
 
@@ -203,4 +209,3 @@ void DeletePackedFile(const std::string& executablePath) {
         }
     }
 }
-

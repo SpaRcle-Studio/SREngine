@@ -17,6 +17,7 @@ namespace SR_PTYPES_NS {
     class PhysXMaterialImpl : public PhysicsMaterialImpl {
         using Super = PhysicsMaterialImpl;
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
+
     public:
         explicit PhysXMaterialImpl(LibraryPtr pLibrary);
         ~PhysXMaterialImpl() override;
@@ -38,6 +39,6 @@ namespace SR_PTYPES_NS {
 
         physx::PxPhysics* m_physics = nullptr;
     };
-}
+} // namespace SR_PTYPES_NS
 
-#endif //SR_ENGINE_PHYSXMATERIALIMPL_H
+#endif // SR_ENGINE_PHYSXMATERIALIMPL_H

@@ -7,8 +7,8 @@
 
 #include <Audio/macros.h>
 
-#include <Utils/Common/NonCopyable.h>
 #include <Audio/AudioLibrary.h>
+#include <Utils/Common/NonCopyable.h>
 
 namespace SR_AUDIO_NS {
     class SoundDevice : public SR_UTILS_NS::NonCopyable {
@@ -30,8 +30,7 @@ namespace SR_AUDIO_NS {
     protected:
         std::string m_name;
         AudioLibrary m_library;
-
     };
-}
+} // namespace SR_AUDIO_NS
 
-#endif //SR_ENGINE_SOUNDDEVICE_H
+#endif // SR_ENGINE_SOUNDDEVICE_H

@@ -12,11 +12,14 @@ int RunUnpackedApplication(const std::string& mainExecutablePath) {
     }
     std::cout << "RunUnpackedApplication() : running file: " << fileName << std::endl;
 
-    auto&& targetPath = fs::absolute(fs::path(mainExecutablePath).remove_filename() / SR_APPLICATION_NAME / "Engine" / "Bin").generic_string();
+    auto&& targetPath =
+        fs::absolute(fs::path(mainExecutablePath).remove_filename() / SR_APPLICATION_NAME / "Engine" / "Bin")
+            .generic_string();
     const std::string packedPath = absolute(fs::path(mainExecutablePath)).string();
 
 #ifdef WIN32
-    const std::string command = "cmd.exe /c \"cd \"" + targetPath + "\" && " + fileName + " --delete-packed \"" + packedPath + "\"\"";
+    const std::string command =
+        "cmd.exe /c \"cd \"" + targetPath + "\" && " + fileName + " --delete-packed \"" + packedPath + "\"\"";
 #else
     const std::string command = "cd \"" + targetPath + "\" && " + fileName + " --delete-packed \"" + packedPath + "\"";
 #endif
@@ -24,13 +27,13 @@ int RunUnpackedApplication(const std::string& mainExecutablePath) {
     std::cout << "RunUnpackedApplication() : running command: " << command << std::endl;
 
 #ifdef WIN32
-    STARTUPINFOA si = { sizeof(si) };
+    STARTUPINFOA si = {sizeof(si)};
     PROCESS_INFORMATION pi = {};
 
     if (CreateProcessA(
-        nullptr, const_cast<char*>(command.c_str()), nullptr, nullptr, FALSE,
-        CREATE_NO_WINDOW | DETACHED_PROCESS, nullptr, nullptr, &si, &pi
-    )) {
+            nullptr, const_cast<char*>(command.c_str()), nullptr, nullptr, FALSE, CREATE_NO_WINDOW | DETACHED_PROCESS,
+            nullptr, nullptr, &si, &pi
+        )) {
         CloseHandle(pi.hProcess);
         CloseHandle(pi.hThread);
     }

@@ -7,8 +7,8 @@
 
 #include <Audio/macros.h>
 
-#include <Utils/Common/NonCopyable.h>
 #include <Audio/SoundFormat.h>
+#include <Utils/Common/NonCopyable.h>
 
 namespace SR_AUDIO_NS {
     class SoundDevice;
@@ -36,23 +36,20 @@ namespace SR_AUDIO_NS {
 
         SR_NODISCARD virtual SoundSource AllocateSource(SoundBuffer buffer) = 0;
 
-        SR_NODISCARD virtual SoundBuffer AllocateBuffer(
-                void* data,
-                uint64_t dataSize,
-                int32_t sampleRate,
-                SoundFormat format) = 0;
+        SR_NODISCARD virtual SoundBuffer
+        AllocateBuffer(void* data, uint64_t dataSize, int32_t sampleRate, SoundFormat format) = 0;
 
         SR_NODISCARD virtual PlayParams GetSourceParams(SoundSource pSource) const = 0;
 
-        template <typename T> void ApplyParam(SoundSource pSource, const T& newParam, T& currentParam, PlayParamType paramType) {
+        template <typename T>
+        void ApplyParam(SoundSource pSource, const T& newParam, T& currentParam, PlayParamType paramType) {
             if (newParam.has_value()) { /// Данил, мы тебя любим! (с) SpaRcle Team <3
                 if (currentParam.has_value()) {
                     if (const_cast<const T&>(currentParam).value() != newParam.value()) {
                         currentParam = newParam;
                         ApplyParamImpl(pSource, paramType, (void*)&currentParam.value());
                     }
-                }
-                else {
+                } else {
                     currentParam = newParam;
                     ApplyParamImpl(pSource, paramType, (void*)&currentParam.value());
                 }
@@ -81,8 +78,7 @@ namespace SR_AUDIO_NS {
     protected:
         SoundDevice* m_device = nullptr;
         std::list<SoundListener*> m_listeners;
-
     };
-}
+} // namespace SR_AUDIO_NS
 
-#endif //SR_ENGINE_SOUNDCONTEXT_H
+#endif // SR_ENGINE_SOUNDCONTEXT_H

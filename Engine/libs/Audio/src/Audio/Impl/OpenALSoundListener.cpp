@@ -15,7 +15,8 @@ namespace SR_AUDIO_NS {
         }
 
         if (!SR_ALC_CALL(alDistanceModel, pOpenALDevice, DistanceModelToALDistanceModel(distanceModel))) {
-            SR_ERROR("OpenALListenerContext::SetDistanceModel() : failed to set distance model!");
+            SR_ERROR("OpenALListenerContext::SetDistanceModel() : failed to "
+                     "set distance model!");
             return;
         }
 
@@ -42,7 +43,8 @@ namespace SR_AUDIO_NS {
         m_data.orientation = SR_MATH_NS::FVector6(forward, up);
 
         if (!SR_AL_CALL(alListenerfv, AL_POSITION, FV3ToALV3(position).vec3)) {
-            SR_ERROR("OpenALListenerContext::Update() : failed to set listener position!");
+            SR_ERROR("OpenALListenerContext::Update() : failed to set listener "
+                     "position!");
             return false;
         }
 
@@ -96,10 +98,11 @@ namespace SR_AUDIO_NS {
 
     void OpenALSoundListener::SetGain(float_t gain) {
         if (!SR_AL_CALL(alListenerf, AL_GAIN, gain)) {
-            SR_ERROR("OpenALListenerContext::SetDopplerFactor() : failed to set gain!");
+            SR_ERROR("OpenALListenerContext::SetDopplerFactor() : failed to "
+                     "set gain!");
             return;
         }
 
         Super::SetGain(gain);
     }
-}
+} // namespace SR_AUDIO_NS

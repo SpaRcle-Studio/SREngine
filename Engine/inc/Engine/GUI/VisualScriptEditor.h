@@ -11,7 +11,7 @@ namespace SR_GRAPH_NS::GUI {
     class Pin;
     class Node;
     class Link;
-}
+} // namespace SR_GRAPH_NS::GUI
 
 namespace SR_CORE_NS::GUI {
     class VisualScriptEditor : public SR_GRAPH_NS::GUI::Widget {
@@ -24,20 +24,21 @@ namespace SR_CORE_NS::GUI {
         void AddNode(SR_GRAPH_NS::GUI::Node* node);
         void AddLink(SR_GRAPH_NS::GUI::Link* link);
 
-        ///SR_NODISCARD SR_GRAPH_NS::GUI::Node* CreateBlueprint(const std::string& id) const;
-        ///SR_NODISCARD bool ValidateLink(SR_GRAPH_NS::GUI::Pin* start, SR_GRAPH_NS::GUI::Pin* end) const;
+        /// SR_NODISCARD SR_GRAPH_NS::GUI::Node* CreateBlueprint(const
+        /// std::string& id) const; SR_NODISCARD bool
+        /// ValidateLink(SR_GRAPH_NS::GUI::Pin* start, SR_GRAPH_NS::GUI::Pin*
+        /// end) const;
 
     private:
         void LoadConfig();
-        ///void RegisterBlueprint(SR_GRAPH_NS::GUI::Node* blueprint);
+        /// void RegisterBlueprint(SR_GRAPH_NS::GUI::Node* blueprint);
 
     private:
-        //ax::NodeEditor::EditorContext* m_editor = nullptr;
+        // ax::NodeEditor::EditorContext* m_editor = nullptr;
         std::unordered_map<uintptr_t, SR_GRAPH_NS::GUI::Node*> m_nodes;
         std::unordered_map<uintptr_t, SR_GRAPH_NS::GUI::Link*> m_links;
         std::unordered_map<std::string, SR_GRAPH_NS::GUI::Node*> m_blueprints;
-
     };
-}
+} // namespace SR_CORE_NS::GUI
 
-#endif //SR_ENGINE_VISUALSCRIPTEDITOR_H
+#endif // SR_ENGINE_VISUALSCRIPTEDITOR_H

@@ -10,6 +10,7 @@
 namespace SR_SCRIPTING_NS {
     class Compiler : SR_UTILS_NS::NonCopyable {
         using Mutex = std::recursive_mutex;
+
     protected:
         Compiler() = default;
 
@@ -21,8 +22,7 @@ namespace SR_SCRIPTING_NS {
 
     protected:
         Mutex m_mutex = Mutex();
-
     };
-}
+} // namespace SR_SCRIPTING_NS
 
-#endif //SR_ENGINE_COMPILER_H
+#endif // SR_ENGINE_COMPILER_H

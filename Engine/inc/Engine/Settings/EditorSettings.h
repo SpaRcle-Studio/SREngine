@@ -8,31 +8,12 @@
 #include <Utils/Settings.h>
 
 namespace SR_CORE_NS {
-    ///Здесь хранятся названия иконок, движок получает иконку по пути, указанному для названия в файле SREngine/Resources/Editor/Configs/EditorSettings.xml
-    SR_ENUM_NS_CLASS_T(EditorIcon, uint32_t,
-          Unknown,
-          Material,
-          File,
-          Back,
-          Play,
-          Stop,
-          PauseActive,
-          Pause,
-          FrameSkip,
-          EmptyFolder,
-          Folder,
-          Script,
-          Reset,
-          Shapes,
-          Game,
-          ZIP,
-          JPG,
-          TXT,
-          XML,
-          PNG,
-          DLL,
-          Font,
-          Audio
+    /// Здесь хранятся названия иконок, движок получает иконку по пути,
+    /// указанному для названия в файле
+    /// SREngine/Resources/Editor/Configs/EditorSettings.xml
+    SR_ENUM_NS_CLASS_T(
+        EditorIcon, uint32_t, Unknown, Material, File, Back, Play, Stop, PauseActive, Pause, FrameSkip, EmptyFolder,
+        Folder, Script, Reset, Shapes, Game, ZIP, JPG, TXT, XML, PNG, DLL, Font, Audio
     );
 
     class EditorSettings : public SR_UTILS_NS::GlobalSettings<EditorSettings> {
@@ -40,6 +21,7 @@ namespace SR_CORE_NS {
         friend class SR_UTILS_NS::GlobalSettings<EditorSettings>;
         using Icons = std::map<EditorIcon, SR_UTILS_NS::Path>;
         using Super = SR_UTILS_NS::GlobalSettings<EditorSettings>;
+
     protected:
         ~EditorSettings() override = default;
 
@@ -62,8 +44,7 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::Path m_prefabEditorRenderTechnique;
 
         bool m_debugChunks = false;
-
     };
-}
+} // namespace SR_CORE_NS
 
-#endif //SR_ENGINE_EDITORSETTINGS_H
+#endif // SR_ENGINE_EDITORSETTINGS_H

@@ -3,49 +3,45 @@
 //
 
 #include <Engine/Engine.h>
-#include <Engine/EngineResources.h>
+#include <Engine/EngineCommands.h>
 #include <Engine/EngineMigrators.h>
+#include <Engine/EngineResources.h>
 #include <Engine/GUI/EditorGUI.h>
 #include <Engine/World/EngineScene.h>
-#include <Engine/EngineCommands.h>
 
-#include <Utils/Events/EventManager.h>
-#include <Utils/World/Scene.h>
-#include <Utils/World/SceneUpdater.h>
 #include <Utils/Common/Features.h>
 #include <Utils/ECS/ComponentManager.h>
+#include <Utils/Events/EventManager.h>
 #include <Utils/Localization/LocalizationManager.h>
 #include <Utils/Serialization/SRASerialization.h>
+#include <Utils/World/Scene.h>
+#include <Utils/World/SceneUpdater.h>
 
+#include <Graphics/GUI/Editor/Theme.h>
 #include <Graphics/GUI/WidgetManager.h>
-#include <Graphics/Render/RenderScene.h>
+#include <Graphics/Memory/CameraManager.h>
+#include <Graphics/Pipeline/Vulkan/VulkanTracy.h>
 #include <Graphics/Render/DebugRenderer.h>
 #include <Graphics/Render/RenderContext.h>
-#include <Graphics/Memory/CameraManager.h>
-#include <Graphics/Window/Window.h>
+#include <Graphics/Render/RenderScene.h>
 #include <Graphics/Types/Geometry/SkinnedMesh.h>
-#include <Graphics/GUI/Editor/Theme.h>
-#include <Graphics/Pipeline/Vulkan/VulkanTracy.h>
+#include <Graphics/Window/Window.h>
 
-#include <Physics/Rigidbody.h>
+#include <Physics/3D/Raycast3D.h>
 #include <Physics/LibraryImpl.h>
 #include <Physics/PhysicsLib.h>
-#include <Physics/PhysicsScene.h>
-#include <Physics/3D/Raycast3D.h>
 #include <Physics/PhysicsMaterial.h>
+#include <Physics/PhysicsScene.h>
+#include <Physics/Rigidbody.h>
 
-//#include <Scripting/Impl/EvoScriptManager.h>
+// #include <Scripting/Impl/EvoScriptManager.h>
 
 namespace SR_CORE_NS {
     Engine::Engine(Application* pApplication)
-        : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
-        , m_application(pApplication)
-    { }
+        : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic), m_application(pApplication) {}
 
     Engine::~Engine() {
-        m_renderContext.AutoFree([](auto&& pContext) {
-            delete pContext;
-        });
+        m_renderContext.AutoFree([](auto&& pContext) { delete pContext; });
     }
 
     bool Engine::Create() {
@@ -64,15 +60,16 @@ namespace SR_CORE_NS {
 
         SR_LOG("Engine::RegisterLibraries() : registering all libraries...");
 
-        //SpaRcle::API::RegisterEvoScriptClasses(this);
+        // SpaRcle::API::RegisterEvoScriptClasses(this);
 
         m_localizationManager = new SR_UTILS_NS::Localization::LocalizationManager();
 
-        ///TEST
-        /// SR_UTILS_NS::Path configPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-        /// configPath = configPath.Concat(R"(Localization\Editor\loc_config.yml)");
-        /// m_localizationManager->LoadInfoAsConfigFile(configPath);
-        ///TEST
+        /// TEST
+        ///  SR_UTILS_NS::Path configPath =
+        ///  SR_UTILS_NS::ResourceManager::Instance().GetResPath(); configPath =
+        ///  configPath.Concat(R"(Localization\Editor\loc_config.yml)");
+        ///  m_localizationManager->LoadInfoAsConfigFile(configPath);
+        /// TEST
 
         m_renderContext = new SR_GRAPH_NS::RenderContext();
 
@@ -121,10 +118,10 @@ namespace SR_CORE_NS {
         auto&& resolutions = SR_PLATFORM_NS::GetScreenResolutions();
 
         if (resolutions.empty()) {
-            SR_ERROR("Engine::CreateMainWindow() : supported resolutions are not found!");
+            SR_ERROR("Engine::CreateMainWindow() : supported resolutions are "
+                     "not found!");
             return nullptr;
-        }
-        else {
+        } else {
             SR_LOG("Engine::CreateMainWindow() : found " + std::to_string(resolutions.size()) + " resolutions");
         }
 
@@ -251,25 +248,23 @@ namespace SR_CORE_NS {
             });
         }
 
-        //SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(true);
+        // SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(true);
 
         return true;
     }
 
-    void Engine::AddSceneToQueue(const SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>& pScene)  {
+    void Engine::AddSceneToQueue(const SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>& pScene) {
         m_sceneQueue.Push(pScene);
     }
 
-    void Engine::Reload() {
-        m_application->Reload();
-    }
+    void Engine::Reload() { m_application->Reload(); }
 
     void Engine::FixedUpdate() {
         SR_TRACY_ZONE;
 
-        ///В этом блоке находится обработка нажатия клавиш, которая не должна срабатывать, если окно не сфокусированно
-        if (IsApplicationFocused())
-        {
+        /// В этом блоке находится обработка нажатия клавиш, которая не должна
+        /// срабатывать, если окно не сфокусированно
+        if (IsApplicationFocused()) {
             SR_UTILS_NS::Input::Instance().Check();
             m_input->Check();
 
@@ -282,7 +277,9 @@ namespace SR_CORE_NS {
 
                 if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Y)) {
                     if (!m_cmdManager->Redo()) {
-                        SR_WARN("Engine::FixedUpdate() : failed to redo \"" + m_cmdManager->GetLastCmdName() + "\" command!");
+                        SR_WARN(
+                            "Engine::FixedUpdate() : failed to redo \"" + m_cmdManager->GetLastCmdName() + "\" command!"
+                        );
                     }
                 }
             }
@@ -291,7 +288,9 @@ namespace SR_CORE_NS {
                 m_editor->SetDockingEnabled(!m_editor->IsDockingEnabled());
             }
 
-            // if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F9)) {
+            // if (m_editor &&
+            // SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F9))
+            // {
             //     SR_UTILS_NS::Input::Instance().LockCursor(!SR_UTILS_NS::Input::Instance().IsCursorLocked());
             // }
 
@@ -322,9 +321,7 @@ namespace SR_CORE_NS {
         }
     }
 
-    void Engine::SetSpeed(float_t speed) {
-        m_speed = speed;
-    }
+    void Engine::SetSpeed(float_t speed) { m_speed = speed; }
 
     void Engine::SetPaused(bool isPaused) {
         if (m_isPaused == isPaused) {
@@ -386,10 +383,13 @@ namespace SR_CORE_NS {
             if (SR_WORLD_NS::Scene::IsExists(scenePath)) {
                 auto&& pScene = SR_WORLD_NS::Scene::LoadScene(scenePath);
                 if (!pScene) {
-                    SR_ERROR("Engine::Create() : failed to load scene! Delete broken new scene\n\tPath: " + scenePath.ToString());
+                    SR_ERROR(
+                        "Engine::Create() : failed to load scene! Delete "
+                        "broken new scene\n\tPath: " +
+                        scenePath.ToString()
+                    );
                     SR_PLATFORM_NS::Delete(SR_WORLD_NS::Scene::GetAbsPath(scenePath));
-                }
-                else {
+                } else {
                     AddSceneToQueue(pScene);
                 }
             }
@@ -406,11 +406,10 @@ namespace SR_CORE_NS {
         if (m_editor) {
             if (m_isGameMode) {
                 m_editor->HideAll();
-                //m_cursorLockOpt.emplace();
-            }
-            else {
+                // m_cursorLockOpt.emplace();
+            } else {
                 m_editor->ShowAll();
-                //m_cursorLockOpt = std::nullopt;
+                // m_cursorLockOpt = std::nullopt;
             }
         }
 
@@ -423,13 +422,9 @@ namespace SR_CORE_NS {
         }
     }
 
-    bool Engine::IsNeedReloadResources() {
-        return m_autoReloadResources && !IsGameMode();
-    }
+    bool Engine::IsNeedReloadResources() { return m_autoReloadResources && !IsGameMode(); }
 
-    Engine::ScenePtr Engine::GetScene() const {
-        return m_engineScene ? m_engineScene->pScene : ScenePtr();
-    }
+    Engine::ScenePtr Engine::GetScene() const { return m_engineScene ? m_engineScene->pScene : ScenePtr(); }
 
     SR_WORLD_NS::SceneUpdater* Engine::GetSceneBuilder() const {
         return m_engineScene ? m_engineScene->pSceneUpdater : nullptr;
@@ -491,7 +486,5 @@ namespace SR_CORE_NS {
         return false;
     }
 
-    SR_UTILS_NS::Debug& Engine::GetDebugger() const {
-        return SR_UTILS_NS::Debug::Instance();
-    }
-}
+    SR_UTILS_NS::Debug& Engine::GetDebugger() const { return SR_UTILS_NS::Debug::Instance(); }
+} // namespace SR_CORE_NS

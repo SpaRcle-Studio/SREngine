@@ -7,13 +7,12 @@
 
 #include <Audio/macros.h>
 
+#include <Audio/PlayParams.h>
 #include <Utils/ECS/Component.h>
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/FileSystem/Path.h>
-#include <Audio/PlayParams.h>
 
-namespace SR_AUDIO_NS
-{
+namespace SR_AUDIO_NS {
     SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_SUPPORTED_AUDIO_FORMATS = "wav,mp3,ogg";
 
     /// @category(Sound)
@@ -21,6 +20,7 @@ namespace SR_AUDIO_NS
         SR_CLASS()
         using Super = SR_UTILS_NS::Component;
         using Handle = void*;
+
     public:
         AudioSource();
 
@@ -70,19 +70,25 @@ namespace SR_AUDIO_NS
         SR_VIRTUAL_PROPERTY
         /// @virtualProperty(loop) @getter(GetLoop) @setter(SetLoop)
         SR_VIRTUAL_PROPERTY
-        /// @virtualProperty(maxDistance) @getter(GetMaxDistance) @setter(SetMaxDistance)
+        /// @virtualProperty(maxDistance) @getter(GetMaxDistance)
+        /// @setter(SetMaxDistance)
         SR_VIRTUAL_PROPERTY
-        /// @virtualProperty(rolloffFactor) @getter(GetRolloffFactor) @setter(SetRolloffFactor)
+        /// @virtualProperty(rolloffFactor) @getter(GetRolloffFactor)
+        /// @setter(SetRolloffFactor)
         SR_VIRTUAL_PROPERTY
-        /// @virtualProperty(referenceDistance) @getter(GetReferenceDistance) @setter(SetReferenceDistance)
+        /// @virtualProperty(referenceDistance) @getter(GetReferenceDistance)
+        /// @setter(SetReferenceDistance)
         SR_VIRTUAL_PROPERTY
-        /// @virtualProperty(spatialize) @getter(GetSpatialize) @setter(SetSpatialize)
+        /// @virtualProperty(spatialize) @getter(GetSpatialize)
+        /// @setter(SetSpatialize)
         SR_VIRTUAL_PROPERTY
-        /// @virtualProperty(direction) @getter(GetDirection) @setter(SetDirection)
+        /// @virtualProperty(direction) @getter(GetDirection)
+        /// @setter(SetDirection)
         SR_VIRTUAL_PROPERTY
-        /// @virtualProperty(coneInnerAngle) @getter(GetConeInnerAngle) @setter(SetConeInnerAngle)
+        /// @virtualProperty(coneInnerAngle) @getter(GetConeInnerAngle)
+        /// @setter(SetConeInnerAngle)
         SR_VIRTUAL_PROPERTY
     };
-}
+} // namespace SR_AUDIO_NS
 
-#endif //SR_ENGINE_AUDIOSOURCE_H
+#endif // SR_ENGINE_AUDIOSOURCE_H

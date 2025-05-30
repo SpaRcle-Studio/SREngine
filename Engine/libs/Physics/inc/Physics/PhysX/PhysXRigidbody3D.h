@@ -10,6 +10,7 @@
 namespace SR_PTYPES_NS {
     class PhysXRigidbody3DImpl : public Rigidbody3DImpl {
         using Super = Rigidbody3DImpl;
+
     public:
         ~PhysXRigidbody3DImpl() override;
 
@@ -43,8 +44,7 @@ namespace SR_PTYPES_NS {
 
     private:
         physx::PxRigidActor* m_rigidActor = nullptr;
-
     };
-}
+} // namespace SR_PTYPES_NS
 
-#endif //SR_ENGINE_PHYSXRIGIDBODY3D_H
+#endif // SR_ENGINE_PHYSXRIGIDBODY3D_H

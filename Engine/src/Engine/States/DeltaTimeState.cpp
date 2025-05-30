@@ -15,11 +15,12 @@ namespace SR_CORE_NS {
         }
 
         const auto deltaTime = now - m_timeStart.value(); /// nanoseconds
-        const auto dt = static_cast<float_t>(deltaTime.count()) / SR_CLOCKS_PER_SEC / SR_CLOCKS_PER_SEC / SR_CLOCKS_PER_SEC; /// Seconds
+        const auto dt = static_cast<float_t>(deltaTime.count()) / SR_CLOCKS_PER_SEC / SR_CLOCKS_PER_SEC /
+                        SR_CLOCKS_PER_SEC; /// Seconds
         m_timeStart = now;
 
         GetContext().SetValue("DeltaTime", dt);
 
         return SR_UTILS_NS::ThreadWorkerResult::Success;
     }
-}
+} // namespace SR_CORE_NS

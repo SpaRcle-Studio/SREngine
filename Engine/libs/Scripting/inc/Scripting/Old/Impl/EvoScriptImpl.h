@@ -15,10 +15,10 @@ namespace SR_SCRIPTING_NS {
 
     class SR_DEPRECATED EvoScriptImpl : public Script {
         using Super = Script;
+
     public:
         EvoScriptImpl(Compiler* compiler, const std::string& name, const SR_UTILS_NS::Path& path)
-            : Super(compiler, name, path.ToString())
-        { }
+            : Super(compiler, name, path.ToString()) {}
 
         ~EvoScriptImpl() override = default;
 
@@ -27,8 +27,7 @@ namespace SR_SCRIPTING_NS {
 
     private:
         EvoScript::Script* m_script = nullptr;
-
     };
-}
+} // namespace SR_SCRIPTING_NS
 
-#endif //SR_ENGINE_SREVOSCRIPT_H
+#endif // SR_ENGINE_SREVOSCRIPT_H

@@ -7,9 +7,9 @@
 #include <Utils/ECS/SceneObject.h>
 #include <Utils/Types/RawMesh.h>
 
-#include <Scripting/Cpp/CppBehaviour.h>
 #include <Audio/Sound.h>
 #include <Enum/SceneObjectType.hpp>
+#include <Scripting/Cpp/CppBehaviour.h>
 
 namespace SpaRcle::Scripts::SREngine {
     class TestBehaviour : public SpaRcle::Scripting::CppBehaviour {
@@ -18,7 +18,7 @@ namespace SpaRcle::Scripts::SREngine {
         SR_NODISCARD bool ExecuteInEditMode() const noexcept override { return true; }
 
     public:
-        void Start() override { }
+        void Start() override {}
 
         void Update(float_t dt) override {
             if (deltaTime > 0.f) {
@@ -41,8 +41,7 @@ namespace SpaRcle::Scripts::SREngine {
         float_t deltaTime = 0.f;
         /// @property
         float_t logInterval = 1.f;
-
     };
-}
+} // namespace SpaRcle::Scripts::SREngine
 
 #include <Codegen/CppTest.generated.hpp>

@@ -141,7 +141,11 @@ namespace SR_SCRIPTING_NS {
         SwitchContext();
 
         if (!m_getProperties) {
-            SR_ERROR("EvoBehaviour::GetProperties() : properties getter invalid!\n\tPath: " + GetResourcePath().ToStringRef());
+            SR_ERROR(
+                "EvoBehaviour::GetProperties() : properties getter "
+                "invalid!\n\tPath: " +
+                GetResourcePath().ToStringRef()
+            );
             m_hasErrors = true;
             return EvoBehaviour::Properties();
         }
@@ -149,7 +153,7 @@ namespace SR_SCRIPTING_NS {
         return m_getProperties();
     }
 
-    std::any EvoBehaviour::GetProperty(const std::string &id) const {
+    std::any EvoBehaviour::GetProperty(const std::string& id) const {
         SR_EVO_SCRIPT_MANAGER_LOCK_CONTEXT
 
         SwitchContext();
@@ -161,15 +165,16 @@ namespace SR_SCRIPTING_NS {
 
         std::any copy1 = m_getProperty(id);
 
-        /// HACK: так как dll может выгрузиться, то RTTI типа в std::any станет невалидным,
-        /// и это значение превратится в замедленную бомбу, потому что любое обращение к переменной
-        /// вызовет краш. При перекопировании RTTI обновится на актуальный для самого приложения.
+        /// HACK: так как dll может выгрузиться, то RTTI типа в std::any станет
+        /// невалидным, и это значение превратится в замедленную бомбу, потому
+        /// что любое обращение к переменной вызовет краш. При перекопировании
+        /// RTTI обновится на актуальный для самого приложения.
         std::any copy = copy1;
 
         return copy;
     }
 
-    void EvoBehaviour::SetProperty(const std::string &id, const std::any &val) {
+    void EvoBehaviour::SetProperty(const std::string& id, const std::any& val) {
         SR_EVO_SCRIPT_MANAGER_LOCK_CONTEXT
 
         SwitchContext();
@@ -181,34 +186,22 @@ namespace SR_SCRIPTING_NS {
         m_setProperty(id, val);
     }
 
-    void EvoBehaviour::Awake() {
-        CallFunction(m_awake, false);
-    }
+    void EvoBehaviour::Awake() { CallFunction(m_awake, false); }
 
-    void EvoBehaviour::OnEnable() {
-        CallFunction(m_onEnable, false);
-    }
+    void EvoBehaviour::OnEnable() { CallFunction(m_onEnable, false); }
 
-    void EvoBehaviour::OnDisable() {
-        CallFunction(m_onDisable, false);
-    }
+    void EvoBehaviour::OnDisable() { CallFunction(m_onDisable, false); }
 
-    void EvoBehaviour::Start() {
-        CallFunction(m_start, false);
-    }
+    void EvoBehaviour::Start() { CallFunction(m_start, false); }
 
-    void EvoBehaviour::Update(float_t dt) {
-        CallFunction(m_update, false, dt);
-    }
+    void EvoBehaviour::Update(float_t dt) { CallFunction(m_update, false, dt); }
 
     void EvoBehaviour::OnAttached() {
         SR_HTYPES_NS::Function<void()> fn = [this]() { SetGameObject(); };
         CallFunction(fn, false);
     }
 
-    void EvoBehaviour::FixedUpdate() {
-        CallFunction(m_fixedUpdate, false);
-    }
+    void EvoBehaviour::FixedUpdate() { CallFunction(m_fixedUpdate, false); }
 
     void EvoBehaviour::OnCollisionEnter(const SR_UTILS_NS::CollisionData& data) {
         CallFunction(m_collisionEnter, false, data);
@@ -241,15 +234,14 @@ namespace SR_SCRIPTING_NS {
 
         SwitchContext();
 
-        typedef void(*SetGameObjectFnPtr)(SR_UTILS_NS::GameObject::Ptr);
-        typedef void(*SetSceneFnPtr)(SR_WORLD_NS::Scene*);
+        typedef void (*SetGameObjectFnPtr)(SR_UTILS_NS::GameObject::Ptr);
+        typedef void (*SetSceneFnPtr)(SR_WORLD_NS::Scene*);
 
         if (auto&& gameObject = m_component->GetGameObject()) {
             if (auto&& setter = GetFunction<SetGameObjectFnPtr>("SetGameObject")) {
                 setter(gameObject);
             }
-        }
-        else if (auto&& pScene = m_component->GetScene()) {
+        } else if (auto&& pScene = m_component->GetScene()) {
             if (auto&& setter = GetFunction<SetSceneFnPtr>("SetScene")) {
                 setter(pScene);
             }
@@ -286,7 +278,5 @@ namespace SR_SCRIPTING_NS {
         CallFunction(fn, false);
     }
 
-    void EvoBehaviour::OnDetached() {
-
-    }
-}
+    void EvoBehaviour::OnDetached() {}
+} // namespace SR_SCRIPTING_NS

@@ -11,14 +11,14 @@ namespace SR_CORE_NS {
     class InitializeState : public SR_UTILS_NS::ThreadWorkerStateBase {
         SR_REGISTER_THREAD_STATE(InitializeState)
         using Super = SR_UTILS_NS::ThreadWorkerStateBase;
+
     public:
         SR_UTILS_NS::ThreadWorkerResult ExecuteImpl() override;
         void FinalizeImpl() override;
 
     private:
         bool m_isInitialized = false;
-
     };
-}
+} // namespace SR_CORE_NS
 
-#endif //SR_ENGINE_CORE_INITIALIZE_STATE_H
+#endif // SR_ENGINE_CORE_INITIALIZE_STATE_H

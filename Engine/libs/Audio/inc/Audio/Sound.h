@@ -7,8 +7,8 @@
 
 #include <Audio/macros.h>
 
-#include <Utils/Resources/IResource.h>
 #include <Audio/PlayParams.h>
+#include <Utils/Resources/IResource.h>
 
 namespace SR_AUDIO_NS {
     class RawSound;
@@ -16,6 +16,7 @@ namespace SR_AUDIO_NS {
 
     class Sound : public SR_UTILS_NS::IResource {
         using Handle = void*;
+
     protected:
         Sound();
         ~Sound() override;
@@ -48,9 +49,7 @@ namespace SR_AUDIO_NS {
     private:
         RawSound* m_rawSound = nullptr;
         SoundData* m_data = nullptr;
-
     };
-}
+} // namespace SR_AUDIO_NS
 
-#endif //SR_ENGINE_SOUND_H
-
+#endif // SR_ENGINE_SOUND_H

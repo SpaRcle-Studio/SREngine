@@ -9,8 +9,8 @@
 #include <Scripting/Cpp/CppCompiler.h>
 #include <Scripting/Cpp/ModuleManager.h>
 
-#include <Utils/Common/Singleton.h>
 #include <Utils/Common/NonCopyable.h>
+#include <Utils/Common/Singleton.h>
 #include <Utils/Resources/FileSystemWatcher.h>
 #include <Utils/Types/SharedPtr.h>
 
@@ -18,14 +18,13 @@ namespace SR_SCRIPTING_NS {
     class ScriptSystem : public SR_UTILS_NS::Singleton<ScriptSystem> {
         SR_REGISTER_SINGLETON(ScriptSystem)
         using Super = SR_HTYPES_NS::SharedPtr<ScriptSystem>;
-        enum class State {
-            InitialAnalyse, Idle, CheckModules, Codegen, Compiling, Reloading
-        };
+        enum class State { InitialAnalyse, Idle, CheckModules, Codegen, Compiling, Reloading };
+
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<ScriptSystem>;
 
-        const static inline std::set<std::string_view> ALLOWED_CPP_EXTENSIONS = { "cpp", "h", "hpp", "cxx" };
-        const static inline std::set<std::string_view> ALLOWED_CPP_MODULE_EXTENSIONS = { "dll", "so" };
+        const static inline std::set<std::string_view> ALLOWED_CPP_EXTENSIONS = {"cpp", "h", "hpp", "cxx"};
+        const static inline std::set<std::string_view> ALLOWED_CPP_MODULE_EXTENSIONS = {"dll", "so"};
         const static inline SR_UTILS_NS::StringAtom ENGINE_MODULE_FILE_NAME = ".module";
 
     private:
@@ -38,7 +37,9 @@ namespace SR_SCRIPTING_NS {
 
         SR_NODISCARD const ModuleManager* GetModuleManager() const { return m_moduleManager.Get(); }
         SR_NODISCARD ModuleManager* GetModuleManager() { return m_moduleManager.Get(); }
-        SR_NODISCARD const std::vector<SR_UTILS_NS::Path>& GetEngineSourcesIncludePaths() const { return m_engineSourcesIncludePaths; }
+        SR_NODISCARD const std::vector<SR_UTILS_NS::Path>& GetEngineSourcesIncludePaths() const {
+            return m_engineSourcesIncludePaths;
+        }
         SR_NODISCARD const SR_UTILS_NS::Path& GetEngineSourcesPath() const { return m_pathToEngineSourcesRoot; }
 
         void ReloadModulesIfNeeded();
@@ -46,7 +47,9 @@ namespace SR_SCRIPTING_NS {
         static std::string_view GetDynamicLibraryExtension();
 
     private:
-        void HandleFileSystemEvent(const SR_UTILS_NS::SubscriptionMessage& message, SR_UTILS_NS::FileSystemWatcher::EventType eventType);
+        void HandleFileSystemEvent(
+            const SR_UTILS_NS::SubscriptionMessage& message, SR_UTILS_NS::FileSystemWatcher::EventType eventType
+        );
         void ThreadFunc();
         bool InitEngineSources();
 
@@ -97,8 +100,7 @@ namespace SR_SCRIPTING_NS {
         std::set<SR_UTILS_NS::Path> m_changedModules;
 
         std::set<SR_UTILS_NS::StringAtom> m_modulesToCopy;
-
     };
-}
+} // namespace SR_SCRIPTING_NS
 
-#endif //SR_ENGINE_SCRIPTING_CPP_SCRIPT_SYSTEM_H
+#endif // SR_ENGINE_SCRIPTING_CPP_SCRIPT_SYSTEM_H

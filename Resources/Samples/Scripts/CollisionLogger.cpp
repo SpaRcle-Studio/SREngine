@@ -13,8 +13,8 @@ public:
     void OnCollisionEnter(const CollisionData& data) override {
         Debug::Log("Collision ENTER detected!");
 
-        /// Dividing impulse value by the simulation time step allows to get an impulse force value.
-        std::cout << (data.impulse.x/fixedDeltaTime) << std::endl;
+        /// Dividing impulse value by the simulation time step allows to get an
+impulse force value. std::cout << (data.impulse.x/fixedDeltaTime) << std::endl;
         std::cout << (data.impulse.y/fixedDeltaTime) << std::endl;
         std::cout << (data.impulse.z/fixedDeltaTime) << std::endl;
     }

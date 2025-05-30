@@ -27,6 +27,7 @@ namespace SR_CORE_GUI_NS {
         using WindowPtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::Window>;
         using EnginePtr = SR_HTYPES_NS::SharedPtr<Engine>;
         SR_INLINE_STATIC const std::string CAMERA_XML = "Editor/Camera.xml";
+
     public:
         SceneViewer() = default;
         SceneViewer(const EnginePtr& pEngine, Hierarchy* hierarchy);
@@ -85,10 +86,9 @@ namespace SR_CORE_GUI_NS {
         std::atomic<bool> m_enabled = true;
         bool m_updateNonHoveredSceneViewer = false;
         SR_MATH_NS::IVector2 m_windowSize;
-        //std::optional<Utils::CursorLock> m_cursorLockOpt = std::nullopt;
+        // std::optional<Utils::CursorLock> m_cursorLockOpt = std::nullopt;
         SR_MATH_NS::FVector2 m_mousePos;
-
     };
-}
+} // namespace SR_CORE_GUI_NS
 
-#endif //SR_ENGINE_SCENE_VIEWER_H
+#endif // SR_ENGINE_SCENE_VIEWER_H

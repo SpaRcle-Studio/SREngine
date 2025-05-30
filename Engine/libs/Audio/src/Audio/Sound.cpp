@@ -3,14 +3,12 @@
 //
 
 #include <Audio/Sound.h>
-#include <Audio/SoundManager.h>
 #include <Audio/SoundData.h>
+#include <Audio/SoundManager.h>
 #include <Utils/Resources/ResourceManager.h>
 
 namespace SR_AUDIO_NS {
-    Sound::Sound()
-        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Sound))
-    { }
+    Sound::Sound() : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Sound)) {}
 
     Sound::~Sound() {
         if (m_data && !SoundManager::Instance().Unregister(&m_data)) {
@@ -51,9 +49,7 @@ namespace SR_AUDIO_NS {
         return pSound;
     }
 
-    Sound::Handle Sound::Play(const PlayParams& params) {
-        return SoundManager::Instance().Play(this, params);
-    }
+    Sound::Handle Sound::Play(const PlayParams& params) { return SoundManager::Instance().Play(this, params); }
 
     Sound::Handle Sound::Play() {
         PlayParams params;
@@ -92,7 +88,7 @@ namespace SR_AUDIO_NS {
         return true;
     }
 
-    void Sound::SetRawSound(RawSound *pRawSound) {
+    void Sound::SetRawSound(RawSound* pRawSound) {
         if (m_rawSound && pRawSound) {
             SRHalt0();
             return;
@@ -109,31 +105,17 @@ namespace SR_AUDIO_NS {
         m_rawSound = pRawSound;
     }
 
-    const uint8_t *Sound::GetBufferData() const {
-        return m_rawSound ? m_rawSound->GetBufferData() : nullptr;
-    }
+    const uint8_t* Sound::GetBufferData() const { return m_rawSound ? m_rawSound->GetBufferData() : nullptr; }
 
-    uint64_t Sound::GetBufferSize() const {
-        return m_rawSound ? m_rawSound->GetBufferSize() : 0;
-    }
+    uint64_t Sound::GetBufferSize() const { return m_rawSound ? m_rawSound->GetBufferSize() : 0; }
 
-    uint8_t Sound::GetChannels() const {
-        return m_rawSound ? m_rawSound->GetChannels() : 0;
-    }
+    uint8_t Sound::GetChannels() const { return m_rawSound ? m_rawSound->GetChannels() : 0; }
 
-    uint8_t Sound::GetBitsPerSample() const {
-        return m_rawSound ? m_rawSound->GetBitsPerSample() : 0;
-    }
+    uint8_t Sound::GetBitsPerSample() const { return m_rawSound ? m_rawSound->GetBitsPerSample() : 0; }
 
-    uint32_t Sound::GetSampleRate() const {
-        return m_rawSound ? m_rawSound->GetSampleRate() : 0;
-    }
+    uint32_t Sound::GetSampleRate() const { return m_rawSound ? m_rawSound->GetSampleRate() : 0; }
 
-    SoundData *Sound::GetData() const {
-        return m_data;
-    }
+    SoundData* Sound::GetData() const { return m_data; }
 
-    bool Sound::IsAllowedToRevive() const {
-        return true;
-    }
-}
+    bool Sound::IsAllowedToRevive() const { return true; }
+} // namespace SR_AUDIO_NS

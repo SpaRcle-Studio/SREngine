@@ -10,8 +10,7 @@
 #include <Audio/ListenerData.h>
 #include <Utils/ECS/Component.h>
 
-namespace SR_AUDIO_NS
-{
+namespace SR_AUDIO_NS {
     class SoundListener;
 
     /// @category(Sound)
@@ -19,6 +18,7 @@ namespace SR_AUDIO_NS
         SR_CLASS()
         using Super = SR_UTILS_NS::Component;
         using Handle = void*;
+
     public:
         void OnEnable() override;
         void OnDisable() override;
@@ -43,6 +43,6 @@ namespace SR_AUDIO_NS
         /// @property @setter(SetGain)
         float_t m_gain = 1.0f;
     };
-}
+} // namespace SR_AUDIO_NS
 
-#endif //SR_ENGINE_AUDIOLISTENER_H
+#endif // SR_ENGINE_AUDIOLISTENER_H

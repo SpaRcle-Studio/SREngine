@@ -5,8 +5,8 @@
 #ifndef SR_ENGINE_VISUALCHUNK_H
 #define SR_ENGINE_VISUALCHUNK_H
 
-#include <Utils/World/Chunk.h>
 #include <Utils/Math/Vector3.h>
+#include <Utils/World/Chunk.h>
 
 namespace SR_GTYPES_NS {
     class DebugWireframeMesh;
@@ -23,6 +23,7 @@ namespace SR_WORLD_NS {
 namespace SR_CORE_NS {
     class VisualChunk : public SR_WORLD_NS::Chunk {
         using RenderScenePtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderScene>;
+
     public:
         explicit VisualChunk(SRChunkAllocArgs);
         ~VisualChunk() override;
@@ -44,8 +45,7 @@ namespace SR_CORE_NS {
         bool Unload() override;
 
         void Update(float_t dt) override;
-
     };
-}
+} // namespace SR_CORE_NS
 
-#endif //SR_ENGINE_VISUALCHUNK_H
+#endif // SR_ENGINE_VISUALCHUNK_H

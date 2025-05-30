@@ -12,13 +12,7 @@
 namespace SR_PTYPES_NS {
     class PhysicsMaterial;
 
-    SR_ENUM_NS_STRUCT_T(Vehicle4WWheelOrder, uint8_t,
-        FrontLeft,
-        FrontRight,
-        RearLeft,
-        RearRight,
-        Size
-    );
+    SR_ENUM_NS_STRUCT_T(Vehicle4WWheelOrder, uint8_t, FrontLeft, FrontRight, RearLeft, RearRight, Size);
 
     struct WheelInternalData {
         float_t m_wheelMass = 1.0f;
@@ -31,8 +25,7 @@ namespace SR_PTYPES_NS {
         SR_MATH_NS::FVector3 m_wheelCenterActorOffset;
 
         PhysicsMaterial* m_wheelMaterial = nullptr;
-
     };
-}
+} // namespace SR_PTYPES_NS
 
-#endif //SR_ENGINE_WHEELINTERNALDATA_H
+#endif // SR_ENGINE_WHEELINTERNALDATA_H

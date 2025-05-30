@@ -5,30 +5,33 @@
 #include <Engine/Common/Importers.h>
 
 #include <Utils/Debug.h>
-#include <Utils/Types/RawMesh.h>
 #include <Utils/ECS/ComponentManager.h>
+#include <Utils/Types/RawMesh.h>
 
 #include <Graphics/Animations/Skeleton.h>
 
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
 #include <assimp/Importer.hpp>
+#include <assimp/postprocess.h>
+#include <assimp/scene.h>
 
 namespace SR_CORE_NS {
-    bool Importers::ImportSkeletonFromRawMesh(const SR_HTYPES_NS::RawMesh* pRawMesh, SR_ANIMATIONS_NS::Skeleton::Ptr pSkeleton) {
+    bool Importers::ImportSkeletonFromRawMesh(
+        const SR_HTYPES_NS::RawMesh* pRawMesh, SR_ANIMATIONS_NS::Skeleton::Ptr pSkeleton
+    ) {
         const aiScene* pScene = static_cast<const aiScene*>(pRawMesh->GetAssimpScene());
 
         if (!pScene->mRootNode) {
             return false;
         }
 
-        const SR_HTYPES_NS::Function<void(aiNode*, SR_ANIMATIONS_NS::Bone*)> processNode = [&](aiNode* node, SR_ANIMATIONS_NS::Bone* pBone) {
-            pBone = pSkeleton->AddBone(pBone, node->mName.C_Str(), false);
+        const SR_HTYPES_NS::Function<void(aiNode*, SR_ANIMATIONS_NS::Bone*)> processNode =
+            [&](aiNode* node, SR_ANIMATIONS_NS::Bone* pBone) {
+                pBone = pSkeleton->AddBone(pBone, node->mName.C_Str(), false);
 
-            for (uint32_t i = 0; i < node->mNumChildren; ++i) {
-                processNode(node->mChildren[i], pBone);
-            }
-        };
+                for (uint32_t i = 0; i < node->mNumChildren; ++i) {
+                    processNode(node->mChildren[i], pBone);
+                }
+            };
 
         processNode(pScene->mRootNode, pSkeleton->GetRootBone());
 
@@ -40,7 +43,7 @@ namespace SR_CORE_NS {
         return pSkeleton->ReCalculateSkeleton();
     }
 
-    SR_ANIMATIONS_NS::Skeleton::Ptr Importers::ImportSkeletonFromRawMesh(const SR_HTYPES_NS::RawMesh *pRawMesh) {
+    SR_ANIMATIONS_NS::Skeleton::Ptr Importers::ImportSkeletonFromRawMesh(const SR_HTYPES_NS::RawMesh* pRawMesh) {
         auto&& pSkeleton = SR_UTILS_NS::Factory::Instance().Create<SR_ANIMATIONS_NS::Skeleton>();
         if (!pSkeleton) {
             SRHalt0();
@@ -48,11 +51,12 @@ namespace SR_CORE_NS {
         }
 
         if (!ImportSkeletonFromRawMesh(pRawMesh, pSkeleton)) {
-            SRHalt("Importers::ImportSkeletonFromRawMesh() : failed to import skeleton!");
+            SRHalt("Importers::ImportSkeletonFromRawMesh() : failed to import "
+                   "skeleton!");
             pSkeleton->OnDestroy();
             return nullptr;
         }
 
         return pSkeleton;
     }
-}
+} // namespace SR_CORE_NS

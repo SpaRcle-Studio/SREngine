@@ -4,9 +4,9 @@
 
 #include <Engine/EntryPoint.h>
 
+#include <Engine/CLIManager.h>
 #include <Engine/Launcher.h>
 #include <Engine/Tests/TestManager.h>
-#include <Engine/CLIManager.h>
 
 #include <Utils/Common/CmdOptions.h>
 #include <Utils/Tests/SharedPtrAutotests.h>
@@ -29,17 +29,13 @@ int SREngineEntryPoint(int argc, char** argv) {
     SR_CORE_NS::CLIManager::Instance().Init(argc, argv);
 
     if (SR_CORE_NS::CLIManager::Instance().IsFlagPresent(SR_CORE_NS::CLIFlags::UnitTests)) {
-        SR_CORE_NS::TestManager::Instance().AddTest([]() {
-            return SR_CORE_NS::Tests::AtlasBuilderTest::Run();
-        }, "Atlas Builder Test");
+        SR_CORE_NS::TestManager::Instance().AddTest(
+            []() { return SR_CORE_NS::Tests::AtlasBuilderTest::Run(); }, "Atlas Builder Test"
+        );
 
-        SR_CORE_NS::TestManager::Instance().AddTest([]() {
-            return SR_CORE_NS::Tests::HTMLTest::Run();
-        }, "HTML Test");
+        SR_CORE_NS::TestManager::Instance().AddTest([]() { return SR_CORE_NS::Tests::HTMLTest::Run(); }, "HTML Test");
 
-        SR_CORE_NS::TestManager::Instance().AddTest([]() {
-            return SR_CORE_NS::Tests::CSSTest::Run();
-        }, "CSS Test");
+        SR_CORE_NS::TestManager::Instance().AddTest([]() { return SR_CORE_NS::Tests::CSSTest::Run(); }, "CSS Test");
 
         SR_CORE_NS::TestManager::Instance().RunAll();
         return 0;
@@ -72,9 +68,7 @@ int SREngineEntryPoint(int argc, char** argv) {
             code = 4;
         }
 
-        pLauncher.AutoFree([](auto&& pData) {
-            delete pData;
-        });
+        pLauncher.AutoFree([](auto&& pData) { delete pData; });
     }
 
     SR_HTYPES_NS::SharedPtrDynamicDataCounter::CheckMemoryLeaks();

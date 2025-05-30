@@ -16,14 +16,15 @@
 
 class ButtonController : public Behaviour {
 public:
-	static void OnKeyDown() {
-        std::cout << "BUTTON IS HOVERED !!! ----------------------------- " << std::endl;
-	}
+        static void OnKeyDown() {
+        std::cout << "BUTTON IS HOVERED !!! ----------------------------- " <<
+std::endl;
+        }
 
 public:
     void Awake() override {
-        auto&& button = DynamicCastComponentToButton(gameObject->GetComponent("Button"));
-        if (button) {
+        auto&& button =
+DynamicCastComponentToButton(gameObject->GetComponent("Button")); if (button) {
             button->SetKeyDownCallback(&OnKeyDown);
         }
     }

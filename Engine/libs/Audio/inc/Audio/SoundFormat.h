@@ -40,6 +40,6 @@ namespace SR_AUDIO_NS {
 
         return SR_SOUND_FORMAT_UNKNOWN;
     }
-}
+} // namespace SR_AUDIO_NS
 
-#endif //SR_ENGINE_SOUNDFORMAT_H
+#endif // SR_ENGINE_SOUNDFORMAT_H

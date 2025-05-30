@@ -10,9 +10,7 @@
 #include <Utils/Serialization/Serializable.h>
 
 namespace SR_SCRIPTING_NS {
-    SR_ENUM_NS_CLASS_T(ScriptLinkMode, uint8_t,
-        Unknown, Dynamic, Static, Mixed
-    );
+    SR_ENUM_NS_CLASS_T(ScriptLinkMode, uint8_t, Unknown, Dynamic, Static, Mixed);
 
     struct CppScriptModuleInfo : public SR_UTILS_NS::Serializable {
         SR_STRUCT()
@@ -25,8 +23,7 @@ namespace SR_SCRIPTING_NS {
         std::set<SR_UTILS_NS::StringAtom> dependencies;
         /// @property
         bool enabled = true;
-
     };
-}
+} // namespace SR_SCRIPTING_NS
 
-#endif //SR_ENGINE_SCRIPTING_CPP_SCRIPT_MODULE_INFO_H
+#endif // SR_ENGINE_SCRIPTING_CPP_SCRIPT_MODULE_INFO_H

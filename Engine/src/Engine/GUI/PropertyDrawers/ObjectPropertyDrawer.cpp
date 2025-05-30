@@ -18,42 +18,54 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::PushID(context.pOwner);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(
+            SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2()
+        );
 
         auto&& pWindow = SR_GRAPH_GUI_NS::Immediate::GetCurrentWindow();
         auto&& pDrawList = SR_GRAPH_GUI_NS::Immediate::GetWindowDrawList(pWindow);
 
         m_isOpened |= context.noHeader;
-        const auto dir = m_isOpened ? SR_GRAPH_GUI_NS::Immediate::Direction::Down : SR_GRAPH_GUI_NS::Immediate::Direction::Right;
+        const auto dir =
+            m_isOpened ? SR_GRAPH_GUI_NS::Immediate::Direction::Down : SR_GRAPH_GUI_NS::Immediate::Direction::Right;
 
         SR_UTILS_NS::SRClass* pClassValue = value.GetSRClass();
 
         SR_MATH_NS::FVector2 buttonSize;
 
         if (context.pValue && !context.noHeader) {
-            const SR_MATH_NS::FVector2 arrowPos = SR_GRAPH_GUI_NS::Immediate::GetWindowCursorPos(pWindow) + SR_MATH_NS::FVector2(5, 5);
-            SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
+            const SR_MATH_NS::FVector2 arrowPos =
+                SR_GRAPH_GUI_NS::Immediate::GetWindowCursorPos(pWindow) + SR_MATH_NS::FVector2(5, 5);
+            SR_GRAPH_GUI_NS::Immediate::RenderArrow(
+                pDrawList, arrowPos,
+                SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f
+            );
 
-            const SR_MATH_NS::FVector2 mainButtonSize = { 30, context.fieldHeight };
-            buttonSize = { context.fieldWidth - mainButtonSize.x, context.fieldHeight };
+            const SR_MATH_NS::FVector2 mainButtonSize = {30, context.fieldHeight};
+            buttonSize = {context.fieldWidth - mainButtonSize.x, context.fieldHeight};
 
             auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
             if (SR_GRAPH_GUI_NS::Immediate::Button("", mainButtonSize)) {
                 m_isOpened = !m_isOpened;
             }
             SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
-        }
-        else if (!context.noHeader) {
-            const SR_MATH_NS::FVector2 arrowPos = SR_GRAPH_GUI_NS::Immediate::GetWindowCursorPos(pWindow) + SR_MATH_NS::FVector2(0, 5);
-            SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
+        } else if (!context.noHeader) {
+            const SR_MATH_NS::FVector2 arrowPos =
+                SR_GRAPH_GUI_NS::Immediate::GetWindowCursorPos(pWindow) + SR_MATH_NS::FVector2(0, 5);
+            SR_GRAPH_GUI_NS::Immediate::RenderArrow(
+                pDrawList, arrowPos,
+                SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f
+            );
 
             SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.GetArrowWidth(), 0));
 
             SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-            const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(context.fieldTitleWidth - context.GetArrowWidth(), 0), context.fieldHeight };
+            const SR_MATH_NS::FVector2 mainButtonSize = {
+                SR_MAX(context.fieldTitleWidth - context.GetArrowWidth(), 0), context.fieldHeight
+            };
             const float_t titleTotalWidth = context.fieldTitleWidth;
-            buttonSize = { (context.fieldWidth + context.fieldTitleWidth) - titleTotalWidth, context.fieldHeight };
+            buttonSize = {(context.fieldWidth + context.fieldTitleWidth) - titleTotalWidth, context.fieldHeight};
 
             SR_UTILS_NS::StringAtom displayName = context.GetEditorParams().GetDisplayName();
             auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
@@ -67,7 +79,9 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::SameLine();
 
             SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
-            SR_GRAPH_GUI_NS::Immediate::Button("{}"_format(pClassValue->GetMeta()->GetFactoryName()).c_str(), buttonSize);
+            SR_GRAPH_GUI_NS::Immediate::Button(
+                "{}"_format(pClassValue->GetMeta()->GetFactoryName()).c_str(), buttonSize
+            );
             SR_GRAPH_GUI_NS::Immediate::EndDisabled();
         }
 
@@ -93,7 +107,9 @@ namespace SR_CORE_GUI_NS {
                     }
 
                     if (inspector.Empty()) {
-                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Missing inspector for element!");
+                        SR_GRAPH_GUI_NS::Immediate::TextColored(
+                            SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Missing inspector for element!"
+                        );
                         return;
                     }
 
@@ -106,7 +122,9 @@ namespace SR_CORE_GUI_NS {
                     }
 
                     if (!m_drawers[index]) {
-                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Missing inspector for element!");
+                        SR_GRAPH_GUI_NS::Immediate::TextColored(
+                            SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Missing inspector for element!"
+                        );
                         return;
                     }
 
@@ -136,9 +154,10 @@ namespace SR_CORE_GUI_NS {
                 if (customFeedback.isChanged) {
                     feedback.isChanged = true;
                 }
-            }
-            else {
-                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Failed to get meta for object!");
+            } else {
+                SR_GRAPH_GUI_NS::Immediate::TextColored(
+                    SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Failed to get meta for object!"
+                );
             }
         }
 
@@ -151,4 +170,4 @@ namespace SR_CORE_GUI_NS {
 
         return feedback;
     }
-}
+} // namespace SR_CORE_GUI_NS

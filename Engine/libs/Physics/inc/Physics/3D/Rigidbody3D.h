@@ -10,19 +10,19 @@
 namespace SR_PTYPES_NS {
     class Rigidbody3DImpl : public RigidbodyImpl {
         using Super = RigidbodyImpl;
+
     public:
         SR_NODISCARD virtual SR_MATH_NS::FVector3 GetLinearVelocity() const = 0;
         SR_NODISCARD virtual SR_MATH_NS::FVector3 GetAngularVelocity() const = 0;
 
-        virtual void AddLinearVelocity(const SR_MATH_NS::FVector3& velocity) { }
-        virtual void AddAngularVelocity(const SR_MATH_NS::FVector3& velocity) { }
+        virtual void AddLinearVelocity(const SR_MATH_NS::FVector3& velocity) {}
+        virtual void AddAngularVelocity(const SR_MATH_NS::FVector3& velocity) {}
 
-        virtual void SetLinearVelocity(const SR_MATH_NS::FVector3& velocity) { }
-        virtual void SetAngularVelocity(const SR_MATH_NS::FVector3& velocity) { }
+        virtual void SetLinearVelocity(const SR_MATH_NS::FVector3& velocity) {}
+        virtual void SetAngularVelocity(const SR_MATH_NS::FVector3& velocity) {}
 
-        virtual void SetLinearLock(const SR_MATH_NS::BVector3& lock) { }
-        virtual void SetAngularLock(const SR_MATH_NS::BVector3& lock) { }
-
+        virtual void SetLinearLock(const SR_MATH_NS::BVector3& lock) {}
+        virtual void SetAngularLock(const SR_MATH_NS::BVector3& lock) {}
     };
 
     /// ----------------------------------------------------------------------------------------------------------------
@@ -31,6 +31,7 @@ namespace SR_PTYPES_NS {
     class Rigidbody3D final : public Rigidbody {
         SR_CLASS()
         using Super = Rigidbody;
+
     public:
         SR_NODISCARD SR_UTILS_NS::Measurement GetMeasurement() const override;
 
@@ -55,12 +56,13 @@ namespace SR_PTYPES_NS {
         /// @property @setter(SetAngularLock)
         SR_MATH_NS::BVector3 m_angularLock;
 
-        /// @virtualProperty(linearVelocity) @getter(GetLinearVelocity) @readOnly @dontSave
+        /// @virtualProperty(linearVelocity) @getter(GetLinearVelocity)
+        /// @readOnly @dontSave
         SR_VIRTUAL_PROPERTY
-        /// @virtualProperty(angularVelocity) @getter(GetAngularVelocity) @readOnly @dontSave
+        /// @virtualProperty(angularVelocity) @getter(GetAngularVelocity)
+        /// @readOnly @dontSave
         SR_VIRTUAL_PROPERTY
-
     };
-}
+} // namespace SR_PTYPES_NS
 
-#endif //SR_ENGINE_RIGIDBODY3D_H
+#endif // SR_ENGINE_RIGIDBODY3D_H

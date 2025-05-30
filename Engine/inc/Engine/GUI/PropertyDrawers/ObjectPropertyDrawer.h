@@ -16,14 +16,14 @@ namespace SR_CORE_GUI_NS {
     public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
 
-        virtual PropertyDrawerFeedback DrawCustomProperties(const PropertyDrawerContext& context) { return PropertyDrawerFeedback(); }
+        virtual PropertyDrawerFeedback DrawCustomProperties(const PropertyDrawerContext& context) {
+            return PropertyDrawerFeedback();
+        }
 
     private:
         bool m_isOpened = false;
         std::vector<PropertyDrawerBase::Ptr> m_drawers;
-
     };
-}
+} // namespace SR_CORE_GUI_NS
 
-#endif //SR_ENGINE_GUI_OBJECT_PROPERTY_DRAWER_H
-
+#endif // SR_ENGINE_GUI_OBJECT_PROPERTY_DRAWER_H

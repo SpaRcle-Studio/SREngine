@@ -4,45 +4,43 @@
 
 #include <Engine/Application.h>
 
-#include <Utils/Debug.h>
 #include <Utils/Common/CmdOptions.h>
-#include <Utils/TaskManager/TaskManager.h>
-#include <Utils/World/SceneAllocator.h>
-#include <Utils/Resources/ResourceManager.h>
-#include <Utils/SRLM/LogicalNodeManager.h>
-#include <Utils/SRLM/DataTypeManager.h>
+#include <Utils/Common/StoreUtils.h>
+#include <Utils/Debug.h>
+#include <Utils/ECS/LayerManager.h>
 #include <Utils/Localization/Encoding.h>
 #include <Utils/Platform/Platform.h>
-#include <Utils/ECS/LayerManager.h>
+#include <Utils/Resources/ResourceManager.h>
+#include <Utils/SRLM/DataTypeManager.h>
+#include <Utils/SRLM/LogicalMachine.h>
+#include <Utils/SRLM/LogicalNodeManager.h>
+#include <Utils/TaskManager/TaskManager.h>
+#include <Utils/TaskManager/ThreadWorker.h>
 #include <Utils/Tests/SharedPtrAutotests.h>
 #include <Utils/Types/RawMesh.h>
-#include <Utils/SRLM/LogicalMachine.h>
-#include <Utils/TaskManager/ThreadWorker.h>
-#include <Utils/Common/StoreUtils.h>
+#include <Utils/World/SceneAllocator.h>
 
-#include <Graphics/GUI/NodeManager.h>
-#include <Graphics/Types/Shader.h>
+#include <Graphics/Animations/AnimationClip.h>
 #include <Graphics/Font/Font.h>
+#include <Graphics/GUI/NodeManager.h>
+#include <Graphics/Types/Framebuffer.h>
+#include <Graphics/Types/Shader.h>
 #include <Graphics/Types/Skybox.h>
 #include <Graphics/Types/Texture.h>
-#include <Graphics/Types/Framebuffer.h>
-#include <Graphics/Animations/AnimationClip.h>
 
+#include <Audio/RawSound.h>
 #include <Audio/Sound.h>
 #include <Audio/SoundManager.h>
-#include <Audio/RawSound.h>
 #include <Engine/CLIManager.h>
 
 #include <Scripting/Base/Behaviour.h>
-//#include <Scripting/Impl/EvoScriptResourceReloader.h>
-//#include <Scripting/Impl/EvoBehaviour.h>
+// #include <Scripting/Impl/EvoScriptResourceReloader.h>
+// #include <Scripting/Impl/EvoBehaviour.h>
 
 #include <Physics/PhysicsMaterial.h>
 
 namespace SR_CORE_NS {
-    Application::Application()
-        : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
-    { }
+    Application::Application() : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic) {}
 
     Application::~Application() {
         Close();
@@ -98,12 +96,14 @@ namespace SR_CORE_NS {
         }
 
         if (!SR_UTILS_NS::ResourceManager::Instance().Run()) {
-            SR_ERROR("Application::EarlyInit() : failed to initialize resources manager!");
+            SR_ERROR("Application::EarlyInit() : failed to initialize "
+                     "resources manager!");
             return false;
         }
 
         if (!InitResourceTypes()) {
-            SR_ERROR("Application::EarlyInit() : failed to initialize resource types!");
+            SR_ERROR("Application::EarlyInit() : failed to initialize resource "
+                     "types!");
             return false;
         }
 
@@ -126,8 +126,8 @@ namespace SR_CORE_NS {
                 return;
             }
 
-            if (auto&& pSound = SR_AUDIO_NS::Sound::Load("Editor/Audio/Success.mp3")) {
-                pSound->Play();
+            if (auto&& pSound =
+    SR_AUDIO_NS::Sound::Load("Editor/Audio/Success.mp3")) { pSound->Play();
             }
 
             m_isNeedPlaySound = false;
@@ -135,22 +135,16 @@ namespace SR_CORE_NS {
     }*/
 
     bool Application::FindResourcesFolder() {
-        static const std::vector<std::string> potentialPaths = {
-            "",
-            "..",
-            "../..",
-            "../../..",
-            "../../../.."
-        };
+        static const std::vector<std::string> potentialPaths = {"", "..", "../..", "../../..", "../../../.."};
 
         for (auto&& relativePath : potentialPaths) {
             auto&& fullPath = m_applicationPath.Concat(relativePath);
 
-    #ifdef SR_LINUX
+#ifdef SR_LINUX
             if (fullPath.View().size() == 1) {
                 return false;
             }
-    #endif
+#endif
 
             fullPath = fullPath.Concat("Resources");
             if (fullPath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
@@ -187,9 +181,7 @@ namespace SR_CORE_NS {
 
         SR_SRLM_NS::LogicalNodeManager::Instance().InitializeTypes();
 
-        SR_WORLD_NS::SceneAllocator::Instance().Init([]() -> SR_WORLD_NS::Scene* {
-            return new SR_CORE_NS::World();
-        });
+        SR_WORLD_NS::SceneAllocator::Instance().Init([]() -> SR_WORLD_NS::Scene* { return new SR_CORE_NS::World(); });
 
         m_engine = SR_CORE_NS::Engine::MakeShared(this);
 
@@ -248,9 +240,7 @@ namespace SR_CORE_NS {
             m_engine->Close();
         }
 
-        m_engine.AutoFree([](auto&& pEngine) {
-            delete pEngine;
-        });
+        m_engine.AutoFree([](auto&& pEngine) { delete pEngine; });
 
         SR_SCRIPTING_NS::ScriptSystem::DestroySingleton();
 
@@ -263,8 +253,8 @@ namespace SR_CORE_NS {
         SR_AUDIO_NS::SoundManager::DestroySingleton();
         SR_PHYSICS_NS::PhysicsLibrary::DestroySingleton();
         SR_GRAPH_NS::Memory::CameraManager::DestroySingleton();
-        //SR_SCRIPTING_NS::GlobalEvoCompiler::DestroySingleton();
-        //SR_SCRIPTING_NS::EvoScriptManager::DestroySingleton();
+        // SR_SCRIPTING_NS::GlobalEvoCompiler::DestroySingleton();
+        // SR_SCRIPTING_NS::EvoScriptManager::DestroySingleton();
         SR_GRAPH_GUI_NS::NodeManager::DestroySingleton();
         SR_UTILS_NS::TaskManager::DestroySingleton();
         SR_GRAPH_NS::Memory::MeshManager::DestroySingleton();
@@ -279,7 +269,7 @@ namespace SR_CORE_NS {
     }
 
     bool Application::InitializeResourcesFolder() {
-    #ifdef SR_ENGINE_FLATPAK_BUILD
+#ifdef SR_ENGINE_FLATPAK_BUILD
         if (FindResourcesFolder()) {
             return true;
         }
@@ -297,37 +287,37 @@ namespace SR_CORE_NS {
             }
         }
 
-        SR_ERROR("Application::InitializeResourcesFolder() : necessary resources were not found. Please try reinstalling the application.");
+        SR_ERROR("Application::InitializeResourcesFolder() : necessary resources "
+                 "were not found. Please try reinstalling the application.");
         return false;
-    #else
+#else
         if (auto&& folderArg = CLIManager::Instance().GetOptionValue(CLIOptions::Resources); folderArg.has_value()) {
             auto&& folder = SR_UTILS_NS::Path(folderArg.value());
 
             if (!folder.Exists(SR_UTILS_NS::Path::Type::Folder)) {
-                SR_INFO("Application::InitializeResourcesFolder() : specified resources folder does not exist!");
-            }
-            else {
+                SR_INFO("Application::InitializeResourcesFolder() : specified "
+                        "resources folder does not exist!");
+            } else {
                 m_resourcesPath = folder;
                 return true;
             }
         }
 
         if (!FindResourcesFolder()) {
-            SR_LOG("Application::InitializeResourcesFolder() : failed to find resources folder!");
+            SR_LOG("Application::InitializeResourcesFolder() : failed to find "
+                   "resources folder!");
             return false;
         }
 
         return true;
-    #endif
+#endif
     }
 
     void Application::SwitchResourcesFolder(const SR_UTILS_NS::Path& path) {
         // SR_STATIC_ASSERT("Not yet implemented.");
     }
 
-    void Application::Reload() {
-        m_isNeedReload = true;
-    }
+    void Application::Reload() { m_isNeedReload = true; }
 
     bool Application::InitResourceTypes() {
         auto&& resourcesManager = SR_UTILS_NS::ResourceManager::Instance();
@@ -345,7 +335,7 @@ namespace SR_CORE_NS {
         resourcesManager.RegisterType<SR_GTYPES_NS::Framebuffer>();
         resourcesManager.RegisterType<SR_GTYPES_NS::Font>();
 
-        //resourcesManager.RegisterType<SR_SCRIPTING_NS::EvoBehaviour>();
+        // resourcesManager.RegisterType<SR_SCRIPTING_NS::EvoBehaviour>();
 
         resourcesManager.RegisterType<SR_AUDIO_NS::Sound>();
         resourcesManager.RegisterType<SR_AUDIO_NS::RawSound>();
@@ -356,4 +346,4 @@ namespace SR_CORE_NS {
 
         return true;
     }
-}
+} // namespace SR_CORE_NS

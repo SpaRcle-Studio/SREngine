@@ -13,4 +13,4 @@
     #define SR_ENGINE_DLL_API SR_DLL_API_IMPORT
 #endif
 
-#endif //SR_ENGINE_CORE_MACROS_H
+#endif // SR_ENGINE_CORE_MACROS_H
