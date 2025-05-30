@@ -41,7 +41,7 @@ namespace SR_AUDIO_NS {
 
         SR_NODISCARD virtual PlayParams GetSourceParams(SoundSource pSource) const = 0;
 
-        template <typename T>
+        template<typename T>
         void ApplyParam(SoundSource pSource, const T& newParam, T& currentParam, PlayParamType paramType) {
             if (newParam.has_value()) { /// Данил, мы тебя любим! (с) SpaRcle Team <3
                 if (currentParam.has_value()) {
@@ -56,7 +56,7 @@ namespace SR_AUDIO_NS {
             }
         }
 
-        template <typename T> void ApplyParam(SoundSource pSource, const T& newParam, PlayParamType paramType) {
+        template<typename T> void ApplyParam(SoundSource pSource, const T& newParam, PlayParamType paramType) {
             SR_TRACY_ZONE;
             if (newParam.has_value() && newParam.is_changed()) { /// Данил, мы тебя любим! (с) SpaRcle Team <3
                 ApplyParamImpl(pSource, paramType, (void*)&newParam.value());

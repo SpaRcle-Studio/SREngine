@@ -35,7 +35,7 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD bool IsInstanceValid() const noexcept;
         SR_NODISCARD bool ExecuteInEditMode() const override;
 
-        template <typename T = CppBehaviour> T* GetBehaviour() {
+        template<typename T = CppBehaviour> T* GetBehaviour() {
             if (!m_cppBehaviour) {
                 return nullptr;
             }

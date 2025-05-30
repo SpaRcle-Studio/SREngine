@@ -24,7 +24,7 @@ namespace SR_SCRIPTING_NS {
     public:
         void SetScript(void* pScriptImpl) { m_scriptImpl = pScriptImpl; }
 
-        template <typename T> SR_NODISCARD T* GetScript() const { return reinterpret_cast<T*>(m_scriptImpl); }
+        template<typename T> SR_NODISCARD T* GetScript() const { return reinterpret_cast<T*>(m_scriptImpl); }
 
     private:
         void* m_scriptImpl = nullptr;

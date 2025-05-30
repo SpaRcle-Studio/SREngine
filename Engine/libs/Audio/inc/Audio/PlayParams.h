@@ -20,7 +20,7 @@ namespace SR_AUDIO_NS {
         RolloffFactor, ReferenceDistance, Spatialize
     );
 
-    template <typename T> class PlayParamChangeChecker {
+    template<typename T> class PlayParamChangeChecker {
     public:
         PlayParamChangeChecker() = default;
         explicit PlayParamChangeChecker(const T& value) : m_value(value), m_changed(true), m_hasValue(true) {}

@@ -130,9 +130,9 @@ namespace EvoScript {
         AddressTableGen(const AddressTableGen&) = delete;
 
     public:
-        template <typename T> void SetPointer(T* pointer) { m_pointers[typeid(T).hash_code()] = (void*)pointer; }
+        template<typename T> void SetPointer(T* pointer) { m_pointers[typeid(T).hash_code()] = (void*)pointer; }
 
-        template <typename T> T* GetPointer() const {
+        template<typename T> T* GetPointer() const {
             auto&& pIt = m_pointers.find(typeid(T).hash_code());
             if (pIt == m_pointers.end()) {
                 return nullptr;

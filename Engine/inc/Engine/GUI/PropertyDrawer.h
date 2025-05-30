@@ -142,7 +142,7 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        template <typename MappedVal, typename NewVal>
+        template<typename MappedVal, typename NewVal>
         static void SetMappedValue(
             const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback, MappedVal pMapped, NewVal value,
             bool drag = false

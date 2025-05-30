@@ -18,7 +18,7 @@ namespace EvoScript {
     public:
         static IState* Allocate(const std::string& path);
 
-        template <typename Fn> inline Fn GetFunction(const char* name) {
+        template<typename Fn> inline Fn GetFunction(const char* name) {
             return reinterpret_cast<Fn>(GetFunctionImpl(name));
         }
 

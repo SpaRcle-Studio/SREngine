@@ -25,7 +25,7 @@ namespace SR_PTYPES_NS {
         virtual bool Init() = 0;
         virtual void DeInit() = 0;
 
-        template <typename T> SR_NODISCARD T* GetLibrary() const {
+        template<typename T> SR_NODISCARD T* GetLibrary() const {
             if (auto&& pLibrary = dynamic_cast<T*>(m_library)) {
                 return pLibrary;
             }

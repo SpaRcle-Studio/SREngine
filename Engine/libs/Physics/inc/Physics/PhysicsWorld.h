@@ -41,7 +41,7 @@ namespace SR_PHYSICS_NS {
 
         SR_NODISCARD Raycast3DImpl* GetRaycast3DImpl() const noexcept { return m_raycast3dImpl; }
 
-        template <typename T> SR_NODISCARD T* GetLibrary() const {
+        template<typename T> SR_NODISCARD T* GetLibrary() const {
             if (auto&& pLibrary = dynamic_cast<T*>(m_library)) {
                 return pLibrary;
             }

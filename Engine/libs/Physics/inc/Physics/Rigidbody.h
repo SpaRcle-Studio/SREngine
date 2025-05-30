@@ -55,7 +55,7 @@ namespace SR_PTYPES_NS {
         virtual bool UpdateShapeInternal() { return true; }
 
     protected:
-        template <typename T> SR_NODISCARD T* GetRigidbody() const noexcept { return dynamic_cast<T*>(m_rigidbody); }
+        template<typename T> SR_NODISCARD T* GetRigidbody() const noexcept { return dynamic_cast<T*>(m_rigidbody); }
 
     protected:
         Rigidbody* m_rigidbody = nullptr;
@@ -124,7 +124,7 @@ namespace SR_PTYPES_NS {
 
         bool InitBody();
 
-        template <typename T = LibraryImpl> SR_NODISCARD T* GetLibrary() const {
+        template<typename T = LibraryImpl> SR_NODISCARD T* GetLibrary() const {
             if (auto&& pLibrary = dynamic_cast<T*>(m_library)) {
                 return pLibrary;
             }
@@ -145,7 +145,7 @@ namespace SR_PTYPES_NS {
 
         SR_NODISCARD const PhysicsScenePtr& GetPhysicsScene() const;
 
-        template <typename T> SR_NODISCARD T* GetImpl() const { return dynamic_cast<T*>(m_impl); }
+        template<typename T> SR_NODISCARD T* GetImpl() const { return dynamic_cast<T*>(m_impl); }
 
         void SetShape(const CollisionShape::Ptr& pShape);
 

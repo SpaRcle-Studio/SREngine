@@ -58,7 +58,7 @@ struct PACKED_STRUCT(1) WAVJUNKHeader {
 #pragma pack(pop)
 
 namespace SR_AUDIO_NS::Tools {
-    template <typename T> void ConvertClamp_IEEEToInt16(const T* Src, int16_t* Dst, size_t NumFloats) {
+    template<typename T> void ConvertClamp_IEEEToInt16(const T* Src, int16_t* Dst, size_t NumFloats) {
         const T* End = Src + NumFloats;
 
         while (Src < End) {

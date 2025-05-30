@@ -182,7 +182,7 @@ namespace SR_AUDIO_NS {
         return true;
     }
 
-    template <typename alFunction, typename... Params>
+    template<typename alFunction, typename... Params>
     auto alCallImpl(const char* filename, const std::uint_fast32_t line, alFunction function, Params... params) ->
         typename std::enable_if_t<!std::is_same_v<void, decltype(function(params...))>, decltype(function(params...))> {
         CheckThreadId(filename, line);
@@ -191,7 +191,7 @@ namespace SR_AUDIO_NS {
         return ret;
     }
 
-    template <typename alFunction, typename... Params>
+    template<typename alFunction, typename... Params>
     auto alCallImpl(const char* filename, const std::uint_fast32_t line, alFunction function, Params... params) ->
         typename std::enable_if_t<std::is_same_v<void, decltype(function(params...))>, bool> {
         CheckThreadId(filename, line);
@@ -199,7 +199,7 @@ namespace SR_AUDIO_NS {
         return check_al_errors(filename, line);
     }
 
-    template <typename alcFunction, typename... Params>
+    template<typename alcFunction, typename... Params>
     auto alcCallImpl(
         const char* filename, const std::uint_fast32_t line, alcFunction function, ALCdevice* device, Params... params
     ) -> typename std::enable_if_t<std::is_same_v<void, decltype(function(params...))>, bool> {
@@ -208,7 +208,7 @@ namespace SR_AUDIO_NS {
         return check_alc_errors(filename, line, device);
     }
 
-    template <typename alcFunction, typename ReturnType, typename... Params>
+    template<typename alcFunction, typename ReturnType, typename... Params>
     auto alcCallImpl(
         const char* filename, const std::uint_fast32_t line, alcFunction function, ReturnType& returnValue,
         ALCdevice* device, Params... params

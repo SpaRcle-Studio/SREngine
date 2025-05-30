@@ -24,21 +24,21 @@ namespace SpaRcleAPI {
 
 #include "ScriptHandle.h"
 
-    template <typename T, bool AllowSuccessor = false, typename... Others>
+    template<typename T, bool AllowSuccessor = false, typename... Others>
     class ScriptablePassKey : private ScriptablePassKey<Others, false>... {
     public:
-        template <
+        template<
             typename U, typename = typename std::enable_if<
                             AllowSuccessor && std::is_base_of<T, U>::value && !std::is_same<U, T>::value, T>::type>
         ScriptablePassKey(ScriptablePassKey<U>&&) {}
 
-        template <
+        template<
             typename U, typename = U,
             typename = typename std::enable_if<
                 std::is_base_of<ScriptablePassKey<U>, ScriptablePassKey<T, AllowSuccessor, Others...>>::value, U>::type>
         ScriptablePassKey(ScriptablePassKey<U>&&) {}
 
-        template <
+        template<
             typename U, typename = U, typename = U,
             typename = typename std::enable_if<
                 (AllowSuccessor || (sizeof...(Others) > 0)) && std::is_same<U, T>::value, T>::type>
@@ -58,7 +58,7 @@ namespace SpaRcleAPI {
         ScriptablePassKey& operator=(ScriptablePassKey&&) = delete;
     };
 
-    template <typename T> ScriptablePassKey(const T*) -> ScriptablePassKey<T>;
+    template<typename T> ScriptablePassKey(const T*) -> ScriptablePassKey<T>;
 
     using AllocateScriptBehaviourFunc = void* (*)();
 
@@ -143,7 +143,7 @@ namespace SpaRcleAPI {
 
     struct SharedPtrUnmanagedPassKey {};
 
-    template <typename T> class SharedPtr {
+    template<typename T> class SharedPtr {
     public:
         SharedPtr() = default;
 
@@ -218,7 +218,7 @@ namespace SpaRcleAPI {
         bool m_initialized = false;
     };
 
-    template <typename T> class UnsafeRef {
+    template<typename T> class UnsafeRef {
     public:
         UnsafeRef() = default;
         ~UnsafeRef() = default;

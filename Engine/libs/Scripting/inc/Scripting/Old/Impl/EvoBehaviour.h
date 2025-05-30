@@ -54,7 +54,7 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD uint64_t GetFileHash() const override;
 
     private:
-        template <typename T, typename... Args> void CallFunction(T function, bool ignoreLoadState, Args&&... args) {
+        template<typename T, typename... Args> void CallFunction(T function, bool ignoreLoadState, Args&&... args) {
             if (!ignoreLoadState && GetResourceLoadState() != LoadState::Loaded) {
                 return;
             }
@@ -74,7 +74,7 @@ namespace SR_SCRIPTING_NS {
         void DestroyScript();
         void SwitchContext() const;
 
-        template <typename T> T GetFunction(const char* name) const {
+        template<typename T> T GetFunction(const char* name) const {
             return m_script->GetScript<EvoScript::Script>()->GetFunction<T>(name);
         }
 

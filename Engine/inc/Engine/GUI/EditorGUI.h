@@ -54,11 +54,11 @@ namespace SR_CORE_GUI_NS {
     public:
         void Enable(bool value);
 
-        template <typename T> SR_DEPRECATED void AddWindow(T* widget) {
+        template<typename T> SR_DEPRECATED void AddWindow(T* widget) {
             m_widgets.insert(std::make_pair(typeid(T).hash_code(), widget));
         }
 
-        template <typename T> T& AddWidget(T* pWidget) {
+        template<typename T> T& AddWidget(T* pWidget) {
             if (m_widgets.count(typeid(T).hash_code()) == 1) {
                 SRHalt("Widget already was added!");
                 static T empty;
@@ -69,11 +69,11 @@ namespace SR_CORE_GUI_NS {
             return *pWidget;
         }
 
-        template <typename T> SR_DEPRECATED T* GetWindow() { return GetWidget<T>(); }
+        template<typename T> SR_DEPRECATED T* GetWindow() { return GetWidget<T>(); }
 
         SR_NODISCARD SR_GRAPH_GUI_NS::Widget* GetWidget(const SR_UTILS_NS::StringAtom& name) const;
 
-        template <typename T> T* GetWidget() {
+        template<typename T> T* GetWidget() {
             if (auto&& pIt = m_widgets.find(typeid(T).hash_code()); pIt != m_widgets.end()) {
                 if (auto&& pWidget = dynamic_cast<T*>(pIt->second))
                     return pWidget;
@@ -84,7 +84,7 @@ namespace SR_CORE_GUI_NS {
             return nullptr;
         }
 
-        template <typename T> T* OpenWidget() {
+        template<typename T> T* OpenWidget() {
             if (auto&& pWidget = GetWidget<T>()) {
                 pWidget->Open();
                 return pWidget;

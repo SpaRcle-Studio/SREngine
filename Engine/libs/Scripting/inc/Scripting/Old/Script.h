@@ -30,36 +30,36 @@ namespace EvoScript {
 
         static Script* Allocate(const std::string& name, Compiler* pCompiler, MethodPointers methodPointers);
 
-        template <typename Fn> SR_INLINE Fn GetFunction(const std::string& name) {
+        template<typename Fn> SR_INLINE Fn GetFunction(const std::string& name) {
             return reinterpret_cast<Fn>(m_state->GetFunction<Fn>(name.c_str()));
         }
 
-        template <typename Fn> SR_INLINE bool HasFunction(const std::string& name) { return GetFunction<Fn>(name); }
+        template<typename Fn> SR_INLINE bool HasFunction(const std::string& name) { return GetFunction<Fn>(name); }
 
-        template <typename Fn, typename Return, typename... Args> SR_INLINE Return Call(Fn fn, Args... args) {
+        template<typename Fn, typename Return, typename... Args> SR_INLINE Return Call(Fn fn, Args... args) {
             return fn(std::forward<Args>(args)...);
         }
 
-        template <typename Fn, typename... Args> SR_INLINE void Call(Fn fn, Args... args) {
+        template<typename Fn, typename... Args> SR_INLINE void Call(Fn fn, Args... args) {
             fn(std::forward<Args>(args)...);
         }
 
-        template <typename Fn, typename Return> SR_INLINE Return Call(Fn fn) { return fn(); }
+        template<typename Fn, typename Return> SR_INLINE Return Call(Fn fn) { return fn(); }
 
-        template <typename Fn, typename Return, typename... Args>
+        template<typename Fn, typename Return, typename... Args>
         SR_INLINE Return Call(const std::string& name, Args... args) {
             return Call<Fn, Return, Args...>(GetFunction<Fn>(name), std::forward<Args>(args)...);
         }
 
-        template <typename Fn, typename... Args> SR_INLINE void Call(const std::string& name, Args... args) {
+        template<typename Fn, typename... Args> SR_INLINE void Call(const std::string& name, Args... args) {
             Call<Fn>(GetFunction<Fn>(name), std::forward<Args>(args)...);
         }
 
-        template <typename Fn, typename Return> SR_INLINE Return Call(const std::string& name) {
+        template<typename Fn, typename Return> SR_INLINE Return Call(const std::string& name) {
             return Call<Fn, Return>(GetFunction<Fn>(name));
         }
 
-        template <typename Fn> SR_INLINE void Call(const std::string& name) {
+        template<typename Fn> SR_INLINE void Call(const std::string& name) {
             return Call<Fn, void>(GetFunction<Fn>(name));
         }
 
