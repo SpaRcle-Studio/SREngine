@@ -13,7 +13,8 @@ namespace EvoScript {
         ~IState() override = default;
 
     protected:
-        explicit IState(std::string path) : m_path(std::move(path)) {}
+        explicit IState(std::string path)
+            : m_path(std::move(path)) {}
 
     public:
         static IState* Allocate(const std::string& path);

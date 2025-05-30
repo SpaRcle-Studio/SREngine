@@ -6,7 +6,8 @@
 #include <Graphics/GUI/NodeCreation.h>
 
 namespace SR_CORE_GUI_NS {
-    RenderTechniqueEditor::RenderTechniqueEditor() : Super("Render Technique Editor") {}
+    RenderTechniqueEditor::RenderTechniqueEditor()
+        : Super("Render Technique Editor") {}
 
     void RenderTechniqueEditor::OnOpen() { Super::OnOpen(); }
 

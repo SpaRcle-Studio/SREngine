@@ -93,7 +93,13 @@ namespace SR_AUDIO_NS::Tools {
     }
 
     struct sADPCMDecoderStatus_MS {
-        sADPCMDecoderStatus_MS() : m_Predictor(0), m_Sample1(0), m_Sample2(0), m_Coeff1(0), m_Coeff2(0), m_iDelta(0) {}
+        sADPCMDecoderStatus_MS()
+            : m_Predictor(0)
+            , m_Sample1(0)
+            , m_Sample2(0)
+            , m_Coeff1(0)
+            , m_Coeff2(0)
+            , m_iDelta(0) {}
 
         int m_Predictor;
         int m_Sample1;
@@ -195,7 +201,9 @@ namespace SR_AUDIO_NS::Tools {
     }
 
     struct sADPCMDecoderStatus_IMA {
-        sADPCMDecoderStatus_IMA() : m_Predictor(0), m_StepIndex(0) {}
+        sADPCMDecoderStatus_IMA()
+            : m_Predictor(0)
+            , m_StepIndex(0) {}
 
         int m_Predictor;
         int m_StepIndex;
@@ -329,7 +337,9 @@ namespace SR_AUDIO_NS::Tools {
 
 namespace SR_AUDIO_NS {
     WAVDataProvider::WAVDataProvider(const RawSoundDataPtr& data)
-        : m_data(data), m_dataSize(data ? data->size() : 0), m_format() {
+        : m_data(data)
+        , m_dataSize(data ? data->size() : 0)
+        , m_format() {
         int s = sizeof(sWAVHeader);
 
         if (data && data->size() > sizeof(sWAVHeader)) {

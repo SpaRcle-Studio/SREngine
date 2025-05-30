@@ -13,7 +13,8 @@ namespace SR_PHYSICS_NS {
         using Super = Raycast3DImpl;
 
     public:
-        explicit PhysXRaycast3DImpl(SR_PHYSICS_NS::PhysicsWorld* world) : Super(world) {}
+        explicit PhysXRaycast3DImpl(SR_PHYSICS_NS::PhysicsWorld* world)
+            : Super(world) {}
 
         RaycastHits Cast(
             const SR_MATH_NS::FVector3& origin, const SR_MATH_NS::FVector3& direction, float_t maxDistance,

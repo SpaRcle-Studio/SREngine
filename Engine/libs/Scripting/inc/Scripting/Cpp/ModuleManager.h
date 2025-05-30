@@ -122,7 +122,8 @@ namespace SR_SCRIPTING_NS {
 
     public:
         ModuleManager(ScriptSystem* pScriptSystem)
-            : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic), m_pScriptSystem(pScriptSystem) {}
+            : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
+            , m_pScriptSystem(pScriptSystem) {}
 
         ~ModuleManager() override;
 

@@ -8,7 +8,8 @@
 #include <alext.h>
 
 namespace SR_AUDIO_NS {
-    OpenALSoundContext::OpenALSoundContext(SoundDevice* pDevice) : SoundContext(pDevice) {}
+    OpenALSoundContext::OpenALSoundContext(SoundDevice* pDevice)
+        : SoundContext(pDevice) {}
 
     OpenALSoundContext::~OpenALSoundContext() {
         auto&& openALDevice = dynamic_cast<OpenALDevice*>(GetDevice())->GetALDevice();

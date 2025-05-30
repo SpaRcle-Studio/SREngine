@@ -18,7 +18,8 @@ namespace SR_CORE_NS::Commands {
         const EnginePtr& pEngine, SR_CORE_GUI_NS::Hierarchy* pHierarchy, const Selection& oldSelected,
         const Selection& newSelected
     )
-        : Super(pEngine), m_hierarchy(pHierarchy) {
+        : Super(pEngine)
+        , m_hierarchy(pHierarchy) {
         for (const SR_UTILS_NS::SceneObject::Ptr& pObject : oldSelected) {
             SRAssert(pObject);
             m_oldSelected.insert(pObject->GetEntityId());
@@ -219,7 +220,10 @@ namespace SR_CORE_NS::Commands {
         const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO,
         SR_UTILS_NS::SceneObject::ObjectNameT newName
     )
-        : Super(pEngine), m_entityId(pSO->GetEntityId()), m_previousName(pSO->GetName()), m_newName(newName) {}
+        : Super(pEngine)
+        , m_entityId(pSO->GetEntityId())
+        , m_previousName(pSO->GetName())
+        , m_newName(newName) {}
 
     bool SceneObjectRename::Redo() {
         auto&& pEntity = m_scene->GetEntityController()->FindById(m_entityId);
@@ -248,7 +252,10 @@ namespace SR_CORE_NS::Commands {
     SceneObjectTag::SceneObjectTag(
         const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO, SR_UTILS_NS::StringAtom newTag
     )
-        : Super(pEngine), m_entityId(pSO->GetEntityId()), m_previousTag(pSO->GetTag()), m_newTag(newTag) {}
+        : Super(pEngine)
+        , m_entityId(pSO->GetEntityId())
+        , m_previousTag(pSO->GetTag())
+        , m_newTag(newTag) {}
 
     bool SceneObjectTag::Redo() {
         auto&& pEntity = m_scene->GetEntityController()->FindById(m_entityId);
@@ -277,7 +284,10 @@ namespace SR_CORE_NS::Commands {
     SceneObjectLayer::SceneObjectLayer(
         const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO, SR_UTILS_NS::StringAtom newLayer
     )
-        : Super(pEngine), m_entityId(pSO->GetEntityId()), m_previousLayer(pSO->GetLayer()), m_newLayer(newLayer) {}
+        : Super(pEngine)
+        , m_entityId(pSO->GetEntityId())
+        , m_previousLayer(pSO->GetLayer())
+        , m_newLayer(newLayer) {}
 
     bool SceneObjectLayer::Redo() {
         auto&& pEntity = m_scene->GetEntityController()->FindById(m_entityId);
@@ -304,7 +314,9 @@ namespace SR_CORE_NS::Commands {
     //! ----------------------------------------------------------------------------------------------------------------
 
     EntityEnable::EntityEnable(const EnginePtr& pEngine, const SR_UTILS_NS::Entity::Ptr& pEntity, bool newEnabled)
-        : Super(pEngine), m_entityId(pEntity->GetEntityId()), m_newEnabled(newEnabled) {
+        : Super(pEngine)
+        , m_entityId(pEntity->GetEntityId())
+        , m_newEnabled(newEnabled) {
         if (auto&& pSO = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
             m_previousEnabled = pSO->IsEnabled();
         } else if (auto&& pComponent = pEntity.DynamicCast<SR_UTILS_NS::Component>()) {
@@ -346,7 +358,8 @@ namespace SR_CORE_NS::Commands {
     //! ----------------------------------------------------------------------------------------------------------------
 
     SceneObjectDelete::SceneObjectDelete(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO)
-        : Super(pEngine), m_entityId(pSO->GetEntityId()) {}
+        : Super(pEngine)
+        , m_entityId(pSO->GetEntityId()) {}
 
     SceneObjectDelete::~SceneObjectDelete() {
         if (m_reserved && m_reserved->IsReserved()) {
@@ -416,7 +429,8 @@ namespace SR_CORE_NS::Commands {
     //! ----------------------------------------------------------------------------------------------------------------
 
     SceneObjectInstance::SceneObjectInstance(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO)
-        : Super(pEngine), m_entityId(pSO->GetEntityId()) {
+        : Super(pEngine)
+        , m_entityId(pSO->GetEntityId()) {
         m_parentEntityId = pSO->GetParent() ? pSO->GetParent()->GetEntityId() : SR_ID_INVALID;
     }
 
@@ -489,8 +503,10 @@ namespace SR_CORE_NS::Commands {
     GameObjectMove::GameObjectMove(
         const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO, SR_UTILS_NS::EntityId newParentId
     )
-        : Super(pEngine), m_entityId(pSO->GetEntityId()), m_newParentId(newParentId),
-          m_previousParentId(pSO->GetParent() ? pSO->GetParent()->GetEntityId() : SR_ID_INVALID) {}
+        : Super(pEngine)
+        , m_entityId(pSO->GetEntityId())
+        , m_newParentId(newParentId)
+        , m_previousParentId(pSO->GetParent() ? pSO->GetParent()->GetEntityId() : SR_ID_INVALID) {}
 
     bool GameObjectMove::Redo() {
         auto&& pController = m_scene->GetEntityController();

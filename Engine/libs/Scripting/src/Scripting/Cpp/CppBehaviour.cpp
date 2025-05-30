@@ -7,7 +7,8 @@
 #include <Codegen/CppBehaviour.generated.hpp>
 
 namespace SR_SCRIPTING_NS {
-    CppBehaviour::CppBehaviour() : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic) {}
+    CppBehaviour::CppBehaviour()
+        : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic) {}
 
     CppBehaviour::~CppBehaviour() = default;
 

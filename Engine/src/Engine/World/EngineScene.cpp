@@ -18,7 +18,9 @@
 
 namespace SR_CORE_NS {
     EngineScene::EngineScene(const EngineScene::ScenePtr& pScene, Engine* pEngine)
-        : Super(), pEngine(pEngine), pScene(pScene) {}
+        : Super()
+        , pEngine(pEngine)
+        , pScene(pScene) {}
 
     EngineScene::~EngineScene() {
         if (pRenderScene) {

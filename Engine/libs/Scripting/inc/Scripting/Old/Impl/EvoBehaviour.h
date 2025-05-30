@@ -17,7 +17,8 @@ namespace SR_SCRIPTING_NS {
         using Super = SR_SCRIPTING_NS::IRawBehaviour;
 
     public:
-        EvoBehaviour() : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(EvoBehaviour)) {}
+        EvoBehaviour()
+            : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(EvoBehaviour)) {}
 
     public:
         Properties GetProperties() const override;

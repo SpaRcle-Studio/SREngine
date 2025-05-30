@@ -25,7 +25,8 @@ namespace EvoScript {
     class LinuxState : public IState {
     public:
         LinuxState(const LinuxState&) = delete;
-        explicit LinuxState(const std::string& path) : IState(path) {}
+        explicit LinuxState(const std::string& path)
+            : IState(path) {}
 
     private:
         ~LinuxState() override = default;

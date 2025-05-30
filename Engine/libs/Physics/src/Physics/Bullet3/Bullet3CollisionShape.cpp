@@ -5,7 +5,8 @@
 #include <Physics/Bullet3/Bullet3CollisionShape.h>
 
 namespace SR_PTYPES_NS {
-    Bullet3CollisionShape::Bullet3CollisionShape(LibraryPtr pLibrary) : Super(pLibrary) {}
+    Bullet3CollisionShape::Bullet3CollisionShape(LibraryPtr pLibrary)
+        : Super(pLibrary) {}
 
     Bullet3CollisionShape::~Bullet3CollisionShape() { SR_SAFE_DELETE_PTR(m_shape) }
 

@@ -7,7 +7,8 @@
 #include <Utils/World/SceneCubeChunkLogic.h>
 
 namespace SR_CORE_GUI_NS {
-    WorldEdit::WorldEdit() : Super("World edit") {}
+    WorldEdit::WorldEdit()
+        : Super("World edit") {}
 
     void WorldEdit::SetScene(const SR_WORLD_NS::Scene::Ptr& pScene) { m_scene = pScene; }
 

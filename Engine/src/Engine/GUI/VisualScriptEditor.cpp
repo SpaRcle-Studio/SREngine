@@ -14,7 +14,8 @@
 #include <Graphics/GUI/NodeManager.h>
 #include <Graphics/GUI/Pin.h>
 
-SR_CORE_GUI_NS::VisualScriptEditor::VisualScriptEditor() : SR_GRAPH_GUI_NS::Widget("Evo Script Editor") {
+SR_CORE_GUI_NS::VisualScriptEditor::VisualScriptEditor()
+    : SR_GRAPH_GUI_NS::Widget("Evo Script Editor") {
     /*auto config = new ax::NodeEditor::Config();
     static std::string settingsFile =
     SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("/NodeEditor.json");

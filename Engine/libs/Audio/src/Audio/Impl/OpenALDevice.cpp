@@ -6,7 +6,8 @@
 #include <Audio/Impl/OpenALTools.h>
 
 namespace SR_AUDIO_NS {
-    OpenALDevice::OpenALDevice(AudioLibrary library, const std::string& name) : SoundDevice(library, name) {}
+    OpenALDevice::OpenALDevice(AudioLibrary library, const std::string& name)
+        : SoundDevice(library, name) {}
 
     OpenALDevice::~OpenALDevice() {
         if (m_openALDevice) {

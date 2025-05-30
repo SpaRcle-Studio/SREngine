@@ -21,7 +21,8 @@ namespace SR_CORE_NS {
 
     public:
         explicit GraphicsResourceReloader(ContextGetterFn contextGetter)
-            : Super(), m_contextGetter(std::move(contextGetter)) {}
+            : Super()
+            , m_contextGetter(std::move(contextGetter)) {}
 
         SR_NODISCARD bool Reload(const SR_UTILS_NS::Path& path, SR_UTILS_NS::ResourceInfo* pResourceInfo) override;
 

@@ -8,7 +8,8 @@
 #include <Utils/Common/StoreUtils.h>
 
 namespace SR_CORE_GUI_NS {
-    EngineSettings::EngineSettings() : SR_GRAPH_NS::GUI::Widget("Settings") {}
+    EngineSettings::EngineSettings()
+        : SR_GRAPH_NS::GUI::Widget("Settings") {}
 
     void EngineSettings::Draw() {
         DrawMultiSampling();

@@ -20,7 +20,9 @@ namespace EvoScript {
 
     private:
         Script(std::string name, Compiler* pCompiler, MethodPointers&& methodPointers)
-            : m_name(std::move(name)), m_methodPointers(std::move(methodPointers)), m_compiler(pCompiler) {}
+            : m_name(std::move(name))
+            , m_methodPointers(std::move(methodPointers))
+            , m_compiler(pCompiler) {}
 
     public:
         ~Script() override;

@@ -11,7 +11,8 @@
 #include <Engine/World/VisualChunk.h>
 
 namespace SR_CORE_NS {
-    VisualChunk::VisualChunk(SRChunkAllocArgs) : SR_UTILS_NS::World::Chunk(SRChunkAllocVArgs) {}
+    VisualChunk::VisualChunk(SRChunkAllocArgs)
+        : SR_UTILS_NS::World::Chunk(SRChunkAllocVArgs) {}
 
     VisualChunk::~VisualChunk() {
         SRAssert(!m_stayMesh);

@@ -40,7 +40,8 @@
 #include <Physics/PhysicsMaterial.h>
 
 namespace SR_CORE_NS {
-    Application::Application() : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic) {}
+    Application::Application()
+        : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic) {}
 
     Application::~Application() {
         Close();

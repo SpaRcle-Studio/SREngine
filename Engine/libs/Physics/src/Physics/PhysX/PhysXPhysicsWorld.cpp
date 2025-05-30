@@ -26,7 +26,8 @@ namespace SR_PHYSICS_NS {
         return physx::PxFilterFlag::eDEFAULT;
     }
 
-    PhysXPhysicsWorld::PhysXPhysicsWorld(Super::LibraryPtr pLibrary, Space space) : Super(pLibrary, space) {
+    PhysXPhysicsWorld::PhysXPhysicsWorld(Super::LibraryPtr pLibrary, Space space)
+        : Super(pLibrary, space) {
         m_contactCallback = new ContactReportCallback();
     }
 

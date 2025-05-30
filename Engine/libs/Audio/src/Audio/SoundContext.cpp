@@ -7,7 +7,8 @@
 #include <Audio/SoundContext.h>
 
 namespace SR_AUDIO_NS {
-    SoundContext::SoundContext(SoundDevice* pDevice) : m_device(pDevice) {}
+    SoundContext::SoundContext(SoundDevice* pDevice)
+        : m_device(pDevice) {}
 
     SoundContext::~SoundContext() {
         for (auto&& pListener : m_listeners) {

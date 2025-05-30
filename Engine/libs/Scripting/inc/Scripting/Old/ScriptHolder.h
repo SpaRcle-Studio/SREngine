@@ -17,7 +17,8 @@ namespace SR_SCRIPTING_NS {
 
     public:
         explicit ScriptHolder(void* pScriptImpl)
-            : Super(this, SR_UTILS_NS::SharedPtrPolicy::Manually), m_scriptImpl(pScriptImpl) {}
+            : Super(this, SR_UTILS_NS::SharedPtrPolicy::Manually)
+            , m_scriptImpl(pScriptImpl) {}
 
         ~ScriptHolder() override { SRAssert(!m_scriptImpl); }
 

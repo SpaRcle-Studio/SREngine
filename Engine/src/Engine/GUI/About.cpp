@@ -9,7 +9,8 @@
 #endif
 
 namespace SR_CORE_GUI_NS {
-    About::About() : Super("About", SR_MATH_NS::IVector2(400, 300)) {}
+    About::About()
+        : Super("About", SR_MATH_NS::IVector2(400, 300)) {}
 
     void About::Draw() {
         if (SR_GRAPH_GUI_NS::Immediate::BeginTabBar("About")) {

@@ -20,7 +20,10 @@ namespace SR_CORE_GUI_NS {
         using Super = SR_GRAPH_GUI_NS::WidgetContainer;
 
     public:
-        SceneTools() : Super("SceneTools") { SetSize(SR_MATH_NS::IVector2(0, 22)); }
+        SceneTools()
+            : Super("SceneTools") {
+            SetSize(SR_MATH_NS::IVector2(0, 22));
+        }
 
     public:
         void Init() override;

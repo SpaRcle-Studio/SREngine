@@ -30,7 +30,9 @@
 #include <Graphics/UI/Gizmo.h>
 
 namespace SR_CORE_GUI_NS {
-    Inspector::Inspector(Hierarchy* hierarchy) : SR_GRAPH_GUI_NS::Widget("Inspector"), m_hierarchy(hierarchy) {
+    Inspector::Inspector(Hierarchy* hierarchy)
+        : SR_GRAPH_GUI_NS::Widget("Inspector")
+        , m_hierarchy(hierarchy) {
         m_pPointerDrawer = SR_CORE_GUI_NS::PropertyDrawerBase::MakeShared<PointerPropertyDrawer>();
         InitCategories();
         m_moduleReloadSubscription = SR_UTILS_NS::Broadcaster::Instance().Subscribe(

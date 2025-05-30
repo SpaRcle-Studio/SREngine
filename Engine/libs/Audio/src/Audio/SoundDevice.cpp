@@ -7,7 +7,9 @@
 #include <Audio/Impl/OpenALDevice.h>
 
 namespace SR_AUDIO_NS {
-    SoundDevice::SoundDevice(AudioLibrary library, const std::string& name) : m_library(library), m_name(name) {}
+    SoundDevice::SoundDevice(AudioLibrary library, const std::string& name)
+        : m_library(library)
+        , m_name(name) {}
 
     SoundDevice* SoundDevice::Allocate(AudioLibrary audioLibrary, const std::string& name) {
         if (name.empty()) {

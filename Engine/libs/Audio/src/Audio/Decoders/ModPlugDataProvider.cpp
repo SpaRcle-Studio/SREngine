@@ -31,7 +31,11 @@ namespace SR_AUDIO_NS {
     }
 
     ModPlugDataProvider::ModPlugDataProvider(const RawSoundDataPtr& data)
-        : m_data(data), m_format(), m_decodingBuffer(), m_bufferUsed(0), m_isEndOfStream(false) {
+        : m_data(data)
+        , m_format()
+        , m_decodingBuffer()
+        , m_bufferUsed(0)
+        , m_isEndOfStream(false) {
         LoadModPlug();
 
         m_format.m_numChannels = 2;

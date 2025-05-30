@@ -11,7 +11,10 @@
 #include <Codegen/AudioSource.generated.hpp>
 
 namespace SR_AUDIO_NS {
-    AudioSource::AudioSource() : Super() { m_params = PlayParams::GetDefault(); }
+    AudioSource::AudioSource()
+        : Super() {
+        m_params = PlayParams::GetDefault();
+    }
 
     void AudioSource::OnMatrixDirty() {
         SR_TRACY_ZONE;

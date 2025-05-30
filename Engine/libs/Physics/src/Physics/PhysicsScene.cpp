@@ -11,7 +11,9 @@
 #include <Physics/PhysicsWorld.h>
 
 namespace SR_PHYSICS_NS {
-    PhysicsScene::PhysicsScene(const ScenePtr& scene) : Super(this), m_scene(scene) {}
+    PhysicsScene::PhysicsScene(const ScenePtr& scene)
+        : Super(this)
+        , m_scene(scene) {}
 
     PhysicsScene::~PhysicsScene() {
         auto&& removeRigidbody = [&](const SR_PTYPES_NS::Rigidbody::Ptr& pRigidbody) {

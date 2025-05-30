@@ -19,7 +19,9 @@ namespace SR_PTYPES_NS {
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
 
     protected:
-        explicit PhysicsMaterialImpl(LibraryPtr pLibrary) : Super(), m_library(pLibrary) {}
+        explicit PhysicsMaterialImpl(LibraryPtr pLibrary)
+            : Super()
+            , m_library(pLibrary) {}
 
     public:
         virtual bool Init() = 0;

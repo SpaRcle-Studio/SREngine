@@ -38,7 +38,8 @@
 
 namespace SR_CORE_NS {
     Engine::Engine(Application* pApplication)
-        : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic), m_application(pApplication) {}
+        : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
+        , m_application(pApplication) {}
 
     Engine::~Engine() {
         m_renderContext.AutoFree([](auto&& pContext) { delete pContext; });

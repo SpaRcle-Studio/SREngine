@@ -17,7 +17,8 @@ namespace SR_CORE_GUI_NS {
     const SR_MATH_NS::FColor SR_PREFAB_COLOR_FIRST = SR_MATH_NS::FColor(39.f / 255.f, 225 / 255.f, 193.f / 255.f, 1.f);
     const SR_MATH_NS::FColor SR_PREFAB_COLOR_SECOND = SR_MATH_NS::FColor(1.f, 140.f / 255.f, 0.f, 1.f);
 
-    Hierarchy::Hierarchy() : Widget("Hierarchy") {
+    Hierarchy::Hierarchy()
+        : Widget("Hierarchy") {
         m_sceneRunnerWidget = new SceneRunner();
 
         SetFlags(SR_GRAPH_GUI_NS::WindowFlags::HorizontalScrollbar);

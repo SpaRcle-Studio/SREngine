@@ -28,7 +28,8 @@ namespace EvoScript {
 
     class CastingGen {
     public:
-        explicit CastingGen(AddressTableGen* addressTableGen) : m_addressTable(addressTableGen) {};
+        explicit CastingGen(AddressTableGen* addressTableGen)
+            : m_addressTable(addressTableGen) {};
 
     private:
         std::set<std::string> m_incomplete;

@@ -12,7 +12,8 @@
 #include <Graphics/GUI/ImmediateGUI.h>
 
 namespace SR_CORE_GUI_NS {
-    SoundDebug::SoundDebug() : Super("Sound Debug") {}
+    SoundDebug::SoundDebug()
+        : Super("Sound Debug") {}
 
     void SoundDebug::Draw() {
         SR_TRACY_ZONE;

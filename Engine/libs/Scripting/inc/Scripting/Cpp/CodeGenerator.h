@@ -45,7 +45,8 @@ namespace SR_SCRIPTING_NS {
 
     public:
         explicit CppCodeGenerator(ScriptSystem* pScriptSystem)
-            : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic), m_pScriptSystem(pScriptSystem) {}
+            : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
+            , m_pScriptSystem(pScriptSystem) {}
 
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<CppCodeGenerator>;

@@ -23,7 +23,10 @@ namespace SR_AUDIO_NS {
     template<typename T> class PlayParamChangeChecker {
     public:
         PlayParamChangeChecker() = default;
-        explicit PlayParamChangeChecker(const T& value) : m_value(value), m_changed(true), m_hasValue(true) {}
+        explicit PlayParamChangeChecker(const T& value)
+            : m_value(value)
+            , m_changed(true)
+            , m_hasValue(true) {}
 
         SR_NODISCARD SR_FORCE_INLINE bool has_value() const noexcept { return m_hasValue; }
         SR_NODISCARD SR_FORCE_INLINE bool is_changed() const noexcept { return m_changed; }

@@ -23,7 +23,8 @@
 // #include <Graphics/Pipeline/Vulkan/VulkanMemory.h>
 
 namespace SR_CORE_GUI_NS {
-    EngineStatistics::EngineStatistics() : SR_GRAPH_GUI_NS::Widget("Engine statistics") {}
+    EngineStatistics::EngineStatistics()
+        : SR_GRAPH_GUI_NS::Widget("Engine statistics") {}
 
     void EngineStatistics::Draw() {
         if (SR_GRAPH_GUI_NS::Immediate::BeginTabBar("EngineStatsTabBar")) {

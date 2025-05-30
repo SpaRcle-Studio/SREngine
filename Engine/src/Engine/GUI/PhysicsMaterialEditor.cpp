@@ -8,7 +8,10 @@
 #include <Utils/Resources/Xml.h>
 
 namespace SR_CORE_GUI_NS {
-    PhysicsMaterialEditor::PhysicsMaterialEditor() : Super("Physics Material Editor") { InitializeButtonActions(); }
+    PhysicsMaterialEditor::PhysicsMaterialEditor()
+        : Super("Physics Material Editor") {
+        InitializeButtonActions();
+    }
 
     void PhysicsMaterialEditor::InitializeButtonActions() {
         m_buttonActions[static_cast<uint32_t>(ButtonType::ChooseMaterial)] = [this]() { ChooseMaterial(); };

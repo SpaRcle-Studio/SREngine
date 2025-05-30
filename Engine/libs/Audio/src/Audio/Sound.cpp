@@ -8,7 +8,8 @@
 #include <Utils/Resources/ResourceManager.h>
 
 namespace SR_AUDIO_NS {
-    Sound::Sound() : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Sound)) {}
+    Sound::Sound()
+        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Sound)) {}
 
     Sound::~Sound() {
         if (m_data && !SoundManager::Instance().Unregister(&m_data)) {

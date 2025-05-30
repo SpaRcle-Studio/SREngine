@@ -5,7 +5,8 @@
 #include <Physics/PhysX/PhysXMaterialImpl.h>
 
 namespace SR_PTYPES_NS {
-    PhysXMaterialImpl::PhysXMaterialImpl(LibraryPtr pLibrary) : Super(pLibrary) {
+    PhysXMaterialImpl::PhysXMaterialImpl(LibraryPtr pLibrary)
+        : Super(pLibrary) {
         m_physics = GetLibrary<PhysXLibraryImpl>()->GetPxPhysics();
     }
 

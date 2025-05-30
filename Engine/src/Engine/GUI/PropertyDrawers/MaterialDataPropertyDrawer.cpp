@@ -14,7 +14,8 @@
 #include <Codegen/MaterialDataPropertyDrawer.generated.hpp>
 
 namespace SR_CORE_GUI_NS {
-    MaterialDataPropertyDrawer::MaterialDataPropertyDrawer() : Super() {
+    MaterialDataPropertyDrawer::MaterialDataPropertyDrawer()
+        : Super() {
         m_vectorDrawer = SRNew<MathVectorPropertyDrawer>();
         m_numericDrawer = SRNew<NumericPropertyDrawer>();
         m_boolDrawer = SRNew<BoolPropertyDrawer>();

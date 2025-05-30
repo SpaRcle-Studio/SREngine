@@ -15,7 +15,8 @@
 #include <Utils/Input/InputSystem.h>
 
 namespace SR_CORE_UI_NS {
-    IButton::IButton() : Super() {
+    IButton::IButton()
+        : Super() {
         m_entityMessages.AddCustomProperty<SR_UTILS_NS::LabelProperty>("Idle")
             .SetLabel("Button is idle.")
             .SetColor(SR_MATH_NS::FColor(1.f, 1.f, 1.f, 1.f))

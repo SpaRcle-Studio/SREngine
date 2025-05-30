@@ -13,7 +13,8 @@
 #include <Graphics/GUI/Icons.h>
 
 namespace SR_CORE_NS::GUI {
-    FileBrowser::FileBrowser() : Widget("Assets") {}
+    FileBrowser::FileBrowser()
+        : Widget("Assets") {}
 
     void FileBrowser::SetFolder(const SR_UTILS_NS::Path& path) {
         m_selectedDir = m_defaultRoot = path;

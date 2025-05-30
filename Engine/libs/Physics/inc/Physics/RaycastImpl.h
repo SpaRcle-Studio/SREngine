@@ -18,7 +18,8 @@ namespace SR_PHYSICS_NS {
         using RaycastHits = std::vector<SR_UTILS_NS::RaycastHit>;
 
     public:
-        explicit RaycastImpl(SR_PHYSICS_NS::PhysicsWorld* world) : m_world(world) {}
+        explicit RaycastImpl(SR_PHYSICS_NS::PhysicsWorld* world)
+            : m_world(world) {}
 
         ~RaycastImpl() override = default;
 

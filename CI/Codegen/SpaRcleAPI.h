@@ -153,13 +153,16 @@ namespace SpaRcleAPI {
             pDeleteFunction(m_handle);
         }
 
-        SharedPtr(const ScriptHandle& handle) : m_handle(handle) {
+        SharedPtr(const ScriptHandle& handle)
+            : m_handle(handle) {
             auto&& pIncrementFunc =
                 (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(T::API_INCREMENT_FUNCTION_INDEX);
             pIncrementFunc(m_handle);
         }
 
-        SharedPtr(const SharedPtr& other) : m_handle(other.m_handle), m_initialized(other.m_initialized) {
+        SharedPtr(const SharedPtr& other)
+            : m_handle(other.m_handle)
+            , m_initialized(other.m_initialized) {
             auto&& pIncrementFunc =
                 (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(T::API_INCREMENT_FUNCTION_INDEX);
             pIncrementFunc(m_handle);
@@ -168,7 +171,8 @@ namespace SpaRcleAPI {
         }
 
         SharedPtr(SharedPtr&& other) noexcept
-            : m_handle(std::exchange(other.m_handle, {})), m_initialized(std::exchange(other.m_initialized, false)) {
+            : m_handle(std::exchange(other.m_handle, {}))
+            , m_initialized(std::exchange(other.m_initialized, false)) {
             memcpy(m_storage, other.m_storage, sizeof(T));
         }
 
@@ -227,7 +231,8 @@ namespace SpaRcleAPI {
         UnsafeRef& operator=(const UnsafeRef&) = delete;
         UnsafeRef& operator=(UnsafeRef&&) = delete;
 
-        UnsafeRef(const ScriptHandle& handle) : m_handle(handle) {}
+        UnsafeRef(const ScriptHandle& handle)
+            : m_handle(handle) {}
 
     public:
         T* operator->() const {

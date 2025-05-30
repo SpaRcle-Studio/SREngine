@@ -9,7 +9,8 @@
 #include <Physics/PhysicsMaterialImpl.h>
 
 namespace SR_PTYPES_NS {
-    PhysicsMaterial::PhysicsMaterial() : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(PhysicsMaterial)) {}
+    PhysicsMaterial::PhysicsMaterial()
+        : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(PhysicsMaterial)) {}
 
     PhysicsMaterial::~PhysicsMaterial() {
         for (auto&& [libraryType, physicsMaterial] : m_implementations) {

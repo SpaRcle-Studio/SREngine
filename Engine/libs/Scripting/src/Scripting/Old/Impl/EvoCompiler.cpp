@@ -12,7 +12,8 @@
 #include <Scripting/Impl/EvoCompiler.h>
 
 namespace SR_SCRIPTING_NS {
-    EvoCompiler::EvoCompiler(std::string cachePath) : EvoScript::Compiler(std::move(cachePath)) {}
+    EvoCompiler::EvoCompiler(std::string cachePath)
+        : EvoScript::Compiler(std::move(cachePath)) {}
 
     EvoCompiler::~EvoCompiler() {
         if (m_generator) {
@@ -89,8 +90,8 @@ namespace SR_SCRIPTING_NS {
     }
 
     GlobalEvoCompiler::GlobalEvoCompiler()
-        : SR_UTILS_NS::Singleton<GlobalEvoCompiler>(),
-          SR_SCRIPTING_NS::EvoCompiler(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scripts")) {
+        : SR_UTILS_NS::Singleton<GlobalEvoCompiler>()
+        , SR_SCRIPTING_NS::EvoCompiler(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scripts")) {
         Init();
     }
 } // namespace SR_SCRIPTING_NS

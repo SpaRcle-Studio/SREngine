@@ -40,7 +40,8 @@ namespace SR_CORE_NS::Commands {
 
     public:
         explicit IEngineReversibleCommand(EnginePtr pEngine)
-            : m_engine(std::move(pEngine)), m_scene(m_engine->GetScene()) {}
+            : m_engine(std::move(pEngine))
+            , m_scene(m_engine->GetScene()) {}
 
     protected:
         SR_HTYPES_NS::SharedPtr<Engine> m_engine;
@@ -78,7 +79,10 @@ namespace SR_CORE_NS::Commands {
             const EnginePtr& pEngine, const SR_UTILS_NS::GameObject::Ptr& pGameObject,
             SR_UTILS_NS::ISerializer::UniquePtr pOld, SR_UTILS_NS::ISerializer::UniquePtr pNew = nullptr
         )
-            : Super(pEngine), m_entityId(pGameObject->GetEntityId()), m_pOld(std::move(pOld)), m_pNew(std::move(pNew)) {
+            : Super(pEngine)
+            , m_entityId(pGameObject->GetEntityId())
+            , m_pOld(std::move(pOld))
+            , m_pNew(std::move(pNew)) {
             if (!m_pNew) {
                 m_pNew = SR_CORE_NS::Commands::CreateSerializer();
                 SR_UTILS_NS::Serialization::Save(*m_pNew, pGameObject->GetTransform(), DATA_ID);
@@ -104,7 +108,10 @@ namespace SR_CORE_NS::Commands {
             const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO,
             SR_UTILS_NS::ISerializer::UniquePtr pOld, SR_UTILS_NS::ISerializer::UniquePtr pNew
         )
-            : Super(pEngine), m_entityId(pSO->GetEntityId()), m_pOld(std::move(pOld)), m_pNew(std::move(pNew)) {}
+            : Super(pEngine)
+            , m_entityId(pSO->GetEntityId())
+            , m_pOld(std::move(pOld))
+            , m_pNew(std::move(pNew)) {}
 
         bool Redo() override;
         bool Undo() override;
@@ -125,7 +132,9 @@ namespace SR_CORE_NS::Commands {
             const EnginePtr& pEngine, const SR_UTILS_NS::IComponentable::Ptr& pComponentable,
             SR_UTILS_NS::ISerializer::UniquePtr pOld
         )
-            : Super(pEngine), m_entityId(pComponentable->GetEntityId()), m_pOld(std::move(pOld)) {
+            : Super(pEngine)
+            , m_entityId(pComponentable->GetEntityId())
+            , m_pOld(std::move(pOld)) {
             m_pNew = SR_CORE_NS::Commands::CreateSerializer();
             SR_UTILS_NS::Serialization::Save(*m_pNew, pComponentable->GetComponents(), DATA_ID);
         }
@@ -149,7 +158,9 @@ namespace SR_CORE_NS::Commands {
             const EnginePtr& pEngine, const SR_UTILS_NS::Component::Ptr& pComponent,
             SR_UTILS_NS::ISerializer::UniquePtr pOld
         )
-            : Super(pEngine), m_entityId(pComponent->GetEntityId()), m_pOld(std::move(pOld)) {
+            : Super(pEngine)
+            , m_entityId(pComponent->GetEntityId())
+            , m_pOld(std::move(pOld)) {
             m_pNew = SR_CORE_NS::Commands::CreateSerializer();
             SR_UTILS_NS::Serialization::Save(*m_pNew, *pComponent, DATA_ID);
         }

@@ -43,7 +43,8 @@ namespace EvoScript {
     class Win32State : public IState {
     public:
         Win32State(const Win32State&) = delete;
-        explicit Win32State(const std::string& path) : IState(path) {}
+        explicit Win32State(const std::string& path)
+            : IState(path) {}
 
     private:
         ~Win32State() override = default;

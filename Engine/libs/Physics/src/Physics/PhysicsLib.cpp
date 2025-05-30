@@ -18,7 +18,10 @@
 #endif
 
 namespace SR_PHYSICS_NS {
-    PhysicsLibrary::PhysicsLibrary() : Super() { m_libraries.resize(SR_UTILS_NS::EnumReflector::Count<LibraryType>()); }
+    PhysicsLibrary::PhysicsLibrary()
+        : Super() {
+        m_libraries.resize(SR_UTILS_NS::EnumReflector::Count<LibraryType>());
+    }
 
     PhysicsLibrary::~PhysicsLibrary() {
         for (auto&& pLibrary : m_libraries) {

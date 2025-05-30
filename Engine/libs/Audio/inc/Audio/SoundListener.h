@@ -17,7 +17,8 @@ namespace SR_AUDIO_NS {
 
     class SoundListener : public SR_UTILS_NS::NonCopyable {
     public:
-        explicit SoundListener(SoundDevice* pDevice) : m_pDevice(pDevice) {}
+        explicit SoundListener(SoundDevice* pDevice)
+            : m_pDevice(pDevice) {}
 
         SoundListener* Allocate(SoundDevice* pDevice);
 

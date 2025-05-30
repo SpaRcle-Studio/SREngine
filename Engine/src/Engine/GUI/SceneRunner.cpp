@@ -8,7 +8,8 @@
 #include <Utils/TaskManager/TaskManager.h>
 
 namespace SR_CORE_NS::GUI {
-    SceneRunner::SceneRunner() : SR_GRAPH_NS::GUI::Widget("Scene runner", SR_MATH_NS::IVector2(0, 60)) {}
+    SceneRunner::SceneRunner()
+        : SR_GRAPH_NS::GUI::Widget("Scene runner", SR_MATH_NS::IVector2(0, 60)) {}
 
     void SceneRunner::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
         SR_LOCK_GUARD;

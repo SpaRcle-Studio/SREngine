@@ -21,9 +21,11 @@ namespace SR_CORE_GUI_NS {
     SR_MAYBE_UNUSED SR_UTILS_NS::StringAtom GetValueInspector(const SR_UTILS_NS::Reflection::Value& value);
 
     struct PropertyDrawerContext {
-        explicit PropertyDrawerContext(const SR_UTILS_NS::Reflection::Property& property) : pProperty(&property) {}
+        explicit PropertyDrawerContext(const SR_UTILS_NS::Reflection::Property& property)
+            : pProperty(&property) {}
 
-        explicit PropertyDrawerContext(SR_UTILS_NS::Reflection::Value* pValue) : pValue(pValue) {}
+        explicit PropertyDrawerContext(SR_UTILS_NS::Reflection::Value* pValue)
+            : pValue(pValue) {}
 
         bool noHeader = false;
         bool openedByDefault = false;
@@ -85,7 +87,8 @@ namespace SR_CORE_GUI_NS {
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<PropertyDrawerBase>;
 
-        PropertyDrawerBase() : Ptr(this, SR_UTILS_NS::SharedPtrPolicy::Automatic) {}
+        PropertyDrawerBase()
+            : Ptr(this, SR_UTILS_NS::SharedPtrPolicy::Automatic) {}
 
         virtual PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) = 0;
 

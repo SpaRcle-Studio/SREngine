@@ -6,7 +6,8 @@
 #include <Scripting/Tools/Finder.h>
 
 namespace EvoScript {
-    Compiler::Compiler(std::string cachePath) : m_cachePath(std::move(cachePath)) {
+    Compiler::Compiler(std::string cachePath)
+        : m_cachePath(std::move(cachePath)) {
         ClearModulesCache(m_cachePath + "/Modules");
     }
 

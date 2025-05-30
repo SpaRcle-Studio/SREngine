@@ -13,7 +13,10 @@ namespace SR_AUDIO_NS {
 
     class WaveDataFormat : public SR_UTILS_NS::NonCopyable {
     public:
-        WaveDataFormat() : m_numChannels(0), m_samplesPerSecond(0), m_bitsPerSample(0) {}
+        WaveDataFormat()
+            : m_numChannels(0)
+            , m_samplesPerSecond(0)
+            , m_bitsPerSample(0) {}
 
         ~WaveDataFormat() override = default;
 

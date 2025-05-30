@@ -5,7 +5,8 @@
 #include <Physics/Bullet3/Bullet3PhysicsWorld.h>
 
 namespace SR_PHYSICS_NS {
-    Bullet3PhysicsWorld::Bullet3PhysicsWorld(PhysicsWorld::LibraryPtr pLibrary, Space space) : Super(pLibrary, space) {}
+    Bullet3PhysicsWorld::Bullet3PhysicsWorld(PhysicsWorld::LibraryPtr pLibrary, Space space)
+        : Super(pLibrary, space) {}
 
     Bullet3PhysicsWorld::~Bullet3PhysicsWorld() {
         SR_SAFE_DELETE_PTR(m_dynamicsWorld);

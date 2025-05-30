@@ -6,7 +6,8 @@
 #include <Physics/Bullet3/Bullet3Rigidbody3D.h>
 
 namespace SR_PTYPES_NS {
-    Bullet3Rigidbody3D::Bullet3Rigidbody3D(Rigidbody::LibraryPtr pLibrary) : Super(pLibrary) {}
+    Bullet3Rigidbody3D::Bullet3Rigidbody3D(Rigidbody::LibraryPtr pLibrary)
+        : Super(pLibrary) {}
 
     Bullet3Rigidbody3D::~Bullet3Rigidbody3D() {
         SR_SAFE_DELETE_PTR(m_motionState);

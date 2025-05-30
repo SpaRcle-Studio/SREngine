@@ -47,7 +47,8 @@ namespace SR_SCRIPTING_NS {
 
     public:
         CppCompiler(ScriptSystem* pScriptSystem)
-            : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic), m_pScriptSystem(pScriptSystem) {}
+            : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
+            , m_pScriptSystem(pScriptSystem) {}
 
         ~CppCompiler() override;
 

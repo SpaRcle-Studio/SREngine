@@ -7,7 +7,8 @@
 #include <Graphics/Animations/Animator.h>
 
 namespace SR_CORE_GUI_NS {
-    AnimatorEditor::AnimatorEditor() : Super("Animator") {}
+    AnimatorEditor::AnimatorEditor()
+        : Super("Animator") {}
 
     void AnimatorEditor::SetAnimator(const AnimatorPtr& pAnimator) noexcept { m_pAnimator = pAnimator; }
 

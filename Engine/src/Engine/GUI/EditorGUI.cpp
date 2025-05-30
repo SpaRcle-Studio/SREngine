@@ -61,7 +61,8 @@ namespace SR_CORE_GUI_NS {
         return scenePath;
     }
 
-    EditorGUI::EditorGUI(const EnginePtr& pEngine) : Super() {
+    EditorGUI::EditorGUI(const EnginePtr& pEngine)
+        : Super() {
         m_cachedScenePath =
             SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("/PreviousScenePath").ConcatExt("cache");
 

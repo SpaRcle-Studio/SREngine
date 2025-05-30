@@ -8,7 +8,8 @@
 #include <Utils/Resources/ResourceManager.h>
 
 namespace SR_AUDIO_NS {
-    RawSound::RawSound() : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(RawSound)) {}
+    RawSound::RawSound()
+        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(RawSound)) {}
 
     RawSound::~RawSound() {}
 
