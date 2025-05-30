@@ -14,12 +14,10 @@
 #include <Audio/SoundFormat.h>
 
 namespace SR_AUDIO_NS {
-    SR_ENUM_NS_CLASS_T(PlayParamType, uint8_t,
-        Async, Loop, Library,
-        Relative, Gain, MinGain,
-        Pitch, ConeInnerAngle, ConeOuterAngle, UniqueId,
-        Position, Direction, Velocity, ConeOuterGain,
-        Orientation, Device, MaxGain, MaxDistance, RolloffFactor, ReferenceDistance, Spatialize
+    SR_ENUM_NS_CLASS_T(
+        PlayParamType, uint8_t, Async, Loop, Library, Relative, Gain, MinGain, Pitch, ConeInnerAngle, ConeOuterAngle,
+        UniqueId, Position, Direction, Velocity, ConeOuterGain, Orientation, Device, MaxGain, MaxDistance,
+        RolloffFactor, ReferenceDistance, Spatialize
     );
 
     template<typename T> class PlayParamChangeChecker {
@@ -28,8 +26,7 @@ namespace SR_AUDIO_NS {
         explicit PlayParamChangeChecker(const T& value)
             : m_value(value)
             , m_changed(true)
-            , m_hasValue(true)
-        { }
+            , m_hasValue(true) {}
 
         SR_NODISCARD SR_FORCE_INLINE bool has_value() const noexcept { return m_hasValue; }
         SR_NODISCARD SR_FORCE_INLINE bool is_changed() const noexcept { return m_changed; }
@@ -43,24 +40,17 @@ namespace SR_AUDIO_NS {
             return *this;
         }
 
-        SR_FORCE_INLINE void reset_changed() const noexcept {
-            m_changed = false;
-        }
+        SR_FORCE_INLINE void reset_changed() const noexcept { m_changed = false; }
 
-        SR_FORCE_INLINE void mark_as_changed() const noexcept {
-            m_changed = true;
-        }
+        SR_FORCE_INLINE void mark_as_changed() const noexcept { m_changed = true; }
 
     private:
         T m_value;
         mutable bool m_changed : 4 = false;
         bool m_hasValue : 4 = false;
-
     };
 
-    SR_ENUM_NS_CLASS_T(SpatializeMode, uint8_t,
-        Off, On, Auto
-    );
+    SR_ENUM_NS_CLASS_T(SpatializeMode, uint8_t, Off, On, Auto);
 
     struct PlayParams {
     public:
@@ -108,8 +98,7 @@ namespace SR_AUDIO_NS {
         PlayParamChangeChecker<SR_MATH_NS::FVector3> velocity;
         PlayParamChangeChecker<SR_MATH_NS::FVector6> orientation;
         PlayParamChangeChecker<std::string> device;
-
     };
-}
+} // namespace SR_AUDIO_NS
 
-#endif //SR_ENGINE_PLAYPARAMS_H
+#endif // SR_ENGINE_PLAYPARAMS_H

@@ -11,6 +11,7 @@
 namespace SR_PHYSICS_NS {
     class PhysXLibraryImpl : public SR_PHYSICS_NS::LibraryImpl {
         using Super = SR_PHYSICS_NS::LibraryImpl;
+
     public:
         PhysXLibraryImpl() = default;
         ~PhysXLibraryImpl() override;
@@ -43,8 +44,7 @@ namespace SR_PHYSICS_NS {
 
         PhysXPvdConnection* m_pvd = nullptr;
         physx::PxPvdTransport* m_pvdTransport = nullptr;
-
     };
-}
+} // namespace SR_PHYSICS_NS
 
-#endif //SR_ENGINE_PHYSXLIBRARYIMPL_H
+#endif // SR_ENGINE_PHYSXLIBRARYIMPL_H

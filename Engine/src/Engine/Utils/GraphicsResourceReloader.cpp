@@ -42,9 +42,9 @@ namespace SR_CORE_NS {
                 }
             }
             pContext.Unlock();
-        }
-        else {
-            SR_WARN("GraphicsResourceReloader::OnResourceReloaded() : render context is not available!");
+        } else {
+            SR_WARN("GraphicsResourceReloader::OnResourceReloaded() : render "
+                    "context is not available!");
         }
     }
-}
+} // namespace SR_CORE_NS

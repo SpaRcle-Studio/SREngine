@@ -7,10 +7,10 @@
 
 #include <Engine/Engine.h>
 
-#include <Utils/World/Scene.h>
 #include <Utils/ECS/Component.h>
-#include <Utils/ECS/Transform3D.h>
 #include <Utils/ECS/GameObject.h>
+#include <Utils/ECS/Transform3D.h>
+#include <Utils/World/Scene.h>
 
 #include <Graphics/Window/Window.h>
 
@@ -23,6 +23,7 @@ namespace SR_CORE_NS {
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
         using CameraPtr = SR_GTYPES_NS::Camera*;
         using RenderScenePtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderScene>;
+
     public:
         World() = default;
 
@@ -34,8 +35,7 @@ namespace SR_CORE_NS {
 
     private:
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
-
     };
-}
+} // namespace SR_CORE_NS
 
-#endif //SR_ENGINE_WORLD_H
+#endif // SR_ENGINE_WORLD_H

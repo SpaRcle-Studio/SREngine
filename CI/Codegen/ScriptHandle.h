@@ -3,7 +3,7 @@
 #endif
 
 #ifndef SR_ENGINE_SCRIPT_API_SCRIPT_HANDLE_INCLUDE_GUARD
-#define SR_ENGINE_SCRIPT_API_SCRIPT_HANDLE_INCLUDE_GUARD
+    #define SR_ENGINE_SCRIPT_API_SCRIPT_HANDLE_INCLUDE_GUARD
 extern "C" {
     struct ScriptHandle {
         void* pData = nullptr;
@@ -11,9 +11,9 @@ extern "C" {
         bool isDestructible = false;
     }
     #if defined(__GNUC__) || defined(__clang__)
-        __attribute__((packed)); // GCC/Clang: Remove padding
+    __attribute__((packed)); // GCC/Clang: Remove padding
     #else
-        ;
+    ;
     #endif
 }
 #endif /// SR_ENGINE_SCRIPT_API_SCRIPT_HANDLE_INCLUDE_GUARD

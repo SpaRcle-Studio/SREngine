@@ -4,24 +4,22 @@
 
 #include <Physics/Rigidbody.h>
 
-#include <Utils/ECS/Transform.h>
-#include <Utils/World/Scene.h>
 #include <Utils/DebugDraw.h>
+#include <Utils/ECS/Transform.h>
 #include <Utils/Types/RawMesh.h>
+#include <Utils/World/Scene.h>
 
-#include <Physics/LibraryImpl.h>
-#include <Physics/PhysicsScene.h>
-#include <Physics/PhysicsMaterial.h>
-#include <Physics/Utils/Utils.h>
 #include <Physics/2D/Rigidbody2D.h>
 #include <Physics/3D/Rigidbody3D.h>
+#include <Physics/LibraryImpl.h>
+#include <Physics/PhysicsMaterial.h>
+#include <Physics/PhysicsScene.h>
+#include <Physics/Utils/Utils.h>
 
 #include <Codegen/Rigidbody.generated.hpp>
 
 namespace SR_PTYPES_NS {
-    Rigidbody::Rigidbody() {
-        GetCollisionShape()->SetRigidbody(this);
-    }
+    Rigidbody::Rigidbody() { GetCollisionShape()->SetRigidbody(this); }
 
     Rigidbody::~Rigidbody() {
         m_shape.AutoFree();
@@ -39,11 +37,8 @@ namespace SR_PTYPES_NS {
 
         if (physicsScene) {
             physicsScene->Remove(this);
-        }
-        else {
-           AutoFree([](auto&& pData) {
-               delete pData;
-           });
+        } else {
+            AutoFree([](auto&& pData) { delete pData; });
         }
     }
 
@@ -85,11 +80,7 @@ namespace SR_PTYPES_NS {
 
     void Rigidbody::OnMatrixDirty() {
         if (auto&& pTransform = GetTransform()) {
-            pTransform->GetMatrix().Decompose(
-                m_translation,
-                m_rotation,
-                m_scale
-            );
+            pTransform->GetMatrix().Decompose(m_translation, m_rotation, m_scale);
 
             GetCollisionShape()->UpdateDebugShape();
         }
@@ -117,13 +108,9 @@ namespace SR_PTYPES_NS {
         return true;
     }
 
-    SR_MATH_NS::FVector3 Rigidbody::GetCenter() const noexcept {
-        return m_center;
-    }
+    SR_MATH_NS::FVector3 Rigidbody::GetCenter() const noexcept { return m_center; }
 
-    float_t Rigidbody::GetMass() const noexcept {
-        return m_mass;
-    }
+    float_t Rigidbody::GetMass() const noexcept { return m_mass; }
 
     bool Rigidbody::IsStatic() const noexcept {
         const ShapeType type = GetCollisionShape()->GetType();
@@ -151,9 +138,7 @@ namespace SR_PTYPES_NS {
         return m_rotation * (m_scale * m_center);
     }
 
-    ShapeType Rigidbody::GetType() const noexcept {
-        return GetCollisionShape()->GetType();
-    }
+    ShapeType Rigidbody::GetType() const noexcept { return GetCollisionShape()->GetType(); }
 
     void Rigidbody::SetType(ShapeType type) {
         if (GetCollisionShape()->GetType() == type) {
@@ -161,7 +146,10 @@ namespace SR_PTYPES_NS {
         }
 
         if (m_library && !m_library->IsShapeSupported(type)) {
-            SR_ERROR("Rigidbody::SetType() : shape \"" + SR_UTILS_NS::EnumReflector::ToStringAtom(type).ToStringRef() + "\" unsupported!");
+            SR_ERROR(
+                "Rigidbody::SetType() : shape \"" + SR_UTILS_NS::EnumReflector::ToStringAtom(type).ToStringRef() +
+                "\" unsupported!"
+            );
             return;
         }
 
@@ -177,8 +165,7 @@ namespace SR_PTYPES_NS {
             }
 
             physicsScene->Register(this);
-        }
-        else {
+        } else {
             SRHalt("Failed to get physics scene!");
         }
 
@@ -190,8 +177,7 @@ namespace SR_PTYPES_NS {
     void Rigidbody::OnDisable() {
         if (auto&& physicsScene = GetPhysicsScene()) {
             physicsScene->Remove(this);
-        }
-        else {
+        } else {
             SRHalt("Failed to get physics scene!");
         }
 
@@ -339,9 +325,7 @@ namespace SR_PTYPES_NS {
         return false;
     }
 
-    void* Rigidbody::GetHandle() const noexcept {
-        return m_impl ? m_impl->GetHandle() : nullptr;
-    }
+    void* Rigidbody::GetHandle() const noexcept { return m_impl ? m_impl->GetHandle() : nullptr; }
 
     void Rigidbody::Synchronize() {
         if (m_impl) {
@@ -371,4 +355,4 @@ namespace SR_PTYPES_NS {
         }
         return m_shape;
     }
-}
+} // namespace SR_PTYPES_NS

@@ -19,6 +19,7 @@ namespace SR_PHYSICS_NS {
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
         using RigidbodyPtr = SR_HTYPES_NS::SharedPtr<SR_PTYPES_NS::Rigidbody>;
         using Space = SR_UTILS_NS::Measurement;
+
     public:
         explicit PhysicsWorld(LibraryPtr pLibrary, Space space);
         ~PhysicsWorld() override;
@@ -29,16 +30,14 @@ namespace SR_PHYSICS_NS {
         virtual bool ClearForces() { return false; }
         virtual bool Synchronize() { return false; }
 
-        virtual void Flush() { }
+        virtual void Flush() {}
 
         virtual bool AddRigidbody(RigidbodyPtr pRigidbody) { return false; }
         virtual bool RemoveRigidbody(RigidbodyPtr pRigidbody) { return false; }
 
-        virtual void ForEachRigidbody3D(const SR_HTYPES_NS::Function<void(SR_PTYPES_NS::Rigidbody3D *)> &fun) { }
+        virtual void ForEachRigidbody3D(const SR_HTYPES_NS::Function<void(SR_PTYPES_NS::Rigidbody3D*)>& fun) {}
 
-        bool ReAddRigidbody(RigidbodyPtr pRigidbody) {
-            return RemoveRigidbody(pRigidbody) && AddRigidbody(pRigidbody);
-        }
+        bool ReAddRigidbody(RigidbodyPtr pRigidbody) { return RemoveRigidbody(pRigidbody) && AddRigidbody(pRigidbody); }
 
         SR_NODISCARD Raycast3DImpl* GetRaycast3DImpl() const noexcept { return m_raycast3dImpl; }
 
@@ -56,8 +55,7 @@ namespace SR_PHYSICS_NS {
         LibraryPtr m_library = nullptr;
         Space m_space = Space::Unknown;
         Raycast3DImpl* m_raycast3dImpl = nullptr;
-
     };
-}
+} // namespace SR_PHYSICS_NS
 
-#endif //SR_ENGINE_PHYSICSWORLD_H
+#endif // SR_ENGINE_PHYSICSWORLD_H

@@ -9,7 +9,9 @@
 
 namespace SR_CORE_GUI_NS {
     class EditorGUI;
-    SR_MAYBE_UNUSED bool DragDropTargetEntityRef(EditorGUI* pContext, SR_UTILS_NS::EntityRef& entityRef, const char* id, float_t width = 300.f);
-}
+    SR_MAYBE_UNUSED bool DragDropTargetEntityRef(
+        EditorGUI* pContext, SR_UTILS_NS::EntityRef& entityRef, const char* id, float_t width = 300.f
+    );
+} // namespace SR_CORE_GUI_NS
 
-#endif //SR_ENGINE_DRAGNDROPHELPER_H
+#endif // SR_ENGINE_DRAGNDROPHELPER_H

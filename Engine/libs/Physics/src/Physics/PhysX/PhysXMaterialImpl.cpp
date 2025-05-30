@@ -6,8 +6,7 @@
 
 namespace SR_PTYPES_NS {
     PhysXMaterialImpl::PhysXMaterialImpl(LibraryPtr pLibrary)
-        : Super(pLibrary)
-    {
+        : Super(pLibrary) {
         m_physics = GetLibrary<PhysXLibraryImpl>()->GetPxPhysics();
     }
 
@@ -28,13 +27,12 @@ namespace SR_PTYPES_NS {
         }
 
         m_pxMaterial = m_physics->createMaterial(
-            m_material->GetStaticFriction(),
-            m_material->GetDynamicFriction(),
-            m_material->GetBounciness()
+            m_material->GetStaticFriction(), m_material->GetDynamicFriction(), m_material->GetBounciness()
         );
 
         m_pxMaterial->setFrictionCombineMode(SR_PHYSICS_UTILS_NS::CombineToPxCombine(m_material->GetFrictionCombine()));
-        m_pxMaterial->setRestitutionCombineMode(SR_PHYSICS_UTILS_NS::CombineToPxCombine(m_material->GetBounceCombine()));
+        m_pxMaterial->setRestitutionCombineMode(SR_PHYSICS_UTILS_NS::CombineToPxCombine(m_material->GetBounceCombine())
+        );
 
         return true;
     }
@@ -56,4 +54,4 @@ namespace SR_PTYPES_NS {
             m_pxMaterial = nullptr;
         }
     }
-}
+} // namespace SR_PTYPES_NS

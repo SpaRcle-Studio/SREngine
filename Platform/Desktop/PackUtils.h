@@ -12,7 +12,8 @@ std::vector<std::string> GetPackFiles(const std::string& executablePath) {
 
     for (const auto& entry : std::filesystem::directory_iterator(currentPath)) {
         if (entry.is_regular_file()) {
-            if (entry.path().extension() == ".dll" || entry.path().extension() == ".so" || entry.path().extension() == ".dylib") {
+            if (entry.path().extension() == ".dll" || entry.path().extension() == ".so" ||
+                entry.path().extension() == ".dylib") {
                 files.emplace_back(absolute(entry.path()).string());
             }
         }
@@ -34,18 +35,27 @@ std::string wildcardToRegex(const std::string& mask) {
     std::string regex;
     for (char c : mask) {
         switch (c) {
-            case '*': regex += ".*"; break;
-            case '?': regex += "."; break;
-            case '.': regex += "\\."; break;
-            case '\\': regex += "/"; break; // normalize slashes
-            default: regex += c;
+        case '*':
+            regex += ".*";
+            break;
+        case '?':
+            regex += ".";
+            break;
+        case '.':
+            regex += "\\.";
+            break;
+        case '\\':
+            regex += "/";
+            break; // normalize slashes
+        default:
+            regex += c;
         }
     }
     return "^" + regex + "$";
 }
 
 bool IsExcluded(const std::filesystem::path& relPath, const std::vector<std::regex>& excludePatterns) {
-    std::string pathStr = relPath.generic_string();  // always forward slashes
+    std::string pathStr = relPath.generic_string(); // always forward slashes
     for (const auto& pattern : excludePatterns) {
         if (std::regex_match(pathStr, pattern)) {
             return true;
@@ -57,7 +67,7 @@ bool IsExcluded(const std::filesystem::path& relPath, const std::vector<std::reg
 std::vector<std::regex> LoadExcludeMask(std::filesystem::path resourcesPath) {
     std::vector<std::regex> excludeMasks;
 
-    auto&& filePath = resourcesPath  / "Engine/Configs/PackExcludeSettings.conf";
+    auto&& filePath = resourcesPath / "Engine/Configs/PackExcludeSettings.conf";
 
     if (std::filesystem::exists(filePath)) {
         std::ifstream file(filePath);
@@ -130,7 +140,10 @@ std::vector<char> CompressData(const std::vector<char>& data) {
     uLongf compressedSize = compressBound(data.size());
     std::vector<char> compressedData(compressedSize);
 
-    int result = compress(reinterpret_cast<Bytef*>(compressedData.data()), &compressedSize, reinterpret_cast<const Bytef*>(data.data()), data.size());
+    int result = compress(
+        reinterpret_cast<Bytef*>(compressedData.data()), &compressedSize, reinterpret_cast<const Bytef*>(data.data()),
+        data.size()
+    );
 
     if (result != Z_OK) {
         throw std::runtime_error("CompressData() : zlib compression failed with error code " + std::to_string(result));
@@ -161,9 +174,8 @@ bool PackFile(std::vector<char>& archive, const std::string& path, bool isResour
     if (isResource) {
         std::filesystem::path resourcesPath = absolute(std::filesystem::current_path() / "../../Resources");
         std::filesystem::path relPath = std::filesystem::relative(path, resourcesPath);
-        name = relPath.generic_string();  // always forward slashes
-    }
-    else {
+        name = relPath.generic_string(); // always forward slashes
+    } else {
         name = std::filesystem::path(path).filename().string();
     }
 
@@ -175,15 +187,24 @@ bool PackFile(std::vector<char>& archive, const std::string& path, bool isResour
         archive.reserve(newSize * 2);
     }
 
-    archive.insert(archive.end(), reinterpret_cast<const char*>(&nameLen), reinterpret_cast<const char*>(&nameLen) + sizeof(nameLen));
+    archive.insert(
+        archive.end(), reinterpret_cast<const char*>(&nameLen),
+        reinterpret_cast<const char*>(&nameLen) + sizeof(nameLen)
+    );
     archive.insert(archive.end(), name.begin(), name.end());
-    archive.insert(archive.end(), reinterpret_cast<const char*>(&dataLen), reinterpret_cast<const char*>(&dataLen) + sizeof(dataLen));
+    archive.insert(
+        archive.end(), reinterpret_cast<const char*>(&dataLen),
+        reinterpret_cast<const char*>(&dataLen) + sizeof(dataLen)
+    );
     archive.insert(archive.end(), fileData.begin(), fileData.end());
 
     return true;
 }
 
-int PackFiles(const std::string& executablePath, const std::vector<std::string>& filesToEmbed, const std::vector<std::string>& resourcesToEmbed, bool onlineData) {
+int PackFiles(
+    const std::string& executablePath, const std::vector<std::string>& filesToEmbed,
+    const std::vector<std::string>& resourcesToEmbed, bool onlineData
+) {
     std::cout << "PackFiles() : packing files...\n";
 
     std::vector<char> archive;
@@ -192,7 +213,10 @@ int PackFiles(const std::string& executablePath, const std::vector<std::string>&
     uint16_t fileNumber = 0;
 
     const auto fileCount = static_cast<uint16_t>(filesToEmbed.size());
-    archive.insert(archive.end(), reinterpret_cast<const char*>(&fileCount), reinterpret_cast<const char*>(&fileCount) + sizeof(fileCount));
+    archive.insert(
+        archive.end(), reinterpret_cast<const char*>(&fileCount),
+        reinterpret_cast<const char*>(&fileCount) + sizeof(fileCount)
+    );
 
     for (const auto& path : filesToEmbed) {
         ++fileNumber;
@@ -204,7 +228,10 @@ int PackFiles(const std::string& executablePath, const std::vector<std::string>&
     }
 
     const auto resourceCount = static_cast<uint16_t>(resourcesToEmbed.size());
-    archive.insert(archive.end(), reinterpret_cast<const char*>(&resourceCount), reinterpret_cast<const char*>(&resourceCount) + sizeof(resourceCount));
+    archive.insert(
+        archive.end(), reinterpret_cast<const char*>(&resourceCount),
+        reinterpret_cast<const char*>(&resourceCount) + sizeof(resourceCount)
+    );
 
     for (const auto& path : resourcesToEmbed) {
         ++fileNumber;
@@ -238,11 +265,18 @@ int PackFiles(const std::string& executablePath, const std::vector<std::string>&
 
     std::cout << "PackFiles() : archive size: " << archiveSize << "\n";
     std::cout << "PackFiles() : decompressed archive size: " << decompressedSize << "\n";
-    std::cout << "PackFiles() : compression ratio: " << (static_cast<float>(decompressedSize) / archive.size()) * 100.0f << "%\n";
+    std::cout << "PackFiles() : compression ratio: " << (static_cast<float>(decompressedSize) / archive.size()) * 100.0f
+              << "%\n";
 
     archive.insert(archive.end(), MAGIC, MAGIC + MAGIC_SIZE);
-    archive.insert(archive.end(), reinterpret_cast<const char*>(&decompressedSize), reinterpret_cast<const char*>(&decompressedSize) + sizeof(decompressedSize));
-    archive.insert(archive.end(), reinterpret_cast<const char*>(&archiveSize), reinterpret_cast<const char*>(&archiveSize) + sizeof(archiveSize));
+    archive.insert(
+        archive.end(), reinterpret_cast<const char*>(&decompressedSize),
+        reinterpret_cast<const char*>(&decompressedSize) + sizeof(decompressedSize)
+    );
+    archive.insert(
+        archive.end(), reinterpret_cast<const char*>(&archiveSize),
+        reinterpret_cast<const char*>(&archiveSize) + sizeof(archiveSize)
+    );
 
     std::cout << "PackFiles() : creating packed file: " << packedFileName << "\n";
 

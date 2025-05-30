@@ -7,18 +7,13 @@
 
 #include <Physics/macros.h>
 
-#include <Utils/Resources/IResource.h>
 #include <Utils/Common/Enumerations.h>
+#include <Utils/Resources/IResource.h>
 
 #include <Physics/Utils/Utils.h>
 
 namespace SR_PHYSICS_NS {
-    SR_ENUM_NS_CLASS_T(Combine, uint8_t,
-            Minimum,
-            Average,
-            Maximum,
-            Multiply
-    )
+    SR_ENUM_NS_CLASS_T(Combine, uint8_t, Minimum, Average, Maximum, Multiply)
 }
 
 namespace SR_PTYPES_NS {
@@ -37,6 +32,7 @@ namespace SR_PTYPES_NS {
 
     class PhysicsMaterial final : public SR_UTILS_NS::IResource {
         using Super = SR_UTILS_NS::IResource;
+
     private:
         PhysicsMaterial();
         ~PhysicsMaterial() override;
@@ -63,6 +59,7 @@ namespace SR_PTYPES_NS {
         void SetRigidbody(SR_PTYPES_NS::Rigidbody* pRigidbody);
 
         void RemoveRigidbody(SR_PTYPES_NS::Rigidbody* pRigidbody);
+
     private:
         bool Load() override;
         bool Unload() override;
@@ -73,5 +70,5 @@ namespace SR_PTYPES_NS {
         std::set<SR_PTYPES_NS::Rigidbody*> m_rigidbodies;
         std::map<LibraryType, PhysicsMaterialImpl*> m_implementations;
     };
-}
-#endif //SR_ENGINE_PHYSICSMATERIAL_H
+} // namespace SR_PTYPES_NS
+#endif // SR_ENGINE_PHYSICSMATERIAL_H

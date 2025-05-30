@@ -6,8 +6,7 @@
 
 namespace SR_PHYSICS_NS {
     Bullet3PhysicsWorld::Bullet3PhysicsWorld(PhysicsWorld::LibraryPtr pLibrary, Space space)
-        : Super(pLibrary, space)
-    { }
+        : Super(pLibrary, space) {}
 
     Bullet3PhysicsWorld::~Bullet3PhysicsWorld() {
         SR_SAFE_DELETE_PTR(m_dynamicsWorld);
@@ -18,17 +17,20 @@ namespace SR_PHYSICS_NS {
     }
 
     bool Bullet3PhysicsWorld::Initialize() {
-        ///collision configuration contains default setup for memory, collision setup
+        /// collision configuration contains default setup for memory, collision
+        /// setup
         m_collisionConfiguration = new btDefaultCollisionConfiguration();
 
-        //m_collisionConfiguration->setConvexConvexMultipointIterations();
+        // m_collisionConfiguration->setConvexConvexMultipointIterations();
 
-        ///use the default collision dispatcher. For parallel processing you can use a diffent dispatcher (see Extras/BulletMultiThreaded)
+        /// use the default collision dispatcher. For parallel processing you
+        /// can use a diffent dispatcher (see Extras/BulletMultiThreaded)
         m_dispatcher = new btCollisionDispatcher(m_collisionConfiguration);
 
         m_broadPhase = new btDbvtBroadphase();
 
-        ///the default constraint solver. For parallel processing you can use a different solver (see Extras/BulletMultiThreaded)
+        /// the default constraint solver. For parallel processing you can use a
+        /// different solver (see Extras/BulletMultiThreaded)
         m_solver = new btSequentialImpulseConstraintSolver();
 
         m_dynamicsWorld = new btDiscreteDynamicsWorld(m_dispatcher, m_broadPhase, m_solver, m_collisionConfiguration);
@@ -43,8 +45,9 @@ namespace SR_PHYSICS_NS {
 
         // m_dynamicsWorld->getDispatchInfo().m_enableSPU = true;
 
-        m_dynamicsWorld->setInternalTickCallback([](btDynamicsWorld *pWorld, btScalar timeStep) {
-            //std::cout << pWorld->getDispatcher()->getNumManifolds() << std::endl;
+        m_dynamicsWorld->setInternalTickCallback([](btDynamicsWorld* pWorld, btScalar timeStep) {
+            // std::cout << pWorld->getDispatcher()->getNumManifolds() <<
+            // std::endl;
         });
 
         return true;
@@ -60,12 +63,9 @@ namespace SR_PHYSICS_NS {
         for (int32_t i = 0; i < numManifolds; ++i) {
             const btPersistentManifold* contactManifold = m_dispatcher->getManifoldByIndexInternal(i);
 
-            if (contactManifold->getNumContacts() > 0)
-            {
+            if (contactManifold->getNumContacts() > 0) {
                 /// Activate triggers here
-            }
-            else
-            {
+            } else {
                 /// Deactivate trigger here
             }
         }
@@ -79,8 +79,7 @@ namespace SR_PHYSICS_NS {
             btTransform trans;
             if (body && body->getMotionState()) {
                 body->getMotionState()->getWorldTransform(trans);
-            }
-            else {
+            } else {
                 trans = colObj->getWorldTransform();
             }
 
@@ -91,18 +90,20 @@ namespace SR_PHYSICS_NS {
             }
 
             if (pRigidbody->UpdateShape() == RBUpdShapeRes::Error) {
-                SR_ERROR("Bullet3PhysicsWorld::Synchronize() : failed to update shape!");
+                SR_ERROR("Bullet3PhysicsWorld::Synchronize() : failed to "
+                         "update shape!");
                 continue;
             }
 
             if (pRigidbody->IsMatrixDirty()) {
                 pRigidbody->UpdateMatrix();
-            }
-            else if (auto&& pTransform = pRigidbody->GetTransform()) {
+            } else if (auto&& pTransform = pRigidbody->GetTransform()) {
                 btVector3 pos = trans.getOrigin();
                 btQuaternion orn = trans.getRotation();
 
-                pTransform->SetTranslation(SR_MATH_NS::FVector3(pos.x(), pos.y(), pos.z()) - pRigidbody->GetCenterDirection());
+                pTransform->SetTranslation(
+                    SR_MATH_NS::FVector3(pos.x(), pos.y(), pos.z()) - pRigidbody->GetCenterDirection()
+                );
                 pTransform->SetRotation(SR_MATH_NS::Quaternion(orn.x(), orn.y(), orn.z(), orn.w()));
 
                 pRigidbody->SetMatrixDirty(false);
@@ -124,7 +125,7 @@ namespace SR_PHYSICS_NS {
 
     bool Bullet3PhysicsWorld::RemoveRigidbody(PhysicsWorld::RigidbodyPtr pRigidbody) {
         if (auto&& pHandle = pRigidbody->GetHandle()) {
-            m_dynamicsWorld->removeRigidBody((btRigidBody *)pHandle);
+            m_dynamicsWorld->removeRigidBody((btRigidBody*)pHandle);
             return true;
         }
 
@@ -136,4 +137,4 @@ namespace SR_PHYSICS_NS {
         m_dynamicsWorld->stepSimulation(step);
         return true;
     }
-}
+} // namespace SR_PHYSICS_NS

@@ -5,15 +5,15 @@
 #ifndef EVOSCRIPT_STRINGUTILS_H
 #define EVOSCRIPT_STRINGUTILS_H
 
-#include <string>
 #include <algorithm>
-#include <sstream>
 #include <ctime>
-#include <sys/stat.h>
 #include <fstream>
 #include <list>
-#include <vector>
+#include <sstream>
 #include <stdarg.h>
+#include <string>
+#include <sys/stat.h>
+#include <vector>
 
 namespace EvoScript::Tools {
     static std::vector<std::string> RemoveFirstSpaces(std::vector<std::string> strings) {
@@ -23,9 +23,7 @@ namespace EvoScript::Tools {
         return strings;
     }
 
-    inline static std::string Read(const std::string& str, uint32_t count) {
-        return str.substr(0, count);
-    }
+    inline static std::string Read(const std::string& str, uint32_t count) { return str.substr(0, count); }
 
     inline static std::string ReadTo(const std::string& str, char c) {
         std::string s = str.substr(0, str.find(c));
@@ -48,9 +46,9 @@ namespace EvoScript::Tools {
 
         size_t pos = 0;
 
-        ret:
+    ret:
         size_t start_pos = str.find('\n', pos);
-        if(start_pos == std::string::npos)
+        if (start_pos == std::string::npos)
             return str;
         pos += start_pos - pos;
         str.insert(str.begin() + pos + 1, '\t');
@@ -61,7 +59,7 @@ namespace EvoScript::Tools {
     static std::string Replace(std::string str, const std::string& from, const std::string& to) {
     ret:
         size_t start_pos = str.find(from);
-        if(start_pos == std::string::npos)
+        if (start_pos == std::string::npos)
             return str;
         str.replace(start_pos, from.length(), to);
         goto ret;
@@ -79,7 +77,7 @@ namespace EvoScript::Tools {
 
     static std::string DeleteSymbolsInStr(std::string str, const std::string& symbols) {
         for (const auto& symbol : symbols)
-            str.erase(remove(str.begin(),str.end(), symbol),str.end());
+            str.erase(remove(str.begin(), str.end(), symbol), str.end());
         return str;
     }
 
@@ -121,6 +119,6 @@ namespace EvoScript::Tools {
         std::vector<std::string> strArgs = EvoScript::Tools::RemoveFirstSpaces(EvoScript::Tools::Split(args));
         return strArgs;
     }
-}
+} // namespace EvoScript::Tools
 
-#endif //EVOSCRIPT_STRINGUTILS_H
+#endif // EVOSCRIPT_STRINGUTILS_H

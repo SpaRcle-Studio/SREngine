@@ -12,6 +12,7 @@ class ALCcontext;
 namespace SR_AUDIO_NS {
     class OpenALSoundContext : public SoundContext {
         using Super = SoundContext;
+
     public:
         explicit OpenALSoundContext(SoundDevice* pDevice);
         ~OpenALSoundContext() override;
@@ -34,11 +35,8 @@ namespace SR_AUDIO_NS {
 
         SR_NODISCARD PlayParams GetSourceParams(SoundSource pSource) const override;
 
-        SR_NODISCARD SoundBuffer AllocateBuffer(
-                void* data,
-                uint64_t dataSize,
-                int32_t sampleRate,
-                SoundFormat format) override;
+        SR_NODISCARD SoundBuffer
+        AllocateBuffer(void* data, uint64_t dataSize, int32_t sampleRate, SoundFormat format) override;
 
     public:
         bool FreeBuffer(SoundBuffer* buffer) override;
@@ -46,8 +44,7 @@ namespace SR_AUDIO_NS {
 
     private:
         ALCcontext* m_openALContext = nullptr;
-
     };
-}
+} // namespace SR_AUDIO_NS
 
-#endif //SR_ENGINE_OPENALSOUNDCONTEXT_H
+#endif // SR_ENGINE_OPENALSOUNDCONTEXT_H

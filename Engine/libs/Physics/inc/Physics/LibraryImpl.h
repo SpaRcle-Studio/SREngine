@@ -15,7 +15,7 @@ namespace SR_PTYPES_NS {
     class CollisionShapeImpl;
     class PhysicsMaterialImpl;
     class Vehicle4W3D;
-}
+} // namespace SR_PTYPES_NS
 
 namespace SR_PHYSICS_NS {
     class PhysicsWorld;
@@ -26,6 +26,7 @@ namespace SR_PHYSICS_NS {
     public:
         using Super = SR_UTILS_NS::NonCopyable;
         using Space = SR_UTILS_NS::Measurement;
+
     public:
         LibraryImpl();
         ~LibraryImpl() override = default;
@@ -33,15 +34,21 @@ namespace SR_PHYSICS_NS {
     public:
         SR_NODISCARD virtual bool Initialize();
 
-        virtual void ConnectPVD() { }
+        virtual void ConnectPVD() {}
 
         SR_NODISCARD virtual bool IsShapeSupported(ShapeType type) const { return false; }
         SR_NODISCARD virtual ShapeType GetDefaultShape() const { return ShapeType::Unknown; }
 
         SR_NODISCARD virtual SR_PTYPES_NS::CollisionShapeImpl* CreateCollisionShapeImpl() { return nullptr; }
 
-        SR_NODISCARD virtual SR_PTYPES_NS::Rigidbody2DImpl* CreateRigidbody2DImpl() { SRHalt("Not implemented!"); return nullptr; }
-        SR_NODISCARD virtual SR_PTYPES_NS::Rigidbody3DImpl* CreateRigidbody3DImpl() { SRHalt("Not implemented!"); return nullptr; }
+        SR_NODISCARD virtual SR_PTYPES_NS::Rigidbody2DImpl* CreateRigidbody2DImpl() {
+            SRHalt("Not implemented!");
+            return nullptr;
+        }
+        SR_NODISCARD virtual SR_PTYPES_NS::Rigidbody3DImpl* CreateRigidbody3DImpl() {
+            SRHalt("Not implemented!");
+            return nullptr;
+        }
 
         SR_NODISCARD virtual SR_PTYPES_NS::Vehicle4W3D* CreateVehicle4W3D() { return nullptr; }
 
@@ -54,6 +61,6 @@ namespace SR_PHYSICS_NS {
     private:
         bool m_isVehicleSupported = false;
     };
-}
+} // namespace SR_PHYSICS_NS
 
-#endif //SR_ENGINE_LIBRARYIMPL_H
+#endif // SR_ENGINE_LIBRARYIMPL_H

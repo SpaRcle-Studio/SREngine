@@ -2,10 +2,10 @@
 // Created by Nikita on 03.07.2021.
 //
 
-#include <EvoScript/Script.h>
 #include <EvoScript/Compilation/Compiler.h>
+#include <EvoScript/Script.h>
 
-bool EvoScript::Script::Load(const std::string &path, Compiler& compiler, bool compile) {
+bool EvoScript::Script::Load(const std::string& path, Compiler& compiler, bool compile) {
     /// ES_LOG("Script::Load() : loading script " + path);
 
     if (m_path = path; compile ? !compiler.Compile(this) : !compiler.Load(this)) {
@@ -40,8 +40,7 @@ bool EvoScript::Script::HookFunctions() {
     for (auto&& m_methodPointer : m_methodPointers) {
         if (m_methodPointer) {
             m_methodPointer(m_state);
-        }
-        else {
+        } else {
             ES_ERROR("Script::HookFunction() : invalid setter!");
             return false;
         }
@@ -49,24 +48,25 @@ bool EvoScript::Script::HookFunctions() {
 
     if (auto&& setter = m_state->GetFunction<Typedefs::SetAllocateMemoryFnPtr>("SetAllocateMemoryFnPtr")) {
         setter(&ESAllocateMemory);
-    }
-    else {
-        ES_ERROR("Script::HookFunctions() : function \"SetAllocateMemoryFnPtr\" not found!");
+    } else {
+        ES_ERROR("Script::HookFunctions() : function "
+                 "\"SetAllocateMemoryFnPtr\" not found!");
         return false;
     }
 
     if (auto&& setter = m_state->GetFunction<Typedefs::SetFreeMemoryFnPtr>("SetFreeMemoryFnPtr")) {
         setter(&ESFreeMemory);
-    }
-    else {
-        ES_ERROR("Script::HookFunctions() : function \"SetFreeMemoryFnPtr\" not found!");
+    } else {
+        ES_ERROR("Script::HookFunctions() : function \"SetFreeMemoryFnPtr\" "
+                 "not found!");
         return false;
     }
 
     return true;
 }
 
-EvoScript::Script *EvoScript::Script::Allocate(const std::string &name, Compiler* pCompiler, MethodPointers methodPointers) {
+EvoScript::Script*
+EvoScript::Script::Allocate(const std::string& name, Compiler* pCompiler, MethodPointers methodPointers) {
     return new Script(name, pCompiler, std::move(methodPointers));
 }
 
@@ -89,18 +89,17 @@ bool EvoScript::Script::IsDirty() const {
 
     const std::string fullPath = path + "/source.hash";
 
-    auto currHash = std::pair(isDebug, std::vector {
-            EvoScript::Tools::GetFileHash(source + ".cpp"),
-            EvoScript::Tools::GetFileHash(source + ".h")
-    });
+    auto currHash = std::pair(
+        isDebug,
+        std::vector{EvoScript::Tools::GetFileHash(source + ".cpp"), EvoScript::Tools::GetFileHash(source + ".h")}
+    );
 
     if (EvoScript::Tools::ESFileSystem::IsExists(fullPath)) {
         auto loadHash = EvoScript::Tools::LoadHashInfo(fullPath);
         if (!EvoScript::Tools::HashEquals(loadHash, currHash)) {
             return false;
         }
-    }
-    else {
+    } else {
         return false;
     }
 

@@ -10,6 +10,7 @@
 namespace SR_PHYSICS_NS {
     class Bullet3LibraryImpl : public SR_PHYSICS_NS::LibraryImpl {
         using Super = SR_PHYSICS_NS::LibraryImpl;
+
     public:
         Bullet3LibraryImpl() = default;
         ~Bullet3LibraryImpl() override = default;
@@ -23,8 +24,7 @@ namespace SR_PHYSICS_NS {
         SR_NODISCARD SR_PTYPES_NS::CollisionShape* CreateCollisionShape() override;
         SR_NODISCARD SR_PTYPES_NS::Rigidbody3D* CreateRigidbody3D() override;
         SR_NODISCARD SR_PHYSICS_NS::PhysicsWorld* CreatePhysicsWorld(Space space) override;
-
     };
-}
+} // namespace SR_PHYSICS_NS
 
-#endif //SR_ENGINE_BULLET3LIBRARYIMPL_H
+#endif // SR_ENGINE_BULLET3LIBRARYIMPL_H

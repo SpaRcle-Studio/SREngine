@@ -23,6 +23,6 @@ namespace SR_PTYPES_NS {
     private:
         WheelsData m_wheelsData;
     };
-}
+} // namespace SR_PTYPES_NS
 
-#endif //SR_ENGINE_VEHICLE4W3D_H
+#endif // SR_ENGINE_VEHICLE4W3D_H

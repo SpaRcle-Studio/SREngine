@@ -22,9 +22,7 @@ namespace SR_SCRIPTING_NS {
         bool isShared = false;
     };
 
-    SR_ENUM_NS_CLASS_T(CppCompilerType, uint8_t,
-        Unknown, MinGW, GCC, Clang, MSVC
-    )
+    SR_ENUM_NS_CLASS_T(CppCompilerType, uint8_t, Unknown, MinGW, GCC, Clang, MSVC)
 
     struct CppCompilerSettings : public SR_UTILS_NS::Serializable {
         SR_STRUCT()
@@ -43,14 +41,14 @@ namespace SR_SCRIPTING_NS {
 
     class CppCompiler : public SR_HTYPES_NS::SharedPtr<CppCompiler> {
         using Super = SR_HTYPES_NS::SharedPtr<CppCompiler>;
+
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<CppCompiler>;
 
     public:
         CppCompiler(ScriptSystem* pScriptSystem)
             : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
-            , m_pScriptSystem(pScriptSystem)
-        { }
+            , m_pScriptSystem(pScriptSystem) {}
 
         ~CppCompiler() override;
 
@@ -77,8 +75,7 @@ namespace SR_SCRIPTING_NS {
         SR_UTILS_NS::Path m_resourcesPath;
         bool m_isInitialized = false;
         ScriptSystem* m_pScriptSystem = nullptr;
-
     };
-}
+} // namespace SR_SCRIPTING_NS
 
-#endif //SR_ENGINE_SCRIPTING_CPP_COMPILER_H
+#endif // SR_ENGINE_SCRIPTING_CPP_COMPILER_H

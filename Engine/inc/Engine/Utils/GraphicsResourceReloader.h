@@ -18,11 +18,11 @@ namespace SR_CORE_NS {
         using Super = SR_UTILS_NS::IResourceReloader;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>;
         using ContextGetterFn = SR_HTYPES_NS::Function<RenderContextPtr()>;
+
     public:
         explicit GraphicsResourceReloader(ContextGetterFn contextGetter)
             : Super()
-            , m_contextGetter(std::move(contextGetter))
-        { }
+            , m_contextGetter(std::move(contextGetter)) {}
 
         SR_NODISCARD bool Reload(const SR_UTILS_NS::Path& path, SR_UTILS_NS::ResourceInfo* pResourceInfo) override;
 
@@ -31,8 +31,7 @@ namespace SR_CORE_NS {
 
     private:
         ContextGetterFn m_contextGetter;
-
     };
-}
+} // namespace SR_CORE_NS
 
-#endif //SR_ENGINE_GRAPHICSRESOURCERELOADER_H
+#endif // SR_ENGINE_GRAPHICSRESOURCERELOADER_H

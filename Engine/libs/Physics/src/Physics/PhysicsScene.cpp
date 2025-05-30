@@ -7,14 +7,13 @@
 #include <Utils/Math/Mathematics.h>
 #include <Utils/World/Scene.h>
 
-#include <Physics/PhysicsWorld.h>
 #include <Physics/LibraryImpl.h>
+#include <Physics/PhysicsWorld.h>
 
 namespace SR_PHYSICS_NS {
     PhysicsScene::PhysicsScene(const ScenePtr& scene)
         : Super(this)
-        , m_scene(scene)
-    { }
+        , m_scene(scene) {}
 
     PhysicsScene::~PhysicsScene() {
         auto&& removeRigidbody = [&](const SR_PTYPES_NS::Rigidbody::Ptr& pRigidbody) {
@@ -26,23 +25,17 @@ namespace SR_PHYSICS_NS {
 
             if (type == SR_PHYSICS_NS::ShapeType::Unknown) {
                 /// Not registered rigidbody
-            }
-            else if (SR_PHYSICS_UTILS_NS::Is2DShape(type)) {
+            } else if (SR_PHYSICS_UTILS_NS::Is2DShape(type)) {
                 m_2DWorld->RemoveRigidbody(pRigidbody);
-            }
-            else if (SR_PHYSICS_UTILS_NS::Is3DShape(type)) {
+            } else if (SR_PHYSICS_UTILS_NS::Is3DShape(type)) {
                 m_3DWorld->RemoveRigidbody(pRigidbody);
-            }
-            else {
+            } else {
                 SRHalt("Unknown measurement of rigidbody!");
             }
 
             if (!pRigidbody->HasParent()) {
-                pRigidbody->AutoFree([](auto&& pData) {
-                    delete pData;
-                });
-            }
-            else {
+                pRigidbody->AutoFree([](auto&& pData) { delete pData; });
+            } else {
                 SRHalt("Something went wrong...");
             }
         };
@@ -106,8 +99,7 @@ namespace SR_PHYSICS_NS {
             dataStorage.SetValue<Ptr>(GetThis());
 
             m_scene.Unlock();
-        }
-        else {
+        } else {
             SRHalt("PhysicsScene::Init() : scene is invalid!");
         }
 
@@ -122,9 +114,7 @@ namespace SR_PHYSICS_NS {
         return true;
     }
 
-    bool PhysicsScene::IsDebugEnabled() const noexcept {
-        return m_debugEnabled && !m_isGameMode;
-    }
+    bool PhysicsScene::IsDebugEnabled() const noexcept { return m_debugEnabled && !m_isGameMode; }
 
     bool PhysicsScene::Flush() {
         SR_TRACY_ZONE;
@@ -136,11 +126,9 @@ namespace SR_PHYSICS_NS {
 
             if (SR_PHYSICS_UTILS_NS::Is2DShape(type)) {
                 m_2DWorld->AddRigidbody(pRigidbody);
-            }
-            else if (SR_PHYSICS_UTILS_NS::Is3DShape(type)) {
+            } else if (SR_PHYSICS_UTILS_NS::Is3DShape(type)) {
                 m_3DWorld->AddRigidbody(pRigidbody);
-            }
-            else {
+            } else {
                 SRHalt("Unknown measurement of rigidbody!");
             }
         }
@@ -150,18 +138,14 @@ namespace SR_PHYSICS_NS {
 
             if (SR_PHYSICS_UTILS_NS::Is2DShape(type)) {
                 m_2DWorld->RemoveRigidbody(pRigidbody);
-            }
-            else if (SR_PHYSICS_UTILS_NS::Is3DShape(type)) {
+            } else if (SR_PHYSICS_UTILS_NS::Is3DShape(type)) {
                 m_3DWorld->RemoveRigidbody(pRigidbody);
-            }
-            else {
+            } else {
                 SRHalt("Unknown measurement of rigidbody!");
             }
 
             if (!pRigidbody->HasParent()) {
-                pRigidbody->AutoFree([](auto&& pData) {
-                    delete pData;
-                });
+                pRigidbody->AutoFree([](auto&& pData) { delete pData; });
             }
         }
 
@@ -173,12 +157,14 @@ namespace SR_PHYSICS_NS {
 
     bool PhysicsScene::CreateDynamicWorld() {
         if (!m_2DWorld->Initialize()) {
-            SR_ERROR("PhysicsScene::Initialize() : failed to create dynamic world for 2d world!");
+            SR_ERROR("PhysicsScene::Initialize() : failed to create dynamic "
+                     "world for 2d world!");
             return false;
         }
 
         if (!m_3DWorld->Initialize()) {
-            SR_ERROR("PhysicsScene::Initialize() : failed to create dynamic world for 3d world!");
+            SR_ERROR("PhysicsScene::Initialize() : failed to create dynamic "
+                     "world for 3d world!");
             return false;
         }
 
@@ -222,7 +208,5 @@ namespace SR_PHYSICS_NS {
         m_rigidbodyToRemove.emplace_back(pRigidbody);
     }
 
-    void PhysicsScene::ClearForces() {
-        m_needClearForces = true;
-    }
-}
+    void PhysicsScene::ClearForces() { m_needClearForces = true; }
+} // namespace SR_PHYSICS_NS

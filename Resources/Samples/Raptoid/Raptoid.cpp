@@ -47,7 +47,8 @@ public:
             return;
         }
 
-        auto&& pRigidbody = DynamicCastComponentToRigidbody3D(pParent->GetComponent("Rigidbody3D").Get());
+        auto&& pRigidbody =
+DynamicCastComponentToRigidbody3D(pParent->GetComponent("Rigidbody3D").Get());
         if (!pRigidbody) {
             return;
         }
@@ -67,7 +68,8 @@ public:
             pGraph->SetBool("IsRunning", false);
         }
 
-        pRigidbody->SetLinearVelocity(pParent->GetTransform()->GetQuaternion() * velocity);
+        pRigidbody->SetLinearVelocity(pParent->GetTransform()->GetQuaternion() *
+velocity);
     }
 
     void RotateControl(AnimationGraph* pGraph) {
@@ -110,8 +112,9 @@ public:
             return;
         }
 
-        FVector3 postion = pCameraSourceGameObject->GetTransform()->GetTranslation();
-        postion = postion.Lerp(pCameraTargetGameObject->GetTransform()->GetTranslation(), 0.6f);
+        FVector3 postion =
+pCameraSourceGameObject->GetTransform()->GetTranslation(); postion =
+postion.Lerp(pCameraTargetGameObject->GetTransform()->GetTranslation(), 0.6f);
 
         pCameraGameObject->GetTransform()->SetTranslation(postion);
     }
@@ -121,7 +124,8 @@ public:
             return;
         }
 
-        auto&& pAnimator = DynamicCastComponentToAnimator(gameObject->GetComponent("Animator").Get());
+        auto&& pAnimator =
+DynamicCastComponentToAnimator(gameObject->GetComponent("Animator").Get());
 
         if (!pAnimator) {
             Debug::Error("Animator is not set");

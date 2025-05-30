@@ -7,4 +7,4 @@
 
 #include <Utils/stdInclude.h>
 
-#endif //SR_ENGINE_COMPONENTDRAWER_H
+#endif // SR_ENGINE_COMPONENTDRAWER_H

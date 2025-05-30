@@ -9,18 +9,16 @@
 namespace SR_GRAPH_NS {
     class RenderScene;
     class IColorBufferPass;
-}
+} // namespace SR_GRAPH_NS
 
 namespace SR_CORE_UI_NS {
-    SR_ENUM_NS_STRUCT_T(ButtonState, uint8_t,
-       Idle = 1 << 0,
-       Hovered = 1 << 1,
-       Pressed = 1 << 2);
+    SR_ENUM_NS_STRUCT_T(ButtonState, uint8_t, Idle = 1 << 0, Hovered = 1 << 1, Pressed = 1 << 2);
 
     class IButton : public SR_GTYPES_NS::IRenderComponent {
         using Super = SR_GTYPES_NS::IRenderComponent;
         using RenderScenePtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderScene>;
         using Callback = std::function<void()>;
+
     public:
         IButton();
 
@@ -32,10 +30,10 @@ namespace SR_CORE_UI_NS {
         SR_NODISCARD bool IsHovered() const { return m_state & ButtonState::Hovered; }
         SR_NODISCARD bool IsPressed() const { return m_state & ButtonState::Pressed; }
 
-        void SetIdleCallback(Callback idleCallback) { m_onIdle = std::move(idleCallback);}
-        void SetHoverCallback(Callback hoverCallback) { m_onHover = std::move(hoverCallback);}
-        void SetKeyDownCallback(Callback keyDownCallback) { m_onKeyDown = std::move(keyDownCallback);}
-        void SetKeyUpCallback(Callback keyUpCallback) { m_onKeyUp = std::move(keyUpCallback);}
+        void SetIdleCallback(Callback idleCallback) { m_onIdle = std::move(idleCallback); }
+        void SetHoverCallback(Callback hoverCallback) { m_onHover = std::move(hoverCallback); }
+        void SetKeyDownCallback(Callback keyDownCallback) { m_onKeyDown = std::move(keyDownCallback); }
+        void SetKeyUpCallback(Callback keyUpCallback) { m_onKeyUp = std::move(keyUpCallback); }
 
     protected:
         bool CompareObject(GameObjectPtr pObject) const;
@@ -56,6 +54,6 @@ namespace SR_CORE_UI_NS {
         Callback m_onKeyDown;
         Callback m_onKeyUp;
     };
-}
+} // namespace SR_CORE_UI_NS
 
-#endif //SR_ENGINE_IBUTTON_H
+#endif // SR_ENGINE_IBUTTON_H

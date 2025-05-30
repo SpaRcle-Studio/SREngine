@@ -8,12 +8,9 @@
 
 namespace SR_CORE_GUI_NS {
     WorldEdit::WorldEdit()
-        : Super("World edit")
-    { }
+        : Super("World edit") {}
 
-    void WorldEdit::SetScene(const SR_WORLD_NS::Scene::Ptr& pScene) {
-        m_scene = pScene;
-    }
+    void WorldEdit::SetScene(const SR_WORLD_NS::Scene::Ptr& pScene) { m_scene = pScene; }
 
     void WorldEdit::Draw() {
         if (m_scene.TryRecursiveLockIfValid()) {
@@ -35,7 +32,9 @@ namespace SR_CORE_GUI_NS {
             }
 
             auto&& editorRenderTechniquePath = dataStorage.GetValueDef<SR_UTILS_NS::Path>("EditorRenderTechnique", "");
-            if (SR_GRAPH_GUI_NS::Immediate::InputText("Editor Render Technique", editorRenderTechniquePath.ToStringPtr())) {
+            if (SR_GRAPH_GUI_NS::Immediate::InputText(
+                    "Editor Render Technique", editorRenderTechniquePath.ToStringPtr()
+                )) {
                 dataStorage.SetValue("EditorRenderTechnique", editorRenderTechniquePath);
             }
 
@@ -45,20 +44,26 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::Immediate::Separator();
                 TextCenter("Current");
 
-                SR_GRAPH_GUI_NS::Immediate::InputInt3("Chunk", &observer->m_chunk[0], ImGuiInputTextFlags_ReadOnly);
-                SR_GRAPH_GUI_NS::Immediate::InputInt3("Region", &observer->m_region[0], ImGuiInputTextFlags_ReadOnly);
+                SR_GRAPH_GUI_NS::Immediate::InputInt3("Chunk",
+            &observer->m_chunk[0], ImGuiInputTextFlags_ReadOnly);
+                SR_GRAPH_GUI_NS::Immediate::InputInt3("Region",
+            &observer->m_region[0], ImGuiInputTextFlags_ReadOnly);
 
                 SR_GRAPH_GUI_NS::Immediate::Separator();
                 TextCenter("Offset");
 
                 auto chunkOffset = offset.m_chunk;
-                if (SR_GRAPH_GUI_NS::Immediate::InputInt3("Chunk offset", &chunkOffset[0], ImGuiInputTextFlags_EnterReturnsTrue)) {
-                    pLogic->SetWorldOffset(SR_WORLD_NS::Offset(offset.m_region, chunkOffset));
+                if (SR_GRAPH_GUI_NS::Immediate::InputInt3("Chunk offset",
+            &chunkOffset[0], ImGuiInputTextFlags_EnterReturnsTrue)) {
+                    pLogic->SetWorldOffset(SR_WORLD_NS::Offset(offset.m_region,
+            chunkOffset));
                 }
 
                 auto regionOffset = offset.m_region;
-                if (SR_GRAPH_GUI_NS::Immediate::InputInt3("Region offset", &regionOffset[0], ImGuiInputTextFlags_EnterReturnsTrue)) {
-                    pLogic->SetWorldOffset(SR_WORLD_NS::Offset(regionOffset, offset.m_chunk));
+                if (SR_GRAPH_GUI_NS::Immediate::InputInt3("Region offset",
+            &regionOffset[0], ImGuiInputTextFlags_EnterReturnsTrue)) {
+                    pLogic->SetWorldOffset(SR_WORLD_NS::Offset(regionOffset,
+            offset.m_chunk));
                 }
 
                 auto scope = observer->GetScope();
@@ -74,4 +79,4 @@ namespace SR_CORE_GUI_NS {
             m_scene.Unlock();
         }
     }
-}
+} // namespace SR_CORE_GUI_NS

@@ -2,18 +2,17 @@
 // Created by Danilka000novishok on 08.08.2023.
 //
 
-#include <Audio/Types/AudioSource.h>
 #include <Audio/SoundManager.h>
+#include <Audio/Types/AudioSource.h>
 
-#include <Utils/ECS/Transform.h>
 #include <Utils/ECS/ComponentManager.h>
+#include <Utils/ECS/Transform.h>
 
 #include <Codegen/AudioSource.generated.hpp>
 
 namespace SR_AUDIO_NS {
     AudioSource::AudioSource()
-        : Super()
-    {
+        : Super() {
         m_params = PlayParams::GetDefault();
     }
 
@@ -27,8 +26,7 @@ namespace SR_AUDIO_NS {
 
             m_params.position = position;
             m_params.orientation = {
-                quaternion * SR_MATH_NS::FVector3::Forward(),
-                quaternion * SR_MATH_NS::FVector3::Up()
+                quaternion * SR_MATH_NS::FVector3::Forward(), quaternion * SR_MATH_NS::FVector3::Up()
             };
 
             UpdateParams();
@@ -37,9 +35,7 @@ namespace SR_AUDIO_NS {
         Super::OnMatrixDirty();
     }
 
-    float_t AudioSource::GetVolume() const {
-        return m_params.gain.has_value() ? m_params.gain.value() : 0.f;
-    }
+    float_t AudioSource::GetVolume() const { return m_params.gain.has_value() ? m_params.gain.value() : 0.f; }
 
     float_t AudioSource::GetMaxDistance() const {
         return m_params.maxDistance.has_value() ? m_params.maxDistance.value() : 0.f;
@@ -61,13 +57,9 @@ namespace SR_AUDIO_NS {
         return m_params.spatialize.has_value() ? m_params.spatialize.value() : SpatializeMode::Auto;
     }
 
-    bool AudioSource::GetLoop() const {
-        return m_params.loop.has_value() ? m_params.loop.value() : false;
-    }
+    bool AudioSource::GetLoop() const { return m_params.loop.has_value() ? m_params.loop.value() : false; }
 
-    float_t AudioSource::GetPitch() const {
-        return m_params.pitch.has_value() ? m_params.pitch.value() : 0.1f;
-    }
+    float_t AudioSource::GetPitch() const { return m_params.pitch.has_value() ? m_params.pitch.value() : 0.1f; }
 
     float_t AudioSource::GetConeInnerAngle() const {
         return m_params.coneInnerAngle.has_value() ? m_params.coneInnerAngle.value() : 0.f;
@@ -118,9 +110,7 @@ namespace SR_AUDIO_NS {
         UpdateParams();
     }
 
-    SR_UTILS_NS::Path AudioSource::GetPath() const {
-        return m_path;
-    }
+    SR_UTILS_NS::Path AudioSource::GetPath() const { return m_path; }
 
     void AudioSource::SetPath(const SR_UTILS_NS::Path& path) {
         m_path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
@@ -157,9 +147,7 @@ namespace SR_AUDIO_NS {
 
         Super::OnDestroy();
 
-        GetThis().AutoFree([](auto&& pData) {
-            delete pData;
-        });
+        GetThis().AutoFree([](auto&& pData) { delete pData; });
     }
 
     void AudioSource::OnDisable() {
@@ -169,4 +157,4 @@ namespace SR_AUDIO_NS {
         }
         Super::OnDisable();
     }
-}
+} // namespace SR_AUDIO_NS

@@ -1,27 +1,21 @@
-// 
+//
 // Created by innerviewer on 2025-04-15.
 //
 
 #ifndef SR_ENGINE_CORE_CLI_MANAGER_H
 #define SR_ENGINE_CORE_CLI_MANAGER_H
 
-#include <Utils/Common/Singleton.h>
 #include <Utils/Common/Enumerations.h>
+#include <Utils/Common/Singleton.h>
 
 namespace SR_CORE_NS {
-    SR_ENUM_NS_STRUCT_T(CLIFlags, uint32_t,
-        None = 0,
-        UnitTests = 1 << 0,
-        DeleteOldApp = 1 << 1
-    );
+    SR_ENUM_NS_STRUCT_T(CLIFlags, uint32_t, None = 0, UnitTests = 1 << 0, DeleteOldApp = 1 << 1);
 
-    SR_ENUM_NS_STRUCT_T(CLIOptions, uint32_t,
-        Resources,
-        LogDir
-    );
+    SR_ENUM_NS_STRUCT_T(CLIOptions, uint32_t, Resources, LogDir);
 
     class CLIManager : public SR_UTILS_NS::Singleton<CLIManager> {
         SR_REGISTER_SINGLETON(CLIManager);
+
     public:
         void Init(int argc, char** argv);
 
@@ -38,6 +32,6 @@ namespace SR_CORE_NS {
         std::map<CLIOptions, std::optional<std::string>> m_options;
         CLIFlags m_flags = CLIFlags::None;
     };
-}
+} // namespace SR_CORE_NS
 
-#endif //SR_ENGINE_CORE_CLI_MANAGER_H
+#endif // SR_ENGINE_CORE_CLI_MANAGER_H

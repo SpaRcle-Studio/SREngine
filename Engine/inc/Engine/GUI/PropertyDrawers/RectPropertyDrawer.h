@@ -15,7 +15,6 @@ namespace SR_CORE_GUI_NS {
 
     public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
-
     };
 
     class MarginPropertyDrawer : public PropertyDrawerBase {
@@ -25,8 +24,7 @@ namespace SR_CORE_GUI_NS {
 
     public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
-
     };
-}
+} // namespace SR_CORE_GUI_NS
 
-#endif //SR_ENGINE_GUI_RECT_PROPERTY_DRAWER_H
+#endif // SR_ENGINE_GUI_RECT_PROPERTY_DRAWER_H

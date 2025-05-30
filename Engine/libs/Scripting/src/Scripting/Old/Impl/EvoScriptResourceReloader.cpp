@@ -5,9 +5,9 @@
 #include <Utils/Common/Features.h>
 #include <Utils/Types/Marshal.h>
 
-#include <Scripting/Impl/EvoScriptResourceReloader.h>
-#include <Scripting/Impl/EvoScriptManager.h>
 #include <Scripting/Impl/EvoBehaviour.h>
+#include <Scripting/Impl/EvoScriptManager.h>
+#include <Scripting/Impl/EvoScriptResourceReloader.h>
 
 namespace SR_SCRIPTING_NS {
     bool EvoScriptResourceReloader::Reload(const SR_UTILS_NS::Path& path, SR_UTILS_NS::ResourceInfo* pResourceInfo) {
@@ -15,7 +15,8 @@ namespace SR_SCRIPTING_NS {
         SR_SCOPED_LOCK;
 
         if (SR_UTILS_NS::Features::Instance().Enabled("CompilePDB", false)) {
-            SR_WARN("EvoScriptResourceReloader::Reload() : PDB compilation enabled! Script reloading impossible.");
+            SR_WARN("EvoScriptResourceReloader::Reload() : PDB compilation "
+                    "enabled! Script reloading impossible.");
             return false;
         }
 
@@ -49,7 +50,11 @@ namespace SR_SCRIPTING_NS {
         SR_LOG("EvoScriptResourceReloader::Reload() : reload \"" + path.ToStringRef() + "\" script...");
 
         if (!EvoScriptManager::Instance().ReloadScript(path)) {
-            SR_ERROR("EvoScriptResourceReloader::Reload() : failed to reload script!\n\tPath: " + path.ToStringRef());
+            SR_ERROR(
+                "EvoScriptResourceReloader::Reload() : failed to reload "
+                "script!\n\tPath: " +
+                path.ToStringRef()
+            );
             FreeStashedProperties(stashedProps);
             return false;
         }
@@ -72,9 +77,10 @@ namespace SR_SCRIPTING_NS {
         return true;
     }
 
-    void EvoScriptResourceReloader::FreeStashedProperties(const EvoScriptResourceReloader::StashedProperties& properties) {
+    void EvoScriptResourceReloader::FreeStashedProperties(const EvoScriptResourceReloader::StashedProperties& properties
+    ) {
         for (auto&& [pBehaviour, pMarshal] : properties) {
             delete pMarshal;
         }
     }
-}
+} // namespace SR_SCRIPTING_NS

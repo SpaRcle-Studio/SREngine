@@ -7,25 +7,26 @@
 
 #include <Audio/macros.h>
 
-#include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Enumerations.h>
+#include <Utils/Common/NonCopyable.h>
 
 #include <Audio/ListenerData.h>
 
-namespace SR_AUDIO_NS{
+namespace SR_AUDIO_NS {
     class SoundDevice;
 
     class SoundListener : public SR_UTILS_NS::NonCopyable {
     public:
         explicit SoundListener(SoundDevice* pDevice)
-            : m_pDevice(pDevice)
-        { }
+            : m_pDevice(pDevice) {}
 
         SoundListener* Allocate(SoundDevice* pDevice);
 
     public:
         virtual bool Init() { return true; }
-        virtual bool Update(const SR_MATH_NS::FVector3& position, const SR_MATH_NS::Quaternion& quaternion) { return true; }
+        virtual bool Update(const SR_MATH_NS::FVector3& position, const SR_MATH_NS::Quaternion& quaternion) {
+            return true;
+        }
 
     public:
         SR_NODISCARD const ListenerData& GetData() const noexcept { return m_data; }
@@ -50,8 +51,7 @@ namespace SR_AUDIO_NS{
 
     private:
         SoundDevice* m_pDevice = nullptr;
-
     };
-}
+} // namespace SR_AUDIO_NS
 
-#endif //SR_ENGINE_SOUNDLISTENER_H
+#endif // SR_ENGINE_SOUNDLISTENER_H

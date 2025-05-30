@@ -11,14 +11,12 @@ namespace SR_AUDIO_NS {
     typedef std::vector<uint8_t> RawSoundData;
     typedef std::shared_ptr<RawSoundData> RawSoundDataPtr;
 
-    class WaveDataFormat : public SR_UTILS_NS::NonCopyable
-    {
+    class WaveDataFormat : public SR_UTILS_NS::NonCopyable {
     public:
         WaveDataFormat()
             : m_numChannels(0)
             , m_samplesPerSecond(0)
-            , m_bitsPerSample(0)
-        { }
+            , m_bitsPerSample(0) {}
 
         ~WaveDataFormat() override = default;
 
@@ -28,8 +26,7 @@ namespace SR_AUDIO_NS {
         int32_t m_bitsPerSample;
     };
 
-    class IWaveDataProvider : public SR_UTILS_NS::NonCopyable
-    {
+    class IWaveDataProvider : public SR_UTILS_NS::NonCopyable {
     public:
         using Ptr = std::shared_ptr<IWaveDataProvider>;
 
@@ -43,14 +40,13 @@ namespace SR_AUDIO_NS {
 
         SR_NODISCARD virtual bool IsStreaming() const { return false; }
         SR_NODISCARD virtual bool IsEndOfStream() const { return false; }
-        virtual void Seek(float_t seconds) { }
+        virtual void Seek(float_t seconds) {}
         virtual size_t StreamWaveData(size_t size) { return 0; }
 
         SR_NODISCARD bool IsValid() const { return GetWaveData() && GetWaveDataSize(); }
-
     };
 
     IWaveDataProvider::Ptr CreateWaveDataProvider(const SR_UTILS_NS::Path& path, const RawSoundDataPtr& data);
-}
+} // namespace SR_AUDIO_NS
 
-#endif //SR_ENGINE_IWAVEDATAPROVIDER_H
+#endif // SR_ENGINE_IWAVEDATAPROVIDER_H

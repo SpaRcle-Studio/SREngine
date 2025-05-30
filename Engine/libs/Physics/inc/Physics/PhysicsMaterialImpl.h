@@ -17,11 +17,11 @@ namespace SR_PTYPES_NS {
     class PhysicsMaterialImpl : public SR_UTILS_NS::NonCopyable {
         using Super = SR_UTILS_NS::NonCopyable;
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
+
     protected:
         explicit PhysicsMaterialImpl(LibraryPtr pLibrary)
             : Super()
-            , m_library(pLibrary)
-        { }
+            , m_library(pLibrary) {}
 
     public:
         virtual bool Init() = 0;
@@ -44,6 +44,6 @@ namespace SR_PTYPES_NS {
     private:
         SR_PHYSICS_NS::LibraryImpl* m_library = nullptr;
     };
-}
+} // namespace SR_PTYPES_NS
 
-#endif //SR_ENGINE_PHYSICSMATERIALIMPL_H
+#endif // SR_ENGINE_PHYSICSMATERIALIMPL_H

@@ -1,4 +1,4 @@
-// 
+//
 // Created by innerviewer on 2025-04-16.
 //
 
@@ -13,11 +13,13 @@ namespace SR_CORE_NS {
         std::map<std::string, CLIFlags> flags;
 
         for (auto&& option : rawOptions) {
-            options[std::string("--" + SR_UTILS_NS::StringUtils::ToKebabCase(option))] = SR_UTILS_NS::EnumReflector::FromString<CLIOptions>(option);
+            options[std::string("--" + SR_UTILS_NS::StringUtils::ToKebabCase(option))] =
+                SR_UTILS_NS::EnumReflector::FromString<CLIOptions>(option);
         }
 
         for (auto&& flag : rawFlags) {
-            flags[std::string("--" + SR_UTILS_NS::StringUtils::ToKebabCase(flag))] = SR_UTILS_NS::EnumReflector::FromString<CLIFlags>(flag);
+            flags[std::string("--" + SR_UTILS_NS::StringUtils::ToKebabCase(flag))] =
+                SR_UTILS_NS::EnumReflector::FromString<CLIFlags>(flag);
         }
 
         for (int i = 1; i < argc; ++i) {
@@ -26,29 +28,31 @@ namespace SR_CORE_NS {
             if (flags.count(arg) > 0) {
                 // Check if a value follows the flag
                 if (i + 1 < argc && std::string(argv[i + 1]).rfind("--", 0) != 0) {
-                    SR_PLATFORM_NS::WriteConsoleWarn(SR_FORMAT("CLIManager::Init() : unexpected value for flag '{}': '{}'"
-                        "\n\tFlags do not take values!\n", arg, argv[i + 1])
-                    );
+                    SR_PLATFORM_NS::WriteConsoleWarn(SR_FORMAT(
+                        "CLIManager::Init() : unexpected value for flag '{}': "
+                        "'{}'"
+                        "\n\tFlags do not take values!\n",
+                        arg, argv[i + 1]
+                    ));
 
                     ++i; // Skip the unexpected value
                 } else {
                     m_flags |= flags.find(arg)->second;
                 }
-            }
-            else if (options.count(arg) > 0) {
+            } else if (options.count(arg) > 0) {
                 if (i + 1 < argc && std::string(argv[i + 1]).rfind("--", 0) != 0) {
                     m_options[options.find(arg)->second] = argv[i + 1];
                     ++i; // Skip the value
                 } else {
-                    SR_PLATFORM_NS::WriteConsoleWarn(SR_FORMAT("CLIManager::Init() : missing value for option "
-                        "'{}': '{}'\n", arg, argv[i + 1])
-                    );
+                    SR_PLATFORM_NS::WriteConsoleWarn(SR_FORMAT(
+                        "CLIManager::Init() : missing value for option "
+                        "'{}': '{}'\n",
+                        arg, argv[i + 1]
+                    ));
                 }
-            }
-            else if (arg.rfind("-", 0) == 0) {
+            } else if (arg.rfind("-", 0) == 0) {
                 SR_PLATFORM_NS::WriteConsoleWarn(SR_FORMAT("CLIManager::Init() : unknown argument: '{}'\n", arg));
-            }
-            else {
+            } else {
                 SR_PLATFORM_NS::WriteConsoleWarn(SR_FORMAT("CLIManager::Init() : unexpected argument: '{}'\n", arg));
             }
         }
@@ -62,4 +66,4 @@ namespace SR_CORE_NS {
 
         return std::nullopt;
     }
-}
+} // namespace SR_CORE_NS

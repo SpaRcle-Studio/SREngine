@@ -9,4 +9,4 @@
 
 extern "C" SR_ENGINE_DLL_API int SREngineEntryPoint(int argc, char** argv);
 
-#endif //SR_ENGINE_ENTRY_POINT_H
+#endif // SR_ENGINE_ENTRY_POINT_H

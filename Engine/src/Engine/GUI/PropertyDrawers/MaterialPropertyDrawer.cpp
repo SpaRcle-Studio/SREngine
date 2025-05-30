@@ -49,4 +49,4 @@ namespace SR_CORE_GUI_NS {
             }
         }
     }
-}
+} // namespace SR_CORE_GUI_NS

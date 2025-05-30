@@ -8,10 +8,10 @@
 #include <Utils/Resources/Xml.h>
 
 #include <Scripting/Base/Compiler.h>
-#include <Scripting/Script.h>
-#include <Scripting/Compilation/Compiler.h>
 #include <Scripting/Compilation/AddressTableGen.h>
 #include <Scripting/Compilation/Casting.h>
+#include <Scripting/Compilation/Compiler.h>
+#include <Scripting/Script.h>
 
 namespace SR_SCRIPTING_NS {
     class SR_SCRIPTING_DLL_API EvoCompiler : public SR_SCRIPTING_NS::Compiler, public EvoScript::Compiler {
@@ -31,11 +31,11 @@ namespace SR_SCRIPTING_NS {
 
     private:
         EvoScript::AddressTableGen* m_generator = nullptr;
-        EvoScript::CastingGen*      m_casting   = nullptr;
-
+        EvoScript::CastingGen* m_casting = nullptr;
     };
 
-    class SR_SCRIPTING_DLL_API GlobalEvoCompiler : public SR_UTILS_NS::Singleton<GlobalEvoCompiler>, public EvoCompiler  {
+    class SR_SCRIPTING_DLL_API GlobalEvoCompiler : public SR_UTILS_NS::Singleton<GlobalEvoCompiler>,
+                                                   public EvoCompiler {
         SR_REGISTER_SINGLETON(GlobalEvoCompiler)
     protected:
         GlobalEvoCompiler();
@@ -43,10 +43,10 @@ namespace SR_SCRIPTING_NS {
 
     protected:
         void OnSingletonDestroy() override {
-            SR_INFO("GlobalEvoCompiler::OnSingletonDestroy() : free global compiler...");
+            SR_INFO("GlobalEvoCompiler::OnSingletonDestroy() : free global "
+                    "compiler...");
         }
-
     };
-}
+} // namespace SR_SCRIPTING_NS
 
-#endif //SR_ENGINE_EVOCOMPILER_H
+#endif // SR_ENGINE_EVOCOMPILER_H

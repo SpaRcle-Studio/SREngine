@@ -2,17 +2,16 @@
 // Created by Monika on 05.07.2022.
 //
 
-#include <Engine/GUI/SceneRunner.h>
-#include <Utils/TaskManager/TaskManager.h>
 #include <Audio/SoundManager.h>
+#include <Engine/GUI/SceneRunner.h>
 #include <Graphics/Overlay/ImGuiOverlay.h>
+#include <Utils/TaskManager/TaskManager.h>
 
 namespace SR_CORE_NS::GUI {
     SceneRunner::SceneRunner()
-        : SR_GRAPH_NS::GUI::Widget("Scene runner", SR_MATH_NS::IVector2(0, 60))
-    { }
+        : SR_GRAPH_NS::GUI::Widget("Scene runner", SR_MATH_NS::IVector2(0, 60)) {}
 
-    void SceneRunner::SetScene(const SR_WORLD_NS::Scene::Ptr &scene) {
+    void SceneRunner::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
         SR_LOCK_GUARD;
         m_scene = scene;
     }
@@ -47,13 +46,15 @@ namespace SR_CORE_NS::GUI {
 
         const EditorIcon playIcon = active ? EditorIcon::Stop : EditorIcon::Play;
         if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(playIcon)) {
-            if (SR_GRAPH_GUI_NS::Immediate::ImageButton("##imgScenePlayBtn", pDescriptor, SR_MATH_NS::FVector2(iconSize), framePadding) && locked) {
+            if (SR_GRAPH_GUI_NS::Immediate::ImageButton(
+                    "##imgScenePlayBtn", pDescriptor, SR_MATH_NS::FVector2(iconSize), framePadding
+                ) &&
+                locked) {
                 active = !active;
 
                 if (active) {
                     active = PlayScene();
-                }
-                else {
+                } else {
                     paused = false;
                     ReturnScene();
                 }
@@ -63,7 +64,9 @@ namespace SR_CORE_NS::GUI {
         SR_GRAPH_GUI_NS::Immediate::SameLine();
 
         if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(paused ? EditorIcon::Pause : EditorIcon::PauseActive)) {
-            if (SR_GRAPH_GUI_NS::Immediate::ImageButton("##imgScenePauseBtn", pDescriptor, SR_MATH_NS::FVector2(iconSize), framePadding)) {
+            if (SR_GRAPH_GUI_NS::Immediate::ImageButton(
+                    "##imgScenePauseBtn", pDescriptor, SR_MATH_NS::FVector2(iconSize), framePadding
+                )) {
                 /// SR_AUDIO_NS::SoundManager::Instance().Play("Editor/Audio/Heavy-popping.wav");
                 paused = !paused;
             }
@@ -73,7 +76,10 @@ namespace SR_CORE_NS::GUI {
             SR_GRAPH_GUI_NS::Immediate::SameLine();
 
             if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(EditorIcon::FrameSkip)) {
-                if (SR_GRAPH_GUI_NS::Immediate::ImageButton("##imgFrameSkipBtn", pDescriptor, SR_MATH_NS::FVector2(iconSize), framePadding) && locked) {
+                if (SR_GRAPH_GUI_NS::Immediate::ImageButton(
+                        "##imgFrameSkipBtn", pDescriptor, SR_MATH_NS::FVector2(iconSize), framePadding
+                    ) &&
+                    locked) {
                     pEngine->SetOneFramePauseSkip(true);
                 }
             }
@@ -83,7 +89,10 @@ namespace SR_CORE_NS::GUI {
             SR_GRAPH_GUI_NS::Immediate::SameLine();
 
             if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(EditorIcon::Game)) {
-                if (SR_GRAPH_GUI_NS::Immediate::ImageButton("##imgSceneGameBtn", pDescriptor, SR_MATH_NS::FVector2(iconSize), framePadding) && locked) {
+                if (SR_GRAPH_GUI_NS::Immediate::ImageButton(
+                        "##imgSceneGameBtn", pDescriptor, SR_MATH_NS::FVector2(iconSize), framePadding
+                    ) &&
+                    locked) {
                     if (!active) {
                         active = PlayScene();
                     }
@@ -97,7 +106,9 @@ namespace SR_CORE_NS::GUI {
             SR_GRAPH_GUI_NS::Immediate::SameLine();
 
             if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(EditorIcon::Back)) {
-                if (SR_GRAPH_GUI_NS::Immediate::ImageButton("##imgSceneBackBtn", pDescriptor, SR_MATH_NS::FVector2(iconSize), framePadding)) {
+                if (SR_GRAPH_GUI_NS::Immediate::ImageButton(
+                        "##imgSceneBackBtn", pDescriptor, SR_MATH_NS::FVector2(iconSize), framePadding
+                    )) {
                     m_scene->SaveScene();
 
                     auto&& resourcesManager = SR_UTILS_NS::ResourceManager::Instance();
@@ -126,7 +137,8 @@ namespace SR_CORE_NS::GUI {
             m_scene.Unlock();
         }
 
-        const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
+        const float_t lineHeight =
+            SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
         const int32_t widgetSize = (framePadding * 2 + iconSize) + lineHeight + 10;
         SetSize(SR_MATH_NS::IVector2(0, widgetSize));
     }
@@ -145,7 +157,9 @@ namespace SR_CORE_NS::GUI {
 
         const std::string extension = m_scene->GetPath().GetExtension();
 
-        auto&& runtimePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_UTILS_NS::Path(SR_WORLD_NS::Scene::RuntimeScenePath).ConcatExt(extension));
+        auto&& runtimePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(
+            SR_UTILS_NS::Path(SR_WORLD_NS::Scene::RuntimeScenePath).ConcatExt(extension)
+        );
         auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
 
         if (runtimePath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
@@ -155,20 +169,28 @@ namespace SR_CORE_NS::GUI {
             }
         }
 
-        SR_LOG("SceneRunner::PlayScene() : copying scene: \n\tFrom: " + m_scene->GetAbsPath().ToString() + "\n\tTo: " + runtimePath.ToString());
+        SR_LOG(
+            "SceneRunner::PlayScene() : copying scene: \n\tFrom: " + m_scene->GetAbsPath().ToString() +
+            "\n\tTo: " + runtimePath.ToString()
+        );
 
         if (!runtimePath.Create()) {
-            SR_ERROR("SceneRunner::PlayScene() : failed to create runtime scene folder!");
+            SR_ERROR("SceneRunner::PlayScene() : failed to create runtime "
+                     "scene folder!");
             return false;
         }
 
         if (!m_scene->GetAbsPath().Copy(runtimePath)) {
-            SR_ERROR("SceneRunner::PlayScene() : failed to copy scene!\n\tSource: "
-                + m_scene->GetPath().ToString() + "\n\tDestination: " + runtimePath.ToString());
+            SR_ERROR(
+                "SceneRunner::PlayScene() : failed to copy scene!\n\tSource: " + m_scene->GetPath().ToString() +
+                "\n\tDestination: " + runtimePath.ToString()
+            );
             return false;
         }
 
-        if (auto&& runtimeScene = SR_WORLD_NS::Scene::LoadScene(SR_UTILS_NS::Path(SR_WORLD_NS::Scene::RuntimeScenePath).ConcatExt(extension))) {
+        if (auto&& runtimeScene = SR_WORLD_NS::Scene::LoadScene(
+                SR_UTILS_NS::Path(SR_WORLD_NS::Scene::RuntimeScenePath).ConcatExt(extension)
+            )) {
             pEngine->AddSceneToQueue(runtimeScene);
             return true;
         }
@@ -193,4 +215,4 @@ namespace SR_CORE_NS::GUI {
         return nullptr;
     }
 
-}
+} // namespace SR_CORE_NS::GUI

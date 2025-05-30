@@ -1,4 +1,4 @@
-// 
+//
 // Created by innerviewer on 2025-05-11.
 //
 
@@ -6,7 +6,6 @@
 #include <Utils/Input/KeyCodes.h>
 
 #include <Utils/Math/Vector2.h>
-
 
 #include <Scripting/Cpp/CppBehaviour.h>
 
@@ -17,7 +16,7 @@ namespace SpaRcle::Scripts::SREngine {
         SR_NODISCARD bool ExecuteInEditMode() const noexcept override { return false; }
 
     public:
-        void Start() override { }
+        void Start() override {}
 
         void Update(float_t dt) override {
             if (!transform) {
@@ -64,6 +63,6 @@ namespace SpaRcle::Scripts::SREngine {
         /// @property
         float_t rotateSpeed = 1.f;
     };
-}
+} // namespace SpaRcle::Scripts::SREngine
 
 #include <Codegen/CharacterControllerTest.generated.hpp>

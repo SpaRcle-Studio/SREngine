@@ -37,8 +37,7 @@ namespace SR_AUDIO_NS {
 
     private:
         std::shared_ptr<IWaveDataProvider> m_dataProvider;
-
     };
-}
+} // namespace SR_AUDIO_NS
 
-#endif //SR_ENGINE_RAWSOUND_H
+#endif // SR_ENGINE_RAWSOUND_H

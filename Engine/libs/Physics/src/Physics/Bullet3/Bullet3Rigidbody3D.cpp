@@ -2,13 +2,12 @@
 // Created by Monika on 22.11.2022.
 //
 
-#include <Physics/Bullet3/Bullet3Rigidbody3D.h>
 #include <Physics/Bullet3/Bullet3PhysicsLib.h>
+#include <Physics/Bullet3/Bullet3Rigidbody3D.h>
 
 namespace SR_PTYPES_NS {
     Bullet3Rigidbody3D::Bullet3Rigidbody3D(Rigidbody::LibraryPtr pLibrary)
-        : Super(pLibrary)
-    { }
+        : Super(pLibrary) {}
 
     Bullet3Rigidbody3D::~Bullet3Rigidbody3D() {
         SR_SAFE_DELETE_PTR(m_motionState);
@@ -37,10 +36,10 @@ namespace SR_PTYPES_NS {
         m_motionState = new btDefaultMotionState(startTransform);
 
         btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(
-                m_mass,        /// mass, in kg. 0 -> Static object, will never move.
-                m_motionState,
-                (btCollisionShape*)m_shape->GetHandle(), /// collision shape of body
-                btVector3()   /// local inertia
+            m_mass, /// mass, in kg. 0 -> Static object, will never move.
+            m_motionState,
+            (btCollisionShape*)m_shape->GetHandle(), /// collision shape of body
+            btVector3()                              /// local inertia
         );
         m_rigidbody = new btRigidBody(rigidBodyCI);
 
@@ -54,8 +53,7 @@ namespace SR_PTYPES_NS {
     void Bullet3Rigidbody3D::AddLinearVelocity(const SR_MATH_NS::FVector3& velocity) {
         if (m_rigidbody) {
             m_rigidbody->setLinearVelocity(m_rigidbody->getLinearVelocity() + SR_PHYSICS_UTILS_NS::FV3ToBtV3(velocity));
-        }
-        else {
+        } else {
             SRHalt("m_rigidbody is nullptr!");
         }
     }
@@ -63,20 +61,20 @@ namespace SR_PTYPES_NS {
     void Bullet3Rigidbody3D::AddAngularVelocity(const SR_MATH_NS::FVector3& velocity) {
         if (m_rigidbody) {
             m_rigidbody->setLinearVelocity(m_rigidbody->getLinearVelocity() + SR_PHYSICS_UTILS_NS::FV3ToBtV3(velocity));
-        }
-        else {
+        } else {
             SRHalt("m_rigidbody is nullptr!");
         }
     }
 
-    //void Bullet3Rigidbody3D::SetVelocity(const SR_MATH_NS::FVector3& velocity) {
-    //    if (m_rigidbody) {
-    //        m_rigidbody->setLinearVelocity(SR_PHYSICS_UTILS_NS::FV3ToBtV3(velocity));
-    //    }
-    //    else {
-    //        SRHalt("m_rigidbody is nullptr!");
-    //    }
-    //}
+    // void Bullet3Rigidbody3D::SetVelocity(const SR_MATH_NS::FVector3&
+    // velocity) {
+    //     if (m_rigidbody) {
+    //         m_rigidbody->setLinearVelocity(SR_PHYSICS_UTILS_NS::FV3ToBtV3(velocity));
+    //     }
+    //     else {
+    //         SRHalt("m_rigidbody is nullptr!");
+    //     }
+    // }
 
     bool Bullet3Rigidbody3D::UpdateMatrix(bool force) {
         if (!Super::UpdateMatrix(force)) {
@@ -105,7 +103,8 @@ namespace SR_PTYPES_NS {
 
     bool Bullet3Rigidbody3D::UpdateShapeInternal() {
         if (!m_rigidbody) {
-            SR_ERROR("Bullet3Rigidbody3D::UpdateShapeInternal() : rigidbody is nullptr!");
+            SR_ERROR("Bullet3Rigidbody3D::UpdateShapeInternal() : rigidbody is "
+                     "nullptr!");
             return false;
         }
 
@@ -114,7 +113,5 @@ namespace SR_PTYPES_NS {
         return true;
     }
 
-    void* Bullet3Rigidbody3D::GetHandle() const noexcept {
-        return (void*)m_rigidbody;
-    }
-}
+    void* Bullet3Rigidbody3D::GetHandle() const noexcept { return (void*)m_rigidbody; }
+} // namespace SR_PTYPES_NS

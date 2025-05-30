@@ -5,10 +5,10 @@
 #ifndef SR_ENGINE_HIERARCHY_H
 #define SR_ENGINE_HIERARCHY_H
 
+#include <Utils/ECS/GameObject.h>
+#include <Utils/Input/InputEvents.h>
 #include <Utils/Types/SafePointer.h>
 #include <Utils/World/Scene.h>
-#include <Utils/Input/InputEvents.h>
-#include <Utils/ECS/GameObject.h>
 
 #include <Graphics/GUI/Widget.h>
 
@@ -54,8 +54,7 @@ namespace SR_CORE_GUI_NS {
         std::atomic<bool> m_shiftPressed;
 
         SR_GRAPH_NS::GUI::Widget* m_sceneRunnerWidget = nullptr;
-
     };
-}
+} // namespace SR_CORE_GUI_NS
 
-#endif //SR_ENGINE_HIERARCHY_H
+#endif // SR_ENGINE_HIERARCHY_H

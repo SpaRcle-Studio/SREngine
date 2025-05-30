@@ -11,26 +11,26 @@
 
 #include <Scripting/Cpp/ScriptSystem.h>
 
+#include <Utils/CommandManager/CmdManager.h>
 #include <Utils/Events/EventManager.h>
-#include <Utils/Types/Time.h>
-#include <Utils/Types/Timer.h>
 #include <Utils/FileSystem/FileSystem.h>
-#include <Utils/Types/Thread.h>
-#include <Utils/Types/SafePointer.h>
 #include <Utils/Input/InputDispatcher.h>
 #include <Utils/Input/InputHandler.h>
+#include <Utils/Localization/LocalizationManager.h>
+#include <Utils/TaskManager/ThreadWorker.h>
 #include <Utils/Types/Function.h>
 #include <Utils/Types/SafeGateArray.h>
-#include <Utils/TaskManager/ThreadWorker.h>
+#include <Utils/Types/SafePointer.h>
 #include <Utils/Types/SafeQueue.h>
-#include <Utils/Localization/LocalizationManager.h>
-#include <Utils/CommandManager/CmdManager.h>
+#include <Utils/Types/Thread.h>
+#include <Utils/Types/Time.h>
+#include <Utils/Types/Timer.h>
 
 namespace SR_GRAPH_NS {
     class Render;
     class RenderScene;
     class RenderContext;
-}
+} // namespace SR_GRAPH_NS
 
 namespace SR_PHYSICS_NS {
     class PhysicsScene;
@@ -43,7 +43,7 @@ namespace SR_GTYPES_NS {
 namespace SR_WORLD_NS {
     class Scene;
     class SceneUpdater;
-}
+} // namespace SR_WORLD_NS
 
 namespace SR_CORE_GUI_NS {
     class EditorGUI;
@@ -64,6 +64,7 @@ namespace SR_CORE_NS {
         using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<SR_PHYSICS_NS::PhysicsScene>;
         using ScenePtr = SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>;
         using RenderScenePtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderScene>;
+
     public:
         explicit Engine(Application* pApplication);
         ~Engine() override;
@@ -118,7 +119,7 @@ namespace SR_CORE_NS {
     private:
         mutable std::recursive_mutex m_mutex;
 
-        std::atomic<bool> m_isCreate  = false;
+        std::atomic<bool> m_isCreate = false;
         std::atomic<bool> m_isInit = false;
         std::atomic<bool> m_isRun = false;
 
@@ -133,7 +134,7 @@ namespace SR_CORE_NS {
 
         SR_UTILS_NS::ThreadsWorker::Ptr m_threadsWorker;
 
-        SR_UTILS_NS::CmdManager* m_cmdManager  = nullptr;
+        SR_UTILS_NS::CmdManager* m_cmdManager = nullptr;
         SR_UTILS_NS::InputDispatcher* m_input = nullptr;
 
         SR_HTYPES_NS::SafeQueue<ScenePtr> m_sceneQueue;
@@ -145,12 +146,11 @@ namespace SR_CORE_NS {
 
         SR_CORE_GUI_NS::EditorGUI* m_editor = nullptr;
 
-        RenderContextPtr m_renderContext = { };
+        RenderContextPtr m_renderContext = {};
 
         std::vector<WindowPtr> m_windows;
         /// std::optional<Utils::CursorLock> m_cursorLockOpt = std::nullopt;
-
     };
-}
+} // namespace SR_CORE_NS
 
-#endif //SR_ENGINE_ENGINE_H
+#endif // SR_ENGINE_ENGINE_H

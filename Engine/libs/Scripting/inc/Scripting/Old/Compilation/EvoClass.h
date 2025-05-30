@@ -10,27 +10,21 @@
 namespace EvoScript {
     struct InheritClass {
         std::string m_name;
-        Publicity   m_pub;
+        Publicity m_pub;
 
-        bool operator<(const InheritClass& rhs) const {
-            return m_name < rhs.m_name && m_pub < rhs.m_pub;
-        }
+        bool operator<(const InheritClass& rhs) const { return m_name < rhs.m_name && m_pub < rhs.m_pub; }
     };
 
     struct Class {
-        std::string               m_header;
-        std::string               m_name;
-        std::vector<Property>     m_properties;
-        std::vector<Method>       m_methods;
+        std::string m_header;
+        std::string m_name;
+        std::vector<Property> m_properties;
+        std::vector<Method> m_methods;
         std::vector<InheritClass> m_inherit;
 
-        [[nodiscard]] std::string GetAsIncomplete() const {
-            return "class " + m_name + ";";
-        }
+        [[nodiscard]] std::string GetAsIncomplete() const { return "class " + m_name + ";"; }
 
-        [[nodiscard]] std::string GetInherit() const {
-            return m_inherit.empty() ? "" : m_inherit[0].m_name;
-        }
+        [[nodiscard]] std::string GetInherit() const { return m_inherit.empty() ? "" : m_inherit[0].m_name; }
 
         [[nodiscard]] std::string ToString() const {
             std::string result;
@@ -85,6 +79,6 @@ namespace EvoScript {
             return result;
         }
     };
-}
+} // namespace EvoScript
 
-#endif //EVOSCRIPT_EVOCLASS_H
+#endif // EVOSCRIPT_EVOCLASS_H

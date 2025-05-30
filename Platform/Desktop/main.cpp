@@ -10,10 +10,10 @@
     #include <Engine/EntryPoint.h>
 #else
     #include "DesktopUtils.h"
+    #include "OnlineDownloader.h"
     #include "PackUtils.h"
     #include "UnpackUtils.h"
     #include "UnpackedRunner.h"
-    #include "OnlineDownloader.h"
 #endif
 
 int main(int argc, char** argv) {

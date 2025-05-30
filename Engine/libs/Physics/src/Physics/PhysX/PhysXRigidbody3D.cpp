@@ -2,8 +2,8 @@
 // Created by Monika on 25.11.2022.
 //
 
-#include <Physics/PhysX/PhysXRigidbody3D.h>
 #include <Physics/PhysX/PhysXLibraryImpl.h>
+#include <Physics/PhysX/PhysXRigidbody3D.h>
 
 namespace SR_PTYPES_NS {
     PhysXRigidbody3DImpl::~PhysXRigidbody3DImpl() {
@@ -13,9 +13,7 @@ namespace SR_PTYPES_NS {
         }
     }
 
-    void* PhysXRigidbody3DImpl::GetHandle() const noexcept {
-        return m_rigidActor;
-    }
+    void* PhysXRigidbody3DImpl::GetHandle() const noexcept { return m_rigidActor; }
 
     void PhysXRigidbody3DImpl::UpdateInertia() {
         SR_TRACY_ZONE;
@@ -53,8 +51,7 @@ namespace SR_PTYPES_NS {
 
         if (m_rigidbody->IsStatic()) {
             m_rigidActor = pPhysics->createRigidStatic(physx::PxTransform(physx::PxVec3(0.f, 0.f, 0.f)));
-        }
-        else {
+        } else {
             m_rigidActor = pPhysics->createRigidDynamic(physx::PxTransform(physx::PxVec3(0.f, 0.f, 0.f)));
         }
 
@@ -70,7 +67,8 @@ namespace SR_PTYPES_NS {
         m_rigidbody->UpdateMatrix(true);
         m_rigidbody->SetShapeDirty(true);
 
-        /// проверяем именно на Updated, так как остальные варианты тут недопустимы
+        /// проверяем именно на Updated, так как остальные варианты тут
+        /// недопустимы
         if (m_rigidbody->UpdateShape() != RBUpdShapeRes::Updated) {
             SR_ERROR("PhysXRigidbody3D::InitBody() : shape is not updated!");
             return false;
@@ -101,7 +99,7 @@ namespace SR_PTYPES_NS {
         }
     }
 
-    void PhysXRigidbody3DImpl::SetLinearVelocity(const SR_MATH_NS::FVector3 &velocity) {
+    void PhysXRigidbody3DImpl::SetLinearVelocity(const SR_MATH_NS::FVector3& velocity) {
         if (!m_rigidActor) {
             return;
         }
@@ -111,7 +109,7 @@ namespace SR_PTYPES_NS {
         }
     }
 
-    void PhysXRigidbody3DImpl::SetAngularVelocity(const SR_MATH_NS::FVector3 &velocity) {
+    void PhysXRigidbody3DImpl::SetAngularVelocity(const SR_MATH_NS::FVector3& velocity) {
         if (!m_rigidActor) {
             return;
         }
@@ -158,8 +156,7 @@ namespace SR_PTYPES_NS {
 
         if (m_rigidbody->GetCollisionShape()->GetType() == ShapeType::Capsule3D) {
             q = m_rigidbody->GetRotation().RotateZ(90);
-        }
-        else {
+        } else {
             q = m_rigidbody->GetRotation();
         }
 
@@ -197,7 +194,8 @@ namespace SR_PTYPES_NS {
         }
 
         if (!m_rigidActor->attachShape(*(physx::PxShape*)m_rigidbody->GetCollisionShape()->GetHandle())) {
-            SRHalt("PhysXRigidbody3D::UpdateShapeInternal() : failed to attach shape!");
+            SRHalt("PhysXRigidbody3D::UpdateShapeInternal() : failed to attach "
+                   "shape!");
             return false;
         }
 
@@ -225,13 +223,25 @@ namespace SR_PTYPES_NS {
             auto&& linearLock = GetRigidbody<Rigidbody3D>()->GetLinearLock();
             auto&& angularLock = GetRigidbody<Rigidbody3D>()->GetAngularLock();
 
-            if (linearLock.X()) { flags |= physx::PxRigidDynamicLockFlag::eLOCK_LINEAR_X; }
-            if (linearLock.Y()) { flags |= physx::PxRigidDynamicLockFlag::eLOCK_LINEAR_Y; }
-            if (linearLock.Z()) { flags |= physx::PxRigidDynamicLockFlag::eLOCK_LINEAR_Z; }
+            if (linearLock.X()) {
+                flags |= physx::PxRigidDynamicLockFlag::eLOCK_LINEAR_X;
+            }
+            if (linearLock.Y()) {
+                flags |= physx::PxRigidDynamicLockFlag::eLOCK_LINEAR_Y;
+            }
+            if (linearLock.Z()) {
+                flags |= physx::PxRigidDynamicLockFlag::eLOCK_LINEAR_Z;
+            }
 
-            if (angularLock.X()) { flags |= physx::PxRigidDynamicLockFlag::eLOCK_ANGULAR_X; }
-            if (angularLock.Y()) { flags |= physx::PxRigidDynamicLockFlag::eLOCK_ANGULAR_Y; }
-            if (angularLock.Z()) { flags |= physx::PxRigidDynamicLockFlag::eLOCK_ANGULAR_Z; }
+            if (angularLock.X()) {
+                flags |= physx::PxRigidDynamicLockFlag::eLOCK_ANGULAR_X;
+            }
+            if (angularLock.Y()) {
+                flags |= physx::PxRigidDynamicLockFlag::eLOCK_ANGULAR_Y;
+            }
+            if (angularLock.Z()) {
+                flags |= physx::PxRigidDynamicLockFlag::eLOCK_ANGULAR_Z;
+            }
 
             pDynamic->setRigidDynamicLockFlags(flags);
         }
@@ -263,7 +273,8 @@ namespace SR_PTYPES_NS {
         auto&& globalPose = m_rigidActor->getGlobalPose();
 
         auto&& rigidbodyTranslation = SR_MATH_NS::FVector3(globalPose.p.x, globalPose.p.y, globalPose.p.z);
-        auto&& rigidbodyRotation = SR_MATH_NS::Quaternion(globalPose.q.x, globalPose.q.y, globalPose.q.z, globalPose.q.w);
+        auto&& rigidbodyRotation =
+            SR_MATH_NS::Quaternion(globalPose.q.x, globalPose.q.y, globalPose.q.z, globalPose.q.w);
 
         if (m_rigidbody->GetType() == ShapeType::Capsule3D) {
             rigidbodyRotation = rigidbodyRotation.RotateZ(-90);
@@ -302,4 +313,4 @@ namespace SR_PTYPES_NS {
 
         Super::Synchronize();
     }
-}
+} // namespace SR_PTYPES_NS

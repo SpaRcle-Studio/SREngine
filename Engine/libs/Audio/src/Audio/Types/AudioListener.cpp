@@ -2,17 +2,17 @@
 // Created by Capitan_Slider on 16.09.1901.
 //
 
-#include <Audio/Types/AudioListener.h>
-#include <Audio/SoundListener.h>
 #include <Audio/Impl/OpenALSoundListener.h>
+#include <Audio/SoundListener.h>
 #include <Audio/SoundManager.h>
+#include <Audio/Types/AudioListener.h>
 
 #include <Utils/ECS/GameObject.h>
 #include <Utils/ECS/Transform.h>
 
 #include <Codegen/AudioListener.generated.hpp>
 
-namespace SR_AUDIO_NS{
+namespace SR_AUDIO_NS {
     void AudioListener::OnEnable() {
         SR_TRACY_ZONE;
 
@@ -46,14 +46,10 @@ namespace SR_AUDIO_NS{
 
         Super::OnDestroy();
 
-        GetThis().AutoFree([](auto&& pData) {
-            delete pData;
-        });
+        GetThis().AutoFree([](auto&& pData) { delete pData; });
     }
 
-    void AudioListener::OnAttached() {
-        Super::OnAttached();
-    }
+    void AudioListener::OnAttached() { Super::OnAttached(); }
 
     void AudioListener::SetDistanceModel(ListenerDistanceModel distanceModel) {
         if (m_distanceModel == distanceModel) {
@@ -105,4 +101,4 @@ namespace SR_AUDIO_NS{
 
         Component::OnMatrixDirty();
     }
-}
+} // namespace SR_AUDIO_NS

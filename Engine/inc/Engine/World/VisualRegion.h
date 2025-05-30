@@ -5,9 +5,9 @@
 #ifndef SR_ENGINE_VISUALREGION_H
 #define SR_ENGINE_VISUALREGION_H
 
-#include <Utils/World/Region.h>
-#include <Utils/Math/Vector3.h>
 #include <Utils/Math/Vector2.h>
+#include <Utils/Math/Vector3.h>
+#include <Utils/World/Region.h>
 
 namespace SR_GRAPH_NS {
     class RenderScene;
@@ -24,8 +24,10 @@ namespace SR_WORLD_NS {
 namespace SR_CORE_NS {
     class VisualRegion : public SR_WORLD_NS::Region {
         using RenderScenePtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderScene>;
+
     public:
-        explicit VisualRegion(SRRegionAllocArgs) : SR_UTILS_NS::World::Region(SRRegionAllocVArgs) { }
+        explicit VisualRegion(SRRegionAllocArgs)
+            : SR_UTILS_NS::World::Region(SRRegionAllocVArgs) {}
         ~VisualRegion() override = default;
 
     private:
@@ -40,8 +42,7 @@ namespace SR_CORE_NS {
         void OnExit() override;
         bool Unload(bool force) override;
         bool Load() override;
-
     };
-}
+} // namespace SR_CORE_NS
 
-#endif //SR_ENGINE_VISUALREGION_H
+#endif // SR_ENGINE_VISUALREGION_H

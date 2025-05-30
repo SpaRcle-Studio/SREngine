@@ -7,9 +7,9 @@
 
 #include <Scripting/macros.h>
 
-#include <Utils/Types/SharedPtr.h>
 #include <Utils/Common/PassKey.h>
 #include <Utils/ECS/SceneObject.h>
+#include <Utils/Types/SharedPtr.h>
 
 #include <Scripting/Cpp/CppBehaviour.h>
 
@@ -32,13 +32,13 @@ namespace SR_SCRIPTING_NS {
         SR_UTILS_NS::Path m_path;
         SR_UTILS_NS::StringAtom m_moduleName;
         void* m_moduleHandle = nullptr;
-
     };
 
     class CppBehaviourInstance {
         using LoadedCallback = SR_HTYPES_NS::Function<void()>;
         using PreReloadCalback = SR_HTYPES_NS::Function<void()>;
         using ManagerPasskey = SR_UTILS_NS::Passkey<ModuleManager>;
+
     public:
         SR_NODISCARD SR_UTILS_NS::StringAtom GetBehaviourName() const { return m_behaviourName; }
         SR_NODISCARD const LoadedCallback& GetLoadedCallback() const { return m_loadedCallback; }
@@ -54,15 +54,51 @@ namespace SR_SCRIPTING_NS {
 
         void OnBehaviourUnloaded(ManagerPasskey);
 
-        void Awake() { if (m_pBehaviour) { m_pBehaviour->Awake(); } }
-        void OnEnable() { if (m_pBehaviour) { m_pBehaviour->OnEnable(); } }
-        void OnDisable() { if (m_pBehaviour) { m_pBehaviour->OnDisable(); } }
-        void OnAttached() { if (m_pBehaviour) { m_pBehaviour->OnAttached(); } }
-        void OnDetached() { if (m_pBehaviour) { m_pBehaviour->OnDetached(); } }
-        void OnDestroy() { if (m_pBehaviour) { m_pBehaviour->OnDestroy(); } }
-        void Start() { if (m_pBehaviour) { m_pBehaviour->Start(); } }
-        void FixedUpdate() { if (m_pBehaviour) { m_pBehaviour->FixedUpdate(); } }
-        void Update(float_t dt) { if (m_pBehaviour) { m_pBehaviour->Update(dt); } }
+        void Awake() {
+            if (m_pBehaviour) {
+                m_pBehaviour->Awake();
+            }
+        }
+        void OnEnable() {
+            if (m_pBehaviour) {
+                m_pBehaviour->OnEnable();
+            }
+        }
+        void OnDisable() {
+            if (m_pBehaviour) {
+                m_pBehaviour->OnDisable();
+            }
+        }
+        void OnAttached() {
+            if (m_pBehaviour) {
+                m_pBehaviour->OnAttached();
+            }
+        }
+        void OnDetached() {
+            if (m_pBehaviour) {
+                m_pBehaviour->OnDetached();
+            }
+        }
+        void OnDestroy() {
+            if (m_pBehaviour) {
+                m_pBehaviour->OnDestroy();
+            }
+        }
+        void Start() {
+            if (m_pBehaviour) {
+                m_pBehaviour->Start();
+            }
+        }
+        void FixedUpdate() {
+            if (m_pBehaviour) {
+                m_pBehaviour->FixedUpdate();
+            }
+        }
+        void Update(float_t dt) {
+            if (m_pBehaviour) {
+                m_pBehaviour->Update(dt);
+            }
+        }
 
         void SetSceneObject(const SR_UTILS_NS::SceneObject::Ptr& pSceneObject);
 
@@ -79,16 +115,15 @@ namespace SR_SCRIPTING_NS {
         SR_UTILS_NS::StringAtom m_behaviourName;
         PreReloadCalback m_preReloadCallback;
         LoadedCallback m_loadedCallback;
-
     };
 
     class ModuleManager : public SR_HTYPES_NS::SharedPtr<ModuleManager> {
         using Super = SR_HTYPES_NS::SharedPtr<ModuleManager>;
+
     public:
         ModuleManager(ScriptSystem* pScriptSystem)
             : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
-            , m_pScriptSystem(pScriptSystem)
-        { }
+            , m_pScriptSystem(pScriptSystem) {}
 
         ~ModuleManager() override;
 
@@ -121,8 +156,7 @@ namespace SR_SCRIPTING_NS {
         std::vector<ScriptModule> m_modules;
         std::recursive_mutex m_mutex;
         ScriptSystem* m_pScriptSystem = nullptr;
-
     };
-}
+} // namespace SR_SCRIPTING_NS
 
-#endif //SR_ENGINE_SCRIPTING_CPP_MODULE_MANAGER_H
+#endif // SR_ENGINE_SCRIPTING_CPP_MODULE_MANAGER_H

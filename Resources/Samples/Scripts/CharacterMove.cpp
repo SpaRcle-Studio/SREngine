@@ -21,7 +21,8 @@ public:
             return;
         }
 
-        auto&& pRigidbody3D = DynamicCastComponentToRigidbody3D(gameObject->GetComponent("Rigidbody3D"));
+        auto&& pRigidbody3D =
+DynamicCastComponentToRigidbody3D(gameObject->GetComponent("Rigidbody3D"));
 
         if (!transform || !pRigidbody3D) {
             return;
@@ -59,12 +60,17 @@ public:
             auto&& rotate = transform->GetRotation().Radians();
             auto&& q = Quaternion(rotate);
 
-            if (std::vector<RaycastHit> hits = Raycast3D::Cast(transform->GetTranslation(), (q * FVector3(0, 0, 1)), 100, 5); !hits.empty()) {
+            if (std::vector<RaycastHit> hits =
+Raycast3D::Cast(transform->GetTranslation(), (q * FVector3(0, 0, 1)), 100, 5);
+!hits.empty()) {
                //for (int i = 0; i < hits.size(); i++){
-               //    std::cout << "Ray (" << i + 1 << ") hits something. Distance = "  << hits[i].distance << "\t Total hits = " << hits.size() << std::endl;
+               //    std::cout << "Ray (" << i + 1 << ") hits something.
+Distance = "  << hits[i].distance << "\t Total hits = " << hits.size() <<
+std::endl;
                //}
                 hit = hits[0];
-                std::cout << "Ray hits something. Distance = "  << hit.distance << std::endl;
+                std::cout << "Ray hits something. Distance = "  << hit.distance
+<< std::endl;
             }
         }
 
@@ -79,22 +85,23 @@ public:
 
       // if (auto&& pRigidbody = (Rigidbody*)hit.pHandler) {
       //      if (auto&& pGameObject = pRigidbody->GetGameObject()) {
-      //          std::cout << "HIT on GameObject: '" << pGameObject->GetName() << "'\n";
+      //          std::cout << "HIT on GameObject: '" << pGameObject->GetName()
+<< "'\n";
       //      }
     }
 
     void OnCollisionEnter(const CollisionData& data) override {
-        auto&& pComponent = DynamicCastRigidbodyToComponent((Rigidbody*)data.pHandler);
-        auto&& pParent = pComponent->GetGameObject();
-        if (pParent->GetTagString() == "Ground") {
+        auto&& pComponent =
+DynamicCastRigidbodyToComponent((Rigidbody*)data.pHandler); auto&& pParent =
+pComponent->GetGameObject(); if (pParent->GetTagString() == "Ground") {
             isGrounded++;
         }
     }
 
     void OnCollisionExit(const CollisionData& data) override {
-        auto&& pComponent = DynamicCastRigidbodyToComponent((Rigidbody*)data.pHandler);
-        auto&& pParent = pComponent->GetGameObject();
-        if (pParent->GetTagString() == "Ground") {
+        auto&& pComponent =
+DynamicCastRigidbodyToComponent((Rigidbody*)data.pHandler); auto&& pParent =
+pComponent->GetGameObject(); if (pParent->GetTagString() == "Ground") {
             isGrounded--;
         }
     }

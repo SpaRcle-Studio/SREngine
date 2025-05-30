@@ -14,8 +14,7 @@ namespace EvoScript {
 
     protected:
         explicit IState(std::string path)
-            : m_path(std::move(path))
-        { }
+            : m_path(std::move(path)) {}
 
     public:
         static IState* Allocate(const std::string& path);
@@ -27,15 +26,14 @@ namespace EvoScript {
     public:
         SR_NODISCARD std::string GetPath() const { return m_path; }
 
-        virtual bool Exists()  = 0;
-        virtual bool Load()    = 0;
-        virtual bool Unload()  = 0;
+        virtual bool Exists() = 0;
+        virtual bool Load() = 0;
+        virtual bool Unload() = 0;
 
     protected:
         virtual void* GetFunctionImpl(const char* name) = 0;
 
     public:
-
 #ifdef SR_WIN32
         static const inline std::string Extension = ".dll";
 #elif defined(SR_LINUX)
@@ -47,8 +45,7 @@ namespace EvoScript {
     protected:
         //! path to local module copy
         std::string m_path;
-
     };
-}
+} // namespace EvoScript
 
-#endif //SR_ENGINE_SCRIPTING_I_STATE_H
+#endif // SR_ENGINE_SCRIPTING_I_STATE_H

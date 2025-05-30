@@ -10,7 +10,8 @@
 #include <Utils/FileSystem/FileSystem.h>
 
 namespace EvoScript::Tools {
-    static bool HashEquals(const std::pair<bool, std::vector<std::string>>& a, const std::pair<bool, std::vector<std::string>>& b) {
+    static bool
+    HashEquals(const std::pair<bool, std::vector<std::string>>& a, const std::pair<bool, std::vector<std::string>>& b) {
         const auto& [a_debug, a_hashes] = a;
         const auto& [b_debug, b_hashes] = b;
 
@@ -37,7 +38,7 @@ namespace EvoScript::Tools {
         auto files = SR_UTILS_NS::Path(dir).GetFiles();
         MD5 md5;
         for (const auto& file : files) {
-            result.emplace_back(md5.TryDigestFile(const_cast<char *>(file.c_str())));
+            result.emplace_back(md5.TryDigestFile(const_cast<char*>(file.c_str())));
         }
 
         return result;
@@ -72,7 +73,7 @@ namespace EvoScript::Tools {
         }
 
         std::string line;
-        while(std::getline(file, line)) {
+        while (std::getline(file, line)) {
             if (line.empty())
                 continue;
 
@@ -86,6 +87,6 @@ namespace EvoScript::Tools {
 
         return result;
     }
-}
+} // namespace EvoScript::Tools
 
-#endif //EVOSCRIPT_HASHUTILS_H
+#endif // EVOSCRIPT_HASHUTILS_H

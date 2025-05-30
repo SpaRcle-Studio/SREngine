@@ -8,30 +8,31 @@ namespace SR_CORE_UI_NS {
     void Button::OnDestroy() {
         Super::OnDestroy();
 
-        AutoFree([](auto&& pData) {
-            delete pData;
-        });
+        AutoFree([](auto&& pData) { delete pData; });
     }
 
     void Button::Update(float_t dt) {
         Super::Update(dt);
 
-        /*if (auto&& pRef = GetComponentProperties().Find<SR_UTILS_NS::EntityRefProperty>(SR_BUTTON_IDLE_PROP_NAME)) {
-            if (auto&& pGameObject = pRef->GetEntityRef().GetGameObject()) {
+        /*if (auto&& pRef =
+        GetComponentProperties().Find<SR_UTILS_NS::EntityRefProperty>(SR_BUTTON_IDLE_PROP_NAME))
+        { if (auto&& pGameObject = pRef->GetEntityRef().GetGameObject()) {
                 pGameObject->SetEnabled(IsIdle());
             }
         }
 
-        if (auto&& pRef = GetComponentProperties().Find<SR_UTILS_NS::EntityRefProperty>(SR_BUTTON_HOVERED_PROP_NAME)) {
-            if (auto&& pGameObject = pRef->GetEntityRef().GetGameObject()) {
+        if (auto&& pRef =
+        GetComponentProperties().Find<SR_UTILS_NS::EntityRefProperty>(SR_BUTTON_HOVERED_PROP_NAME))
+        { if (auto&& pGameObject = pRef->GetEntityRef().GetGameObject()) {
                 pGameObject->SetEnabled(IsHovered());
             }
         }
 
-        if (auto&& pRef = GetComponentProperties().Find<SR_UTILS_NS::EntityRefProperty>(SR_BUTTON_PRESSED_PROP_NAME)) {
-            if (auto&& pGameObject = pRef->GetEntityRef().GetGameObject()) {
+        if (auto&& pRef =
+        GetComponentProperties().Find<SR_UTILS_NS::EntityRefProperty>(SR_BUTTON_PRESSED_PROP_NAME))
+        { if (auto&& pGameObject = pRef->GetEntityRef().GetGameObject()) {
                 pGameObject->SetEnabled(IsPressed());
             }
         }*/
     }
-}
+} // namespace SR_CORE_UI_NS

@@ -11,8 +11,7 @@
 
 namespace SR_AUDIO_NS {
     /// ModPlug decoder
-    class ModPlugDataProvider : public IWaveDataProvider
-    {
+    class ModPlugDataProvider : public IWaveDataProvider {
     public:
         explicit ModPlugDataProvider(const RawSoundDataPtr& data);
         ~ModPlugDataProvider() override;
@@ -42,6 +41,6 @@ namespace SR_AUDIO_NS {
         /// ModPlug stuff
         ModPlugFile* m_ModPlugFile;
     };
-}
+} // namespace SR_AUDIO_NS
 
-#endif //SR_ENGINE_MODPLUGDATAPROVIDER_H
+#endif // SR_ENGINE_MODPLUGDATAPROVIDER_H

@@ -1,11 +1,11 @@
-#include <vector>
-#include <optional>
-#include <iostream>
-#include <cstdint>
 #include <cfloat>
 #include <cmath>
+#include <cstdint>
 #include <cstdio>
+#include <iostream>
 #include <memory>
+#include <optional>
+#include <vector>
 
 #ifdef SR_SCRIPT_AOT_ENABLED
     #define SR_SCRIPT_EXTERN_DLL
@@ -22,33 +22,40 @@ namespace SpaRcleAPI {
 
     CoreAPI* g_pCoreAPI = nullptr;
 
-    #include "ScriptHandle.h"
+#include "ScriptHandle.h"
 
-    template <typename T, bool AllowSuccessor = false, typename ... Others>
-    class ScriptablePassKey : private ScriptablePassKey<Others, false> ... {
+    template<typename T, bool AllowSuccessor = false, typename... Others>
+    class ScriptablePassKey : private ScriptablePassKey<Others, false>... {
     public:
-        template <typename U, typename = typename std::enable_if<AllowSuccessor && std::is_base_of<T, U>::value && !std::is_same<U, T>::value, T>::type>
-        ScriptablePassKey(ScriptablePassKey<U>&&) { }
+        template<
+            typename U, typename = typename std::enable_if<
+                            AllowSuccessor && std::is_base_of<T, U>::value && !std::is_same<U, T>::value, T>::type>
+        ScriptablePassKey(ScriptablePassKey<U>&&) {}
 
-        template <typename U, typename = U, typename = typename std::enable_if<std::is_base_of<ScriptablePassKey<U>, ScriptablePassKey<T, AllowSuccessor, Others...>>::value, U>::type>
-        ScriptablePassKey(ScriptablePassKey<U>&&) { }
+        template<
+            typename U, typename = U,
+            typename = typename std::enable_if<
+                std::is_base_of<ScriptablePassKey<U>, ScriptablePassKey<T, AllowSuccessor, Others...>>::value, U>::type>
+        ScriptablePassKey(ScriptablePassKey<U>&&) {}
 
-        template <typename U, typename = U, typename = U, typename = typename std::enable_if<(AllowSuccessor || (sizeof...(Others) > 0)) && std::is_same<U, T>::value, T>::type>
-        ScriptablePassKey(ScriptablePassKey<U, AllowSuccessor, Others...>&&) { }
+        template<
+            typename U, typename = U, typename = U,
+            typename = typename std::enable_if<
+                (AllowSuccessor || (sizeof...(Others) > 0)) && std::is_same<U, T>::value, T>::type>
+        ScriptablePassKey(ScriptablePassKey<U, AllowSuccessor, Others...>&&) {}
 
     protected:
         ScriptablePassKey() noexcept = default;
-        explicit ScriptablePassKey(const T *) noexcept { }
+        explicit ScriptablePassKey(const T*) noexcept {}
 
     private:
         friend T;
 
-        ScriptablePassKey(ScriptablePassKey<T, false>&&) { }
+        ScriptablePassKey(ScriptablePassKey<T, false>&&) {}
 
         ScriptablePassKey(const ScriptablePassKey&) = delete;
         ScriptablePassKey& operator=(const ScriptablePassKey&) = delete;
         ScriptablePassKey& operator=(ScriptablePassKey&&) = delete;
-
     };
 
     template<typename T> ScriptablePassKey(const T*) -> ScriptablePassKey<T>;
@@ -59,7 +66,6 @@ namespace SpaRcleAPI {
     public:
         const char* name = nullptr;
         AllocateScriptBehaviourFunc allocateFunc = nullptr;
-
     };
 
     struct ScriptModuleInfo {
@@ -74,13 +80,13 @@ namespace SpaRcleAPI {
     public:
         const char* name = nullptr;
         std::vector<ScriptModuleBehaviourInfo> behaviours;
-
     };
 
     class CppBehaviour;
 
     class CoreAPI {
         using FunctionHandle = void*;
+
     private:
         CoreAPI() = default;
         ~CoreAPI() = default;
@@ -116,9 +122,7 @@ namespace SpaRcleAPI {
             return module;
         }
 
-        ScriptModuleInfo& GetLastModule() {
-            return m_scriptModules.back();
-        }
+        ScriptModuleInfo& GetLastModule() { return m_scriptModules.back(); }
 
         CoreAPI& SetCompilerVersion(const char* version) {
             m_compilerVersion = version;
@@ -135,32 +139,32 @@ namespace SpaRcleAPI {
         const char* m_compilerVersion = nullptr;
         std::vector<ScriptModuleInfo> m_scriptModules;
         std::vector<FunctionHandle> m_functionTable;
-
     };
 
-    struct SharedPtrUnmanagedPassKey { };
+    struct SharedPtrUnmanagedPassKey {};
 
     template<typename T> class SharedPtr {
     public:
         SharedPtr() = default;
 
         ~SharedPtr() {
-            auto&& pDeleteFunction = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(T::API_DELETE_FUNCTION_INDEX);
+            auto&& pDeleteFunction =
+                (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(T::API_DELETE_FUNCTION_INDEX);
             pDeleteFunction(m_handle);
         }
 
         SharedPtr(const ScriptHandle& handle)
-            : m_handle(handle)
-        {
-            auto&& pIncrementFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(T::API_INCREMENT_FUNCTION_INDEX);
+            : m_handle(handle) {
+            auto&& pIncrementFunc =
+                (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(T::API_INCREMENT_FUNCTION_INDEX);
             pIncrementFunc(m_handle);
         }
 
         SharedPtr(const SharedPtr& other)
             : m_handle(other.m_handle)
-            , m_initialized(other.m_initialized)
-        {
-            auto&& pIncrementFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(T::API_INCREMENT_FUNCTION_INDEX);
+            , m_initialized(other.m_initialized) {
+            auto&& pIncrementFunc =
+                (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(T::API_INCREMENT_FUNCTION_INDEX);
             pIncrementFunc(m_handle);
 
             memcpy(m_storage, other.m_storage, sizeof(T));
@@ -168,14 +172,14 @@ namespace SpaRcleAPI {
 
         SharedPtr(SharedPtr&& other) noexcept
             : m_handle(std::exchange(other.m_handle, {}))
-            , m_initialized(std::exchange(other.m_initialized, false))
-        {
+            , m_initialized(std::exchange(other.m_initialized, false)) {
             memcpy(m_storage, other.m_storage, sizeof(T));
         }
 
         SharedPtr& operator=(const SharedPtr& other) {
             if (this != &other) {
-                auto&& pIncrementFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(T::API_INCREMENT_FUNCTION_INDEX);
+                auto&& pIncrementFunc =
+                    (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(T::API_INCREMENT_FUNCTION_INDEX);
                 pIncrementFunc(other.m_handle);
                 m_handle = other.m_handle;
                 m_initialized = other.m_initialized;
@@ -193,8 +197,14 @@ namespace SpaRcleAPI {
             return *this;
         }
 
-        T* operator->() { EnsureInitialized(); return Get(); }
-        T& operator*() { EnsureInitialized(); return *Get(); }
+        T* operator->() {
+            EnsureInitialized();
+            return Get();
+        }
+        T& operator*() {
+            EnsureInitialized();
+            return *Get();
+        }
 
     private:
         T* Get() { return reinterpret_cast<T*>(&m_storage); }
@@ -210,7 +220,6 @@ namespace SpaRcleAPI {
         ScriptHandle m_handle;
         alignas(T) std::byte m_storage[sizeof(T)];
         bool m_initialized = false;
-
     };
 
     template<typename T> class UnsafeRef {
@@ -223,8 +232,7 @@ namespace SpaRcleAPI {
         UnsafeRef& operator=(UnsafeRef&&) = delete;
 
         UnsafeRef(const ScriptHandle& handle)
-            : m_handle(handle)
-        { }
+            : m_handle(handle) {}
 
     public:
         T* operator->() const {
@@ -237,24 +245,33 @@ namespace SpaRcleAPI {
     private:
         mutable std::optional<T> m_instance;
         ScriptHandle m_handle;
-
     };
-}
+} // namespace SpaRcleAPI
 
 #define SR_SCRIPT_BEHAVIOUR_CLASS()
 
 using namespace SpaRcleAPI;
 
 SR_SCRIPT_EXTERN_DLL void InitScriptCoreAPI(uint64_t countFunctions) { CoreAPI::Instance().Init(countFunctions); }
-SR_SCRIPT_EXTERN_DLL void SetScriptFunction(uint64_t index, void* pFunction) { CoreAPI::Instance().SetFunction(index, pFunction); }
+SR_SCRIPT_EXTERN_DLL void SetScriptFunction(uint64_t index, void* pFunction) {
+    CoreAPI::Instance().SetFunction(index, pFunction);
+}
 SR_SCRIPT_EXTERN_DLL void DestroyScriptCoreAPI() { CoreAPI::Destroy(); }
 SR_SCRIPT_EXTERN_DLL uint32_t GetScriptModulesCount() { return CoreAPI::Instance().GetCountModules(); }
-SR_SCRIPT_EXTERN_DLL uint32_t GetScriptModuleBehavioursCount(uint32_t index) { return CoreAPI::Instance().GetScriptModule(index).behaviours.size(); }
-SR_SCRIPT_EXTERN_DLL const char* GetScriptModuleBehaviourName(uint32_t moduleIndex, uint32_t behaviourIndex) { return CoreAPI::Instance().GetScriptModule(moduleIndex).behaviours[behaviourIndex].name; }
-SR_SCRIPT_EXTERN_DLL const char* GetScriptModuleName(uint32_t index) { return CoreAPI::Instance().GetScriptModule(index).name; }
+SR_SCRIPT_EXTERN_DLL uint32_t GetScriptModuleBehavioursCount(uint32_t index) {
+    return CoreAPI::Instance().GetScriptModule(index).behaviours.size();
+}
+SR_SCRIPT_EXTERN_DLL const char* GetScriptModuleBehaviourName(uint32_t moduleIndex, uint32_t behaviourIndex) {
+    return CoreAPI::Instance().GetScriptModule(moduleIndex).behaviours[behaviourIndex].name;
+}
+SR_SCRIPT_EXTERN_DLL const char* GetScriptModuleName(uint32_t index) {
+    return CoreAPI::Instance().GetScriptModule(index).name;
+}
 SR_SCRIPT_EXTERN_DLL const char* GetScriptModuleCompilerVersion() { return CoreAPI::Instance().GetCompilerVersion(); }
 
-SR_SCRIPT_EXTERN_DLL void* AllocateScriptBehaviour(const char* behaviourName) { return CoreAPI::Instance().AllocateBehaviour(behaviourName); }
+SR_SCRIPT_EXTERN_DLL void* AllocateScriptBehaviour(const char* behaviourName) {
+    return CoreAPI::Instance().AllocateBehaviour(behaviourName);
+}
 SR_SCRIPT_EXTERN_DLL void FreeScriptBehaviour(void* pBehaviour);
 SR_SCRIPT_EXTERN_DLL void ScriptModuleSetBehaviourSceneObject(void* pInstance, ScriptHandle handle);
 

@@ -18,13 +18,16 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::PushID(context.pOwner);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(
+            SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2()
+        );
 
         auto&& pWindow = SR_GRAPH_GUI_NS::Immediate::GetCurrentWindow();
         auto&& pDrawList = SR_GRAPH_GUI_NS::Immediate::GetWindowDrawList(pWindow);
         const auto cursorPos = SR_GRAPH_GUI_NS::Immediate::GetWindowCursorPos(pWindow);
 
-        const auto dir = m_isOpened ? SR_GRAPH_GUI_NS::Immediate::Direction::Down : SR_GRAPH_GUI_NS::Immediate::Direction::Right;
+        const auto dir =
+            m_isOpened ? SR_GRAPH_GUI_NS::Immediate::Direction::Down : SR_GRAPH_GUI_NS::Immediate::Direction::Right;
 
         std::string_view typeName = value.GetSharedPtrType();
         if (size_t pos = typeName.rfind(':'); pos != std::string_view::npos) {
@@ -40,26 +43,33 @@ namespace SR_CORE_GUI_NS {
 
         if (context.pValue && !context.noHeader) {
             const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(5, 5);
-            SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
+            SR_GRAPH_GUI_NS::Immediate::RenderArrow(
+                pDrawList, arrowPos,
+                SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f
+            );
 
-            const SR_MATH_NS::FVector2 mainButtonSize = { 30, context.fieldHeight };
+            const SR_MATH_NS::FVector2 mainButtonSize = {30, context.fieldHeight};
 
             auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
             if (SR_GRAPH_GUI_NS::Immediate::Button("", mainButtonSize)) {
                 m_isOpened = !m_isOpened;
             }
             SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
-        }
-        else if (!context.noHeader) {
+        } else if (!context.noHeader) {
             const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(0, 5);
-            SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
+            SR_GRAPH_GUI_NS::Immediate::RenderArrow(
+                pDrawList, arrowPos,
+                SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f
+            );
 
             const float_t arrowWidth = context.lineHeight * 0.75f;
             SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(arrowWidth, 0));
 
             SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-            const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(context.fieldTitleWidth - arrowWidth, 0), context.fieldHeight };
+            const SR_MATH_NS::FVector2 mainButtonSize = {
+                SR_MAX(context.fieldTitleWidth - arrowWidth, 0), context.fieldHeight
+            };
 
             SR_UTILS_NS::StringAtom displayName = editorParams.GetDisplayName();
             auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
@@ -103,9 +113,12 @@ namespace SR_CORE_GUI_NS {
                 pTypeNameIt = std::find(m_typeNames.begin(), m_typeNames.end(), pMeta->GetFactoryName());
             }
 
-            std::optional<uint64_t> selectedIndex = pTypeNameIt != m_typeNames.end() ? std::make_optional(std::distance(m_typeNames.begin(), pTypeNameIt)) : std::nullopt;
+            std::optional<uint64_t> selectedIndex =
+                pTypeNameIt != m_typeNames.end() ? std::make_optional(std::distance(m_typeNames.begin(), pTypeNameIt))
+                                                 : std::nullopt;
 
-            const char* pPrevValue = selectedIndex.has_value() ? m_typeNames[selectedIndex.value()].data() : m_default.c_str();
+            const char* pPrevValue =
+                selectedIndex.has_value() ? m_typeNames[selectedIndex.value()].data() : m_default.c_str();
 
             SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth);
 
@@ -113,7 +126,9 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
             }
 
-            if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("##Combo", pPrevValue, SR_GRAPH_GUI_NS::Immediate::ComboFlags::NoArrowButton)) {
+            if (SR_GRAPH_GUI_NS::Immediate::BeginCombo(
+                    "##Combo", pPrevValue, SR_GRAPH_GUI_NS::Immediate::ComboFlags::NoArrowButton
+                )) {
                 if (!m_comboOpened) {
                     SR_GRAPH_GUI_NS::Immediate::SetKeyboardFocusHere();
                     m_comboOpened = true;
@@ -129,8 +144,7 @@ namespace SR_CORE_GUI_NS {
                     }
 
                     bool isSelected = (selectedIndex == i);
-                    if (SR_GRAPH_GUI_NS::Immediate::Selectable(m_typeNames[i].data(), isSelected))
-                    {
+                    if (SR_GRAPH_GUI_NS::Immediate::Selectable(m_typeNames[i].data(), isSelected)) {
                         selectedIndex = i;
                         m_searchBuffer = m_typeNames[i];
                         SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
@@ -141,8 +155,7 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
                 SR_GRAPH_GUI_NS::Immediate::EndCombo();
-            }
-            else {
+            } else {
                 m_comboOpened = false;
                 m_searchBuffer.clear();
             }
@@ -163,8 +176,7 @@ namespace SR_CORE_GUI_NS {
                     OnObjectReplaced(pClassValue, nullptr);
                     pNew = nullptr;
                     feedback.isChanged = true;
-                }
-                else if (pClassValue) {
+                } else if (pClassValue) {
                     if (m_typeNames[selectedIndex.value()] != pClassValue->GetMeta()->GetFactoryName()) {
                         if (context.onBeforeChangeCallback) {
                             context.onBeforeChangeCallback(false);
@@ -173,8 +185,7 @@ namespace SR_CORE_GUI_NS {
                         OnObjectReplaced(pClassValue, pNew);
                         feedback.isChanged = true;
                     }
-                }
-                else {
+                } else {
                     if (context.onBeforeChangeCallback) {
                         context.onBeforeChangeCallback(false);
                     }
@@ -237,4 +248,4 @@ namespace SR_CORE_GUI_NS {
 
         return feedback;
     }
-}
+} // namespace SR_CORE_GUI_NS

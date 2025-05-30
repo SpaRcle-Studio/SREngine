@@ -5,47 +5,48 @@
 #include <Engine/Engine.h>
 #include <Engine/World/VisualRegion.h>
 
-#include <Graphics/Types/Geometry/DebugWireframeMesh.h>
 #include <Graphics/Render/RenderScene.h>
+#include <Graphics/Types/Geometry/DebugWireframeMesh.h>
 
 namespace SR_CORE_NS {
-    void VisualRegion::OnEnter() {
-        Region::OnEnter();
-    }
+    void VisualRegion::OnEnter() { Region::OnEnter(); }
 
-    void VisualRegion::OnExit() {
-        Region::OnExit();
-    }
+    void VisualRegion::OnExit() { Region::OnExit(); }
 
     void VisualRegion::SetVisible(bool value) {
         using namespace Graphics::Types;
         using namespace Graphics;
 
-        //auto&& renderScene = GetScene().Do<RenderScenePtr>([](SR_WORLD_NS::Scene* ptr) -> RenderScenePtr {
-        //    return ptr->GetDataStorage().GetValue<RenderScenePtr>();
-        //}, RenderScenePtr());
+        // auto&& renderScene =
+        // GetScene().Do<RenderScenePtr>([](SR_WORLD_NS::Scene* ptr) ->
+        // RenderScenePtr {
+        //     return ptr->GetDataStorage().GetValue<RenderScenePtr>();
+        // }, RenderScenePtr());
 
         if (value && !m_mesh && m_position.y == 1) {
-            //if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load("Engine/Models/planeWireframe.obj", SR_GTYPES_NS::MeshType::Wireframe, 0)) {
-            //    m_mesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh *>(pMesh);
-            //}
-            //else
-             //   return;
+            // if (auto&& pMesh =
+            // SR_GTYPES_NS::Mesh::Load("Engine/Models/planeWireframe.obj",
+            // SR_GTYPES_NS::MeshType::Wireframe, 0)) {
+            //     m_mesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh
+            //     *>(pMesh);
+            // }
+            // else
+            //    return;
 
-            //UpdateFacesPos();
+            // UpdateFacesPos();
 
-            //m_mesh->AddUsePoint();
-            //m_mesh->SetMaterial(Material::Load("Engine/Materials/Colors/red_wireframe.mat"));
+            // m_mesh->AddUsePoint();
+            // m_mesh->SetMaterial(Material::Load("Engine/Materials/Colors/red_wireframe.mat"));
 
-            //renderScene.Do([this](SR_GRAPH_NS::RenderScene* ptr) {
-            //    ptr->Register(m_mesh);
-            //});
+            // renderScene.Do([this](SR_GRAPH_NS::RenderScene* ptr) {
+            //     ptr->Register(m_mesh);
+            // });
         }
 
-        //if (!value && m_mesh) {
-        //    m_mesh->RemoveUsePoint();
-        //    m_mesh = nullptr;
-        //}
+        // if (!value && m_mesh) {
+        //     m_mesh->RemoveUsePoint();
+        //     m_mesh = nullptr;
+        // }
     }
 
     bool VisualRegion::Unload(bool force) {
@@ -70,9 +71,8 @@ namespace SR_CORE_NS {
             fPos += offset.m_chunk * m_chunkSize.x;
 
             auto&& matrix = SR_MATH_NS::Matrix4x4(
-                    SR_MATH_NS::FVector3(fPos.x, static_cast<SR_MATH_NS::Unit>(0.01), fPos.z),
-                    SR_MATH_NS::Quaternion::Identity(),
-                    SR_MATH_NS::FVector3(size.x / 2.f, 1.f, size.y / 2.f)
+                SR_MATH_NS::FVector3(fPos.x, static_cast<SR_MATH_NS::Unit>(0.01), fPos.z),
+                SR_MATH_NS::Quaternion::Identity(), SR_MATH_NS::FVector3(size.x / 2.f, 1.f, size.y / 2.f)
             );
 
             m_mesh->SetMatrix(matrix);
@@ -83,4 +83,4 @@ namespace SR_CORE_NS {
         UpdateFacesPos();
         Region::ApplyOffset();
     }
-}
+} // namespace SR_CORE_NS

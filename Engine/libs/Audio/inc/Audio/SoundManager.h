@@ -35,10 +35,9 @@ namespace SR_AUDIO_NS {
     class SoundManager : public SR_UTILS_NS::Singleton<SoundManager> {
         SR_REGISTER_SINGLETON(SoundManager)
     public:
-        enum class State : uint8_t {
-            Stopped, Active, Paused
-        };
+        enum class State : uint8_t { Stopped, Active, Paused };
         using Handle = void*;
+
     private:
         SoundManager() = default;
         ~SoundManager() override = default;
@@ -67,7 +66,10 @@ namespace SR_AUDIO_NS {
         void SetListenerDistanceModel(SoundListener* pListenerContext, ListenerDistanceModel distanceModel);
         void SetListenerGain(SoundListener* pListenerContext, float_t gain);
         void SetListenerVelocity(SoundListener* pListenerContext, SR_MATH_NS::FVector3 velocity);
-        void SetListenerTransform(SoundListener* pListenerContext, const SR_MATH_NS::FVector3& position, const SR_MATH_NS::Quaternion& quaternion);
+        void SetListenerTransform(
+            SoundListener* pListenerContext, const SR_MATH_NS::FVector3& position,
+            const SR_MATH_NS::Quaternion& quaternion
+        );
 
         SR_NODISCARD const std::set<SoundListener*>& GetListeners() const noexcept { return m_listeners; }
         SR_NODISCARD const std::list<PlayData*>& GetPlayStack() const noexcept { return m_playStack; }
@@ -103,8 +105,7 @@ namespace SR_AUDIO_NS {
         std::list<PlayData*> m_playStack;
         std::set<PlayData*> m_playing;
         std::map<AudioLibrary, std::map<AudioDeviceName, SoundContext*>> m_contexts;
-
     };
-}
+} // namespace SR_AUDIO_NS
 
-#endif //SR_ENGINE_SOUNDMANAGER_H
+#endif // SR_ENGINE_SOUNDMANAGER_H

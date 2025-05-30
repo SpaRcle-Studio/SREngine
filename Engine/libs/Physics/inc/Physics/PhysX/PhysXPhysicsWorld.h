@@ -16,6 +16,7 @@ namespace SR_PHYSICS_NS {
     class ContactReportCallback;
     class PhysXPhysicsWorld : public PhysicsWorld {
         using Super = PhysicsWorld;
+
     public:
         explicit PhysXPhysicsWorld(LibraryPtr pLibrary, Space space);
         ~PhysXPhysicsWorld() override;
@@ -30,7 +31,7 @@ namespace SR_PHYSICS_NS {
         bool AddRigidbody(RigidbodyPtr pRigidbody) override;
         bool RemoveRigidbody(RigidbodyPtr pRigidbody) override;
 
-        void ForEachRigidbody3D(const SR_HTYPES_NS::Function<void(SR_PTYPES_NS::Rigidbody3D *)> &fun) override;
+        void ForEachRigidbody3D(const SR_HTYPES_NS::Function<void(SR_PTYPES_NS::Rigidbody3D*)>& fun) override;
 
         void Flush() override;
 
@@ -46,8 +47,7 @@ namespace SR_PHYSICS_NS {
         std::vector<physx::PxActor*> m_dynamicActors;
         std::vector<physx::PxActor*> m_staticActors;
         std::vector<physx::PxActor*> m_actors;
-
     };
-}
+} // namespace SR_PHYSICS_NS
 
-#endif //SR_ENGINE_PHYSXPHYSICSWORLD_H
+#endif // SR_ENGINE_PHYSXPHYSICSWORLD_H

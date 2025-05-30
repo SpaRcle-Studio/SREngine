@@ -2,19 +2,17 @@
 // Created by Monika on 12.05.2025.
 //
 
-#include <string>
-#include <iostream>
-#include <fstream>
-#include <ostream>
-#include <filesystem>
-#include <regex>
 #include <atomic>
+#include <filesystem>
+#include <fstream>
+#include <iostream>
+#include <ostream>
+#include <regex>
+#include <string>
 
 #include <zlib.h>
 
-constexpr uint64_t constexpr_strlen(const char* str) {
-    return *str ? 1 + constexpr_strlen(str + 1) : 0;
-}
+constexpr uint64_t constexpr_strlen(const char* str) { return *str ? 1 + constexpr_strlen(str + 1) : 0; }
 
 static std::string SR_APPLICATION_NAME = "SREngine";
 
@@ -31,53 +29,37 @@ enum ERROR_CODES {
 };
 
 #if defined(WIN32)
-    constexpr bool SR_IS_WINDOWS = true;
-    constexpr bool SR_IS_LINUX = false;
-    constexpr bool SR_IS_MACOS = false;
+constexpr bool SR_IS_WINDOWS = true;
+constexpr bool SR_IS_LINUX = false;
+constexpr bool SR_IS_MACOS = false;
     #include <Windows.h>
-    const char* DYNAMIC_MODULE_EXTENSION = ".dll";
-    void* LoadDynamicModule(const char* moduleName) {
-        return LoadLibraryA(moduleName);
-    }
-    bool UnloadDynamicModule(void* pModule) {
-        return FreeLibrary((HMODULE)pModule);
-    }
-    auto FindEngineEntryPoint(void* pModule) {
-        return (int(*)(int, char**))GetProcAddress((HMODULE)pModule, ENTRY_POINT_MODULE_NAME);
-    }
+const char* DYNAMIC_MODULE_EXTENSION = ".dll";
+void* LoadDynamicModule(const char* moduleName) { return LoadLibraryA(moduleName); }
+bool UnloadDynamicModule(void* pModule) { return FreeLibrary((HMODULE)pModule); }
+auto FindEngineEntryPoint(void* pModule) {
+    return (int (*)(int, char**))GetProcAddress((HMODULE)pModule, ENTRY_POINT_MODULE_NAME);
+}
 #elif defined(__linux__)
-    constexpr bool SR_IS_WINDOWS = false;
-    constexpr bool SR_IS_LINUX = true;
-    constexpr bool SR_IS_MACOS = false;
-    #include <dlfcn.h>
-    #include <unistd.h>
+constexpr bool SR_IS_WINDOWS = false;
+constexpr bool SR_IS_LINUX = true;
+constexpr bool SR_IS_MACOS = false;
     #include <cstring>
-    const char* DYNAMIC_MODULE_EXTENSION = ".so";
-    void* LoadDynamicModule(const char* moduleName) {
-        return dlopen(moduleName, RTLD_NOW);
-    }
-    bool UnloadDynamicModule(void* pModule) {
-        return dlclose(pModule) != 0;
-    }
-    auto FindEngineEntryPoint(void* pModule) {
-        return (int(*)(int, char**))dlsym(pModule, ENTRY_POINT_MODULE_NAME);
-    }
-#elif defined(__APPLE__)
-    constexpr bool SR_IS_WINDOWS = false;
-    constexpr bool SR_IS_LINUX = false;
-    constexpr bool SR_IS_MACOS = true;
     #include <dlfcn.h>
     #include <unistd.h>
-    const char* DYNAMIC_MODULE_EXTENSION = ".dylib";
-    void* LoadDynamicModule(const char* moduleName) {
-        return dlopen(moduleName, RTLD_NOW);
-    }
-    bool UnloadDynamicModule(void* pModule) {
-        return dlclose(pModule) != 0;
-    }
-    auto FindEngineEntryPoint(void* pModule) {
-        return (int(*)(int, char**))dlsym(pModule, ENTRY_POINT_MODULE_NAME);
-    }
+const char* DYNAMIC_MODULE_EXTENSION = ".so";
+void* LoadDynamicModule(const char* moduleName) { return dlopen(moduleName, RTLD_NOW); }
+bool UnloadDynamicModule(void* pModule) { return dlclose(pModule) != 0; }
+auto FindEngineEntryPoint(void* pModule) { return (int (*)(int, char**))dlsym(pModule, ENTRY_POINT_MODULE_NAME); }
+#elif defined(__APPLE__)
+constexpr bool SR_IS_WINDOWS = false;
+constexpr bool SR_IS_LINUX = false;
+constexpr bool SR_IS_MACOS = true;
+    #include <dlfcn.h>
+    #include <unistd.h>
+const char* DYNAMIC_MODULE_EXTENSION = ".dylib";
+void* LoadDynamicModule(const char* moduleName) { return dlopen(moduleName, RTLD_NOW); }
+bool UnloadDynamicModule(void* pModule) { return dlclose(pModule) != 0; }
+auto FindEngineEntryPoint(void* pModule) { return (int (*)(int, char**))dlsym(pModule, ENTRY_POINT_MODULE_NAME); }
 #else
     #error "Unsupported platform"
 #endif

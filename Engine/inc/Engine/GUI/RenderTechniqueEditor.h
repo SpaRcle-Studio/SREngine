@@ -12,6 +12,7 @@
 namespace SR_CORE_GUI_NS {
     class RenderTechniqueEditor : public SR_GRAPH_GUI_NS::NodeWidget {
         using Super = SR_GRAPH_GUI_NS::NodeWidget;
+
     public:
         RenderTechniqueEditor();
         ~RenderTechniqueEditor() override = default;
@@ -20,8 +21,7 @@ namespace SR_CORE_GUI_NS {
         void OnOpen() override;
         void InitCreationPopup() override;
         void DrawLeftPanel() override;
-
     };
-}
+} // namespace SR_CORE_GUI_NS
 
-#endif //SR_ENGINE_RENDERTECHNIQUEEDITOR_H
+#endif // SR_ENGINE_RENDERTECHNIQUEEDITOR_H

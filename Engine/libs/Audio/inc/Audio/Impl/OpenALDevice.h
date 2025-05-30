@@ -22,8 +22,7 @@ namespace SR_AUDIO_NS {
 
     private:
         ALCdevice* m_openALDevice = nullptr;
-
     };
-}
+} // namespace SR_AUDIO_NS
 
-#endif //SR_ENGINE_OPENALDEVICE_H
+#endif // SR_ENGINE_OPENALDEVICE_H

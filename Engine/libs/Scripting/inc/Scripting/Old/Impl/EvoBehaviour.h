@@ -6,19 +6,19 @@
 #define SR_ENGINE_EVOBEHAVIOUR_H
 
 #include <Scripting/Base/Behaviour.h>
-#include <Scripting/ScriptHolder.h>
 #include <Scripting/Impl/EvoScriptManager.h>
+#include <Scripting/ScriptHolder.h>
 
 namespace SR_SCRIPTING_NS {
-    typedef void(*CollisionFnPtr)(const SR_UTILS_NS::CollisionData& data);
+    typedef void (*CollisionFnPtr)(const SR_UTILS_NS::CollisionData& data);
 
     class EvoBehaviour : public SR_SCRIPTING_NS::IRawBehaviour {
         using Properties = std::vector<std::string>;
         using Super = SR_SCRIPTING_NS::IRawBehaviour;
+
     public:
         EvoBehaviour()
-            : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(EvoBehaviour))
-        { }
+            : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(EvoBehaviour)) {}
 
     public:
         Properties GetProperties() const override;
@@ -55,7 +55,7 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD uint64_t GetFileHash() const override;
 
     private:
-        template<typename T, typename ...Args> void CallFunction(T function, bool ignoreLoadState, Args&&... args) {
+        template<typename T, typename... Args> void CallFunction(T function, bool ignoreLoadState, Args&&... args) {
             if (!ignoreLoadState && GetResourceLoadState() != LoadState::Loaded) {
                 return;
             }
@@ -103,8 +103,7 @@ namespace SR_SCRIPTING_NS {
         EvoScript::Typedefs::GetPropertiesFnPtr m_getProperties = nullptr;
         EvoScript::Typedefs::GetPropertyFnPtr m_getProperty = nullptr;
         EvoScript::Typedefs::SetPropertyFnPtr m_setProperty = nullptr;
-
     };
-}
+} // namespace SR_SCRIPTING_NS
 
-#endif //SR_ENGINE_EVOBEHAVIOUR_H
+#endif // SR_ENGINE_EVOBEHAVIOUR_H

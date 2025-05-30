@@ -8,6 +8,4 @@
 #include <Utils/ECS/LayerManager.h>
 #include <Utils/UI/UIModifier.h>
 
-namespace SR_CORE_NS {
-
-}
+namespace SR_CORE_NS {}

@@ -7,11 +7,11 @@
 
 #include <Physics/macros.h>
 
-#include <Utils/stdInclude.h>
 #include <Utils/Math/Vector3.h>
+#include <Utils/stdInclude.h>
 
-#include <PxPhysicsAPI.h>
 #include <PxFoundation.h>
+#include <PxPhysicsAPI.h>
 #include <PxSimulationEventCallback.h>
 
 SR_CONSTEXPR auto SR_PHYSX_FOUNDATION_VERSION = PX_PHYSICS_VERSION;
@@ -23,34 +23,35 @@ namespace SR_PHYSICS_NS {
 #else
     typedef physx::PxPvd PhysXPvdConnection;
 #endif
-}
+} // namespace SR_PHYSICS_NS
 
 namespace SR_PHYSICS_UTILS_NS {
-    SR_MAYBE_UNUSED static physx::PxVec3 FV3ToPxV3(const SR_MATH_NS::FVector3 &vector3) {
+    SR_MAYBE_UNUSED static physx::PxVec3 FV3ToPxV3(const SR_MATH_NS::FVector3& vector3) {
         return physx::PxVec3(vector3.x, vector3.y, vector3.z);
     }
 
-    SR_MAYBE_UNUSED static SR_MATH_NS::FVector3 PxV3ToFV3(const physx::PxVec3 &vector3) {
+    SR_MAYBE_UNUSED static SR_MATH_NS::FVector3 PxV3ToFV3(const physx::PxVec3& vector3) {
         return SR_MATH_NS::FVector3(vector3.x, vector3.y, vector3.z);
     }
 
-    static physx::PxCombineMode::Enum CombineToPxCombine(const Combine mode){
+    static physx::PxCombineMode::Enum CombineToPxCombine(const Combine mode) {
         switch (mode) {
-            case Combine::Minimum:
-                return physx::PxCombineMode::Enum::eMIN;
-            case Combine::Average:
-                return physx::PxCombineMode::Enum::eAVERAGE;
-            case Combine::Maximum:
-                return physx::PxCombineMode::Enum::eMAX;
-            case Combine::Multiply:
-                return physx::PxCombineMode::Enum::eMULTIPLY;
-            default:
-                SRHalt("CombineToPxCombine() : unsolved situation.");
-                return physx::PxCombineMode::Enum::eAVERAGE;
+        case Combine::Minimum:
+            return physx::PxCombineMode::Enum::eMIN;
+        case Combine::Average:
+            return physx::PxCombineMode::Enum::eAVERAGE;
+        case Combine::Maximum:
+            return physx::PxCombineMode::Enum::eMAX;
+        case Combine::Multiply:
+            return physx::PxCombineMode::Enum::eMULTIPLY;
+        default:
+            SRHalt("CombineToPxCombine() : unsolved situation.");
+            return physx::PxCombineMode::Enum::eAVERAGE;
         }
     }
 
-    PhysXPvdConnection* CreatePvdConnection(physx::PxFoundation* pFoundation, const std::string& ip, uint16_t port, uint32_t timeout) {
+    PhysXPvdConnection*
+    CreatePvdConnection(physx::PxFoundation* pFoundation, const std::string& ip, uint16_t port, uint32_t timeout) {
         auto&& pPvd = PxCreatePvd(*pFoundation);
         auto&& pTransport = physx::PxDefaultPvdSocketTransportCreate(ip.c_str(), port, timeout);
 
@@ -62,6 +63,6 @@ namespace SR_PHYSICS_UTILS_NS {
 
         return nullptr;
     }
-}
+} // namespace SR_PHYSICS_UTILS_NS
 
-#endif //SR_ENGINE_PHYSXUTILS_H
+#endif // SR_ENGINE_PHYSXUTILS_H

@@ -4,19 +4,19 @@
 
 #include <Engine/GUI/EngineStatistics.h>
 
-#include <Utils/Resources/ResourceManager.h>
 #include <Utils/DebugDraw.h>
+#include <Utils/Resources/ResourceManager.h>
 
+#include <Graphics/Pass/IFramebufferPass.h>
 #include <Graphics/Types/Framebuffer.h>
 #include <Graphics/Types/Skybox.h>
-#include <Graphics/Pass/IFramebufferPass.h>
 
 #include <Graphics/Memory/ShaderProgramManager.h>
 #include <Graphics/Pass/MeshDrawerPass.h>
-#include <Graphics/Render/RenderTechnique.h>
 #include <Graphics/Render/DebugRenderer.h>
-#include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/RenderQueue.h>
+#include <Graphics/Render/RenderScene.h>
+#include <Graphics/Render/RenderTechnique.h>
 
 // #include <Graphics/Pipeline/Vulkan/VulkanPipeline.h>
 // #include <Graphics/Pipeline/Vulkan/VulkanKernel.h>
@@ -24,8 +24,7 @@
 
 namespace SR_CORE_GUI_NS {
     EngineStatistics::EngineStatistics()
-        : SR_GRAPH_GUI_NS::Widget("Engine statistics")
-    { }
+        : SR_GRAPH_GUI_NS::Widget("Engine statistics") {}
 
     void EngineStatistics::Draw() {
         if (SR_GRAPH_GUI_NS::Immediate::BeginTabBar("EngineStatsTabBar")) {
@@ -52,18 +51,25 @@ namespace SR_CORE_GUI_NS {
                 std::string node = SR_FORMAT("[{}] {} = {}", index, pRes->GetResourceId().data(), pRes->GetCountUses());
 
                 if (isDestroyed) {
-                    SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(1.f, 0.f, 0.f));
+                    SR_GRAPH_GUI_NS::Immediate::PushStyleColor(
+                        SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(1.f, 0.f, 0.f)
+                    );
 
                     std::stringstream stream;
-                    stream << std::fixed << std::setprecision(3) << static_cast<float>(SR_MAX(pRes->GetLifetime(), 0) / SR_CLOCKS_PER_SEC);
+                    stream << std::fixed << std::setprecision(3)
+                           << static_cast<float>(SR_MAX(pRes->GetLifetime(), 0) / SR_CLOCKS_PER_SEC);
 
                     node.append(" (").append(stream.str()).append(")");
                 }
 
-                SR_GRAPH_GUI_NS::Immediate::TreeNodeEx(pRes, SR_GRAPH_GUI_NS::Immediate::SR_NODE_FLAGS_WITHOUT_CHILD, "%s", node.c_str());
+                SR_GRAPH_GUI_NS::Immediate::TreeNodeEx(
+                    pRes, SR_GRAPH_GUI_NS::Immediate::SR_NODE_FLAGS_WITHOUT_CHILD, "%s", node.c_str()
+                );
 
                 if (isDestroyed) {
-                    if (SR_GRAPH_GUI_NS::Immediate::IsMouseDoubleClicked(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left) && SR_GRAPH_GUI_NS::Immediate::IsItemHovered()) {
+                    if (SR_GRAPH_GUI_NS::Immediate::IsMouseDoubleClicked(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left
+                        ) &&
+                        SR_GRAPH_GUI_NS::Immediate::IsItemHovered()) {
                         pRes->Kill();
                     }
 
@@ -74,29 +80,34 @@ namespace SR_CORE_GUI_NS {
             auto&& drawResources = [=](const std::unordered_set<SR_UTILS_NS::IResource*>& resources, uint32_t index) {
                 uint32_t subIndex = 0;
 
-                const auto node = SR_FORMAT("[{}] {} ({})", index, (*resources.begin())->GetResourceId().data(), resources.size());
+                const auto node =
+                    SR_FORMAT("[{}] {} ({})", index, (*resources.begin())->GetResourceId().data(), resources.size());
 
-                const bool open = SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)index, SR_GRAPH_GUI_NS::Immediate::SR_NODE_FLAGS_WITH_CHILD, "%s", node.c_str());
+                const bool open = SR_GRAPH_GUI_NS::Immediate::TreeNodeEx(
+                    (void*)(intptr_t)index, SR_GRAPH_GUI_NS::Immediate::SR_NODE_FLAGS_WITH_CHILD, "%s", node.c_str()
+                );
 
                 if (open) {
-                    for (auto &&pRes : resources)
+                    for (auto&& pRes : resources)
                         drawResource(pRes, subIndex++);
                     SR_GRAPH_GUI_NS::Immediate::TreePop();
                 }
             };
 
-            SR_UTILS_NS::ResourceManager::Instance().InspectResources([=](const auto &groups) {
+            SR_UTILS_NS::ResourceManager::Instance().InspectResources([=](const auto& groups) {
                 for (const auto& [groupHashName, pResourceType] : groups) {
-                    const bool open = SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)pResourceType, SR_GRAPH_GUI_NS::Immediate::SR_NODE_FLAGS_WITH_CHILD, "%s", pResourceType->GetName().data());
+                    const bool open = SR_GRAPH_GUI_NS::Immediate::TreeNodeEx(
+                        (void*)(intptr_t)pResourceType, SR_GRAPH_GUI_NS::Immediate::SR_NODE_FLAGS_WITH_CHILD, "%s",
+                        pResourceType->GetName().data()
+                    );
 
                     if (open) {
                         uint32_t index = 0;
 
-                        for (const auto&[resourceName, pResources] : pResourceType->GetCopiesRef()) {
+                        for (const auto& [resourceName, pResources] : pResourceType->GetCopiesRef()) {
                             if (pResources.size() == 1) {
                                 drawResource(*pResources.begin(), index++);
-                            }
-                            else {
+                            } else {
                                 drawResources(pResources, index++);
                             }
                         }
@@ -137,8 +148,7 @@ namespace SR_CORE_GUI_NS {
 
     void EngineStatistics::WidgetsPage() {
         if (SR_GRAPH_GUI_NS::Immediate::BeginTabItem("Widgets")) {
-            if (SR_GRAPH_GUI_NS::Immediate::BeginTable("##WidgetsTable", 4))
-            {
+            if (SR_GRAPH_GUI_NS::Immediate::BeginTable("##WidgetsTable", 4)) {
                 for (auto&& [name, pWidget] : GetManager()->GetWidgets()) {
                     SR_GRAPH_GUI_NS::Immediate::TableNextRow();
 
@@ -165,7 +175,7 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::EndTabItem();
         }
     }
- 
+
     void EngineStatistics::VideoMemoryPage() {
         if (SR_GRAPH_GUI_NS::Immediate::BeginTabItem("Video memory")) {
             auto&& pContext = GetContext();
@@ -241,8 +251,7 @@ namespace SR_CORE_GUI_NS {
 
                         if (auto&& pResource = dynamic_cast<SR_UTILS_NS::IResource*>(pRenderTechnique)) {
                             SR_GRAPH_GUI_NS::Immediate::Text("%s", pResource->GetResourceId().c_str());
-                        }
-                        else {
+                        } else {
                             SR_GRAPH_GUI_NS::Immediate::Text("%s", pRenderTechnique->GetName().data());
                         }
 
@@ -255,16 +264,16 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            //if (ImGui::CollapsingHeader("Materials")) {
-            //    if (ImGui::BeginTable("##MaterialsTable", 1)) {
-            //        for (auto&& pMaterial : materials) {
-            //            ImGui::TableNextRow();
-//
+            // if (ImGui::CollapsingHeader("Materials")) {
+            //     if (ImGui::BeginTable("##MaterialsTable", 1)) {
+            //         for (auto&& pMaterial : materials) {
+            //             ImGui::TableNextRow();
+            //
             //            ImGui::TableSetColumnIndex(0);
             //            ImGui::Text("%s", pMaterial->GetResourceId().c_str());
             //            ImGui::Separator();
             //        }
-//
+            //
             //        ImGui::EndTable();
             //    }
             //}
@@ -289,7 +298,8 @@ namespace SR_CORE_GUI_NS {
 
     void EngineStatistics::SubmitQueuePage() {
         /*if (SR_GRAPH_GUI_NS::Immediate::BeginTabItem("Submit queue")) {
-            auto&& pVulkan = GetContext()->GetPipeline().DynamicCast<SR_GRAPH_NS::VulkanPipeline>();
+            auto&& pVulkan =
+        GetContext()->GetPipeline().DynamicCast<SR_GRAPH_NS::VulkanPipeline>();
             if (!pVulkan) {
                 SR_GRAPH_GUI_NS::Immediate::Text("Not supported!");
                 SR_GRAPH_GUI_NS::Immediate::EndTabItem();
@@ -303,23 +313,28 @@ namespace SR_CORE_GUI_NS {
                 return;
             }
 
-            SR_GRAPH_GUI_NS::Immediate::CollapsingHeader(SR_FORMAT_C("Present complete semaphore [{}]", (void*)pKernel->GetPresentCompleteSemaphore()));
+            SR_GRAPH_GUI_NS::Immediate::CollapsingHeader(SR_FORMAT_C("Present
+        complete semaphore [{}]",
+        (void*)pKernel->GetPresentCompleteSemaphore()));
 
             auto&& queue = pKernel->GetSubmitQueue();
 
             uint32_t index = 0;
             for (auto&& submitInfo : queue) {
-                if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader(SR_FORMAT_C("Queue {}", index))) {
-                    DrawSubmitInfo(submitInfo);
+                if
+        (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader(SR_FORMAT_C("Queue {}",
+        index))) { DrawSubmitInfo(submitInfo);
                 }
                 ++index;
             }
 
-            if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader("Graphics queue")) {
-                DrawSubmitInfo(pKernel->GetSubmitInfo());
+            if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader("Graphics queue"))
+        { DrawSubmitInfo(pKernel->GetSubmitInfo());
             }
 
-            SR_GRAPH_GUI_NS::Immediate::CollapsingHeader(SR_FORMAT_C("Render complete semaphore [{}]", (void*)pKernel->GetRenderCompleteSemaphore()));
+            SR_GRAPH_GUI_NS::Immediate::CollapsingHeader(SR_FORMAT_C("Render
+        complete semaphore [{}]",
+        (void*)pKernel->GetRenderCompleteSemaphore()));
 
             SR_GRAPH_GUI_NS::Immediate::EndTabItem();
         }*/
@@ -330,7 +345,8 @@ namespace SR_CORE_GUI_NS {
 
         uint32_t waitIndex = 0;
         for (auto&& pSemaphore : submitInfo.waitSemaphores) {
-            SR_GRAPH_GUI_NS::Immediate::Text("Wait semaphore %i [%p]", waitIndex, pSemaphore);
+            SR_GRAPH_GUI_NS::Immediate::Text("Wait semaphore %i [%p]",
+        waitIndex, pSemaphore);
             ++waitIndex;
         }
 
@@ -338,7 +354,8 @@ namespace SR_CORE_GUI_NS {
 
         uint32_t cmdIndex = 0;
         for (auto&& pCmd : submitInfo.commandBuffers) {
-            SR_GRAPH_GUI_NS::Immediate::Text("Cmd buffer %i [%p]", cmdIndex, pCmd);
+            SR_GRAPH_GUI_NS::Immediate::Text("Cmd buffer %i [%p]", cmdIndex,
+        pCmd);
             ++cmdIndex;
         }
 
@@ -346,7 +363,8 @@ namespace SR_CORE_GUI_NS {
 
         uint32_t signalIndex = 0;
         for (auto&& pSemaphore : submitInfo.signalSemaphores) {
-            SR_GRAPH_GUI_NS::Immediate::Text("Signal semaphore %i [%p]", signalIndex, pSemaphore);
+            SR_GRAPH_GUI_NS::Immediate::Text("Signal semaphore %i [%p]",
+        signalIndex, pSemaphore);
             ++signalIndex;
         }
 
@@ -416,9 +434,10 @@ namespace SR_CORE_GUI_NS {
                 if (first || pShader != meshInfo.shaderUseInfo.pShader) {
                     pShader = meshInfo.shaderUseInfo.pShader;
                     if (meshInfo.shaderUseInfo.pShader) {
-                        SR_GRAPH_GUI_NS::Immediate::Text("\t\t* Shader: %s", meshInfo.shaderUseInfo.pShader->GetResourceId().c_str());
-                    }
-                    else {
+                        SR_GRAPH_GUI_NS::Immediate::Text(
+                            "\t\t* Shader: %s", meshInfo.shaderUseInfo.pShader->GetResourceId().c_str()
+                        );
+                    } else {
                         SR_GRAPH_GUI_NS::Immediate::Text("\t\t* Shader: [no shader]");
                     }
                 }
@@ -428,18 +447,26 @@ namespace SR_CORE_GUI_NS {
                     SR_GRAPH_GUI_NS::Immediate::Text("\t\t\t* VBO: %i", vbo);
                 }
 
-                if (auto&& pMeshComponent = dynamic_cast<SR_GTYPES_NS::Mesh*>(meshInfo.pMesh); pMeshComponent && pMeshComponent->GetGameObject()) {
-                    SR_GRAPH_GUI_NS::Immediate::Text("\t\t\t\t* GameObject: %s", pMeshComponent->GetGameObject()->GetName().c_str());
-                }
-                else {
-                    SR_GRAPH_GUI_NS::Immediate::Text("\t\t\t\t* Geometry: %s", meshInfo.pMesh->GetMeshIdentifier().c_str());
+                if (auto&& pMeshComponent = dynamic_cast<SR_GTYPES_NS::Mesh*>(meshInfo.pMesh);
+                    pMeshComponent && pMeshComponent->GetGameObject()) {
+                    SR_GRAPH_GUI_NS::Immediate::Text(
+                        "\t\t\t\t* GameObject: %s", pMeshComponent->GetGameObject()->GetName().c_str()
+                    );
+                } else {
+                    SR_GRAPH_GUI_NS::Immediate::Text(
+                        "\t\t\t\t* Geometry: %s", meshInfo.pMesh->GetMeshIdentifier().c_str()
+                    );
                 }
 
                 SR_GRAPH_GUI_NS::Immediate::SameLine();
                 SR_GRAPH_GUI_NS::Immediate::Text(" : ");
 
-                const bool vboError = SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_VBO_ERROR);
-                const bool shaderError = SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_SHADER_ERROR);
+                const bool vboError = SR_UTILS_NS::Math::IsMaskIncludedSubMask(
+                    meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_VBO_ERROR
+                );
+                const bool shaderError = SR_UTILS_NS::Math::IsMaskIncludedSubMask(
+                    meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_SHADER_ERROR
+                );
 
                 if (vboError || shaderError) {
                     if (vboError) {
@@ -451,8 +478,9 @@ namespace SR_CORE_GUI_NS {
                         SR_GRAPH_GUI_NS::Immediate::SameLine();
                         SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1, 0, 0, 1), "Shader");
                     }
-                }
-                else if (SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_ERROR)) {
+                } else if (SR_UTILS_NS::Math::IsMaskIncludedSubMask(
+                               meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_ERROR
+                           )) {
                     SR_GRAPH_GUI_NS::Immediate::SameLine();
                     SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1, 0, 1, 1), "Inactive");
                 }
@@ -489,14 +517,20 @@ namespace SR_CORE_GUI_NS {
             }
 
             if (cameraInfo.pCamera == pMainCamera) {
-                SR_GRAPH_GUI_NS::Immediate::Text("* Main camera: %s", cameraInfo.pCamera->GetRenderTechniquePath().c_str());
-            }
-            else {
-                SR_GRAPH_GUI_NS::Immediate::Text("* Offscreen camera: %s", cameraInfo.pCamera->GetRenderTechniquePath().c_str());
+                SR_GRAPH_GUI_NS::Immediate::Text(
+                    "* Main camera: %s", cameraInfo.pCamera->GetRenderTechniquePath().c_str()
+                );
+            } else {
+                SR_GRAPH_GUI_NS::Immediate::Text(
+                    "* Offscreen camera: %s", cameraInfo.pCamera->GetRenderTechniquePath().c_str()
+                );
             }
 
             if (SR_GRAPH_GUI_NS::Immediate::Button(SR_FORMAT_C("Raycast test##{}", cameraInfo.pCamera.GetRawPtr()))) {
-                SR_UTILS_NS::DebugDraw::Instance().DrawLine(SR_ID_INVALID, cameraInfo.pCamera->GetPosition(), SR_MATH_NS::FVector3::Zero(), SR_MATH_NS::FColor::Red(), 5.0f);
+                SR_UTILS_NS::DebugDraw::Instance().DrawLine(
+                    SR_ID_INVALID, cameraInfo.pCamera->GetPosition(), SR_MATH_NS::FVector3::Zero(),
+                    SR_MATH_NS::FColor::Red(), 5.0f
+                );
             }
         }
 
@@ -507,44 +541,61 @@ namespace SR_CORE_GUI_NS {
         if (pPipeline->GetPreviousState().transferredMemory >= 1024) {
             const uint32_t transferredKBytes = pPipeline->GetPreviousState().transferredMemory / 1024;
             SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Transferred memory: {}Kb", transferredKBytes));
-        }
-        else {
+        } else {
             const uint32_t transferredBytes = pPipeline->GetPreviousState().transferredMemory;
             SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Transferred memory: {}B", transferredBytes));
         }
 
-        SR_GRAPH_GUI_NS::Immediate::Text("%", SR_FORMAT_C("Transferred count: {}", pPipeline->GetPreviousState().transferredCount));
+        SR_GRAPH_GUI_NS::Immediate::Text(
+            "%", SR_FORMAT_C("Transferred count: {}", pPipeline->GetPreviousState().transferredCount)
+        );
 
         SR_GRAPH_GUI_NS::Immediate::Separator();
         SR_GRAPH_GUI_NS::Immediate::Text("Draw info:");
 
         SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Vertices count: {}", pPipeline->GetBuildState().vertices));
-        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Triangles count: {}", static_cast<uint32_t>(pPipeline->GetBuildState().vertices / 3)));
+        SR_GRAPH_GUI_NS::Immediate::Text(
+            SR_FORMAT_C("Triangles count: {}", static_cast<uint32_t>(pPipeline->GetBuildState().vertices / 3))
+        );
         SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Draw calls: {}", pPipeline->GetBuildState().drawCalls));
         SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Used textures: {}", pPipeline->GetBuildState().usedTextures));
         SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Used shaders: {}", pPipeline->GetBuildState().usedShaders));
 
         if (auto&& pDebugRenderer = pRenderScene->GetRenderer<SR_GRAPH_NS::DebugRenderer>()) {
-            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Timed objects pool size: {}", pDebugRenderer->GetTimedObjectPoolSize()));
-            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Timed empty ids pool size: {}", pDebugRenderer->GetEmptyIdsPoolSize()));
-        }
-        else {
-            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(1, 0, 0, 1));
+            SR_GRAPH_GUI_NS::Immediate::Text(
+                SR_FORMAT_C("Timed objects pool size: {}", pDebugRenderer->GetTimedObjectPoolSize())
+            );
+            SR_GRAPH_GUI_NS::Immediate::Text(
+                SR_FORMAT_C("Timed empty ids pool size: {}", pDebugRenderer->GetEmptyIdsPoolSize())
+            );
+        } else {
+            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(
+                SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(1, 0, 0, 1)
+            );
             SR_GRAPH_GUI_NS::Immediate::Text("Debug renderer not found!");
             SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
         }
 
-        /*if (auto&& pVulkanPipeline = pPipeline.DynamicCast<SR_GRAPH_NS::VulkanPipeline>()) {
+        /*if (auto&& pVulkanPipeline =
+        pPipeline.DynamicCast<SR_GRAPH_NS::VulkanPipeline>()) {
             SR_GRAPH_GUI_NS::Immediate::Separator();
             SR_GRAPH_GUI_NS::Immediate::Text("Vulkan memory:");
-            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Descriptor sets count: {}", pVulkanPipeline->GetMemoryManager()->GetDescriptorSetsCount()));
-            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Shader programs count: {}", pVulkanPipeline->GetMemoryManager()->GetShaderProgramsCount()));
-            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("UBOs count: {}", pVulkanPipeline->GetMemoryManager()->GetUBOsCount()));
-            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("VBOs count: {}", pVulkanPipeline->GetMemoryManager()->GetVBOsCount()));
-            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("IBOs count: {}", pVulkanPipeline->GetMemoryManager()->GetIBOsCount()));
-            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("SSBOs count: {}", pVulkanPipeline->GetMemoryManager()->GetSSBOsCount()));
-            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("FBOs count: {}", pVulkanPipeline->GetMemoryManager()->GetFBOsCount()));
-            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Textures count: {}", pVulkanPipeline->GetMemoryManager()->GetTexturesCount()));
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Descriptor sets count:
+        {}", pVulkanPipeline->GetMemoryManager()->GetDescriptorSetsCount()));
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Shader programs count:
+        {}", pVulkanPipeline->GetMemoryManager()->GetShaderProgramsCount()));
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("UBOs count: {}",
+        pVulkanPipeline->GetMemoryManager()->GetUBOsCount()));
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("VBOs count: {}",
+        pVulkanPipeline->GetMemoryManager()->GetVBOsCount()));
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("IBOs count: {}",
+        pVulkanPipeline->GetMemoryManager()->GetIBOsCount()));
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("SSBOs count: {}",
+        pVulkanPipeline->GetMemoryManager()->GetSSBOsCount()));
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("FBOs count: {}",
+        pVulkanPipeline->GetMemoryManager()->GetFBOsCount()));
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Textures count: {}",
+        pVulkanPipeline->GetMemoryManager()->GetTexturesCount()));
         }*/
 
         SR_GRAPH_GUI_NS::Immediate::Separator();
@@ -561,8 +612,7 @@ namespace SR_CORE_GUI_NS {
                 }
                 SR_GRAPH_GUI_NS::Immediate::EndListBox();
             }
-        }
-        else {
+        } else {
             SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(0, 1, 0, 1), "Ok");
         }
 
@@ -630,4 +680,4 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::EndTabItem();
     }
-}
+} // namespace SR_CORE_GUI_NS

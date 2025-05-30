@@ -12,13 +12,13 @@ namespace SR_CORE_NS {
     class DeltaTimeState : public SR_UTILS_NS::ThreadWorkerStateBase {
         SR_REGISTER_THREAD_STATE(DeltaTimeState)
         using Super = SR_UTILS_NS::ThreadWorkerStateBase;
+
     public:
         SR_UTILS_NS::ThreadWorkerResult ExecuteImpl() override;
 
     private:
         std::optional<SR_UTILS_NS::TimePointType> m_timeStart;
-
     };
-}
+} // namespace SR_CORE_NS
 
-#endif //SR_ENGINE_CORE_DELTA_TIME_STATE_H
+#endif // SR_ENGINE_CORE_DELTA_TIME_STATE_H

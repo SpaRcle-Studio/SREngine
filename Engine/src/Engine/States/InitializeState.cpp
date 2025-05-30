@@ -24,7 +24,8 @@ namespace SR_CORE_NS {
 
         if (pWindow && pWindowImpl) {
             if (!pWindow->Open()) {
-                SR_ERROR("Engine::InitializeRender() : failed to open the main window!");
+                SR_ERROR("Engine::InitializeRender() : failed to open the main "
+                         "window!");
                 GetThreadsWorker()->StopAsync();
                 return SR_UTILS_NS::ThreadWorkerResult::Break;
             }
@@ -52,8 +53,7 @@ namespace SR_CORE_NS {
                 if (isMaximized) {
                     pWindowImpl->Maximize();
                 }
-            }
-            else {
+            } else {
                 pWindowImpl->Centralize();
             }
 
@@ -75,7 +75,8 @@ namespace SR_CORE_NS {
         }
 
         if (!pRenderContext->Init()) {
-            SR_ERROR("Engine::InitializeRender() : failed to initialize the render context!");
+            SR_ERROR("Engine::InitializeRender() : failed to initialize the "
+                     "render context!");
             GetThreadsWorker()->StopAsync();
             return SR_UTILS_NS::ThreadWorkerResult::Break;
         }
@@ -109,7 +110,11 @@ namespace SR_CORE_NS {
             rootNode.AppendAttribute("IsMaximized", pWindow->IsMaximized());
 
             if (!windowSettings.Save(windowSettingsPath)) {
-                SR_ERROR("Engine::Finalize() : failed to save window settings!\n\tPath: " + windowSettingsPath.ToString());
+                SR_ERROR(
+                    "Engine::Finalize() : failed to save window "
+                    "settings!\n\tPath: " +
+                    windowSettingsPath.ToString()
+                );
             }
         }
 
@@ -121,12 +126,11 @@ namespace SR_CORE_NS {
 
         do {
             SR_INFO("InitializeState::Finalize() : flushing scene...");
-        }
-        while (pEngine->FlushScene());
+        } while (pEngine->FlushScene());
 
         auto&& pRenderContext = pEngine->GetRenderContext();
         if (pRenderContext) {
             pRenderContext->Close();
         }
     }
-}
+} // namespace SR_CORE_NS

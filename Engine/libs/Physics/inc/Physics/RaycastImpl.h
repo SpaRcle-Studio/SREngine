@@ -19,14 +19,13 @@ namespace SR_PHYSICS_NS {
 
     public:
         explicit RaycastImpl(SR_PHYSICS_NS::PhysicsWorld* world)
-            : m_world(world)
-        { }
+            : m_world(world) {}
 
         ~RaycastImpl() override = default;
 
     protected:
         SR_PHYSICS_NS::PhysicsWorld* m_world = nullptr;
     };
-}
+} // namespace SR_PHYSICS_NS
 
-#endif //SR_ENGINE_RAYCASTIMPL_H
+#endif // SR_ENGINE_RAYCASTIMPL_H

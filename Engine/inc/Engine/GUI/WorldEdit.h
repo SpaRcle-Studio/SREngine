@@ -12,6 +12,7 @@
 namespace SR_CORE_GUI_NS {
     class WorldEdit : public SR_GRAPH_GUI_NS::Widget {
         using Super = SR_GRAPH_GUI_NS::Widget;
+
     public:
         WorldEdit();
         ~WorldEdit() override = default;
@@ -24,8 +25,7 @@ namespace SR_CORE_GUI_NS {
 
     private:
         SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene> m_scene;
-
     };
-}
+} // namespace SR_CORE_GUI_NS
 
-#endif //SR_ENGINE_WORLDEDIT_H
+#endif // SR_ENGINE_WORLDEDIT_H

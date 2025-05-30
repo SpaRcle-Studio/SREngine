@@ -7,18 +7,20 @@
 #include <Utils/ECS/GameObject.h>
 
 namespace SR_PHYSICS_NS {
-    PhysXRaycast3DImpl::RaycastHits PhysXRaycast3DImpl::Cast(const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance, uint32_t maxHits) {
+    PhysXRaycast3DImpl::RaycastHits PhysXRaycast3DImpl::Cast(
+        const SR_MATH_NS::FVector3& origin, const SR_MATH_NS::FVector3& direction, float_t maxDistance, uint32_t maxHits
+    ) {
         RaycastHits hits;
         hits.reserve(maxHits);
 
-        m_world->ForEachRigidbody3D([&](SR_PTYPES_NS::Rigidbody3D* pRigidbody){
-            if (hits.size() == maxHits){
+        m_world->ForEachRigidbody3D([&](SR_PTYPES_NS::Rigidbody3D* pRigidbody) {
+            if (hits.size() == maxHits) {
                 return;
             }
 
             physx::PxTransform pose = ((physx::PxRigidActor*)pRigidbody->GetHandle())->getGlobalPose();
 
-            if (pose.p == SR_PHYSICS_UTILS_NS::FV3ToPxV3(origin)){
+            if (pose.p == SR_PHYSICS_UTILS_NS::FV3ToPxV3(origin)) {
                 return;
             }
 
@@ -26,27 +28,24 @@ namespace SR_PHYSICS_NS {
 
             if (!pShape) {
                 if (auto&& gameObject = pRigidbody->GetGameObject()) {
-                    SRHaltOnce("PhysXRaycast3DImpl::Cast() : " + gameObject->GetName().ToStringRef() + " does not have a collision shape!");
-                }
-                else {
-                    SRHaltOnce("PhysXRaycast3DImpl::Cast() : rigidbody does not have a collision shape!");
+                    SRHaltOnce(
+                        "PhysXRaycast3DImpl::Cast() : " + gameObject->GetName().ToStringRef() +
+                        " does not have a collision shape!"
+                    );
+                } else {
+                    SRHaltOnce("PhysXRaycast3DImpl::Cast() : rigidbody does "
+                               "not have a collision shape!");
                 }
                 return;
             }
 
             physx::PxRaycastHit pxHit;
             physx::PxU32 hitCount = physx::PxGeometryQuery::raycast(
-                    SR_PHYSICS_UTILS_NS::FV3ToPxV3(origin),
-                    SR_PHYSICS_UTILS_NS::FV3ToPxV3(direction),
-                    pShape->getGeometry().any(),
-                    pose,
-                    maxDistance,
-                    physx::PxHitFlag::eDEFAULT,
-                    1,
-                    &pxHit
+                SR_PHYSICS_UTILS_NS::FV3ToPxV3(origin), SR_PHYSICS_UTILS_NS::FV3ToPxV3(direction),
+                pShape->getGeometry().any(), pose, maxDistance, physx::PxHitFlag::eDEFAULT, 1, &pxHit
             );
 
-            if (hitCount == 0){
+            if (hitCount == 0) {
                 return;
             }
 
@@ -61,4 +60,4 @@ namespace SR_PHYSICS_NS {
 
         return hits;
     }
-}
+} // namespace SR_PHYSICS_NS

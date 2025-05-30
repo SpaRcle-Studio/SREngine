@@ -10,8 +10,8 @@
 #include <Physics/PhysicsLib.h>
 #include <Physics/VehicleInternalData.h>
 
-#include <Utils/ECS/Component.h>
 #include <Utils/Common/Measurement.h>
+#include <Utils/ECS/Component.h>
 #include <Utils/Types/SafePointer.h>
 
 namespace SR_PTYPES_NS {
@@ -33,8 +33,7 @@ namespace SR_PTYPES_NS {
 
     private:
         VehicleInternalData m_internalData;
-
     };
-}
+} // namespace SR_PTYPES_NS
 
-#endif //SR_ENGINE_VEHICLE_H
+#endif // SR_ENGINE_VEHICLE_H

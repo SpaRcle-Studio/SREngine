@@ -15,7 +15,7 @@ namespace SR_UTILS_NS {
     class Transform3D;
     class Transform2D;
     class Transform;
-}
+} // namespace SR_UTILS_NS
 
 namespace SR_SCRIPTING_NS {
     class ScriptSystem;
@@ -27,6 +27,7 @@ namespace SR_SCRIPTING_NS {
     class Behaviour final : public SR_UTILS_NS::Component {
         SR_CLASS()
         using Super = SR_UTILS_NS::Component;
+
     public:
         void Save(SR_UTILS_NS::ISerializer& serializer) const override;
         bool Load(SR_UTILS_NS::IDeserializer& deserializer) override;
@@ -41,8 +42,7 @@ namespace SR_SCRIPTING_NS {
 
             if constexpr (std::is_same_v<T, CppBehaviour>) {
                 return m_cppBehaviour->GetBehaviour().Get();
-            }
-            else {
+            } else {
                 return dynamic_cast<T*>(m_cppBehaviour->GetBehaviour().Get());
             }
         }
@@ -75,10 +75,10 @@ namespace SR_SCRIPTING_NS {
         CppBehaviourInstance* m_cppBehaviour = nullptr;
         std::optional<SR_UTILS_NS::SerializationNode> m_serializationNode;
 
-        /// @property @setter(SetBehaviourName) @inspector(BehaviourNamePropertyDrawer)
+        /// @property @setter(SetBehaviourName)
+        /// @inspector(BehaviourNamePropertyDrawer)
         SR_UTILS_NS::StringAtom m_behaviourName;
-
     };
-}
+} // namespace SR_SCRIPTING_NS
 
-#endif //SR_ENGINE_BEHAVIOUR_H
+#endif // SR_ENGINE_BEHAVIOUR_H

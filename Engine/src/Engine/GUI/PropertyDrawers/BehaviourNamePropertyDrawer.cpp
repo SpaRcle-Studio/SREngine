@@ -11,9 +11,9 @@
 namespace SR_CORE_GUI_NS {
     BehaviourNamePropertyDrawer::BehaviourNamePropertyDrawer() {
         ReInitNames();
-        m_moduleReloadSubscription = SR_UTILS_NS::Broadcaster::Instance().Subscribe(SR_UTILS_NS::Events::EVENT_ON_SCRIPT_MODULE_RELOADED_ID, [this](auto&& msg) {
-            ReInitNames();
-        });
+        m_moduleReloadSubscription = SR_UTILS_NS::Broadcaster::Instance().Subscribe(
+            SR_UTILS_NS::Events::EVENT_ON_SCRIPT_MODULE_RELOADED_ID, [this](auto&& msg) { ReInitNames(); }
+        );
     }
 
     PropertyDrawerFeedback BehaviourNamePropertyDrawer::Draw(const PropertyDrawerContext& context) {
@@ -24,13 +24,18 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::PushID(context.pOwner);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetProperty().GetName().c_str());
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(
+            SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2()
+        );
 
         if (!context.pValue) {
-            const SR_MATH_NS::FVector2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
+            const SR_MATH_NS::FVector2 buttonSize = {context.fieldTitleWidth, context.fieldHeight};
 
-            if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetProperty().GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
-                value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
+            if (SR_GRAPH_GUI_NS::Immediate::Button(
+                    context.GetProperty().GetEditorParams().GetDisplayName().c_str(), buttonSize
+                )) {
+                value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue()
+                                                              : context.GetProperty().GetDefaultValue();
                 value = value.DetachIfConst();
                 SetReflectedValue(context, feedback, value);
             }
@@ -47,13 +52,18 @@ namespace SR_CORE_GUI_NS {
             if (auto&& pStringAtom = value.TryCast<SR_UTILS_NS::StringAtom>()) {
                 const bool markAsInvalid = !pBehaviour->IsInstanceValid();
                 if (markAsInvalid) {
-                    SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f));
+                    SR_GRAPH_GUI_NS::Immediate::PushStyleColor(
+                        SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f)
+                    );
                 }
 
                 std::optional<uint64_t> selectedIndex = GetSelectedIndex(*pStringAtom);
 
-                const char* pPrevValue = selectedIndex ? m_existingNames[selectedIndex.value()].c_str() : pStringAtom->c_str();
-                if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("##Combo", pPrevValue, SR_GRAPH_GUI_NS::Immediate::ComboFlags::NoArrowButton)) {
+                const char* pPrevValue =
+                    selectedIndex ? m_existingNames[selectedIndex.value()].c_str() : pStringAtom->c_str();
+                if (SR_GRAPH_GUI_NS::Immediate::BeginCombo(
+                        "##Combo", pPrevValue, SR_GRAPH_GUI_NS::Immediate::ComboFlags::NoArrowButton
+                    )) {
                     if (markAsInvalid) {
                         SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
                     }
@@ -84,8 +94,7 @@ namespace SR_CORE_GUI_NS {
                         }
                     }
                     SR_GRAPH_GUI_NS::Immediate::EndCombo();
-                }
-                else {
+                } else {
                     if (markAsInvalid) {
                         SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
                     }
@@ -96,12 +105,12 @@ namespace SR_CORE_GUI_NS {
                 if (selectedIndex && *pStringAtom != m_existingNames[selectedIndex.value()]) {
                     SetMappedValue(context, feedback, pStringAtom, m_existingNames[selectedIndex.value()]);
                 }
+            } else {
+                SR_GRAPH_GUI_NS::Immediate::TextColored(
+                    SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map string atom value!"
+                );
             }
-            else {
-                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map string atom value!");
-            }
-        }
-        else {
+        } else {
             SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Invalid string type!");
         }
 
@@ -121,9 +130,7 @@ namespace SR_CORE_GUI_NS {
 
         m_existingNames = factory.GetInheritances(cppBehaviourName);
 
-        std::erase_if(m_existingNames, [factory](const auto& name) {
-            return factory.IsAbstract(name);
-        });
+        std::erase_if(m_existingNames, [factory](const auto& name) { return factory.IsAbstract(name); });
     }
 
     std::optional<uint32_t> BehaviourNamePropertyDrawer::GetSelectedIndex(SR_UTILS_NS::StringAtom name) const {
@@ -135,4 +142,4 @@ namespace SR_CORE_GUI_NS {
 
         return std::nullopt;
     }
-}
+} // namespace SR_CORE_GUI_NS

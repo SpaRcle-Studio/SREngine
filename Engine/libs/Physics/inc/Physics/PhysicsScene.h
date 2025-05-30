@@ -23,6 +23,7 @@ namespace SR_PHYSICS_NS {
 
     class PhysicsScene : public SR_HTYPES_NS::SafePtr<PhysicsScene> {
         friend class SR_HTYPES_NS::SafePtr<PhysicsScene>;
+
     public:
         using Super = SR_HTYPES_NS::SafePtr<PhysicsScene>;
         using Ptr = Super;
@@ -31,6 +32,7 @@ namespace SR_PHYSICS_NS {
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
         using ScenePtr = SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>;
         using Space = SR_UTILS_NS::Measurement;
+
     public:
         explicit PhysicsScene(const ScenePtr& scene);
         virtual ~PhysicsScene();
@@ -70,8 +72,7 @@ namespace SR_PHYSICS_NS {
         bool m_needClearForces = false;
         bool m_debugEnabled = true;
         bool m_isGameMode = false;
-
     };
-}
+} // namespace SR_PHYSICS_NS
 
-#endif //SR_ENGINE_PHYSICSSCENE_H
+#endif // SR_ENGINE_PHYSICSSCENE_H

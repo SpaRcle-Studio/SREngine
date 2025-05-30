@@ -2,8 +2,8 @@
 // Created by Monika on 13.04.2024.
 //
 
-#include <Engine/States/ChunkSystemState.h>
 #include <Engine/Engine.h>
+#include <Engine/States/ChunkSystemState.h>
 #include <Engine/World/EngineScene.h>
 
 #include <Graphics/Render/RenderScene.h>
@@ -31,12 +31,14 @@ namespace SR_CORE_NS {
             return SR_UTILS_NS::ThreadWorkerResult::Success;
         }
 
-        //if (auto&& gameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(pMainCamera->GetParent())) {
-        //    auto&& pLogic = pScene->GetLogicBase().DynamicCast<SR_WORLD_NS::SceneCubeChunkLogic>();
-        //    if (pLogic && gameObject) {
-        //        pLogic->SetObserver(gameObject);
-        //    }
-        //}
+        // if (auto&& gameObject =
+        // dynamic_cast<SR_UTILS_NS::GameObject*>(pMainCamera->GetParent())) {
+        //     auto&& pLogic =
+        //     pScene->GetLogicBase().DynamicCast<SR_WORLD_NS::SceneCubeChunkLogic>();
+        //     if (pLogic && gameObject) {
+        //         pLogic->SetObserver(gameObject);
+        //     }
+        // }
 
         pScene->GetLogicBase()->Update(m_worldTimer.GetDeltaTime());
 
@@ -44,4 +46,4 @@ namespace SR_CORE_NS {
 
         return SR_UTILS_NS::ThreadWorkerResult::Success;
     }
-}
+} // namespace SR_CORE_NS

@@ -12,6 +12,7 @@
 namespace SR_PTYPES_NS {
     class Bullet3CollisionShape : public CollisionShape {
         using Super = CollisionShape;
+
     public:
         Bullet3CollisionShape(LibraryPtr pLibrary);
         ~Bullet3CollisionShape() override;
@@ -26,8 +27,7 @@ namespace SR_PTYPES_NS {
 
     private:
         btCollisionShape* m_shape = nullptr;
-
     };
-}
+} // namespace SR_PTYPES_NS
 
-#endif //SR_ENGINE_BULLET3COLLISIONSHAPE_H
+#endif // SR_ENGINE_BULLET3COLLISIONSHAPE_H

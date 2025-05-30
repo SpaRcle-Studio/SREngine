@@ -4,11 +4,11 @@
 
 #include <Engine/UI/IButton.h>
 
-#include <Graphics/Types/Geometry/Mesh3D.h>
 #include <Graphics/Types/Camera.h>
+#include <Graphics/Types/Geometry/Mesh3D.h>
 
-#include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/IRenderTechnique.h>
+#include <Graphics/Render/RenderScene.h>
 
 #include <Graphics/Pass/IColorBufferPass.h>
 
@@ -16,26 +16,25 @@
 
 namespace SR_CORE_UI_NS {
     IButton::IButton()
-        : Super()
-    {
+        : Super() {
         m_entityMessages.AddCustomProperty<SR_UTILS_NS::LabelProperty>("Idle")
-                .SetLabel("Button is idle.")
-                .SetColor(SR_MATH_NS::FColor(1.f, 1.f, 1.f, 1.f))
-                .SetActiveCondition([this] { return IsIdle(); })
-                .SetDontSave()
-                .SetReadOnly();
+            .SetLabel("Button is idle.")
+            .SetColor(SR_MATH_NS::FColor(1.f, 1.f, 1.f, 1.f))
+            .SetActiveCondition([this] { return IsIdle(); })
+            .SetDontSave()
+            .SetReadOnly();
         m_entityMessages.AddCustomProperty<SR_UTILS_NS::LabelProperty>("Hovered")
-                .SetLabel("Button is hovered.")
-                .SetColor(SR_MATH_NS::FColor(0.f, 1.f, 0.f, 1.f))
-                .SetActiveCondition([this] { return IsHovered(); })
-                .SetDontSave()
-                .SetReadOnly();
+            .SetLabel("Button is hovered.")
+            .SetColor(SR_MATH_NS::FColor(0.f, 1.f, 0.f, 1.f))
+            .SetActiveCondition([this] { return IsHovered(); })
+            .SetDontSave()
+            .SetReadOnly();
         m_entityMessages.AddCustomProperty<SR_UTILS_NS::LabelProperty>("Pressed")
-                .SetLabel("Button is pressed.")
-                .SetColor(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f))
-                .SetActiveCondition([this] { return IsPressed(); })
-                .SetDontSave()
-                .SetReadOnly();
+            .SetLabel("Button is pressed.")
+            .SetColor(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f))
+            .SetActiveCondition([this] { return IsPressed(); })
+            .SetDontSave()
+            .SetReadOnly();
     }
 
     void IButton::Update(float_t dt) {
@@ -58,8 +57,7 @@ namespace SR_CORE_UI_NS {
                 m_state = ButtonState::Pressed;
                 OnKeyDown();
             }
-        }
-        else {
+        } else {
             m_state = ButtonState::Idle;
             OnKeyDown();
         }
@@ -90,13 +88,13 @@ namespace SR_CORE_UI_NS {
     }
 
     bool IButton::CompareObject(GameObjectPtr pObject) const {
-        //while (pObject) {
-        //    if (pObject == GetGameObject()) {
-        //        return true;
-        //    }
-        //    pObject = pObject->GetParent();
-        //}
+        // while (pObject) {
+        //     if (pObject == GetGameObject()) {
+        //         return true;
+        //     }
+        //     pObject = pObject->GetParent();
+        // }
 
         return false;
     }
-}
+} // namespace SR_CORE_UI_NS

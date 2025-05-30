@@ -5,8 +5,8 @@
 #ifndef SR_ENGINE_SCRIPTING_SET_UTILS_H
 #define SR_ENGINE_SCRIPTING_SET_UTILS_H
 
-#include <set>
 #include <iostream>
+#include <set>
 
 namespace EvoScript::Tools {
     template<typename T> std::set<T> Merge(const std::set<T>& s1, const std::set<T>& s2) {
@@ -20,6 +20,6 @@ namespace EvoScript::Tools {
             std::cout << *it << ' ';
         std::cout << std::endl;
     }
-}
+} // namespace EvoScript::Tools
 
-#endif //SR_ENGINE_SCRIPTING_SET_UTILS_H
+#endif // SR_ENGINE_SCRIPTING_SET_UTILS_H

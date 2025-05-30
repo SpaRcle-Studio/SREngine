@@ -26,6 +26,7 @@ namespace SR_CORE_NS::GUI {
     class FileBrowser : public SR_GRAPH_GUI_NS::Widget {
         using Hash = std::size_t;
         using CallbackFn = std::function<void(const SR_UTILS_NS::Path& path)>;
+
     public:
         FileBrowser();
         ~FileBrowser() override = default;
@@ -38,7 +39,7 @@ namespace SR_CORE_NS::GUI {
         void Draw() override;
 
     private:
-        void FileContextMenu(const std::string &element);
+        void FileContextMenu(const std::string& element);
         void CurrentDirectoryContextMenu();
         void CurrentDirectoryPanel(const float_t height);
         void ItemViewPanel();
@@ -47,7 +48,7 @@ namespace SR_CORE_NS::GUI {
 
     private:
         void DrawFoldersTree(const FBFolder& parentFolder); // Отрисовка созданного дерева
-        void LoadFoldersTree(FBFolder& parentFolder); // Создание дерева файлов и его кеширования
+        void LoadFoldersTree(FBFolder& parentFolder);       // Создание дерева файлов и его кеширования
 
     private:
         SR_UTILS_NS::Path m_defaultRoot;
@@ -64,6 +65,6 @@ namespace SR_CORE_NS::GUI {
 
         std::list<FBElement> m_elements;
     };
-}
+} // namespace SR_CORE_NS::GUI
 
-#endif //SR_ENGINE_FILEBROWSER_H
+#endif // SR_ENGINE_FILEBROWSER_H

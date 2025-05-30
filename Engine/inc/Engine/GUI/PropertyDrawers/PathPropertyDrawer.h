@@ -15,8 +15,7 @@ namespace SR_CORE_GUI_NS {
 
     public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
-
     };
-}
+} // namespace SR_CORE_GUI_NS
 
-#endif //SR_ENGINE_GUI_PATH_PROPERTY_DRAWER_H
+#endif // SR_ENGINE_GUI_PATH_PROPERTY_DRAWER_H

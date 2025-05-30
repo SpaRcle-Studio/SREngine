@@ -21,8 +21,7 @@ namespace SR_CORE_GUI_NS {
         std::string m_searchBuffer;
         bool m_comboOpened = false;
         ObjectPropertyDrawer::Ptr m_pObjectPropertyDrawer;
-
     };
-}
+} // namespace SR_CORE_GUI_NS
 
-#endif //SR_ENGINE_GUI_BEHAVIOUR_PROPERTY_DRAWER_H
+#endif // SR_ENGINE_GUI_BEHAVIOUR_PROPERTY_DRAWER_H

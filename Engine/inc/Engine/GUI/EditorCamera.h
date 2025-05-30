@@ -26,8 +26,7 @@ namespace SR_CORE_GUI_NS {
 
     private:
         SceneViewer* m_sceneViewer = nullptr;
-
     };
-}
+} // namespace SR_CORE_GUI_NS
 
-#endif //SR_ENGINE_EDITORCAMERA_H
+#endif // SR_ENGINE_EDITORCAMERA_H

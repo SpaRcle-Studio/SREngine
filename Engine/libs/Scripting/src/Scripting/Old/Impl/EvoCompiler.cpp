@@ -2,19 +2,18 @@
 // Created by Nikita on 11.07.2021.
 //
 
-#include <Utils/Resources/ResourceManager.h>
+#include <Utils/Common/Features.h>
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Platform/Platform.h>
+#include <Utils/Resources/ResourceManager.h>
 #include <Utils/Resources/Xml.h>
-#include <Utils/Common/Features.h>
 
 #include <Scripting/Impl/EvoCompiler.h>
 
 namespace SR_SCRIPTING_NS {
     EvoCompiler::EvoCompiler(std::string cachePath)
-        : EvoScript::Compiler(std::move(cachePath))
-    { }
+        : EvoScript::Compiler(std::move(cachePath)) {}
 
     EvoCompiler::~EvoCompiler() {
         if (m_generator) {
@@ -28,14 +27,13 @@ namespace SR_SCRIPTING_NS {
         }
     }
 
-    EvoScript::AddressTableGen* EvoCompiler::GetGenerator() const {
-        return m_generator;
-    }
+    EvoScript::AddressTableGen* EvoCompiler::GetGenerator() const { return m_generator; }
 
     bool EvoCompiler::Init() {
         SR_INFO("EvoCompiler::Init() : initializing compiler...");
 
-        auto&& configPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Configs/EvoScript.xml");
+        auto&& configPath =
+            SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Configs/EvoScript.xml");
 
         if (configPath.Exists()) {
             auto xml = SR_XML_NS::Document::Load(configPath);
@@ -57,15 +55,14 @@ namespace SR_SCRIPTING_NS {
             m_casting = new EvoScript::CastingGen(m_generator);
 
             return true;
-        }
-        else {
+        } else {
             SR_ERROR("EvoCompiler::Init() : config file not found! \n\tPath: " + configPath.ToString());
         }
 
         return false;
     }
 
-    std::string SR_SCRIPTING_NS::EvoCompiler::GetGeneratorName(const SR_XML_NS::Node &config) const {
+    std::string SR_SCRIPTING_NS::EvoCompiler::GetGeneratorName(const SR_XML_NS::Node& config) const {
         if (!SR_UTILS_NS::Features::Instance().Enabled("EvoCompiler", true)) {
             SR_INFO("EvoCompiler::GetGenerator() : cmake generator is disabled.");
             return "Disabled";
@@ -78,13 +75,14 @@ namespace SR_SCRIPTING_NS {
             return std::string();
         }
 
-    #ifdef SR_MINGW
-        const auto warnMsg = "EvoCompiler::Init() : The script compiler and the engine are different! This can lead to unpredictable consequences!";
+#ifdef SR_MINGW
+        const auto warnMsg = "EvoCompiler::Init() : The script compiler and the engine are "
+                             "different! This can lead to unpredictable consequences!";
 
         if (generator.find("Visual Studio") != std::string::npos) {
             SR_WARN(warnMsg);
         }
-    #endif
+#endif
 
         SR_INFO("EvoCompiler::GetGenerator() : using \"" + generator + "\" generator...");
 
@@ -93,8 +91,7 @@ namespace SR_SCRIPTING_NS {
 
     GlobalEvoCompiler::GlobalEvoCompiler()
         : SR_UTILS_NS::Singleton<GlobalEvoCompiler>()
-        , SR_SCRIPTING_NS::EvoCompiler(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scripts"))
-    {
+        , SR_SCRIPTING_NS::EvoCompiler(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scripts")) {
         Init();
     }
-}
+} // namespace SR_SCRIPTING_NS

@@ -4,8 +4,8 @@
 
 #include <Engine/GUI/PhysicsMaterialEditor.h>
 
-#include <Utils/Resources/Xml.h>
 #include <Utils/Resources/IResourceReloader.h>
+#include <Utils/Resources/Xml.h>
 
 namespace SR_CORE_GUI_NS {
     PhysicsMaterialEditor::PhysicsMaterialEditor()
@@ -14,33 +14,36 @@ namespace SR_CORE_GUI_NS {
     }
 
     void PhysicsMaterialEditor::InitializeButtonActions() {
-        m_buttonActions[static_cast<uint32_t>(ButtonType::ChooseMaterial)] = [this](){ ChooseMaterial(); };
-        m_buttonActions[static_cast<uint32_t>(ButtonType::Discard)] = [this](){ ReadData(); };
-        m_buttonActions[static_cast<uint32_t>(ButtonType::Save)] = [this](){ SaveMaterial(); };
+        m_buttonActions[static_cast<uint32_t>(ButtonType::ChooseMaterial)] = [this]() { ChooseMaterial(); };
+        m_buttonActions[static_cast<uint32_t>(ButtonType::Discard)] = [this]() { ReadData(); };
+        m_buttonActions[static_cast<uint32_t>(ButtonType::Save)] = [this]() { SaveMaterial(); };
     }
 
     void PhysicsMaterialEditor::Draw() {
         if (m_materialPath.GetExtensionView() == "physmat") {
             SR_GRAPH_GUI_NS::Immediate::Text("%s", m_materialPath.c_str());
-        }
-        else {
+        } else {
             DrawButton(ButtonType::ChooseMaterial);
             return;
         }
 
         SR_GRAPH_GUI_NS::Immediate::Separator();
 
-        SetMaterialProperty("Dynamic Friction", &m_materialData.dynamicFriction, 0.01f,
-                            [this](){ SetDynamicFriction(m_materialData.dynamicFriction); });
+        SetMaterialProperty("Dynamic Friction", &m_materialData.dynamicFriction, 0.01f, [this]() {
+            SetDynamicFriction(m_materialData.dynamicFriction);
+        });
 
-        SetMaterialProperty("Static Friction", &m_materialData.staticFriction, 0.01f,
-                            [this](){ SetStaticFriction(m_materialData.staticFriction); });
+        SetMaterialProperty("Static Friction", &m_materialData.staticFriction, 0.01f, [this]() {
+            SetStaticFriction(m_materialData.staticFriction);
+        });
 
-        SetMaterialProperty("Bounciness", &m_materialData.bounciness, 0.01f,
-                            [this](){ SetBounciness(m_materialData.bounciness); });
+        SetMaterialProperty("Bounciness", &m_materialData.bounciness, 0.01f, [this]() {
+            SetBounciness(m_materialData.bounciness);
+        });
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("Friction Combine",
-                              SR_UTILS_NS::EnumReflector::ToStringAtom(m_materialData.frictionCombine).c_str())) {
+        if (SR_GRAPH_GUI_NS::Immediate::BeginCombo(
+                "Friction Combine", SR_UTILS_NS::EnumReflector::ToStringAtom(m_materialData.frictionCombine).c_str()
+            )) {
             auto&& selectables = SR_UTILS_NS::EnumReflector::GetNames<SR_PHYSICS_NS::Combine>();
             for (auto&& selectable : selectables) {
                 if (SR_GRAPH_GUI_NS::Immediate::Selectable(selectable.c_str())) {
@@ -52,7 +55,9 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::EndCombo();
         }
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("Bounce Combine", SR_UTILS_NS::EnumReflector::ToStringAtom(m_materialData.bounceCombine).c_str())) {
+        if (SR_GRAPH_GUI_NS::Immediate::BeginCombo(
+                "Bounce Combine", SR_UTILS_NS::EnumReflector::ToStringAtom(m_materialData.bounceCombine).c_str()
+            )) {
             auto&& selectables = SR_UTILS_NS::EnumReflector::GetNames<SR_PHYSICS_NS::Combine>();
             for (auto&& selectable : selectables) {
                 if (SR_GRAPH_GUI_NS::Immediate::Selectable(selectable.c_str())) {
@@ -78,7 +83,9 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
-     void PhysicsMaterialEditor::SetMaterialProperty(const std::string &label, float_t* value, float speed, const std::function<void()>& func) {
+    void PhysicsMaterialEditor::SetMaterialProperty(
+        const std::string& label, float_t* value, float speed, const std::function<void()>& func
+    ) {
         if (SR_GRAPH_GUI_NS::Immediate::DragFloat(label.c_str(), value, speed)) {
             func();
         }
@@ -88,36 +95,47 @@ namespace SR_CORE_GUI_NS {
         if (auto&& pFileBrowser = GetManager()->GetWidget<FileBrowser>()) {
             pFileBrowser->Open();
 
-            pFileBrowser->SetCallback([this,pFileBrowser](const SR_UTILS_NS::Path& path){
+            pFileBrowser->SetCallback([this, pFileBrowser](const SR_UTILS_NS::Path& path) {
                 this->SetMaterialPath(path);
                 pFileBrowser->Close();
             });
         }
     }
 
-    //SR_PTYPES_NS::PhysicsMaterial::Save(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(m_materialPath), m_materialData);
-    void PhysicsMaterialEditor::SaveMaterial() {
-        SR_PTYPES_NS::PhysicsMaterial::Save(m_materialPath, m_materialData);
-    }
+    // SR_PTYPES_NS::PhysicsMaterial::Save(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(m_materialPath),
+    // m_materialData);
+    void PhysicsMaterialEditor::SaveMaterial() { SR_PTYPES_NS::PhysicsMaterial::Save(m_materialPath, m_materialData); }
 
     void PhysicsMaterialEditor::ReadData() {
         auto&& document = SR_XML_NS::Document::Load(m_materialPath);
         if (!document.Valid()) {
-            SR_ERROR("PhysicsMaterialEditor::Draw() : file is not found! \n\tPath: " + m_materialPath.ToString());
+            SR_ERROR(
+                "PhysicsMaterialEditor::Draw() : file is not found! "
+                "\n\tPath: " +
+                m_materialPath.ToString()
+            );
             return;
         }
 
         auto&& matXml = document.Root().GetNode("PhysicsMaterial");
         if (!matXml) {
-            SR_ERROR("PhysicsMaterialEditor::Draw() : \"PhysicsMaterial\" node is not found! \n\tPath: " + m_materialPath.ToString());
+            SR_ERROR(
+                "PhysicsMaterialEditor::Draw() : \"PhysicsMaterial\" node is "
+                "not found! \n\tPath: " +
+                m_materialPath.ToString()
+            );
             return;
         }
 
         SetDynamicFriction(matXml.TryGetNode("DynamicFriction").TryGetAttribute<float_t>(0.6f));
         SetStaticFriction(matXml.TryGetNode("StaticFriction").TryGetAttribute<float_t>(0.6f));
         SetBounciness(matXml.TryGetNode("Bounciness").TryGetAttribute<float_t>(0.6f));
-        SetFrictionCombine(SR_UTILS_NS::EnumReflector::FromString<SR_PHYSICS_NS::Combine>(matXml.TryGetNode("FrictionCombine").TryGetAttribute<std::string>("Average")));
-        SetBounceCombine(SR_UTILS_NS::EnumReflector::FromString<SR_PHYSICS_NS::Combine>(matXml.TryGetNode("BounceCombine").TryGetAttribute<std::string>("Average")));
+        SetFrictionCombine(SR_UTILS_NS::EnumReflector::FromString<SR_PHYSICS_NS::Combine>(
+            matXml.TryGetNode("FrictionCombine").TryGetAttribute<std::string>("Average")
+        ));
+        SetBounceCombine(SR_UTILS_NS::EnumReflector::FromString<SR_PHYSICS_NS::Combine>(
+            matXml.TryGetNode("BounceCombine").TryGetAttribute<std::string>("Average")
+        ));
     }
 
     bool PhysicsMaterialEditor::OpenFile(const SR_UTILS_NS::Path& path) {
@@ -126,4 +144,4 @@ namespace SR_CORE_GUI_NS {
         Super::Open();
         return true;
     }
-}
+} // namespace SR_CORE_GUI_NS

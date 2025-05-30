@@ -6,8 +6,8 @@
 #define SR_ENGINE_EDITOR_GUI_H
 
 #include <Utils/Common/Enumerations.h>
-#include <Utils/Types/SafePointer.h>
 #include <Utils/ECS/SceneObject.h>
+#include <Utils/Types/SafePointer.h>
 
 #include <Graphics/GUI/WidgetManager.h>
 
@@ -22,7 +22,7 @@ namespace SR_GTYPES_NS {
 namespace SR_GRAPH_NS {
     class Window;
     class RenderContext;
-}
+} // namespace SR_GRAPH_NS
 
 namespace SR_CORE_NS {
     class Engine;
@@ -45,9 +45,8 @@ namespace SR_CORE_GUI_NS {
         using WindowPtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::Window>;
         using ScenePtr = SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>;
         using EnginePtr = SR_HTYPES_NS::SharedPtr<SR_CORE_NS::Engine>;
-        enum class Click {
-            None, Drag, Miss
-        };
+        enum class Click { None, Drag, Miss };
+
     public:
         explicit EditorGUI(const EnginePtr& pEngine);
         ~EditorGUI() override;
@@ -70,9 +69,7 @@ namespace SR_CORE_GUI_NS {
             return *pWidget;
         }
 
-        template<typename T> SR_DEPRECATED T* GetWindow() {
-            return GetWidget<T>();
-        }
+        template<typename T> SR_DEPRECATED T* GetWindow() { return GetWidget<T>(); }
 
         SR_NODISCARD SR_GRAPH_GUI_NS::Widget* GetWidget(const SR_UTILS_NS::StringAtom& name) const;
 
@@ -148,18 +145,16 @@ namespace SR_CORE_GUI_NS {
 
         Click m_click = Click::None;
 
-        std::atomic<bool> m_isInit     = false;
-        std::atomic<bool> m_hasErrors  = false;
-        std::atomic<bool> m_enabled    = false;
-        std::atomic<bool> m_loaded     = false;
+        std::atomic<bool> m_isInit = false;
+        std::atomic<bool> m_hasErrors = false;
+        std::atomic<bool> m_enabled = false;
+        std::atomic<bool> m_loaded = false;
 
         std::atomic<bool> m_useDocking = true;
         std::atomic<bool> m_dragWindow = false;
 
         bool m_imGuiDemo = false;
-
     };
-}
+} // namespace SR_CORE_GUI_NS
 
-#endif //SR_ENGINE_EDITOR_GUI_H
-
+#endif // SR_ENGINE_EDITOR_GUI_H

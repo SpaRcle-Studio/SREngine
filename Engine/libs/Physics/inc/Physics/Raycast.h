@@ -24,6 +24,6 @@ namespace SR_PHYSICS_NS {
     protected:
         SR_PHYSICS_NS::PhysicsWorld* m_world = nullptr;
     };
-}
+} // namespace SR_PHYSICS_NS
 
-#endif //SR_ENGINE_RAYCAST_H
+#endif // SR_ENGINE_RAYCAST_H

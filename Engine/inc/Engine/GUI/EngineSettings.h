@@ -19,8 +19,7 @@ namespace SR_CORE_GUI_NS {
         void DrawLighting();
         void DrawVSync();
         void DrawEditorSettings();
-
     };
-}
+} // namespace SR_CORE_GUI_NS
 
-#endif //SR_ENGINE_ENGINESETTINGS_H
+#endif // SR_ENGINE_ENGINESETTINGS_H

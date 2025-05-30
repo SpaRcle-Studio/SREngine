@@ -13,7 +13,9 @@
 #include <Libraries/Scene.h>
 #include <Libraries/Mesh.h>
 
-#define SR_ABS_CHUNK_POSITION_AXIS(regionAxis, ChunkAxis, regionSize) ((regionAxis > 0 ? regionAxis - 1 : regionAxis) * regionSize) + (ChunkAxis > 0 ? (ChunkAxis - 1) : (ChunkAxis + regionSize))
+#define SR_ABS_CHUNK_POSITION_AXIS(regionAxis, ChunkAxis, regionSize)
+((regionAxis > 0 ? regionAxis - 1 : regionAxis) * regionSize) + (ChunkAxis > 0 ?
+(ChunkAxis - 1) : (ChunkAxis + regionSize))
 
 #define SR_ABS_CHUNK_POSITION(region, chunk, regionSize) IVector3 { \
         SR_ABS_CHUNK_POSITION_AXIS(region.x, chunk.x, regionSize),  \
@@ -29,7 +31,7 @@ public:
             changed = true;
             m_region = region;
         }
-        
+
         if (auto&& chunk = m_observer->GetChunk(); chunk != m_chunk) {
             changed = true;
             m_chunk = chunk;
@@ -48,7 +50,7 @@ public:
     void CreateSpiral()
     {
         int x = 0;
-    	int z = 0;
+        int z = 0;
 
         int scope = std::max(1, m_scope - 3);
         int size = scope * 2 + 1;
@@ -65,14 +67,15 @@ public:
         for (int i = 1; i < size * size + 1; ++i)
         {
             if (m_logic->ScopeCheckFunction(x - scope, 0, z - scope)) {
-                m_spiral.emplace(m_spiral.begin(), IVector3(x - scope, 0, z - scope));
+                m_spiral.emplace(m_spiral.begin(), IVector3(x - scope, 0, z -
+scope));
             }
 
             switch (move) {
-	            case 'r': x += 1; break;
-	            case 'l': x -= 1; break;
-	            case 'u': z -= 1; break;
-	            case 'd': z += 1; break;
+                    case 'r': x += 1; break;
+                    case 'l': x -= 1; break;
+                    case 'u': z -= 1; break;
+                    case 'd': z += 1; break;
             }
 
             if (i == boundary)
@@ -88,17 +91,18 @@ public:
                 }
 
                 switch (move) {
-					case 'r': move = 'd'; break;
-					case 'd': move = 'l'; break;
-					case 'l': move = 'u'; break;
-					case 'u': move = 'r'; break;
+                                        case 'r': move = 'd'; break;
+                                        case 'd': move = 'l'; break;
+                                        case 'l': move = 'u'; break;
+                                        case 'u': move = 'r'; break;
                 }
             }
         }
     }
 
     void Awake() override {
-        m_logic = DynamicCastSceneLogicToSceneCubeChunkLogic(scene->GetLogicBase().Get());
+        m_logic =
+DynamicCastSceneLogicToSceneCubeChunkLogic(scene->GetLogicBase().Get());
         m_observer = m_logic->GetObserver();
         UpdateObserverPosition();
         ResetObserver();
@@ -109,21 +113,23 @@ public:
 
         if (!m_logic->IsChunkLoaded(region, chunk)) {
             return;
-        } 
-         
+        }
+
         auto&& position = m_logic->GetWorldPosition(region, chunk);
         auto&& absChunk = SR_ABS_CHUNK_POSITION(region, chunk, m_regionWidth);
 
-        std::string name = "Chunk(" + std::to_string(absChunk.x) + ", " + std::to_string(absChunk.y) + ", " + std::to_string(absChunk.z) + ")";
+        std::string name = "Chunk(" + std::to_string(absChunk.x) + ", " +
+std::to_string(absChunk.y) + ", " + std::to_string(absChunk.z) + ")";
 
-    	//GameObjectPtr chunkHolder = scene->Find("CHUNK_HODLER");
+        //GameObjectPtr chunkHolder = scene->Find("CHUNK_HODLER");
        // if (!chunkHolder) {
        //     chunkHolder = scene->Instance("CHUNK_HODLER");
             //chunkHolder->SetTransform(Transform::NewZero());
         //}
 
         if (auto&& chunkPtr = scene->Find(name); !chunkPtr) {
-            chunkPtr = scene->InstanceFromFile("Samples/ProceduralWorld/Chunk.prefab");
+            chunkPtr =
+scene->InstanceFromFile("Samples/ProceduralWorld/Chunk.prefab");
             chunkPtr->SetName(name);
             chunkPtr->GetTransform()->SetTranslation(position);
             //chunkHolder->AddChild(chunkPtr);
@@ -132,7 +138,8 @@ public:
 //
 //
             //if (!chunkPtr->GetComponent("Mesh3D")) {
-            //    auto pCube = Mesh::Load("Engine/Models/cube.obj", MeshType::Static)[0];
+            //    auto pCube = Mesh::Load("Engine/Models/cube.obj",
+MeshType::Static)[0];
             //    chunkPtr->AddComponent(DynamicCastMeshToComponent(pCube));
             //}
         }

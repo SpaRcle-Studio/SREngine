@@ -3,11 +3,11 @@
 //
 
 #include <Scripting/Base/Behaviour.h>
-#include <Scripting/Cpp/ScriptSystem.h>
 #include <Scripting/Cpp/ModuleManager.h>
+#include <Scripting/Cpp/ScriptSystem.h>
 
-#include <Utils/ECS/GameObject.h>
 #include <Utils/ECS/ComponentManager.h>
+#include <Utils/ECS/GameObject.h>
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/World/Scene.h>
 
@@ -51,9 +51,7 @@ namespace SR_SCRIPTING_NS {
 
         Super::OnDestroy();
 
-        AutoFree([](auto&& pData) {
-            delete pData;
-        });
+        AutoFree([](auto&& pData) { delete pData; });
     }
 
     void Behaviour::OnAttached() {
@@ -92,29 +90,17 @@ namespace SR_SCRIPTING_NS {
         Super::FixedUpdate();
     }
 
-    void Behaviour::OnCollisionEnter(const SR_UTILS_NS::CollisionData& data) {
-        Super::OnCollisionEnter(data);
-    }
+    void Behaviour::OnCollisionEnter(const SR_UTILS_NS::CollisionData& data) { Super::OnCollisionEnter(data); }
 
-    void Behaviour::OnCollisionExit(const SR_UTILS_NS::CollisionData& data) {
-        Super::OnCollisionExit(data);
-    }
+    void Behaviour::OnCollisionExit(const SR_UTILS_NS::CollisionData& data) { Super::OnCollisionExit(data); }
 
-    void Behaviour::OnCollisionStay(const SR_UTILS_NS::CollisionData& data) {
-        Super::OnCollisionStay(data);
-    }
+    void Behaviour::OnCollisionStay(const SR_UTILS_NS::CollisionData& data) { Super::OnCollisionStay(data); }
 
-    void Behaviour::OnTriggerEnter(const SR_UTILS_NS::CollisionData& data) {
-        Super::OnTriggerEnter(data);
-    }
+    void Behaviour::OnTriggerEnter(const SR_UTILS_NS::CollisionData& data) { Super::OnTriggerEnter(data); }
 
-    void Behaviour::OnTriggerExit(const SR_UTILS_NS::CollisionData& data) {
-        Super::OnTriggerExit(data);
-    }
+    void Behaviour::OnTriggerExit(const SR_UTILS_NS::CollisionData& data) { Super::OnTriggerExit(data); }
 
-    void Behaviour::OnTriggerStay(const SR_UTILS_NS::CollisionData& data) {
-        Super::OnTriggerStay(data);
-    }
+    void Behaviour::OnTriggerStay(const SR_UTILS_NS::CollisionData& data) { Super::OnTriggerStay(data); }
 
     void Behaviour::Save(SR_UTILS_NS::ISerializer& serializer) const {
         Super::Save(serializer);
@@ -137,8 +123,7 @@ namespace SR_SCRIPTING_NS {
             if (IsInstanceValid()) {
                 m_cppBehaviour->GetBehaviour()->Load(deserializer);
                 m_serializationNode = std::nullopt;
-            }
-            else {
+            } else {
                 auto&& impl = dynamic_cast<SR_UTILS_NS::IBaseSerialization&>(deserializer);
                 m_serializationNode = impl.GetWalkNode();
             }
@@ -166,9 +151,7 @@ namespace SR_SCRIPTING_NS {
         m_behaviourName = name;
     }
 
-    bool Behaviour::IsInstanceValid() const noexcept {
-        return m_cppBehaviour && m_cppBehaviour->IsValid();
-    }
+    bool Behaviour::IsInstanceValid() const noexcept { return m_cppBehaviour && m_cppBehaviour->IsValid(); }
 
     void Behaviour::OnBehaviourLoaded() {
         m_isStarted = false;
@@ -185,9 +168,7 @@ namespace SR_SCRIPTING_NS {
         }
     }
 
-    bool Behaviour::ExecuteInEditMode() const {
-        return m_cppBehaviour && m_cppBehaviour->ExecuteInEditMode();
-    }
+    bool Behaviour::ExecuteInEditMode() const { return m_cppBehaviour && m_cppBehaviour->ExecuteInEditMode(); }
 
     void Behaviour::TryLoadBehaviourData() {
         if (m_serializationNode && IsInstanceValid()) {
@@ -207,4 +188,4 @@ namespace SR_SCRIPTING_NS {
             m_serializationNode = serializer.GetWalkNode();
         }
     }
-}
+} // namespace SR_SCRIPTING_NS

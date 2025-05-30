@@ -12,14 +12,8 @@
 #include <Utils/Math/Vector6.h>
 
 namespace SR_AUDIO_NS {
-    SR_ENUM_NS_CLASS_T(ListenerDistanceModel, uint8_t,
-       None,
-       Inverse,
-       InverseClamped,
-       Linear,
-       LinearClamped,
-       Exponent,
-       ExponentClamped
+    SR_ENUM_NS_CLASS_T(
+        ListenerDistanceModel, uint8_t, None, Inverse, InverseClamped, Linear, LinearClamped, Exponent, ExponentClamped
     );
 
     struct ListenerData {
@@ -29,6 +23,6 @@ namespace SR_AUDIO_NS {
         SR_MATH_NS::FVector3 position;
         SR_MATH_NS::FVector6 orientation;
     };
-}
+} // namespace SR_AUDIO_NS
 
-#endif //SR_ENGINE_LISTENERDATA_H
+#endif // SR_ENGINE_LISTENERDATA_H

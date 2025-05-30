@@ -13,6 +13,7 @@ class btMotionState;
 namespace SR_PTYPES_NS {
     class Bullet3Rigidbody3D : public Rigidbody3D {
         using Super = Rigidbody3D;
+
     public:
         explicit Bullet3Rigidbody3D(LibraryPtr pLibrary);
         ~Bullet3Rigidbody3D() override;
@@ -29,13 +30,12 @@ namespace SR_PTYPES_NS {
 
         void AddLinearVelocity(const SR_MATH_NS::FVector3& velocity) override;
         void AddAngularVelocity(const SR_MATH_NS::FVector3& velocity) override;
-        //void SetVelocity(const SR_MATH_NS::FVector3& velocity) override;
+        // void SetVelocity(const SR_MATH_NS::FVector3& velocity) override;
 
     private:
         btRigidBody* m_rigidbody = nullptr;
         btMotionState* m_motionState = nullptr;
-
     };
-}
+} // namespace SR_PTYPES_NS
 
-#endif //SR_ENGINE_BULLET3RIGIDBODY3D_H
+#endif // SR_ENGINE_BULLET3RIGIDBODY3D_H

@@ -7,8 +7,7 @@
 
 namespace SR_AUDIO_NS {
     OpenALDevice::OpenALDevice(AudioLibrary library, const std::string& name)
-        : SoundDevice(library, name)
-    { }
+        : SoundDevice(library, name) {}
 
     OpenALDevice::~OpenALDevice() {
         if (m_openALDevice) {
@@ -22,8 +21,7 @@ namespace SR_AUDIO_NS {
         const ALchar* pDeviceNames = NULL;
 
         pDeviceNames = alcGetString(NULL, ALC_ALL_DEVICES_SPECIFIER);
-        while (pDeviceNames && *pDeviceNames)
-        {
+        while (pDeviceNames && *pDeviceNames) {
             if (std::string(pDeviceNames) == m_name || m_name.empty()) {
                 break;
             }
@@ -31,9 +29,9 @@ namespace SR_AUDIO_NS {
         }
 
         if (!pDeviceNames) {
-            SR_ERROR("OpenALDevice::Init() : no suitable audio device has been found!");
-        }
-        else if (m_name.empty()) {
+            SR_ERROR("OpenALDevice::Init() : no suitable audio device has been "
+                     "found!");
+        } else if (m_name.empty()) {
             m_name = pDeviceNames;
         }
 
@@ -47,7 +45,5 @@ namespace SR_AUDIO_NS {
         return true;
     }
 
-    ALCdevice* OpenALDevice::GetALDevice() const {
-        return m_openALDevice;
-    }
-}
+    ALCdevice* OpenALDevice::GetALDevice() const { return m_openALDevice; }
+} // namespace SR_AUDIO_NS

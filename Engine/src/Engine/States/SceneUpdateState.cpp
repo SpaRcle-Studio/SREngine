@@ -2,15 +2,15 @@
 // Created by Monika on 10.04.2024.
 //
 
-#include <Engine/States/SceneUpdateState.h>
 #include <Engine/Engine.h>
+#include <Engine/States/SceneUpdateState.h>
 #include <Engine/World/EngineScene.h>
 
 #include <Graphics/Render/RenderScene.h>
 
+#include <Utils/DebugDraw.h>
 #include <Utils/World/Scene.h>
 #include <Utils/World/SceneLogic.h>
-#include <Utils/DebugDraw.h>
 
 namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult SceneUpdateState::ExecuteImpl() {
@@ -29,4 +29,4 @@ namespace SR_CORE_NS {
 
         return SR_UTILS_NS::ThreadWorkerResult::Success;
     }
-}
+} // namespace SR_CORE_NS

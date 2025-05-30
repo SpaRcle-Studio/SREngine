@@ -8,12 +8,12 @@
 #include <dlfcn.h>
 #include <errno.h>
 
-#include <EvoScript/Tools/FileSystem.h>
 #include <EvoScript/IState.h>
+#include <EvoScript/Tools/FileSystem.h>
 
 namespace EvoScript {
-        static std::string GetLastErrorAsString() {
-        if(errno == 0) {
+    static std::string GetLastErrorAsString() {
+        if (errno == 0) {
             return std::string();
         }
 
@@ -25,12 +25,16 @@ namespace EvoScript {
     class LinuxState : public IState {
     public:
         LinuxState(const LinuxState&) = delete;
-        explicit LinuxState(const std::string& path) : IState(path) { }
+        explicit LinuxState(const std::string& path)
+            : IState(path) {}
+
     private:
         ~LinuxState() override = default;
+
     public:
         void* GetFunctionImpl(const char* name) override {
-            return dlsym(m_handle, name);;
+            return dlsym(m_handle, name);
+            ;
         }
 
         bool Unload() override {
@@ -59,22 +63,22 @@ namespace EvoScript {
             }
 
             if (m_handle = dlopen(m_path.c_str(), RTLD_LAZY); !m_handle) {
-                ES_ERROR("LinuxState::Load() : failed to load dll!"
-                         "\n\tPath: " + m_path +
-                         "\n\tDescription: " + dlerror());
+                ES_ERROR(
+                    "LinuxState::Load() : failed to load dll!"
+                    "\n\tPath: " +
+                    m_path + "\n\tDescription: " + dlerror()
+                );
                 return false;
             }
 
             return true;
         }
 
-        bool Exists() override {
-            return false;
-        }
+        bool Exists() override { return false; }
 
     private:
         void* m_handle = nullptr;
     };
-}
+} // namespace EvoScript
 
-#endif //EVO_SCRIPT_LINUX_STATE_HPP
+#endif // EVO_SCRIPT_LINUX_STATE_HPP

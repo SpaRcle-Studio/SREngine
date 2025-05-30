@@ -7,14 +7,14 @@
 
 #include <Physics/macros.h>
 
-#include <Physics/PhysicsLib.h>
 #include <Physics/CollisionShape.h>
+#include <Physics/PhysicsLib.h>
 
 #include <Utils/Common/Measurement.h>
-#include <Utils/ECS/ComponentManager.h>
 #include <Utils/ECS/Component.h>
-#include <Utils/Types/SafePointer.h>
+#include <Utils/ECS/ComponentManager.h>
 #include <Utils/Math/Matrix4x4.h>
+#include <Utils/Types/SafePointer.h>
 
 namespace SR_HTYPES_NS {
     class RawMesh;
@@ -25,12 +25,8 @@ namespace SR_PHYSICS_NS {
     class LibraryImpl;
 
     /// Rigidbody Update Shape Result
-    enum class RBUpdShapeRes : uint8_t {
-        Updated = 0,
-        Error = 1,
-        Nothing = 2
-    };
-}
+    enum class RBUpdShapeRes : uint8_t { Updated = 0, Error = 1, Nothing = 2 };
+} // namespace SR_PHYSICS_NS
 
 namespace SR_PTYPES_NS {
     class PhysicsMaterial;
@@ -41,16 +37,17 @@ namespace SR_PTYPES_NS {
         using Super = SR_UTILS_NS::NonCopyable;
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
         using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<PhysicsScene>;
+
     public:
         SR_NODISCARD virtual void* GetHandle() const noexcept = 0;
 
     public:
         void SetRigidbody(Rigidbody* pRigidbody) { m_rigidbody = pRigidbody; }
 
-        virtual void UpdateInertia() { }
-        virtual void ClearForces() { }
+        virtual void UpdateInertia() {}
+        virtual void ClearForces() {}
 
-        virtual void Synchronize() { }
+        virtual void Synchronize() {}
 
         virtual bool InitBody() { return true; }
 
@@ -58,15 +55,12 @@ namespace SR_PTYPES_NS {
         virtual bool UpdateShapeInternal() { return true; }
 
     protected:
-        template<typename T> SR_NODISCARD T* GetRigidbody() const noexcept {
-            return dynamic_cast<T*>(m_rigidbody);
-        }
+        template<typename T> SR_NODISCARD T* GetRigidbody() const noexcept { return dynamic_cast<T*>(m_rigidbody); }
 
     protected:
         Rigidbody* m_rigidbody = nullptr;
         SR_MATH_NS::Quaternion m_rigidbodyRotation = SR_MATH_NS::InfinityQuaternion;
         SR_MATH_NS::FVector3 m_rigidbodyTranslation = SR_MATH_NS::InfinityFV3;
-
     };
 
     /// ----------------------------------------------------------------------------------------------------------------
@@ -151,9 +145,7 @@ namespace SR_PTYPES_NS {
 
         SR_NODISCARD const PhysicsScenePtr& GetPhysicsScene() const;
 
-        template<typename T> SR_NODISCARD T* GetImpl() const {
-            return dynamic_cast<T*>(m_impl);
-        }
+        template<typename T> SR_NODISCARD T* GetImpl() const { return dynamic_cast<T*>(m_impl); }
 
         void SetShape(const CollisionShape::Ptr& pShape);
 
@@ -184,8 +176,7 @@ namespace SR_PTYPES_NS {
         bool m_isBodyDirty = true;
         bool m_isMatrixDirty = false;
         bool m_isShapeDirty = false;
-
     };
-}
+} // namespace SR_PTYPES_NS
 
-#endif //SR_ENGINE_RIGIDBODY_H
+#endif // SR_ENGINE_RIGIDBODY_H
