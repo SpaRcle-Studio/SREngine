@@ -56,3 +56,4 @@ Resources/**/*.so
 /Resources/API
 /Platform/Emscripten/codegen.spec
 /Platform/Emscripten/ninja.exe
+codegen.spec
