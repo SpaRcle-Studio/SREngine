@@ -1,4 +1,7 @@
 cmake_minimum_required(VERSION 3.16...3.16.2)
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 project(SREngine VERSION 1.0.0 LANGUAGES CXX DESCRIPTION "SpaRcle Engine - cross-platform 2D/3D game engine in C++.")
 
 set_property(GLOBAL PROPERTY SR_ENGINE_VERSION_PROPERTY ${PROJECT_VERSION})
@@ -106,7 +109,7 @@ add_definitions(
     -DSR_CXX_20
 )
 
-if (NOT SR_EMSCRIPTEN)
+if (NOT SR_EMSCRIPTEN AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     add_definitions(-DSR_SUPPORT_PARALLEL)
 endif()
 
