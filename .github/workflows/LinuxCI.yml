@@ -8,6 +8,7 @@ jobs:
     name: Build.
     runs-on: ubuntu-22.04
     strategy:
+      fail-fast: false
       matrix:
         buildType: [Debug, Release]
         compiler: [gcc, clang]
