@@ -88,6 +88,7 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |  SR\_NODISCARD bool | [**IsInstanceValid**](#function-isinstancevalid) () noexcept const<br> |
 |  bool | [**Load**](#function-load) ([**SR\_UTILS\_NS::IDeserializer**](classSR__UTILS__NS_1_1IDeserializer.md) & deserializer) override<br> |
 |  void | [**Save**](#function-save) ([**SR\_UTILS\_NS::ISerializer**](classSR__UTILS__NS_1_1ISerializer.md) & serializer) override const<br> |
+|  void | [**SetBehaviourName**](#function-setbehaviourname) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) <br> |
 
 
 ## Public Functions inherited from SR_UTILS_NS::Component
@@ -293,6 +294,21 @@ bool SR_SCRIPTING_NS::Behaviour::Load (
 void SR_SCRIPTING_NS::Behaviour::Save (
     SR_UTILS_NS::ISerializer & serializer
 ) override const
+```
+
+
+
+
+<hr>
+
+
+
+### function SetBehaviourName 
+
+```C++
+void SR_SCRIPTING_NS::Behaviour::SetBehaviourName (
+    SR_UTILS_NS::StringAtom name
+) 
 ```
 
 

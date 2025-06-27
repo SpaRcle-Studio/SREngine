@@ -9,7 +9,7 @@
         <argsstring></argsstring>
         <name>isCompiled</name>
         <qualifiedname>SR_SCRIPTING_NS::CppCodegenModule::isCompiled</qualifiedname>
-        <initializer>= false</initializer>
+        <initializer>= true</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -24,7 +24,7 @@
         <argsstring></argsstring>
         <name>isNeedCodegen</name>
         <qualifiedname>SR_SCRIPTING_NS::CppCodegenModule::isNeedCodegen</qualifiedname>
-        <initializer>= true</initializer>
+        <initializer>= false</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -75,6 +75,91 @@
         </inbodydescription>
         <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="39" column="18" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="39" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="structSR__SCRIPTING__NS_1_1CppCodegenModule_1a5868fda04e2115ae07cfbb4697df6c6f" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_SCRIPTING_NS::CppCodegenModule::hash</definition>
+        <argsstring></argsstring>
+        <name>hash</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppCodegenModule::hash</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="40" column="18" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__SCRIPTING__NS_1_1CppCodegenModule_1a5bb4c8752f5cc2da23311946d52abee3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_SCRIPTING_NS::CppCodegenModule::IsCacheExpired</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;cacheFolder) const</argsstring>
+        <name>IsCacheExpired</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppCodegenModule::IsCacheExpired</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>cacheFolder</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="42" column="14" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="42" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__SCRIPTING__NS_1_1CppCodegenModule_1acfbcc52b5d5a1671ee3170abdcca4fa8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_SCRIPTING_NS::CppCodegenModule::GetCacheHash</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;cacheFolder) const</argsstring>
+        <name>GetCacheHash</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppCodegenModule::GetCacheHash</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>cacheFolder</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="46" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__SCRIPTING__NS_1_1CppCodegenModule_1aad9290f134fb580a525582c167291579" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SCRIPTING_NS::CppCodegenModule::SaveHash</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;cacheFolder)</argsstring>
+        <name>SaveHash</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppCodegenModule::SaveHash</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>cacheFolder</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="47" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__SCRIPTING__NS_1_1CppCodegenModule_1adc47725409b028770f20779707a237d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SCRIPTING_NS::CppCodegenModule::CalculateHash</definition>
+        <argsstring>()</argsstring>
+        <name>CalculateHash</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppCodegenModule::CalculateHash</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="48" column="14"/>
+      </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
@@ -119,13 +204,18 @@
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="34" column="5" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="34" bodyend="40"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="34" column="5" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="34" bodyend="50"/>
     <listofallmembers>
+      <member refid="structSR__SCRIPTING__NS_1_1CppCodegenModule_1adc47725409b028770f20779707a237d5" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodegenModule</scope><name>CalculateHash</name></member>
       <member refid="structSR__SCRIPTING__NS_1_1CppCodegenModule_1a352ec73eb73fa64387e43d7338d91c0d" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodegenModule</scope><name>codeFiles</name></member>
+      <member refid="structSR__SCRIPTING__NS_1_1CppCodegenModule_1acfbcc52b5d5a1671ee3170abdcca4fa8" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodegenModule</scope><name>GetCacheHash</name></member>
+      <member refid="structSR__SCRIPTING__NS_1_1CppCodegenModule_1a5868fda04e2115ae07cfbb4697df6c6f" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodegenModule</scope><name>hash</name></member>
+      <member refid="structSR__SCRIPTING__NS_1_1CppCodegenModule_1a5bb4c8752f5cc2da23311946d52abee3" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodegenModule</scope><name>IsCacheExpired</name></member>
       <member refid="structSR__SCRIPTING__NS_1_1CppCodegenModule_1aff0fa1cf3136719370234568e4da9c83" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodegenModule</scope><name>isCompiled</name></member>
       <member refid="structSR__SCRIPTING__NS_1_1CppCodegenModule_1ac6abe462c0890786770d45d728d999e9" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodegenModule</scope><name>isNeedCodegen</name></member>
       <member refid="structSR__SCRIPTING__NS_1_1CppCodegenModule_1ab2d7c901c88094534fa2ef13728729d5" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodegenModule</scope><name>moduleInfo</name></member>
       <member refid="structSR__SCRIPTING__NS_1_1CppCodegenModule_1a18a10845f9837669672bd28e6c5c2062" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodegenModule</scope><name>path</name></member>
+      <member refid="structSR__SCRIPTING__NS_1_1CppCodegenModule_1aad9290f134fb580a525582c167291579" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodegenModule</scope><name>SaveHash</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

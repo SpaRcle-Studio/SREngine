@@ -32,6 +32,7 @@ Inherits the following classes: [SR\_GTYPES\_NS::IndexedMesh](classSR__GTYPES__N
 
 | Type | Name |
 | ---: | :--- |
+| typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**ProceduralMesh**](classSR__GTYPES__NS_1_1ProceduralMesh.md) &gt; | [**Ptr**](#typedef-ptr)  <br> |
 | typedef Vertices::StaticMeshVertex | [**VertexType**](#typedef-vertextype)  <br> |
 
 
@@ -548,6 +549,19 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 
 ## Public Types Documentation
 
+
+
+
+### typedef Ptr 
+
+```C++
+using SR_GTYPES_NS::ProceduralMesh::Ptr =  SR_HTYPES_NS::SharedPtr<ProceduralMesh>;
+```
+
+
+
+
+<hr>
 
 
 

@@ -29,6 +29,7 @@ namespace SR_UTILS_NS {
 
         template<typename T> void Shuffle(std::vector<T>& vector);
 
+        SR_NODISCARD bool Bool();
         SR_NODISCARD float_t Float(float_t minimum, float_t maximum);
         SR_NODISCARD int32_t Int32Range(int32_t minimum, int32_t maximum);
         SR_NODISCARD int64_t Int64();

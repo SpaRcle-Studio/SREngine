@@ -35,11 +35,11 @@
 
 | Type | Name |
 | ---: | :--- |
-|  glm::vec3 | [**bitang**](#variable-bitang)  <br> |
-|  glm::vec3 | [**norm**](#variable-norm)  <br> |
-|  glm::vec3 | [**pos**](#variable-pos)  <br> |
-|  glm::vec3 | [**tang**](#variable-tang)  <br> |
-|  glm::vec2 | [**uv**](#variable-uv)  <br> |
+|  SR\_MATH\_NS::FVector3 | [**bitang**](#variable-bitang)  <br> |
+|  SR\_MATH\_NS::FVector3 | [**norm**](#variable-norm)  <br> |
+|  SR\_MATH\_NS::FVector3 | [**pos**](#variable-pos)  <br> |
+|  SR\_MATH\_NS::FVector3 | [**tang**](#variable-tang)  <br> |
+|  SR\_MATH\_NS::FVector2 | [**uv**](#variable-uv)  <br> |
 
 
 
@@ -105,7 +105,7 @@
 ### variable bitang 
 
 ```C++
-glm::vec3 SR_GRAPH_NS::Vertices::StaticMeshVertex::bitang;
+SR_MATH_NS::FVector3 SR_GRAPH_NS::Vertices::StaticMeshVertex::bitang;
 ```
 
 
@@ -118,7 +118,7 @@ glm::vec3 SR_GRAPH_NS::Vertices::StaticMeshVertex::bitang;
 ### variable norm 
 
 ```C++
-glm::vec3 SR_GRAPH_NS::Vertices::StaticMeshVertex::norm;
+SR_MATH_NS::FVector3 SR_GRAPH_NS::Vertices::StaticMeshVertex::norm;
 ```
 
 
@@ -131,7 +131,7 @@ glm::vec3 SR_GRAPH_NS::Vertices::StaticMeshVertex::norm;
 ### variable pos 
 
 ```C++
-glm::vec3 SR_GRAPH_NS::Vertices::StaticMeshVertex::pos;
+SR_MATH_NS::FVector3 SR_GRAPH_NS::Vertices::StaticMeshVertex::pos;
 ```
 
 
@@ -144,7 +144,7 @@ glm::vec3 SR_GRAPH_NS::Vertices::StaticMeshVertex::pos;
 ### variable tang 
 
 ```C++
-glm::vec3 SR_GRAPH_NS::Vertices::StaticMeshVertex::tang;
+SR_MATH_NS::FVector3 SR_GRAPH_NS::Vertices::StaticMeshVertex::tang;
 ```
 
 
@@ -157,7 +157,7 @@ glm::vec3 SR_GRAPH_NS::Vertices::StaticMeshVertex::tang;
 ### variable uv 
 
 ```C++
-glm::vec2 SR_GRAPH_NS::Vertices::StaticMeshVertex::uv;
+SR_MATH_NS::FVector2 SR_GRAPH_NS::Vertices::StaticMeshVertex::uv;
 ```
 
 

@@ -3,9 +3,9 @@
   <compounddef id="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex" kind="struct" language="C++" prot="public">
     <compoundname>SR_GRAPH_NS::Vertices::StaticMeshVertex</compoundname>
     <sectiondef kind="public-attrib">
-      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1a0c9028037201253b33358b666dc1e332" prot="public" static="no" mutable="no">
-        <type>glm::vec3</type>
-        <definition>glm::vec3 SR_GRAPH_NS::Vertices::StaticMeshVertex::pos</definition>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1a26c9e4900e463d41e5fc89d6ff4d8b97" prot="public" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector3</type>
+        <definition>SR_MATH_NS::FVector3 SR_GRAPH_NS::Vertices::StaticMeshVertex::pos</definition>
         <argsstring></argsstring>
         <name>pos</name>
         <qualifiedname>SR_GRAPH_NS::Vertices::StaticMeshVertex::pos</qualifiedname>
@@ -15,11 +15,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="43" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="43" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="43" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="43" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1a8bdea9b29e64a60360f6ae7f698e1da8" prot="public" static="no" mutable="no">
-        <type>glm::vec2</type>
-        <definition>glm::vec2 SR_GRAPH_NS::Vertices::StaticMeshVertex::uv</definition>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1ae6e0340124f2ef444915e868cbd6f710" prot="public" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector2</type>
+        <definition>SR_MATH_NS::FVector2 SR_GRAPH_NS::Vertices::StaticMeshVertex::uv</definition>
         <argsstring></argsstring>
         <name>uv</name>
         <qualifiedname>SR_GRAPH_NS::Vertices::StaticMeshVertex::uv</qualifiedname>
@@ -29,11 +29,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="44" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="44" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="44" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1a38c204cd9d129d0d00289cf99b5534f4" prot="public" static="no" mutable="no">
-        <type>glm::vec3</type>
-        <definition>glm::vec3 SR_GRAPH_NS::Vertices::StaticMeshVertex::norm</definition>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1af6d6713b2bccfb9d9a280b270d3eeb04" prot="public" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector3</type>
+        <definition>SR_MATH_NS::FVector3 SR_GRAPH_NS::Vertices::StaticMeshVertex::norm</definition>
         <argsstring></argsstring>
         <name>norm</name>
         <qualifiedname>SR_GRAPH_NS::Vertices::StaticMeshVertex::norm</qualifiedname>
@@ -43,11 +43,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="45" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="45" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="45" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="45" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1a4d585836343d26cc7aa5afc70661bd48" prot="public" static="no" mutable="no">
-        <type>glm::vec3</type>
-        <definition>glm::vec3 SR_GRAPH_NS::Vertices::StaticMeshVertex::tang</definition>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1a8b031243ade9e4ba3183939f8ee4aed9" prot="public" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector3</type>
+        <definition>SR_MATH_NS::FVector3 SR_GRAPH_NS::Vertices::StaticMeshVertex::tang</definition>
         <argsstring></argsstring>
         <name>tang</name>
         <qualifiedname>SR_GRAPH_NS::Vertices::StaticMeshVertex::tang</qualifiedname>
@@ -57,11 +57,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="46" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="46" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="46" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="46" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1a3a805d99b014e5419451a3d2603b1d6e" prot="public" static="no" mutable="no">
-        <type>glm::vec3</type>
-        <definition>glm::vec3 SR_GRAPH_NS::Vertices::StaticMeshVertex::bitang</definition>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1af379b69549ff1b52219d3a4ef5e12e55" prot="public" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector3</type>
+        <definition>SR_MATH_NS::FVector3 SR_GRAPH_NS::Vertices::StaticMeshVertex::bitang</definition>
         <argsstring></argsstring>
         <name>bitang</name>
         <qualifiedname>SR_GRAPH_NS::Vertices::StaticMeshVertex::bitang</qualifiedname>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="47" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="47" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="47" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -162,16 +162,16 @@
     </detaileddescription>
     <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="42" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="42" bodyend="95"/>
     <listofallmembers>
-      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1a3a805d99b014e5419451a3d2603b1d6e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertex</scope><name>bitang</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1af379b69549ff1b52219d3a4ef5e12e55" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertex</scope><name>bitang</name></member>
       <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1abf1e2ee422f148adffdf80dd31341cda" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertex</scope><name>GetAttributes</name></member>
       <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1a7f979dfb49b88271ff8026b75e37f5e9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertex</scope><name>GetDescription</name></member>
       <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1a3845ca34788a21d70c404360f5067d29" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertex</scope><name>GetNames</name></member>
-      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1a38c204cd9d129d0d00289cf99b5534f4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertex</scope><name>norm</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1af6d6713b2bccfb9d9a280b270d3eeb04" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertex</scope><name>norm</name></member>
       <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1a588371c8adb55073294663bba19dbb25" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertex</scope><name>operator==</name></member>
-      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1a0c9028037201253b33358b666dc1e332" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertex</scope><name>pos</name></member>
-      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1a4d585836343d26cc7aa5afc70661bd48" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertex</scope><name>tang</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1a26c9e4900e463d41e5fc89d6ff4d8b97" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertex</scope><name>pos</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1a8b031243ade9e4ba3183939f8ee4aed9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertex</scope><name>tang</name></member>
       <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1ae2445258be2886e1307d4df4d63bf688" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertex</scope><name>ToString</name></member>
-      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1a8bdea9b29e64a60360f6ae7f698e1da8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertex</scope><name>uv</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1ae6e0340124f2ef444915e868cbd6f710" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertex</scope><name>uv</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

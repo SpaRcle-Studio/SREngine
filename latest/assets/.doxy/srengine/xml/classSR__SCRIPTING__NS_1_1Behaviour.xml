@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="75" column="30" bodyfile="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" bodystart="75" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="76" column="30" bodyfile="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" bodystart="76" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1Behaviour_1a113aa21e55036ce543fe33b45c948d0f" prot="private" static="no" mutable="no">
         <type>std::optional&lt; <ref refid="structSR__UTILS__NS_1_1SerializationNode" kindref="compound">SR_UTILS_NS::SerializationNode</ref> &gt;</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="76" column="23" bodyfile="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" bodystart="76" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="77" column="23" bodyfile="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" bodystart="77" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1Behaviour_1aef39ce313a15e71960fd8477e5cc0afe" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="79" column="33" bodyfile="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" bodystart="79" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="80" column="33" bodyfile="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" bodystart="80" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -150,6 +150,24 @@
         </inbodydescription>
         <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="37" column="24" bodyfile="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" bodystart="37" bodyend="48"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1Behaviour_1a006ce98649c136391ff273e379046182" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SCRIPTING_NS::Behaviour::SetBehaviourName</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom name)</argsstring>
+        <name>SetBehaviourName</name>
+        <qualifiedname>SR_SCRIPTING_NS::Behaviour::SetBehaviourName</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="50" column="14"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1Behaviour_1a1972527c85697fbb355f1b5f0ddc1883" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
@@ -165,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="51" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="53" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1Behaviour_1a8e720ddeb7afc36fc5747cd93bf526d9" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -180,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="52" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="54" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1Behaviour_1a0bc8bac603e6afa91912b0b6d31663a6" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -195,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="53" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="55" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1Behaviour_1a4fe624ed0fc9a1a8d09ab900da73eaf6" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -211,7 +229,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="54" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="56" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1Behaviour_1a34f9154f170305728e597fa3eadd1822" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -227,7 +245,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="55" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="57" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1Behaviour_1a02b2a8f80b4e1e46b508aaf699fede9e" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -243,7 +261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="56" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="58" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1Behaviour_1a81e6329898ec5e3ab200c8186e7afa3e" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -258,7 +276,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="57" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="59" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1Behaviour_1a317c3a1d17d3e1255b86fcfe10d0b976" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -277,7 +295,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="58" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="60" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1Behaviour_1ab1af6da65d85b2cc766284611b21fee6" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -292,7 +310,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="59" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="61" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1Behaviour_1a89a8feafdad35eb9d09ba5f78d0736d0" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -311,7 +329,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="61" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="63" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1Behaviour_1ae0c115da3228a5b7fc17e87561cd5918" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -330,7 +348,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="62" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="64" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1Behaviour_1a7d763f010b8e6760d95081c776e6e2de" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -349,7 +367,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="63" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="65" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1Behaviour_1a72b3498eeee5bc7ebfc3873ce5ef3bff" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -368,7 +386,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="64" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="66" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1Behaviour_1a03181a35393c7c7979101662618caf5c" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -387,7 +405,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="65" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="67" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1Behaviour_1ab581382593bedd34a107434e814b798c" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -406,25 +424,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="66" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1Behaviour_1a006ce98649c136391ff273e379046182" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_SCRIPTING_NS::Behaviour::SetBehaviourName</definition>
-        <argsstring>(SR_UTILS_NS::StringAtom name)</argsstring>
-        <name>SetBehaviourName</name>
-        <qualifiedname>SR_SCRIPTING_NS::Behaviour::SetBehaviourName</qualifiedname>
-        <param>
-          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
-          <declname>name</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="69" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="68" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1Behaviour_1a614a78838f517e693cb7f5feafa155dd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -438,7 +438,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="70" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="71" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1Behaviour_1ae736e4e17d0f028171a23a0afe622ade" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -452,7 +452,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="71" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="72" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1Behaviour_1ab9abc4dcac9d4d2cb4a98046e4c80c62" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -466,7 +466,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="72" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="73" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -525,7 +525,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="27" column="5" bodyfile="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" bodystart="27" bodyend="81"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="27" column="5" bodyfile="Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h" bodystart="27" bodyend="82"/>
     <listofallmembers>
       <member refid="classSR__SCRIPTING__NS_1_1Behaviour_1a1972527c85697fbb355f1b5f0ddc1883" prot="private" virt="virtual"><scope>SR_SCRIPTING_NS::Behaviour</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::Behaviour</scope><name>BaseComponent</name></member>
@@ -596,7 +596,7 @@
       <member refid="classSR__SCRIPTING__NS_1_1Behaviour_1a7c1484e67d56eee093079ee91b43d1ff" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::Behaviour</scope><name>Save</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a6e97391d1dc50a29f1bdc0179c925019" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::Behaviour</scope><name>SceneObjectPtr</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a2e37d2ebbceab36530a6c79cad4b3606" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::Behaviour</scope><name>ScenePtr</name></member>
-      <member refid="classSR__SCRIPTING__NS_1_1Behaviour_1a006ce98649c136391ff273e379046182" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::Behaviour</scope><name>SetBehaviourName</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1Behaviour_1a006ce98649c136391ff273e379046182" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::Behaviour</scope><name>SetBehaviourName</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad94a8ad5e03600e4f9bdae868ba6021b" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::Behaviour</scope><name>SetEnabled</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af57bdc6a2c4f4ed50fec8a5175bcbf8f" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::Behaviour</scope><name>SetIndexIdSceneUpdater</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ac9780c1f95cd3106101f4e1595550816" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::Behaviour</scope><name>SetParent</name></member>

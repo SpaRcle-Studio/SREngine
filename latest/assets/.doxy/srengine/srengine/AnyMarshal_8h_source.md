@@ -12,8 +12,8 @@
 // Created by Monika on 09.08.2022.
 //
 
-#ifndef SR_ENGINE_ANYMARSHAL_H
-#define SR_ENGINE_ANYMARSHAL_H
+#ifndef SR_ENGINE_ANY_MARSHAL_H
+#define SR_ENGINE_ANY_MARSHAL_H
 
 #include <Utils/Common/BaseMarshal.h>
 #include <Utils/Types/Stream.h>
@@ -44,7 +44,6 @@ namespace SR_UTILS_NS::MarshalUtils {
     template<typename Any> static void SR_FASTCALL SaveAny(SR_HTYPES_NS::Stream& stream, const Any& any) {
         try {
             auto&& type = GetStandardType<Any>(any);
-
             SaveValue(stream, static_cast<uint16_t>(type));
 
             switch (type) {
@@ -71,7 +70,7 @@ namespace SR_UTILS_NS::MarshalUtils {
     }
 }
 
-#endif //SR_ENGINE_ANYMARSHAL_H
+#endif //SR_ENGINE_ANY_MARSHAL_H
 ```
 
 

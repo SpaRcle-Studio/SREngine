@@ -112,6 +112,7 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 
 | Type | Name |
 | ---: | :--- |
+|  SR\_NODISCARD bool | [**Bool**](#function-bool) () <br> |
 |  SR\_NODISCARD float\_t | [**Float**](#function-float) (float\_t minimum, float\_t maximum) <br> |
 |  SR\_NODISCARD int32\_t | [**Int32**](#function-int32) () <br> |
 |  SR\_NODISCARD int32\_t | [**Int32Range**](#function-int32range) (int32\_t minimum, int32\_t maximum) <br> |
@@ -300,6 +301,19 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 ## Public Functions Documentation
 
+
+
+
+### function Bool 
+
+```C++
+SR_NODISCARD bool SR_UTILS_NS::Random::Bool () 
+```
+
+
+
+
+<hr>
 
 
 

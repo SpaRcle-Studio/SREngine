@@ -36,7 +36,11 @@ namespace SR_CORE_GUI_NS {
 
     class Inspector : public SR_GRAPH_GUI_NS::Widget {
         struct ComponentCategory {
-            std::vector<SR_UTILS_NS::StringAtom> components;
+            struct ComponentInfo {
+                SR_UTILS_NS::StringAtom name;
+                bool isBehaviour = false;
+            };
+            std::vector<ComponentInfo> components;
             std::map<SR_UTILS_NS::StringAtom, ComponentCategory> categories;
         };
     public:
@@ -76,6 +80,7 @@ namespace SR_CORE_GUI_NS {
         bool m_componentSearchOpened = false;
 
         std::vector<SR_UTILS_NS::StringAtom> m_availableComponents;
+        std::vector<SR_UTILS_NS::StringAtom> m_availableCppBehaviours;
         ComponentCategory m_componentsCategories;
 
         std::list<SR_UTILS_NS::Component::Ptr> m_pointersHolder;

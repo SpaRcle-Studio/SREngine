@@ -191,6 +191,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **class** [**VectorPropertyDrawer**](classSR__CORE__GUI__NS_1_1VectorPropertyDrawer.md)     
     * **class** [**WorldEdit**](classSR__CORE__GUI__NS_1_1WorldEdit.md)     
 * **struct** [**ComponentCategory**](structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory.md)     
+    * **struct** [**ComponentInfo**](structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory_1_1ComponentInfo.md)     
 * **struct** [**ComponentContext**](structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentContext.md)     
 * **namespace** [**SR\_CORE\_NS**](namespaceSR__CORE__NS.md)     
     * **class** [**Application**](classSR__CORE__NS_1_1Application.md)     

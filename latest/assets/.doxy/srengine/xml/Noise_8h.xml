@@ -515,7 +515,7 @@
 <codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>double_t<sp/>sz<sp/>=<sp/>rz0<sp/>*<sp/>rz0<sp/>*<sp/>(3.0<sp/>-<sp/>2.0<sp/>*<sp/>rz0);</highlight></codeline>
 <codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>double_t<sp/>st<sp/>=<sp/>rt0<sp/>*<sp/>rt0<sp/>*<sp/>(3.0<sp/>-<sp/>2.0<sp/>*<sp/>rt0);</highlight></codeline>
 <codeline lineno="144"><highlight class="normal"></highlight></codeline>
-<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>double_t<sp/>*g;</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>double_t*<sp/>g;</highlight></codeline>
 <codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>double_t<sp/>u,<sp/>v;</highlight></codeline>
 <codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>double_t<sp/>a,<sp/>b,<sp/>c,<sp/>d,<sp/>e,<sp/>f;</highlight></codeline>
 <codeline lineno="148"><highlight class="normal"></highlight></codeline>

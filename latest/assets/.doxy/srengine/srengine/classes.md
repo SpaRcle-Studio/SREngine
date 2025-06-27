@@ -241,6 +241,8 @@
 * [**ComponentChange**](classSR__CORE__NS_1_1Commands_1_1ComponentChange.md)
 ([**SR\_CORE\_NS::Commands**](namespaceSR__CORE__NS_1_1Commands.md))
 * [**ComponentContext**](structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentContext.md)
+* [**ComponentInfo**](structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory_1_1ComponentInfo.md)
+([**SR\_CORE\_GUI\_NS::Inspector::ComponentCategory**](structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory.md))
 * [**ComponentManager**](classSR__UTILS__NS_1_1ComponentManager.md)
 ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * [**ComponentsChange**](classSR__CORE__NS_1_1Commands_1_1ComponentsChange.md)

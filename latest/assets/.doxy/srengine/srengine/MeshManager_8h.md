@@ -34,6 +34,7 @@
 | namespace | [**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md) <br> |
 | namespace | [**Memory**](namespaceSR__GRAPH__NS_1_1Memory.md) <br> |
 | namespace | [**SR\_GTYPES\_NS**](namespaceSR__GTYPES__NS.md) <br> |
+| namespace | [**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md) <br> |
 
 
 ## Classes

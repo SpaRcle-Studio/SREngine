@@ -144,7 +144,7 @@ namespace SR_MATH_NS {
         double_t sz = rz0 * rz0 * (3.0 - 2.0 * rz0);
         double_t st = rt0 * rt0 * (3.0 - 2.0 * rt0);
 
-        const double_t *g;
+        const double_t* g;
         double_t u, v;
         double_t a, b, c, d, e, f;
 

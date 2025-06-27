@@ -50,11 +50,11 @@ namespace SR_GRAPH_NS::Vertices {
     }
 
     struct StaticMeshVertex {
-        glm::vec3 pos;
-        glm::vec2 uv;
-        glm::vec3 norm;
-        glm::vec3 tang;
-        glm::vec3 bitang;
+        SR_MATH_NS::FVector3 pos;
+        SR_MATH_NS::FVector2 uv;
+        SR_MATH_NS::FVector3 norm;
+        SR_MATH_NS::FVector3 tang;
+        SR_MATH_NS::FVector3 bitang;
 
         static constexpr SR_FORCE_INLINE SR_VERTEX_DESCRIPTION GetDescription() {
             return sizeof(StaticMeshVertex);
@@ -95,11 +95,11 @@ namespace SR_GRAPH_NS::Vertices {
 
         SR_NODISCARD std::string ToString() const {
             return SR_FORMAT("[ {}, {}, {}, {}, {} ],",
-                    Vertices::ToString(pos).c_str(),
-                    Vertices::ToString(uv).c_str(),
-                    Vertices::ToString(norm).c_str(),
-                    Vertices::ToString(bitang).c_str(),
-                    Vertices::ToString(tang).c_str()
+                    Vertices::ToString(pos.ToGLM()).c_str(),
+                    Vertices::ToString(uv.ToGLM()).c_str(),
+                    Vertices::ToString(norm.ToGLM()).c_str(),
+                    Vertices::ToString(bitang.ToGLM()).c_str(),
+                    Vertices::ToString(tang.ToGLM()).c_str()
             );
         }
     };

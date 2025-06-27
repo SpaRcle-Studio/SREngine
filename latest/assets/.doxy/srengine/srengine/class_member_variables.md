@@ -266,7 +266,7 @@
 * **hashId** ([**SR\_GRAPH\_NS::Memory::ShaderUBOBlock::SubBlock**](structSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1_1SubBlock.md))
 * **hidden** ([**SR\_GRAPH\_NS::Memory::ShaderUBOBlock::SubBlock**](structSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1_1SubBlock.md))
 * **heightPolicy** ([**SR\_GRAPH\_UI\_NS::UILayout**](structSR__GRAPH__UI__NS_1_1UILayout.md))
-* **hash** ([**SR\_HTYPES\_NS::PathT::Element**](structSR__HTYPES__NS_1_1PathT_1_1Element.md), [**SR\_HTYPES\_NS::TreeT::Node**](structSR__HTYPES__NS_1_1TreeT_1_1Node.md), [**SR\_UTILS\_NS::ConstexprStringHashEntry**](structSR__UTILS__NS_1_1ConstexprStringHashEntry.md), [**SR\_UTILS\_NS::SerializationId**](structSR__UTILS__NS_1_1SerializationId.md), [**SR\_UTILS\_NS::StringHashInfo**](structSR__UTILS__NS_1_1StringHashInfo.md))
+* **hash** ([**SR\_HTYPES\_NS::PathT::Element**](structSR__HTYPES__NS_1_1PathT_1_1Element.md), [**SR\_HTYPES\_NS::TreeT::Node**](structSR__HTYPES__NS_1_1TreeT_1_1Node.md), [**SR\_SCRIPTING\_NS::CppCodegenModule**](structSR__SCRIPTING__NS_1_1CppCodegenModule.md), [**SR\_UTILS\_NS::ConstexprStringHashEntry**](structSR__UTILS__NS_1_1ConstexprStringHashEntry.md), [**SR\_UTILS\_NS::SerializationId**](structSR__UTILS__NS_1_1SerializationId.md), [**SR\_UTILS\_NS::StringHashInfo**](structSR__UTILS__NS_1_1StringHashInfo.md))
 * **hashing\_stack** ([**SR\_HTYPES\_NS::TreeT**](classSR__HTYPES__NS_1_1TreeT.md))
 * **hashName** ([**SR\_SRLM\_NS::LogicalNode::NodePin**](structSR__SRLM__NS_1_1LogicalNode_1_1NodePin.md), [**SR\_UTILS\_NS::EnumReflector::Enumerator**](structSR__UTILS__NS_1_1EnumReflector_1_1Enumerator.md), [**SR\_UTILS\_NS::EnumReflector::Data**](structSR__UTILS__NS_1_1EnumReflector_1_1Data.md))
 * **HasEmpty** ([**SR\_UTILS\_NS::SerializationTraits**](structSR__UTILS__NS_1_1SerializationTraits.md))
@@ -280,6 +280,7 @@
 * **initialized** ([**SR\_AUDIO\_NS::SoundData**](structSR__AUDIO__NS_1_1SoundData.md))
 * **isChanged** ([**SR\_CORE\_GUI\_NS::PropertyDrawerFeedback**](structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback.md))
 * **isDrag** ([**SR\_CORE\_GUI\_NS::PropertyDrawerFeedback**](structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback.md))
+* **isBehaviour** ([**SR\_CORE\_GUI\_NS::Inspector::ComponentCategory::ComponentInfo**](structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory_1_1ComponentInfo.md))
 * **iconType** ([**SR\_CORE\_NS::GUI::FBElement**](structSR__CORE__NS_1_1GUI_1_1FBElement.md))
 * **isDir** ([**SR\_CORE\_NS::GUI::FBElement**](structSR__CORE__NS_1_1GUI_1_1FBElement.md))
 * **innerFolders** ([**SR\_CORE\_NS::GUI::FBFolder**](structSR__CORE__NS_1_1GUI_1_1FBFolder.md))
@@ -523,6 +524,7 @@
 * **m\_shiftPressed** ([**SR\_CORE\_GUI\_NS::Hierarchy**](classSR__CORE__GUI__NS_1_1Hierarchy.md))
 * **m\_tree** ([**SR\_CORE\_GUI\_NS::Hierarchy**](classSR__CORE__GUI__NS_1_1Hierarchy.md))
 * **m\_availableComponents** ([**SR\_CORE\_GUI\_NS::Inspector**](classSR__CORE__GUI__NS_1_1Inspector.md))
+* **m\_availableCppBehaviours** ([**SR\_CORE\_GUI\_NS::Inspector**](classSR__CORE__GUI__NS_1_1Inspector.md))
 * **m\_componentContexts** ([**SR\_CORE\_GUI\_NS::Inspector**](classSR__CORE__GUI__NS_1_1Inspector.md))
 * **m\_componentSearchBuffer** ([**SR\_CORE\_GUI\_NS::Inspector**](classSR__CORE__GUI__NS_1_1Inspector.md))
 * **m\_componentSearchOpened** ([**SR\_CORE\_GUI\_NS::Inspector**](classSR__CORE__GUI__NS_1_1Inspector.md))
@@ -1649,7 +1651,7 @@
 
 ## n
 
-* **name** ([**SR\_ANIMATIONS\_NS::Bone**](structSR__ANIMATIONS__NS_1_1Bone.md), [**SR\_GRAPH\_GUI\_NS::NodeWidgetProperty**](structSR__GRAPH__GUI__NS_1_1NodeWidgetProperty.md), [**SR\_GRAPH\_NS::SRSL::SRSLFunc**](structSR__GRAPH__NS_1_1SRSL_1_1SRSLFunc.md), [**SR\_GRAPH\_NS::SRSL::SRSLStruct**](structSR__GRAPH__NS_1_1SRSL_1_1SRSLStruct.md), [**SR\_GRAPH\_NS::SSBOBinding**](structSR__GRAPH__NS_1_1SSBOBinding.md), [**SR\_GRAPH\_NS::Memory::ShaderUBOBlock::DefaultValue**](structSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1_1DefaultValue.md), [**SR\_SCRIPTING\_NS::CppCodegenBehaviour**](structSR__SCRIPTING__NS_1_1CppCodegenBehaviour.md), [**SR\_SRSL\_NS::SRSLDecorator**](classSR__SRSL__NS_1_1SRSLDecorator.md), [**SR\_SRSL\_NS::SRSLUniformBlock::Field**](structSR__SRSL__NS_1_1SRSLUniformBlock_1_1Field.md), [**SR\_UTILS\_NS::ClassInfo**](structSR__UTILS__NS_1_1ClassInfo.md), [**SR\_UTILS\_NS::EntityRefUtils::PathItem**](structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem.md), [**SR\_UTILS\_NS::EnumReflector::Enumerator**](structSR__UTILS__NS_1_1EnumReflector_1_1Enumerator.md), [**SR\_UTILS\_NS::SerializationId**](structSR__UTILS__NS_1_1SerializationId.md), [**SR\_UTILS\_NS::SingletonManager::SingletonInfo**](structSR__UTILS__NS_1_1SingletonManager_1_1SingletonInfo.md))
+* **name** ([**SR\_ANIMATIONS\_NS::Bone**](structSR__ANIMATIONS__NS_1_1Bone.md), [**SR\_CORE\_GUI\_NS::Inspector::ComponentCategory::ComponentInfo**](structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory_1_1ComponentInfo.md), [**SR\_GRAPH\_GUI\_NS::NodeWidgetProperty**](structSR__GRAPH__GUI__NS_1_1NodeWidgetProperty.md), [**SR\_GRAPH\_NS::SRSL::SRSLFunc**](structSR__GRAPH__NS_1_1SRSL_1_1SRSLFunc.md), [**SR\_GRAPH\_NS::SRSL::SRSLStruct**](structSR__GRAPH__NS_1_1SRSL_1_1SRSLStruct.md), [**SR\_GRAPH\_NS::SSBOBinding**](structSR__GRAPH__NS_1_1SSBOBinding.md), [**SR\_GRAPH\_NS::Memory::ShaderUBOBlock::DefaultValue**](structSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1_1DefaultValue.md), [**SR\_SCRIPTING\_NS::CppCodegenBehaviour**](structSR__SCRIPTING__NS_1_1CppCodegenBehaviour.md), [**SR\_SRSL\_NS::SRSLDecorator**](classSR__SRSL__NS_1_1SRSLDecorator.md), [**SR\_SRSL\_NS::SRSLUniformBlock::Field**](structSR__SRSL__NS_1_1SRSLUniformBlock_1_1Field.md), [**SR\_UTILS\_NS::ClassInfo**](structSR__UTILS__NS_1_1ClassInfo.md), [**SR\_UTILS\_NS::EntityRefUtils::PathItem**](structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem.md), [**SR\_UTILS\_NS::EnumReflector::Enumerator**](structSR__UTILS__NS_1_1EnumReflector_1_1Enumerator.md), [**SR\_UTILS\_NS::SerializationId**](structSR__UTILS__NS_1_1SerializationId.md), [**SR\_UTILS\_NS::SingletonManager::SingletonInfo**](structSR__UTILS__NS_1_1SingletonManager_1_1SingletonInfo.md))
 * **now** ([**SR\_ANIMATIONS\_NS::UpdateContext**](structSR__ANIMATIONS__NS_1_1UpdateContext.md))
 * **noHeader** ([**SR\_CORE\_GUI\_NS::PropertyDrawerContext**](structSR__CORE__GUI__NS_1_1PropertyDrawerContext.md))
 * **nearFace** ([**SR\_GRAPH\_NS::Frustum**](structSR__GRAPH__NS_1_1Frustum.md))

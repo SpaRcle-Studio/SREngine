@@ -11434,6 +11434,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**SR\_CORE\_GUI\_NS::PropertyDrawerContext**](structSR__CORE__GUI__NS_1_1PropertyDrawerContext.md) 
 * **struct** [**SR\_CORE\_GUI\_NS::PropertyDrawerFeedback**](structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback.md) 
 * **struct** [**SR\_CORE\_GUI\_NS::Inspector::ComponentCategory**](structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory.md) 
+* **struct** [**SR\_CORE\_GUI\_NS::Inspector::ComponentCategory::ComponentInfo**](structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory_1_1ComponentInfo.md) 
 * **struct** [**SR\_CORE\_GUI\_NS::Inspector::ComponentContext**](structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentContext.md) 
 * **struct** [**SR\_CORE\_NS::GUI::FBElement**](structSR__CORE__NS_1_1GUI_1_1FBElement.md) 
 * **struct** [**SR\_CORE\_NS::GUI::FBFolder**](structSR__CORE__NS_1_1GUI_1_1FBFolder.md) 

@@ -160,6 +160,7 @@ namespace SR_GTYPES_NS {
         FrustumCullingType m_frustumCullingType = FrustumCullingType::Sphere;
         bool m_isWaitReRegister = false;
         SR_VIRTUAL_PROPERTY
+        SR_VIRTUAL_PROPERTY
         bool m_hasErrors = false;
         bool m_dirtyMaterial = false;
         bool m_isUniformsDirty = false;

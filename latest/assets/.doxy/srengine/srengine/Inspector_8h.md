@@ -43,6 +43,7 @@
 | Type | Name |
 | ---: | :--- |
 | class | [**Inspector**](classSR__CORE__GUI__NS_1_1Inspector.md) <br> |
+| struct | [**ComponentInfo**](structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory_1_1ComponentInfo.md) <br> |
 
 
 

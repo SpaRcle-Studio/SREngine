@@ -2,10 +2,11 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory" kind="struct" language="C++" prot="private">
     <compoundname>SR_CORE_GUI_NS::Inspector::ComponentCategory</compoundname>
+    <innerclass refid="structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory_1_1ComponentInfo" prot="public">SR_CORE_GUI_NS::Inspector::ComponentCategory::ComponentInfo</innerclass>
     <sectiondef kind="public-attrib">
-      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory_1a1082e09497fd8ebb4ae2e27ed0bd8b82" prot="public" static="no" mutable="no">
-        <type>std::vector&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
-        <definition>std::vector&lt;SR_UTILS_NS::StringAtom&gt; SR_CORE_GUI_NS::Inspector::ComponentCategory::components</definition>
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory_1a15053562821f06e0a0840a3290c9627b" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory_1_1ComponentInfo" kindref="compound">ComponentInfo</ref> &gt;</type>
+        <definition>std::vector&lt;ComponentInfo&gt; SR_CORE_GUI_NS::Inspector::ComponentCategory::components</definition>
         <argsstring></argsstring>
         <name>components</name>
         <qualifiedname>SR_CORE_GUI_NS::Inspector::ComponentCategory::components</qualifiedname>
@@ -15,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/Inspector.h" line="29" column="25" bodyfile="Engine/inc/Engine/GUI/Inspector.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/Inspector.h" line="33" column="25" bodyfile="Engine/inc/Engine/GUI/Inspector.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory_1a3a36414e18d88ef17d4549655fd88565" prot="public" static="no" mutable="no">
         <type>std::map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, ComponentCategory &gt;</type>
@@ -29,17 +30,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/Inspector.h" line="30" column="22" bodyfile="Engine/inc/Engine/GUI/Inspector.h" bodystart="30" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/Inspector.h" line="34" column="22" bodyfile="Engine/inc/Engine/GUI/Inspector.h" bodystart="34" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/inc/Engine/GUI/Inspector.h" line="28" column="9" bodyfile="Engine/inc/Engine/GUI/Inspector.h" bodystart="28" bodyend="31"/>
+    <location file="Engine/inc/Engine/GUI/Inspector.h" line="28" column="9" bodyfile="Engine/inc/Engine/GUI/Inspector.h" bodystart="28" bodyend="35"/>
     <listofallmembers>
       <member refid="structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory_1a3a36414e18d88ef17d4549655fd88565" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector::ComponentCategory</scope><name>categories</name></member>
-      <member refid="structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory_1a1082e09497fd8ebb4ae2e27ed0bd8b82" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector::ComponentCategory</scope><name>components</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory_1a15053562821f06e0a0840a3290c9627b" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector::ComponentCategory</scope><name>components</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

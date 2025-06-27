@@ -25,6 +25,11 @@
 
 
 
+## Classes
+
+| Type | Name |
+| ---: | :--- |
+| struct | [**ComponentInfo**](structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory_1_1ComponentInfo.md) <br> |
 
 
 
@@ -36,7 +41,7 @@
 | Type | Name |
 | ---: | :--- |
 |  std::map&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md), ComponentCategory &gt; | [**categories**](#variable-categories)  <br> |
-|  std::vector&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; | [**components**](#variable-components)  <br> |
+|  std::vector&lt; [**ComponentInfo**](structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory_1_1ComponentInfo.md) &gt; | [**components**](#variable-components)  <br> |
 
 
 
@@ -102,7 +107,7 @@ std::map<SR_UTILS_NS::StringAtom, ComponentCategory> SR_CORE_GUI_NS::Inspector::
 ### variable components 
 
 ```C++
-std::vector<SR_UTILS_NS::StringAtom> SR_CORE_GUI_NS::Inspector::ComponentCategory::components;
+std::vector<ComponentInfo> SR_CORE_GUI_NS::Inspector::ComponentCategory::components;
 ```
 
 

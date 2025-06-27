@@ -33,6 +33,20 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1FileSystem_1a2d0f8bbb8836a265310d134301e2b250" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>static uint64_t SR_UTILS_NS::FileSystem::GetExecutableAndModulesHash</definition>
+        <argsstring>()</argsstring>
+        <name>GetExecutableAndModulesHash</name>
+        <qualifiedname>SR_UTILS_NS::FileSystem::GetExecutableAndModulesHash</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="18" column="25"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1FileSystem_1af436176e32c91b283bbde0b78d326b24" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
         <definition>static bool SR_UTILS_NS::FileSystem::CreatePath</definition>
@@ -54,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="18" column="21"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="20" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1FileSystem_1aa8986d9a50cb0b520e4efe7aeb6dc548" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -76,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="20" column="21"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="22" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1FileSystem_1ad14fcb3f4a4ef48f3ed4da5fb20ca9a6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -94,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="21" column="28"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="23" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1FileSystem_1a910baf9a7dff71cd4c7740d1c427e16e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::vector&lt; std::string &gt;</type>
@@ -112,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="23" column="28"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="25" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1FileSystem_1a1ca63ae54558af624673874ae4a4baee" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint64_t</type>
@@ -130,7 +144,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="25" column="25"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="27" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1FileSystem_1a690b62e531114b2589ef821fb0ad6cad" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -152,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="26" column="21"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="28" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1FileSystem_1ae23012dbc562d8f158e308763cceddba" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -175,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="28" column="28"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="30" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1FileSystem_1aaad7987c5cf3b7810fc6ce812ba442bc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::vector&lt; char &gt;</type>
@@ -193,7 +207,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="29" column="28"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="31" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1FileSystem_1a3f1f66f80a53de3ee54c3dd6382d71a5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::vector&lt; uint8_t &gt;</type>
@@ -211,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="30" column="28"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="32" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1FileSystem_1a130872fa1d95120f2146133cc496050b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::shared_ptr&lt; std::vector&lt; uint8_t &gt; &gt;</type>
@@ -229,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="31" column="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="33" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1FileSystem_1a00eb3069c3d392f38cf65e556103476e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -247,7 +261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="33" column="28"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="35" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1FileSystem_1a9eb999135687292a6d360b8c9ae29939" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>char *</type>
@@ -265,7 +279,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="35" column="21"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="37" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1FileSystem_1aab99625c73688424e48ea396f717fde8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -291,7 +305,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="37" column="21"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="39" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1FileSystem_1a7a90dc93438587656467ae60dce25216" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint64_t</type>
@@ -309,7 +323,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="39" column="25"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="41" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1FileSystem_1a5ce6b1253d7455aa6ab01c3e6dd3242d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint64_t</type>
@@ -332,7 +346,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="40" column="25"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="42" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1FileSystem_1afe9d78b5a9eb1612c503799606eaefbe" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const char *</type>
@@ -350,7 +364,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="42" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="44" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1FileSystem_1ad058524eb3d09343e39e60ce6670427c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -368,19 +382,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="43" column="21"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="45" column="21"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="13" column="5" bodyfile="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" bodystart="13" bodyend="44"/>
+    <location file="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" line="13" column="5" bodyfile="Engine/libs/Utils/inc/Utils/FileSystem/FileSystem.h" bodystart="13" bodyend="46"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1FileSystem_1af436176e32c91b283bbde0b78d326b24" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileSystem</scope><name>CreatePath</name></member>
       <member refid="classSR__UTILS__NS_1_1FileSystem_1afe9d78b5a9eb1612c503799606eaefbe" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileSystem</scope><name>FileMapView</name></member>
       <member refid="classSR__UTILS__NS_1_1FileSystem_1a9f6b77a52e7f54d0ab2c917911bfc160" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileSystem</scope><name>FileSystem</name></member>
       <member refid="classSR__UTILS__NS_1_1FileSystem_1aab99625c73688424e48ea396f717fde8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileSystem</scope><name>ForEachFileInFolder</name></member>
+      <member refid="classSR__UTILS__NS_1_1FileSystem_1a2d0f8bbb8836a265310d134301e2b250" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileSystem</scope><name>GetExecutableAndModulesHash</name></member>
       <member refid="classSR__UTILS__NS_1_1FileSystem_1a7a90dc93438587656467ae60dce25216" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileSystem</scope><name>GetFileHash</name></member>
       <member refid="classSR__UTILS__NS_1_1FileSystem_1a5ce6b1253d7455aa6ab01c3e6dd3242d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileSystem</scope><name>GetFolderHash</name></member>
       <member refid="classSR__UTILS__NS_1_1FileSystem_1a9eb999135687292a6d360b8c9ae29939" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileSystem</scope><name>Load</name></member>

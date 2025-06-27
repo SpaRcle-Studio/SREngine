@@ -56,6 +56,8 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
+        void SetBehaviourName(SR_UTILS_NS::StringAtom name);
+
     private:
         void Awake() override;
         void OnEnable() override;
@@ -75,7 +77,6 @@ namespace SR_SCRIPTING_NS {
         void OnTriggerStay(const SR_UTILS_NS::CollisionData& data) override;
 
     private:
-        void SetBehaviourName(SR_UTILS_NS::StringAtom name);
         void OnBehaviourPreReload();
         void OnBehaviourLoaded();
         void TryLoadBehaviourData();

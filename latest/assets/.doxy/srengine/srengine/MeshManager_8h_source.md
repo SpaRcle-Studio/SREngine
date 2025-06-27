@@ -25,7 +25,13 @@ namespace SR_GTYPES_NS {
     class Mesh3D;
 }
 
+namespace SR_HTYPES_NS {
+    class RawMesh;
+}
+
 namespace SR_GRAPH_NS {
+    class Pipeline;
+
     namespace Memory {
         class MeshManager;
 

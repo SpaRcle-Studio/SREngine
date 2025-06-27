@@ -20,11 +20,13 @@
 namespace SR_GTYPES_NS {
     class ProceduralMesh final : public IndexedMesh {
         using Super = IndexedMesh;
+        SR_CLASS()
     public:
-        ProceduralMesh() = default;
+        using Ptr = SR_HTYPES_NS::SharedPtr<ProceduralMesh>;
+        typedef Vertices::StaticMeshVertex VertexType;
 
     public:
-        typedef Vertices::StaticMeshVertex VertexType;
+        ProceduralMesh() = default;
 
     public:
         SR_NODISCARD MeshType GetMeshType() const noexcept override { return MeshType::Procedural; }
@@ -42,7 +44,6 @@ namespace SR_GTYPES_NS {
 
     private:
         bool Calculate() override;
-        void Draw() override;
         void SetDirtyMesh();
 
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
