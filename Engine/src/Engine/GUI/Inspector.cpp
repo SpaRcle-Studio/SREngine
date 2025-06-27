@@ -557,9 +557,11 @@ namespace SR_CORE_GUI_NS {
     }
 
     void Inspector::DrawComponentCategory(SR_UTILS_NS::IComponentable* pComponentable, ComponentCategory& category, SR_UTILS_NS::StringAtom categoryName) {
-        static auto&& addComponentFn = [](Inspector* pInspector, SR_UTILS_NS::IComponentable* pComponentable, SR_UTILS_NS::StringAtom name) {
-            if (SR_GRAPH_GUI_NS::Immediate::Selectable(name.c_str(), false)) {
-                if (auto&& pComponent = SR_UTILS_NS::Factory::Instance().Create<SR_UTILS_NS::Component>(name)) {
+        static auto&& addComponentFn = [](Inspector* pInspector, SR_UTILS_NS::IComponentable* pComponentable, SR_UTILS_NS::StringAtom name, SR_UTILS_NS::StringAtom displayName)-> SR_UTILS_NS::Component::Ptr {
+            SR_UTILS_NS::Component::Ptr pComponent;
+            if (SR_GRAPH_GUI_NS::Immediate::Selectable(displayName.c_str(), false)) {
+                pComponent = SR_UTILS_NS::Factory::Instance().Create<SR_UTILS_NS::Component>(name);
+                if (pComponent) {
                     pInspector->m_onBeforeChangeCallback(false);
                     pComponentable->AddComponent(pComponent);
                 }
@@ -569,7 +571,8 @@ namespace SR_CORE_GUI_NS {
             }
             if (SR_GRAPH_GUI_NS::Immediate::IsItemFocused()) {
                 if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Enter)) {
-                    if (auto&& pComponent = SR_UTILS_NS::Factory::Instance().Create<SR_UTILS_NS::Component>(name)) {
+                    pComponent = SR_UTILS_NS::Factory::Instance().Create<SR_UTILS_NS::Component>(name);
+                    if (pComponent) {
                         pInspector->m_onBeforeChangeCallback(false);
                         pComponentable->AddComponent(pComponent);
                     }
@@ -580,13 +583,14 @@ namespace SR_CORE_GUI_NS {
                 }
             }
             SR_GRAPH_GUI_NS::Immediate::Separator();
+            return pComponent;
         };
 
         std::function<bool(const ComponentCategory&, std::string_view)> checkMatch;
 
         checkMatch = [&checkMatch](const ComponentCategory& checkCategory, std::string_view search) -> bool {
-            const bool hasComponents = std::ranges::any_of(checkCategory.components, [&](auto&& name) {
-                return PropertyDrawerBase::CheckSearchMatch(search, name);
+            const bool hasComponents = std::ranges::any_of(checkCategory.components, [&](auto&& info) {
+                return PropertyDrawerBase::CheckSearchMatch(search, info.name);
             });
             return hasComponents || std::ranges::any_of(checkCategory.categories, [&](auto&& pair) {
                 return checkMatch(pair.second, search);
@@ -599,11 +603,19 @@ namespace SR_CORE_GUI_NS {
                     DrawComponentCategory(pComponentable, subCategory, name);
                 }
 
-                for (auto&& name : category.components) {
-                    if (!m_componentSearchBuffer.empty() && !PropertyDrawerBase::CheckSearchMatch(m_componentSearchBuffer, name)) {
+                for (auto&& info : category.components) {
+                    if (!m_componentSearchBuffer.empty() && !PropertyDrawerBase::CheckSearchMatch(m_componentSearchBuffer, info.name)) {
                         continue;
                     }
-                    addComponentFn(this, pComponentable, name);
+
+                    if (info.isBehaviour) {
+                        if (auto&& pBehaviour = addComponentFn(this, pComponentable, SR_SCRIPTING_NS::Behaviour::GetClassStaticName(), info.name)) {
+                            pBehaviour.StaticCast<SR_SCRIPTING_NS::Behaviour>()->SetBehaviourName(info.name);
+                        }
+                    }
+                    else {
+                        addComponentFn(this, pComponentable, info.name, info.name);
+                    }
                 }
 
                 if (!category.components.empty()) {
@@ -681,22 +693,32 @@ namespace SR_CORE_GUI_NS {
 
     void Inspector::InitCategories() {
         m_availableComponents = SR_UTILS_NS::Factory::Instance().GetInheritances(SR_UTILS_NS::Component::GetClassStaticName());
+        m_availableCppBehaviours = SR_UTILS_NS::Factory::Instance().GetInheritances(SR_SCRIPTING_NS::CppBehaviour::GetClassStaticName());
 
         std::erase_if(m_availableComponents, [](auto&& name) {
             auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(name);
             return pMeta->IsAbstract() || pMeta->IsHidden();
         });
 
+        std::erase_if(m_availableCppBehaviours, [](auto&& name) {
+            auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(name);
+            return pMeta->IsAbstract() || pMeta->IsHidden();
+        });
+
         m_componentsCategories = ComponentCategory();
 
-        for (auto&& name : m_availableComponents) {
-            auto&& category = SR_UTILS_NS::Factory::Instance().GetType(name)->GetCategory();
-            if (category.empty()) {
-                m_componentsCategories.categories["Misc"].components.emplace_back(name);
+        auto&& processComponent = [this](const SR_UTILS_NS::StringAtom& name, bool isBehaviour) {
+            ComponentCategory::ComponentInfo componentInfo;
+            componentInfo.name = name;
+            componentInfo.isBehaviour = isBehaviour;
+
+            auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(name);
+            if (pMeta->GetCategory().empty()) {
+                m_componentsCategories.categories["Misc"].components.emplace_back(componentInfo);
             }
             else {
                 ComponentCategory* pCategory = nullptr;
-                for (auto&& cat : category) {
+                for (auto&& cat : pMeta->GetCategory()) {
                     if (pCategory) {
                         pCategory = &pCategory->categories[cat];
                     }
@@ -704,9 +726,19 @@ namespace SR_CORE_GUI_NS {
                         pCategory = &m_componentsCategories.categories[cat];
                     }
                 }
-                SRAssert(pCategory);
-                pCategory->components.emplace_back(name);
+
+                if (SRVerify(pCategory)) {
+                    pCategory->components.emplace_back(componentInfo);
+                }
             }
+        };
+
+        for (auto&& name : m_availableComponents) {
+            processComponent(name, false);
+        }
+
+        for (auto&& name : m_availableCppBehaviours) {
+            processComponent(name, true);
         }
     }
 }

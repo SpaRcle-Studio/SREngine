@@ -33,6 +33,7 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::TextWrapped("    glm, GLFW, GLEW, glad, Bullet3, PhysX, Box2D, Dear ImGui, tinyobjloader, stbi, json, Assimp");
             SR_GRAPH_GUI_NS::Immediate::Separator();
             SR_GRAPH_GUI_NS::Immediate::Text("Build Version: 0.0.7");
+
     #ifdef SR_COMMON_GIT_METADATA
             static std::string metadata;
             if (metadata.empty()) {
@@ -45,6 +46,10 @@ namespace SR_CORE_GUI_NS {
 
             SR_GRAPH_GUI_NS::Immediate::Text(metadata.c_str());
     #endif
+
+            const std::string executableAndModulesHash = SR_UTILS_NS::ToString(SR_UTILS_NS::FileSystem::GetExecutableAndModulesHash());
+            SR_GRAPH_GUI_NS::Immediate::Text("Executable and modules hash: %s", executableAndModulesHash.c_str());
+
             SR_GRAPH_GUI_NS::Immediate::Text("Licensed under the MIT License");
 
             SR_GRAPH_GUI_NS::Immediate::EndTabBar();

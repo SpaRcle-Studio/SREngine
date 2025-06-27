@@ -3,7 +3,9 @@
 //
 
 #include <Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h>
+
 #include <Graphics/GUI/Utils.h>
+#include <Graphics/GUI/ImmediateGUI.h>
 
 #include <Codegen/ObjectPropertyDrawer.generated.hpp>
 
@@ -125,7 +127,7 @@ namespace SR_CORE_GUI_NS {
                     SR_GRAPH_GUI_NS::Immediate::EndGroup();
 
                     if (propertyFeedback.isChanged) {
-                        property.OnChanged(context.pOwner);
+                        property.OnChanged(propertyContext.pOwner);
                         feedback.isChanged = true;
                     }
                 });

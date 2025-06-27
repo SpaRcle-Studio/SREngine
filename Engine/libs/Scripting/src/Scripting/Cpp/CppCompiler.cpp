@@ -149,8 +149,20 @@ namespace SR_SCRIPTING_NS {
             customArgs += "-nologo /std:c++20 /EHsc ";
             customArgs += "/DSR_ENGINE_SCRIPT_API_MODE ";
             customArgs += "/DFMT_HEADER_ONLY ";
+
+        #ifdef SR_TRACY_ENABLE
+            customArgs += "/DSR_TRACY_ENABLE ";
+            customArgs += "/DTRACY_ON_DEMAND ";
+            customArgs += "/DTRACY_ENABLE ";
+        #endif
         }
         else {
+        #ifdef SR_TRACY_ENABLE
+            customArgs += "-DSR_TRACY_ENABLE ";
+            customArgs += "-DTRACY_ON_DEMAND ";
+            customArgs += "-DTRACY_ENABLE ";
+        #endif
+
             customArgs += "-DSR_ENGINE_SCRIPT_API_MODE ";
             customArgs += "-DFMT_HEADER_ONLY ";
             customArgs += "-std=c++20 ";
@@ -237,6 +249,7 @@ namespace SR_SCRIPTING_NS {
 
         #if defined(SR_WINDOWS_SDK_DIR) && defined(SR_WINDOWS_SDK_VERSION)
             includePaths += "/I\"" + SR_UTILS_NS::Path(SR_WINDOWS_SDK_DIR).Concat("Include").Concat(SR_WINDOWS_SDK_VERSION).Concat("ucrt").ToString() + "\" ";
+            includePaths += "/I\"" + SR_UTILS_NS::Path(SR_WINDOWS_SDK_DIR).Concat("Include").Concat(SR_WINDOWS_SDK_VERSION).Concat("shared").ToString() + "\" ";
 
             windowsKitsUmLibs = SR_UTILS_NS::Path(SR_WINDOWS_SDK_DIR).Concat("Lib").Concat(SR_WINDOWS_SDK_VERSION).Concat("um/x64").ToString();
             windowsKitsUcrtLibs = SR_UTILS_NS::Path(SR_WINDOWS_SDK_DIR).Concat("Lib").Concat(SR_WINDOWS_SDK_VERSION).Concat("ucrt/x64").ToString();

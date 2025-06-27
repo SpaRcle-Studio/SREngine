@@ -6,9 +6,8 @@
        <EvoCompiler Value="true"/>
        <CompilePDB Value="true"/>
        <ScriptMultiInstances Value="false"/>
+       <ShowScriptsCodegenResult Value="false"/>
 
-       <UpdateScripts Value="false"/>
-       <UseEditorGUIScript Value="false"/>
        <ColorBufferPick Value="true"/>
 
        <CrashHandler Value="false"/>
