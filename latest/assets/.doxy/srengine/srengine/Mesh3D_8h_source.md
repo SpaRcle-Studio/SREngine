@@ -39,7 +39,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD MeshType GetMeshType() const noexcept override { return MeshType::Static; }
 
         SR_NODISCARD bool IsCalculatable() const override;
-        SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
+        SR_NODISCARD const SR_HTYPES_NS::FastMemoryArray<uint32_t>& GetIndices() const override;
         SR_NODISCARD std::string GetMeshIdentifier() const override;
 
     private:

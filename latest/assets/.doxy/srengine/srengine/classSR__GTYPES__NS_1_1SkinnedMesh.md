@@ -219,13 +219,13 @@ See [SR\_GTYPES\_NS::IndexedMesh](classSR__GTYPES__NS_1_1IndexedMesh.md)
 | ---: | :--- |
 | virtual bool | [**Calculate**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-calculate) () override<br> |
 |  bool | [**CalculateIBO**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-calculateibo) () <br> |
-|  bool | [**CalculateVBO**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-calculatevbo-12) (const std::vector&lt; Vertex &gt; & vertices) <br> |
-|  bool | [**CalculateVBO**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-calculatevbo-22) (const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; std::vector&lt; Vertex &gt;()&gt; & getter) <br> |
+|  bool | [**CalculateVBO**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-calculatevbo-12) (const [**SR\_HTYPES\_NS::FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md)&lt; Vertex &gt; & vertices) <br> |
+|  bool | [**CalculateVBO**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-calculatevbo-22) (const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; [**SR\_HTYPES\_NS::FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md)&lt; Vertex &gt;()&gt; & getter) <br> |
 |  bool | [**FreeIBO**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-freeibo) () <br> |
 |  bool | [**FreeVBO**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-freevbo) () <br> |
 |  void | [**FreeVideoMemory**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-freevideomemory) () override<br> |
 | virtual SR\_NODISCARD int32\_t | [**GetIBO**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-getibo) () override<br> |
-| virtual SR\_NODISCARD std::vector&lt; uint32\_t &gt; | [**GetIndices**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-getindices) () const<br> |
+| virtual SR\_NODISCARD const [**SR\_HTYPES\_NS::FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md)&lt; uint32\_t &gt; & | [**GetIndices**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-getindices) () const<br> |
 | virtual SR\_NODISCARD uint32\_t | [**GetIndicesCount**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-getindicescount) () override const<br> |
 | virtual SR\_NODISCARD int32\_t | [**GetVBO**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-getvbo) () override<br> |
 | virtual SR\_NODISCARD uint32\_t | [**GetVerticesCount**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-getverticescount) () override const<br> |

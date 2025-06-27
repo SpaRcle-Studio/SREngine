@@ -17,6 +17,8 @@
 
 #include <Graphics/Types/Geometry/MeshComponent.h>
 
+#include <Utils/Types/FastMemoryArray.h>
+
 namespace SR_GTYPES_NS {
     class ProceduralMesh final : public IndexedMesh {
         using Super = IndexedMesh;
@@ -31,8 +33,12 @@ namespace SR_GTYPES_NS {
     public:
         SR_NODISCARD MeshType GetMeshType() const noexcept override { return MeshType::Procedural; }
 
+        void SwapIndexedVertices(SR_HTYPES_NS::FastMemoryArray<Vertices::StaticMeshVertex>& vertices);
+        void SwapIndices(SR_HTYPES_NS::FastMemoryArray<uint32_t>& indices);
+
         void SetIndexedVertices(void* pData, uint64_t count);
         void SetIndices(void* pData, uint64_t count);
+
         void SetVertices(const std::vector<Vertices::StaticMeshVertex>& vertices);
 
         void UseMaterial() override;
@@ -46,11 +52,11 @@ namespace SR_GTYPES_NS {
         bool Calculate() override;
         void SetDirtyMesh();
 
-        SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
+        SR_NODISCARD const SR_HTYPES_NS::FastMemoryArray<uint32_t>& GetIndices() const override;
 
     private:
-        std::vector<Vertices::StaticMeshVertex> m_vertices;
-        std::vector<uint32_t> m_indices;
+        SR_HTYPES_NS::FastMemoryArray<Vertices::StaticMeshVertex> m_vertices;
+        SR_HTYPES_NS::FastMemoryArray<uint32_t> m_indices;
 
     };
 }

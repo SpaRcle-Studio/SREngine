@@ -1,0 +1,471 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classSR__MATH__NS_1_1UVector3Iterator" kind="class" language="C++" prot="public">
+    <compoundname>SR_MATH_NS::UVector3Iterator</compoundname>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__MATH__NS_1_1UVector3Iterator_1a331f6681b2640ac45583c45b1dde6e01" prot="public" static="no">
+        <type>std::random_access_iterator_tag</type>
+        <definition>using SR_MATH_NS::UVector3Iterator::iterator_category =  std::random_access_iterator_tag</definition>
+        <argsstring></argsstring>
+        <name>iterator_category</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::iterator_category</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="13" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__MATH__NS_1_1UVector3Iterator_1a4ed7b9a2d3971277d0102306a58446e5" prot="public" static="no">
+        <type>SR_MATH_NS::UVector3</type>
+        <definition>using SR_MATH_NS::UVector3Iterator::value_type =  SR_MATH_NS::UVector3</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="14" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__MATH__NS_1_1UVector3Iterator_1a90e9a64d83136b137abf503cc1131cd7" prot="public" static="no">
+        <type>std::ptrdiff_t</type>
+        <definition>using SR_MATH_NS::UVector3Iterator::difference_type =  std::ptrdiff_t</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::difference_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="15" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__MATH__NS_1_1UVector3Iterator_1a6e5a5f37a2d82ba03b41062357c7dfeb" prot="public" static="no">
+        <type>SR_MATH_NS::UVector3 *</type>
+        <definition>using SR_MATH_NS::UVector3Iterator::pointer =  SR_MATH_NS::UVector3 *</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::pointer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="16" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__MATH__NS_1_1UVector3Iterator_1ab97d088d85c5ff38a2e63105da77f6ed" prot="public" static="no">
+        <type>SR_MATH_NS::UVector3</type>
+        <definition>using SR_MATH_NS::UVector3Iterator::reference =  SR_MATH_NS::UVector3</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::reference</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="17" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1UVector3Iterator_1a320adc69ee8db0468c6c9a201ea663c1" prot="private" static="no" mutable="no">
+        <type>SR_MATH_NS::UVector3</type>
+        <definition>SR_MATH_NS::UVector3 SR_MATH_NS::UVector3Iterator::m_max</definition>
+        <argsstring></argsstring>
+        <name>m_max</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::m_max</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="52" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1UVector3Iterator_1a39b4637fc990aedb7178d8351ec8d0d9" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t SR_MATH_NS::UVector3Iterator::m_index</definition>
+        <argsstring></argsstring>
+        <name>m_index</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::m_index</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="53" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__MATH__NS_1_1UVector3Iterator_1aa8fe436fecd95a4a65c33778b1dd79c9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_MATH_NS::UVector3Iterator::UVector3Iterator</definition>
+        <argsstring>()</argsstring>
+        <name>UVector3Iterator</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::UVector3Iterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="19" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="19" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1UVector3Iterator_1a3bd915682f7de6ab534dec27de67186f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_MATH_NS::UVector3Iterator::UVector3Iterator</definition>
+        <argsstring>(SR_MATH_NS::UVector3 max, std::size_t index)</argsstring>
+        <name>UVector3Iterator</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::UVector3Iterator</qualifiedname>
+        <param>
+          <type>SR_MATH_NS::UVector3</type>
+          <declname>max</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="23" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="23" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1UVector3Iterator_1abeb003cc0e457220c0e0c6a40e9b1cd5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_MATH_NS::UVector3</type>
+        <definition>SR_MATH_NS::UVector3 SR_MATH_NS::UVector3Iterator::operator*</definition>
+        <argsstring>() const</argsstring>
+        <name>operator*</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::operator*</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="27" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="27" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1UVector3Iterator_1a762cd1104c8301f4b6b5cdf1e4be478f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1UVector3Iterator" kindref="compound">UVector3Iterator</ref> &amp;</type>
+        <definition>UVector3Iterator &amp; SR_MATH_NS::UVector3Iterator::operator++</definition>
+        <argsstring>()</argsstring>
+        <name>operator++</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::operator++</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="34" column="26" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1UVector3Iterator_1aea3d7b12fda12a326712aeffb53db6a3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1UVector3Iterator" kindref="compound">UVector3Iterator</ref></type>
+        <definition>UVector3Iterator SR_MATH_NS::UVector3Iterator::operator++</definition>
+        <argsstring>(int)</argsstring>
+        <name>operator++</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::operator++</qualifiedname>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="35" column="26" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1UVector3Iterator_1ac1eff1070d33eda75a194dbf67527a3d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1UVector3Iterator" kindref="compound">UVector3Iterator</ref> &amp;</type>
+        <definition>UVector3Iterator &amp; SR_MATH_NS::UVector3Iterator::operator--</definition>
+        <argsstring>()</argsstring>
+        <name>operator--</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::operator--</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="36" column="26" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1UVector3Iterator_1ac9ec2704296ea4f4c90dc9d00d1a616d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1UVector3Iterator" kindref="compound">UVector3Iterator</ref></type>
+        <definition>UVector3Iterator SR_MATH_NS::UVector3Iterator::operator--</definition>
+        <argsstring>(int)</argsstring>
+        <name>operator--</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::operator--</qualifiedname>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="37" column="26" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1UVector3Iterator_1ae353a060cefee0a6e7a54677645933fb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1UVector3Iterator" kindref="compound">UVector3Iterator</ref> &amp;</type>
+        <definition>UVector3Iterator &amp; SR_MATH_NS::UVector3Iterator::operator+=</definition>
+        <argsstring>(difference_type n)</argsstring>
+        <name>operator+=</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::operator+=</qualifiedname>
+        <param>
+          <type>difference_type</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="38" column="26" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1UVector3Iterator_1aa7c168f9553411d4ef13b36bf06278ca" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1UVector3Iterator" kindref="compound">UVector3Iterator</ref> &amp;</type>
+        <definition>UVector3Iterator &amp; SR_MATH_NS::UVector3Iterator::operator-=</definition>
+        <argsstring>(difference_type n)</argsstring>
+        <name>operator-=</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::operator-=</qualifiedname>
+        <param>
+          <type>difference_type</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="39" column="26" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1UVector3Iterator_1a48f202725687dcc920fae68c3b0534af" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1UVector3Iterator" kindref="compound">UVector3Iterator</ref></type>
+        <definition>UVector3Iterator SR_MATH_NS::UVector3Iterator::operator+</definition>
+        <argsstring>(difference_type n) const</argsstring>
+        <name>operator+</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::operator+</qualifiedname>
+        <param>
+          <type>difference_type</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="40" column="26" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1UVector3Iterator_1a1de934aad5f6d2d2441e42a103436dec" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1UVector3Iterator" kindref="compound">UVector3Iterator</ref></type>
+        <definition>UVector3Iterator SR_MATH_NS::UVector3Iterator::operator-</definition>
+        <argsstring>(difference_type n) const</argsstring>
+        <name>operator-</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::operator-</qualifiedname>
+        <param>
+          <type>difference_type</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="41" column="26" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1UVector3Iterator_1a74ba28158302979c5669da5e4e8682e8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>difference_type</type>
+        <definition>difference_type SR_MATH_NS::UVector3Iterator::operator-</definition>
+        <argsstring>(const UVector3Iterator &amp;other) const</argsstring>
+        <name>operator-</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::operator-</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1UVector3Iterator" kindref="compound">UVector3Iterator</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="42" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1UVector3Iterator_1a8f7c2df75b4fe204841edae8c5563db0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_MATH_NS::UVector3</type>
+        <definition>SR_MATH_NS::UVector3 SR_MATH_NS::UVector3Iterator::operator[]</definition>
+        <argsstring>(difference_type n) const</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::operator[]</qualifiedname>
+        <param>
+          <type>difference_type</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="43" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1UVector3Iterator_1a10dcc7e0b31835f565533543d600aa77" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_MATH_NS::UVector3Iterator::operator==</definition>
+        <argsstring>(const UVector3Iterator &amp;other) const</argsstring>
+        <name>operator==</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1UVector3Iterator" kindref="compound">UVector3Iterator</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="44" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1UVector3Iterator_1a9dd6748edb1f7e53f28aa511ad8ddef9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_MATH_NS::UVector3Iterator::operator!=</definition>
+        <argsstring>(const UVector3Iterator &amp;other) const</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1UVector3Iterator" kindref="compound">UVector3Iterator</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="45" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1UVector3Iterator_1ab9edbf30a128952bda50f79bf0d83136" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_MATH_NS::UVector3Iterator::operator&lt;</definition>
+        <argsstring>(const UVector3Iterator &amp;other) const</argsstring>
+        <name>operator&lt;</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::operator&lt;</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1UVector3Iterator" kindref="compound">UVector3Iterator</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="46" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1UVector3Iterator_1ae9d95b1ce3bf09795eeeea55138b2e0a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_MATH_NS::UVector3Iterator::operator&gt;</definition>
+        <argsstring>(const UVector3Iterator &amp;other) const</argsstring>
+        <name>operator&gt;</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::operator&gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1UVector3Iterator" kindref="compound">UVector3Iterator</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="47" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1UVector3Iterator_1ae455e77af48abc6c2daf8ad6b2d53a3d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_MATH_NS::UVector3Iterator::operator&lt;=</definition>
+        <argsstring>(const UVector3Iterator &amp;other) const</argsstring>
+        <name>operator&lt;=</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::operator&lt;=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1UVector3Iterator" kindref="compound">UVector3Iterator</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="48" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1UVector3Iterator_1a4eb78c6fc7973877647695ad68826ae3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_MATH_NS::UVector3Iterator::operator&gt;=</definition>
+        <argsstring>(const UVector3Iterator &amp;other) const</argsstring>
+        <name>operator&gt;=</name>
+        <qualifiedname>SR_MATH_NS::UVector3Iterator::operator&gt;=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1UVector3Iterator" kindref="compound">UVector3Iterator</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="49" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" line="11" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Math/VectorRanges.h" bodystart="11" bodyend="55"/>
+    <listofallmembers>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a90e9a64d83136b137abf503cc1131cd7" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>difference_type</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a331f6681b2640ac45583c45b1dde6e01" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>iterator_category</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a39b4637fc990aedb7178d8351ec8d0d9" prot="private" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>m_index</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a320adc69ee8db0468c6c9a201ea663c1" prot="private" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>m_max</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a9dd6748edb1f7e53f28aa511ad8ddef9" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>operator!=</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1abeb003cc0e457220c0e0c6a40e9b1cd5" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>operator*</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a48f202725687dcc920fae68c3b0534af" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>operator+</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a762cd1104c8301f4b6b5cdf1e4be478f" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>operator++</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1aea3d7b12fda12a326712aeffb53db6a3" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>operator++</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1ae353a060cefee0a6e7a54677645933fb" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>operator+=</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a1de934aad5f6d2d2441e42a103436dec" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>operator-</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a74ba28158302979c5669da5e4e8682e8" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>operator-</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1ac1eff1070d33eda75a194dbf67527a3d" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>operator--</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1ac9ec2704296ea4f4c90dc9d00d1a616d" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>operator--</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1aa7c168f9553411d4ef13b36bf06278ca" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>operator-=</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1ab9edbf30a128952bda50f79bf0d83136" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>operator&lt;</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1ae455e77af48abc6c2daf8ad6b2d53a3d" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>operator&lt;=</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a10dcc7e0b31835f565533543d600aa77" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>operator==</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1ae9d95b1ce3bf09795eeeea55138b2e0a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>operator&gt;</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a4eb78c6fc7973877647695ad68826ae3" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>operator&gt;=</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a8f7c2df75b4fe204841edae8c5563db0" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>operator[]</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a6e5a5f37a2d82ba03b41062357c7dfeb" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>pointer</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1ab97d088d85c5ff38a2e63105da77f6ed" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>reference</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1aa8fe436fecd95a4a65c33778b1dd79c9" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>UVector3Iterator</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a3bd915682f7de6ab534dec27de67186f" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>UVector3Iterator</name></member>
+      <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a4ed7b9a2d3971277d0102306a58446e5" prot="public" virt="non-virtual"><scope>SR_MATH_NS::UVector3Iterator</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

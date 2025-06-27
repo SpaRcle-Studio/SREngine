@@ -1957,6 +1957,10 @@
          <lastmod>2025-06-27</lastmod>
     </url>
     <url>
+         <loc>https://docs.sparcles.dev/latest/srengine/classSR__HTYPES__NS_1_1FastMemoryArray/</loc>
+         <lastmod>2025-06-27</lastmod>
+    </url>
+    <url>
          <loc>https://docs.sparcles.dev/latest/srengine/classSR__HTYPES__NS_1_1ForwardList/</loc>
          <lastmod>2025-06-27</lastmod>
     </url>
@@ -2210,6 +2214,14 @@
     </url>
     <url>
          <loc>https://docs.sparcles.dev/latest/srengine/structSR__MATH__NS_1_1Size2/</loc>
+         <lastmod>2025-06-27</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.sparcles.dev/latest/srengine/classSR__MATH__NS_1_1UVector3Iterator/</loc>
+         <lastmod>2025-06-27</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.sparcles.dev/latest/srengine/classSR__MATH__NS_1_1UVector3Range/</loc>
          <lastmod>2025-06-27</lastmod>
     </url>
     <url>
@@ -8473,6 +8485,14 @@
          <lastmod>2025-06-27</lastmod>
     </url>
     <url>
+         <loc>https://docs.sparcles.dev/latest/srengine/VectorRanges_8h/</loc>
+         <lastmod>2025-06-27</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.sparcles.dev/latest/srengine/VectorRanges_8h_source/</loc>
+         <lastmod>2025-06-27</lastmod>
+    </url>
+    <url>
          <loc>https://docs.sparcles.dev/latest/srengine/dir_6c2eca2af3b09130c469ec03e9c2b107/</loc>
          <lastmod>2025-06-27</lastmod>
     </url>
@@ -9150,6 +9170,14 @@
     </url>
     <url>
          <loc>https://docs.sparcles.dev/latest/srengine/EDMarshal_8h_source/</loc>
+         <lastmod>2025-06-27</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.sparcles.dev/latest/srengine/FastMemoryArray_8h/</loc>
+         <lastmod>2025-06-27</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.sparcles.dev/latest/srengine/FastMemoryArray_8h_source/</loc>
          <lastmod>2025-06-27</lastmod>
     </url>
     <url>

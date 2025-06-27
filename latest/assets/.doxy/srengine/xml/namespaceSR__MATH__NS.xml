@@ -10,6 +10,8 @@
     <innerclass refid="structSR__MATH__NS_1_1Rect" prot="public">SR_MATH_NS::Rect</innerclass>
     <innerclass refid="structSR__MATH__NS_1_1Size" prot="public">SR_MATH_NS::Size</innerclass>
     <innerclass refid="structSR__MATH__NS_1_1Size2" prot="public">SR_MATH_NS::Size2</innerclass>
+    <innerclass refid="classSR__MATH__NS_1_1UVector3Iterator" prot="public">SR_MATH_NS::UVector3Iterator</innerclass>
+    <innerclass refid="classSR__MATH__NS_1_1UVector3Range" prot="public">SR_MATH_NS::UVector3Range</innerclass>
     <innerclass refid="structSR__MATH__NS_1_1Vector2" prot="public">SR_MATH_NS::Vector2</innerclass>
     <innerclass refid="structSR__MATH__NS_1_1Vector3" prot="public">SR_MATH_NS::Vector3</innerclass>
     <innerclass refid="structSR__MATH__NS_1_1Vector4" prot="public">SR_MATH_NS::Vector4</innerclass>

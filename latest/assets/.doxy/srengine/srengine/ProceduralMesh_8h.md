@@ -11,6 +11,7 @@
 
 
 * `#include <Graphics/Types/Geometry/MeshComponent.h>`
+* `#include <Utils/Types/FastMemoryArray.h>`
 
 
 

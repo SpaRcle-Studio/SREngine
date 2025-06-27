@@ -5,6 +5,7 @@
     <innerclass refid="classSR__HTYPES__NS_1_1BinarySearchTree" prot="public">SR_HTYPES_NS::BinarySearchTree</innerclass>
     <innerclass refid="classSR__HTYPES__NS_1_1DataStorage" prot="public">SR_HTYPES_NS::DataStorage</innerclass>
     <innerclass refid="classSR__HTYPES__NS_1_1DictionaryEntry" prot="public">SR_HTYPES_NS::DictionaryEntry</innerclass>
+    <innerclass refid="classSR__HTYPES__NS_1_1FastMemoryArray" prot="public">SR_HTYPES_NS::FastMemoryArray</innerclass>
     <innerclass refid="classSR__HTYPES__NS_1_1ForwardList" prot="public">SR_HTYPES_NS::ForwardList</innerclass>
     <innerclass refid="classSR__HTYPES__NS_1_1Function" prot="public">SR_HTYPES_NS::Function</innerclass>
     <innerclass refid="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4" prot="public">SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;</innerclass>

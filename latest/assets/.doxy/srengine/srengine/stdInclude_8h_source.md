@@ -74,6 +74,7 @@
     #include <condition_variable>
     #include <numeric>
     #include <numbers>
+    #include <execution>
 
     #ifndef SR_ENGINE_SCRIPT_API_MODE
         #include <zlib.h>

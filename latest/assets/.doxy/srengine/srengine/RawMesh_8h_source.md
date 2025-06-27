@@ -20,6 +20,7 @@
 #include <Utils/Types/Map.h>
 #include <Utils/Common/Vertices.h>
 #include <Utils/Math/Matrix4x4.h>
+#include <Utils/Types/FastMemoryArray.h>
 
 #ifdef SR_UTILS_ASSIMP
 namespace Assimp {
@@ -62,7 +63,7 @@ namespace SR_HTYPES_NS {
         SR_NODISCARD std::string_view GetGeometryName(uint32_t id) const;
 
         SR_NODISCARD std::vector<SR_UTILS_NS::Vertex> GetVertices(uint32_t id) const;
-        SR_NODISCARD const std::vector<uint32_t>& GetIndices(uint32_t id) const;
+        SR_NODISCARD const SR_HTYPES_NS::FastMemoryArray<uint32_t>& GetIndices(uint32_t id) const;
         SR_NODISCARD const ska::flat_hash_map<SR_UTILS_NS::StringAtom, uint32_t>& GetBones(uint32_t id) const;
         SR_NODISCARD const ska::flat_hash_map<SR_UTILS_NS::StringAtom, uint16_t>& GetOptimizedBones() const;
         SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetBoneOffset(SR_UTILS_NS::StringAtom name) const;
@@ -113,7 +114,7 @@ namespace SR_HTYPES_NS {
         std::vector<SR_MATH_NS::Matrix4x4> m_boneOffsets;
         std::vector<SR_MATH_NS::Matrix4x4> m_boneTransforms;
 
-        mutable std::vector<std::vector<uint32_t>> m_indices;
+        mutable std::vector<SR_HTYPES_NS::FastMemoryArray<uint32_t>> m_indices;
 
         RawMeshParams m_params;
 

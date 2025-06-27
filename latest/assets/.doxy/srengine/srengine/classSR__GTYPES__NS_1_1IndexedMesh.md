@@ -145,13 +145,13 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 | ---: | :--- |
 | virtual bool | [**Calculate**](#function-calculate) () override<br> |
 |  bool | [**CalculateIBO**](#function-calculateibo) () <br> |
-|  bool | [**CalculateVBO**](#function-calculatevbo-12) (const std::vector&lt; Vertex &gt; & vertices) <br> |
-|  bool | [**CalculateVBO**](#function-calculatevbo-22) (const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; std::vector&lt; Vertex &gt;()&gt; & getter) <br> |
+|  bool | [**CalculateVBO**](#function-calculatevbo-12) (const [**SR\_HTYPES\_NS::FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md)&lt; Vertex &gt; & vertices) <br> |
+|  bool | [**CalculateVBO**](#function-calculatevbo-22) (const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; [**SR\_HTYPES\_NS::FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md)&lt; Vertex &gt;()&gt; & getter) <br> |
 |  bool | [**FreeIBO**](#function-freeibo) () <br> |
 |  bool | [**FreeVBO**](#function-freevbo) () <br> |
 |  void | [**FreeVideoMemory**](#function-freevideomemory) () override<br> |
 | virtual SR\_NODISCARD int32\_t | [**GetIBO**](#function-getibo) () override<br> |
-| virtual SR\_NODISCARD std::vector&lt; uint32\_t &gt; | [**GetIndices**](#function-getindices) () const<br> |
+| virtual SR\_NODISCARD const [**SR\_HTYPES\_NS::FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md)&lt; uint32\_t &gt; & | [**GetIndices**](#function-getindices) () const<br> |
 | virtual SR\_NODISCARD uint32\_t | [**GetIndicesCount**](#function-getindicescount) () override const<br> |
 | virtual SR\_NODISCARD int32\_t | [**GetVBO**](#function-getvbo) () override<br> |
 | virtual SR\_NODISCARD uint32\_t | [**GetVerticesCount**](#function-getverticescount) () override const<br> |
@@ -513,7 +513,7 @@ bool SR_GTYPES_NS::IndexedMesh::CalculateIBO ()
 ```C++
 template<Vertices::VertexType type, typename Vertex>
 bool SR_GTYPES_NS::IndexedMesh::CalculateVBO (
-    const std::vector< Vertex > & vertices
+    const SR_HTYPES_NS::FastMemoryArray < Vertex > & vertices
 ) 
 ```
 
@@ -529,7 +529,7 @@ bool SR_GTYPES_NS::IndexedMesh::CalculateVBO (
 ```C++
 template<Vertices::VertexType type, typename Vertex>
 bool SR_GTYPES_NS::IndexedMesh::CalculateVBO (
-    const SR_HTYPES_NS::Function < std::vector< Vertex >()> & getter
+    const SR_HTYPES_NS::Function < SR_HTYPES_NS::FastMemoryArray < Vertex >()> & getter
 ) 
 ```
 
@@ -602,7 +602,7 @@ Implements [*SR\_GTYPES\_NS::Mesh::GetIBO*](classSR__GTYPES__NS_1_1Mesh.md#funct
 ### function GetIndices 
 
 ```C++
-inline virtual SR_NODISCARD std::vector< uint32_t > SR_GTYPES_NS::IndexedMesh::GetIndices () const
+inline virtual SR_NODISCARD const SR_HTYPES_NS::FastMemoryArray < uint32_t > & SR_GTYPES_NS::IndexedMesh::GetIndices () const
 ```
 
 

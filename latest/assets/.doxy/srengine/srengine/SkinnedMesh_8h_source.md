@@ -60,7 +60,7 @@ namespace SR_GTYPES_NS {
 
         void FreeSSBO();
 
-        SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
+        SR_NODISCARD const SR_HTYPES_NS::FastMemoryArray<uint32_t>& GetIndices() const override;
 
     private:
         bool m_skeletonIsBroken = false;

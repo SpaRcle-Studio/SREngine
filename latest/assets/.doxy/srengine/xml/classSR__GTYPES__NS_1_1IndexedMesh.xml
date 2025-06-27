@@ -21,7 +21,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="45" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" bodystart="45" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="50" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" bodystart="50" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1IndexedMesh_1ac8337db392cc53da044963aa01206384" prot="protected" static="no" mutable="no">
         <type>int32_t</type>
@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="46" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" bodystart="46" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="51" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1IndexedMesh_1a1f57e149db806a94763183bc9049ae82" prot="protected" static="no" mutable="no">
         <type>uint32_t</type>
@@ -51,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="47" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="52" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1IndexedMesh_1a0a04824761e31371806daa9932e61b23" prot="protected" static="no" mutable="no">
         <type>uint32_t</type>
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="48" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" bodystart="48" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="53" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" bodystart="53" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="16" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="18" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -98,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="19" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="21" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1IndexedMesh_1a662817c97a9740a6941294d213120cde" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -113,7 +113,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="22" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="24" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1IndexedMesh_1ada0a7c8f0f59896c470f8ab2386dc220" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="23" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="25" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1IndexedMesh_1a7be4509796e691647981d7e0ada70f3b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="25" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" bodystart="25" bodyend="25"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="27" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" bodystart="27" bodyend="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1IndexedMesh_1a898c8bb0651bfcdb5c01125c8b34bdc8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -158,25 +158,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="26" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" bodystart="26" bodyend="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="28" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" bodystart="28" bodyend="28"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1IndexedMesh_1a0719b2d564ec8a0098ac348919a94943" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
-        <type>SR_NODISCARD std::vector&lt; uint32_t &gt;</type>
-        <definition>virtual SR_NODISCARD std::vector&lt; uint32_t &gt; SR_GTYPES_NS::IndexedMesh::GetIndices</definition>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1IndexedMesh_1ab7226085318122a31fcfae25b4bc8597" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__HTYPES__NS_1_1FastMemoryArray" kindref="compound">SR_HTYPES_NS::FastMemoryArray</ref>&lt; uint32_t &gt; &amp;</type>
+        <definition>virtual SR_NODISCARD const SR_HTYPES_NS::FastMemoryArray&lt; uint32_t &gt; &amp; SR_GTYPES_NS::IndexedMesh::GetIndices</definition>
         <argsstring>() const</argsstring>
         <name>GetIndices</name>
         <qualifiedname>SR_GTYPES_NS::IndexedMesh::GetIndices</qualifiedname>
-        <reimplementedby refid="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a0d446a3a06fbaf0cec37d82998d134ca">GetIndices</reimplementedby>
-        <reimplementedby refid="classSR__GTYPES__NS_1_1Mesh3D_1aafdc337069a9fcbe4ea14bb71af39fc6">GetIndices</reimplementedby>
-        <reimplementedby refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a01586903b886cf78584cbe1427190c24">GetIndices</reimplementedby>
-        <reimplementedby refid="classSR__GTYPES__NS_1_1SkinnedMesh_1acaa71e57c9ca61e6a5de5c30136f08bd">GetIndices</reimplementedby>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a3d7c99a59d22f5861e9762f971b1fb10">GetIndices</reimplementedby>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1Mesh3D_1a73f1a52089c4b9c60ae948be917d1c78">GetIndices</reimplementedby>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1ProceduralMesh_1aacc095e2cbe3cd01a7beed6fd7e54c85">GetIndices</reimplementedby>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a95a1f94c5e642a43c154a24397273694">GetIndices</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="28" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" bodystart="28" bodyend="28"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="30" column="66" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" bodystart="30" bodyend="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1IndexedMesh_1acd2426952f16cf3f88068adef2d09a04" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -191,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="30" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" bodystart="30" bodyend="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="35" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" bodystart="35" bodyend="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1IndexedMesh_1ab9a915299cbac7482344fcdc270c1094" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -209,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="32" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="37" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1IndexedMesh_1adeeebbf20285c62a82ec70bbef37e186" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -223,7 +223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="34" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="39" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1IndexedMesh_1a3819bcea53ef97fa3ac221b7a24238e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -237,9 +237,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="36" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="41" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1IndexedMesh_1a050089d8895d5d0087220aa97c646871" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1IndexedMesh_1ad168fddb96e38da5724084b1f46f3864" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>Vertices::VertexType</type>
@@ -252,11 +252,11 @@
         </templateparamlist>
         <type>bool</type>
         <definition>bool SR_GTYPES_NS::IndexedMesh::CalculateVBO</definition>
-        <argsstring>(const std::vector&lt; Vertex &gt; &amp;vertices)</argsstring>
+        <argsstring>(const SR_HTYPES_NS::FastMemoryArray&lt; Vertex &gt; &amp;vertices)</argsstring>
         <name>CalculateVBO</name>
         <qualifiedname>SR_GTYPES_NS::IndexedMesh::CalculateVBO</qualifiedname>
         <param>
-          <type>const std::vector&lt; Vertex &gt; &amp;</type>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1FastMemoryArray" kindref="compound">SR_HTYPES_NS::FastMemoryArray</ref>&lt; Vertex &gt; &amp;</type>
           <declname>vertices</declname>
         </param>
         <briefdescription>
@@ -265,9 +265,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="38" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" bodystart="80" bodyend="121"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="43" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" bodystart="85" bodyend="126"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1IndexedMesh_1afa9717bbb1d9736e0091964ad182215f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1IndexedMesh_1ac566d60a8e744908fe1fd4948f56adb1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>Vertices::VertexType</type>
@@ -280,11 +280,11 @@
         </templateparamlist>
         <type>bool</type>
         <definition>bool SR_GTYPES_NS::IndexedMesh::CalculateVBO</definition>
-        <argsstring>(const SR_HTYPES_NS::Function&lt; std::vector&lt; Vertex &gt;()&gt; &amp;getter)</argsstring>
+        <argsstring>(const SR_HTYPES_NS::Function&lt; SR_HTYPES_NS::FastMemoryArray&lt; Vertex &gt;()&gt; &amp;getter)</argsstring>
         <name>CalculateVBO</name>
         <qualifiedname>SR_GTYPES_NS::IndexedMesh::CalculateVBO</qualifiedname>
         <param>
-          <type>const <ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; std::vector&lt; Vertex &gt;()&gt; &amp;</type>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; <ref refid="classSR__HTYPES__NS_1_1FastMemoryArray" kindref="compound">SR_HTYPES_NS::FastMemoryArray</ref>&lt; Vertex &gt;()&gt; &amp;</type>
           <declname>getter</declname>
         </param>
         <briefdescription>
@@ -295,7 +295,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="39" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" bodystart="54" bodyend="78"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="44" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" bodystart="59" bodyend="83"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1IndexedMesh_1a0b23120e9e096f7a60733dfac37790ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -309,7 +309,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="41" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="46" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1IndexedMesh_1aab16bcf36a31cc423dbd4492c9f458d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -323,7 +323,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="42" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="47" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -465,15 +465,15 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="13" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" bodystart="13" bodyend="50"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" line="15" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h" bodystart="15" bodyend="55"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::IndexedMesh</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::IndexedMesh</scope><name>BaseComponent</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1ac081233babf593b4ccac9e5dabaf35d2" prot="public" virt="virtual"><scope>SR_GTYPES_NS::IndexedMesh</scope><name>BindMesh</name></member>
       <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1ab9a915299cbac7482344fcdc270c1094" prot="public" virt="virtual"><scope>SR_GTYPES_NS::IndexedMesh</scope><name>Calculate</name></member>
       <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1adeeebbf20285c62a82ec70bbef37e186" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::IndexedMesh</scope><name>CalculateIBO</name></member>
-      <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1a050089d8895d5d0087220aa97c646871" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::IndexedMesh</scope><name>CalculateVBO</name></member>
-      <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1afa9717bbb1d9736e0091964ad182215f" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::IndexedMesh</scope><name>CalculateVBO</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1ad168fddb96e38da5724084b1f46f3864" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::IndexedMesh</scope><name>CalculateVBO</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1ac566d60a8e744908fe1fd4948f56adb1" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::IndexedMesh</scope><name>CalculateVBO</name></member>
       <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1a95e88410ef4fd3374845724623f6cf55" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::IndexedMesh</scope><name>CameraPtr</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad595cda1bf5fd49695826b348848bea7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::IndexedMesh</scope><name>CheckActivity</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ae178f96f84ede2be45870eab162e794d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::IndexedMesh</scope><name>CloneComponent</name></member>
@@ -493,7 +493,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1a9d72186be6f9c2f138a8ad989b440c01" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::IndexedMesh</scope><name>GetGameObject</name></member>
       <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1a662817c97a9740a6941294d213120cde" prot="public" virt="virtual"><scope>SR_GTYPES_NS::IndexedMesh</scope><name>GetIBO</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a1bc2cbdfbcd251764907ebd0dddef009" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::IndexedMesh</scope><name>GetIndexInSceneUpdater</name></member>
-      <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1a0719b2d564ec8a0098ac348919a94943" prot="public" virt="virtual"><scope>SR_GTYPES_NS::IndexedMesh</scope><name>GetIndices</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1ab7226085318122a31fcfae25b4bc8597" prot="public" virt="virtual"><scope>SR_GTYPES_NS::IndexedMesh</scope><name>GetIndices</name></member>
       <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1a898c8bb0651bfcdb5c01125c8b34bdc8" prot="public" virt="virtual"><scope>SR_GTYPES_NS::IndexedMesh</scope><name>GetIndicesCount</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a1d06cec76546a9849a50b484293b684a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::IndexedMesh</scope><name>GetMaterial</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1adff93b7a6119dc188a28c6c0eb8a8e37" prot="public" virt="virtual"><scope>SR_GTYPES_NS::IndexedMesh</scope><name>GetMatrix</name></member>

@@ -41,7 +41,7 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD MeshType GetMeshType() const noexcept override { return MeshType::Wireframe; }
 
-        SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
+        SR_NODISCARD const SR_HTYPES_NS::FastMemoryArray<uint32_t>& GetIndices() const override;
         SR_NODISCARD std::string GetMeshIdentifier() const override;
 
         SR_NODISCARD SR_UTILS_NS::StringAtom GetMeshLayer() const override {

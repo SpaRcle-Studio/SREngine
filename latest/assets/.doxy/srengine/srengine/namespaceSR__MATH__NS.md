@@ -42,6 +42,8 @@
 | struct | [**Rect**](structSR__MATH__NS_1_1Rect.md) &lt;typename T&gt;<br> |
 | struct | [**Size**](structSR__MATH__NS_1_1Size.md) &lt;typename T&gt;<br> |
 | struct | [**Size2**](structSR__MATH__NS_1_1Size2.md) &lt;typename T&gt;<br> |
+| class | [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) <br> |
+| class | [**UVector3Range**](classSR__MATH__NS_1_1UVector3Range.md) <br> |
 | struct | [**Vector2**](structSR__MATH__NS_1_1Vector2.md) &lt;typename T&gt;<br> |
 | struct | [**Vector3**](structSR__MATH__NS_1_1Vector3.md) &lt;typename T&gt;<br> |
 | struct | [**Vector4**](structSR__MATH__NS_1_1Vector4.md) &lt;typename T&gt;<br> |

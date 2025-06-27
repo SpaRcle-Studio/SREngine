@@ -16,6 +16,7 @@
     <innerfile refid="Vector3_8h">Vector3.h</innerfile>
     <innerfile refid="Vector4_8h">Vector4.h</innerfile>
     <innerfile refid="Vector6_8h">Vector6.h</innerfile>
+    <innerfile refid="VectorRanges_8h">VectorRanges.h</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

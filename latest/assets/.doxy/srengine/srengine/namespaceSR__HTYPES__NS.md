@@ -37,6 +37,7 @@
 | class | [**BinarySearchTree**](classSR__HTYPES__NS_1_1BinarySearchTree.md) &lt;typename T&gt;<br> |
 | class | [**DataStorage**](classSR__HTYPES__NS_1_1DataStorage.md) <br> |
 | class | [**DictionaryEntry**](classSR__HTYPES__NS_1_1DictionaryEntry.md) &lt;typename T&gt;<br> |
+| class | [**FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md) &lt;typename T&gt;<br> |
 | class | [**ForwardList**](classSR__HTYPES__NS_1_1ForwardList.md) &lt;typename T&gt;<br> |
 | class | [**Function**](classSR__HTYPES__NS_1_1Function.md) &lt;typename UnusedType&gt;<br> |
 | class | [**Function&lt; ReturnType(ArgumentTypes...)&gt;**](classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4.md) &lt;typename ReturnType, ArgumentTypes&gt;<br> |

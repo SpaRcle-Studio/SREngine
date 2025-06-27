@@ -63,7 +63,7 @@ Inherits the following classes: IResource
 |  SR\_NODISCARD const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & | [**GetBoneTransform**](#function-getbonetransform-22) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) const<br> |
 |  SR\_NODISCARD const ska::flat\_hash\_map&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md), uint32\_t &gt; & | [**GetBones**](#function-getbones) (uint32\_t id) const<br> |
 |  SR\_NODISCARD std::string\_view | [**GetGeometryName**](#function-getgeometryname) (uint32\_t id) const<br> |
-|  SR\_NODISCARD const std::vector&lt; uint32\_t &gt; & | [**GetIndices**](#function-getindices) (uint32\_t id) const<br> |
+|  SR\_NODISCARD const [**SR\_HTYPES\_NS::FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md)&lt; uint32\_t &gt; & | [**GetIndices**](#function-getindices) (uint32\_t id) const<br> |
 |  SR\_NODISCARD uint32\_t | [**GetIndicesCount**](#function-getindicescount) (uint32\_t id) const<br> |
 |  SR\_NODISCARD int32\_t | [**GetMeshId**](#function-getmeshid) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) const<br> |
 |  SR\_NODISCARD uint32\_t | [**GetMeshesCount**](#function-getmeshescount) () const<br> |
@@ -276,7 +276,7 @@ SR_NODISCARD std::string_view SR_HTYPES_NS::RawMesh::GetGeometryName (
 ### function GetIndices 
 
 ```C++
-SR_NODISCARD const std::vector< uint32_t > & SR_HTYPES_NS::RawMesh::GetIndices (
+SR_NODISCARD const SR_HTYPES_NS::FastMemoryArray < uint32_t > & SR_HTYPES_NS::RawMesh::GetIndices (
     uint32_t id
 ) const
 ```

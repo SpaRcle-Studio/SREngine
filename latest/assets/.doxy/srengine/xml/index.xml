@@ -2653,7 +2653,7 @@
     <member refid="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a8b4bae459592a401bf9a665c7ceefda1" kind="function"><name>OnResourceReloaded</name></member>
     <member refid="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a71647c3497766a65ce2eb7835762aa05" kind="function"><name>OnRawMeshChanged</name></member>
     <member refid="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a939e3597723f5e3feb514adfeab23fb4" kind="function"><name>GetMeshType</name></member>
-    <member refid="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a0d446a3a06fbaf0cec37d82998d134ca" kind="function"><name>GetIndices</name></member>
+    <member refid="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a3d7c99a59d22f5861e9762f971b1fb10" kind="function"><name>GetIndices</name></member>
     <member refid="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a3c933dd4ceee02d3ffb0e6eaf6f3e646" kind="function"><name>GetMeshIdentifier</name></member>
     <member refid="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a2fdf9b8f55c42130fae558a6ff59964a" kind="function"><name>GetMeshLayer</name></member>
     <member refid="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a4fbda01e8a426c3efbd3e4adf45adeba" kind="function"><name>SetMatrix</name></member>
@@ -3551,6 +3551,32 @@
     <member refid="classSR__UTILS__NS_1_1Factory_1acaa2a0e7f867d3fd844510ef1322f822" kind="function"><name>ForEachClassInModule</name></member>
     <member refid="classSR__UTILS__NS_1_1Factory_1a3e6c39e2adab7fb215dc703fe8224f74" kind="function"><name>WriteLog</name></member>
     <member refid="classSR__UTILS__NS_1_1Factory_1a67220e10d3697bc683dbd1f14d4df7e3" kind="function"><name>WriteError</name></member>
+  </compound>
+  <compound refid="classSR__HTYPES__NS_1_1FastMemoryArray" kind="class"><name>SR_HTYPES_NS::FastMemoryArray</name>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1ad06892ab2f120c17ce169603ac80570e" kind="typedef"><name>ValueType</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1adc05fc1a3f77182c39832af434f79e16" kind="variable"><name>m_size</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a70f2104c30bbc2739890d7464daca6c8" kind="variable"><name>m_capacity</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a98f827960b14eea2906e5a9d23cc3e7c" kind="variable"><name>m_data</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1aed9691c8af8e339e340f1dd8a8735e15" kind="function"><name>FastMemoryArray</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a622487e67d5b4fe6b625e6fddea6ca10" kind="function"><name>FastMemoryArray</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1ac9fc967ec43daf0cb9a3ef47633e39f5" kind="function"><name>FastMemoryArray</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a54b34ace781fa2494da20e8510cf903a" kind="function"><name>operator=</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1af200fe89853ff1b2ab342ec2aab478ee" kind="function"><name>FastMemoryArray</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a8d1898f21ce27c90b41e07240d0db2b0" kind="function"><name>operator=</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a7017c78ebf6f6c624821ad7f323c2249" kind="function"><name>~FastMemoryArray</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1acd41a0aa67ba13c5bfd3b1485def7500" kind="function"><name>size</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1adc0df515c03b6b445f2187629aafb9ab" kind="function"><name>capacity</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a2e8a5168db8ac0addf0ad2d73aa1d9bf" kind="function"><name>empty</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1accf1aded974a53849d47e51aa5be2e3c" kind="function"><name>data</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a6907fccf74adfb1a5d447bca496ac405" kind="function"><name>data</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a3f0eeb18fe72c27fca75224560556f22" kind="function"><name>operator[]</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1ab4594a718599bee211d00c61762f2b66" kind="function"><name>operator[]</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a675c0bb34ad6b2b2056ab091a582b2a2" kind="function"><name>clear</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a5c183590e3e938f8d04c1bd8228f300d" kind="function"><name>shrink_to_fit</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a49e62e6f0183beef5b9bc28de2ab7cdb" kind="function"><name>push_back</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a42cfafc1ec4b3a85401475a317941b87" kind="function"><name>push_back</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a6c595feee0d4b1f1b128d311d8a3fd38" kind="function"><name>resize</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1afd8712192e67c20e66131164956ca7c9" kind="function"><name>reserve</name></member>
   </compound>
   <compound refid="structSR__CORE__NS_1_1GUI_1_1FBElement" kind="struct"><name>SR_CORE_NS::GUI::FBElement</name>
     <member refid="structSR__CORE__NS_1_1GUI_1_1FBElement_1a9cd36d3abdf40a0de59737013877b46a" kind="variable"><name>filename</name></member>
@@ -4941,13 +4967,13 @@
     <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1ada0a7c8f0f59896c470f8ab2386dc220" kind="function"><name>GetVBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1a7be4509796e691647981d7e0ada70f3b" kind="function"><name>GetVerticesCount</name></member>
     <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1a898c8bb0651bfcdb5c01125c8b34bdc8" kind="function"><name>GetIndicesCount</name></member>
-    <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1a0719b2d564ec8a0098ac348919a94943" kind="function"><name>GetIndices</name></member>
+    <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1ab7226085318122a31fcfae25b4bc8597" kind="function"><name>GetIndices</name></member>
     <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1acd2426952f16cf3f88068adef2d09a04" kind="function"><name>IsSupportVBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1ab9a915299cbac7482344fcdc270c1094" kind="function"><name>Calculate</name></member>
     <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1adeeebbf20285c62a82ec70bbef37e186" kind="function"><name>CalculateIBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1a3819bcea53ef97fa3ac221b7a24238e6" kind="function"><name>FreeVideoMemory</name></member>
-    <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1a050089d8895d5d0087220aa97c646871" kind="function"><name>CalculateVBO</name></member>
-    <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1afa9717bbb1d9736e0091964ad182215f" kind="function"><name>CalculateVBO</name></member>
+    <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1ad168fddb96e38da5724084b1f46f3864" kind="function"><name>CalculateVBO</name></member>
+    <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1ac566d60a8e744908fe1fd4948f56adb1" kind="function"><name>CalculateVBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1a0b23120e9e096f7a60733dfac37790ae" kind="function"><name>FreeVBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1aab16bcf36a31cc423dbd4492c9f458d7" kind="function"><name>FreeIBO</name></member>
   </compound>
@@ -6240,7 +6266,7 @@
     <member refid="classSR__GTYPES__NS_1_1Mesh3D_1af920e1a41c39c02af0db823ae29caa9b" kind="function"><name>OnResourceReloaded</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh3D_1a6e4f14eb69451418d19b4347e3bec2d5" kind="function"><name>GetMeshType</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh3D_1a725199ac6ffd3df2bd2f9caad2ab7fce" kind="function"><name>IsCalculatable</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Mesh3D_1aafdc337069a9fcbe4ea14bb71af39fc6" kind="function"><name>GetIndices</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Mesh3D_1a73f1a52089c4b9c60ae948be917d1c78" kind="function"><name>GetIndices</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh3D_1a8cca4275124f373d73a0c54f4ac2f5c5" kind="function"><name>GetMeshIdentifier</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh3D_1ae1a30f8505e1bc1b948b0be9a2c34f50" kind="function"><name>Calculate</name></member>
   </compound>
@@ -8023,10 +8049,12 @@
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a187a9a2afaff3e74e1e168ae5ab63244" kind="typedef"><name>Super</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1ac70459f6d29532d02def09b15989cea6" kind="typedef"><name>Ptr</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1aeaf4281e865fc618affbe9576a06df96" kind="typedef"><name>VertexType</name></member>
-    <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1aaec63d1a19df44277781d09c76c1594e" kind="variable"><name>m_vertices</name></member>
-    <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1aeb40ea9372644b2502afefad965e9351" kind="variable"><name>m_indices</name></member>
+    <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1ad761170d992249d8dfdcaa54b059a8c5" kind="variable"><name>m_vertices</name></member>
+    <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a3d347555c32559fa0d175e6296c18c69" kind="variable"><name>m_indices</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1ad68dbdbdb31138a062420c64eddbb605" kind="function"><name>ProceduralMesh</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a1b494dddb7f1182ec87ac58f76039e91" kind="function"><name>GetMeshType</name></member>
+    <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1acc1d040de4c97427731d10b0c98a4fdb" kind="function"><name>SwapIndexedVertices</name></member>
+    <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1ab6f925bf3ac21c85a71a8144e26cdbcb" kind="function"><name>SwapIndices</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a73233cb7a070e2b92005fcf50ae0e603" kind="function"><name>SetIndexedVertices</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a210b2b2b453a33cdaf9600a35f4b908d" kind="function"><name>SetIndices</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a7ca68c422d8890c3990f9295801bfc1f" kind="function"><name>SetVertices</name></member>
@@ -8036,7 +8064,7 @@
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1ae856ccedae6a060b798f3c37314e36ab" kind="function"><name>IsCalculatable</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a27260cd51b0292e5b9f69fa260bea19d" kind="function"><name>Calculate</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1af0db779a0e3c83254570f0a2eac408c7" kind="function"><name>SetDirtyMesh</name></member>
-    <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a01586903b886cf78584cbe1427190c24" kind="function"><name>GetIndices</name></member>
+    <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1aacc095e2cbe3cd01a7beed6fd7e54c85" kind="function"><name>GetIndices</name></member>
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1ProjViewUBO" kind="struct"><name>SR_GRAPH_NS::ProjViewUBO</name>
     <member refid="structSR__GRAPH__NS_1_1ProjViewUBO_1aeebeb4eb37c24710cbfd8facf8895c6d" kind="variable"><name>proj</name></member>
@@ -8313,7 +8341,7 @@
     <member refid="classSR__HTYPES__NS_1_1RawMesh_1a881cad9b1baac4f97fabca46f3859eb6" kind="variable"><name>m_boneTransformsMap</name></member>
     <member refid="classSR__HTYPES__NS_1_1RawMesh_1a98ade07e13ec7aa2f071c23f03460a9b" kind="variable"><name>m_boneOffsets</name></member>
     <member refid="classSR__HTYPES__NS_1_1RawMesh_1a5fbb776c541a49063e328eb0d3dcff6b" kind="variable"><name>m_boneTransforms</name></member>
-    <member refid="classSR__HTYPES__NS_1_1RawMesh_1a084a30182433ba36595c5ef31561279f" kind="variable"><name>m_indices</name></member>
+    <member refid="classSR__HTYPES__NS_1_1RawMesh_1ac9185797be9d6b769ace99b41979b2d3" kind="variable"><name>m_indices</name></member>
     <member refid="classSR__HTYPES__NS_1_1RawMesh_1af975764fa41ededd89cc98bc6883edc6" kind="variable"><name>m_params</name></member>
     <member refid="classSR__HTYPES__NS_1_1RawMesh_1a46e8738269644f31d009f91cb106dd62" kind="variable"><name>m_fromCache</name></member>
     <member refid="classSR__HTYPES__NS_1_1RawMesh_1a69be77430de9edf02084e600996de797" kind="function"><name>RawMesh</name></member>
@@ -8330,7 +8358,7 @@
     <member refid="classSR__HTYPES__NS_1_1RawMesh_1a309aabfdeebc20db5e437f47b76fe948" kind="function"><name>GetMeshesCount</name></member>
     <member refid="classSR__HTYPES__NS_1_1RawMesh_1ad9e42b0283df048253e571a1ed063aa6" kind="function"><name>GetGeometryName</name></member>
     <member refid="classSR__HTYPES__NS_1_1RawMesh_1ad5ca8020192796636cbde6e50e677741" kind="function"><name>GetVertices</name></member>
-    <member refid="classSR__HTYPES__NS_1_1RawMesh_1a1e7ca45eac317e4d872789d5ba82efd6" kind="function"><name>GetIndices</name></member>
+    <member refid="classSR__HTYPES__NS_1_1RawMesh_1abcd4d63493cb0747454aaf1c3e00176a" kind="function"><name>GetIndices</name></member>
     <member refid="classSR__HTYPES__NS_1_1RawMesh_1ae6680beeaef37826e6bb786637d519cb" kind="function"><name>GetBones</name></member>
     <member refid="classSR__HTYPES__NS_1_1RawMesh_1a06da406487c0dccc95521fec583a2f47" kind="function"><name>GetOptimizedBones</name></member>
     <member refid="classSR__HTYPES__NS_1_1RawMesh_1a4a23c21a6d1edb9b2a34620df8c2d62d" kind="function"><name>GetBoneOffset</name></member>
@@ -10352,7 +10380,7 @@
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a5882874deab2bb403553f7a28ffdc43d" kind="function"><name>OnRawMeshChanged</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1ac956768308c8cc73915daeb35ae81219" kind="function"><name>Calculate</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a7c9f4f4a97cbb51d0e1bcf93a8af7ea3" kind="function"><name>FreeSSBO</name></member>
-    <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1acaa71e57c9ca61e6a5de5c30136f08bd" kind="function"><name>GetIndices</name></member>
+    <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a95a1f94c5e642a43c154a24397273694" kind="function"><name>GetIndices</name></member>
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex" kind="struct"><name>SR_GRAPH_NS::Vertices::SkinnedMeshVertex</name>
     <member refid="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1a6a48132ecd895a4ae460f1a88d58c0f9" kind="variable"><name>pos</name></member>
@@ -12798,6 +12826,42 @@
     <member refid="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_014_01_4_1a18067229cc6d2ce37f829c8851efa89a" kind="function"><name>Decode</name></member>
     <member refid="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_014_01_4_1a25af7211732ce25034f750d6b6bce0ed" kind="function"><name>Width</name></member>
     <member refid="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_014_01_4_1a5cedbac64cc01666dd440f5e5b9f27ee" kind="function"><name>Encode</name></member>
+  </compound>
+  <compound refid="classSR__MATH__NS_1_1UVector3Iterator" kind="class"><name>SR_MATH_NS::UVector3Iterator</name>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a331f6681b2640ac45583c45b1dde6e01" kind="typedef"><name>iterator_category</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a4ed7b9a2d3971277d0102306a58446e5" kind="typedef"><name>value_type</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a90e9a64d83136b137abf503cc1131cd7" kind="typedef"><name>difference_type</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a6e5a5f37a2d82ba03b41062357c7dfeb" kind="typedef"><name>pointer</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1ab97d088d85c5ff38a2e63105da77f6ed" kind="typedef"><name>reference</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a320adc69ee8db0468c6c9a201ea663c1" kind="variable"><name>m_max</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a39b4637fc990aedb7178d8351ec8d0d9" kind="variable"><name>m_index</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1aa8fe436fecd95a4a65c33778b1dd79c9" kind="function"><name>UVector3Iterator</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a3bd915682f7de6ab534dec27de67186f" kind="function"><name>UVector3Iterator</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1abeb003cc0e457220c0e0c6a40e9b1cd5" kind="function"><name>operator*</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a762cd1104c8301f4b6b5cdf1e4be478f" kind="function"><name>operator++</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1aea3d7b12fda12a326712aeffb53db6a3" kind="function"><name>operator++</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1ac1eff1070d33eda75a194dbf67527a3d" kind="function"><name>operator--</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1ac9ec2704296ea4f4c90dc9d00d1a616d" kind="function"><name>operator--</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1ae353a060cefee0a6e7a54677645933fb" kind="function"><name>operator+=</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1aa7c168f9553411d4ef13b36bf06278ca" kind="function"><name>operator-=</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a48f202725687dcc920fae68c3b0534af" kind="function"><name>operator+</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a1de934aad5f6d2d2441e42a103436dec" kind="function"><name>operator-</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a74ba28158302979c5669da5e4e8682e8" kind="function"><name>operator-</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a8f7c2df75b4fe204841edae8c5563db0" kind="function"><name>operator[]</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a10dcc7e0b31835f565533543d600aa77" kind="function"><name>operator==</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a9dd6748edb1f7e53f28aa511ad8ddef9" kind="function"><name>operator!=</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1ab9edbf30a128952bda50f79bf0d83136" kind="function"><name>operator&lt;</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1ae9d95b1ce3bf09795eeeea55138b2e0a" kind="function"><name>operator&gt;</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1ae455e77af48abc6c2daf8ad6b2d53a3d" kind="function"><name>operator&lt;=</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Iterator_1a4eb78c6fc7973877647695ad68826ae3" kind="function"><name>operator&gt;=</name></member>
+  </compound>
+  <compound refid="classSR__MATH__NS_1_1UVector3Range" kind="class"><name>SR_MATH_NS::UVector3Range</name>
+    <member refid="classSR__MATH__NS_1_1UVector3Range_1a8bd51fab17ec4ad222aab4b48d11dd9a" kind="variable"><name>min</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Range_1a54678d24c28f138aef1884f08fae4937" kind="variable"><name>max</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Range_1ab994d6897235100bf18697e58ecc0767" kind="function"><name>UVector3Range</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Range_1a429d21270fb5e7ccf9ee3f227bd59ae0" kind="function"><name>UVector3Range</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Range_1a9dc63b211c7206d9ea11b7fe53040ab2" kind="function"><name>begin</name></member>
+    <member refid="classSR__MATH__NS_1_1UVector3Range_1ab332990ed7e12c80e89ab30696fc5c67" kind="function"><name>end</name></member>
   </compound>
   <compound refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kind="class"><name>SR_UTILS_NS::Reflection::Value</name>
     <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a7b9efd5440cf2064c13ef3e24b9972d1" kind="typedef"><name>SRClassGetterFn</name></member>
@@ -16396,6 +16460,8 @@
   </compound>
   <compound refid="Vector6_8h" kind="file"><name>Vector6.h</name>
   </compound>
+  <compound refid="VectorRanges_8h" kind="file"><name>VectorRanges.h</name>
+  </compound>
   <compound refid="Allocator_8h" kind="file"><name>Allocator.h</name>
     <member refid="Allocator_8h_1aa4a76e64681140dfe9947e80d5681e09" kind="function"><name>SRMalloc</name></member>
     <member refid="Allocator_8h_1a1d44575f16d0141f1a49178041648b46" kind="function"><name>SRReAlloc</name></member>
@@ -16582,6 +16648,8 @@
   <compound refid="DataStorage_8h" kind="file"><name>DataStorage.h</name>
   </compound>
   <compound refid="EDMarshal_8h" kind="file"><name>EDMarshal.h</name>
+  </compound>
+  <compound refid="FastMemoryArray_8h" kind="file"><name>FastMemoryArray.h</name>
   </compound>
   <compound refid="ForwardList_8h" kind="file"><name>ForwardList.h</name>
   </compound>

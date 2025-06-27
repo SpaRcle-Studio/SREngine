@@ -145,20 +145,20 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="32" column="27"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh3D_1aafdc337069a9fcbe4ea14bb71af39fc6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
-        <type>SR_NODISCARD std::vector&lt; uint32_t &gt;</type>
-        <definition>SR_NODISCARD std::vector&lt; uint32_t &gt; SR_GTYPES_NS::Mesh3D::GetIndices</definition>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh3D_1a73f1a52089c4b9c60ae948be917d1c78" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__HTYPES__NS_1_1FastMemoryArray" kindref="compound">SR_HTYPES_NS::FastMemoryArray</ref>&lt; uint32_t &gt; &amp;</type>
+        <definition>SR_NODISCARD const SR_HTYPES_NS::FastMemoryArray&lt; uint32_t &gt; &amp; SR_GTYPES_NS::Mesh3D::GetIndices</definition>
         <argsstring>() const override</argsstring>
         <name>GetIndices</name>
         <qualifiedname>SR_GTYPES_NS::Mesh3D::GetIndices</qualifiedname>
-        <reimplements refid="classSR__GTYPES__NS_1_1IndexedMesh_1a0719b2d564ec8a0098ac348919a94943">GetIndices</reimplements>
+        <reimplements refid="classSR__GTYPES__NS_1_1IndexedMesh_1ab7226085318122a31fcfae25b4bc8597">GetIndices</reimplements>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="33" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h" line="33" column="58"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh3D_1a8cca4275124f373d73a0c54f4ac2f5c5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD std::string</type>
@@ -339,8 +339,8 @@
       <member refid="classSR__GTYPES__NS_1_1Mesh_1ac081233babf593b4ccac9e5dabaf35d2" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>BindMesh</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh3D_1ae1a30f8505e1bc1b948b0be9a2c34f50" prot="private" virt="virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>Calculate</name></member>
       <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1adeeebbf20285c62a82ec70bbef37e186" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>CalculateIBO</name></member>
-      <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1a050089d8895d5d0087220aa97c646871" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>CalculateVBO</name></member>
-      <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1afa9717bbb1d9736e0091964ad182215f" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>CalculateVBO</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1ad168fddb96e38da5724084b1f46f3864" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>CalculateVBO</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1ac566d60a8e744908fe1fd4948f56adb1" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>CalculateVBO</name></member>
       <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1a95e88410ef4fd3374845724623f6cf55" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>CameraPtr</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad595cda1bf5fd49695826b348848bea7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>CheckActivity</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ae178f96f84ede2be45870eab162e794d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>CloneComponent</name></member>
@@ -361,7 +361,7 @@
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a8cedda755c832cabdaaf14644939695d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>GetGeometryName</name></member>
       <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1a662817c97a9740a6941294d213120cde" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>GetIBO</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a1bc2cbdfbcd251764907ebd0dddef009" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>GetIndexInSceneUpdater</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Mesh3D_1aafdc337069a9fcbe4ea14bb71af39fc6" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>GetIndices</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh3D_1a73f1a52089c4b9c60ae948be917d1c78" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>GetIndices</name></member>
       <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1a898c8bb0651bfcdb5c01125c8b34bdc8" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>GetIndicesCount</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a1d06cec76546a9849a50b484293b684a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>GetMaterial</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1adff93b7a6119dc188a28c6c0eb8a8e37" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>GetMatrix</name></member>

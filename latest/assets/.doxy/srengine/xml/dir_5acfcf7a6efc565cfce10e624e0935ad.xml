@@ -5,6 +5,7 @@
     <innerfile refid="BinarySearchTree_8h">BinarySearchTree.h</innerfile>
     <innerfile refid="DataStorage_8h">DataStorage.h</innerfile>
     <innerfile refid="EDMarshal_8h">EDMarshal.h</innerfile>
+    <innerfile refid="FastMemoryArray_8h">FastMemoryArray.h</innerfile>
     <innerfile refid="ForwardList_8h">ForwardList.h</innerfile>
     <innerfile refid="Function_8h">Function.h</innerfile>
     <innerfile refid="IRawMeshHolder_8h">IRawMeshHolder.h</innerfile>

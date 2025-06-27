@@ -550,6 +550,8 @@
 ([**SR\_HTYPES\_NS::Thread**](classSR__HTYPES__NS_1_1Thread.md))
 * [**Factory**](classSR__UTILS__NS_1_1Factory.md)
 ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
+* [**FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md)
+([**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md))
 * [**FBElement**](structSR__CORE__NS_1_1GUI_1_1FBElement.md)
 ([**SR\_CORE\_NS::GUI**](namespaceSR__CORE__NS_1_1GUI.md))
 * [**FBFolder**](structSR__CORE__NS_1_1GUI_1_1FBFolder.md)
@@ -1902,6 +1904,10 @@
 ([**SR\_UTILS\_NS::Localization::Utf**](namespaceSR__UTILS__NS_1_1Localization_1_1Utf.md))
 * [**UtfTraits&lt; CharType, 4 &gt;**](structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_014_01_4.md)
 ([**SR\_UTILS\_NS::Localization::Utf**](namespaceSR__UTILS__NS_1_1Localization_1_1Utf.md))
+* [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md)
+([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
+* [**UVector3Range**](classSR__MATH__NS_1_1UVector3Range.md)
+([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 
 
 ## v
