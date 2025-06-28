@@ -6,6 +6,7 @@
 #include <Utils/Input/KeyCodes.h>
 #include <Utils/Math/Vector2.h>
 #include <Utils/Math/Noise.h>
+#include <Utils/Math/VectorRanges.h>
 
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
 
@@ -49,12 +50,14 @@ namespace SpaRcle::Scripts::Samples {
 
     struct BlockInfo {
         bool exists = false;
+        uint8_t sides = 0;
+        uint32_t offset = 0;
     };
 
     class ChunkRenderer : public SpaRcle::Scripting::CppBehaviour {
         SR_CLASS()
     public:
-        bool ExecuteInEditMode() const override {
+        SR_NODISCARD bool ExecuteInEditMode() const override {
             return true; // Allow execution in edit mode for testing purposes
         }
 
@@ -77,19 +80,16 @@ namespace SpaRcle::Scripts::Samples {
                 return;
             }
 
-            vertices.reserve(size.x * size.y * size.z * 6 * 4);
-            indices.reserve(size.x * size.y * size.z * 6 * 6);
-
             RegenerateChunkData();
+            PreCalcBlockMeshes();
+
+            vertices.resize(totalSides * 4);
+            indices.resize(totalSides * 6);
+
             RebuildVerticesAndIndices();
 
-            /// some comment 2 3
-
-            pMesh->SetIndexedVertices(vertices.data(), vertices.size());
-            pMesh->SetIndices(indices.data(), indices.size());
-
-            vertices.clear();
-            indices.clear();
+            pMesh->SwapIndexedVertices(vertices);
+            pMesh->SwapIndices(indices);
         }
 
         void MarkDirty() {
@@ -97,19 +97,65 @@ namespace SpaRcle::Scripts::Samples {
         }
 
     private:
+        void PreCalcBlockMeshes() {
+            SR_TRACY_ZONE;
+
+            SR_MATH_NS::UVector3Range chunkRange(size.x, size.y, size.z);
+
+            std::atomic<uint32_t> blockIndex = 0;
+
+            std::for_each(std::execution::par_unseq, chunkRange.begin(), chunkRange.end(), [&](const auto& pos) {
+                BlockInfo& block = GetBlockUnsafe(pos.x, pos.y, pos.z);
+                block.sides = 0;
+                if (block.exists) {
+                    for (const auto& face : BLOCK_FACES) {
+                        if (!GetBlockNeighbour(pos.x, pos.y, pos.z, face.side).exists) {
+                            block.sides += 1;
+                        }
+                    }
+                    if (block.sides > 0) {
+                        block.offset = blockIndex.fetch_add(block.sides, std::memory_order_relaxed);
+                    }
+                }
+            });
+
+            totalSides = std::transform_reduce(std::execution::par_unseq, chunkRange.begin(), chunkRange.end(), 0u, std::plus<>(), [&](const SR_MATH_NS::UVector3& pos) {
+                return static_cast<uint32_t>(GetBlockUnsafe(pos.x, pos.y, pos.z).sides);
+            });
+        }
+
         void RebuildVerticesAndIndices() {
             SR_TRACY_ZONE;
 
-            for (uint32_t x = 0; x < size.x; ++x) {
-                for (uint32_t y = 0; y < size.y; ++y) {
-                    for (uint32_t z = 0; z < size.z; ++z) {
-                        if (!GetBlockUnsafe(x, y, z).exists) SR_UNLIKELY_ATTRIBUTE {
-                            continue;
-                        }
-                        GenerateBlock(x, y, z);
-                    }
+            SR_MATH_NS::UVector3Range chunkRange(size.x, size.y, size.z);
+
+            std::for_each(std::execution::par_unseq, chunkRange.begin(), chunkRange.end(), [&](const auto& pos) {
+                const BlockInfo& blockInfo = GetBlockUnsafe(pos.x, pos.y, pos.z);
+
+                if (blockInfo.sides == 0) {
+                    return;
                 }
-            }
+
+                uint32_t baseIndex = blockInfo.offset * 4;
+                uint32_t indicesIndex = blockInfo.offset * 6;
+
+                for (const auto& face : BLOCK_FACES) {
+                    if (GetBlockNeighbour(pos.x, pos.y, pos.z, face.side).exists) {
+                        continue;
+                    }
+
+                    AddFace(
+                        pos.x + face.originOffset.x,
+                        pos.y + face.originOffset.y,
+                        pos.z + face.originOffset.z,
+                        face.normal, face.offsetU, face.offsetV,
+                        baseIndex, indicesIndex
+                    );
+
+                    baseIndex += 4;
+                    indicesIndex += 6;
+                }
+            });
         }
 
         void RegenerateChunkData() {
@@ -121,87 +167,58 @@ namespace SpaRcle::Scripts::Samples {
                 pBlocks = new BlockInfo[blocksCount];
             }
 
-            for (uint32_t x = 0; x < size.x; ++x) {
-                for (uint32_t y = 0; y < size.y; ++y) {
-                    for (uint32_t z = 0; z < size.z; ++z) {
-                        const float_t noise = SR_MATH_NS::SNoise(
-                            (static_cast<double>(x) / noiseScale + static_cast<double>(seed)),
-                            (static_cast<double>(y) / noiseScale + static_cast<double>(seed)),
-                            (static_cast<double>(z) / noiseScale + static_cast<double>(seed))
-                        );
+            SR_MATH_NS::UVector3Range chunkRange(size.x, size.y, size.z);
 
-                        GetBlockUnsafe(x, y, z).exists = noise > 0.f;
-                    }
-                }
-            }
+            std::for_each(std::execution::par_unseq, chunkRange.begin(), chunkRange.end(), [&](const auto& pos) {
+                const double dx = static_cast<double>(pos.x) / noiseScale + seed;
+                const double dy = static_cast<double>(pos.y) / noiseScale + seed;
+                const double dz = static_cast<double>(pos.z) / noiseScale + seed;
+
+                const float_t noise = SR_MATH_NS::SNoise(dx, dy, dz);
+                GetBlockUnsafe(pos.x, pos.y, pos.z).exists = noise > 0.f;
+            });
         }
 
-        void AddFace(
+        SR_FORCE_INLINE void SR_FASTCALL AddFace(
             uint32_t x, uint32_t y, uint32_t z,
             const SR_MATH_NS::FVector3& normal,
             const SR_MATH_NS::FVector3& offsetU,
-            const SR_MATH_NS::FVector3& offsetV
+            const SR_MATH_NS::FVector3& offsetV,
+            uint32_t baseIndex,
+            uint32_t indicesIndex
         ) {
-            SR_GRAPH_NS::Vertices::StaticMeshVertex vertex;
-            const uint32_t count = vertices.size();
+            constexpr static SR_MATH_NS::FVector2 uvs[4] = { {0, 0}, {0, 1}, {1, 0}, {1, 1} };
+            const SR_MATH_NS::FVector3 origin(static_cast<float_t>(x), static_cast<float_t>(y), static_cast<float_t>(z));
 
-            vertex.norm = normal;
+            auto* pVertices = vertices.data() + baseIndex;
+            auto* pIndices = indices.data() + indicesIndex;
 
-            vertex.pos = SR_MATH_NS::FVector3(x, y, z);
-            vertex.uv = SR_MATH_NS::FVector2(0, 0);
-            vertices.emplace_back(vertex);
+            pVertices[0] = { origin,                     uvs[0], normal };
+            pVertices[1] = { origin + offsetV,           uvs[1], normal };
+            pVertices[2] = { origin + offsetU,           uvs[2], normal };
+            pVertices[3] = { origin + offsetU + offsetV, uvs[3], normal };
 
-            vertex.pos = SR_MATH_NS::FVector3(x, y, z) + offsetV;
-            vertex.uv = SR_MATH_NS::FVector2(0, 1);
-            vertices.emplace_back(vertex);
-
-            vertex.pos = SR_MATH_NS::FVector3(x, y, z) + offsetU;
-            vertex.uv = SR_MATH_NS::FVector2(1, 0);
-            vertices.emplace_back(vertex);
-
-            vertex.pos = SR_MATH_NS::FVector3(x, y, z) + offsetU + offsetV;
-            vertex.uv = SR_MATH_NS::FVector2(1, 1);
-            vertices.emplace_back(vertex);
-
-            indices.emplace_back(count + 0);
-            indices.emplace_back(count + 1);
-            indices.emplace_back(count + 2);
-
-            indices.emplace_back(count + 1);
-            indices.emplace_back(count + 3);
-            indices.emplace_back(count + 2);
-        }
-
-        void GenerateBlock(uint32_t x, uint32_t y, uint32_t z) {
-            for (const auto& face : BLOCK_FACES) {
-                if (GetBlockNeighbour(x, y, z, face.side).exists) {
-                    continue;
-                }
-
-                AddFace(
-                    x + face.originOffset.x,
-                    y + face.originOffset.y,
-                    z + face.originOffset.z,
-                    face.normal,
-                    face.offsetU,
-                    face.offsetV
-                );
-            }
+            pIndices[0] = baseIndex + 0;
+            pIndices[1] = baseIndex + 1;
+            pIndices[2] = baseIndex + 2;
+            pIndices[3] = baseIndex + 1;
+            pIndices[4] = baseIndex + 3;
+            pIndices[5] = baseIndex + 2;
         }
 
         BlockInfo& GetBlock(uint32_t x, uint32_t y, uint32_t z) {
             if (x >= size.x || y >= size.y || z >= size.z) SR_UNLIKELY_ATTRIBUTE {
                 static BlockInfo emptyBlock;
-                return emptyBlock; // Return an empty block if out of bounds
+                return emptyBlock;
             }
             return pBlocks[x + y * size.x + z * size.x * size.y];
         }
 
-        BlockInfo& GetBlockUnsafe(uint32_t x, uint32_t y, uint32_t z) {
+        SR_NODISCARD BlockInfo& SR_FASTCALL GetBlockUnsafe(uint32_t x, uint32_t y, uint32_t z) {
             return pBlocks[x + y * size.x + z * size.x * size.y];
         }
 
-        BlockInfo& GetBlockNeighbour(uint32_t x, uint32_t y, uint32_t z, BlockSide side) {
+        BlockInfo& SR_FASTCALL GetBlockNeighbour(uint32_t x, uint32_t y, uint32_t z, BlockSide side) {
             return GetBlock(
                 static_cast<int32_t>(x) + BLOCK_FACE_OFFSETS[static_cast<uint32_t>(side)].x,
                 static_cast<int32_t>(y) + BLOCK_FACE_OFFSETS[static_cast<uint32_t>(side)].y,
@@ -210,12 +227,16 @@ namespace SpaRcle::Scripts::Samples {
         }
 
     private:
-        std::vector<SR_GRAPH_NS::Vertices::StaticMeshVertex> vertices;
-        std::vector<uint32_t> indices;
+        SR_HTYPES_NS::FastMemoryArray<SR_GRAPH_NS::Vertices::StaticMeshVertex> vertices;
+        SR_HTYPES_NS::FastMemoryArray<uint32_t> indices;
         bool isDirty = true;
+
+        std::mutex buffersMutex;
 
         BlockInfo* pBlocks = nullptr;
         uint32_t blocksCount = 0;
+
+        uint32_t totalSides = 0;
 
         SR_GTYPES_NS::ProceduralMesh::Ptr pMesh;
 

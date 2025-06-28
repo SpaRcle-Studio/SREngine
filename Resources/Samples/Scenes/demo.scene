@@ -3483,11 +3483,15 @@ ddddцццゔぅヾボ
 									9-o:data
 										10-o:size
 											11-v:x
-												12-i:16
+												12-i:200
 											11-v:y
 												12-i:64
 											11-v:z
-												12-i:16
+												12-i:200
+										10-v:noiseScale
+											11-f:57.000000
+										10-v:seed
+											11-i:-380
 						6-k:i
 							7-o:d
 								8-v:type
@@ -3503,6 +3507,8 @@ ddddцццゔぅヾボ
 												12-s:Engine/Materials/default.mat
 					5-v:name
 						6-s:New GameObject
+					5-v:layer
+						6-s:UI
 					5-o:transform
 						6-v:type
 							7-s:Transform3D
