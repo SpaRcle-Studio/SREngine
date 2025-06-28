@@ -1,0 +1,42 @@
+ShaderType Simple;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false;
+DepthWrite true;
+DepthTest true;
+
+struct SSBOVertex {
+    vec3 pos;
+    vec2 uv;
+    vec3 norm;
+    vec3 tang;
+    vec3 bitang;
+};
+
+[[ssbo(ssboVertices)]] SSBOVertex[] ssboVertices;
+
+[[uniform], [public]] vec4 color = vec4(1, 1, 1, 1);
+[[uniform], [public]] sampler2D diffuse;
+
+[[shared]] vec2 uv;
+[[shared]] vec3 vPos;
+
+#include <Engine/Shaders/CascadedShadowMap/pcf-utils.inl.srsl>
+
+void fragment() {
+    vec3 diffuseColor = texture(diffuse, uv).rgb * color.rgb;
+    vec3 lightColor = vec3(1.0);
+    COLOR = CalculateShadowCustom(diffuseColor, lightColor, vPos);
+}
+
+void vertex() {
+    uv = ssboVertices[VERTEX_INDEX].uv;
+    vPos = ssboVertices[VERTEX_INDEX].pos;
+
+    PreparePCFCustom(MODEL_MATRIX, vPos, ssboVertices[VERTEX_INDEX].norm);
+
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(vPos, 1.0);
+}
