@@ -32,6 +32,7 @@
 | struct | [**SimpleVertex**](structSR__GRAPH__NS_1_1Vertices_1_1SimpleVertex.md) <br> |
 | struct | [**SkinnedMeshVertex**](structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex.md) <br> |
 | struct | [**StaticMeshVertex**](structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex.md) <br> |
+| struct | [**StaticMeshVertexAligned**](structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned.md) <br> |
 | struct | [**UIVertex**](structSR__GRAPH__NS_1_1Vertices_1_1UIVertex.md) <br> |
 | struct | [**VertexInfo**](structSR__GRAPH__NS_1_1Vertices_1_1VertexInfo.md) <br> |
 

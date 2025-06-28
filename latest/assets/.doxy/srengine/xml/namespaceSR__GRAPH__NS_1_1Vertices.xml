@@ -5,6 +5,7 @@
     <innerclass refid="structSR__GRAPH__NS_1_1Vertices_1_1SimpleVertex" prot="public">SR_GRAPH_NS::Vertices::SimpleVertex</innerclass>
     <innerclass refid="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex" prot="public">SR_GRAPH_NS::Vertices::SkinnedMeshVertex</innerclass>
     <innerclass refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex" prot="public">SR_GRAPH_NS::Vertices::StaticMeshVertex</innerclass>
+    <innerclass refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned" prot="public">SR_GRAPH_NS::Vertices::StaticMeshVertexAligned</innerclass>
     <innerclass refid="structSR__GRAPH__NS_1_1Vertices_1_1UIVertex" prot="public">SR_GRAPH_NS::Vertices::UIVertex</innerclass>
     <innerclass refid="structSR__GRAPH__NS_1_1Vertices_1_1VertexInfo" prot="public">SR_GRAPH_NS::Vertices::VertexInfo</innerclass>
     <sectiondef kind="enum">
@@ -106,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="96" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="96" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="109" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="109" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Graphics_2inc_2Graphics_2Types_2Vertices_8h_1ac9df1e91c521132d4414a0d344fcfd17" prot="public" static="no">
         <type>std::vector&lt; <ref refid="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex" kindref="compound">SkinnedMeshVertex</ref> &gt;</type>
@@ -120,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="174" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="174" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="187" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="187" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Graphics_2inc_2Graphics_2Types_2Vertices_8h_1a37c09a56c69f5b5894f3272ec13829c2" prot="public" static="no">
         <type>std::vector&lt; <ref refid="structSR__GRAPH__NS_1_1Vertices_1_1UIVertex" kindref="compound">UIVertex</ref> &gt;</type>
@@ -134,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="212" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="212" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="225" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="225" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Graphics_2inc_2Graphics_2Types_2Vertices_8h_1aa74c1bda5aed87876550564a3554588e" prot="public" static="no">
         <type>std::vector&lt; <ref refid="structSR__GRAPH__NS_1_1Vertices_1_1SimpleVertex" kindref="compound">SimpleVertex</ref> &gt;</type>
@@ -148,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="260" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="260" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="273" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="273" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -204,7 +205,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="214" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="214" bodyend="221"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="227" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="227" bodyend="234"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2Types_2Vertices_8h_1a005160df4a3fe5a9a0176d4dc581edd6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED std::string</type>
@@ -222,7 +223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="223" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="223" bodyend="230"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="236" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="236" bodyend="243"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2Types_2Vertices_8h_1a1400382aeb7f250a502a6c83c62ae5a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -257,7 +258,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="262" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="262" bodyend="285"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="275" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="275" bodyend="298"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2Types_2Vertices_8h_1abfea4c65b4ab9eeb2a487d024033b24d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -280,7 +281,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="287" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="287" bodyend="293"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="300" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="300" bodyend="306"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2Types_2Vertices_8h_1aad29abd0a7073d799626b2fe475f577e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED <ref refid="structSR__GRAPH__NS_1_1Vertices_1_1VertexInfo" kindref="compound">VertexInfo</ref></type>
@@ -298,7 +299,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="302" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="302" bodyend="338"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="315" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="315" bodyend="351"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2Types_2Vertices_8h_1ad426de7cba2d8a1a38e62f0a91dc1b32" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -325,7 +326,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="340" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="340" bodyend="398"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="353" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="353" bodyend="411"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2Types_2Vertices_8h_1a067f4d7f0b5fd4280e0c0a6cec0550bb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -348,7 +349,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="400" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="400" bodyend="402"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="413" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="413" bodyend="415"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

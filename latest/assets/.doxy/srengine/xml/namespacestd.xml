@@ -87,7 +87,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="406" column="36" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="406" bodyend="409"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="419" column="36" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="419" bodyend="422"/>
       </memberdef>
       <memberdef kind="function" id="Vector2_8h_1a9f6f4418239bc1645038f7b784ecae0d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>

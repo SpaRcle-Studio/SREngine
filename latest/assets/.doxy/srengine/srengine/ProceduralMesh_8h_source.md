@@ -33,6 +33,8 @@ namespace SR_GTYPES_NS {
     public:
         SR_NODISCARD MeshType GetMeshType() const noexcept override { return MeshType::Procedural; }
 
+        void SwapIndexedVertices(SR_HTYPES_NS::FastMemoryArray<Vertices::StaticMeshVertexAligned>& vertices);
+
         void SwapIndexedVertices(SR_HTYPES_NS::FastMemoryArray<Vertices::StaticMeshVertex>& vertices);
         void SwapIndices(SR_HTYPES_NS::FastMemoryArray<uint32_t>& indices);
 
@@ -45,16 +47,25 @@ namespace SR_GTYPES_NS {
         void UseModelMatrix() override;
 
         SR_NODISCARD bool IsUniqueMesh() const override { return true; }
-
         SR_NODISCARD bool IsCalculatable() const override;
+        SR_NODISCARD bool IsSupportVBO() const override;
 
     private:
+        void FreeVideoMemory() override;
         bool Calculate() override;
         void SetDirtyMesh();
+        void UseSSBO() override;
 
         SR_NODISCARD const SR_HTYPES_NS::FastMemoryArray<uint32_t>& GetIndices() const override;
 
     private:
+        bool m_useSSBOInsteadOfVertices = false;
+
+        int32_t m_ssbo = SR_ID_INVALID;
+        uint32_t m_ssboSize = 0;
+
+        SR_HTYPES_NS::FastMemoryArray<Vertices::StaticMeshVertexAligned> m_verticesAligned;
+
         SR_HTYPES_NS::FastMemoryArray<Vertices::StaticMeshVertex> m_vertices;
         SR_HTYPES_NS::FastMemoryArray<uint32_t> m_indices;
 

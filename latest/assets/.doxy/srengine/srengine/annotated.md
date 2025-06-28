@@ -424,6 +424,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
         * **struct** [**SimpleVertex**](structSR__GRAPH__NS_1_1Vertices_1_1SimpleVertex.md)     
         * **struct** [**SkinnedMeshVertex**](structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex.md)     
         * **struct** [**StaticMeshVertex**](structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex.md)     
+        * **struct** [**StaticMeshVertexAligned**](structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned.md)     
         * **struct** [**UIVertex**](structSR__GRAPH__NS_1_1Vertices_1_1UIVertex.md)     
         * **struct** [**VertexInfo**](structSR__GRAPH__NS_1_1Vertices_1_1VertexInfo.md)     
     * **class** [**VulkanImGuiOverlay**](classSR__GRAPH__NS_1_1VulkanImGuiOverlay.md)     

@@ -105,6 +105,14 @@
 
 
 
+## Public Attributes
+
+| Type | Name |
+| ---: | :--- |
+|  constexpr uint32\_t | [**SR\_INVALID\_FBO**](#variable-sr_invalid_fbo)   = `SR\_ID\_INVALID`<br> |
+|  constexpr uint32\_t | [**SR\_INVALID\_IBO**](#variable-sr_invalid_ibo)   = `SR\_ID\_INVALID`<br> |
+|  constexpr uint32\_t | [**SR\_INVALID\_UBO**](#variable-sr_invalid_ubo)   = `SR\_ID\_INVALID`<br> |
+|  constexpr uint32\_t | [**SR\_INVALID\_VBO**](#variable-sr_invalid_vbo)   = `SR\_ID\_INVALID`<br> |
 
 
 
@@ -162,6 +170,60 @@
 | define  | [**SR\_GET\_COMPILE\_TIME\_CLASS\_NAME**](stdInclude_8h.md#define-sr_get_compile_time_class_name) (T) `SR\_UTILS\_NS::GetCompileTimeTypeName&lt;T&gt;()`<br> |
 | define  | [**SR\_IGNORE\_UNUSED**](stdInclude_8h.md#define-sr_ignore_unused) (...) `SR\_UTILS\_NS::IgnoreUnused(\_\_VA\_ARGS\_\_)`<br> |
 
+## Public Attributes Documentation
+
+
+
+
+### variable SR\_INVALID\_FBO 
+
+```C++
+constexpr uint32_t SR_INVALID_FBO;
+```
+
+
+
+
+<hr>
+
+
+
+### variable SR\_INVALID\_IBO 
+
+```C++
+constexpr uint32_t SR_INVALID_IBO;
+```
+
+
+
+
+<hr>
+
+
+
+### variable SR\_INVALID\_UBO 
+
+```C++
+constexpr uint32_t SR_INVALID_UBO;
+```
+
+
+
+
+<hr>
+
+
+
+### variable SR\_INVALID\_VBO 
+
+```C++
+constexpr uint32_t SR_INVALID_VBO;
+```
+
+
+
+
+<hr>
 ## Public Functions Documentation
 
 

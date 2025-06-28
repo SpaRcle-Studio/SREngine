@@ -49,6 +49,19 @@ namespace SR_GRAPH_NS::Vertices {
         return SR_FORMAT("[ {}, {} ]", vec2.x, vec2.y);
     }
 
+    struct alignas(16) StaticMeshVertexAligned {
+        SR_MATH_NS::FVector3 pos;
+        float _pad0;               // выравнивание после vec3
+        SR_MATH_NS::FVector2 uv;
+        float _pad1[2];            // добиваем до 16
+        SR_MATH_NS::FVector3 norm;
+        float _pad2;               // выравнивание
+        SR_MATH_NS::FVector3 tang;
+        float _pad3;
+        SR_MATH_NS::FVector3 bitang;
+        float _pad4;
+    };
+
     struct StaticMeshVertex {
         SR_MATH_NS::FVector3 pos;
         SR_MATH_NS::FVector2 uv;

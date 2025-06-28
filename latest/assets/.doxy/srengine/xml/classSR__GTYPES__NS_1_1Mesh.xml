@@ -591,6 +591,7 @@
         <reimplementedby refid="classSR__GTYPES__NS_1_1Text_1a82c1372140d1fd686a9a04cd7d6318d4">IsSupportVBO</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1DebugLine_1a235809b6118c7d4813c649a55302d13c">IsSupportVBO</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1IndexedMesh_1acd2426952f16cf3f88068adef2d09a04">IsSupportVBO</reimplementedby>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1ProceduralMesh_1aad460d05b12c64efce8550b4afd06056">IsSupportVBO</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Sprite_1adc6b23cd26da870ee3ff8eb1fc408353">IsSupportVBO</reimplementedby>
         <briefdescription>
         </briefdescription>
@@ -958,6 +959,7 @@
         <argsstring>()</argsstring>
         <name>UseSSBO</name>
         <qualifiedname>SR_GTYPES_NS::Mesh::UseSSBO</qualifiedname>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a292312ee2f8a2f8882184fc41366d2aa">UseSSBO</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1SkinnedMesh_1aed5fe44d2a612d6d6dfd4f1bb3ccb253">UseSSBO</reimplementedby>
         <briefdescription>
         </briefdescription>

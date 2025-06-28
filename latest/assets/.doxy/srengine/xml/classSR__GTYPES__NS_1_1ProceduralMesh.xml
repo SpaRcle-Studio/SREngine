@@ -50,6 +50,65 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1ProceduralMesh_1a655ad9f9a608be3f3cc65cc419bda1b1" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::ProceduralMesh::m_useSSBOInsteadOfVertices</definition>
+        <argsstring></argsstring>
+        <name>m_useSSBOInsteadOfVertices</name>
+        <qualifiedname>SR_GTYPES_NS::ProceduralMesh::m_useSSBOInsteadOfVertices</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="53" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1ProceduralMesh_1a63ec85aad71b483b7442a00c23bf11cd" prot="private" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t SR_GTYPES_NS::ProceduralMesh::m_ssbo</definition>
+        <argsstring></argsstring>
+        <name>m_ssbo</name>
+        <qualifiedname>SR_GTYPES_NS::ProceduralMesh::m_ssbo</qualifiedname>
+        <initializer>= SR_ID_INVALID</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="55" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1ProceduralMesh_1abcdbd4b58b05da8046f5bf434a516d5c" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GTYPES_NS::ProceduralMesh::m_ssboSize</definition>
+        <argsstring></argsstring>
+        <name>m_ssboSize</name>
+        <qualifiedname>SR_GTYPES_NS::ProceduralMesh::m_ssboSize</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="56" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1ProceduralMesh_1a143893177a9a74c2125a840a036890f4" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1FastMemoryArray" kindref="compound">SR_HTYPES_NS::FastMemoryArray</ref>&lt; Vertices::StaticMeshVertexAligned &gt;</type>
+        <definition>SR_HTYPES_NS::FastMemoryArray&lt;Vertices::StaticMeshVertexAligned&gt; SR_GTYPES_NS::ProceduralMesh::m_verticesAligned</definition>
+        <argsstring></argsstring>
+        <name>m_verticesAligned</name>
+        <qualifiedname>SR_GTYPES_NS::ProceduralMesh::m_verticesAligned</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="58" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1ProceduralMesh_1ad761170d992249d8dfdcaa54b059a8c5" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1FastMemoryArray" kindref="compound">SR_HTYPES_NS::FastMemoryArray</ref>&lt; Vertices::StaticMeshVertex &gt;</type>
         <definition>SR_HTYPES_NS::FastMemoryArray&lt;Vertices::StaticMeshVertex&gt; SR_GTYPES_NS::ProceduralMesh::m_vertices</definition>
@@ -62,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="48" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" bodystart="48" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="60" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1ProceduralMesh_1a3d347555c32559fa0d175e6296c18c69" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1FastMemoryArray" kindref="compound">SR_HTYPES_NS::FastMemoryArray</ref>&lt; uint32_t &gt;</type>
@@ -76,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="49" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" bodystart="49" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="61" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" bodystart="61" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -109,6 +168,24 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="24" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" bodystart="24" bodyend="24"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1ProceduralMesh_1a5e408b8f03c394f03609a39090ab23d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::ProceduralMesh::SwapIndexedVertices</definition>
+        <argsstring>(SR_HTYPES_NS::FastMemoryArray&lt; Vertices::StaticMeshVertexAligned &gt; &amp;vertices)</argsstring>
+        <name>SwapIndexedVertices</name>
+        <qualifiedname>SR_GTYPES_NS::ProceduralMesh::SwapIndexedVertices</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1FastMemoryArray" kindref="compound">SR_HTYPES_NS::FastMemoryArray</ref>&lt; Vertices::StaticMeshVertexAligned &gt; &amp;</type>
+          <declname>vertices</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="26" column="14"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1ProceduralMesh_1acc1d040de4c97427731d10b0c98a4fdb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void SR_GTYPES_NS::ProceduralMesh::SwapIndexedVertices</definition>
@@ -125,7 +202,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="26" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="28" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1ProceduralMesh_1ab6f925bf3ac21c85a71a8144e26cdbcb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -143,7 +220,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="27" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="29" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1ProceduralMesh_1a73233cb7a070e2b92005fcf50ae0e603" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -165,7 +242,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="29" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1ProceduralMesh_1a210b2b2b453a33cdaf9600a35f4b908d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -187,7 +264,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="30" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1ProceduralMesh_1a7ca68c422d8890c3990f9295801bfc1f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -205,7 +282,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="32" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="34" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1ProceduralMesh_1a823faa68ac39e8ac9b872610106f4349" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -220,7 +297,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="34" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="36" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1ProceduralMesh_1a58b77d0540d3a4c9b6885c69391d5c64" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -235,7 +312,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="35" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="37" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1ProceduralMesh_1ac5a7acb0d9aed027543dfd5a2694ee34" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -250,7 +327,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="37" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" bodystart="37" bodyend="37"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="39" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" bodystart="39" bodyend="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1ProceduralMesh_1ae856ccedae6a060b798f3c37314e36ab" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -265,10 +342,39 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="39" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="40" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1ProceduralMesh_1aad460d05b12c64efce8550b4afd06056" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GTYPES_NS::ProceduralMesh::IsSupportVBO</definition>
+        <argsstring>() const override</argsstring>
+        <name>IsSupportVBO</name>
+        <qualifiedname>SR_GTYPES_NS::ProceduralMesh::IsSupportVBO</qualifiedname>
+        <reimplements refid="classSR__GTYPES__NS_1_1IndexedMesh_1acd2426952f16cf3f88068adef2d09a04">IsSupportVBO</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="41" column="27"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1ProceduralMesh_1aee82348fabf1539c105bffb1fe6caaff" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::ProceduralMesh::FreeVideoMemory</definition>
+        <argsstring>() override</argsstring>
+        <name>FreeVideoMemory</name>
+        <qualifiedname>SR_GTYPES_NS::ProceduralMesh::FreeVideoMemory</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="44" column="14"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1ProceduralMesh_1a27260cd51b0292e5b9f69fa260bea19d" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
         <definition>bool SR_GTYPES_NS::ProceduralMesh::Calculate</definition>
@@ -282,7 +388,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="42" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="45" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1ProceduralMesh_1af0db779a0e3c83254570f0a2eac408c7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -296,7 +402,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="43" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="46" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1ProceduralMesh_1a292312ee2f8a2f8882184fc41366d2aa" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::ProceduralMesh::UseSSBO</definition>
+        <argsstring>() override</argsstring>
+        <name>UseSSBO</name>
+        <qualifiedname>SR_GTYPES_NS::ProceduralMesh::UseSSBO</qualifiedname>
+        <reimplements refid="classSR__GTYPES__NS_1_1Mesh_1a736239062e920cf16ef80dabc52fe4d3">UseSSBO</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="47" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1ProceduralMesh_1aacc095e2cbe3cd01a7beed6fd7e54c85" prot="private" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD const <ref refid="classSR__HTYPES__NS_1_1FastMemoryArray" kindref="compound">SR_HTYPES_NS::FastMemoryArray</ref>&lt; uint32_t &gt; &amp;</type>
@@ -311,7 +432,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="45" column="58"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="49" column="58"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -441,7 +562,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="13" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" bodystart="13" bodyend="51"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" line="13" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h" bodystart="13" bodyend="63"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>BaseComponent</name></member>
@@ -461,7 +582,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1acae95de33825449f163ab99828593fd5" prot="public" virt="virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>FixedUpdate</name></member>
       <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1aab16bcf36a31cc423dbd4492c9f458d7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>FreeIBO</name></member>
       <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1a0b23120e9e096f7a60733dfac37790ae" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>FreeVBO</name></member>
-      <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1a3819bcea53ef97fa3ac221b7a24238e6" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>FreeVideoMemory</name></member>
+      <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1aee82348fabf1539c105bffb1fe6caaff" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>FreeVideoMemory</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aebb43fee7f75dd142ad299853208ee1e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>GameObjectPtr</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad0630357a7ef40b1c526565323c1cea0" prot="public" virt="virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>GetBarycenter</name></member>
       <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1a8ffc0a7bba083f7d2703dd38752c7405" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>GetCamera</name></member>
@@ -505,7 +626,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1af9ad40b9b09d748d7e0b591f4b78b60f" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>IsPausedMode</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a3d09e0388a5a982e6fe71cbf59f8c813" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>IsPlayingMode</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a547028a4a9ab2b115832b2000259e127" prot="public" virt="virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>IsStarted</name></member>
-      <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1acd2426952f16cf3f88068adef2d09a04" prot="public" virt="virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>IsSupportVBO</name></member>
+      <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1aad460d05b12c64efce8550b4afd06056" prot="public" virt="virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>IsSupportVBO</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a0c42f4050860150b1bf7d0e53b4486b1" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>IsUniformsDirty</name></member>
       <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1ac5a7acb0d9aed027543dfd5a2694ee34" prot="public" virt="virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>IsUniqueMesh</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ace675f265b886fef357651e43c29c5d4" prot="public" virt="virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>IsUpdatable</name></member>
@@ -537,9 +658,13 @@
       <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1adf98d6531d11ca6c8946df21461446b7" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>m_renderScene</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ae7b09faaab768e65bf45cef6d3a84666" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>m_scene</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a5bbd2e2f1ed3059025e390d428d4d6ac" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>m_sceneObject</name></member>
+      <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a63ec85aad71b483b7442a00c23bf11cd" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>m_ssbo</name></member>
+      <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1abcdbd4b58b05da8046f5bf434a516d5c" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>m_ssboSize</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1ac6c0dd4752763f730a0909861c7612cf" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>m_uboManager</name></member>
+      <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a655ad9f9a608be3f3cc65cc419bda1b1" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>m_useSSBOInsteadOfVertices</name></member>
       <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1ac8337db392cc53da044963aa01206384" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>m_VBO</name></member>
       <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1ad761170d992249d8dfdcaa54b059a8c5" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>m_vertices</name></member>
+      <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a143893177a9a74c2125a840a036890f4" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>m_verticesAligned</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a8e92536a0dbb2e45e1f2fda2e74ac7bb" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>m_virtualDescriptor</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1ad4bba700ef6bd6d6e86f2185869011e3" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>m_virtualUBO</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a55e5fd9cabd800e7aceabc257b130a58" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>MarkMaterialDirty</name></member>
@@ -588,6 +713,7 @@
       <member refid="classSR__GTYPES__NS_1_1Mesh_1aa763366331082200de8fffc15b9edb1e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>ShaderPtr</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a572b27823d61376ebbd0c33758ea5d6f" prot="public" virt="virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>Start</name></member>
       <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a187a9a2afaff3e74e1e168ae5ab63244" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>Super</name></member>
+      <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a5e408b8f03c394f03609a39090ab23d6" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>SwapIndexedVertices</name></member>
       <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1acc1d040de4c97427731d10b0c98a4fdb" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>SwapIndexedVertices</name></member>
       <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1ab6f925bf3ac21c85a71a8144e26cdbcb" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>SwapIndices</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a55ba0d3b4c08092148668bae579366ff" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>TryGetParent</name></member>
@@ -600,7 +726,7 @@
       <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a823faa68ac39e8ac9b872610106f4349" prot="public" virt="virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>UseMaterial</name></member>
       <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a58b77d0540d3a4c9b6885c69391d5c64" prot="public" virt="virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>UseModelMatrix</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a838cad3d42bd1d6e6185b4e8b8ff0ca7" prot="public" virt="virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>UseSamplers</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Mesh_1a736239062e920cf16ef80dabc52fe4d3" prot="public" virt="virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>UseSSBO</name></member>
+      <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a292312ee2f8a2f8882184fc41366d2aa" prot="private" virt="virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>UseSSBO</name></member>
       <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1aeaf4281e865fc618affbe9576a06df96" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>VertexType</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a135465a44a99fa3e946782dbc11f56c7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>~Component</name></member>
       <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1a4d63aaca5cd6ef1015567944e5266f45" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::ProceduralMesh</scope><name>~IndexedMesh</name></member>

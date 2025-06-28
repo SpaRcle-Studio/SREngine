@@ -14,6 +14,10 @@
 * **SR\_ICONS** ([**Icons.h**](Icons_8h.md))
 * **SR\_PHYSX\_FOUNDATION\_VERSION** ([**PhysXUtils.h**](PhysXUtils_8h.md))
 * **SR\_PHYSX\_PHYSICS\_VERSION** ([**PhysXUtils.h**](PhysXUtils_8h.md))
+* **SR\_INVALID\_FBO** ([**stdInclude.h**](stdInclude_8h.md))
+* **SR\_INVALID\_IBO** ([**stdInclude.h**](stdInclude_8h.md))
+* **SR\_INVALID\_UBO** ([**stdInclude.h**](stdInclude_8h.md))
+* **SR\_INVALID\_VBO** ([**stdInclude.h**](stdInclude_8h.md))
 
 
 

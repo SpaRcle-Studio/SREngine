@@ -11498,6 +11498,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**SR\_GRAPH\_NS::Vertices::SimpleVertex**](structSR__GRAPH__NS_1_1Vertices_1_1SimpleVertex.md) 
 * **struct** [**SR\_GRAPH\_NS::Vertices::SkinnedMeshVertex**](structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex.md) 
 * **struct** [**SR\_GRAPH\_NS::Vertices::StaticMeshVertex**](structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex.md) 
+* **struct** [**SR\_GRAPH\_NS::Vertices::StaticMeshVertexAligned**](structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned.md) 
 * **struct** [**SR\_GRAPH\_NS::Vertices::UIVertex**](structSR__GRAPH__NS_1_1Vertices_1_1UIVertex.md) 
 * **struct** [**SR\_GRAPH\_NS::Vertices::VertexInfo**](structSR__GRAPH__NS_1_1Vertices_1_1VertexInfo.md) 
 * **struct** [**SR\_GRAPH\_NS::VulkanTools::VulkanFrameBufferAllocInfo**](structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo.md) 

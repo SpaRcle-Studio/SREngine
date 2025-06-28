@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="233" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="233" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="246" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="246" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="235" column="44" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="235" bodyend="237"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="248" column="44" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="248" bodyend="250"/>
       </memberdef>
       <memberdef kind="function" id="structSR__GRAPH__NS_1_1Vertices_1_1SimpleVertex_1a13079f3bdc35085bf90601a4336fd2c4" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE SR_VERTEX_DESCRIPTION</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="239" column="54" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="239" bodyend="241"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="252" column="54" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="252" bodyend="254"/>
       </memberdef>
       <memberdef kind="function" id="structSR__GRAPH__NS_1_1Vertices_1_1SimpleVertex_1a29dbc224a7d97f6266390db6e0ad579f" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE std::vector&lt; std::pair&lt; Attribute, size_t &gt; &gt;</type>
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="247" column="44" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="247" bodyend="258"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="260" column="44" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="260" bodyend="271"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -83,14 +83,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="243" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="243" bodyend="245"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="256" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="256" bodyend="258"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="232" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="232" bodyend="259"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="245" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="245" bodyend="272"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1Vertices_1_1SimpleVertex_1a29dbc224a7d97f6266390db6e0ad579f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::SimpleVertex</scope><name>GetAttributes</name></member>
       <member refid="structSR__GRAPH__NS_1_1Vertices_1_1SimpleVertex_1a13079f3bdc35085bf90601a4336fd2c4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::SimpleVertex</scope><name>GetDescription</name></member>

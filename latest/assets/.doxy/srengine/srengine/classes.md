@@ -1734,6 +1734,8 @@
 ([**SR\_ANIMATIONS\_NS**](namespaceSR__ANIMATIONS__NS.md))
 * [**StaticMeshVertex**](structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex.md)
 ([**SR\_GRAPH\_NS::Vertices**](namespaceSR__GRAPH__NS_1_1Vertices.md))
+* [**StaticMeshVertexAligned**](structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned.md)
+([**SR\_GRAPH\_NS::Vertices**](namespaceSR__GRAPH__NS_1_1Vertices.md))
 * [**Statistics**](structSR__HTYPES__NS_1_1TreeT_1_1Statistics.md)
 ([**SR\_HTYPES\_NS::TreeT**](classSR__HTYPES__NS_1_1TreeT.md))
 * [**StopState**](classSR__CORE__NS_1_1StopState.md)

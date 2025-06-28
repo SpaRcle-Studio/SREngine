@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned" kind="struct" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::Vertices::StaticMeshVertexAligned</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1abcdf27718f7eac1ec9d91c28b3d524c2" prot="public" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector3</type>
+        <definition>SR_MATH_NS::FVector3 SR_GRAPH_NS::Vertices::StaticMeshVertexAligned::pos</definition>
+        <argsstring></argsstring>
+        <name>pos</name>
+        <qualifiedname>SR_GRAPH_NS::Vertices::StaticMeshVertexAligned::pos</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="43" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a964b0efe9ae20420aecf26d583fcd3cc" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float SR_GRAPH_NS::Vertices::StaticMeshVertexAligned::_pad0</definition>
+        <argsstring></argsstring>
+        <name>_pad0</name>
+        <qualifiedname>SR_GRAPH_NS::Vertices::StaticMeshVertexAligned::_pad0</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="44" column="15" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a774ffba44213777efb16eb7944282b5b" prot="public" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector2</type>
+        <definition>SR_MATH_NS::FVector2 SR_GRAPH_NS::Vertices::StaticMeshVertexAligned::uv</definition>
+        <argsstring></argsstring>
+        <name>uv</name>
+        <qualifiedname>SR_GRAPH_NS::Vertices::StaticMeshVertexAligned::uv</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="45" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a9b93f6451dab257ebf6b66274d847ed2" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float SR_GRAPH_NS::Vertices::StaticMeshVertexAligned::_pad1[2]</definition>
+        <argsstring>[2]</argsstring>
+        <name>_pad1</name>
+        <qualifiedname>SR_GRAPH_NS::Vertices::StaticMeshVertexAligned::_pad1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="46" column="15" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a8376ac77a61805a6faf3c7ece463fe5b" prot="public" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector3</type>
+        <definition>SR_MATH_NS::FVector3 SR_GRAPH_NS::Vertices::StaticMeshVertexAligned::norm</definition>
+        <argsstring></argsstring>
+        <name>norm</name>
+        <qualifiedname>SR_GRAPH_NS::Vertices::StaticMeshVertexAligned::norm</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="47" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a8e0975cd52156557102da5d277679746" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float SR_GRAPH_NS::Vertices::StaticMeshVertexAligned::_pad2</definition>
+        <argsstring></argsstring>
+        <name>_pad2</name>
+        <qualifiedname>SR_GRAPH_NS::Vertices::StaticMeshVertexAligned::_pad2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="48" column="15" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a7d2e330588198cb5ccb17504c3a626d2" prot="public" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector3</type>
+        <definition>SR_MATH_NS::FVector3 SR_GRAPH_NS::Vertices::StaticMeshVertexAligned::tang</definition>
+        <argsstring></argsstring>
+        <name>tang</name>
+        <qualifiedname>SR_GRAPH_NS::Vertices::StaticMeshVertexAligned::tang</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="49" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1aaccdbc7fe6b116c69f936de135b8d1fe" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float SR_GRAPH_NS::Vertices::StaticMeshVertexAligned::_pad3</definition>
+        <argsstring></argsstring>
+        <name>_pad3</name>
+        <qualifiedname>SR_GRAPH_NS::Vertices::StaticMeshVertexAligned::_pad3</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="50" column="15" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a45dad6115bc9be0b0c60f5de821216b4" prot="public" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector3</type>
+        <definition>SR_MATH_NS::FVector3 SR_GRAPH_NS::Vertices::StaticMeshVertexAligned::bitang</definition>
+        <argsstring></argsstring>
+        <name>bitang</name>
+        <qualifiedname>SR_GRAPH_NS::Vertices::StaticMeshVertexAligned::bitang</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="51" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a52c64a30e0f849efae24aabb94a74903" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float SR_GRAPH_NS::Vertices::StaticMeshVertexAligned::_pad4</definition>
+        <argsstring></argsstring>
+        <name>_pad4</name>
+        <qualifiedname>SR_GRAPH_NS::Vertices::StaticMeshVertexAligned::_pad4</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="52" column="15" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="42" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="42" bodyend="53"/>
+    <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a964b0efe9ae20420aecf26d583fcd3cc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertexAligned</scope><name>_pad0</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a9b93f6451dab257ebf6b66274d847ed2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertexAligned</scope><name>_pad1</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a8e0975cd52156557102da5d277679746" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertexAligned</scope><name>_pad2</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1aaccdbc7fe6b116c69f936de135b8d1fe" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertexAligned</scope><name>_pad3</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a52c64a30e0f849efae24aabb94a74903" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertexAligned</scope><name>_pad4</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a45dad6115bc9be0b0c60f5de821216b4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertexAligned</scope><name>bitang</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a8376ac77a61805a6faf3c7ece463fe5b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertexAligned</scope><name>norm</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1abcdf27718f7eac1ec9d91c28b3d524c2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertexAligned</scope><name>pos</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a7d2e330588198cb5ccb17504c3a626d2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertexAligned</scope><name>tang</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a774ffba44213777efb16eb7944282b5b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::StaticMeshVertexAligned</scope><name>uv</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

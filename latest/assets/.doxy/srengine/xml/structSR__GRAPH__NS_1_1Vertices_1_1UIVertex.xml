@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="177" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="177" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="190" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="190" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1UIVertex_1a062d156dc700761f8a348bedf85ae256" prot="public" static="no" mutable="no">
         <type>glm::vec2</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="178" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="178" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="191" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="191" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="180" column="64" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="180" bodyend="182"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="193" column="64" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="193" bodyend="195"/>
       </memberdef>
       <memberdef kind="function" id="structSR__GRAPH__NS_1_1Vertices_1_1UIVertex_1af97f8389132546795de2520fe849de62" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE std::vector&lt; std::string &gt;</type>
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="184" column="44" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="184" bodyend="186"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="197" column="44" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="197" bodyend="199"/>
       </memberdef>
       <memberdef kind="function" id="structSR__GRAPH__NS_1_1Vertices_1_1UIVertex_1a2c6bbd1c4e08a1180c030c27acbc7a69" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE std::vector&lt; std::pair&lt; Attribute, size_t &gt; &gt;</type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="188" column="44" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="188" bodyend="201"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="201" column="44" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="201" bodyend="214"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -97,7 +97,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="203" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="203" bodyend="206"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="216" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="216" bodyend="219"/>
       </memberdef>
       <memberdef kind="function" id="structSR__GRAPH__NS_1_1Vertices_1_1UIVertex_1a0a2372d08fb19cc23d84f155b48e94eb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -111,14 +111,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="208" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="208" bodyend="210"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="221" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="221" bodyend="223"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="176" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="176" bodyend="211"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" line="189" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="189" bodyend="224"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1Vertices_1_1UIVertex_1a2c6bbd1c4e08a1180c030c27acbc7a69" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::UIVertex</scope><name>GetAttributes</name></member>
       <member refid="structSR__GRAPH__NS_1_1Vertices_1_1UIVertex_1ace8c30751f5129fcc8b643c1f0ffeae0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::UIVertex</scope><name>GetDescription</name></member>

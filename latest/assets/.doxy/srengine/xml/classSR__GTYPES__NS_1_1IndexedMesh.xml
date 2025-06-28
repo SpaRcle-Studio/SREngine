@@ -185,6 +185,7 @@
         <name>IsSupportVBO</name>
         <qualifiedname>SR_GTYPES_NS::IndexedMesh::IsSupportVBO</qualifiedname>
         <reimplements refid="classSR__GTYPES__NS_1_1Mesh_1a4ec50ee8dc9308de4af8baec12fecbd8">IsSupportVBO</reimplements>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1ProceduralMesh_1aad460d05b12c64efce8550b4afd06056">IsSupportVBO</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>

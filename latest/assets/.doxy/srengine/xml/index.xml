@@ -8049,10 +8049,15 @@
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a187a9a2afaff3e74e1e168ae5ab63244" kind="typedef"><name>Super</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1ac70459f6d29532d02def09b15989cea6" kind="typedef"><name>Ptr</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1aeaf4281e865fc618affbe9576a06df96" kind="typedef"><name>VertexType</name></member>
+    <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a655ad9f9a608be3f3cc65cc419bda1b1" kind="variable"><name>m_useSSBOInsteadOfVertices</name></member>
+    <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a63ec85aad71b483b7442a00c23bf11cd" kind="variable"><name>m_ssbo</name></member>
+    <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1abcdbd4b58b05da8046f5bf434a516d5c" kind="variable"><name>m_ssboSize</name></member>
+    <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a143893177a9a74c2125a840a036890f4" kind="variable"><name>m_verticesAligned</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1ad761170d992249d8dfdcaa54b059a8c5" kind="variable"><name>m_vertices</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a3d347555c32559fa0d175e6296c18c69" kind="variable"><name>m_indices</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1ad68dbdbdb31138a062420c64eddbb605" kind="function"><name>ProceduralMesh</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a1b494dddb7f1182ec87ac58f76039e91" kind="function"><name>GetMeshType</name></member>
+    <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a5e408b8f03c394f03609a39090ab23d6" kind="function"><name>SwapIndexedVertices</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1acc1d040de4c97427731d10b0c98a4fdb" kind="function"><name>SwapIndexedVertices</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1ab6f925bf3ac21c85a71a8144e26cdbcb" kind="function"><name>SwapIndices</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a73233cb7a070e2b92005fcf50ae0e603" kind="function"><name>SetIndexedVertices</name></member>
@@ -8062,8 +8067,11 @@
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a58b77d0540d3a4c9b6885c69391d5c64" kind="function"><name>UseModelMatrix</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1ac5a7acb0d9aed027543dfd5a2694ee34" kind="function"><name>IsUniqueMesh</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1ae856ccedae6a060b798f3c37314e36ab" kind="function"><name>IsCalculatable</name></member>
+    <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1aad460d05b12c64efce8550b4afd06056" kind="function"><name>IsSupportVBO</name></member>
+    <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1aee82348fabf1539c105bffb1fe6caaff" kind="function"><name>FreeVideoMemory</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a27260cd51b0292e5b9f69fa260bea19d" kind="function"><name>Calculate</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1af0db779a0e3c83254570f0a2eac408c7" kind="function"><name>SetDirtyMesh</name></member>
+    <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a292312ee2f8a2f8882184fc41366d2aa" kind="function"><name>UseSSBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1aacc095e2cbe3cd01a7beed6fd7e54c85" kind="function"><name>GetIndices</name></member>
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1ProjViewUBO" kind="struct"><name>SR_GRAPH_NS::ProjViewUBO</name>
@@ -11449,6 +11457,18 @@
     <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1abf1e2ee422f148adffdf80dd31341cda" kind="function"><name>GetAttributes</name></member>
     <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1a588371c8adb55073294663bba19dbb25" kind="function"><name>operator==</name></member>
     <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_1ae2445258be2886e1307d4df4d63bf688" kind="function"><name>ToString</name></member>
+  </compound>
+  <compound refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned" kind="struct"><name>SR_GRAPH_NS::Vertices::StaticMeshVertexAligned</name>
+    <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1abcdf27718f7eac1ec9d91c28b3d524c2" kind="variable"><name>pos</name></member>
+    <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a964b0efe9ae20420aecf26d583fcd3cc" kind="variable"><name>_pad0</name></member>
+    <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a774ffba44213777efb16eb7944282b5b" kind="variable"><name>uv</name></member>
+    <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a9b93f6451dab257ebf6b66274d847ed2" kind="variable"><name>_pad1</name></member>
+    <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a8376ac77a61805a6faf3c7ece463fe5b" kind="variable"><name>norm</name></member>
+    <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a8e0975cd52156557102da5d277679746" kind="variable"><name>_pad2</name></member>
+    <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a7d2e330588198cb5ccb17504c3a626d2" kind="variable"><name>tang</name></member>
+    <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1aaccdbc7fe6b116c69f936de135b8d1fe" kind="variable"><name>_pad3</name></member>
+    <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a45dad6115bc9be0b0c60f5de821216b4" kind="variable"><name>bitang</name></member>
+    <member refid="structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertexAligned_1a52c64a30e0f849efae24aabb94a74903" kind="variable"><name>_pad4</name></member>
   </compound>
   <compound refid="structSR__HTYPES__NS_1_1TreeT_1_1Statistics" kind="struct"><name>SR_HTYPES_NS::TreeT::Statistics</name>
     <member refid="structSR__HTYPES__NS_1_1TreeT_1_1Statistics_1a4e333f5234392449fdc10793e8a917b8" kind="variable"><name>num_hash</name></member>
@@ -16628,6 +16648,10 @@
     <member refid="stdInclude_8h_1abfb4b7729ca2fb01876603931e04a2ef" kind="define"><name>SR_GET_COMPILE_TIME_CLASS_NAME</name></member>
     <member refid="stdInclude_8h_1a373c375726b4e9c0075eb8330a59fb90" kind="define"><name>SR_IGNORE_UNUSED</name></member>
     <member refid="stdInclude_8h_1a82da9ce3135ae948a35a57e48dc71bea" kind="define"><name>SR_EXCHANGE</name></member>
+    <member refid="stdInclude_8h_1ae0a2402cdfd41b5a6e4b4d627371efd5" kind="variable"><name>SR_INVALID_VBO</name></member>
+    <member refid="stdInclude_8h_1ad3d99ec92cb71ca21f95dbb20694c206" kind="variable"><name>SR_INVALID_IBO</name></member>
+    <member refid="stdInclude_8h_1aeefed3d8b5216324942afa4b4d814ee8" kind="variable"><name>SR_INVALID_UBO</name></member>
+    <member refid="stdInclude_8h_1ab797db22b34a1f3c2a7608108dddd42c" kind="variable"><name>SR_INVALID_FBO</name></member>
     <member refid="stdInclude_8h_1a12f3021866d93a65274800bd5952649e" kind="function"><name>SRGetClassName</name></member>
   </compound>
   <compound refid="TaskManager_8h" kind="file"><name>TaskManager.h</name>

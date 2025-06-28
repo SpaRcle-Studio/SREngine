@@ -133,6 +133,11 @@ inline std::string_view SRGetClassName(std::string_view func_signature) {
 
 #define SR_IGNORE_UNUSED(...) SR_UTILS_NS::IgnoreUnused(__VA_ARGS__)
 
+constexpr uint32_t SR_INVALID_VBO = SR_ID_INVALID;
+constexpr uint32_t SR_INVALID_IBO = SR_ID_INVALID;
+constexpr uint32_t SR_INVALID_UBO = SR_ID_INVALID;
+constexpr uint32_t SR_INVALID_FBO = SR_ID_INVALID;
+
 namespace SR_UTILS_NS {
     template <typename T> constexpr bool HasPublicDestructor() {
         if constexpr (!std::is_destructible_v<T>) {
