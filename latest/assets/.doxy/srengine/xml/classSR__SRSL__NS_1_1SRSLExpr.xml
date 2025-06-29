@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="97" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="97" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="99" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="99" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLExpr_1a949356ada0ff620166cc3ce64b50e271" prot="public" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref> * &gt;</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="98" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="98" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="100" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="100" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLExpr_1a6837bec8f99611dc4e8530a79f1cec4c" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="100" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="100" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="102" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="102" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLExpr_1a20c5abc9709e62dbc4046d77b11f6539" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="101" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="101" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="103" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="103" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLExpr_1a65c1db3af48c3d106888fa4d3cb3b479" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="102" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="102" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="104" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="104" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLExpr_1ab8cc2d89eea593f449a5ad29cf8ae344" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="103" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="103" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="105" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="105" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -252,6 +252,20 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="95" column="34"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLExpr_1a74a14bdf454f89b093642a4931e0c22e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string SR_SRSL_NS::SRSLExpr::GetAsName</definition>
+        <argsstring>()</argsstring>
+        <name>GetAsName</name>
+        <qualifiedname>SR_SRSL_NS::SRSLExpr::GetAsName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="97" column="21"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLExpr_1a10abfe2942b159d1dc2acd8b4cd7a020" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -315,10 +329,11 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="22" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="22" bodyend="105"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="22" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="22" bodyend="107"/>
     <listofallmembers>
       <member refid="classSR__SRSL__NS_1_1SRSLExpr_1a949356ada0ff620166cc3ce64b50e271" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLExpr</scope><name>args</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLExpr_1a10abfe2942b159d1dc2acd8b4cd7a020" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLExpr</scope><name>CreateStringExpression</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLExpr_1a74a14bdf454f89b093642a4931e0c22e" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLExpr</scope><name>GetAsName</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLExpr_1a20c5abc9709e62dbc4046d77b11f6539" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLExpr</scope><name>isArray</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLExpr_1a6837bec8f99611dc4e8530a79f1cec4c" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLExpr</scope><name>isCall</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLExpr_1a65c1db3af48c3d106888fa4d3cb3b479" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLExpr</scope><name>isList</name></member>

@@ -103,6 +103,7 @@ Inherits the following classes: [SR\_SRSL\_NS::SRSLLexicalUnit](classSR__SRSL__N
 
 | Type | Name |
 | ---: | :--- |
+|  std::string | [**GetAsName**](#function-getasname) () <br> |
 |   | [**SRSLExpr**](#function-srslexpr-16) () = default<br> |
 |   | [**SRSLExpr**](#function-srslexpr-26) (std::string && token) <br> |
 |   | [**SRSLExpr**](#function-srslexpr-36) (std::string && token, [**SRSLExpr**](classSR__SRSL__NS_1_1SRSLExpr.md) \* pAExpr) <br> |
@@ -316,6 +317,19 @@ std::string SR_SRSL_NS::SRSLExpr::token;
 <hr>
 ## Public Functions Documentation
 
+
+
+
+### function GetAsName 
+
+```C++
+std::string SR_SRSL_NS::SRSLExpr::GetAsName () 
+```
+
+
+
+
+<hr>
 
 
 

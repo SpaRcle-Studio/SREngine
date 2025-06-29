@@ -101,6 +101,8 @@ namespace SR_SRSL_NS {
 
         SR_NODISCARD std::string ToString(uint32_t deep) const override;
 
+        std::string GetAsName();
+
         std::string token;
         std::vector<SRSLExpr*> args;
 

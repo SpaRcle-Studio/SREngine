@@ -10964,6 +10964,7 @@
     <member refid="classSR__SRSL__NS_1_1SRSLExpr_1a7513d0b8b0fce5533e507a0011b17b6a" kind="function"><name>~SRSLExpr</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLExpr_1a375c23fffc3e0ae7332056be829306f7" kind="function"><name>SRSLExpr</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLExpr_1aacf2ca3bd73877945d725fac28e9aeac" kind="function"><name>ToString</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLExpr_1a74a14bdf454f89b093642a4931e0c22e" kind="function"><name>GetAsName</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLExpr_1a10abfe2942b159d1dc2acd8b4cd7a020" kind="function"><name>CreateStringExpression</name></member>
   </compound>
   <compound refid="classSR__SRSL__NS_1_1SRSLForStatement" kind="class"><name>SR_SRSL_NS::SRSLForStatement</name>

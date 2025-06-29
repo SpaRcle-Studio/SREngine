@@ -1684,6 +1684,7 @@
 * **GetCurrentLexem** ([**SR\_SRSL\_NS::SRSLAssignExpander**](classSR__SRSL__NS_1_1SRSLAssignExpander.md), [**SR\_SRSL\_NS::SRSLLexicalAnalyzer**](classSR__SRSL__NS_1_1SRSLLexicalAnalyzer.md), [**SR\_SRSL\_NS::SRSLMathExpression**](classSR__SRSL__NS_1_1SRSLMathExpression.md), [**SR\_SRSL\_NS::SRSLPreProcessor**](classSR__SRSL__NS_1_1SRSLPreProcessor.md))
 * **GetLeftSide** ([**SR\_SRSL\_NS::SRSLAssignExpander**](classSR__SRSL__NS_1_1SRSLAssignExpander.md))
 * **GetLexem** ([**SR\_SRSL\_NS::SRSLAssignExpander**](classSR__SRSL__NS_1_1SRSLAssignExpander.md), [**SR\_SRSL\_NS::SRSLLexicalAnalyzer**](classSR__SRSL__NS_1_1SRSLLexicalAnalyzer.md), [**SR\_SRSL\_NS::SRSLMathExpression**](classSR__SRSL__NS_1_1SRSLMathExpression.md), [**SR\_SRSL\_NS::SRSLPreProcessor**](classSR__SRSL__NS_1_1SRSLPreProcessor.md))
+* **GetAsName** ([**SR\_SRSL\_NS::SRSLExpr**](classSR__SRSL__NS_1_1SRSLExpr.md))
 * **GenerateDecorators** ([**SR\_SRSL\_NS::SRSLPseudoCodeGenerator**](classSR__SRSL__NS_1_1SRSLPseudoCodeGenerator.md))
 * **GetAnalyzedTree** ([**SR\_SRSL\_NS::SRSLShader**](classSR__SRSL__NS_1_1SRSLShader.md))
 * **GetConstants** ([**SR\_SRSL\_NS::SRSLShader**](classSR__SRSL__NS_1_1SRSLShader.md))
