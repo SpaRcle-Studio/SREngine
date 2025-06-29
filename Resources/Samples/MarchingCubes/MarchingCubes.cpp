@@ -50,9 +50,11 @@ namespace SpaRcle::Scripts::Samples {
             m_computeShader = SR_GTYPES_NS::ComputeShader::Load(shaderPath);
 
             if (m_computeShader) {
-                constexpr uint64_t triangleSize = sizeof(Detail::Triangle);
-                SSBO = m_computeShader->GetPipeline()->AllocateSSBO(triangleSize * 2, SR_GRAPH_NS::SSBOUsage::Read);
+                constexpr uint64_t dataSize = sizeof(uint32_t) + 12 + sizeof(Detail::Triangle) * 64;
+                SSBO = m_computeShader->GetPipeline()->AllocateSSBO(dataSize, SR_GRAPH_NS::SSBOUsage::Read);
             }
+
+            Generate();
         }
 
         void Generate() {
@@ -60,9 +62,12 @@ namespace SpaRcle::Scripts::Samples {
                 return;
             }
 
+            uint32_t trianglesCount = 0;
+            m_computeShader->GetPipeline()->UpdateSSBO(SSBO, &trianglesCount, sizeof(uint32_t));
+
             if (m_computeShader->BeginCompute()) {
                 m_computeShader->GetShader()->BindSSBO("triangles", SSBO);
-                m_computeShader->Dispatch();
+                m_computeShader->Dispatch(4, 1, 1);
                 m_computeShader->EndCompute();
             }
 
@@ -74,19 +79,27 @@ namespace SpaRcle::Scripts::Samples {
                 return;
             }
 
-            std::array<Detail::Triangle, 2> triangles;
-            m_computeShader->GetPipeline()->ReadSSBO(SSBO, triangles.data(), triangles.size() * sizeof(Detail::Triangle));
-
-            for (const auto& triangle : triangles) {
-                SR_DEBUG_LOG("Triangle: A({:.2f}, {:.2f}, {:.2f}), B({:.2f}, {:.2f}, {:.2f}), C({:.2f}, {:.2f}, {:.2f})",
-                 triangle.vertexA.position.x, triangle.vertexA.position.y, triangle.vertexA.position.z,
-                 triangle.vertexB.position.x, triangle.vertexB.position.y, triangle.vertexB.position.z,
-                 triangle.vertexC.position.x, triangle.vertexC.position.y, triangle.vertexC.position.z);
+            void* pData = nullptr;
+            if (!m_computeShader->GetPipeline()->MapSSBO(SSBO, &pData)) {
+                return;
             }
+
+            uint32_t trianglesCount = *reinterpret_cast<uint32_t*>(pData);
+            Detail::Triangle* triangles = reinterpret_cast<Detail::Triangle*>(reinterpret_cast<uint8_t*>(pData) + sizeof(uint32_t) + 12);
+
+            for (uint32_t i = 0; i < trianglesCount; ++i) {
+                const Detail::Triangle& triangle = triangles[i];
+
+                SR_DEBUG_LOG("Triangle: A({:.2f}, {:.2f}, {:.2f}), B({:.2f}, {:.2f}, {:.2f}), C({:.2f}, {:.2f}, {:.2f})",
+                     triangle.vertexA.position.x, triangle.vertexA.position.y, triangle.vertexA.position.z,
+                     triangle.vertexB.position.x, triangle.vertexB.position.y, triangle.vertexB.position.z,
+                     triangle.vertexC.position.x, triangle.vertexC.position.y, triangle.vertexC.position.z);
+            }
+
+            m_computeShader->GetPipeline()->UnMapSSBO(SSBO);
         }
 
         void Update(float_t dt) override {
-            Generate();
         }
 
         void Finalize() {
