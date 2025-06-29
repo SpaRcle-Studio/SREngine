@@ -270,6 +270,7 @@
 * **hash** ([**SR\_HTYPES\_NS::PathT::Element**](structSR__HTYPES__NS_1_1PathT_1_1Element.md), [**SR\_HTYPES\_NS::TreeT::Node**](structSR__HTYPES__NS_1_1TreeT_1_1Node.md), [**SR\_SCRIPTING\_NS::CppCodegenModule**](structSR__SCRIPTING__NS_1_1CppCodegenModule.md), [**SR\_UTILS\_NS::ConstexprStringHashEntry**](structSR__UTILS__NS_1_1ConstexprStringHashEntry.md), [**SR\_UTILS\_NS::SerializationId**](structSR__UTILS__NS_1_1SerializationId.md), [**SR\_UTILS\_NS::StringHashInfo**](structSR__UTILS__NS_1_1StringHashInfo.md))
 * **hashing\_stack** ([**SR\_HTYPES\_NS::TreeT**](classSR__HTYPES__NS_1_1TreeT.md))
 * **hashName** ([**SR\_SRLM\_NS::LogicalNode::NodePin**](structSR__SRLM__NS_1_1LogicalNode_1_1NodePin.md), [**SR\_UTILS\_NS::EnumReflector::Enumerator**](structSR__UTILS__NS_1_1EnumReflector_1_1Enumerator.md), [**SR\_UTILS\_NS::EnumReflector::Data**](structSR__UTILS__NS_1_1EnumReflector_1_1Data.md))
+* **hasUsage** ([**SR\_SRSL\_NS::SRSLUniformBlock**](structSR__SRSL__NS_1_1SRSLUniformBlock.md))
 * **HasEmpty** ([**SR\_UTILS\_NS::SerializationTraits**](structSR__UTILS__NS_1_1SerializationTraits.md))
 
 

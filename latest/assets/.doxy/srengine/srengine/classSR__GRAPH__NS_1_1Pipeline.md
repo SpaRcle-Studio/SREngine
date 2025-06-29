@@ -203,6 +203,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  SR\_NODISCARD bool | [**IsShaderChanged**](#function-isshaderchanged) () noexcept const<br>_Изменился ли текущий шейдер после UseShader. Даже если был вызван UnUseShader. Низкоуровневая проверка._  |
 | virtual SR\_NODISCARD bool | [**IsShaderConstantSupport**](#function-isshaderconstantsupport) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsVSyncEnabled**](#function-isvsyncenabled) () const<br> |
+| virtual bool | [**MapSSBO**](#function-mapssbo) (uint32\_t SSBO, void \*\* ppData) <br> |
 | virtual void | [**OnMultiSampleChanged**](#function-onmultisamplechanged) () <br>_-------------------------------------_  _Мультисемплинг и VSync -----------------------------------------_ __ |
 | virtual void | [**OnResize**](#function-onresize) (const SR\_MATH\_NS::UVector2 & size) <br> |
 |   | [**Pipeline**](#function-pipeline) (const RenderContextPtr & pContext) <br> |
@@ -230,6 +231,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual void | [**SetVSyncEnabled**](#function-setvsyncenabled) (bool enabled) <br> |
 | virtual void | [**SetViewport**](#function-setviewport) (int32\_t width=-1, int32\_t height=-1) <br> |
 | virtual void | [**SwitchWindow**](#function-switchwindow) (const WindowPtr & pWindow) <br> |
+| virtual void | [**UnMapSSBO**](#function-unmapssbo) (uint32\_t SSBO) <br> |
 | virtual void | [**UnUseShader**](#function-unuseshader) () <br> |
 | virtual void | [**UpdateDescriptorSets**](#function-updatedescriptorsets) (uint32\_t descriptorSet, const SRDescriptorUpdateInfos & updateInfo) <br>_Привязываем к дескриптору юниформы. Работает не во всех API._  |
 | virtual void | [**UpdateMultiSampling**](#function-updatemultisampling) () <br> |
@@ -1840,6 +1842,22 @@ inline virtual SR_NODISCARD bool SR_GRAPH_NS::Pipeline::IsVSyncEnabled () const
 
 
 
+### function MapSSBO 
+
+```C++
+inline virtual bool SR_GRAPH_NS::Pipeline::MapSSBO (
+    uint32_t SSBO,
+    void ** ppData
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function OnMultiSampleChanged 
 
 _-------------------------------------_  _Мультисемплинг и VSync -----------------------------------------_ __
@@ -2248,6 +2266,21 @@ inline virtual void SR_GRAPH_NS::Pipeline::SetViewport (
 ```C++
 virtual void SR_GRAPH_NS::Pipeline::SwitchWindow (
     const WindowPtr & pWindow
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function UnMapSSBO 
+
+```C++
+inline virtual void SR_GRAPH_NS::Pipeline::UnMapSSBO (
+    uint32_t SSBO
 ) 
 ```
 

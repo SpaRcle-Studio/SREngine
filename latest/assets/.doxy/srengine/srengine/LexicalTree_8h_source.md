@@ -263,6 +263,8 @@ namespace SR_SRSL_NS {
 
         SRSLExpr* pName = nullptr;
         SRSLLexicalTree* pLexicalTree = nullptr;
+
+        bool HasDynamicArray() const;
     };
 
 

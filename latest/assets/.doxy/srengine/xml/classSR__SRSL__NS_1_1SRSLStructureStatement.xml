@@ -64,6 +64,20 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="262" column="9"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLStructureStatement_1a4e2de467011265fc7b3b413a115eea33" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_SRSL_NS::SRSLStructureStatement::HasDynamicArray</definition>
+        <argsstring>() const</argsstring>
+        <name>HasDynamicArray</name>
+        <qualifiedname>SR_SRSL_NS::SRSLStructureStatement::HasDynamicArray</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="267" column="14"/>
+      </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
@@ -123,8 +137,9 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="259" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="259" bodyend="266"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="259" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="259" bodyend="268"/>
     <listofallmembers>
+      <member refid="classSR__SRSL__NS_1_1SRSLStructureStatement_1a4e2de467011265fc7b3b413a115eea33" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLStructureStatement</scope><name>HasDynamicArray</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLStructureStatement</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLStructureStatement</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_SRSL_NS::SRSLStructureStatement</scope><name>operator=</name></member>

@@ -68,6 +68,8 @@ namespace SR_SRSL_NS {
 
         SR_NODISCARD std::string VertexAttributeToString(Vertices::Attribute attribute) const;
 
+        void GenerateSSBOBlock(std::string& code, SR_UTILS_NS::StringAtom name, const SRSLUniformBlock& uniformBlock, const SRSLUseStack::Ptr& pFunction) const;
+
     private:
         const SRSLShader* m_shader = nullptr;
 

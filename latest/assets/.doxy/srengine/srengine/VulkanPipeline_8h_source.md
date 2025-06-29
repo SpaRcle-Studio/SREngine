@@ -132,6 +132,9 @@ namespace SR_GRAPH_NS {
         void UpdateSSBO(uint32_t SSBO, void* pData, uint64_t size) override;
         void ReadSSBO(uint32_t SSBO, void* pData, uint64_t size) override;
 
+        bool MapSSBO(uint32_t SSBO, void** ppData) override;
+        void UnMapSSBO(uint32_t SSBO) override;
+
         void PushConstants(void* pData, uint64_t size) override;
 
         void UseShader(uint32_t shaderProgram) override;

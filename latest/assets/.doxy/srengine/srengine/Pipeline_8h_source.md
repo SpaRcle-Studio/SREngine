@@ -218,6 +218,9 @@ namespace SR_GRAPH_NS {
 
         virtual void BindSSBO(uint32_t SSBO);
 
+        virtual bool MapSSBO(uint32_t SSBO, void** ppData) { return false; }
+        virtual void UnMapSSBO(uint32_t SSBO) {}
+
         virtual void UpdateUBO(uint32_t UBO, void* pData, uint64_t size);
 
         virtual void UpdateSSBO(uint32_t SSBO, void* pData, uint64_t size);

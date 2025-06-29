@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="62" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" bodystart="62" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="64" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" bodystart="64" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -583,6 +583,36 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="59" column="34"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a92cc65e15025d1b448c68cba5d9172ce" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRSL_NS::GLSLCodeGenerator::GenerateSSBOBlock</definition>
+        <argsstring>(std::string &amp;code, SR_UTILS_NS::StringAtom name, const SRSLUniformBlock &amp;uniformBlock, const SRSLUseStack::Ptr &amp;pFunction) const</argsstring>
+        <name>GenerateSSBOBlock</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateSSBOBlock</qualifiedname>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>code</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__SRSL__NS_1_1SRSLUniformBlock" kindref="compound">SRSLUniformBlock</ref> &amp;</type>
+          <declname>uniformBlock</declname>
+        </param>
+        <param>
+          <type>const SRSLUseStack::Ptr &amp;</type>
+          <declname>pFunction</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="61" column="14"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ae185b73016d5e0c0fb5b74ddb961dcd1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
@@ -676,7 +706,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="12" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" bodystart="12" bodyend="64"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="12" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" bodystart="12" bodyend="66"/>
     <listofallmembers>
       <member refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator_1aa93fd305bdbd46c3acf2c2109f58c27b" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>Clear</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>DestroySingleton</name></member>
@@ -698,6 +728,7 @@
       <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1aab416cf922d27083c311dbcea1318126" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateRayIntersectionStage</name></member>
       <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1aa17abb3fd06144a9e739bf3c3b2bde91" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateRayMissPrimaryStage</name></member>
       <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1acb08fd2d7b96bce4111a374c61ebea28" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateRayMissSecondaryStage</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a92cc65e15025d1b448c68cba5d9172ce" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateSSBOBlock</name></member>
       <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a0bdd790c680d0526bac96df4459dbb13" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateStage</name></member>
       <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ae185b73016d5e0c0fb5b74ddb961dcd1" prot="public" virt="virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateStages</name></member>
       <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a9030fd38f461fd824ae8f9f8cbe9cb7f" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateStructure</name></member>

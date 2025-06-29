@@ -75,6 +75,7 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 | ---: | :--- |
 |  SR\_NODISCARD bool | [**Export**](#function-export) (ShaderLanguage shaderLanguage) const<br> |
 |  SR\_NODISCARD const [**SRSLUniformBlock::Field**](structSR__SRSL__NS_1_1SRSLUniformBlock_1_1Field.md) \* | [**FindField**](#function-findfield) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & name) const<br> |
+|  SR\_NODISCARD const [**SRSLStructureStatement**](classSR__SRSL__NS_1_1SRSLStructureStatement.md) \* | [**FindStructure**](#function-findstructure) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & name) const<br> |
 |  SR\_NODISCARD const [**SRSLUniformBlock**](structSR__SRSL__NS_1_1SRSLUniformBlock.md) \* | [**FindUniformBlock**](#function-finduniformblock) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & name) const<br> |
 |  SR\_NODISCARD const SRSLAnalyzedTree::Ptr | [**GetAnalyzedTree**](#function-getanalyzedtree) () const<br> |
 |  SR\_NODISCARD const SR\_MATH\_NS::UVector3 & | [**GetComputeWorkGroupSize**](#function-getcomputeworkgroupsize) () const<br> |
@@ -202,6 +203,21 @@ SR_NODISCARD bool SR_SRSL_NS::SRSLShader::Export (
 
 ```C++
 SR_NODISCARD const SRSLUniformBlock::Field * SR_SRSL_NS::SRSLShader::FindField (
+    const SR_UTILS_NS::StringAtom & name
+) const
+```
+
+
+
+
+<hr>
+
+
+
+### function FindStructure 
+
+```C++
+SR_NODISCARD const SRSLStructureStatement * SR_SRSL_NS::SRSLShader::FindStructure (
     const SR_UTILS_NS::StringAtom & name
 ) const
 ```

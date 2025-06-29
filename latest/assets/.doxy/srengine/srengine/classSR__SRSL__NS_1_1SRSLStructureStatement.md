@@ -98,6 +98,7 @@ Inherits the following classes: [SR\_SRSL\_NS::SRSLLexicalUnit](classSR__SRSL__N
 
 | Type | Name |
 | ---: | :--- |
+|  bool | [**HasDynamicArray**](#function-hasdynamicarray) () const<br> |
 |   | [**SRSLStructureStatement**](#function-srslstructurestatement) () = default<br> |
 |   | [**~SRSLStructureStatement**](#function-srslstructurestatement) () override<br> |
 
@@ -237,6 +238,19 @@ SRSLExpr* SR_SRSL_NS::SRSLStructureStatement::pName;
 <hr>
 ## Public Functions Documentation
 
+
+
+
+### function HasDynamicArray 
+
+```C++
+bool SR_SRSL_NS::SRSLStructureStatement::HasDynamicArray () const
+```
+
+
+
+
+<hr>
 
 
 
