@@ -259,6 +259,7 @@ namespace SR_SCRIPTING_NS {
 
             std::string msvcLibs = m_settings.compilerPath.GetPrevious().GetPrevious().GetPrevious().GetPrevious().Concat("lib/x64").ToString();
 
+            sourceFiles += " \"{}/libconcrtd.lib\" "_format(msvcLibs);
             sourceFiles += " \"{}/libcpmtd.lib\" "_format(msvcLibs);
             sourceFiles += " \"{}/LIBCMTD.lib\" "_format(msvcLibs);
             sourceFiles += " \"{}/OLDNAMES.lib\" "_format(msvcLibs);

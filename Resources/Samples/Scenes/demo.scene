@@ -3483,13 +3483,11 @@ ddddцццゔぅヾボ
 									9-o:data
 										10-o:size
 											11-v:x
-												12-i:200
+												12-i:16
 											11-v:y
 												12-i:64
 											11-v:z
-												12-i:200
-										10-v:noiseScale
-											11-f:50.000000
+												12-i:16
 						6-k:i
 							7-o:d
 								8-v:type
@@ -3536,15 +3534,11 @@ ddddцццゔぅヾボ
 									9-o:data
 										10-o:size
 											11-v:x
-												12-i:200
+												12-i:16
 											11-v:y
 												12-i:64
 											11-v:z
-												12-i:200
-										10-v:noiseScale
-											11-f:50.000000
-										10-v:seed
-											11-i:-634
+												12-i:16
 						6-k:i
 							7-o:d
 								8-v:type
@@ -3594,6 +3588,8 @@ ddddцццゔぅヾボ
 										10-b:true
 					5-v:name
 						6-s:Chunk SSBO
+					5-v:isEnabled
+						6-b:false
 					5-v:layer
 						6-s:UI
 					5-o:transform
@@ -3603,3 +3599,27 @@ ddddцццゔぅヾボ
 							7-o:translation
 								8-v:y
 									9-f:1.420000
+		2-k:i
+			3-o:d
+				4-v:type
+					5-s:GameObject
+				4-o:ptr
+					5-v:entityId
+						6-i:3862067440479574013
+					5-a:components
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Behaviour
+								8-o:ptr
+									9-v:entityId
+										10-i:3303638222097433881
+									9-v:behaviourName
+										10-s:MarchingCubes
+									9-o:data
+					5-v:name
+						6-s:MarchingCubes
+					5-o:transform
+						6-v:type
+							7-s:Transform3D
+						6-o:ptr
