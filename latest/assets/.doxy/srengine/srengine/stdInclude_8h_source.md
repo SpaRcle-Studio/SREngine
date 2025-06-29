@@ -136,6 +136,8 @@ inline std::string_view SRGetClassName(std::string_view func_signature) {
 constexpr uint32_t SR_INVALID_VBO = SR_ID_INVALID;
 constexpr uint32_t SR_INVALID_IBO = SR_ID_INVALID;
 constexpr uint32_t SR_INVALID_UBO = SR_ID_INVALID;
+constexpr uint32_t SR_INVALID_SSBO = SR_ID_INVALID;
+constexpr uint32_t SR_INVALID_DESCRIPTOR_SET = SR_ID_INVALID;
 constexpr uint32_t SR_INVALID_FBO = SR_ID_INVALID;
 
 namespace SR_UTILS_NS {

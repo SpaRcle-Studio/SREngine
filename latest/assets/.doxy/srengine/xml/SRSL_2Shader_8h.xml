@@ -41,6 +41,8 @@
         </childnode>
         <childnode refid="140" relation="include">
         </childnode>
+        <childnode refid="142" relation="include">
+        </childnode>
       </node>
       <node id="136">
         <label>Graphics/SRSL/ICodeGenerator.h</label>
@@ -1347,33 +1349,33 @@
 <codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;std::pair&lt;SR_UTILS_NS::StringAtom,<sp/>SRSLVariable*&gt;&gt;&amp;<sp/>GetShared()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_shared;<sp/>}</highlight></codeline>
 <codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::map&lt;SR_UTILS_NS::StringAtom,<sp/>SRSLVariable*&gt;&amp;<sp/>GetConstants()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_constants;<sp/>}</highlight></codeline>
 <codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;SR_UTILS_NS::StringAtom&gt;&amp;<sp/>GetIncludes()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_includes;<sp/>}</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"></highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>float_t<sp/>EvalExpressionFloat(<ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref>*<sp/>pExpression)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>int32_t<sp/>EvalExpressionInt(<ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref>*<sp/>pExpression)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_MATH_NS::FVector2<sp/>EvalExpressionVec2(<ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref>*<sp/>pExpression)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_MATH_NS::FVector3<sp/>EvalExpressionVec3(<ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref>*<sp/>pExpression)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_MATH_NS::FVector4<sp/>EvalExpressionVec4(<ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref>*<sp/>pExpression)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>std::optional&lt;ShaderPropertyVariant&gt;<sp/>EvalExpressionValue(<ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref>*<sp/>pExpression,<sp/><ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref>*<sp/>pType)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="97"><highlight class="normal"></highlight></codeline>
-<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>ISRSLCodeGenerator::SRSLCodeGenRes<sp/>GenerateStages(ShaderLanguage<sp/>shaderLanguage)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="99"><highlight class="normal"></highlight></codeline>
-<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>SaveCache()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>uint64_t<sp/>GetHash()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"></highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Prepare();</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>PrepareSettings();</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>PrepareUniformBlocks();</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>PrepareSamplers();</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>PrepareStages();</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"></highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref><sp/>m_path;</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"></highlight></codeline>
-<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;SR_UTILS_NS::StringAtom&gt;<sp/>m_includes;</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;std::pair&lt;SR_UTILS_NS::StringAtom,<sp/>SRSLVariable*&gt;&gt;<sp/>m_shared;</highlight></codeline>
-<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;SR_UTILS_NS::StringAtom,<sp/>SRSLVariable*&gt;<sp/>m_constants;</highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ShaderType<sp/>m_type<sp/>=<sp/>ShaderType::Unknown;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::UVector3&amp;<sp/>GetComputeWorkGroupSize()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_computeWorkGroupSize;<sp/>}</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>float_t<sp/>EvalExpressionFloat(<ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref>*<sp/>pExpression)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>int32_t<sp/>EvalExpressionInt(<ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref>*<sp/>pExpression)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_MATH_NS::FVector2<sp/>EvalExpressionVec2(<ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref>*<sp/>pExpression)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_MATH_NS::FVector3<sp/>EvalExpressionVec3(<ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref>*<sp/>pExpression)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_MATH_NS::FVector4<sp/>EvalExpressionVec4(<ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref>*<sp/>pExpression)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>std::optional&lt;ShaderPropertyVariant&gt;<sp/>EvalExpressionValue(<ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref>*<sp/>pExpression,<sp/><ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref>*<sp/>pType)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>ISRSLCodeGenerator::SRSLCodeGenRes<sp/>GenerateStages(ShaderLanguage<sp/>shaderLanguage)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>SaveCache()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>uint64_t<sp/>GetHash()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Prepare();</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>PrepareSettings();</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>PrepareUniformBlocks();</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>PrepareSamplers();</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>PrepareStages();</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref><sp/>m_path;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;SR_UTILS_NS::StringAtom&gt;<sp/>m_includes;</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;std::pair&lt;SR_UTILS_NS::StringAtom,<sp/>SRSLVariable*&gt;&gt;<sp/>m_shared;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;SR_UTILS_NS::StringAtom,<sp/>SRSLVariable*&gt;<sp/>m_constants;</highlight></codeline>
 <codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SRShaderCreateInfo<sp/>m_createInfo;</highlight></codeline>
 <codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SRSLAnalyzedTree::Ptr<sp/>m_analyzedTree;</highlight></codeline>
 <codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SRSLUseStack::Ptr<sp/>m_useStack;</highlight></codeline>
@@ -1381,11 +1383,12 @@
 <codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>UniformBlocks<sp/>m_uniformBlocks;</highlight></codeline>
 <codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__SRSL__NS_1_1SRSLUniformBlock" kindref="compound">SRSLUniformBlock</ref><sp/>m_pushConstants;</highlight></codeline>
 <codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SRSLSamplers<sp/>m_samplers;</highlight></codeline>
-<codeline lineno="123"><highlight class="normal"></highlight></codeline>
-<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="125"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="126"><highlight class="normal"></highlight></codeline>
-<codeline lineno="127"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_SRSL_SHADER_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_MATH_NS::UVector3<sp/>m_computeWorkGroupSize<sp/>=<sp/>{<sp/>1,<sp/>1,<sp/>1<sp/>};</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="126"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_SRSL_SHADER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h"/>
   </compounddef>

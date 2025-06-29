@@ -4,6 +4,7 @@
     <compoundname>Engine/libs/Graphics/inc/Graphics/Types</compoundname>
     <innerdir refid="dir_85f7ff9424d99e3bcbc126d4280965b1">Engine/libs/Graphics/inc/Graphics/Types/Geometry</innerdir>
     <innerfile refid="Camera_8h">Camera.h</innerfile>
+    <innerfile refid="ComputeShader_8h">ComputeShader.h</innerfile>
     <innerfile refid="Descriptors_8h">Descriptors.h</innerfile>
     <innerfile refid="EditorGrid_8h">EditorGrid.h</innerfile>
     <innerfile refid="Framebuffer_8h">Framebuffer.h</innerfile>

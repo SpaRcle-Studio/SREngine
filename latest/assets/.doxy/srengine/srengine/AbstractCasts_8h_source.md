@@ -137,6 +137,8 @@ namespace SR_GRAPH_NS::VulkanTools {
         switch (type) {
             case ShaderStage::Fragment: return VkShaderStageFlagBits::VK_SHADER_STAGE_FRAGMENT_BIT;
             case ShaderStage::Vertex:   return VkShaderStageFlagBits::VK_SHADER_STAGE_VERTEX_BIT;
+            case ShaderStage::Compute:  return VkShaderStageFlagBits::VK_SHADER_STAGE_COMPUTE_BIT;
+            case ShaderStage::Geometry: return VkShaderStageFlagBits::VK_SHADER_STAGE_GEOMETRY_BIT;
             default:
                 SR_ERROR("VulkanTools::VkShaderShaderTypeToStage() : unknown type!");
                 return VkShaderStageFlagBits::VK_SHADER_STAGE_FLAG_BITS_MAX_ENUM;
@@ -147,6 +149,8 @@ namespace SR_GRAPH_NS::VulkanTools {
         switch (stage) {
             case VkShaderStageFlagBits::VK_SHADER_STAGE_FRAGMENT_BIT: return ShaderStage::Fragment;
             case VkShaderStageFlagBits::VK_SHADER_STAGE_VERTEX_BIT:   return ShaderStage::Vertex;
+            case VkShaderStageFlagBits::VK_SHADER_STAGE_COMPUTE_BIT:  return ShaderStage::Compute;
+            case VkShaderStageFlagBits::VK_SHADER_STAGE_GEOMETRY_BIT: return ShaderStage::Geometry;
             default:
                 SR_ERROR("VulkanTools::VkShaderStageToShaderType() : unknown stage!");
                 return ShaderStage::Unknown;

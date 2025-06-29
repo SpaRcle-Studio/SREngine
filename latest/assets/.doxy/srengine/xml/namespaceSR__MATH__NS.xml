@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="namespaceSR__MATH__NS" kind="namespace" language="C++">
     <compoundname>SR_MATH_NS</compoundname>
+    <innerclass refid="structSR__MATH__NS_1_1AABB" prot="public">SR_MATH_NS::AABB</innerclass>
     <innerclass refid="classSR__MATH__NS_1_1FColor" prot="public">SR_MATH_NS::FColor</innerclass>
     <innerclass refid="classSR__MATH__NS_1_1Matrix3x3" prot="public">SR_MATH_NS::Matrix3x3</innerclass>
     <innerclass refid="classSR__MATH__NS_1_1Matrix4x4" prot="public">SR_MATH_NS::Matrix4x4</innerclass>
@@ -1690,6 +1691,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/Math/Axis.h" line="10" column="1"/>
+    <location file="Engine/libs/Utils/inc/Utils/Math/AABB.h" line="10" column="1"/>
   </compounddef>
 </doxygen>

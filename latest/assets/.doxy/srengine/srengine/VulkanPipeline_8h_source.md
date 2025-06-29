@@ -99,6 +99,11 @@ namespace SR_GRAPH_NS {
 
         void OnResize(const SR_MATH_NS::UVector2& size) override;
 
+        void WaitComputeIdle() override;
+
+        bool BeginCompute() override;
+        void EndCompute() override;
+
         bool BeginCmdBuffer() override;
         void EndCmdBuffer() override;
 
@@ -125,6 +130,7 @@ namespace SR_GRAPH_NS {
         void UpdateDescriptorSets(uint32_t descriptorSet, const SRDescriptorUpdateInfos& updateInfo) override;
         void UpdateUBO(uint32_t UBO, void* pData, uint64_t size) override;
         void UpdateSSBO(uint32_t SSBO, void* pData, uint64_t size) override;
+        void ReadSSBO(uint32_t SSBO, void* pData, uint64_t size) override;
 
         void PushConstants(void* pData, uint64_t size) override;
 
@@ -133,6 +139,8 @@ namespace SR_GRAPH_NS {
 
         void Draw(uint32_t count) override;
         void DrawIndices(uint32_t count) override;
+
+        void Dispatch(uint32_t groupCountX, uint32_t groupCountY, uint32_t groupCountZ) override;
 
         void BindAttachment(uint8_t activeTexture, uint32_t textureId) override;
         void BindVBO(uint32_t VBO) override;

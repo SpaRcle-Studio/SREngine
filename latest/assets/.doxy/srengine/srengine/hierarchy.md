@@ -117,6 +117,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **class** [**SR\_GRAPH\_NS::TextBuilder**](classSR__GRAPH__NS_1_1TextBuilder.md) 
     * **class** [**SR\_GRAPH\_NS::TextureData**](classSR__GRAPH__NS_1_1TextureData.md) 
     * **class** [**SR\_GRAPH\_NS::VulkanTools::MemoryManager**](classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager.md) 
+    * **class** [**SR\_GTYPES\_NS::ComputeShader**](classSR__GTYPES__NS_1_1ComputeShader.md) 
     * **class** [**SR\_HTYPES\_NS::BinarySearchTree**](classSR__HTYPES__NS_1_1BinarySearchTree.md) 
     * **class** [**SR\_HTYPES\_NS::DictionaryEntry**](classSR__HTYPES__NS_1_1DictionaryEntry.md) 
     * **class** [**SR\_HTYPES\_NS::LinkedList**](classSR__HTYPES__NS_1_1LinkedList.md) 
@@ -11525,6 +11526,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**SR\_HTYPES\_NS::MultiThreadPtr::dynamic\_data**](structSR__HTYPES__NS_1_1MultiThreadPtr_1_1dynamic__data.md) 
 * **struct** [**SR\_HTYPES\_NS::Time::TimeInfo**](structSR__HTYPES__NS_1_1Time_1_1TimeInfo.md) 
 * **struct** [**SR\_HTYPES\_NS::TreeT::InsertionStackElement**](structSR__HTYPES__NS_1_1TreeT_1_1InsertionStackElement.md) _The structure of elements on the insertion stack._ 
+* **struct** [**SR\_MATH\_NS::AABB**](structSR__MATH__NS_1_1AABB.md) 
 * **struct** [**SR\_MATH\_NS::Ray**](structSR__MATH__NS_1_1Ray.md) 
 * **struct** [**SR\_MATH\_NS::Rect**](structSR__MATH__NS_1_1Rect.md) 
 * **struct** [**SR\_MATH\_NS::Size**](structSR__MATH__NS_1_1Size.md) 

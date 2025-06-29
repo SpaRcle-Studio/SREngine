@@ -95,7 +95,7 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="27" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="27" bodyend="27"/>
       </memberdef>
-      <memberdef kind="variable" id="structSR__MATH__NS_1_1Vector2_1a341d7ffe2d3d45039f239282d390a8a8" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="structSR__MATH__NS_1_1Vector2_1a7c6ed305e3780303d70d17525fdafd74" prot="public" static="no" mutable="no">
         <type>union <ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">SR_MATH_NS::Vector2</ref></type>
         <definition>union SR_MATH_NS::Vector2 SR_MATH_NS::Vector2&lt; T &gt;</definition>
         <argsstring></argsstring>

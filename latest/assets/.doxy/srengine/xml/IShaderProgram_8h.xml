@@ -9,6 +9,7 @@
     <includes refid="Enumerations_8h" local="no">Utils/Common/Enumerations.h</includes>
     <includes refid="Uniforms_8h" local="no">Graphics/Types/Uniforms.h</includes>
     <includes refid="Graphics_2inc_2Graphics_2Types_2Vertices_8h" local="no">Graphics/Types/Vertices.h</includes>
+    <includes refid="ShaderType_8h" local="no">Graphics/SRSL/ShaderType.h</includes>
     <includedby refid="SRSL_8h" local="no">Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h</includedby>
     <includedby refid="SRSLParser_8h" local="no">Engine/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h</includedby>
     <includedby refid="BaseMaterial_8h" local="no">Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h</includedby>
@@ -25,6 +26,22 @@
     <includedby refid="SRSL_2Shader_8h" local="no">Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h</includedby>
     <includedby refid="Mesh_8h" local="no">Engine/libs/Graphics/inc/Graphics/Types/Mesh.h</includedby>
     <incdepgraph>
+      <node id="135">
+        <label>Graphics/Loaders/ShaderProperties.h</label>
+        <link refid="ShaderProperties_8h_source"/>
+        <childnode refid="131" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="136" relation="include">
+        </childnode>
+        <childnode refid="138" relation="include">
+        </childnode>
+      </node>
       <node id="1">
         <label>Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h</label>
         <link refid="IShaderProgram_8h"/>
@@ -41,6 +58,14 @@
         <childnode refid="130" relation="include">
         </childnode>
         <childnode refid="132" relation="include">
+        </childnode>
+        <childnode refid="134" relation="include">
+        </childnode>
+      </node>
+      <node id="134">
+        <label>Graphics/SRSL/ShaderType.h</label>
+        <link refid="ShaderType_8h_source"/>
+        <childnode refid="135" relation="include">
         </childnode>
       </node>
       <node id="130">
@@ -199,6 +224,12 @@
         <childnode refid="84" relation="include">
         </childnode>
       </node>
+      <node id="145">
+        <label>Utils/Common/StringAtomLiterals.h</label>
+        <link refid="StringAtomLiterals_8h_source"/>
+        <childnode refid="87" relation="include">
+        </childnode>
+      </node>
       <node id="100">
         <label>Utils/Common/StringFormat.h</label>
         <link refid="StringFormat_8h_source"/>
@@ -279,6 +310,26 @@
         <childnode refid="103" relation="include">
         </childnode>
       </node>
+      <node id="141">
+        <label>Utils/ECS/EntityRef.h</label>
+        <link refid="EntityRef_8h_source"/>
+        <childnode refid="142" relation="include">
+        </childnode>
+        <childnode refid="140" relation="include">
+        </childnode>
+      </node>
+      <node id="142">
+        <label>Utils/ECS/EntityRefUtils.h</label>
+        <link refid="EntityRefUtils_8h_source"/>
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="143" relation="include">
+        </childnode>
+        <childnode refid="153" relation="include">
+        </childnode>
+        <childnode refid="105" relation="include">
+        </childnode>
+      </node>
       <node id="2">
         <label>Utils/FileSystem/FileSystem.h</label>
         <link refid="FileSystem_8h_source"/>
@@ -327,6 +378,16 @@
         <label>Utils/Math/Quaternion.h</label>
         <link refid="Quaternion_8h_source"/>
         <childnode refid="68" relation="include">
+        </childnode>
+      </node>
+      <node id="147">
+        <label>Utils/Math/Rect.h</label>
+        <link refid="Rect_8h_source"/>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
         </childnode>
       </node>
       <node id="108">
@@ -477,6 +538,32 @@
         <childnode refid="129" relation="include">
         </childnode>
       </node>
+      <node id="136">
+        <label>Utils/Resources/Xml.h</label>
+        <link refid="Xml_8h_source"/>
+        <childnode refid="99" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="137" relation="include">
+        </childnode>
+      </node>
+      <node id="151">
+        <label>Utils/Serialization/DefaultCheckers.inl.h</label>
+        <link refid="DefaultCheckers_8inl_8h_source"/>
+      </node>
+      <node id="149">
+        <label>Utils/Serialization/DefaultObjectMakers.inl.h</label>
+        <link refid="DefaultObjectMakers_8inl_8h_source"/>
+      </node>
       <node id="120">
         <label>Utils/Serialization/Deserializer.h</label>
         <link refid="Deserializer_8h_source"/>
@@ -487,6 +574,56 @@
         <label>Utils/Serialization/ObjectDataAccessor.h</label>
         <link refid="ObjectDataAccessor_8h_source"/>
         <childnode refid="78" relation="include">
+        </childnode>
+      </node>
+      <node id="152">
+        <label>Utils/Serialization/ObjectDataAccessors.inl.h</label>
+        <link refid="ObjectDataAccessors_8inl_8h_source"/>
+      </node>
+      <node id="150">
+        <label>Utils/Serialization/SaveCheckers.inl.h</label>
+        <link refid="SaveCheckers_8inl_8h_source"/>
+      </node>
+      <node id="143">
+        <label>Utils/Serialization/Serializable.h</label>
+        <link refid="Serializable_8h_source"/>
+        <childnode refid="110" relation="include">
+        </childnode>
+        <childnode refid="144" relation="include">
+        </childnode>
+        <childnode refid="146" relation="include">
+        </childnode>
+      </node>
+      <node id="146">
+        <label>Utils/Serialization/Serialization.h</label>
+        <link refid="Serialization_8h_source"/>
+        <childnode refid="119" relation="include">
+        </childnode>
+        <childnode refid="120" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="144" relation="include">
+        </childnode>
+        <childnode refid="109" relation="include">
+        </childnode>
+        <childnode refid="105" relation="include">
+        </childnode>
+        <childnode refid="108" relation="include">
+        </childnode>
+        <childnode refid="147" relation="include">
+        </childnode>
+        <childnode refid="145" relation="include">
+        </childnode>
+        <childnode refid="148" relation="include">
+        </childnode>
+        <childnode refid="149" relation="include">
+        </childnode>
+        <childnode refid="150" relation="include">
+        </childnode>
+        <childnode refid="151" relation="include">
+        </childnode>
+        <childnode refid="152" relation="include">
         </childnode>
       </node>
       <node id="119">
@@ -503,6 +640,44 @@
         <childnode refid="73" relation="include">
         </childnode>
         <childnode refid="117" relation="include">
+        </childnode>
+      </node>
+      <node id="144">
+        <label>Utils/TypeTraits/Factory.h</label>
+        <link refid="Factory_8h_source"/>
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="145" relation="include">
+        </childnode>
+        <childnode refid="105" relation="include">
+        </childnode>
+        <childnode refid="118" relation="include">
+        </childnode>
+      </node>
+      <node id="138">
+        <label>Utils/TypeTraits/Properties.h</label>
+        <link refid="Properties_8h_source"/>
+        <childnode refid="139" relation="include">
+        </childnode>
+        <childnode refid="141" relation="include">
+        </childnode>
+      </node>
+      <node id="140">
+        <label>Utils/TypeTraits/Property.h</label>
+        <link refid="TypeTraits_2Property_8h_source"/>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="106" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="111" relation="include">
+        </childnode>
+        <childnode refid="99" relation="include">
         </childnode>
       </node>
       <node id="110">
@@ -525,6 +700,12 @@
         <childnode refid="119" relation="include">
         </childnode>
         <childnode refid="120" relation="include">
+        </childnode>
+      </node>
+      <node id="139">
+        <label>Utils/TypeTraits/StandardProperty.h</label>
+        <link refid="StandardProperty_8h_source"/>
+        <childnode refid="140" relation="include">
         </childnode>
       </node>
       <node id="78">
@@ -597,6 +778,18 @@
         <childnode refid="88" relation="include">
         </childnode>
         <childnode refid="100" relation="include">
+        </childnode>
+      </node>
+      <node id="153">
+        <label>Utils/Types/SafePointer.h</label>
+        <link refid="SafePointer_8h_source"/>
+        <childnode refid="100" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="129" relation="include">
+        </childnode>
+        <childnode refid="105" relation="include">
         </childnode>
       </node>
       <node id="83">
@@ -797,6 +990,9 @@
         <childnode refid="67" relation="include">
         </childnode>
       </node>
+      <node id="148">
+        <label>Codegen/Enums.generated.hpp</label>
+      </node>
       <node id="89">
         <label>Codegen/EnumsFwd.generated.hpp</label>
       </node>
@@ -808,6 +1004,9 @@
       </node>
       <node id="9">
         <label>array</label>
+      </node>
+      <node id="137">
+        <label>assimp/contrib/pugixml/src/pugixml.hpp</label>
       </node>
       <node id="43">
         <label>atomic</label>
@@ -1003,10 +1202,10 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="50">
+      <node id="51">
         <label>Engine/inc/Engine/GUI/EditorGizmo.h</label>
         <link refid="EditorGizmo_8h_source"/>
-        <childnode refid="51" relation="include">
+        <childnode refid="52" relation="include">
         </childnode>
       </node>
       <node id="7">
@@ -1095,37 +1294,37 @@
         <label>Engine/inc/Engine/GUI/PropertyDrawers/VectorPropertyDrawer.h</label>
         <link refid="VectorPropertyDrawer_8h_source"/>
       </node>
-      <node id="51">
+      <node id="52">
         <label>Engine/inc/Engine/GUI/SceneTools.h</label>
         <link refid="SceneTools_8h_source"/>
       </node>
-      <node id="56">
+      <node id="57">
         <label>Engine/inc/Engine/World/EngineScene.h</label>
         <link refid="EngineScene_8h_source"/>
       </node>
-      <node id="65">
+      <node id="66">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
         <link refid="Animator_8h_source"/>
       </node>
-      <node id="63">
+      <node id="64">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/Bone.h</label>
         <link refid="Bone_8h_source"/>
-        <childnode refid="64" relation="include">
-        </childnode>
-      </node>
-      <node id="64">
-        <label>Engine/libs/Graphics/inc/Graphics/Animations/Skeleton.h</label>
-        <link refid="Skeleton_8h_source"/>
         <childnode refid="65" relation="include">
         </childnode>
-        <childnode refid="47" relation="include">
+      </node>
+      <node id="65">
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/Skeleton.h</label>
+        <link refid="Skeleton_8h_source"/>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
         </childnode>
       </node>
-      <node id="66">
+      <node id="67">
         <label>Engine/libs/Graphics/inc/Graphics/Font/Text.h</label>
         <link refid="Text_8h_source"/>
       </node>
-      <node id="39">
+      <node id="40">
         <label>Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h</label>
         <link refid="LightSystem_8h_source"/>
       </node>
@@ -1135,7 +1334,7 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="27">
+      <node id="28">
         <label>Engine/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h</label>
         <link refid="SRSLParser_8h_source"/>
         <childnode refid="2" relation="include">
@@ -1165,25 +1364,25 @@
         <label>Engine/libs/Graphics/inc/Graphics/Material/UniqueMaterial.h</label>
         <link refid="UniqueMaterial_8h_source"/>
       </node>
-      <node id="28">
+      <node id="29">
         <label>Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h</label>
         <link refid="ShaderProgramManager_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="29">
+      <node id="30">
         <label>Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h</label>
         <link refid="ShaderUBOBlock_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="33">
+      <node id="34">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h</label>
         <link refid="CascadedShadowMapPass_8h_source"/>
-        <childnode refid="34" relation="include">
+        <childnode refid="35" relation="include">
         </childnode>
       </node>
-      <node id="35">
+      <node id="36">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
         <link refid="ColorBufferPass_8h_source"/>
       </node>
@@ -1195,41 +1394,41 @@
         <label>Engine/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
         <link refid="HTMLDrawerPass_8h_source"/>
       </node>
-      <node id="30">
+      <node id="31">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h</label>
         <link refid="ISamplersPass_8h_source"/>
-        <childnode refid="31" relation="include">
-        </childnode>
-      </node>
-      <node id="31">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
-        <link refid="MeshDrawerPass_8h_source"/>
         <childnode refid="32" relation="include">
         </childnode>
       </node>
       <node id="32">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
-        <link refid="OffScreenMeshDrawerPass_8h_source"/>
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
+        <link refid="MeshDrawerPass_8h_source"/>
         <childnode refid="33" relation="include">
         </childnode>
-        <childnode refid="35" relation="include">
-        </childnode>
       </node>
-      <node id="36">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h</label>
-        <link refid="PostProcessPass_8h_source"/>
-        <childnode refid="37" relation="include">
+      <node id="33">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
+        <link refid="OffScreenMeshDrawerPass_8h_source"/>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
         </childnode>
       </node>
       <node id="37">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h</label>
+        <link refid="PostProcessPass_8h_source"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h</label>
         <link refid="SSAOPass_8h_source"/>
       </node>
-      <node id="34">
+      <node id="35">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h</label>
         <link refid="VarianceShadowMapPass_8h_source"/>
       </node>
-      <node id="40">
+      <node id="41">
         <label>Engine/libs/Graphics/inc/Graphics/Pipeline/EmptyPipeline.h</label>
         <link refid="EmptyPipeline_8h_source"/>
       </node>
@@ -1238,11 +1437,9 @@
         <link refid="IShaderProgram_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="28" relation="include">
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
@@ -1250,40 +1447,44 @@
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
-        <childnode refid="36" relation="include">
+        <childnode refid="32" relation="include">
         </childnode>
-        <childnode refid="38" relation="include">
+        <childnode refid="37" relation="include">
         </childnode>
-        <childnode refid="52" relation="include">
+        <childnode refid="39" relation="include">
         </childnode>
         <childnode refid="53" relation="include">
         </childnode>
         <childnode refid="54" relation="include">
         </childnode>
-        <childnode refid="58" relation="include">
+        <childnode refid="55" relation="include">
         </childnode>
-        <childnode refid="61" relation="include">
+        <childnode refid="59" relation="include">
         </childnode>
         <childnode refid="62" relation="include">
         </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
       </node>
-      <node id="38">
+      <node id="39">
         <label>Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h</label>
         <link refid="Pipeline_8h_source"/>
-        <childnode refid="39" relation="include">
-        </childnode>
         <childnode refid="40" relation="include">
         </childnode>
         <childnode refid="41" relation="include">
         </childnode>
         <childnode refid="42" relation="include">
         </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
       </node>
-      <node id="52">
+      <node id="53">
         <label>Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h</label>
         <link refid="AbstractCasts_8h_source"/>
       </node>
-      <node id="41">
+      <node id="42">
         <label>Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanPipeline.h</label>
         <link refid="VulkanPipeline_8h_source"/>
       </node>
@@ -1305,75 +1506,77 @@
         <childnode refid="26" relation="include">
         </childnode>
       </node>
-      <node id="53">
+      <node id="54">
         <label>Engine/libs/Graphics/inc/Graphics/Render/RenderPredicates.h</label>
         <link refid="RenderPredicates_8h_source"/>
-        <childnode refid="31" relation="include">
+        <childnode refid="32" relation="include">
         </childnode>
-        <childnode refid="54" relation="include">
-        </childnode>
-      </node>
-      <node id="55">
-        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h</label>
-        <link refid="RenderScene_8h_source"/>
-        <childnode refid="56" relation="include">
-        </childnode>
-        <childnode refid="57" relation="include">
-        </childnode>
-      </node>
-      <node id="54">
-        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderStrategy.h</label>
-        <link refid="RenderStrategy_8h_source"/>
         <childnode refid="55" relation="include">
         </childnode>
       </node>
-      <node id="59">
+      <node id="56">
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h</label>
+        <link refid="RenderScene_8h_source"/>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+      </node>
+      <node id="55">
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderStrategy.h</label>
+        <link refid="RenderStrategy_8h_source"/>
+        <childnode refid="56" relation="include">
+        </childnode>
+      </node>
+      <node id="60">
         <label>Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h</label>
         <link refid="GLSLCodeGenerator_8h_source"/>
       </node>
-      <node id="58">
+      <node id="59">
         <label>Engine/libs/Graphics/inc/Graphics/SRSL/ICodeGenerator.h</label>
         <link refid="ICodeGenerator_8h_source"/>
-        <childnode refid="59" relation="include">
-        </childnode>
         <childnode refid="60" relation="include">
         </childnode>
         <childnode refid="61" relation="include">
         </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
       </node>
-      <node id="60">
+      <node id="61">
         <label>Engine/libs/Graphics/inc/Graphics/SRSL/PseudoCodeGenerator.h</label>
         <link refid="PseudoCodeGenerator_8h_source"/>
       </node>
-      <node id="61">
+      <node id="62">
         <label>Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h</label>
         <link refid="SRSL_2Shader_8h_source"/>
       </node>
-      <node id="67">
+      <node id="27">
+        <label>Engine/libs/Graphics/inc/Graphics/Types/ComputeShader.h</label>
+        <link refid="ComputeShader_8h_source"/>
+      </node>
+      <node id="68">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h</label>
         <link refid="DebugLine_8h_source"/>
       </node>
-      <node id="43">
+      <node id="44">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</label>
         <link refid="DebugWireframeMesh_8h_source"/>
       </node>
-      <node id="42">
+      <node id="43">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h</label>
         <link refid="IndexedMesh_8h_source"/>
-        <childnode refid="43" relation="include">
-        </childnode>
         <childnode refid="44" relation="include">
         </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
       </node>
-      <node id="45">
+      <node id="46">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</label>
         <link refid="Mesh3D_8h_source"/>
       </node>
-      <node id="44">
+      <node id="45">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/MeshComponent.h</label>
         <link refid="MeshComponent_8h_source"/>
-        <childnode refid="45" relation="include">
-        </childnode>
         <childnode refid="46" relation="include">
         </childnode>
         <childnode refid="47" relation="include">
@@ -1382,29 +1585,31 @@
         </childnode>
         <childnode refid="49" relation="include">
         </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
       </node>
-      <node id="46">
+      <node id="47">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h</label>
         <link refid="ProceduralMesh_8h_source"/>
       </node>
-      <node id="47">
+      <node id="48">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
         <link refid="SkinnedMesh_8h_source"/>
       </node>
-      <node id="48">
+      <node id="49">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h</label>
         <link refid="Sprite_8h_source"/>
       </node>
-      <node id="62">
+      <node id="63">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Mesh.h</label>
         <link refid="Mesh_8h_source"/>
-        <childnode refid="63" relation="include">
-        </childnode>
-        <childnode refid="66" relation="include">
+        <childnode refid="64" relation="include">
         </childnode>
         <childnode refid="67" relation="include">
         </childnode>
-        <childnode refid="42" relation="include">
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
         </childnode>
       </node>
       <node id="3">
@@ -1416,15 +1621,17 @@
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
       </node>
-      <node id="57">
+      <node id="58">
         <label>Engine/libs/Graphics/inc/Graphics/UI/Canvas.h</label>
         <link refid="Canvas_8h_source"/>
       </node>
-      <node id="49">
+      <node id="50">
         <label>Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h</label>
         <link refid="Gizmo_8h_source"/>
-        <childnode refid="50" relation="include">
+        <childnode refid="51" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -1456,223 +1663,233 @@
 <codeline lineno="13"><highlight class="normal"></highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Graphics/Types/Uniforms.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Graphics/Types/Vertices.h&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="16"><highlight class="normal"></highlight></codeline>
-<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceSR__GTYPES__NS" kindref="compound">SR_GTYPES_NS</ref><sp/>{</highlight></codeline>
-<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Texture;</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Shader;</highlight></codeline>
-<codeline lineno="20"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"></highlight></codeline>
-<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SR_GRAPH_NS<sp/>{</highlight></codeline>
-<codeline lineno="23" refid="structSR__GRAPH__NS_1_1ShaderUseInfo" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__GRAPH__NS_1_1ShaderUseInfo" kindref="compound">ShaderUseInfo</ref><sp/>{</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__GRAPH__NS_1_1ShaderUseInfo" kindref="compound">ShaderUseInfo</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>SR_CONSTEXPR<sp/><ref refid="structSR__GRAPH__NS_1_1ShaderUseInfo" kindref="compound">ShaderUseInfo</ref>(<ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref>*<sp/>pShader)</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>pShader(pShader)</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>ignoreReplace(</highlight><highlight class="keyword">false</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>useMaterialUniforms(</highlight><highlight class="keyword">true</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>useMaterialSamplers(</highlight><highlight class="keyword">true</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>}</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"></highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref>*<sp/>pShader;</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>ignoreReplace<sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>4;</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>useMaterialUniforms<sp/>:<sp/>2;</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>useMaterialSamplers<sp/>:<sp/>2;</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"></highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ENUM_NS_CLASS_T(ShaderBindResult,<sp/>uint8_t,</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Failed<sp/>=<sp/>0,<sp/><sp/></highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Success<sp/>=<sp/>1,<sp/></highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Duplicated,</highlight></codeline>
-<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ReAllocated</highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>);</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"></highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_LINE_START_POINT<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;LINE_START_POINT&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_LINE_END_POINT<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;LINE_END_POINT&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_LINE_COLOR<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;LINE_COLOR&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_MODEL_MATRIX<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;MODEL_MATRIX&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_SLICED_TEXTURE_BORDER<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SLICED_TEXTURE_BORDER&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_SLICED_WINDOW_BORDER<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SLICED_WINDOW_BORDER&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_MODEL_NO_SCALE_MATRIX<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;MODEL_NO_SCALE_MATRIX&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_SKELETON_MATRICES_128<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SKELETON_MATRICES_128&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_SKELETON_MATRIX_OFFSETS_128<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SKELETON_MATRIX_OFFSETS_128&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_SKELETON_MATRICES_256<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SKELETON_MATRICES_256&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_SKELETON_MATRIX_OFFSETS_256<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SKELETON_MATRIX_OFFSETS_256&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_SKELETON_MATRICES_384<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SKELETON_MATRICES_384&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_SKELETON_MATRIX_OFFSETS_384<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SKELETON_MATRIX_OFFSETS_384&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_VIEW_MATRIX<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;VIEW_MATRIX&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_SSAO_SAMPLES<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SSAO_SAMPLES&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_LIGHT_SPACE_MATRIX<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;LIGHT_SPACE_MATRIX&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_VIEW_NO_TRANSLATE_MATRIX<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;VIEW_NO_TRANSLATE_MATRIX&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_PROJECTION_MATRIX<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;PROJECTION_MATRIX&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_PROJECTION_NO_FOV_MATRIX<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;PROJECTION_NO_FOV_MATRIX&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_ORTHOGONAL_MATRIX<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;ORTHOGONAL_MATRIX&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_VIEW_DIRECTION<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;VIEW_DIRECTION&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_VIEW_POSITION<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;VIEW_POSITION&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_TIME<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;TIME&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_ASPECT<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;ASPECT&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_RESOLUTION<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;RESOLUTION&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_SKYBOX_DIFFUSE<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SKYBOX_DIFFUSE&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_DEPTH_ATTACHMENT<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;DEPTH_ATTACHMENT&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_TEXT_RECT_X<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;TEXT_RECT_X&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_TEXT_RECT_Y<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;TEXT_RECT_Y&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_TEXT_RECT_WIDTH<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;TEXT_RECT_WIDTH&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_TEXT_RECT_HEIGHT<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;TEXT_RECT_HEIGHT&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_DIRECTIONAL_LIGHT_POSITION<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;DIRECTIONAL_LIGHT_POSITION&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_PC_SHADOW_CASCADE_INDEX<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;PC_SHADOW_CASCADE_INDEX&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_CASCADE_LIGHT_SPACE_MATRICES<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;CASCADE_LIGHT_SPACE_MATRICES&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_CASCADE_SPLITS<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;CASCADE_SPLITS&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_PC_COLOR_BUFFER_MODE<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;PC_COLOR_BUFFER_MODE&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_PC_COLOR_BUFFER_VALUE<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;PC_COLOR_BUFFER_VALUE&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_SSAO_NOISE<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SSAO_NOISE&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_RGBA_VALUE<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;RGBA_VALUE&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_TEXT_ATLAS_TEXTURE<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;TEXT_ATLAS_TEXTURE&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_NDC_RECT<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;NDC_RECT&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"></highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>std::vector&lt;std::pair&lt;Vertices::Attribute,<sp/>size_t&gt;&gt;<sp/>VertexAttributes;</highlight></codeline>
-<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>std::vector&lt;SR_VERTEX_DESCRIPTION&gt;<sp/>VertexDescriptions;</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"></highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_DEPRECATED</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>std::variant&lt;glm::mat4,<sp/>glm::mat3,<sp/>glm::mat2,<sp/>float,<sp/>int,<sp/>glm::vec2,<sp/>glm::vec3,<sp/>glm::vec4,<sp/>glm::ivec2,<sp/>glm::ivec3,<sp/>glm::ivec4&gt;<sp/>ShaderVariable;</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"></highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ENUM_NS_CLASS_T(ShaderStage,<sp/>uint8_t,</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Unknown,</highlight></codeline>
-<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vertex,</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Fragment,</highlight></codeline>
-<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Geometry,</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Tesselation,</highlight></codeline>
-<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Compute,</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Raygen,</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Intersection,</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>HitClosest,</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>HitAny,</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MissPrimary,</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MissSecondary</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>);</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"></highlight></codeline>
-<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ENUM_NS_CLASS(LayoutBinding,<sp/>Unknown<sp/>=<sp/>0,<sp/><ref refid="structSR__GRAPH__NS_1_1Uniform" kindref="compound">Uniform</ref>,<sp/>Sampler2D,<sp/>Attachhment,<sp/>SSBO)</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ENUM_NS_CLASS(PolygonMode,<sp/>Unknown,<sp/>Fill,<sp/>Line,<sp/>Point)</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ENUM_NS_CLASS(CullMode,<sp/>Unknown,<sp/>None,<sp/>Front,<sp/>Back,<sp/>FrontAndBack)</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ENUM_NS_CLASS(PrimitiveTopology,</highlight></codeline>
-<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Unknown,</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PointList,</highlight></codeline>
-<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LineList,</highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LineStrip,</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TriangleList,</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TriangleStrip,</highlight></codeline>
-<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TriangleFan,</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LineListWithAdjacency,</highlight></codeline>
-<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LineStripWithAdjacency,</highlight></codeline>
-<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TriangleListWithAdjacency,</highlight></codeline>
-<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TriangleStripWithAdjacency,</highlight></codeline>
-<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PathList)</highlight></codeline>
-<codeline lineno="124"><highlight class="normal"></highlight></codeline>
-<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ENUM_NS_CLASS(DepthCompare,</highlight></codeline>
-<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Unknown,</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Never,</highlight></codeline>
-<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Less,</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Equal,</highlight></codeline>
-<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LessOrEqual,</highlight></codeline>
-<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Greater,</highlight></codeline>
-<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NotEqual,</highlight></codeline>
-<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GreaterOrEqual,</highlight></codeline>
-<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Always)</highlight></codeline>
-<codeline lineno="135"><highlight class="normal"></highlight></codeline>
-<codeline lineno="136" refid="structSR__GRAPH__NS_1_1Uniform" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/>struct<sp/>SR_RENDERER_DLL_API<sp/><ref refid="structSR__GRAPH__NS_1_1Uniform" kindref="compound">Uniform</ref><sp/>{</highlight></codeline>
-<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LayoutBinding<sp/>type<sp/>=<sp/>LayoutBinding::Unknown;</highlight></codeline>
-<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ShaderStage<sp/>stage<sp/>=<sp/>ShaderStage::Unknown;</highlight></codeline>
-<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>binding<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>size<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="142"><highlight class="normal"></highlight></codeline>
-<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>std::vector&lt;Uniform&gt;<sp/>UBOInfo;</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"></highlight></codeline>
-<codeline lineno="145" refid="structSR__GRAPH__NS_1_1SRShaderPushConstant" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">SR_RENDERER_DLL_API<sp/><ref refid="structSR__GRAPH__NS_1_1SRShaderPushConstant" kindref="compound">SRShaderPushConstant</ref><sp/>{</highlight></codeline>
-<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>size<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>offset<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="149"><highlight class="normal"></highlight></codeline>
-<codeline lineno="150" refid="structSR__GRAPH__NS_1_1SRShaderStageInfo" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">SR_RENDERER_DLL_API<sp/><ref refid="structSR__GRAPH__NS_1_1SRShaderStageInfo" kindref="compound">SRShaderStageInfo</ref><sp/>{</highlight></codeline>
-<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref><sp/>path;</highlight></codeline>
-<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;SRShaderPushConstant&gt;<sp/>pushConstants;</highlight></codeline>
-<codeline lineno="154"><highlight class="normal"></highlight></codeline>
-<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="156"><highlight class="normal"></highlight></codeline>
-<codeline lineno="157" refid="structSR__GRAPH__NS_1_1SRShaderCreateInfo" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">SR_RENDERER_DLL_API<sp/><ref refid="structSR__GRAPH__NS_1_1SRShaderCreateInfo" kindref="compound">SRShaderCreateInfo</ref><sp/>{</highlight></codeline>
-<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Validate()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>polygonMode<sp/><sp/><sp/><sp/><sp/><sp/><sp/>!=<sp/>PolygonMode::Unknown</highlight></codeline>
-<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;&amp;<sp/>cullMode<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>!=<sp/>CullMode::Unknown</highlight></codeline>
-<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;&amp;<sp/>depthCompare<sp/><sp/><sp/><sp/><sp/><sp/>!=<sp/>DepthCompare::Unknown</highlight></codeline>
-<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;&amp;<sp/>primitiveTopology<sp/>!=<sp/>PrimitiveTopology::Unknown;</highlight></codeline>
-<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="165"><highlight class="normal"></highlight></codeline>
-<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;ShaderStage,<sp/>SRShaderStageInfo&gt;<sp/>stages;</highlight></codeline>
-<codeline lineno="168"><highlight class="normal"></highlight></codeline>
-<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PolygonMode<sp/><sp/><sp/><sp/><sp/><sp/><sp/>polygonMode<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>PolygonMode::Unknown;</highlight></codeline>
-<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CullMode<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cullMode<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>CullMode::Unknown;</highlight></codeline>
-<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DepthCompare<sp/><sp/><sp/><sp/><sp/><sp/>depthCompare<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>DepthCompare::Unknown;</highlight></codeline>
-<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PrimitiveTopology<sp/>primitiveTopology<sp/>=<sp/>PrimitiveTopology::Unknown;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Graphics/SRSL/ShaderType.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceSR__GTYPES__NS" kindref="compound">SR_GTYPES_NS</ref><sp/>{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Texture;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Shader;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SR_GRAPH_NS<sp/>{</highlight></codeline>
+<codeline lineno="24" refid="structSR__GRAPH__NS_1_1ShaderUseInfo" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__GRAPH__NS_1_1ShaderUseInfo" kindref="compound">ShaderUseInfo</ref><sp/>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__GRAPH__NS_1_1ShaderUseInfo" kindref="compound">ShaderUseInfo</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>SR_CONSTEXPR<sp/><ref refid="structSR__GRAPH__NS_1_1ShaderUseInfo" kindref="compound">ShaderUseInfo</ref>(<ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref>*<sp/>pShader)</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>pShader(pShader)</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>ignoreReplace(</highlight><highlight class="keyword">false</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>useMaterialUniforms(</highlight><highlight class="keyword">true</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>useMaterialSamplers(</highlight><highlight class="keyword">true</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref>*<sp/>pShader;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>ignoreReplace<sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>4;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>useMaterialUniforms<sp/>:<sp/>2;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>useMaterialSamplers<sp/>:<sp/>2;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ENUM_NS_CLASS_T(ShaderBindResult,<sp/>uint8_t,</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Failed<sp/>=<sp/>0,<sp/><sp/></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Success<sp/>=<sp/>1,<sp/></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Duplicated,</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ReAllocated</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_LINE_START_POINT<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;LINE_START_POINT&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_LINE_END_POINT<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;LINE_END_POINT&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_LINE_COLOR<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;LINE_COLOR&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_MODEL_MATRIX<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;MODEL_MATRIX&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_SLICED_TEXTURE_BORDER<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SLICED_TEXTURE_BORDER&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_SLICED_WINDOW_BORDER<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SLICED_WINDOW_BORDER&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_MODEL_NO_SCALE_MATRIX<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;MODEL_NO_SCALE_MATRIX&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_SKELETON_MATRICES_128<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SKELETON_MATRICES_128&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_SKELETON_MATRIX_OFFSETS_128<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SKELETON_MATRIX_OFFSETS_128&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_SKELETON_MATRICES_256<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SKELETON_MATRICES_256&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_SKELETON_MATRIX_OFFSETS_256<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SKELETON_MATRIX_OFFSETS_256&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_SKELETON_MATRICES_384<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SKELETON_MATRICES_384&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_SKELETON_MATRIX_OFFSETS_384<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SKELETON_MATRIX_OFFSETS_384&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_VIEW_MATRIX<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;VIEW_MATRIX&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_SSAO_SAMPLES<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SSAO_SAMPLES&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_LIGHT_SPACE_MATRIX<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;LIGHT_SPACE_MATRIX&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_VIEW_NO_TRANSLATE_MATRIX<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;VIEW_NO_TRANSLATE_MATRIX&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_PROJECTION_MATRIX<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;PROJECTION_MATRIX&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_PROJECTION_NO_FOV_MATRIX<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;PROJECTION_NO_FOV_MATRIX&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_ORTHOGONAL_MATRIX<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;ORTHOGONAL_MATRIX&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_VIEW_DIRECTION<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;VIEW_DIRECTION&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_VIEW_POSITION<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;VIEW_POSITION&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_TIME<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;TIME&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_ASPECT<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;ASPECT&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_RESOLUTION<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;RESOLUTION&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_SKYBOX_DIFFUSE<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SKYBOX_DIFFUSE&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_DEPTH_ATTACHMENT<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;DEPTH_ATTACHMENT&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_TEXT_RECT_X<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;TEXT_RECT_X&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_TEXT_RECT_Y<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;TEXT_RECT_Y&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_TEXT_RECT_WIDTH<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;TEXT_RECT_WIDTH&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_TEXT_RECT_HEIGHT<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;TEXT_RECT_HEIGHT&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_DIRECTIONAL_LIGHT_POSITION<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;DIRECTIONAL_LIGHT_POSITION&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_PC_SHADOW_CASCADE_INDEX<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;PC_SHADOW_CASCADE_INDEX&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_CASCADE_LIGHT_SPACE_MATRICES<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;CASCADE_LIGHT_SPACE_MATRICES&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_CASCADE_SPLITS<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;CASCADE_SPLITS&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_PC_COLOR_BUFFER_MODE<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;PC_COLOR_BUFFER_MODE&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_PC_COLOR_BUFFER_VALUE<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;PC_COLOR_BUFFER_VALUE&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_SSAO_NOISE<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SSAO_NOISE&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_RGBA_VALUE<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;RGBA_VALUE&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_TEXT_ATLAS_TEXTURE<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;TEXT_ATLAS_TEXTURE&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_NDC_RECT<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;NDC_RECT&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>std::vector&lt;std::pair&lt;Vertices::Attribute,<sp/>size_t&gt;&gt;<sp/>VertexAttributes;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>std::vector&lt;SR_VERTEX_DESCRIPTION&gt;<sp/>VertexDescriptions;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_DEPRECATED</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>std::variant&lt;glm::mat4,<sp/>glm::mat3,<sp/>glm::mat2,<sp/>float,<sp/>int,<sp/>glm::vec2,<sp/>glm::vec3,<sp/>glm::vec4,<sp/>glm::ivec2,<sp/>glm::ivec3,<sp/>glm::ivec4&gt;<sp/>ShaderVariable;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ENUM_NS_CLASS_T(ShaderStage,<sp/>uint8_t,</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Unknown,</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vertex,</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Fragment,</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Geometry,</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Tesselation,</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Compute,</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Raygen,</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Intersection,</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>HitClosest,</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>HitAny,</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MissPrimary,</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MissSecondary</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ENUM_NS_CLASS(LayoutBinding,<sp/>Unknown<sp/>=<sp/>0,<sp/><ref refid="structSR__GRAPH__NS_1_1Uniform" kindref="compound">Uniform</ref>,<sp/>Sampler2D,<sp/>Attachhment,<sp/>SSBO)</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ENUM_NS_CLASS(PolygonMode,<sp/>Unknown,<sp/>Fill,<sp/>Line,<sp/>Point)</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ENUM_NS_CLASS(CullMode,<sp/>Unknown,<sp/>None,<sp/>Front,<sp/>Back,<sp/>FrontAndBack)</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ENUM_NS_CLASS(PrimitiveTopology,</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Unknown,</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PointList,</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LineList,</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LineStrip,</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TriangleList,</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TriangleStrip,</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TriangleFan,</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LineListWithAdjacency,</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LineStripWithAdjacency,</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TriangleListWithAdjacency,</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TriangleStripWithAdjacency,</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PathList)</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ENUM_NS_CLASS(DepthCompare,</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Unknown,</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Never,</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Less,</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Equal,</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LessOrEqual,</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Greater,</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NotEqual,</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GreaterOrEqual,</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Always)</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137" refid="structSR__GRAPH__NS_1_1Uniform" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/>struct<sp/>SR_RENDERER_DLL_API<sp/><ref refid="structSR__GRAPH__NS_1_1Uniform" kindref="compound">Uniform</ref><sp/>{</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LayoutBinding<sp/>type<sp/>=<sp/>LayoutBinding::Unknown;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ShaderStage<sp/>stage<sp/>=<sp/>ShaderStage::Unknown;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>binding<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>size<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>std::vector&lt;Uniform&gt;<sp/>UBOInfo;</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight></codeline>
+<codeline lineno="146" refid="structSR__GRAPH__NS_1_1SRShaderPushConstant" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">SR_RENDERER_DLL_API<sp/><ref refid="structSR__GRAPH__NS_1_1SRShaderPushConstant" kindref="compound">SRShaderPushConstant</ref><sp/>{</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>size<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>offset<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151" refid="structSR__GRAPH__NS_1_1SRShaderStageInfo" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">SR_RENDERER_DLL_API<sp/><ref refid="structSR__GRAPH__NS_1_1SRShaderStageInfo" kindref="compound">SRShaderStageInfo</ref><sp/>{</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref><sp/>path;</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;SRShaderPushConstant&gt;<sp/>pushConstants;</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158" refid="structSR__GRAPH__NS_1_1SRShaderCreateInfo" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">SR_RENDERER_DLL_API<sp/><ref refid="structSR__GRAPH__NS_1_1SRShaderCreateInfo" kindref="compound">SRShaderCreateInfo</ref><sp/>{</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Validate()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(shaderType<sp/>==<sp/>SR_SRSL_NS::ShaderType::Compute)<sp/>{</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>polygonMode<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>==<sp/>PolygonMode::Unknown</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;&amp;<sp/>cullMode<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>==<sp/>CullMode::Unknown</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;&amp;<sp/>depthCompare<sp/><sp/><sp/><sp/><sp/><sp/>==<sp/>DepthCompare::Unknown</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;&amp;<sp/>primitiveTopology<sp/>==<sp/>PrimitiveTopology::Unknown;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>polygonMode<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>!=<sp/>PolygonMode::Unknown</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;&amp;<sp/>cullMode<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>!=<sp/>CullMode::Unknown</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;&amp;<sp/>depthCompare<sp/><sp/><sp/><sp/><sp/><sp/>!=<sp/>DepthCompare::Unknown</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;&amp;<sp/>primitiveTopology<sp/>!=<sp/>PrimitiveTopology::Unknown;</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="173"><highlight class="normal"></highlight></codeline>
-<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VertexAttributes<sp/>vertexAttributes;</highlight></codeline>
-<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VertexDescriptions<sp/>vertexDescriptions;</highlight></codeline>
-<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>UBOInfo<sp/>uniforms;</highlight></codeline>
-<codeline lineno="177"><highlight class="normal"></highlight></codeline>
-<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>blendEnabled<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>depthWrite<sp/><sp/><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>depthTest<sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="181"><highlight class="normal"></highlight></codeline>
-<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;ShaderStage,<sp/>SRShaderStageInfo&gt;<sp/>stages;</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_SRSL_NS::ShaderType<sp/>shaderType<sp/>=<sp/>SR_SRSL_NS::ShaderType::Unknown;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PolygonMode<sp/><sp/><sp/><sp/><sp/><sp/><sp/>polygonMode<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>PolygonMode::Unknown;</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CullMode<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cullMode<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>CullMode::Unknown;</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DepthCompare<sp/><sp/><sp/><sp/><sp/><sp/>depthCompare<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>DepthCompare::Unknown;</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PrimitiveTopology<sp/>primitiveTopology<sp/>=<sp/>PrimitiveTopology::Unknown;</highlight></codeline>
 <codeline lineno="183"><highlight class="normal"></highlight></codeline>
-<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_MAYBE_UNUSED<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>CullMode<sp/>InverseCullMode(CullMode<sp/>cullMode)<sp/>{</highlight></codeline>
-<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(cullMode)<sp/>{</highlight></codeline>
-<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>CullMode::Back:</highlight></codeline>
-<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>CullMode::Front;</highlight></codeline>
-<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>CullMode::Front:</highlight></codeline>
-<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>CullMode::Back;</highlight></codeline>
-<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>cullMode;</highlight></codeline>
-<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="194"><highlight class="normal"></highlight></codeline>
-<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_MAYBE_UNUSED<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>LayoutBinding<sp/>GetBindingType(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>line)<sp/>{</highlight></codeline>
-<codeline lineno="197"><highlight class="normal"></highlight></codeline>
-<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(SR_UTILS_NS::StringUtils::Contains(line,<sp/></highlight><highlight class="stringliteral">&quot;sampler2DArray&quot;</highlight><highlight class="normal">))</highlight></codeline>
-<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>LayoutBinding::Sampler2D;</highlight></codeline>
-<codeline lineno="200"><highlight class="normal"></highlight></codeline>
-<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(SR_UTILS_NS::StringUtils::Contains(line,<sp/></highlight><highlight class="stringliteral">&quot;sampler2D&quot;</highlight><highlight class="normal">))</highlight></codeline>
-<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>LayoutBinding::Sampler2D;</highlight></codeline>
-<codeline lineno="203"><highlight class="normal"></highlight></codeline>
-<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(SR_UTILS_NS::StringUtils::Contains(line,<sp/></highlight><highlight class="stringliteral">&quot;samplerCube&quot;</highlight><highlight class="normal">))</highlight></codeline>
-<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>LayoutBinding::Sampler2D;</highlight></codeline>
-<codeline lineno="206"><highlight class="normal"></highlight></codeline>
-<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(SR_UTILS_NS::StringUtils::Contains(line,<sp/></highlight><highlight class="stringliteral">&quot;subpassInputMS&quot;</highlight><highlight class="normal">))</highlight></codeline>
-<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>LayoutBinding::Attachhment;</highlight></codeline>
-<codeline lineno="209"><highlight class="normal"></highlight></codeline>
-<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(SR_UTILS_NS::StringUtils::Contains(line,<sp/></highlight><highlight class="stringliteral">&quot;subpassInput&quot;</highlight><highlight class="normal">))</highlight></codeline>
-<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>LayoutBinding::Attachhment;</highlight></codeline>
-<codeline lineno="212"><highlight class="normal"></highlight></codeline>
-<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(SR_UTILS_NS::StringUtils::Contains(line,<sp/></highlight><highlight class="stringliteral">&quot;uniform&quot;</highlight><highlight class="normal">))</highlight></codeline>
-<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>LayoutBinding::Uniform;</highlight></codeline>
-<codeline lineno="215"><highlight class="normal"></highlight></codeline>
-<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(SR_UTILS_NS::StringUtils::Contains(line,<sp/></highlight><highlight class="stringliteral">&quot;ssbo&quot;</highlight><highlight class="normal">))</highlight></codeline>
-<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>LayoutBinding::SSBO;</highlight></codeline>
-<codeline lineno="218"><highlight class="normal"></highlight></codeline>
-<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>LayoutBinding::Unknown;</highlight></codeline>
-<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="221"><highlight class="normal"></highlight></codeline>
-<codeline lineno="222" refid="structSR__GRAPH__NS_1_1SourceShader" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__GRAPH__NS_1_1SourceShader" kindref="compound">SourceShader</ref><sp/>{</highlight></codeline>
-<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>m_path;</highlight></codeline>
-<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ShaderStage<sp/>m_stage;</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VertexAttributes<sp/>vertexAttributes;</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VertexDescriptions<sp/>vertexDescriptions;</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>UBOInfo<sp/>uniforms;</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>blendEnabled<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>depthWrite<sp/><sp/><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>depthTest<sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_MAYBE_UNUSED<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>CullMode<sp/>InverseCullMode(CullMode<sp/>cullMode)<sp/>{</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(cullMode)<sp/>{</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>CullMode::Back:</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>CullMode::Front;</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>CullMode::Front:</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>CullMode::Back;</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>cullMode;</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_MAYBE_UNUSED<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>LayoutBinding<sp/>GetBindingType(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>line)<sp/>{</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(SR_UTILS_NS::StringUtils::Contains(line,<sp/></highlight><highlight class="stringliteral">&quot;sampler2DArray&quot;</highlight><highlight class="normal">))</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>LayoutBinding::Sampler2D;</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(SR_UTILS_NS::StringUtils::Contains(line,<sp/></highlight><highlight class="stringliteral">&quot;sampler2D&quot;</highlight><highlight class="normal">))</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>LayoutBinding::Sampler2D;</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(SR_UTILS_NS::StringUtils::Contains(line,<sp/></highlight><highlight class="stringliteral">&quot;samplerCube&quot;</highlight><highlight class="normal">))</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>LayoutBinding::Sampler2D;</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"></highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(SR_UTILS_NS::StringUtils::Contains(line,<sp/></highlight><highlight class="stringliteral">&quot;subpassInputMS&quot;</highlight><highlight class="normal">))</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>LayoutBinding::Attachhment;</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(SR_UTILS_NS::StringUtils::Contains(line,<sp/></highlight><highlight class="stringliteral">&quot;subpassInput&quot;</highlight><highlight class="normal">))</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>LayoutBinding::Attachhment;</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(SR_UTILS_NS::StringUtils::Contains(line,<sp/></highlight><highlight class="stringliteral">&quot;uniform&quot;</highlight><highlight class="normal">))</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>LayoutBinding::Uniform;</highlight></codeline>
 <codeline lineno="225"><highlight class="normal"></highlight></codeline>
-<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__GRAPH__NS_1_1SourceShader" kindref="compound">SourceShader</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>path,<sp/>ShaderStage<sp/>stage)<sp/>{</highlight></codeline>
-<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_path<sp/><sp/>=<sp/>path;</highlight></codeline>
-<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_stage<sp/>=<sp/>stage;</highlight></codeline>
-<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="231"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="232"><highlight class="normal"></highlight></codeline>
-<codeline lineno="233"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GRAPHICS_I_SHADER_PROGRAM_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(SR_UTILS_NS::StringUtils::Contains(line,<sp/></highlight><highlight class="stringliteral">&quot;ssbo&quot;</highlight><highlight class="normal">))</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>LayoutBinding::SSBO;</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>LayoutBinding::Unknown;</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"></highlight></codeline>
+<codeline lineno="232" refid="structSR__GRAPH__NS_1_1SourceShader" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__GRAPH__NS_1_1SourceShader" kindref="compound">SourceShader</ref><sp/>{</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>m_path;</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ShaderStage<sp/>m_stage;</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"></highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__GRAPH__NS_1_1SourceShader" kindref="compound">SourceShader</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>path,<sp/>ShaderStage<sp/>stage)<sp/>{</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_path<sp/><sp/>=<sp/>path;</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_stage<sp/>=<sp/>stage;</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="241"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GRAPHICS_I_SHADER_PROGRAM_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h"/>
   </compounddef>

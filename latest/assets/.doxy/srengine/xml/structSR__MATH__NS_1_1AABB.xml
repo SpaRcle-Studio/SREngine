@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structSR__MATH__NS_1_1AABB" kind="struct" language="C++" prot="public">
+    <compoundname>SR_MATH_NS::AABB</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__MATH__NS_1_1AABB_1acc5815bcce332a493e5152028bbfda1d" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref></type>
+        <definition>FVector3 SR_MATH_NS::AABB::min</definition>
+        <argsstring></argsstring>
+        <name>min</name>
+        <qualifiedname>SR_MATH_NS::AABB::min</qualifiedname>
+        <initializer>= <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref>(0.f, 0.f, 0.f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/AABB.h" line="13" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Math/AABB.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__MATH__NS_1_1AABB_1afd4b0bb7e2cf3e8b5d7d093f6d610fad" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref></type>
+        <definition>FVector3 SR_MATH_NS::AABB::position</definition>
+        <argsstring></argsstring>
+        <name>position</name>
+        <qualifiedname>SR_MATH_NS::AABB::position</qualifiedname>
+        <briefdescription>
+<para>Alias for min. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/AABB.h" line="14" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Math/AABB.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__MATH__NS_1_1AABB_1a0d22df572a1d54185aead8694f6cbf41" prot="public" static="no" mutable="no">
+        <type>union <ref refid="structSR__MATH__NS_1_1AABB" kindref="compound">SR_MATH_NS::AABB</ref></type>
+        <definition>union SR_MATH_NS::AABB SR_MATH_NS::AABB</definition>
+        <argsstring></argsstring>
+        <name></name>
+        <qualifiedname>SR_MATH_NS::AABB</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/AABB.h" line="15" column="9"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__MATH__NS_1_1AABB_1a524f5693253a84336751323cf94a48c5" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref></type>
+        <definition>FVector3 SR_MATH_NS::AABB::max</definition>
+        <argsstring></argsstring>
+        <name>max</name>
+        <qualifiedname>SR_MATH_NS::AABB::max</qualifiedname>
+        <initializer>= <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref>(0.f, 0.f, 0.f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/AABB.h" line="18" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Math/AABB.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__MATH__NS_1_1AABB_1a997b5014c4ad389e09ca1c0ab7339453" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref></type>
+        <definition>FVector3 SR_MATH_NS::AABB::size</definition>
+        <argsstring></argsstring>
+        <name>size</name>
+        <qualifiedname>SR_MATH_NS::AABB::size</qualifiedname>
+        <briefdescription>
+<para>Alias for max. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/AABB.h" line="19" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Math/AABB.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__MATH__NS_1_1AABB_1a7671d7989dba74697299d57c6c19464a" prot="public" static="no" mutable="no">
+        <type>union <ref refid="structSR__MATH__NS_1_1AABB" kindref="compound">SR_MATH_NS::AABB</ref></type>
+        <definition>union SR_MATH_NS::AABB SR_MATH_NS::AABB</definition>
+        <argsstring></argsstring>
+        <name></name>
+        <qualifiedname>SR_MATH_NS::AABB</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/AABB.h" line="20" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__MATH__NS_1_1AABB_1ae1a5b943bd76323180550cdc56d416d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_MATH_NS::AABB::AABB</definition>
+        <argsstring>()</argsstring>
+        <name>AABB</name>
+        <qualifiedname>SR_MATH_NS::AABB::AABB</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/AABB.h" line="22" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__MATH__NS_1_1AABB_1a0cc7aa8458554727bce6cb739a479063" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_MATH_NS::AABB::AABB</definition>
+        <argsstring>(const FVector3 &amp;min, const FVector3 &amp;max)</argsstring>
+        <name>AABB</name>
+        <qualifiedname>SR_MATH_NS::AABB::AABB</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>min</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/AABB.h" line="23" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__MATH__NS_1_1AABB_1ad1d35501b8253edfadfe156f2d26d0ef" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_MATH_NS::AABB::IsValid</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsValid</name>
+        <qualifiedname>SR_MATH_NS::AABB::IsValid</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/AABB.h" line="25" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__MATH__NS_1_1AABB_1af20ab8d3bce98e1d613a705d6a70a91a" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_MATH_NS::AABB::IsEmpty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsEmpty</name>
+        <qualifiedname>SR_MATH_NS::AABB::IsEmpty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/AABB.h" line="26" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__MATH__NS_1_1AABB_1ad31608d28715a69af21d87e51028a023" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref></type>
+        <definition>SR_NODISCARD FVector3 SR_MATH_NS::AABB::GetCenter</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetCenter</name>
+        <qualifiedname>SR_MATH_NS::AABB::GetCenter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/AABB.h" line="27" column="31"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Utils/inc/Utils/Math/AABB.h" line="11" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Math/AABB.h" bodystart="11" bodyend="29"/>
+    <listofallmembers>
+      <member refid="structSR__MATH__NS_1_1AABB_1ae1a5b943bd76323180550cdc56d416d8" prot="public" virt="non-virtual"><scope>SR_MATH_NS::AABB</scope><name>AABB</name></member>
+      <member refid="structSR__MATH__NS_1_1AABB_1a0cc7aa8458554727bce6cb739a479063" prot="public" virt="non-virtual"><scope>SR_MATH_NS::AABB</scope><name>AABB</name></member>
+      <member refid="structSR__MATH__NS_1_1AABB_1ad31608d28715a69af21d87e51028a023" prot="public" virt="non-virtual"><scope>SR_MATH_NS::AABB</scope><name>GetCenter</name></member>
+      <member refid="structSR__MATH__NS_1_1AABB_1af20ab8d3bce98e1d613a705d6a70a91a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::AABB</scope><name>IsEmpty</name></member>
+      <member refid="structSR__MATH__NS_1_1AABB_1ad1d35501b8253edfadfe156f2d26d0ef" prot="public" virt="non-virtual"><scope>SR_MATH_NS::AABB</scope><name>IsValid</name></member>
+      <member refid="structSR__MATH__NS_1_1AABB_1a524f5693253a84336751323cf94a48c5" prot="public" virt="non-virtual"><scope>SR_MATH_NS::AABB</scope><name>max</name></member>
+      <member refid="structSR__MATH__NS_1_1AABB_1acc5815bcce332a493e5152028bbfda1d" prot="public" virt="non-virtual"><scope>SR_MATH_NS::AABB</scope><name>min</name></member>
+      <member refid="structSR__MATH__NS_1_1AABB_1afd4b0bb7e2cf3e8b5d7d093f6d610fad" prot="public" virt="non-virtual"><scope>SR_MATH_NS::AABB</scope><name>position</name></member>
+      <member refid="structSR__MATH__NS_1_1AABB_1a997b5014c4ad389e09ca1c0ab7339453" prot="public" virt="non-virtual"><scope>SR_MATH_NS::AABB</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

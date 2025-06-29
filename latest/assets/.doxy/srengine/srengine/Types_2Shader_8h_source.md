@@ -56,11 +56,12 @@ namespace SR_GTYPES_NS {
 
         bool Init();
         void UnUse() noexcept;
-        //bool InitUBOBlock();
         bool Flush() const;
         void FlushSamplers();
         void FlushConstants();
         void FreeVideoMemory() override;
+        void Dispatch(uint32_t x, uint32_t y, uint32_t z);
+        void Dispatch();
         void StartWatch() override;
 
         void AttachDescriptorSets();
@@ -84,7 +85,9 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD bool IsAvailable() const;
         SR_NODISCARD bool IsSamplersValid() const;
         SR_NODISCARD bool HasSharedUBO() const noexcept { return m_uniformSharedBlock.Valid(); }
+        SR_NODISCARD bool HasSSBOBindings() const noexcept { return !m_ssboBindings.empty(); }
         SR_NODISCARD SR_SRSL_NS::ShaderType GetType() const noexcept;
+        SR_NODISCARD const SR_MATH_NS::UVector3& GetComputeWorkGroupSize() const noexcept { return m_computeWorkGroupSize; }
 
     public:
         template<bool constant, typename T> void SetValue(uint64_t hashId, const T* v) noexcept {
@@ -158,6 +161,8 @@ namespace SR_GTYPES_NS {
         SRShaderCreateInfo m_shaderCreateInfo = { };
 
         std::pair<int32_t, bool> m_virtualUBO = { SR_ID_INVALID, true };
+
+        SR_MATH_NS::UVector3 m_computeWorkGroupSize = { 1, 1, 1 };
 
         std::vector<SR_UTILS_NS::StringAtom> m_includes;
         Memory::ShaderUBOBlock m_uniformBlock;

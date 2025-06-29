@@ -20,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="150" column="9" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="150" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="152" column="9" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="152" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structSR__UTILS__NS_1_1InputIteratorPointer_1a37afe1a849efb675020eef2561935d4f" prot="public" static="no">
         <type>T *</type>
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="151" column="9" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="151" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="153" column="9" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="153" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structSR__UTILS__NS_1_1InputIteratorPointer_1a7c5aad2cdefdd98240a7e7bff2afdac0" prot="public" static="no">
         <type>T &amp;</type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="152" column="9" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="152" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="154" column="9" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="154" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="162" column="11" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="162" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="164" column="11" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="164" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -85,7 +85,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="154" column="19" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="154" bodyend="156"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="156" column="19" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="156" bodyend="158"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1InputIteratorPointer_1a840d47a2fed050c42f74b632216aa6a9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD constexpr Pointer</type>
@@ -99,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="158" column="40" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="158" bodyend="158"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="160" column="40" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="160" bodyend="160"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1InputIteratorPointer_1a04dc7d20cde75606b8d356a836055191" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD constexpr Reference</type>
@@ -113,14 +113,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="159" column="42" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="159" bodyend="159"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="161" column="42" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="161" bodyend="161"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="149" column="15" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="149" bodyend="163"/>
+    <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="151" column="15" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="151" bodyend="165"/>
     <listofallmembers>
       <member refid="structSR__UTILS__NS_1_1InputIteratorPointer_1a2ae8582177bdbaf8a4c4dce483fcd353" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::InputIteratorPointer</scope><name>InputIteratorPointer</name></member>
       <member refid="structSR__UTILS__NS_1_1InputIteratorPointer_1abdf06cb8491d99646a3d5669945f1010" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::InputIteratorPointer</scope><name>m_value</name></member>

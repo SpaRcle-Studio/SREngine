@@ -144,6 +144,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual SR\_NODISCARD int32\_t | [**AllocateUBO**](#function-allocateubo) (uint32\_t uboSize) override<br> |
 | virtual SR\_NODISCARD int32\_t | [**AllocateVBO**](#function-allocatevbo) (const void \* pVertices, Vertices::VertexType type, size\_t count) override<br>_---------------------------------------_  _Работа с памятью ---------------------------------------------_ __ |
 | virtual bool | [**BeginCmdBuffer**](#function-begincmdbuffer) () override<br>_Начало записи в буфер команд. Разделение необходимо некоторым графическим API._  |
+| virtual bool | [**BeginCompute**](#function-begincompute) () override<br>_Начало вычислений в Compute Shader._  |
 | virtual bool | [**BeginRender**](#function-beginrender) () override<br>_Начало рендера в кадровый буфер или в SwapChain._  |
 | virtual void | [**BindAttachment**](#function-bindattachment) (uint8\_t activeTexture, uint32\_t textureId) override<br> |
 | virtual bool | [**BindDescriptorSet**](#function-binddescriptorset) (uint32\_t descriptorSet) override<br>_Привязка UBO к набору дескрипторов. Поддерживается не всеми API._  |
@@ -159,10 +160,12 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual void | [**ClearColorBuffer**](#function-clearcolorbuffer) (const ClearColors & clearColors) override<br> |
 | virtual void | [**ClearDepthBuffer**](#function-cleardepthbuffer) (float\_t depth) override<br> |
 | virtual bool | [**Destroy**](#function-destroy) () override<br>_Чистим все данные графического конфейера и де-инициализируем его_  |
+| virtual void | [**Dispatch**](#function-dispatch) (uint32\_t groupCountX, uint32\_t groupCountY, uint32\_t groupCountZ) override<br>_-----------------------------------------_  _Вычисления -------------------------------------------------_ __ |
 | virtual void | [**Draw**](#function-draw) (uint32\_t count) override<br>_Обычная отрисовка вершин_  |
 | virtual void | [**DrawFrame**](#function-drawframe) () override<br> |
 | virtual void | [**DrawIndices**](#function-drawindices) (uint32\_t count) override<br>_---------------------------------------_  _Вызовы отрисовки ---------------------------------------------_ __ |
 | virtual void | [**EndCmdBuffer**](#function-endcmdbuffer) () override<br>_Конец записи в буфер команд. Разделение необходимо некоторым графическим API._  |
+| virtual void | [**EndCompute**](#function-endcompute) () override<br>_Конец вычислений в Compute Shader._  |
 | virtual void | [**EndRender**](#function-endrender) () override<br>_Обязательно нужно вызвать после успешного вызова BeginRender._  |
 | virtual bool | [**FreeCubeMap**](#function-freecubemap) (int32\_t \* id) override<br> |
 | virtual bool | [**FreeDescriptorSet**](#function-freedescriptorset) (int32\_t \* id) override<br> |
@@ -198,6 +201,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual bool | [**PreInit**](#function-preinit) (const [**PipelinePreInitInfo**](structSR__GRAPH__NS_1_1PipelinePreInitInfo.md) & info) override<br>_-------------------------------------_  _Инициализация рендера ------------------------------------------_ __ |
 | virtual void | [**PrepareFrame**](#function-prepareframe) () override<br>_------------------------------------_  _Главные методы рендера ------------------------------------------_ __ |
 | virtual void | [**PushConstants**](#function-pushconstants) (void \* pData, uint64\_t size) override<br> |
+| virtual void | [**ReadSSBO**](#function-readssbo) (uint32\_t SSBO, void \* pData, uint64\_t size) override<br>_Читает данные из SSBO в память_  |
 | virtual void | [**ResetLastShader**](#function-resetlastshader) () override<br> |
 | virtual void | [**ResetSubmitQueue**](#function-resetsubmitqueue) () override<br> |
 | virtual void | [**SetCurrentFrameBuffer**](#function-setcurrentframebuffer) (FramebufferPtr pFrameBuffer) override<br> |
@@ -212,6 +216,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual void | [**UpdateUBO**](#function-updateubo) (uint32\_t UBO, void \* pData, uint64\_t size) override<br>_Обеспечивает обновление данных в шейдере_  |
 | virtual void | [**UseShader**](#function-useshader) (uint32\_t shaderProgram) override<br>_------------------------------------------_  _Биндинги --------------------------------------------------_ __ |
 |   | [**VulkanPipeline**](#function-vulkanpipeline) (const RenderContextPtr & pContext) <br> |
+| virtual void | [**WaitComputeIdle**](#function-waitcomputeidle) () override<br> |
 |   | [**~VulkanPipeline**](#function-vulkanpipeline) () override<br> |
 
 
@@ -232,6 +237,7 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 | virtual SR\_NODISCARD int32\_t | [**AllocateVBO**](classSR__GRAPH__NS_1_1Pipeline.md#function-allocatevbo-12) (const void \* pVertices, Vertices::VertexType type, size\_t count) <br>_---------------------------------------_  _Работа с памятью ---------------------------------------------_ __ |
 | virtual SR\_NODISCARD int32\_t | [**AllocateVBO**](classSR__GRAPH__NS_1_1Pipeline.md#function-allocatevbo-22) (const [**SR\_UTILS\_NS::Vertex**](structSR__UTILS__NS_1_1Vertex.md) \* pVertices, Vertices::VertexType type, size\_t count) <br>_Продвинутая версия AllocateVBO, может сама выполнить преобразование типа памяти базовых вершин к нужному выравниванию._  |
 | virtual bool | [**BeginCmdBuffer**](classSR__GRAPH__NS_1_1Pipeline.md#function-begincmdbuffer) () <br>_Начало записи в буфер команд. Разделение необходимо некоторым графическим API._  |
+| virtual bool | [**BeginCompute**](classSR__GRAPH__NS_1_1Pipeline.md#function-begincompute) () <br>_Начало вычислений в Compute Shader._  |
 | virtual bool | [**BeginDrawOverlay**](classSR__GRAPH__NS_1_1Pipeline.md#function-begindrawoverlay) (OverlayType overlayType) <br> |
 | virtual bool | [**BeginRender**](classSR__GRAPH__NS_1_1Pipeline.md#function-beginrender) () <br>_Начало рендера в кадровый буфер или в SwapChain._  |
 | virtual void | [**BindAttachment**](classSR__GRAPH__NS_1_1Pipeline.md#function-bindattachment) (uint8\_t activeTexture, uint32\_t textureId) <br> |
@@ -250,10 +256,12 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 | virtual void | [**ClearFrameBuffersQueue**](classSR__GRAPH__NS_1_1Pipeline.md#function-clearframebuffersqueue) () <br>_Вызывается в начале построения сцены рендера, чистит очередь рендера._  |
 | virtual bool | [**Destroy**](classSR__GRAPH__NS_1_1Pipeline.md#function-destroy) () <br>_Чистим все данные графического конфейера и де-инициализируем его_  |
 | virtual void | [**DestroyOverlay**](classSR__GRAPH__NS_1_1Pipeline.md#function-destroyoverlay) () <br> |
+| virtual void | [**Dispatch**](classSR__GRAPH__NS_1_1Pipeline.md#function-dispatch) (uint32\_t groupCountX, uint32\_t groupCountY, uint32\_t groupCountZ) <br>_-----------------------------------------_  _Вычисления -------------------------------------------------_ __ |
 | virtual void | [**Draw**](classSR__GRAPH__NS_1_1Pipeline.md#function-draw) (uint32\_t count) <br>_Обычная отрисовка вершин_  |
 | virtual void | [**DrawFrame**](classSR__GRAPH__NS_1_1Pipeline.md#function-drawframe) () <br> |
 | virtual void | [**DrawIndices**](classSR__GRAPH__NS_1_1Pipeline.md#function-drawindices) (uint32\_t count) <br>_---------------------------------------_  _Вызовы отрисовки ---------------------------------------------_ __ |
 | virtual void | [**EndCmdBuffer**](classSR__GRAPH__NS_1_1Pipeline.md#function-endcmdbuffer) () <br>_Конец записи в буфер команд. Разделение необходимо некоторым графическим API._  |
+| virtual void | [**EndCompute**](classSR__GRAPH__NS_1_1Pipeline.md#function-endcompute) () <br>_Конец вычислений в Compute Shader._  |
 | virtual void | [**EndDrawOverlay**](classSR__GRAPH__NS_1_1Pipeline.md#function-enddrawoverlay) (OverlayType overlayType) <br> |
 | virtual void | [**EndRender**](classSR__GRAPH__NS_1_1Pipeline.md#function-endrender) () <br>_Обязательно нужно вызвать после успешного вызова BeginRender._  |
 | virtual bool | [**FreeCubeMap**](classSR__GRAPH__NS_1_1Pipeline.md#function-freecubemap) (int32\_t \* id) <br> |
@@ -318,6 +326,7 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 | virtual void | [**PrepareOverlay**](classSR__GRAPH__NS_1_1Pipeline.md#function-prepareoverlay) (OverlayType overlayType) <br> |
 | virtual void | [**PushConstants**](classSR__GRAPH__NS_1_1Pipeline.md#function-pushconstants) (void \* pData, uint64\_t size) <br> |
 | virtual void | [**ReCreateOverlay**](classSR__GRAPH__NS_1_1Pipeline.md#function-recreateoverlay) () <br> |
+| virtual void | [**ReadSSBO**](classSR__GRAPH__NS_1_1Pipeline.md#function-readssbo) (uint32\_t SSBO, void \* pData, uint64\_t size) <br>_Читает данные из SSBO в память_  |
 | virtual void | [**ResetLastShader**](classSR__GRAPH__NS_1_1Pipeline.md#function-resetlastshader) () <br> |
 | virtual void | [**ResetSubmitQueue**](classSR__GRAPH__NS_1_1Pipeline.md#function-resetsubmitqueue) () <br> |
 | virtual void | [**SetBuildIteration**](classSR__GRAPH__NS_1_1Pipeline.md#function-setbuilditeration) (uint8\_t iteration) <br> |
@@ -340,6 +349,7 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 | virtual void | [**UpdateSSBO**](classSR__GRAPH__NS_1_1Pipeline.md#function-updatessbo) (uint32\_t SSBO, void \* pData, uint64\_t size) <br>_Обеспечивает обновление данных в шейдере_  |
 | virtual void | [**UpdateUBO**](classSR__GRAPH__NS_1_1Pipeline.md#function-updateubo) (uint32\_t UBO, void \* pData, uint64\_t size) <br>_Обеспечивает обновление данных в шейдере_  |
 | virtual void | [**UseShader**](classSR__GRAPH__NS_1_1Pipeline.md#function-useshader) (uint32\_t shaderProgram) <br>_------------------------------------------_  _Биндинги --------------------------------------------------_ __ |
+| virtual void | [**WaitComputeIdle**](classSR__GRAPH__NS_1_1Pipeline.md#function-waitcomputeidle) () <br> |
 | virtual  | [**~Pipeline**](classSR__GRAPH__NS_1_1Pipeline.md#function-pipeline) () <br> |
 
 
@@ -454,6 +464,7 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 |  uint32\_t | [**m\_frames**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_frames)   = `0`<br> |
 |  uint32\_t | [**m\_framesPerSecond**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_framespersecond)   = `0`<br> |
 |  bool | [**m\_isCmdState**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_iscmdstate)   = `false`<br> |
+|  bool | [**m\_isComputeState**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_iscomputestate)   = `false`<br> |
 |  bool | [**m\_isMultiSampleSupported**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_ismultisamplesupported)   = `false`<br> |
 |  bool | [**m\_isRenderState**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_isrenderstate)   = `false`<br> |
 |  bool | [**m\_isShaderChanged**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_isshaderchanged)   = `true`<br> |
@@ -735,6 +746,22 @@ Implements [*SR\_GRAPH\_NS::Pipeline::BeginCmdBuffer*](classSR__GRAPH__NS_1_1Pip
 
 
 
+### function BeginCompute 
+
+_Начало вычислений в Compute Shader._ 
+```C++
+virtual bool SR_GRAPH_NS::VulkanPipeline::BeginCompute () override
+```
+
+
+
+Implements [*SR\_GRAPH\_NS::Pipeline::BeginCompute*](classSR__GRAPH__NS_1_1Pipeline.md#function-begincompute)
+
+
+<hr>
+
+
+
 ### function BeginRender 
 
 _Начало рендера в кадровый буфер или в SwapChain._ 
@@ -1003,6 +1030,26 @@ Implements [*SR\_GRAPH\_NS::Pipeline::Destroy*](classSR__GRAPH__NS_1_1Pipeline.m
 
 
 
+### function Dispatch 
+
+_-----------------------------------------_  _Вычисления -------------------------------------------------_ __
+```C++
+virtual void SR_GRAPH_NS::VulkanPipeline::Dispatch (
+    uint32_t groupCountX,
+    uint32_t groupCountY,
+    uint32_t groupCountZ
+) override
+```
+
+
+
+Implements [*SR\_GRAPH\_NS::Pipeline::Dispatch*](classSR__GRAPH__NS_1_1Pipeline.md#function-dispatch)
+
+
+<hr>
+
+
+
 ### function Draw 
 
 _Обычная отрисовка вершин_ 
@@ -1072,6 +1119,22 @@ virtual void SR_GRAPH_NS::VulkanPipeline::EndCmdBuffer () override
 
 
 Implements [*SR\_GRAPH\_NS::Pipeline::EndCmdBuffer*](classSR__GRAPH__NS_1_1Pipeline.md#function-endcmdbuffer)
+
+
+<hr>
+
+
+
+### function EndCompute 
+
+_Конец вычислений в Compute Shader._ 
+```C++
+virtual void SR_GRAPH_NS::VulkanPipeline::EndCompute () override
+```
+
+
+
+Implements [*SR\_GRAPH\_NS::Pipeline::EndCompute*](classSR__GRAPH__NS_1_1Pipeline.md#function-endcompute)
 
 
 <hr>
@@ -1650,6 +1713,26 @@ Implements [*SR\_GRAPH\_NS::Pipeline::PushConstants*](classSR__GRAPH__NS_1_1Pipe
 
 
 
+### function ReadSSBO 
+
+_Читает данные из SSBO в память_ 
+```C++
+virtual void SR_GRAPH_NS::VulkanPipeline::ReadSSBO (
+    uint32_t SSBO,
+    void * pData,
+    uint64_t size
+) override
+```
+
+
+
+Implements [*SR\_GRAPH\_NS::Pipeline::ReadSSBO*](classSR__GRAPH__NS_1_1Pipeline.md#function-readssbo)
+
+
+<hr>
+
+
+
 ### function ResetLastShader 
 
 ```C++
@@ -1890,6 +1973,21 @@ inline explicit SR_GRAPH_NS::VulkanPipeline::VulkanPipeline (
 ```
 
 
+
+
+<hr>
+
+
+
+### function WaitComputeIdle 
+
+```C++
+virtual void SR_GRAPH_NS::VulkanPipeline::WaitComputeIdle () override
+```
+
+
+
+Implements [*SR\_GRAPH\_NS::Pipeline::WaitComputeIdle*](classSR__GRAPH__NS_1_1Pipeline.md#function-waitcomputeidle)
 
 
 <hr>

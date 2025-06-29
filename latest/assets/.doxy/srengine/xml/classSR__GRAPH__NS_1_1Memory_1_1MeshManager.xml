@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="116" column="13" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="116" bodyend="118"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="115" column="13" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="115" bodyend="117"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1aee5008acb69310636df66974f67de943" prot="public" static="no">
         <type>std::unordered_map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, <ref refid="classSR__GRAPH__NS_1_1Memory_1_1MeshVidMemInfo" kindref="compound">MeshVidMemInfo</ref> &gt;</type>
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="113" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="113" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="112" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="112" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a167cccbe6179e9fccfd0fbfa794c1716" prot="public" static="no">
         <type>std::optional&lt; VideoResources::iterator &gt;</type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="114" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="114" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="113" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="113" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-type">
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="111" column="13" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="111" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="110" column="13" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="110" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -109,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="148" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="148" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="147" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="147" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1ace5e4e2024a03387ab05c15ce017df99" prot="private" static="no" mutable="no">
         <type>VideoResources</type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="149" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="149" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="148" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="148" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a63108e5d1d46d85dfdd73d7e18629190" prot="private" static="no" mutable="no">
         <type>HashTable</type>
@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="151" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="151" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="150" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="150" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a423a9cf59a1fe7065b455597e5e5689a" prot="private" static="no" mutable="no">
         <type>HashTable</type>
@@ -151,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="152" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="152" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="151" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="151" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="121" column="13"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="120" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a39bd199c0508ad849f9b407bfd083916" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -181,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="122" column="13"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="121" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a78b7e03d568558bea1fb11c674293c45" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>VideoResourcesIter</type>
@@ -203,7 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="137" column="32"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="136" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a5f22afe61c9e13f3115f05d76cb80b93" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>VideoResourcesIter</type>
@@ -225,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="138" column="32"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="137" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1acd02a75a388379fe182f003b5c8e23d4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -255,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="140" column="18"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="139" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a59eec3c3899a3f142979709d4857bbe8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>FreeResult</type>
@@ -277,7 +277,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="141" column="24"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="140" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1ae9fcf36f5c80c2ff8792253f0254f1a6" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -292,7 +292,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="143" column="18"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="142" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a018277f97d7a28865a5cfed84888e1a9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -321,7 +321,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="145" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="239" bodyend="253"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="144" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="238" bodyend="252"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -353,7 +353,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="125" column="41"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="124" column="41"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a48d37ebcca2f3478927e929233a8c721" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -392,7 +392,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="127" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="159" bodyend="175"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="126" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="158" bodyend="174"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a1d2f120f4e776ec256aa42de6aca30c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -430,7 +430,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="128" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="178" bodyend="194"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="127" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="177" bodyend="193"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a397ad9601f278ababc1d197d9cb41f78" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -455,7 +455,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="130" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="196" bodyend="207"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="129" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="195" bodyend="206"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a2d4fa4d616854f0151ca7215a439d301" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -484,7 +484,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="132" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="210" bodyend="219"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="131" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="209" bodyend="218"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a0b81f8e986ef2007fe1355b22d00e9e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -514,7 +514,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="133" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="222" bodyend="224"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="132" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="221" bodyend="223"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1aa54d3e2a882bd188afb7adad56de4e26" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -544,7 +544,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="134" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="227" bodyend="236"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="133" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="226" bodyend="235"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -599,7 +599,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="109" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="109" bodyend="154"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="108" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="108" bodyend="153"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a05e42a474864d82c8f8be0db714e25b4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>BakeMesh</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a2d4fa4d616854f0151ca7215a439d301" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>CopyIfExists</name></member>

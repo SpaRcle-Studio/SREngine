@@ -17,6 +17,7 @@
 * `#include <Utils/Common/Enumerations.h>`
 * `#include <Graphics/Types/Uniforms.h>`
 * `#include <Graphics/Types/Vertices.h>`
+* `#include <Graphics/SRSL/ShaderType.h>`
 
 
 

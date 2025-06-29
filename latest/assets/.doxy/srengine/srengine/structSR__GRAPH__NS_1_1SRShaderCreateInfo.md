@@ -42,6 +42,7 @@
 |  bool | [**depthWrite**](#variable-depthwrite)   = `false`<br> |
 |  PolygonMode | [**polygonMode**](#variable-polygonmode)   = `PolygonMode::Unknown`<br> |
 |  PrimitiveTopology | [**primitiveTopology**](#variable-primitivetopology)   = `PrimitiveTopology::Unknown`<br> |
+|  SR\_SRSL\_NS::ShaderType | [**shaderType**](#variable-shadertype)   = `SR\_SRSL\_NS::ShaderType::Unknown`<br> |
 |  std::map&lt; ShaderStage, [**SRShaderStageInfo**](structSR__GRAPH__NS_1_1SRShaderStageInfo.md) &gt; | [**stages**](#variable-stages)  <br> |
 |  UBOInfo | [**uniforms**](#variable-uniforms)  <br> |
 |  VertexAttributes | [**vertexAttributes**](#variable-vertexattributes)  <br> |
@@ -182,6 +183,19 @@ PolygonMode SR_GRAPH_NS::SRShaderCreateInfo::polygonMode;
 
 ```C++
 PrimitiveTopology SR_GRAPH_NS::SRShaderCreateInfo::primitiveTopology;
+```
+
+
+
+
+<hr>
+
+
+
+### variable shaderType 
+
+```C++
+SR_SRSL_NS::ShaderType SR_GRAPH_NS::SRShaderCreateInfo::shaderType;
 ```
 
 

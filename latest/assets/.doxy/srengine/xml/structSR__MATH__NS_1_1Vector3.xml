@@ -82,7 +82,7 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="28" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="28" bodyend="28"/>
       </memberdef>
-      <memberdef kind="variable" id="structSR__MATH__NS_1_1Vector3_1aaf2f67b0fb0232bf8219f2c0031b3529" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="structSR__MATH__NS_1_1Vector3_1a772dfbdbf7e5d50a65071af7e7514e25" prot="public" static="no" mutable="no">
         <type>union <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">SR_MATH_NS::Vector3</ref></type>
         <definition>union SR_MATH_NS::Vector3 SR_MATH_NS::Vector3&lt; T &gt;</definition>
         <argsstring></argsstring>

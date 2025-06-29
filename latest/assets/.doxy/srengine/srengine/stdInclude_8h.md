@@ -109,8 +109,10 @@
 
 | Type | Name |
 | ---: | :--- |
+|  constexpr uint32\_t | [**SR\_INVALID\_DESCRIPTOR\_SET**](#variable-sr_invalid_descriptor_set)   = `SR\_ID\_INVALID`<br> |
 |  constexpr uint32\_t | [**SR\_INVALID\_FBO**](#variable-sr_invalid_fbo)   = `SR\_ID\_INVALID`<br> |
 |  constexpr uint32\_t | [**SR\_INVALID\_IBO**](#variable-sr_invalid_ibo)   = `SR\_ID\_INVALID`<br> |
+|  constexpr uint32\_t | [**SR\_INVALID\_SSBO**](#variable-sr_invalid_ssbo)   = `SR\_ID\_INVALID`<br> |
 |  constexpr uint32\_t | [**SR\_INVALID\_UBO**](#variable-sr_invalid_ubo)   = `SR\_ID\_INVALID`<br> |
 |  constexpr uint32\_t | [**SR\_INVALID\_VBO**](#variable-sr_invalid_vbo)   = `SR\_ID\_INVALID`<br> |
 
@@ -175,6 +177,19 @@
 
 
 
+### variable SR\_INVALID\_DESCRIPTOR\_SET 
+
+```C++
+constexpr uint32_t SR_INVALID_DESCRIPTOR_SET;
+```
+
+
+
+
+<hr>
+
+
+
 ### variable SR\_INVALID\_FBO 
 
 ```C++
@@ -192,6 +207,19 @@ constexpr uint32_t SR_INVALID_FBO;
 
 ```C++
 constexpr uint32_t SR_INVALID_IBO;
+```
+
+
+
+
+<hr>
+
+
+
+### variable SR\_INVALID\_SSBO 
+
+```C++
+constexpr uint32_t SR_INVALID_SSBO;
 ```
 
 

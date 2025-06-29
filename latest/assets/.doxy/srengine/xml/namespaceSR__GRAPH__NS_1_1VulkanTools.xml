@@ -131,7 +131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="126" column="66" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="126" bodyend="134"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="126" column="66" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="126" bodyend="136"/>
       </memberdef>
       <memberdef kind="function" id="AbstractCasts_8h_1a58d3e3b9d1c1048f5f96541949f37e96" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_FORCE_INLINE ShaderStage</type>
@@ -149,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="136" column="56" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="136" bodyend="144"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="138" column="56" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="138" bodyend="148"/>
       </memberdef>
       <memberdef kind="function" id="AbstractCasts_8h_1a94768357975e3ad90b8fb6d7f8b6a0d5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_FORCE_INLINE std::vector&lt; VkVertexInputAttributeDescription &gt;</type>
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="146" column="56" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="146" bodyend="162"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="150" column="56" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="150" bodyend="166"/>
       </memberdef>
       <memberdef kind="function" id="AbstractCasts_8h_1a80ea1890e963385d8beb05b7453c787e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_FORCE_INLINE std::vector&lt; std::pair&lt; std::string, ShaderStage &gt; &gt;</type>
@@ -185,7 +185,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="164" column="56" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="164" bodyend="171"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="168" column="56" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="168" bodyend="175"/>
       </memberdef>
       <memberdef kind="function" id="AbstractCasts_8h_1a82fb8e94242e415eb880ef7960ecf7ae" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_FORCE_INLINE VkPrimitiveTopology</type>
@@ -203,7 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="173" column="64" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="173" bodyend="191"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="177" column="64" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="177" bodyend="195"/>
       </memberdef>
       <memberdef kind="function" id="AbstractCasts_8h_1a943e216b8aee0f1096dda07789966e2b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_FORCE_INLINE VkPolygonMode</type>
@@ -221,7 +221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="193" column="58" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="193" bodyend="203"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="197" column="58" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="197" bodyend="207"/>
       </memberdef>
       <memberdef kind="function" id="AbstractCasts_8h_1a876fcfc4eaa8d51f63bfd68e1a551e87" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_FORCE_INLINE VkCullModeFlagBits</type>
@@ -239,7 +239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="205" column="63" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="205" bodyend="216"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="209" column="63" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="209" bodyend="220"/>
       </memberdef>
       <memberdef kind="function" id="AbstractCasts_8h_1ac16e49e13e04b820f5719b479b0ba29a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_FORCE_INLINE VkCompareOp</type>
@@ -257,7 +257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="218" column="56" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="218" bodyend="233"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="222" column="56" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="222" bodyend="237"/>
       </memberdef>
       <memberdef kind="function" id="AbstractCasts_8h_1a99535bc4ddb2104f5aa37808fdb84cd9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_FORCE_INLINE VkDescriptorType</type>
@@ -275,7 +275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="235" column="61" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="235" bodyend="246"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="239" column="61" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="239" bodyend="250"/>
       </memberdef>
       <memberdef kind="function" id="AbstractCasts_8h_1a879f0ea5c3add0e9097c1c82336bfcf8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_FORCE_INLINE const std::vector&lt; uint64_t &gt; &amp;</type>
@@ -293,7 +293,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="248" column="62" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="248" bodyend="273"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="252" column="62" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="252" bodyend="277"/>
       </memberdef>
       <memberdef kind="function" id="AbstractCasts_8h_1a79d0e35fe83e10c01ea22ba6b0bbe58c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_FORCE_INLINE std::vector&lt; uint64_t &gt;</type>
@@ -311,7 +311,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="275" column="56" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="275" bodyend="286"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="279" column="56" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="279" bodyend="290"/>
       </memberdef>
       <memberdef kind="function" id="AbstractCasts_8h_1a5727e99859da85e343ef702cde51c945" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_FORCE_INLINE VkImageAspectFlags</type>
@@ -330,7 +330,7 @@
         <inbodydescription>
 <para>NOLINT</para>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="288" column="63" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="288" bodyend="300"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="292" column="63" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="292" bodyend="304"/>
       </memberdef>
       <memberdef kind="function" id="AbstractCasts_8h_1a65d5922845dfd435c18bada6db5764bd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_FORCE_INLINE VkFormat</type>
@@ -348,7 +348,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="302" column="53" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="302" bodyend="337"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="306" column="53" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="306" bodyend="341"/>
       </memberdef>
       <memberdef kind="function" id="AbstractCasts_8h_1af715cd9c2a5d72c91843c4935b99ecad" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_FORCE_INLINE VkFormat</type>
@@ -370,7 +370,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="339" column="53" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="339" bodyend="428"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" line="343" column="53" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h" bodystart="343" bodyend="432"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

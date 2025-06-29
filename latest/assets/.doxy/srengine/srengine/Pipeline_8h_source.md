@@ -74,12 +74,18 @@ namespace SR_GRAPH_NS {
 
         virtual bool BeginRender();
 
+        virtual bool BeginCompute();
+
+        virtual void EndCompute();
+
         virtual void EndRender();
 
         virtual void SetViewport(int32_t width = -1, int32_t height = -1) { ++m_state.operations; };
         virtual void SetScissor(int32_t width = -1, int32_t height = -1) { ++m_state.operations; };
 
         virtual void SwitchWindow(const WindowPtr& pWindow);
+
+        virtual void WaitComputeIdle();
 
 
         virtual bool InitOverlay();
@@ -196,6 +202,9 @@ namespace SR_GRAPH_NS {
         virtual void Draw(uint32_t count);
 
 
+        virtual void Dispatch(uint32_t groupCountX, uint32_t groupCountY, uint32_t groupCountZ);
+
+
         virtual void UseShader(uint32_t shaderProgram);
         virtual void UnUseShader();
 
@@ -212,6 +221,8 @@ namespace SR_GRAPH_NS {
         virtual void UpdateUBO(uint32_t UBO, void* pData, uint64_t size);
 
         virtual void UpdateSSBO(uint32_t SSBO, void* pData, uint64_t size);
+
+        virtual void ReadSSBO(uint32_t SSBO, void* pData, uint64_t size);
 
         virtual void UpdateDescriptorSets(uint32_t descriptorSet, const SRDescriptorUpdateInfos& updateInfo);
 
@@ -231,6 +242,7 @@ namespace SR_GRAPH_NS {
 
         FrameBufferQueue m_fboQueue;
 
+        bool m_isComputeState = false;
         bool m_isRenderState = false;
         bool m_isCmdState = false;
         bool m_enableValidationLayers = false;

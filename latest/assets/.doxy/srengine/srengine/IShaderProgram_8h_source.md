@@ -23,6 +23,7 @@
 
 #include <Graphics/Types/Uniforms.h>
 #include <Graphics/Types/Vertices.h>
+#include <Graphics/SRSL/ShaderType.h>
 
 namespace SR_GTYPES_NS {
     class Texture;
@@ -167,7 +168,14 @@ namespace SR_GRAPH_NS {
     struct SR_RENDERER_DLL_API SRShaderCreateInfo {
     public:
         SR_NODISCARD bool Validate() const noexcept {
-            return polygonMode       != PolygonMode::Unknown
+            if (shaderType == SR_SRSL_NS::ShaderType::Compute) {
+                return polygonMode          == PolygonMode::Unknown
+                       && cullMode          == CullMode::Unknown
+                       && depthCompare      == DepthCompare::Unknown
+                       && primitiveTopology == PrimitiveTopology::Unknown;
+            }
+
+            return polygonMode          != PolygonMode::Unknown
                    && cullMode          != CullMode::Unknown
                    && depthCompare      != DepthCompare::Unknown
                    && primitiveTopology != PrimitiveTopology::Unknown;
@@ -175,6 +183,8 @@ namespace SR_GRAPH_NS {
 
     public:
         std::map<ShaderStage, SRShaderStageInfo> stages;
+
+        SR_SRSL_NS::ShaderType shaderType = SR_SRSL_NS::ShaderType::Unknown;
 
         PolygonMode       polygonMode       = PolygonMode::Unknown;
         CullMode          cullMode          = CullMode::Unknown;

@@ -94,6 +94,7 @@ namespace SR_SRSL_NS {
         SR_NODISCARD const std::vector<std::pair<SR_UTILS_NS::StringAtom, SRSLVariable*>>& GetShared() const { return m_shared; }
         SR_NODISCARD const std::map<SR_UTILS_NS::StringAtom, SRSLVariable*>& GetConstants() const { return m_constants; }
         SR_NODISCARD const std::vector<SR_UTILS_NS::StringAtom>& GetIncludes() const { return m_includes; }
+        SR_NODISCARD const SR_MATH_NS::UVector3& GetComputeWorkGroupSize() const { return m_computeWorkGroupSize; }
 
     private:
         SR_NODISCARD float_t EvalExpressionFloat(SRSLExpr* pExpression) const;
@@ -120,7 +121,6 @@ namespace SR_SRSL_NS {
         std::vector<SR_UTILS_NS::StringAtom> m_includes;
         std::vector<std::pair<SR_UTILS_NS::StringAtom, SRSLVariable*>> m_shared;
         std::map<SR_UTILS_NS::StringAtom, SRSLVariable*> m_constants;
-        ShaderType m_type = ShaderType::Unknown;
         SRShaderCreateInfo m_createInfo;
         SRSLAnalyzedTree::Ptr m_analyzedTree;
         SRSLUseStack::Ptr m_useStack;
@@ -128,6 +128,7 @@ namespace SR_SRSL_NS {
         UniformBlocks m_uniformBlocks;
         SRSLUniformBlock m_pushConstants;
         SRSLSamplers m_samplers;
+        SR_MATH_NS::UVector3 m_computeWorkGroupSize = { 1, 1, 1 };
 
     };
 }

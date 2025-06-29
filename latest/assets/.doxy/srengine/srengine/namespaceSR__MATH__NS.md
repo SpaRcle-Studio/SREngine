@@ -34,6 +34,7 @@
 
 | Type | Name |
 | ---: | :--- |
+| struct | [**AABB**](structSR__MATH__NS_1_1AABB.md) <br> |
 | class | [**FColor**](classSR__MATH__NS_1_1FColor.md) <br> |
 | class | [**Matrix3x3**](classSR__MATH__NS_1_1Matrix3x3.md) <br> |
 | class | [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) <br> |
@@ -1444,5 +1445,5 @@ static uint8_t SR_MATH_NS::TableIndex4D (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Math/Axis.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Math/AABB.h`
 

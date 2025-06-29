@@ -106,7 +106,7 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="28" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="28" bodyend="28"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__MATH__NS_1_1Quaternion_1ad70bdc1474a49695989b8f673ce6c3a4" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Quaternion_1aa2b0ff00044d2fad97acd02e396e9c81" prot="public" static="no" mutable="no">
         <type>union <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref></type>
         <definition>union SR_MATH_NS::Quaternion SR_MATH_NS::Quaternion</definition>
         <argsstring></argsstring>

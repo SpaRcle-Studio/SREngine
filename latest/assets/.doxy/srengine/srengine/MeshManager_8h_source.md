@@ -12,21 +12,20 @@
 // Created by Monika on 05.10.2021.
 //
 
-#ifndef SR_ENGINE_MESHMANAGER_H
-#define SR_ENGINE_MESHMANAGER_H
+#ifndef SR_ENGINE_GRAPHICS_MEMORY_MESH_MANAGER_H
+#define SR_ENGINE_GRAPHICS_MEMORY_MESH_MANAGER_H
 
 #include <Utils/Common/Singleton.h>
+#include <Utils/Common/Enumerations.h>
 #include <Utils/Types/Thread.h>
+#include <Utils/Types/SharedPtr.h>
+#include <Utils/Types/RawMesh.h>
 
 #include <Graphics/Types/Vertices.h>
 #include <Graphics/Pipeline/PipelineType.h>
 
 namespace SR_GTYPES_NS {
     class Mesh3D;
-}
-
-namespace SR_HTYPES_NS {
-    class RawMesh;
 }
 
 namespace SR_GRAPH_NS {
@@ -264,7 +263,7 @@ namespace SR_GRAPH_NS {
 }
 
 
-#endif //SR_ENGINE_MESHMANAGER_H
+#endif //SR_ENGINE_GRAPHICS_MEMORY_MESH_MANAGER_H
 ```
 
 

@@ -3,6 +3,7 @@
   <compounddef id="namespaceSR__GTYPES__NS" kind="namespace" language="C++">
     <compoundname>SR_GTYPES_NS</compoundname>
     <innerclass refid="classSR__GTYPES__NS_1_1Camera" prot="public">SR_GTYPES_NS::Camera</innerclass>
+    <innerclass refid="classSR__GTYPES__NS_1_1ComputeShader" prot="public">SR_GTYPES_NS::ComputeShader</innerclass>
     <innerclass refid="classSR__GTYPES__NS_1_1DebugLine" prot="public">SR_GTYPES_NS::DebugLine</innerclass>
     <innerclass refid="classSR__GTYPES__NS_1_1DebugWireframeMesh" prot="public">SR_GTYPES_NS::DebugWireframeMesh</innerclass>
     <innerclass refid="classSR__GTYPES__NS_1_1Font" prot="public">SR_GTYPES_NS::Font</innerclass>

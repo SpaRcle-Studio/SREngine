@@ -77,6 +77,7 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 |  SR\_NODISCARD const [**SRSLUniformBlock::Field**](structSR__SRSL__NS_1_1SRSLUniformBlock_1_1Field.md) \* | [**FindField**](#function-findfield) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & name) const<br> |
 |  SR\_NODISCARD const [**SRSLUniformBlock**](structSR__SRSL__NS_1_1SRSLUniformBlock.md) \* | [**FindUniformBlock**](#function-finduniformblock) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & name) const<br> |
 |  SR\_NODISCARD const SRSLAnalyzedTree::Ptr | [**GetAnalyzedTree**](#function-getanalyzedtree) () const<br> |
+|  SR\_NODISCARD const SR\_MATH\_NS::UVector3 & | [**GetComputeWorkGroupSize**](#function-getcomputeworkgroupsize) () const<br> |
 |  SR\_NODISCARD const std::map&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md), [**SRSLVariable**](classSR__SRSL__NS_1_1SRSLVariable.md) \* &gt; & | [**GetConstants**](#function-getconstants) () const<br> |
 |  SR\_NODISCARD const SRShaderCreateInfo & | [**GetCreateInfo**](#function-getcreateinfo) () const<br> |
 |  SR\_NODISCARD const std::vector&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; & | [**GetIncludes**](#function-getincludes) () const<br> |
@@ -231,6 +232,19 @@ SR_NODISCARD const SRSLUniformBlock * SR_SRSL_NS::SRSLShader::FindUniformBlock (
 
 ```C++
 SR_NODISCARD const SRSLAnalyzedTree::Ptr SR_SRSL_NS::SRSLShader::GetAnalyzedTree () const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetComputeWorkGroupSize 
+
+```C++
+inline SR_NODISCARD const SR_MATH_NS::UVector3 & SR_SRSL_NS::SRSLShader::GetComputeWorkGroupSize () const
 ```
 
 

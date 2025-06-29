@@ -17,7 +17,7 @@
         <childnode refid="173" relation="include">
         </childnode>
       </node>
-      <node id="186">
+      <node id="184">
         <label>Graphics/Loaders/ShaderProperties.h</label>
         <link refid="ShaderProperties_8h_source"/>
         <childnode refid="176" relation="include">
@@ -33,15 +33,15 @@
         <childnode refid="136" relation="include">
         </childnode>
       </node>
-      <node id="185">
+      <node id="187">
         <label>Graphics/Material/MaterialProperty.h</label>
         <link refid="MaterialProperty_8h_source"/>
-        <childnode refid="186" relation="include">
+        <childnode refid="184" relation="include">
         </childnode>
         <childnode refid="148" relation="include">
         </childnode>
       </node>
-      <node id="190">
+      <node id="191">
         <label>Graphics/Material/MaterialType.h</label>
         <link refid="MaterialType_8h_source"/>
         <childnode refid="176" relation="include">
@@ -49,15 +49,15 @@
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="189">
+      <node id="190">
         <label>Graphics/Material/MeshMaterialProperty.h</label>
         <link refid="MeshMaterialProperty_8h_source"/>
         <childnode refid="136" relation="include">
         </childnode>
-        <childnode refid="190" relation="include">
+        <childnode refid="191" relation="include">
         </childnode>
       </node>
-      <node id="187">
+      <node id="188">
         <label>Graphics/Memory/DescriptorManager.h</label>
         <link refid="DescriptorManager_8h_source"/>
         <childnode refid="8" relation="include">
@@ -66,10 +66,10 @@
         </childnode>
         <childnode refid="122" relation="include">
         </childnode>
-        <childnode refid="188" relation="include">
+        <childnode refid="189" relation="include">
         </childnode>
       </node>
-      <node id="183">
+      <node id="185">
         <label>Graphics/Memory/IGraphicsResource.h</label>
         <link refid="IGraphicsResource_8h_source"/>
         <childnode refid="176" relation="include">
@@ -77,7 +77,7 @@
         <childnode refid="113" relation="include">
         </childnode>
       </node>
-      <node id="184">
+      <node id="186">
         <label>Graphics/Memory/UBOManager.h</label>
         <link refid="UBOManager_8h_source"/>
         <childnode refid="176" relation="include">
@@ -108,8 +108,10 @@
         </childnode>
         <childnode refid="181" relation="include">
         </childnode>
+        <childnode refid="183" relation="include">
+        </childnode>
       </node>
-      <node id="191">
+      <node id="192">
         <label>Graphics/Render/RenderQueue.h</label>
         <link refid="RenderQueue_8h_source"/>
         <childnode refid="176" relation="include">
@@ -118,10 +120,16 @@
         </childnode>
         <childnode refid="174" relation="include">
         </childnode>
+        <childnode refid="186" relation="include">
+        </childnode>
+      </node>
+      <node id="183">
+        <label>Graphics/SRSL/ShaderType.h</label>
+        <link refid="ShaderType_8h_source"/>
         <childnode refid="184" relation="include">
         </childnode>
       </node>
-      <node id="188">
+      <node id="189">
         <label>Graphics/Types/Descriptors.h</label>
         <link refid="Descriptors_8h_source"/>
         <childnode refid="176" relation="include">
@@ -129,7 +137,7 @@
         <childnode refid="11" relation="include">
         </childnode>
       </node>
-      <node id="192">
+      <node id="193">
         <label>Graphics/Types/IRenderComponent.h</label>
         <link refid="IRenderComponent_8h_source"/>
         <childnode refid="176" relation="include">
@@ -154,19 +162,19 @@
         </childnode>
         <childnode refid="178" relation="include">
         </childnode>
-        <childnode refid="183" relation="include">
-        </childnode>
-        <childnode refid="184" relation="include">
-        </childnode>
         <childnode refid="185" relation="include">
+        </childnode>
+        <childnode refid="186" relation="include">
         </childnode>
         <childnode refid="187" relation="include">
         </childnode>
-        <childnode refid="189" relation="include">
+        <childnode refid="188" relation="include">
         </childnode>
-        <childnode refid="191" relation="include">
+        <childnode refid="190" relation="include">
         </childnode>
         <childnode refid="192" relation="include">
+        </childnode>
+        <childnode refid="193" relation="include">
         </childnode>
       </node>
       <node id="180">

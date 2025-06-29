@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="28" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="28" bodyend="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="27" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="27" bodyend="29"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

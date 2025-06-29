@@ -11,7 +11,10 @@
 
 
 * `#include <Utils/Common/Singleton.h>`
+* `#include <Utils/Common/Enumerations.h>`
 * `#include <Utils/Types/Thread.h>`
+* `#include <Utils/Types/SharedPtr.h>`
+* `#include <Utils/Types/RawMesh.h>`
 * `#include <Graphics/Types/Vertices.h>`
 * `#include <Graphics/Pipeline/PipelineType.h>`
 
@@ -34,7 +37,6 @@
 | namespace | [**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md) <br> |
 | namespace | [**Memory**](namespaceSR__GRAPH__NS_1_1Memory.md) <br> |
 | namespace | [**SR\_GTYPES\_NS**](namespaceSR__GTYPES__NS.md) <br> |
-| namespace | [**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md) <br> |
 
 
 ## Classes

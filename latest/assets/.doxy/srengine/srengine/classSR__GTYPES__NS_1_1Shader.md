@@ -157,12 +157,15 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  void | [**AttachDescriptorSets**](#function-attachdescriptorsets) () <br> |
 |  bool | [**BeginSharedUBO**](#function-beginsharedubo) () <br> |
 |  void | [**BindSSBO**](#function-bindssbo) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name, uint32\_t ssbo) noexcept<br> |
+|  void | [**Dispatch**](#function-dispatch-12) (uint32\_t x, uint32\_t y, uint32\_t z) <br> |
+|  void | [**Dispatch**](#function-dispatch-22) () <br> |
 |  void | [**EndSharedUBO**](#function-endsharedubo) () <br> |
 |  bool | [**Flush**](#function-flush) () const<br> |
 |  void | [**FlushConstants**](#function-flushconstants) () <br> |
 |  void | [**FlushSamplers**](#function-flushsamplers) () <br> |
 |  void | [**FreeVideoMemory**](#function-freevideomemory) () override<br> |
 | virtual SR\_NODISCARD [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**GetAssociatedPath**](#function-getassociatedpath) () override const<br> |
+|  SR\_NODISCARD const SR\_MATH\_NS::UVector3 & | [**GetComputeWorkGroupSize**](#function-getcomputeworkgroupsize) () noexcept const<br> |
 |  SR\_DEPRECATED SR\_NODISCARD int32\_t | [**GetID**](#function-getid) () <br> |
 |  SR\_NODISCARD int32\_t | [**GetId**](#function-getid) () noexcept<br> |
 |  SR\_NODISCARD ShaderProperties | [**GetProperties**](#function-getproperties) () <br> |
@@ -172,6 +175,7 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  SR\_NODISCARD uint64\_t | [**GetUBOBlockSize**](#function-getuboblocksize) () const<br> |
 |  SR\_NODISCARD ShaderProgram | [**GetVirtualProgram**](#function-getvirtualprogram) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**HasErrors**](#function-haserrors) () noexcept const<br> |
+|  SR\_NODISCARD bool | [**HasSSBOBindings**](#function-hasssbobindings) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**HasSharedUBO**](#function-hassharedubo) () noexcept const<br> |
 |  bool | [**Init**](#function-init) () <br> |
 |  SR\_NODISCARD bool | [**IsAvailable**](#function-isavailable) () const<br> |
@@ -546,6 +550,36 @@ void SR_GTYPES_NS::Shader::BindSSBO (
 
 
 
+### function Dispatch [1/2]
+
+```C++
+void SR_GTYPES_NS::Shader::Dispatch (
+    uint32_t x,
+    uint32_t y,
+    uint32_t z
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function Dispatch [2/2]
+
+```C++
+void SR_GTYPES_NS::Shader::Dispatch () 
+```
+
+
+
+
+<hr>
+
+
+
 ### function EndSharedUBO 
 
 ```C++
@@ -620,6 +654,19 @@ virtual SR_NODISCARD SR_UTILS_NS::Path SR_GTYPES_NS::Shader::GetAssociatedPath (
 
 
 Implements [*SR\_UTILS\_NS::IResource::GetAssociatedPath*](classSR__UTILS__NS_1_1IResource.md#function-getassociatedpath)
+
+
+<hr>
+
+
+
+### function GetComputeWorkGroupSize 
+
+```C++
+inline SR_NODISCARD const SR_MATH_NS::UVector3 & SR_GTYPES_NS::Shader::GetComputeWorkGroupSize () noexcept const
+```
+
+
 
 
 <hr>
@@ -734,6 +781,19 @@ inline SR_NODISCARD ShaderProgram SR_GTYPES_NS::Shader::GetVirtualProgram () noe
 
 ```C++
 inline SR_NODISCARD bool SR_GTYPES_NS::Shader::HasErrors () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function HasSSBOBindings 
+
+```C++
+inline SR_NODISCARD bool SR_GTYPES_NS::Shader::HasSSBOBindings () noexcept const
 ```
 
 

@@ -124,6 +124,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual SR\_NODISCARD int32\_t | [**AllocateVBO**](#function-allocatevbo-12) (const void \* pVertices, Vertices::VertexType type, size\_t count) <br>_---------------------------------------_  _Работа с памятью ---------------------------------------------_ __ |
 | virtual SR\_NODISCARD int32\_t | [**AllocateVBO**](#function-allocatevbo-22) (const [**SR\_UTILS\_NS::Vertex**](structSR__UTILS__NS_1_1Vertex.md) \* pVertices, Vertices::VertexType type, size\_t count) <br>_Продвинутая версия AllocateVBO, может сама выполнить преобразование типа памяти базовых вершин к нужному выравниванию._  |
 | virtual bool | [**BeginCmdBuffer**](#function-begincmdbuffer) () <br>_Начало записи в буфер команд. Разделение необходимо некоторым графическим API._  |
+| virtual bool | [**BeginCompute**](#function-begincompute) () <br>_Начало вычислений в Compute Shader._  |
 | virtual bool | [**BeginDrawOverlay**](#function-begindrawoverlay) (OverlayType overlayType) <br> |
 | virtual bool | [**BeginRender**](#function-beginrender) () <br>_Начало рендера в кадровый буфер или в SwapChain._  |
 | virtual void | [**BindAttachment**](#function-bindattachment) (uint8\_t activeTexture, uint32\_t textureId) <br> |
@@ -142,10 +143,12 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual void | [**ClearFrameBuffersQueue**](#function-clearframebuffersqueue) () <br>_Вызывается в начале построения сцены рендера, чистит очередь рендера._  |
 | virtual bool | [**Destroy**](#function-destroy) () <br>_Чистим все данные графического конфейера и де-инициализируем его_  |
 | virtual void | [**DestroyOverlay**](#function-destroyoverlay) () <br> |
+| virtual void | [**Dispatch**](#function-dispatch) (uint32\_t groupCountX, uint32\_t groupCountY, uint32\_t groupCountZ) <br>_-----------------------------------------_  _Вычисления -------------------------------------------------_ __ |
 | virtual void | [**Draw**](#function-draw) (uint32\_t count) <br>_Обычная отрисовка вершин_  |
 | virtual void | [**DrawFrame**](#function-drawframe) () <br> |
 | virtual void | [**DrawIndices**](#function-drawindices) (uint32\_t count) <br>_---------------------------------------_  _Вызовы отрисовки ---------------------------------------------_ __ |
 | virtual void | [**EndCmdBuffer**](#function-endcmdbuffer) () <br>_Конец записи в буфер команд. Разделение необходимо некоторым графическим API._  |
+| virtual void | [**EndCompute**](#function-endcompute) () <br>_Конец вычислений в Compute Shader._  |
 | virtual void | [**EndDrawOverlay**](#function-enddrawoverlay) (OverlayType overlayType) <br> |
 | virtual void | [**EndRender**](#function-endrender) () <br>_Обязательно нужно вызвать после успешного вызова BeginRender._  |
 | virtual bool | [**FreeCubeMap**](#function-freecubemap) (int32\_t \* id) <br> |
@@ -210,6 +213,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual void | [**PrepareOverlay**](#function-prepareoverlay) (OverlayType overlayType) <br> |
 | virtual void | [**PushConstants**](#function-pushconstants) (void \* pData, uint64\_t size) <br> |
 | virtual void | [**ReCreateOverlay**](#function-recreateoverlay) () <br> |
+| virtual void | [**ReadSSBO**](#function-readssbo) (uint32\_t SSBO, void \* pData, uint64\_t size) <br>_Читает данные из SSBO в память_  |
 | virtual void | [**ResetLastShader**](#function-resetlastshader) () <br> |
 | virtual void | [**ResetSubmitQueue**](#function-resetsubmitqueue) () <br> |
 | virtual void | [**SetBuildIteration**](#function-setbuilditeration) (uint8\_t iteration) <br> |
@@ -232,6 +236,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual void | [**UpdateSSBO**](#function-updatessbo) (uint32\_t SSBO, void \* pData, uint64\_t size) <br>_Обеспечивает обновление данных в шейдере_  |
 | virtual void | [**UpdateUBO**](#function-updateubo) (uint32\_t UBO, void \* pData, uint64\_t size) <br>_Обеспечивает обновление данных в шейдере_  |
 | virtual void | [**UseShader**](#function-useshader) (uint32\_t shaderProgram) <br>_------------------------------------------_  _Биндинги --------------------------------------------------_ __ |
+| virtual void | [**WaitComputeIdle**](#function-waitcomputeidle) () <br> |
 | virtual  | [**~Pipeline**](#function-pipeline) () <br> |
 
 
@@ -336,6 +341,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  uint32\_t | [**m\_frames**](#variable-m_frames)   = `0`<br> |
 |  uint32\_t | [**m\_framesPerSecond**](#variable-m_framespersecond)   = `0`<br> |
 |  bool | [**m\_isCmdState**](#variable-m_iscmdstate)   = `false`<br> |
+|  bool | [**m\_isComputeState**](#variable-m_iscomputestate)   = `false`<br> |
 |  bool | [**m\_isMultiSampleSupported**](#variable-m_ismultisamplesupported)   = `false`<br> |
 |  bool | [**m\_isRenderState**](#variable-m_isrenderstate)   = `false`<br> |
 |  bool | [**m\_isShaderChanged**](#variable-m_isshaderchanged)   = `true`<br> |
@@ -703,6 +709,20 @@ virtual bool SR_GRAPH_NS::Pipeline::BeginCmdBuffer ()
 
 
 
+### function BeginCompute 
+
+_Начало вычислений в Compute Shader._ 
+```C++
+virtual bool SR_GRAPH_NS::Pipeline::BeginCompute () 
+```
+
+
+
+
+<hr>
+
+
+
 ### function BeginDrawOverlay 
 
 ```C++
@@ -983,6 +1003,24 @@ virtual void SR_GRAPH_NS::Pipeline::DestroyOverlay ()
 
 
 
+### function Dispatch 
+
+_-----------------------------------------_  _Вычисления -------------------------------------------------_ __
+```C++
+virtual void SR_GRAPH_NS::Pipeline::Dispatch (
+    uint32_t groupCountX,
+    uint32_t groupCountY,
+    uint32_t groupCountZ
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function Draw 
 
 _Обычная отрисовка вершин_ 
@@ -1041,6 +1079,20 @@ virtual void SR_GRAPH_NS::Pipeline::DrawIndices (
 _Конец записи в буфер команд. Разделение необходимо некоторым графическим API._ 
 ```C++
 virtual void SR_GRAPH_NS::Pipeline::EndCmdBuffer () 
+```
+
+
+
+
+<hr>
+
+
+
+### function EndCompute 
+
+_Конец вычислений в Compute Shader._ 
+```C++
+virtual void SR_GRAPH_NS::Pipeline::EndCompute () 
 ```
 
 
@@ -1947,6 +1999,24 @@ virtual void SR_GRAPH_NS::Pipeline::ReCreateOverlay ()
 
 
 
+### function ReadSSBO 
+
+_Читает данные из SSBO в память_ 
+```C++
+virtual void SR_GRAPH_NS::Pipeline::ReadSSBO (
+    uint32_t SSBO,
+    void * pData,
+    uint64_t size
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function ResetLastShader 
 
 ```C++
@@ -2283,6 +2353,19 @@ virtual void SR_GRAPH_NS::Pipeline::UseShader (
 
 
 
+### function WaitComputeIdle 
+
+```C++
+virtual void SR_GRAPH_NS::Pipeline::WaitComputeIdle () 
+```
+
+
+
+
+<hr>
+
+
+
 ### function ~Pipeline 
 
 ```C++
@@ -2420,6 +2503,19 @@ uint32_t SR_GRAPH_NS::Pipeline::m_framesPerSecond;
 
 ```C++
 bool SR_GRAPH_NS::Pipeline::m_isCmdState;
+```
+
+
+
+
+<hr>
+
+
+
+### variable m\_isComputeState 
+
+```C++
+bool SR_GRAPH_NS::Pipeline::m_isComputeState;
 ```
 
 

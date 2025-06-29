@@ -36,7 +36,7 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Math/Size.h" line="32" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Math/Size.h" bodystart="32" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structSR__MATH__NS_1_1Size_1abf31eb7a8bbd94abc63940a91f7a512f" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="structSR__MATH__NS_1_1Size_1ac95445a8f23817236b172fc13c289812" prot="public" static="no" mutable="no">
         <type>union <ref refid="structSR__MATH__NS_1_1Size" kindref="compound">SR_MATH_NS::Size</ref></type>
         <definition>union SR_MATH_NS::Size SR_MATH_NS::Size&lt; T &gt;</definition>
         <argsstring></argsstring>

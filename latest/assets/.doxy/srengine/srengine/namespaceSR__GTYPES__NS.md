@@ -30,6 +30,7 @@
 | Type | Name |
 | ---: | :--- |
 | class | [**Camera**](classSR__GTYPES__NS_1_1Camera.md) <br> |
+| class | [**ComputeShader**](classSR__GTYPES__NS_1_1ComputeShader.md) <br> |
 | class | [**DebugLine**](classSR__GTYPES__NS_1_1DebugLine.md) <br> |
 | class | [**DebugWireframeMesh**](classSR__GTYPES__NS_1_1DebugWireframeMesh.md) <br> |
 | class | [**Font**](classSR__GTYPES__NS_1_1Font.md) <br> |
