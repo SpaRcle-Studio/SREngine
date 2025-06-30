@@ -12,23 +12,23 @@
 #include <Graphics/Types/ComputeShader.h>
 #include <Graphics/Render/RenderContext.h>
 
+namespace Detail {
+    struct alignas(16) Vertex {
+        alignas(16) SR_MATH_NS::FVector3 position;
+        alignas(16) SR_MATH_NS::FVector3 normal;
+        alignas(16) SR_MATH_NS::IVector2 id;
+    };
+
+    struct alignas(16) Triangle {
+        alignas(16)Vertex c;
+        alignas(16)Vertex b;
+        alignas(16)Vertex a;
+    };
+}
+
 #include <Scripting/Cpp/CppBehaviour.h>
 
 namespace SpaRcle::Scripts::Samples {
-    namespace Detail {
-        struct alignas(16) Vertex {
-            alignas(16) SR_MATH_NS::FVector3 position;
-            alignas(16) SR_MATH_NS::FVector3 normal;
-            alignas(16) SR_MATH_NS::IVector2 id;
-        };
-
-        struct alignas(16) Triangle {
-            alignas(16)Vertex c;
-            alignas(16)Vertex b;
-            alignas(16)Vertex a;
-        };
-    }
-
     class MarchingCubes : public SpaRcle::Scripting::CppBehaviour {
         SR_CLASS()
     public:
@@ -43,6 +43,8 @@ namespace SpaRcle::Scripts::Samples {
         using DensityType = float;
 
         std::vector<DensityType> GenerateCubeDensityField() {
+            SR_TRACY_ZONE;
+
             const int sizeX = 64;
             const int sizeY = 64;
             const int sizeZ = 64;
@@ -77,6 +79,8 @@ namespace SpaRcle::Scripts::Samples {
         }
 
         std::vector<DensityType> GenerateSphereDensityField() {
+            SR_TRACY_ZONE;
+
             /// Параметры сетки
             const int sizeX = 64;
             const int sizeY = 64;
@@ -114,6 +118,8 @@ namespace SpaRcle::Scripts::Samples {
         }
 
         void OnEnable() override {
+            SR_TRACY_ZONE;
+
             Finalize();
 
             m_computeShader = SR_GTYPES_NS::ComputeShader::Load(shaderPath);
@@ -128,17 +134,20 @@ namespace SpaRcle::Scripts::Samples {
                 SSBO = m_computeShader->GetPipeline()->AllocateSSBO(dataSize, SR_GRAPH_NS::SSBOUsage::Read);
 
                 /// density SSBO
-                auto&& densityData = GenerateCubeDensityField();
-                const uint64_t densityDataSize = densityData.size() * sizeof(DensityType);
+                //densities = GenerateSphereDensityField();
+                densities = GenerateCubeDensityField();
+                const uint64_t densityDataSize = densities.size() * sizeof(DensityType);
                 densitySSBO = m_computeShader->GetPipeline()->AllocateSSBO(densityDataSize, SR_GRAPH_NS::SSBOUsage::Write);
 
-                m_computeShader->GetPipeline()->UpdateSSBO(densitySSBO, densityData.data(), densityDataSize);
+                m_computeShader->GetPipeline()->UpdateSSBO(densitySSBO, densities.data(), densityDataSize);
             }
 
             Generate();
         }
 
         void Generate() {
+            SR_TRACY_ZONE;
+
             if (!m_computeShader) {
                 return;
             }
@@ -162,6 +171,8 @@ namespace SpaRcle::Scripts::Samples {
         }
 
         void DebugReadSSBO() {
+            SR_TRACY_ZONE;
+
             if (SSBO == SR_ID_INVALID) {
                 return;
             }
@@ -174,34 +185,64 @@ namespace SpaRcle::Scripts::Samples {
             uint32_t trianglesCount = *reinterpret_cast<uint32_t*>(pData);
             Detail::Triangle* triangles = reinterpret_cast<Detail::Triangle*>(reinterpret_cast<uint8_t*>(pData) + sizeof(uint32_t) + 12);
 
-            std::vector<SR_GRAPH_NS::Vertices::StaticMeshVertex> nonIndexedVertices;
+            //std::vector<Detail::Triangle> triangles;
+            //int numVoxelsPerAxis = numPointsPerAxis - 1;
+            //GenerateMarchingCubesCPU(numVoxelsPerAxis * 8, numVoxelsPerAxis * 8, numVoxelsPerAxis * 8, numPointsPerAxis, densities, triangles);
+            //uint32_t trianglesCount = static_cast<uint32_t>(triangles.size());
 
-            std::vector<SR_GRAPH_NS::Vertices::StaticMeshVertex> vertices;
-            std::unordered_map<SR_MATH_NS::IVector2, uint32_t> vertexMap;
-            std::vector<uint32_t> processedTriangles;
+            //std::vector<SR_GRAPH_NS::Vertices::StaticMeshVertex> nonIndexedVertices;
+            //nonIndexedVertices.reserve(trianglesCount * 3);
+
+            //std::unordered_map<SR_MATH_NS::IVector2, uint32_t> vertexMap;
+
+            std::unordered_map<uint64_t, uint32_t> vertexMap;
+            static SR_HTYPES_NS::FastMemoryArray<SR_GRAPH_NS::Vertices::StaticMeshVertex> vertices;
+            static SR_HTYPES_NS::FastMemoryArray<uint32_t> processedTriangles;
+
+            vertices.clear();
+            processedTriangles.clear();
+
+            vertices.reserve(trianglesCount * 3);
+            processedTriangles.reserve(trianglesCount);
+
+            int triangleIndex = 0;
+            SR_GRAPH_NS::Vertices::StaticMeshVertex meshVertex;
+
+            std::hash<SR_MATH_NS::FVector3> hashFunction;
 
             auto&& processVertex = [&](const Detail::Vertex& vertex) {
-                /*SR_DEBUG_LOG("Triangle: POS({:.2f}, {:.2f}, {:.2f}), NORM({:.2f}, {:.2f}, {:.2f}), ID({:d}, {:d})",
-                            vertex.position.x, vertex.position.y, vertex.position.z,
-                            vertex.normal.x, vertex.normal.y, vertex.normal.z,
-                            vertex.id.x, vertex.id.y);
+                const uint64_t vertexPosHash = hashFunction(vertex.position);
+                auto&& pIt = vertexMap.find(vertexPosHash);
+                if (pIt == vertexMap.end()) {
+                    meshVertex.pos = vertex.position;
+                    meshVertex.norm = vertex.normal;
+                    vertices.push_back(meshVertex);
+                    pIt = vertexMap.emplace(vertexPosHash, triangleIndex).first;
+                    processedTriangles.push_back(triangleIndex);
+                    triangleIndex++;
+                }
+                else {
+                    processedTriangles.push_back(pIt->second);
+                }
 
-                auto&& pIt = vertexMap.find(vertex.id);
+                /*auto&& pIt = vertexMap.find(vertex.id);
                 if (pIt == vertexMap.end()) {
                     SR_GRAPH_NS::Vertices::StaticMeshVertex meshVertex;
                     meshVertex.pos = vertex.position;
                     meshVertex.norm = vertex.normal;
                     vertices.emplace_back(meshVertex);
-
-                    pIt = vertexMap.emplace(vertex.id, static_cast<uint32_t>(vertices.size() - 1)).first;
+                    pIt = vertexMap.emplace(vertex.id, triangleIndex).first;
+                    processedTriangles.emplace_back(triangleIndex);
+                    triangleIndex++;
                 }
                 else {
                     processedTriangles.emplace_back(pIt->second);
                 }*/
-                SR_GRAPH_NS::Vertices::StaticMeshVertex meshVertex;
-                meshVertex.pos = vertex.position;
-                meshVertex.norm = vertex.normal;
-                nonIndexedVertices.emplace_back(meshVertex);
+
+                //SR_GRAPH_NS::Vertices::StaticMeshVertex meshVertex;
+                //meshVertex.pos = vertex.position;
+                //meshVertex.norm = vertex.normal;
+                //nonIndexedVertices.emplace_back(meshVertex);
             };
 
             for (uint32_t i = 0; i < trianglesCount; ++i) {
@@ -214,9 +255,11 @@ namespace SpaRcle::Scripts::Samples {
 
             if (gameObject) {
                 if (auto&& pProceduralMesh = gameObject->GetComponent<SR_GTYPES_NS::ProceduralMesh>()) {
-                    pProceduralMesh->SetVertices(nonIndexedVertices);
+                    //pProceduralMesh->SetVertices(nonIndexedVertices);
                     //pProceduralMesh->SetIndexedVertices(vertices.data(), static_cast<uint32_t>(vertices.size()));
                     //pProceduralMesh->SetIndices(processedTriangles.data(), static_cast<uint32_t>(processedTriangles.size()));
+                    pProceduralMesh->SwapIndices(processedTriangles);
+                    pProceduralMesh->SwapIndexedVertices(vertices);
                 }
             }
 
@@ -227,6 +270,8 @@ namespace SpaRcle::Scripts::Samples {
         }
 
         void Finalize() {
+            SR_TRACY_ZONE;
+
             if (SSBO != SR_ID_INVALID) {
                 m_computeShader->GetPipeline()->FreeSSBO(&SSBO);
             }
@@ -239,6 +284,7 @@ namespace SpaRcle::Scripts::Samples {
         }
 
     private:
+        std::vector<DensityType> densities;
         SR_GTYPES_NS::ComputeShader::Ptr m_computeShader = nullptr;
         int32_t SSBO = SR_ID_INVALID;
         int32_t densitySSBO = SR_ID_INVALID;

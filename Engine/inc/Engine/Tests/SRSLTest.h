@@ -1,0 +1,104 @@
+//
+// Created by Monika on 30.06.2025.
+//
+
+#ifndef SR_ENGINE_CORE_SRSL_TEST_H
+#define SR_ENGINE_CORE_SRSL_TEST_H
+
+#include <Utils/Resources/ResourceManager.h>
+
+#include <Graphics/SRSL/Shader.h>
+#include <Graphics/SRSL/GLSLCodeGenerator.h>
+#include <Graphics/Pipeline/IShaderProgram.h>
+
+#include <Enum/ShaderStage.hpp>
+
+namespace SR_CORE_NS::Tests {
+    class SRSLTest {
+    public:
+        static bool Run() {
+            const SR_UTILS_NS::Path path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("ModuleTests/SRSL");
+            auto&& expectedFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("ModuleTests/SRSL/Expected");
+            auto&& resultFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("ModuleTests/SRSL/Result");
+
+            for (auto file : path.GetFiles()) {
+                if (file.GetExtension() != "srsl") {
+                    continue;
+                }
+
+
+                file = file.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+
+                if (auto&& pShader = SR_SRSL_NS::SRSLShader::Load(file)) {
+                    SR_SRSL_NS::ISRSLCodeGenerator::SRSLCodeGenRes result = SR_SRSL_NS::GLSLCodeGenerator::Instance().GenerateStages(pShader.get());
+                    if (result.first.HasAny()) {
+                        SR_ERROR("SRSLTest::Run() : failed to generate shader stages for SRSL shader: {}\n\tResult: {}", file, result.first.ToString(pShader->GetIncludes()));
+                        return false;
+                    }
+
+                    for (auto&& [stage, code] : result.second) {
+                        resultFolder.CreateIfNotExists();
+                        auto outputFile = resultFolder.Concat(file.GetBaseNameAndExt()).ConcatExt(SR_UTILS_NS::EnumReflector::ToStringAtom(stage).ToString() + ".glsl");
+                        if (!SR_UTILS_NS::FileSystem::WriteToFile(outputFile, code)) {
+                            SR_ERROR("SRSLTest::Run() : failed to write shader stage to file: {}", outputFile);
+                            return false;
+                        }
+                    }
+                }
+                else {
+                    SR_ERROR("SRSLTest::Run() : failed to load SRSL shader: {}", file);
+                    return false;
+                }
+            }
+
+            const uint32_t expectedCount = expectedFolder.GetFiles().size();
+            const uint32_t resultCount = resultFolder.GetFiles().size();
+
+            if (expectedCount != resultCount) {
+                SR_ERROR("SRSLTest::Run() : expected {} shader files, but found {} in result folder!", expectedCount, resultCount);
+                return false;
+            }
+
+            uint32_t errors = 0;
+            const uint32_t maxErrors = 128;
+
+            for (auto file : expectedFolder.GetFiles()) {
+                if (file.GetExtension() != "glsl") {
+                    SR_ERROR("SRSLTest::Run() : expected file is not a GLSL shader: {}", file);
+                    return false;
+                }
+
+                auto expectedFile = expectedFolder.Concat(file.GetBaseNameAndExt());
+                auto resultFile = resultFolder.Concat(file.GetBaseNameAndExt());
+
+                if (!resultFile.Exists()) {
+                    SR_ERROR("SRSLTest::Run() : result file does not exist: {}", resultFile);
+                    return false;
+                }
+
+                std::vector<std::string> expectedCode = SR_UTILS_NS::FileSystem::ReadAllLines(expectedFile);
+                std::vector<std::string> resultCode = SR_UTILS_NS::FileSystem::ReadAllLines(resultFile);
+
+                if (expectedCode.size() != resultCode.size()) {
+                    SR_ERROR("SRSLTest::Run() : expected and result shader files have different number of lines: {} vs {}", expectedFile, resultFile);
+                    return false;
+                }
+
+                for (size_t i = 0; i < expectedCode.size(); ++i) {
+                    if (expectedCode[i] != resultCode[i]) {
+                        SR_ERROR("SRSLTest::Run() : expected and result shader files differ at line {}: \nExpected: {}\nResult: {}", i + 1, expectedCode[i], resultCode[i]);
+                        ++errors;
+                        if (errors >= maxErrors) {
+                            SR_ERROR("SRSLTest::Run() : too many errors, stopping test!");
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            return errors == 0;
+        }
+    };
+}
+
+#endif //SR_ENGINE_CORE_SRSL_TEST_H
