@@ -24,7 +24,7 @@
 namespace SR_UTILS_NS {
     SR_ENUM_NS_CLASS_T(DebugLogType, uint8_t,
         Log, Info, Debug, Graph, Shader, Script, System, Warn,
-        Error, ScriptError, ScriptLog, Vulkan, VulkanLog, VulkanError, Assert, Success
+        Error, ScriptError, ScriptLog, Vulkan, VulkanLog, VulkanError, Assert, Success, Test
     );
 
     static fmt::text_style GetTextStyleColorByLogType(DebugLogType type);
@@ -96,6 +96,7 @@ namespace SR_UTILS_NS {
     };
 }
 
+#define SR_LOG_TEST(...) SR_UTILS_NS::Debug::Instance().Print(SR_FORMAT(__VA_ARGS__), SR_UTILS_NS::DebugLogType::Test)
 #define SR_LOG(...) SR_UTILS_NS::Debug::Instance().Log(SR_FORMAT(__VA_ARGS__))
 #define SR_INFO(...) SR_UTILS_NS::Debug::Instance().Info(SR_FORMAT(__VA_ARGS__))
 #define SR_WARN(...) SR_UTILS_NS::Debug::Instance().Warn(SR_FORMAT(__VA_ARGS__))

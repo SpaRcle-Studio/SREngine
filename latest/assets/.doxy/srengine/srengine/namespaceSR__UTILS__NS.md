@@ -392,7 +392,7 @@
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (PropertyPublicity, uint8\_t, Public, Hidden, ReadOnly, HiddenReadOnly, Private) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (Measurement, int32\_t, Unknown=-2, Holder=-1, SpaceZero=0, Space1D=1, Space2D=2, Space3D=3, Space4D=4) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (StandardType, uint16\_t, Unknown, Bool, Int8, UInt8, Int16, UInt16, Int32, UInt32, Int64, UInt64, Float, Double, String, [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md), UnicodeString, [**Path**](classSR__UTILS__NS_1_1Path.md), Array, Map, Set, Enum, FSize, FSize2, ISize, ISize2, USize, USize2, FVector2, FVector3, FVector4, FVector5, FVector6, IVector2, IVector3, IVector4, IVector5, IVector6, UVector2, UVector3, UVector4, UVector5, UVector6, BVector2, BVector3, BVector4, BVector5, BVector6, Object, Class, Ptr) <br> |
-|   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (DebugLogType, uint8\_t, Log, Info, [**Debug**](classSR__UTILS__NS_1_1Debug.md), Graph, Shader, Script, System, Warn, Error, ScriptError, ScriptLog, Vulkan, VulkanLog, VulkanError, Assert, Success) <br> |
+|   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (DebugLogType, uint8\_t, Log, Info, [**Debug**](classSR__UTILS__NS_1_1Debug.md), Graph, Shader, Script, System, Warn, Error, ScriptError, ScriptLog, Vulkan, VulkanLog, VulkanError, Assert, Success, Test) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (LookAtAxis, uint8\_t, AxisX, AxisY, AxisZ, InvAxisX, InvAxisY, InvAxisZ) <br>_Ось, которая будет разворачиваться в сторону цели_  |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (InputDeviceType, uint8\_t, Unknown, Mouse, Keyboard, Joystick) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (KeyCode, uint8\_t, MouseLeft=0, MouseRight=1, MouseMiddle=2, MouseButton4=3, MouseButton5=4, BackSpace=8, Tab=9, Enter=13, LShift=16, Ctrl=17, Alt=18, Esc=27, Escape=27, Space=32, LeftArrow=37, UpArrow=38, RightArrow=39, DownArrow=40, Del=46, \_0=48, \_1=49, \_2=50, \_3=51, \_4=52, \_5=53, \_6=54, \_7=55, \_8=56, \_9=57, A=65, B=66, C=67, D=68, E=69, F=70, G=71, H=72, I=73, J=74, K=75, L=76, M=77, N=78, O=79, P=80, Q=81, S=83, R=82, T=84, U=85, V=86, W=87, X=88, Y=89, Z=90, F1=112, F2=113, F3=114, F4=115, F5=116, F6=117, F7=118, F8=119, F9=120, F10=121, F11=122, F12=123, Plus=187, Minus=189, Dot=190, Tilde=192, None=std::numeric\_limits&lt; uint8\_t &gt;::max() - 1) <br> |
@@ -2369,7 +2369,8 @@ SR_UTILS_NS::SR_ENUM_NS_CLASS_T (
     VulkanLog,
     VulkanError,
     Assert,
-    Success
+    Success,
+    Test
 ) 
 ```
 

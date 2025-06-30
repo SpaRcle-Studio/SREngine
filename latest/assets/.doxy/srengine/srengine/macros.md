@@ -171,6 +171,7 @@
 * **SR\_GRAPH\_LOG** ([**Debug.h**](Debug_8h.md))
 * **SR\_INFO** ([**Debug.h**](Debug_8h.md))
 * **SR\_LOG** ([**Debug.h**](Debug_8h.md))
+* **SR\_LOG\_TEST** ([**Debug.h**](Debug_8h.md))
 * **SR\_MAKE\_ASSERT** ([**Debug.h**](Debug_8h.md))
 * **SR\_SAFE\_PTR\_ASSERT** ([**Debug.h**](Debug_8h.md))
 * **SR\_SHADER** ([**Debug.h**](Debug_8h.md))

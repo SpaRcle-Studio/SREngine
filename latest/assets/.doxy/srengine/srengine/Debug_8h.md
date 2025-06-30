@@ -114,6 +114,7 @@
 | define  | [**SR\_GRAPH\_LOG**](Debug_8h.md#define-sr_graph_log) (...) `SR\_GRAPH(SR\_FORMAT(\_\_VA\_ARGS\_\_))`<br> |
 | define  | [**SR\_INFO**](Debug_8h.md#define-sr_info) (...) `SR\_UTILS\_NS::Debug::Instance().Info(SR\_FORMAT(\_\_VA\_ARGS\_\_))`<br> |
 | define  | [**SR\_LOG**](Debug_8h.md#define-sr_log) (...) `SR\_UTILS\_NS::Debug::Instance().Log(SR\_FORMAT(\_\_VA\_ARGS\_\_))`<br> |
+| define  | [**SR\_LOG\_TEST**](Debug_8h.md#define-sr_log_test) (...) `SR\_UTILS\_NS::Debug::Instance().Print(SR\_FORMAT(\_\_VA\_ARGS\_\_), SR\_UTILS\_NS::DebugLogType::Test)`<br> |
 | define  | [**SR\_MAKE\_ASSERT**](Debug_8h.md#define-sr_make_assert) (msg) `(msg).append("\nFile: ").append(\_\_FILE\_\_).append("\nLine: ").append(std::to\_string(\_\_LINE\_\_))`<br> |
 | define  | [**SR\_SAFE\_PTR\_ASSERT**](Debug_8h.md#define-sr_safe_ptr_assert) (expr, msg) `(SR\_NOOP)`<br> |
 | define  | [**SR\_SHADER**](Debug_8h.md#define-sr_shader) (...) `SR\_UTILS\_NS::Debug::Instance().Shader(SR\_FORMAT(\_\_VA\_ARGS\_\_))`<br> |
@@ -443,6 +444,21 @@
 #define SR_LOG (
     ...
 ) `SR_UTILS_NS::Debug::Instance().Log(SR_FORMAT(__VA_ARGS__))`
+```
+
+
+
+
+<hr>
+
+
+
+### define SR\_LOG\_TEST 
+
+```C++
+#define SR_LOG_TEST (
+    ...
+) `SR_UTILS_NS::Debug::Instance().Print(SR_FORMAT(__VA_ARGS__), SR_UTILS_NS::DebugLogType::Test)`
 ```
 
 

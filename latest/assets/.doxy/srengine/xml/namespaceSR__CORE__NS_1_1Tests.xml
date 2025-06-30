@@ -5,6 +5,7 @@
     <innerclass refid="classSR__CORE__NS_1_1Tests_1_1AtlasBuilderTest" prot="public">SR_CORE_NS::Tests::AtlasBuilderTest</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1Tests_1_1CSSTest" prot="public">SR_CORE_NS::Tests::CSSTest</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1Tests_1_1HTMLTest" prot="public">SR_CORE_NS::Tests::HTMLTest</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1Tests_1_1SRSLTest" prot="public">SR_CORE_NS::Tests::SRSLTest</innerclass>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

@@ -11275,6 +11275,9 @@
     <member refid="classSR__SRSL__NS_1_1SRSLStructureStatement_1ad4160ea3e997ab1e5d01554f61c91ebc" kind="function"><name>~SRSLStructureStatement</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLStructureStatement_1a4e2de467011265fc7b3b413a115eea33" kind="function"><name>HasDynamicArray</name></member>
   </compound>
+  <compound refid="classSR__CORE__NS_1_1Tests_1_1SRSLTest" kind="class"><name>SR_CORE_NS::Tests::SRSLTest</name>
+    <member refid="classSR__CORE__NS_1_1Tests_1_1SRSLTest_1a8e751de734346e22e8a1ebfbc8a86e11" kind="function"><name>Run</name></member>
+  </compound>
   <compound refid="classSR__SRSL__NS_1_1SRSLTypeInfo" kind="class"><name>SR_SRSL_NS::SRSLTypeInfo</name>
     <member refid="classSR__SRSL__NS_1_1SRSLTypeInfo_1af98358205759ba62c02fa881baab8591" kind="function"><name>GetDimension</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLTypeInfo_1a48b5a372397bd35b55c9b23ef154780e" kind="function"><name>GetDimension</name></member>
@@ -14908,7 +14911,7 @@
     <member refid="namespaceSR__UTILS__NS_1a5c64b270d6b05cc9541b29139db26217" kind="function"><name>ForEach</name></member>
     <member refid="namespaceSR__UTILS__NS_1a36a155d3b16c5aa8d9588f0dbed3e645" kind="function"><name>ComputeConvexHull</name></member>
     <member refid="namespaceSR__UTILS__NS_1a568ca4d56af97898a1561009021c47ee" kind="function"><name>IndexedVerticesToNonIndexed</name></member>
-    <member refid="namespaceSR__UTILS__NS_1a788e954d291cd7770532f5544b5df092" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a861a149ac1ad5805c1c78f5ca9d01c60" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="namespaceSR__UTILS__NS_1ae22165290eb0649097efba553a1b9bf1" kind="function"><name>GetTextStyleColorByLogType</name></member>
     <member refid="namespaceSR__UTILS__NS_1a242d7f279667004c063392216b2b2122" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="namespaceSR__UTILS__NS_1a8168033d9114e8b998bf7d8a42f25c84" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
@@ -15396,6 +15399,8 @@
   <compound refid="SubmitState_8h" kind="file"><name>SubmitState.h</name>
   </compound>
   <compound refid="HTMLTest_8h" kind="file"><name>HTMLTest.h</name>
+  </compound>
+  <compound refid="SRSLTest_8h" kind="file"><name>SRSLTest.h</name>
   </compound>
   <compound refid="TestManager_8h" kind="file"><name>TestManager.h</name>
   </compound>
@@ -16337,6 +16342,7 @@
   <compound refid="VectorUtils_8h" kind="file"><name>VectorUtils.h</name>
   </compound>
   <compound refid="Debug_8h" kind="file"><name>Debug.h</name>
+    <member refid="Debug_8h_1a807a3c3d12b2bd59b3640b4d42f527f6" kind="define"><name>SR_LOG_TEST</name></member>
     <member refid="Debug_8h_1ac85651a297f41e6add773cf80b4015c6" kind="define"><name>SR_LOG</name></member>
     <member refid="Debug_8h_1ae182558019c87d29519af8a7d34727be" kind="define"><name>SR_INFO</name></member>
     <member refid="Debug_8h_1a8f29851a9ac187de95aa44177883d7ec" kind="define"><name>SR_WARN</name></member>

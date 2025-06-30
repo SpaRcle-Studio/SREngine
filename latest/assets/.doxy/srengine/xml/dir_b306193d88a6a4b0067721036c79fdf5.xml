@@ -4,6 +4,7 @@
     <compoundname>Engine/inc/Engine/Tests</compoundname>
     <innerfile refid="inc_2Engine_2Tests_2AtlasBuilderTest_8h">AtlasBuilderTest.h</innerfile>
     <innerfile refid="HTMLTest_8h">HTMLTest.h</innerfile>
+    <innerfile refid="SRSLTest_8h">SRSLTest.h</innerfile>
     <innerfile refid="TestManager_8h">TestManager.h</innerfile>
     <briefdescription>
     </briefdescription>

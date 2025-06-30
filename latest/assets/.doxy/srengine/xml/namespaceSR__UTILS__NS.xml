@@ -3165,10 +3165,10 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Common/Vertices.h" line="62" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Common/Vertices.h" bodystart="62" bodyend="72"/>
       </memberdef>
-      <memberdef kind="function" id="namespaceSR__UTILS__NS_1a788e954d291cd7770532f5544b5df092" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="namespaceSR__UTILS__NS_1a861a149ac1ad5805c1c78f5ca9d01c60" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_UTILS_NS::SR_ENUM_NS_CLASS_T</definition>
-        <argsstring>(DebugLogType, uint8_t, Log, Info, Debug, Graph, Shader, Script, System, Warn, Error, ScriptError, ScriptLog, Vulkan, VulkanLog, VulkanError, Assert, Success)</argsstring>
+        <argsstring>(DebugLogType, uint8_t, Log, Info, Debug, Graph, Shader, Script, System, Warn, Error, ScriptError, ScriptLog, Vulkan, VulkanLog, VulkanError, Assert, Success, Test)</argsstring>
         <name>SR_ENUM_NS_CLASS_T</name>
         <qualifiedname>SR_UTILS_NS::SR_ENUM_NS_CLASS_T</qualifiedname>
         <param>
@@ -3224,6 +3224,9 @@
         </param>
         <param>
           <type>Success</type>
+        </param>
+        <param>
+          <type>Test</type>
         </param>
         <briefdescription>
         </briefdescription>

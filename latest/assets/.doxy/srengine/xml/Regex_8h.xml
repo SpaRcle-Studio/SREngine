@@ -334,6 +334,10 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
+      <node id="9">
+        <label>Engine/inc/Engine/Tests/SRSLTest.h</label>
+        <link refid="SRSLTest_8h_source"/>
+      </node>
       <node id="5">
         <label>Engine/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h</label>
         <link refid="AssignExpander_8h_source"/>
@@ -345,15 +349,17 @@
       <node id="8">
         <label>Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h</label>
         <link refid="GLSLCodeGenerator_8h_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
       </node>
       <node id="7">
         <label>Engine/libs/Graphics/inc/Graphics/SRSL/ICodeGenerator.h</label>
         <link refid="ICodeGenerator_8h_source"/>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
         <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
         </childnode>
       </node>
       <node id="3">
@@ -368,7 +374,7 @@
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="12">
+      <node id="13">
         <label>Engine/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h</label>
         <link refid="LexicalAnalyzer_8h_source"/>
       </node>
@@ -381,40 +387,42 @@
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
-      </node>
-      <node id="11">
-        <label>Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h</label>
-        <link refid="MathExpression_8h_source"/>
-        <childnode refid="12" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
-      <node id="13">
+      <node id="12">
+        <label>Engine/libs/Graphics/inc/Graphics/SRSL/MathExpression.h</label>
+        <link refid="MathExpression_8h_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
         <label>Engine/libs/Graphics/inc/Graphics/SRSL/PreProcessor.h</label>
         <link refid="PreProcessor_8h_source"/>
       </node>
-      <node id="9">
+      <node id="10">
         <label>Engine/libs/Graphics/inc/Graphics/SRSL/PseudoCodeGenerator.h</label>
         <link refid="PseudoCodeGenerator_8h_source"/>
       </node>
-      <node id="14">
+      <node id="15">
         <label>Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h</label>
         <link refid="RefAnalyzer_8h_source"/>
-        <childnode refid="10" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
       </node>
-      <node id="10">
+      <node id="11">
         <label>Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h</label>
         <link refid="SRSL_2Shader_8h_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
       </node>
-      <node id="15">
+      <node id="16">
         <label>Engine/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h</label>
         <link refid="Graphics_2inc_2Graphics_2SRSL_2TypeInfo_8h_source"/>
       </node>

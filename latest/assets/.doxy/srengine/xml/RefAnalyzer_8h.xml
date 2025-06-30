@@ -975,6 +975,10 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
+      <node id="3">
+        <label>Engine/inc/Engine/Tests/SRSLTest.h</label>
+        <link refid="SRSLTest_8h_source"/>
+      </node>
       <node id="1">
         <label>Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h</label>
         <link refid="RefAnalyzer_8h"/>
@@ -984,6 +988,8 @@
       <node id="2">
         <label>Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h</label>
         <link refid="SRSL_2Shader_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
       </node>
     </invincdepgraph>
     <innerclass refid="structSR__SRSL__NS_1_1SRSLUseStack" prot="public">SR_SRSL_NS::SRSLUseStack</innerclass>
