@@ -17,15 +17,15 @@
 namespace SpaRcle::Scripts::Samples {
     namespace Detail {
         struct alignas(16) Vertex {
-             alignas(16) SR_MATH_NS::FVector3 position;
-             alignas(16) SR_MATH_NS::FVector3 normal;
-             alignas(16) SR_MATH_NS::IVector2 id;
+            alignas(16) SR_MATH_NS::FVector3 position;
+            alignas(16) SR_MATH_NS::FVector3 normal;
+            alignas(16) SR_MATH_NS::IVector2 id;
         };
 
         struct alignas(16) Triangle {
-             alignas(16) Vertex vertexC;
-             alignas(16) Vertex vertexB;
-             alignas(16) Vertex vertexA;
+            alignas(16)Vertex c;
+            alignas(16)Vertex b;
+            alignas(16)Vertex a;
         };
     }
 
@@ -40,6 +40,75 @@ namespace SpaRcle::Scripts::Samples {
             return true; // Allow execution in edit mode for testing purposes
         }
 
+        using DensityType = float;
+
+        std::vector<DensityType> GenerateCubeDensityField() {
+            const int sizeX = 64;
+            const int sizeY = 64;
+            const int sizeZ = 64;
+            const float voxelSize = 1.0f; // шаг сетки в мире
+            const float isoLevel = 0.0f;  // поверхность будет на расстоянии radius от центра
+            const float cubeSize = 32.0f;  // поверхность будет на расстоянии radius от центра
+
+            std::vector<DensityType> densities(sizeX * sizeY * sizeZ);
+
+            // Центр куба
+            glm::vec3 center = glm::vec3(sizeX, sizeY, sizeZ) * 0.5f * voxelSize;
+            glm::vec3 halfExtents = glm::vec3(cubeSize * 0.5f);
+
+            for (int z = 0; z < sizeZ; ++z) {
+                for (int y = 0; y < sizeY; ++y) {
+                    for (int x = 0; x < sizeX; ++x) {
+                        int index = z * sizeY * sizeX + y * sizeX + x;
+
+                        glm::vec3 worldPos = glm::vec3(x, y, z) * voxelSize;
+                        glm::vec3 d = glm::abs(worldPos - center) - halfExtents;
+
+                        // SDF куба: max(max(d.x, d.y), d.z)
+                        float outside = glm::max(glm::max(d.x, d.y), d.z);
+                        float sdf = -outside; // < 0 — снаружи, > 0 — внутри
+
+                        densities[index] = sdf;
+                    }
+                }
+            }
+
+            return densities;
+        }
+
+        std::vector<DensityType> GenerateSphereDensityField() {
+            /// Параметры сетки
+            const int sizeX = 64;
+            const int sizeY = 64;
+            const int sizeZ = 64;
+            const float voxelSize = 1.0f; // шаг сетки в мире
+            const float isoLevel = 0.0f;  // поверхность будет на расстоянии radius от центра
+
+            /// Центр и радиус сферы
+            glm::vec3 center = glm::vec3(sizeX, sizeY, sizeZ) * 0.5f * voxelSize;
+            float radius = 20.0f;
+
+            std::vector<DensityType> densities(sizeX * sizeY * sizeZ);
+
+            for (int z = 0; z < sizeZ; ++z) {
+                for (int y = 0; y < sizeY; ++y) {
+                    for (int x = 0; x < sizeX; ++x) {
+                        int index = z * sizeY * sizeX + y * sizeX + x;
+
+                        // Мировая позиция текущего вокселя
+                        glm::vec3 worldPos = glm::vec3(x, y, z) * voxelSize;
+
+                        // SDF сферы: (расстояние от центра - радиус)
+                        float d = radius - glm::distance(worldPos, center);
+
+                        densities[index] = d;
+                    }
+                }
+            }
+
+            return densities;
+        }
+
         void OnDisable() override {
             Finalize();
         }
@@ -49,9 +118,21 @@ namespace SpaRcle::Scripts::Samples {
 
             m_computeShader = SR_GTYPES_NS::ComputeShader::Load(shaderPath);
 
+            int numVoxelsPerAxis = numPointsPerAxis - 1;
+            int numVoxels = numVoxelsPerAxis * numVoxelsPerAxis * numVoxelsPerAxis;
+            int maxTriangleCount = numVoxels * 5;
+            int maxVertexCount = maxTriangleCount * 3;
+
             if (m_computeShader) {
-                constexpr uint64_t dataSize = sizeof(uint32_t) + 12 + sizeof(Detail::Triangle) * 64;
+                const uint64_t dataSize = sizeof(uint32_t) + 12 + sizeof(Detail::Triangle) * maxVertexCount;
                 SSBO = m_computeShader->GetPipeline()->AllocateSSBO(dataSize, SR_GRAPH_NS::SSBOUsage::Read);
+
+                /// density SSBO
+                auto&& densityData = GenerateCubeDensityField();
+                const uint64_t densityDataSize = densityData.size() * sizeof(DensityType);
+                densitySSBO = m_computeShader->GetPipeline()->AllocateSSBO(densityDataSize, SR_GRAPH_NS::SSBOUsage::Write);
+
+                m_computeShader->GetPipeline()->UpdateSSBO(densitySSBO, densityData.data(), densityDataSize);
             }
 
             Generate();
@@ -62,12 +143,18 @@ namespace SpaRcle::Scripts::Samples {
                 return;
             }
 
+            int numVoxelsPerAxis = numPointsPerAxis - 1;
+            if (numVoxelsPerAxis <= 0) {
+                return;
+            }
+
             uint32_t trianglesCount = 0;
             m_computeShader->GetPipeline()->UpdateSSBO(SSBO, &trianglesCount, sizeof(uint32_t));
 
             if (m_computeShader->BeginCompute()) {
                 m_computeShader->GetShader()->BindSSBO("triangles", SSBO);
-                m_computeShader->Dispatch(4, 1, 1);
+                m_computeShader->GetShader()->BindSSBO("densities", densitySSBO);
+                m_computeShader->Dispatch(numVoxelsPerAxis, numVoxelsPerAxis, numVoxelsPerAxis);
                 m_computeShader->EndCompute();
             }
 
@@ -87,13 +174,50 @@ namespace SpaRcle::Scripts::Samples {
             uint32_t trianglesCount = *reinterpret_cast<uint32_t*>(pData);
             Detail::Triangle* triangles = reinterpret_cast<Detail::Triangle*>(reinterpret_cast<uint8_t*>(pData) + sizeof(uint32_t) + 12);
 
+            std::vector<SR_GRAPH_NS::Vertices::StaticMeshVertex> nonIndexedVertices;
+
+            std::vector<SR_GRAPH_NS::Vertices::StaticMeshVertex> vertices;
+            std::unordered_map<SR_MATH_NS::IVector2, uint32_t> vertexMap;
+            std::vector<uint32_t> processedTriangles;
+
+            auto&& processVertex = [&](const Detail::Vertex& vertex) {
+                /*SR_DEBUG_LOG("Triangle: POS({:.2f}, {:.2f}, {:.2f}), NORM({:.2f}, {:.2f}, {:.2f}), ID({:d}, {:d})",
+                            vertex.position.x, vertex.position.y, vertex.position.z,
+                            vertex.normal.x, vertex.normal.y, vertex.normal.z,
+                            vertex.id.x, vertex.id.y);
+
+                auto&& pIt = vertexMap.find(vertex.id);
+                if (pIt == vertexMap.end()) {
+                    SR_GRAPH_NS::Vertices::StaticMeshVertex meshVertex;
+                    meshVertex.pos = vertex.position;
+                    meshVertex.norm = vertex.normal;
+                    vertices.emplace_back(meshVertex);
+
+                    pIt = vertexMap.emplace(vertex.id, static_cast<uint32_t>(vertices.size() - 1)).first;
+                }
+                else {
+                    processedTriangles.emplace_back(pIt->second);
+                }*/
+                SR_GRAPH_NS::Vertices::StaticMeshVertex meshVertex;
+                meshVertex.pos = vertex.position;
+                meshVertex.norm = vertex.normal;
+                nonIndexedVertices.emplace_back(meshVertex);
+            };
+
             for (uint32_t i = 0; i < trianglesCount; ++i) {
                 const Detail::Triangle& triangle = triangles[i];
 
-                SR_DEBUG_LOG("Triangle: A({:.2f}, {:.2f}, {:.2f}), B({:.2f}, {:.2f}, {:.2f}), C({:.2f}, {:.2f}, {:.2f})",
-                     triangle.vertexA.position.x, triangle.vertexA.position.y, triangle.vertexA.position.z,
-                     triangle.vertexB.position.x, triangle.vertexB.position.y, triangle.vertexB.position.z,
-                     triangle.vertexC.position.x, triangle.vertexC.position.y, triangle.vertexC.position.z);
+                processVertex(triangle.c);
+                processVertex(triangle.b);
+                processVertex(triangle.a);
+            }
+
+            if (gameObject) {
+                if (auto&& pProceduralMesh = gameObject->GetComponent<SR_GTYPES_NS::ProceduralMesh>()) {
+                    pProceduralMesh->SetVertices(nonIndexedVertices);
+                    //pProceduralMesh->SetIndexedVertices(vertices.data(), static_cast<uint32_t>(vertices.size()));
+                    //pProceduralMesh->SetIndices(processedTriangles.data(), static_cast<uint32_t>(processedTriangles.size()));
+                }
             }
 
             m_computeShader->GetPipeline()->UnMapSSBO(SSBO);
@@ -107,12 +231,20 @@ namespace SpaRcle::Scripts::Samples {
                 m_computeShader->GetPipeline()->FreeSSBO(&SSBO);
             }
 
+            if (densitySSBO != SR_ID_INVALID) {
+                m_computeShader->GetPipeline()->FreeSSBO(&densitySSBO);
+            }
+
             m_computeShader = nullptr;
         }
 
     private:
         SR_GTYPES_NS::ComputeShader::Ptr m_computeShader = nullptr;
         int32_t SSBO = SR_ID_INVALID;
+        int32_t densitySSBO = SR_ID_INVALID;
+
+        /// @property
+        uint32_t numPointsPerAxis = 10;
 
         /// @property
         SR_UTILS_NS::Path shaderPath = "Samples/MarchingCubes/MarchingCubes.srsl";

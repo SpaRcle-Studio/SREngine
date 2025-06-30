@@ -1255,7 +1255,7 @@ ddddцццゔぅヾボ
 						6-v:heightPolicy
 							7-s:Fixed
 						6-v:width
-							7-f:1652.000000
+							7-f:1653.000000
 						6-v:height
 							7-f:949.000000
 		2-k:i
@@ -1718,7 +1718,7 @@ ddddцццゔぅヾボ
 						6-v:heightPolicy
 							7-s:Fixed
 						6-v:width
-							7-f:1652.000000
+							7-f:1653.000000
 						6-v:height
 							7-f:949.000000
 						6-v:align
@@ -2661,7 +2661,7 @@ ddddцццゔぅヾボ
 						6-v:heightPolicy
 							7-s:Fixed
 						6-v:width
-							7-f:1652.000000
+							7-f:1653.000000
 						6-v:height
 							7-f:949.000000
 					5-v:containerAlign
@@ -3023,7 +3023,7 @@ ddddцццゔぅヾボ
 						6-v:heightPolicy
 							7-s:Fixed
 						6-v:width
-							7-f:1652.000000
+							7-f:1653.000000
 						6-v:height
 							7-f:949.000000
 					5-v:direction
@@ -3410,7 +3410,7 @@ ddddцццゔぅヾボ
 						6-v:heightPolicy
 							7-s:Fixed
 						6-v:width
-							7-f:1652.000000
+							7-f:1653.000000
 						6-v:height
 							7-f:949.000000
 					5-v:direction
@@ -3617,9 +3617,61 @@ ddddцццゔぅヾボ
 									9-v:behaviourName
 										10-s:MarchingCubes
 									9-o:data
+										10-v:numPointsPerAxis
+											11-i:16
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:ProceduralMesh
+								8-o:ptr
+									9-v:entityId
+										10-i:3006554398143624751
+									9-o:material
+										10-v:type
+											11-s:UniqueMaterial
+										10-o:ptr
+											11-o:data
+												12-v:type
+													13-s:MaterialData
+												12-o:ptr
+													13-o:default
+														14-v:shader
+															15-s:Samples/MarchingCubes/MeshShader.srsl
+														14-o:data
+															15-a:uniforms
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:color
+																		18-v:type
+																			19-s:Vec4
+																		18-o:value
+																			19-v:x
+																				20-f:1.000000
+																			19-v:y
+																				20-f:1.000000
+																			19-v:z
+																				20-f:1.000000
+																			19-v:w
+																				20-f:1.000000
+															15-a:samplers
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:diffuse
+																		18-v:type
+																			19-s:Sampler2D
+																		18-v:value
+																			19-s:Engine/Textures/default_improved.png
+													13-a:stages
 					5-v:name
 						6-s:MarchingCubes
 					5-o:transform
 						6-v:type
 							7-s:Transform3D
 						6-o:ptr
+							7-o:translation
+								8-v:y
+									9-f:7.172591
+								8-v:z
+									9-f:3.949847

@@ -15,11 +15,117 @@ struct Triangle {
 [[ssbo(triangles)]] uint count;
 [[ssbo(triangles)]] Triangle[] triangles;
 
-[[THREADS(2, 1, 1)]]
-void compute() {
-    uint index = atomicAdd(count, 1);
+[[ssbo(densities)]] float[] densities;
 
-    triangles[index].a = Vertex(vec3(index + 1, 0.0, 0.0), vec3(0.0, 1.0, 0.0), ivec2(0, 0));
-    triangles[index].b = Vertex(vec3(0.0, index + 1, 0.0), vec3(0.0, 1.0, 0.0), ivec2(0, 0));
-    triangles[index].c = Vertex(vec3(0.0, 0.0, index + 1), vec3(0.0, 1.0, 0.0), ivec2(0, 0));
+#include <Samples/MarchingCubes/MarchTables.srsl>
+
+[[const]] int densityCountAxis = 64;
+[[const]] float isoLevel = 0.0;
+[[const]] float voxelSize = 0.5;
+[[const]] int numPointsPerAxis = 64;
+
+vec3 coordToWorld(ivec3 coord) {
+    float planetSize = 1.0;
+    int textureSize = 2;
+	return (coord / (textureSize - 1.0) - 0.5) * planetSize;
 }
+
+float GetDensity(ivec3 pos) {
+    int sizeX = densityCountAxis;
+    int sizeY = densityCountAxis;
+    int index = pos.z * sizeY * sizeX + pos.y * sizeX + pos.x;
+    return densities[index];
+}
+
+vec3 VertexInterp(float iso, vec3 p1, vec3 p2, float valp1, float valp2) {
+    float t = (iso - valp1) / (valp2 - valp1);
+    t = clamp(t, 0.0, 1.0); // на всякий случай
+    return mix(p1, p2, t);
+}
+
+[[THREADS(8, 8, 8)]]
+void compute() {
+    ivec3 voxelPos = ivec3(GLOBAL_INVOCATION_ID.xyz);
+
+    int numCubesPerAxis = numPointsPerAxis - 1;
+    if (voxelPos.x >= numCubesPerAxis || voxelPos.y >= numCubesPerAxis || voxelPos.z >= numCubesPerAxis) {
+        return;
+    }
+
+	ivec3 cornerCoords[8];
+	cornerCoords[0] = voxelPos + cornerOffsets_official[0];
+	cornerCoords[1] = voxelPos + cornerOffsets_official[1];
+	cornerCoords[2] = voxelPos + cornerOffsets_official[2];
+	cornerCoords[3] = voxelPos + cornerOffsets_official[3];
+	cornerCoords[4] = voxelPos + cornerOffsets_official[4];
+	cornerCoords[5] = voxelPos + cornerOffsets_official[5];
+	cornerCoords[6] = voxelPos + cornerOffsets_official[6];
+	cornerCoords[7] = voxelPos + cornerOffsets_official[7];
+
+    int cubeIndex = 0;
+    for (int i = 0; i < 8; i ++) {
+        if (GetDensity(cornerCoords[i]) < isoLevel) {
+            cubeIndex |= (1 << i);
+        }
+    }
+
+    //int edgeFlags = edgeTable[cubeIndex];
+    //if (edgeFlags == 0) {
+    //    return;
+    //}
+
+    for (int i = 0; i < 15; i += 3) {
+        int edgeIndexA = triangulation_official[cubeIndex][i];
+
+        if (edgeIndexA == -1) {
+            break;
+        }
+
+        int a0 = cornerIndexAFromEdge[edgeIndexA];
+        int a1 = cornerIndexBFromEdge[edgeIndexA];
+
+        int edgeIndexB = triangulation_official[cubeIndex][i + 1];
+        int b0 = cornerIndexAFromEdge[edgeIndexB];
+        int b1 = cornerIndexBFromEdge[edgeIndexB];
+
+        int edgeIndexC = triangulation_official[cubeIndex][i + 2];
+        int c0 = cornerIndexAFromEdge[edgeIndexC];
+        int c1 = cornerIndexBFromEdge[edgeIndexC];
+
+        uint index = atomicAdd(count, 1);
+
+        float valA0 = GetDensity(cornerCoords[a0]);
+        float valA1 = GetDensity(cornerCoords[a1]);
+        vec3 pA0 = vec3(cornerCoords[a0]) * voxelSize;
+        vec3 pA1 = vec3(cornerCoords[a1]) * voxelSize;
+
+        float valB0 = GetDensity(cornerCoords[b0]);
+        float valB1 = GetDensity(cornerCoords[b1]);
+        vec3 pB0 = vec3(cornerCoords[b0]) * voxelSize;
+        vec3 pB1 = vec3(cornerCoords[b1]) * voxelSize;
+
+        float valC0 = GetDensity(cornerCoords[c0]);
+        float valC1 = GetDensity(cornerCoords[c1]);
+        vec3 pC0 = vec3(cornerCoords[c0]) * voxelSize;
+        vec3 pC1 = vec3(cornerCoords[c1]) * voxelSize;
+
+        vec3 vA = VertexInterp(isoLevel, pA0, pA1, valA0, valA1);
+        vec3 vB = VertexInterp(isoLevel, pB0, pB1, valB0, valB1);
+        vec3 vC = VertexInterp(isoLevel, pC0, pC1, valC0, valC1);
+
+        triangles[index].c = Vertex(vA, vec3(0.0, 1.0, 1.0), ivec2(0, 0));
+        triangles[index].b = Vertex(vB, vec3(0.0, 1.0, 1.0), ivec2(0, 0));
+        triangles[index].a = Vertex(vC, vec3(0.0, 1.0, 1.0), ivec2(0, 0));
+    }
+}
+
+   //triangles[index].a = createVertex(cornerCoords[c0], cornerCoords[c1]);
+    //triangles[index].b = createVertex(cornerCoords[b0], cornerCoords[b1]);
+    //triangles[index].c = createVertex(cornerCoords[a0], cornerCoords[a1]);
+
+
+        /*
+
+        triangles[index].c = Vertex(vec3(cornerCoords[c0] + cornerCoords[c1]) * 0.5, vec3(0.0, 1.0, 1.0), ivec2(0, 0));
+        triangles[index].b = Vertex(vec3(cornerCoords[b0] + cornerCoords[b1]) * 0.5, vec3(0.0, 1.0, 1.0), ivec2(0, 0));
+        triangles[index].a = Vertex(vec3(cornerCoords[a0] + cornerCoords[a1]) * 0.5, vec3(0.0, 1.0, 1.0), ivec2(0, 0));*/
