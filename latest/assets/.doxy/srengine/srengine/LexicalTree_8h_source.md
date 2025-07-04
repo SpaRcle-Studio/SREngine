@@ -258,6 +258,15 @@ namespace SR_SRSL_NS {
         SRSLLexicalTree* pLexicalTree = nullptr;
     };
 
+    class SRSLWhileStatement : public SRSLLexicalUnit {
+    public:
+        SRSLWhileStatement() = default;
+        ~SRSLWhileStatement() override;
+
+        SRSLExpr* pCondition = nullptr;
+        SRSLLexicalTree* pLexicalTree = nullptr;
+    };
+
     class SRSLStructureStatement : public SRSLLexicalUnit {
     public:
         SRSLStructureStatement() = default;

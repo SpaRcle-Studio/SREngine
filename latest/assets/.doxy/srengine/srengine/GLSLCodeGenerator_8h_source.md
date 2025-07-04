@@ -59,6 +59,7 @@ namespace SR_SRSL_NS {
         SR_NODISCARD std::string GenerateType(SRSLExpr* pExpr, int32_t deep) const;
         SR_NODISCARD std::string GenerateName(SRSLExpr* pExpr, int32_t deep) const;
 
+        SR_NODISCARD std::string GenerateWhileStatement(SRSLWhileStatement* pWhileStatement, int32_t deep) const;
         SR_NODISCARD std::string GenerateForStatement(SRSLForStatement* pForStatement, int32_t deep) const;
         SR_NODISCARD std::string GenerateIfStatement(SRSLIfStatement* pIfStatement, int32_t deep) const;
         SR_NODISCARD std::string GenerateExpression(SRSLExpr* pExpr, int32_t deep) const;

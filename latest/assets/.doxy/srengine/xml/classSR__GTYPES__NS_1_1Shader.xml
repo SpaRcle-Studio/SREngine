@@ -524,9 +524,9 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Types/Shader.h" line="55" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1aabf2c78dc169167ba3736ae4bf467fe7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_GTYPES_NS::Shader::AttachDescriptorSets</definition>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a083c1aa4a853226c9f999efe1b7969e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::Shader::AttachDescriptorSets</definition>
         <argsstring>()</argsstring>
         <name>AttachDescriptorSets</name>
         <qualifiedname>SR_GTYPES_NS::Shader::AttachDescriptorSets</qualifiedname>
@@ -1553,7 +1553,7 @@
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>AddDependency</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1abcf6bc4fde8bd87a0f1d72d0183af0cf" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>AddUsePoint</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Shader_1aabf2c78dc169167ba3736ae4bf467fe7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>AttachDescriptorSets</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Shader_1a083c1aa4a853226c9f999efe1b7969e8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>AttachDescriptorSets</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1a506e578c684c5556fb0f3c6013c687d6" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>BeginSharedUBO</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1ac99a51be8a8f1e3b903a058848f04233" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>BindSSBO</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a459ed22e0064b69639129562ea9aad38" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>Broadcast</name></member>

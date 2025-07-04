@@ -3601,6 +3601,8 @@
     <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a6907fccf74adfb1a5d447bca496ac405" kind="function"><name>data</name></member>
     <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a3f0eeb18fe72c27fca75224560556f22" kind="function"><name>operator[]</name></member>
     <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1ab4594a718599bee211d00c61762f2b66" kind="function"><name>operator[]</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a0a73c9b19769a5f420fef93045009355" kind="function"><name>FillZero</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a933f8b40601509bacae46379046d5578" kind="function"><name>FillInt</name></member>
     <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a675c0bb34ad6b2b2056ab091a582b2a2" kind="function"><name>clear</name></member>
     <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a5c183590e3e938f8d04c1bd8228f300d" kind="function"><name>shrink_to_fit</name></member>
     <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a49e62e6f0183beef5b9bc28de2ab7cdb" kind="function"><name>push_back</name></member>
@@ -4293,6 +4295,7 @@
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a9030fd38f461fd824ae8f9f8cbe9cb7f" kind="function"><name>GenerateStructure</name></member>
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ad779109cd8002bd3398f65e82e6a6167" kind="function"><name>GenerateType</name></member>
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a83e3d11a83598fa9c3c7ca2f6dfc0c23" kind="function"><name>GenerateName</name></member>
+    <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1aa122658a3af1b6a9af5ddf718c852238" kind="function"><name>GenerateWhileStatement</name></member>
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a5dfc09d4792c37e9aa48ddd0945e6433" kind="function"><name>GenerateForStatement</name></member>
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a1e0220c5c51af8ea110e51b95c38a8c7" kind="function"><name>GenerateIfStatement</name></member>
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1aec64664086590a9263a9dcbd04c4e03a" kind="function"><name>GenerateExpression</name></member>
@@ -9999,7 +10002,7 @@
     <member refid="classSR__GTYPES__NS_1_1Shader_1a791831d081b16045a7d5d4facc216f8c" kind="function"><name>Dispatch</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a066553d82af8251a7b41b45e85e2ae14" kind="function"><name>Dispatch</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a7bd3b986354c80acd5aadde8777dfa6a" kind="function"><name>StartWatch</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Shader_1aabf2c78dc169167ba3736ae4bf467fe7" kind="function"><name>AttachDescriptorSets</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Shader_1a083c1aa4a853226c9f999efe1b7969e8" kind="function"><name>AttachDescriptorSets</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a506e578c684c5556fb0f3c6013c687d6" kind="function"><name>BeginSharedUBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1abfc207502ce6c9b358f00fd04ca39873" kind="function"><name>EndSharedUBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a4fc66490b2ead167a963e198d2b0bc36" kind="function"><name>ResetUBOToDefaults</name></member>
@@ -11038,6 +11041,9 @@
     <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a9440e09ea12e628526dbda4f34341e0b" kind="enumvalue"><name>ForStatementCondition</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a80db93aa763f91a82ab50c6ef5dd9ba3" kind="enumvalue"><name>ForStatementExpression</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a95497c2ef3b2eb59e7572e7363f758e2" kind="enumvalue"><name>ForStatementBody</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029ab29d5f9d91f4492a318586100a2a00d4" kind="enumvalue"><name>WhileStatement</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a7a1714d5becae757a1d94e55d08d437e" kind="enumvalue"><name>WhileStatementCondition</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a092a125d762af17d36639bc5b49a0db0" kind="enumvalue"><name>WhileStatementBody</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a20f8b2efb809cd9be3df86e9145d1ac7" kind="enumvalue"><name>StructureStatement</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a509c7551f6ec2906dae3caa6a6e18485" kind="enumvalue"><name>StructureStatementBody</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a1c61cd60e8dc58cb18128ac5e6dd1b28" kind="variable"><name>m_lexicalTree</name></member>
@@ -11344,6 +11350,12 @@
     <member refid="classSR__SRSL__NS_1_1SRSLVariable_1ad721df68d132442d74143bced44a131d" kind="function"><name>ToString</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLVariable_1adf34f6615cea4aca57c62f476e841482" kind="function"><name>GetType</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLVariable_1ab93b8a454cda48d4e8767dcb39111103" kind="function"><name>GetName</name></member>
+  </compound>
+  <compound refid="classSR__SRSL__NS_1_1SRSLWhileStatement" kind="class"><name>SR_SRSL_NS::SRSLWhileStatement</name>
+    <member refid="classSR__SRSL__NS_1_1SRSLWhileStatement_1ac401968b1d499cf2867948df25548fe9" kind="variable"><name>pCondition</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLWhileStatement_1a8ab3a64f31c7b659f0bc3364119519f8" kind="variable"><name>pLexicalTree</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLWhileStatement_1a3c5a8890ede2931251c1dd1ce1b57b1c" kind="function"><name>SRSLWhileStatement</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLWhileStatement_1aca9fa9dd20016aa37b876ec6ff1ff351" kind="function"><name>~SRSLWhileStatement</name></member>
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1SRTextureCreateInfo" kind="struct"><name>SR_GRAPH_NS::SRTextureCreateInfo</name>
     <member refid="structSR__GRAPH__NS_1_1SRTextureCreateInfo_1a461c2dd8f59b3cb2bd7e510879647223" kind="variable"><name>pData</name></member>

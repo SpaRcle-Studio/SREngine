@@ -62,6 +62,8 @@
 |   | [**FastMemoryArray**](#function-fastmemoryarray-24) (const [**FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md) & other) <br> |
 |   | [**FastMemoryArray**](#function-fastmemoryarray-34) ([**FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md) && other) noexcept<br> |
 |   | [**FastMemoryArray**](#function-fastmemoryarray-44) (const std::vector&lt; T &gt; & other) <br> |
+|  void | [**FillInt**](#function-fillint) (int32\_t value) noexcept<br> |
+|  void | [**FillZero**](#function-fillzero) () noexcept<br> |
 |  SR\_NODISCARD SizeType | [**capacity**](#function-capacity) () noexcept const<br> |
 |  void | [**clear**](#function-clear) () noexcept<br> |
 |  SR\_NODISCARD T \* | [**data**](#function-data-12) () noexcept<br> |
@@ -175,6 +177,34 @@ inline SR_HTYPES_NS::FastMemoryArray::FastMemoryArray (
 inline SR_HTYPES_NS::FastMemoryArray::FastMemoryArray (
     const std::vector< T > & other
 ) 
+```
+
+
+
+
+<hr>
+
+
+
+### function FillInt 
+
+```C++
+inline void SR_HTYPES_NS::FastMemoryArray::FillInt (
+    int32_t value
+) noexcept
+```
+
+
+
+
+<hr>
+
+
+
+### function FillZero 
+
+```C++
+inline void SR_HTYPES_NS::FastMemoryArray::FillZero () noexcept
 ```
 
 

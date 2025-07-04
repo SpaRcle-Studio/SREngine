@@ -60,6 +60,7 @@
 | struct | [**SRSLUniformBlock**](structSR__SRSL__NS_1_1SRSLUniformBlock.md) <br> |
 | struct | [**SRSLUseStack**](structSR__SRSL__NS_1_1SRSLUseStack.md) <br> |
 | class | [**SRSLVariable**](classSR__SRSL__NS_1_1SRSLVariable.md) <br> |
+| class | [**SRSLWhileStatement**](classSR__SRSL__NS_1_1SRSLWhileStatement.md) <br> |
 
 
 ## Public Types

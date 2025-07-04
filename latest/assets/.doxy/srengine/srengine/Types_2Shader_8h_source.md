@@ -64,7 +64,7 @@ namespace SR_GTYPES_NS {
         void Dispatch();
         void StartWatch() override;
 
-        void AttachDescriptorSets();
+        bool AttachDescriptorSets();
 
         bool BeginSharedUBO();
         void EndSharedUBO();

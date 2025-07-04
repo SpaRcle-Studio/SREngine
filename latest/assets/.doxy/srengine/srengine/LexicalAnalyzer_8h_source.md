@@ -25,6 +25,7 @@ namespace SR_SRSL_NS {
             Decorators, Decorator, DecoratorArgs,
             Expression, Variable, Function, FunctionArgs, FunctionBody, IfStatement, IfStatementBody,
             ForStatement, ForStatementVariable, ForStatementCondition, ForStatementExpression, ForStatementBody,
+            WhileStatement, WhileStatementCondition, WhileStatementBody,
             StructureStatement, StructureStatementBody,
         };
     public:

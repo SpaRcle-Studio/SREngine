@@ -154,7 +154,7 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**AttachDescriptorSets**](#function-attachdescriptorsets) () <br> |
+|  bool | [**AttachDescriptorSets**](#function-attachdescriptorsets) () <br> |
 |  bool | [**BeginSharedUBO**](#function-beginsharedubo) () <br> |
 |  void | [**BindSSBO**](#function-bindssbo) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name, uint32\_t ssbo) noexcept<br> |
 |  void | [**Dispatch**](#function-dispatch-12) (uint32\_t x, uint32\_t y, uint32\_t z) <br> |
@@ -511,7 +511,7 @@ using SR_GTYPES_NS::Shader::Ptr =  Shader*;
 ### function AttachDescriptorSets 
 
 ```C++
-void SR_GTYPES_NS::Shader::AttachDescriptorSets () 
+bool SR_GTYPES_NS::Shader::AttachDescriptorSets () 
 ```
 
 

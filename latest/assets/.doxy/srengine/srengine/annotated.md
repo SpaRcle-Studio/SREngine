@@ -737,6 +737,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
         * **struct** [**Field**](structSR__SRSL__NS_1_1SRSLUniformBlock_1_1Field.md)     
     * **struct** [**SRSLUseStack**](structSR__SRSL__NS_1_1SRSLUseStack.md)     
     * **class** [**SRSLVariable**](classSR__SRSL__NS_1_1SRSLVariable.md)     
+    * **class** [**SRSLWhileStatement**](classSR__SRSL__NS_1_1SRSLWhileStatement.md)     
 * **namespace** [**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md)     
     * **namespace** [**detail**](namespaceSR__TYPES__NS_1_1detail.md)     
         * **struct** [**allocator\_dummy\_unsafe**](structSR__TYPES__NS_1_1detail_1_1allocator__dummy__unsafe.md)     

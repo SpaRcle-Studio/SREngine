@@ -33,6 +33,7 @@
     <innerclass refid="structSR__SRSL__NS_1_1SRSLUniformBlock" prot="public">SR_SRSL_NS::SRSLUniformBlock</innerclass>
     <innerclass refid="structSR__SRSL__NS_1_1SRSLUseStack" prot="public">SR_SRSL_NS::SRSLUseStack</innerclass>
     <innerclass refid="classSR__SRSL__NS_1_1SRSLVariable" prot="public">SR_SRSL_NS::SRSLVariable</innerclass>
+    <innerclass refid="classSR__SRSL__NS_1_1SRSLWhileStatement" prot="public">SR_SRSL_NS::SRSLWhileStatement</innerclass>
     <sectiondef kind="enum">
       <memberdef kind="enum" id="ShaderType_8h_1ad6fe2e63423a355f94758e42d4ed2bf4" prot="public" static="no" strong="no">
         <type></type>
