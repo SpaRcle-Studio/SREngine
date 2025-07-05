@@ -299,7 +299,7 @@
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (ShaderBindResult, uint8\_t, Failed=0, Success=1, Duplicated, ReAllocated) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (ShaderStage, uint8\_t, Unknown, Vertex, Fragment, Geometry, Tesselation, Compute, Raygen, Intersection, HitClosest, HitAny, MissPrimary, MissSecondary) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (PipelineType, uint8\_t, Unknown, OpenGL, Vulkan, DirectX9, DirectX10, DirectX11, DirectX12) <br> |
-|   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (SSBOUsage, uint8\_t, Unknown, Read, Write, ReadWrite) <br> |
+|   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (SSBOUsage, uint8\_t, Unknown, GPUOnly, CPUOnly, CPUToGPU, GPUToCPU, CPUCopy, GPULazyAlloc, Auto, AutoPreferDevice, AutoPreferHost) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (ImageLoadFormat, uint8\_t, Unknown, Grey, GreyAlpha, RGB, RGBA) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (Antialiasing, uint8\_t, None, Samples2, Samples4, Samples8, Samples16, Samples32) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (RCUpdateQueueState, uint8\_t, Begin=0, Framebuffers, Shaders, Textures, Techniques, Skyboxes, End) <br> |
@@ -1826,9 +1826,15 @@ SR_GRAPH_NS::SR_ENUM_NS_CLASS_T (
     SSBOUsage,
     uint8_t,
     Unknown,
-    Read,
-    Write,
-    ReadWrite
+    GPUOnly,
+    CPUOnly,
+    CPUToGPU,
+    GPUToCPU,
+    CPUCopy,
+    GPULazyAlloc,
+    Auto,
+    AutoPreferDevice,
+    AutoPreferHost
 ) 
 ```
 

@@ -1984,10 +1984,10 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineType.h" line="15" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineType.h" declline="15" declcolumn="5"/>
       </memberdef>
-      <memberdef kind="function" id="TextureHelper_8h_1ad707112df97c2b5ce625e4ed30ff3c0c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="TextureHelper_8h_1a12ecf70fc9e33e404c59d24ddc4f6f1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_GRAPH_NS::SR_ENUM_NS_CLASS_T</definition>
-        <argsstring>(SSBOUsage, uint8_t, Unknown, Read, Write, ReadWrite)</argsstring>
+        <argsstring>(SSBOUsage, uint8_t, Unknown, GPUOnly, CPUOnly, CPUToGPU, GPUToCPU, CPUCopy, GPULazyAlloc, Auto, AutoPreferDevice, AutoPreferHost)</argsstring>
         <name>SR_ENUM_NS_CLASS_T</name>
         <qualifiedname>SR_GRAPH_NS::SR_ENUM_NS_CLASS_T</qualifiedname>
         <param>
@@ -2000,13 +2000,31 @@
           <type>Unknown</type>
         </param>
         <param>
-          <type>Read</type>
+          <type>GPUOnly</type>
         </param>
         <param>
-          <type>Write</type>
+          <type>CPUOnly</type>
         </param>
         <param>
-          <type>ReadWrite</type>
+          <type>CPUToGPU</type>
+        </param>
+        <param>
+          <type>GPUToCPU</type>
+        </param>
+        <param>
+          <type>CPUCopy</type>
+        </param>
+        <param>
+          <type>GPULazyAlloc</type>
+        </param>
+        <param>
+          <type>Auto</type>
+        </param>
+        <param>
+          <type>AutoPreferDevice</type>
+        </param>
+        <param>
+          <type>AutoPreferHost</type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -2049,7 +2067,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="19" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="19" declcolumn="5"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="23" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="23" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1ab27f4ce893ea4d1ecbc2fbf91a50db3d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -2087,7 +2105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="34" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="34" declcolumn="5"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="38" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="38" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1a5dc6057f12c6a0204ed4acf651d2f991" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -2119,7 +2137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="43" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="43" declcolumn="5"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="47" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="47" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1ae51fbd6a4f5459a81414c019aef879e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -2208,7 +2226,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="47" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="47" declcolumn="5"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="51" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="51" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1aff0279fccad73cdb7d0637489c1db642" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_INLINE uint8_t</type>
@@ -2226,7 +2244,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="82" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" bodystart="82" bodyend="110"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="86" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" bodystart="86" bodyend="114"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1ad3467be90083ecbc5c0f979ce26feae8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -2271,7 +2289,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="132" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="132" declcolumn="5"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="136" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="136" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1aff490b109f1ced35ad0f6b7bdd1566fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -2320,7 +2338,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="137" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="137" declcolumn="5"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="141" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="141" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1ae4837a8957cc25acfe80fd4902e69a52" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_INLINE uint32_t</type>
@@ -2338,7 +2356,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="141" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" bodystart="141" bodyend="146"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="145" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" bodystart="145" bodyend="150"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1a74d5453e8d6bb6cd1a3f55f610889b06" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_INLINE auto</type>
@@ -2360,7 +2378,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="148" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" bodystart="148" bodyend="150"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="152" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" bodystart="152" bodyend="154"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1af75e9b5b3b6562f4f77209da25400e5e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_INLINE uint8_t *</type>
@@ -2394,7 +2412,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="152" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" bodystart="152" bodyend="161"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="156" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" bodystart="156" bodyend="165"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1a56be377189a3a986a290a0648d34d23b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -2412,7 +2430,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="163" column="14" declfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="163" declcolumn="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="167" column="14" declfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="167" declcolumn="14"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1a0fec1eb029f4de8cb1c6aab6e58a93f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint8_t *</type>
@@ -2442,7 +2460,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="165" column="13" declfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="165" declcolumn="13"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="169" column="13" declfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="169" declcolumn="13"/>
       </memberdef>
       <memberdef kind="function" id="MeshCluster_8h_1a446fcf34b08aaeaba975841b6192a8d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>

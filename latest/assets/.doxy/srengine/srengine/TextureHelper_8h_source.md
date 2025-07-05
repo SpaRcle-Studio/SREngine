@@ -23,7 +23,11 @@
 namespace SR_GRAPH_NS {
     SR_ENUM_NS_CLASS_T(SSBOUsage, uint8_t,
         Unknown,
-        Read, Write, ReadWrite
+        GPUOnly, CPUOnly,
+        CPUToGPU, GPUToCPU,
+        CPUCopy,
+        GPULazyAlloc,
+        Auto, AutoPreferDevice, AutoPreferHost
     );
 
     SR_ENUM_NS_CLASS_T(ImageLoadFormat, uint8_t,

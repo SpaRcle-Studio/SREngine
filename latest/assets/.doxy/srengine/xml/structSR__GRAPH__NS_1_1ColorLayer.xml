@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="113" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" bodystart="113" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="117" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" bodystart="117" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ColorLayer_1a7a926113461743bbc2d87cecc47e9502" prot="public" static="no" mutable="no">
         <type>ImageFormat</type>
@@ -31,14 +31,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="114" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" bodystart="114" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="118" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" bodystart="118" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="112" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" bodystart="112" bodyend="115"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="116" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" bodystart="116" bodyend="119"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1ColorLayer_1a7a926113461743bbc2d87cecc47e9502" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ColorLayer</scope><name>format</name></member>
       <member refid="structSR__GRAPH__NS_1_1ColorLayer_1a6dc31b60faa8ebdc802cd7e60711f2a6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ColorLayer</scope><name>texture</name></member>

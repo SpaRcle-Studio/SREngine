@@ -14223,7 +14223,7 @@
     <member refid="IShaderProgram_8h_1ac3031f55a2a364bd59ffcbedc6f9d826" kind="function"><name>InverseCullMode</name></member>
     <member refid="IShaderProgram_8h_1a07c2847887f47e9af9a8f0b8a92f576f" kind="function"><name>GetBindingType</name></member>
     <member refid="PipelineType_8h_1a5542e32605e29ec0021ab8962a295b08" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
-    <member refid="TextureHelper_8h_1ad707112df97c2b5ce625e4ed30ff3c0c" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
+    <member refid="TextureHelper_8h_1a12ecf70fc9e33e404c59d24ddc4f6f1c" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="TextureHelper_8h_1ac720046f7e048616d098444d910e693d" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="TextureHelper_8h_1ab27f4ce893ea4d1ecbc2fbf91a50db3d" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="TextureHelper_8h_1a5dc6057f12c6a0204ed4acf651d2f991" kind="function"><name>SR_ENUM_NS_CLASS</name></member>
