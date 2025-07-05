@@ -1255,7 +1255,7 @@ ddddцццゔぅヾボ
 						6-v:heightPolicy
 							7-s:Fixed
 						6-v:width
-							7-f:1653.000000
+							7-f:1633.000000
 						6-v:height
 							7-f:949.000000
 		2-k:i
@@ -1718,7 +1718,7 @@ ddddцццゔぅヾボ
 						6-v:heightPolicy
 							7-s:Fixed
 						6-v:width
-							7-f:1653.000000
+							7-f:1633.000000
 						6-v:height
 							7-f:949.000000
 						6-v:align
@@ -2661,7 +2661,7 @@ ddddцццゔぅヾボ
 						6-v:heightPolicy
 							7-s:Fixed
 						6-v:width
-							7-f:1653.000000
+							7-f:1633.000000
 						6-v:height
 							7-f:949.000000
 					5-v:containerAlign
@@ -3023,7 +3023,7 @@ ddddцццゔぅヾボ
 						6-v:heightPolicy
 							7-s:Fixed
 						6-v:width
-							7-f:1653.000000
+							7-f:1633.000000
 						6-v:height
 							7-f:949.000000
 					5-v:direction
@@ -3410,7 +3410,7 @@ ddddцццゔぅヾボ
 						6-v:heightPolicy
 							7-s:Fixed
 						6-v:width
-							7-f:1653.000000
+							7-f:1633.000000
 						6-v:height
 							7-f:949.000000
 					5-v:direction
@@ -3618,7 +3618,19 @@ ddddцццゔぅヾボ
 										10-s:MarchingCubes
 									9-o:data
 										10-v:numPointsPerAxis
-											11-i:16
+											11-i:32
+										10-v:vertexHashTableSize
+											11-i:2097152
+										10-v:noiseScale
+											11-f:6.060000
+										10-v:seed
+											11-i:62
+										10-v:geometrySize
+											11-f:2.200000
+										10-v:generateEveryFrame
+											11-b:true
+										10-v:shape
+											11-s:PerlinNoise
 						6-k:i
 							7-o:d
 								8-v:type
