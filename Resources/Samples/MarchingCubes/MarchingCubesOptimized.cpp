@@ -120,16 +120,16 @@ namespace SpaRcle::Scripts::Samples {
             int maxVertexCount = maxTriangleCount * 3;
 
             if (m_computeShader) {
-                vertexCacheSSBO = m_computeShader->GetPipeline()->AllocateSSBO(3 * densityCountAxis * densityCountAxis * densityCountAxis * sizeof(uint32_t), SR_GRAPH_NS::SSBOUsage::ReadWrite);
+                vertexCacheSSBO = m_computeShader->GetPipeline()->AllocateSSBO(3 * densityCountAxis * densityCountAxis * densityCountAxis * sizeof(uint32_t), SR_GRAPH_NS::SSBOUsage::CPUToGPU);
 
-                verticesSSBO = m_computeShader->GetPipeline()->AllocateSSBO(maxVertexCount * sizeof(Vertex) + sizeof(uint32_t) * 4, SR_GRAPH_NS::SSBOUsage::Read);
-                indicesSSBO = m_computeShader->GetPipeline()->AllocateSSBO(maxTriangleCount * sizeof(uint32_t) + sizeof(uint32_t), SR_GRAPH_NS::SSBOUsage::Read);
+                verticesSSBO = m_computeShader->GetPipeline()->AllocateSSBO(maxVertexCount * sizeof(Vertex) + sizeof(uint32_t) * 4, SR_GRAPH_NS::SSBOUsage::GPUToCPU);
+                indicesSSBO = m_computeShader->GetPipeline()->AllocateSSBO(maxTriangleCount * sizeof(uint32_t) + sizeof(uint32_t), SR_GRAPH_NS::SSBOUsage::GPUToCPU);
 
                 /// density SSBO
                 densities = GenerateSphereDensityField();
                 //densities = GenerateCubeDensityField();
                 const uint64_t densityDataSize = densities.size() * sizeof(DensityType);
-                densitySSBO = m_computeShader->GetPipeline()->AllocateSSBO(densityDataSize, SR_GRAPH_NS::SSBOUsage::Write);
+                densitySSBO = m_computeShader->GetPipeline()->AllocateSSBO(densityDataSize, SR_GRAPH_NS::SSBOUsage::CPUToGPU);
 
                 m_computeShader->GetPipeline()->UpdateSSBO(densitySSBO, densities.data(), densityDataSize);
             }

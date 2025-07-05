@@ -11,9 +11,9 @@ struct Vertex {
 [[ssbo(vertices)]] uint vertexCount;
 [[ssbo(vertices)]] Vertex[] vertices;
 
-[[ssbo(vertexKeys)]] uint[] vertexKeys;
-[[ssbo(vertexValues)]] int[] vertexValues;
-[[ssbo(hashTable)]] int[] hashTable;
+//[[ssbo(vertexKeys)]] uint[] vertexKeys;
+//[[ssbo(vertexValues)]] int[] vertexValues;
+[[ssbo(hashTable)]] uint[] hashTable;
 
 [[ssbo(indices)]] uint indicesCount;
 [[ssbo(indices)]] uint[] indices;
@@ -88,48 +88,12 @@ Vertex createVertex(ivec3 coordA, ivec3 coordB) {
     vec3 normalB = calculateNormal(coordB);
     vec3 normal = normalize(normalA + t * (normalB - normalA));
 
-    //int indexA = indexFromCoord(coordA);
-    //int indexB = indexFromCoord(coordB);
-
     Vertex vertex;
     vertex.position = position;
     vertex.normal = normal;
-    //vertex.id = ivec2(hash3D(min(coordA, coordB)), computeEdgeCode(coordA, coordB));
 
     return vertex;
 }
-
-//void lockMutex() {
-//    while (atomicCompSwap(mutex, 0u, 1u) != 0u) { }
-//}
-//
-//void unlockMutex() {
-//    atomicExchange(mutex, 0u);
-//}
-
-/*int getOrInsertVertex(ivec3 coordA, ivec3 coordB) {
-    ivec2 id = ivec2(hash3D(min(coordA, coordB)), computeEdgeCode(coordA, coordB));
-    uint h = hashVertexID(id);
-    uint key = packID(id);
-
-    for (uint i = 0u; i < vertexHashTableSize; ++i) {
-        uint idx = (h + i) & (vertexHashTableSize - 1u);
-        uint old = atomicCompSwap(vertexKeys[idx], uint(-1), key);
-
-        if (old == key) {
-            return vertexValues[idx];
-        }
-
-        if (old == uint(-1)) {
-            int newIndex = int(atomicAdd(vertexCount, 1));
-            vertices[newIndex] = createVertex(coordA, coordB);
-            vertexValues[idx] = newIndex;
-            return newIndex;
-        }
-    }
-
-    return -1;
-}*/
 
 [[const]] uint EMPTY_KEY = 0xFFFFFFFFu;
 [[const]] uint RESERVED_MARKER = 0xFFFFFFFEu;
@@ -187,93 +151,30 @@ uint getEdgeIndex(ivec3 coordA, ivec3 coordB) {
     return 0;
 }
 
-int getOrInsertVertexHashTable(ivec3 coordA, ivec3 coordB) {
-    uint idx = getEdgeIndex(coordA, coordB);
-    return hashTable[idx];
+uint getOrInsertVertexHashTable(ivec3 coordA, ivec3 coordB) {
+    return hashTable[getEdgeIndex(coordA, coordB)];
 }
 
 void prepareHashTable(ivec3 coordA, ivec3 coordB) {
     uint idx = getEdgeIndex(coordA, coordB);
-    uint index = atomicCompSwap(hashTable[idx], -1, 0);
 
-    //if (index != -1) {
-    //    return;
-    //}
-
-    int newIndex = int(atomicAdd(vertexCount, 1));
-    vertices[newIndex] = createVertex(coordA, coordB);
-    hashTable[idx] = newIndex;
-}
-
-void prepareTable(ivec3 coordA, ivec3 coordB) {
-    ivec2 id = ivec2(hash3D(min(coordA, coordB)), computeEdgeCode(coordA, coordB));
-    //ivec2 id = ivec2(flatCoord(min(coordA, coordB)), computeEdgeCode(coordA, coordB));
-
-    uint key = packID(id);
-    //uint key = getEdgeIndex(coordA, coordB);
-    uint h = hashVertexID(id);
-
-    if (key == EMPTY_KEY || key == RESERVED_MARKER) {
+    if (atomicCompSwap(hashTable[idx], -1, 0) != -1) {
         return;
     }
 
-    for (uint i = 0u; i < vertexHashTableSize; ++i) {
-        uint idx = (h + i) & (vertexHashTableSize - 1u);
-        uint storedKey = atomicCompSwap(vertexKeys[idx], EMPTY_KEY, RESERVED_MARKER);
-
-        if (storedKey == RESERVED_MARKER || storedKey == key) {
-            return;
-        }
-
-        if (storedKey == EMPTY_KEY) {
-            int newIndex = int(atomicAdd(vertexCount, 1));
-            vertices[newIndex] = createVertex(coordA, coordB);
-            vertexValues[idx] = newIndex;
-            vertexKeys[idx] = key;
-            return;
-        }
-    }
-}
-
-int getOrInsertVertex(ivec3 coordA, ivec3 coordB) {
-    //int indexA = indexFromCoord(coordA);
-    //int indexB = indexFromCoord(coordB);
-    //ivec2 id = ivec2(min(indexA, indexB), max(indexA, indexB));
-    //ivec2 id = ivec2(flatCoord(min(coordA, coordB)), computeEdgeCode(coordA, coordB));
-    ivec2 id = ivec2(hash3D(min(coordA, coordB)), computeEdgeCode(coordA, coordB));
-
-    uint key = packID(id);
-    //uint key = getEdgeIndex(coordA, coordB);
-    if (key == EMPTY_KEY || key == RESERVED_MARKER) {
-        return -1;
-    }
-
-    uint h = hashVertexID(id);
-
-    for (uint i = 0u; i < vertexHashTableSize; ++i) {
-        uint idx = (h + i) & (vertexHashTableSize - 1u);
-        uint storedKey = atomicCompSwap(vertexKeys[idx], EMPTY_KEY, RESERVED_MARKER);
-
-        if (storedKey == EMPTY_KEY) {
-            int newIndex = int(atomicAdd(vertexCount, 1));
-            vertices[newIndex] = createVertex(coordA, coordB);
-            vertexValues[idx] = newIndex;
-            vertexKeys[idx] = key;
-            return newIndex;
-        }
-
-        if (storedKey == key) {
-            return vertexValues[idx];
-        }
-        // Слот занят другим ключом или ещё не готов — идём дальше
-    }
-
-    return -1; // таблица переполнена
+    uint newIndex = atomicAdd(vertexCount, 1);
+    vertices[newIndex] = createVertex(coordA, coordB);
+    hashTable[idx] = newIndex;
 }
 
 [[THREADS(8, 8, 8)]]
 void compute() {
     ivec3 voxelPos = ivec3(GLOBAL_INVOCATION_ID.xyz);
+    if (voxelPos.x < 0 || voxelPos.x >= densityCountAxis ||
+        voxelPos.y < 0 || voxelPos.y >= densityCountAxis ||
+        voxelPos.z < 0 || voxelPos.z >= densityCountAxis) {
+        return; // Выход за пределы массива
+    }
 
     int cubeIndex = 0;
     ivec3 cornerCoords[8];
@@ -284,21 +185,21 @@ void compute() {
         }
     }
 
-    int edgeFlags = edgeTable[cubeIndex];
-    if (edgeFlags == 0) {
-        return;
-    }
+    //int edgeFlags = edgeTable[cubeIndex];
+    //if (edgeFlags == 0) {
+    //    return;
+    //}
 
     int[] edges = triangulation_official[cubeIndex];
 
     for (int i = 0; i < 15; i += 3) {
         int edgeIndexA = edges[i];
-        if (edgeIndexA == -1) {
-            break;
-        }
-
         int edgeIndexB = edges[i + 1];
         int edgeIndexC = edges[i + 2];
+
+        if (edgeIndexA == -1 || edgeIndexB == -1 || edgeIndexC == -1) {
+            break;
+        }
 
         int a0 = cornerIndexAFromEdge[edgeIndexA];
         int a1 = cornerIndexBFromEdge[edgeIndexA];
@@ -308,45 +209,19 @@ void compute() {
         int c1 = cornerIndexBFromEdge[edgeIndexC];
 
         if (COMPUTE_STAGE == 1) {
-            int indexA = getOrInsertVertex(cornerCoords[a0], cornerCoords[a1]);
-            int indexB = getOrInsertVertex(cornerCoords[b0], cornerCoords[b1]);
-            int indexC = getOrInsertVertex(cornerCoords[c0], cornerCoords[c1]);
-            //if (indexA == -1 || indexB == -1 || indexC == -1) {
-            //    return;
-            //}
-
-            //int indexA = getOrInsertVertexHashTable(cornerCoords[a0], cornerCoords[a1]);
-            //int indexB = getOrInsertVertexHashTable(cornerCoords[b0], cornerCoords[b1]);
-            //int indexC = getOrInsertVertexHashTable(cornerCoords[c0], cornerCoords[c1]);
+            uint indexA = getOrInsertVertexHashTable(cornerCoords[a0], cornerCoords[a1]);
+            uint indexB = getOrInsertVertexHashTable(cornerCoords[b0], cornerCoords[b1]);
+            uint indexC = getOrInsertVertexHashTable(cornerCoords[c0], cornerCoords[c1]);
 
             uint baseIndex = atomicAdd(indicesCount, 3);
             indices[baseIndex + 0] = uint(indexA);
             indices[baseIndex + 1] = uint(indexB);
             indices[baseIndex + 2] = uint(indexC);
-
-            //indicesCount = 1;
         }
         else {
-            prepareTable(cornerCoords[a0], cornerCoords[a1]);
-            prepareTable(cornerCoords[b0], cornerCoords[b1]);
-            prepareTable(cornerCoords[c0], cornerCoords[c1]);
-
-             //prepareHashTable(cornerCoords[a0], cornerCoords[a1]);
-             //prepareHashTable(cornerCoords[b0], cornerCoords[b1]);
-             //prepareHashTable(cornerCoords[c0], cornerCoords[c1]);
-
-             //int newIndex = int(atomicAdd(vertexCount, 3));
-             //vertices[newIndex + 0] = createVertex(cornerCoords[a0], cornerCoords[a1]);
-             //vertices[newIndex + 1] = createVertex(cornerCoords[b0], cornerCoords[b1]);
-             //vertices[newIndex + 2] = createVertex(cornerCoords[c0], cornerCoords[c1]);
+            prepareHashTable(cornerCoords[a0], cornerCoords[a1]);
+            prepareHashTable(cornerCoords[b0], cornerCoords[b1]);
+            prepareHashTable(cornerCoords[c0], cornerCoords[c1]);
         }
-
-        //Vertex vA = createVertex(cornerCoords[a0], cornerCoords[a1]);
-        //Vertex vB = createVertex(cornerCoords[b0], cornerCoords[b1]);
-        //Vertex vC = createVertex(cornerCoords[c0], cornerCoords[c1]);
-        //uint baseIndex = atomicAdd(vertexCount, 3);
-        //vertices[baseIndex + 0] = vA;
-        //vertices[baseIndex + 1] = vB;
-        //vertices[baseIndex + 2] = vC;
     }
 }

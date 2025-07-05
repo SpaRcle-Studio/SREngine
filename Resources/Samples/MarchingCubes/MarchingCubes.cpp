@@ -39,10 +39,6 @@ namespace SpaRcle::Scripts::Samples {
             return true; // Allow execution in edit mode for testing purposes
         }
 
-        uint32_t hashVertexID(SR_MATH_NS::IVector2 id) {
-            return uint32_t(id.x * 73856093 ^ id.y * 19349663) % vertexHashTableSize;
-        }
-
         using DensityType = float;
 
         std::vector<DensityType> GenerateRandomDensityField() {
@@ -200,14 +196,12 @@ namespace SpaRcle::Scripts::Samples {
 
             if (m_computeShader) {
                 const uint64_t verticesSize = sizeof(uint32_t) + 12 + sizeof(Vertex) * maxVertexCount;
-                verticesSSBO = m_computeShader->GetPipeline()->AllocateSSBO(verticesSize, SR_GRAPH_NS::SSBOUsage::Write);
+                verticesSSBO = m_computeShader->GetPipeline()->AllocateSSBO(verticesSize, SR_GRAPH_NS::SSBOUsage::GPUToCPU);
 
                 const uint64_t indicesSize = sizeof(uint32_t) + sizeof(uint32_t) * maxVertexCount;
-                indicesSSBO = m_computeShader->GetPipeline()->AllocateSSBO(indicesSize, SR_GRAPH_NS::SSBOUsage::Write);
+                indicesSSBO = m_computeShader->GetPipeline()->AllocateSSBO(indicesSize, SR_GRAPH_NS::SSBOUsage::GPUToCPU);
 
-                hashTableSSBO = m_computeShader->GetPipeline()->AllocateSSBO(sizeof(uint32_t) * vertexHashTableSize, SR_GRAPH_NS::SSBOUsage::Write);
-                vertexKeysSSBO = m_computeShader->GetPipeline()->AllocateSSBO(sizeof(uint32_t) * vertexHashTableSize, SR_GRAPH_NS::SSBOUsage::Write);
-                vertexValuesSSBO = m_computeShader->GetPipeline()->AllocateSSBO(sizeof(uint32_t) * vertexHashTableSize, SR_GRAPH_NS::SSBOUsage::Write);
+                hashTableSSBO = m_computeShader->GetPipeline()->AllocateSSBO(sizeof(uint32_t) * vertexHashTableSize, SR_GRAPH_NS::SSBOUsage::CPUToGPU);
 
                 /// density SSBO
                 switch (shape) {
@@ -227,7 +221,7 @@ namespace SpaRcle::Scripts::Samples {
                 }
 
                 const uint64_t densityDataSize = densities.size() * sizeof(DensityType);
-                densitySSBO = m_computeShader->GetPipeline()->AllocateSSBO(densityDataSize, SR_GRAPH_NS::SSBOUsage::Read);
+                densitySSBO = m_computeShader->GetPipeline()->AllocateSSBO(densityDataSize, SR_GRAPH_NS::SSBOUsage::CPUToGPU);
 
                 m_computeShader->GetPipeline()->UpdateSSBO(densitySSBO, densities.data(), densityDataSize);
             }
@@ -241,14 +235,19 @@ namespace SpaRcle::Scripts::Samples {
             Generate();
         }
 
-        uint32_t packID(SR_MATH_NS::IVector2 id) {
-            //return (uint32_t(id.x) & 0xFFFFu) | ((uint32_t(id.y) & 0xFFFFu) << 16);
-            return id.x * (73856093u ^ id.y) * 19349663u; // простой хеш-функция для ID
-        }
 
-        //SR_MATH_NS::IVector2 unpackID(uint32_t packed) {
-        //    return SR_MATH_NS::IVector2(int(packed & 0xFFFFu), int((packed >> 16) & 0xFFFFu));
-        //}
+        void ResetHashTable() {
+            SR_TRACY_ZONE;
+
+            void* pData = nullptr;
+            if (!m_computeShader->GetPipeline()->MapSSBO(hashTableSSBO, &pData)) {
+                return;
+            }
+
+            std::memset(pData, -1, sizeof(uint32_t) * vertexHashTableSize);
+
+            m_computeShader->GetPipeline()->UnMapSSBO(hashTableSSBO);
+        }
 
         void Generate() {
             SR_TRACY_ZONE;
@@ -266,9 +265,7 @@ namespace SpaRcle::Scripts::Samples {
             m_computeShader->GetPipeline()->UpdateSSBO(verticesSSBO, &nullVal, sizeof(uint32_t));
             m_computeShader->GetPipeline()->UpdateSSBO(indicesSSBO, &nullVal, sizeof(uint32_t));
 
-            m_computeShader->GetPipeline()->UpdateSSBO(vertexKeysSSBO, vertexKeys.data(), sizeof(uint32_t) * vertexHashTableSize);
-            m_computeShader->GetPipeline()->UpdateSSBO(vertexValuesSSBO, vertexValues.data(), sizeof(uint32_t) * vertexHashTableSize);
-            m_computeShader->GetPipeline()->UpdateSSBO(hashTableSSBO, vertexKeys.data(), sizeof(uint32_t) * vertexHashTableSize);
+            ResetHashTable();
 
             for (int stage = 0; stage <= 1; ++stage) {
                 if (m_computeShader->BeginCompute()) {
@@ -276,8 +273,6 @@ namespace SpaRcle::Scripts::Samples {
                     m_computeShader->GetShader()->BindSSBO("indices", indicesSSBO);
                     m_computeShader->GetShader()->BindSSBO("densities", densitySSBO);
                     m_computeShader->GetShader()->BindSSBO("hashTable", hashTableSSBO);
-                    m_computeShader->GetShader()->BindSSBO("vertexKeys", vertexKeysSSBO);
-                    m_computeShader->GetShader()->BindSSBO("vertexValues", vertexValuesSSBO);
                     m_computeShader->GetShader()->SetConstInt("vertexHashTableSize"_atom, static_cast<int>(vertexHashTableSize));
                     m_computeShader->GetShader()->SetConstInt(SR_GRAPH_NS::SHADER_COMPUTE_STAGE, stage);
                     m_computeShader->Dispatch(numVoxelsPerAxis, numVoxelsPerAxis, numVoxelsPerAxis);
@@ -285,39 +280,7 @@ namespace SpaRcle::Scripts::Samples {
                 }
             }
 
-            DebugReadSSBO();
-        }
-
-        int getOrInsertVertex(Vertex v) {
-            uint32_t h = hashVertexID(v.id);
-            uint32_t key = packID(v.id);
-
-            for (uint32_t i = 0u; i < vertexHashTableSize; ++i) {
-                uint32_t idx = (h + i) & (vertexHashTableSize - 1u); // быстрая альтернатива % tableSize
-
-                uint32_t old = vertexKeys[idx];
-                if (vertexKeys[idx] == 0xFFFFFFFFu) {
-                    vertexKeys[idx] = key;
-                }
-
-                if (old == key) {
-                    return vertexValues[idx]; // уже был
-                }
-
-                if (old == 0xFFFFFFFFu) {
-                    SR_GRAPH_NS::Vertices::StaticMeshVertex newVertex;
-                    newVertex.pos = v.position;
-                    newVertex.norm = v.normal;
-                    vertices.push_back(newVertex);
-
-                    vertexValues[idx] = vertices.size() - 1;
-                    return vertices.size() - 1;
-                }
-
-                // иначе — коллизия, продолжаем
-            }
-
-            return -1; // таблица переполнена
+            GenerateMesh();
         }
 
         void ReadIndices() {
@@ -360,10 +323,10 @@ namespace SpaRcle::Scripts::Samples {
             m_computeShader->GetPipeline()->UnMapSSBO(verticesSSBO);
         }
 
-        void DebugReadSSBO() {
+        void GenerateMesh() {
             SR_TRACY_ZONE;
 
-            if (verticesSSBO == SR_ID_INVALID) {
+            if (verticesSSBO == SR_ID_INVALID || indicesSSBO == SR_ID_INVALID) {
                 return;
             }
 
@@ -374,7 +337,6 @@ namespace SpaRcle::Scripts::Samples {
                 if (auto&& pProceduralMesh = gameObject->GetComponent<SR_GTYPES_NS::ProceduralMesh>()) {
                     pProceduralMesh->SwapIndices(indices);
                     pProceduralMesh->SwapIndexedVertices(vertices);
-                    //pProceduralMesh->SetVertices(vertices);
                 }
             }
         }
@@ -392,14 +354,6 @@ namespace SpaRcle::Scripts::Samples {
                 m_computeShader->GetPipeline()->FreeSSBO(&hashTableSSBO);
             }
 
-            if (vertexKeysSSBO != SR_ID_INVALID) {
-                m_computeShader->GetPipeline()->FreeSSBO(&vertexKeysSSBO);
-            }
-
-            if (vertexValuesSSBO != SR_ID_INVALID) {
-                m_computeShader->GetPipeline()->FreeSSBO(&vertexValuesSSBO);
-            }
-
             if (indicesSSBO != SR_ID_INVALID) {
                 m_computeShader->GetPipeline()->FreeSSBO(&indicesSSBO);
             }
@@ -410,10 +364,6 @@ namespace SpaRcle::Scripts::Samples {
 
             if (densitySSBO != SR_ID_INVALID) {
                 m_computeShader->GetPipeline()->FreeSSBO(&densitySSBO);
-            }
-
-            if (mutexSSBO != SR_ID_INVALID) {
-                m_computeShader->GetPipeline()->FreeSSBO(&mutexSSBO);
             }
 
             m_computeShader = nullptr;
@@ -431,10 +381,7 @@ namespace SpaRcle::Scripts::Samples {
         int32_t verticesSSBO = SR_ID_INVALID;
         int32_t indicesSSBO = SR_ID_INVALID;
         int32_t densitySSBO = SR_ID_INVALID;
-        int32_t vertexKeysSSBO = SR_ID_INVALID;
-        int32_t vertexValuesSSBO = SR_ID_INVALID;
         int32_t hashTableSSBO = SR_ID_INVALID;
-        int32_t mutexSSBO = SR_ID_INVALID;
 
         /// @property @onChanged(OnEnable)
         uint32_t numPointsPerAxis = 10;
@@ -456,8 +403,6 @@ namespace SpaRcle::Scripts::Samples {
 
         /// @property
         SR_UTILS_NS::Path shaderPath = "Samples/MarchingCubes/MarchingCubes.srsl";
-        /// @property @onChanged(DebugReadSSBO)
-        bool debugReadSSBO = false;
 
     };
 }
