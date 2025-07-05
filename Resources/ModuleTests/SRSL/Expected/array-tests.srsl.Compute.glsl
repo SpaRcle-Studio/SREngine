@@ -30,10 +30,13 @@ const int array_case_2[1][16] = {
             }
     };
 
+const int case_1_1 = 123456u;
+
 layout (local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
 
 void main() {
-    int case_1 = array_case_1[0];
+    int case_1_2 = 1111u;
+    int case_1 = ((array_case_1[0] + case_1_1) + case_1_2);
     int case_2 = array_case_2[0][0];
     int case_3 = 10;
     int[1] case_4 = { 

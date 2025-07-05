@@ -12,32 +12,30 @@
 #include <Graphics/Types/ComputeShader.h>
 #include <Graphics/Render/RenderContext.h>
 
-namespace Detail {
-    struct alignas(16) Vertex {
-        alignas(16) SR_MATH_NS::FVector3 position;
-        alignas(16) SR_MATH_NS::FVector3 normal;
-        alignas(16) SR_MATH_NS::IVector2 id;
-    };
-
-    struct alignas(16) Triangle {
-        alignas(16)Vertex c;
-        alignas(16)Vertex b;
-        alignas(16)Vertex a;
-    };
-}
-
 #include <Scripting/Cpp/CppBehaviour.h>
 
 namespace SpaRcle::Scripts::Samples {
     class MarchingCubes : public SpaRcle::Scripting::CppBehaviour {
         SR_CLASS()
     public:
+	    struct alignas(16) Vertex {
+			alignas(16) SR_MATH_NS::FVector3 position;
+			alignas(16) SR_MATH_NS::FVector3 normal;
+			alignas(16) SR_MATH_NS::IVector2 id;
+		};
+
+        int vertexHashTableSize = 65536;
+
         ~MarchingCubes() override {
             Finalize();
         }
 
         SR_NODISCARD bool ExecuteInEditMode() const override {
             return true; // Allow execution in edit mode for testing purposes
+        }
+
+        uint32_t hashVertexID(SR_MATH_NS::IVector2 id) {
+            return uint32_t(id.x * 73856093 ^ id.y * 19349663) % vertexHashTableSize;
         }
 
         using DensityType = float;
@@ -130,20 +128,35 @@ namespace SpaRcle::Scripts::Samples {
             int maxVertexCount = maxTriangleCount * 3;
 
             if (m_computeShader) {
-                const uint64_t dataSize = sizeof(uint32_t) + 12 + sizeof(Detail::Triangle) * maxVertexCount;
-                SSBO = m_computeShader->GetPipeline()->AllocateSSBO(dataSize, SR_GRAPH_NS::SSBOUsage::Read);
+                const uint64_t verticesSize = sizeof(uint32_t) + 12 + sizeof(Vertex) * maxVertexCount;
+                verticesSSBO = m_computeShader->GetPipeline()->AllocateSSBO(verticesSize, SR_GRAPH_NS::SSBOUsage::Write);
+
+                const uint64_t indicesSize = sizeof(uint32_t) + sizeof(uint32_t) * maxVertexCount;
+                indicesSSBO = m_computeShader->GetPipeline()->AllocateSSBO(indicesSize, SR_GRAPH_NS::SSBOUsage::Write);
+
+                vertexKeysSSBO = m_computeShader->GetPipeline()->AllocateSSBO(sizeof(uint32_t) * vertexHashTableSize, SR_GRAPH_NS::SSBOUsage::Read);
+                vertexValuesSSBO = m_computeShader->GetPipeline()->AllocateSSBO(sizeof(uint32_t) * vertexHashTableSize, SR_GRAPH_NS::SSBOUsage::Read);
 
                 /// density SSBO
-                //densities = GenerateSphereDensityField();
-                densities = GenerateCubeDensityField();
+                densities = GenerateSphereDensityField();
+                //densities = GenerateCubeDensityField();
                 const uint64_t densityDataSize = densities.size() * sizeof(DensityType);
-                densitySSBO = m_computeShader->GetPipeline()->AllocateSSBO(densityDataSize, SR_GRAPH_NS::SSBOUsage::Write);
+                densitySSBO = m_computeShader->GetPipeline()->AllocateSSBO(densityDataSize, SR_GRAPH_NS::SSBOUsage::Read);
 
                 m_computeShader->GetPipeline()->UpdateSSBO(densitySSBO, densities.data(), densityDataSize);
             }
 
             Generate();
         }
+
+        uint32_t packID(SR_MATH_NS::IVector2 id) {
+            //return (uint32_t(id.x) & 0xFFFFu) | ((uint32_t(id.y) & 0xFFFFu) << 16);
+            return id.x * (73856093u ^ id.y) * 19349663u; // простой хеш-функция для ID
+        }
+
+        //SR_MATH_NS::IVector2 unpackID(uint32_t packed) {
+        //    return SR_MATH_NS::IVector2(int(packed & 0xFFFFu), int((packed >> 16) & 0xFFFFu));
+        //}
 
         void Generate() {
             SR_TRACY_ZONE;
@@ -157,12 +170,26 @@ namespace SpaRcle::Scripts::Samples {
                 return;
             }
 
-            uint32_t trianglesCount = 0;
-            m_computeShader->GetPipeline()->UpdateSSBO(SSBO, &trianglesCount, sizeof(uint32_t));
+            uint32_t nullVal = 0;
+            m_computeShader->GetPipeline()->UpdateSSBO(verticesSSBO, &nullVal, sizeof(uint32_t));
+            m_computeShader->GetPipeline()->UpdateSSBO(indicesSSBO, &nullVal, sizeof(uint32_t));
+
+            vertexKeys.resize(vertexHashTableSize);
+            vertexValues.resize(vertexHashTableSize);
+
+            //vertexKeys.FillInt(packID(SR_MATH_NS::IVector2(-1, -1)));
+            vertexKeys.FillInt(-1);
+            vertexValues.FillZero();
+
+            m_computeShader->GetPipeline()->UpdateSSBO(vertexKeysSSBO, vertexKeys.data(), sizeof(uint32_t) * vertexHashTableSize);
+            m_computeShader->GetPipeline()->UpdateSSBO(vertexValuesSSBO, vertexValues.data(), sizeof(uint32_t) * vertexHashTableSize);
 
             if (m_computeShader->BeginCompute()) {
-                m_computeShader->GetShader()->BindSSBO("triangles", SSBO);
+                m_computeShader->GetShader()->BindSSBO("vertices", verticesSSBO);
+                m_computeShader->GetShader()->BindSSBO("indices", indicesSSBO);
                 m_computeShader->GetShader()->BindSSBO("densities", densitySSBO);
+                m_computeShader->GetShader()->BindSSBO("vertexKeys", vertexKeysSSBO);
+                m_computeShader->GetShader()->BindSSBO("vertexValues", vertexValuesSSBO);
                 m_computeShader->Dispatch(numVoxelsPerAxis, numVoxelsPerAxis, numVoxelsPerAxis);
                 m_computeShader->EndCompute();
             }
@@ -170,100 +197,94 @@ namespace SpaRcle::Scripts::Samples {
             DebugReadSSBO();
         }
 
+        int getOrInsertVertex(Vertex v) {
+            uint32_t h = hashVertexID(v.id);
+            uint32_t key = packID(v.id);
+
+            for (uint32_t i = 0u; i < vertexHashTableSize; ++i) {
+                uint32_t idx = (h + i) & (vertexHashTableSize - 1u); // быстрая альтернатива % tableSize
+
+                uint32_t old = vertexKeys[idx];
+                if (vertexKeys[idx] == 0xFFFFFFFFu) {
+                    vertexKeys[idx] = key;
+                }
+
+                if (old == key) {
+                    return vertexValues[idx]; // уже был
+                }
+
+                if (old == 0xFFFFFFFFu) {
+                    SR_GRAPH_NS::Vertices::StaticMeshVertex newVertex;
+                    newVertex.pos = v.position;
+                    newVertex.norm = v.normal;
+                    vertices.push_back(newVertex);
+
+                    vertexValues[idx] = vertices.size() - 1;
+                    return vertices.size() - 1;
+                }
+
+                // иначе — коллизия, продолжаем
+            }
+
+            return -1; // таблица переполнена
+        }
+
+        void ReadIndices() {
+            SR_TRACY_ZONE;
+            void* pData = nullptr;
+
+            if (!m_computeShader->GetPipeline()->MapSSBO(indicesSSBO, &pData)) {
+                return;
+            }
+
+            uint32_t indicesCount = *reinterpret_cast<uint32_t*>(pData);
+            indices.resize(indicesCount);
+            std::memcpy(indices.data(), reinterpret_cast<uint8_t*>(pData) + sizeof(uint32_t), sizeof(uint32_t) * indicesCount);
+
+            m_computeShader->GetPipeline()->UnMapSSBO(indicesSSBO);
+        }
+
+        void ReadVertices() {
+            SR_TRACY_ZONE;
+
+            void* pData = nullptr;
+            if (!m_computeShader->GetPipeline()->MapSSBO(verticesSSBO, &pData)) {
+                return;
+            }
+
+            uint32_t verticesCount = *reinterpret_cast<uint32_t*>(pData);
+            Vertex* pVertices = reinterpret_cast<Vertex*>(reinterpret_cast<uint8_t*>(pData) + sizeof(uint32_t) + 12);
+
+            vertices.resize(verticesCount);
+
+            auto&& range = std::views::iota(0, static_cast<int>(verticesCount));
+            std::for_each(std::execution::par_unseq, range.begin(), range.end(), [&](int index) {
+                const Vertex& vertex = pVertices[index];
+                vertices[index] = SR_GRAPH_NS::Vertices::StaticMeshVertex{
+                    .pos = vertex.position,
+                    .norm = vertex.normal
+                };
+            });
+
+            m_computeShader->GetPipeline()->UnMapSSBO(verticesSSBO);
+        }
+
         void DebugReadSSBO() {
             SR_TRACY_ZONE;
 
-            if (SSBO == SR_ID_INVALID) {
+            if (verticesSSBO == SR_ID_INVALID) {
                 return;
             }
 
-            void* pData = nullptr;
-            if (!m_computeShader->GetPipeline()->MapSSBO(SSBO, &pData)) {
-                return;
-            }
-
-            uint32_t trianglesCount = *reinterpret_cast<uint32_t*>(pData);
-            Detail::Triangle* triangles = reinterpret_cast<Detail::Triangle*>(reinterpret_cast<uint8_t*>(pData) + sizeof(uint32_t) + 12);
-
-            //std::vector<Detail::Triangle> triangles;
-            //int numVoxelsPerAxis = numPointsPerAxis - 1;
-            //GenerateMarchingCubesCPU(numVoxelsPerAxis * 8, numVoxelsPerAxis * 8, numVoxelsPerAxis * 8, numPointsPerAxis, densities, triangles);
-            //uint32_t trianglesCount = static_cast<uint32_t>(triangles.size());
-
-            //std::vector<SR_GRAPH_NS::Vertices::StaticMeshVertex> nonIndexedVertices;
-            //nonIndexedVertices.reserve(trianglesCount * 3);
-
-            //std::unordered_map<SR_MATH_NS::IVector2, uint32_t> vertexMap;
-
-            std::unordered_map<uint64_t, uint32_t> vertexMap;
-            static SR_HTYPES_NS::FastMemoryArray<SR_GRAPH_NS::Vertices::StaticMeshVertex> vertices;
-            static SR_HTYPES_NS::FastMemoryArray<uint32_t> processedTriangles;
-
-            vertices.clear();
-            processedTriangles.clear();
-
-            vertices.reserve(trianglesCount * 3);
-            processedTriangles.reserve(trianglesCount);
-
-            int triangleIndex = 0;
-            SR_GRAPH_NS::Vertices::StaticMeshVertex meshVertex;
-
-            std::hash<SR_MATH_NS::FVector3> hashFunction;
-
-            auto&& processVertex = [&](const Detail::Vertex& vertex) {
-                const uint64_t vertexPosHash = hashFunction(vertex.position);
-                auto&& pIt = vertexMap.find(vertexPosHash);
-                if (pIt == vertexMap.end()) {
-                    meshVertex.pos = vertex.position;
-                    meshVertex.norm = vertex.normal;
-                    vertices.push_back(meshVertex);
-                    pIt = vertexMap.emplace(vertexPosHash, triangleIndex).first;
-                    processedTriangles.push_back(triangleIndex);
-                    triangleIndex++;
-                }
-                else {
-                    processedTriangles.push_back(pIt->second);
-                }
-
-                /*auto&& pIt = vertexMap.find(vertex.id);
-                if (pIt == vertexMap.end()) {
-                    SR_GRAPH_NS::Vertices::StaticMeshVertex meshVertex;
-                    meshVertex.pos = vertex.position;
-                    meshVertex.norm = vertex.normal;
-                    vertices.emplace_back(meshVertex);
-                    pIt = vertexMap.emplace(vertex.id, triangleIndex).first;
-                    processedTriangles.emplace_back(triangleIndex);
-                    triangleIndex++;
-                }
-                else {
-                    processedTriangles.emplace_back(pIt->second);
-                }*/
-
-                //SR_GRAPH_NS::Vertices::StaticMeshVertex meshVertex;
-                //meshVertex.pos = vertex.position;
-                //meshVertex.norm = vertex.normal;
-                //nonIndexedVertices.emplace_back(meshVertex);
-            };
-
-            for (uint32_t i = 0; i < trianglesCount; ++i) {
-                const Detail::Triangle& triangle = triangles[i];
-
-                processVertex(triangle.c);
-                processVertex(triangle.b);
-                processVertex(triangle.a);
-            }
+            ReadIndices();
+            ReadVertices();
 
             if (gameObject) {
                 if (auto&& pProceduralMesh = gameObject->GetComponent<SR_GTYPES_NS::ProceduralMesh>()) {
-                    //pProceduralMesh->SetVertices(nonIndexedVertices);
-                    //pProceduralMesh->SetIndexedVertices(vertices.data(), static_cast<uint32_t>(vertices.size()));
-                    //pProceduralMesh->SetIndices(processedTriangles.data(), static_cast<uint32_t>(processedTriangles.size()));
-                    pProceduralMesh->SwapIndices(processedTriangles);
+                    pProceduralMesh->SwapIndices(indices);
                     pProceduralMesh->SwapIndexedVertices(vertices);
                 }
             }
-
-            m_computeShader->GetPipeline()->UnMapSSBO(SSBO);
         }
 
         void Update(float_t dt) override {
@@ -272,8 +293,20 @@ namespace SpaRcle::Scripts::Samples {
         void Finalize() {
             SR_TRACY_ZONE;
 
-            if (SSBO != SR_ID_INVALID) {
-                m_computeShader->GetPipeline()->FreeSSBO(&SSBO);
+            if (vertexKeysSSBO != SR_ID_INVALID) {
+                m_computeShader->GetPipeline()->FreeSSBO(&vertexKeysSSBO);
+            }
+
+            if (vertexValuesSSBO != SR_ID_INVALID) {
+                m_computeShader->GetPipeline()->FreeSSBO(&vertexValuesSSBO);
+            }
+
+            if (indicesSSBO != SR_ID_INVALID) {
+                m_computeShader->GetPipeline()->FreeSSBO(&indicesSSBO);
+            }
+
+            if (verticesSSBO != SR_ID_INVALID) {
+                m_computeShader->GetPipeline()->FreeSSBO(&verticesSSBO);
             }
 
             if (densitySSBO != SR_ID_INVALID) {
@@ -284,10 +317,19 @@ namespace SpaRcle::Scripts::Samples {
         }
 
     private:
+        SR_HTYPES_NS::FastMemoryArray<SR_GRAPH_NS::Vertices::StaticMeshVertex> vertices;
+        SR_HTYPES_NS::FastMemoryArray<uint32_t> indices;
+
+        SR_HTYPES_NS::FastMemoryArray<uint32_t> vertexKeys; // для хеш-таблицы вершин
+        SR_HTYPES_NS::FastMemoryArray<uint32_t> vertexValues; // для хеш-таблицы вершин
+
         std::vector<DensityType> densities;
         SR_GTYPES_NS::ComputeShader::Ptr m_computeShader = nullptr;
-        int32_t SSBO = SR_ID_INVALID;
+        int32_t verticesSSBO = SR_ID_INVALID;
+        int32_t indicesSSBO = SR_ID_INVALID;
         int32_t densitySSBO = SR_ID_INVALID;
+        int32_t vertexKeysSSBO = SR_ID_INVALID;
+        int32_t vertexValuesSSBO = SR_ID_INVALID;
 
         /// @property
         uint32_t numPointsPerAxis = 10;

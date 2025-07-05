@@ -30,6 +30,56 @@
 
 /*
 
+vec3 coordToWorld(ivec3 coord) {
+    float planetSize = 1.0;
+    int textureSize = 2;
+	return (coord / (textureSize - 1.0) - 0.5) * planetSize;
+}
+
+int indexFromCoord(ivec3 coord) {
+	/// coord = coord - int3(chunkCoord);
+	return coord.z * numPointsPerAxis * numPointsPerAxis + coord.y * numPointsPerAxis + coord.x;
+}
+
+vec3 calculateNormal(ivec3 coord) {
+	ivec3 offsetX = ivec3(1, 0, 0);
+	ivec3 offsetY = ivec3(0, 1, 0);
+	ivec3 offsetZ = ivec3(0, 0, 1);
+
+	float dx = GetDensity(coord + offsetX) - GetDensity(coord - offsetX);
+	float dy = GetDensity(coord + offsetY) - GetDensity(coord - offsetY);
+	float dz = GetDensity(coord + offsetZ) - GetDensity(coord - offsetZ);
+
+	return normalize(vec3(dx, dy, dz));
+}
+
+Vertex createVertex(ivec3 coordA, ivec3 coordB) {
+    vec3 posA = coordToWorld(coordA);
+    vec3 posB = coordToWorld(coordB);
+    float densityA = GetDensity(coordA);
+    float densityB = GetDensity(coordB);
+
+    float t = (isoLevel - densityA) / (densityB - densityA);
+    vec3 position = posA + t * (posB - posA);
+
+    vec3 normalA = calculateNormal(coordA);
+    vec3 normalB = calculateNormal(coordB);
+    vec3 normal = normalize(normalA + t * (normalB - normalA));
+
+    int indexA = indexFromCoord(coordA);
+    int indexB = indexFromCoord(coordB);
+
+    Vertex vertex;
+    vertex.position = position;
+    vertex.normal = normal;
+    vertex.id = ivec2(min(indexA, indexB), max(indexA, indexB));
+
+    //vertex.position = vec3(1, 2, 3);
+    //vertex.normal = vec3(4, 5, 6);
+    //vertex.id = ivec2(7, 8);
+
+    return vertex;
+}
 
 	//cornerCoords[0] = voxelPos + ivec3(0, 0, 0);
 	//cornerCoords[1] = voxelPos + ivec3(1, 0, 0);
@@ -98,6 +148,20 @@
     0xf00, 0xe09, 0xd03, 0xc0a, 0xb06, 0xa0f, 0x905, 0x80c, 0x70c, 0x605, 0x50f, 0x406, 0x30a, 0x203, 0x109, 0x000
 };
 
+[[const]] vec3 edges[12][2] = {
+    { vec3(0.0, 0.0, 0.0), vec3(1.0, 0.0, 0.0) },
+    { vec3(1.0, 0.0, 0.0), vec3(1.0, 1.0, 0.0) },
+    { vec3(0.0, 1.0, 0.0), vec3(1.0, 1.0, 0.0) },
+    { vec3(0.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0) },
+    { vec3(0.0, 0.0, 1.0), vec3(1.0, 0.0, 1.0) },
+    { vec3(1.0, 0.0, 1.0), vec3(1.0, 1.0, 1.0) },
+    { vec3(0.0, 1.0, 1.0), vec3(1.0, 1.0, 1.0) },
+    { vec3(0.0, 0.0, 1.0), vec3(0.0, 1.0, 1.0) },
+    { vec3(0.0, 0.0, 0.0), vec3(0.0, 0.0, 1.0) },
+    { vec3(1.0, 0.0, 0.0), vec3(1.0, 0.0, 1.0) },
+    { vec3(1.0, 1.0, 0.0), vec3(1.0, 1.0, 1.0) },
+    { vec3(0.0, 1.0, 0.0), vec3(0.0, 1.0, 1.0) }
+};
 
 [[const]] int triangulation_unreal[256][16] = {
         {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},

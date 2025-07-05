@@ -1,19 +1,24 @@
 ShaderType Compute;
 
 struct Vertex {
-	vec3 position;
-	vec3 normal;
-	ivec2 id;
+    vec3 position;
+    vec3 normal;
+    ivec2 id; // Unique ID for the vertex
 };
 
-struct Triangle {
-	Vertex c;
-	Vertex b;
-	Vertex a;
-};
+[[ssbo(vertices)]] uint vertexCount;
+[[ssbo(vertices)]] Vertex[] vertices;
 
-[[ssbo(triangles)]] uint count;
-[[ssbo(triangles)]] Triangle[] triangles;
+[[ssbo(vertexKeys)]] uint[] vertexKeys;
+[[ssbo(vertexValues)]] int[] vertexValues;
+
+[[ssbo(indices)]] uint indicesCount;
+[[ssbo(indices)]] uint[] indices;
+
+[[const]] ivec3 cornerOffsets[8] = {
+    ivec3(0, 0, 0), ivec3(1, 0, 0), ivec3(1, 1, 0), ivec3(0, 1, 0),
+    ivec3(0, 0, 1), ivec3(1, 0, 1), ivec3(1, 1, 1), ivec3(0, 1, 1)
+};
 
 [[ssbo(densities)]] float[] densities;
 
@@ -23,12 +28,13 @@ struct Triangle {
 [[const]] float isoLevel = 0.2;
 [[const]] float voxelSize = 0.1;
 [[const]] int numPointsPerAxis = 16;
+[[const]] int vertexHashTableSize = 65536;
 
 float GetDensity(ivec3 pos) {
     if (pos.x < 0 || pos.x >= densityCountAxis ||
         pos.y < 0 || pos.y >= densityCountAxis ||
         pos.z < 0 || pos.z >= densityCountAxis) {
-        return 0.0; // или любое другое значение по умолчанию
+        return 0.0;
     }
     int sizeX = densityCountAxis;
     int sizeY = densityCountAxis;
@@ -38,31 +44,54 @@ float GetDensity(ivec3 pos) {
 
 vec3 VertexInterp(float iso, vec3 p1, vec3 p2, float valp1, float valp2) {
     float t = (iso - valp1) / (valp2 - valp1);
-    t = clamp(t, 0.0, 1.0); // на всякий случай
+    t = clamp(t, 0.0, 1.0);
     return mix(p1, p2, t);
 }
 
 vec3 coordToWorld(ivec3 coord) {
     float planetSize = 1.0;
     int textureSize = 2;
-	return (coord / (textureSize - 1.0) - 0.5) * planetSize;
+    return (coord / (textureSize - 1.0) - 0.5) * planetSize;
 }
 
 int indexFromCoord(ivec3 coord) {
-	/// coord = coord - int3(chunkCoord);
-	return coord.z * numPointsPerAxis * numPointsPerAxis + coord.y * numPointsPerAxis + coord.x;
+    return coord.z * numPointsPerAxis * numPointsPerAxis + coord.y * numPointsPerAxis + coord.x;
 }
 
 vec3 calculateNormal(ivec3 coord) {
-	ivec3 offsetX = ivec3(1, 0, 0);
-	ivec3 offsetY = ivec3(0, 1, 0);
-	ivec3 offsetZ = ivec3(0, 0, 1);
+    ivec3 offsetX = ivec3(1, 0, 0);
+    ivec3 offsetY = ivec3(0, 1, 0);
+    ivec3 offsetZ = ivec3(0, 0, 1);
 
-	float dx = GetDensity(coord + offsetX) - GetDensity(coord - offsetX);
-	float dy = GetDensity(coord + offsetY) - GetDensity(coord - offsetY);
-	float dz = GetDensity(coord + offsetZ) - GetDensity(coord - offsetZ);
+    float dx = GetDensity(coord + offsetX) - GetDensity(coord - offsetX);
+    float dy = GetDensity(coord + offsetY) - GetDensity(coord - offsetY);
+    float dz = GetDensity(coord + offsetZ) - GetDensity(coord - offsetZ);
 
-	return normalize(vec3(dx, dy, dz));
+    return normalize(vec3(dx, dy, dz));
+}
+
+int hash3D(ivec3 coord) {
+    return coord.x + coord.y * densityCountAxis + coord.z * densityCountAxis * densityCountAxis;
+}
+
+int computeEdgeCode(ivec3 a, ivec3 b) {
+    ivec3 d = abs(a - b);
+    if (d.x == 1) { return 0; }
+    if (d.y == 1) { return 1; }
+    if (d.z == 1) { return 2; }
+    return 3; // ошибка или диагональ (не должно быть)
+}
+
+uint hashVertexID(ivec2 id) {
+    return (uint(id.x) * 92837111u + uint(id.y) * 689287499u) & (vertexHashTableSize - 1u);
+}
+
+uint packID(ivec2 id) {
+    return id.x * 73856093u ^ id.y * 19349663u; // простой хеш-функция для ID
+}
+
+int flatCoord(ivec3 c) {
+    return c.x + c.y * densityCountAxis + c.z * densityCountAxis * densityCountAxis;
 }
 
 Vertex createVertex(ivec3 coordA, ivec3 coordB) {
@@ -84,31 +113,81 @@ Vertex createVertex(ivec3 coordA, ivec3 coordB) {
     Vertex vertex;
     vertex.position = position;
     vertex.normal = normal;
-    vertex.id = ivec2(min(indexA, indexB), max(indexA, indexB));
-
-    //vertex.position = vec3(1, 2, 3);
-    //vertex.normal = vec3(4, 5, 6);
-    //vertex.id = ivec2(7, 8);
+    vertex.id = ivec2(hash3D(min(coordA, coordB)), computeEdgeCode(coordA, coordB));
 
     return vertex;
+}
+
+/*int getOrInsertVertex(ivec3 coordA, ivec3 coordB) {
+    ivec2 id = ivec2(hash3D(min(coordA, coordB)), computeEdgeCode(coordA, coordB));
+    uint h = hashVertexID(id);
+    uint key = packID(id);
+
+    for (uint i = 0u; i < vertexHashTableSize; ++i) {
+        uint idx = (h + i) & (vertexHashTableSize - 1u);
+        uint old = atomicCompSwap(vertexKeys[idx], uint(-1), key);
+
+        if (old == key) {
+            return vertexValues[idx];
+        }
+
+        if (old == uint(-1)) {
+            int newIndex = int(atomicAdd(vertexCount, 1));
+            vertices[newIndex] = createVertex(coordA, coordB);
+            vertexValues[idx] = newIndex;
+            return newIndex;
+        }
+    }
+
+    return -1;
+}*/
+
+[[const]] uint EMPTY_KEY = 0xFFFFFFFFu;
+[[const]] uint RESERVED_MARKER = 0xFFFFFFFEu;
+
+int getOrInsertVertex(ivec3 coordA, ivec3 coordB) {
+    //ivec2 id = ivec2(hash3D(min(coordA, coordB)), computeEdgeCode(coordA, coordB));
+    ivec2 id = ivec2(flatCoord(min(coordA, coordB)), computeEdgeCode(coordA, coordB));
+
+    uint key = packID(id);
+    uint h = hashVertexID(id);
+
+    for (uint i = 0u; i < vertexHashTableSize; ++i) {
+        uint idx = (h + i) & (vertexHashTableSize - 1u);
+        uint storedKey = atomicCompSwap(vertexKeys[idx], EMPTY_KEY, RESERVED_MARKER);
+
+        if (storedKey == EMPTY_KEY) {
+            // Мы первые, вставляем вершину
+            int newIndex = int(atomicAdd(vertexCount, 1));
+            vertices[newIndex] = createVertex(coordA, coordB);
+            vertexValues[idx] = newIndex;
+
+            // Публикуем ключ
+            vertexKeys[idx] = key;
+            return newIndex;
+        }
+
+        memoryBarrier(); // Гарантируем, что ключ уже записан
+
+        // Если уже кто-то вставил наш ключ
+        if (storedKey == key || vertexKeys[idx] == key) {
+            return vertexValues[idx];
+        }
+
+        // Слот занят другим ключом или ещё не готов — идём дальше
+    }
+
+    return -1; // таблица переполнена
 }
 
 [[THREADS(8, 8, 8)]]
 void compute() {
     ivec3 voxelPos = ivec3(GLOBAL_INVOCATION_ID.xyz);
 
-    ivec3 cornerCoords[8];
-    cornerCoords[0] = voxelPos + cornerOffsets[0];
-    cornerCoords[1] = voxelPos + cornerOffsets[1];
-    cornerCoords[2] = voxelPos + cornerOffsets[2];
-    cornerCoords[3] = voxelPos + cornerOffsets[3];
-    cornerCoords[4] = voxelPos + cornerOffsets[4];
-    cornerCoords[5] = voxelPos + cornerOffsets[5];
-    cornerCoords[6] = voxelPos + cornerOffsets[6];
-    cornerCoords[7] = voxelPos + cornerOffsets[7];
-
     int cubeIndex = 0;
-    for (int i = 0; i < 8; i ++) {
+    ivec3 cornerCoords[8];
+    for (int i = 0; i < 8; ++i) {
+        cornerCoords[i] = voxelPos + cornerOffsets[i];
         if (GetDensity(cornerCoords[i]) < isoLevel) {
             cubeIndex |= (1 << i);
         }
@@ -119,78 +198,38 @@ void compute() {
         return;
     }
 
-    for (int i = 0; i < 15; i += 3) {
-        int[] edges = triangulation_official[cubeIndex];
-        int edgeIndexA = edges[i];
+    int[] edges = triangulation_official[cubeIndex];
 
+    for (int i = 0; i < 15; i += 3) {
+        int edgeIndexA = edges[i];
         if (edgeIndexA == -1) {
             break;
         }
 
+        int edgeIndexB = edges[i + 1];
+        int edgeIndexC = edges[i + 2];
+
         int a0 = cornerIndexAFromEdge[edgeIndexA];
         int a1 = cornerIndexBFromEdge[edgeIndexA];
-
-        int edgeIndexB = edges[i + 1];
         int b0 = cornerIndexAFromEdge[edgeIndexB];
         int b1 = cornerIndexBFromEdge[edgeIndexB];
-
-        int edgeIndexC = edges[i + 2];
         int c0 = cornerIndexAFromEdge[edgeIndexC];
         int c1 = cornerIndexBFromEdge[edgeIndexC];
 
-        uint index = atomicAdd(count, 1);
+        int indexA = getOrInsertVertex(cornerCoords[a0], cornerCoords[a1]);
+        int indexB = getOrInsertVertex(cornerCoords[b0], cornerCoords[b1]);
+        int indexC = getOrInsertVertex(cornerCoords[c0], cornerCoords[c1]);
+        uint baseIndex = atomicAdd(indicesCount, 3);
+        indices[baseIndex + 0] = uint(indexA);
+        indices[baseIndex + 1] = uint(indexB);
+        indices[baseIndex + 2] = uint(indexC);
 
-        triangles[index].a = createVertex(cornerCoords[c0], cornerCoords[c1]);
-        triangles[index].b = createVertex(cornerCoords[b0], cornerCoords[b1]);
-        triangles[index].c = createVertex(cornerCoords[a0], cornerCoords[a1]);
-
-        /*float valA0 = GetDensity(cornerCoords[a0]);
-        float valA1 = GetDensity(cornerCoords[a1]);
-        vec3 pA0 = vec3(cornerCoords[a0]) * voxelSize;
-        vec3 pA1 = vec3(cornerCoords[a1]) * voxelSize;
-
-        float valB0 = GetDensity(cornerCoords[b0]);
-        float valB1 = GetDensity(cornerCoords[b1]);
-        vec3 pB0 = vec3(cornerCoords[b0]) * voxelSize;
-        vec3 pB1 = vec3(cornerCoords[b1]) * voxelSize;
-
-        float valC0 = GetDensity(cornerCoords[c0]);
-        float valC1 = GetDensity(cornerCoords[c1]);
-        vec3 pC0 = vec3(cornerCoords[c0]) * voxelSize;
-        vec3 pC1 = vec3(cornerCoords[c1]) * voxelSize;
-
-        vec3 vA = VertexInterp(isoLevel, pA0, pA1, valA0, valA1);
-        vec3 vB = VertexInterp(isoLevel, pB0, pB1, valB0, valB1);
-        vec3 vC = VertexInterp(isoLevel, pC0, pC1, valC0, valC1);
-
-        ivec2 indexA = ivec2(indexFromCoord(cornerCoords[a0]), indexFromCoord(cornerCoords[a1]));
-        ivec2 indexB = ivec2(indexFromCoord(cornerCoords[b0]), indexFromCoord(cornerCoords[b1]));
-        ivec2 indexC = ivec2(indexFromCoord(cornerCoords[c0]), indexFromCoord(cornerCoords[c1]));
-
-        triangles[index].c = Vertex(vA, vec3(0.0, 1.0, 1.0), indexC);
-        triangles[index].b = Vertex(vB, vec3(0.0, 1.0, 1.0), indexB);
-        triangles[index].a = Vertex(vC, vec3(0.0, 1.0, 1.0), indexA);*/
+        //Vertex vA = createVertex(cornerCoords[a0], cornerCoords[a1]);
+        //Vertex vB = createVertex(cornerCoords[b0], cornerCoords[b1]);
+        //Vertex vC = createVertex(cornerCoords[c0], cornerCoords[c1]);
+        //uint baseIndex = atomicAdd(vertexCount, 3);
+        //vertices[baseIndex + 0] = vA;
+        //vertices[baseIndex + 1] = vB;
+        //vertices[baseIndex + 2] = vC;
     }
 }
-
-    //int numCubesPerAxis = numPointsPerAxis - 1;
-    //if (voxelPos.x >= numCubesPerAxis || voxelPos.y >= numCubesPerAxis || voxelPos.z >= numCubesPerAxis) {
-    //if (voxelPos.x > numCubesPerAxis || voxelPos.y > numCubesPerAxis || voxelPos.z > numCubesPerAxis) {
-    //    return;
-    //}
-
-/*
-triangles[index].a = Vertex(vec3(cornerCoords[c0] + cornerCoords[c1]), vec3(0.0, 1.0, 1.0), ivec2(0, 0));
-triangles[index].b = Vertex(vec3(cornerCoords[b0] + cornerCoords[b1]), vec3(0.0, 1.0, 1.0), ivec2(0, 0));
-triangles[index].c = Vertex(vec3(cornerCoords[a0] + cornerCoords[a1]), vec3(0.0, 1.0, 1.0), ivec2(0, 0));*/
-
-   //triangles[index].a = createVertex(cornerCoords[c0], cornerCoords[c1]);
-    //triangles[index].b = createVertex(cornerCoords[b0], cornerCoords[b1]);
-    //triangles[index].c = createVertex(cornerCoords[a0], cornerCoords[a1]);
-
-
-        /*
-
-        triangles[index].c = Vertex(vec3(cornerCoords[c0] + cornerCoords[c1]) * 0.5, vec3(0.0, 1.0, 1.0), ivec2(0, 0));
-        triangles[index].b = Vertex(vec3(cornerCoords[b0] + cornerCoords[b1]) * 0.5, vec3(0.0, 1.0, 1.0), ivec2(0, 0));
-        triangles[index].a = Vertex(vec3(cornerCoords[a0] + cornerCoords[a1]) * 0.5, vec3(0.0, 1.0, 1.0), ivec2(0, 0));*/
