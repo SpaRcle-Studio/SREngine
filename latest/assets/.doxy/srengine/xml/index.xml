@@ -1727,6 +1727,7 @@
     <member refid="classSR__GTYPES__NS_1_1ComputeShader_1ad466b085983bde7b694b7eaada4a0aa1" kind="variable"><name>m_pShader</name></member>
     <member refid="classSR__GTYPES__NS_1_1ComputeShader_1aa2495b9d47c2cc1b70df8fdfb7506a1c" kind="variable"><name>m_pipeline</name></member>
     <member refid="classSR__GTYPES__NS_1_1ComputeShader_1adf4fc4a3be729e22d20a07705c498b71" kind="variable"><name>m_descriptorSet</name></member>
+    <member refid="classSR__GTYPES__NS_1_1ComputeShader_1ab7345c0a7e951c46488d97d20bc8200b" kind="variable"><name>m_virtualUBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1ComputeShader_1abfb6ae4a201f29112073845d819af3f7" kind="variable"><name>m_isComputeState</name></member>
     <member refid="classSR__GTYPES__NS_1_1ComputeShader_1a80c9fe00c6caae6b0098ee53809cad7d" kind="variable"><name>m_isDispatched</name></member>
     <member refid="classSR__GTYPES__NS_1_1ComputeShader_1a40630d8267802d528236bdee57cf9d1c" kind="function"><name>ComputeShader</name></member>
@@ -8105,6 +8106,7 @@
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a73233cb7a070e2b92005fcf50ae0e603" kind="function"><name>SetIndexedVertices</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a210b2b2b453a33cdaf9600a35f4b908d" kind="function"><name>SetIndices</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a7ca68c422d8890c3990f9295801bfc1f" kind="function"><name>SetVertices</name></member>
+    <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a81566013e38ec69f1c9e63569c51d597" kind="function"><name>SetVertices</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a823faa68ac39e8ac9b872610106f4349" kind="function"><name>UseMaterial</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a58b77d0540d3a4c9b6885c69391d5c64" kind="function"><name>UseModelMatrix</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1ac5a7acb0d9aed027543dfd5a2694ee34" kind="function"><name>IsUniqueMesh</name></member>
@@ -11181,6 +11183,7 @@
     <member refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a910967c46528c0b91a353d73c8fd4ce1" kind="function"><name>AnalyzeArrayExpression</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1ada0b773f2f27ee64e23ad5c3c55d6e2e" kind="function"><name>AnalyzeIfStatement</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a5c17c53e7bf6d07287c1cb6d2186c5ab" kind="function"><name>AnalyzeForStatement</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1ac67f111dea6b64a1bf94dadb71a83045" kind="function"><name>AnalyzeWhileStatement</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a110a0302116a99b8a5554f208fc90f74" kind="function"><name>AnalyzeEntryPoint</name></member>
   </compound>
   <compound refid="structSR__SRSL__NS_1_1SRSLResult" kind="struct"><name>SR_SRSL_NS::SRSLResult</name>
@@ -13909,8 +13912,8 @@
   <compound refid="namespaceax_1_1NodeEditor" kind="namespace"><name>ax::NodeEditor</name>
   </compound>
   <compound refid="namespaceCodegen" kind="namespace"><name>Codegen</name>
-    <member refid="EnumReflector_8h_1a1adda562e7572270f41021ef28879703" kind="function"><name>GetEnumVariant</name></member>
-    <member refid="EnumReflector_8h_1a2e0a939e2042e7664b9593906bf59a5f" kind="function"><name>GetEnumItemsCount</name></member>
+    <member refid="stdInclude_8h_1a1adda562e7572270f41021ef28879703" kind="function"><name>GetEnumVariant</name></member>
+    <member refid="stdInclude_8h_1a2e0a939e2042e7664b9593906bf59a5f" kind="function"><name>GetEnumItemsCount</name></member>
   </compound>
   <compound refid="namespaceDetails" kind="namespace"><name>Details</name>
   </compound>
@@ -14148,6 +14151,7 @@
     <member refid="IShaderProgram_8h_1ac19825f73833bd317724ac6d9dfb9749" kind="variable"><name>SHADER_LINE_END_POINT</name></member>
     <member refid="IShaderProgram_8h_1ac322a39f54c8aac14cab46ba059f952a" kind="variable"><name>SHADER_LINE_COLOR</name></member>
     <member refid="IShaderProgram_8h_1a5a9f9ce7d2f7b80baec4d12f17a2caca" kind="variable"><name>SHADER_MODEL_MATRIX</name></member>
+    <member refid="IShaderProgram_8h_1abd62d4d98040f3ca6d4c66804d8b8685" kind="variable"><name>SHADER_COMPUTE_STAGE</name></member>
     <member refid="IShaderProgram_8h_1a9f50729e9de78a63cd346d26adc0e80c" kind="variable"><name>SHADER_SLICED_TEXTURE_BORDER</name></member>
     <member refid="IShaderProgram_8h_1abb3c3c23f480c1083e29e6512123c391" kind="variable"><name>SHADER_SLICED_WINDOW_BORDER</name></member>
     <member refid="IShaderProgram_8h_1aee26af1177e27c3acb0e32bc60a60193" kind="variable"><name>SHADER_MODEL_NO_SCALE_MATRIX</name></member>
@@ -14774,10 +14778,6 @@
     <member refid="namespaceSR__UTILS__NS_1a88a8b541898e07836525f5dbe6ce81cdad8e87c0927539672f54462c837be0b7f" kind="enumvalue"><name>Sync</name></member>
     <member refid="namespaceSR__UTILS__NS_1a88a8b541898e07836525f5dbe6ce81cda24aa4117da86c41684ad25742832dfa6" kind="enumvalue"><name>Async</name></member>
     <member refid="namespaceSR__UTILS__NS_1a88a8b541898e07836525f5dbe6ce81cda9eb6b78a99cdb6ffd3d40d18621d9f80" kind="enumvalue"><name>Force</name></member>
-    <member refid="namespaceSR__UTILS__NS_1af51bfa3dbeb9285cef7dd48d48b76311" kind="enum"><name>EnumVariant</name></member>
-    <member refid="namespaceSR__UTILS__NS_1af51bfa3dbeb9285cef7dd48d48b76311aec0fc0100c4fc1ce4eea230c3dc10360" kind="enumvalue"><name>Undefined</name></member>
-    <member refid="namespaceSR__UTILS__NS_1af51bfa3dbeb9285cef7dd48d48b76311a4ee29ca12c7d126654bd0e5275de6135" kind="enumvalue"><name>List</name></member>
-    <member refid="namespaceSR__UTILS__NS_1af51bfa3dbeb9285cef7dd48d48b76311a4ea7801f17a4e5485e8b050c052fb443" kind="enumvalue"><name>Flags</name></member>
     <member refid="namespaceSR__UTILS__NS_1a436bfeb743303c9ca2e3f733d769abd2" kind="enum"><name>MarshalSaveMode</name></member>
     <member refid="namespaceSR__UTILS__NS_1a436bfeb743303c9ca2e3f733d769abd2a6ce976e8f061b2b5cfe4d0c50c3405dd" kind="enumvalue"><name>Binary</name></member>
     <member refid="namespaceSR__UTILS__NS_1a436bfeb743303c9ca2e3f733d769abd2aeed8d85b888a6c015834240885ee6333" kind="enumvalue"><name>Json</name></member>
@@ -14807,6 +14807,10 @@
     <member refid="namespaceSR__UTILS__NS_1ab71d8ac2ea06361a979a52d03569163ca497031794414a552435f90151ac3b54b" kind="enumvalue"><name>Object</name></member>
     <member refid="namespaceSR__UTILS__NS_1ab71d8ac2ea06361a979a52d03569163ca7d74f3b92b19da5e606d737d339a9679" kind="enumvalue"><name>Item</name></member>
     <member refid="namespaceSR__UTILS__NS_1ab71d8ac2ea06361a979a52d03569163ca4410ec34d9e6c1a68100ca0ce033fb17" kind="enumvalue"><name>Array</name></member>
+    <member refid="namespaceSR__UTILS__NS_1af51bfa3dbeb9285cef7dd48d48b76311" kind="enum"><name>EnumVariant</name></member>
+    <member refid="namespaceSR__UTILS__NS_1af51bfa3dbeb9285cef7dd48d48b76311aec0fc0100c4fc1ce4eea230c3dc10360" kind="enumvalue"><name>Undefined</name></member>
+    <member refid="namespaceSR__UTILS__NS_1af51bfa3dbeb9285cef7dd48d48b76311a4ee29ca12c7d126654bd0e5275de6135" kind="enumvalue"><name>List</name></member>
+    <member refid="namespaceSR__UTILS__NS_1af51bfa3dbeb9285cef7dd48d48b76311a4ea7801f17a4e5485e8b050c052fb443" kind="enumvalue"><name>Flags</name></member>
     <member refid="namespaceSR__UTILS__NS_1ac36557f19a3e92bb036d9ccb273aca4e" kind="enum"><name>SharedPtrPolicy</name></member>
     <member refid="namespaceSR__UTILS__NS_1ac36557f19a3e92bb036d9ccb273aca4ea086247a9b57fde6eefee2a0c4752242d" kind="enumvalue"><name>Automatic</name></member>
     <member refid="namespaceSR__UTILS__NS_1ac36557f19a3e92bb036d9ccb273aca4ea826c19d01b527f2701cc3460b9c889de" kind="enumvalue"><name>Manually</name></member>

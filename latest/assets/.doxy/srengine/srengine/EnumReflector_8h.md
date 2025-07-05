@@ -33,7 +33,6 @@
 
 | Type | Name |
 | ---: | :--- |
-| namespace | [**Codegen**](namespaceCodegen.md) <br> |
 | namespace | [**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md) <br> |
 
 
@@ -41,7 +40,6 @@
 
 | Type | Name |
 | ---: | :--- |
-| struct | [**EnumSelector**](structCodegen_1_1EnumSelector.md) &lt;typename EnumType&gt;<br> |
 | class | [**EnumReflector**](classSR__UTILS__NS_1_1EnumReflector.md) <br> |
 | struct | [**Enumerator**](structSR__UTILS__NS_1_1EnumReflector_1_1Enumerator.md) <br> |
 | class | [**EnumReflectorManager**](classSR__UTILS__NS_1_1EnumReflectorManager.md) <br> |

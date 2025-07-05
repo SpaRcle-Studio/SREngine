@@ -42,6 +42,7 @@ namespace SR_GTYPES_NS {
         void SetIndices(void* pData, uint64_t count);
 
         void SetVertices(const std::vector<Vertices::StaticMeshVertex>& vertices);
+        void SetVertices(const SR_HTYPES_NS::FastMemoryArray<Vertices::StaticMeshVertex>& vertices);
 
         void UseMaterial() override;
         void UseModelMatrix() override;

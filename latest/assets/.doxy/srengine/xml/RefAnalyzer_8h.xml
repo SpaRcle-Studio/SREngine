@@ -1049,15 +1049,16 @@
 <codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AnalyzeArrayExpression(SRSLUseStack::Ptr&amp;<sp/>pUseStack,<sp/>std::list&lt;std::string&gt;&amp;<sp/>stack,<sp/><ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref>*<sp/>pExpr);</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AnalyzeIfStatement(SRSLUseStack::Ptr&amp;<sp/>pUseStack,<sp/>std::list&lt;std::string&gt;&amp;<sp/>stack,<sp/><ref refid="classSR__SRSL__NS_1_1SRSLIfStatement" kindref="compound">SRSLIfStatement</ref>*<sp/>pIfStatement);</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AnalyzeForStatement(SRSLUseStack::Ptr&amp;<sp/>pUseStack,<sp/>std::list&lt;std::string&gt;&amp;<sp/>stack,<sp/><ref refid="classSR__SRSL__NS_1_1SRSLForStatement" kindref="compound">SRSLForStatement</ref>*<sp/>pForStatement);</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AnalyzeEntryPoint(SRSLUseStack::Ptr&amp;<sp/>pUseStack,<sp/>std::list&lt;std::string&gt;&amp;<sp/>stack,<sp/><ref refid="classSR__SRSL__NS_1_1SRSLFunction" kindref="compound">SRSLFunction</ref>*<sp/>pFunction);</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"></highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SRSLAnalyzedTree::Ptr<sp/>m_analyzedTree;</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"></highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="55"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"></highlight></codeline>
-<codeline lineno="57"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_REFANALYZER_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AnalyzeWhileStatement(SRSLUseStack::Ptr&amp;<sp/>pUseStack,<sp/>std::list&lt;std::string&gt;&amp;<sp/>stack,<sp/><ref refid="classSR__SRSL__NS_1_1SRSLWhileStatement" kindref="compound">SRSLWhileStatement</ref>*<sp/>pWhileStatement);</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AnalyzeEntryPoint(SRSLUseStack::Ptr&amp;<sp/>pUseStack,<sp/>std::list&lt;std::string&gt;&amp;<sp/>stack,<sp/><ref refid="classSR__SRSL__NS_1_1SRSLFunction" kindref="compound">SRSLFunction</ref>*<sp/>pFunction);</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SRSLAnalyzedTree::Ptr<sp/>m_analyzedTree;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="56"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_REFANALYZER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h"/>
   </compounddef>

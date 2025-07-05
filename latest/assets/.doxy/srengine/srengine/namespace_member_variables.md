@@ -151,6 +151,7 @@
 * **SHADER\_ASPECT** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **SHADER\_CASCADE\_LIGHT\_SPACE\_MATRICES** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **SHADER\_CASCADE\_SPLITS** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
+* **SHADER\_COMPUTE\_STAGE** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **SHADER\_DEPTH\_ATTACHMENT** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **SHADER\_DIRECTIONAL\_LIGHT\_POSITION** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **SHADER\_LIGHT\_SPACE\_MATRIX** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))

@@ -65,6 +65,21 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Types/ComputeShader.h" line="37" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/ComputeShader.h" bodystart="37" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1ComputeShader_1ab7345c0a7e951c46488d97d20bc8200b" prot="private" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t SR_GTYPES_NS::ComputeShader::m_virtualUBO</definition>
+        <argsstring></argsstring>
+        <name>m_virtualUBO</name>
+        <qualifiedname>SR_GTYPES_NS::ComputeShader::m_virtualUBO</qualifiedname>
+        <initializer>= SR_ID_INVALID</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/ComputeShader.h" line="38" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/ComputeShader.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1ComputeShader_1abfb6ae4a201f29112073845d819af3f7" prot="private" static="no" mutable="no">
         <type>bool</type>
         <definition>bool SR_GTYPES_NS::ComputeShader::m_isComputeState</definition>
@@ -78,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/ComputeShader.h" line="38" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/ComputeShader.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/ComputeShader.h" line="39" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/ComputeShader.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1ComputeShader_1a80c9fe00c6caae6b0098ee53809cad7d" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -93,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/ComputeShader.h" line="39" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/ComputeShader.h" bodystart="39" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/ComputeShader.h" line="40" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/ComputeShader.h" bodystart="40" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -272,7 +287,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Types/ComputeShader.h" line="12" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/ComputeShader.h" bodystart="12" bodyend="41"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/ComputeShader.h" line="12" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/ComputeShader.h" bodystart="12" bodyend="42"/>
     <listofallmembers>
       <member refid="classSR__GTYPES__NS_1_1ComputeShader_1a04c9b88677aa6783b08085c36df80517" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::ComputeShader</scope><name>BeginCompute</name></member>
       <member refid="classSR__GTYPES__NS_1_1ComputeShader_1a40630d8267802d528236bdee57cf9d1c" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::ComputeShader</scope><name>ComputeShader</name></member>
@@ -287,6 +302,7 @@
       <member refid="classSR__GTYPES__NS_1_1ComputeShader_1a80c9fe00c6caae6b0098ee53809cad7d" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::ComputeShader</scope><name>m_isDispatched</name></member>
       <member refid="classSR__GTYPES__NS_1_1ComputeShader_1aa2495b9d47c2cc1b70df8fdfb7506a1c" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::ComputeShader</scope><name>m_pipeline</name></member>
       <member refid="classSR__GTYPES__NS_1_1ComputeShader_1ad466b085983bde7b694b7eaada4a0aa1" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::ComputeShader</scope><name>m_pShader</name></member>
+      <member refid="classSR__GTYPES__NS_1_1ComputeShader_1ab7345c0a7e951c46488d97d20bc8200b" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::ComputeShader</scope><name>m_virtualUBO</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::ComputeShader</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::ComputeShader</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GTYPES_NS::ComputeShader</scope><name>operator=</name></member>

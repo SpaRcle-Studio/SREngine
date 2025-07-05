@@ -88,6 +88,7 @@
 
 | Type | Name |
 | ---: | :--- |
+| namespace | [**Codegen**](namespaceCodegen.md) <br> |
 | namespace | [**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md) <br> |
 | namespace | [**string\_literals**](namespacestd_1_1literals_1_1string__literals.md) <br> |
 | namespace | [**string\_view\_literals**](namespacestd_1_1literals_1_1string__view__literals.md) <br> |
@@ -97,6 +98,7 @@
 
 | Type | Name |
 | ---: | :--- |
+| struct | [**EnumSelector**](structCodegen_1_1EnumSelector.md) &lt;typename EnumType&gt;<br> |
 | struct | [**InputIteratorPointer**](structSR__UTILS__NS_1_1InputIteratorPointer.md) &lt;typename T&gt;<br> |
 | struct | [**IsDerivedFrom**](structSR__UTILS__NS_1_1IsDerivedFrom.md) &lt;T, class U&gt;<br> |
 

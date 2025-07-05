@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="52" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="52" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="53" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="53" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -232,6 +232,32 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="48" column="14"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1ac67f111dea6b64a1bf94dadb71a83045" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRSL_NS::SRSLRefAnalyzer::AnalyzeWhileStatement</definition>
+        <argsstring>(SRSLUseStack::Ptr &amp;pUseStack, std::list&lt; std::string &gt; &amp;stack, SRSLWhileStatement *pWhileStatement)</argsstring>
+        <name>AnalyzeWhileStatement</name>
+        <qualifiedname>SR_SRSL_NS::SRSLRefAnalyzer::AnalyzeWhileStatement</qualifiedname>
+        <param>
+          <type>SRSLUseStack::Ptr &amp;</type>
+          <declname>pUseStack</declname>
+        </param>
+        <param>
+          <type>std::list&lt; std::string &gt; &amp;</type>
+          <declname>stack</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__SRSL__NS_1_1SRSLWhileStatement" kindref="compound">SRSLWhileStatement</ref> *</type>
+          <declname>pWhileStatement</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="49" column="14"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a110a0302116a99b8a5554f208fc90f74" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void SR_SRSL_NS::SRSLRefAnalyzer::AnalyzeEntryPoint</definition>
@@ -256,7 +282,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="49" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="50" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -311,7 +337,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="34" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="34" bodyend="54"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="34" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="34" bodyend="55"/>
     <listofallmembers>
       <member refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a5f23d3edd622a199c8239ced6a2507f0" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>Analyze</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a910967c46528c0b91a353d73c8fd4ce1" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>AnalyzeArrayExpression</name></member>
@@ -321,6 +347,7 @@
       <member refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1ada0b773f2f27ee64e23ad5c3c55d6e2e" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>AnalyzeIfStatement</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a0ce5b3ffc9b3c20d04584e6ec9e860bf" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>AnalyzeTree</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1aac832a391ea0622c1eb85f67902d0fb0" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>AnalyzeVariable</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1ac67f111dea6b64a1bf94dadb71a83045" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>AnalyzeWhileStatement</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>DestroySingleton</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1aa9c4f318eb11a2e1affb6793dff85e00" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>FindFunction</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a5247bd9f7f1adbc37f8e3ab6237d2793" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>FindFunction</name></member>

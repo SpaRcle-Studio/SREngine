@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="122" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="122" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="103" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="103" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1EnumReflector_1_1Data_1a83d077ecd2b1e4c7c8210b3aafae4790" prot="public" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="123" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="123" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="104" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="104" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1EnumReflector_1_1Data_1a7e589f75159fb3bdcfe676a284b30de4" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="124" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="124" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="105" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="105" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1EnumReflector_1_1Data_1a6550230fed09b89ad1208667014ed0ed" prot="public" static="no" mutable="no">
         <type>uint64_t</type>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="125" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="125" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="106" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="106" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -76,7 +76,7 @@
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="120" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="121" bodyend="126"/>
+    <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="101" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="102" bodyend="107"/>
     <listofallmembers>
       <member refid="structSR__UTILS__NS_1_1EnumReflector_1_1Data_1a7e589f75159fb3bdcfe676a284b30de4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector::Data</scope><name>enumName</name></member>
       <member refid="structSR__UTILS__NS_1_1EnumReflector_1_1Data_1a6550230fed09b89ad1208667014ed0ed" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector::Data</scope><name>hashName</name></member>

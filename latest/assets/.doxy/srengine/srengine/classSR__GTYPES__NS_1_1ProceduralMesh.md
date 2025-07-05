@@ -175,7 +175,8 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |   | [**ProceduralMesh**](#function-proceduralmesh) () = default<br> |
 |  void | [**SetIndexedVertices**](#function-setindexedvertices) (void \* pData, uint64\_t count) <br> |
 |  void | [**SetIndices**](#function-setindices) (void \* pData, uint64\_t count) <br> |
-|  void | [**SetVertices**](#function-setvertices) (const std::vector&lt; Vertices::StaticMeshVertex &gt; & vertices) <br> |
+|  void | [**SetVertices**](#function-setvertices-12) (const std::vector&lt; Vertices::StaticMeshVertex &gt; & vertices) <br> |
+|  void | [**SetVertices**](#function-setvertices-22) (const [**SR\_HTYPES\_NS::FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md)&lt; Vertices::StaticMeshVertex &gt; & vertices) <br> |
 |  void | [**SwapIndexedVertices**](#function-swapindexedvertices-12) ([**SR\_HTYPES\_NS::FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md)&lt; Vertices::StaticMeshVertexAligned &gt; & vertices) <br> |
 |  void | [**SwapIndexedVertices**](#function-swapindexedvertices-22) ([**SR\_HTYPES\_NS::FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md)&lt; Vertices::StaticMeshVertex &gt; & vertices) <br> |
 |  void | [**SwapIndices**](#function-swapindices) ([**SR\_HTYPES\_NS::FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md)&lt; uint32\_t &gt; & indices) <br> |
@@ -689,11 +690,26 @@ void SR_GTYPES_NS::ProceduralMesh::SetIndices (
 
 
 
-### function SetVertices 
+### function SetVertices [1/2]
 
 ```C++
 void SR_GTYPES_NS::ProceduralMesh::SetVertices (
     const std::vector< Vertices::StaticMeshVertex > & vertices
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SetVertices [2/2]
+
+```C++
+void SR_GTYPES_NS::ProceduralMesh::SetVertices (
+    const SR_HTYPES_NS::FastMemoryArray < Vertices::StaticMeshVertex > & vertices
 ) 
 ```
 

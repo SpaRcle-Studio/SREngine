@@ -45,6 +45,7 @@ namespace SR_GTYPES_NS {
         SR_GTYPES_NS::Shader::Ptr m_pShader = nullptr;
         mutable SR_GRAPH_NS::Pipeline::Ptr m_pipeline = nullptr;
         int32_t m_descriptorSet = SR_ID_INVALID;
+        int32_t m_virtualUBO = SR_ID_INVALID;
         bool m_isComputeState = false;
         bool m_isDispatched = false;
 

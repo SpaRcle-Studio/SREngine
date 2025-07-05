@@ -24,25 +24,6 @@
 #include <Codegen/EnumsFwd.generated.hpp>
 
 namespace SR_UTILS_NS {
-    enum class EnumVariant : uint8_t {
-        Undefined, List, Flags
-    };
-}
-
-namespace Codegen {
-    template <typename EnumType> struct EnumSelector {};
-
-    template<typename T>
-    constexpr SR_UTILS_NS::EnumVariant GetEnumVariant(T) noexcept {
-        return SR_UTILS_NS::EnumVariant::Undefined;
-    }
-
-    template<typename T> constexpr size_t GetEnumItemsCount(T) noexcept {
-        return 0;
-    }
-}
-
-namespace SR_UTILS_NS {
     class EnumReflector;
 
     class EnumReflectorManager : public SR_UTILS_NS::Singleton<EnumReflectorManager> {

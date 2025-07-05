@@ -211,6 +211,7 @@
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_ASPECT**](#variable-shader_aspect)   = `"ASPECT"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_CASCADE\_LIGHT\_SPACE\_MATRICES**](#variable-shader_cascade_light_space_matrices)   = `"CASCADE\_LIGHT\_SPACE\_MATRICES"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_CASCADE\_SPLITS**](#variable-shader_cascade_splits)   = `"CASCADE\_SPLITS"`<br> |
+|  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_COMPUTE\_STAGE**](#variable-shader_compute_stage)   = `"COMPUTE\_STAGE"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_DEPTH\_ATTACHMENT**](#variable-shader_depth_attachment)   = `"DEPTH\_ATTACHMENT"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_DIRECTIONAL\_LIGHT\_POSITION**](#variable-shader_directional_light_position)   = `"DIRECTIONAL\_LIGHT\_POSITION"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_LIGHT\_SPACE\_MATRIX**](#variable-shader_light_space_matrix)   = `"LIGHT\_SPACE\_MATRIX"`<br> |
@@ -734,6 +735,19 @@ SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_CASCADE_LIGHT_SPACE
 
 ```C++
 SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_CASCADE_SPLITS;
+```
+
+
+
+
+<hr>
+
+
+
+### variable SHADER\_COMPUTE\_STAGE 
+
+```C++
+SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_COMPUTE_STAGE;
 ```
 
 

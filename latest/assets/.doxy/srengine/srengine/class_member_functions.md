@@ -126,6 +126,7 @@
 * **AnalyzeIfStatement** ([**SR\_SRSL\_NS::SRSLRefAnalyzer**](classSR__SRSL__NS_1_1SRSLRefAnalyzer.md))
 * **AnalyzeTree** ([**SR\_SRSL\_NS::SRSLRefAnalyzer**](classSR__SRSL__NS_1_1SRSLRefAnalyzer.md))
 * **AnalyzeVariable** ([**SR\_SRSL\_NS::SRSLRefAnalyzer**](classSR__SRSL__NS_1_1SRSLRefAnalyzer.md))
+* **AnalyzeWhileStatement** ([**SR\_SRSL\_NS::SRSLRefAnalyzer**](classSR__SRSL__NS_1_1SRSLRefAnalyzer.md))
 * **allocator\_dummy\_unsafe** ([**SR\_TYPES\_NS::detail::allocator\_dummy\_unsafe**](structSR__TYPES__NS_1_1detail_1_1allocator__dummy__unsafe.md))
 * **assign** ([**SR\_TYPES\_NS::detail::array\_detail::array**](classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array.md))
 * **at** ([**SR\_TYPES\_NS::detail::array\_detail::array**](classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array.md), [**util::dynamic\_array**](classutil_1_1dynamic__array.md))

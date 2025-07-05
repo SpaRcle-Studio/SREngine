@@ -238,39 +238,6 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" line="12" column="5" bodyfile="Engine/libs/Utils/inc/Utils/CommandManager/CmdManager.h" bodystart="12" bodyend="14"/>
       </memberdef>
-      <memberdef kind="enum" id="namespaceSR__UTILS__NS_1af51bfa3dbeb9285cef7dd48d48b76311" prot="public" static="no" strong="yes">
-        <type>uint8_t</type>
-        <name>EnumVariant</name>
-        <qualifiedname>SR_UTILS_NS::EnumVariant</qualifiedname>
-        <enumvalue id="namespaceSR__UTILS__NS_1af51bfa3dbeb9285cef7dd48d48b76311aec0fc0100c4fc1ce4eea230c3dc10360" prot="public">
-          <name>Undefined</name>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="namespaceSR__UTILS__NS_1af51bfa3dbeb9285cef7dd48d48b76311a4ee29ca12c7d126654bd0e5275de6135" prot="public">
-          <name>List</name>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="namespaceSR__UTILS__NS_1af51bfa3dbeb9285cef7dd48d48b76311a4ea7801f17a4e5485e8b050c052fb443" prot="public">
-          <name>Flags</name>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="17" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="17" bodyend="19"/>
-      </memberdef>
       <memberdef kind="enum" id="namespaceSR__UTILS__NS_1a436bfeb743303c9ca2e3f733d769abd2" prot="public" static="no" strong="yes">
         <type></type>
         <name>MarshalSaveMode</name>
@@ -504,6 +471,39 @@
         <inbodydescription>
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="19" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="19" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespaceSR__UTILS__NS_1af51bfa3dbeb9285cef7dd48d48b76311" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>EnumVariant</name>
+        <qualifiedname>SR_UTILS_NS::EnumVariant</qualifiedname>
+        <enumvalue id="namespaceSR__UTILS__NS_1af51bfa3dbeb9285cef7dd48d48b76311aec0fc0100c4fc1ce4eea230c3dc10360" prot="public">
+          <name>Undefined</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceSR__UTILS__NS_1af51bfa3dbeb9285cef7dd48d48b76311a4ee29ca12c7d126654bd0e5275de6135" prot="public">
+          <name>List</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceSR__UTILS__NS_1af51bfa3dbeb9285cef7dd48d48b76311a4ea7801f17a4e5485e8b050c052fb443" prot="public">
+          <name>Flags</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="282" column="5" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="282" bodyend="284"/>
       </memberdef>
       <memberdef kind="enum" id="namespaceSR__UTILS__NS_1ac36557f19a3e92bb036d9ccb273aca4e" prot="public" static="no" strong="yes">
         <type>uint8_t</type>

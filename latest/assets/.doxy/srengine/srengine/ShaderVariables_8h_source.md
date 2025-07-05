@@ -21,6 +21,7 @@ namespace SR_SRSL_NS {
     SR_INLINE_STATIC const std::map<std::string, std::string> SR_SRSL_DEFAULT_PUSH_CONSTANTS = { 
             { "PC_SHADOW_CASCADE_INDEX",           "int"        },
             { "PC_COLOR_BUFFER_MODE",              "int"        },
+            { "COMPUTE_STAGE",                     "int"        },
             { "PC_COLOR_BUFFER_VALUE",             "vec3"       },
     };
 
