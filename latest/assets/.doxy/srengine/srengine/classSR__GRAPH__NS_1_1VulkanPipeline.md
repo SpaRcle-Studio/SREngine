@@ -167,6 +167,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual void | [**EndCmdBuffer**](#function-endcmdbuffer) () override<br>_Конец записи в буфер команд. Разделение необходимо некоторым графическим API._  |
 | virtual void | [**EndCompute**](#function-endcompute) () override<br>_Конец вычислений в Compute Shader._  |
 | virtual void | [**EndRender**](#function-endrender) () override<br>_Обязательно нужно вызвать после успешного вызова BeginRender._  |
+| virtual void | [**FlushSSBO**](#function-flushssbo) (uint32\_t SSBO, uint64\_t offset, uint64\_t size) override<br> |
 | virtual bool | [**FreeCubeMap**](#function-freecubemap) (int32\_t \* id) override<br> |
 | virtual bool | [**FreeDescriptorSet**](#function-freedescriptorset) (int32\_t \* id) override<br> |
 | virtual bool | [**FreeFBO**](#function-freefbo) (int32\_t \* id) override<br> |
@@ -266,6 +267,7 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 | virtual void | [**EndCompute**](classSR__GRAPH__NS_1_1Pipeline.md#function-endcompute) () <br>_Конец вычислений в Compute Shader._  |
 | virtual void | [**EndDrawOverlay**](classSR__GRAPH__NS_1_1Pipeline.md#function-enddrawoverlay) (OverlayType overlayType) <br> |
 | virtual void | [**EndRender**](classSR__GRAPH__NS_1_1Pipeline.md#function-endrender) () <br>_Обязательно нужно вызвать после успешного вызова BeginRender._  |
+| virtual void | [**FlushSSBO**](classSR__GRAPH__NS_1_1Pipeline.md#function-flushssbo) (uint32\_t SSBO, uint64\_t offset, uint64\_t size) <br> |
 | virtual bool | [**FreeCubeMap**](classSR__GRAPH__NS_1_1Pipeline.md#function-freecubemap) (int32\_t \* id) <br> |
 | virtual bool | [**FreeDescriptorSet**](classSR__GRAPH__NS_1_1Pipeline.md#function-freedescriptorset) (int32\_t \* id) <br> |
 | virtual bool | [**FreeFBO**](classSR__GRAPH__NS_1_1Pipeline.md#function-freefbo) (int32\_t \* id) <br> |
@@ -1155,6 +1157,25 @@ virtual void SR_GRAPH_NS::VulkanPipeline::EndRender () override
 
 
 Implements [*SR\_GRAPH\_NS::Pipeline::EndRender*](classSR__GRAPH__NS_1_1Pipeline.md#function-endrender)
+
+
+<hr>
+
+
+
+### function FlushSSBO 
+
+```C++
+virtual void SR_GRAPH_NS::VulkanPipeline::FlushSSBO (
+    uint32_t SSBO,
+    uint64_t offset,
+    uint64_t size
+) override
+```
+
+
+
+Implements [*SR\_GRAPH\_NS::Pipeline::FlushSSBO*](classSR__GRAPH__NS_1_1Pipeline.md#function-flushssbo)
 
 
 <hr>

@@ -9,6 +9,7 @@
     <innerfile refid="MeshManager_8h">MeshManager.h</innerfile>
     <innerfile refid="ShaderProgramManager_8h">ShaderProgramManager.h</innerfile>
     <innerfile refid="ShaderUBOBlock_8h">ShaderUBOBlock.h</innerfile>
+    <innerfile refid="SSBO_8h">SSBO.h</innerfile>
     <innerfile refid="SSBOManager_8h">SSBOManager.h</innerfile>
     <innerfile refid="TextureConfigs_8h">TextureConfigs.h</innerfile>
     <innerfile refid="UBOManager_8h">UBOManager.h</innerfile>

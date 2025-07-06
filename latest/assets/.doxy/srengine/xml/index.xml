@@ -7885,6 +7885,7 @@
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1ae704aa6f79d3bedede16b5178b269ded" kind="function"><name>BindSSBO</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a8e3a1bc5398a3e29e9e94aa0bef3a1f1" kind="function"><name>MapSSBO</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a863b1a3d49f81492e7b5afe1adae7cb1" kind="function"><name>UnMapSSBO</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Pipeline_1acbae5cb2f46970e09acfde68e8331969" kind="function"><name>FlushSSBO</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a69662cc79877bb2e0c1bf234e413d9b1" kind="function"><name>UpdateUBO</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1aaadace5910d67cb91c3c84aad7c0cd6d" kind="function"><name>UpdateSSBO</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1afe042f0c53e552ff100cd09adf284dfc" kind="function"><name>ReadSSBO</name></member>
@@ -13630,6 +13631,7 @@
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a0eb35599a9be107ba8b8a9170220d0e0" kind="function"><name>UpdateUBO</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a778bf751c0cd1759aa11e2979a6a59bc" kind="function"><name>UpdateSSBO</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a7c9112ac4a1906405e6ae99b9b9320f8" kind="function"><name>ReadSSBO</name></member>
+    <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a977019920da5b8c4cba79ce73774f17e" kind="function"><name>FlushSSBO</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a12250d7b443c052e1b2293320e1fdd62" kind="function"><name>MapSSBO</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1ae0feba849f26146f612955e4b0c9ab7b" kind="function"><name>UnMapSSBO</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a12d6fd94377ca553fa8472c1b66f3cea" kind="function"><name>PushConstants</name></member>
@@ -15806,6 +15808,8 @@
   <compound refid="ShaderProgramManager_8h" kind="file"><name>ShaderProgramManager.h</name>
   </compound>
   <compound refid="ShaderUBOBlock_8h" kind="file"><name>ShaderUBOBlock.h</name>
+  </compound>
+  <compound refid="SSBO_8h" kind="file"><name>SSBO.h</name>
   </compound>
   <compound refid="SSBOManager_8h" kind="file"><name>SSBOManager.h</name>
   </compound>
