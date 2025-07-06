@@ -11,6 +11,7 @@
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
 #include <Graphics/Types/ComputeShader.h>
 #include <Graphics/Render/RenderContext.h>
+#include <Graphics/Memory/SSBO.h>
 
 #include <Scripting/Cpp/CppBehaviour.h>
 
@@ -28,7 +29,6 @@ namespace SpaRcle::Scripts::Samples {
 	    struct alignas(16) Vertex {
 			alignas(16) SR_MATH_NS::FVector3 position;
 			alignas(16) SR_MATH_NS::FVector3 normal;
-			alignas(16) SR_MATH_NS::IVector2 id;
 		};
 
         ~MarchingCubes() override {
@@ -187,72 +187,46 @@ namespace SpaRcle::Scripts::Samples {
 
             Finalize();
 
-            m_computeShader = SR_GTYPES_NS::ComputeShader::Load(shaderPath);
+            pComputeShader = SR_GTYPES_NS::ComputeShader::Load(shaderPath);
 
             int numVoxelsPerAxis = numPointsPerAxis - 1;
             int numVoxels = numVoxelsPerAxis * numVoxelsPerAxis * numVoxelsPerAxis;
             int maxTriangleCount = numVoxels * 5;
             int maxVertexCount = maxTriangleCount * 3;
 
-            if (m_computeShader) {
-                const uint64_t verticesSize = sizeof(uint32_t) + 12 + sizeof(Vertex) * maxVertexCount;
-                verticesSSBO = m_computeShader->GetPipeline()->AllocateSSBO(verticesSize, SR_GRAPH_NS::SSBOUsage::GPUToCPU);
+            std::vector<float_t> densities;
 
-                const uint64_t indicesSize = sizeof(uint32_t) + sizeof(uint32_t) * maxVertexCount;
-                indicesSSBO = m_computeShader->GetPipeline()->AllocateSSBO(indicesSize, SR_GRAPH_NS::SSBOUsage::GPUToCPU);
-
-                hashTableSSBO = m_computeShader->GetPipeline()->AllocateSSBO(sizeof(uint32_t) * vertexHashTableSize, SR_GRAPH_NS::SSBOUsage::CPUToGPU);
-
-                /// density SSBO
-                switch (shape) {
-                    default:
-                    case MarchingCubesShape::Sphere:
-                        densities = GenerateSphereDensityField();
-                        break;
-                    case MarchingCubesShape::Cube:
-                        densities = GenerateCubeDensityField();
-                        break;
-                    case MarchingCubesShape::WavySphere:
-                        densities = generateWavySphereDensities();
-                        break;
-                    case MarchingCubesShape::PerlinNoise:
-                        densities = GenerateRandomDensityField();
-                        break;
-                }
-
-                const uint64_t densityDataSize = densities.size() * sizeof(DensityType);
-                densitySSBO = m_computeShader->GetPipeline()->AllocateSSBO(densityDataSize, SR_GRAPH_NS::SSBOUsage::CPUToGPU);
-
-                m_computeShader->GetPipeline()->UpdateSSBO(densitySSBO, densities.data(), densityDataSize);
+            /// density SSBO
+            switch (shape) {
+                default:
+                case MarchingCubesShape::Sphere:
+                    densities = GenerateSphereDensityField();
+                    break;
+                case MarchingCubesShape::Cube:
+                    densities = GenerateCubeDensityField();
+                    break;
+                case MarchingCubesShape::WavySphere:
+                    densities = generateWavySphereDensities();
+                    break;
+                case MarchingCubesShape::PerlinNoise:
+                    densities = GenerateRandomDensityField();
+                    break;
             }
 
-            vertexKeys.resize(vertexHashTableSize);
-            vertexValues.resize(vertexHashTableSize);
+            pDensitySSBO = SR_GRAPH_NS::SSBOInstance::Create<float_t>(densities.size(), SR_GRAPH_NS::SSBOUsage::CPUToGPU, "densities");
+            pDensitySSBO->UpdateSSBO(densities.data());
 
-            vertexKeys.FillInt(-1);
-            vertexValues.FillZero();
+            pHashTableSSBO = SR_GRAPH_NS::SSBOInstance::Create<uint32_t>(vertexHashTableSize, SR_GRAPH_NS::SSBOUsage::CPUToGPU, "hashTable");
+            pVerticesSSBO = SR_GRAPH_NS::SSBOInstance::Create<Vertex>(maxVertexCount, SR_GRAPH_NS::SSBOUsage::GPUToCPU, "vertices", SR_GRAPH_NS::SSBOFlags::StructuredCounter);
+            pIndicesSSBO = SR_GRAPH_NS::SSBOInstance::Create<uint32_t>(maxVertexCount, SR_GRAPH_NS::SSBOUsage::GPUToCPU, "indices", SR_GRAPH_NS::SSBOFlags::Counter);
 
             Generate();
-        }
-
-
-        void ResetHashTable() {
-            SR_TRACY_ZONE;
-
-            void* pData = nullptr;
-            if (!m_computeShader->GetPipeline()->MapSSBO(hashTableSSBO, &pData)) {
-                return;
-            }
-
-            std::memset(pData, -1, sizeof(uint32_t) * vertexHashTableSize);
-
-            m_computeShader->GetPipeline()->UnMapSSBO(hashTableSSBO);
         }
 
         void Generate() {
             SR_TRACY_ZONE;
 
-            if (!m_computeShader) {
+            if (!pComputeShader) {
                 return;
             }
 
@@ -261,22 +235,18 @@ namespace SpaRcle::Scripts::Samples {
                 return;
             }
 
-            uint32_t nullVal = 0;
-            m_computeShader->GetPipeline()->UpdateSSBO(verticesSSBO, &nullVal, sizeof(uint32_t));
-            m_computeShader->GetPipeline()->UpdateSSBO(indicesSSBO, &nullVal, sizeof(uint32_t));
-
-            ResetHashTable();
+            pHashTableSSBO->Memset(-1);
 
             for (int stage = 0; stage <= 1; ++stage) {
-                if (m_computeShader->BeginCompute()) {
-                    m_computeShader->GetShader()->BindSSBO("vertices", verticesSSBO);
-                    m_computeShader->GetShader()->BindSSBO("indices", indicesSSBO);
-                    m_computeShader->GetShader()->BindSSBO("densities", densitySSBO);
-                    m_computeShader->GetShader()->BindSSBO("hashTable", hashTableSSBO);
-                    m_computeShader->GetShader()->SetConstInt("vertexHashTableSize"_atom, static_cast<int>(vertexHashTableSize));
-                    m_computeShader->GetShader()->SetConstInt(SR_GRAPH_NS::SHADER_COMPUTE_STAGE, stage);
-                    m_computeShader->Dispatch(numVoxelsPerAxis, numVoxelsPerAxis, numVoxelsPerAxis);
-                    m_computeShader->EndCompute();
+                if (pComputeShader->BeginCompute()) {
+                    pDensitySSBO->Bind();
+                    pHashTableSSBO->Bind();
+                    pVerticesSSBO->Bind();
+                    pIndicesSSBO->Bind();
+                    pComputeShader->GetShader()->SetConstInt("vertexHashTableSize"_atom, static_cast<int>(vertexHashTableSize));
+                    pComputeShader->GetShader()->SetConstInt(SR_GRAPH_NS::SHADER_COMPUTE_STAGE, stage);
+                    pComputeShader->Dispatch(numVoxelsPerAxis, numVoxelsPerAxis, numVoxelsPerAxis);
+                    pComputeShader->EndCompute();
                 }
             }
 
@@ -285,50 +255,42 @@ namespace SpaRcle::Scripts::Samples {
 
         void ReadIndices() {
             SR_TRACY_ZONE;
-            void* pData = nullptr;
 
-            if (!m_computeShader->GetPipeline()->MapSSBO(indicesSSBO, &pData)) {
-                return;
+            if (void* pData = pIndicesSSBO->MapData()) {
+                const uint32_t indicesCount = pIndicesSSBO->GetCounter();
+                indices.resize(indicesCount);
+                std::memcpy(indices.data(), pData, sizeof(uint32_t) * indicesCount);
+                pIndicesSSBO->ResetCounter();
+                pIndicesSSBO->FlushCounter();
+                pIndicesSSBO->UnMap();
             }
-
-            uint32_t indicesCount = *reinterpret_cast<uint32_t*>(pData);
-            indices.resize(indicesCount);
-            std::memcpy(indices.data(), reinterpret_cast<uint8_t*>(pData) + sizeof(uint32_t), sizeof(uint32_t) * indicesCount);
-
-            m_computeShader->GetPipeline()->UnMapSSBO(indicesSSBO);
         }
 
         void ReadVertices() {
             SR_TRACY_ZONE;
 
-            void* pData = nullptr;
-            if (!m_computeShader->GetPipeline()->MapSSBO(verticesSSBO, &pData)) {
-                return;
+            if (auto&& pVertices = reinterpret_cast<Vertex*>(pVerticesSSBO->MapData())) {
+                const uint32_t verticesCount = pVerticesSSBO->GetCounter();
+                vertices.resize(verticesCount);
+
+                auto&& range = std::views::iota(0, static_cast<int>(verticesCount));
+
+                std::for_each(std::execution::par_unseq, range.begin(), range.end(), [&](int index) {
+                    const Vertex& vertex = pVertices[index];
+                    vertices[index] = SR_GRAPH_NS::Vertices::StaticMeshVertex{
+                        .pos = vertex.position,
+                        .norm = vertex.normal
+                    };
+                });
+
+                pVerticesSSBO->ResetCounter();
+                pVerticesSSBO->FlushCounter();
+                pVerticesSSBO->UnMap();
             }
-
-            uint32_t verticesCount = *reinterpret_cast<uint32_t*>(pData);
-            Vertex* pVertices = reinterpret_cast<Vertex*>(reinterpret_cast<uint8_t*>(pData) + sizeof(uint32_t) + 12);
-
-            vertices.resize(verticesCount);
-
-            auto&& range = std::views::iota(0, static_cast<int>(verticesCount));
-            std::for_each(std::execution::par_unseq, range.begin(), range.end(), [&](int index) {
-                const Vertex& vertex = pVertices[index];
-                vertices[index] = SR_GRAPH_NS::Vertices::StaticMeshVertex{
-                    .pos = vertex.position,
-                    .norm = vertex.normal
-                };
-            });
-
-            m_computeShader->GetPipeline()->UnMapSSBO(verticesSSBO);
         }
 
         void GenerateMesh() {
             SR_TRACY_ZONE;
-
-            if (verticesSSBO == SR_ID_INVALID || indicesSSBO == SR_ID_INVALID) {
-                return;
-            }
 
             ReadIndices();
             ReadVertices();
@@ -350,38 +312,23 @@ namespace SpaRcle::Scripts::Samples {
         void Finalize() {
             SR_TRACY_ZONE;
 
-            if (hashTableSSBO != SR_ID_INVALID) {
-                m_computeShader->GetPipeline()->FreeSSBO(&hashTableSSBO);
-            }
-
-            if (indicesSSBO != SR_ID_INVALID) {
-                m_computeShader->GetPipeline()->FreeSSBO(&indicesSSBO);
-            }
-
-            if (verticesSSBO != SR_ID_INVALID) {
-                m_computeShader->GetPipeline()->FreeSSBO(&verticesSSBO);
-            }
-
-            if (densitySSBO != SR_ID_INVALID) {
-                m_computeShader->GetPipeline()->FreeSSBO(&densitySSBO);
-            }
-
-            m_computeShader = nullptr;
+            pVerticesSSBO = nullptr;
+            pIndicesSSBO = nullptr;
+            pHashTableSSBO = nullptr;
+            pDensitySSBO = nullptr;
+            pComputeShader = nullptr;
         }
 
     private:
         SR_HTYPES_NS::FastMemoryArray<SR_GRAPH_NS::Vertices::StaticMeshVertex> vertices;
         SR_HTYPES_NS::FastMemoryArray<uint32_t> indices;
 
-        SR_HTYPES_NS::FastMemoryArray<uint32_t> vertexKeys; // для хеш-таблицы вершин
-        SR_HTYPES_NS::FastMemoryArray<uint32_t> vertexValues; // для хеш-таблицы вершин
+        SR_GTYPES_NS::ComputeShader::Ptr pComputeShader = nullptr;
 
-        std::vector<DensityType> densities;
-        SR_GTYPES_NS::ComputeShader::Ptr m_computeShader = nullptr;
-        int32_t verticesSSBO = SR_ID_INVALID;
-        int32_t indicesSSBO = SR_ID_INVALID;
-        int32_t densitySSBO = SR_ID_INVALID;
-        int32_t hashTableSSBO = SR_ID_INVALID;
+        SR_GRAPH_NS::SSBOInstance::Ptr pDensitySSBO = nullptr;
+        SR_GRAPH_NS::SSBOInstance::Ptr pHashTableSSBO = nullptr;
+        SR_GRAPH_NS::SSBOInstance::Ptr pVerticesSSBO = nullptr;
+        SR_GRAPH_NS::SSBOInstance::Ptr pIndicesSSBO = nullptr;
 
         /// @property @onChanged(OnEnable)
         uint32_t numPointsPerAxis = 10;

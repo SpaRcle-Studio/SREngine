@@ -3,27 +3,19 @@ ShaderType Compute;
 struct Vertex {
     vec3 position;
     vec3 normal;
-    ivec2 id; // Unique ID for the vertex
 };
-
-//[[ssbo(mutex)]] uint mutex;
 
 [[ssbo(vertices)]] uint vertexCount;
 [[ssbo(vertices)]] Vertex[] vertices;
 
-//[[ssbo(vertexKeys)]] uint[] vertexKeys;
-//[[ssbo(vertexValues)]] int[] vertexValues;
-[[ssbo(hashTable)]] uint[] hashTable;
-
 [[ssbo(indices)]] uint indicesCount;
 [[ssbo(indices)]] uint[] indices;
 
-[[const]] ivec3 cornerOffsets[8] = {
-    ivec3(0, 0, 0), ivec3(1, 0, 0), ivec3(1, 1, 0), ivec3(0, 1, 0),
-    ivec3(0, 0, 1), ivec3(1, 0, 1), ivec3(1, 1, 1), ivec3(0, 1, 1)
-};
+[[ssbo(hashTable)]] uint[] hashTable;
 
 [[ssbo(densities)]] float[] densities;
+
+[[const], [uniform]] int vertexHashTableSize;
 
 #include <Samples/MarchingCubes/MarchTables.srsl>
 
@@ -31,8 +23,6 @@ struct Vertex {
 [[const]] float isoLevel = 0.2;
 [[const]] float voxelSize = 0.1;
 [[const]] int numPointsPerAxis = 16;
-
-[[const], [uniform]] int vertexHashTableSize;
 
 float GetDensity(ivec3 pos) {
     if (pos.x < 0 || pos.x >= densityCountAxis ||
