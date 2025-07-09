@@ -147,6 +147,7 @@ namespace SR_SCRIPTING_NS {
 
         if (m_settings.compilerType == CppCompilerType::MSVC) {
             customArgs += "-nologo /std:c++20 /EHsc ";
+            customArgs += "/utf-8 ";
             customArgs += "/DSR_ENGINE_SCRIPT_API_MODE ";
             customArgs += "/DFMT_HEADER_ONLY ";
 

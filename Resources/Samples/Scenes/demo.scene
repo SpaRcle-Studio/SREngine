@@ -6870,26 +6870,6 @@ ddddцццゔぅヾボ
 														14-i:3265523632229615522
 													13-v:behaviourName
 														14-s:MarchingCubes
-													13-o:data
-														14-v:numPointsPerAxis
-															15-i:32
-														14-v:vertexHashTableSize
-															15-i:2097152
-														14-v:noiseScale
-															15-f:3.820000
-														14-v:seed
-															15-i:0
-														14-v:geometrySize
-															15-f:1.590000
-														14-v:isoLevel
-															15-f:0.020000
-														14-v:generateEveryFrame
-															15-b:true
-														14-o:chunkCoord
-															15-v:x
-																16-i:1
-														14-v:shape
-															15-s:Shader
 										10-k:i
 											11-o:d
 												12-v:type
@@ -7009,23 +6989,6 @@ ddddцццゔぅヾボ
 														14-i:3303638222097433881
 													13-v:behaviourName
 														14-s:MarchingCubes
-													13-o:data
-														14-v:numPointsPerAxis
-															15-i:32
-														14-v:vertexHashTableSize
-															15-i:2097152
-														14-v:noiseScale
-															15-f:3.820000
-														14-v:seed
-															15-i:0
-														14-v:geometrySize
-															15-f:1.590000
-														14-v:isoLevel
-															15-f:0.020000
-														14-v:generateEveryFrame
-															15-b:true
-														14-v:shape
-															15-s:Shader
 										10-k:i
 											11-o:d
 												12-v:type
@@ -7140,26 +7103,6 @@ ddddцццゔぅヾボ
 														14-i:4275128173124227750
 													13-v:behaviourName
 														14-s:MarchingCubes
-													13-o:data
-														14-v:numPointsPerAxis
-															15-i:32
-														14-v:vertexHashTableSize
-															15-i:2097152
-														14-v:noiseScale
-															15-f:3.820000
-														14-v:seed
-															15-i:0
-														14-v:geometrySize
-															15-f:1.590000
-														14-v:isoLevel
-															15-f:0.020000
-														14-v:generateEveryFrame
-															15-b:true
-														14-o:chunkCoord
-															15-v:z
-																16-i:1
-														14-v:shape
-															15-s:Shader
 										10-k:i
 											11-o:d
 												12-v:type
