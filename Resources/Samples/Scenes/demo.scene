@@ -1296,9 +1296,9 @@ ddddцццゔぅヾボ
 						6-v:heightPolicy
 							7-s:Fixed
 						6-v:width
-							7-f:1633.000000
+							7-f:1720.000000
 						6-v:height
-							7-f:949.000000
+							7-f:1356.000000
 		2-k:i
 			3-o:d
 				4-v:type
@@ -1759,9 +1759,9 @@ ddddцццゔぅヾボ
 						6-v:heightPolicy
 							7-s:Fixed
 						6-v:width
-							7-f:1633.000000
+							7-f:1720.000000
 						6-v:height
-							7-f:949.000000
+							7-f:1356.000000
 						6-v:align
 							7-s:End
 					5-v:direction
@@ -2702,9 +2702,9 @@ ddddцццゔぅヾボ
 						6-v:heightPolicy
 							7-s:Fixed
 						6-v:width
-							7-f:1633.000000
+							7-f:1720.000000
 						6-v:height
-							7-f:949.000000
+							7-f:1356.000000
 					5-v:containerAlign
 						6-s:Center
 					5-v:justify
@@ -3064,9 +3064,9 @@ ddddцццゔぅヾボ
 						6-v:heightPolicy
 							7-s:Fixed
 						6-v:width
-							7-f:1633.000000
+							7-f:1720.000000
 						6-v:height
-							7-f:949.000000
+							7-f:1356.000000
 					5-v:direction
 						6-s:Column
 					5-v:containerAlign
@@ -3451,9 +3451,9 @@ ddddцццゔぅヾボ
 						6-v:heightPolicy
 							7-s:Fixed
 						6-v:width
-							7-f:1633.000000
+							7-f:1720.000000
 						6-v:height
-							7-f:949.000000
+							7-f:1356.000000
 					5-v:direction
 						6-s:Column
 					5-v:containerAlign
@@ -6870,6 +6870,26 @@ ddddцццゔぅヾボ
 														14-i:3265523632229615522
 													13-v:behaviourName
 														14-s:MarchingCubes
+													13-o:data
+														14-v:numPointsPerAxis
+															15-i:32
+														14-v:vertexHashTableSize
+															15-i:2097152
+														14-v:noiseScale
+															15-f:3.820000
+														14-v:seed
+															15-i:0
+														14-v:geometrySize
+															15-f:1.590000
+														14-v:isoLevel
+															15-f:0.020000
+														14-v:generateEveryFrame
+															15-b:true
+														14-o:chunkCoord
+															15-v:x
+																16-i:1
+														14-v:shape
+															15-s:Shader
 										10-k:i
 											11-o:d
 												12-v:type
@@ -6989,6 +7009,23 @@ ddddцццゔぅヾボ
 														14-i:3303638222097433881
 													13-v:behaviourName
 														14-s:MarchingCubes
+													13-o:data
+														14-v:numPointsPerAxis
+															15-i:32
+														14-v:vertexHashTableSize
+															15-i:2097152
+														14-v:noiseScale
+															15-f:3.820000
+														14-v:seed
+															15-i:0
+														14-v:geometrySize
+															15-f:1.590000
+														14-v:isoLevel
+															15-f:0.020000
+														14-v:generateEveryFrame
+															15-b:true
+														14-v:shape
+															15-s:Shader
 										10-k:i
 											11-o:d
 												12-v:type
@@ -7103,6 +7140,26 @@ ddddцццゔぅヾボ
 														14-i:4275128173124227750
 													13-v:behaviourName
 														14-s:MarchingCubes
+													13-o:data
+														14-v:numPointsPerAxis
+															15-i:32
+														14-v:vertexHashTableSize
+															15-i:2097152
+														14-v:noiseScale
+															15-f:3.820000
+														14-v:seed
+															15-i:0
+														14-v:geometrySize
+															15-f:1.590000
+														14-v:isoLevel
+															15-f:0.020000
+														14-v:generateEveryFrame
+															15-b:true
+														14-o:chunkCoord
+															15-v:z
+																16-i:1
+														14-v:shape
+															15-s:Shader
 										10-k:i
 											11-o:d
 												12-v:type
