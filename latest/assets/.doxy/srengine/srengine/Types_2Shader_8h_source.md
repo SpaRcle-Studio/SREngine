@@ -114,6 +114,7 @@ namespace SR_GTYPES_NS {
         void SR_FASTCALL SetRect(uint64_t hashId, const SR_MATH_NS::FRect& v) noexcept;
         void SR_FASTCALL SetVec2(uint64_t hashId, const SR_MATH_NS::FVector2& v) noexcept;
         void SR_FASTCALL SetIVec2(uint64_t hashId, const SR_MATH_NS::IVector2& v) noexcept;
+        void SR_FASTCALL SetIVec3(uint64_t hashId, const SR_MATH_NS::IVector3& v) noexcept;
 
         void SR_FASTCALL SetConstBool(uint64_t hashId, bool v) noexcept;
         void SR_FASTCALL SetConstFloat(uint64_t hashId, float_t v) noexcept;
@@ -124,6 +125,7 @@ namespace SR_GTYPES_NS {
         void SR_FASTCALL SetConstVec3(uint64_t hashId, const SR_MATH_NS::FVector3& v) noexcept;
         void SR_FASTCALL SetConstVec2(uint64_t hashId, const SR_MATH_NS::FVector2& v) noexcept;
         void SR_FASTCALL SetConstIVec2(uint64_t hashId, const SR_MATH_NS::IVector2& v) noexcept;
+        void SR_FASTCALL SetConstIVec3(uint64_t hashId, const SR_MATH_NS::IVector3& v) noexcept;
 
         void SR_FASTCALL SetSampler2D(SR_UTILS_NS::StringAtom name, Texture* sampler) noexcept;
         void SR_FASTCALL SetSampler2D(SR_UTILS_NS::StringAtom name, int32_t sampler) noexcept;

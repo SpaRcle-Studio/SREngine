@@ -189,6 +189,7 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  void SR\_FASTCALL | [**SetConstColor**](#function-setconstcolor) (uint64\_t hashId, const [**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md) & v) noexcept<br> |
 |  void SR\_FASTCALL | [**SetConstFloat**](#function-setconstfloat) (uint64\_t hashId, float\_t v) noexcept<br> |
 |  void SR\_FASTCALL | [**SetConstIVec2**](#function-setconstivec2) (uint64\_t hashId, const SR\_MATH\_NS::IVector2 & v) noexcept<br> |
+|  void SR\_FASTCALL | [**SetConstIVec3**](#function-setconstivec3) (uint64\_t hashId, const SR\_MATH\_NS::IVector3 & v) noexcept<br> |
 |  void SR\_FASTCALL | [**SetConstInt**](#function-setconstint) (uint64\_t hashId, int32\_t v) noexcept<br> |
 |  void SR\_FASTCALL | [**SetConstMat4**](#function-setconstmat4) (uint64\_t hashId, const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & v) noexcept<br> |
 |  void SR\_FASTCALL | [**SetConstVec2**](#function-setconstvec2) (uint64\_t hashId, const SR\_MATH\_NS::FVector2 & v) noexcept<br> |
@@ -196,6 +197,7 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  void SR\_FASTCALL | [**SetConstVec4**](#function-setconstvec4) (uint64\_t hashId, const SR\_MATH\_NS::FVector4 & v) noexcept<br> |
 |  void SR\_FASTCALL | [**SetFloat**](#function-setfloat) (uint64\_t hashId, float\_t v) noexcept<br> |
 |  void SR\_FASTCALL | [**SetIVec2**](#function-setivec2) (uint64\_t hashId, const SR\_MATH\_NS::IVector2 & v) noexcept<br> |
+|  void SR\_FASTCALL | [**SetIVec3**](#function-setivec3) (uint64\_t hashId, const SR\_MATH\_NS::IVector3 & v) noexcept<br> |
 |  void SR\_FASTCALL | [**SetInt**](#function-setint) (uint64\_t hashId, int32\_t v) noexcept<br> |
 |  void SR\_FASTCALL | [**SetMat4**](#function-setmat4) (uint64\_t hashId, const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & v) noexcept<br> |
 |  void SR\_FASTCALL | [**SetRect**](#function-setrect) (uint64\_t hashId, const SR\_MATH\_NS::FRect & v) noexcept<br> |
@@ -990,6 +992,22 @@ void SR_FASTCALL SR_GTYPES_NS::Shader::SetConstIVec2 (
 
 
 
+### function SetConstIVec3 
+
+```C++
+void SR_FASTCALL SR_GTYPES_NS::Shader::SetConstIVec3 (
+    uint64_t hashId,
+    const SR_MATH_NS::IVector3 & v
+) noexcept
+```
+
+
+
+
+<hr>
+
+
+
 ### function SetConstInt 
 
 ```C++
@@ -1092,6 +1110,22 @@ void SR_FASTCALL SR_GTYPES_NS::Shader::SetFloat (
 void SR_FASTCALL SR_GTYPES_NS::Shader::SetIVec2 (
     uint64_t hashId,
     const SR_MATH_NS::IVector2 & v
+) noexcept
+```
+
+
+
+
+<hr>
+
+
+
+### function SetIVec3 
+
+```C++
+void SR_FASTCALL SR_GTYPES_NS::Shader::SetIVec3 (
+    uint64_t hashId,
+    const SR_MATH_NS::IVector3 & v
 ) noexcept
 ```
 

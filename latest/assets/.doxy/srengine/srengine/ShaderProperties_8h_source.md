@@ -37,6 +37,7 @@ namespace SR_GRAPH_NS {
         int32_t,
         SR_MATH_NS::FVector2,
         SR_MATH_NS::FVector3,
+        SR_MATH_NS::IVector3,
         SR_MATH_NS::FVector4
     > ShaderPropertyVariant;
 
@@ -196,6 +197,8 @@ namespace SR_GRAPH_NS {
                 return SR_MATH_NS::FVector2(SR_MATH_NS::Unit(0));
             case ShaderVarType::Vec3:
                 return SR_MATH_NS::FVector3(SR_MATH_NS::Unit(0));
+            case ShaderVarType::IVec3:
+                return SR_MATH_NS::IVector3(0);
             case ShaderVarType::Vec4:
                 return SR_MATH_NS::FVector4(SR_MATH_NS::Unit(0));
             case ShaderVarType::Sampler1D:

@@ -168,6 +168,7 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 
 | Type | Name |
 | ---: | :--- |
+|  bool | [**Export**](#function-export) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) const<br> |
 | virtual SR\_NODISCARD MeshType | [**GetMeshType**](#function-getmeshtype) () noexcept override const<br> |
 | virtual SR\_NODISCARD bool | [**IsCalculatable**](#function-iscalculatable) () override const<br> |
 | virtual SR\_NODISCARD bool | [**IsSupportVBO**](#function-issupportvbo) () override const<br> |
@@ -582,6 +583,21 @@ typedef Vertices::StaticMeshVertex SR_GTYPES_NS::ProceduralMesh::VertexType;
 <hr>
 ## Public Functions Documentation
 
+
+
+
+### function Export 
+
+```C++
+bool SR_GTYPES_NS::ProceduralMesh::Export (
+    const SR_UTILS_NS::Path & path
+) const
+```
+
+
+
+
+<hr>
 
 
 

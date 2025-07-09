@@ -51,6 +51,8 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD bool IsCalculatable() const override;
         SR_NODISCARD bool IsSupportVBO() const override;
 
+        bool Export(const SR_UTILS_NS::Path& path) const;
+
     private:
         void FreeVideoMemory() override;
         bool Calculate() override;

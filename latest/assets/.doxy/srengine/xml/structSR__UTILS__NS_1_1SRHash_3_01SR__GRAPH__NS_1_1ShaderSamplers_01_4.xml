@@ -21,14 +21,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="216" column="12" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="216" bodyend="225"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="219" column="12" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="219" bodyend="228"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="215" column="10" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="215" bodyend="226"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="218" column="10" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="218" bodyend="229"/>
     <listofallmembers>
       <member refid="structSR__UTILS__NS_1_1SRHash_3_01SR__GRAPH__NS_1_1ShaderSamplers_01_4_1acaea6522d128c48b89ecfe0013ab4265" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRHash&lt; SR_GRAPH_NS::ShaderSamplers &gt;</scope><name>operator()</name></member>
     </listofallmembers>

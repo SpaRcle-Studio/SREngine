@@ -8113,6 +8113,7 @@
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1ac5a7acb0d9aed027543dfd5a2694ee34" kind="function"><name>IsUniqueMesh</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1ae856ccedae6a060b798f3c37314e36ab" kind="function"><name>IsCalculatable</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1aad460d05b12c64efce8550b4afd06056" kind="function"><name>IsSupportVBO</name></member>
+    <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1aac1cff28a39803cd09b5d19d0c4e119b" kind="function"><name>Export</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1aee82348fabf1539c105bffb1fe6caaff" kind="function"><name>FreeVideoMemory</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a27260cd51b0292e5b9f69fa260bea19d" kind="function"><name>Calculate</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1af0db779a0e3c83254570f0a2eac408c7" kind="function"><name>SetDirtyMesh</name></member>
@@ -10036,6 +10037,7 @@
     <member refid="classSR__GTYPES__NS_1_1Shader_1a4237aa67a5a7d0c487387c8caed14235" kind="function"><name>SetRect</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a22830f3e8cfa165343749d759cfb35a2" kind="function"><name>SetVec2</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1ad5de1e27f9bd283cf412855a6591bf6c" kind="function"><name>SetIVec2</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Shader_1a2ef91baea7ae9be95a5b6129647190ce" kind="function"><name>SetIVec3</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a3e59357fb34efd4008489a963995a9e5" kind="function"><name>SetConstBool</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a0dda4dc07e381feac03ad5a0592e812d" kind="function"><name>SetConstFloat</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a32869593d8b3de9bd56321dd3c99e658" kind="function"><name>SetConstInt</name></member>
@@ -10045,6 +10047,7 @@
     <member refid="classSR__GTYPES__NS_1_1Shader_1a5d44147efc5ebd82616266fbf1a1686b" kind="function"><name>SetConstVec3</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a9d2b2ddca1dff7bd29e4faf6dbea85d7" kind="function"><name>SetConstVec2</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a6740d42bf9a20cdd524ddb58b306c25f" kind="function"><name>SetConstIVec2</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Shader_1a90ab1e9bb5d8741452123816691451b1" kind="function"><name>SetConstIVec3</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a0f18202442ce43daee0c5a4da28de93c" kind="function"><name>SetSampler2D</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a0b1da0cc95eaaeab8c08741ade7e69ea" kind="function"><name>SetSampler2D</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a76140dfdc2500cc12eecbdb2b0a29f3c" kind="function"><name>SetSamplerCube</name></member>
@@ -11237,6 +11240,7 @@
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a09dc77243e960a7f8969e3f1e1c8a0b2" kind="function"><name>EvalExpressionInt</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a75cf09e6315baea51abea45be89adb87" kind="function"><name>EvalExpressionVec2</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a003f32b82dcd19da7585aefd2389211e" kind="function"><name>EvalExpressionVec3</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLShader_1ac76e29c7d12bc974c99b3fa90d4879e5" kind="function"><name>EvalExpressionIVec3</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a52c8bda3307318f54fa3b2c95e6037e4" kind="function"><name>EvalExpressionVec4</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a62a63d2d0021a998b9755b17e6829dac" kind="function"><name>EvalExpressionValue</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1ab6983616d829c653d82d58e8ea6aa0dd" kind="function"><name>GenerateStages</name></member>
@@ -14131,7 +14135,7 @@
     <member refid="BasicWindowImpl_8h_1ac479aab0ea08f1e8e53d02c37dd1ca0daab27f5ee6b3e86fe7260fdd770a72010" kind="enumvalue"><name>Collapsed</name></member>
     <member refid="BasicWindowImpl_8h_1ac479aab0ea08f1e8e53d02c37dd1ca0da49d903a5c02560cf79bf6b516cc89457" kind="enumvalue"><name>Maximized</name></member>
     <member refid="BasicWindowImpl_8h_1ac479aab0ea08f1e8e53d02c37dd1ca0dae7ec409749889353b8f83a6b04159420" kind="enumvalue"><name>FullScreen</name></member>
-    <member refid="ShaderProperties_8h_1a78fb0e61feb6e02162be1353ae1d0eae" kind="typedef"><name>ShaderPropertyVariant</name></member>
+    <member refid="ShaderProperties_8h_1ab245485401e1ffed6b5beead8f9d61b5" kind="typedef"><name>ShaderPropertyVariant</name></member>
     <member refid="ShaderProperties_8h_1af59d4ba2aaaa54f83c1d8e8d343e0763" kind="typedef"><name>ShaderProperties</name></member>
     <member refid="ShaderProperties_8h_1a41bd7df3390015dc7cb3202df57e28bf" kind="typedef"><name>ShaderSamplers</name></member>
     <member refid="ShaderProperties_8h_1a3ce09526ddf0e5907be9e5507b58b850" kind="typedef"><name>SSBOBindings</name></member>

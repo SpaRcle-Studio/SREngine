@@ -261,9 +261,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="ShaderProperties_8h_1a78fb0e61feb6e02162be1353ae1d0eae" prot="public" static="no">
-        <type>std::variant&lt; <ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> *, float_t, int32_t, SR_MATH_NS::FVector2, SR_MATH_NS::FVector3, SR_MATH_NS::FVector4 &gt;</type>
-        <definition>typedef std::variant&lt; SR_GTYPES_NS::Texture*, float_t, int32_t, SR_MATH_NS::FVector2, SR_MATH_NS::FVector3, SR_MATH_NS::FVector4 &gt; SR_GRAPH_NS::ShaderPropertyVariant</definition>
+      <memberdef kind="typedef" id="ShaderProperties_8h_1ab245485401e1ffed6b5beead8f9d61b5" prot="public" static="no">
+        <type>std::variant&lt; <ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> *, float_t, int32_t, SR_MATH_NS::FVector2, SR_MATH_NS::FVector3, SR_MATH_NS::IVector3, SR_MATH_NS::FVector4 &gt;</type>
+        <definition>typedef std::variant&lt; SR_GTYPES_NS::Texture*, float_t, int32_t, SR_MATH_NS::FVector2, SR_MATH_NS::FVector3, SR_MATH_NS::IVector3, SR_MATH_NS::FVector4 &gt; SR_GRAPH_NS::ShaderPropertyVariant</definition>
         <argsstring></argsstring>
         <name>ShaderPropertyVariant</name>
         <qualifiedname>SR_GRAPH_NS::ShaderPropertyVariant</qualifiedname>
@@ -274,7 +274,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="33" column="2" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="34" column="2" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="ShaderProperties_8h_1af59d4ba2aaaa54f83c1d8e8d343e0763" prot="public" static="no">
         <type>std::list&lt; ShaderProperty &gt;</type>
@@ -288,7 +288,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="86" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="86" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="87" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="87" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="ShaderProperties_8h_1a41bd7df3390015dc7cb3202df57e28bf" prot="public" static="no">
         <type>std::map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, <ref refid="structSR__GRAPH__NS_1_1ShaderSampler" kindref="compound">ShaderSampler</ref> &gt;</type>
@@ -302,7 +302,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="95" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="95" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="96" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="96" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="ShaderProperties_8h_1a3ce09526ddf0e5907be9e5507b58b850" prot="public" static="no">
         <type>std::vector&lt; <ref refid="structSR__GRAPH__NS_1_1SSBOBinding" kindref="compound">SSBOBinding</ref> &gt;</type>
@@ -316,7 +316,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="102" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="102" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="103" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="103" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="BasePass_8h_1a5ba4e456f01edbfffc80498045fe58d4" prot="public" static="no">
         <type>std::map&lt; std::string, <ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1BasePass" kindref="compound">BasePass</ref> *(const SR_XML_NS::Node &amp;, <ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> *)&gt; &gt;</type>
@@ -1480,7 +1480,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="35" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="35" bodyend="84"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="36" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="36" bodyend="85"/>
       </memberdef>
       <memberdef kind="function" id="ShaderProperties_8h_1a3b515f3675d8e349c207afed9e9a05d5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool SR_FASTCALL</type>
@@ -1498,7 +1498,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="104" column="45" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="104" bodyend="116"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="105" column="45" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="105" bodyend="117"/>
       </memberdef>
       <memberdef kind="function" id="ShaderProperties_8h_1af2eaf6829bc696b6fef9001047e9c1c5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -1516,7 +1516,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="118" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="118" bodyend="128"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="119" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="119" bodyend="129"/>
       </memberdef>
       <memberdef kind="function" id="ShaderProperties_8h_1ab76bac2e9d27a923f35eeefb95c47b40" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED std::string</type>
@@ -1534,7 +1534,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="130" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="130" bodyend="142"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="131" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="131" bodyend="143"/>
       </memberdef>
       <memberdef kind="function" id="ShaderProperties_8h_1ad4cacc3740be8a9692f7930dda606897" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED std::string</type>
@@ -1556,7 +1556,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="144" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="144" bodyend="150"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="145" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="145" bodyend="151"/>
       </memberdef>
       <memberdef kind="function" id="ShaderProperties_8h_1a2e7010bb4052965b24a4e0f7343967d6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED uint32_t</type>
@@ -1574,7 +1574,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="152" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="152" bodyend="177"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="153" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="153" bodyend="178"/>
       </memberdef>
       <memberdef kind="function" id="ShaderProperties_8h_1acb2fca5f51fe781afd2c3917daffb16c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED ShaderPropertyVariant</type>
@@ -1592,7 +1592,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="179" column="50" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="179" bodyend="204"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="180" column="50" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="180" bodyend="207"/>
       </memberdef>
       <memberdef kind="function" id="ShaderProperties_8h_1a9a86036beda9df8f5528639675b796d6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED ShaderVarType</type>
@@ -1610,7 +1610,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="206" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="206" bodyend="212"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="209" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="209" bodyend="215"/>
       </memberdef>
       <memberdef kind="function" id="MaterialProperty_8h_1a9eaaa5acc46da23e2fee720736f502ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>

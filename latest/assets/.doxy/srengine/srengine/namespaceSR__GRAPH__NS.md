@@ -187,7 +187,7 @@
 | typedef std::vector&lt; [**SRDescriptorUpdateInfo**](structSR__GRAPH__NS_1_1SRDescriptorUpdateInfo.md) &gt; | [**SRDescriptorUpdateInfos**](#typedef-srdescriptorupdateinfos)  <br> |
 | typedef std::vector&lt; [**SSBOBinding**](structSR__GRAPH__NS_1_1SSBOBinding.md) &gt; | [**SSBOBindings**](#typedef-ssbobindings)  <br> |
 | typedef std::list&lt; ShaderProperty &gt; | [**ShaderProperties**](#typedef-shaderproperties)  <br> |
-| typedef std::variant&lt; [**SR\_GTYPES\_NS::Texture**](classSR__GTYPES__NS_1_1Texture.md) \*, float\_t, int32\_t, SR\_MATH\_NS::FVector2, SR\_MATH\_NS::FVector3, SR\_MATH\_NS::FVector4 &gt; | [**ShaderPropertyVariant**](#typedef-shaderpropertyvariant)  <br> |
+| typedef std::variant&lt; [**SR\_GTYPES\_NS::Texture**](classSR__GTYPES__NS_1_1Texture.md) \*, float\_t, int32\_t, SR\_MATH\_NS::FVector2, SR\_MATH\_NS::FVector3, SR\_MATH\_NS::IVector3, SR\_MATH\_NS::FVector4 &gt; | [**ShaderPropertyVariant**](#typedef-shaderpropertyvariant)  <br> |
 | typedef std::map&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md), [**ShaderSampler**](structSR__GRAPH__NS_1_1ShaderSampler.md) &gt; | [**ShaderSamplers**](#typedef-shadersamplers)  <br> |
 | typedef std::vector&lt; [**Uniform**](structSR__GRAPH__NS_1_1Uniform.md) &gt; | [**UBOInfo**](#typedef-uboinfo)  <br> |
 | typedef std::vector&lt; std::pair&lt; Vertices::Attribute, size\_t &gt; &gt; | [**VertexAttributes**](#typedef-vertexattributes)  <br> |
@@ -528,7 +528,7 @@ typedef std::list<ShaderProperty> SR_GRAPH_NS::ShaderProperties;
 ### typedef ShaderPropertyVariant 
 
 ```C++
-typedef std::variant< SR_GTYPES_NS::Texture*, float_t, int32_t, SR_MATH_NS::FVector2, SR_MATH_NS::FVector3, SR_MATH_NS::FVector4 > SR_GRAPH_NS::ShaderPropertyVariant;
+typedef std::variant< SR_GTYPES_NS::Texture*, float_t, int32_t, SR_MATH_NS::FVector2, SR_MATH_NS::FVector3, SR_MATH_NS::IVector3, SR_MATH_NS::FVector4 > SR_GRAPH_NS::ShaderPropertyVariant;
 ```
 
 
