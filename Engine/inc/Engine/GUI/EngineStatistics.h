@@ -26,6 +26,7 @@ namespace SR_CORE_NS::GUI {
         void Draw() override;
 
     private:
+        void CommonPage();
         void ResourcesPage();
         void ThreadsPage();
         void WidgetsPage();

@@ -43,7 +43,7 @@ namespace SR_CORE_NS {
             return;
         }
 
-        SR_LOG("TestManager::RunAll() : SpaRcle Engine is being run in unit test mode!");
+        SR_LOG_TEST("TestManager::RunAll() : SpaRcle Engine is being run in unit test mode!");
 
         for (auto&& test : m_engineTests) {
             if (RunEngineTest(test)) {
@@ -51,8 +51,8 @@ namespace SR_CORE_NS {
             }
         }
 
-        SR_LOG("TestManager::RunAll() : unit tests passed: {}/{}.", successes, m_tests.size());
-        SR_LOG("TestManager::RunAll() : destroying test instances...");
+        SR_LOG_TEST("TestManager::RunAll() : unit tests passed: {}/{}.", successes, m_tests.size());
+        SR_LOG_TEST("TestManager::RunAll() : destroying test instances...");
 
         pLauncher.AutoFree([](auto&& pData) {
             delete pData;
@@ -77,9 +77,11 @@ namespace SR_CORE_NS {
             return false;
         }
 
-        SR_LOG("TestManager::RunTest() : running test '{}'.", test.first);
+        SR_LOG_TEST("TestManager::RunTest() : running test '{}'.", test.first);
 
         auto&& result = test.second();
+
+        SR_LOG_TEST("TestManager::RunTest() : test '{}' finished with result: {}.", test.first, result ? "success" : "failure");
 
         pApplication->AutoFree([](auto&& pData) {
             delete pData;
@@ -89,7 +91,7 @@ namespace SR_CORE_NS {
     }
 
     bool TestManager::RunEngineTest(const TestManager::Test& test) {
-        SR_LOG("TestManager::RunEngineTest() : running test '{}'.", test.first);
+        SR_LOG_TEST("TestManager::RunEngineTest() : running test '{}'.", test.first);
 
         auto&& result = test.second();
         return result;

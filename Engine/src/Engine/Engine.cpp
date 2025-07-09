@@ -153,12 +153,12 @@ namespace SR_CORE_NS {
             SR_UTILS_NS::Input::Instance().SetMouseScroll(xOffset, yOffset);
         });
 
-        pWindow->SetFocusCallback([](bool focus) {
-            if (!focus) {
-                auto&& input = SR_UTILS_NS::Input::Instance();
-                input.ForceUnlockCursor();
-            }
-        });
+        /// pWindow->SetFocusCallback([](bool focus) {
+        ///     if (!focus) {
+        ///         auto&& input = SR_UTILS_NS::Input::Instance();
+        ///         input.ForceUnlockCursor();
+        ///     }
+        /// });
 
         return pWindow;
     }
@@ -406,11 +406,11 @@ namespace SR_CORE_NS {
         if (m_editor) {
             if (m_isGameMode) {
                 m_editor->HideAll();
-                m_cursorLockOpt.emplace();
+                //m_cursorLockOpt.emplace();
             }
             else {
                 m_editor->ShowAll();
-                m_cursorLockOpt = std::nullopt;
+                //m_cursorLockOpt = std::nullopt;
             }
         }
 

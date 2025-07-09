@@ -65,13 +65,6 @@ namespace SR_CORE_UI_NS {
         }
     }
 
-    bool IButton::InitializeEntity() noexcept {
-        /*m_properties.AddEntityRefProperty("Mesh", GetThis())
-        .SetWidth(260.0f);*/
-
-        return Entity::InitializeEntity();
-    }
-
     void IButton::OnIdle() {
         if (m_onIdle) {
             m_onIdle();

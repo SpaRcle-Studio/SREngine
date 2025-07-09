@@ -11,6 +11,7 @@
 		"/Engine/libs/Utils/libs/sparsehash/",
 		"/Engine/libs/Utils/libs/flat_hash_map/",
 		"/Engine/libs/Utils/libs/fmt/include/",
+		"/Engine/libs/Utils/libs/tracy/",
 		"/Engine/inc/Engine/",
 		"/Engine/libs/Utils/libs/assimp/contrib/pugixml/src"
 	],

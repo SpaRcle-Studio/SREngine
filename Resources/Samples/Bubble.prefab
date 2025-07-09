@@ -94,10 +94,14 @@ sra format
 											11-s:Engine/Models/sphere.obj
 						6-v:name
 							7-s:Sphere
+						6-v:layer
+							7-s:Transparent
 						6-o:transform
 							7-v:type
 								8-s:Transform3D
 							7-o:ptr
+		2-v:layer
+			3-s:Transparent
 		2-o:transform
 			3-v:type
 				4-s:Transform3D

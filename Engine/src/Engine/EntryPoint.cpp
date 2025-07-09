@@ -13,6 +13,7 @@
 
 #include <Engine/Tests/AtlasBuilderTest.h>
 #include <Engine/Tests/HTMLTest.h>
+#include <Engine/Tests/SRSLTest.h>
 
 #include <Codegen/SpaRcleModuleApplicationCore.generated.hpp>
 
@@ -30,6 +31,10 @@ int SREngineEntryPoint(int argc, char** argv) {
 
     if (SR_CORE_NS::CLIManager::Instance().IsFlagPresent(SR_CORE_NS::CLIFlags::UnitTests)) {
         SR_CORE_NS::TestManager::Instance().AddTest([]() {
+            return SR_CORE_NS::Tests::SRSLTest::Run();
+        }, "SRSL Test");
+
+        SR_CORE_NS::TestManager::Instance().AddTest([]() {
             return SR_CORE_NS::Tests::AtlasBuilderTest::Run();
         }, "Atlas Builder Test");
 
@@ -42,6 +47,7 @@ int SREngineEntryPoint(int argc, char** argv) {
         }, "CSS Test");
 
         SR_CORE_NS::TestManager::Instance().RunAll();
+        SR_UTILS_NS::ShutdownEngineProfiler();
         return 0;
     }
 

@@ -13,14 +13,6 @@ namespace SR_CORE_UI_NS {
         });
     }
 
-    bool Button::InitializeEntity() noexcept {
-        //m_properties.AddEntityRefProperty(SR_BUTTON_IDLE_PROP_NAME, GetThis()).SetWidth(260.f);
-        //m_properties.AddEntityRefProperty(SR_BUTTON_HOVERED_PROP_NAME, GetThis()).SetWidth(260.f);
-        //m_properties.AddEntityRefProperty(SR_BUTTON_PRESSED_PROP_NAME, GetThis()).SetWidth(260.f);
-
-        return Super::InitializeEntity();
-    }
-
     void Button::Update(float_t dt) {
         Super::Update(dt);
 

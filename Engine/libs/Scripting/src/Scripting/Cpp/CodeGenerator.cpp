@@ -14,6 +14,8 @@ namespace SR_SCRIPTING_NS {
         std::set<SR_UTILS_NS::Path> deletedFiles;
         std::set<SR_UTILS_NS::Path> updatedCppFiles;
 
+        std::set<SR_UTILS_NS::StringAtom> changedModuleNames;
+
         for (auto&& file : changedFiles) {
             if (file.IsFile()) {
                 if (ScriptSystem::ALLOWED_CPP_EXTENSIONS.find(file.GetExtensionView()) == ScriptSystem::ALLOWED_CPP_EXTENSIONS.end()) {
@@ -34,7 +36,7 @@ namespace SR_SCRIPTING_NS {
 
             if (pModuleIt != m_modules.end()) {
                 pModuleIt->codeFiles.insert(filePath);
-                OnModuleChanged(pModuleIt->moduleInfo.moduleName);
+                changedModuleNames.insert(pModuleIt->moduleInfo.moduleName);
             }
         }
 
@@ -46,8 +48,26 @@ namespace SR_SCRIPTING_NS {
             if (pModuleIt != m_modules.end()) {
                 if (auto&& pFileIt = pModuleIt->codeFiles.find(filePath); pFileIt != pModuleIt->codeFiles.end()) {
                     pModuleIt->codeFiles.erase(pFileIt);
-                    OnModuleChanged(pModuleIt->moduleInfo.moduleName);
+                    changedModuleNames.insert(pModuleIt->moduleInfo.moduleName);
                 }
+            }
+        }
+
+        for (auto&& moduleName : changedModuleNames) {
+            auto&& pModuleIt = std::ranges::find_if(m_modules, [&moduleName](const CppCodegenModule& module) {
+                return module.moduleInfo.moduleName == moduleName;
+            });
+
+            if (pModuleIt == m_modules.end()) {
+                SR_ERROR("CppCodeGenerator::ProcessChangedCodeFiles() : module not found!\n\tModule: {}", moduleName);
+                continue;
+            }
+
+            pModuleIt->CalculateHash();
+
+            if (pModuleIt->IsCacheExpired(m_cacheFolder)) {
+                pModuleIt->SaveHash(m_cacheFolder);
+                OnModuleChanged(pModuleIt->moduleInfo.moduleName);
             }
         }
     }
@@ -114,7 +134,12 @@ namespace SR_SCRIPTING_NS {
             }
 
             InitModuleSources(*pModuleIt);
-            OnModuleChanged(moduleInfo.moduleName);
+            pModuleIt->CalculateHash();
+
+            if (pModuleIt->IsCacheExpired(m_cacheFolder)) {
+                pModuleIt->SaveHash(m_cacheFolder);
+                OnModuleChanged(moduleInfo.moduleName);
+            }
         }
 
         for (auto&& modulePath : deletedModules) {
@@ -123,6 +148,8 @@ namespace SR_SCRIPTING_NS {
             });
 
             if (pModuleIt != m_modules.end()) {
+                pModuleIt->CalculateHash();
+                pModuleIt->SaveHash(m_cacheFolder);
                 OnModuleChanged(pModuleIt->moduleInfo.moduleName);
                 m_modules.erase(pModuleIt);
             }
@@ -169,7 +196,10 @@ namespace SR_SCRIPTING_NS {
             const SR_UTILS_NS::TimePointType endTime = SR_HTYPES_NS::Time::Instance().Now();
             const auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
 
-            SR_LOG("CppCodeGenerator::RegenerateChangedModules() : codegen result:\n{}", result);
+            if (SR_UTILS_NS::Features::Instance().Enabled("ShowScriptsCodegenResult", true)) {
+                SR_LOG("CppCodeGenerator::RegenerateChangedModules() : codegen result:\n{}", result);
+            }
+
             SR_LOG("CppCodeGenerator::RegenerateChangedModules() : codegen duration: {} ms", duration);
 
             GenerateModule(module);
@@ -203,6 +233,8 @@ namespace SR_SCRIPTING_NS {
             cmakeContent += "\t)\n";
 
             cmakeContent += "endif()\n";
+
+            cmakeContent += "target_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, module.path.GetFolder());
 
             for (auto&& engineIncludeDir : m_pScriptSystem->GetEngineSourcesIncludePaths()) {
                 cmakeContent += "target_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, engineIncludeDir);
@@ -317,7 +349,9 @@ namespace SR_SCRIPTING_NS {
         if (codegenFileStream.is_open()) {
             codegenFileStream << "/// " << SR_CODEGEN_HEADER_COMMENT << "\n\n";
 
+            SR_UTILS_NS::Path enumsFile = m_cacheFolder.Concat("Scripts/Modules/{}/Codegen/Codegen/Enums.generated.hpp"_format(module.moduleInfo.moduleName));
             codegenFileStream << "#include <Codegen/SpaRcleModule{}Core.generated.hpp>\n\n"_format(module.moduleInfo.moduleName);
+            codegenFileStream << "#include \"{}\""_format(enumsFile.ToStringRef()) << "\n\n";
 
             for (auto&& file : module.codeFiles) {
                 if (file.GetExtensionView() == "cxx" || file.GetExtensionView() == "cpp") {
@@ -372,5 +406,29 @@ namespace SR_SCRIPTING_NS {
         else {
             SR_ERROR("CppCodeGenerator::GenerateModule() : failed to open file!\n\tPath: {}", codegenFile);
         }
+    }
+
+    void CppCodegenModule::CalculateHash() {
+        hash = SR_UTILS_NS::FileSystem::GetExecutableAndModulesHash();
+
+        for (const auto& file : codeFiles) {
+            if (file.IsFile()) {
+                hash = SR_UTILS_NS::CombineTwoHashes(hash, file.GetFileHash());
+            }
+        }
+
+        if (path.IsFile()) {
+            hash = SR_UTILS_NS::CombineTwoHashes(hash, path.GetFileHash());
+        }
+    }
+
+    uint64_t CppCodegenModule::GetCacheHash(const SR_UTILS_NS::Path& cacheFolder) const {
+        auto&& cache = cacheFolder.Concat("Scripts/Modules/{}"_format(moduleInfo.moduleName)).ConcatExt("hash");
+        return SR_UTILS_NS::FileSystem::ReadHashFromFile(cache);
+    }
+
+    void CppCodegenModule::SaveHash(const SR_UTILS_NS::Path& cacheFolder) {
+        auto&& cache = cacheFolder.Concat("Scripts/Modules/{}"_format(moduleInfo.moduleName)).ConcatExt("hash");
+        SR_UTILS_NS::FileSystem::WriteHashToFile(cache, hash);
     }
 }

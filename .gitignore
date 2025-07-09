@@ -57,3 +57,4 @@ Resources/**/*.so
 /Platform/Emscripten/codegen.spec
 /Platform/Emscripten/ninja.exe
 codegen.spec
+/Resources/ModuleTests/SRSL/Result

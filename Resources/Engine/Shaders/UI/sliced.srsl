@@ -10,6 +10,7 @@ DepthTest true;
 
 [[uniform], [public]] vec4 color = vec4(1.0, 1.0, 1.0, 1.0);
 [[uniform], [public]] sampler2D diffuse;
+[[uniform], [public]] vec4 NDC_RECT;
 
 [[shared]] vec2 UV;
 
@@ -45,6 +46,14 @@ void fragment() {
 
 void vertex() {
     #include <Engine/Shaders/UI/sprite-vertices.inl.srsl>
+
+    vec3 sprite_vertices[4] = {
+        vec3(NDC_RECT.x, NDC_RECT.w, 0.0), /// vec3(left, bottom, 0.0),
+        vec3(NDC_RECT.x, NDC_RECT.z, 0.0), /// vec3(left, top, 0.0),
+        vec3(NDC_RECT.y, NDC_RECT.w, 0.0), /// vec3(right, bottom, 0.0),
+        vec3(NDC_RECT.y, NDC_RECT.z, 0.0)  /// vec3(right, top, 0.0),
+    };
+    
+    OUT_POSITION = ORTHOGONAL_MATRIX * vec4(sprite_vertices[VERTEX_INDEX], 1.0);
     UV = uv[VERTEX_INDEX];
-    OUT_POSITION = ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(vertices[VERTEX_INDEX], 1.0);
 }

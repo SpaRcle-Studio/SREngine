@@ -1,0 +1,25 @@
+ShaderType Compute;
+
+[[const]] int case_1_1 = 123456u;
+
+[[const]] int array_case_1[1] = {
+    10
+};
+
+[[const]] int array_case_2[1][16] = {
+    {1, 2, 10, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}
+};
+
+
+[[THREADS(1, 1, 1)]]
+void compute() {
+    int case_1_2 = 1111u;
+    int case_1 = array_case_1[0] + case_1_1 + case_1_2;
+    int case_2 = array_case_2[0][0];
+    int case_3 = 10;
+    int[1] case_4 = { 123 };
+    int[3] case_5 = { 0x10, 0x20, 0x32 };
+    int[2][3] case_6 = { { 0x10, 0x20, 0x32 }, { 0x40, 0x50, 0x60 } };
+    float[2][3] case_7 = { { 0.1, 0.2, 0.3 }, { 0.4, 0.5, 0.6 } };
+    float[1] case_8 = { 0.1 };
+}

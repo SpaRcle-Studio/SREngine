@@ -32,11 +32,21 @@ namespace SR_SCRIPTING_NS {
     };
 
     struct CppCodegenModule {
-        bool isCompiled = false;
-        bool isNeedCodegen = true;
+        bool isCompiled = true;
+        bool isNeedCodegen = false;
         SR_UTILS_NS::Path path;
         CppScriptModuleInfo moduleInfo;
         std::set<SR_UTILS_NS::Path> codeFiles;
+        uint64_t hash = 0;
+
+        bool IsCacheExpired(const SR_UTILS_NS::Path& cacheFolder) const {
+            return hash != GetCacheHash(cacheFolder);
+        }
+
+        uint64_t GetCacheHash(const SR_UTILS_NS::Path& cacheFolder) const;
+        void SaveHash(const SR_UTILS_NS::Path& cacheFolder);
+        void CalculateHash();
+
     };
 
     class CppCodeGenerator : public SR_HTYPES_NS::SharedPtr<CppCodeGenerator> {

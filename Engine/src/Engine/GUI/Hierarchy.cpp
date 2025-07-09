@@ -16,8 +16,6 @@
 namespace SR_CORE_GUI_NS {
     const SR_MATH_NS::FColor SR_PREFAB_COLOR_FIRST = SR_MATH_NS::FColor(39.f / 255.f, 225 / 255.f, 193.f / 255.f, 1.f);
     const SR_MATH_NS::FColor SR_PREFAB_COLOR_SECOND = SR_MATH_NS::FColor(1.f, 140.f / 255.f, 0.f, 1.f);
-    const auto SR_NODE_FLAGS_WITH_CHILD = SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::OpenOnArrow | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::OpenOnDoubleClick;
-    const auto SR_NODE_FLAGS_WITHOUT_CHILD = SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::NoTreePushOnOpen | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::Leaf;
 
     Hierarchy::Hierarchy()
         : Widget("Hierarchy")
@@ -175,7 +173,7 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        const SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags flags = (hasChild ? SR_NODE_FLAGS_WITH_CHILD : SR_NODE_FLAGS_WITHOUT_CHILD) |
+        const SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags flags = (hasChild ? SR_GRAPH_GUI_NS::Immediate::SR_NODE_FLAGS_WITH_CHILD : SR_GRAPH_GUI_NS::Immediate::SR_NODE_FLAGS_WITHOUT_CHILD) |
                                          ((m_selected.count(pRoot) == 1) ? SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::Selected : SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::None);
 
         if (pRoot->IsPrefabOwner()) {
@@ -328,6 +326,33 @@ namespace SR_CORE_GUI_NS {
                         }
                     }
                 }
+                else if (SR_GRAPH_GUI_NS::Immediate::Selectable("Make prefab")) {
+                    auto&& resPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+
+                    if (auto&& path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(resPath.ToString(), { { "Scene", "prefab" } }); !path.IsEmpty()) {
+                        path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetCachePath());
+                        path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+
+                        SR_UTILS_NS::SRASerializer serializer;
+                        SR_WORLD_NS::ScenePrefabLogic::SaveSOAsPrefab(serializer, pSceneObject);
+
+                        if (auto&& pPrefabScene = SR_WORLD_NS::Scene::NewScene(path, SR_WORLD_NS::SceneLogicType::Prefab)) {
+                            pPrefabScene->GetLogicBase().DynamicCast<SR_WORLD_NS::ScenePrefabLogic>()->SetCustomSOData(serializer.CreateDeserializer());
+                            pPrefabScene->SaveScene();
+
+                            pSceneObject->DestroyChildren();
+
+                            if (auto&& pPrefab = SR_UTILS_NS::Prefab::Load(path)) {
+                                pSceneObject->SetPrefab(pPrefab, true);
+                            }
+                            else {
+                                SR_ERROR("Hierarchy::ChildContextMenu() : failed to load prefab from path: {}", path.ToString());
+                            }
+
+                            pEngine->AddSceneToQueue(pPrefabScene);
+                        }
+                    }
+                }
 
                 if (pSceneObject->GetSceneObjectType() == SR_UTILS_NS::SceneObjectType::GameObject) {
                     SR_GRAPH_GUI_NS::Immediate::Separator();
@@ -420,9 +445,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (fromGUI) {
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-
-            if (!SR_GRAPH_GUI_NS::Immediate::Button("Paste")) {
+            if (!SR_GRAPH_GUI_NS::Immediate::Selectable("Paste")) {
                 return;
             }
         }

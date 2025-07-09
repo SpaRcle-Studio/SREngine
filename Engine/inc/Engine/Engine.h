@@ -148,7 +148,7 @@ namespace SR_CORE_NS {
         RenderContextPtr m_renderContext = { };
 
         std::vector<WindowPtr> m_windows;
-        std::optional<Utils::CursorLock> m_cursorLockOpt = std::nullopt;
+        /// std::optional<Utils::CursorLock> m_cursorLockOpt = std::nullopt;
 
     };
 }
