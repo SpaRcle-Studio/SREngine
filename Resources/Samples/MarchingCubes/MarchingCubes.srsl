@@ -3,6 +3,7 @@ ShaderType Compute;
 struct Vertex {
     vec3 position;
     vec3 normal;
+    vec2 uv;
 };
 
 [[ssbo(vertices)]] uint vertexCount;
@@ -16,30 +17,56 @@ struct Vertex {
 [[ssbo(densities)]] float[] densities;
 
 [[const], [uniform]] int vertexHashTableSize;
+[[const], [uniform]] int densityCountAxis = 0;
+[[const], [uniform]] float isoLevel = 0.2;
 
 #include <Samples/MarchingCubes/MarchTables.srsl>
 
-[[const]] int densityCountAxis = 64;
-[[const]] float isoLevel = 0.2;
-[[const]] float voxelSize = 0.1;
-[[const]] int numPointsPerAxis = 16;
-
 float GetDensity(ivec3 pos) {
-    if (pos.x < 0 || pos.x >= densityCountAxis ||
-        pos.y < 0 || pos.y >= densityCountAxis ||
-        pos.z < 0 || pos.z >= densityCountAxis) {
-        return 0.0;
-    }
+    //if (pos.x < 0 || pos.x >= densityCountAxis ||
+    //    pos.y < 0 || pos.y >= densityCountAxis ||
+    //    pos.z < 0 || pos.z >= densityCountAxis) {
+    //    return 0.0;
+    //}
+
     int sizeX = densityCountAxis;
     int sizeY = densityCountAxis;
     int index = pos.z * sizeY * sizeX + pos.y * sizeX + pos.x;
     return densities[index];
 }
 
-vec3 VertexInterp(float iso, vec3 p1, vec3 p2, float valp1, float valp2) {
-    float t = (iso - valp1) / (valp2 - valp1);
-    t = clamp(t, 0.0, 1.0);
-    return mix(p1, p2, t);
+float GetDensityTrilinear(vec3 pos) {
+    vec3 p = clamp(pos, vec3(1.0), vec3(densityCountAxis - 2.0));
+    ivec3 base = ivec3(floor(p));
+    vec3 f = fract(p);
+
+    float c000 = GetDensity(base + ivec3(0, 0, 0));
+    float c100 = GetDensity(base + ivec3(1, 0, 0));
+    float c010 = GetDensity(base + ivec3(0, 1, 0));
+    float c110 = GetDensity(base + ivec3(1, 1, 0));
+    float c001 = GetDensity(base + ivec3(0, 0, 1));
+    float c101 = GetDensity(base + ivec3(1, 0, 1));
+    float c011 = GetDensity(base + ivec3(0, 1, 1));
+    float c111 = GetDensity(base + ivec3(1, 1, 1));
+
+    //float c000 = GetDensity(base + cornerOffsets[0]);
+    //float c100 = GetDensity(base + cornerOffsets[1]);
+    //float c010 = GetDensity(base + cornerOffsets[2]);
+    //float c110 = GetDensity(base + cornerOffsets[3]);
+    //float c001 = GetDensity(base + cornerOffsets[4]);
+    //float c101 = GetDensity(base + cornerOffsets[5]);
+    //float c011 = GetDensity(base + cornerOffsets[6]);
+    //float c111 = GetDensity(base + cornerOffsets[7]);
+
+    float c00 = mix(c000, c100, f.x);
+    float c01 = mix(c001, c101, f.x);
+    float c10 = mix(c010, c110, f.x);
+    float c11 = mix(c011, c111, f.x);
+
+    float c0 = mix(c00, c10, f.y);
+    float c1 = mix(c01, c11, f.y);
+
+    return mix(c0, c1, f.z);
 }
 
 vec3 coordToWorld(ivec3 coord) {
@@ -48,68 +75,55 @@ vec3 coordToWorld(ivec3 coord) {
     return (coord / (textureSize - 1.0) - 0.5) * planetSize;
 }
 
-int indexFromCoord(ivec3 coord) {
-    //return coord.z * numPointsPerAxis * numPointsPerAxis + coord.y * numPointsPerAxis + coord.x;
-    return coord.z * densityCountAxis * densityCountAxis + coord.y * densityCountAxis + coord.x;
+vec3 calculateNormalAt(vec3 worldPos) {
+    //float epsilon = 1.0;
+    //float dx = GetDensityTrilinear(worldPos + vec3(epsilon, 0.0, 0.0)) -
+    //           GetDensityTrilinear(worldPos - vec3(epsilon, 0.0, 0.0));
+    //float dy = GetDensityTrilinear(worldPos + vec3(0.0, epsilon, 0.0)) -
+    //           GetDensityTrilinear(worldPos - vec3(0.0, epsilon, 0.0));
+    //float dz = GetDensityTrilinear(worldPos + vec3(0.0, 0.0, epsilon)) -
+    //           GetDensityTrilinear(worldPos - vec3(0.0, 0.0, epsilon));
+    //return normalize(vec3(dx, dy, dz));
+
+    float delta = 0.5;
+    float dx = GetDensity(ivec3(worldPos + vec3(delta, 0, 0))) - GetDensity(ivec3(worldPos - vec3(delta, 0, 0)));
+    float dy = GetDensity(ivec3(worldPos + vec3(0, delta, 0))) - GetDensity(ivec3(worldPos - vec3(0, delta, 0)));
+    float dz = GetDensity(ivec3(worldPos + vec3(0, 0, delta))) - GetDensity(ivec3(worldPos - vec3(0, 0, delta)));
+    return normalize(vec3(dx, dy, dz));
 }
 
-vec3 calculateNormal(ivec3 coord) {
-    ivec3 offsetX = ivec3(1, 0, 0);
-    ivec3 offsetY = ivec3(0, 1, 0);
-    ivec3 offsetZ = ivec3(0, 0, 1);
-
-    float dx = GetDensity(coord + offsetX) - GetDensity(coord - offsetX);
-    float dy = GetDensity(coord + offsetY) - GetDensity(coord - offsetY);
-    float dz = GetDensity(coord + offsetZ) - GetDensity(coord - offsetZ);
-
+vec3 computeNormal(ivec3 coord) {
+    float dx = GetDensity(coord + ivec3(1, 0, 0)) - GetDensity(coord - ivec3(1, 0, 0));
+    float dy = GetDensity(coord + ivec3(0, 1, 0)) - GetDensity(coord - ivec3(0, 1, 0));
+    float dz = GetDensity(coord + ivec3(0, 0, 1)) - GetDensity(coord - ivec3(0, 0, 1));
     return normalize(vec3(dx, dy, dz));
 }
 
 Vertex createVertex(ivec3 coordA, ivec3 coordB) {
     vec3 posA = coordToWorld(coordA);
     vec3 posB = coordToWorld(coordB);
+
     float densityA = GetDensity(coordA);
     float densityB = GetDensity(coordB);
 
-    float t = (isoLevel - densityA) / (densityB - densityA);
-    vec3 position = posA + t * (posB - posA);
-
-    vec3 normalA = calculateNormal(coordA);
-    vec3 normalB = calculateNormal(coordB);
-    vec3 normal = normalize(normalA + t * (normalB - normalA));
+    float t = clamp((isoLevel - densityA) / (densityB - densityA), 0.0, 1.0);
+    vec3 position = mix(posA, posB, t);
 
     Vertex vertex;
     vertex.position = position;
-    vertex.normal = normal;
+
+    float textureScale = 10.0;
+    vertex.uv = (position.xz / float(densityCountAxis - 2)) * textureScale;
+
+    //vec3 normalA = computeNormal(coordA);
+    //vec3 normalB = computeNormal(coordB);
+    //vec3 normal = normalize(mix(normalA, normalB, t));
+
+    //vertex.normal = vec3(0, 1, 0);
+
+    vertex.normal = -calculateNormalAt(position);  // минус для внешней нормали
 
     return vertex;
-}
-
-[[const]] uint EMPTY_KEY = 0xFFFFFFFFu;
-[[const]] uint RESERVED_MARKER = 0xFFFFFFFEu;
-
-int hash3D(ivec3 coord) {
-    return coord.x + coord.y * densityCountAxis + coord.z * densityCountAxis * densityCountAxis;
-}
-
-int computeEdgeCode(ivec3 a, ivec3 b) {
-    ivec3 d = abs(a - b);
-    if (d.x == 1) { return 0; }
-    if (d.y == 1) { return 1; }
-    if (d.z == 1) { return 2; }
-    return 3; // ошибка или диагональ (не должно быть)
-}
-
-uint hashVertexID(ivec2 id) {
-    return (uint(id.x) * 92837111u + uint(id.y) * 689287499u) & (vertexHashTableSize - 1u);
-}
-
-uint packID(ivec2 id) {
-    return id.x * 73856093u ^ id.y * 19349663u; // простой хеш-функция для ID
-}
-
-int flatCoord(ivec3 c) {
-    return c.x + c.y * densityCountAxis + c.z * densityCountAxis * densityCountAxis;
 }
 
 uint getEdgeIndex(ivec3 coordA, ivec3 coordB) {
@@ -118,23 +132,25 @@ uint getEdgeIndex(ivec3 coordA, ivec3 coordB) {
     ivec3 b = max(coordA, coordB);
     ivec3 d = b - a;
 
+    uint count = densityCountAxis;
+
     if (d == ivec3(1, 0, 0)) {
         // Рёбра по X: X ∈ [0..62], Y ∈ [0..63], Z ∈ [0..63]
         // Всего: 63 * 64 * 64 = 258,048
-        return uint(a.z * densityCountAxis * densityCountAxis + a.y * densityCountAxis + a.x);
+        return uint(a.z * count * count + a.y * count + a.x);
     }
     else if (d == ivec3(0, 1, 0)) {
         // Рёбра по Y: X ∈ [0..63], Y ∈ [0..62], Z ∈ [0..63]
         // Смещение: +258,048
-        return uint(densityCountAxis * densityCountAxis * densityCountAxis
-                    + a.z * densityCountAxis * densityCountAxis + a.y * densityCountAxis + a.x);
+        return uint(count * count * count
+                    + a.z * count * count + a.y * count + a.x);
     }
     else if (d == ivec3(0, 0, 1)) {
         // Рёбра по Z: X ∈ [0..63], Y ∈ [0..63], Z ∈ [0..62]
         // Смещение: +258,048 + 258,048 = 516,096
-        return uint(densityCountAxis * densityCountAxis * densityCountAxis    // X
-                    + densityCountAxis * densityCountAxis * densityCountAxis  // Y
-                    + a.z * densityCountAxis * densityCountAxis + a.y * densityCountAxis + a.x);
+        return uint(count * count * count    // X
+                    + count * count * count  // Y
+                    + a.z * count * count + a.y * count + a.x);
     }
 
     // Невалидное ребро — не соседняя вершина
@@ -160,11 +176,15 @@ void prepareHashTable(ivec3 coordA, ivec3 coordB) {
 [[THREADS(8, 8, 8)]]
 void compute() {
     ivec3 voxelPos = ivec3(GLOBAL_INVOCATION_ID.xyz);
-    if (voxelPos.x < 0 || voxelPos.x >= densityCountAxis ||
-        voxelPos.y < 0 || voxelPos.y >= densityCountAxis ||
-        voxelPos.z < 0 || voxelPos.z >= densityCountAxis) {
+    if (voxelPos.x < 1 || voxelPos.x >= densityCountAxis - 1 ||
+        voxelPos.y < 1 || voxelPos.y >= densityCountAxis - 1 ||
+        voxelPos.z < 1 || voxelPos.z >= densityCountAxis - 1) {
         return; // Выход за пределы массива
     }
+
+    //if (any(greaterThanEqual(voxelPos, ivec3(densityCountAxis - 1)))) {
+    //    return; // ← не обрабатываем последнюю линию!
+    //}
 
     int cubeIndex = 0;
     ivec3 cornerCoords[8];

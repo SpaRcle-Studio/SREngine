@@ -176,6 +176,10 @@ namespace SR_CORE_GUI_NS {
                 value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<SR_MATH_NS::FVector3>(property.data));
                 feedback = m_vectorDrawer->Draw(propertyContext);
                 break;
+            case SR_GRAPH_NS::ShaderVarType::IVec3:
+                value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<SR_MATH_NS::IVector3>(property.data));
+                feedback = m_vectorDrawer->Draw(propertyContext);
+                break;
             case SR_GRAPH_NS::ShaderVarType::Vec4:
                 value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<SR_MATH_NS::FVector4>(property.data));
                 feedback = m_vectorDrawer->Draw(propertyContext);

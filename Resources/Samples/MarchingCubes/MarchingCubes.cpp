@@ -2,33 +2,18 @@
 // Created by Monika on 28.06.2025.
 //
 
-
-#include <Utils/Input/KeyCodes.h>
-#include <Utils/Math/Vector2.h>
-#include <Utils/Math/Noise.h>
-#include <Utils/Math/VectorRanges.h>
-
-#include <Graphics/Types/Geometry/ProceduralMesh.h>
-#include <Graphics/Types/ComputeShader.h>
-#include <Graphics/Render/RenderContext.h>
-#include <Graphics/Memory/SSBO.h>
+#include <MarchingCubes/DensityGenerator.h>
 
 #include <Scripting/Cpp/CppBehaviour.h>
 
 namespace SpaRcle::Scripts::Samples {
-    SR_ENUM_NS_CLASS_T(MarchingCubesShape, uint32_t,
-        Sphere = 0,
-        Cube = 1,
-        WavySphere = 2,
-        PerlinNoise = 3
-    );
-
     class MarchingCubes : public SpaRcle::Scripting::CppBehaviour {
         SR_CLASS()
     public:
 	    struct alignas(16) Vertex {
 			alignas(16) SR_MATH_NS::FVector3 position;
 			alignas(16) SR_MATH_NS::FVector3 normal;
+			alignas(16) SR_MATH_NS::FVector2 uv;
 		};
 
         ~MarchingCubes() override {
@@ -39,194 +24,85 @@ namespace SpaRcle::Scripts::Samples {
             return true; // Allow execution in edit mode for testing purposes
         }
 
-        using DensityType = float;
-
-        std::vector<DensityType> GenerateRandomDensityField() {
-            SR_TRACY_ZONE;
-
-            const int sizeX = 64;
-            const int sizeY = 64;
-            const int sizeZ = 64;
-            const float voxelSize = 1.0f; // шаг сетки в мире
-            const float isoLevel = 0.0f;  // поверхность будет на расстоянии radius от центра
-
-            std::vector<DensityType> densities(sizeX * sizeY * sizeZ);
-
-            for (int z = 0; z < sizeZ; ++z) {
-                for (int y = 0; y < sizeY; ++y) {
-                    for (int x = 0; x < sizeX; ++x) {
-                        int index = z * sizeY * sizeX + y * sizeX + x;
-
-                        glm::vec3 worldPos = glm::vec3(x, y, z) * voxelSize;
-
-                        const double dx = static_cast<double>(worldPos.x) / noiseScale + seed;
-                        const double dy = static_cast<double>(worldPos.y) / noiseScale + seed;
-                        const double dz = static_cast<double>(worldPos.z) / noiseScale + seed;
-
-                        // Генерация случайной плотности с использованием шума Перлина
-                        float noiseValue = SR_MATH_NS::SNoise(dx, dy, dz);
-                        densities[index] = noiseValue - isoLevel; // смещение по isoLevel
-                    }
-                }
-            }
-
-            return densities;
-        }
-
-        std::vector<DensityType> GenerateCubeDensityField() {
-            SR_TRACY_ZONE;
-
-            const int sizeX = 64;
-            const int sizeY = 64;
-            const int sizeZ = 64;
-            const float voxelSize = 1.0f; // шаг сетки в мире
-            const float isoLevel = 0.0f;  // поверхность будет на расстоянии radius от центра
-            const float cubeSize = 32.0f * geometrySize;  // поверхность будет на расстоянии radius от центра
-
-            std::vector<DensityType> densities(sizeX * sizeY * sizeZ);
-
-            // Центр куба
-            glm::vec3 center = glm::vec3(sizeX, sizeY, sizeZ) * 0.5f * voxelSize;
-            glm::vec3 halfExtents = glm::vec3(cubeSize * 0.5f);
-
-            for (int z = 0; z < sizeZ; ++z) {
-                for (int y = 0; y < sizeY; ++y) {
-                    for (int x = 0; x < sizeX; ++x) {
-                        int index = z * sizeY * sizeX + y * sizeX + x;
-
-                        glm::vec3 worldPos = glm::vec3(x, y, z) * voxelSize;
-                        glm::vec3 d = glm::abs(worldPos - center) - halfExtents;
-
-                        // SDF куба: max(max(d.x, d.y), d.z)
-                        float outside = glm::max(glm::max(d.x, d.y), d.z);
-                        float sdf = -outside; // < 0 — снаружи, > 0 — внутри
-
-                        densities[index] = sdf;
-                    }
-                }
-            }
-
-            return densities;
-        }
-
-        std::vector<DensityType> generateWavySphereDensities() {
-            SR_TRACY_ZONE;
-            const int GRID_SIZE = 64; // Размер сетки
-            std::vector<DensityType> density(GRID_SIZE * GRID_SIZE * GRID_SIZE);
-
-            for (int z = 0; z < GRID_SIZE; ++z) {
-                for (int y = 0; y < GRID_SIZE; ++y) {
-                    for (int x = 0; x < GRID_SIZE; ++x) {
-                        // Нормализуем координаты в [-1, 1]
-                        float fx = (float)x / (GRID_SIZE - 1) * 2.f - 1.f;
-                        float fy = (float)y / (GRID_SIZE - 1) * 2.f - 1.f;
-                        float fz = (float)z / (GRID_SIZE - 1) * 2.f - 1.f;
-
-                        // Расстояние до центра
-                        float dist = std::sqrt(fx * fx + fy * fy + fz * fz);
-
-                        // Базовая плотность — сфера радиуса 0.5
-                        float base = 0.5f * geometrySize - dist;
-
-                        // Волны в разных плоскостях
-                        float waveXZ = 0.07f * std::sin(10.f * fx) * std::sin(10.f * fz);
-                        float waveXY = 0.07f * std::cos(12.f * fx) * std::cos(12.f * fy);
-
-                        // Итоговая плотность
-                        float finalDensity = base + waveXZ + waveXY;
-
-                        density[x + y * GRID_SIZE + z * GRID_SIZE * GRID_SIZE] = finalDensity;
-                    }
-                }
-            }
-
-            return density;
-        }
-
-        std::vector<DensityType> GenerateSphereDensityField() {
-            SR_TRACY_ZONE;
-
-            /// Параметры сетки
-            const int sizeX = 64;
-            const int sizeY = 64;
-            const int sizeZ = 64;
-            const float voxelSize = 1.0f; // шаг сетки в мире
-            const float isoLevel = 0.0f;  // поверхность будет на расстоянии radius от центра
-
-            /// Центр и радиус сферы
-            glm::vec3 center = glm::vec3(sizeX, sizeY, sizeZ) * 0.5f * voxelSize;
-            float radius = 20.0f * geometrySize;
-
-            std::vector<DensityType> densities(sizeX * sizeY * sizeZ);
-
-            for (int z = 0; z < sizeZ; ++z) {
-                for (int y = 0; y < sizeY; ++y) {
-                    for (int x = 0; x < sizeX; ++x) {
-                        int index = z * sizeY * sizeX + y * sizeX + x;
-
-                        // Мировая позиция текущего вокселя
-                        glm::vec3 worldPos = glm::vec3(x, y, z) * voxelSize;
-
-                        // SDF сферы: (расстояние от центра - радиус)
-                        float d = radius - glm::distance(worldPos, center);
-
-                        densities[index] = d;
-                    }
-                }
-            }
-
-            return densities;
-        }
-
         void OnDisable() override {
             Finalize();
         }
 
         void OnEnable() override {
+            isDirty = true;
+        }
+
+        void GenerateDensity() {
             SR_TRACY_ZONE;
+
+            const uint32_t countPexAxis = densityCountAxis;
+            const auto densitiesCount = static_cast<uint64_t>(countPexAxis * countPexAxis * countPexAxis);
+            pDensitySSBO = SR_GRAPH_NS::SSBOInstance::Create<float_t>(densitiesCount, SR_GRAPH_NS::SSBOUsage::CPUToGPU, "densities");
+            pDensitySSBO->Memset(0);
+
+            if (shape != MarchingCubesShape::Shader) {
+                DensityFieldSettings settings;
+                settings.noiseScale = noiseScale;
+                settings.seed = seed;
+                settings.isoLevel = isoLevel;
+                settings.geometrySize = geometrySize;
+                settings.densityCountAxis = countPexAxis;
+                settings.shape = shape;
+
+                std::vector<float_t> densities;
+                GenerateDensityField(settings, densities);
+                pDensitySSBO->UpdateSSBO(densities.data());
+                return;
+            }
+
+            if (pDensityComputeShader->BeginCompute()) {
+                pDensitySSBO->Bind();
+                pDensityComputeShader->GetShader()->SetConstInt("densityCountAxis"_atom, static_cast<int>(countPexAxis));
+                pDensityComputeShader->GetShader()->SetConstInt("seed"_atom, static_cast<int>(seed));
+                pDensityComputeShader->GetShader()->SetConstFloat("isoLevel"_atom, isoLevel);
+                pDensityComputeShader->GetShader()->SetConstFloat("noiseScale"_atom, noiseScale);
+                pDensityComputeShader->GetShader()->SetConstIVec3("chunkCoord"_atom, chunkCoord);
+                pDensityComputeShader->Dispatch(densityComputeGroups, densityComputeGroups, densityComputeGroups);
+                pDensityComputeShader->EndCompute();
+            }
+        }
+
+        void ReInit() {
+            SR_TRACY_ZONE;
+
+            if (!isDirty) {
+                return;
+            }
+
+            isDirty = false;
 
             Finalize();
 
-            pComputeShader = SR_GTYPES_NS::ComputeShader::Load(shaderPath);
+            pMarchingComputeShader = SR_GTYPES_NS::ComputeShader::Load(marchingCubesShader);
+            pDensityComputeShader = SR_GTYPES_NS::ComputeShader::Load(densityShader);
 
-            int numVoxelsPerAxis = numPointsPerAxis - 1;
-            int numVoxels = numVoxelsPerAxis * numVoxelsPerAxis * numVoxelsPerAxis;
-            int maxTriangleCount = numVoxels * 5;
-            int maxVertexCount = maxTriangleCount * 3;
-
-            std::vector<float_t> densities;
-
-            /// density SSBO
-            switch (shape) {
-                default:
-                case MarchingCubesShape::Sphere:
-                    densities = GenerateSphereDensityField();
-                    break;
-                case MarchingCubesShape::Cube:
-                    densities = GenerateCubeDensityField();
-                    break;
-                case MarchingCubesShape::WavySphere:
-                    densities = generateWavySphereDensities();
-                    break;
-                case MarchingCubesShape::PerlinNoise:
-                    densities = GenerateRandomDensityField();
-                    break;
+            if (!pMarchingComputeShader || !pDensityComputeShader) {
+                SRHalt("Failed to load compute shaders for Marching Cubes!");
+                return;
             }
 
-            pDensitySSBO = SR_GRAPH_NS::SSBOInstance::Create<float_t>(densities.size(), SR_GRAPH_NS::SSBOUsage::CPUToGPU, "densities");
-            pDensitySSBO->UpdateSSBO(densities.data());
+            const int numVoxelsPerAxis = numPointsPerAxis - 1;
+            const int numVoxels = numVoxelsPerAxis * numVoxelsPerAxis * numVoxelsPerAxis;
+            const int maxTriangleCount = numVoxels * 5;
+            const int maxVertexCount = maxTriangleCount * 3;
 
             pHashTableSSBO = SR_GRAPH_NS::SSBOInstance::Create<uint32_t>(vertexHashTableSize, SR_GRAPH_NS::SSBOUsage::CPUToGPU, "hashTable");
             pVerticesSSBO = SR_GRAPH_NS::SSBOInstance::Create<Vertex>(maxVertexCount, SR_GRAPH_NS::SSBOUsage::GPUToCPU, "vertices", SR_GRAPH_NS::SSBOFlags::StructuredCounter);
             pIndicesSSBO = SR_GRAPH_NS::SSBOInstance::Create<uint32_t>(maxVertexCount, SR_GRAPH_NS::SSBOUsage::GPUToCPU, "indices", SR_GRAPH_NS::SSBOFlags::Counter);
 
+            GenerateDensity();
             Generate();
         }
 
         void Generate() {
             SR_TRACY_ZONE;
 
-            if (!pComputeShader) {
+            if (!pMarchingComputeShader) {
                 return;
             }
 
@@ -238,15 +114,17 @@ namespace SpaRcle::Scripts::Samples {
             pHashTableSSBO->Memset(-1);
 
             for (int stage = 0; stage <= 1; ++stage) {
-                if (pComputeShader->BeginCompute()) {
+                if (pMarchingComputeShader->BeginCompute()) {
                     pDensitySSBO->Bind();
                     pHashTableSSBO->Bind();
                     pVerticesSSBO->Bind();
                     pIndicesSSBO->Bind();
-                    pComputeShader->GetShader()->SetConstInt("vertexHashTableSize"_atom, static_cast<int>(vertexHashTableSize));
-                    pComputeShader->GetShader()->SetConstInt(SR_GRAPH_NS::SHADER_COMPUTE_STAGE, stage);
-                    pComputeShader->Dispatch(numVoxelsPerAxis, numVoxelsPerAxis, numVoxelsPerAxis);
-                    pComputeShader->EndCompute();
+                    pMarchingComputeShader->GetShader()->SetConstInt("vertexHashTableSize"_atom, static_cast<int>(vertexHashTableSize));
+                    pMarchingComputeShader->GetShader()->SetConstInt("densityCountAxis"_atom, static_cast<int>(densityCountAxis));
+                    pMarchingComputeShader->GetShader()->SetConstFloat("isoLevel"_atom, isoLevel);
+                    pMarchingComputeShader->GetShader()->SetConstInt(SR_GRAPH_NS::SHADER_COMPUTE_STAGE, stage);
+                    pMarchingComputeShader->Dispatch(numVoxelsPerAxis, numVoxelsPerAxis, numVoxelsPerAxis);
+                    pMarchingComputeShader->EndCompute();
                 }
             }
 
@@ -279,6 +157,7 @@ namespace SpaRcle::Scripts::Samples {
                     const Vertex& vertex = pVertices[index];
                     vertices[index] = SR_GRAPH_NS::Vertices::StaticMeshVertex{
                         .pos = vertex.position,
+                        .uv = vertex.uv,
                         .norm = vertex.normal
                     };
                 });
@@ -292,6 +171,10 @@ namespace SpaRcle::Scripts::Samples {
         void GenerateMesh() {
             SR_TRACY_ZONE;
 
+            if (isDirty) {
+                return;
+            }
+
             ReadIndices();
             ReadVertices();
 
@@ -304,8 +187,20 @@ namespace SpaRcle::Scripts::Samples {
         }
 
         void Update(float_t dt) override {
-            if (generateEveryFrame) {
+            if (isDirty) {
+                ReInit();
+            }
+            else if (generateEveryFrame) {
                 Generate();
+            }
+
+            if (exportMesh) {
+                if (auto&& pProceduralMesh = gameObject->GetComponent<SR_GTYPES_NS::ProceduralMesh>()) {
+                    if (!pProceduralMesh->Export(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("MarchingCubesMesh.obj"))) {
+                        SR_ERROR("Failed to export Marching Cubes mesh!");
+                    }
+                }
+                exportMesh = false; // Reset after export
             }
         }
 
@@ -316,14 +211,18 @@ namespace SpaRcle::Scripts::Samples {
             pIndicesSSBO = nullptr;
             pHashTableSSBO = nullptr;
             pDensitySSBO = nullptr;
-            pComputeShader = nullptr;
+            pDensityComputeShader = nullptr;
+            pMarchingComputeShader = nullptr;
         }
 
     private:
         SR_HTYPES_NS::FastMemoryArray<SR_GRAPH_NS::Vertices::StaticMeshVertex> vertices;
         SR_HTYPES_NS::FastMemoryArray<uint32_t> indices;
 
-        SR_GTYPES_NS::ComputeShader::Ptr pComputeShader = nullptr;
+        bool isDirty = true;
+
+        SR_GTYPES_NS::ComputeShader::Ptr pMarchingComputeShader = nullptr;
+        SR_GTYPES_NS::ComputeShader::Ptr pDensityComputeShader = nullptr;
 
         SR_GRAPH_NS::SSBOInstance::Ptr pDensitySSBO = nullptr;
         SR_GRAPH_NS::SSBOInstance::Ptr pHashTableSSBO = nullptr;
@@ -337,19 +236,34 @@ namespace SpaRcle::Scripts::Samples {
         uint32_t vertexHashTableSize = 65536;
 
         /// @property @onChanged(OnEnable)
+        uint32_t densityCountAxis = 64;
+
+        /// @property @onChanged(OnEnable)
+        uint32_t densityComputeGroups = 8;
+
+        /// @property @onChanged(OnEnable)
         float_t noiseScale = 10.0f;
         /// @property @onChanged(OnEnable)
         int64_t seed = 1;
         /// @property @onChanged(OnEnable)
         float_t geometrySize = 1.f;
+        /// @property @onChanged(OnEnable)
+        float_t isoLevel = 0.2f;
         /// @property
         bool generateEveryFrame = false;
+        /// @property
+        bool exportMesh = false;
+
+        /// @property @onChanged(OnEnable)
+        SR_MATH_NS::IVector3 chunkCoord;
 
         /// @property @onChanged(OnEnable)
         MarchingCubesShape shape = MarchingCubesShape::Sphere;
 
         /// @property
-        SR_UTILS_NS::Path shaderPath = "Samples/MarchingCubes/MarchingCubes.srsl";
+        SR_UTILS_NS::Path marchingCubesShader = "Samples/MarchingCubes/MarchingCubes.srsl";
+        /// @property
+        SR_UTILS_NS::Path densityShader = "Samples/MarchingCubes/Density.srsl";
 
     };
 }

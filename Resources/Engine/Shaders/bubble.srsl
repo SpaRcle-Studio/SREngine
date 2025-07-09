@@ -19,7 +19,6 @@ DepthTest true;
 void fragment() {
     vec3 viewDirectionWorld = (VIEW_MATRIX * vec4(VIEW_DIRECTION, 0)).xyz;
 	vec3 normalWorld = (VIEW_MATRIX * vec4(NORMAL, 0.0)).xyz;
-
 	COLOR = vec4(BubbleColor, Fresnel(viewDirectionWorld, normalWorld));
 }
 
