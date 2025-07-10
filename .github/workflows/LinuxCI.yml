@@ -30,22 +30,36 @@ jobs:
           # Разделяем строку на отдельные пакеты по пробелам
           IFS=' ' read -r -a DEP_ARRAY <<< "$DEPENDENCIES"
 
-          # Логируем установку каждого пакета
+          echo "::group::📦 Package list"
+          echo "[LOG] Installing the following packages:"
           for DEP in "${DEP_ARRAY[@]}"; do
-            echo "[LOG] Installing package $DEP..."
-            sudo apt-get install -y $DEP || { echo "Error installing $DEP"; exit 1; }
+              echo "  - $DEP"
           done
+          echo "::endgroup::"
+          
+          echo "::group::🚀 Installing all packages at once"
+          if ! sudo apt-get install -y "${DEP_ARRAY[@]}"; then
+              echo "::endgroup::"
+              echo "::group::❗ Fallback: Installing individually"
+              for DEP in "${DEP_ARRAY[@]}"; do
+                  echo "[TRY] Installing $DEP..."
+                  if ! sudo apt-get install -y "$DEP"; then
+                      echo "[FAIL] Package $DEP failed to install!"
+                      echo "::endgroup::"
+                      exit 1
+                  else
+                      echo "[OK] $DEP installed successfully."
+                  fi
+              done
+              echo "::endgroup::"
+              echo "[ERROR] Something went wrong, but fallback succeeded?"
+              exit 1
+          else
+              echo "[LOG] All packages installed successfully."
+              echo "::endgroup::"
+          fi
 
-          # Проверка на успех после установки
           echo "All ubuntu dependencies installed successfully."
-
-          # sudo add-apt-repository universe
-          # sudo apt update -y
-          # sudo apt upgrade -y
-          # sudo apt-get install -y $DEPENDENCIES
-
-          # sudo pip install numpy
-          # sudo pip install clang
         env:
           DEPENDENCIES: ${{ vars.UBUNTU_DEPENDENCIES }}
 
