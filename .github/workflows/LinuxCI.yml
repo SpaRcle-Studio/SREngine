@@ -27,6 +27,9 @@ jobs:
 
           sudo apt update
 
+          echo "Installing build-essential..."
+          sudo apt-get install -y build-essential
+
           # Разделяем строку на отдельные пакеты по пробелам
           IFS=' ' read -r -a DEP_ARRAY <<< "$DEPENDENCIES"
 
@@ -71,11 +74,15 @@ jobs:
           wget https://apt.llvm.org/llvm.sh
           chmod +x llvm.sh
           sudo ./llvm.sh 17 all
-          sudo apt install -y libc++-17-dev libc++abi-17-dev gcc-13 g++-13
-          sudo update-alternatives --install /usr/bin/clang   clang   /usr/bin/clang-17   100
-          sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-17 100
-          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100
-          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 100
+          sudo apt install -y libc++-17-dev libc++abi-17-dev
+
+        # sudo apt install -y libc++-17-dev libc++abi-17-dev gcc-13 g++-13
+        # sudo update-alternatives --install /usr/bin/clang   clang   /usr/bin/clang-17   100
+        # sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-17 100
+        # sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100
+        # sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 100
+        # clang-17 --version
+        # clang++-17 --version
 
       - name: Updating submodules.
         run: git submodule --quiet update --init --recursive --depth 1 --jobs 4
