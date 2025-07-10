@@ -49,21 +49,14 @@ jobs:
         env:
           DEPENDENCIES: ${{ vars.UBUNTU_DEPENDENCIES }}
 
-      - name: Install LLVM APT key and repo
+      - name: Install LLVM and libc++
         run: |
           sudo apt update
           sudo apt install -y wget gnupg lsb-release
           wget https://apt.llvm.org/llvm.sh
           chmod +x llvm.sh
           sudo ./llvm.sh 17 all
-          
-          # GCC 13 (for libstdc++-13)
-          sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-          sudo apt update
-
-      - name: Install libc++ and GCC
-        run: |
-          sudo apt install -y libc++-17-dev libc++abi-17-dev g++-13
+          sudo apt install -y libc++-17-dev libc++abi-17-dev
 
       - name: Updating submodules.
         run: git submodule --quiet update --init --recursive --depth 1 --jobs 4
