@@ -107,7 +107,7 @@ jobs:
             echo "CXX=clang++" >> $GITHUB_ENV
           fi
 
-      - name: Building ${{ matrix.buildType }}.
+      - name: Building ${{ matrix.buildType }} ${{ matrix.compiler }}.
         shell: bash
         working-directory: ${{github.workspace}}/build
         run: |
@@ -124,7 +124,7 @@ jobs:
       - name: Uploading a ${{ matrix.buildType }} build trace artifact.
         uses: actions/upload-artifact@v4
         with:
-          name: "SREngine ${{ matrix.buildType }} Linux Build Trace Artifact"
+          name: "SREngine ${{ matrix.buildType }} ${{ matrix.compiler }} Linux Build Trace Artifact"
           path: "${{github.workspace}}/CI/trace.json"
 
       - name: Creating ${{ matrix.buildType }} artifact.
@@ -139,7 +139,7 @@ jobs:
         name: Uploading a successful ${{ matrix.buildType }} build artifact.
         uses: actions/upload-artifact@v4
         with:
-          name: "Linux ${{ matrix.buildType }} Executable"
+          name: "Linux ${{ matrix.buildType }} ${{ matrix.compiler }} Executable"
           path: "${{github.workspace}}/build/Engine/SREngineBuild"
 
       #- if: env.buildSuccessful == 'false'
