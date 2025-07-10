@@ -1,4 +1,9 @@
 cmake_minimum_required(VERSION 3.16)
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND NOT MSVC AND NOT ANDROID_NDK)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++ -std=c++20")
+endif()
+
 project(Physics)
 
 set(CMAKE_CXX_STANDARD 20)
