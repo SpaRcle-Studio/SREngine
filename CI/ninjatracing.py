@@ -46,9 +46,9 @@ def read_targets(log, show_all):
     m = re.search(r'^# ninja log v(\d+)\n$', header)
     assert m, "unrecognized ninja log version %r" % header
     version = int(m.group(1))
-    assert 5 <= version <= 6, "unsupported ninja log version %d" % version
-    if version == 6:
-        # Skip header line
+    assert 5 <= version <= 7, "unsupported ninja log version %d" % version
+    if version in (6, 7):
+        # Skip second header line
         next(log)
 
     targets = {}
@@ -56,7 +56,16 @@ def read_targets(log, show_all):
     for line in log:
         if line.startswith('#'):
             continue
-        start, end, _, name, cmdhash = line.strip().split('\t') # Ignore restat.
+        fields = line.strip().split('\t')
+        if version == 7:
+            # Version 7 adds a restat field as the last column
+            if len(fields) == 6:
+                start, end, _, name, cmdhash, _restat = fields
+            else:
+                # In case some logs are malformed, skip them
+                continue
+        else:
+            start, end, _, name, cmdhash = fields
         if not show_all and int(end) < last_end_seen:
             # An earlier time stamp means that this step is the first in a new
             # build, possibly an incremental build. Throw away the previous data
