@@ -49,11 +49,17 @@ jobs:
         env:
           DEPENDENCIES: ${{ vars.UBUNTU_DEPENDENCIES }}
 
-      - name: Install GCC 13 and Clang 17
+        - name: Install LLVM APT key and repo
         run: |
-          sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
           sudo apt update
-          sudo apt install -y gcc-13 g++-13 clang-17 libc++-17-dev libc++abi-17-dev
+          sudo apt install -y wget gnupg lsb-release
+          wget https://apt.llvm.org/llvm.sh
+          chmod +x llvm.sh
+          sudo ./llvm.sh 17 all
+
+      - name: Install libc++ and GCC
+        run: |
+          sudo apt install -y libc++-17-dev libc++abi-17-dev g++-13
 
       - name: Updating submodules.
         run: git submodule --quiet update --init --recursive --depth 1 --jobs 4
