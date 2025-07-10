@@ -96,7 +96,8 @@ namespace SR_PHYSICS_NS {
                 break;
         #endif
             default:
-                SRHalt("Unsupported library!");
+                SR_ERROR("PhysicsLibrary::GetLibrary() : unsupported physics library type! \n\tType: "
+                     + SR_UTILS_NS::EnumReflector::ToStringAtom(type).ToStringRef());
                 return nullptr;
         }
 

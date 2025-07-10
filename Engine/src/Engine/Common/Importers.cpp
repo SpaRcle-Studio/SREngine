@@ -10,12 +10,15 @@
 
 #include <Graphics/Animations/Skeleton.h>
 
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
-#include <assimp/Importer.hpp>
+#ifdef SR_UTILS_ASSIMP
+    #include <assimp/scene.h>
+    #include <assimp/postprocess.h>
+    #include <assimp/Importer.hpp>
+#endif
 
 namespace SR_CORE_NS {
     bool Importers::ImportSkeletonFromRawMesh(const SR_HTYPES_NS::RawMesh* pRawMesh, SR_ANIMATIONS_NS::Skeleton::Ptr pSkeleton) {
+    #ifdef SR_UTILS_ASSIMP
         const aiScene* pScene = static_cast<const aiScene*>(pRawMesh->GetAssimpScene());
 
         if (!pScene->mRootNode) {
@@ -31,6 +34,7 @@ namespace SR_CORE_NS {
         };
 
         processNode(pScene->mRootNode, pSkeleton->GetRootBone());
+    #endif
 
         /// если нет сцены, значит загружаем сырой компонент
         if (!pSkeleton->HasScene()) {

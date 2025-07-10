@@ -17,13 +17,16 @@
 #include <Physics/PhysicsLib.h>
 #include <Physics/LibraryImpl.h>
 
-#include <assimp/scene.h>
 #include <Graphics/Types/Texture.h>
+
+#ifdef SR_UTILS_ASSIMP
+    #include <assimp/scene.h>
+#endif
 
 namespace SR_CORE_NS {
     SR_UTILS_NS::SceneObject::Ptr World::Instance(const SR_HTYPES_NS::RawMesh* pRawMesh) {
         GameObjectPtr root;
-
+    #ifdef SR_UTILS_ASSIMP
         static std::function processMaterial = [](const SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t meshId, SR_GTYPES_NS::Mesh* pMesh, uint64_t materialIndex) {
             const aiScene* pScene = static_cast<const aiScene*>(pRawMesh->GetAssimpScene());
 
@@ -118,6 +121,7 @@ namespace SR_CORE_NS {
                 pSkinnedMesh->GetSkeleton().SetPathTo(pSkeleton.StaticCast<SR_UTILS_NS::Entity>());
             }
         }
+    #endif
 
         return root.StaticCast<SR_UTILS_NS::SceneObject>();
     }

@@ -144,18 +144,10 @@ if (SR_DISABLE_EXCEPTIONS)
     endif()
 endif()
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSR_UTILS_ASSIMP")
-
 include(Engine/cmake/ModularBuild.cmake)
 
 set(SR_PHYSICS_USE_BULLET3 OFF)
 set(SR_PHYSICS_USE_BOX2D OFF)
-
-if (NOT SR_EMSCRIPTEN)
-    set(SR_PHYSICS_USE_PHYSX ON)
-else()
-    set(SR_PHYSICS_USE_PHYSX OFF)
-endif()
 
 set(EVO_VULKAN_STATIC_LIBRARY ON)
 
