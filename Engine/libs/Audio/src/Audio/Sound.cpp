@@ -5,12 +5,13 @@
 #include <Audio/Sound.h>
 #include <Audio/SoundManager.h>
 #include <Audio/SoundData.h>
+
 #include <Utils/Resources/ResourceManager.h>
 
+#include <Codegen/Sound.generated.hpp>
+
 namespace SR_AUDIO_NS {
-    Sound::Sound()
-        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Sound))
-    { }
+    Sound::Sound() = default;
 
     Sound::~Sound() {
         if (m_data && !SoundManager::Instance().Unregister(&m_data)) {
@@ -19,7 +20,7 @@ namespace SR_AUDIO_NS {
         SetRawSound(nullptr);
     }
 
-    Sound* Sound::Load(const SR_UTILS_NS::Path& rawPath) {
+    Sound::Ptr Sound::Load(const SR_UTILS_NS::Path& rawPath) {
         auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
         SR_UTILS_NS::Path&& path = rawPath.RemoveSubPath(resourceManager.GetResPath());
@@ -35,7 +36,7 @@ namespace SR_AUDIO_NS {
             return nullptr;
         }
 
-        auto&& pSound = new Sound();
+        auto&& pSound = Sound::MakeShared<Sound>();
 
         pSound->SetRawSound(pRawSound);
         pSound->SetId(path.ToStringRef(), false);
@@ -43,10 +44,11 @@ namespace SR_AUDIO_NS {
         if (!pSound->Reload()) {
             SR_ERROR("Sound::Load() : failed to reload sound!");
             pSound->DeleteResource();
+            pSound = nullptr;
             return nullptr;
         }
 
-        resourceManager.RegisterResource(pSound);
+        resourceManager.RegisterResource(pSound.StaticCast<SR_UTILS_NS::IResource>());
 
         return pSound;
     }
@@ -92,18 +94,18 @@ namespace SR_AUDIO_NS {
         return true;
     }
 
-    void Sound::SetRawSound(RawSound *pRawSound) {
+    void Sound::SetRawSound(const RawSound::Ptr& pRawSound) {
         if (m_rawSound && pRawSound) {
             SRHalt0();
             return;
         }
 
         if (m_rawSound) {
-            RemoveDependency(m_rawSound);
+            RemoveDependency(m_rawSound.StaticCast<SR_UTILS_NS::ResourceContainer>());
         }
 
         if (pRawSound) {
-            AddDependency(pRawSound);
+            AddDependency(pRawSound.StaticCast<SR_UTILS_NS::ResourceContainer>());
         }
 
         m_rawSound = pRawSound;

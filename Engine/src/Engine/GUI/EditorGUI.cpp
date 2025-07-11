@@ -328,18 +328,18 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
-    SR_GTYPES_NS::Texture* EditorGUI::GetIcon(EditorIcon icon) const {
+    const SR_GTYPES_NS::Texture* EditorGUI::GetIcon(EditorIcon icon) const {
         if (m_icons.count(icon) == 1) {
-            return m_icons.at(icon);
+            return m_icons.at(icon).Get();
         }
 
-        return m_context->GetNoneTexture();
+        return m_context->GetNoneTexture().Get();
     }
 
     void *EditorGUI::GetIconDescriptor(EditorIcon icon) const {
-        if (auto&& iconTexture = GetIcon(icon)) {
+        if (auto&& iconTexture = const_cast<SR_GTYPES_NS::Texture*>(GetIcon(icon))) {
             if (!iconTexture->GetDescriptor()) {
-                iconTexture = m_context->GetNoneTexture();
+                iconTexture = m_context->GetNoneTexture().Get();
             }
 
             return iconTexture->GetDescriptor();

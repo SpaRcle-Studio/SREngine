@@ -8,6 +8,7 @@
 #include <Physics/macros.h>
 
 #include <Physics/PhysicsLib.h>
+#include <Physics/PhysicsMaterial.h>
 #include <Physics/CollisionShape.h>
 
 #include <Utils/Common/Measurement.h>
@@ -33,7 +34,6 @@ namespace SR_PHYSICS_NS {
 }
 
 namespace SR_PTYPES_NS {
-    class PhysicsMaterial;
     class Rigidbody;
 
     class RigidbodyImpl : public SR_UTILS_NS::NonCopyable {
@@ -110,7 +110,7 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD SR_MATH_NS::FVector3 GetTranslation() const noexcept { return m_translation; }
         SR_NODISCARD SR_MATH_NS::Quaternion GetRotation() const noexcept { return m_rotation; }
         SR_NODISCARD SR_MATH_NS::FVector3 GetScale() const noexcept { return m_scale; }
-        SR_NODISCARD PhysicsMaterial* GetPhysicsMaterial() const noexcept { return m_material; }
+        SR_NODISCARD PhysicsMaterial::Ptr GetPhysicsMaterial() const noexcept { return m_material; }
         SR_NODISCARD bool IsDebugEnabled() const noexcept;
         SR_NODISCARD RBUpdShapeRes UpdateShape();
         SR_NODISCARD bool IsShapeSupported(ShapeType type) const;
@@ -125,7 +125,7 @@ namespace SR_PTYPES_NS {
         virtual void SetType(ShapeType type);
         void SetMass(float_t mass);
 
-        void SetMaterial(PhysicsMaterial* pMaterial);
+        void SetMaterial(const PhysicsMaterial::Ptr& pMaterial);
         void SetMaterial(const SR_UTILS_NS::Path& path);
 
         bool InitBody();
@@ -179,7 +179,7 @@ namespace SR_PTYPES_NS {
 
         SR_MATH_NS::FVector3 m_scale = SR_MATH_NS::FVector3::One();
 
-        SR_PTYPES_NS::PhysicsMaterial* m_material = nullptr;
+        SR_PTYPES_NS::PhysicsMaterial::Ptr m_material = nullptr;
 
         bool m_isBodyDirty = true;
         bool m_isMatrixDirty = false;

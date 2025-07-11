@@ -13,12 +13,16 @@ namespace SR_AUDIO_NS {
     class IWaveDataProvider;
 
     class RawSound : public SR_UTILS_NS::IResource {
-    private:
+        SR_CLASS()
+    public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<RawSound>;
+
+    public:
         RawSound();
         ~RawSound() override;
 
     public:
-        static RawSound* Load(const SR_UTILS_NS::Path& rawPath);
+        static RawSound::Ptr Load(const SR_UTILS_NS::Path& rawPath);
 
     public:
         SR_NODISCARD uint64_t GetFileHash() const override { return 0; };

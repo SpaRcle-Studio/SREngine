@@ -14,10 +14,10 @@
 
 namespace SR_PHYSICS_NS {
     SR_ENUM_NS_CLASS_T(Combine, uint8_t,
-            Minimum,
-            Average,
-            Maximum,
-            Multiply
+        Minimum,
+        Average,
+        Maximum,
+        Multiply
     )
 }
 
@@ -36,13 +36,17 @@ namespace SR_PTYPES_NS {
     };
 
     class PhysicsMaterial final : public SR_UTILS_NS::IResource {
+        SR_CLASS()
         using Super = SR_UTILS_NS::IResource;
-    private:
+    public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<PhysicsMaterial>;
+
+    public:
         PhysicsMaterial();
         ~PhysicsMaterial() override;
 
     public:
-        static PhysicsMaterial* Load(const SR_UTILS_NS::Path& rawPath);
+        static PhysicsMaterial::Ptr Load(const SR_UTILS_NS::Path& rawPath);
         static bool Save(const SR_UTILS_NS::Path& path, const PhysicsMaterialData& materialData);
 
     public:

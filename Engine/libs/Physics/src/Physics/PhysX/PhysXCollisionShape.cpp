@@ -58,7 +58,7 @@ namespace SR_PTYPES_NS {
                 break;
             }
             case ShapeType::Convex3D: {
-                SR_HTYPES_NS::RawMesh* pRawMesh = GetShape()->GetRawMesh();
+                SR_HTYPES_NS::RawMesh::Ptr pRawMesh = GetShape()->GetRawMesh();
 
                 if (!pRawMesh) {
                     SR_WARN("PhysXCollisionShape::UpdateShape() : mesh is not set!");
@@ -66,7 +66,7 @@ namespace SR_PTYPES_NS {
                     break;
                 }
 
-                physx::PxConvexMesh* convexMesh = CreateConvexMesh(pRawMesh);
+                physx::PxConvexMesh* convexMesh = CreateConvexMesh(pRawMesh.Get());
 
                 if (!convexMesh) {
                     SR_ERROR("PhysXCollisionShape::UpdateShape() : failed to create convex mesh!");
@@ -77,14 +77,14 @@ namespace SR_PTYPES_NS {
                 break;
             }
             case ShapeType::TriangleMesh3D: {
-                SR_HTYPES_NS::RawMesh* pRawMesh = GetShape()->GetRawMesh();
+                SR_HTYPES_NS::RawMesh::Ptr pRawMesh = GetShape()->GetRawMesh();
 
                 if (!pRawMesh) {
                     SR_ERROR("PhysXCollisionShape::UpdateShape() : mesh is nullptr!");
                     return false;
                 }
 
-                physx::PxTriangleMesh* triangleMesh = CreateTriangleMesh(pRawMesh);
+                physx::PxTriangleMesh* triangleMesh = CreateTriangleMesh(pRawMesh.Get());
 
                 if (!triangleMesh) {
                     SR_ERROR("PhysXCollisionShape::UpdateShape() : failed to create triangle mesh!");

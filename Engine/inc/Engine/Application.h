@@ -34,7 +34,6 @@ namespace SR_CORE_NS {
         SR_NODISCARD SR_HTYPES_NS::SharedPtr<Engine>& GetEngine() { return m_engine; }
 
     private:
-        bool InitResourceTypes();
         bool InitLogger(const SR_UTILS_NS::Path& logDir);
         bool FindResourcesFolder();
         //void TryPlayStartSound()

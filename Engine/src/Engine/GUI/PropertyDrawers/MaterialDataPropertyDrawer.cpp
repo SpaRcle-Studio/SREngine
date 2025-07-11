@@ -203,7 +203,7 @@ namespace SR_CORE_GUI_NS {
             case SR_GRAPH_NS::ShaderVarType::Sampler2D: {
                 SR_GRAPH_GUI_NS::Immediate::SameLine();
                 SR_UTILS_NS::Path path;
-                if (auto&& pTexture = std::get<SR_GTYPES_NS::Texture*>(property.data)) {
+                if (auto&& pTexture = std::get<SR_GTYPES_NS::Texture::Ptr>(property.data)) {
                     path = pTexture->GetResourcePath();
                 }
                 value = SR_UTILS_NS::Reflection::Value::CreateRef(path);
@@ -213,7 +213,7 @@ namespace SR_CORE_GUI_NS {
                     shaderData.SetData(property.id, pTexture, SR_GRAPH_NS::ShaderVarType::Sampler2D);
                 }
 
-                auto&& pTexture = std::get<SR_GTYPES_NS::Texture*>(property.data);
+                auto&& pTexture = std::get<SR_GTYPES_NS::Texture::Ptr>(property.data);
                 if (void* pDescriptor = pTexture ? pTexture->GetDescriptor() : nullptr) {
                     const float_t imageSize = context.lineHeight * 2.5f;
 

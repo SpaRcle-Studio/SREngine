@@ -2,36 +2,40 @@
 // Created by Monika on 06.07.2022.
 //
 
-#include <Audio/RawSound.h>
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/FileSystem/FileSystem.h>
+
 #include <Audio/Decoders/IWaveDataProvider.h>
+#include <Audio/RawSound.h>
+
+#include <Codegen/RawSound.generated.hpp>
 
 namespace SR_AUDIO_NS {
-    RawSound::RawSound()
-        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(RawSound))
-    { }
+    RawSound::RawSound() = default;
 
-    RawSound::~RawSound() { }
+    RawSound::~RawSound() = default;
 
-    RawSound *RawSound::Load(const SR_UTILS_NS::Path& rawPath) {
+    RawSound::Ptr RawSound::Load(const SR_UTILS_NS::Path& rawPath) {
         auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
         SR_UTILS_NS::Path&& path = rawPath.RemoveSubPath(resourceManager.GetResPath());
 
-        if (auto&& pRawSound = resourceManager.Find<RawSound>(path))
+        if (auto&& pRawSound = resourceManager.Find<RawSound>(path)) {
             return pRawSound;
+        }
 
-        auto&& pRawSound = new RawSound();
+        auto&& pRawSound = RawSound::MakeShared<RawSound>();
 
         pRawSound->SetId(path.ToStringRef(), false);
 
         if (!pRawSound->Reload()) {
-            delete pRawSound;
+            SR_ERROR("RawSound::Load() : failed to load raw sound resource!\n\tPath: {}", path);
+            pRawSound->DeleteResource();
+            pRawSound = nullptr;
             return nullptr;
         }
 
-        resourceManager.RegisterResource(pRawSound);
+        resourceManager.RegisterResource(pRawSound->StaticCast<SR_UTILS_NS::IResource>());
 
         return pRawSound;
     }

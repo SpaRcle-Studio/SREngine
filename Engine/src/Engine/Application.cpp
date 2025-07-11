@@ -102,11 +102,6 @@ namespace SR_CORE_NS {
             return false;
         }
 
-        if (!InitResourceTypes()) {
-            SR_ERROR("Application::EarlyInit() : failed to initialize resource types!");
-            return false;
-        }
-
         return true;
     }
 
@@ -327,33 +322,5 @@ namespace SR_CORE_NS {
 
     void Application::Reload() {
         m_isNeedReload = true;
-    }
-
-    bool Application::InitResourceTypes() {
-        auto&& resourcesManager = SR_UTILS_NS::ResourceManager::Instance();
-
-        resourcesManager.RegisterType<SR_HTYPES_NS::RawMesh>();
-        resourcesManager.RegisterType<SR_UTILS_NS::Settings>();
-        resourcesManager.RegisterType<SR_UTILS_NS::Prefab>();
-
-        resourcesManager.RegisterType<SR_SRLM_NS::LogicalMachine>();
-
-        resourcesManager.RegisterType<SR_GRAPH_NS::FileMaterialResource>();
-        resourcesManager.RegisterType<SR_GTYPES_NS::Texture>();
-        resourcesManager.RegisterType<SR_GTYPES_NS::Shader>();
-        resourcesManager.RegisterType<SR_GTYPES_NS::Skybox>();
-        resourcesManager.RegisterType<SR_GTYPES_NS::Framebuffer>();
-        resourcesManager.RegisterType<SR_GTYPES_NS::Font>();
-
-        //resourcesManager.RegisterType<SR_SCRIPTING_NS::EvoBehaviour>();
-
-        resourcesManager.RegisterType<SR_AUDIO_NS::Sound>();
-        resourcesManager.RegisterType<SR_AUDIO_NS::RawSound>();
-
-        resourcesManager.RegisterType<SR_ANIMATIONS_NS::AnimationClip>();
-
-        resourcesManager.RegisterType<SR_PTYPES_NS::PhysicsMaterial>();
-
-        return true;
     }
 }

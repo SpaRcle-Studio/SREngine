@@ -27,7 +27,7 @@ namespace SR_CORE_NS {
         SR_NODISCARD bool Reload(const SR_UTILS_NS::Path& path, SR_UTILS_NS::ResourceInfo* pResourceInfo) override;
 
     private:
-        void OnResourceReloaded(SR_UTILS_NS::IResource* pResource);
+        void OnResourceReloaded(const SR_UTILS_NS::IResource::Ptr& pResource);
 
     private:
         ContextGetterFn m_contextGetter;

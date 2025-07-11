@@ -10,6 +10,7 @@
 #include <Utils/Common/Measurement.h>
 #include <Utils/Common/Singleton.h>
 #include <Utils/Math/Vector3.h>
+#include <Utils/Types/SharedPtr.h>
 
 #include <Physics/Utils/Utils.h>
 
@@ -34,7 +35,7 @@ namespace SR_PHYSICS_NS {
         SR_NODISCARD LibraryImpl* GetActiveLibrary(Space space);
         SR_NODISCARD LibraryTypes GetSupportedLibraries() const;
 
-        SR_NODISCARD SR_PTYPES_NS::PhysicsMaterial* GetDefaultMaterial() const noexcept { return m_defaultMaterial; }
+        SR_NODISCARD SR_HTYPES_NS::SharedPtr<SR_PTYPES_NS::PhysicsMaterial> GetDefaultMaterial() const noexcept { return m_defaultMaterial; }
 
     protected:
         void InitSingleton() override;
@@ -45,7 +46,7 @@ namespace SR_PHYSICS_NS {
         std::map<Space, LibraryType> m_activeLibs;
         std::set<LibraryType> m_supportedLibs;
 
-        SR_PTYPES_NS::PhysicsMaterial* m_defaultMaterial = nullptr;
+        SR_HTYPES_NS::SharedPtr<SR_PTYPES_NS::PhysicsMaterial> m_defaultMaterial = nullptr;
     };
 }
 

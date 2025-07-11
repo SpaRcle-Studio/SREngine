@@ -74,7 +74,7 @@ namespace SR_PTYPES_NS {
         }
         else if (HasGeometry()) {
             m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawMesh(
-                    GetRawMesh(), GetMeshId(),
+                    GetRawMesh().Get(), GetMeshId(),
                     m_debugId,
                     m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
                     m_rigidbody->GetRotation(),

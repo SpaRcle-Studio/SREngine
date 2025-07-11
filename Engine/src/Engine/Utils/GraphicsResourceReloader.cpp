@@ -30,7 +30,7 @@ namespace SR_CORE_NS {
         return true;
     }
 
-    void GraphicsResourceReloader::OnResourceReloaded(SR_UTILS_NS::IResource::Ptr pResource) {
+    void GraphicsResourceReloader::OnResourceReloaded(const SR_UTILS_NS::IResource::Ptr& pResource) {
         SR_TRACY_ZONE;
 
         auto&& pContext = m_contextGetter ? m_contextGetter() : RenderContextPtr();

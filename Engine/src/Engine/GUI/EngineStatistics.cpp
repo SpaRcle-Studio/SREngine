@@ -71,7 +71,7 @@ namespace SR_CORE_GUI_NS {
                 }
             };
 
-            auto&& drawResources = [=](const std::unordered_set<SR_UTILS_NS::IResource*>& resources, uint32_t index) {
+            auto&& drawResources = [=](std::unordered_set<SR_UTILS_NS::IResource::Ptr>& resources, uint32_t index) {
                 uint32_t subIndex = 0;
 
                 const auto node = SR_FORMAT("[{}] {} ({})", index, (*resources.begin())->GetResourceId().data(), resources.size());
@@ -79,22 +79,25 @@ namespace SR_CORE_GUI_NS {
                 const bool open = SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)index, SR_GRAPH_GUI_NS::Immediate::SR_NODE_FLAGS_WITH_CHILD, "%s", node.c_str());
 
                 if (open) {
-                    for (auto &&pRes : resources)
-                        drawResource(pRes, subIndex++);
+                    for (const SR_UTILS_NS::IResource::Ptr& pRes : resources) {
+                        drawResource(const_cast<SR_UTILS_NS::IResource*>(pRes.Get()), subIndex++);
+                    }
                     SR_GRAPH_GUI_NS::Immediate::TreePop();
                 }
             };
 
-            SR_UTILS_NS::ResourceManager::Instance().InspectResources([=](const auto &groups) {
-                for (const auto& [groupHashName, pResourceType] : groups) {
+            SR_UTILS_NS::ResourceManager::Instance().InspectResources([=](auto &groups) {
+                for (auto& [groupHashName, pResourceType] : groups) {
                     const bool open = SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)pResourceType, SR_GRAPH_GUI_NS::Immediate::SR_NODE_FLAGS_WITH_CHILD, "%s", pResourceType->GetName().data());
 
                     if (open) {
                         uint32_t index = 0;
 
-                        for (const auto&[resourceName, pResources] : pResourceType->GetCopiesRef()) {
+                        SR_UTILS_NS::ResourceType::CopiesMap& copies = pResourceType->GetCopiesRef();
+
+                        for (auto& [resourceName, pResources] : copies) {
                             if (pResources.size() == 1) {
-                                drawResource(*pResources.begin(), index++);
+                                drawResource(const_cast<SR_UTILS_NS::IResource*>((*pResources.begin()).Get()), index++);
                             }
                             else {
                                 drawResources(pResources, index++);
@@ -239,14 +242,9 @@ namespace SR_CORE_GUI_NS {
 
                         SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(0);
 
-                        if (auto&& pResource = dynamic_cast<SR_UTILS_NS::IResource*>(pRenderTechnique)) {
-                            SR_GRAPH_GUI_NS::Immediate::Text("%s", pResource->GetResourceId().c_str());
-                        }
-                        else {
-                            SR_GRAPH_GUI_NS::Immediate::Text("%s", pRenderTechnique->GetName().data());
-                        }
+                        SR_GRAPH_GUI_NS::Immediate::Text("%s", pRenderTechnique->GetName().data());
 
-                        DrawRenderTechnique(pRenderTechnique);
+                        DrawRenderTechnique(const_cast<Graphics::IRenderTechnique *>(pRenderTechnique.Get()));
 
                         SR_GRAPH_GUI_NS::Immediate::Separator();
                     }
@@ -399,7 +397,7 @@ namespace SR_CORE_GUI_NS {
         bool first = true;
         uint32_t vbo = SR_ID_INVALID;
         int64_t priority = 0;
-        SR_GTYPES_NS::Shader* pShader = nullptr;
+        const SR_GTYPES_NS::Shader* pShader = nullptr;
 
         SR_GRAPH_GUI_NS::Immediate::Separator();
         SR_GRAPH_GUI_NS::Immediate::Text("Queue:");
@@ -413,8 +411,8 @@ namespace SR_CORE_GUI_NS {
                     SR_GRAPH_GUI_NS::Immediate::Text("\t* Priority: %lli", priority);
                 }
 
-                if (first || pShader != meshInfo.shaderUseInfo.pShader) {
-                    pShader = meshInfo.shaderUseInfo.pShader;
+                if (first || pShader != meshInfo.shaderUseInfo.pShader.Get()) {
+                    pShader = meshInfo.shaderUseInfo.pShader.Get();
                     if (meshInfo.shaderUseInfo.pShader) {
                         SR_GRAPH_GUI_NS::Immediate::Text("\t\t* Shader: %s", meshInfo.shaderUseInfo.pShader->GetResourceId().c_str());
                     }

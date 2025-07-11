@@ -26,7 +26,7 @@ namespace SR_PTYPES_NS {
     Rigidbody::~Rigidbody() {
         m_shape.AutoFree();
         SR_SAFE_DELETE_PTR(m_impl);
-        SetMaterial(nullptr);
+        SetMaterial(SR_PTYPES_NS::PhysicsMaterial::Ptr());
     }
 
     void Rigidbody::OnDestroy() {
@@ -280,7 +280,7 @@ namespace SR_PTYPES_NS {
         return true;
     }
 
-    void Rigidbody::SetMaterial(PhysicsMaterial* pMaterial) {
+    void Rigidbody::SetMaterial(const SR_PTYPES_NS::PhysicsMaterial::Ptr& pMaterial) {
         if (pMaterial == m_material) {
             return;
         }
@@ -311,11 +311,10 @@ namespace SR_PTYPES_NS {
 
     void Rigidbody::SetMaterial(const SR_UTILS_NS::Path& path) {
         if (path.IsEmpty()) {
-            SetMaterial(nullptr);
+            SetMaterial(SR_PTYPES_NS::PhysicsMaterial::Ptr());
             return;
         }
-        SR_PTYPES_NS::PhysicsMaterial* pMaterial = SR_PTYPES_NS::PhysicsMaterial::Load(path);
-        SetMaterial(pMaterial);
+        SetMaterial(SR_PTYPES_NS::PhysicsMaterial::Load(path));
     }
 
     void Rigidbody::UpdateInertia() {

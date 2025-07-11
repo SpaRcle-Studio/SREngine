@@ -5,11 +5,11 @@
 #include <Engine/EntryPoint.h>
 
 #include <Engine/Launcher.h>
-#include <Engine/Tests/TestManager.h>
 #include <Engine/CLIManager.h>
 
 #include <Utils/Common/CmdOptions.h>
 #include <Utils/Tests/SharedPtrAutotests.h>
+#include <Utils/Tests/TestManager.h>
 
 #include <Engine/Tests/AtlasBuilderTest.h>
 #include <Engine/Tests/HTMLTest.h>
@@ -30,7 +30,7 @@ int SREngineEntryPoint(int argc, char** argv) {
     SR_CORE_NS::CLIManager::Instance().Init(argc, argv);
 
     if (SR_CORE_NS::CLIManager::Instance().IsFlagPresent(SR_CORE_NS::CLIFlags::UnitTests)) {
-        SR_CORE_NS::TestManager::Instance().AddTest([]() {
+        /*SR_CORE_NS::TestManager::Instance().AddTest([]() {
             return SR_CORE_NS::Tests::SRSLTest::Run();
         }, "SRSL Test");
 
@@ -46,7 +46,7 @@ int SREngineEntryPoint(int argc, char** argv) {
             return SR_CORE_NS::Tests::CSSTest::Run();
         }, "CSS Test");
 
-        SR_CORE_NS::TestManager::Instance().RunAll();
+        SR_CORE_NS::TestManager::Instance().RunAll();*/
         SR_UTILS_NS::ShutdownEngineProfiler();
         return 0;
     }

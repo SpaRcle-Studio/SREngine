@@ -8,10 +8,10 @@
 #include <Physics/PhysicsMaterial.h>
 #include <Physics/PhysicsMaterialImpl.h>
 
+#include <Codegen/PhysicsMaterial.generated.hpp>
+
 namespace SR_PTYPES_NS {
-    PhysicsMaterial::PhysicsMaterial()
-        : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(PhysicsMaterial))
-    { }
+    PhysicsMaterial::PhysicsMaterial() = default;
 
     PhysicsMaterial::~PhysicsMaterial() {
         for (auto&& [libraryType, physicsMaterial] : m_implementations) {
@@ -26,37 +26,8 @@ namespace SR_PTYPES_NS {
         return nullptr;
     }
 
-    PhysicsMaterial* PhysicsMaterial::Load(const SR_UTILS_NS::Path& rawPath) {
-        if (rawPath.IsEmpty()) {
-            SRHalt("PhysicsMaterial::Load() : path is empty!");
-            return nullptr;
-        }
-
-        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
-
-        PhysicsMaterial* pMaterial = nullptr;
-
-        resourceManager.Execute([&](){
-            auto&& path = rawPath.SelfRemoveSubPath(resourceManager.GetResPathRef());
-
-            if ((pMaterial = resourceManager.Find<PhysicsMaterial>(path))) {
-                return;
-            }
-
-            pMaterial = new PhysicsMaterial();
-
-            pMaterial->SetId(path.ToStringRef(), false);
-
-            if (!pMaterial->Reload()) {
-                delete pMaterial;
-                pMaterial = nullptr;
-                return;
-            }
-
-            resourceManager.RegisterResource(pMaterial);
-        });
-
-        return pMaterial;
+    PhysicsMaterial::Ptr PhysicsMaterial::Load(const SR_UTILS_NS::Path& rawPath) {
+        return SR_UTILS_NS::ResourceManager::Instance().GetOrLoadResource<PhysicsMaterial>(rawPath);
     }
 
     bool PhysicsMaterial::Load() {
