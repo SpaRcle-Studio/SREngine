@@ -9,6 +9,7 @@
 #include <filesystem>
 #include <regex>
 #include <atomic>
+#include <sstream>
 
 #include <zlib.h>
 
@@ -54,8 +55,14 @@ enum ERROR_CODES {
     #include <cstring>
     const char* DYNAMIC_MODULE_EXTENSION = ".so";
     void* LoadDynamicModule(const char* moduleName) {
-        return dlopen(moduleName, RTLD_NOW);
+        void* pHandle = dlopen(moduleName, RTLD_NOW | RTLD_GLOBAL);
+        if (!pHandle) {
+            const char* error = dlerror();
+            fprintf(stderr, "LoadDynamicModule() : dlopen failed, reason: %s\n", error);
+        }
+        return pHandle;
     }
+
     bool UnloadDynamicModule(void* pModule) {
         return dlclose(pModule) != 0;
     }
@@ -70,8 +77,14 @@ enum ERROR_CODES {
     #include <unistd.h>
     const char* DYNAMIC_MODULE_EXTENSION = ".dylib";
     void* LoadDynamicModule(const char* moduleName) {
-        return dlopen(moduleName, RTLD_NOW);
+        void* pHandle = dlopen(moduleName, RTLD_NOW | RTLD_GLOBAL);
+        if (!pHandle) {
+            const char* error = dlerror();
+            fprintf(stderr, "LoadDynamicModule() : dlopen failed, reason: %s\n", error);
+        }
+        return pHandle;
     }
+
     bool UnloadDynamicModule(void* pModule) {
         return dlclose(pModule) != 0;
     }
@@ -86,11 +99,11 @@ int SREngineEntryPointFromExternalModule(int argc, char** argv, bool notFoundAsE
     void* pModuleHandle = nullptr;
     namespace fs = std::filesystem;
 
-    for (const auto& entry : fs::directory_iterator(fs::current_path())) {
+    for (const auto& entry : fs::directory_iterator(fs::absolute(fs::current_path()))) {
         if (!entry.is_regular_file() || entry.path().extension() != DYNAMIC_MODULE_EXTENSION) {
             continue;
         }
-
+        
         if (entry.path().filename().string().find("Engine") != std::string::npos) {
             pModuleHandle = LoadDynamicModule(entry.path().string().c_str());
             if (!pModuleHandle) {

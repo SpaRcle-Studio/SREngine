@@ -1,4 +1,11 @@
 cmake_minimum_required(VERSION 3.16...3.16.2)
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND NOT MSVC AND NOT ANDROID_NDK)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++ -std=c++20")
+endif()
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 project(SREngine VERSION 1.0.0 LANGUAGES CXX DESCRIPTION "SpaRcle Engine - cross-platform 2D/3D game engine in C++.")
 
 set_property(GLOBAL PROPERTY SR_ENGINE_VERSION_PROPERTY ${PROJECT_VERSION})
@@ -106,7 +113,7 @@ add_definitions(
     -DSR_CXX_20
 )
 
-if (NOT SR_EMSCRIPTEN)
+if (NOT SR_EMSCRIPTEN AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     add_definitions(-DSR_SUPPORT_PARALLEL)
 endif()
 
@@ -115,10 +122,6 @@ if (ANDROID_NDK)
     add_definitions(-Wno-c++20-attribute-extensions)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-c++20-attribute-extensions")
 else()
-    if (UNIX AND NOT SR_EMSCRIPTEN)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcompare-debug-second")
-    endif()
-
     if (UNIX)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w -Wno-deprecated -fPIC")
     endif()
@@ -145,18 +148,10 @@ if (SR_DISABLE_EXCEPTIONS)
     endif()
 endif()
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSR_UTILS_ASSIMP")
-
 include(Engine/cmake/ModularBuild.cmake)
 
 set(SR_PHYSICS_USE_BULLET3 OFF)
 set(SR_PHYSICS_USE_BOX2D OFF)
-
-if (NOT SR_EMSCRIPTEN)
-    set(SR_PHYSICS_USE_PHYSX ON)
-else()
-    set(SR_PHYSICS_USE_PHYSX OFF)
-endif()
 
 set(EVO_VULKAN_STATIC_LIBRARY ON)
 

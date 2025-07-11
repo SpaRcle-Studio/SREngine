@@ -8,8 +8,10 @@ jobs:
     name: Build.
     runs-on: ubuntu-22.04
     strategy:
+      fail-fast: false
       matrix:
         buildType: [Debug, Release]
+        compiler: [gcc, clang]
     steps:
       - name: Fetching repository.
         uses: actions/checkout@v4
@@ -25,27 +27,62 @@ jobs:
 
           sudo apt update
 
+          echo "Installing build-essential..."
+          sudo apt-get install -y build-essential
+
           # Разделяем строку на отдельные пакеты по пробелам
           IFS=' ' read -r -a DEP_ARRAY <<< "$DEPENDENCIES"
 
-          # Логируем установку каждого пакета
+          echo "::group::📦 Package list"
+          echo "[LOG] Installing the following packages:"
           for DEP in "${DEP_ARRAY[@]}"; do
-            echo "[LOG] Installing package $DEP..."
-            sudo apt-get install -y $DEP || { echo "Error installing $DEP"; exit 1; }
+              echo "  - $DEP"
           done
+          echo "::endgroup::"
+          
+          echo "::group::🚀 Installing all packages at once"
+          if ! sudo apt-get install -y "${DEP_ARRAY[@]}"; then
+              echo "::endgroup::"
+              echo "::group::❗ Fallback: Installing individually"
+              for DEP in "${DEP_ARRAY[@]}"; do
+                  echo "[TRY] Installing $DEP..."
+                  if ! sudo apt-get install -y "$DEP"; then
+                      echo "[FAIL] Package $DEP failed to install!"
+                      echo "::endgroup::"
+                      exit 1
+                  else
+                      echo "[OK] $DEP installed successfully."
+                  fi
+              done
+              echo "::endgroup::"
+              echo "[ERROR] Something went wrong, but fallback succeeded?"
+              exit 1
+          else
+              echo "[LOG] All packages installed successfully."
+              echo "::endgroup::"
+          fi
 
-          # Проверка на успех после установки
           echo "All ubuntu dependencies installed successfully."
-
-          # sudo add-apt-repository universe
-          # sudo apt update -y
-          # sudo apt upgrade -y
-          # sudo apt-get install -y $DEPENDENCIES
-
-          # sudo pip install numpy
-          # sudo pip install clang
         env:
           DEPENDENCIES: ${{ vars.UBUNTU_DEPENDENCIES }}
+
+      - name: Install LLVM, libc++ and gcc-13.
+        run: |
+          sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+          sudo apt update
+          sudo apt install -y wget gnupg lsb-release
+          wget https://apt.llvm.org/llvm.sh
+          chmod +x llvm.sh
+          sudo ./llvm.sh 17 all
+          sudo apt install -y libc++-17-dev libc++abi-17-dev
+
+        # sudo apt install -y libc++-17-dev libc++abi-17-dev gcc-13 g++-13
+        # sudo update-alternatives --install /usr/bin/clang   clang   /usr/bin/clang-17   100
+        # sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-17 100
+        # sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100
+        # sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 100
+        # clang-17 --version
+        # clang++-17 --version
 
       - name: Updating submodules.
         run: git submodule --quiet update --init --recursive --depth 1 --jobs 4
@@ -60,7 +97,17 @@ jobs:
         run: |
           cmake -E make_directory ${{github.workspace}}/build
 
-      - name: Building ${{ matrix.buildType }}.
+      - name: Set compiler
+        run: |
+          if [ "${{ matrix.compiler }}" == "gcc" ]; then
+            echo "CC=gcc" >> $GITHUB_ENV
+            echo "CXX=g++" >> $GITHUB_ENV
+          elif [ "${{ matrix.compiler }}" == "clang" ]; then
+            echo "CC=clang" >> $GITHUB_ENV
+            echo "CXX=clang++" >> $GITHUB_ENV
+          fi
+
+      - name: Building ${{ matrix.buildType }} ${{ matrix.compiler }}.
         shell: bash
         working-directory: ${{github.workspace}}/build
         run: |
@@ -77,7 +124,7 @@ jobs:
       - name: Uploading a ${{ matrix.buildType }} build trace artifact.
         uses: actions/upload-artifact@v4
         with:
-          name: "SREngine ${{ matrix.buildType }} Linux Build Trace Artifact"
+          name: "SREngine ${{ matrix.buildType }} ${{ matrix.compiler }} Linux Build Trace Artifact"
           path: "${{github.workspace}}/CI/trace.json"
 
       - name: Creating ${{ matrix.buildType }} artifact.
@@ -92,7 +139,7 @@ jobs:
         name: Uploading a successful ${{ matrix.buildType }} build artifact.
         uses: actions/upload-artifact@v4
         with:
-          name: "Linux ${{ matrix.buildType }} Executable"
+          name: "Linux ${{ matrix.buildType }} ${{ matrix.compiler }} Executable"
           path: "${{github.workspace}}/build/Engine/SREngineBuild"
 
       #- if: env.buildSuccessful == 'false'

@@ -1,6 +1,5 @@
 import sys, os
 
-
 def init_utf8_console():
     sys.stdout.reconfigure(encoding='utf-8')
 
@@ -24,7 +23,8 @@ class Logger:
         self.log_prefix = f"[SpaRcle Codegen] [{module_name}]"
 
     def create_log_file(self, log_file):
-        self.log_file = log_file.replace("/", "\\")
+        #self.log_file = log_file.replace("/", "\\")
+        self.log_file = os.path.normpath(log_file)
 
         print(f'{self.log_prefix} Create log file to: {log_file}')
 

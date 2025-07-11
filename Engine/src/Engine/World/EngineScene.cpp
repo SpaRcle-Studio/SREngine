@@ -76,7 +76,7 @@ namespace SR_CORE_NS {
 
             if (!pPhysicsScene->Init()) {
                 SR_ERROR("InitializeScene() : failed to initialize physics scene!");
-                return false;
+                SR_ERROR("InitializeScene() : will work without physics!");
             }
         }
 

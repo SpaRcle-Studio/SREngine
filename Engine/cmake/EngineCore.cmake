@@ -3,7 +3,6 @@ if (ANDROID_NDK)
     add_link_options(-femulated-tls)
 endif()
 
-set(SR_UTILS_ASSIMP ON CACHE INTERNAL "" FORCE)
 set(SR_UTILS_DLL_EXPORTS ON CACHE INTERNAL "" FORCE)
 
 if (SR_TRACY_ENABLE)
@@ -75,6 +74,14 @@ add_compile_definitions(SR_COMMON_GIT_METADATA)
 
 message(STATUS "SpaRcle Engine: CONFIGURING Utils")
 add_subdirectory(libs/Utils)
+
+if (NOT SR_EMSCRIPTEN AND NOT SR_COMMON_USE_CLANG_EMULATION)
+    set(SR_PHYSICS_USE_PHYSX ON)
+else()
+    set(SR_PHYSICS_USE_PHYSX OFF)
+    message(STATUS "SpaRcle Engine: PhysX is disabled because Clang emulation is used or Emscripten build")
+endif()
+
 message(STATUS "SpaRcle Engine: CONFIGURING Audio")
 add_subdirectory(libs/Audio)
 message(STATUS "SpaRcle Engine: CONFIGURING Physics")
