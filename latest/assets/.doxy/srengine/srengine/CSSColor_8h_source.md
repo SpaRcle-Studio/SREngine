@@ -90,7 +90,7 @@ namespace SR_UTILS_NS::Web {
 
 
     struct CSSColor {
-        static SR_NODISCARD CSSColor Parse(std::string_view data);
+        static CSSColor Parse(std::string_view data);
 
         SR_NODISCARD std::string ToString() const {
             std::string result;

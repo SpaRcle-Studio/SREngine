@@ -105,9 +105,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="58" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a2dbb5a7639f7a2f5b275bc1e6e4135df" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD SR_MAYBE_UNUSED std::optional&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
-        <definition>SR_NODISCARD SR_MAYBE_UNUSED std::optional&lt; SR_UTILS_NS::StringAtom &gt; SR_UTILS_NS::EnumReflector::ToStringInternal</definition>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1aaa71ce3d3ec60120e83c4cd763857fa7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_NODISCARD std::optional&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
+        <definition>SR_MAYBE_UNUSED SR_NODISCARD std::optional&lt; SR_UTILS_NS::StringAtom &gt; SR_UTILS_NS::EnumReflector::ToStringInternal</definition>
         <argsstring>(int64_t value) const</argsstring>
         <name>ToStringInternal</name>
         <qualifiedname>SR_UTILS_NS::EnumReflector::ToStringInternal</qualifiedname>
@@ -123,9 +123,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="83" column="52"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1aad4eb40f9af9e9caba5396df35a3d1ff" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD SR_MAYBE_UNUSED std::optional&lt; int64_t &gt;</type>
-        <definition>SR_NODISCARD SR_MAYBE_UNUSED std::optional&lt; int64_t &gt; SR_UTILS_NS::EnumReflector::FromStringInternal</definition>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a9fad2e856589c21940e604807e9d3a23" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_NODISCARD std::optional&lt; int64_t &gt;</type>
+        <definition>SR_MAYBE_UNUSED SR_NODISCARD std::optional&lt; int64_t &gt; SR_UTILS_NS::EnumReflector::FromStringInternal</definition>
         <argsstring>(const SR_UTILS_NS::StringAtom &amp;name) const</argsstring>
         <name>FromStringInternal</name>
         <qualifiedname>SR_UTILS_NS::EnumReflector::FromStringInternal</qualifiedname>
@@ -141,9 +141,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="84" column="52"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1aa409c7d867e4a8ccb21acc252088de92" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD SR_MAYBE_UNUSED std::optional&lt; int64_t &gt;</type>
-        <definition>SR_NODISCARD SR_MAYBE_UNUSED std::optional&lt; int64_t &gt; SR_UTILS_NS::EnumReflector::FromStringLowerCaseInternal</definition>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a6d6e83ed2e77840862a8f86d1e6b0e13" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_NODISCARD std::optional&lt; int64_t &gt;</type>
+        <definition>SR_MAYBE_UNUSED SR_NODISCARD std::optional&lt; int64_t &gt; SR_UTILS_NS::EnumReflector::FromStringLowerCaseInternal</definition>
         <argsstring>(const std::string &amp;value) const</argsstring>
         <name>FromStringLowerCaseInternal</name>
         <qualifiedname>SR_UTILS_NS::EnumReflector::FromStringLowerCaseInternal</qualifiedname>
@@ -159,9 +159,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="85" column="52"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1aebc0858478ac5279b199eedc95adbdcf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD SR_MAYBE_UNUSED std::optional&lt; int64_t &gt;</type>
-        <definition>SR_NODISCARD SR_MAYBE_UNUSED std::optional&lt; int64_t &gt; SR_UTILS_NS::EnumReflector::GetIndexInternal</definition>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a8a3f484b08ec1754c0067c18a557fb95" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_NODISCARD std::optional&lt; int64_t &gt;</type>
+        <definition>SR_MAYBE_UNUSED SR_NODISCARD std::optional&lt; int64_t &gt; SR_UTILS_NS::EnumReflector::GetIndexInternal</definition>
         <argsstring>(int64_t value) const</argsstring>
         <name>GetIndexInternal</name>
         <qualifiedname>SR_UTILS_NS::EnumReflector::GetIndexInternal</qualifiedname>
@@ -177,9 +177,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="86" column="52"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a9d19bee71aaec666f8d64abe203465f7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD SR_MAYBE_UNUSED std::optional&lt; int64_t &gt;</type>
-        <definition>SR_NODISCARD SR_MAYBE_UNUSED std::optional&lt; int64_t &gt; SR_UTILS_NS::EnumReflector::AtInternal</definition>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a81f40d3120f2d92231cf220aa1afbb05" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_NODISCARD std::optional&lt; int64_t &gt;</type>
+        <definition>SR_MAYBE_UNUSED SR_NODISCARD std::optional&lt; int64_t &gt; SR_UTILS_NS::EnumReflector::AtInternal</definition>
         <argsstring>(uint64_t index) const</argsstring>
         <name>AtInternal</name>
         <qualifiedname>SR_UTILS_NS::EnumReflector::AtInternal</qualifiedname>
@@ -195,9 +195,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="87" column="52"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a583b80aab4c51967fe70b71753139b3a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD SR_MAYBE_UNUSED const std::vector&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt; &amp;</type>
-        <definition>SR_NODISCARD SR_MAYBE_UNUSED const std::vector&lt; SR_UTILS_NS::StringAtom &gt; &amp; SR_UTILS_NS::EnumReflector::GetNamesInternal</definition>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1abfaf94d8e803cb5dc4cbe66f9189664b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_NODISCARD const std::vector&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt; &amp;</type>
+        <definition>SR_MAYBE_UNUSED SR_NODISCARD const std::vector&lt; SR_UTILS_NS::StringAtom &gt; &amp; SR_UTILS_NS::EnumReflector::GetNamesInternal</definition>
         <argsstring>() const</argsstring>
         <name>GetNamesInternal</name>
         <qualifiedname>SR_UTILS_NS::EnumReflector::GetNamesInternal</qualifiedname>
@@ -209,9 +209,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="88" column="56"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a33fc335476e5efaa77424468b32a3db7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD SR_MAYBE_UNUSED const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &amp;</type>
-        <definition>SR_NODISCARD SR_MAYBE_UNUSED const SR_UTILS_NS::StringAtom &amp; SR_UTILS_NS::EnumReflector::GetNameInternal</definition>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a86ebc5a3f1ffcb9e02638c251b92e306" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_NODISCARD const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &amp;</type>
+        <definition>SR_MAYBE_UNUSED SR_NODISCARD const SR_UTILS_NS::StringAtom &amp; SR_UTILS_NS::EnumReflector::GetNameInternal</definition>
         <argsstring>() const</argsstring>
         <name>GetNameInternal</name>
         <qualifiedname>SR_UTILS_NS::EnumReflector::GetNameInternal</qualifiedname>
@@ -223,9 +223,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="89" column="68"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a16813b28d344bdb1d79737a8f6ea16b3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD SR_MAYBE_UNUSED uint64_t</type>
-        <definition>SR_NODISCARD SR_MAYBE_UNUSED uint64_t SR_UTILS_NS::EnumReflector::GetIntegralTypeSizeInternal</definition>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a479c88e995e9e058f0ca4c75d6c83eba" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_NODISCARD uint64_t</type>
+        <definition>SR_MAYBE_UNUSED SR_NODISCARD uint64_t SR_UTILS_NS::EnumReflector::GetIntegralTypeSizeInternal</definition>
         <argsstring>() const</argsstring>
         <name>GetIntegralTypeSizeInternal</name>
         <qualifiedname>SR_UTILS_NS::EnumReflector::GetIntegralTypeSizeInternal</qualifiedname>
@@ -237,9 +237,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="90" column="47"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a548f67ce51ff8ccb2d3fa391413480fd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD SR_MAYBE_UNUSED uint64_t</type>
-        <definition>SR_NODISCARD SR_MAYBE_UNUSED uint64_t SR_UTILS_NS::EnumReflector::GetHashNameInternal</definition>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1aacd6ba1c0b51b8eb7a0f0b26bd97a98e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_NODISCARD uint64_t</type>
+        <definition>SR_MAYBE_UNUSED SR_NODISCARD uint64_t SR_UTILS_NS::EnumReflector::GetHashNameInternal</definition>
         <argsstring>() const</argsstring>
         <name>GetHashNameInternal</name>
         <qualifiedname>SR_UTILS_NS::EnumReflector::GetHashNameInternal</qualifiedname>
@@ -251,9 +251,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="91" column="47"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1ab8e37f3ab845657830c10fa8b00b025f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD SR_MAYBE_UNUSED int64_t</type>
-        <definition>SR_NODISCARD SR_MAYBE_UNUSED int64_t SR_UTILS_NS::EnumReflector::ReadEnumValueFromPointerInternal</definition>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1aaecd6760ca84f7eb7d2d6472ec457f1a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_NODISCARD int64_t</type>
+        <definition>SR_MAYBE_UNUSED SR_NODISCARD int64_t SR_UTILS_NS::EnumReflector::ReadEnumValueFromPointerInternal</definition>
         <argsstring>(const void *pEnum) const</argsstring>
         <name>ReadEnumValueFromPointerInternal</name>
         <qualifiedname>SR_UTILS_NS::EnumReflector::ReadEnumValueFromPointerInternal</qualifiedname>
@@ -269,9 +269,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="92" column="46"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a03fd806f8867c233df484421514bee8e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD SR_MAYBE_UNUSED void</type>
-        <definition>SR_NODISCARD SR_MAYBE_UNUSED void SR_UTILS_NS::EnumReflector::WriteEnumValueToPointerInternal</definition>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1af39e515855b97bfb248c8ec09c546fa1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_NODISCARD void</type>
+        <definition>SR_MAYBE_UNUSED SR_NODISCARD void SR_UTILS_NS::EnumReflector::WriteEnumValueToPointerInternal</definition>
         <argsstring>(void *pEnum, int64_t value) const</argsstring>
         <name>WriteEnumValueToPointerInternal</name>
         <qualifiedname>SR_UTILS_NS::EnumReflector::WriteEnumValueToPointerInternal</qualifiedname>
@@ -291,9 +291,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Common/EnumReflector.h" line="93" column="43"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1a7a81182c5a0cfe68a9bc93e2b3e48aec" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD SR_MAYBE_UNUSED EnumVariant</type>
-        <definition>SR_NODISCARD SR_MAYBE_UNUSED EnumVariant SR_UTILS_NS::EnumReflector::GetEnumVariantInternal</definition>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EnumReflector_1ae08408adc274aeed4828e32a4cb393dd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_NODISCARD EnumVariant</type>
+        <definition>SR_MAYBE_UNUSED SR_NODISCARD EnumVariant SR_UTILS_NS::EnumReflector::GetEnumVariantInternal</definition>
         <argsstring>() const</argsstring>
         <name>GetEnumVariantInternal</name>
         <qualifiedname>SR_UTILS_NS::EnumReflector::GetEnumVariantInternal</qualifiedname>
@@ -1162,7 +1162,7 @@
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a01de6892a0dd1d3e437e610197502465" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>At</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1acfe699480d6af1adfdaa3d3a1729dd39" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>AtAsInt</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1ae288df3c06cad029a8927c703b040bf7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>AtAsInt</name></member>
-      <member refid="classSR__UTILS__NS_1_1EnumReflector_1a9d19bee71aaec666f8d64abe203465f7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>AtInternal</name></member>
+      <member refid="classSR__UTILS__NS_1_1EnumReflector_1a81f40d3120f2d92231cf220aa1afbb05" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>AtInternal</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a5ede81cdb4d1a61ba3decf06693f1ede" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>Count</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a6a9aa25433f6f886bc8a9fadaa7f2aa3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>Count</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1ab5b6ad4d2982d78b29df1282e5a8626a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>EnumReflector</name></member>
@@ -1173,30 +1173,30 @@
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a6a1f80cb8892091eef0c846ea091602f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>FromString</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a94bd974e0f84d87206ad1c7cd0bb1423" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>FromString</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a2014f14789be10720bf73df870743303" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>FromString</name></member>
-      <member refid="classSR__UTILS__NS_1_1EnumReflector_1aad4eb40f9af9e9caba5396df35a3d1ff" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>FromStringInternal</name></member>
+      <member refid="classSR__UTILS__NS_1_1EnumReflector_1a9fad2e856589c21940e604807e9d3a23" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>FromStringInternal</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a181a18b43200d76dabdd29b990967bd5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>FromStringLowerCase</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a2402f33ced4deb29689e77dda55a6f4b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>FromStringLowerCase</name></member>
-      <member refid="classSR__UTILS__NS_1_1EnumReflector_1aa409c7d867e4a8ccb21acc252088de92" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>FromStringLowerCaseInternal</name></member>
+      <member refid="classSR__UTILS__NS_1_1EnumReflector_1a6d6e83ed2e77840862a8f86d1e6b0e13" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>FromStringLowerCaseInternal</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a4885e5805f94656ee380b22888f6c9b5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetEnumVariant</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a3c322b3f55a983359e876cfa199e2423" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetEnumVariant</name></member>
-      <member refid="classSR__UTILS__NS_1_1EnumReflector_1a7a81182c5a0cfe68a9bc93e2b3e48aec" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetEnumVariantInternal</name></member>
-      <member refid="classSR__UTILS__NS_1_1EnumReflector_1a548f67ce51ff8ccb2d3fa391413480fd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetHashNameInternal</name></member>
+      <member refid="classSR__UTILS__NS_1_1EnumReflector_1ae08408adc274aeed4828e32a4cb393dd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetEnumVariantInternal</name></member>
+      <member refid="classSR__UTILS__NS_1_1EnumReflector_1aacd6ba1c0b51b8eb7a0f0b26bd97a98e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetHashNameInternal</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1ab99bf284175b47a3ed6b581f8ee2c450" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetIndex</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a1ba405211eca65a0cdd131eb7fea1791" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetIndex</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a36e778f1bb4eaa0f57f96485b7ec5fa0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetIndex</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a650206803558976fd54f6ca49e28a7c3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetIndex</name></member>
-      <member refid="classSR__UTILS__NS_1_1EnumReflector_1aebc0858478ac5279b199eedc95adbdcf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetIndexInternal</name></member>
+      <member refid="classSR__UTILS__NS_1_1EnumReflector_1a8a3f484b08ec1754c0067c18a557fb95" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetIndexInternal</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a1e6386bb8b340d9ced7107bc6c648fa1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetIntegralTypeSize</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a377638951eca21be68c6cb7e53d725f6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetIntegralTypeSize</name></member>
-      <member refid="classSR__UTILS__NS_1_1EnumReflector_1a16813b28d344bdb1d79737a8f6ea16b3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetIntegralTypeSizeInternal</name></member>
+      <member refid="classSR__UTILS__NS_1_1EnumReflector_1a479c88e995e9e058f0ca4c75d6c83eba" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetIntegralTypeSizeInternal</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1ab881159ecc038255131cede2ec2899a6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetName</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1af5939234009d4293cd75bfd0d92b8fbd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetName</name></member>
-      <member refid="classSR__UTILS__NS_1_1EnumReflector_1a33fc335476e5efaa77424468b32a3db7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetNameInternal</name></member>
+      <member refid="classSR__UTILS__NS_1_1EnumReflector_1a86ebc5a3f1ffcb9e02638c251b92e306" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetNameInternal</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1aa4d0dfbca5cd17ca11bfbb158ede1815" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetNames</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a5704360ca3c5d76d17f0978fba7920f1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetNames</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1acda6a9b7bbe8259c38c3926de3d16e8c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetNamesFilter</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a3bd1075ff3a1cf27cb881c18a6e17e57" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetNamesFilter</name></member>
-      <member refid="classSR__UTILS__NS_1_1EnumReflector_1a583b80aab4c51967fe70b71753139b3a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetNamesInternal</name></member>
+      <member refid="classSR__UTILS__NS_1_1EnumReflector_1abfaf94d8e803cb5dc4cbe66f9189664b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetNamesInternal</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1aacfa232f0557fe06a152ca935bd2220d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetReflector</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1abccd71ca74107e84bc9d2d54770cc5d1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetReflector</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a0625bdd53f33ab85f280a3ca3d56601a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>GetValues</name></member>
@@ -1208,13 +1208,13 @@
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>operator=</name></member>
-      <member refid="classSR__UTILS__NS_1_1EnumReflector_1ab8e37f3ab845657830c10fa8b00b025f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>ReadEnumValueFromPointerInternal</name></member>
+      <member refid="classSR__UTILS__NS_1_1EnumReflector_1aaecd6760ca84f7eb7d2d6472ec457f1a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>ReadEnumValueFromPointerInternal</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a36e37ce913c3b44d5fded790a3a421db" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>ToStringAtom</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a35891b9bd19030f6c1d10bd3856b2abd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>ToStringAtom</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1a737a838c412ab630e73bf06db54bdeb4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>ToStringAtom</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1af074fa474a5bf676d30aed7187b00a7f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>ToStringAtom</name></member>
-      <member refid="classSR__UTILS__NS_1_1EnumReflector_1a2dbb5a7639f7a2f5b275bc1e6e4135df" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>ToStringInternal</name></member>
-      <member refid="classSR__UTILS__NS_1_1EnumReflector_1a03fd806f8867c233df484421514bee8e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>WriteEnumValueToPointerInternal</name></member>
+      <member refid="classSR__UTILS__NS_1_1EnumReflector_1aaa71ce3d3ec60120e83c4cd763857fa7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>ToStringInternal</name></member>
+      <member refid="classSR__UTILS__NS_1_1EnumReflector_1af39e515855b97bfb248c8ec09c546fa1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>WriteEnumValueToPointerInternal</name></member>
       <member refid="classSR__UTILS__NS_1_1EnumReflector_1aaa83e253dbb51d181b95caec6e4431f9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>~EnumReflector</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_UTILS_NS::EnumReflector</scope><name>~NonCopyable</name></member>
     </listofallmembers>

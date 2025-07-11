@@ -72,7 +72,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD [**CSSColor**](structSR__UTILS__NS_1_1Web_1_1CSSColor.md) | [**Parse**](#function-parse) (std::string\_view data) <br> |
+|  [**CSSColor**](structSR__UTILS__NS_1_1Web_1_1CSSColor.md) | [**Parse**](#function-parse) (std::string\_view data) <br> |
 
 
 
@@ -203,7 +203,7 @@ inline SR_NODISCARD std::string SR_UTILS_NS::Web::CSSColor::ToString () const
 ### function Parse 
 
 ```C++
-static SR_NODISCARD CSSColor SR_UTILS_NS::Web::CSSColor::Parse (
+static CSSColor SR_UTILS_NS::Web::CSSColor::Parse (
     std::string_view data
 ) 
 ```

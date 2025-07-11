@@ -263,8 +263,8 @@ template<> struct SR_UTILS_NS::SRHash<long double> {
     }
 };
 
-template<> struct SR_UTILS_NS::SRHash<nullptr_t> {
-    SR_NODISCARD constexpr size_t operator()(nullptr_t) const noexcept {
+template<> struct SR_UTILS_NS::SRHash<std::nullptr_t> {
+    SR_NODISCARD constexpr size_t operator()(std::nullptr_t) const noexcept {
         void* null = nullptr;
         return HashRepresentation(null);
     }

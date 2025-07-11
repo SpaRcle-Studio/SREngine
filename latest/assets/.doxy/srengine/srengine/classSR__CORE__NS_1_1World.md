@@ -143,7 +143,7 @@ See [SR\_WORLD\_NS::Scene](classSR__WORLD__NS_1_1Scene.md)
 |  SR\_NODISCARD [**SR\_HTYPES\_NS::DataStorage**](classSR__HTYPES__NS_1_1DataStorage.md) & | [**GetDataStorage**](classSR__WORLD__NS_1_1Scene.md#function-getdatastorage-12) () <br> |
 |  SR\_NODISCARD const [**SR\_HTYPES\_NS::DataStorage**](classSR__HTYPES__NS_1_1DataStorage.md) & | [**GetDataStorage**](classSR__WORLD__NS_1_1Scene.md#function-getdatastorage-22) () const<br> |
 |  SR\_NODISCARD const SR\_UTILS\_NS::EntityController::Ptr & | [**GetEntityController**](classSR__WORLD__NS_1_1Scene.md#function-getentitycontroller) () const<br> |
-|  SR\_NODISCARD SR\_INLINE SceneLogicPtr | [**GetLogicBase**](classSR__WORLD__NS_1_1Scene.md#function-getlogicbase) () const<br> |
+|  SR\_NODISCARD SceneLogicPtr | [**GetLogicBase**](classSR__WORLD__NS_1_1Scene.md#function-getlogicbase) () const<br> |
 |  SR\_NODISCARD std::string | [**GetName**](classSR__WORLD__NS_1_1Scene.md#function-getname) () const<br> |
 |  SR\_NODISCARD Path | [**GetPath**](classSR__WORLD__NS_1_1Scene.md#function-getpath) () const<br> |
 |  SceneObjects & | [**GetRootSceneObjects**](classSR__WORLD__NS_1_1Scene.md#function-getrootsceneobjects) () <br> |

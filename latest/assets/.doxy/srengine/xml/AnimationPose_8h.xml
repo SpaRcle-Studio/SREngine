@@ -19,10 +19,6 @@
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="176" relation="include">
-        </childnode>
-        <childnode refid="177" relation="include">
-        </childnode>
       </node>
       <node id="1">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationPose.h</label>
@@ -1203,12 +1199,6 @@
       </node>
       <node id="143">
         <label>assimp/contrib/pugixml/src/pugixml.hpp</label>
-      </node>
-      <node id="177">
-        <label>assimp/quaternion.h</label>
-      </node>
-      <node id="176">
-        <label>assimp/vector3.h</label>
       </node>
       <node id="51">
         <label>atomic</label>

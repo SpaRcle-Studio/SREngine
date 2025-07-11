@@ -91,7 +91,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (AnimationGraphNodeType, uint8\_t, None, Final, Mix, Clip, StateMachine) <br> |
+|   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (AnimationGraphNodeType, uint8\_t, None, Final, Mix, Clip, StateMachine) <br>_Это тип свойства которое изменяет AnimationKey._  |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (AnimationStateType, uint8\_t, None, Graph, Entry) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (AnimationStateConditionOperationType, uint8\_t, Equals, Less, More, NotEquals) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (AnimationKeyType, uint8\_t, None, Translation, Rotation, Scaling) <br> |
@@ -102,8 +102,6 @@
 
 | Type | Name |
 | ---: | :--- |
-|  [**SR\_MATH\_NS::Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**AiQToQ**](#function-aiqtoq) (const aiQuaternion & q) <br> |
-|  SR\_MATH\_NS::FVector3 | [**AiV3ToFV3**](#function-aiv3tofv3) (const aiVector3D & v, float\_t multiplier) <br>_Это тип свойства которое изменяет AnimationKey._  |
 |  [**AnimationGameObjectData**](structSR__ANIMATIONS__NS_1_1AnimationGameObjectData.md) | [**Merge**](#function-merge) ([**AnimationGameObjectData**](structSR__ANIMATIONS__NS_1_1AnimationGameObjectData.md) & from, [**AnimationGameObjectData**](structSR__ANIMATIONS__NS_1_1AnimationGameObjectData.md) & to, float\_t weight) <br> |
 
 
@@ -138,6 +136,7 @@
 
 ### function SR\_ENUM\_NS\_CLASS\_T 
 
+_Это тип свойства которое изменяет AnimationKey._ 
 ```C++
 SR_ANIMATIONS_NS::SR_ENUM_NS_CLASS_T (
     AnimationGraphNodeType,
@@ -234,38 +233,6 @@ SR_ANIMATIONS_NS::SR_ENUM_NS_CLASS_T (
 <hr>
 ## Public Static Functions Documentation
 
-
-
-
-### function AiQToQ 
-
-```C++
-static SR_MATH_NS::Quaternion SR_ANIMATIONS_NS::AiQToQ (
-    const aiQuaternion & q
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function AiV3ToFV3 
-
-_Это тип свойства которое изменяет AnimationKey._ 
-```C++
-static SR_MATH_NS::FVector3 SR_ANIMATIONS_NS::AiV3ToFV3 (
-    const aiVector3D & v,
-    float_t multiplier
-) 
-```
-
-
-
-
-<hr>
 
 
 

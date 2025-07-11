@@ -79,35 +79,35 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 | ---: | :--- |
 |  EnumType | [**At**](#function-at-12) (uint64\_t index) <br> |
 |  int64\_t | [**AtAsInt**](#function-atasint-12) (uint64\_t index) <br> |
-|  SR\_NODISCARD SR\_MAYBE\_UNUSED std::optional&lt; int64\_t &gt; | [**AtInternal**](#function-atinternal) (uint64\_t index) const<br> |
+|  SR\_MAYBE\_UNUSED SR\_NODISCARD std::optional&lt; int64\_t &gt; | [**AtInternal**](#function-atinternal) (uint64\_t index) const<br> |
 |  uint64\_t | [**Count**](#function-count-12) () <br> |
 |   | [**EnumReflector**](#function-enumreflector) (EnumVariant enumVariant, const Integral \* values, size\_t count, const char \* name, const char \* body) <br> |
 |  void | [**ForEach**](#function-foreach-12) (Types::Function&lt; void(EnumType)&gt; func) <br> |
 |  EnumType | [**FromString**](#function-fromstring-14) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & value) <br> |
 |  bool | [**FromString**](#function-fromstring-24) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & value, EnumType & result) <br> |
-|  SR\_NODISCARD SR\_MAYBE\_UNUSED std::optional&lt; int64\_t &gt; | [**FromStringInternal**](#function-fromstringinternal) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & name) const<br> |
+|  SR\_MAYBE\_UNUSED SR\_NODISCARD std::optional&lt; int64\_t &gt; | [**FromStringInternal**](#function-fromstringinternal) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & name) const<br> |
 |  EnumType | [**FromStringLowerCase**](#function-fromstringlowercase-12) (const std::string & value) <br> |
-|  SR\_NODISCARD SR\_MAYBE\_UNUSED std::optional&lt; int64\_t &gt; | [**FromStringLowerCaseInternal**](#function-fromstringlowercaseinternal) (const std::string & value) const<br> |
+|  SR\_MAYBE\_UNUSED SR\_NODISCARD std::optional&lt; int64\_t &gt; | [**FromStringLowerCaseInternal**](#function-fromstringlowercaseinternal) (const std::string & value) const<br> |
 |  EnumVariant | [**GetEnumVariant**](#function-getenumvariant-12) () <br> |
-|  SR\_NODISCARD SR\_MAYBE\_UNUSED EnumVariant | [**GetEnumVariantInternal**](#function-getenumvariantinternal) () const<br> |
-|  SR\_NODISCARD SR\_MAYBE\_UNUSED uint64\_t | [**GetHashNameInternal**](#function-gethashnameinternal) () const<br> |
+|  SR\_MAYBE\_UNUSED SR\_NODISCARD EnumVariant | [**GetEnumVariantInternal**](#function-getenumvariantinternal) () const<br> |
+|  SR\_MAYBE\_UNUSED SR\_NODISCARD uint64\_t | [**GetHashNameInternal**](#function-gethashnameinternal) () const<br> |
 |  int64\_t | [**GetIndex**](#function-getindex-14) (EnumType value) <br> |
 |  int64\_t | [**GetIndex**](#function-getindex-24) (int64\_t value) <br> |
-|  SR\_NODISCARD SR\_MAYBE\_UNUSED std::optional&lt; int64\_t &gt; | [**GetIndexInternal**](#function-getindexinternal) (int64\_t value) const<br> |
+|  SR\_MAYBE\_UNUSED SR\_NODISCARD std::optional&lt; int64\_t &gt; | [**GetIndexInternal**](#function-getindexinternal) (int64\_t value) const<br> |
 |  uint64\_t | [**GetIntegralTypeSize**](#function-getintegraltypesize-12) () <br> |
-|  SR\_NODISCARD SR\_MAYBE\_UNUSED uint64\_t | [**GetIntegralTypeSizeInternal**](#function-getintegraltypesizeinternal) () const<br> |
+|  SR\_MAYBE\_UNUSED SR\_NODISCARD uint64\_t | [**GetIntegralTypeSizeInternal**](#function-getintegraltypesizeinternal) () const<br> |
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetName**](#function-getname-12) () <br> |
-|  SR\_NODISCARD SR\_MAYBE\_UNUSED const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & | [**GetNameInternal**](#function-getnameinternal) () const<br> |
+|  SR\_MAYBE\_UNUSED SR\_NODISCARD const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & | [**GetNameInternal**](#function-getnameinternal) () const<br> |
 |  const std::vector&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; & | [**GetNames**](#function-getnames-12) () <br> |
 |  std::vector&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; | [**GetNamesFilter**](#function-getnamesfilter-12) (const std::function&lt; bool(EnumType)&gt; & filter) <br> |
-|  SR\_NODISCARD SR\_MAYBE\_UNUSED const std::vector&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; & | [**GetNamesInternal**](#function-getnamesinternal) () const<br> |
+|  SR\_MAYBE\_UNUSED SR\_NODISCARD const std::vector&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; & | [**GetNamesInternal**](#function-getnamesinternal) () const<br> |
 |  [**EnumReflector**](classSR__UTILS__NS_1_1EnumReflector.md) \* | [**GetReflector**](#function-getreflector-12) () <br> |
 |  const std::vector&lt; [**SR\_UTILS\_NS::EnumReflector::Enumerator**](structSR__UTILS__NS_1_1EnumReflector_1_1Enumerator.md) &gt; & | [**GetValues**](#function-getvalues-12) () <br> |
-|  SR\_NODISCARD SR\_MAYBE\_UNUSED int64\_t | [**ReadEnumValueFromPointerInternal**](#function-readenumvaluefrompointerinternal) (const void \* pEnum) const<br> |
+|  SR\_MAYBE\_UNUSED SR\_NODISCARD int64\_t | [**ReadEnumValueFromPointerInternal**](#function-readenumvaluefrompointerinternal) (const void \* pEnum) const<br> |
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**ToStringAtom**](#function-tostringatom-14) (EnumType value) <br> |
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**ToStringAtom**](#function-tostringatom-24) (int64\_t value) <br> |
-|  SR\_NODISCARD SR\_MAYBE\_UNUSED std::optional&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; | [**ToStringInternal**](#function-tostringinternal) (int64\_t value) const<br> |
-|  SR\_NODISCARD SR\_MAYBE\_UNUSED void | [**WriteEnumValueToPointerInternal**](#function-writeenumvaluetopointerinternal) (void \* pEnum, int64\_t value) const<br> |
+|  SR\_MAYBE\_UNUSED SR\_NODISCARD std::optional&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; | [**ToStringInternal**](#function-tostringinternal) (int64\_t value) const<br> |
+|  SR\_MAYBE\_UNUSED SR\_NODISCARD void | [**WriteEnumValueToPointerInternal**](#function-writeenumvaluetopointerinternal) (void \* pEnum, int64\_t value) const<br> |
 |   | [**~EnumReflector**](#function-enumreflector) () override<br> |
 
 
@@ -243,7 +243,7 @@ int64_t SR_UTILS_NS::EnumReflector::AtAsInt (
 ### function AtInternal 
 
 ```C++
-SR_NODISCARD SR_MAYBE_UNUSED std::optional< int64_t > SR_UTILS_NS::EnumReflector::AtInternal (
+SR_MAYBE_UNUSED SR_NODISCARD std::optional< int64_t > SR_UTILS_NS::EnumReflector::AtInternal (
     uint64_t index
 ) const
 ```
@@ -341,7 +341,7 @@ bool SR_UTILS_NS::EnumReflector::FromString (
 ### function FromStringInternal 
 
 ```C++
-SR_NODISCARD SR_MAYBE_UNUSED std::optional< int64_t > SR_UTILS_NS::EnumReflector::FromStringInternal (
+SR_MAYBE_UNUSED SR_NODISCARD std::optional< int64_t > SR_UTILS_NS::EnumReflector::FromStringInternal (
     const SR_UTILS_NS::StringAtom & name
 ) const
 ```
@@ -372,7 +372,7 @@ EnumType SR_UTILS_NS::EnumReflector::FromStringLowerCase (
 ### function FromStringLowerCaseInternal 
 
 ```C++
-SR_NODISCARD SR_MAYBE_UNUSED std::optional< int64_t > SR_UTILS_NS::EnumReflector::FromStringLowerCaseInternal (
+SR_MAYBE_UNUSED SR_NODISCARD std::optional< int64_t > SR_UTILS_NS::EnumReflector::FromStringLowerCaseInternal (
     const std::string & value
 ) const
 ```
@@ -401,7 +401,7 @@ EnumVariant SR_UTILS_NS::EnumReflector::GetEnumVariant ()
 ### function GetEnumVariantInternal 
 
 ```C++
-SR_NODISCARD SR_MAYBE_UNUSED EnumVariant SR_UTILS_NS::EnumReflector::GetEnumVariantInternal () const
+SR_MAYBE_UNUSED SR_NODISCARD EnumVariant SR_UTILS_NS::EnumReflector::GetEnumVariantInternal () const
 ```
 
 
@@ -414,7 +414,7 @@ SR_NODISCARD SR_MAYBE_UNUSED EnumVariant SR_UTILS_NS::EnumReflector::GetEnumVari
 ### function GetHashNameInternal 
 
 ```C++
-SR_NODISCARD SR_MAYBE_UNUSED uint64_t SR_UTILS_NS::EnumReflector::GetHashNameInternal () const
+SR_MAYBE_UNUSED SR_NODISCARD uint64_t SR_UTILS_NS::EnumReflector::GetHashNameInternal () const
 ```
 
 
@@ -459,7 +459,7 @@ int64_t SR_UTILS_NS::EnumReflector::GetIndex (
 ### function GetIndexInternal 
 
 ```C++
-SR_NODISCARD SR_MAYBE_UNUSED std::optional< int64_t > SR_UTILS_NS::EnumReflector::GetIndexInternal (
+SR_MAYBE_UNUSED SR_NODISCARD std::optional< int64_t > SR_UTILS_NS::EnumReflector::GetIndexInternal (
     int64_t value
 ) const
 ```
@@ -488,7 +488,7 @@ uint64_t SR_UTILS_NS::EnumReflector::GetIntegralTypeSize ()
 ### function GetIntegralTypeSizeInternal 
 
 ```C++
-SR_NODISCARD SR_MAYBE_UNUSED uint64_t SR_UTILS_NS::EnumReflector::GetIntegralTypeSizeInternal () const
+SR_MAYBE_UNUSED SR_NODISCARD uint64_t SR_UTILS_NS::EnumReflector::GetIntegralTypeSizeInternal () const
 ```
 
 
@@ -515,7 +515,7 @@ SR_UTILS_NS::StringAtom SR_UTILS_NS::EnumReflector::GetName ()
 ### function GetNameInternal 
 
 ```C++
-SR_NODISCARD SR_MAYBE_UNUSED const SR_UTILS_NS::StringAtom & SR_UTILS_NS::EnumReflector::GetNameInternal () const
+SR_MAYBE_UNUSED SR_NODISCARD const SR_UTILS_NS::StringAtom & SR_UTILS_NS::EnumReflector::GetNameInternal () const
 ```
 
 
@@ -558,7 +558,7 @@ std::vector< SR_UTILS_NS::StringAtom > SR_UTILS_NS::EnumReflector::GetNamesFilte
 ### function GetNamesInternal 
 
 ```C++
-SR_NODISCARD SR_MAYBE_UNUSED const std::vector< SR_UTILS_NS::StringAtom > & SR_UTILS_NS::EnumReflector::GetNamesInternal () const
+SR_MAYBE_UNUSED SR_NODISCARD const std::vector< SR_UTILS_NS::StringAtom > & SR_UTILS_NS::EnumReflector::GetNamesInternal () const
 ```
 
 
@@ -599,7 +599,7 @@ const std::vector< SR_UTILS_NS::EnumReflector::Enumerator > & SR_UTILS_NS::EnumR
 ### function ReadEnumValueFromPointerInternal 
 
 ```C++
-SR_NODISCARD SR_MAYBE_UNUSED int64_t SR_UTILS_NS::EnumReflector::ReadEnumValueFromPointerInternal (
+SR_MAYBE_UNUSED SR_NODISCARD int64_t SR_UTILS_NS::EnumReflector::ReadEnumValueFromPointerInternal (
     const void * pEnum
 ) const
 ```
@@ -646,7 +646,7 @@ SR_UTILS_NS::StringAtom SR_UTILS_NS::EnumReflector::ToStringAtom (
 ### function ToStringInternal 
 
 ```C++
-SR_NODISCARD SR_MAYBE_UNUSED std::optional< SR_UTILS_NS::StringAtom > SR_UTILS_NS::EnumReflector::ToStringInternal (
+SR_MAYBE_UNUSED SR_NODISCARD std::optional< SR_UTILS_NS::StringAtom > SR_UTILS_NS::EnumReflector::ToStringInternal (
     int64_t value
 ) const
 ```
@@ -661,7 +661,7 @@ SR_NODISCARD SR_MAYBE_UNUSED std::optional< SR_UTILS_NS::StringAtom > SR_UTILS_N
 ### function WriteEnumValueToPointerInternal 
 
 ```C++
-SR_NODISCARD SR_MAYBE_UNUSED void SR_UTILS_NS::EnumReflector::WriteEnumValueToPointerInternal (
+SR_MAYBE_UNUSED SR_NODISCARD void SR_UTILS_NS::EnumReflector::WriteEnumValueToPointerInternal (
     void * pEnum,
     int64_t value
 ) const

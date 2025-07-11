@@ -237,7 +237,7 @@
     #define SR_WIN32_BOOL false
 #endif
 
-#ifdef WIN32
+#if defined(WIN32) && !defined(SR_COMMON_USE_CLANG_EMULATION)
     #define SR_SIMD_SUPPORT 1
 #else
     #define SR_SIMD_SUPPORT 0

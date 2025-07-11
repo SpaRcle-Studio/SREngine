@@ -62,6 +62,7 @@ Inherits the following classes: Singleton< Time >
 |  SR\_NODISCARD float\_t | [**FClock**](#function-fclock) () noexcept const<br> |
 |  SR\_NODISCARD TimePointType | [**Now**](#function-now) () noexcept const<br> |
 |  void | [**Update**](#function-update) () <br> |
+|   | [**~Time**](#function-time) () override<br> |
 
 
 
@@ -166,6 +167,19 @@ inline SR_NODISCARD TimePointType SR_HTYPES_NS::Time::Now () noexcept const
 
 ```C++
 inline void SR_HTYPES_NS::Time::Update () 
+```
+
+
+
+
+<hr>
+
+
+
+### function ~Time 
+
+```C++
+SR_HTYPES_NS::Time::~Time () override
 ```
 
 

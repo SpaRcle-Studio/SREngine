@@ -18,17 +18,13 @@
         </childnode>
         <childnode refid="95" relation="include">
         </childnode>
-        <childnode refid="110" relation="include">
-        </childnode>
-        <childnode refid="111" relation="include">
-        </childnode>
       </node>
       <node id="106">
         <label>Graphics/Animations/AnimationContext.h</label>
         <link refid="AnimationContext_8h_source"/>
         <childnode refid="107" relation="include">
         </childnode>
-        <childnode refid="112" relation="include">
+        <childnode refid="110" relation="include">
         </childnode>
       </node>
       <node id="107">
@@ -325,15 +321,15 @@
         <childnode refid="84" relation="include">
         </childnode>
       </node>
-      <node id="112">
+      <node id="110">
         <label>Utils/Types/SortedVector.h</label>
         <link refid="SortedVector_8h_source"/>
-        <childnode refid="113" relation="include">
+        <childnode refid="111" relation="include">
         </childnode>
         <childnode refid="105" relation="include">
         </childnode>
       </node>
-      <node id="113">
+      <node id="111">
         <label>Utils/Types/Stack.h</label>
         <link refid="Stack_8h_source"/>
         <childnode refid="101" relation="include">
@@ -504,12 +500,6 @@
       </node>
       <node id="12">
         <label>array</label>
-      </node>
-      <node id="111">
-        <label>assimp/quaternion.h</label>
-      </node>
-      <node id="110">
-        <label>assimp/vector3.h</label>
       </node>
       <node id="46">
         <label>atomic</label>

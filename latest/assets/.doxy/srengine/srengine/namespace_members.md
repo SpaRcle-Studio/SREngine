@@ -7,8 +7,6 @@
 
 * **AllocateMemoryFnPtr** ([**EvoScript::Typedefs**](namespaceEvoScript_1_1Typedefs.md))
 * **AwakeFnPtr** ([**EvoScript::Typedefs**](namespaceEvoScript_1_1Typedefs.md))
-* **AiQToQ** ([**SR\_ANIMATIONS\_NS**](namespaceSR__ANIMATIONS__NS.md))
-* **AiV3ToFV3** ([**SR\_ANIMATIONS\_NS**](namespaceSR__ANIMATIONS__NS.md))
 * **ALDistanceModelToDistanceModel** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
 * **ALfVec3** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
 * **ALfVec6** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))

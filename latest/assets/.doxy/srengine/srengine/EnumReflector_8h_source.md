@@ -90,18 +90,18 @@ namespace SR_UTILS_NS {
         template<typename EnumType> SR_NODISCARD static SR_UTILS_NS::StringAtom GetName();
         template<typename EnumType> SR_NODISCARD static EnumVariant GetEnumVariant();
 
-        SR_NODISCARD SR_MAYBE_UNUSED std::optional<SR_UTILS_NS::StringAtom> ToStringInternal(int64_t value) const;
-        SR_NODISCARD SR_MAYBE_UNUSED std::optional<int64_t> FromStringInternal(const SR_UTILS_NS::StringAtom& name) const;
-        SR_NODISCARD SR_MAYBE_UNUSED std::optional<int64_t> FromStringLowerCaseInternal(const std::string& value) const;
-        SR_NODISCARD SR_MAYBE_UNUSED std::optional<int64_t> GetIndexInternal(int64_t value) const;
-        SR_NODISCARD SR_MAYBE_UNUSED std::optional<int64_t> AtInternal(uint64_t index) const;
-        SR_NODISCARD SR_MAYBE_UNUSED const std::vector<SR_UTILS_NS::StringAtom>& GetNamesInternal() const;
-        SR_NODISCARD SR_MAYBE_UNUSED const SR_UTILS_NS::StringAtom& GetNameInternal() const;
-        SR_NODISCARD SR_MAYBE_UNUSED uint64_t GetIntegralTypeSizeInternal() const;
-        SR_NODISCARD SR_MAYBE_UNUSED uint64_t GetHashNameInternal() const;
-        SR_NODISCARD SR_MAYBE_UNUSED int64_t ReadEnumValueFromPointerInternal(const void* pEnum) const;
-        SR_NODISCARD SR_MAYBE_UNUSED void WriteEnumValueToPointerInternal(void* pEnum, int64_t value) const;
-        SR_NODISCARD SR_MAYBE_UNUSED EnumVariant GetEnumVariantInternal() const;
+        SR_MAYBE_UNUSED SR_NODISCARD std::optional<SR_UTILS_NS::StringAtom> ToStringInternal(int64_t value) const;
+        SR_MAYBE_UNUSED SR_NODISCARD std::optional<int64_t> FromStringInternal(const SR_UTILS_NS::StringAtom& name) const;
+        SR_MAYBE_UNUSED SR_NODISCARD std::optional<int64_t> FromStringLowerCaseInternal(const std::string& value) const;
+        SR_MAYBE_UNUSED SR_NODISCARD std::optional<int64_t> GetIndexInternal(int64_t value) const;
+        SR_MAYBE_UNUSED SR_NODISCARD std::optional<int64_t> AtInternal(uint64_t index) const;
+        SR_MAYBE_UNUSED SR_NODISCARD const std::vector<SR_UTILS_NS::StringAtom>& GetNamesInternal() const;
+        SR_MAYBE_UNUSED SR_NODISCARD const SR_UTILS_NS::StringAtom& GetNameInternal() const;
+        SR_MAYBE_UNUSED SR_NODISCARD uint64_t GetIntegralTypeSizeInternal() const;
+        SR_MAYBE_UNUSED SR_NODISCARD uint64_t GetHashNameInternal() const;
+        SR_MAYBE_UNUSED SR_NODISCARD int64_t ReadEnumValueFromPointerInternal(const void* pEnum) const;
+        SR_MAYBE_UNUSED SR_NODISCARD void WriteEnumValueToPointerInternal(void* pEnum, int64_t value) const;
+        SR_MAYBE_UNUSED SR_NODISCARD EnumVariant GetEnumVariantInternal() const;
 
     private:
         static bool IsIdentChar(char c);

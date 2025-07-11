@@ -11624,7 +11624,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**SR\_UTILS\_NS::SRHash&lt; double &gt;**](structSR__UTILS__NS_1_1SRHash_3_01double_01_4.md) 
 * **struct** [**SR\_UTILS\_NS::SRHash&lt; float &gt;**](structSR__UTILS__NS_1_1SRHash_3_01float_01_4.md) 
 * **struct** [**SR\_UTILS\_NS::SRHash&lt; long double &gt;**](structSR__UTILS__NS_1_1SRHash_3_01long_01double_01_4.md) 
-* **struct** [**SR\_UTILS\_NS::SRHash&lt; nullptr\_t &gt;**](structSR__UTILS__NS_1_1SRHash_3_01nullptr__t_01_4.md) 
+* **struct** [**SR\_UTILS\_NS::SRHash&lt; std::nullptr\_t &gt;**](structSR__UTILS__NS_1_1SRHash_3_01std_1_1nullptr__t_01_4.md) 
 * **struct** [**SR\_UTILS\_NS::SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) 
 * **struct** [**SR\_UTILS\_NS::SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) 
 * **struct** [**SR\_UTILS\_NS::SerializationTraits**](structSR__UTILS__NS_1_1SerializationTraits.md) 

@@ -110,7 +110,7 @@ See [SR\_UTILS\_NS::IComponentable](classSR__UTILS__NS_1_1IComponentable.md)
 |  SR\_NODISCARD [**SR\_HTYPES\_NS::DataStorage**](classSR__HTYPES__NS_1_1DataStorage.md) & | [**GetDataStorage**](#function-getdatastorage-12) () <br> |
 |  SR\_NODISCARD const [**SR\_HTYPES\_NS::DataStorage**](classSR__HTYPES__NS_1_1DataStorage.md) & | [**GetDataStorage**](#function-getdatastorage-22) () const<br> |
 |  SR\_NODISCARD const SR\_UTILS\_NS::EntityController::Ptr & | [**GetEntityController**](#function-getentitycontroller) () const<br> |
-|  SR\_NODISCARD SR\_INLINE SceneLogicPtr | [**GetLogicBase**](#function-getlogicbase) () const<br> |
+|  SR\_NODISCARD SceneLogicPtr | [**GetLogicBase**](#function-getlogicbase) () const<br> |
 |  SR\_NODISCARD std::string | [**GetName**](#function-getname) () const<br> |
 |  SR\_NODISCARD Path | [**GetPath**](#function-getpath) () const<br> |
 |  SceneObjects & | [**GetRootSceneObjects**](#function-getrootsceneobjects) () <br> |
@@ -539,7 +539,7 @@ inline SR_NODISCARD const SR_UTILS_NS::EntityController::Ptr & SR_WORLD_NS::Scen
 ### function GetLogicBase 
 
 ```C++
-inline SR_NODISCARD SR_INLINE SceneLogicPtr SR_WORLD_NS::Scene::GetLogicBase () const
+SR_NODISCARD SceneLogicPtr SR_WORLD_NS::Scene::GetLogicBase () const
 ```
 
 

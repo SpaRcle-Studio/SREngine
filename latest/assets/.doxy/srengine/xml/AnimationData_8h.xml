@@ -18,10 +18,6 @@
         </childnode>
         <childnode refid="95" relation="include">
         </childnode>
-        <childnode refid="106" relation="include">
-        </childnode>
-        <childnode refid="107" relation="include">
-        </childnode>
       </node>
       <node id="1">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationData.h</label>
@@ -460,12 +456,6 @@
       </node>
       <node id="10">
         <label>array</label>
-      </node>
-      <node id="107">
-        <label>assimp/quaternion.h</label>
-      </node>
-      <node id="106">
-        <label>assimp/vector3.h</label>
       </node>
       <node id="44">
         <label>atomic</label>

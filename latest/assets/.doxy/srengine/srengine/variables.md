@@ -5,8 +5,8 @@
 
 ## a
 
-* **AndroidNativeAppGlue\_8h\_1a9e93d8eae633734dfeb29e24a1f3a7c0** ([**AndroidNativeAppGlue.h**](AndroidNativeAppGlue_8h.md))
-* **AndroidNativeAppGlue\_8h\_1ade9ca5088d171ad20b4c237f1c2d6260** ([**AndroidNativeAppGlue.h**](AndroidNativeAppGlue_8h.md))
+* **AndroidNativeAppGlue\_8h\_1a2f80701c36e79c0640d91c788feee0b3** ([**AndroidNativeAppGlue.h**](AndroidNativeAppGlue_8h.md))
+* **AndroidNativeAppGlue\_8h\_1a531c35e38ede3ea4e5ba5afb24b29493** ([**AndroidNativeAppGlue.h**](AndroidNativeAppGlue_8h.md))
 
 
 ## s

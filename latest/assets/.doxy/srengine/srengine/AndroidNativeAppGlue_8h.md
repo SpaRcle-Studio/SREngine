@@ -44,8 +44,8 @@
 
 | Type | Name |
 | ---: | :--- |
-| enum  | [**AndroidNativeAppGlue\_8h\_1a9e93d8eae633734dfeb29e24a1f3a7c0**](#enum-androidnativeappglue_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0)  <br> |
-| enum  | [**AndroidNativeAppGlue\_8h\_1ade9ca5088d171ad20b4c237f1c2d6260**](#enum-androidnativeappglue_8h_1ade9ca5088d171ad20b4c237f1c2d6260)  <br> |
+| enum  | [**AndroidNativeAppGlue\_8h\_1a2f80701c36e79c0640d91c788feee0b3**](#enum-androidnativeappglue_8h_1a2f80701c36e79c0640d91c788feee0b3)  <br> |
+| enum  | [**AndroidNativeAppGlue\_8h\_1a531c35e38ede3ea4e5ba5afb24b29493**](#enum-androidnativeappglue_8h_1a531c35e38ede3ea4e5ba5afb24b29493)  <br> |
 
 
 
@@ -108,10 +108,27 @@
 
 
 
-### enum AndroidNativeAppGlue\_8h\_1a9e93d8eae633734dfeb29e24a1f3a7c0 
+### enum AndroidNativeAppGlue\_8h\_1a2f80701c36e79c0640d91c788feee0b3 
 
 ```C++
-enum AndroidNativeAppGlue_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0 {
+enum AndroidNativeAppGlue_8h_1a2f80701c36e79c0640d91c788feee0b3 {
+    LOOPER_ID_MAIN = 1,
+    LOOPER_ID_INPUT = 2,
+    LOOPER_ID_USER = 3
+};
+```
+
+
+
+
+<hr>
+
+
+
+### enum AndroidNativeAppGlue\_8h\_1a531c35e38ede3ea4e5ba5afb24b29493 
+
+```C++
+enum AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493 {
     APP_CMD_INPUT_CHANGED,
     APP_CMD_INIT_WINDOW,
     APP_CMD_TERM_WINDOW,
@@ -128,23 +145,6 @@ enum AndroidNativeAppGlue_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0 {
     APP_CMD_PAUSE,
     APP_CMD_STOP,
     APP_CMD_DESTROY
-};
-```
-
-
-
-
-<hr>
-
-
-
-### enum AndroidNativeAppGlue\_8h\_1ade9ca5088d171ad20b4c237f1c2d6260 
-
-```C++
-enum AndroidNativeAppGlue_8h_1ade9ca5088d171ad20b4c237f1c2d6260 {
-    LOOPER_ID_MAIN = 1,
-    LOOPER_ID_INPUT = 2,
-    LOOPER_ID_USER = 3
 };
 ```
 

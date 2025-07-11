@@ -36,7 +36,7 @@
 | Type | Name |
 | ---: | :--- |
 |  uint64\_t | [**m\_clock**](#variable-m_clock)   = `0`<br> |
-|  TimePointType | [**m\_point**](#variable-m_point)  <br> |
+|  TimePointType | [**m\_point**](#variable-m_point)   = `TimePointType()`<br> |
 
 
 
@@ -53,6 +53,14 @@
 
 
 
+## Public Functions
+
+| Type | Name |
+| ---: | :--- |
+|   | [**TimeInfo**](#function-timeinfo-13) () = default<br> |
+|   | [**TimeInfo**](#function-timeinfo-23) (TimePointType point, uint64\_t clock) <br> |
+|   | [**TimeInfo**](#function-timeinfo-33) (const TimeInfo & other) = default<br> |
+|  TimeInfo & | [**operator=**](#function-operator) (const TimeInfo & other) = default<br> |
 
 
 
@@ -103,6 +111,67 @@ uint64_t SR_HTYPES_NS::Time::TimeInfo::m_clock;
 
 ```C++
 TimePointType SR_HTYPES_NS::Time::TimeInfo::m_point;
+```
+
+
+
+
+<hr>
+## Public Functions Documentation
+
+
+
+
+### function TimeInfo [1/3]
+
+```C++
+TimeInfo::TimeInfo () = default
+```
+
+
+
+
+<hr>
+
+
+
+### function TimeInfo [2/3]
+
+```C++
+inline TimeInfo::TimeInfo (
+    TimePointType point,
+    uint64_t clock
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function TimeInfo [3/3]
+
+```C++
+TimeInfo::TimeInfo (
+    const TimeInfo & other
+) = default
+```
+
+
+
+
+<hr>
+
+
+
+### function operator= 
+
+```C++
+TimeInfo & TimeInfo::operator= (
+    const TimeInfo & other
+) = default
 ```
 
 

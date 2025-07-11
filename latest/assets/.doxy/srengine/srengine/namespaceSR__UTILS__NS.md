@@ -190,9 +190,9 @@
 | struct | [**SRHash&lt; double &gt;**](structSR__UTILS__NS_1_1SRHash_3_01double_01_4.md) &lt;&gt;<br> |
 | struct | [**SRHash&lt; float &gt;**](structSR__UTILS__NS_1_1SRHash_3_01float_01_4.md) &lt;&gt;<br> |
 | struct | [**SRHash&lt; long double &gt;**](structSR__UTILS__NS_1_1SRHash_3_01long_01double_01_4.md) &lt;&gt;<br> |
-| struct | [**SRHash&lt; nullptr\_t &gt;**](structSR__UTILS__NS_1_1SRHash_3_01nullptr__t_01_4.md) &lt;&gt;<br> |
 | struct | [**SRHash&lt; std::basic\_string&lt; Elem, std::char\_traits&lt; Elem &gt;, Alloc &gt; &gt;**](structSR__UTILS__NS_1_1SRHash_3_01std_1_1basic__string_3_01Elem_00_01std_1_1char__traits_3_01Elem_01_4_00_01Alloc_01_4_01_4.md) &lt;class Elem, class Alloc&gt;<br> |
 | struct | [**SRHash&lt; std::basic\_string\_view&lt; Elem &gt; &gt;**](structSR__UTILS__NS_1_1SRHash_3_01std_1_1basic__string__view_3_01Elem_01_4_01_4.md) &lt;class Elem&gt;<br> |
+| struct | [**SRHash&lt; std::nullptr\_t &gt;**](structSR__UTILS__NS_1_1SRHash_3_01std_1_1nullptr__t_01_4.md) &lt;&gt;<br> |
 | class | [**SRProperty**](classSR__UTILS__NS_1_1SRProperty.md) <br> |
 | class | [**SRPropertyVariant**](classSR__UTILS__NS_1_1SRPropertyVariant.md) <br> |
 | class | [**Serializable**](classSR__UTILS__NS_1_1Serializable.md) <br> |
@@ -342,8 +342,8 @@
 |  bool | [**ForEach**](#function-foreach) (const std::function&lt; bool(T &type, const uint32\_t &index)&gt; & fn, std::list&lt; U &gt; & vector) <br> |
 |  bool | [**ForEach**](#function-foreach) (const std::function&lt; bool(const T &type, const uint32\_t &index)&gt; & fn, const std::vector&lt; U &gt; & vector) <br> |
 |  bool | [**ForEach**](#function-foreach) (const std::function&lt; bool(const T &type, const uint32\_t &index)&gt; & fn, const std::list&lt; U &gt; & vector) <br> |
-|  SR\_NODISCARD std::string | [**Format**](#function-format) (const char \* fmt, Args &&... args) <br> |
-|  SR\_NODISCARD std::string | [**Format**](#function-format) (const std::string & fmt, Args &&... args) <br> |
+|  SR\_NODISCARD std::string | [**Format**](#function-format) (const char \* format\_str, Args &&... args) <br> |
+|  SR\_NODISCARD std::string | [**Format**](#function-format) (const std::string & format\_str, Args &&... args) <br> |
 |  constexpr T && | [**Forward**](#function-forward) (RemoveReferenceT&lt; T &gt; & t) noexcept<br> |
 |  constexpr T && | [**Forward**](#function-forward) (RemoveReferenceT&lt; T &gt; && t) noexcept<br> |
 |  std::string | [**GetCmdOption**](#function-getcmdoption) (char \*\* begin, char \*\* end, const std::string & option) <br> |
@@ -386,7 +386,7 @@
 |   | [**Overloaded**](#function-overloaded) (Fs && ...) <br> |
 |   | [**Passkey**](#function-passkey) (const T \*) <br> |
 |  B | [**PolymorphicCast**](#function-polymorphiccast) (A pA) <br> |
-|  SR\_NODISCARD std::string | [**SPrintF**](#function-sprintf) (const char \* fmt, Args &&... args) <br> |
+|  SR\_NODISCARD std::string | [**SPrintF**](#function-sprintf) (const char \* format\_str, Args &&... args) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (BoolExt, int8\_t, None=-1, False=0, True=1) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (MigrationResult, int8\_t, Unhandled, Success, Failed, Fatal) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (PropertyPublicity, uint8\_t, Public, Hidden, ReadOnly, HiddenReadOnly, Private) <br> |
@@ -1524,7 +1524,7 @@ bool SR_UTILS_NS::ForEach (
 ```C++
 template<class... Args>
 SR_NODISCARD std::string SR_UTILS_NS::Format (
-    const char * fmt,
+    const char * format_str,
     Args &&... args
 ) 
 ```
@@ -1541,7 +1541,7 @@ SR_NODISCARD std::string SR_UTILS_NS::Format (
 ```C++
 template<class... Args>
 SR_NODISCARD std::string SR_UTILS_NS::Format (
-    const std::string & fmt,
+    const std::string & format_str,
     Args &&... args
 ) 
 ```
@@ -2188,7 +2188,7 @@ B SR_UTILS_NS::PolymorphicCast (
 ```C++
 template<class... Args>
 SR_NODISCARD std::string SR_UTILS_NS::SPrintF (
-    const char * fmt,
+    const char * format_str,
     Args &&... args
 ) 
 ```

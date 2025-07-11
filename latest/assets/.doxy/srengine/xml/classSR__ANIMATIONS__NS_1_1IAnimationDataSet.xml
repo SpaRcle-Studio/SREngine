@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="120" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="120" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="124" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="124" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1a61d975512c1e622c69bf28fd3edb26b4" prot="protected" static="no" mutable="no">
         <type>std::map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, int32_t &gt;</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="121" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="121" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="125" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="125" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1a63076306ab79e989a5aed44c54052139" prot="protected" static="no" mutable="no">
         <type>std::map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, float_t &gt;</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="122" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="122" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="126" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="126" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1a644f640970bdda9479af7b1c5ab8e5bb" prot="protected" static="no" mutable="no">
         <type>std::map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, std::string &gt;</type>
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="123" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="123" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="127" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="127" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1ada14e567a9876f9f517ff71630a10f2b" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__ANIMATIONS__NS_1_1IAnimationDataSet" kindref="compound">IAnimationDataSet</ref> *</type>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="125" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="125" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="129" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="129" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -98,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="88" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="88" bodyend="90"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="92" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="92" bodyend="94"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1a9e298709fdddba3a15f63d5aa1deb27b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="91" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="91" bodyend="93"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="95" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="95" bodyend="97"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1a258c09212265f341610d711abce727c8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="94" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="94" bodyend="96"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="98" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="98" bodyend="100"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1a2c9b2267b32f9566db4e16ce590e2940" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -164,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="97" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="97" bodyend="99"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="101" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="101" bodyend="103"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1a951151f1d317dbfc09d9ea9af083c498" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::optional&lt; bool &gt;</type>
@@ -182,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="101" column="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="105" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1a4e51e24d89ac76566ddafa40d79e7d46" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::optional&lt; int32_t &gt;</type>
@@ -200,7 +200,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="102" column="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="106" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1ae6bb993886c48f0f376e7e712051d494" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::optional&lt; float_t &gt;</type>
@@ -218,7 +218,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="103" column="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="107" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1a04daa248c14523694aa7a1ba1ce99281" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::optional&lt; std::string &gt;</type>
@@ -236,7 +236,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="104" column="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="108" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1a9fc86dd40c76eed20355a049067b9817" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -254,7 +254,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="106" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="106" bodyend="108"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="110" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="110" bodyend="112"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -270,7 +270,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="111" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="115" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1a93a552eed5561c0ed37839edb17d2970" prot="protected" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -288,7 +288,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="113" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="113" bodyend="115"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="117" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="117" bodyend="119"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1a58fa101351f7dd3f658d83faa496f722" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -302,7 +302,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="117" column="17"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="121" column="17"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -336,7 +336,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="86" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="86" bodyend="127"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="90" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="90" bodyend="131"/>
     <listofallmembers>
       <member refid="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1a951151f1d317dbfc09d9ea9af083c498" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::IAnimationDataSet</scope><name>GetBool</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1ae6bb993886c48f0f376e7e712051d494" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::IAnimationDataSet</scope><name>GetFloat</name></member>

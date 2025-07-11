@@ -166,6 +166,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  SR\_NODISCARD [**SR\_HTYPES\_NS::ObjectPool**](classSR__HTYPES__NS_1_1ObjectPool.md)&lt; [**DebugTimedObject**](structSR__GRAPH__NS_1_1DebugRenderer_1_1DebugTimedObject.md) &gt; & | [**GetTimedObjects**](#function-gettimedobjects) () noexcept<br> |
 | virtual void | [**Init**](#function-init) () override<br> |
 | virtual SR\_NODISCARD bool | [**IsEmpty**](#function-isempty) () noexcept override const<br> |
+|  SR\_NODISCARD SR\_FORCE\_INLINE bool | [**IsMeshValid**](#function-ismeshvalid) (uint32\_t index) noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsRenderSceneChanged**](#function-isrenderscenechanged) () noexcept const<br> |
 | virtual void | [**Prepare**](#function-prepare) () override<br> |
 |  void | [**ResetChangedFlags**](#function-resetchangedflags) () noexcept<br> |
@@ -560,6 +561,21 @@ inline virtual SR_NODISCARD bool SR_GRAPH_NS::DebugRenderer::IsEmpty () noexcept
 
 
 Implements [*SR\_GRAPH\_NS::IRenderer::IsEmpty*](classSR__GRAPH__NS_1_1IRenderer.md#function-isempty)
+
+
+<hr>
+
+
+
+### function IsMeshValid 
+
+```C++
+inline SR_NODISCARD SR_FORCE_INLINE bool SR_GRAPH_NS::DebugRenderer::IsMeshValid (
+    uint32_t index
+) noexcept const
+```
+
+
 
 
 <hr>

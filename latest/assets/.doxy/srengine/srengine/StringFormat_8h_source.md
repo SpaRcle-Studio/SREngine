@@ -191,9 +191,9 @@ namespace SR_UTILS_NS {
         }
     }
 
-    template <class... Args> SR_NODISCARD std::string Format(const char* fmt, Args&&... args) {
+    template <class... Args> SR_NODISCARD std::string Format(const char* format_str, Args&&... args) {
         try {
-            return fmt::format(fmt::runtime(fmt), args...);
+            return fmt::format(fmt::runtime(format_str), std::forward<Args>(args)...);
         }
         catch (std::exception& exception) {
             std::cerr << "Format: an exception has occurred! Exception: " << exception.what() << std::endl;
@@ -202,9 +202,9 @@ namespace SR_UTILS_NS {
         }
     }
 
-    template <class... Args> SR_NODISCARD std::string SPrintF(const char* fmt, Args&&... args) {
+    template <class... Args> SR_NODISCARD std::string SPrintF(const char* format_str, Args&&... args) {
         try {
-            return fmt::sprintf(fmt, args...);
+            return fmt::sprintf(format_str, std::forward<Args>(args)...);
         }
         catch (std::exception& exception) {
             std::cerr << "SPrintFFormat: an exception has occurred! Exception: " << exception.what() << std::endl;
@@ -213,8 +213,8 @@ namespace SR_UTILS_NS {
         }
     }
 
-    template <class... Args> SR_NODISCARD std::string Format(const std::string& fmt, Args&&... args) {
-        return Format<Args...>(fmt.c_str(), args...);
+    template <class... Args> SR_NODISCARD std::string Format(const std::string& format_str, Args&&... args) {
+        return Format<Args...>(format_str.c_str(), std::forward<Args>(args)...);
     }
 }
 

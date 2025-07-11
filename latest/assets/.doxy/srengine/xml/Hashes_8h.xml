@@ -4488,7 +4488,7 @@
     <innerclass refid="structSR__UTILS__NS_1_1SRHash_3_01float_01_4" prot="public">SR_UTILS_NS::SRHash&lt; float &gt;</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1SRHash_3_01double_01_4" prot="public">SR_UTILS_NS::SRHash&lt; double &gt;</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1SRHash_3_01long_01double_01_4" prot="public">SR_UTILS_NS::SRHash&lt; long double &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1SRHash_3_01nullptr__t_01_4" prot="public">SR_UTILS_NS::SRHash&lt; nullptr_t &gt;</innerclass>
+    <innerclass refid="structSR__UTILS__NS_1_1SRHash_3_01std_1_1nullptr__t_01_4" prot="public">SR_UTILS_NS::SRHash&lt; std::nullptr_t &gt;</innerclass>
     <innernamespace refid="namespaceSR__UTILS__NS">SR_UTILS_NS</innernamespace>
     <innernamespace refid="namespaceSR__UTILS__NS_1_1Hash">SR_UTILS_NS::Hash</innernamespace>
     <innernamespace refid="namespaceSR__UTILS__NS_1_1Hash_1_1Detail">SR_UTILS_NS::Hash::Detail</innernamespace>
@@ -4899,8 +4899,8 @@
 <codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="254"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="255"><highlight class="normal"></highlight></codeline>
-<codeline lineno="256" refid="structSR__UTILS__NS_1_1SRHash_3_01nullptr__t_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;&gt;<sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__UTILS__NS_1_1SRHash" kindref="compound">SR_UTILS_NS::SRHash</ref>&lt;nullptr_t&gt;<sp/>{</highlight></codeline>
-<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>operator()(nullptr_t)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="256" refid="structSR__UTILS__NS_1_1SRHash_3_01std_1_1nullptr__t_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;&gt;<sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__UTILS__NS_1_1SRHash" kindref="compound">SR_UTILS_NS::SRHash</ref>&lt;std::nullptr_t&gt;<sp/>{</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>operator()(std::nullptr_t)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>null<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>HashRepresentation(null);</highlight></codeline>
 <codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>

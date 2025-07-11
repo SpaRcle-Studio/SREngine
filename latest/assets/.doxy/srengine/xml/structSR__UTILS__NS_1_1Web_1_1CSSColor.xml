@@ -98,9 +98,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
-      <memberdef kind="function" id="structSR__UTILS__NS_1_1Web_1_1CSSColor_1a3ddb1e0430eca98c47c7d73a4dc5da8b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD <ref refid="structSR__UTILS__NS_1_1Web_1_1CSSColor" kindref="compound">CSSColor</ref></type>
-        <definition>static SR_NODISCARD CSSColor SR_UTILS_NS::Web::CSSColor::Parse</definition>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1Web_1_1CSSColor_1a0f09b67fc3c971468733defb612aeaae" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structSR__UTILS__NS_1_1Web_1_1CSSColor" kindref="compound">CSSColor</ref></type>
+        <definition>static CSSColor SR_UTILS_NS::Web::CSSColor::Parse</definition>
         <argsstring>(std::string_view data)</argsstring>
         <name>Parse</name>
         <qualifiedname>SR_UTILS_NS::Web::CSSColor::Parse</qualifiedname>
@@ -114,7 +114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Web/CSS/CSSColor.h" line="85" column="38"/>
+        <location file="Engine/libs/Utils/inc/Utils/Web/CSS/CSSColor.h" line="85" column="25"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -186,7 +186,7 @@
       <member refid="structSR__UTILS__NS_1_1Web_1_1CSSColor_1a9f9f268a20cebc34b77e24839496dfa8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSSColor</scope><name>ColorType</name></member>
       <member refid="structSR__UTILS__NS_1_1Web_1_1CSSColor_1ad0326cc792fe0606c975adb4fa841dbd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSSColor</scope><name>colorType</name></member>
       <member refid="structSR__UTILS__NS_1_1Web_1_1CSSColor_1a2dc1d9113a9fd52bfee2aea04e7fc71d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSSColor</scope><name>linearGradient</name></member>
-      <member refid="structSR__UTILS__NS_1_1Web_1_1CSSColor_1a3ddb1e0430eca98c47c7d73a4dc5da8b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSSColor</scope><name>Parse</name></member>
+      <member refid="structSR__UTILS__NS_1_1Web_1_1CSSColor_1a0f09b67fc3c971468733defb612aeaae" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSSColor</scope><name>Parse</name></member>
       <member refid="structSR__UTILS__NS_1_1Web_1_1CSSColor_1a0d2e765f72634d37a64b62c188e5f188" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSSColor</scope><name>radialGradient</name></member>
       <member refid="structSR__UTILS__NS_1_1Web_1_1CSSColor_1a1e9bc6a5ba6e8f7a8b1476d286c7893c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSSColor</scope><name>ToString</name></member>
     </listofallmembers>

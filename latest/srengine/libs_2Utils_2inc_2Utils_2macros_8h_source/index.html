@@ -227,7 +227,7 @@
 </span><span id=__span-0-227><a id=__codelineno-0-227 name=__codelineno-0-227 href=#__codelineno-0-227></a><span class=w>    </span><span class=cp>#define SR_WIN32_BOOL false</span>
 </span><span id=__span-0-228><a id=__codelineno-0-228 name=__codelineno-0-228 href=#__codelineno-0-228></a><span class=cp>#endif</span>
 </span><span id=__span-0-229><a id=__codelineno-0-229 name=__codelineno-0-229 href=#__codelineno-0-229></a>
-</span><span id=__span-0-230><a id=__codelineno-0-230 name=__codelineno-0-230 href=#__codelineno-0-230></a><span class=cp>#ifdef WIN32</span>
+</span><span id=__span-0-230><a id=__codelineno-0-230 name=__codelineno-0-230 href=#__codelineno-0-230></a><span class=cp>#if defined(WIN32) &amp;&amp; !defined(SR_COMMON_USE_CLANG_EMULATION)</span>
 </span><span id=__span-0-231><a id=__codelineno-0-231 name=__codelineno-0-231 href=#__codelineno-0-231></a><span class=w>    </span><span class=cp>#define SR_SIMD_SUPPORT 1</span>
 </span><span id=__span-0-232><a id=__codelineno-0-232 name=__codelineno-0-232 href=#__codelineno-0-232></a><span class=cp>#else</span>
 </span><span id=__span-0-233><a id=__codelineno-0-233 name=__codelineno-0-233 href=#__codelineno-0-233></a><span class=w>    </span><span class=cp>#define SR_SIMD_SUPPORT 0</span>

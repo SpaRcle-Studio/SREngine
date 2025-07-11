@@ -192,7 +192,7 @@
       <member refid="classSR__WORLD__NS_1_1Scene_1a77a71524af38f4e43270dbfc61d1a244" prot="public" virt="non-virtual"><scope>SR_CORE_NS::World</scope><name>GetDataStorage</name></member>
       <member refid="classSR__WORLD__NS_1_1Scene_1a6555eae70f319b82ffef8cb7e51400c2" prot="public" virt="non-virtual"><scope>SR_CORE_NS::World</scope><name>GetDataStorage</name></member>
       <member refid="classSR__WORLD__NS_1_1Scene_1a6aa9017791362d7645e43c6ba5015f6a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::World</scope><name>GetEntityController</name></member>
-      <member refid="classSR__WORLD__NS_1_1Scene_1a9a6556db9473835d477b3f9b9f530b25" prot="public" virt="non-virtual"><scope>SR_CORE_NS::World</scope><name>GetLogicBase</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1ad8d72cfd948b08f37d2b82fbb17fce9a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::World</scope><name>GetLogicBase</name></member>
       <member refid="classSR__WORLD__NS_1_1Scene_1a9c5cc12471b9d569014a8564e8b2dbd0" prot="public" virt="non-virtual"><scope>SR_CORE_NS::World</scope><name>GetName</name></member>
       <member refid="classSR__UTILS__NS_1_1IComponentable_1a213ac205606cbc0ff0ed66ba2238f357" prot="public" virt="virtual"><scope>SR_CORE_NS::World</scope><name>GetOrCreateComponent</name></member>
       <member refid="classSR__UTILS__NS_1_1IComponentable_1a96d8cf98278e875d28450aada24c4e46" prot="public" virt="virtual"><scope>SR_CORE_NS::World</scope><name>GetOrCreateComponent</name></member>

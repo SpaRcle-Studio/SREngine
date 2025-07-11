@@ -28,7 +28,7 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="111" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="111" bodyend="111"/>
       </memberdef>
-      <memberdef kind="function" id="structfmt_1_1formatter_3_01SR__UTILS__NS_1_1StringAtom_01_4_1a70d8f7e73dec57dc525d28274e364a87" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="structfmt_1_1formatter_3_01SR__UTILS__NS_1_1StringAtom_01_4_1a17f2871a4bd18ddf0cd787cb1edfcb9a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename FormatContext</type>
@@ -36,7 +36,7 @@
         </templateparamlist>
         <type>auto</type>
         <definition>auto fmt::formatter&lt; SR_UTILS_NS::StringAtom &gt;::format</definition>
-        <argsstring>(SR_UTILS_NS::StringAtom const &amp;str, FormatContext &amp;ctx)</argsstring>
+        <argsstring>(SR_UTILS_NS::StringAtom const &amp;str, FormatContext &amp;ctx) const</argsstring>
         <name>format</name>
         <qualifiedname>fmt::formatter&lt; SR_UTILS_NS::StringAtom &gt;::format</qualifiedname>
         <param>
@@ -62,7 +62,7 @@
     </detaileddescription>
     <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="108" column="10" bodyfile="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="109" bodyend="117"/>
     <listofallmembers>
-      <member refid="structfmt_1_1formatter_3_01SR__UTILS__NS_1_1StringAtom_01_4_1a70d8f7e73dec57dc525d28274e364a87" prot="public" virt="non-virtual"><scope>fmt::formatter&lt; SR_UTILS_NS::StringAtom &gt;</scope><name>format</name></member>
+      <member refid="structfmt_1_1formatter_3_01SR__UTILS__NS_1_1StringAtom_01_4_1a17f2871a4bd18ddf0cd787cb1edfcb9a" prot="public" virt="non-virtual"><scope>fmt::formatter&lt; SR_UTILS_NS::StringAtom &gt;</scope><name>format</name></member>
       <member refid="structfmt_1_1formatter_3_01SR__UTILS__NS_1_1StringAtom_01_4_1aed2b57c6b4872f16166d7fd2c725dfa5" prot="public" virt="non-virtual"><scope>fmt::formatter&lt; SR_UTILS_NS::StringAtom &gt;</scope><name>parse</name></member>
     </listofallmembers>
   </compounddef>

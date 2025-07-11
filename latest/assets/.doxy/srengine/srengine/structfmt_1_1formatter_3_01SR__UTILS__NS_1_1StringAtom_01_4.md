@@ -53,7 +53,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  auto | [**format**](#function-format) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) const & str, FormatContext & ctx) <br> |
+|  auto | [**format**](#function-format) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) const & str, FormatContext & ctx) const<br> |
 |  constexpr auto | [**parse**](#function-parse) (ParseContext & ctx) <br> |
 
 
@@ -95,7 +95,7 @@ template<typename FormatContext>
 inline auto fmt::formatter< SR_UTILS_NS::StringAtom >::format (
     SR_UTILS_NS::StringAtom const & str,
     FormatContext & ctx
-) 
+) const
 ```
 
 

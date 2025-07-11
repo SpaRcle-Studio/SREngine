@@ -15,8 +15,6 @@
 * `#include <Utils/Types/Time.h>`
 * `#include <Utils/Common/NonCopyable.h>`
 * `#include <Utils/Common/Enumerations.h>`
-* `#include <assimp/vector3.h>`
-* `#include <assimp/quaternion.h>`
 
 
 

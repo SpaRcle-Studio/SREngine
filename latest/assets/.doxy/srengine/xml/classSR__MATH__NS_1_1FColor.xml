@@ -130,7 +130,7 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="110" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="110" bodyend="110"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__MATH__NS_1_1FColor_1aa82037466c7c10e0d568114ddc2be7ec" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1FColor_1aeb052aa1c0e9cff1c97c20ecf7cd95c1" prot="public" static="no" mutable="no">
         <type>union <ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">SR_MATH_NS::FColor</ref></type>
         <definition>union SR_MATH_NS::FColor SR_MATH_NS::FColor</definition>
         <argsstring></argsstring>

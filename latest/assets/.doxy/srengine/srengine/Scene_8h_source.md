@@ -84,7 +84,7 @@ namespace SR_WORLD_NS {
         SR_NODISCARD SR_HTYPES_NS::DataStorage& GetDataStorage();
         SR_NODISCARD const SR_HTYPES_NS::DataStorage& GetDataStorage() const;
         SR_NODISCARD SR_INLINE SceneUpdater* GetSceneUpdater() const { return m_sceneUpdater; }
-        SR_NODISCARD SR_INLINE SceneLogicPtr GetLogicBase() const { return m_logic; }
+        SR_NODISCARD SceneLogicPtr GetLogicBase() const;
         SR_NODISCARD const SR_UTILS_NS::EntityController::Ptr& GetEntityController() const { return m_pEntityController; }
 
         SR_NODISCARD virtual bool IsPlayingMode() const { return false; }

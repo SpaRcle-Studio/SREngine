@@ -105,7 +105,7 @@ template<> struct fmt::formatter<SR_UTILS_NS::StringAtom>
     constexpr auto parse(ParseContext& ctx) { return ctx.begin(); }
 
     template<typename FormatContext>
-    auto format(SR_UTILS_NS::StringAtom const& str, FormatContext& ctx) {
+    auto format(SR_UTILS_NS::StringAtom const& str, FormatContext& ctx) const {
         return fmt::format_to(ctx.out(), "{}", str.ToStringView());
     }
 };

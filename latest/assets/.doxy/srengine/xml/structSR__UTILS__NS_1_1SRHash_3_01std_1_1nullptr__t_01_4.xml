@@ -1,18 +1,18 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
-  <compounddef id="structSR__UTILS__NS_1_1SRHash_3_01nullptr__t_01_4" kind="struct" language="C++" prot="public">
-    <compoundname>SR_UTILS_NS::SRHash&lt; nullptr_t &gt;</compoundname>
+  <compounddef id="structSR__UTILS__NS_1_1SRHash_3_01std_1_1nullptr__t_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::SRHash&lt; std::nullptr_t &gt;</compoundname>
     <templateparamlist>
     </templateparamlist>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="structSR__UTILS__NS_1_1SRHash_3_01nullptr__t_01_4_1ae4505ecfbf19940616f82bf4cb7109f0" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1SRHash_3_01std_1_1nullptr__t_01_4_1a36c0e84f558586c1e506b59a7ae68cf5" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD constexpr size_t</type>
-        <definition>SR_NODISCARD constexpr size_t SR_UTILS_NS::SRHash&lt; nullptr_t &gt;::operator()</definition>
-        <argsstring>(nullptr_t) const noexcept</argsstring>
+        <definition>SR_NODISCARD constexpr size_t SR_UTILS_NS::SRHash&lt; std::nullptr_t &gt;::operator()</definition>
+        <argsstring>(std::nullptr_t) const noexcept</argsstring>
         <name>operator()</name>
-        <qualifiedname>SR_UTILS_NS::SRHash&lt; nullptr_t &gt;::operator()</qualifiedname>
+        <qualifiedname>SR_UTILS_NS::SRHash&lt; std::nullptr_t &gt;::operator()</qualifiedname>
         <param>
-          <type>nullptr_t</type>
+          <type>std::nullptr_t</type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -29,7 +29,7 @@
     </detaileddescription>
     <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="256" column="10" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="256" bodyend="261"/>
     <listofallmembers>
-      <member refid="structSR__UTILS__NS_1_1SRHash_3_01nullptr__t_01_4_1ae4505ecfbf19940616f82bf4cb7109f0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRHash&lt; nullptr_t &gt;</scope><name>operator()</name></member>
+      <member refid="structSR__UTILS__NS_1_1SRHash_3_01std_1_1nullptr__t_01_4_1a36c0e84f558586c1e506b59a7ae68cf5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRHash&lt; std::nullptr_t &gt;</scope><name>operator()</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -48,9 +48,9 @@
 | struct | [**SRHash&lt; double &gt;**](structSR__UTILS__NS_1_1SRHash_3_01double_01_4.md) &lt;&gt;<br> |
 | struct | [**SRHash&lt; float &gt;**](structSR__UTILS__NS_1_1SRHash_3_01float_01_4.md) &lt;&gt;<br> |
 | struct | [**SRHash&lt; long double &gt;**](structSR__UTILS__NS_1_1SRHash_3_01long_01double_01_4.md) &lt;&gt;<br> |
-| struct | [**SRHash&lt; nullptr\_t &gt;**](structSR__UTILS__NS_1_1SRHash_3_01nullptr__t_01_4.md) &lt;&gt;<br> |
 | struct | [**SRHash&lt; std::basic\_string&lt; Elem, std::char\_traits&lt; Elem &gt;, Alloc &gt; &gt;**](structSR__UTILS__NS_1_1SRHash_3_01std_1_1basic__string_3_01Elem_00_01std_1_1char__traits_3_01Elem_01_4_00_01Alloc_01_4_01_4.md) &lt;class Elem, class Alloc&gt;<br> |
 | struct | [**SRHash&lt; std::basic\_string\_view&lt; Elem &gt; &gt;**](structSR__UTILS__NS_1_1SRHash_3_01std_1_1basic__string__view_3_01Elem_01_4_01_4.md) &lt;class Elem&gt;<br> |
+| struct | [**SRHash&lt; std::nullptr\_t &gt;**](structSR__UTILS__NS_1_1SRHash_3_01std_1_1nullptr__t_01_4.md) &lt;&gt;<br> |
 
 
 

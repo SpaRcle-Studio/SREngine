@@ -142,12 +142,12 @@
     <innerclass refid="structSR__UTILS__NS_1_1SRHash_3_01double_01_4" prot="public">SR_UTILS_NS::SRHash&lt; double &gt;</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1SRHash_3_01float_01_4" prot="public">SR_UTILS_NS::SRHash&lt; float &gt;</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1SRHash_3_01long_01double_01_4" prot="public">SR_UTILS_NS::SRHash&lt; long double &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1SRHash_3_01nullptr__t_01_4" prot="public">SR_UTILS_NS::SRHash&lt; nullptr_t &gt;</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1SRHash_3_01SR__GRAPH__NS_1_1ShaderProperties_01_4" prot="public">SR_UTILS_NS::SRHash&lt; SR_GRAPH_NS::ShaderProperties &gt;</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1SRHash_3_01SR__GRAPH__NS_1_1ShaderSamplers_01_4" prot="public">SR_UTILS_NS::SRHash&lt; SR_GRAPH_NS::ShaderSamplers &gt;</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1SRHash_3_01SR__HTYPES__NS_1_1RawMeshParams_01_4" prot="public">SR_UTILS_NS::SRHash&lt; SR_HTYPES_NS::RawMeshParams &gt;</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1SRHash_3_01std_1_1basic__string_3_01Elem_00_01std_1_1char__traits_3_01Elem_01_4_00_01Alloc_01_4_01_4" prot="public">SR_UTILS_NS::SRHash&lt; std::basic_string&lt; Elem, std::char_traits&lt; Elem &gt;, Alloc &gt; &gt;</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1SRHash_3_01std_1_1basic__string__view_3_01Elem_01_4_01_4" prot="public">SR_UTILS_NS::SRHash&lt; std::basic_string_view&lt; Elem &gt; &gt;</innerclass>
+    <innerclass refid="structSR__UTILS__NS_1_1SRHash_3_01std_1_1nullptr__t_01_4" prot="public">SR_UTILS_NS::SRHash&lt; std::nullptr_t &gt;</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1SRProperty" prot="public">SR_UTILS_NS::SRProperty</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1SRPropertyVariant" prot="public">SR_UTILS_NS::SRPropertyVariant</innerclass>
     <innerclass refid="unionSR__UTILS__NS_1_1StandardData" prot="public">SR_UTILS_NS::StandardData</innerclass>
@@ -2307,7 +2307,7 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="60" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="60" bodyend="184"/>
       </memberdef>
-      <memberdef kind="function" id="namespaceSR__UTILS__NS_1a9718b3f27920e6beeda1eda97d45f0c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="namespaceSR__UTILS__NS_1a1f4d3744ebe5f4ff6d2504a1f5a15526" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class...</type>
@@ -2317,12 +2317,12 @@
         </templateparamlist>
         <type>SR_NODISCARD std::string</type>
         <definition>SR_NODISCARD std::string SR_UTILS_NS::Format</definition>
-        <argsstring>(const char *fmt, Args &amp;&amp;... args)</argsstring>
+        <argsstring>(const char *format_str, Args &amp;&amp;... args)</argsstring>
         <name>Format</name>
         <qualifiedname>SR_UTILS_NS::Format</qualifiedname>
         <param>
           <type>const char *</type>
-          <declname>fmt</declname>
+          <declname>format_str</declname>
         </param>
         <param>
           <type>Args &amp;&amp;...</type>
@@ -2337,7 +2337,7 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="186" column="42" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="186" bodyend="195"/>
       </memberdef>
-      <memberdef kind="function" id="namespaceSR__UTILS__NS_1a51b1fffd2388d32d839b63f2713641ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="namespaceSR__UTILS__NS_1a099032240793afbd2a66b0ff8ee1591e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class...</type>
@@ -2347,12 +2347,12 @@
         </templateparamlist>
         <type>SR_NODISCARD std::string</type>
         <definition>SR_NODISCARD std::string SR_UTILS_NS::SPrintF</definition>
-        <argsstring>(const char *fmt, Args &amp;&amp;... args)</argsstring>
+        <argsstring>(const char *format_str, Args &amp;&amp;... args)</argsstring>
         <name>SPrintF</name>
         <qualifiedname>SR_UTILS_NS::SPrintF</qualifiedname>
         <param>
           <type>const char *</type>
-          <declname>fmt</declname>
+          <declname>format_str</declname>
         </param>
         <param>
           <type>Args &amp;&amp;...</type>
@@ -2367,7 +2367,7 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="197" column="42" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="197" bodyend="206"/>
       </memberdef>
-      <memberdef kind="function" id="namespaceSR__UTILS__NS_1ad499d098052df0db524bee389cb2ebfb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="namespaceSR__UTILS__NS_1a284f821fc1608703ed165377f586f269" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class...</type>
@@ -2377,12 +2377,12 @@
         </templateparamlist>
         <type>SR_NODISCARD std::string</type>
         <definition>SR_NODISCARD std::string SR_UTILS_NS::Format</definition>
-        <argsstring>(const std::string &amp;fmt, Args &amp;&amp;... args)</argsstring>
+        <argsstring>(const std::string &amp;format_str, Args &amp;&amp;... args)</argsstring>
         <name>Format</name>
         <qualifiedname>SR_UTILS_NS::Format</qualifiedname>
         <param>
           <type>const std::string &amp;</type>
-          <declname>fmt</declname>
+          <declname>format_str</declname>
         </param>
         <param>
           <type>Args &amp;&amp;...</type>

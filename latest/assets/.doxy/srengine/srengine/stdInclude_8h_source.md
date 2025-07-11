@@ -202,7 +202,7 @@ namespace SR_UTILS_NS {
     using SRHashType = uint64_t;
 
     #if defined(SR_LINUX) && !defined(SR_ANDROID)
-        using TimePointType = std::chrono::time_point<std::chrono::system_clock>;
+        using TimePointType = std::chrono::time_point<std::chrono::high_resolution_clock>;
     #else
         #ifdef SR_MINGW
             using TimePointType = std::chrono::high_resolution_clock::time_point;

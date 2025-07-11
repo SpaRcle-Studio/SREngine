@@ -35,12 +35,8 @@
 
 | Type | Name |
 | ---: | :--- |
-|  union [**SR\_MATH\_NS::AABB**](structSR__MATH__NS_1_1AABB.md) | [**AABB**](#variable-aabb-12)  <br> |
-|  union [**SR\_MATH\_NS::AABB**](structSR__MATH__NS_1_1AABB.md) | [**AABB**](#variable-aabb-22)  <br> |
 |  [**FVector3**](structSR__MATH__NS_1_1Vector3.md) | [**max**](#variable-max)   = `[**FVector3**](structSR__MATH__NS_1_1Vector3.md)(0.f, 0.f, 0.f)`<br> |
 |  [**FVector3**](structSR__MATH__NS_1_1Vector3.md) | [**min**](#variable-min)   = `[**FVector3**](structSR__MATH__NS_1_1Vector3.md)(0.f, 0.f, 0.f)`<br> |
-|  [**FVector3**](structSR__MATH__NS_1_1Vector3.md) | [**position**](#variable-position)  <br>_Alias for min._  |
-|  [**FVector3**](structSR__MATH__NS_1_1Vector3.md) | [**size**](#variable-size)  <br>_Alias for max._  |
 
 
 
@@ -99,32 +95,6 @@
 
 
 
-### variable AABB [1/2]
-
-```C++
-union SR_MATH_NS::AABB SR_MATH_NS::AABB;
-```
-
-
-
-
-<hr>
-
-
-
-### variable AABB [2/2]
-
-```C++
-union SR_MATH_NS::AABB SR_MATH_NS::AABB;
-```
-
-
-
-
-<hr>
-
-
-
 ### variable max 
 
 ```C++
@@ -142,34 +112,6 @@ FVector3 SR_MATH_NS::AABB::max;
 
 ```C++
 FVector3 SR_MATH_NS::AABB::min;
-```
-
-
-
-
-<hr>
-
-
-
-### variable position 
-
-_Alias for min._ 
-```C++
-FVector3 SR_MATH_NS::AABB::position;
-```
-
-
-
-
-<hr>
-
-
-
-### variable size 
-
-_Alias for max._ 
-```C++
-FVector3 SR_MATH_NS::AABB::size;
 ```
 
 

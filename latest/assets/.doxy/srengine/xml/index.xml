@@ -7,11 +7,7 @@
   </compound>
   <compound refid="structSR__MATH__NS_1_1AABB" kind="struct"><name>SR_MATH_NS::AABB</name>
     <member refid="structSR__MATH__NS_1_1AABB_1acc5815bcce332a493e5152028bbfda1d" kind="variable"><name>min</name></member>
-    <member refid="structSR__MATH__NS_1_1AABB_1afd4b0bb7e2cf3e8b5d7d093f6d610fad" kind="variable"><name>position</name></member>
-    <member refid="structSR__MATH__NS_1_1AABB_1a0d22df572a1d54185aead8694f6cbf41" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1AABB_1a524f5693253a84336751323cf94a48c5" kind="variable"><name>max</name></member>
-    <member refid="structSR__MATH__NS_1_1AABB_1a997b5014c4ad389e09ca1c0ab7339453" kind="variable"><name>size</name></member>
-    <member refid="structSR__MATH__NS_1_1AABB_1a7671d7989dba74697299d57c6c19464a" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1AABB_1ae1a5b943bd76323180550cdc56d416d8" kind="function"><name>AABB</name></member>
     <member refid="structSR__MATH__NS_1_1AABB_1a0cc7aa8458554727bce6cb739a479063" kind="function"><name>AABB</name></member>
     <member refid="structSR__MATH__NS_1_1AABB_1ad1d35501b8253edfadfe156f2d26d0ef" kind="function"><name>IsValid</name></member>
@@ -1987,7 +1983,7 @@
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSColor_1a8fd59c9976de6f0b2e0e8af8f4f472cc" kind="variable"><name>color</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSColor_1a2dc1d9113a9fd52bfee2aea04e7fc71d" kind="variable"><name>linearGradient</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSColor_1a0d2e765f72634d37a64b62c188e5f188" kind="variable"><name>radialGradient</name></member>
-    <member refid="structSR__UTILS__NS_1_1Web_1_1CSSColor_1a3ddb1e0430eca98c47c7d73a4dc5da8b" kind="function"><name>Parse</name></member>
+    <member refid="structSR__UTILS__NS_1_1Web_1_1CSSColor_1a0f09b67fc3c971468733defb612aeaae" kind="function"><name>Parse</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSColor_1a1e9bc6a5ba6e8f7a8b1476d286c7893c" kind="function"><name>ToString</name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection" kind="struct"><name>SR_UTILS_NS::Web::CSSDirection</name>
@@ -2006,7 +2002,7 @@
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection_1aaeda44b670fe0b20aad9e1b392e00393" kind="variable"><name>type</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection_1a94f2bc7d29e9c42e28bab70275017378" kind="variable"><name>direction</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection_1a91f59540be25dfa4adc532f6e4cceb0c" kind="variable"><name>degree</name></member>
-    <member refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection_1a980db6b4885eb9e392140b2adbc79288" kind="variable"><name></name></member>
+    <member refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection_1a0f670c7b37027352bfbf77ecc6d36338" kind="variable"><name></name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1Web_1_1CSSGradientColor" kind="struct"><name>SR_UTILS_NS::Web::CSSGradientColor</name>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSGradientColor_1a49b905f66d5b3d3ba91af4dffc67428d" kind="variable"><name>color</name></member>
@@ -2109,7 +2105,7 @@
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1ad3579d47e3f497ca3d4152eb15bb3478" kind="variable"><name>percent</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a52001a76a637197e9937f1b5f58d7330" kind="variable"><name>dpi</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a091cd7f8d1d79db1a4332834add1efa9" kind="variable"><name>deg</name></member>
-    <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a3ccb07a566505ddeb2408f8bc89fe5d7" kind="variable"><name></name></member>
+    <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a1a3300e87d8b2970063346a870a343f4" kind="variable"><name></name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a248defadfbdae30a585a521b88acb427" kind="function"><name>CSSSizeValue</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a5e2d6b1465a1b725206848946d49b41c" kind="function"><name>CSSSizeValue</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1aaf98edc7b6d691eeef454ce75196ccef" kind="function"><name>CSSSizeValue</name></member>
@@ -2659,6 +2655,7 @@
     <member refid="classSR__GRAPH__NS_1_1DebugRenderer_1a5c02d37c343e102ea98b9b280ced0efb" kind="function"><name>GetEmptyIdsPoolSize</name></member>
     <member refid="classSR__GRAPH__NS_1_1DebugRenderer_1af2621ba0e58df30f1f538d255ee219d0" kind="function"><name>GetTimedObjects</name></member>
     <member refid="classSR__GRAPH__NS_1_1DebugRenderer_1ad32c73806551d7461fc426125f8586a0" kind="function"><name>GetMeshUnchecked</name></member>
+    <member refid="classSR__GRAPH__NS_1_1DebugRenderer_1abd797975b9a2baa0bec105f2bf5c0f3c" kind="function"><name>IsMeshValid</name></member>
     <member refid="classSR__GRAPH__NS_1_1DebugRenderer_1a9841b0a001e59755ff5803d1286618c9" kind="function"><name>IsRenderSceneChanged</name></member>
     <member refid="classSR__GRAPH__NS_1_1DebugRenderer_1a41f4afcc8eae68995e13411d69705a8b" kind="function"><name>AddLine</name></member>
     <member refid="classSR__GRAPH__NS_1_1DebugRenderer_1a8afc58b535878f75ebc2dee9b35d2fbf" kind="function"><name>AddMesh</name></member>
@@ -3335,18 +3332,18 @@
     <member refid="classSR__UTILS__NS_1_1EnumReflector_1ae2992378acac693f72a03a2b9402bff9" kind="variable"><name>m_enumVariant</name></member>
     <member refid="classSR__UTILS__NS_1_1EnumReflector_1ab5b6ad4d2982d78b29df1282e5a8626a" kind="function"><name>EnumReflector</name></member>
     <member refid="classSR__UTILS__NS_1_1EnumReflector_1aaa83e253dbb51d181b95caec6e4431f9" kind="function"><name>~EnumReflector</name></member>
-    <member refid="classSR__UTILS__NS_1_1EnumReflector_1a2dbb5a7639f7a2f5b275bc1e6e4135df" kind="function"><name>ToStringInternal</name></member>
-    <member refid="classSR__UTILS__NS_1_1EnumReflector_1aad4eb40f9af9e9caba5396df35a3d1ff" kind="function"><name>FromStringInternal</name></member>
-    <member refid="classSR__UTILS__NS_1_1EnumReflector_1aa409c7d867e4a8ccb21acc252088de92" kind="function"><name>FromStringLowerCaseInternal</name></member>
-    <member refid="classSR__UTILS__NS_1_1EnumReflector_1aebc0858478ac5279b199eedc95adbdcf" kind="function"><name>GetIndexInternal</name></member>
-    <member refid="classSR__UTILS__NS_1_1EnumReflector_1a9d19bee71aaec666f8d64abe203465f7" kind="function"><name>AtInternal</name></member>
-    <member refid="classSR__UTILS__NS_1_1EnumReflector_1a583b80aab4c51967fe70b71753139b3a" kind="function"><name>GetNamesInternal</name></member>
-    <member refid="classSR__UTILS__NS_1_1EnumReflector_1a33fc335476e5efaa77424468b32a3db7" kind="function"><name>GetNameInternal</name></member>
-    <member refid="classSR__UTILS__NS_1_1EnumReflector_1a16813b28d344bdb1d79737a8f6ea16b3" kind="function"><name>GetIntegralTypeSizeInternal</name></member>
-    <member refid="classSR__UTILS__NS_1_1EnumReflector_1a548f67ce51ff8ccb2d3fa391413480fd" kind="function"><name>GetHashNameInternal</name></member>
-    <member refid="classSR__UTILS__NS_1_1EnumReflector_1ab8e37f3ab845657830c10fa8b00b025f" kind="function"><name>ReadEnumValueFromPointerInternal</name></member>
-    <member refid="classSR__UTILS__NS_1_1EnumReflector_1a03fd806f8867c233df484421514bee8e" kind="function"><name>WriteEnumValueToPointerInternal</name></member>
-    <member refid="classSR__UTILS__NS_1_1EnumReflector_1a7a81182c5a0cfe68a9bc93e2b3e48aec" kind="function"><name>GetEnumVariantInternal</name></member>
+    <member refid="classSR__UTILS__NS_1_1EnumReflector_1aaa71ce3d3ec60120e83c4cd763857fa7" kind="function"><name>ToStringInternal</name></member>
+    <member refid="classSR__UTILS__NS_1_1EnumReflector_1a9fad2e856589c21940e604807e9d3a23" kind="function"><name>FromStringInternal</name></member>
+    <member refid="classSR__UTILS__NS_1_1EnumReflector_1a6d6e83ed2e77840862a8f86d1e6b0e13" kind="function"><name>FromStringLowerCaseInternal</name></member>
+    <member refid="classSR__UTILS__NS_1_1EnumReflector_1a8a3f484b08ec1754c0067c18a557fb95" kind="function"><name>GetIndexInternal</name></member>
+    <member refid="classSR__UTILS__NS_1_1EnumReflector_1a81f40d3120f2d92231cf220aa1afbb05" kind="function"><name>AtInternal</name></member>
+    <member refid="classSR__UTILS__NS_1_1EnumReflector_1abfaf94d8e803cb5dc4cbe66f9189664b" kind="function"><name>GetNamesInternal</name></member>
+    <member refid="classSR__UTILS__NS_1_1EnumReflector_1a86ebc5a3f1ffcb9e02638c251b92e306" kind="function"><name>GetNameInternal</name></member>
+    <member refid="classSR__UTILS__NS_1_1EnumReflector_1a479c88e995e9e058f0ca4c75d6c83eba" kind="function"><name>GetIntegralTypeSizeInternal</name></member>
+    <member refid="classSR__UTILS__NS_1_1EnumReflector_1aacd6ba1c0b51b8eb7a0f0b26bd97a98e" kind="function"><name>GetHashNameInternal</name></member>
+    <member refid="classSR__UTILS__NS_1_1EnumReflector_1aaecd6760ca84f7eb7d2d6472ec457f1a" kind="function"><name>ReadEnumValueFromPointerInternal</name></member>
+    <member refid="classSR__UTILS__NS_1_1EnumReflector_1af39e515855b97bfb248c8ec09c546fa1" kind="function"><name>WriteEnumValueToPointerInternal</name></member>
+    <member refid="classSR__UTILS__NS_1_1EnumReflector_1ae08408adc274aeed4828e32a4cb393dd" kind="function"><name>GetEnumVariantInternal</name></member>
     <member refid="classSR__UTILS__NS_1_1EnumReflector_1a737a838c412ab630e73bf06db54bdeb4" kind="function"><name>ToStringAtom</name></member>
     <member refid="classSR__UTILS__NS_1_1EnumReflector_1af074fa474a5bf676d30aed7187b00a7f" kind="function"><name>ToStringAtom</name></member>
     <member refid="classSR__UTILS__NS_1_1EnumReflector_1a94bd974e0f84d87206ad1c7cd0bb1423" kind="function"><name>FromString</name></member>
@@ -3548,7 +3545,7 @@
   </compound>
   <compound refid="classSR__HTYPES__NS_1_1Thread_1_1Factory" kind="class"><name>SR_HTYPES_NS::Thread::Factory</name>
     <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1adbc148eaddd341d7ae4d07c9e9e33bfd" kind="friend"><name>Thread</name></member>
-    <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1af7975088905fa79e9a136cbe7a23b992" kind="variable"><name>GetThreadsCount</name></member>
+    <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a508ef3a0d2ab9780001f44462d597e69" kind="variable"><name>GetThreadsCount</name></member>
     <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1addd11e30e30a396f84ec6c536be258b9" kind="variable"><name>m_threads</name></member>
     <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1ad341e152e836310a9d802b30c02bd179" kind="variable"><name>m_main</name></member>
     <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a8266175a219b9402ddefa1368a36a599" kind="function"><name>Factory</name></member>
@@ -3632,7 +3629,7 @@
     <member refid="classSR__MATH__NS_1_1FColor_1ad84bb8e1543675f473971257b653aefb" kind="variable"><name>b</name></member>
     <member refid="classSR__MATH__NS_1_1FColor_1ac5096048b42774f3cc2e1740f8484033" kind="variable"><name>a</name></member>
     <member refid="classSR__MATH__NS_1_1FColor_1ae04e4e4dcf5b40d938fde5064ad6e0f1" kind="variable"><name>coord</name></member>
-    <member refid="classSR__MATH__NS_1_1FColor_1aa82037466c7c10e0d568114ddc2be7ec" kind="variable"><name></name></member>
+    <member refid="classSR__MATH__NS_1_1FColor_1aeb052aa1c0e9cff1c97c20ecf7cd95c1" kind="variable"><name></name></member>
     <member refid="classSR__MATH__NS_1_1FColor_1ab46897f38de7a6c15c5ca80a2444453d" kind="function"><name>FColor</name></member>
     <member refid="classSR__MATH__NS_1_1FColor_1a0959cda756be7ea55274b7ac2a2237bd" kind="function"><name>FColor</name></member>
     <member refid="classSR__MATH__NS_1_1FColor_1a90ea0acb67cfefccd7ea28439b1cbc2a" kind="function"><name>FColor</name></member>
@@ -3924,11 +3921,11 @@
   </compound>
   <compound refid="structfmt_1_1formatter_3_01SR__UTILS__NS_1_1Path_01_4" kind="struct"><name>fmt::formatter&lt; SR_UTILS_NS::Path &gt;</name>
     <member refid="structfmt_1_1formatter_3_01SR__UTILS__NS_1_1Path_01_4_1a2a2af46734a17f2bb7d8138cdb3bdd47" kind="function"><name>parse</name></member>
-    <member refid="structfmt_1_1formatter_3_01SR__UTILS__NS_1_1Path_01_4_1a5acff85d255710417f1282769e0c330f" kind="function"><name>format</name></member>
+    <member refid="structfmt_1_1formatter_3_01SR__UTILS__NS_1_1Path_01_4_1a5acb080584509aa73b6d8be8f51b7589" kind="function"><name>format</name></member>
   </compound>
   <compound refid="structfmt_1_1formatter_3_01SR__UTILS__NS_1_1StringAtom_01_4" kind="struct"><name>fmt::formatter&lt; SR_UTILS_NS::StringAtom &gt;</name>
     <member refid="structfmt_1_1formatter_3_01SR__UTILS__NS_1_1StringAtom_01_4_1aed2b57c6b4872f16166d7fd2c725dfa5" kind="function"><name>parse</name></member>
-    <member refid="structfmt_1_1formatter_3_01SR__UTILS__NS_1_1StringAtom_01_4_1a70d8f7e73dec57dc525d28274e364a87" kind="function"><name>format</name></member>
+    <member refid="structfmt_1_1formatter_3_01SR__UTILS__NS_1_1StringAtom_01_4_1a17f2871a4bd18ddf0cd787cb1edfcb9a" kind="function"><name>format</name></member>
   </compound>
   <compound refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1forward__iterator__tag" kind="class"><name>SR_TYPES_NS::detail::iterator_detail::forward_iterator_tag</name>
   </compound>
@@ -6024,7 +6021,7 @@
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1a7d5258aa8a7faf6abe00dd91d2ddadc1" kind="variable"><name>up</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1abdd47fe0ddfa04bbfba79d79d7e58a73" kind="variable"><name>dir</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1af9aabb2f9514edd39ba831eb7dbca724" kind="variable"><name>position</name></member>
-    <member refid="classSR__MATH__NS_1_1Matrix4x4_1ad9a6bc1cff47296dc5c5ebaa60cce21f" kind="variable"><name>v</name></member>
+    <member refid="classSR__MATH__NS_1_1Matrix4x4_1ad104b6d6ed8b10d1da2d6170af2e1702" kind="variable"><name>v</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1a7cd89858cfaf5a21d8fb3599cccb06e2" kind="variable"><name>m</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1adbda46793b38a1fa722f18b9a7e235b4" kind="variable"><name>m00</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1a4b62217f05c4b851537648e398886b34" kind="variable"><name>m01</name></member>
@@ -6042,7 +6039,7 @@
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1a4c9d0f599f0209f3f070029e11ede704" kind="variable"><name>m31</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1a7bcb02634712d8652e24f0cdb0669655" kind="variable"><name>m32</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1a0edd19b0ae4cedd98ac1e42720ef48c9" kind="variable"><name>m33</name></member>
-    <member refid="classSR__MATH__NS_1_1Matrix4x4_1a1ca3c2b351d87c8f7b80dcd175b5bb98" kind="variable"><name></name></member>
+    <member refid="classSR__MATH__NS_1_1Matrix4x4_1a131716ea4d149cd207b4b368ecd50d04" kind="variable"><name></name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1a7051a5db76dd8fb5c34b7913daef389f" kind="function"><name>Matrix4x4</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1a676ce457a691b04c37c4179013713f47" kind="function"><name>Matrix4x4</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1ad2540ec3d4241218b1ef20f0f46bca1d" kind="function"><name>Matrix4x4</name></member>
@@ -8311,7 +8308,7 @@
     <member refid="classSR__MATH__NS_1_1Quaternion_1a0ce6a0a2786bc1a0fe235b04eaadc9a1" kind="variable"><name>z</name></member>
     <member refid="classSR__MATH__NS_1_1Quaternion_1ad2c38e39ed9b5df736cdadb3a5e3697c" kind="variable"><name>w</name></member>
     <member refid="classSR__MATH__NS_1_1Quaternion_1ae01300185f7bd611c9af2f9e87ed1de7" kind="variable"><name>self</name></member>
-    <member refid="classSR__MATH__NS_1_1Quaternion_1aa2b0ff00044d2fad97acd02e396e9c81" kind="variable"><name></name></member>
+    <member refid="classSR__MATH__NS_1_1Quaternion_1ad70bdc1474a49695989b8f673ce6c3a4" kind="variable"><name></name></member>
     <member refid="classSR__MATH__NS_1_1Quaternion_1ab664debdc7816b834a65a4aee9ff8b3a" kind="function"><name>ToGLM</name></member>
     <member refid="classSR__MATH__NS_1_1Quaternion_1a4a696622ed6c48cd8d1ed490dbd65e9e" kind="function"><name>Vector</name></member>
     <member refid="classSR__MATH__NS_1_1Quaternion_1a55b975570e644056f46a43a382726134" kind="function"><name>ToMat4x4</name></member>
@@ -8506,7 +8503,7 @@
     <member refid="structSR__MATH__NS_1_1Rect_1a876d951a1851731af35458cc261b55ff" kind="variable"><name>wh</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1ab6fda76a25854c3dc125935f66485ef3" kind="variable"><name>position</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a45b0d34ad00b2121777a034bef7eeb8f" kind="variable"><name>size</name></member>
-    <member refid="structSR__MATH__NS_1_1Rect_1a5891241edcadfa096664af823017a11c" kind="variable"><name></name></member>
+    <member refid="structSR__MATH__NS_1_1Rect_1a406e1b6ebb516602a7c98cb5dc2f2ff8" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a89b07119c3fa0a19fa63b2179d1327c7" kind="function"><name>Rect</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1afc07cf71e559d2acbe5ab00acc7fe65d" kind="function"><name>Rect</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a6ef063c8e43e96d191d5b7b27e721ba6" kind="function"><name>Rect</name></member>
@@ -9469,7 +9466,7 @@
     <member refid="classSR__WORLD__NS_1_1Scene_1a77a71524af38f4e43270dbfc61d1a244" kind="function"><name>GetDataStorage</name></member>
     <member refid="classSR__WORLD__NS_1_1Scene_1a6555eae70f319b82ffef8cb7e51400c2" kind="function"><name>GetDataStorage</name></member>
     <member refid="classSR__WORLD__NS_1_1Scene_1a4b96699a74cdd9024381a51ca08b24c2" kind="function"><name>GetSceneUpdater</name></member>
-    <member refid="classSR__WORLD__NS_1_1Scene_1a9a6556db9473835d477b3f9b9f530b25" kind="function"><name>GetLogicBase</name></member>
+    <member refid="classSR__WORLD__NS_1_1Scene_1ad8d72cfd948b08f37d2b82fbb17fce9a" kind="function"><name>GetLogicBase</name></member>
     <member refid="classSR__WORLD__NS_1_1Scene_1a6aa9017791362d7645e43c6ba5015f6a" kind="function"><name>GetEntityController</name></member>
     <member refid="classSR__WORLD__NS_1_1Scene_1a64dbda3f8845f0b7e8a583d75a0e3237" kind="function"><name>IsPlayingMode</name></member>
     <member refid="classSR__WORLD__NS_1_1Scene_1a9c2abe1b4870ee4d74bf99b7b3bef437" kind="function"><name>IsPausedMode</name></member>
@@ -10351,7 +10348,7 @@
   <compound refid="structSR__MATH__NS_1_1Size" kind="struct"><name>SR_MATH_NS::Size</name>
     <member refid="structSR__MATH__NS_1_1Size_1aca993cc4f087238f52af9401d5a4c075" kind="variable"><name>value</name></member>
     <member refid="structSR__MATH__NS_1_1Size_1a22fb4d151dfcbad7ef2dd298ab816a6b" kind="variable"><name>v</name></member>
-    <member refid="structSR__MATH__NS_1_1Size_1ac95445a8f23817236b172fc13c289812" kind="variable"><name></name></member>
+    <member refid="structSR__MATH__NS_1_1Size_1abf31eb7a8bbd94abc63940a91f7a512f" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1Size_1acaedcbaca354b1bc1fefb28af1b48d99" kind="variable"><name>metric</name></member>
     <member refid="structSR__MATH__NS_1_1Size_1a3b286d50f061414353b23b287c0b64b8" kind="function"><name>Size</name></member>
     <member refid="structSR__MATH__NS_1_1Size_1aafc6c9612b22c422e319732be1bd87ba" kind="function"><name>Size</name></member>
@@ -10365,7 +10362,7 @@
     <member refid="structSR__MATH__NS_1_1Size2_1a9948760c262a06fbf0119030859c988d" kind="variable"><name>height</name></member>
     <member refid="structSR__MATH__NS_1_1Size2_1aff1b84fa79efc11cd510f87baa635d0f" kind="variable"><name>w</name></member>
     <member refid="structSR__MATH__NS_1_1Size2_1a03cfbc0b7cee36bb92b19542f26b47f4" kind="variable"><name>h</name></member>
-    <member refid="structSR__MATH__NS_1_1Size2_1a2b666f063c638a56d70cc033da61d220" kind="variable"><name></name></member>
+    <member refid="structSR__MATH__NS_1_1Size2_1af8ab9b37f3913c08db841e18b336b031" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1Size2_1ac69c88691e5a5f4f53b10ed9009d3ef2" kind="function"><name>Size2</name></member>
     <member refid="structSR__MATH__NS_1_1Size2_1a7d41c28a249ee1bf919a7eef9c87e894" kind="function"><name>HasPercent</name></member>
     <member refid="structSR__MATH__NS_1_1Size2_1affafdef3eacd39d59c2b3e83fba3e746" kind="function"><name>ToPixels</name></member>
@@ -10864,9 +10861,6 @@
   <compound refid="structSR__UTILS__NS_1_1SRHash_3_01long_01double_01_4" kind="struct"><name>SR_UTILS_NS::SRHash&lt; long double &gt;</name>
     <member refid="structSR__UTILS__NS_1_1SRHash_3_01long_01double_01_4_1a3cee91122358e6e6adde3d4e2d28acaa" kind="function"><name>operator()</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1SRHash_3_01nullptr__t_01_4" kind="struct"><name>SR_UTILS_NS::SRHash&lt; nullptr_t &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1SRHash_3_01nullptr__t_01_4_1ae4505ecfbf19940616f82bf4cb7109f0" kind="function"><name>operator()</name></member>
-  </compound>
   <compound refid="structSR__UTILS__NS_1_1SRHash_3_01SR__GRAPH__NS_1_1ShaderProperties_01_4" kind="struct"><name>SR_UTILS_NS::SRHash&lt; SR_GRAPH_NS::ShaderProperties &gt;</name>
     <member refid="structSR__UTILS__NS_1_1SRHash_3_01SR__GRAPH__NS_1_1ShaderProperties_01_4_1a2b832c94c7721cd0bdb13a759adad361" kind="function"><name>operator()</name></member>
   </compound>
@@ -10881,6 +10875,9 @@
   </compound>
   <compound refid="structSR__UTILS__NS_1_1SRHash_3_01std_1_1basic__string__view_3_01Elem_01_4_01_4" kind="struct"><name>SR_UTILS_NS::SRHash&lt; std::basic_string_view&lt; Elem &gt; &gt;</name>
     <member refid="structSR__UTILS__NS_1_1SRHash_3_01std_1_1basic__string__view_3_01Elem_01_4_01_4_1a0c824048321a3ea706ac7b1a58b8410e" kind="function"><name>DoHash</name></member>
+  </compound>
+  <compound refid="structSR__UTILS__NS_1_1SRHash_3_01std_1_1nullptr__t_01_4" kind="struct"><name>SR_UTILS_NS::SRHash&lt; std::nullptr_t &gt;</name>
+    <member refid="structSR__UTILS__NS_1_1SRHash_3_01std_1_1nullptr__t_01_4_1a36c0e84f558586c1e506b59a7ae68cf5" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classSR__UTILS__NS_1_1SRProperty" kind="class"><name>SR_UTILS_NS::SRProperty</name>
     <member refid="classSR__UTILS__NS_1_1SRProperty_1a8af17be07062a9b5fa523a2d15731e48" kind="variable"><name>m_name</name></member>
@@ -12196,6 +12193,7 @@
   <compound refid="classSR__HTYPES__NS_1_1Time" kind="class"><name>SR_HTYPES_NS::Time</name>
     <member refid="classSR__HTYPES__NS_1_1Time_1a5419367405f9892ddb8bf2c19520510a" kind="typedef"><name>ClockT</name></member>
     <member refid="classSR__HTYPES__NS_1_1Time_1a9374348e099c6022ecb8da2db4b08025" kind="variable"><name>m_timeInfo</name></member>
+    <member refid="classSR__HTYPES__NS_1_1Time_1a4b1647e160aa03034fb617f70ce9ee63" kind="function"><name>~Time</name></member>
     <member refid="classSR__HTYPES__NS_1_1Time_1abeea70113f671195c4b13837e28a90f7" kind="function"><name>Update</name></member>
     <member refid="classSR__HTYPES__NS_1_1Time_1a053fec44cb3331c09c4e4b8d69dc2e1b" kind="function"><name>Now</name></member>
     <member refid="classSR__HTYPES__NS_1_1Time_1a8c53b23fc76a074b4912282fbc5679a9" kind="function"><name>Count</name></member>
@@ -12205,6 +12203,10 @@
   <compound refid="structSR__HTYPES__NS_1_1Time_1_1TimeInfo" kind="struct"><name>SR_HTYPES_NS::Time::TimeInfo</name>
     <member refid="structSR__HTYPES__NS_1_1Time_1_1TimeInfo_1af3584d00e798cc274ec27a8bbb1bb217" kind="variable"><name>m_point</name></member>
     <member refid="structSR__HTYPES__NS_1_1Time_1_1TimeInfo_1a1e05a3af3799cb73bb701a18a28c48bd" kind="variable"><name>m_clock</name></member>
+    <member refid="structSR__HTYPES__NS_1_1Time_1_1TimeInfo_1af48770d92cc0251e7ba0b5e764e7273b" kind="function"><name>TimeInfo</name></member>
+    <member refid="structSR__HTYPES__NS_1_1Time_1_1TimeInfo_1ad6658a942b038576c147c396cfe02098" kind="function"><name>TimeInfo</name></member>
+    <member refid="structSR__HTYPES__NS_1_1Time_1_1TimeInfo_1aa34e0f5b280479abf3c154411d5fa588" kind="function"><name>TimeInfo</name></member>
+    <member refid="structSR__HTYPES__NS_1_1Time_1_1TimeInfo_1a68efdc25d88eb67e0ebbd7428b773b9d" kind="function"><name>operator=</name></member>
   </compound>
   <compound refid="classSR__HTYPES__NS_1_1Timer" kind="class"><name>SR_HTYPES_NS::Timer</name>
     <member refid="classSR__HTYPES__NS_1_1Timer_1af378154593db39a2e2bdfa294053b568" kind="variable"><name>m_updateFrequency</name></member>
@@ -13064,7 +13066,7 @@
     <member refid="structSR__MATH__NS_1_1Vector2_1a2bfe28e835809dde9ba5de30b1edc885" kind="variable"><name>top</name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1a2ced756008cc2560c48ecc238b18d0f9" kind="variable"><name>bottom</name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1a06e26740d9709f430b9be0efdff8707d" kind="variable"><name>coord</name></member>
-    <member refid="structSR__MATH__NS_1_1Vector2_1a7c6ed305e3780303d70d17525fdafd74" kind="variable"><name></name></member>
+    <member refid="structSR__MATH__NS_1_1Vector2_1a341d7ffe2d3d45039f239282d390a8a8" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1a5ce4f26dfc0d47494da2230666490755" kind="function"><name>Vector2</name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1ace2dd6f9df99300d725ad70a2fa30260" kind="function"><name>Vector2</name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1a5d8ffa6d4410610bdf195031f34fdd2b" kind="function"><name>Vector2</name></member>
@@ -13128,7 +13130,7 @@
     <member refid="structSR__MATH__NS_1_1Vector3_1a8514956322972f72b626db5f1f6a3839" kind="variable"><name>y</name></member>
     <member refid="structSR__MATH__NS_1_1Vector3_1a23257d25f7b83bf9bbfa7c2522746b26" kind="variable"><name>z</name></member>
     <member refid="structSR__MATH__NS_1_1Vector3_1a38cc2c1f6b96c858cde44a912541d43c" kind="variable"><name>coord</name></member>
-    <member refid="structSR__MATH__NS_1_1Vector3_1a772dfbdbf7e5d50a65071af7e7514e25" kind="variable"><name></name></member>
+    <member refid="structSR__MATH__NS_1_1Vector3_1aaf2f67b0fb0232bf8219f2c0031b3529" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1Vector3_1a05e74cab417518e2ede289594cad895b" kind="function"><name>Vector3</name></member>
     <member refid="structSR__MATH__NS_1_1Vector3_1a9448d16133b5b75cd70c86de7c30fe07" kind="function"><name>Vector3</name></member>
     <member refid="structSR__MATH__NS_1_1Vector3_1a0faf157a65a4d0f36e071b9a28cb463b" kind="function"><name>Vector3</name></member>
@@ -13267,7 +13269,7 @@
     <member refid="structSR__MATH__NS_1_1Vector4_1ac0a985978a004760cc821ec58ddb5fbc" kind="variable"><name>b</name></member>
     <member refid="structSR__MATH__NS_1_1Vector4_1a6e8e42f98e3cb7a416345b11e73dde68" kind="variable"><name>a</name></member>
     <member refid="structSR__MATH__NS_1_1Vector4_1aa936b71f8716a27728ba6dcd604646f0" kind="variable"><name>coord</name></member>
-    <member refid="structSR__MATH__NS_1_1Vector4_1accc3b3208dd831d74bbadb88c96f4a36" kind="variable"><name></name></member>
+    <member refid="structSR__MATH__NS_1_1Vector4_1a7986b72cc91ae165110d50c8c87fe656" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1Vector4_1a2089fccb699e16a6034146024413367b" kind="function"><name>Vector4</name></member>
     <member refid="structSR__MATH__NS_1_1Vector4_1a600cff8c25611028271161199ea7d892" kind="function"><name>Vector4</name></member>
     <member refid="structSR__MATH__NS_1_1Vector4_1ad3471d835f1104ad27fb26f56f25e412" kind="function"><name>Vector4</name></member>
@@ -13330,7 +13332,7 @@
     <member refid="structSR__MATH__NS_1_1Vector6_1a826081ee0cf772e931c2d692414f0418" kind="variable"><name>vec2d1</name></member>
     <member refid="structSR__MATH__NS_1_1Vector6_1a85c31fd88996c7e3376ede3d3c9967e1" kind="variable"><name>vec2d2</name></member>
     <member refid="structSR__MATH__NS_1_1Vector6_1a0dd89c54210647f8d7bd0e3977bb169a" kind="variable"><name>vec2d3</name></member>
-    <member refid="structSR__MATH__NS_1_1Vector6_1a7beb43b0544bdef9a337e769d71850a7" kind="variable"><name></name></member>
+    <member refid="structSR__MATH__NS_1_1Vector6_1a13a5f8db92a7462bc4c75c0fee7a287e" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1Vector6_1a6d936b56e9470e45c1350ec921083347" kind="function"><name>Vector6</name></member>
     <member refid="structSR__MATH__NS_1_1Vector6_1a3492f1bd3ff9ca0a53a7f19f0f2354b4" kind="function"><name>Vector6</name></member>
     <member refid="structSR__MATH__NS_1_1Vector6_1ae453798430d6cf17feeae4c5d76aea29" kind="function"><name>Vector6</name></member>
@@ -14036,8 +14038,6 @@
   <compound refid="namespaceSpaRcle_1_1Graphics_1_1Animations" kind="namespace"><name>SpaRcle::Graphics::Animations</name>
   </compound>
   <compound refid="namespaceSR__ANIMATIONS__NS" kind="namespace"><name>SR_ANIMATIONS_NS</name>
-    <member refid="AnimationCommon_8h_1aec3edbed8d1b1bca452cda524f219aa1" kind="function"><name>AiV3ToFV3</name></member>
-    <member refid="AnimationCommon_8h_1aa0bff1e62766d6edc299eb21860da2f9" kind="function"><name>AiQToQ</name></member>
     <member refid="AnimationCommon_8h_1a925ac2de98c4f0ecae22616f38f240e0" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="AnimationCommon_8h_1a3a36652c9c885a64d39aa828712b62a1" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="AnimationCommon_8h_1aa8949fa6480c662dc998c4b15f66b3e2" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
@@ -14901,9 +14901,9 @@
     <member refid="namespaceSR__UTILS__NS_1ae8bf089bf5ac52f47228a5dbc3a7f580" kind="function"><name>HexToByte</name></member>
     <member refid="namespaceSR__UTILS__NS_1ae95d8968291cf5b170faa5d1650dfee1" kind="function"><name>CharToInt</name></member>
     <member refid="namespaceSR__UTILS__NS_1af6ba209cc7c3b697990f5791461b1721" kind="function"><name>LexicalCast</name></member>
-    <member refid="namespaceSR__UTILS__NS_1a9718b3f27920e6beeda1eda97d45f0c1" kind="function"><name>Format</name></member>
-    <member refid="namespaceSR__UTILS__NS_1a51b1fffd2388d32d839b63f2713641ea" kind="function"><name>SPrintF</name></member>
-    <member refid="namespaceSR__UTILS__NS_1ad499d098052df0db524bee389cb2ebfb" kind="function"><name>Format</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a1f4d3744ebe5f4ff6d2504a1f5a15526" kind="function"><name>Format</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a099032240793afbd2a66b0ff8ee1591e" kind="function"><name>SPrintF</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a284f821fc1608703ed165377f586f269" kind="function"><name>Format</name></member>
     <member refid="namespaceSR__UTILS__NS_1ac193473466442675f9ee7ba480273334" kind="function"><name>s2ws</name></member>
     <member refid="namespaceSR__UTILS__NS_1ab348d700e36d15e5c17f8ed24fdde415" kind="function"><name>ws2s</name></member>
     <member refid="namespaceSR__UTILS__NS_1ac9effbbfa3029940ca824981a909a4a9" kind="function"><name>SR_ENUM_NS_T</name></member>
@@ -16617,27 +16617,27 @@
   <compound refid="Socket_8h" kind="file"><name>Socket.h</name>
   </compound>
   <compound refid="AndroidNativeAppGlue_8h" kind="file"><name>AndroidNativeAppGlue.h</name>
-    <member refid="AndroidNativeAppGlue_8h_1ade9ca5088d171ad20b4c237f1c2d6260" kind="enum"><name></name></member>
-    <member refid="AndroidNativeAppGlue_8h_1ade9ca5088d171ad20b4c237f1c2d6260a66661a2e57566ddd214710ca3494b0b9" kind="enumvalue"><name>LOOPER_ID_MAIN</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1ade9ca5088d171ad20b4c237f1c2d6260a5e50c78fcf09cc1b0ab723f71aa7004a" kind="enumvalue"><name>LOOPER_ID_INPUT</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1ade9ca5088d171ad20b4c237f1c2d6260a9310453935dbed3c38ca54243f8d1114" kind="enumvalue"><name>LOOPER_ID_USER</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0" kind="enum"><name></name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0a7819d1cf24caefafd27bc595faa90cff" kind="enumvalue"><name>APP_CMD_INPUT_CHANGED</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0a0d6fca4488718da1af972b5eb76b4e70" kind="enumvalue"><name>APP_CMD_INIT_WINDOW</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0ae4454163b5148d7feb2c1398e87f1bd5" kind="enumvalue"><name>APP_CMD_TERM_WINDOW</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0a448514d4220320ec7a7e7324e019f42c" kind="enumvalue"><name>APP_CMD_WINDOW_RESIZED</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0a1b0e01d7dd6e8ca91e8a51033ca3e59a" kind="enumvalue"><name>APP_CMD_WINDOW_REDRAW_NEEDED</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0a867d94e17fcae1afb7a1518b7716f3f4" kind="enumvalue"><name>APP_CMD_CONTENT_RECT_CHANGED</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0a185c97bb056e5f4b95ddadecbec20e7e" kind="enumvalue"><name>APP_CMD_GAINED_FOCUS</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0a0288cde5cba1809643528f87a08b7652" kind="enumvalue"><name>APP_CMD_LOST_FOCUS</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0a1e522859766d39850cbc3f1c015b632c" kind="enumvalue"><name>APP_CMD_CONFIG_CHANGED</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0a81f8fd5d321c73ce40ac190c097dfc07" kind="enumvalue"><name>APP_CMD_LOW_MEMORY</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0af3fe7e75c6650752c617380c1dae3e5a" kind="enumvalue"><name>APP_CMD_START</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0ae74474be4b21cdcde2ef833e6e8cd239" kind="enumvalue"><name>APP_CMD_RESUME</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0a90c4a6ced7ede689613ce2b1e0f95d66" kind="enumvalue"><name>APP_CMD_SAVE_STATE</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0a074614e1c74af041e42a982d85a22fee" kind="enumvalue"><name>APP_CMD_PAUSE</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0a85fd01d255415043aeb43f552ae1c970" kind="enumvalue"><name>APP_CMD_STOP</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0af816e28d8f833b5e9597b40ce725974f" kind="enumvalue"><name>APP_CMD_DESTROY</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a2f80701c36e79c0640d91c788feee0b3" kind="enum"><name></name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a2f80701c36e79c0640d91c788feee0b3a66661a2e57566ddd214710ca3494b0b9" kind="enumvalue"><name>LOOPER_ID_MAIN</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a2f80701c36e79c0640d91c788feee0b3a5e50c78fcf09cc1b0ab723f71aa7004a" kind="enumvalue"><name>LOOPER_ID_INPUT</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a2f80701c36e79c0640d91c788feee0b3a9310453935dbed3c38ca54243f8d1114" kind="enumvalue"><name>LOOPER_ID_USER</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493" kind="enum"><name></name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a7819d1cf24caefafd27bc595faa90cff" kind="enumvalue"><name>APP_CMD_INPUT_CHANGED</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a0d6fca4488718da1af972b5eb76b4e70" kind="enumvalue"><name>APP_CMD_INIT_WINDOW</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493ae4454163b5148d7feb2c1398e87f1bd5" kind="enumvalue"><name>APP_CMD_TERM_WINDOW</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a448514d4220320ec7a7e7324e019f42c" kind="enumvalue"><name>APP_CMD_WINDOW_RESIZED</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a1b0e01d7dd6e8ca91e8a51033ca3e59a" kind="enumvalue"><name>APP_CMD_WINDOW_REDRAW_NEEDED</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a867d94e17fcae1afb7a1518b7716f3f4" kind="enumvalue"><name>APP_CMD_CONTENT_RECT_CHANGED</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a185c97bb056e5f4b95ddadecbec20e7e" kind="enumvalue"><name>APP_CMD_GAINED_FOCUS</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a0288cde5cba1809643528f87a08b7652" kind="enumvalue"><name>APP_CMD_LOST_FOCUS</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a1e522859766d39850cbc3f1c015b632c" kind="enumvalue"><name>APP_CMD_CONFIG_CHANGED</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a81f8fd5d321c73ce40ac190c097dfc07" kind="enumvalue"><name>APP_CMD_LOW_MEMORY</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493af3fe7e75c6650752c617380c1dae3e5a" kind="enumvalue"><name>APP_CMD_START</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493ae74474be4b21cdcde2ef833e6e8cd239" kind="enumvalue"><name>APP_CMD_RESUME</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a90c4a6ced7ede689613ce2b1e0f95d66" kind="enumvalue"><name>APP_CMD_SAVE_STATE</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a074614e1c74af041e42a982d85a22fee" kind="enumvalue"><name>APP_CMD_PAUSE</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a85fd01d255415043aeb43f552ae1c970" kind="enumvalue"><name>APP_CMD_STOP</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493af816e28d8f833b5e9597b40ce725974f" kind="enumvalue"><name>APP_CMD_DESTROY</name></member>
     <member refid="AndroidNativeAppGlue_8h_1a05d3cc727656e360f4d2bb290ceec365" kind="function"><name>android_app_read_cmd</name></member>
     <member refid="AndroidNativeAppGlue_8h_1a19fcc2ceab1c8d7f0664f9436950bf18" kind="function"><name>android_app_pre_exec_cmd</name></member>
     <member refid="AndroidNativeAppGlue_8h_1af0b682de686fba098479227bc5a2f044" kind="function"><name>android_app_post_exec_cmd</name></member>

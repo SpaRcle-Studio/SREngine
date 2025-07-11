@@ -26,12 +26,15 @@ namespace SR_HTYPES_NS {
         using ClockT = std::chrono::high_resolution_clock;
 
     public:
+        ~Time() override = default;
+
         void Update() {
             SR_TRACY_ZONE;
-            m_timeInfo = TimeInfo {
+
+            m_timeInfo = TimeInfo(
                 ClockT::now(),
                 static_cast<uint64_t>(clock())
-            };
+            );
         }
 
         SR_NODISCARD TimePointType Now() const noexcept { return m_timeInfo.load().m_point; }
@@ -46,11 +49,21 @@ namespace SR_HTYPES_NS {
 
     private:
         struct TimeInfo {
-            TimePointType m_point;
+            TimeInfo() = default;
+
+            TimeInfo(TimePointType point, uint64_t clock)
+                : m_point(point)
+                , m_clock(clock)
+            { }
+
+            TimeInfo(const TimeInfo& other) = default;
+            TimeInfo& operator=(const TimeInfo& other) = default;
+
+            TimePointType m_point = TimePointType();
             uint64_t m_clock = 0;
         };
 
-        std::atomic<TimeInfo> m_timeInfo;
+        std::atomic<TimeInfo> m_timeInfo = TimeInfo();
     };
 }
 

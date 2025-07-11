@@ -39,47 +39,6 @@
     <innerclass refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey" prot="public">SR_ANIMATIONS_NS::UnionAnimationKey</innerclass>
     <innerclass refid="structSR__ANIMATIONS__NS_1_1UpdateContext" prot="public">SR_ANIMATIONS_NS::UpdateContext</innerclass>
     <sectiondef kind="func">
-      <memberdef kind="function" id="AnimationCommon_8h_1aec3edbed8d1b1bca452cda524f219aa1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MATH_NS::FVector3</type>
-        <definition>static SR_MATH_NS::FVector3 SR_ANIMATIONS_NS::AiV3ToFV3</definition>
-        <argsstring>(const aiVector3D &amp;v, float_t multiplier)</argsstring>
-        <name>AiV3ToFV3</name>
-        <qualifiedname>SR_ANIMATIONS_NS::AiV3ToFV3</qualifiedname>
-        <param>
-          <type>const aiVector3D &amp;</type>
-          <declname>v</declname>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>multiplier</declname>
-        </param>
-        <briefdescription>
-<para>Это тип свойства которое изменяет AnimationKey. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="41" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="41" bodyend="43"/>
-      </memberdef>
-      <memberdef kind="function" id="AnimationCommon_8h_1aa0bff1e62766d6edc299eb21860da2f9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref></type>
-        <definition>static SR_MATH_NS::Quaternion SR_ANIMATIONS_NS::AiQToQ</definition>
-        <argsstring>(const aiQuaternion &amp;q)</argsstring>
-        <name>AiQToQ</name>
-        <qualifiedname>SR_ANIMATIONS_NS::AiQToQ</qualifiedname>
-        <param>
-          <type>const aiQuaternion &amp;</type>
-          <declname>q</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="45" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="45" bodyend="47"/>
-      </memberdef>
       <memberdef kind="function" id="AnimationCommon_8h_1a925ac2de98c4f0ecae22616f38f240e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_ANIMATIONS_NS::SR_ENUM_NS_CLASS_T</definition>
@@ -108,12 +67,13 @@
           <type>StateMachine</type>
         </param>
         <briefdescription>
+<para>Это тип свойства которое изменяет AnimationKey. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="49" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" declline="49" declcolumn="5"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="53" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" declline="53" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="AnimationCommon_8h_1a3a36652c9c885a64d39aa828712b62a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -142,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="53" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" declline="53" declcolumn="5"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="57" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" declline="57" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="AnimationCommon_8h_1aa8949fa6480c662dc998c4b15f66b3e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -174,7 +134,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="70" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" declline="70" declcolumn="5"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="74" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" declline="74" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="AnimationData_8h_1a1618de3e5d14ce505a6c016356f2ac67" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structSR__ANIMATIONS__NS_1_1AnimationGameObjectData" kindref="compound">AnimationGameObjectData</ref></type>

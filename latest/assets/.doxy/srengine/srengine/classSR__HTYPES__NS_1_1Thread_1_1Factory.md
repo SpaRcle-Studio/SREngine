@@ -36,7 +36,7 @@ Inherits the following classes: Singleton< Factory >
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD SR\_DEPRECATED\_EX("Not safe, use Create([**Ptr**](classSR__HTYPES__NS_1_1Thread.md)& pThread, Functor&& fn, Args&&... args)") Ptr Create(std SR\_NODISCARD SR\_DEPRECATED\_EX("Not safe, use Create([**Ptr**](classSR__HTYPES__NS_1_1Thread.md)& pThread, Functor&& fn, Args&&... args)") Ptr Create(const std SR\_NODISCARD uint32\_t | [**GetThreadsCount**](#variable-getthreadscount)  <br> |
+|  SR\_DEPRECATED\_EX("Not safe, use Create([**Ptr**](classSR__HTYPES__NS_1_1Thread.md)& pThread, Functor&& fn, Args&&... args)") SR\_NODISCARD [**Ptr**](classSR__HTYPES__NS_1_1Thread.md) Create(std SR\_DEPRECATED\_EX("Not safe, use Create([**Ptr**](classSR__HTYPES__NS_1_1Thread.md)& pThread, Functor&& fn, Args&&... args)") SR\_NODISCARD [**Ptr**](classSR__HTYPES__NS_1_1Thread.md) Create(const std SR\_NODISCARD uint32\_t | [**GetThreadsCount**](#variable-getthreadscount)  <br> |
 
 
 
@@ -106,7 +106,7 @@ Inherits the following classes: Singleton< Factory >
 ### variable GetThreadsCount 
 
 ```C++
-SR_NODISCARD SR_DEPRECATED_EX("Not safe, use Create(Ptr& pThread, Functor&& fn, Args&&... args)") Ptr Create(std SR_NODISCARD SR_DEPRECATED_EX("Not safe, use Create(Ptr& pThread, Functor&& fn, Args&&... args)") Ptr Create(const std SR_NODISCARD uint32_t SR_HTYPES_NS::Thread::Factory::GetThreadsCount();
+SR_DEPRECATED_EX("Not safe, use Create(Ptr& pThread, Functor&& fn, Args&&... args)") SR_NODISCARD Ptr Create(std SR_DEPRECATED_EX("Not safe, use Create(Ptr& pThread, Functor&& fn, Args&&... args)") SR_NODISCARD Ptr Create(const std SR_NODISCARD uint32_t SR_HTYPES_NS::Thread::Factory::GetThreadsCount();
 ```
 
 

@@ -19,15 +19,8 @@
 
 namespace SR_MATH_NS {
     struct SR_RENDERER_DLL_API AABB {
-        union {
-            FVector3 min = FVector3(0.f, 0.f, 0.f);
-            FVector3 position; 
-        };
-
-        union {
-            FVector3 max = FVector3(0.f, 0.f, 0.f);
-            FVector3 size; 
-        };
+        FVector3 min = FVector3(0.f, 0.f, 0.f);
+        FVector3 max = FVector3(0.f, 0.f, 0.f);
 
         AABB();
         AABB(const FVector3& min, const FVector3& max);
