@@ -28,6 +28,7 @@ void ShutdownApplication() {
 
 int SREngineEntryPoint(int argc, char** argv) {
     SR_UTILS_NS::StartupEngineProfiler();
+    SR_PLATFORM_NS::InitializePlatform();
 
     Codegen::RegisterModule_Application();
 

@@ -48,7 +48,6 @@ namespace SR_CORE_NS {
     }
 
     bool Application::PreInit() {
-        SR_PLATFORM_NS::InitializePlatform();
         SR_UTILS_NS::Localization::SetLocale();
         SR_UTILS_NS::Random::Initialize();
 
