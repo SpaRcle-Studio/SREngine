@@ -4,3 +4,14 @@ sra format
 2-v:type
 3-s:TestManagerAsset
 2-o:ptr
+3-a:tests
+4-k:i
+5-o:d
+6-v:type
+7-s:SRSLTest
+6-o:ptr
+4-k:i
+5-o:d
+6-v:type
+7-s:SharedPtrTest
+6-o:ptr

@@ -30,9 +30,25 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
+        auto&& windowsWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x;
+
         auto&& path = m_pAsset->GetResourcePath();
         SR_GRAPH_GUI_NS::Immediate::Text("Asset: %s", path.c_str());
         SR_GRAPH_GUI_NS::Immediate::Text("Type: %s", m_pAsset->GetMeta()->GetFactoryName().c_str());
+
+        if (SR_GRAPH_GUI_NS::Immediate::Button("Save", SR_MATH_NS::FVector2(windowsWidth / 2.f, 0.f))) {
+            if (!m_pAsset->SaveAsset()) {
+                SR_ERROR("AssetInspector::Draw() : failed to save asset at path: {}", path.ToString());
+            }
+        }
+
+        SR_GRAPH_GUI_NS::Immediate::SameLine();
+
+        if (SR_GRAPH_GUI_NS::Immediate::Button("Discard", SR_MATH_NS::FVector2(windowsWidth / 2.f, 0.f))) {
+            if (!m_pAsset->Reload()) {
+                SR_ERROR("AssetInspector::Draw() : failed to reload asset at path: {}", path.ToString());
+            }
+        }
 
         SR_GRAPH_GUI_NS::Immediate::Separator();
 

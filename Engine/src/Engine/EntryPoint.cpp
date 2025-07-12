@@ -8,7 +8,6 @@
 #include <Utils/Common/CLIManager.h>
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/Tests/TestManager.h>
-#include <Utils/Tests/SharedPtrAutotests.h>
 #include <Utils/Profile/TracyContext.h>
 
 #include <Codegen/SpaRcleModuleApplicationCore.generated.hpp>
@@ -31,12 +30,6 @@ int SREngineEntryPoint(int argc, char** argv) {
     SR_UTILS_NS::StartupEngineProfiler();
 
     Codegen::RegisterModule_Application();
-
-    if (!SR_UTILS_NS::RunTestSharedPtr()) {
-        SR_PLATFORM_NS::WriteConsoleError("Application::PreInit() : shared pointer autotests failed!\n");
-        ShutdownApplication();
-        return 10;
-    }
 
     SR_UTILS_NS::CLIManager::Instance().Init(argc, argv);
 
