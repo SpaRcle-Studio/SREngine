@@ -4,6 +4,7 @@
 
 #include <Utils/macros.h>
 
+#include "../src/Engine/GUI/AssetInspector.cpp"
 #include "../src/Engine/GUI/SoundDebug.cpp"
 #include "../src/Engine/GUI/ComponentDrawer.cpp"
 #include "../src/Engine/GUI/EditorGUI.cpp"

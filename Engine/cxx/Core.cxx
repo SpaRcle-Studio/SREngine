@@ -35,6 +35,5 @@
 #include "../src/Engine/EvoScriptAPI.cpp"
 #include "../src/Engine/EngineResources.cpp"
 #include "../src/Engine/EngineMigrators.cpp"
-#include "../src/Engine/CLIManager.cpp"
 
 #include "../src/Engine/Utils/GraphicsResourceReloader.cpp"

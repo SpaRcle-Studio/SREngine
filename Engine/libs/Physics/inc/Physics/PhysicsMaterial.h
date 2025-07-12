@@ -50,8 +50,6 @@ namespace SR_PTYPES_NS {
         static bool Save(const SR_UTILS_NS::Path& path, const PhysicsMaterialData& materialData);
 
     public:
-        SR_NODISCARD Super* CopyResource(Super* destination) const override;
-
         SR_NODISCARD float_t GetDynamicFriction() const { return m_materialData.dynamicFriction; }
         SR_NODISCARD float_t GetStaticFriction() const { return m_materialData.staticFriction; }
         SR_NODISCARD float_t GetBounciness() const { return m_materialData.bounciness; }

@@ -15,6 +15,7 @@
 #include <Engine/GUI/PhysicsMaterialEditor.h>
 #include <Engine/GUI/EngineStatistics.h>
 #include <Engine/GUI/Hierarchy.h>
+#include <Engine/GUI/AssetInspector.h>
 #include <Engine/GUI/SceneViewer.h>
 #include <Engine/GUI/RenderTechniqueEditor.h>
 #include <Engine/GUI/FileBrowser.h>
@@ -68,6 +69,7 @@ namespace SR_CORE_GUI_NS {
 
         m_engine = pEngine;
 
+        AddWidget(new AssetInspector());
         AddWidget(new FileBrowser());
         AddWidget(new Hierarchy());
         AddWidget(new VisualScriptEditor());

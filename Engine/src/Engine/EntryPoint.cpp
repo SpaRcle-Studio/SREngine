@@ -3,19 +3,29 @@
 //
 
 #include <Engine/EntryPoint.h>
-
 #include <Engine/Launcher.h>
-#include <Engine/CLIManager.h>
 
-#include <Utils/Common/CmdOptions.h>
-#include <Utils/Tests/SharedPtrAutotests.h>
+#include <Utils/Common/CLIManager.h>
+#include <Utils/Resources/ResourceManager.h>
 #include <Utils/Tests/TestManager.h>
-
-#include <Engine/Tests/AtlasBuilderTest.h>
-#include <Engine/Tests/HTMLTest.h>
-#include <Engine/Tests/SRSLTest.h>
+#include <Utils/Tests/SharedPtrAutotests.h>
+#include <Utils/Profile/TracyContext.h>
 
 #include <Codegen/SpaRcleModuleApplicationCore.generated.hpp>
+
+void ShutdownApplication() {
+    SR_UTILS_NS::GetSingletonManager()->DestroyAll();
+    if (SR_UTILS_NS::ResourceManager::Instance().IsInitialized()) {
+        SR_UTILS_NS::ResourceManager::Instance().DeInitialize();
+    }
+    if (SR_UTILS_NS::Debug::Instance().IsInitialized()) {
+        SR_UTILS_NS::Debug::Instance().DeInitialize();
+    }
+    SR_HTYPES_NS::Thread::Factory::Instance().PrintThreads();
+    SR_HTYPES_NS::Thread::Factory::Instance().DeInitialize();
+    SR_HTYPES_NS::SharedPtrDynamicDataCounter::CheckMemoryLeaks();
+    SR_UTILS_NS::ShutdownEngineProfiler();
+}
 
 int SREngineEntryPoint(int argc, char** argv) {
     SR_UTILS_NS::StartupEngineProfiler();
@@ -24,68 +34,58 @@ int SREngineEntryPoint(int argc, char** argv) {
 
     if (!SR_UTILS_NS::RunTestSharedPtr()) {
         SR_PLATFORM_NS::WriteConsoleError("Application::PreInit() : shared pointer autotests failed!\n");
+        ShutdownApplication();
         return 10;
     }
 
-    SR_CORE_NS::CLIManager::Instance().Init(argc, argv);
+    SR_UTILS_NS::CLIManager::Instance().Init(argc, argv);
 
-    if (SR_CORE_NS::CLIManager::Instance().IsFlagPresent(SR_CORE_NS::CLIFlags::UnitTests)) {
-        /*SR_CORE_NS::TestManager::Instance().AddTest([]() {
-            return SR_CORE_NS::Tests::SRSLTest::Run();
-        }, "SRSL Test");
-
-        SR_CORE_NS::TestManager::Instance().AddTest([]() {
-            return SR_CORE_NS::Tests::AtlasBuilderTest::Run();
-        }, "Atlas Builder Test");
-
-        SR_CORE_NS::TestManager::Instance().AddTest([]() {
-            return SR_CORE_NS::Tests::HTMLTest::Run();
-        }, "HTML Test");
-
-        SR_CORE_NS::TestManager::Instance().AddTest([]() {
-            return SR_CORE_NS::Tests::CSSTest::Run();
-        }, "CSS Test");
-
-        SR_CORE_NS::TestManager::Instance().RunAll();*/
-        SR_UTILS_NS::ShutdownEngineProfiler();
-        return 0;
+    if (SR_UTILS_NS::CLIManager::Instance().IsFlagPresent(SR_UTILS_NS::CLIFlags::UnitTests)) {
+        auto&& result = SR_UTILS_NS::TestManager::Instance().RunAll();
+        if (!SR_UTILS_NS::CLIManager::Instance().IsFlagPresent(SR_UTILS_NS::CLIFlags::ContinueAfterTests) || result != SR_UTILS_NS::TestExecutionResult::Success) {
+            ShutdownApplication();
+            return static_cast<int>(result);
+        }
     }
 
     int32_t code = 0;
 
-    {
-        SR_HTYPES_NS::SharedPtr pLauncher = new SR_CORE_NS::Launcher();
+    SR_HTYPES_NS::SharedPtr pLauncher = new SR_CORE_NS::Launcher();
 
-        auto&& launcherInitStatus = pLauncher->InitLauncher();
+    auto&& launcherInitStatus = pLauncher->InitLauncher();
 
-        if (launcherInitStatus == SR_CORE_NS::LauncherInitStatus::Error) {
-            SR_PLATFORM_NS::WriteConsoleError("Failed to initialize launcher!\n");
+    if (!SR_UTILS_NS::ResourceManager::Instance().IsInitialized()) {
+        if (!SR_UTILS_NS::ResourceManager::Instance().Initialize(pLauncher->GetResourcesPath())) {
+            SR_PLATFORM_NS::WriteConsoleError("Failed to initialize resources manager!");
             code = 1;
         }
-
-        if (code == 0 && !pLauncher->EarlyInit()) {
-            SR_ERROR("Failed to early initialize application!");
-            code = 3;
-        }
-
-        if (code == 0 && !pLauncher->Init()) {
-            SR_ERROR("Failed to initialize application!");
-            code = 3;
-        }
-
-        if (code == 0 && !pLauncher->Execute()) {
-            SR_ERROR("Failed to execute application!");
-            code = 4;
-        }
-
-        pLauncher.AutoFree([](auto&& pData) {
-            delete pData;
-        });
     }
 
-    SR_HTYPES_NS::SharedPtrDynamicDataCounter::CheckMemoryLeaks();
+    if (launcherInitStatus == SR_CORE_NS::LauncherInitStatus::Error) {
+        SR_PLATFORM_NS::WriteConsoleError("Failed to initialize launcher!\n");
+        code = 2;
+    }
 
-    SR_UTILS_NS::ShutdownEngineProfiler();
+    if (code == 0 && !pLauncher->EarlyInit()) {
+        SR_ERROR("Failed to early initialize application!");
+        code = 3;
+    }
+
+    if (code == 0 && !pLauncher->Init()) {
+        SR_ERROR("Failed to initialize application!");
+        code = 4;
+    }
+
+    if (code == 0 && !pLauncher->Execute()) {
+        SR_ERROR("Failed to execute application!");
+        code = 5;
+    }
+
+    pLauncher.AutoFree([](auto&& pData) {
+        delete pData;
+    });
+
+    ShutdownApplication();
 
     return code;
 }

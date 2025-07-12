@@ -3,6 +3,7 @@
 //
 
 #include <Engine/GUI/FileBrowser.h>
+#include <Engine/GUI/AssetInspector.h>
 
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Common/VectorUtils.h>
@@ -149,14 +150,7 @@ namespace SR_CORE_NS::GUI {
 
         if (SR_GRAPH_GUI_NS::Immediate::Selectable("Open")) {
             SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
-
-            if (m_callbackFunction) {
-                m_callbackFunction(path);
-                m_callbackFunction = CallbackFn();
-            }
-            else {
-                SR_UTILS_NS::Platform::OpenWithAssociatedApp(path);
-            }
+            OpenFileWithApp(path);
         }
         if (SR_GRAPH_GUI_NS::Immediate::Selectable("Extract animations")) {
             SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
@@ -252,15 +246,7 @@ namespace SR_CORE_NS::GUI {
 
                     if (SR_GRAPH_GUI_NS::Immediate::ImageButtonDouble(headerid, descriptor, SR_MATH_NS::FVector2(50), 0)) {
                         SR_UTILS_NS::Path path = m_selectedDir.Concat(element.filename);
-                        //SR_UTILS_NS::Platform::OpenWithAssociatedApp(m_selectedDir.Concat(element.filename));
-
-                        if (m_callbackFunction) {
-                            m_callbackFunction(path);
-                            m_callbackFunction = CallbackFn();
-                        }
-                        else {
-                            SR_UTILS_NS::Platform::OpenWithAssociatedApp(path);
-                        }
+                        OpenFileWithApp(path);
                     }
 
                     FileContextMenu(element.filename);
@@ -345,5 +331,21 @@ namespace SR_CORE_NS::GUI {
         ItemViewPanel(); //Отрисовка панели файлового древа
 
         SR_GRAPH_GUI_NS::Immediate::EndGroup();
+    }
+
+    void FileBrowser::OpenFileWithApp(const SR_UTILS_NS::Path& path) {
+        if (m_callbackFunction) {
+            m_callbackFunction(path);
+            m_callbackFunction = CallbackFn();
+        }
+        else {
+            if (path.GetExtensionView() == SR_UTILS_NS::Asset::EXTENSION_NAME) {
+                if (auto&& pAssetInspector = GetManager()->GetWidget<AssetInspector>()) {
+                    pAssetInspector->Inspect(path);
+                }
+                return;
+            }
+            SR_UTILS_NS::Platform::OpenWithAssociatedApp(path);
+        }
     }
 }

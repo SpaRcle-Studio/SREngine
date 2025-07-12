@@ -19,6 +19,7 @@
 #include <Utils/SRLM/LogicalMachine.h>
 #include <Utils/TaskManager/ThreadWorker.h>
 #include <Utils/Common/StoreUtils.h>
+#include <Utils/Common/CLIManager.h>
 
 #include <Graphics/GUI/NodeManager.h>
 #include <Graphics/Types/Shader.h>
@@ -31,11 +32,8 @@
 #include <Audio/Sound.h>
 #include <Audio/SoundManager.h>
 #include <Audio/RawSound.h>
-#include <Engine/CLIManager.h>
 
 #include <Scripting/Base/Behaviour.h>
-//#include <Scripting/Impl/EvoScriptResourceReloader.h>
-//#include <Scripting/Impl/EvoBehaviour.h>
 
 #include <Physics/PhysicsMaterial.h>
 
@@ -57,7 +55,7 @@ namespace SR_CORE_NS {
         m_applicationPath = SR_PLATFORM_NS::GetApplicationPath().GetFolder();
 
         auto&& defaultLogDir = SR_UTILS_NS::Path(m_applicationPath);
-        SR_UTILS_NS::Path logDir = CLIManager::Instance().GetOptionValue(CLIOptions::LogDir).value_or(defaultLogDir);
+        SR_UTILS_NS::Path logDir = SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::LogDir).value_or(defaultLogDir);
 
         return InitLogger(logDir);
     }
@@ -89,18 +87,11 @@ namespace SR_CORE_NS {
             SR_UTILS_NS::DisableStacktrace();
         }
 
-        SR_UTILS_NS::ResourceManager::Instance().Init(m_resourcesPath);
-
-        SR_UTILS_NS::StoreUtils::Storage::Instance().Load();
-
         if (SR_UTILS_NS::Features::Instance().Enabled("ResourceUsePointStackTraceProfiling", false)) {
             SR_UTILS_NS::ResourceManager::Instance().EnableStackTraceProfiling();
         }
 
-        if (!SR_UTILS_NS::ResourceManager::Instance().Run()) {
-            SR_ERROR("Application::EarlyInit() : failed to initialize resources manager!");
-            return false;
-        }
+        SR_UTILS_NS::StoreUtils::Storage::Instance().Load();
 
         return true;
     }
@@ -129,34 +120,9 @@ namespace SR_CORE_NS {
         }
     }*/
 
-    bool Application::FindResourcesFolder() {
-        static const std::vector<std::string> potentialPaths = {
-            "",
-            "..",
-            "../..",
-            "../../..",
-            "../../../.."
-        };
-
-        for (auto&& relativePath : potentialPaths) {
-            auto&& fullPath = m_applicationPath.Concat(relativePath);
-
-    #ifdef SR_LINUX
-            if (fullPath.View().size() == 1) {
-                return false;
-            }
-    #endif
-
-            fullPath = fullPath.Concat("Resources");
-            if (fullPath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
-                if (fullPath.Concat("Engine").Exists(SR_UTILS_NS::Path::Type::Folder)) { /// Check is folder correct
-                    m_resourcesPath = fullPath;
-                    return true;
-                }
-            }
-        }
-
-        return false;
+    bool Application::InitializeResourcesFolder() {
+        m_resourcesPath = SR_PLATFORM_NS::GetApplicationResourcesPath();
+        return m_resourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder);
     }
 
     bool Application::InitLogger(const SR_UTILS_NS::Path& logDir) {
@@ -164,13 +130,7 @@ namespace SR_CORE_NS {
             return true;
         }
 
-        auto&& logPath = logDir.Concat("srengine.log");
-        if (!logPath.GetFolder().CreateIfNotExists()) {
-            SR_PLATFORM_NS::WriteConsoleError("Failed to create log file!\n");
-            return false;
-        }
-
-        SR_UTILS_NS::Debug::Instance().Init(logPath, true, SR_UTILS_NS::Debug::Theme::Dark);
+        SR_UTILS_NS::Debug::Instance().Initialize(logDir.Concat("srengine.log"), true, SR_UTILS_NS::Debug::Theme::Dark);
         SR_UTILS_NS::Debug::Instance().SetLevel(SR_UTILS_NS::Debug::Level::Low);
         return true;
     }
@@ -258,62 +218,11 @@ namespace SR_CORE_NS {
         SR_AUDIO_NS::SoundManager::DestroySingleton();
         SR_PHYSICS_NS::PhysicsLibrary::DestroySingleton();
         SR_GRAPH_NS::Memory::CameraManager::DestroySingleton();
-        //SR_SCRIPTING_NS::GlobalEvoCompiler::DestroySingleton();
-        //SR_SCRIPTING_NS::EvoScriptManager::DestroySingleton();
         SR_GRAPH_GUI_NS::NodeManager::DestroySingleton();
         SR_UTILS_NS::TaskManager::DestroySingleton();
         SR_GRAPH_NS::Memory::MeshManager::DestroySingleton();
 
         SR_UTILS_NS::Debug::Instance().System("Application::Close() : all systems were successfully closed!");
-
-        SR_UTILS_NS::ResourceManager::DestroySingleton();
-
-        SR_HTYPES_NS::Thread::Factory::Instance().PrintThreads();
-
-        SR_UTILS_NS::GetSingletonManager()->DestroyAll();
-    }
-
-    bool Application::InitializeResourcesFolder() {
-    #ifdef SR_ENGINE_FLATPAK_BUILD
-        if (FindResourcesFolder()) {
-            return true;
-        }
-
-        if (SR_UTILS_NS::Path folder = SR_UTILS_NS::GetCmdOption(argv, argv + argc, "-resources"); !folder.empty()) {
-            m_resourcesPath = folder;
-
-            if (folder.Exists()) {
-                return true;
-            }
-
-            SR_UTILS_NS::Path defaultFlatpakPath = "/app/share/SREngine/Resources";
-            if (defaultFlatpakPath.Exists() && defaultFlatpakPath.Copy(folder)) {
-                return true;
-            }
-        }
-
-        SR_ERROR("Application::InitializeResourcesFolder() : necessary resources were not found. Please try reinstalling the application.");
-        return false;
-    #else
-        if (auto&& folderArg = CLIManager::Instance().GetOptionValue(CLIOptions::Resources); folderArg.has_value()) {
-            auto&& folder = SR_UTILS_NS::Path(folderArg.value());
-
-            if (!folder.Exists(SR_UTILS_NS::Path::Type::Folder)) {
-                SR_INFO("Application::InitializeResourcesFolder() : specified resources folder does not exist!");
-            }
-            else {
-                m_resourcesPath = folder;
-                return true;
-            }
-        }
-
-        if (!FindResourcesFolder()) {
-            SR_LOG("Application::InitializeResourcesFolder() : failed to find resources folder!");
-            return false;
-        }
-
-        return true;
-    #endif
     }
 
     void Application::SwitchResourcesFolder(const SR_UTILS_NS::Path& path) {

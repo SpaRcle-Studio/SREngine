@@ -21,11 +21,6 @@ namespace SR_PTYPES_NS {
         m_implementations.clear();
     }
 
-    SR_UTILS_NS::IResource* PhysicsMaterial::CopyResource(Super *destination) const {
-        SRHalt("Materials are not copyable!");
-        return nullptr;
-    }
-
     PhysicsMaterial::Ptr PhysicsMaterial::Load(const SR_UTILS_NS::Path& rawPath) {
         return SR_UTILS_NS::ResourceManager::Instance().GetOrLoadResource<PhysicsMaterial>(rawPath);
     }

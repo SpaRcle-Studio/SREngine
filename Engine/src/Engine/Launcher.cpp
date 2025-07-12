@@ -15,7 +15,7 @@ namespace SR_CORE_NS {
         }
 
     #ifdef SR_ENGINE_FLATPAK_BUILD
-        if (InitializeResourcesFolder(argc, argv)) {
+        if (InitializeResourcesFolder()) {
             return LauncherInitStatus::Success;
         }
 

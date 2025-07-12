@@ -44,6 +44,7 @@ namespace SR_CORE_NS::GUI {
         void ItemViewPanel();
         void FileCatalogPanel(const float_t& leftWidth);
         void CacheElements(const SR_UTILS_NS::Path& root); // Загружает элементы CurrentDirectoryPanel в кэш
+        void OpenFileWithApp(const SR_UTILS_NS::Path& path);
 
     private:
         void DrawFoldersTree(const FBFolder& parentFolder); // Отрисовка созданного дерева
