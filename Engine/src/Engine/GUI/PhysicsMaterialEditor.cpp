@@ -8,7 +8,7 @@
 #include <Utils/Resources/IResourceReloader.h>
 
 namespace SR_CORE_GUI_NS {
-    PhysicsMaterialEditor::PhysicsMaterialEditor()
+    /*PhysicsMaterialEditor::PhysicsMaterialEditor()
         : Super("Physics Material Editor") {
         InitializeButtonActions();
     }
@@ -125,5 +125,5 @@ namespace SR_CORE_GUI_NS {
         ReadData();
         Super::Open();
         return true;
-    }
+    }*/
 }

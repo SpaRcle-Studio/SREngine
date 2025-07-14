@@ -40,7 +40,7 @@ namespace SR_CORE_NS::GUI {
     private:
         void FileContextMenu(const std::string &element);
         void CurrentDirectoryContextMenu();
-        void CurrentDirectoryPanel(const float_t height);
+        void CurrentDirectoryPanel();
         void ItemViewPanel();
         void FileCatalogPanel(const float_t& leftWidth);
         void CacheElements(const SR_UTILS_NS::Path& root); // Загружает элементы CurrentDirectoryPanel в кэш
@@ -51,12 +51,14 @@ namespace SR_CORE_NS::GUI {
         void LoadFoldersTree(FBFolder& parentFolder); // Создание дерева файлов и его кеширования
 
     private:
+        float_t m_itemsScale = 1.0f;
+
         SR_UTILS_NS::Path m_defaultRoot;
         SR_UTILS_NS::Path m_selectedDir;
 
         CallbackFn m_callbackFunction;
 
-        float_t m_assetWidth;
+        float_t m_assetWidth = 0.0f;
 
         FBFolder m_foldersTree;
 

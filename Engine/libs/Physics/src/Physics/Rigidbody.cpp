@@ -314,7 +314,7 @@ namespace SR_PTYPES_NS {
             SetMaterial(SR_PTYPES_NS::PhysicsMaterial::Ptr());
             return;
         }
-        SetMaterial(SR_PTYPES_NS::PhysicsMaterial::Load(path));
+        SetMaterial(SR_UTILS_NS::Asset::Load<PhysicsMaterial>(path));
     }
 
     void Rigidbody::UpdateInertia() {

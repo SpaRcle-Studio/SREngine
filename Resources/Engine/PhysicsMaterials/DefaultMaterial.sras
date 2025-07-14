@@ -1,0 +1,6 @@
+sra format
+0-r:Root
+1-o:asset
+2-v:type
+3-s:PhysicsMaterial
+2-o:ptr

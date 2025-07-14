@@ -12,6 +12,7 @@
 
 #include <Graphics/GUI/Icons.h>
 #include <Graphics/Animations/AnimationClip.h>
+#include <Graphics/Overlay/ImGuiOverlay.h>
 
 namespace SR_CORE_NS::GUI {
     FileBrowser::FileBrowser()
@@ -61,7 +62,7 @@ namespace SR_CORE_NS::GUI {
                     current.isDir = false;
                 }
 
-                current.cutName = SR_UTILS_NS::StringUtils::CutName(current.filename, 7);
+                current.cutName = SR_UTILS_NS::StringUtils::CutName(current.filename, static_cast<uint32_t>(17.f * m_itemsScale));
 
                 auto&& extension = path.GetExtensionView();
 
@@ -72,8 +73,24 @@ namespace SR_CORE_NS::GUI {
                     current.iconType = Core::EditorIcon::ZIP;
                 } else if ((extension == "jpg") || (extension == "jpeg")) {
                     current.iconType = Core::EditorIcon::JPG;
+                } else if ((extension == "obj") || (extension == "fbx")) {
+                    current.iconType = Core::EditorIcon::Shapes;
+                } else if ((extension == "wav") || (extension == "mp3") || (extension == "ogg")) {
+                    current.iconType = Core::EditorIcon::Audio;
                 } else if (extension == "txt") {
                     current.iconType = Core::EditorIcon::TXT;
+                } else if (extension == "srsl") {
+                    current.iconType = Core::EditorIcon::Shader;
+                } else if (extension == "mat") {
+                    current.iconType = Core::EditorIcon::Material;
+                } else if (extension == "ttf") {
+                    current.iconType = Core::EditorIcon::Font;
+                } else if (extension == "prefab") {
+                    current.iconType = Core::EditorIcon::Prefab;
+                } else if (extension == "sras") {
+                    current.iconType = Core::EditorIcon::Asset;
+                } else if (extension == "cpp" || extension == "h" || extension == "hpp") {
+                    current.iconType = Core::EditorIcon::Script;
                 } else if (extension == "xml") {
                     current.iconType = Core::EditorIcon::XML;
                 } else if (extension == "png") {
@@ -188,13 +205,37 @@ namespace SR_CORE_NS::GUI {
         SR_GRAPH_GUI_NS::Immediate::EndPopup();
     }
 
-    void FileBrowser::CurrentDirectoryPanel(const float_t height) { //height используется и как ширина Refresh Button
-        if (SR_GRAPH_GUI_NS::Immediate::BeginChild("current directory panel", SR_MATH_NS::FVector2(0.f, height)))
+    void FileBrowser::CurrentDirectoryPanel() {
+        const float_t fontSize = SR_UTILS_NS::StoreUtils::User::GetFloat("ImGuiFontSize", 0.f);
+        const float_t panelHeight = fontSize * 1.6f;
+
+        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::FrameRounding, 0.0f);
+        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::FramePadding, SR_MATH_NS::FVector2(1.f, 1.f) * fontSize * 0.25f);
+
+        if (SR_GRAPH_GUI_NS::Immediate::BeginChild("current directory panel", SR_MATH_NS::FVector2(0.f, panelHeight), false))
         {
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-            /// Back Button
-            if (SR_GRAPH_GUI_NS::Immediate::Button("Back")) {
-                m_selectedDir = m_selectedDir.GetPrevious();
+            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(fontSize * 6.f);
+            if (SR_GRAPH_GUI_NS::Immediate::SliderFloat("##assets-scale", &m_itemsScale, 0.0, 4.0)) {
+                m_dirtySelectedDir = true;
+            }
+            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+
+            if (SR_GRAPH_GUI_NS::Immediate::Button("Back", SR_MATH_NS::FVector2(fontSize * 4.f, 0.f))) {
+                auto&& prevPath = m_selectedDir.GetPrevious();
+                auto&& resPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+
+                if (prevPath == resPath || prevPath.IsSubPath(resPath)) {
+                    m_selectedDir = prevPath;
+                    m_dirtySelectedDir = true;
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+
+            if (SR_GRAPH_GUI_NS::Immediate::Button("Home", SR_MATH_NS::FVector2(fontSize * 4.f, 0.f))) {
+                m_selectedDir = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                 m_dirtySelectedDir = true;
             }
             /// Current Directory Text
@@ -202,18 +243,24 @@ namespace SR_CORE_NS::GUI {
             SR_GRAPH_GUI_NS::Immediate::Text("%s", m_selectedDir.CStr());
             /// Refresh Button
             SR_GRAPH_GUI_NS::Immediate::SameLine();
-            SR_GRAPH_GUI_NS::Immediate::SetCursorPosX(SR_GRAPH_GUI_NS::Immediate::GetCursorPos().x + SR_GRAPH_GUI_NS::Immediate::GetContentRegionAvail().x - height);
+            SR_GRAPH_GUI_NS::Immediate::SetCursorPosX(SR_GRAPH_GUI_NS::Immediate::GetCursorPos().x + SR_GRAPH_GUI_NS::Immediate::GetContentRegionAvail().x - panelHeight);
 
-            if (SR_GRAPH_GUI_NS::Immediate::ImageButton(dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::Reset), height-10.f)){
+            if (SR_GRAPH_GUI_NS::Immediate::ImageButton(dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::Reset), panelHeight - 10.f)){
                 m_dirtySelectedDir = true;
                 m_dirtyFoldersTree = true;
             }
 
             SR_GRAPH_GUI_NS::Immediate::EndChild();
         }
+
+        SR_GRAPH_GUI_NS::Immediate::PopStyleVar(2);
     }
 
     void FileBrowser::ItemViewPanel() {
+        auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+        auto&& pOverlay = pEngine->GetRenderContext()->GetPipeline()->GetOverlay(SR_GRAPH_NS::OverlayType::ImGui);
+        auto&& pSmallFont = pOverlay.DynamicCast<SR_GRAPH_NS::ImGuiOverlay>()->GetSmallFont();
+
         if (SR_GRAPH_GUI_NS::Immediate::BeginChild("item view", SR_MATH_NS::FVector2(0, -SR_GRAPH_GUI_NS::Immediate::GetFrameHeightWithSpacing())))
         {
             SR_GRAPH_GUI_NS::Immediate::Separator();
@@ -224,6 +271,9 @@ namespace SR_CORE_NS::GUI {
 
             uint32_t index = 1;
 
+            const float_t fontSize = SR_UTILS_NS::StoreUtils::User::GetFloat("ImGuiFontSize", 0.f);
+            const float_t iconSize = fontSize * 3.5f * m_itemsScale;
+
             for (const auto &element : m_elements) {
                 ++index;
 
@@ -233,18 +283,17 @@ namespace SR_CORE_NS::GUI {
                 if (element.isDir) {
                     void* descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.iconType);
 
-                    if (SR_GRAPH_GUI_NS::Immediate::ImageButtonDouble(headerid, descriptor, SR_MATH_NS::FVector2(50), 0)) {
+                    if (SR_GRAPH_GUI_NS::Immediate::ImageButtonDouble(headerid, descriptor, SR_MATH_NS::FVector2(iconSize), iconSize / 3.f)) {
                         m_selectedDir = m_selectedDir.Concat(element.filename);
                         m_dirtySelectedDir = true;
                     }
 
                     FileContextMenu(element.filename);
                 }
-                else
-                {
+                else {
                     void* descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.iconType);
 
-                    if (SR_GRAPH_GUI_NS::Immediate::ImageButtonDouble(headerid, descriptor, SR_MATH_NS::FVector2(50), 0)) {
+                    if (SR_GRAPH_GUI_NS::Immediate::ImageButtonDouble(headerid, descriptor, SR_MATH_NS::FVector2(iconSize), iconSize / 3.f)) {
                         SR_UTILS_NS::Path path = m_selectedDir.Concat(element.filename);
                         OpenFileWithApp(path);
                     }
@@ -252,7 +301,9 @@ namespace SR_CORE_NS::GUI {
                     FileContextMenu(element.filename);
                 }
 
+                SR_GRAPH_GUI_NS::Immediate::PushFont(pSmallFont);
                 SR_GRAPH_GUI_NS::Immediate::Text("%s", element.cutName.c_str());
+                SR_GRAPH_GUI_NS::Immediate::PopFont();
 
                 SR_GRAPH_GUI_NS::Immediate::EndGroup();
 
@@ -316,7 +367,7 @@ namespace SR_CORE_NS::GUI {
 
         SR_GRAPH_GUI_NS::Immediate::BeginGroup();
 
-        CurrentDirectoryPanel(22); //Отрисовка панели нынешней директории
+        CurrentDirectoryPanel(); //Отрисовка панели нынешней директории
 
         auto&& DirectoryPanelHeight = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().y; //код для исключения ошибок ImGui
         if (DirectoryPanelHeight < 50) {                        //проверяет высоту панели нынешней директории

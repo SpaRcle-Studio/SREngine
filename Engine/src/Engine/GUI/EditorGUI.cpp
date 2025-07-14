@@ -78,7 +78,7 @@ namespace SR_CORE_GUI_NS {
         AddWidget(new EngineSettings());
         AddWidget(new AnimatorEditor());
         AddWidget(new EngineStatistics());
-		AddWidget(new PhysicsMaterialEditor());
+		//AddWidget(new PhysicsMaterialEditor());
 		AddWidget(new About());
 		AddWidget(new SoundDebug());
         AddWidget(new RenderTechniqueEditor());
@@ -777,7 +777,6 @@ namespace SR_CORE_GUI_NS {
                 OpenWidget<SceneViewer>();
             }
 
-
             SR_GRAPH_GUI_NS::Immediate::Separator();
 
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Sound debug")) {
@@ -812,12 +811,6 @@ namespace SR_CORE_GUI_NS {
 
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("World edit")) {
                OpenWidget<WorldEdit>();
-            }
-
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Physics material editor")) {
-                OpenWidget<PhysicsMaterialEditor>();
             }
 
             SR_GRAPH_GUI_NS::Immediate::Separator();

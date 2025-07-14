@@ -25,6 +25,9 @@
         <Pair First="Script" Second="Editor/Textures/script.png"/>
         <Pair First="Reset" Second="Editor/Textures/reset.png"/>
         <Pair First="Shapes" Second="Editor/Textures/shapes.png"/>
+        <Pair First="Prefab" Second="Editor/Textures/prefab.png"/>
+        <Pair First="Asset" Second="Editor/Textures/asset.png"/>
+        <Pair First="Shader" Second="Editor/Textures/graphic-card.png"/>
         <Pair First="ZIP" Second="Editor/Textures/zip.png"/>
         <Pair First="JPG" Second="Editor/Textures/jpg.png"/>
         <Pair First="TXT" Second="Editor/Textures/txt.png"/>
@@ -38,7 +41,7 @@
         <Pair First="PauseActive" Second="Editor/Textures/pause.png"/>
         <Pair First="Back" Second="Editor/Textures/back.png"/>
         <Pair First="Font" Second="Editor/Textures/font.png"/>
-        <Pair First="Audio" Second="Editor/Textures/audio.png"/>
+        <Pair First="Audio" Second="Editor/Textures/sound.png"/>
         <Pair First="FrameSkip" Second="Editor/Textures/frame-skip.png"/>
     </Icons>
 </Settings>

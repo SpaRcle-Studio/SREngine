@@ -3,7 +3,10 @@
 //
 
 #include <Physics/PhysicsLib.h>
+
 #include <Utils/Resources/ResourceManager.h>
+#include <Utils/Resources/Asset.h>
+#include <Utils/Resources/Xml.h>
 
 #ifdef SR_PHYSICS_USE_BULLET3
     #include <Physics/Bullet3/Bullet3LibraryImpl.h>
@@ -54,11 +57,14 @@ namespace SR_PHYSICS_NS {
             m_supportedLibs.insert(library);
         }
 
-        const auto&& defaultMaterialPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/PhysicsMaterials/DefaultMaterial.physmat");
-        m_defaultMaterial = SR_PTYPES_NS::PhysicsMaterial::Load(defaultMaterialPath);
+        const auto&& defaultMaterialPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/PhysicsMaterials/DefaultMaterial.sras");
+        m_defaultMaterial = SR_UTILS_NS::Asset::Load<SR_PTYPES_NS::PhysicsMaterial>(defaultMaterialPath);
 
         if (m_defaultMaterial) {
             m_defaultMaterial->AddUsePoint();
+        }
+        else {
+            SR_ERROR("PhysicsLibrary::InitSingleton() : failed to load default physics material!\n\tPath: {}", defaultMaterialPath);
         }
     }
 
