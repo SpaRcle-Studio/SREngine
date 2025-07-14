@@ -134,6 +134,12 @@
         <childnode refid="74" relation="include">
         </childnode>
       </node>
+      <node id="124">
+        <label>Utils/Common/StringAtomLiterals.h</label>
+        <link refid="StringAtomLiterals_8h_source"/>
+        <childnode refid="88" relation="include">
+        </childnode>
+      </node>
       <node id="98">
         <label>Utils/Common/StringFormat.h</label>
         <link refid="StringFormat_8h_source"/>
@@ -174,7 +180,7 @@
         <childnode refid="93" relation="include">
         </childnode>
       </node>
-      <node id="130">
+      <node id="140">
         <label>Utils/Common/ToString.h</label>
         <link refid="ToString_8h_source"/>
         <childnode refid="93" relation="include">
@@ -256,6 +262,16 @@
         <childnode refid="80" relation="include">
         </childnode>
       </node>
+      <node id="126">
+        <label>Utils/Math/Rect.h</label>
+        <link refid="Rect_8h_source"/>
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+      </node>
       <node id="109">
         <label>Utils/Math/Size.h</label>
         <link refid="Size_8h_source"/>
@@ -316,11 +332,11 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="128">
+      <node id="138">
         <label>Utils/Profile/TracyContext.h</label>
         <link refid="TracyContext_8h_source"/>
       </node>
-      <node id="126">
+      <node id="136">
         <label>Utils/Resources/FileSystemWatcher.h</label>
         <link refid="FileSystemWatcher_8h_source"/>
         <childnode refid="106" relation="include">
@@ -328,7 +344,7 @@
         <childnode refid="103" relation="include">
         </childnode>
       </node>
-      <node id="123">
+      <node id="133">
         <label>Utils/Resources/FileWatcher.h</label>
         <link refid="FileWatcher_8h_source"/>
         <childnode refid="78" relation="include">
@@ -363,16 +379,18 @@
         </childnode>
         <childnode refid="122" relation="include">
         </childnode>
-        <childnode refid="123" relation="include">
+        <childnode refid="132" relation="include">
+        </childnode>
+        <childnode refid="133" relation="include">
         </childnode>
       </node>
-      <node id="122">
+      <node id="132">
         <label>Utils/Resources/ResourceContainer.h</label>
         <link refid="ResourceContainer_8h_source"/>
-        <childnode refid="2" relation="include">
+        <childnode refid="106" relation="include">
         </childnode>
       </node>
-      <node id="127">
+      <node id="137">
         <label>Utils/Resources/ResourceInfo.h</label>
         <link refid="ResourceInfo_8h_source"/>
         <childnode refid="78" relation="include">
@@ -384,12 +402,12 @@
         <childnode refid="74" relation="include">
         </childnode>
       </node>
-      <node id="124">
+      <node id="134">
         <label>Utils/Resources/ResourceManager.h</label>
         <link refid="ResourceManager_8h_source"/>
         <childnode refid="78" relation="include">
         </childnode>
-        <childnode refid="125" relation="include">
+        <childnode refid="135" relation="include">
         </childnode>
         <childnode refid="106" relation="include">
         </childnode>
@@ -397,14 +415,14 @@
         </childnode>
         <childnode refid="77" relation="include">
         </childnode>
-        <childnode refid="126" relation="include">
+        <childnode refid="136" relation="include">
         </childnode>
-        <childnode refid="127" relation="include">
+        <childnode refid="137" relation="include">
         </childnode>
-        <childnode refid="128" relation="include">
+        <childnode refid="138" relation="include">
         </childnode>
       </node>
-      <node id="131">
+      <node id="141">
         <label>Utils/Resources/Xml.h</label>
         <link refid="Xml_8h_source"/>
         <childnode refid="78" relation="include">
@@ -419,7 +437,7 @@
         </childnode>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="132" relation="include">
+        <childnode refid="142" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -433,16 +451,16 @@
         </childnode>
         <childnode refid="77" relation="include">
         </childnode>
-        <childnode refid="123" relation="include">
+        <childnode refid="133" relation="include">
         </childnode>
-        <childnode refid="124" relation="include">
+        <childnode refid="134" relation="include">
         </childnode>
-        <childnode refid="129" relation="include">
+        <childnode refid="139" relation="include">
         </childnode>
-        <childnode refid="131" relation="include">
+        <childnode refid="141" relation="include">
         </childnode>
       </node>
-      <node id="129">
+      <node id="139">
         <label>Utils/SRLM/LogicalNode.h</label>
         <link refid="LogicalNode_8h_source"/>
         <childnode refid="2" relation="include">
@@ -451,12 +469,20 @@
         </childnode>
         <childnode refid="93" relation="include">
         </childnode>
-        <childnode refid="130" relation="include">
+        <childnode refid="140" relation="include">
         </childnode>
-        <childnode refid="131" relation="include">
+        <childnode refid="141" relation="include">
         </childnode>
-        <childnode refid="133" relation="include">
+        <childnode refid="127" relation="include">
         </childnode>
+      </node>
+      <node id="130">
+        <label>Utils/Serialization/DefaultCheckers.inl.h</label>
+        <link refid="DefaultCheckers_8inl_8h_source"/>
+      </node>
+      <node id="128">
+        <label>Utils/Serialization/DefaultObjectMakers.inl.h</label>
+        <link refid="DefaultObjectMakers_8inl_8h_source"/>
       </node>
       <node id="121">
         <label>Utils/Serialization/Deserializer.h</label>
@@ -468,6 +494,56 @@
         <label>Utils/Serialization/ObjectDataAccessor.h</label>
         <link refid="ObjectDataAccessor_8h_source"/>
         <childnode refid="86" relation="include">
+        </childnode>
+      </node>
+      <node id="131">
+        <label>Utils/Serialization/ObjectDataAccessors.inl.h</label>
+        <link refid="ObjectDataAccessors_8inl_8h_source"/>
+      </node>
+      <node id="129">
+        <label>Utils/Serialization/SaveCheckers.inl.h</label>
+        <link refid="SaveCheckers_8inl_8h_source"/>
+      </node>
+      <node id="122">
+        <label>Utils/Serialization/Serializable.h</label>
+        <link refid="Serializable_8h_source"/>
+        <childnode refid="111" relation="include">
+        </childnode>
+        <childnode refid="123" relation="include">
+        </childnode>
+        <childnode refid="125" relation="include">
+        </childnode>
+      </node>
+      <node id="125">
+        <label>Utils/Serialization/Serialization.h</label>
+        <link refid="Serialization_8h_source"/>
+        <childnode refid="120" relation="include">
+        </childnode>
+        <childnode refid="121" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="123" relation="include">
+        </childnode>
+        <childnode refid="110" relation="include">
+        </childnode>
+        <childnode refid="106" relation="include">
+        </childnode>
+        <childnode refid="109" relation="include">
+        </childnode>
+        <childnode refid="126" relation="include">
+        </childnode>
+        <childnode refid="124" relation="include">
+        </childnode>
+        <childnode refid="127" relation="include">
+        </childnode>
+        <childnode refid="128" relation="include">
+        </childnode>
+        <childnode refid="129" relation="include">
+        </childnode>
+        <childnode refid="130" relation="include">
+        </childnode>
+        <childnode refid="131" relation="include">
         </childnode>
       </node>
       <node id="120">
@@ -484,6 +560,18 @@
         <childnode refid="70" relation="include">
         </childnode>
         <childnode refid="118" relation="include">
+        </childnode>
+      </node>
+      <node id="123">
+        <label>Utils/TypeTraits/Factory.h</label>
+        <link refid="Factory_8h_source"/>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="124" relation="include">
+        </childnode>
+        <childnode refid="106" relation="include">
+        </childnode>
+        <childnode refid="119" relation="include">
         </childnode>
       </node>
       <node id="111">
@@ -626,7 +714,7 @@
         <childnode refid="71" relation="include">
         </childnode>
       </node>
-      <node id="125">
+      <node id="135">
         <label>Utils/Types/Thread.h</label>
         <link refid="Thread_8h_source"/>
         <childnode refid="78" relation="include">
@@ -778,7 +866,7 @@
         <childnode refid="66" relation="include">
         </childnode>
       </node>
-      <node id="133">
+      <node id="127">
         <label>Codegen/Enums.generated.hpp</label>
       </node>
       <node id="90">
@@ -793,7 +881,7 @@
       <node id="8">
         <label>array</label>
       </node>
-      <node id="132">
+      <node id="142">
         <label>assimp/contrib/pugixml/src/pugixml.hpp</label>
       </node>
       <node id="42">
@@ -1045,66 +1133,64 @@
 <codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UpdateMachine(float_t<sp/>dt);</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight></codeline>
 <codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>IResource*<sp/>CopyResource(<ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">SR_UTILS_NS::IResource</ref>*<sp/>pDestination)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"></highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Execute(float_t<sp/>dt);</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddNode(<ref refid="classSR__SRLM__NS_1_1LogicalNode" kindref="compound">LogicalNode</ref>*<sp/>pNode);</highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Optimize();</highlight></codeline>
-<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>ProcessExecutable(float_t<sp/>dt);</highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>ProcessReset(float_t<sp/>dt);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Execute(float_t<sp/>dt);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddNode(<ref refid="classSR__SRLM__NS_1_1LogicalNode" kindref="compound">LogicalNode</ref>*<sp/>pNode);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Optimize();</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>ProcessExecutable(float_t<sp/>dt);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>ProcessReset(float_t<sp/>dt);</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetCurrentNode(<ref refid="classSR__SRLM__NS_1_1LogicalNode" kindref="compound">LogicalNode</ref>*<sp/>pNode,<sp/><ref refid="structSR__SRLM__NS_1_1LogicalNode_1_1NodePin" kindref="compound">LogicalNode::NodePin</ref>*<sp/>pFromPin);</highlight></codeline>
 <codeline lineno="44"><highlight class="normal"></highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetCurrentNode(<ref refid="classSR__SRLM__NS_1_1LogicalNode" kindref="compound">LogicalNode</ref>*<sp/>pNode,<sp/><ref refid="structSR__SRLM__NS_1_1LogicalNode_1_1NodePin" kindref="compound">LogicalNode::NodePin</ref>*<sp/>pFromPin);</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"></highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__SRLM__NS_1_1LogicalNode" kindref="compound">LogicalNode</ref>*<sp/>GetCurrentNode()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="structSR__SRLM__NS_1_1LogicalNode_1_1NodePin" kindref="compound">LogicalNode::NodePin</ref>*<sp/>GetCurrentPin()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"></highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Load()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Unload()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__SRLM__NS_1_1LogicalNode" kindref="compound">LogicalNode</ref>*<sp/>GetCurrentNode()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="structSR__SRLM__NS_1_1LogicalNode_1_1NodePin" kindref="compound">LogicalNode::NodePin</ref>*<sp/>GetCurrentPin()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Load()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Unload()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Clear();</highlight></codeline>
 <codeline lineno="52"><highlight class="normal"></highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Clear();</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"></highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;LogicalNode*&gt;<sp/>m_nodes;</highlight></codeline>
-<codeline lineno="57"><highlight class="normal"></highlight></codeline>
-<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ActiveNodeInfo<sp/>{</highlight></codeline>
-<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__SRLM__NS_1_1LogicalNode" kindref="compound">LogicalNode</ref>*<sp/>pNode<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__SRLM__NS_1_1LogicalNode_1_1NodePin" kindref="compound">LogicalNode::NodePin</ref>*<sp/>pFromPin<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;LogicalNode*&gt;<sp/>m_nodes;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ActiveNodeInfo<sp/>{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__SRLM__NS_1_1LogicalNode" kindref="compound">LogicalNode</ref>*<sp/>pNode<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__SRLM__NS_1_1LogicalNode_1_1NodePin" kindref="compound">LogicalNode::NodePin</ref>*<sp/>pFromPin<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;ActiveNodeInfo&gt;<sp/>m_active;</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"></highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;ActiveNodeInfo&gt;<sp/>m_active;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>m_currentNode<sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"></highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>m_currentNode<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;std::string,<sp/>LogicalNode*&gt;<sp/>m_entryPoints;</highlight></codeline>
 <codeline lineno="66"><highlight class="normal"></highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;std::string,<sp/>LogicalNode*&gt;<sp/>m_entryPoints;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"></highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"></highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;<sp/><ref refid="classSR__SRLM__NS_1_1LogicalMachine" kindref="compound">LogicalMachine</ref>*<sp/>LogicalMachine::Load(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Path&amp;<sp/>rawPath)<sp/>{</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!rawPath.Exists())<sp/>{</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_ERROR(</highlight><highlight class="stringliteral">&quot;LogicalMachine::Load()<sp/>:<sp/>file<sp/>not<sp/>exists!<sp/>Path:<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/>rawPath.ToStringRef());</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"></highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;&amp;<sp/>resourceManager<sp/>=<sp/>SR_UTILS_NS::ResourceManager::Instance();</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref>&amp;&amp;<sp/>path<sp/>=<sp/>rawPath.RemoveSubPath(resourceManager.GetResPath());</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;<sp/><ref refid="classSR__SRLM__NS_1_1LogicalMachine" kindref="compound">LogicalMachine</ref>*<sp/>LogicalMachine::Load(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Path&amp;<sp/>rawPath)<sp/>{</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!rawPath.Exists())<sp/>{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_ERROR(</highlight><highlight class="stringliteral">&quot;LogicalMachine::Load()<sp/>:<sp/>file<sp/>not<sp/>exists!<sp/>Path:<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/>rawPath.ToStringRef());</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;&amp;<sp/>resourceManager<sp/>=<sp/>SR_UTILS_NS::ResourceManager::Instance();</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref>&amp;&amp;<sp/>path<sp/>=<sp/>rawPath.RemoveSubPath(resourceManager.GetResPath());</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;&amp;<sp/>pResource<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>T();</highlight></codeline>
 <codeline lineno="79"><highlight class="normal"></highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;&amp;<sp/>pResource<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>T();</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pResource-&gt;SetId(path.ToStringRef(),<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"></highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pResource-&gt;SetId(path.ToStringRef(),<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"></highlight></codeline>
-<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!pResource-&gt;Reload())<sp/>{</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_ERROR(</highlight><highlight class="stringliteral">&quot;LogicalMachine::Load()<sp/>:<sp/>failed<sp/>to<sp/>load!&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pResource-&gt;DeleteResource();</highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!pResource-&gt;Reload())<sp/>{</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_ERROR(</highlight><highlight class="stringliteral">&quot;LogicalMachine::Load()<sp/>:<sp/>failed<sp/>to<sp/>load!&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pResource-&gt;DeleteResource();</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>resourceManager.RegisterResource(pResource);</highlight></codeline>
 <codeline lineno="89"><highlight class="normal"></highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>resourceManager.RegisterResource(pResource);</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"></highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pResource;</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="94"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="95"><highlight class="normal"></highlight></codeline>
-<codeline lineno="96"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_LOGICALMACHINE_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pResource;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="92"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_LOGICALMACHINE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="Engine/libs/Utils/inc/Utils/SRLM/LogicalMachine.h"/>
   </compounddef>

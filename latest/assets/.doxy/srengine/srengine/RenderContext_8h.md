@@ -16,6 +16,7 @@
 * `#include <Utils/Types/SafePointer.h>`
 * `#include <Graphics/Render/MeshCluster.h>`
 * `#include <Graphics/Memory/IGraphicsResource.h>`
+* `#include <Graphics/Render/IRenderTechnique.h>`
 * `#include <Graphics/Pipeline/PipelineType.h>`
 
 

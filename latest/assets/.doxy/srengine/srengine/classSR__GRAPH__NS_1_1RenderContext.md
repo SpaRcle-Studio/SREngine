@@ -87,16 +87,16 @@ Inherits the following classes: [SR\_HTYPES\_NS::SafePtr](classSR__HTYPES__NS_1_
 |  SR\_NODISCARD MaterialPtr | [**GetDefaultMaterial**](#function-getdefaultmaterial) () const<br> |
 |  SR\_NODISCARD TexturePtr | [**GetDefaultTexture**](#function-getdefaulttexture) () const<br> |
 |  SR\_NODISCARD MaterialPtr | [**GetDefaultUIMaterial**](#function-getdefaultuimaterial) () const<br> |
-|  SR\_NODISCARD const std::vector&lt; [**SR\_GTYPES\_NS::Framebuffer**](classSR__GTYPES__NS_1_1Framebuffer.md) \* &gt; & | [**GetFramebuffers**](#function-getframebuffers) () noexcept const<br> |
+|  SR\_NODISCARD const std::vector&lt; [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_GTYPES\_NS::Framebuffer**](classSR__GTYPES__NS_1_1Framebuffer.md) &gt; &gt; & | [**GetFramebuffers**](#function-getframebuffers) () noexcept const<br> |
 |  SR\_NODISCARD TexturePtr | [**GetNoneTexture**](#function-getnonetexture) () const<br> |
 |  SR\_NODISCARD const RenderContext::PipelinePtr & | [**GetPipeline**](#function-getpipeline-12) () const<br> |
 |  SR\_NODISCARD RenderContext::PipelinePtr & | [**GetPipeline**](#function-getpipeline-22) () <br> |
 |  SR\_NODISCARD PipelineType | [**GetPipelineType**](#function-getpipelinetype) () const<br> |
-|  SR\_NODISCARD const std::vector&lt; [**IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* &gt; & | [**GetRenderTechniques**](#function-getrendertechniques) () noexcept const<br> |
+|  SR\_NODISCARD const std::vector&lt; IRenderTechnique::Ptr &gt; & | [**GetRenderTechniques**](#function-getrendertechniques) () noexcept const<br> |
 |  SR\_NODISCARD const RenderScenes & | [**GetScenes**](#function-getscenes) () noexcept const<br> |
 |  SR\_NODISCARD const std::vector&lt; [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* &gt; & | [**GetShaders**](#function-getshaders) () noexcept const<br> |
 |  SR\_NODISCARD const std::vector&lt; [**SR\_GTYPES\_NS::Skybox**](classSR__GTYPES__NS_1_1Skybox.md) \* &gt; & | [**GetSkyboxes**](#function-getskyboxes) () noexcept const<br> |
-|  SR\_NODISCARD const std::vector&lt; [**SR\_GTYPES\_NS::Texture**](classSR__GTYPES__NS_1_1Texture.md) \* &gt; & | [**GetTextures**](#function-gettextures) () noexcept const<br> |
+|  SR\_NODISCARD const std::vector&lt; TexturePtr &gt; & | [**GetTextures**](#function-gettextures) () noexcept const<br> |
 |  SR\_NODISCARD WindowPtr | [**GetWindow**](#function-getwindow) () const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::UVector2 | [**GetWindowSize**](#function-getwindowsize) () const<br> |
 |  bool | [**Init**](#function-init) () <br> |
@@ -376,7 +376,7 @@ inline SR_NODISCARD MaterialPtr SR_GRAPH_NS::RenderContext::GetDefaultUIMaterial
 ### function GetFramebuffers 
 
 ```C++
-SR_NODISCARD const std::vector< SR_GTYPES_NS::Framebuffer * > & SR_GRAPH_NS::RenderContext::GetFramebuffers () noexcept const
+SR_NODISCARD const std::vector< SR_HTYPES_NS::SharedPtr < SR_GTYPES_NS::Framebuffer > > & SR_GRAPH_NS::RenderContext::GetFramebuffers () noexcept const
 ```
 
 
@@ -441,7 +441,7 @@ SR_NODISCARD PipelineType SR_GRAPH_NS::RenderContext::GetPipelineType () const
 ### function GetRenderTechniques 
 
 ```C++
-SR_NODISCARD const std::vector< IRenderTechnique * > & SR_GRAPH_NS::RenderContext::GetRenderTechniques () noexcept const
+SR_NODISCARD const std::vector< IRenderTechnique::Ptr > & SR_GRAPH_NS::RenderContext::GetRenderTechniques () noexcept const
 ```
 
 
@@ -493,7 +493,7 @@ SR_NODISCARD const std::vector< SR_GTYPES_NS::Skybox * > & SR_GRAPH_NS::RenderCo
 ### function GetTextures 
 
 ```C++
-SR_NODISCARD const std::vector< SR_GTYPES_NS::Texture * > & SR_GRAPH_NS::RenderContext::GetTextures () noexcept const
+SR_NODISCARD const std::vector< TexturePtr > & SR_GRAPH_NS::RenderContext::GetTextures () noexcept const
 ```
 
 

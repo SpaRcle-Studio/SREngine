@@ -51,7 +51,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD constexpr bool | [**operator()**](#function-operator()) (const [**MeshInfo**](structSR__GRAPH__NS_1_1RenderQueue_1_1MeshInfo.md) & left, const [**MeshInfo**](structSR__GRAPH__NS_1_1RenderQueue_1_1MeshInfo.md) & right) noexcept const<br> |
+|  SR\_NODISCARD bool | [**operator()**](#function-operator()) (const [**MeshInfo**](structSR__GRAPH__NS_1_1RenderQueue_1_1MeshInfo.md) & left, const [**MeshInfo**](structSR__GRAPH__NS_1_1RenderQueue_1_1MeshInfo.md) & right) noexcept const<br> |
 
 
 
@@ -88,7 +88,7 @@
 ### function operator() 
 
 ```C++
-inline SR_NODISCARD constexpr bool SR_GRAPH_NS::RenderQueue::RenderQueueLessPredicate::operator() (
+inline SR_NODISCARD bool SR_GRAPH_NS::RenderQueue::RenderQueueLessPredicate::operator() (
     const MeshInfo & left,
     const MeshInfo & right
 ) noexcept const

@@ -238,6 +238,7 @@ This function is the compression function of SHA256, which, for the special case
       </memberdef>
     </sectiondef>
     <briefdescription>
+<para>#define SR_SHARED_PTR_TRACE </para>
     </briefdescription>
     <detaileddescription>
 <para>Awake -&gt; OnEnabled -&gt; Start -&gt; Update -&gt; FixedUpdate </para>

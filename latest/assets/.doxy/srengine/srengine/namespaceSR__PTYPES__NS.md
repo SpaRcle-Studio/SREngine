@@ -37,7 +37,6 @@
 | class | [**PhysXMaterialImpl**](classSR__PTYPES__NS_1_1PhysXMaterialImpl.md) <br> |
 | class | [**PhysXRigidbody3DImpl**](classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl.md) <br> |
 | class | [**PhysicsMaterial**](classSR__PTYPES__NS_1_1PhysicsMaterial.md) <br> |
-| struct | [**PhysicsMaterialData**](structSR__PTYPES__NS_1_1PhysicsMaterialData.md) <br> |
 | class | [**PhysicsMaterialImpl**](classSR__PTYPES__NS_1_1PhysicsMaterialImpl.md) <br> |
 | class | [**Rigidbody**](classSR__PTYPES__NS_1_1Rigidbody.md) <br> |
 | class | [**Rigidbody2D**](classSR__PTYPES__NS_1_1Rigidbody2D.md) <br> |

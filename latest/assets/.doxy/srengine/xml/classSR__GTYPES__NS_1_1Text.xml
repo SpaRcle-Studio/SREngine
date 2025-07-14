@@ -155,20 +155,19 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="93" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="93" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Text_1ac0d92d2f83bdb1b8aeddfa271fe5fb20" prot="private" static="no" mutable="no">
-        <type><ref refid="classSR__GTYPES__NS_1_1Font" kindref="compound">Font</ref> *</type>
-        <definition>Font* SR_GTYPES_NS::Text::m_font</definition>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Text_1a6af9af7b49a43973dc5edd31517fe196" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GTYPES__NS_1_1Font" kindref="compound">Font</ref> &gt;</type>
+        <definition>SR_HTYPES_NS::SharedPtr&lt;Font&gt; SR_GTYPES_NS::Text::m_font</definition>
         <argsstring></argsstring>
         <name>m_font</name>
         <qualifiedname>SR_GTYPES_NS::Text::m_font</qualifiedname>
-        <initializer>= nullptr</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="94" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="94" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="94" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="94" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -362,9 +361,9 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="39" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="39" bodyend="39"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a76a8e13f53e747486782f22758bab85c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD SR_FORCE_INLINE <ref refid="classSR__GTYPES__NS_1_1Font" kindref="compound">Font</ref> *</type>
-        <definition>SR_NODISCARD SR_FORCE_INLINE Font * SR_GTYPES_NS::Text::GetFont</definition>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1ab643e10404ab4079a1ea42b744828db2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GTYPES__NS_1_1Font" kindref="compound">Font</ref> &gt; &amp;</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE const SR_HTYPES_NS::SharedPtr&lt; Font &gt; &amp; SR_GTYPES_NS::Text::GetFont</definition>
         <argsstring>() const noexcept</argsstring>
         <name>GetFont</name>
         <qualifiedname>SR_GTYPES_NS::Text::GetFont</qualifiedname>
@@ -374,7 +373,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="40" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="40" bodyend="40"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="40" column="68" bodyfile="Engine/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="40" bodyend="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1ab5d62d990e456f81bea4f58d00bd0100" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE uint16_t</type>
@@ -551,14 +550,14 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Font/Text.h" line="55" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1aee3589cc10d0768b524b7bfd62d8d072" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1abf67001246b139b634b106bc2cbdec7e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void SR_GTYPES_NS::Text::SetFont</definition>
-        <argsstring>(Font *pFont)</argsstring>
+        <argsstring>(const SR_HTYPES_NS::SharedPtr&lt; Font &gt; &amp;pFont)</argsstring>
         <name>SetFont</name>
         <qualifiedname>SR_GTYPES_NS::Text::SetFont</qualifiedname>
         <param>
-          <type><ref refid="classSR__GTYPES__NS_1_1Font" kindref="compound">Font</ref> *</type>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GTYPES__NS_1_1Font" kindref="compound">Font</ref> &gt; &amp;</type>
           <declname>pFont</declname>
         </param>
         <briefdescription>
@@ -845,7 +844,7 @@
       <member refid="classSR__GTYPES__NS_1_1Text_1ac305aaf2c864c2909fec9d0dfa0cb8fa" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetAtlasWidth</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad0630357a7ef40b1c526565323c1cea0" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetBarycenter</name></member>
       <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1a8ffc0a7bba083f7d2703dd38752c7405" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetCamera</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Text_1a76a8e13f53e747486782f22758bab85c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetFont</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1ab643e10404ab4079a1ea42b744828db2" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetFont</name></member>
       <member refid="classSR__GTYPES__NS_1_1Text_1ac072059473f7992a3b2660f41b0a9215" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetFontPath</name></member>
       <member refid="classSR__GTYPES__NS_1_1Text_1ab5d62d990e456f81bea4f58d00bd0100" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetFontSize</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a1857b0420fe2a3b300e35246e756e3c9" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetFrustumCullingType</name></member>
@@ -904,7 +903,7 @@
       <member refid="classSR__GTYPES__NS_1_1Text_1ace286a9b3db4841ca29416b802c08111" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_debug</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a025a6751aee4601105000e7c9d960c9a" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_descriptorManager</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a1eedf6ed8926b01f933ce6d17942d928" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_dirtyMaterial</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Text_1ac0d92d2f83bdb1b8aeddfa271fe5fb20" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_font</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a6af9af7b49a43973dc5edd31517fe196" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_font</name></member>
       <member refid="classSR__GTYPES__NS_1_1Text_1aec4ba4d41c08481d4394929687adfdb0" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_fontSize</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1abbbdef9e59eb97f8eed740c6e96c1a53" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_frustumCullingType</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1aa12c514db6c826253a1d368e7279e02a" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_hasErrors</name></member>
@@ -950,7 +949,7 @@
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a1b0a2c9312c0344c53db90eae676a60d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnMatrixDirty</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1af3caea0c23c92bd870b87a3e52840645" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnPriorityChanged</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1ab78cc1eaebe6f734293b577b6d9ab1dd" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnReRegistered</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Mesh_1a1beb296af0e07a7ca16aafeb8879294b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnResourceReloaded</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a38cd9c334fee6452c42dd5a7d2fdd41d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnResourceReloaded</name></member>
       <member refid="classSR__GTYPES__NS_1_1Text_1aa0bf875c1c6111f54f477f079f793c18" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnTextDirty</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aac7babfab0aaf8e811e05f8f55dbebb1" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnTriggerEnter</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a54e04b235d9aaa0f027996b71362242b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnTriggerExit</name></member>
@@ -965,7 +964,7 @@
       <member refid="classSR__GTYPES__NS_1_1Text_1a40f02731e29a088105cdd422f9d567b3" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetDebug</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad94a8ad5e03600e4f9bdae868ba6021b" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetEnabled</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a0459026984bf4bd56d9ceb4f82f48d53" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetErrorsClean</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Text_1aee3589cc10d0768b524b7bfd62d8d072" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetFont</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1abf67001246b139b634b106bc2cbdec7e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetFont</name></member>
       <member refid="classSR__GTYPES__NS_1_1Text_1aa7f411307e3fdad56f62b00e0c5ab6f3" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetFont</name></member>
       <member refid="classSR__GTYPES__NS_1_1Text_1ab2e323bf6a531f738f8a921af2d2b509" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetFontSize</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af57bdc6a2c4f4ed50fec8a5175bcbf8f" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetIndexIdSceneUpdater</name></member>
@@ -981,7 +980,7 @@
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a73a3904579729c1939e4e6757b39ab51" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetUniformsClean</name></member>
       <member refid="classSR__GTYPES__NS_1_1Text_1a3eb372bec3d1acc456c74e18f1f5e7e3" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetUseLocalization</name></member>
       <member refid="classSR__GTYPES__NS_1_1Text_1a68790e68f11e8b3630bf8e537b2dc88c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetUsePreprocessor</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Mesh_1aa763366331082200de8fffc15b9edb1e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>ShaderPtr</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a293bad07f36ba94ea55b3ca8d192d92a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>ShaderPtr</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a572b27823d61376ebbd0c33758ea5d6f" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>Start</name></member>
       <member refid="classSR__GTYPES__NS_1_1Text_1aada3bf81775f44d054101f966333668a" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>Super</name></member>
       <member refid="classSR__GTYPES__NS_1_1Text_1a58ffd11d3f6267a167e6a6b597cf31c6" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>Text</name></member>

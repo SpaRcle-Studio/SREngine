@@ -4,6 +4,7 @@
     <compoundname>SR_CORE_GUI_NS</compoundname>
     <innerclass refid="classSR__CORE__GUI__NS_1_1About" prot="public">SR_CORE_GUI_NS::About</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1AnimatorEditor" prot="public">SR_CORE_GUI_NS::AnimatorEditor</innerclass>
+    <innerclass refid="classSR__CORE__GUI__NS_1_1AssetInspector" prot="public">SR_CORE_GUI_NS::AssetInspector</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1BehaviourNamePropertyDrawer" prot="public">SR_CORE_GUI_NS::BehaviourNamePropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1BehaviourPropertyDrawer" prot="public">SR_CORE_GUI_NS::BehaviourPropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1BitMapPropertyDrawer" prot="public">SR_CORE_GUI_NS::BitMapPropertyDrawer</innerclass>
@@ -25,7 +26,6 @@
     <innerclass refid="classSR__CORE__GUI__NS_1_1NumericPropertyDrawer" prot="public">SR_CORE_GUI_NS::NumericPropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1ObjectPropertyDrawer" prot="public">SR_CORE_GUI_NS::ObjectPropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1PathPropertyDrawer" prot="public">SR_CORE_GUI_NS::PathPropertyDrawer</innerclass>
-    <innerclass refid="classSR__CORE__GUI__NS_1_1PhysicsMaterialEditor" prot="public">SR_CORE_GUI_NS::PhysicsMaterialEditor</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer" prot="public">SR_CORE_GUI_NS::PointerPropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" prot="public">SR_CORE_GUI_NS::PropertyDrawerBase</innerclass>
     <innerclass refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" prot="public">SR_CORE_GUI_NS::PropertyDrawerContext</innerclass>
@@ -70,35 +70,6 @@
         <inbodydescription>
         </inbodydescription>
         <location file="Engine/inc/Engine/GUI/DragNDropHelper.h" line="12" column="26" declfile="Engine/inc/Engine/GUI/DragNDropHelper.h" declline="12" declcolumn="26"/>
-      </memberdef>
-      <memberdef kind="function" id="PhysicsMaterialEditor_8h_1a19dda9907fb9a2faa8dff99405a07e5c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type></type>
-        <definition>SR_CORE_GUI_NS::SR_ENUM_NS_CLASS_T</definition>
-        <argsstring>(ButtonType, uint8_t, ChooseMaterial, Discard, Save)</argsstring>
-        <name>SR_ENUM_NS_CLASS_T</name>
-        <qualifiedname>SR_CORE_GUI_NS::SR_ENUM_NS_CLASS_T</qualifiedname>
-        <param>
-          <type>ButtonType</type>
-        </param>
-        <param>
-          <type>uint8_t</type>
-        </param>
-        <param>
-          <type>ChooseMaterial</type>
-        </param>
-        <param>
-          <type>Discard</type>
-        </param>
-        <param>
-          <type>Save</type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" line="14" column="5" declfile="Engine/inc/Engine/GUI/PhysicsMaterialEditor.h" declline="14" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="PropertyDrawer_8h_1ad3c5e0379a5a9e2e3ae9bc8d5f9f22cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>

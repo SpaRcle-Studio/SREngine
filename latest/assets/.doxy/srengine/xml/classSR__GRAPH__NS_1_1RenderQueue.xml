@@ -97,9 +97,9 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="26" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="26" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1RenderQueue_1aba5d1b67bd2e6ae70be5fd505522bbf2" prot="private" static="no">
-        <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
-        <definition>using SR_GRAPH_NS::RenderQueue::ShaderPtr =  SR_GTYPES_NS::Shader*</definition>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1RenderQueue_1a02e4cc8efbb196050a3dcc62a9fb22fa" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> &gt;</type>
+        <definition>using SR_GRAPH_NS::RenderQueue::ShaderPtr =  SR_HTYPES_NS::SharedPtr&lt;SR_GTYPES_NS::Shader&gt;</definition>
         <argsstring></argsstring>
         <name>ShaderPtr</name>
         <qualifiedname>SR_GRAPH_NS::RenderQueue::ShaderPtr</qualifiedname>
@@ -823,7 +823,7 @@
       <member refid="classSR__GRAPH__NS_1_1RenderQueue_1a0ce17d97a4404779d63063d268c4a746" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue</scope><name>RenderQueue</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::RenderQueue</scope><name>Reset</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::RenderQueue</scope><name>SetPointerFromBase</name></member>
-      <member refid="classSR__GRAPH__NS_1_1RenderQueue_1aba5d1b67bd2e6ae70be5fd505522bbf2" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue</scope><name>ShaderPtr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderQueue_1a02e4cc8efbb196050a3dcc62a9fb22fa" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue</scope><name>ShaderPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue</scope><name>SharedPointerType</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue</scope><name>SharedPtr</name></member>

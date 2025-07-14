@@ -1957,7 +1957,7 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="16">
+      <node id="18">
         <label>Memory::IGraphicsResource</label>
       </node>
       <node id="8">
@@ -1994,17 +1994,17 @@
         <childnode refid="10" relation="usage">
           <edgelabel>pShader</edgelabel>
         </childnode>
-        <childnode refid="17" relation="usage">
+        <childnode refid="19" relation="usage">
           <edgelabel>pFrameBuffer</edgelabel>
         </childnode>
-        <childnode refid="18" relation="usage">
+        <childnode refid="20" relation="usage">
           <edgelabel>pRenderStrategy</edgelabel>
         </childnode>
       </node>
-      <node id="18">
+      <node id="20">
         <label>SR_GRAPH_NS::RenderStrategy</label>
         <link refid="classSR__GRAPH__NS_1_1RenderStrategy"/>
-        <childnode refid="13" relation="public-inheritance">
+        <childnode refid="21" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
@@ -2013,12 +2013,12 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="17">
+      <node id="19">
         <label>SR_GTYPES_NS::Framebuffer</label>
         <link refid="classSR__GTYPES__NS_1_1Framebuffer"/>
         <childnode refid="11" relation="public-inheritance">
         </childnode>
-        <childnode refid="16" relation="public-inheritance">
+        <childnode refid="18" relation="public-inheritance">
         </childnode>
       </node>
       <node id="10">
@@ -2026,10 +2026,16 @@
         <link refid="classSR__GTYPES__NS_1_1Shader"/>
         <childnode refid="11" relation="public-inheritance">
         </childnode>
-        <childnode refid="16" relation="public-inheritance">
+        <childnode refid="18" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
         <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="4" relation="public-inheritance">
@@ -2053,12 +2059,14 @@
         </childnode>
         <childnode refid="14" relation="public-inheritance">
         </childnode>
-        <childnode refid="15" relation="usage">
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+        <childnode refid="17" relation="usage">
           <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
           <edgelabel>RELOAD_DONE_EVENT</edgelabel>
         </childnode>
       </node>
-      <node id="13">
+      <node id="21">
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
@@ -2072,7 +2080,17 @@
         <childnode refid="13" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="16">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
       <node id="15">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
         <label>SR_UTILS_NS::StringAtom</label>
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>

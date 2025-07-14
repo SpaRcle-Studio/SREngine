@@ -124,7 +124,7 @@ namespace SR_WORLD_NS {
 
     private:
         mutable std::map<EntityId, EntityId> m_registerEntityIdReplaceCache;
-        mutable std::map<SR_UTILS_NS::Prefab*, std::vector<Entity*>> m_registerEntityCache;
+        mutable std::map<SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::Prefab>, std::vector<Entity*>> m_registerEntityCache;
 
         SceneUpdater* m_sceneUpdater = nullptr;
 

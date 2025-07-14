@@ -102,7 +102,7 @@ See [SR\_UTILS\_NS::IResourceReloader](classSR__UTILS__NS_1_1IResourceReloader.m
 
 | Type | Name |
 | ---: | :--- |
-| virtual SR\_NODISCARD bool | [**IsResourceSuitableForReload**](classSR__UTILS__NS_1_1IResourceReloader.md#function-isresourcesuitableforreload) ([**IResource**](classSR__UTILS__NS_1_1IResource.md) \* pResource) const<br> |
+| virtual SR\_NODISCARD bool | [**IsResourceSuitableForReload**](classSR__UTILS__NS_1_1IResourceReloader.md#function-isresourcesuitableforreload) (const IResource::Ptr & pResource) const<br> |
 | virtual SR\_NODISCARD bool | [**Reload**](classSR__UTILS__NS_1_1IResourceReloader.md#function-reload) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path, [**ResourceInfo**](structSR__UTILS__NS_1_1ResourceInfo.md) \* pResourceInfo) = 0<br> |
 
 

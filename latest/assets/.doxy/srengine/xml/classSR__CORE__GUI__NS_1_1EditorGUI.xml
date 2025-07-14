@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="48" column="9" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="48" bodyend="50"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="45" column="9" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="45" bodyend="47"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__CORE__GUI__NS_1_1EditorGUI_1abdd836ee99ccfbcfb1161ede330c4910" prot="private" static="no">
         <type>SR_GRAPH_GUI_NS::WidgetManager</type>
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="41" column="9" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="41" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="38" column="9" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a6ed9b19f22cc02da37f74cd32002dffc" prot="private" static="no">
         <type>std::unordered_map&lt; size_t, SR_GRAPH_NS::GUI::Widget * &gt;</type>
@@ -63,11 +63,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="42" column="9" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="42" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="39" column="9" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="39" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a4d5a6e0ea20684c339d82bfbce1a0472" prot="private" static="no">
-        <type>std::map&lt; EditorIcon, <ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> * &gt;</type>
-        <definition>using SR_CORE_GUI_NS::EditorGUI::Icons =  std::map&lt;EditorIcon, SR_GTYPES_NS::Texture*&gt;</definition>
+      <memberdef kind="typedef" id="classSR__CORE__GUI__NS_1_1EditorGUI_1aa6ccaedbde3214ec9ee40f4407fd417d" prot="private" static="no">
+        <type>std::map&lt; EditorIcon, SR_GTYPES_NS::Texture::Ptr &gt;</type>
+        <definition>using SR_CORE_GUI_NS::EditorGUI::Icons =  std::map&lt;EditorIcon, SR_GTYPES_NS::Texture::Ptr&gt;</definition>
         <argsstring></argsstring>
         <name>Icons</name>
         <qualifiedname>SR_CORE_GUI_NS::EditorGUI::Icons</qualifiedname>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="43" column="9" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="43" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="40" column="9" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__CORE__GUI__NS_1_1EditorGUI_1aab2408855682331dc5af13c56ae2c2cd" prot="private" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SafePtr" kindref="compound">SR_HTYPES_NS::SafePtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">SR_GRAPH_NS::RenderContext</ref> &gt;</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="44" column="9" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="41" column="9" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__CORE__GUI__NS_1_1EditorGUI_1ab63c52ae68fb203877a9988b520cb77d" prot="private" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1Window" kindref="compound">SR_GRAPH_NS::Window</ref> &gt;</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="45" column="9" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="45" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="42" column="9" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a3a5b6d64d1a75288890f6bd64a736a50" prot="private" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__WORLD__NS_1_1Scene" kindref="compound">SR_WORLD_NS::Scene</ref> &gt;</type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="46" column="9" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="46" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="43" column="9" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__CORE__GUI__NS_1_1EditorGUI_1ad1c3566f080f81d65a5e105df854ad5f" prot="private" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__CORE__NS_1_1Engine" kindref="compound">SR_CORE_NS::Engine</ref> &gt;</type>
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="47" column="9" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="44" column="9" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="44" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -149,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="141" column="27" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="141" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="138" column="27" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="138" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1afad4f7993a6b5dd04456f277964e41ad" prot="private" static="no" mutable="no">
         <type>RenderContextPtr</type>
@@ -163,7 +163,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="143" column="26" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="143" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="140" column="26" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="140" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a2b858e70daf8f50bfa920ba89b6aeaff" prot="private" static="no" mutable="no">
         <type>EnginePtr</type>
@@ -177,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="144" column="19" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="144" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="141" column="19" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="141" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a77de8de2b23413459ab40abf3991bf80" prot="private" static="no" mutable="no">
         <type>Widgets</type>
@@ -191,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="146" column="17" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="146" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="143" column="17" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="143" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a3c7fe3a7dece668bcf9ad45b5ca71e3b" prot="private" static="no" mutable="no">
         <type>Icons</type>
@@ -205,7 +205,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="147" column="15" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="147" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="144" column="15" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="144" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1aab362bce14e2d4c502c507db863835ab" prot="private" static="no" mutable="no">
         <type>Click</type>
@@ -220,7 +220,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="149" column="15" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="149" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="146" column="15" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="146" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a8b1921f31ec192b146186b8e9ef54208" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -235,7 +235,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="151" column="21" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="151" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="148" column="21" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="148" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1adb74dd85269d6391ac691896da91705f" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -250,7 +250,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="152" column="21" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="152" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="149" column="21" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="149" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a1d93f2ab7372325614e97e9f8316834d" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -265,7 +265,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="153" column="21" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="153" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="150" column="21" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="150" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a0770c1495bede31d13fe97a65b4b2b42" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -280,7 +280,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="154" column="21" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="154" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="151" column="21" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="151" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a1417df05f7f9018843d1fa1719a6fead" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -295,7 +295,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="156" column="21" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="156" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="153" column="21" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="153" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1af22c3d62df1784a235ab20872535667d" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -310,7 +310,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="157" column="21" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="157" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="154" column="21" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="154" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1af3a544dae6ee08d895ae4ed367f08dbc" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -325,7 +325,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="159" column="14" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="159" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="156" column="14" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="156" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -345,7 +345,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="52" column="18"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="49" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a31e1ee8f282f9985ca8cb34375e4cb6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -359,7 +359,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="53" column="9"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="50" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a053a86d45a6b2d0a9f1da3f98d6dac9b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -377,7 +377,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="56" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="53" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a8f5582e64248d8c9618e461d5bd07f17" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -400,7 +400,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="58" column="39" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="58" bodyend="60"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="55" column="39" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="55" bodyend="57"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a9636edfdae266d820f45effb2c534b67" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -423,7 +423,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="62" column="22" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="62" bodyend="71"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="59" column="22" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="59" bodyend="68"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1ab46994c0ea32a17d329236c7d252eec2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -442,7 +442,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="73" column="36" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="73" bodyend="75"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="70" column="36" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="70" bodyend="72"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a8b20695d0afe72065b2b5475717b50dd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__GUI__NS_1_1Widget" kindref="compound">SR_GRAPH_GUI_NS::Widget</ref> *</type>
@@ -460,7 +460,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="77" column="46"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="74" column="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a5f7be886daa6e4893804ac70680f216c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -479,7 +479,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="79" column="22" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="79" bodyend="88"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="76" column="22" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="76" bodyend="85"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a826c7bec3cef42bc103e4fe59139945c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -498,7 +498,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="90" column="22" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="90" bodyend="96"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="87" column="22" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="87" bodyend="93"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1aec3c96078d9c08ad7232ba63580beb73" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -512,7 +512,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="98" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="95" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a42d8502fca54c75536ac621a27d230e9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -526,7 +526,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="100" column="27" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="100" bodyend="100"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="97" column="27" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="97" bodyend="97"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1af2418385f5e9175b012d0600b30e8e22" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -540,7 +540,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="101" column="27" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="101" bodyend="101"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="98" column="27" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="98" bodyend="98"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1abb9175b07cd9dc209c6cb7bca4091857" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD void *</type>
@@ -558,11 +558,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="102" column="27"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="99" column="27"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a15dc762a6c4ceb608843bf8156b13d22" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD <ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> *</type>
-        <definition>SR_NODISCARD SR_GTYPES_NS::Texture * SR_CORE_GUI_NS::EditorGUI::GetIcon</definition>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1ac17a3c595819347c65b928a2f9684d0b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> *</type>
+        <definition>SR_NODISCARD const SR_GTYPES_NS::Texture * SR_CORE_GUI_NS::EditorGUI::GetIcon</definition>
         <argsstring>(EditorIcon icon) const</argsstring>
         <name>GetIcon</name>
         <qualifiedname>SR_CORE_GUI_NS::EditorGUI::GetIcon</qualifiedname>
@@ -576,7 +576,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="103" column="44"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="100" column="50"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a13a4f68a024346ae7cdb49b526088344" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const EnginePtr &amp;</type>
@@ -590,7 +590,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="104" column="38" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="104" bodyend="104"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="101" column="38" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="101" bodyend="101"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a9849d8bc00521c623dc6fc747be69877" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -604,7 +604,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="105" column="27" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="105" bodyend="105"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="102" column="27" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="102" bodyend="102"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a31cb3f18b97ec6246b5f118abdbab502" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -622,7 +622,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="107" column="14" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="107" bodyend="107"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="104" column="14" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="104" bodyend="104"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a66dae4535da891942ed28ce5dd9776db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -636,7 +636,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="109" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="106" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1aec91b3d6557510d32954e771d7d08ff7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -654,7 +654,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="110" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="107" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1aac250e14cf7795ad870bd45fb33c0bac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -668,7 +668,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="111" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="108" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a0baf278d8073bbaeab279d50f1676295" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -682,7 +682,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="112" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="109" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1ad37b3bd99876893a6f09f030c4057018" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -696,7 +696,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="114" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="111" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1aaac99f5329f31124aa0870a3435219e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -710,7 +710,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="115" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="112" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a8b118495a82a4a3ad30a97742c8d948e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -728,7 +728,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="117" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="114" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a98abd9fe103e00fd2bdebd618fc82292" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -742,7 +742,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="118" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="115" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a517b7d2aa988e3820b30b6cd10e3ed10" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -756,7 +756,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="120" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="117" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a18a06bff7df2110f0d29ced84e8ce8a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -770,7 +770,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="122" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="119" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -790,7 +790,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="125" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="122" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a5383cb00bd6089953dd8988cfb25178e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -808,7 +808,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="127" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="124" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a968cef77b127589ca70d21de9f9487e5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -826,7 +826,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="129" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="126" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1aa6278eb09afb02562a78c5239ead58d7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -844,7 +844,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="130" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="127" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a5c3828d82575443d989a483a3db426f6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -862,7 +862,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="131" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="128" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1aee6c3d2316038126c61114d5e9c12493" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -876,7 +876,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="134" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="131" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1af4c8664a1976d98481f39951ffdf24ea" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -890,7 +890,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="136" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="133" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a5ced7fc7ea4e53c761a69d9dbc3424f2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -904,7 +904,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="137" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="134" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1ad51afe6c7222f451429b51be3bd695db" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -918,7 +918,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="138" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="135" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -947,7 +947,7 @@
         <label>SR_GRAPH_GUI_NS::WidgetManager</label>
       </node>
     </collaborationgraph>
-    <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="40" column="5" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="40" bodyend="161"/>
+    <location file="Engine/inc/Engine/GUI/EditorGUI.h" line="37" column="5" bodyfile="Engine/inc/Engine/GUI/EditorGUI.h" bodystart="37" bodyend="158"/>
     <listofallmembers>
       <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a9636edfdae266d820f45effb2c534b67" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>AddWidget</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a8f5582e64248d8c9618e461d5bd07f17" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>AddWindow</name></member>
@@ -965,12 +965,12 @@
       <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1ad1c3566f080f81d65a5e105df854ad5f" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>EnginePtr</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1aac250e14cf7795ad870bd45fb33c0bac" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>FixedUpdate</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a13a4f68a024346ae7cdb49b526088344" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>GetEngine</name></member>
-      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a15dc762a6c4ceb608843bf8156b13d22" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>GetIcon</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1ac17a3c595819347c65b928a2f9684d0b" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>GetIcon</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1abb9175b07cd9dc209c6cb7bca4091857" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>GetIconDescriptor</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a8b20695d0afe72065b2b5475717b50dd" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>GetWidget</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a5f7be886daa6e4893804ac70680f216c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>GetWidget</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1ab46994c0ea32a17d329236c7d252eec2" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>GetWindow</name></member>
-      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a4d5a6e0ea20684c339d82bfbce1a0472" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>Icons</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1aa6ccaedbde3214ec9ee40f4407fd417d" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>Icons</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1ad37b3bd99876893a6f09f030c4057018" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>Init</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1ac28f19d0af9b8bbaabdf47d52eeef386" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>InstantiateSO</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1af2418385f5e9175b012d0600b30e8e22" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>IsDockingEnabled</name></member>

@@ -117,31 +117,31 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**Destroy**](#function-destroy) ([**IResource**](classSR__UTILS__NS_1_1IResource.md) \* pResource) <br>_Register resource to destroy in resource manager._  |
+|  void | [**DeInitialize**](#function-deinitialize) () <br> |
+|  bool | [**Destroy**](#function-destroy) (const IResource::Ptr & pResource) <br>_Register resource to destroy in resource manager._  |
 |  void | [**EnableStackTraceProfiling**](#function-enablestacktraceprofiling) () <br> |
 |  void | [**Execute**](#function-execute) (const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void()&gt; & fun) <br> |
-|  SR\_NODISCARD [**IResource**](classSR__UTILS__NS_1_1IResource.md) \* | [**Find**](#function-find-13) (uint64\_t hashTypeName, const std::string & ID) <br> |
-|  T \* | [**Find**](#function-find-23) (const std::string & id) <br> |
-|  T \* | [**Find**](#function-find-33) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
+|  SR\_NODISCARD IResource::Ptr | [**Find**](#function-find-13) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) typeName, [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id) const<br> |
+|  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; | [**Find**](#function-find-23) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & id) <br> |
+|  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; | [**Find**](#function-find-33) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 |  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetCachePath**](#function-getcachepath) () const<br> |
 |  SR\_NODISCARD [**FileSystemWatcher::Ptr**](classSR__HTYPES__NS_1_1SharedPtr.md) | [**GetFileSystemWatcher**](#function-getfilesystemwatcher) () const<br> |
+|  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; | [**GetOrLoadResource**](#function-getorloadresource) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & rawPath) <br> |
 |  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetResPath**](#function-getrespath) () const<br> |
 |  SR\_NODISCARD const [**Path**](classSR__UTILS__NS_1_1Path.md) & | [**GetResPathRef**](#function-getrespathref) () const<br> |
-|  SR\_NODISCARD std::string\_view | [**GetTypeName**](#function-gettypename) (Hash hashName) const<br> |
-|  bool | [**Init**](#function-init) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & resourcesFolder) <br> |
-|  void | [**InspectResources**](#function-inspectresources) (const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void(const ResourcesTypes &)&gt; & callback) <br> |
-|  SR\_NODISCARD bool | [**IsLastResource**](#function-islastresource) ([**IResource**](classSR__UTILS__NS_1_1IResource.md) \* resource) <br> |
+|  bool | [**Initialize**](#function-initialize) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & resourcesFolder) <br> |
+|  void | [**InspectResources**](#function-inspectresources) (const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void(ResourcesTypes &)&gt; & callback) <br> |
+|  SR\_NODISCARD bool | [**IsInitialized**](#function-isinitialized) () const<br> |
+|  SR\_NODISCARD bool | [**IsLastResource**](#function-islastresource) (const IResource::Ptr & pResource) <br> |
+| virtual bool | [**IsSingletonCanBeDestroyed**](#function-issingletoncanbedestroyed) () override const<br> |
 |  SR\_NODISCARD bool | [**IsUsePointStackTraceProfilingEnabled**](#function-isusepointstacktraceprofilingenabled) () const<br> |
-| virtual void | [**OnSingletonDestroy**](#function-onsingletondestroy) () override<br> |
 |  void | [**PrintMemoryDump**](#function-printmemorydump) () <br> |
 |  void | [**PullWatchers**](#function-pullwatchers) () <br> |
 |  bool | [**RegisterReloader**](#function-registerreloader-12) (Args &&... args) <br> |
-|  void | [**RegisterResource**](#function-registerresource) ([**IResource**](classSR__UTILS__NS_1_1IResource.md) \* pResource) <br>_Register resource in resource manager._  |
-|  bool | [**RegisterType**](#function-registertype-12) () <br> |
-|  void | [**ReloadResource**](#function-reloadresource) ([**IResource**](classSR__UTILS__NS_1_1IResource.md) \* pResource) <br> |
+|  void | [**RegisterResource**](#function-registerresource) (const IResource::Ptr & pResource) <br>_Register resource in resource manager._  |
+|  void | [**ReloadResource**](#function-reloadresource) (const IResource::Ptr & pResource) <br> |
 |  void | [**ReloadResources**](#function-reloadresources) (float\_t dt) <br>_Проверить хэши ресурсов и перезагрузить их, если это требуется_  |
-|  bool | [**ReviveResource**](#function-reviveresource) ([**IResource**](classSR__UTILS__NS_1_1IResource.md) \* pResource) <br> |
-|  bool | [**Run**](#function-run) () <br> |
+|  bool | [**ReviveResource**](#function-reviveresource) (const IResource::Ptr & pResource) <br> |
 |  void | [**Synchronize**](#function-synchronize) (bool force) <br> |
 
 
@@ -337,12 +337,25 @@ const uint64_t SR_UTILS_NS::ResourceManager::ResourceLifeTime;
 
 
 
+### function DeInitialize 
+
+```C++
+void SR_UTILS_NS::ResourceManager::DeInitialize () 
+```
+
+
+
+
+<hr>
+
+
+
 ### function Destroy 
 
 _Register resource to destroy in resource manager._ 
 ```C++
 bool SR_UTILS_NS::ResourceManager::Destroy (
-    IResource * pResource
+    const IResource::Ptr & pResource
 ) 
 ```
 
@@ -395,10 +408,10 @@ void SR_UTILS_NS::ResourceManager::Execute (
 ### function Find [1/3]
 
 ```C++
-SR_NODISCARD IResource * SR_UTILS_NS::ResourceManager::Find (
-    uint64_t hashTypeName,
-    const std::string & ID
-) 
+SR_NODISCARD IResource::Ptr SR_UTILS_NS::ResourceManager::Find (
+    SR_UTILS_NS::StringAtom typeName,
+    SR_UTILS_NS::StringAtom id
+) const
 ```
 
 
@@ -412,8 +425,8 @@ SR_NODISCARD IResource * SR_UTILS_NS::ResourceManager::Find (
 
 ```C++
 template<typename T>
-inline T * SR_UTILS_NS::ResourceManager::Find (
-    const std::string & id
+inline SR_HTYPES_NS::SharedPtr < T > SR_UTILS_NS::ResourceManager::Find (
+    const SR_UTILS_NS::StringAtom & id
 ) 
 ```
 
@@ -428,7 +441,7 @@ inline T * SR_UTILS_NS::ResourceManager::Find (
 
 ```C++
 template<typename T>
-inline T * SR_UTILS_NS::ResourceManager::Find (
+inline SR_HTYPES_NS::SharedPtr < T > SR_UTILS_NS::ResourceManager::Find (
     const Path & path
 ) 
 ```
@@ -466,6 +479,22 @@ inline SR_NODISCARD FileSystemWatcher::Ptr SR_UTILS_NS::ResourceManager::GetFile
 
 
 
+### function GetOrLoadResource 
+
+```C++
+template<typename T>
+SR_HTYPES_NS::SharedPtr < T > SR_UTILS_NS::ResourceManager::GetOrLoadResource (
+    const Path & rawPath
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function GetResPath 
 
 ```C++
@@ -492,25 +521,10 @@ SR_NODISCARD const Path & SR_UTILS_NS::ResourceManager::GetResPathRef () const
 
 
 
-### function GetTypeName 
+### function Initialize 
 
 ```C++
-SR_NODISCARD std::string_view SR_UTILS_NS::ResourceManager::GetTypeName (
-    Hash hashName
-) const
-```
-
-
-
-
-<hr>
-
-
-
-### function Init 
-
-```C++
-bool SR_UTILS_NS::ResourceManager::Init (
+bool SR_UTILS_NS::ResourceManager::Initialize (
     const SR_UTILS_NS::Path & resourcesFolder
 ) 
 ```
@@ -526,8 +540,21 @@ bool SR_UTILS_NS::ResourceManager::Init (
 
 ```C++
 void SR_UTILS_NS::ResourceManager::InspectResources (
-    const SR_HTYPES_NS::Function < void(const ResourcesTypes &)> & callback
+    const SR_HTYPES_NS::Function < void(ResourcesTypes &)> & callback
 ) 
+```
+
+
+
+
+<hr>
+
+
+
+### function IsInitialized 
+
+```C++
+inline SR_NODISCARD bool SR_UTILS_NS::ResourceManager::IsInitialized () const
 ```
 
 
@@ -541,11 +568,26 @@ void SR_UTILS_NS::ResourceManager::InspectResources (
 
 ```C++
 SR_NODISCARD bool SR_UTILS_NS::ResourceManager::IsLastResource (
-    IResource * resource
+    const IResource::Ptr & pResource
 ) 
 ```
 
 
+
+
+<hr>
+
+
+
+### function IsSingletonCanBeDestroyed 
+
+```C++
+inline virtual bool SR_UTILS_NS::ResourceManager::IsSingletonCanBeDestroyed () override const
+```
+
+
+
+Implements [*SR\_UTILS\_NS::SingletonBase::IsSingletonCanBeDestroyed*](classSR__UTILS__NS_1_1SingletonBase.md#function-issingletoncanbedestroyed)
 
 
 <hr>
@@ -559,21 +601,6 @@ inline SR_NODISCARD bool SR_UTILS_NS::ResourceManager::IsUsePointStackTraceProfi
 ```
 
 
-
-
-<hr>
-
-
-
-### function OnSingletonDestroy 
-
-```C++
-virtual void SR_UTILS_NS::ResourceManager::OnSingletonDestroy () override
-```
-
-
-
-Implements [*SR\_UTILS\_NS::SingletonBase::OnSingletonDestroy*](classSR__UTILS__NS_1_1SingletonBase.md#function-onsingletondestroy)
 
 
 <hr>
@@ -627,7 +654,7 @@ inline bool SR_UTILS_NS::ResourceManager::RegisterReloader (
 _Register resource in resource manager._ 
 ```C++
 void SR_UTILS_NS::ResourceManager::RegisterResource (
-    IResource * pResource
+    const IResource::Ptr & pResource
 ) 
 ```
 
@@ -649,25 +676,11 @@ Call only from [**IResource**](classSR__UTILS__NS_1_1IResource.md) parents
 
 
 
-### function RegisterType [1/2]
-
-```C++
-template<typename T>
-inline bool SR_UTILS_NS::ResourceManager::RegisterType () 
-```
-
-
-
-
-<hr>
-
-
-
 ### function ReloadResource 
 
 ```C++
 void SR_UTILS_NS::ResourceManager::ReloadResource (
-    IResource * pResource
+    const IResource::Ptr & pResource
 ) 
 ```
 
@@ -698,21 +711,8 @@ void SR_UTILS_NS::ResourceManager::ReloadResources (
 
 ```C++
 bool SR_UTILS_NS::ResourceManager::ReviveResource (
-    IResource * pResource
+    const IResource::Ptr & pResource
 ) 
-```
-
-
-
-
-<hr>
-
-
-
-### function Run 
-
-```C++
-bool SR_UTILS_NS::ResourceManager::Run () 
 ```
 
 

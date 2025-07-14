@@ -187,7 +187,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  void SR\_FASTCALL | [**SetColor**](#function-setcolor) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, const [**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md) & v) noexcept<br> |
 | virtual void | [**SetShader**](#function-setshader-12) (ShaderPtr pShader, [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) stage=[**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md)()) <br> |
 |  void | [**SetShader**](#function-setshader-22) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path, [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) stage=[**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md)()) <br> |
-|  void SR\_FASTCALL | [**SetTexture**](#function-settexture) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, [**SR\_GTYPES\_NS::Texture**](classSR__GTYPES__NS_1_1Texture.md) \* pTexture) noexcept<br> |
+|  void SR\_FASTCALL | [**SetTexture**](#function-settexture) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_GTYPES\_NS::Texture**](classSR__GTYPES__NS_1_1Texture.md) &gt; & pTexture) noexcept<br> |
 |  void SR\_FASTCALL | [**SetVec4**](#function-setvec4) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, const SR\_MATH\_NS::FVector4 & v) noexcept<br> |
 | virtual void | [**UnregisterMesh**](#function-unregistermesh) (uint32\_t \* pId) <br> |
 |  void | [**Use**](#function-use) () <br> |
@@ -331,7 +331,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | ---: | :--- |
 | typedef [**SR\_GTYPES\_NS::Mesh**](classSR__GTYPES__NS_1_1Mesh.md) \* | [**MeshPtr**](#typedef-meshptr)  <br> |
 | typedef [**SR\_HTYPES\_NS::SafePtr**](classSR__HTYPES__NS_1_1SafePtr.md)&lt; [**RenderContext**](classSR__GRAPH__NS_1_1RenderContext.md) &gt; | [**RenderContextPtr**](#typedef-rendercontextptr)  <br> |
-| typedef [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* | [**ShaderPtr**](#typedef-shaderptr)  <br> |
+| typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) &gt; | [**ShaderPtr**](#typedef-shaderptr)  <br> |
 | typedef [**SR\_GTYPES\_NS::Texture**](classSR__GTYPES__NS_1_1Texture.md) \* | [**TexturePtr**](#typedef-textureptr)  <br> |
 
 
@@ -731,7 +731,7 @@ void SR_GRAPH_NS::BaseMaterial::SetShader (
 ```C++
 void SR_FASTCALL SR_GRAPH_NS::BaseMaterial::SetTexture (
     SR_UTILS_NS::StringAtom id,
-    SR_GTYPES_NS::Texture * pTexture
+    const SR_HTYPES_NS::SharedPtr < SR_GTYPES_NS::Texture > & pTexture
 ) noexcept
 ```
 
@@ -843,7 +843,7 @@ using SR_GRAPH_NS::BaseMaterial::RenderContextPtr =  SR_HTYPES_NS::SafePtr<Rende
 ### typedef ShaderPtr 
 
 ```C++
-using SR_GRAPH_NS::BaseMaterial::ShaderPtr =  SR_GTYPES_NS::Shader*;
+using SR_GRAPH_NS::BaseMaterial::ShaderPtr =  SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Shader>;
 ```
 
 

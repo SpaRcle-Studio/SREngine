@@ -8,6 +8,7 @@
     <innerfile refid="BaseMarshal_8h">BaseMarshal.h</innerfile>
     <innerfile refid="Breakpoint_8h">Breakpoint.h</innerfile>
     <innerfile refid="CastUtils_8h">CastUtils.h</innerfile>
+    <innerfile refid="CLIManager_8h">CLIManager.h</innerfile>
     <innerfile refid="CmdOptions_8h">CmdOptions.h</innerfile>
     <innerfile refid="CollisionData_8h">CollisionData.h</innerfile>
     <innerfile refid="Compression_8h">Compression.h</innerfile>

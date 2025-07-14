@@ -10,7 +10,7 @@
 
 
 
-* `#include <Utils/Common/NonCopyable.h>`
+* `#include <Utils/Types/SharedPtr.h>`
 
 
 

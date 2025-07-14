@@ -35,12 +35,14 @@ namespace SR_GTYPES_NS {
     class RenderTexture;
 
     class Framebuffer : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {
-    public:
-        using Ptr = Framebuffer*;
+        SR_CLASS()
         using Super = SR_UTILS_NS::IResource;
+    public:
         using ClearColors = std::vector<SR_MATH_NS::FColor>;
         using PipelinePtr = SR_HTYPES_NS::SharedPtr<Pipeline>;
-    private:
+        using Ptr = SR_HTYPES_NS::SharedPtr<Framebuffer>;
+
+    public:
         Framebuffer();
         ~Framebuffer() override;
 

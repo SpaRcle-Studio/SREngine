@@ -4,7 +4,7 @@
     <compoundname>SR_GRAPH_NS::IRenderTechnique</compoundname>
     <basecompoundref refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource" prot="public" virt="non-virtual">SR_GRAPH_NS::Memory::IGraphicsResource</basecompoundref>
     <basecompoundref refid="classSR__GRAPH__NS_1_1GroupPass" prot="public" virt="non-virtual">SR_GRAPH_NS::GroupPass</basecompoundref>
-    <derivedcompoundref refid="classSR__GRAPH__NS_1_1RenderTechnique" prot="public" virt="non-virtual">SR_GRAPH_NS::RenderTechnique</derivedcompoundref>
+    <derivedcompoundref refid="classSR__GRAPH__NS_1_1FileRenderTechnique" prot="public" virt="non-virtual">SR_GRAPH_NS::FileRenderTechnique</derivedcompoundref>
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1ScriptableRenderTechnique" prot="public" virt="non-virtual">SR_GRAPH_NS::ScriptableRenderTechnique</derivedcompoundref>
     <sectiondef kind="public-type">
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1IRenderTechnique_1aabe916f28e0ba33fad1f0c3b6808e83c" prot="public" static="no">
@@ -77,6 +77,20 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="37" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="37" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1IRenderTechnique_1a3761753eee9965e5c33748c688d8d3b7" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> &gt;</type>
+        <definition>using SR_GRAPH_NS::IRenderTechnique::Ptr =  SR_HTYPES_NS::SharedPtr&lt;IRenderTechnique&gt;</definition>
+        <argsstring></argsstring>
+        <name>Ptr</name>
+        <qualifiedname>SR_GRAPH_NS::IRenderTechnique::Ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="40" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-attrib">
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1IRenderTechnique_1abb48510764be0f3f045c46ae7ab67d87" prot="public" static="yes" mutable="no">
@@ -108,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="81" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="81" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="87" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="87" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1IRenderTechnique_1a53592eedb14ed307d0ca2caefd5e74c2" prot="protected" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -123,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="82" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="82" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="88" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="88" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1IRenderTechnique_1ae8c981d2c083b5953b02feb06e294d8e" prot="protected" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -138,7 +152,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="83" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="83" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="89" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1IRenderTechnique_1ad6f8c70c4885e0ce6a6a523e794371a7" prot="protected" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_GRAPH_NS::IRenderTechnique::m_isDead</definition>
+        <argsstring></argsstring>
+        <name>m_isDead</name>
+        <qualifiedname>SR_GRAPH_NS::IRenderTechnique::m_isDead</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="90" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="90" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1IRenderTechnique_1a2b12363689a7acd7bff08fbdb8c0ca94" prot="protected" static="no" mutable="no">
         <type>std::map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, FrameBufferControllerPtr &gt;</type>
@@ -152,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="85" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="85" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="92" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="92" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1IRenderTechnique_1aeb4eff392e88f9c1c64cfd08adbc8e8d" prot="protected" static="no" mutable="no">
         <type>PassQueues</type>
@@ -166,7 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="87" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="87" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="94" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="94" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -182,7 +211,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="40" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="43" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1a3543bf8bfe11de137cad196a096d9f01" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -196,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="41" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="44" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1af06afdd96b707b8c2bcef3743a557b0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -212,7 +241,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="44" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="47" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1a0a6c686ad1fa68b3503a00a8069b1a1d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -228,7 +257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="45" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="48" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1acc82c1ef472390c3961ed51fbc28d974" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -244,7 +273,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="46" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="49" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1a0f225f27cf92cb04d29b03650f7eb6fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -260,7 +289,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="47" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="50" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1a1087f891a05bea07558f313ffaf54b18" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::IRenderTechnique::SetDirty</definition>
+        <argsstring>()</argsstring>
+        <name>SetDirty</name>
+        <qualifiedname>SR_GRAPH_NS::IRenderTechnique::SetDirty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="51" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1ab283e950411fbad853de8e59c5c686ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -275,7 +318,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="49" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="53" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1a8d908e096ffec512294a617fa1109ad2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::IRenderTechnique::KillTechnique</definition>
+        <argsstring>()</argsstring>
+        <name>KillTechnique</name>
+        <qualifiedname>SR_GRAPH_NS::IRenderTechnique::KillTechnique</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="55" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="55" bodyend="55"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1a596a4017cc0261fcf3d1163958f00ac7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -290,7 +347,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="51" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="57" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1a2119c9686c62b599fffcea483955d43a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -308,7 +365,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="53" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="59" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1a2fca4b2845f1c2cec6b501230ad6821f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -326,7 +383,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="54" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="60" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1a35e5446ff2b8a8b8abd694446a8a2308" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD CameraPtr</type>
@@ -340,7 +397,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="56" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="56" bodyend="56"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="62" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="62" bodyend="62"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1a4e7f6c94a109983057926432f8c8e867" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD RenderScenePtr</type>
@@ -355,7 +412,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="57" column="37"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="63" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1a9c5f6a49b7b57933fdc7a57330b165aa" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -369,7 +426,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="58" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="64" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1a08313f12474361f815eda22790f7eb72" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GRAPH_NS::IRenderTechnique::IsTechniqueDead</definition>
+        <argsstring>() const</argsstring>
+        <name>IsTechniqueDead</name>
+        <qualifiedname>SR_GRAPH_NS::IRenderTechnique::IsTechniqueDead</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="65" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1ac330f5ff4ba1b807bb9e84c43924c3a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -388,7 +459,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="60" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="67" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1ac34275c0ff731da6ce455c9b17556f83" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -403,7 +474,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="61" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="68" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1a237b89b3be2ea8b3016c245fcd325c1c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD FrameBufferControllerPtr</type>
@@ -421,7 +492,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="63" column="47"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="70" column="47"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1a85b689d3132181cae4001dacbca6cfd1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__GTYPES__NS_1_1Mesh" kindref="compound">SR_GTYPES_NS::Mesh</ref> *</type>
@@ -439,7 +510,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="65" column="28"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="72" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1adf021b47688ffe55f55227b6a78da740" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__GTYPES__NS_1_1Mesh" kindref="compound">SR_GTYPES_NS::Mesh</ref> *</type>
@@ -461,7 +532,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="66" column="28"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="73" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1abc99a67fe607f518a42412df76c41abf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__GTYPES__NS_1_1Mesh" kindref="compound">SR_GTYPES_NS::Mesh</ref> *</type>
@@ -487,7 +558,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="67" column="28"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="74" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1a9252f6365dfe1a32ea6c412bcc60a3b3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__GTYPES__NS_1_1Mesh" kindref="compound">SR_GTYPES_NS::Mesh</ref> *</type>
@@ -513,7 +584,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="68" column="28"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="75" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1a1a5ccb8771ac2927a04f1c2225bec749" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const PassQueues &amp;</type>
@@ -527,7 +598,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="69" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="69" bodyend="69"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="76" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="76" bodyend="76"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -537,28 +608,14 @@
         <argsstring>()</argsstring>
         <name>Build</name>
         <qualifiedname>SR_GRAPH_NS::IRenderTechnique::Build</qualifiedname>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1RenderTechnique_1a66716b01cec661b6630d9ffd3df96034">Build</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1FileRenderTechnique_1afde6880b532dc5252ae88f568f2360bc">Build</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="72" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="72" bodyend="72"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1a1087f891a05bea07558f313ffaf54b18" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_GRAPH_NS::IRenderTechnique::SetDirty</definition>
-        <argsstring>()</argsstring>
-        <name>SetDirty</name>
-        <qualifiedname>SR_GRAPH_NS::IRenderTechnique::SetDirty</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="73" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="79" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="79" bodyend="79"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1ae42052d285f8ece8d8e26481345e29a2" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -572,7 +629,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="74" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="80" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1aaa33fdc7067b80cfd2e03bdf141cbd00" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -586,7 +643,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="75" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="81" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1a1d409e99cee98de18c99830ee1d40dcc" prot="protected" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -601,7 +658,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="77" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="77" bodyend="77"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="83" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="83" bodyend="83"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IRenderTechnique_1a826b7d043b1cccd8b3a653e2470e8210" prot="protected" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD std::string</type>
@@ -616,7 +673,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="78" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="78" bodyend="78"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="84" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="84" bodyend="84"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -629,7 +686,13 @@
         <link refid="classSR__GRAPH__NS_1_1BasePass"/>
         <childnode refid="5" relation="public-inheritance">
         </childnode>
-        <childnode refid="7" relation="public-inheritance">
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>SR_GRAPH_NS::FileRenderTechnique</label>
+        <link refid="classSR__GRAPH__NS_1_1FileRenderTechnique"/>
+        <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
@@ -650,31 +713,35 @@
         <label>SR_GRAPH_NS::Memory::IGraphicsResource</label>
         <link refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource"/>
       </node>
-      <node id="9">
-        <label>SR_GRAPH_NS::RenderTechnique</label>
-        <link refid="classSR__GRAPH__NS_1_1RenderTechnique"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="10">
+      <node id="12">
         <label>SR_GRAPH_NS::ScriptableRenderTechnique</label>
         <link refid="classSR__GRAPH__NS_1_1ScriptableRenderTechnique"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="7">
-        <label>SR_SRLM_NS::IExecutableNode</label>
-        <link refid="classSR__SRLM__NS_1_1IExecutableNode"/>
-        <childnode refid="8" relation="public-inheritance">
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="7" relation="public-inheritance">
         </childnode>
+      </node>
+      <node id="7">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
       </node>
       <node id="8">
-        <label>SR_SRLM_NS::LogicalNode</label>
-        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
-        <childnode refid="6" relation="public-inheritance">
+        <label>SR_SRLM_NS::IExecutableNode</label>
+        <link refid="classSR__SRLM__NS_1_1IExecutableNode"/>
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="6">
+      <node id="9">
+        <label>SR_SRLM_NS::LogicalNode</label>
+        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
@@ -686,7 +753,7 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="17">
+      <node id="22">
         <label>Entity</label>
       </node>
       <node id="6">
@@ -694,22 +761,22 @@
         <link refid="classSR__GRAPH__NS_1_1BasePass"/>
         <childnode refid="7" relation="public-inheritance">
         </childnode>
-        <childnode refid="9" relation="public-inheritance">
-        </childnode>
-        <childnode refid="15" relation="usage">
-          <edgelabel>m_camera</edgelabel>
+        <childnode refid="11" relation="public-inheritance">
         </childnode>
         <childnode refid="20" relation="usage">
+          <edgelabel>m_camera</edgelabel>
+        </childnode>
+        <childnode refid="25" relation="usage">
           <edgelabel>m_uboManager</edgelabel>
         </childnode>
-        <childnode refid="23" relation="usage">
+        <childnode refid="28" relation="usage">
           <edgelabel>m_descriptorManager</edgelabel>
         </childnode>
       </node>
-      <node id="23">
+      <node id="28">
         <label>SR_GRAPH_NS::DescriptorManager</label>
         <link refid="classSR__GRAPH__NS_1_1DescriptorManager"/>
-        <childnode refid="24" relation="public-inheritance">
+        <childnode refid="29" relation="public-inheritance">
         </childnode>
       </node>
       <node id="5">
@@ -733,10 +800,10 @@
           <edgelabel>m_renderContext</edgelabel>
         </childnode>
       </node>
-      <node id="20">
+      <node id="25">
         <label>SR_GRAPH_NS::Memory::UBOManager</label>
         <link refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager"/>
-        <childnode refid="21" relation="public-inheritance">
+        <childnode refid="26" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
@@ -745,68 +812,87 @@
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="15">
+      <node id="20">
         <label>SR_GTYPES_NS::Camera</label>
         <link refid="classSR__GTYPES__NS_1_1Camera"/>
-        <childnode refid="16" relation="public-inheritance">
+        <childnode refid="21" relation="public-inheritance">
         </childnode>
       </node>
       <node id="4">
         <label>SR_HTYPES_NS::SafePtr&lt; T &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SafePtr"/>
       </node>
-      <node id="9">
-        <label>SR_SRLM_NS::IExecutableNode</label>
-        <link refid="classSR__SRLM__NS_1_1IExecutableNode"/>
-        <childnode refid="10" relation="public-inheritance">
+      <node id="8">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="11">
-        <label>SR_SRLM_NS::LogicalMachine</label>
-        <link refid="classSR__SRLM__NS_1_1LogicalMachine"/>
-        <childnode refid="12" relation="public-inheritance">
+      <node id="9">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="10" relation="usage">
+          <edgelabel>m_data</edgelabel>
         </childnode>
       </node>
       <node id="10">
-        <label>SR_SRLM_NS::LogicalNode</label>
-        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
-        <childnode refid="8" relation="public-inheritance">
-        </childnode>
-        <childnode refid="11" relation="usage">
-          <edgelabel>m_machine</edgelabel>
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="11">
+        <label>SR_SRLM_NS::IExecutableNode</label>
+        <link refid="classSR__SRLM__NS_1_1IExecutableNode"/>
+        <childnode refid="12" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="16">
-        <label>SR_UTILS_NS::Component</label>
-        <link refid="classSR__UTILS__NS_1_1Component"/>
-        <childnode refid="17" relation="public-inheritance">
-        </childnode>
-        <childnode refid="18" relation="usage">
-          <edgelabel>m_parent</edgelabel>
-        </childnode>
-        <childnode refid="19" relation="usage">
-          <edgelabel>m_scene</edgelabel>
-        </childnode>
-      </node>
-      <node id="18">
-        <label>SR_UTILS_NS::IComponentable</label>
-        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
-        <childnode refid="17" relation="public-inheritance">
+      <node id="14">
+        <label>SR_SRLM_NS::LogicalMachine</label>
+        <link refid="classSR__SRLM__NS_1_1LogicalMachine"/>
+        <childnode refid="15" relation="public-inheritance">
         </childnode>
       </node>
       <node id="12">
+        <label>SR_SRLM_NS::LogicalNode</label>
+        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+        <childnode refid="14" relation="usage">
+          <edgelabel>m_machine</edgelabel>
+        </childnode>
+      </node>
+      <node id="21">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="22" relation="public-inheritance">
+        </childnode>
+        <childnode refid="23" relation="usage">
+          <edgelabel>m_parent</edgelabel>
+        </childnode>
+        <childnode refid="24" relation="usage">
+          <edgelabel>m_scene</edgelabel>
+        </childnode>
+      </node>
+      <node id="23">
+        <label>SR_UTILS_NS::IComponentable</label>
+        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
+        <childnode refid="22" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
         <label>SR_UTILS_NS::IResource</label>
         <link refid="classSR__UTILS__NS_1_1IResource"/>
         <childnode refid="7" relation="public-inheritance">
         </childnode>
-        <childnode refid="13" relation="public-inheritance">
+        <childnode refid="16" relation="public-inheritance">
         </childnode>
-        <childnode refid="14" relation="usage">
+        <childnode refid="17" relation="public-inheritance">
+        </childnode>
+        <childnode refid="19" relation="usage">
           <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
           <edgelabel>RELOAD_DONE_EVENT</edgelabel>
         </childnode>
       </node>
-      <node id="8">
+      <node id="13">
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
@@ -816,48 +902,60 @@
         <childnode refid="8" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="24">
-        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="22" relation="public-inheritance">
-        </childnode>
+      <node id="18">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
       </node>
-      <node id="21">
-        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="22" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="22">
-        <label>SR_UTILS_NS::SingletonBase</label>
-        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
-        <childnode refid="8" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="14">
-        <label>SR_UTILS_NS::StringAtom</label>
-        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
-      </node>
-      <node id="13">
-        <label>SR_UTILS_NS::SubscriptionHolder</label>
-        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
-      </node>
-      <node id="19">
-        <label>SR_WORLD_NS::Scene</label>
-        <link refid="classSR__WORLD__NS_1_1Scene"/>
+      <node id="17">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
         <childnode refid="18" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="29">
+        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="27" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="27" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+      <node id="16">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      </node>
+      <node id="24">
+        <label>SR_WORLD_NS::Scene</label>
+        <link refid="classSR__WORLD__NS_1_1Scene"/>
+        <childnode refid="23" relation="public-inheritance">
+        </childnode>
+      </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="31" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="31" bodyend="89"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" line="31" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h" bodystart="31" bodyend="96"/>
     <listofallmembers>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>AddDependency</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1af9087ca5182397a9c7d3b92fb5591523" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>AddDependency</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>AddInputConnection</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a451d30d4d677248caa80bb7ac74baad9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>AddInputData</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a72915afde33f4d0c714e454cab1544c7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>AddInputData</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac528a232f2481034bf0c9c866aadf580" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>AddOutputConnection</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a968e3caf521de3d586f0ffb6cd9c2e07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>AddOutputData</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a70d337798b8e852a40f5f3a74fe35d79" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>AddOutputData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>AutoFree</name></member>
       <member refid="classSR__SRLM__NS_1_1IExecutableNode_1a52d82db24c1ba529cf2c3fb289188eae" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Base</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a0d095ccdf074b9c91026a4f1b7e46f91" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>BasePass</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1afffc5aa7bc9b5e340f99221abdf47be0" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Bind</name></member>
@@ -866,10 +964,12 @@
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ab8e320966e6ea9c1792ce8d7743f0a7b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>CameraPtr</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4b0351f30fc7afe7f45854cde8e09f64" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>ClearLogicalNode</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a999915d4aaaaedc6961849f95e311b54" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Context</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>DecrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1abb48510764be0f3f045c46ae7ab67d87" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>DEFAULT_RENDER_TECHNIQUE</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1a29b1bfca493d7c9e93b9d2ccd0919a1e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>DeInit</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ab417478adc60452e564a0ec2ac2d7f2b" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>DeInitGraphicsResource</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ae42052d285f8ece8d8e26481345e29a2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>DeInitPasses</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>DynamicCast</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab95638d1f3f8a9b82a1dfdaa63d28d1f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Execute</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1abcbd0e8263b9809e9bbc2f0c817e4503" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>FindPass</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1a20c3fb2bf3786cd776f09f008371ba7c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>FindPass</name></member>
@@ -877,9 +977,11 @@
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1a81ad67862db2e023140ea7f197d6b119" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>ForEachPass</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1aabe916f28e0ba33fad1f0c3b6808e83c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>FrameBufferControllerPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a596a4017cc0261fcf3d1163958f00ac7" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>FreeVideoMemory</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Get</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac38d38ae8e248a1b1ad573f3e2ac7ccf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetBaseLogicalNode</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a35e5446ff2b8a8b8abd694446a8a2308" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetCamera</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac6c46124f5261f90e4392fd749afc0e1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetContainerParents</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a725e3e44aa2830a8a799d71e13693a73" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetContainerParents</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a149dec24886d7c8700a1b117c469307f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetContext</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a237b89b3be2ea8b3016c245fcd325c1c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetFrameBufferController</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a0928ede3e5d5886b93cb7eba8d77b744" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetFrameBuffers</name></member>
@@ -893,12 +995,20 @@
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8f05935a0013471af3796065104ddd87" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetParent</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a95b0ad3eee1d6801d720bc7eab40bc6e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetPassPipeline</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ae8747567cc979bc69b84be32896e03b0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetPipeline</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetPtrData</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a1a5ccb8771ac2927a04f1c2225bec749" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetQueues</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetRawPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ac6a1c5c4af59a5ad1764c67147ed6966" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetRenderContext</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a4e7f6c94a109983057926432f8c8e867" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetRenderScene</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetSRClass</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae8e205c3d55f751a1cffabd6ae2cbafa" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetStatus</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ace5d758ae98e877e7fe6b9b311ca8976" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetTechnique</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetThis</name></member>
       <member refid="classSR__SRLM__NS_1_1IExecutableNode_1a5e765eb12571b7a44b7f1dc9cfcf2b4e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a39f67280ae696a53716dbe19ef2461ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>HasErrors</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4b0bdf3803c8a5163c579feab8e93704" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Hash</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a05a08258b94dbd0e17d74634384ebed4" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>HasPostRender</name></member>
@@ -908,6 +1018,7 @@
       <member refid="classSR__SRLM__NS_1_1IExecutableNode_1a72369ad750e0cbaa06007623f7a5a6aa" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>IExecutableNode</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a2674e73b6c08f0962a2036d6b37f8c0d" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>IGraphicsResource</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1afcc66f98c8ca1ccde9afaeb65fe6d9ee" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>IGraphicsResource</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>IncrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ab283e950411fbad853de8e59c5c686ad" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Init</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae6934733a21e34c45488912bdac8b9a4" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>InitNode</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a46d4de6ffa829b0ac09255febc01f8c3" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>InitValues</name></member>
@@ -921,39 +1032,51 @@
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1aafd12c320ddcfd1850b69560ba7b3131" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>IsNeedPostRepeat</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a187877bae66f7b85f2e285d83ae2874f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>IsNeedRepeat</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a0f333ecbc614fc619a47de757b06b048" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>IsSuccessfullyCompleted</name></member>
+      <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a08313f12474361f815eda22790f7eb72" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>IsTechniqueDead</name></member>
+      <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a8d908e096ffec512294a617fa1109ad2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>KillTechnique</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1afb4405820e3f634ad6eaaf91285c840e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Load</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a6bcd14ebcd882a6f89e531c1789f7037" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>LoadXml</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>m_basicManually</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad98f4d77d135b01f81a76f9534b393c1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>m_camera</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>m_data</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a25fe2fa123f3a2a1fee0ca8ec9e64fa2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>m_descriptorManager</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a53592eedb14ed307d0ca2caefd5e74c2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>m_dirty</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a2b12363689a7acd7bff08fbdb8c0ca94" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>m_frameBufferControllers</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ae8c981d2c083b5953b02feb06e294d8e" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>m_hasErrors</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1aaefebe7fd52cbf14db7c85bbe21b49ef" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>m_inputs</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1adf9d6452fd88d1c578835f72dcc08789" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>m_isCalculated</name></member>
+      <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ad6f8c70c4885e0ce6a6a523e794371a7" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>m_isDead</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a94e08d6063aad6edd1ff62430d08fd20" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>m_machine</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3a2a6ff04f3fe1f0a7d3691fa9c38bad" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>m_nodeIndex</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1acdfab2ebb3fe8db5559f506f14207265" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>m_outputs</name></member>
-      <member refid="classSR__GRAPH__NS_1_1GroupPass_1a68c07f5cdb6306f82bc207fa2872fca4" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>m_passes</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GroupPass_1a8666988960c7b392ef4f63a4eb85f1a3" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>m_passes</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1aab5b6b9c539f265beb0b86d683f7f924" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>m_pipeline</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1aeb4eff392e88f9c1c64cfd08adbc8e8d" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>m_queues</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1aec3e5a7cc61a197bc507d0d26f239c04" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>m_renderContext</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a693f9e83b3499d00aff3ec8ba31a2841" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>m_renderScene</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a326155de44e7fe4f9a7f6f905f239e83" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>m_status</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8b2e3a39351e9141029bea133f380465" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>m_uboManager</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>MakeShared</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1abeb669de15f340d47b81aff73c8494a7" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>MarkDirty</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a798d0be5203c28d4754826bc95a25d82" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>MarkPipelineUnBuild</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1aa7c29336844c31150ba16812fc82ad7d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>MeshPtr</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual" ambiguityscope="SR_SRLM_NS::IExecutableNode::"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual" ambiguityscope="SR_SRLM_NS::IExecutableNode::"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>NonCopyable</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1a4f4001a872701b375649681b01f13e91" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>OnMeshAdded</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1af37e4e5995bd3ff7b33c3df773254ac9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>OnMeshRemoved</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ac34275c0ff731da6ce455c9b17556f83" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>OnMultisampleChanged</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ac330f5ff4ba1b807bb9e84c43924c3a8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>OnResize</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a833f3da55449659aeb8df7992155dd69" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>OnResourceUpdated</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>operator-&gt;</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a99a9f5fd64c904f5fee0a8c932b1c017" prot="public" virt="non-virtual" ambiguityscope="SR_GRAPH_NS::"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>operator=</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_GRAPH_NS::GroupPass::"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual" ambiguityscope="SR_GRAPH_NS::GroupPass::SR_UTILS_NS::"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual" ambiguityscope="SR_GRAPH_NS::GroupPass::"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual" ambiguityscope="SR_GRAPH_NS::GroupPass::"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_GRAPH_NS::GroupPass::SR_SRLM_NS::IExecutableNode::"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>operator==</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a0a6c686ad1fa68b3503a00a8069b1a1d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Overlay</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a85b689d3132181cae4001dacbca6cfd1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>PickMeshAt</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1adf021b47688ffe55f55227b6a78da740" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>PickMeshAt</name></member>
@@ -962,12 +1085,16 @@
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a9a07bf1f90447c55603ffa6b1e0bed70" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Pins</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a6dc9bedad0df3df80fb9b4bdc0296873" prot="public" virt="non-virtual" ambiguityscope="SR_GRAPH_NS::"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>PipelinePtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ac2790f23f7796eb36002c30dc817f1ba" prot="public" virt="non-virtual" ambiguityscope="SR_GRAPH_NS::GroupPass::"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>PipelinePtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>PolymorphicCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1aaa25866fae2b8ae8552b8d8508a35ac2" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>PostRender</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1ad52301708b23646274027c680dda84b7" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>PostUpdate</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1af06afdd96b707b8c2bcef3743a557b0e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Prepare</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1af5e458a31d0c5bd370bd486d46ae8a75" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>PreRender</name></member>
+      <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a3761753eee9965e5c33748c688d8d3b7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>ReinterpretCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1aaa33fdc7067b80cfd2e03bdf141cbd00" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>ReleaseFrameBufferControllers</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ab3931d45e2b3c2fd69160c76748dd95d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>RemoveDependency</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac21f24c643f3298ec89225361ce96a9f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>RemoveDependency</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae81c72460b1aeba9e7a6d61cfd26ab69" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>RemoveInput</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3dd7841012e531003e34e7b8cee39c8a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>RemoveInputConnection</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a1d32f0aa31055f7327c207e687fd159f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>RemoveOutput</name></member>
@@ -975,33 +1102,50 @@
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1acc82c1ef472390c3961ed51fbc28d974" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Render</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ab9a2f99532e7a296100c1323b7e632c4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>RenderContextPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a8ad7dc5e483a74446d60f628fd923528" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>RenderScenePtr</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4fe38d653d32f3462b0f932fe1db83a7" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Reset</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Reset</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4fe38d653d32f3462b0f932fe1db83a7" prot="public" virt="virtual" ambiguityscope="SR_SRLM_NS::IExecutableNode::"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Reset</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac04e4fd8681f829b225da3d92de851f9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>ResetInputFlows</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ad119153e52e8ea5c69fc41d600a6f98b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>ResetOutputFlows</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a26cb3321be56bb940227895f39e39585" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>ResetStatus</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a4fb6331893e314c01da26b361197a75e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>ResourceContainer</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a1d2f00105677e74286e1d1c8dee82255" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>SaveXml</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a2119c9686c62b599fffcea483955d43a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>SetCamera</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a62227cc4ae3b9feee5afcca5f23bc919" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>SetContext</name></member>
-      <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a1087f891a05bea07558f313ffaf54b18" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>SetDirty</name></member>
+      <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a1087f891a05bea07558f313ffaf54b18" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>SetDirty</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1acee317aea228ef1431a3a4b37010cedb" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>SetInput</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a5b46945b1d679dbd01c1eb4587adfd8b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>SetMachine</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a1f1fe9682ea099f5ca3fbbfb6bc6a9e5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>SetName</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a915d9919621e79a3ee48ddb15799123c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>SetNodeIndex</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ab5e34c676e9594e60de4ca2e962a0cf7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>SetParent</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>SetPointerFromBase</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a97892e608c168ea6f1937e19d4e6e685" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>SetRenderContext</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a2fca4b2845f1c2cec6b501230ad6821f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>SetRenderScene</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1a482bd1243f9b252fa81b99aeaa88617c" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>SetRenderTechnique</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a97cd8c3e02986bed93c9db6fc7569e0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>ShaderPtr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a65e58bf20b3acc95f7e07f4cef52facb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>ShaderPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>StaticCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a5487b12037b2a6ee644409bdf3a9dcac" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Super</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Unlock</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a0f225f27cf92cb04d29b03650f7eb6fe" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Update</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac84a44cf058fa5cb53715e250ae7157c" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>UpdateResources</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Valid</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a127a21b6754f470eeddf8af6f2c16cb3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>~BasePass</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1a8d48368ad09721d19defb74eae582660" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>~GroupPass</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ada3d293778fe4fb07865aaf7eca8c8d9" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>~IGraphicsResource</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a3543bf8bfe11de137cad196a096d9f01" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>~IRenderTechnique</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a19b262ecaf034d84c1783c24712ccf2d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>~LogicalNode</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>~NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a25f84a35792474f3b2e2eff6431695d3" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>~ResourceContainer</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a25f84a35792474f3b2e2eff6431695d3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>~ResourceContainer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>~SharedPtrBase</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

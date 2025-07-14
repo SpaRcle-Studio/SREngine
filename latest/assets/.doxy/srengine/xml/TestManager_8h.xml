@@ -4,16 +4,41 @@
     <compoundname>TestManager.h</compoundname>
     <includes refid="Singleton_8h" local="no">Utils/Common/Singleton.h</includes>
     <includes refid="Coroutine_8h" local="no">Utils/Common/Coroutine.h</includes>
-    <includes refid="Function_8h" local="no">Utils/Types/Function.h</includes>
+    <includes refid="Enumerations_8h" local="no">Utils/Common/Enumerations.h</includes>
+    <includes refid="Asset_8h" local="no">Utils/Resources/Asset.h</includes>
+    <includedby refid="SRSLTest_8h" local="no">Engine/inc/Engine/Tests/SRSLTest.h</includedby>
+    <includedby refid="SharedPtrAutotests_8h" local="no">Engine/libs/Utils/inc/Utils/Tests/SharedPtrAutotests.h</includedby>
     <incdepgraph>
-      <node id="1">
-        <label>Engine/inc/Engine/Tests/TestManager.h</label>
-        <link refid="TestManager_8h"/>
-        <childnode refid="2" relation="include">
+      <node id="116">
+        <label>Utils/Common/AnyMarshal.h</label>
+        <link refid="AnyMarshal_8h_source"/>
+        <childnode refid="117" relation="include">
         </childnode>
-        <childnode refid="77" relation="include">
+        <childnode refid="118" relation="include">
         </childnode>
-        <childnode refid="78" relation="include">
+      </node>
+      <node id="110">
+        <label>Utils/Common/AnyVisitor.h</label>
+        <link refid="AnyVisitor_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="117">
+        <label>Utils/Common/BaseMarshal.h</label>
+        <link refid="BaseMarshal_8h_source"/>
+        <childnode refid="100" relation="include">
+        </childnode>
+        <childnode refid="118" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="98" relation="include">
+        </childnode>
+        <childnode refid="109" relation="include">
+        </childnode>
+        <childnode refid="112" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
         </childnode>
       </node>
       <node id="68">
@@ -22,10 +47,48 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
+      <node id="104">
+        <label>Utils/Common/CastUtils.h</label>
+        <link refid="CastUtils_8h_source"/>
+        <childnode refid="101" relation="include">
+        </childnode>
+      </node>
       <node id="77">
         <label>Utils/Common/Coroutine.h</label>
         <link refid="Coroutine_8h_source"/>
         <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="79">
+        <label>Utils/Common/EnumReflector.h</label>
+        <link refid="EnumReflector_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+      </node>
+      <node id="78">
+        <label>Utils/Common/Enumerations.h</label>
+        <link refid="Enumerations_8h_source"/>
+        <childnode refid="79" relation="include">
+        </childnode>
+      </node>
+      <node id="80">
+        <label>Utils/Common/HashManager.h</label>
+        <link refid="HashManager_8h_source"/>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
         </childnode>
       </node>
       <node id="71">
@@ -34,6 +97,22 @@
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="72" relation="include">
+        </childnode>
+      </node>
+      <node id="115">
+        <label>Utils/Common/MarshalUtils.h</label>
+        <link refid="MarshalUtils_8h_source"/>
+        <childnode refid="100" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="98" relation="include">
+        </childnode>
+        <childnode refid="109" relation="include">
+        </childnode>
+        <childnode refid="116" relation="include">
+        </childnode>
+        <childnode refid="117" relation="include">
         </childnode>
       </node>
       <node id="3">
@@ -58,9 +137,189 @@
         <childnode refid="74" relation="include">
         </childnode>
       </node>
+      <node id="126">
+        <label>Utils/Common/StringAtomLiterals.h</label>
+        <link refid="StringAtomLiterals_8h_source"/>
+        <childnode refid="80" relation="include">
+        </childnode>
+      </node>
+      <node id="100">
+        <label>Utils/Common/StringFormat.h</label>
+        <link refid="StringFormat_8h_source"/>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="98" relation="include">
+        </childnode>
+        <childnode refid="101" relation="include">
+        </childnode>
+        <childnode refid="103" relation="include">
+        </childnode>
+      </node>
+      <node id="103">
+        <label>Utils/Common/StringUtils.h</label>
+        <link refid="Utils_2inc_2Utils_2Common_2StringUtils_8h_source"/>
+        <childnode refid="87" relation="include">
+        </childnode>
+      </node>
+      <node id="105">
+        <label>Utils/Common/SubscriptionHolder.h</label>
+        <link refid="SubscriptionHolder_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="106" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
+      </node>
+      <node id="102">
+        <label>Utils/Common/ThreadUtils.h</label>
+        <link refid="ThreadUtils_8h_source"/>
+        <childnode refid="78" relation="include">
+        </childnode>
+      </node>
+      <node id="109">
+        <label>Utils/Common/TypeInfo.h</label>
+        <link refid="Utils_2inc_2Utils_2Common_2TypeInfo_8h_source"/>
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="110" relation="include">
+        </childnode>
+        <childnode refid="111" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="98" relation="include">
+        </childnode>
+        <childnode refid="99" relation="include">
+        </childnode>
+        <childnode refid="112" relation="include">
+        </childnode>
+      </node>
+      <node id="85">
+        <label>Utils/Debug.h</label>
+        <link refid="Debug_8h_source"/>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="100" relation="include">
+        </childnode>
+        <childnode refid="104" relation="include">
+        </childnode>
+      </node>
+      <node id="86">
+        <label>Utils/FileSystem/Path.h</label>
+        <link refid="Path_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+      </node>
+      <node id="95">
+        <label>Utils/Math/Axis.h</label>
+        <link refid="Axis_8h_source"/>
+        <childnode refid="78" relation="include">
+        </childnode>
+      </node>
+      <node id="87">
+        <label>Utils/Math/Mathematics.h</label>
+        <link refid="Mathematics_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+      </node>
+      <node id="97">
+        <label>Utils/Math/Quaternion.h</label>
+        <link refid="Quaternion_8h_source"/>
+        <childnode refid="87" relation="include">
+        </childnode>
+      </node>
+      <node id="128">
+        <label>Utils/Math/Rect.h</label>
+        <link refid="Rect_8h_source"/>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+      </node>
+      <node id="111">
+        <label>Utils/Math/Size.h</label>
+        <link refid="Size_8h_source"/>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+      </node>
+      <node id="94">
+        <label>Utils/Math/Vector2.h</label>
+        <link refid="Vector2_8h_source"/>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+      </node>
+      <node id="96">
+        <label>Utils/Math/Vector3.h</label>
+        <link refid="Vector3_8h_source"/>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+      </node>
+      <node id="98">
+        <label>Utils/Math/Vector4.h</label>
+        <link refid="Vector4_8h_source"/>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+      </node>
+      <node id="99">
+        <label>Utils/Math/Vector6.h</label>
+        <link refid="Vector6_8h_source"/>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+      </node>
       <node id="7">
         <label>Utils/Memory/Allocator.h</label>
         <link refid="Allocator_8h_source"/>
+      </node>
+      <node id="101">
+        <label>Utils/Platform/Platform.h</label>
+        <link refid="Platform_8h_source"/>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="102" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
       </node>
       <node id="69">
         <label>Utils/Platform/Stacktrace.h</label>
@@ -68,7 +327,207 @@
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="78">
+      <node id="83">
+        <label>Utils/Resources/Asset.h</label>
+        <link refid="Asset_8h_source"/>
+        <childnode refid="84" relation="include">
+        </childnode>
+      </node>
+      <node id="135">
+        <label>Utils/Resources/FileWatcher.h</label>
+        <link refid="FileWatcher_8h_source"/>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="105" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="108" relation="include">
+        </childnode>
+      </node>
+      <node id="84">
+        <label>Utils/Resources/IResource.h</label>
+        <link refid="IResource_8h_source"/>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="105" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="108" relation="include">
+        </childnode>
+        <childnode refid="124" relation="include">
+        </childnode>
+        <childnode refid="134" relation="include">
+        </childnode>
+        <childnode refid="135" relation="include">
+        </childnode>
+      </node>
+      <node id="134">
+        <label>Utils/Resources/ResourceContainer.h</label>
+        <link refid="ResourceContainer_8h_source"/>
+        <childnode refid="108" relation="include">
+        </childnode>
+      </node>
+      <node id="132">
+        <label>Utils/Serialization/DefaultCheckers.inl.h</label>
+        <link refid="DefaultCheckers_8inl_8h_source"/>
+      </node>
+      <node id="130">
+        <label>Utils/Serialization/DefaultObjectMakers.inl.h</label>
+        <link refid="DefaultObjectMakers_8inl_8h_source"/>
+      </node>
+      <node id="123">
+        <label>Utils/Serialization/Deserializer.h</label>
+        <link refid="Deserializer_8h_source"/>
+        <childnode refid="93" relation="include">
+        </childnode>
+      </node>
+      <node id="92">
+        <label>Utils/Serialization/ObjectDataAccessor.h</label>
+        <link refid="ObjectDataAccessor_8h_source"/>
+        <childnode refid="93" relation="include">
+        </childnode>
+      </node>
+      <node id="133">
+        <label>Utils/Serialization/ObjectDataAccessors.inl.h</label>
+        <link refid="ObjectDataAccessors_8inl_8h_source"/>
+      </node>
+      <node id="131">
+        <label>Utils/Serialization/SaveCheckers.inl.h</label>
+        <link refid="SaveCheckers_8inl_8h_source"/>
+      </node>
+      <node id="124">
+        <label>Utils/Serialization/Serializable.h</label>
+        <link refid="Serializable_8h_source"/>
+        <childnode refid="113" relation="include">
+        </childnode>
+        <childnode refid="125" relation="include">
+        </childnode>
+        <childnode refid="127" relation="include">
+        </childnode>
+      </node>
+      <node id="127">
+        <label>Utils/Serialization/Serialization.h</label>
+        <link refid="Serialization_8h_source"/>
+        <childnode refid="122" relation="include">
+        </childnode>
+        <childnode refid="123" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="125" relation="include">
+        </childnode>
+        <childnode refid="112" relation="include">
+        </childnode>
+        <childnode refid="108" relation="include">
+        </childnode>
+        <childnode refid="111" relation="include">
+        </childnode>
+        <childnode refid="128" relation="include">
+        </childnode>
+        <childnode refid="126" relation="include">
+        </childnode>
+        <childnode refid="129" relation="include">
+        </childnode>
+        <childnode refid="130" relation="include">
+        </childnode>
+        <childnode refid="131" relation="include">
+        </childnode>
+        <childnode refid="132" relation="include">
+        </childnode>
+        <childnode refid="133" relation="include">
+        </childnode>
+      </node>
+      <node id="122">
+        <label>Utils/Serialization/Serializer.h</label>
+        <link refid="Serializer_8h_source"/>
+        <childnode refid="93" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Engine/libs/Utils/inc/Utils/Tests/TestManager.h</label>
+        <link refid="TestManager_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
+      </node>
+      <node id="119">
+        <label>Utils/TypeTraits/ClassDB.h</label>
+        <link refid="ClassDB_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="120" relation="include">
+        </childnode>
+      </node>
+      <node id="125">
+        <label>Utils/TypeTraits/Factory.h</label>
+        <link refid="Factory_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="126" relation="include">
+        </childnode>
+        <childnode refid="108" relation="include">
+        </childnode>
+        <childnode refid="121" relation="include">
+        </childnode>
+      </node>
+      <node id="113">
+        <label>Utils/TypeTraits/SRClass.h</label>
+        <link refid="SRClass_8h_source"/>
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="114" relation="include">
+        </childnode>
+        <childnode refid="119" relation="include">
+        </childnode>
+        <childnode refid="121" relation="include">
+        </childnode>
+      </node>
+      <node id="121">
+        <label>Utils/TypeTraits/SRClassMeta.h</label>
+        <link refid="SRClassMeta_8h_source"/>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="122" relation="include">
+        </childnode>
+        <childnode refid="123" relation="include">
+        </childnode>
+      </node>
+      <node id="93">
+        <label>Utils/TypeTraits/TypeTraits.h</label>
+        <link refid="TypeTraits_8h_source"/>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="98" relation="include">
+        </childnode>
+        <childnode refid="99" relation="include">
+        </childnode>
+      </node>
+      <node id="81">
         <label>Utils/Types/Function.h</label>
         <link refid="Function_8h_source"/>
         <childnode refid="4" relation="include">
@@ -84,10 +543,44 @@
         <childnode refid="76" relation="include">
         </childnode>
       </node>
+      <node id="114">
+        <label>Utils/Types/Marshal.h</label>
+        <link refid="Marshal_8h_source"/>
+        <childnode refid="115" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="118" relation="include">
+        </childnode>
+        <childnode refid="100" relation="include">
+        </childnode>
+      </node>
       <node id="72">
         <label>Utils/Types/MerkleTree.h</label>
         <link refid="MerkleTree_8h_source"/>
         <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="120">
+        <label>Utils/Types/Mutex.h</label>
+        <link refid="Mutex_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="106">
+        <label>Utils/Types/ObjectPool.h</label>
+        <link refid="ObjectPool_8h_source"/>
+        <childnode refid="107" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="100" relation="include">
         </childnode>
       </node>
       <node id="73">
@@ -96,12 +589,50 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
+      <node id="108">
+        <label>Utils/Types/SharedPtr.h</label>
+        <link refid="SharedPtr_8h_source"/>
+        <childnode refid="100" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="109" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="101" relation="include">
+        </childnode>
+        <childnode refid="113" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
+        </childnode>
+      </node>
+      <node id="107">
+        <label>Utils/Types/Stack.h</label>
+        <link refid="Stack_8h_source"/>
+        <childnode refid="101" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="118">
+        <label>Utils/Types/Stream.h</label>
+        <link refid="Stream_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
       <node id="70">
         <label>Utils/Types/StringAtom.h</label>
         <link refid="StringAtom_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="71" relation="include">
+        </childnode>
+      </node>
+      <node id="112">
+        <label>Utils/Types/UnicodeString.h</label>
+        <link refid="UnicodeString_8h_source"/>
+        <childnode refid="4" relation="include">
         </childnode>
       </node>
       <node id="5">
@@ -238,6 +769,12 @@
         <childnode refid="67" relation="include">
         </childnode>
       </node>
+      <node id="129">
+        <label>Codegen/Enums.generated.hpp</label>
+      </node>
+      <node id="82">
+        <label>Codegen/EnumsFwd.generated.hpp</label>
+      </node>
       <node id="48">
         <label>algorithm</label>
       </node>
@@ -318,6 +855,18 @@
       </node>
       <node id="45">
         <label>functional</label>
+      </node>
+      <node id="88">
+        <label>glm/glm.hpp</label>
+      </node>
+      <node id="91">
+        <label>glm/gtc/quaternion.hpp</label>
+      </node>
+      <node id="89">
+        <label>glm/gtc/type_ptr.hpp</label>
+      </node>
+      <node id="90">
+        <label>glm/gtx/string_cast.hpp</label>
       </node>
       <node id="26">
         <label>initializer_list</label>
@@ -428,8 +977,29 @@
         <label>zlib.h</label>
       </node>
     </incdepgraph>
-    <innerclass refid="classSR__CORE__NS_1_1TestManager" prot="public">SR_CORE_NS::TestManager</innerclass>
-    <innernamespace refid="namespaceSR__CORE__NS">SR_CORE_NS</innernamespace>
+    <invincdepgraph>
+      <node id="2">
+        <label>Engine/inc/Engine/Tests/SRSLTest.h</label>
+        <link refid="SRSLTest_8h_source"/>
+      </node>
+      <node id="3">
+        <label>Engine/libs/Utils/inc/Utils/Tests/SharedPtrAutotests.h</label>
+        <link refid="SharedPtrAutotests_8h_source"/>
+      </node>
+      <node id="1">
+        <label>Engine/libs/Utils/inc/Utils/Tests/TestManager.h</label>
+        <link refid="TestManager_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classSR__UTILS__NS_1_1ITestController" prot="public">SR_UTILS_NS::ITestController</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1TestGroupController" prot="public">SR_UTILS_NS::TestGroupController</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1TestManagerAsset" prot="public">SR_UTILS_NS::TestManagerAsset</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1TestManager" prot="public">SR_UTILS_NS::TestManager</innerclass>
+    <innernamespace refid="namespaceSR__UTILS__NS">SR_UTILS_NS</innernamespace>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -439,38 +1009,81 @@
 <codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Created<sp/>by<sp/>innerviewer<sp/>on<sp/>2024-03-18.</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="4"><highlight class="normal"></highlight></codeline>
-<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SR_ENGINE_TESTMANAGER_H</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ENGINE_TESTMANAGER_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SR_ENGINE_COMMON_TESTS_TEST_MANAGER_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ENGINE_COMMON_TESTS_TEST_MANAGER_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Common/Singleton.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Common/Coroutine.h&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Types/Function.h&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceSR__CORE__NS" kindref="compound">SR_CORE_NS</ref><sp/>{</highlight></codeline>
-<codeline lineno="13" refid="classSR__CORE__NS_1_1TestManager" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__CORE__NS_1_1TestManager" kindref="compound">TestManager</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Singleton" kindref="compound">SR_UTILS_NS::Singleton</ref>&lt;TestManager&gt;<sp/>{</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_REGISTER_SINGLETON(<ref refid="classSR__CORE__NS_1_1TestManager" kindref="compound">TestManager</ref>)</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">TestFn<sp/>=<sp/><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt;bool()&gt;;</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Test<sp/>=<sp/>std::pair&lt;std::string,<sp/>TestFn&gt;;</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddTest(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>TestFn&amp;<sp/>test,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name)<sp/>{<sp/>m_tests.insert(std::make_pair(name,<sp/>test));<sp/>}</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddEngineTest(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>TestFn&amp;<sp/>test,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name)<sp/>{<sp/>m_engineTests.insert(std::make_pair(name,<sp/>test));<sp/>}</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"></highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>RunAll();</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"></highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsSingletonCanBeDestroyed()</highlight><highlight class="keyword"><sp/>const<sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"></highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>RunTest(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Test&amp;<sp/>test);</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>RunEngineTest(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Test&amp;<sp/>test);</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;std::string,<sp/>TestFn&gt;<sp/>m_engineTests;</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;std::string,<sp/>TestFn&gt;<sp/>m_tests;</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="33"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Common/Enumerations.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Resources/Asset.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceSR__UTILS__NS" kindref="compound">SR_UTILS_NS</ref><sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ENUM_NS_CLASS_T(TestExecutionResult,<sp/>uint8_t,</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Success,</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Error,</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Fatal,</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Skipped,</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Count</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="classSR__UTILS__NS_1_1ITestController" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__UTILS__NS_1_1ITestController" kindref="compound">ITestController</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Serializable" kindref="compound">SR_UTILS_NS::Serializable</ref>,<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt;ITestController&gt;<sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_CLASS()</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Ptr<sp/>=<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;ITestController&gt;</ref>;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classSR__UTILS__NS_1_1ITestController" kindref="compound">OriginType</ref><sp/>=<sp/><ref refid="classSR__UTILS__NS_1_1ITestController" kindref="compound">ITestController</ref>;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1ITestController" kindref="compound">ITestController</ref>();</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>TestExecutionResult<sp/>Run()<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>uint32_t<sp/>GetTotalTestsCount()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1;<sp/>}</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight></codeline>
-<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_TESTMANAGER_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="classSR__UTILS__NS_1_1TestGroupController" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__UTILS__NS_1_1TestGroupController" kindref="compound">TestGroupController</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1ITestController" kindref="compound">ITestController</ref><sp/>{</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_CLASS()</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Ptr<sp/>=<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;TestGroupController&gt;</ref>;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TestExecutionResult<sp/>Run()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>uint32_t<sp/>GetTotalTestsCount()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;ITestController::Ptr&gt;<sp/>m_tests;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52" refid="classSR__UTILS__NS_1_1TestManagerAsset" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__UTILS__NS_1_1TestManagerAsset" kindref="compound">TestManagerAsset</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Asset" kindref="compound">SR_UTILS_NS::Asset</ref><sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_CLASS()</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Ptr<sp/>=<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;TestManagerAsset&gt;</ref>;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;ITestController::Ptr&gt;<sp/>m_tests;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63" refid="classSR__UTILS__NS_1_1TestManager" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__UTILS__NS_1_1TestManager" kindref="compound">TestManager</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Singleton" kindref="compound">Singleton</ref>&lt;TestManager&gt;<sp/>{</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_REGISTER_SINGLETON(<ref refid="classSR__UTILS__NS_1_1TestManager" kindref="compound">TestManager</ref>)</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>TestExecutionResult<sp/>RunAll();</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>HasFatalError()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_hasFatalError;<sp/>}</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnTestResult(TestExecutionResult<sp/>result);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TestManagerAsset::Ptr<sp/>m_pTestManagerAsset;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::array&lt;uint32_t,<sp/>static_cast&lt;uint32_t&gt;(TestExecutionResult::Count)&gt;<sp/>m_testResults;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_hasFatalError<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="78"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_COMMON_TESTS_TEST_MANAGER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="Engine/inc/Engine/Tests/TestManager.h"/>
+    <location file="Engine/libs/Utils/inc/Utils/Tests/TestManager.h"/>
   </compounddef>
 </doxygen>

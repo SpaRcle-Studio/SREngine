@@ -96,7 +96,7 @@ namespace SR_ANIMATIONS_NS {
         void Update(UpdateContext& context) override;
         bool Compile(CompileContext& context) override;
         void Reset() override;
-        void SetClip(AnimationClip* pClip);
+        void SetClip(const SR_HTYPES_NS::SharedPtr<AnimationClip>& pClip);
 
         SR_NODISCARD float_t GetProgress() const noexcept override;
         SR_NODISCARD float_t GetDuration() const noexcept override { return m_duration; }
@@ -105,7 +105,7 @@ namespace SR_ANIMATIONS_NS {
 
     protected:
         std::vector<ChannelUpdateContext> m_channelContexts;
-        AnimationClip* m_clip = nullptr;
+        SR_HTYPES_NS::SharedPtr<AnimationClip> m_clip = nullptr;
         uint32_t m_maxKeyFrame = 0;
         float_t m_duration = 0.f;
         float_t m_time = 0.f;

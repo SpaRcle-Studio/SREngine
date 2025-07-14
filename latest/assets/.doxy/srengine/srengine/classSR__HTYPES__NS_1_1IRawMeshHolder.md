@@ -34,7 +34,7 @@ Inherited by the following classes: [SR\_GTYPES\_NS::DebugWireframeMesh](classSR
 | Type | Name |
 | ---: | :--- |
 | typedef int32\_t | [**MeshIndex**](#typedef-meshindex)  <br> |
-| typedef [**SR\_HTYPES\_NS::RawMesh**](classSR__HTYPES__NS_1_1RawMesh.md) \* | [**RawMeshPtr**](#typedef-rawmeshptr)  <br> |
+| typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_HTYPES\_NS::RawMesh**](classSR__HTYPES__NS_1_1RawMesh.md) &gt; | [**RawMeshPtr**](#typedef-rawmeshptr)  <br> |
 
 
 
@@ -120,7 +120,7 @@ using SR_HTYPES_NS::IRawMeshHolder::MeshIndex =  int32_t;
 ### typedef RawMeshPtr 
 
 ```C++
-using SR_HTYPES_NS::IRawMeshHolder::RawMeshPtr =  SR_HTYPES_NS::RawMesh*;
+using SR_HTYPES_NS::IRawMeshHolder::RawMeshPtr =  SR_HTYPES_NS::SharedPtr<SR_HTYPES_NS::RawMesh>;
 ```
 
 

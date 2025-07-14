@@ -40,7 +40,7 @@ namespace SR_GRAPH_NS {
     class ShaderReplacePredicate {
     public:
         virtual ~ShaderReplacePredicate() = default;
-        SR_NODISCARD virtual SR_GRAPH_NS::ShaderUseInfo ReplaceShader(SR_GTYPES_NS::Shader* pShader) const = 0;
+        SR_NODISCARD virtual SR_GRAPH_NS::ShaderUseInfo ReplaceShader(const SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Shader>& pShader) const = 0;
     };
 }
 

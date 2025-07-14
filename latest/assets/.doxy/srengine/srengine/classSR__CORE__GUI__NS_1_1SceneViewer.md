@@ -186,6 +186,7 @@ See [SR\_GRAPH\_GUI\_NS::Widget](classSR__GRAPH__GUI__NS_1_1Widget.md)
 | virtual void | [**Close**](classSR__GRAPH__GUI__NS_1_1Widget.md#function-close) () <br> |
 |  void | [**DrawAsSubWindow**](classSR__GRAPH__GUI__NS_1_1Widget.md#function-drawassubwindow) () <br> |
 | virtual void | [**FixedUpdate**](classSR__GRAPH__GUI__NS_1_1Widget.md#function-fixedupdate) () <br> |
+| virtual void | [**Focus**](classSR__GRAPH__GUI__NS_1_1Widget.md#function-focus) () <br> |
 |  SR\_NODISCARD ContextPtr | [**GetContext**](classSR__GRAPH__GUI__NS_1_1Widget.md#function-getcontext) () const<br> |
 |  SR\_NODISCARD WidgetManager \* | [**GetManager**](classSR__GRAPH__GUI__NS_1_1Widget.md#function-getmanager) () const<br> |
 |  SR\_NODISCARD const std::string & | [**GetName**](classSR__GRAPH__GUI__NS_1_1Widget.md#function-getname) () const<br> |
@@ -201,6 +202,7 @@ See [SR\_GRAPH\_GUI\_NS::Widget](classSR__GRAPH__GUI__NS_1_1Widget.md)
 | virtual void | [**OnKeyUp**](classSR__GRAPH__GUI__NS_1_1Widget.md#function-onkeyup) (const [**SR\_UTILS\_NS::KeyboardInputData**](classSR__UTILS__NS_1_1KeyboardInputData.md) \* pData) override<br> |
 | virtual void | [**Open**](classSR__GRAPH__GUI__NS_1_1Widget.md#function-open) () <br> |
 | virtual bool | [**OpenFile**](classSR__GRAPH__GUI__NS_1_1Widget.md#function-openfile) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
+|  void | [**SetDefaultSize**](classSR__GRAPH__GUI__NS_1_1Widget.md#function-setdefaultsize) (const SR\_MATH\_NS::IVector2 & size) <br> |
 |  void | [**SetManager**](classSR__GRAPH__GUI__NS_1_1Widget.md#function-setmanager) (WidgetManager \* pManager) <br> |
 | virtual void | [**SetScene**](classSR__GRAPH__GUI__NS_1_1Widget.md#function-setscene) (const ScenePtr & scene) <br> |
 | virtual void | [**SetSize**](classSR__GRAPH__GUI__NS_1_1Widget.md#function-setsize) (const SR\_MATH\_NS::IVector2 & size) <br> |

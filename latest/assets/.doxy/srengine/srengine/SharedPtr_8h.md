@@ -34,7 +34,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| namespace | [**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md) <br> |
+| namespace | [**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md) <br>_#define SR\_SHARED\_PTR\_TRACE_  |
 | namespace | [**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md) <br> |
 | namespace | [**SharedPointerTraits**](namespaceSR__UTILS__NS_1_1SharedPointerTraits.md) <br> |
 | namespace | [**std**](namespacestd.md) <br> |

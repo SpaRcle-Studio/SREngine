@@ -35,7 +35,8 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**RenderTechnique**](classSR__GRAPH__NS_1_1RenderTechnique.md) <br> |
+| class | [**FileRenderTechnique**](classSR__GRAPH__NS_1_1FileRenderTechnique.md) <br> |
+| class | [**FileRenderTechniqueResource**](classSR__GRAPH__NS_1_1FileRenderTechniqueResource.md) <br> |
 
 
 

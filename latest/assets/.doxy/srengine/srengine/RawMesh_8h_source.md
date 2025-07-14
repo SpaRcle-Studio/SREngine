@@ -45,16 +45,20 @@ namespace SR_HTYPES_NS {
     };
 
     class SR_COMMON_DLL_API RawMesh : public IResource {
+        SR_CLASS()
+        using Super = IResource;
         using ScenePtr = SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>;
-        using Ptr = RawMesh*;
         using Hash = uint64_t;
-    private:
+    public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<RawMesh>;
+
+    public:
         RawMesh();
         ~RawMesh() override;
 
     public:
-        static RawMesh* Load(const SR_UTILS_NS::Path &path, RawMeshParams params);
-        static RawMesh* Load(const SR_UTILS_NS::Path &path);
+        static RawMesh::Ptr Load(const SR_UTILS_NS::Path &path, RawMeshParams params);
+        static RawMesh::Ptr Load(const SR_UTILS_NS::Path &path);
 
     public:
         void ComputeConvexHull();

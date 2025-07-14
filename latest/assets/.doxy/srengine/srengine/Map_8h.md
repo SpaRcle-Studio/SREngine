@@ -30,7 +30,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| namespace | [**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md) <br> |
+| namespace | [**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md) <br>_#define SR\_SHARED\_PTR\_TRACE_  |
 
 
 

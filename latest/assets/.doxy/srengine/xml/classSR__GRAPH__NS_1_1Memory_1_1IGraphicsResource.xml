@@ -270,6 +270,12 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
+      <node id="3">
+        <label>SR_GRAPH_NS::FileRenderTechnique</label>
+        <link refid="classSR__GRAPH__NS_1_1FileRenderTechnique"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
       <node id="2">
         <label>SR_GRAPH_NS::IRenderTechnique</label>
         <link refid="classSR__GRAPH__NS_1_1IRenderTechnique"/>
@@ -279,12 +285,6 @@
       <node id="1">
         <label>SR_GRAPH_NS::Memory::IGraphicsResource</label>
         <link refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource"/>
-      </node>
-      <node id="3">
-        <label>SR_GRAPH_NS::RenderTechnique</label>
-        <link refid="classSR__GRAPH__NS_1_1RenderTechnique"/>
-        <childnode refid="2" relation="public-inheritance">
-        </childnode>
       </node>
       <node id="4">
         <label>SR_GRAPH_NS::ScriptableRenderTechnique</label>

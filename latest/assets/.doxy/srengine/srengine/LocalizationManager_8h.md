@@ -31,7 +31,7 @@
 | ---: | :--- |
 | namespace | [**SR\_CORE\_NS**](namespaceSR__CORE__NS.md) <br> |
 | namespace | [**SR\_GTYPES\_NS**](namespaceSR__GTYPES__NS.md) <br> |
-| namespace | [**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md) <br> |
+| namespace | [**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md) <br>_#define SR\_SHARED\_PTR\_TRACE_  |
 | namespace | [**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md) <br> |
 | namespace | [**Localization**](namespaceSR__UTILS__NS_1_1Localization.md) <br> |
 

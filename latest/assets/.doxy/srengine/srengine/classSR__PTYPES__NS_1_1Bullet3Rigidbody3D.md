@@ -175,7 +175,7 @@ See [SR\_PTYPES\_NS::Rigidbody](classSR__PTYPES__NS_1_1Rigidbody.md)
 |  SR\_NODISCARD T \* | [**GetLibrary**](classSR__PTYPES__NS_1_1Rigidbody.md#function-getlibrary) () const<br> |
 |  SR\_NODISCARD float\_t | [**GetMass**](classSR__PTYPES__NS_1_1Rigidbody.md#function-getmass) () noexcept const<br> |
 | virtual SR\_NODISCARD SR\_UTILS\_NS::Measurement | [**GetMeasurement**](classSR__PTYPES__NS_1_1Rigidbody.md#function-getmeasurement) () const = 0<br> |
-|  SR\_NODISCARD [**PhysicsMaterial**](classSR__PTYPES__NS_1_1PhysicsMaterial.md) \* | [**GetPhysicsMaterial**](classSR__PTYPES__NS_1_1Rigidbody.md#function-getphysicsmaterial) () noexcept const<br> |
+|  SR\_NODISCARD PhysicsMaterial::Ptr | [**GetPhysicsMaterial**](classSR__PTYPES__NS_1_1Rigidbody.md#function-getphysicsmaterial) () noexcept const<br> |
 |  SR\_NODISCARD [**SR\_MATH\_NS::Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**GetRotation**](classSR__PTYPES__NS_1_1Rigidbody.md#function-getrotation) () noexcept const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetScale**](classSR__PTYPES__NS_1_1Rigidbody.md#function-getscale) () noexcept const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetTranslation**](classSR__PTYPES__NS_1_1Rigidbody.md#function-gettranslation) () noexcept const<br> |
@@ -193,7 +193,7 @@ See [SR\_PTYPES\_NS::Rigidbody](classSR__PTYPES__NS_1_1Rigidbody.md)
 | virtual void | [**SetIsStatic**](classSR__PTYPES__NS_1_1Rigidbody.md#function-setisstatic) (bool value) <br> |
 | virtual void | [**SetIsTrigger**](classSR__PTYPES__NS_1_1Rigidbody.md#function-setistrigger) (bool value) <br> |
 |  void | [**SetMass**](classSR__PTYPES__NS_1_1Rigidbody.md#function-setmass) (float\_t mass) <br> |
-|  void | [**SetMaterial**](classSR__PTYPES__NS_1_1Rigidbody.md#function-setmaterial-12) ([**PhysicsMaterial**](classSR__PTYPES__NS_1_1PhysicsMaterial.md) \* pMaterial) <br> |
+|  void | [**SetMaterial**](classSR__PTYPES__NS_1_1Rigidbody.md#function-setmaterial-12) (const PhysicsMaterial::Ptr & pMaterial) <br> |
 |  void | [**SetMaterial**](classSR__PTYPES__NS_1_1Rigidbody.md#function-setmaterial-22) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 |  void | [**SetMatrixDirty**](classSR__PTYPES__NS_1_1Rigidbody.md#function-setmatrixdirty) (const bool value=true) <br> |
 |  void | [**SetShapeDirty**](classSR__PTYPES__NS_1_1Rigidbody.md#function-setshapedirty) (const bool value=true) <br> |
@@ -325,7 +325,7 @@ See [SR\_PTYPES\_NS::Rigidbody](classSR__PTYPES__NS_1_1Rigidbody.md)
 |  bool | [**m\_isTrigger**](classSR__PTYPES__NS_1_1Rigidbody.md#variable-m_istrigger)   = `false`<br> |
 |  LibraryPtr | [**m\_library**](classSR__PTYPES__NS_1_1Rigidbody.md#variable-m_library)   = `nullptr`<br> |
 |  float\_t | [**m\_mass**](classSR__PTYPES__NS_1_1Rigidbody.md#variable-m_mass)   = `1.f`<br> |
-|  [**SR\_PTYPES\_NS::PhysicsMaterial**](classSR__PTYPES__NS_1_1PhysicsMaterial.md) \* | [**m\_material**](classSR__PTYPES__NS_1_1Rigidbody.md#variable-m_material)   = `nullptr`<br> |
+|  SR\_PTYPES\_NS::PhysicsMaterial::Ptr | [**m\_material**](classSR__PTYPES__NS_1_1Rigidbody.md#variable-m_material)   = `nullptr`<br> |
 |  PhysicsScenePtr | [**m\_physicsScene**](classSR__PTYPES__NS_1_1Rigidbody.md#variable-m_physicsscene)  <br> |
 |  [**SR\_MATH\_NS::Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**m\_rotation**](classSR__PTYPES__NS_1_1Rigidbody.md#variable-m_rotation)  <br> |
 |  SR\_MATH\_NS::FVector3 | [**m\_scale**](classSR__PTYPES__NS_1_1Rigidbody.md#variable-m_scale)   = `SR\_MATH\_NS::FVector3::One()`<br> |

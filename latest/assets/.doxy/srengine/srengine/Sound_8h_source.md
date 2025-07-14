@@ -16,24 +16,28 @@
 #define SR_ENGINE_SOUND_H
 
 #include <Audio/macros.h>
+#include <Audio/PlayParams.h>
 
 #include <Utils/Resources/IResource.h>
-#include <Audio/PlayParams.h>
 
 namespace SR_AUDIO_NS {
     class RawSound;
     struct SoundData;
 
     class Sound : public SR_UTILS_NS::IResource {
+        SR_CLASS();
         using Handle = void*;
-    protected:
+    public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<Sound>;
+
+    public:
         Sound();
         ~Sound() override;
 
         SR_NODISCARD uint64_t GetFileHash() const override { return 0; };
 
     public:
-        static Sound* Load(const SR_UTILS_NS::Path& path);
+        static Sound::Ptr Load(const SR_UTILS_NS::Path& path);
 
         Handle Play(const PlayParams& params);
         Handle Play();
@@ -53,10 +57,10 @@ namespace SR_AUDIO_NS {
         bool Reload() override;
 
     private:
-        void SetRawSound(RawSound* pRawSound);
+        void SetRawSound(const SR_HTYPES_NS::SharedPtr<RawSound>& pRawSound);
 
     private:
-        RawSound* m_rawSound = nullptr;
+        SR_HTYPES_NS::SharedPtr<RawSound> m_rawSound;
         SoundData* m_data = nullptr;
 
     };

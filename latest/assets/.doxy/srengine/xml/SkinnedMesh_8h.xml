@@ -970,6 +970,8 @@
         </childnode>
         <childnode refid="127" relation="include">
         </childnode>
+        <childnode refid="124" relation="include">
+        </childnode>
         <childnode refid="144" relation="include">
         </childnode>
         <childnode refid="145" relation="include">
@@ -978,7 +980,7 @@
       <node id="144">
         <label>Utils/Resources/ResourceContainer.h</label>
         <link refid="ResourceContainer_8h_source"/>
-        <childnode refid="7" relation="include">
+        <childnode refid="127" relation="include">
         </childnode>
       </node>
       <node id="160">
@@ -1828,7 +1830,7 @@
 <codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>PopulateSkeletonMatrices();</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight></codeline>
-<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>OnResourceReloaded(<ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">SR_UTILS_NS::IResource</ref>*<sp/>pResource)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>OnResourceReloaded(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">SR_UTILS_NS::IResource</ref>*<sp/>pResource)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnRawMeshChanged()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Calculate()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight></codeline>

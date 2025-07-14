@@ -3,9 +3,9 @@
   <compounddef id="structSR__GRAPH__NS_1_1RenderQueue_1_1RenderQueueLessPredicate" kind="struct" language="C++" prot="public">
     <compoundname>SR_GRAPH_NS::RenderQueue::RenderQueueLessPredicate</compoundname>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="structSR__GRAPH__NS_1_1RenderQueue_1_1RenderQueueLessPredicate_1ab6b0d3a979f0cc1d36831961034fc7a6" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD constexpr bool</type>
-        <definition>SR_NODISCARD constexpr bool SR_GRAPH_NS::RenderQueue::RenderQueueLessPredicate::operator()</definition>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1RenderQueue_1_1RenderQueueLessPredicate_1a02a8f259d7a339369159f227ba915f52" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GRAPH_NS::RenderQueue::RenderQueueLessPredicate::operator()</definition>
         <argsstring>(const MeshInfo &amp;left, const MeshInfo &amp;right) const noexcept</argsstring>
         <name>operator()</name>
         <qualifiedname>SR_GRAPH_NS::RenderQueue::RenderQueueLessPredicate::operator()</qualifiedname>
@@ -27,7 +27,7 @@
 <para>Если шейдеры одинаковые, сравниваем VBO</para>
 <para>Если и VBO одинаковые, сравниваем указатели на меши</para>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="60" column="41" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="60" bodyend="78"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="60" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="60" bodyend="78"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -36,7 +36,7 @@
     </detaileddescription>
     <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="59" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="59" bodyend="79"/>
     <listofallmembers>
-      <member refid="structSR__GRAPH__NS_1_1RenderQueue_1_1RenderQueueLessPredicate_1ab6b0d3a979f0cc1d36831961034fc7a6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue::RenderQueueLessPredicate</scope><name>operator()</name></member>
+      <member refid="structSR__GRAPH__NS_1_1RenderQueue_1_1RenderQueueLessPredicate_1a02a8f259d7a339369159f227ba915f52" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue::RenderQueueLessPredicate</scope><name>operator()</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

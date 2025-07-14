@@ -134,14 +134,14 @@
         <childnode refid="3" relation="usage">
           <edgelabel>pSound</edgelabel>
         </childnode>
-        <childnode refid="8" relation="usage">
+        <childnode refid="13" relation="usage">
           <edgelabel>pData</edgelabel>
         </childnode>
-        <childnode refid="11" relation="usage">
+        <childnode refid="16" relation="usage">
           <edgelabel>params</edgelabel>
         </childnode>
       </node>
-      <node id="11">
+      <node id="16">
         <label>SR_AUDIO_NS::PlayParams</label>
         <link refid="structSR__AUDIO__NS_1_1PlayParams"/>
       </node>
@@ -151,41 +151,60 @@
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="9">
+      <node id="14">
         <label>SR_AUDIO_NS::SoundContext</label>
         <link refid="classSR__AUDIO__NS_1_1SoundContext"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="10" relation="usage">
+        <childnode refid="15" relation="usage">
           <edgelabel>m_device</edgelabel>
         </childnode>
       </node>
-      <node id="8">
+      <node id="13">
         <label>SR_AUDIO_NS::SoundData</label>
         <link refid="structSR__AUDIO__NS_1_1SoundData"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="9" relation="usage">
+        <childnode refid="14" relation="usage">
           <edgelabel>pContext</edgelabel>
         </childnode>
         <childnode refid="3" relation="usage">
           <edgelabel>pSound</edgelabel>
         </childnode>
       </node>
-      <node id="10">
+      <node id="15">
         <label>SR_AUDIO_NS::SoundDevice</label>
         <link refid="classSR__AUDIO__NS_1_1SoundDevice"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="8" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
       </node>
       <node id="4">
         <label>SR_UTILS_NS::IResource</label>
         <link refid="classSR__UTILS__NS_1_1IResource"/>
         <childnode refid="5" relation="public-inheritance">
         </childnode>
-        <childnode refid="6" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
-        <childnode refid="7" relation="usage">
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+        <childnode refid="12" relation="usage">
           <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
           <edgelabel>RELOAD_DONE_EVENT</edgelabel>
         </childnode>
@@ -197,14 +216,24 @@
       <node id="5">
         <label>SR_UTILS_NS::ResourceContainer</label>
         <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
-        <childnode refid="2" relation="public-inheritance">
+        <childnode refid="6" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="7">
+      <node id="11">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="10">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
         <label>SR_UTILS_NS::StringAtom</label>
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
-      <node id="6">
+      <node id="9">
         <label>SR_UTILS_NS::SubscriptionHolder</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>

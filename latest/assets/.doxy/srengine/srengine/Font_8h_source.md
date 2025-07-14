@@ -22,16 +22,20 @@
 
 namespace SR_GTYPES_NS {
     class SR_RENDERER_DLL_API Font : public SR_UTILS_NS::IResource {
+        SR_CLASS()
         using Super = SR_UTILS_NS::IResource;
         using FontLibrary = FT_Library;
         using FontFace = FT_Face;
         using StringType = std::u32string;
-    private:
+    public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<Font>;
+
+    public:
         Font();
         ~Font() override = default;
 
     public:
-        static Font* Load(const SR_UTILS_NS::Path& rawPath);
+        static Font::Ptr Load(const SR_UTILS_NS::Path& rawPath);
 
         SR_NODISCARD bool HasColor() const noexcept { return m_hasColor; }
         SR_NODISCARD bool IsColorEmoji() const noexcept { return m_isColorEmoji; }

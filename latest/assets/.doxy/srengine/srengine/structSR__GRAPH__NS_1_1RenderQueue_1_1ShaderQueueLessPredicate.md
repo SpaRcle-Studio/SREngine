@@ -51,7 +51,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD constexpr bool | [**operator()**](#function-operator()) (const [**ShaderUseInfo**](structSR__GRAPH__NS_1_1ShaderUseInfo.md) & left, const [**ShaderUseInfo**](structSR__GRAPH__NS_1_1ShaderUseInfo.md) & right) noexcept const<br> |
+|  SR\_NODISCARD bool | [**operator()**](#function-operator()) (const [**ShaderUseInfo**](structSR__GRAPH__NS_1_1ShaderUseInfo.md) & left, const [**ShaderUseInfo**](structSR__GRAPH__NS_1_1ShaderUseInfo.md) & right) noexcept const<br> |
 
 
 
@@ -88,7 +88,7 @@
 ### function operator() 
 
 ```C++
-inline SR_NODISCARD constexpr bool SR_GRAPH_NS::RenderQueue::ShaderQueueLessPredicate::operator() (
+inline SR_NODISCARD bool SR_GRAPH_NS::RenderQueue::ShaderQueueLessPredicate::operator() (
     const ShaderUseInfo & left,
     const ShaderUseInfo & right
 ) noexcept const

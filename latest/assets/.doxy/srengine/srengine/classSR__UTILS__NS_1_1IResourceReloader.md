@@ -73,7 +73,7 @@ Inherited by the following classes: [SR\_CORE\_NS::GraphicsResourceReloader](cla
 
 | Type | Name |
 | ---: | :--- |
-| virtual SR\_NODISCARD bool | [**IsResourceSuitableForReload**](#function-isresourcesuitableforreload) ([**IResource**](classSR__UTILS__NS_1_1IResource.md) \* pResource) const<br> |
+| virtual SR\_NODISCARD bool | [**IsResourceSuitableForReload**](#function-isresourcesuitableforreload) (const IResource::Ptr & pResource) const<br> |
 | virtual SR\_NODISCARD bool | [**Reload**](#function-reload) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path, [**ResourceInfo**](structSR__UTILS__NS_1_1ResourceInfo.md) \* pResourceInfo) = 0<br> |
 
 
@@ -161,7 +161,7 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 ```C++
 virtual SR_NODISCARD bool SR_UTILS_NS::IResourceReloader::IsResourceSuitableForReload (
-    IResource * pResource
+    const IResource::Ptr & pResource
 ) const
 ```
 

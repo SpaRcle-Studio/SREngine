@@ -12,6 +12,7 @@
 
 * `#include <Physics/macros.h>`
 * `#include <Physics/PhysicsLib.h>`
+* `#include <Physics/PhysicsMaterial.h>`
 * `#include <Physics/CollisionShape.h>`
 * `#include <Utils/Common/Measurement.h>`
 * `#include <Utils/ECS/ComponentManager.h>`
@@ -35,7 +36,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| namespace | [**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md) <br> |
+| namespace | [**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md) <br>_#define SR\_SHARED\_PTR\_TRACE_  |
 | namespace | [**SR\_PHYSICS\_NS**](namespaceSR__PHYSICS__NS.md) <br> |
 | namespace | [**SR\_PTYPES\_NS**](namespaceSR__PTYPES__NS.md) <br> |
 

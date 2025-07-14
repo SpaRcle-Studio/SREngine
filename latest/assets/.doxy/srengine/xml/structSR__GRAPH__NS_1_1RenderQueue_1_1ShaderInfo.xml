@@ -73,9 +73,6 @@
     <detaileddescription>
     </detaileddescription>
     <collaborationgraph>
-      <node id="9">
-        <label>Memory::IGraphicsResource</label>
-      </node>
       <node id="1">
         <label>SR_GRAPH_NS::RenderQueue::ShaderInfo</label>
         <link refid="structSR__GRAPH__NS_1_1RenderQueue_1_1ShaderInfo"/>
@@ -86,47 +83,6 @@
       <node id="2">
         <label>SR_GRAPH_NS::ShaderUseInfo</label>
         <link refid="structSR__GRAPH__NS_1_1ShaderUseInfo"/>
-        <childnode refid="3" relation="usage">
-          <edgelabel>pShader</edgelabel>
-        </childnode>
-      </node>
-      <node id="3">
-        <label>SR_GTYPES_NS::Shader</label>
-        <link refid="classSR__GTYPES__NS_1_1Shader"/>
-        <childnode refid="4" relation="public-inheritance">
-        </childnode>
-        <childnode refid="9" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>SR_UTILS_NS::IResource</label>
-        <link refid="classSR__UTILS__NS_1_1IResource"/>
-        <childnode refid="5" relation="public-inheritance">
-        </childnode>
-        <childnode refid="7" relation="public-inheritance">
-        </childnode>
-        <childnode refid="8" relation="usage">
-          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
-          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
-        </childnode>
-      </node>
-      <node id="6">
-        <label>SR_UTILS_NS::NonCopyable</label>
-        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
-      </node>
-      <node id="5">
-        <label>SR_UTILS_NS::ResourceContainer</label>
-        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
-        <childnode refid="6" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="8">
-        <label>SR_UTILS_NS::StringAtom</label>
-        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
-      </node>
-      <node id="7">
-        <label>SR_UTILS_NS::SubscriptionHolder</label>
-        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
     <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="81" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="81" bodyend="86"/>

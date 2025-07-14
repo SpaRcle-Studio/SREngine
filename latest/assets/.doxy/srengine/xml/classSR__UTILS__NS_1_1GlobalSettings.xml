@@ -28,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Settings.h" line="14" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Settings.h" bodystart="55" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Settings.h" line="14" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Settings.h" bodystart="62" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Settings.h" line="57" column="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/Settings.h" line="64" column="37"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Settings.h" line="60" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Settings.h" line="67" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Settings.h" line="63" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Settings.h" line="70" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1GlobalSettings_1a5eb03779d112028f83c89bad53763d4d" prot="private" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>void</type>
@@ -92,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Settings.h" line="64" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Settings.h" line="71" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1GlobalSettings_1a7bb6c851e4c2eb711e0b700e08a9ccb1" prot="private" static="no" const="yes" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Settings.h" line="65" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Settings.h" line="72" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1GlobalSettings_1a11a775a40888f29a71c2c3f3c09467c3" prot="private" static="no" const="no" explicit="no" inline="no" final="yes" virt="non-virtual">
         <type>IResource::RemoveUPResult</type>
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Settings.h" line="66" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Settings.h" line="73" column="35"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -204,7 +204,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/Settings.h" line="54" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Settings.h" bodystart="54" bodyend="68"/>
+    <location file="Engine/libs/Utils/inc/Utils/Settings.h" line="61" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Settings.h" bodystart="61" bodyend="75"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1GlobalSettings_1a7c384beb02cf67610f00e1d2e0da6f15" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>DestroySettings</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>DestroySingleton</name></member>

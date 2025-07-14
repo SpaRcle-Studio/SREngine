@@ -33,14 +33,14 @@ namespace SR_GTYPES_NS {
 namespace SR_GRAPH_NS {
     struct ShaderUseInfo {
         ShaderUseInfo() = default;
-        explicit SR_CONSTEXPR ShaderUseInfo(SR_GTYPES_NS::Shader* pShader)
+        explicit ShaderUseInfo(const SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Shader>& pShader)
             : pShader(pShader)
             , ignoreReplace(false)
             , useMaterialUniforms(true)
             , useMaterialSamplers(true)
         { }
 
-        SR_GTYPES_NS::Shader* pShader;
+        SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Shader> pShader;
         bool ignoreReplace       : 4;
         bool useMaterialUniforms : 2;
         bool useMaterialSamplers : 2;

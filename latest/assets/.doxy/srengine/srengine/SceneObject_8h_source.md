@@ -55,7 +55,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_FORCE_INLINE StringAtom GetLayer() const noexcept { return m_cachedLayer; }
         SR_NODISCARD SR_FORCE_INLINE StringAtom GetLocalLayer() const noexcept { return m_layer; }
 
-        SR_NODISCARD SR_FORCE_INLINE Prefab* GetPrefab() const noexcept { return m_prefabInfo.pPrefab; }
+        SR_NODISCARD SR_FORCE_INLINE const SR_HTYPES_NS::SharedPtr<Prefab>& GetPrefab() const noexcept { return m_prefabInfo.pPrefab; }
         SR_NODISCARD SR_FORCE_INLINE bool IsPrefabOwner() const noexcept { return m_prefabInfo.isOwner; }
 
         SR_NODISCARD SR_FORCE_INLINE SceneObject::Ptr GetParent() const noexcept { return m_parent; }
@@ -99,7 +99,7 @@ namespace SR_UTILS_NS {
         void SetLayer(StringAtom layer);
         void SetIdInScene(uint64_t id);
         void SetScene(ScenePtr pScene);
-        void SetPrefab(Prefab* pPrefab, bool isOwner);
+        void SetPrefab(const SR_HTYPES_NS::SharedPtr<Prefab>& pPrefab, bool isOwner);
 
         void UnlinkPrefab();
         void RemoveChildren();
@@ -131,7 +131,7 @@ namespace SR_UTILS_NS {
 
     private:
         struct PrefabInfo {
-            Prefab* pPrefab = nullptr;
+            SR_HTYPES_NS::SharedPtr<Prefab> pPrefab;
             bool isOwner = false;
         } m_prefabInfo;
 

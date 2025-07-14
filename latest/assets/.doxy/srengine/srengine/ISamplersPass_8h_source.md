@@ -36,7 +36,7 @@ namespace SR_GRAPH_NS {
             uint32_t fboId = SR_ID_INVALID;
             SR_UTILS_NS::StringAtom id;
             SR_UTILS_NS::StringAtom fboName;
-            SR_GTYPES_NS::Texture* pTexture = nullptr;
+            SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Texture> pTexture;
             uint64_t index = 0;
             bool depth = false;
         };

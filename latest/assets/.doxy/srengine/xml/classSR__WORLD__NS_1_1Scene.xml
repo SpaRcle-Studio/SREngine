@@ -154,9 +154,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/World/Scene.h" line="118" column="26" bodyfile="Engine/libs/Utils/inc/Utils/World/Scene.h" bodystart="118" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1a7d42e2892e9b41f5ac00141399174293" prot="private" static="no" mutable="yes">
-        <type>std::map&lt; <ref refid="classSR__UTILS__NS_1_1Prefab" kindref="compound">SR_UTILS_NS::Prefab</ref> *, std::vector&lt; Entity * &gt; &gt;</type>
-        <definition>std::map&lt;SR_UTILS_NS::Prefab*, std::vector&lt;Entity*&gt; &gt; SR_WORLD_NS::Scene::m_registerEntityCache</definition>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1a94bc087c202f55f9d123127d7cf816a3" prot="private" static="no" mutable="yes">
+        <type>std::map&lt; <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__UTILS__NS_1_1Prefab" kindref="compound">SR_UTILS_NS::Prefab</ref> &gt;, std::vector&lt; Entity * &gt; &gt;</type>
+        <definition>std::map&lt;SR_HTYPES_NS::SharedPtr&lt;SR_UTILS_NS::Prefab&gt;, std::vector&lt;Entity*&gt; &gt; SR_WORLD_NS::Scene::m_registerEntityCache</definition>
         <argsstring></argsstring>
         <name>m_registerEntityCache</name>
         <qualifiedname>SR_WORLD_NS::Scene::m_registerEntityCache</qualifiedname>
@@ -1224,7 +1224,7 @@
       <member refid="classSR__WORLD__NS_1_1Scene_1a58764a001ec44bdd721da64c7121c834" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_newQueue</name></member>
       <member refid="classSR__WORLD__NS_1_1Scene_1a15efb7f302d2f67092a400ecc7800a04" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_path</name></member>
       <member refid="classSR__WORLD__NS_1_1Scene_1abdcf52c05a9519e339fa3a8463080381" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_pEntityController</name></member>
-      <member refid="classSR__WORLD__NS_1_1Scene_1a7d42e2892e9b41f5ac00141399174293" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_registerEntityCache</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a94bc087c202f55f9d123127d7cf816a3" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_registerEntityCache</name></member>
       <member refid="classSR__WORLD__NS_1_1Scene_1abab8ba3414566c3d7c92f08a689479db" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_registerEntityIdReplaceCache</name></member>
       <member refid="classSR__WORLD__NS_1_1Scene_1a34253adca0797db4f6fa949e8aaa714d" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_root</name></member>
       <member refid="classSR__WORLD__NS_1_1Scene_1a1241a5667e3bb9364d8c3182823c8387" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_sceneObjects</name></member>

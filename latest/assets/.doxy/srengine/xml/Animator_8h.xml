@@ -956,6 +956,8 @@
         </childnode>
         <childnode refid="122" relation="include">
         </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
         <childnode refid="164" relation="include">
         </childnode>
         <childnode refid="165" relation="include">
@@ -964,7 +966,7 @@
       <node id="164">
         <label>Utils/Resources/ResourceContainer.h</label>
         <link refid="ResourceContainer_8h_source"/>
-        <childnode refid="9" relation="include">
+        <childnode refid="122" relation="include">
         </childnode>
       </node>
       <node id="168">

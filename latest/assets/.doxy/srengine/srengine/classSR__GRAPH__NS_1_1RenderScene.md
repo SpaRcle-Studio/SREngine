@@ -140,7 +140,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  SR\_NODISCARD bool | [**IsEmpty**](#function-isempty) () const<br> |
 |  SR\_NODISCARD bool | [**IsOverlayEnabled**](#function-isoverlayenabled) () const<br> |
 |  void | [**OnResize**](#function-onresize) (const SR\_MATH\_NS::UVector2 & size) <br> |
-|  void | [**OnResourceReloaded**](#function-onresourcereloaded) ([**SR\_UTILS\_NS::IResource**](classSR__UTILS__NS_1_1IResource.md) \* pResource) <br> |
+|  void | [**OnResourceReloaded**](#function-onresourcereloaded) (const SR\_UTILS\_NS::IResource::Ptr & pResource) <br> |
 |  void | [**ReRegister**](#function-reregister) (const [**MeshRegistrationInfo**](structSR__GRAPH__NS_1_1MeshRegistrationInfo.md) & info) <br> |
 |  void | [**Register**](#function-register-13) (const CameraPtr & pCamera) <br> |
 |  void | [**Register**](#function-register-23) ([**WidgetManagerPtr**](classSR__GRAPH__NS_1_1GUI_1_1WidgetManager.md) pWidgetManager) <br> |
@@ -154,7 +154,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  void | [**SetDirty**](#function-setdirty) () <br>_Можно вызывать не синхронно_  |
 |  void | [**SetDirtyCameras**](#function-setdirtycameras) () <br> |
 |  void | [**SetOverlayEnabled**](#function-setoverlayenabled) (bool enabled) <br> |
-|  void | [**SetTechnique**](#function-settechnique-12) ([**IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* pTechnique) <br> |
+|  void | [**SetTechnique**](#function-settechnique-12) (const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) &gt; & pTechnique) <br> |
 |  void | [**SetTechnique**](#function-settechnique-22) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 |  void | [**Submit**](#function-submit) () <br> |
 |  void | [**Synchronize**](#function-synchronize) () <br> |
@@ -740,7 +740,7 @@ void SR_GRAPH_NS::RenderScene::OnResize (
 
 ```C++
 void SR_GRAPH_NS::RenderScene::OnResourceReloaded (
-    SR_UTILS_NS::IResource * pResource
+    const SR_UTILS_NS::IResource::Ptr & pResource
 ) 
 ```
 
@@ -946,7 +946,7 @@ void SR_GRAPH_NS::RenderScene::SetOverlayEnabled (
 
 ```C++
 void SR_GRAPH_NS::RenderScene::SetTechnique (
-    IRenderTechnique * pTechnique
+    const SR_HTYPES_NS::SharedPtr < IRenderTechnique > & pTechnique
 ) 
 ```
 

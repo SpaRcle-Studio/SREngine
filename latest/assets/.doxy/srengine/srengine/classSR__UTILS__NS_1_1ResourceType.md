@@ -28,6 +28,12 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 
 
 
+## Public Types
+
+| Type | Name |
+| ---: | :--- |
+| typedef std::unordered\_map&lt; ResourceId, std::unordered\_set&lt; IResource::Ptr &gt; &gt; | [**CopiesMap**](#typedef-copiesmap)  <br> |
+| typedef std::unordered\_map&lt; ResourcePath, ResourceInfo::HardPtr &gt; | [**Info**](#typedef-info)  <br> |
 
 
 
@@ -72,16 +78,17 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**Add**](#function-add) ([**IResource**](classSR__UTILS__NS_1_1IResource.md) \* pResource) <br> |
+|  void | [**Add**](#function-add) (const IResource::Ptr & pResource) <br> |
 |  void | [**CollectUnused**](#function-collectunused) () <br>_ставит все неиспользуемые ресурсы на очередь уничтожения_  |
-|  SR\_NODISCARD [**IResource**](classSR__UTILS__NS_1_1IResource.md) \* | [**Find**](#function-find) (const ResourceId & id) <br> |
-|  SR\_NODISCARD const CopiesMap & | [**GetCopiesRef**](#function-getcopiesref) () const<br> |
+|  SR\_NODISCARD IResource::Ptr | [**Find**](#function-find) (const ResourceId & id) <br> |
+|  SR\_NODISCARD CopiesMap & | [**GetCopiesRef**](#function-getcopiesref-12) () <br> |
+|  SR\_NODISCARD const CopiesMap & | [**GetCopiesRef**](#function-getcopiesref-22) () const<br> |
 |  SR\_NODISCARD Info & | [**GetInfo**](#function-getinfo) () <br> |
 |  SR\_NODISCARD std::pair&lt; ResourcePath, ResourceInfo::HardPtr &gt; | [**GetInfoByIndex**](#function-getinfobyindex) (uint64\_t index) <br> |
 |  SR\_NODISCARD const std::string & | [**GetName**](#function-getname) () const<br> |
 |  SR\_NODISCARD [**IResourceReloader**](classSR__UTILS__NS_1_1IResourceReloader.md) \* | [**GetReloader**](#function-getreloader) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsLast**](#function-islast) (const ResourceId & id) <br> |
-|  void | [**Remove**](#function-remove) ([**IResource**](classSR__UTILS__NS_1_1IResource.md) \* pResource) <br> |
+|  void | [**Remove**](#function-remove) (const IResource::Ptr & pResource) <br> |
 |   | [**ResourceType**](#function-resourcetype) (std::string name) <br> |
 |  void | [**SetReloader**](#function-setreloader) ([**IResourceReloader**](classSR__UTILS__NS_1_1IResourceReloader.md) \* pReloader) <br> |
 |   | [**~ResourceType**](#function-resourcetype) () override<br> |
@@ -157,6 +164,34 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 
 
+## Public Types Documentation
+
+
+
+
+### typedef CopiesMap 
+
+```C++
+using SR_UTILS_NS::ResourceType::CopiesMap =  std::unordered_map<ResourceId, std::unordered_set<IResource::Ptr> >;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef Info 
+
+```C++
+using SR_UTILS_NS::ResourceType::Info =  std::unordered_map<ResourcePath, ResourceInfo::HardPtr>;
+```
+
+
+
+
+<hr>
 ## Public Functions Documentation
 
 
@@ -166,7 +201,7 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 ```C++
 void SR_UTILS_NS::ResourceType::Add (
-    IResource * pResource
+    const IResource::Ptr & pResource
 ) 
 ```
 
@@ -194,7 +229,7 @@ void SR_UTILS_NS::ResourceType::CollectUnused ()
 ### function Find 
 
 ```C++
-SR_NODISCARD IResource * SR_UTILS_NS::ResourceType::Find (
+SR_NODISCARD IResource::Ptr SR_UTILS_NS::ResourceType::Find (
     const ResourceId & id
 ) 
 ```
@@ -206,7 +241,20 @@ SR_NODISCARD IResource * SR_UTILS_NS::ResourceType::Find (
 
 
 
-### function GetCopiesRef 
+### function GetCopiesRef [1/2]
+
+```C++
+SR_NODISCARD CopiesMap & SR_UTILS_NS::ResourceType::GetCopiesRef () 
+```
+
+
+
+
+<hr>
+
+
+
+### function GetCopiesRef [2/2]
 
 ```C++
 SR_NODISCARD const CopiesMap & SR_UTILS_NS::ResourceType::GetCopiesRef () const
@@ -292,7 +340,7 @@ SR_NODISCARD bool SR_UTILS_NS::ResourceType::IsLast (
 
 ```C++
 void SR_UTILS_NS::ResourceType::Remove (
-    IResource * pResource
+    const IResource::Ptr & pResource
 ) 
 ```
 

@@ -12,6 +12,7 @@
 
 * `#include <Graphics/Pass/PostProcessPass.h>`
 * `#include <Graphics/Pass/IFramebufferPass.h>`
+* `#include <Graphics/Types/Texture.h>`
 
 
 
@@ -30,7 +31,6 @@
 | Type | Name |
 | ---: | :--- |
 | namespace | [**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md) <br> |
-| namespace | [**SR\_GTYPES\_NS**](namespaceSR__GTYPES__NS.md) <br> |
 
 
 ## Classes

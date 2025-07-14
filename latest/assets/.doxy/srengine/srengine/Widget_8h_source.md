@@ -77,12 +77,15 @@ namespace SR_GRAPH_GUI_NS {
         SR_NODISCARD SR_HTYPES_NS::DataStorage& GetWeakStorage() const { return m_weakStorage; }
         SR_NODISCARD SR_HTYPES_NS::DataStorage& GetStrongStorage() const { return m_strongStorage; }
 
+        void SetDefaultSize(const SR_MATH_NS::IVector2& size) { m_defaultSize = size; }
+
         virtual void Init() { }
 
         virtual void SetSize(const SR_MATH_NS::IVector2& size) { m_size = size; }
 
         virtual bool OpenFile(const SR_UTILS_NS::Path& path) { return false; }
 
+        virtual void Focus();
         virtual void Open();
         virtual void Close();
 
@@ -134,6 +137,7 @@ namespace SR_GRAPH_GUI_NS {
         std::atomic<WidgetFlagBits> m_internalFlags = WIDGET_FLAG_NONE;
         WindowFlags m_windowFlags = WindowFlags::None;
         SR_MATH_NS::IVector2 m_size;
+        SR_MATH_NS::IVector2 m_defaultSize;
         WidgetManager* m_manager = nullptr;
 
         mutable SR_HTYPES_NS::DataStorage m_weakStorage;

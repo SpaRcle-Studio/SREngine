@@ -93,9 +93,6 @@
     <detaileddescription>
     </detaileddescription>
     <collaborationgraph>
-      <node id="13">
-        <label>Memory::IGraphicsResource</label>
-      </node>
       <node id="2">
         <label>SR_GRAPH_NS::RenderQueue</label>
         <link refid="classSR__GRAPH__NS_1_1RenderQueue"/>
@@ -115,17 +112,6 @@
       <node id="6">
         <label>SR_GRAPH_NS::ShaderUseInfo</label>
         <link refid="structSR__GRAPH__NS_1_1ShaderUseInfo"/>
-        <childnode refid="7" relation="usage">
-          <edgelabel>pShader</edgelabel>
-        </childnode>
-      </node>
-      <node id="7">
-        <label>SR_GTYPES_NS::Shader</label>
-        <link refid="classSR__GTYPES__NS_1_1Shader"/>
-        <childnode refid="8" relation="public-inheritance">
-        </childnode>
-        <childnode refid="13" relation="public-inheritance">
-        </childnode>
       </node>
       <node id="3">
         <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
@@ -143,36 +129,6 @@
       <node id="5">
         <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
         <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
-      </node>
-      <node id="8">
-        <label>SR_UTILS_NS::IResource</label>
-        <link refid="classSR__UTILS__NS_1_1IResource"/>
-        <childnode refid="9" relation="public-inheritance">
-        </childnode>
-        <childnode refid="11" relation="public-inheritance">
-        </childnode>
-        <childnode refid="12" relation="usage">
-          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
-          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
-        </childnode>
-      </node>
-      <node id="10">
-        <label>SR_UTILS_NS::NonCopyable</label>
-        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
-      </node>
-      <node id="9">
-        <label>SR_UTILS_NS::ResourceContainer</label>
-        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
-        <childnode refid="10" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="12">
-        <label>SR_UTILS_NS::StringAtom</label>
-        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
-      </node>
-      <node id="11">
-        <label>SR_UTILS_NS::SubscriptionHolder</label>
-        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
     <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="158" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="158" bodyend="170"/>

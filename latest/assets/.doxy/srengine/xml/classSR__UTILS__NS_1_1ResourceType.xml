@@ -32,9 +32,11 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="48" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="48" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1ResourceType_1a5de7ce33323757847225bdf95dd6ede8" prot="private" static="no">
-        <type>std::unordered_map&lt; ResourceId, std::unordered_set&lt; <ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">IResource</ref> * &gt; &gt;</type>
-        <definition>using SR_UTILS_NS::ResourceType::CopiesMap =  std::unordered_map&lt;ResourceId, std::unordered_set&lt;IResource*&gt; &gt;</definition>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1ResourceType_1a51fd804d558012a76336918dd17efbc0" prot="public" static="no">
+        <type>std::unordered_map&lt; ResourceId, std::unordered_set&lt; IResource::Ptr &gt; &gt;</type>
+        <definition>using SR_UTILS_NS::ResourceType::CopiesMap =  std::unordered_map&lt;ResourceId, std::unordered_set&lt;IResource::Ptr&gt; &gt;</definition>
         <argsstring></argsstring>
         <name>CopiesMap</name>
         <qualifiedname>SR_UTILS_NS::ResourceType::CopiesMap</qualifiedname>
@@ -44,9 +46,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="49" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="49" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="50" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="50" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1ResourceType_1a08dfb0c91b7a2b5549fe2834f4ad9b20" prot="private" static="no">
+      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1ResourceType_1a08dfb0c91b7a2b5549fe2834f4ad9b20" prot="public" static="no">
         <type>std::unordered_map&lt; ResourcePath, ResourceInfo::HardPtr &gt;</type>
         <definition>using SR_UTILS_NS::ResourceType::Info =  std::unordered_map&lt;ResourcePath, ResourceInfo::HardPtr&gt;</definition>
         <argsstring></argsstring>
@@ -58,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="50" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="50" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="51" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="51" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="friend">
@@ -94,7 +96,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="76" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="76" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="79" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="79" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceType_1affcbcc43347f77222411b5cf82a42a7f" prot="private" static="no" mutable="no">
         <type>ResourcesSet</type>
@@ -108,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="77" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="77" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="80" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="80" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceType_1af8431a219431d7031f602f50185403ba" prot="private" static="no" mutable="no">
         <type>CopiesMap</type>
@@ -122,7 +124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="78" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="78" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="81" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="81" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceType_1a492e756790d45719fb2e2f6d7934ed7a" prot="private" static="no" mutable="no">
         <type>Info</type>
@@ -136,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="79" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="79" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="82" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="82" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceType_1a09d9ab53797fbe313d1de98571565030" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -150,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="80" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="80" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="83" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="83" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -170,7 +172,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="52" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="52" bodyend="54"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="54" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="54" bodyend="56"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1a6f6ea80f7e1bf1d0cc4da0d0786dd04f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -184,11 +186,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="56" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="58" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1a2bd801b6669b34ddc509c06d5e9bab9b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">IResource</ref> *</type>
-        <definition>SR_NODISCARD IResource * SR_UTILS_NS::ResourceType::Find</definition>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1adc59d8b535bef3fa6acb1fbc24517a42" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD IResource::Ptr</type>
+        <definition>SR_NODISCARD IResource::Ptr SR_UTILS_NS::ResourceType::Find</definition>
         <argsstring>(const ResourceId &amp;id)</argsstring>
         <name>Find</name>
         <qualifiedname>SR_UTILS_NS::ResourceType::Find</qualifiedname>
@@ -202,7 +204,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="59" column="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="61" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1ac9ebe2cce13f8c1ae06d47ebe7d23d13" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -220,7 +222,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="60" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="62" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1a4a5935d96de1a0879fdc45736adac4b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD CopiesMap &amp;</type>
+        <definition>SR_NODISCARD CopiesMap &amp; SR_UTILS_NS::ResourceType::GetCopiesRef</definition>
+        <argsstring>()</argsstring>
+        <name>GetCopiesRef</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::GetCopiesRef</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="63" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1ae8b9ccea03bfb658b6dd38d90d954dde" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const CopiesMap &amp;</type>
@@ -234,7 +250,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="61" column="38"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="64" column="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1a255be7757f503a9a891c180a28438e4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD Info &amp;</type>
@@ -248,7 +264,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="62" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="65" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1a43f4fac972c2d09d1d53e7f53f15dded" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::pair&lt; ResourcePath, ResourceInfo::HardPtr &gt;</type>
@@ -266,7 +282,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="63" column="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="66" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1a0dcc1283b4509084efe16e0d5bd47726" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1IResourceReloader" kindref="compound">IResourceReloader</ref> *</type>
@@ -280,7 +296,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="64" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="64" bodyend="64"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="67" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="67" bodyend="67"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1a18e2a667db2d8c2ab73b97fae8810abc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const std::string &amp;</type>
@@ -294,16 +310,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="65" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="65" bodyend="65"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="68" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="68" bodyend="68"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1a68b9f9216643ffef2a5ed9f011819a04" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1a6967fd124bbdd16874631dc5769667a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void SR_UTILS_NS::ResourceType::Remove</definition>
-        <argsstring>(IResource *pResource)</argsstring>
+        <argsstring>(const IResource::Ptr &amp;pResource)</argsstring>
         <name>Remove</name>
         <qualifiedname>SR_UTILS_NS::ResourceType::Remove</qualifiedname>
         <param>
-          <type><ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">IResource</ref> *</type>
+          <type>const IResource::Ptr &amp;</type>
           <declname>pResource</declname>
         </param>
         <briefdescription>
@@ -312,16 +328,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="67" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="70" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1a34d069e1fa16c892eb7d2badfe2a5b9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1a20bfb8724623a2b753cf0084d5fba7f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void SR_UTILS_NS::ResourceType::Add</definition>
-        <argsstring>(IResource *pResource)</argsstring>
+        <argsstring>(const IResource::Ptr &amp;pResource)</argsstring>
         <name>Add</name>
         <qualifiedname>SR_UTILS_NS::ResourceType::Add</qualifiedname>
         <param>
-          <type><ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">IResource</ref> *</type>
+          <type>const IResource::Ptr &amp;</type>
           <declname>pResource</declname>
         </param>
         <briefdescription>
@@ -330,7 +346,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="68" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="71" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1a93998d1055ce05b11175a76368347ded" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -348,7 +364,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="70" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="73" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1aa14e37504f53873078a90d8a6d62871c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -363,7 +379,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="73" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="76" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -394,18 +410,19 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="45" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="45" bodyend="82"/>
+    <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="45" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="45" bodyend="85"/>
     <listofallmembers>
-      <member refid="classSR__UTILS__NS_1_1ResourceType_1a34d069e1fa16c892eb7d2badfe2a5b9d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>Add</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1a20bfb8724623a2b753cf0084d5fba7f0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>Add</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceType_1aa14e37504f53873078a90d8a6d62871c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>CollectUnused</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceType_1a5de7ce33323757847225bdf95dd6ede8" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>CopiesMap</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceType_1a2bd801b6669b34ddc509c06d5e9bab9b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>Find</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1a51fd804d558012a76336918dd17efbc0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>CopiesMap</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1adc59d8b535bef3fa6acb1fbc24517a42" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>Find</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1a4a5935d96de1a0879fdc45736adac4b6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>GetCopiesRef</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceType_1ae8b9ccea03bfb658b6dd38d90d954dde" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>GetCopiesRef</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceType_1a255be7757f503a9a891c180a28438e4a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>GetInfo</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceType_1a43f4fac972c2d09d1d53e7f53f15dded" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>GetInfoByIndex</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceType_1a18e2a667db2d8c2ab73b97fae8810abc" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>GetName</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceType_1a0dcc1283b4509084efe16e0d5bd47726" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>GetReloader</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceType_1a08dfb0c91b7a2b5549fe2834f4ad9b20" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>Info</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1a08dfb0c91b7a2b5549fe2834f4ad9b20" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>Info</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceType_1ac9ebe2cce13f8c1ae06d47ebe7d23d13" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>IsLast</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceType_1af8431a219431d7031f602f50185403ba" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>m_copies</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceType_1a492e756790d45719fb2e2f6d7934ed7a" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>m_info</name></member>
@@ -415,7 +432,7 @@
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>operator=</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceType_1a68b9f9216643ffef2a5ed9f011819a04" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>Remove</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1a6967fd124bbdd16874631dc5769667a9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>Remove</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceType_1a5825e80ff795b5c8c9e0d4f98ccfea41" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>ResourceId</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceType_1a54c1252abc87a78a301e6b6984470408" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>ResourceManager</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceType_1a08c0d327282f72a48f5f568a3374d33e" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>ResourcePath</name></member>

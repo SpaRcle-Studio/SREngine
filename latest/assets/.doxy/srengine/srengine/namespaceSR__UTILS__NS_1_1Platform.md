@@ -76,6 +76,7 @@
 |  SR\_COMMON\_DLL\_API [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetApplicationDirectory**](#function-getapplicationdirectory) () <br> |
 |  SR\_COMMON\_DLL\_API [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetApplicationName**](#function-getapplicationname) () <br> |
 |  SR\_COMMON\_DLL\_API [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetApplicationPath**](#function-getapplicationpath) () <br> |
+|  SR\_COMMON\_DLL\_API [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetApplicationResourcesPath**](#function-getapplicationresourcespath) () <br> |
 |  SR\_COMMON\_DLL\_API std::string | [**GetClipboardText**](#function-getclipboardtext) () <br> |
 |  SR\_COMMON\_DLL\_API uint16\_t | [**GetCurrentProcessId**](#function-getcurrentprocessid) () <br> |
 |  SR\_COMMON\_DLL\_API [**FileMetadata**](structSR__UTILS__NS_1_1Platform_1_1FileMetadata.md) | [**GetFileMetadata**](#function-getfilemetadata) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & file) <br> |
@@ -366,6 +367,19 @@ SR_COMMON_DLL_API Path SR_UTILS_NS::Platform::GetApplicationName ()
 
 ```C++
 SR_COMMON_DLL_API Path SR_UTILS_NS::Platform::GetApplicationPath () 
+```
+
+
+
+
+<hr>
+
+
+
+### function GetApplicationResourcesPath 
+
+```C++
+SR_COMMON_DLL_API Path SR_UTILS_NS::Platform::GetApplicationResourcesPath () 
 ```
 
 

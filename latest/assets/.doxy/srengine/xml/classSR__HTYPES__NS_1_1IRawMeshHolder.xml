@@ -8,9 +8,9 @@
     <derivedcompoundref refid="classSR__PTYPES__NS_1_1CollisionShape" prot="public" virt="non-virtual">SR_PTYPES_NS::CollisionShape</derivedcompoundref>
     <includes refid="IRawMeshHolder_8h" local="no">IRawMeshHolder.h</includes>
     <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a54f8031259b5b3ea78a9f794143e681d" prot="public" static="no">
-        <type><ref refid="classSR__HTYPES__NS_1_1RawMesh" kindref="compound">SR_HTYPES_NS::RawMesh</ref> *</type>
-        <definition>using SR_HTYPES_NS::IRawMeshHolder::RawMeshPtr =  SR_HTYPES_NS::RawMesh*</definition>
+      <memberdef kind="typedef" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a164db9b7fa7f3789548e3fb65af02155" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__HTYPES__NS_1_1RawMesh" kindref="compound">SR_HTYPES_NS::RawMesh</ref> &gt;</type>
+        <definition>using SR_HTYPES_NS::IRawMeshHolder::RawMeshPtr =  SR_HTYPES_NS::SharedPtr&lt;SR_HTYPES_NS::RawMesh&gt;</definition>
         <argsstring></argsstring>
         <name>RawMeshPtr</name>
         <qualifiedname>SR_HTYPES_NS::IRawMeshHolder::RawMeshPtr</qualifiedname>
@@ -330,7 +330,7 @@
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a54493d5fd9b4f2a57e7a70c217d93560" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>m_reloadSubscription</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a1e49a98ca25d90f7b5a7208a58477f84" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>MeshIndex</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a0b7780b0866a0482fa8bbc365d9b795b" prot="public" virt="virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>OnRawMeshChanged</name></member>
-      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a54f8031259b5b3ea78a9f794143e681d" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>RawMeshPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a164db9b7fa7f3789548e3fb65af02155" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>RawMeshPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a5a6bc29a5ae54972e18fb7d61124ecff" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>SetMeshId</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a8f54083212793185d112dfc01e612baf" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>SetRawMesh</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1ad5f9834371708471d3f6712e145aa7ae" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>SetRawMesh</name></member>

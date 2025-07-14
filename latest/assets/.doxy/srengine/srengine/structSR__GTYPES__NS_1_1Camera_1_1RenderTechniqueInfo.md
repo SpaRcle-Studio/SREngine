@@ -35,7 +35,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  [**SR\_GRAPH\_NS::IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* | [**pTechnique**](#variable-ptechnique)   = `nullptr`<br> |
+|  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_GRAPH\_NS::IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) &gt; | [**pTechnique**](#variable-ptechnique)  <br> |
 |  [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**path**](#variable-path)  <br> |
 
 
@@ -89,7 +89,7 @@
 ### variable pTechnique 
 
 ```C++
-SR_GRAPH_NS::IRenderTechnique* SR_GTYPES_NS::Camera::RenderTechniqueInfo::pTechnique;
+SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::IRenderTechnique> SR_GTYPES_NS::Camera::RenderTechniqueInfo::pTechnique;
 ```
 
 

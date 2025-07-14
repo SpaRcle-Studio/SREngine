@@ -369,12 +369,6 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="13">
-        <label>SR_PTYPES_NS::PhysicsMaterial</label>
-        <link refid="classSR__PTYPES__NS_1_1PhysicsMaterial"/>
-        <childnode refid="14" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="5">
         <label>SR_PTYPES_NS::Rigidbody</label>
         <link refid="classSR__PTYPES__NS_1_1Rigidbody"/>
@@ -393,9 +387,6 @@
         </childnode>
         <childnode refid="12" relation="usage">
           <edgelabel>m_rotation</edgelabel>
-        </childnode>
-        <childnode refid="13" relation="usage">
-          <edgelabel>m_material</edgelabel>
         </childnode>
       </node>
       <node id="2">
@@ -437,35 +428,9 @@
         <childnode refid="7" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="14">
-        <label>SR_UTILS_NS::IResource</label>
-        <link refid="classSR__UTILS__NS_1_1IResource"/>
-        <childnode refid="15" relation="public-inheritance">
-        </childnode>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-        <childnode refid="17" relation="usage">
-          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
-          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
-        </childnode>
-      </node>
       <node id="4">
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
-      </node>
-      <node id="15">
-        <label>SR_UTILS_NS::ResourceContainer</label>
-        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
-        <childnode refid="4" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="17">
-        <label>SR_UTILS_NS::StringAtom</label>
-        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
-      </node>
-      <node id="16">
-        <label>SR_UTILS_NS::SubscriptionHolder</label>
-        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
       <node id="9">
         <label>SR_WORLD_NS::Scene</label>

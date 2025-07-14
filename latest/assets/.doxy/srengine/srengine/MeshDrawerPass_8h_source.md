@@ -64,7 +64,7 @@ namespace SR_GRAPH_NS {
         virtual void UseSharedUniforms(ShaderUseInfo info);
         virtual void UseConstants(ShaderUseInfo info);
 
-        SR_NODISCARD ShaderUseInfo ReplaceShader(ShaderPtr pShader) const override;
+        SR_NODISCARD ShaderUseInfo ReplaceShader(const SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Shader>& pShader) const override;
         SR_NODISCARD bool IsLayerAllowed(SR_UTILS_NS::StringAtom layer) const override;
         SR_NODISCARD bool IsPriorityAllowed(int64_t priority) const override { return true; }
 

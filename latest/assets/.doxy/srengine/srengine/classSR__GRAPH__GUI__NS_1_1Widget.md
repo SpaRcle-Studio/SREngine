@@ -16,7 +16,7 @@
 Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md),  [SR\_UTILS\_NS::InputHandler](classSR__UTILS__NS_1_1InputHandler.md)
 
 
-Inherited by the following classes: [SR\_CORE\_GUI\_NS::About](classSR__CORE__GUI__NS_1_1About.md),  [SR\_CORE\_GUI\_NS::AnimatorEditor](classSR__CORE__GUI__NS_1_1AnimatorEditor.md),  [SR\_CORE\_GUI\_NS::EngineSettings](classSR__CORE__GUI__NS_1_1EngineSettings.md),  [SR\_CORE\_GUI\_NS::Inspector](classSR__CORE__GUI__NS_1_1Inspector.md),  [SR\_CORE\_GUI\_NS::PhysicsMaterialEditor](classSR__CORE__GUI__NS_1_1PhysicsMaterialEditor.md),  [SR\_CORE\_GUI\_NS::SceneViewer](classSR__CORE__GUI__NS_1_1SceneViewer.md),  [SR\_CORE\_GUI\_NS::SoundDebug](classSR__CORE__GUI__NS_1_1SoundDebug.md),  [SR\_CORE\_GUI\_NS::WorldEdit](classSR__CORE__GUI__NS_1_1WorldEdit.md),  [SR\_CORE\_NS::GUI::EngineStatistics](classSR__CORE__NS_1_1GUI_1_1EngineStatistics.md),  [SR\_CORE\_NS::GUI::FileBrowser](classSR__CORE__NS_1_1GUI_1_1FileBrowser.md),  [SR\_GRAPH\_GUI\_NS::NodeWidget](classSR__GRAPH__GUI__NS_1_1NodeWidget.md),  [SR\_GRAPH\_GUI\_NS::WidgetContainer](classSR__GRAPH__GUI__NS_1_1WidgetContainer.md)
+Inherited by the following classes: [SR\_CORE\_GUI\_NS::About](classSR__CORE__GUI__NS_1_1About.md),  [SR\_CORE\_GUI\_NS::AnimatorEditor](classSR__CORE__GUI__NS_1_1AnimatorEditor.md),  [SR\_CORE\_GUI\_NS::AssetInspector](classSR__CORE__GUI__NS_1_1AssetInspector.md),  [SR\_CORE\_GUI\_NS::EngineSettings](classSR__CORE__GUI__NS_1_1EngineSettings.md),  [SR\_CORE\_GUI\_NS::Inspector](classSR__CORE__GUI__NS_1_1Inspector.md),  [SR\_CORE\_GUI\_NS::SceneViewer](classSR__CORE__GUI__NS_1_1SceneViewer.md),  [SR\_CORE\_GUI\_NS::SoundDebug](classSR__CORE__GUI__NS_1_1SoundDebug.md),  [SR\_CORE\_GUI\_NS::WorldEdit](classSR__CORE__GUI__NS_1_1WorldEdit.md),  [SR\_CORE\_NS::GUI::EngineStatistics](classSR__CORE__NS_1_1GUI_1_1EngineStatistics.md),  [SR\_CORE\_NS::GUI::FileBrowser](classSR__CORE__NS_1_1GUI_1_1FileBrowser.md),  [SR\_GRAPH\_GUI\_NS::NodeWidget](classSR__GRAPH__GUI__NS_1_1NodeWidget.md),  [SR\_GRAPH\_GUI\_NS::WidgetContainer](classSR__GRAPH__GUI__NS_1_1WidgetContainer.md)
 
 
 
@@ -144,6 +144,7 @@ Inherited by the following classes: [SR\_CORE\_GUI\_NS::About](classSR__CORE__GU
 | virtual void | [**Close**](#function-close) () <br> |
 |  void | [**DrawAsSubWindow**](#function-drawassubwindow) () <br> |
 | virtual void | [**FixedUpdate**](#function-fixedupdate) () <br> |
+| virtual void | [**Focus**](#function-focus) () <br> |
 |  SR\_NODISCARD ContextPtr | [**GetContext**](#function-getcontext) () const<br> |
 |  SR\_NODISCARD WidgetManager \* | [**GetManager**](#function-getmanager) () const<br> |
 |  SR\_NODISCARD const std::string & | [**GetName**](#function-getname) () const<br> |
@@ -159,6 +160,7 @@ Inherited by the following classes: [SR\_CORE\_GUI\_NS::About](classSR__CORE__GU
 | virtual void | [**OnKeyUp**](#function-onkeyup) (const [**SR\_UTILS\_NS::KeyboardInputData**](classSR__UTILS__NS_1_1KeyboardInputData.md) \* pData) override<br> |
 | virtual void | [**Open**](#function-open) () <br> |
 | virtual bool | [**OpenFile**](#function-openfile) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
+|  void | [**SetDefaultSize**](#function-setdefaultsize) (const SR\_MATH\_NS::IVector2 & size) <br> |
 |  void | [**SetManager**](#function-setmanager) (WidgetManager \* pManager) <br> |
 | virtual void | [**SetScene**](#function-setscene) (const ScenePtr & scene) <br> |
 | virtual void | [**SetSize**](#function-setsize) (const SR\_MATH\_NS::IVector2 & size) <br> |
@@ -491,6 +493,19 @@ inline virtual void SR_GRAPH_GUI_NS::Widget::FixedUpdate ()
 
 
 
+### function Focus 
+
+```C++
+virtual void SR_GRAPH_GUI_NS::Widget::Focus () 
+```
+
+
+
+
+<hr>
+
+
+
 ### function GetContext 
 
 ```C++
@@ -690,6 +705,21 @@ virtual void SR_GRAPH_GUI_NS::Widget::Open ()
 ```C++
 inline virtual bool SR_GRAPH_GUI_NS::Widget::OpenFile (
     const SR_UTILS_NS::Path & path
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SetDefaultSize 
+
+```C++
+inline void SR_GRAPH_GUI_NS::Widget::SetDefaultSize (
+    const SR_MATH_NS::IVector2 & size
 ) 
 ```
 

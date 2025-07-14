@@ -65,6 +65,8 @@
 | class | [**EmptyPipeline**](classSR__GRAPH__NS_1_1EmptyPipeline.md) <br> |
 | class | [**FileMaterial**](classSR__GRAPH__NS_1_1FileMaterial.md) <br> |
 | class | [**FileMaterialResource**](classSR__GRAPH__NS_1_1FileMaterialResource.md) <br> |
+| class | [**FileRenderTechnique**](classSR__GRAPH__NS_1_1FileRenderTechnique.md) <br> |
+| class | [**FileRenderTechniqueResource**](classSR__GRAPH__NS_1_1FileRenderTechniqueResource.md) <br> |
 | class | [**FlatClusterPass**](classSR__GRAPH__NS_1_1FlatClusterPass.md) <br> |
 | class | [**FlatMeshCluster**](classSR__GRAPH__NS_1_1FlatMeshCluster.md) <br> |
 | class | [**FrameBufferController**](classSR__GRAPH__NS_1_1FrameBufferController.md) <br> |
@@ -127,7 +129,6 @@
 | class | [**RenderScene**](classSR__GRAPH__NS_1_1RenderScene.md) <br> |
 | class | [**RenderSettings**](classSR__GRAPH__NS_1_1RenderSettings.md) <br> |
 | class | [**RenderStrategy**](classSR__GRAPH__NS_1_1RenderStrategy.md) <br> |
-| class | [**RenderTechnique**](classSR__GRAPH__NS_1_1RenderTechnique.md) <br> |
 | struct | [**SRCubeMapCreateInfo**](structSR__GRAPH__NS_1_1SRCubeMapCreateInfo.md) <br> |
 | struct | [**SRDescriptorUpdateInfo**](structSR__GRAPH__NS_1_1SRDescriptorUpdateInfo.md) <br> |
 | struct | [**SRFrameBufferCreateInfo**](structSR__GRAPH__NS_1_1SRFrameBufferCreateInfo.md) <br> |
@@ -187,7 +188,7 @@
 | typedef std::vector&lt; [**SRDescriptorUpdateInfo**](structSR__GRAPH__NS_1_1SRDescriptorUpdateInfo.md) &gt; | [**SRDescriptorUpdateInfos**](#typedef-srdescriptorupdateinfos)  <br> |
 | typedef std::vector&lt; [**SSBOBinding**](structSR__GRAPH__NS_1_1SSBOBinding.md) &gt; | [**SSBOBindings**](#typedef-ssbobindings)  <br> |
 | typedef std::list&lt; ShaderProperty &gt; | [**ShaderProperties**](#typedef-shaderproperties)  <br> |
-| typedef std::variant&lt; [**SR\_GTYPES\_NS::Texture**](classSR__GTYPES__NS_1_1Texture.md) \*, float\_t, int32\_t, SR\_MATH\_NS::FVector2, SR\_MATH\_NS::FVector3, SR\_MATH\_NS::IVector3, SR\_MATH\_NS::FVector4 &gt; | [**ShaderPropertyVariant**](#typedef-shaderpropertyvariant)  <br> |
+| typedef std::variant&lt; [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_GTYPES\_NS::Texture**](classSR__GTYPES__NS_1_1Texture.md) &gt;, float\_t, int32\_t, SR\_MATH\_NS::FVector2, SR\_MATH\_NS::FVector3, SR\_MATH\_NS::IVector3, SR\_MATH\_NS::FVector4 &gt; | [**ShaderPropertyVariant**](#typedef-shaderpropertyvariant)  <br> |
 | typedef std::map&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md), [**ShaderSampler**](structSR__GRAPH__NS_1_1ShaderSampler.md) &gt; | [**ShaderSamplers**](#typedef-shadersamplers)  <br> |
 | typedef std::vector&lt; [**Uniform**](structSR__GRAPH__NS_1_1Uniform.md) &gt; | [**UBOInfo**](#typedef-uboinfo)  <br> |
 | typedef std::vector&lt; std::pair&lt; Vertices::Attribute, size\_t &gt; &gt; | [**VertexAttributes**](#typedef-vertexattributes)  <br> |
@@ -280,7 +281,6 @@
 |  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_GTYPES\_NS::Mesh**](classSR__GTYPES__NS_1_1Mesh.md) &gt; | [**CreateMeshByType**](#function-createmeshbytype) (MeshType type) <br> |
 |  uint32\_t | [**GetPixelSize**](#function-getpixelsize) (ImageFormat format) <br> |
 |  RenderPassMap & | [**GetRenderPassMap**](#function-getrenderpassmap) () <br> |
-|  std::list&lt; [**SR\_GTYPES\_NS::Texture**](classSR__GTYPES__NS_1_1Texture.md) \* &gt; | [**GetTexturesFromMatProperties**](#function-gettexturesfrommatproperties) (const [**MaterialProperties**](classSR__GRAPH__NS_1_1MaterialProperties.md) & properties) <br> |
 |  void | [**LoadMaterialProperties**](#function-loadmaterialproperties) (const std::string & materialDebugIdentifier, const SR\_XML\_NS::Node & propertiesNode, [**MaterialProperties**](classSR__GRAPH__NS_1_1MaterialProperties.md) \* pProperties) <br> |
 |  bool SR\_FASTCALL | [**QuickSort**](#function-quicksort) ([**SR\_GTYPES\_NS::Mesh**](classSR__GTYPES__NS_1_1Mesh.md) \*\* data, const SR\_MATH\_NS::FVector3 & pos, MeshQSortCmpFn cmp, uint32\_t count) <br> |
 |  bool SR\_FASTCALL | [**QuickSortInternal**](#function-quicksortinternal) ([**SR\_GTYPES\_NS::Mesh**](classSR__GTYPES__NS_1_1Mesh.md) \*\* data, const SR\_MATH\_NS::FVector3 & pos, MeshQSortCmpFn cmp, uint32\_t lowestIndex, uint32\_t higherIndex) <br> |
@@ -528,7 +528,7 @@ typedef std::list<ShaderProperty> SR_GRAPH_NS::ShaderProperties;
 ### typedef ShaderPropertyVariant 
 
 ```C++
-typedef std::variant< SR_GTYPES_NS::Texture*, float_t, int32_t, SR_MATH_NS::FVector2, SR_MATH_NS::FVector3, SR_MATH_NS::IVector3, SR_MATH_NS::FVector4 > SR_GRAPH_NS::ShaderPropertyVariant;
+typedef std::variant< SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Texture>, float_t, int32_t, SR_MATH_NS::FVector2, SR_MATH_NS::FVector3, SR_MATH_NS::IVector3, SR_MATH_NS::FVector4 > SR_GRAPH_NS::ShaderPropertyVariant;
 ```
 
 
@@ -1383,21 +1383,6 @@ uint32_t SR_GRAPH_NS::GetPixelSize (
 
 ```C++
 RenderPassMap & SR_GRAPH_NS::GetRenderPassMap () 
-```
-
-
-
-
-<hr>
-
-
-
-### function GetTexturesFromMatProperties 
-
-```C++
-std::list< SR_GTYPES_NS::Texture * > SR_GRAPH_NS::GetTexturesFromMatProperties (
-    const MaterialProperties & properties
-) 
 ```
 
 

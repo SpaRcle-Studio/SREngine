@@ -46,7 +46,7 @@ namespace SR_GRAPH_NS {
 
     protected:
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<RenderContext>;
-        using ShaderPtr = SR_GTYPES_NS::Shader*;
+        using ShaderPtr = SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Shader>;
         using MeshPtr = SR_GTYPES_NS::Mesh*;
         using TexturePtr = SR_GTYPES_NS::Texture*;
 
@@ -58,7 +58,7 @@ namespace SR_GRAPH_NS {
         void SR_FASTCALL SetVec4(SR_UTILS_NS::StringAtom id, const SR_MATH_NS::FVector4& v) noexcept;
         void SR_FASTCALL SetColor(SR_UTILS_NS::StringAtom id, const SR_MATH_NS::FColor& v) noexcept;
         void SR_FASTCALL SetBool(SR_UTILS_NS::StringAtom id, bool v) noexcept;
-        void SR_FASTCALL SetTexture(SR_UTILS_NS::StringAtom id, SR_GTYPES_NS::Texture* pTexture) noexcept;
+        void SR_FASTCALL SetTexture(SR_UTILS_NS::StringAtom id, const SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Texture>& pTexture) noexcept;
 
         SR_NODISCARD SR_UTILS_NS::StringAtom GetRenderStageId() const noexcept;
         SR_NODISCARD bool IsTransparent() const;

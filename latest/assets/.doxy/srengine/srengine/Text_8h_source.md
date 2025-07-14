@@ -46,7 +46,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD SR_FORCE_INLINE bool IsDebugEnabled() const noexcept { return m_debug; }
         SR_NODISCARD SR_FORCE_INLINE bool IsPreprocessorEnabled() const noexcept { return m_preprocessor; }
         SR_NODISCARD SR_FORCE_INLINE bool IsLocalizationEnabled() const noexcept { return m_localization; }
-        SR_NODISCARD SR_FORCE_INLINE Font* GetFont() const noexcept { return m_font; }
+        SR_NODISCARD SR_FORCE_INLINE const SR_HTYPES_NS::SharedPtr<Font>& GetFont() const noexcept { return m_font; }
         SR_NODISCARD SR_FORCE_INLINE uint16_t GetFontSize() const noexcept { return m_fontSize; }
 
         SR_NODISCARD bool IsSupportVBO() const override { return false; }
@@ -62,7 +62,7 @@ namespace SR_GTYPES_NS {
         void SetText(const std::u32string& text);
         void SetKerning(bool enabled);
         void SetDebug(bool enabled);
-        void SetFont(Font* pFont);
+        void SetFont(const SR_HTYPES_NS::SharedPtr<Font>& pFont);
         void SetFont(const SR_UTILS_NS::Path& path);
         void SetFontSize(const uint16_t& size);
         void SetUseLocalization(bool enabled);
@@ -88,7 +88,7 @@ namespace SR_GTYPES_NS {
 
     private:
         int32_t m_id = SR_ID_INVALID;
-        Font* m_font = nullptr;
+        SR_HTYPES_NS::SharedPtr<Font> m_font;
 
     };
 }

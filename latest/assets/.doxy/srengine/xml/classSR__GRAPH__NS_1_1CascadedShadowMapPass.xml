@@ -316,7 +316,7 @@
         <link refid="classSR__GRAPH__NS_1_1BasePass"/>
         <childnode refid="6" relation="public-inheritance">
         </childnode>
-        <childnode refid="8" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
@@ -329,11 +329,11 @@
         <label>SR_GRAPH_NS::IFramebufferPass</label>
         <link refid="classSR__GRAPH__NS_1_1IFramebufferPass"/>
       </node>
-      <node id="10">
+      <node id="12">
         <label>SR_GRAPH_NS::ISamplersPass</label>
         <link refid="classSR__GRAPH__NS_1_1ISamplersPass"/>
       </node>
-      <node id="11">
+      <node id="13">
         <label>SR_GRAPH_NS::LayerFilterPredicate</label>
         <link refid="classSR__GRAPH__NS_1_1LayerFilterPredicate"/>
       </node>
@@ -342,13 +342,13 @@
         <link refid="classSR__GRAPH__NS_1_1MeshDrawerPass"/>
         <childnode refid="5" relation="public-inheritance">
         </childnode>
-        <childnode refid="10" relation="public-inheritance">
-        </childnode>
-        <childnode refid="11" relation="public-inheritance">
-        </childnode>
         <childnode refid="12" relation="public-inheritance">
         </childnode>
         <childnode refid="13" relation="public-inheritance">
+        </childnode>
+        <childnode refid="14" relation="public-inheritance">
+        </childnode>
+        <childnode refid="15" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
@@ -359,33 +359,43 @@
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="13">
+      <node id="15">
         <label>SR_GRAPH_NS::PriorityFilterPredicate</label>
         <link refid="classSR__GRAPH__NS_1_1PriorityFilterPredicate"/>
       </node>
-      <node id="12">
+      <node id="14">
         <label>SR_GRAPH_NS::ShaderReplacePredicate</label>
         <link refid="classSR__GRAPH__NS_1_1ShaderReplacePredicate"/>
       </node>
-      <node id="14">
+      <node id="16">
         <label>SR_GRAPH_NS::VarianceShadowMapPass</label>
         <link refid="classSR__GRAPH__NS_1_1VarianceShadowMapPass"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="8">
-        <label>SR_SRLM_NS::IExecutableNode</label>
-        <link refid="classSR__SRLM__NS_1_1IExecutableNode"/>
-        <childnode refid="9" relation="public-inheritance">
+      <node id="7">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="8" relation="public-inheritance">
         </childnode>
+      </node>
+      <node id="8">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
       </node>
       <node id="9">
-        <label>SR_SRLM_NS::LogicalNode</label>
-        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
-        <childnode refid="7" relation="public-inheritance">
+        <label>SR_SRLM_NS::IExecutableNode</label>
+        <link refid="classSR__SRLM__NS_1_1IExecutableNode"/>
+        <childnode refid="10" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="7">
+      <node id="10">
+        <label>SR_SRLM_NS::LogicalNode</label>
+        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
@@ -397,7 +407,7 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="16">
+      <node id="21">
         <label>Entity</label>
       </node>
       <node id="5">
@@ -405,15 +415,15 @@
         <link refid="classSR__GRAPH__NS_1_1BasePass"/>
         <childnode refid="6" relation="public-inheritance">
         </childnode>
-        <childnode refid="8" relation="public-inheritance">
-        </childnode>
-        <childnode refid="14" relation="usage">
-          <edgelabel>m_camera</edgelabel>
+        <childnode refid="10" relation="public-inheritance">
         </childnode>
         <childnode refid="19" relation="usage">
+          <edgelabel>m_camera</edgelabel>
+        </childnode>
+        <childnode refid="24" relation="usage">
           <edgelabel>m_uboManager</edgelabel>
         </childnode>
-        <childnode refid="22" relation="usage">
+        <childnode refid="27" relation="usage">
           <edgelabel>m_descriptorManager</edgelabel>
         </childnode>
       </node>
@@ -422,32 +432,32 @@
         <link refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="28" relation="usage">
+        <childnode refid="33" relation="usage">
           <edgelabel>m_cameraRotation</edgelabel>
         </childnode>
       </node>
-      <node id="22">
+      <node id="27">
         <label>SR_GRAPH_NS::DescriptorManager</label>
         <link refid="classSR__GRAPH__NS_1_1DescriptorManager"/>
-        <childnode refid="23" relation="public-inheritance">
+        <childnode refid="28" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
         <label>SR_GRAPH_NS::IFramebufferPass</label>
         <link refid="classSR__GRAPH__NS_1_1IFramebufferPass"/>
       </node>
-      <node id="24">
+      <node id="29">
         <label>SR_GRAPH_NS::ISamplersPass</label>
         <link refid="classSR__GRAPH__NS_1_1ISamplersPass"/>
       </node>
-      <node id="25">
+      <node id="30">
         <label>SR_GRAPH_NS::LayerFilterPredicate</label>
         <link refid="classSR__GRAPH__NS_1_1LayerFilterPredicate"/>
       </node>
-      <node id="19">
+      <node id="24">
         <label>SR_GRAPH_NS::Memory::UBOManager</label>
         <link refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager"/>
-        <childnode refid="20" relation="public-inheritance">
+        <childnode refid="25" relation="public-inheritance">
         </childnode>
       </node>
       <node id="4">
@@ -455,13 +465,13 @@
         <link refid="classSR__GRAPH__NS_1_1MeshDrawerPass"/>
         <childnode refid="5" relation="public-inheritance">
         </childnode>
-        <childnode refid="24" relation="public-inheritance">
+        <childnode refid="29" relation="public-inheritance">
         </childnode>
-        <childnode refid="25" relation="public-inheritance">
+        <childnode refid="30" relation="public-inheritance">
         </childnode>
-        <childnode refid="26" relation="public-inheritance">
+        <childnode refid="31" relation="public-inheritance">
         </childnode>
-        <childnode refid="27" relation="public-inheritance">
+        <childnode refid="32" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
@@ -472,76 +482,95 @@
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="27">
+      <node id="32">
         <label>SR_GRAPH_NS::PriorityFilterPredicate</label>
         <link refid="classSR__GRAPH__NS_1_1PriorityFilterPredicate"/>
       </node>
-      <node id="26">
+      <node id="31">
         <label>SR_GRAPH_NS::ShaderReplacePredicate</label>
         <link refid="classSR__GRAPH__NS_1_1ShaderReplacePredicate"/>
       </node>
-      <node id="14">
+      <node id="19">
         <label>SR_GTYPES_NS::Camera</label>
         <link refid="classSR__GTYPES__NS_1_1Camera"/>
-        <childnode refid="15" relation="public-inheritance">
+        <childnode refid="20" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="28">
-        <label>SR_MATH_NS::Quaternion</label>
-        <link refid="classSR__MATH__NS_1_1Quaternion"/>
+      <node id="7">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
       </node>
       <node id="8">
-        <label>SR_SRLM_NS::IExecutableNode</label>
-        <link refid="classSR__SRLM__NS_1_1IExecutableNode"/>
-        <childnode refid="9" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="10">
-        <label>SR_SRLM_NS::LogicalMachine</label>
-        <link refid="classSR__SRLM__NS_1_1LogicalMachine"/>
-        <childnode refid="11" relation="public-inheritance">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="9" relation="usage">
+          <edgelabel>m_data</edgelabel>
         </childnode>
       </node>
       <node id="9">
-        <label>SR_SRLM_NS::LogicalNode</label>
-        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
-        <childnode refid="7" relation="public-inheritance">
-        </childnode>
-        <childnode refid="10" relation="usage">
-          <edgelabel>m_machine</edgelabel>
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="33">
+        <label>SR_MATH_NS::Quaternion</label>
+        <link refid="classSR__MATH__NS_1_1Quaternion"/>
+      </node>
+      <node id="10">
+        <label>SR_SRLM_NS::IExecutableNode</label>
+        <link refid="classSR__SRLM__NS_1_1IExecutableNode"/>
+        <childnode refid="11" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="15">
-        <label>SR_UTILS_NS::Component</label>
-        <link refid="classSR__UTILS__NS_1_1Component"/>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-        <childnode refid="17" relation="usage">
-          <edgelabel>m_parent</edgelabel>
-        </childnode>
-        <childnode refid="18" relation="usage">
-          <edgelabel>m_scene</edgelabel>
-        </childnode>
-      </node>
-      <node id="17">
-        <label>SR_UTILS_NS::IComponentable</label>
-        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
-        <childnode refid="16" relation="public-inheritance">
+      <node id="13">
+        <label>SR_SRLM_NS::LogicalMachine</label>
+        <link refid="classSR__SRLM__NS_1_1LogicalMachine"/>
+        <childnode refid="14" relation="public-inheritance">
         </childnode>
       </node>
       <node id="11">
+        <label>SR_SRLM_NS::LogicalNode</label>
+        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>m_machine</edgelabel>
+        </childnode>
+      </node>
+      <node id="20">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="21" relation="public-inheritance">
+        </childnode>
+        <childnode refid="22" relation="usage">
+          <edgelabel>m_parent</edgelabel>
+        </childnode>
+        <childnode refid="23" relation="usage">
+          <edgelabel>m_scene</edgelabel>
+        </childnode>
+      </node>
+      <node id="22">
+        <label>SR_UTILS_NS::IComponentable</label>
+        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
+        <childnode refid="21" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
         <label>SR_UTILS_NS::IResource</label>
         <link refid="classSR__UTILS__NS_1_1IResource"/>
         <childnode refid="6" relation="public-inheritance">
         </childnode>
-        <childnode refid="12" relation="public-inheritance">
+        <childnode refid="15" relation="public-inheritance">
         </childnode>
-        <childnode refid="13" relation="usage">
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+        <childnode refid="18" relation="usage">
           <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
           <edgelabel>RELOAD_DONE_EVENT</edgelabel>
         </childnode>
       </node>
-      <node id="7">
+      <node id="12">
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
@@ -551,42 +580,52 @@
         <childnode refid="7" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="23">
-        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="21" relation="public-inheritance">
+      <node id="17">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="16">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="17" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="20">
+      <node id="28">
         <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="21" relation="public-inheritance">
+        <childnode refid="26" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="21">
+      <node id="25">
+        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="26" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="26">
         <label>SR_UTILS_NS::SingletonBase</label>
         <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
-        <childnode refid="7" relation="public-inheritance">
+        <childnode refid="12" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="13">
+      <node id="18">
         <label>SR_UTILS_NS::StringAtom</label>
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
-      <node id="12">
+      <node id="15">
         <label>SR_UTILS_NS::SubscriptionHolder</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
-      <node id="18">
+      <node id="23">
         <label>SR_WORLD_NS::Scene</label>
         <link refid="classSR__WORLD__NS_1_1Scene"/>
-        <childnode refid="17" relation="public-inheritance">
+        <childnode refid="22" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>
     <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="13" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="13" bodyend="46"/>
     <listofallmembers>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>AddDependency</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1af9087ca5182397a9c7d3b92fb5591523" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>AddDependency</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>AddInputConnection</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a451d30d4d677248caa80bb7ac74baad9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>AddInputData</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a72915afde33f4d0c714e454cab1544c7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>AddInputData</name></member>
@@ -594,6 +633,8 @@
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a968e3caf521de3d586f0ffb6cd9c2e07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>AddOutputData</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a70d337798b8e852a40f5f3a74fe35d79" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>AddOutputData</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1adaaa38e13468791bcb6c645092d08a73" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>AllocateRenderQueue</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>AutoFree</name></member>
       <member refid="classSR__SRLM__NS_1_1IExecutableNode_1a52d82db24c1ba529cf2c3fb289188eae" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Base</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a0d095ccdf074b9c91026a4f1b7e46f91" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>BasePass</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1afffc5aa7bc9b5e340f99221abdf47be0" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Bind</name></member>
@@ -604,14 +645,18 @@
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4b0351f30fc7afe7f45854cde8e09f64" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>ClearLogicalNode</name></member>
       <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a6f6e571576126604b2fac770137bdb70" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>ColorFormats</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8ff68384102d0f025a1dd259b1d57c17" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Context</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>DecrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a567caf35c79947385ee0fa54da27e052" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>DeInit</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>DynamicCast</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab95638d1f3f8a9b82a1dfdaa63d28d1f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Execute</name></member>
-      <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a4c9a862c7abb7935d1e112e5f1761da5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>FramebufferPtr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a8fd00ce8264bf9dff6363cc0c4b699cb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>FramebufferPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Get</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac38d38ae8e248a1b1ad573f3e2ac7ccf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetBaseLogicalNode</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aa389d8b46444dfa274aa68cc69e67d85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetCascadeMatrices</name></member>
       <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a93387ebe5820fb69594970f92c2b97be" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetClearColors</name></member>
       <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a2c7f6783a7d03ea990fd4642b3d7043d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetClearDepth</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac6c46124f5261f90e4392fd749afc0e1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetContainerParents</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a725e3e44aa2830a8a799d71e13693a73" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetContainerParents</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a149dec24886d7c8700a1b117c469307f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetContext</name></member>
       <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a3173139e9ba2929ad7e5c71b8d06e7c3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetFramebuffer</name></member>
       <member refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a8d7278781a2119c4feb86916b8eba81f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetFrameBufferRenderTechnique</name></member>
@@ -627,13 +672,21 @@
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1aa14e801043f55bacd8b6ae930d1b063b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetOutputs</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8f05935a0013471af3796065104ddd87" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetParent</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a95b0ad3eee1d6801d720bc7eab40bc6e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetPassPipeline</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetRawPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a0a5f8a97c3dbf872cf04c0c81ca58a0e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetRenderQueues</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a2d00f38853dae5296edc23d4c7bfa75c" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetRenderScene</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a4435db91121eee036621f931696007f9" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetRenderStrategy</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a013ac2ccec3d56f755d585ac7129b981" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetSplitDepths</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetSRClass</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae8e205c3d55f751a1cffabd6ae2cbafa" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetStatus</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ace5d758ae98e877e7fe6b9b311ca8976" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetTechnique</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetThis</name></member>
       <member refid="classSR__SRLM__NS_1_1IExecutableNode_1a5e765eb12571b7a44b7f1dc9cfcf2b4e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a39f67280ae696a53716dbe19ef2461ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>HasErrors</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4b0bdf3803c8a5163c579feab8e93704" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Hash</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a6005e3b582569eea6cc429174680a804" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>HasPostRender</name></member>
@@ -643,6 +696,7 @@
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a63b89d1da5c027690ec57549d061677f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>HasUpdate</name></member>
       <member refid="classSR__SRLM__NS_1_1IExecutableNode_1a72369ad750e0cbaa06007623f7a5a6aa" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>IExecutableNode</name></member>
       <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1abaa083530168f30691542a8bca773401" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>IFramebufferPass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>IncrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a660d8bc99d6b36b662e68730ca4c81ed" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Init</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae6934733a21e34c45488912bdac8b9a4" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>InitNode</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a46d4de6ffa829b0ac09255febc01f8c3" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>InitValues</name></member>
@@ -663,12 +717,14 @@
       <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a4ad51c2c5abff53df15340fd5205c861" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>LoadFramebufferSettings</name></member>
       <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1a9069d7a809b4d6a4f2bea7c0a7324cd3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>LoadSamplersPass</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a6bcd14ebcd882a6f89e531c1789f7037" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>LoadXml</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_basicManually</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad98f4d77d135b01f81a76f9534b393c1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_camera</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aa05bb9ae4b5ec4c6a9b6510e52f04bb4" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_cameraPosition</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a6029524d0a90c307ea0540df53b25f57" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_cameraRotation</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a30ef6bef23016db8551b58cdc094c84c" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_cascadeMatrices</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a7c88f47420b46139ad9dfb1a41cc0d4e" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_cascadeSplitDepths</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a4282279a8fb4de5dfaa74cddd3dc72c9" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_cascadeSplitLambda</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_data</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a25fe2fa123f3a2a1fee0ca8ec9e64fa2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_descriptorManager</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ac9171a05a693eaa8174f6d3012c8d114" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_directionalLightPosition</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a316c137b56d58d88498d8826b75c9d99" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_far</name></member>
@@ -682,30 +738,41 @@
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a326155de44e7fe4f9a7f6f905f239e83" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_status</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8b2e3a39351e9141029bea133f380465" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_uboManager</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ac1cfb486e5b40e21a404aeabccca8bb8" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_usePerspective</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>MakeShared</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1abeb669de15f340d47b81aff73c8494a7" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>MarkDirty</name></member>
       <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1a7e588f69a586128652fe361e13313764" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>MarkSamplersDirty</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7a70a21bb631f62e665555e71d3b97f8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>MeshDrawerPass</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1aa7c29336844c31150ba16812fc82ad7d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>MeshPtr</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual" ambiguityscope="SR_SRLM_NS::IExecutableNode::"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual" ambiguityscope="SR_SRLM_NS::IExecutableNode::"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>NonCopyable</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad6e7d35a53f2d509bf057186f66481e6" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>OnMeshAdded</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a5f7298ff562c16372c6c233189be0d49" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>OnMeshRemoved</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a2c8facd7b70961d91c011f337c8902f0" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>OnMultisampleChanged</name></member>
       <member refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a4cecff17587b90edebb89381333c25d9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>OnResize</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a833f3da55449659aeb8df7992155dd69" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>OnResourceUpdated</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7ff01caedf031547f8416149deae336e" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>OnSamplersChanged</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_SRLM_NS::IExecutableNode::"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>operator==</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a16df7383e3420c9291cb97ec92c2d537" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Overlay</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a9a07bf1f90447c55603ffa6b1e0bed70" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Pins</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ac2790f23f7796eb36002c30dc817f1ba" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>PipelinePtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>PolymorphicCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a2618cec5cb8f6f4c384b88bb3878c781" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>PostRender</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ac907cd9eeb58321011db7473671aead2" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>PostUpdate</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a3c35b40b7095392be6ae0fe7bd4edf05" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Prepare</name></member>
       <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1aba0559086ff8566ead9530dc765081cf" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>PrepareSamplers</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad2075554ddda52bbe8c83f514951a680" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>PreRender</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ab3931d45e2b3c2fd69160c76748dd95d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>RemoveDependency</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a2db19e6bfa97da6d7089665a0edfc3fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac21f24c643f3298ec89225361ce96a9f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>RemoveDependency</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae81c72460b1aeba9e7a6d61cfd26ab69" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>RemoveInput</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3dd7841012e531003e34e7b8cee39c8a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>RemoveInputConnection</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a1d32f0aa31055f7327c207e687fd159f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>RemoveOutput</name></member>
@@ -715,11 +782,13 @@
       <member refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a1829457bff5d1d8f4db40eca09b22eb4" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>RenderFrameBufferInner</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a9fe3f67ad907624d9277f7ade5e02826" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>RenderQueuePtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad5832c5a9f8abf85ac97967105d3a953" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>RenderScenePtr</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a0f5ae4c677fc4a1d8c38c67b9ea0026e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>ReplaceShader</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4fe38d653d32f3462b0f932fe1db83a7" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Reset</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a1f1efedcc65733c7078b6634b690bc17" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>ReplaceShader</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Reset</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4fe38d653d32f3462b0f932fe1db83a7" prot="public" virt="virtual" ambiguityscope="SR_SRLM_NS::IExecutableNode::"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Reset</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac04e4fd8681f829b225da3d92de851f9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>ResetInputFlows</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ad119153e52e8ea5c69fc41d600a6f98b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>ResetOutputFlows</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a26cb3321be56bb940227895f39e39585" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>ResetStatus</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a4fb6331893e314c01da26b361197a75e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>ResourceContainer</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a1d2f00105677e74286e1d1c8dee82255" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>SaveXml</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a62227cc4ae3b9feee5afcca5f23bc919" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>SetContext</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1acee317aea228ef1431a3a4b37010cedb" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>SetInput</name></member>
@@ -728,9 +797,21 @@
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a1f1fe9682ea099f5ca3fbbfb6bc6a9e5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>SetName</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a915d9919621e79a3ee48ddb15799123c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>SetNodeIndex</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ab5e34c676e9594e60de4ca2e962a0cf7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>SetParent</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>SetPointerFromBase</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1ad107004af861726eb3616e82c1ff6f6b" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>SetRenderTechnique</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a97cd8c3e02986bed93c9db6fc7569e0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>ShaderPtr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a65e58bf20b3acc95f7e07f4cef52facb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>ShaderPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>StaticCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a4ca91fe00d09e61e7c22f8a9918afafd" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Super</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Unlock</name></member>
       <member refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a39032468632681f25ca46f0693308a7a" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Update</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aeea9bcce13f150416fca9034b439f906" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>UpdateCascades</name></member>
       <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1aa449983c3593b2bc303d0c6f9a1d6a9f" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>UpdateFrameBuffer</name></member>
@@ -740,6 +821,7 @@
       <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1af41b07a501d2f5d98fa7d40566d9b529" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>UseSamplers</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a0912cb535115952924c5a03d8f81346b" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>UseSharedUniforms</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a6b7b3dfb130a65c03cf8f36d8a4dc666" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>UseUniforms</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Valid</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a127a21b6754f470eeddf8af6f2c16cb3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>~BasePass</name></member>
       <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1aaf06bfe3be77272f4697b4b066491330" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>~IFramebufferPass</name></member>
       <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1a4d6ba09d9f666b194cc2a8740e07e256" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>~ISamplersPass</name></member>
@@ -748,8 +830,10 @@
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a55de8160e5bfe0a4b074ed801001ac79" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>~MeshDrawerPass</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>~NonCopyable</name></member>
       <member refid="classSR__GRAPH__NS_1_1PriorityFilterPredicate_1a597e5df2d40b6d48c2774bdb34b516ca" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>~PriorityFilterPredicate</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a25f84a35792474f3b2e2eff6431695d3" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>~ResourceContainer</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a25f84a35792474f3b2e2eff6431695d3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>~ResourceContainer</name></member>
       <member refid="classSR__GRAPH__NS_1_1ShaderReplacePredicate_1a8c27d1b6d8ad022203f55c9bcf096d7e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>~ShaderReplacePredicate</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>~SharedPtrBase</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

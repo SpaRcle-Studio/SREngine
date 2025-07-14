@@ -99,7 +99,7 @@ Inherits the following classes: [SR\_ANIMATIONS\_NS::AnimationState](classSR__AN
 | virtual SR\_NODISCARD float\_t | [**GetProgress**](#function-getprogress) () noexcept override const<br> |
 | virtual SR\_NODISCARD float\_t | [**GetTime**](#function-gettime) () noexcept override const<br> |
 | virtual void | [**Reset**](#function-reset) () override<br> |
-|  void | [**SetClip**](#function-setclip) ([**AnimationClip**](classSR__ANIMATIONS__NS_1_1AnimationClip.md) \* pClip) <br> |
+|  void | [**SetClip**](#function-setclip) (const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**AnimationClip**](classSR__ANIMATIONS__NS_1_1AnimationClip.md) &gt; & pClip) <br> |
 | virtual void | [**Update**](#function-update) ([**UpdateContext**](structSR__ANIMATIONS__NS_1_1UpdateContext.md) & context) override<br> |
 |   | [**~AnimationClipState**](#function-animationclipstate) () override<br> |
 
@@ -179,7 +179,7 @@ See [SR\_ANIMATIONS\_NS::AnimationState](classSR__ANIMATIONS__NS_1_1AnimationSta
 | ---: | :--- |
 |  std::vector&lt; [**ChannelUpdateContext**](structSR__ANIMATIONS__NS_1_1ChannelUpdateContext.md) &gt; | [**m\_channelContexts**](#variable-m_channelcontexts)  <br> |
 |  std::vector&lt; uint32\_t &gt; | [**m\_channelPlayState**](#variable-m_channelplaystate)  <br> |
-|  [**AnimationClip**](classSR__ANIMATIONS__NS_1_1AnimationClip.md) \* | [**m\_clip**](#variable-m_clip)   = `nullptr`<br> |
+|  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**AnimationClip**](classSR__ANIMATIONS__NS_1_1AnimationClip.md) &gt; | [**m\_clip**](#variable-m_clip)   = `nullptr`<br> |
 |  float\_t | [**m\_duration**](#variable-m_duration)   = `0.f`<br> |
 |  uint32\_t | [**m\_maxKeyFrame**](#variable-m_maxkeyframe)   = `0`<br> |
 |  float\_t | [**m\_time**](#variable-m_time)   = `0.f`<br> |
@@ -370,7 +370,7 @@ Implements [*SR\_ANIMATIONS\_NS::AnimationState::Reset*](classSR__ANIMATIONS__NS
 
 ```C++
 void SR_ANIMATIONS_NS::AnimationClipState::SetClip (
-    AnimationClip * pClip
+    const SR_HTYPES_NS::SharedPtr < AnimationClip > & pClip
 ) 
 ```
 
@@ -459,7 +459,7 @@ std::vector<uint32_t> SR_ANIMATIONS_NS::AnimationClipState::m_channelPlayState;
 ### variable m\_clip 
 
 ```C++
-AnimationClip* SR_ANIMATIONS_NS::AnimationClipState::m_clip;
+SR_HTYPES_NS::SharedPtr<AnimationClip> SR_ANIMATIONS_NS::AnimationClipState::m_clip;
 ```
 
 

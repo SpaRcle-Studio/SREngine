@@ -12,6 +12,7 @@
 
 * `#include <Utils/Serialization/Serializable.h>`
 * `#include <Graphics/Types/Shader.h>`
+* `#include <Graphics/Types/Texture.h>`
 
 
 

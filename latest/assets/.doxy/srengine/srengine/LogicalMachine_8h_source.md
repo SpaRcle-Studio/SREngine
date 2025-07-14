@@ -44,8 +44,6 @@ namespace SR_SRLM_NS {
         virtual void UpdateMachine(float_t dt);
 
     private:
-        SR_NODISCARD IResource* CopyResource(SR_UTILS_NS::IResource* pDestination) const override;
-
         bool Execute(float_t dt);
         void AddNode(LogicalNode* pNode);
         void Optimize();

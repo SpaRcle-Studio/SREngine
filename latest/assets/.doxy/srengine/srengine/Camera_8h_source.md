@@ -24,7 +24,6 @@
 
 namespace SR_GRAPH_NS {
     class Window;
-    class RenderTechnique;
     class IRenderTechnique;
     class RenderScene;
 }
@@ -34,7 +33,7 @@ namespace SR_GTYPES_NS {
         SR_CLASS()
         struct RenderTechniqueInfo {
             SR_UTILS_NS::Path path;
-            SR_GRAPH_NS::IRenderTechnique* pTechnique = nullptr;
+            SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::IRenderTechnique> pTechnique;
         };
         using RenderScenePtr = SR_HTYPES_NS::SharedPtr<RenderScene>;
         using Super = SR_UTILS_NS::Component;

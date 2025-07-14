@@ -4,6 +4,7 @@
     <compoundname>MaterialData.h</compoundname>
     <includes refid="Serializable_8h" local="no">Utils/Serialization/Serializable.h</includes>
     <includes refid="Types_2Shader_8h" local="no">Graphics/Types/Shader.h</includes>
+    <includes refid="Texture_8h" local="no">Graphics/Types/Texture.h</includes>
     <includedby refid="BaseMaterial_8h" local="no">Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h</includedby>
     <incdepgraph>
       <node id="157">
@@ -44,12 +45,24 @@
         <childnode refid="144" relation="include">
         </childnode>
       </node>
+      <node id="165">
+        <label>Graphics/Loaders/TextureLoader.h</label>
+        <link refid="TextureLoader_8h_source"/>
+        <childnode refid="120" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="164" relation="include">
+        </childnode>
+      </node>
       <node id="1">
         <label>Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h</label>
         <link refid="MaterialData_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="128" relation="include">
+        </childnode>
+        <childnode refid="162" relation="include">
         </childnode>
       </node>
       <node id="160">
@@ -80,6 +93,14 @@
         <childnode refid="78" relation="include">
         </childnode>
         <childnode refid="150" relation="include">
+        </childnode>
+      </node>
+      <node id="164">
+        <label>Graphics/Memory/TextureConfigs.h</label>
+        <link refid="TextureConfigs_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="163" relation="include">
         </childnode>
       </node>
       <node id="161">
@@ -116,6 +137,16 @@
         <childnode refid="156" relation="include">
         </childnode>
       </node>
+      <node id="163">
+        <label>Graphics/Pipeline/TextureHelper.h</label>
+        <link refid="TextureHelper_8h_source"/>
+        <childnode refid="136" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="142" relation="include">
+        </childnode>
+      </node>
       <node id="156">
         <label>Graphics/SRSL/ShaderType.h</label>
         <link refid="ShaderType_8h_source"/>
@@ -146,6 +177,22 @@
         <childnode refid="160" relation="include">
         </childnode>
         <childnode refid="161" relation="include">
+        </childnode>
+      </node>
+      <node id="162">
+        <label>Graphics/Types/Texture.h</label>
+        <link refid="Texture_8h_source"/>
+        <childnode refid="129" relation="include">
+        </childnode>
+        <childnode refid="149" relation="include">
+        </childnode>
+        <childnode refid="163" relation="include">
+        </childnode>
+        <childnode refid="164" relation="include">
+        </childnode>
+        <childnode refid="160" relation="include">
+        </childnode>
+        <childnode refid="165" relation="include">
         </childnode>
       </node>
       <node id="139">
@@ -575,6 +622,8 @@
         </childnode>
         <childnode refid="120" relation="include">
         </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
         <childnode refid="133" relation="include">
         </childnode>
         <childnode refid="134" relation="include">
@@ -583,7 +632,7 @@
       <node id="133">
         <label>Utils/Resources/ResourceContainer.h</label>
         <link refid="ResourceContainer_8h_source"/>
-        <childnode refid="7" relation="include">
+        <childnode refid="120" relation="include">
         </childnode>
       </node>
       <node id="155">
@@ -1283,6 +1332,10 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="4">
+        <label>Engine/inc/Engine/GUI/AssetInspector.h</label>
+        <link refid="AssetInspector_8h_source"/>
+      </node>
+      <node id="5">
         <label>Engine/inc/Engine/GUI/Inspector.h</label>
         <link refid="Inspector_8h_source"/>
       </node>
@@ -1299,72 +1352,78 @@
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
       </node>
-      <node id="5">
+      <node id="6">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/BehaviourNamePropertyDrawer.h</label>
         <link refid="BehaviourNamePropertyDrawer_8h_source"/>
       </node>
-      <node id="9">
+      <node id="10">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.h</label>
         <link refid="BehaviourPropertyDrawer_8h_source"/>
       </node>
-      <node id="6">
+      <node id="7">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/BitMapPropertyDrawer.h</label>
         <link refid="BitMapPropertyDrawer_8h_source"/>
       </node>
-      <node id="7">
+      <node id="8">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/EnumPropertyDrawer.h</label>
         <link refid="EnumPropertyDrawer_8h_source"/>
       </node>
-      <node id="10">
+      <node id="11">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h</label>
         <link refid="MaterialDataPropertyDrawer_8h_source"/>
       </node>
-      <node id="13">
+      <node id="14">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/MaterialPropertyDrawer.h</label>
         <link refid="MaterialPropertyDrawer_8h_source"/>
       </node>
-      <node id="8">
+      <node id="9">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h</label>
         <link refid="ObjectPropertyDrawer_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
       </node>
-      <node id="11">
+      <node id="12">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/PathPropertyDrawer.h</label>
         <link refid="PathPropertyDrawer_8h_source"/>
       </node>
-      <node id="12">
+      <node id="13">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h</label>
         <link refid="PointerPropertyDrawer_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
         </childnode>
       </node>
-      <node id="14">
+      <node id="15">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/RectPropertyDrawer.h</label>
         <link refid="RectPropertyDrawer_8h_source"/>
       </node>
-      <node id="15">
+      <node id="16">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/StringPropertyDrawer.h</label>
         <link refid="StringPropertyDrawer_8h_source"/>
       </node>
-      <node id="16">
+      <node id="17">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/VectorPropertyDrawer.h</label>
         <link refid="VectorPropertyDrawer_8h_source"/>
       </node>
@@ -1373,12 +1432,12 @@
         <link refid="BaseMaterial_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
         <childnode refid="18" relation="include">
         </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
       </node>
-      <node id="17">
+      <node id="18">
         <label>Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h</label>
         <link refid="FileMaterial_8h_source"/>
       </node>
@@ -1388,7 +1447,7 @@
         <childnode refid="2" relation="include">
         </childnode>
       </node>
-      <node id="18">
+      <node id="19">
         <label>Engine/libs/Graphics/inc/Graphics/Material/UniqueMaterial.h</label>
         <link refid="UniqueMaterial_8h_source"/>
       </node>
@@ -1412,116 +1471,117 @@
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Serialization/Serializable.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Graphics/Types/Shader.h&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SR_GRAPH_NS<sp/>{</highlight></codeline>
-<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*SR_ENUM_NS_CLASS_T(MaterialShader,<sp/>uint16_t,</highlight></codeline>
-<codeline lineno="14"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Default,</highlight></codeline>
-<codeline lineno="15"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Simple,</highlight></codeline>
-<codeline lineno="16"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Shadows,<sp/>SSAO,<sp/>HDAO,<sp/>HBAO,<sp/>VXAO,<sp/>Bloom,</highlight></codeline>
-<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SSAOShadows,<sp/>HDAOShadows,<sp/>HBAOShadows,<sp/>VXAOShadows,</highlight></codeline>
-<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SSAOShadowsBloom</highlight></codeline>
-<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/>);*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="20"><highlight class="normal"></highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">MaterialData;</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"></highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/>MaterialPropertyChangeResult<sp/>:<sp/>uint8_t<sp/>{</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>None,<sp/>Error,<sp/>Update,<sp/>ReDraw</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"></highlight></codeline>
-<codeline lineno="27" refid="structSR__GRAPH__NS_1_1MaterialShaderProperty" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__GRAPH__NS_1_1MaterialShaderProperty" kindref="compound">MaterialShaderProperty</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Serializable" kindref="compound">SR_UTILS_NS::Serializable</ref><sp/>{</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_STRUCT()</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Super<sp/>=<sp/><ref refid="classSR__UTILS__NS_1_1Serializable" kindref="compound">SR_UTILS_NS::Serializable</ref>;</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"></highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Save(<ref refid="classSR__UTILS__NS_1_1ISerializer" kindref="compound">SR_UTILS_NS::ISerializer</ref>&amp;<sp/>serializer)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Load(<ref refid="classSR__UTILS__NS_1_1IDeserializer" kindref="compound">SR_UTILS_NS::IDeserializer</ref>&amp;<sp/>deserializer)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"></highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>editorOrder<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>displayName;</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ShaderPropertyVariant<sp/>data;</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"></highlight></codeline>
-<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>id;</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ShaderVarType<sp/>type<sp/>=<sp/>ShaderVarType::Unknown;</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>pushConstant<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"></highlight></codeline>
-<codeline lineno="49" refid="structSR__GRAPH__NS_1_1MaterialShaderData" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__GRAPH__NS_1_1MaterialShaderData" kindref="compound">MaterialShaderData</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Serializable" kindref="compound">SR_UTILS_NS::Serializable</ref><sp/>{</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_STRUCT()</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"></highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GRAPH__NS_1_1MaterialData" kindref="compound">MaterialData</ref>*<sp/>pOwnedMaterialData<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref>*<sp/>pShader<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"></highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;MaterialShaderProperty&gt;<sp/>uniforms;</highlight></codeline>
-<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;MaterialShaderProperty&gt;<sp/>samplers;</highlight></codeline>
-<codeline lineno="59"><highlight class="normal"></highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnPreLoad()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnPostLoad()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"></highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ForEachProperty(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">(<ref refid="structSR__GRAPH__NS_1_1MaterialShaderProperty" kindref="compound">MaterialShaderProperty</ref>&amp;)&gt;&amp;<sp/>func);</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"></highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MaterialPropertyChangeResult<sp/>SR_FASTCALL<sp/>SetData(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ShaderPropertyVariant&amp;<sp/>v,<sp/>ShaderVarType<sp/>type)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UpdateProperties();</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"></highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"></highlight></codeline>
-<codeline lineno="71" refid="classSR__GRAPH__NS_1_1MaterialData" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__GRAPH__NS_1_1MaterialData" kindref="compound">MaterialData</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Serializable" kindref="compound">SR_UTILS_NS::Serializable</ref></highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1NonCopyable" kindref="compound">SR_UTILS_NS::NonCopyable</ref></highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt;MaterialData&gt;</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1SubscriptionHolder" kindref="compound">SR_UTILS_NS::SubscriptionHolder</ref></highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Super<sp/>=<sp/><ref refid="classSR__UTILS__NS_1_1Serializable" kindref="compound">SR_UTILS_NS::Serializable</ref>;</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_CLASS()</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Ptr<sp/>=<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;MaterialData&gt;</ref>;</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"></highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>PROPERTY_CHANGED_EVENT<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;PropertyChanged&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_CHANGED_EVENT<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;ShaderChanged&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>ONLY_UNIFORMS_BOOL_ID<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;OnlyUniforms&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"></highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GRAPH__NS_1_1MaterialData" kindref="compound">MaterialData</ref>();</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GRAPH__NS_1_1MaterialData" kindref="compound">~MaterialData</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="87"><highlight class="normal"></highlight></codeline>
-<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Save(<ref refid="classSR__UTILS__NS_1_1ISerializer" kindref="compound">SR_UTILS_NS::ISerializer</ref>&amp;<sp/>serializer)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Load(<ref refid="classSR__UTILS__NS_1_1IDeserializer" kindref="compound">SR_UTILS_NS::IDeserializer</ref>&amp;<sp/>deserializer)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"></highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref>*<sp/>GetShader(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__GRAPH__NS_1_1Pipeline" kindref="compound">Pipeline</ref>*<sp/>pPipeline)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"></highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Finalize();</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"></highlight></codeline>
-<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UseUniforms(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__GRAPH__NS_1_1Pipeline" kindref="compound">Pipeline</ref>*<sp/>pPipeline);</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UseSamplers(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__GRAPH__NS_1_1Pipeline" kindref="compound">Pipeline</ref>*<sp/>pPipeline);</highlight></codeline>
-<codeline lineno="97"><highlight class="normal"></highlight></codeline>
-<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="structSR__GRAPH__NS_1_1MaterialShaderData" kindref="compound">MaterialShaderData</ref>&amp;<sp/>GetDefaultShaderData()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_defaultShader;<sp/>}</highlight></codeline>
-<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__GRAPH__NS_1_1MaterialShaderData" kindref="compound">MaterialShaderData</ref>&amp;<sp/>GetDefaultShaderData()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_defaultShader;<sp/>}</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::map&lt;SR_UTILS_NS::StringAtom,<sp/>MaterialShaderData&gt;&amp;<sp/>GetShadersData()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_shaders;<sp/>}</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>std::map&lt;SR_UTILS_NS::StringAtom,<sp/>MaterialShaderData&gt;&amp;<sp/>GetShadersData()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_shaders;<sp/>}</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="structSR__GRAPH__NS_1_1MaterialShaderData" kindref="compound">MaterialShaderData</ref>*<sp/>GetShaderData(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__GRAPH__NS_1_1MaterialShaderData" kindref="compound">MaterialShaderData</ref>*<sp/>GetShaderData(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"></highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetSampler(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref>&amp;<sp/>path)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetShader(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref>&amp;<sp/>path,<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>stage<sp/>=<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>());</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetShader(<ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref>*<sp/>pShader,<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>stage<sp/>=<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>());</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetData(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ShaderPropertyVariant&amp;<sp/>v,<sp/>ShaderVarType<sp/>type)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>OnSamplerChanged(<ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref>*<sp/>pOldTexture,<sp/><ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref>*<sp/>pNewTexture)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"></highlight></codeline>
-<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>RemoveStage(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>stage);</highlight></codeline>
-<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnPropertyChanged(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>onlyUniforms);</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"></highlight></codeline>
-<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnShaderChanged();</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"></highlight></codeline>
-<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;SR_GTYPES_NS::Shader*,<sp/>std::pair&lt;SR_UTILS_NS::Subscription,<sp/>uint32_t&gt;&gt;<sp/>m_shaderSubscriptions;</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;SR_GTYPES_NS::Texture*,<sp/>std::pair&lt;SR_UTILS_NS::Subscription,<sp/>uint32_t&gt;&gt;<sp/>m_textureSubscriptions;</highlight></codeline>
-<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__GRAPH__NS_1_1MaterialShaderData" kindref="compound">MaterialShaderData</ref><sp/>m_defaultShader;</highlight></codeline>
-<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;SR_UTILS_NS::StringAtom,<sp/>MaterialShaderData&gt;<sp/>m_shaders;</highlight></codeline>
-<codeline lineno="122"><highlight class="normal"></highlight></codeline>
-<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="124"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="125"><highlight class="normal"></highlight></codeline>
-<codeline lineno="126"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GRAPHICS_MATERIAL_DATA_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Graphics/Types/Texture.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SR_GRAPH_NS<sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*SR_ENUM_NS_CLASS_T(MaterialShader,<sp/>uint16_t,</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Default,</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Simple,</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Shadows,<sp/>SSAO,<sp/>HDAO,<sp/>HBAO,<sp/>VXAO,<sp/>Bloom,</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SSAOShadows,<sp/>HDAOShadows,<sp/>HBAOShadows,<sp/>VXAOShadows,</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SSAOShadowsBloom</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/>);*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">MaterialData;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/>MaterialPropertyChangeResult<sp/>:<sp/>uint8_t<sp/>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>None,<sp/>Error,<sp/>Update,<sp/>ReDraw</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28" refid="structSR__GRAPH__NS_1_1MaterialShaderProperty" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__GRAPH__NS_1_1MaterialShaderProperty" kindref="compound">MaterialShaderProperty</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Serializable" kindref="compound">SR_UTILS_NS::Serializable</ref><sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_STRUCT()</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Super<sp/>=<sp/><ref refid="classSR__UTILS__NS_1_1Serializable" kindref="compound">SR_UTILS_NS::Serializable</ref>;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Save(<ref refid="classSR__UTILS__NS_1_1ISerializer" kindref="compound">SR_UTILS_NS::ISerializer</ref>&amp;<sp/>serializer)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Load(<ref refid="classSR__UTILS__NS_1_1IDeserializer" kindref="compound">SR_UTILS_NS::IDeserializer</ref>&amp;<sp/>deserializer)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>editorOrder<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>displayName;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ShaderPropertyVariant<sp/>data;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>id;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ShaderVarType<sp/>type<sp/>=<sp/>ShaderVarType::Unknown;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>pushConstant<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50" refid="structSR__GRAPH__NS_1_1MaterialShaderData" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__GRAPH__NS_1_1MaterialShaderData" kindref="compound">MaterialShaderData</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Serializable" kindref="compound">SR_UTILS_NS::Serializable</ref><sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_STRUCT()</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GRAPH__NS_1_1MaterialData" kindref="compound">MaterialData</ref>*<sp/>pOwnedMaterialData<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_GTYPES_NS::Shader::Ptr<sp/>pShader<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;MaterialShaderProperty&gt;<sp/>uniforms;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;MaterialShaderProperty&gt;<sp/>samplers;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnPreLoad()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnPostLoad()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ForEachProperty(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">(<ref refid="structSR__GRAPH__NS_1_1MaterialShaderProperty" kindref="compound">MaterialShaderProperty</ref>&amp;)&gt;&amp;<sp/>func);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MaterialPropertyChangeResult<sp/>SR_FASTCALL<sp/>SetData(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ShaderPropertyVariant&amp;<sp/>v,<sp/>ShaderVarType<sp/>type)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UpdateProperties();</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72" refid="classSR__GRAPH__NS_1_1MaterialData" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__GRAPH__NS_1_1MaterialData" kindref="compound">MaterialData</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Serializable" kindref="compound">SR_UTILS_NS::Serializable</ref></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1NonCopyable" kindref="compound">SR_UTILS_NS::NonCopyable</ref></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt;MaterialData&gt;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1SubscriptionHolder" kindref="compound">SR_UTILS_NS::SubscriptionHolder</ref></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Super<sp/>=<sp/><ref refid="classSR__UTILS__NS_1_1Serializable" kindref="compound">SR_UTILS_NS::Serializable</ref>;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_CLASS()</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Ptr<sp/>=<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;MaterialData&gt;</ref>;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>PROPERTY_CHANGED_EVENT<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;PropertyChanged&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_CHANGED_EVENT<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;ShaderChanged&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>ONLY_UNIFORMS_BOOL_ID<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;OnlyUniforms&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GRAPH__NS_1_1MaterialData" kindref="compound">MaterialData</ref>();</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GRAPH__NS_1_1MaterialData" kindref="compound">~MaterialData</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Save(<ref refid="classSR__UTILS__NS_1_1ISerializer" kindref="compound">SR_UTILS_NS::ISerializer</ref>&amp;<sp/>serializer)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Load(<ref refid="classSR__UTILS__NS_1_1IDeserializer" kindref="compound">SR_UTILS_NS::IDeserializer</ref>&amp;<sp/>deserializer)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_GTYPES_NS::Shader::Ptr<sp/>GetShader(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__GRAPH__NS_1_1Pipeline" kindref="compound">Pipeline</ref>*<sp/>pPipeline)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Finalize();</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UseUniforms(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__GRAPH__NS_1_1Pipeline" kindref="compound">Pipeline</ref>*<sp/>pPipeline);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UseSamplers(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__GRAPH__NS_1_1Pipeline" kindref="compound">Pipeline</ref>*<sp/>pPipeline);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="structSR__GRAPH__NS_1_1MaterialShaderData" kindref="compound">MaterialShaderData</ref>&amp;<sp/>GetDefaultShaderData()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_defaultShader;<sp/>}</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__GRAPH__NS_1_1MaterialShaderData" kindref="compound">MaterialShaderData</ref>&amp;<sp/>GetDefaultShaderData()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_defaultShader;<sp/>}</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::map&lt;SR_UTILS_NS::StringAtom,<sp/>MaterialShaderData&gt;&amp;<sp/>GetShadersData()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_shaders;<sp/>}</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>std::map&lt;SR_UTILS_NS::StringAtom,<sp/>MaterialShaderData&gt;&amp;<sp/>GetShadersData()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_shaders;<sp/>}</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="structSR__GRAPH__NS_1_1MaterialShaderData" kindref="compound">MaterialShaderData</ref>*<sp/>GetShaderData(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__GRAPH__NS_1_1MaterialShaderData" kindref="compound">MaterialShaderData</ref>*<sp/>GetShaderData(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetSampler(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref>&amp;<sp/>path)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetShader(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref>&amp;<sp/>path,<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>stage<sp/>=<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>());</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetShader(SR_GTYPES_NS::Shader::Ptr<sp/>pShader,<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>stage<sp/>=<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>());</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetData(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ShaderPropertyVariant&amp;<sp/>v,<sp/>ShaderVarType<sp/>type)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>OnSamplerChanged(SR_GTYPES_NS::Texture::Ptr<sp/>pOldTexture,<sp/>SR_GTYPES_NS::Texture::Ptr<sp/>pNewTexture)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>RemoveStage(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>stage);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnPropertyChanged(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>onlyUniforms);</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnShaderChanged();</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;SR_GTYPES_NS::Shader::Ptr,<sp/>std::pair&lt;SR_UTILS_NS::Subscription,<sp/>uint32_t&gt;&gt;<sp/>m_shaderSubscriptions;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;SR_GTYPES_NS::Texture::Ptr,<sp/>std::pair&lt;SR_UTILS_NS::Subscription,<sp/>uint32_t&gt;&gt;<sp/>m_textureSubscriptions;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__GRAPH__NS_1_1MaterialShaderData" kindref="compound">MaterialShaderData</ref><sp/>m_defaultShader;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;SR_UTILS_NS::StringAtom,<sp/>MaterialShaderData&gt;<sp/>m_shaders;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="125"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GRAPHICS_MATERIAL_DATA_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h"/>
   </compounddef>

@@ -242,12 +242,6 @@
         <childnode refid="10" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="20">
-        <label>SR_PTYPES_NS::PhysicsMaterial</label>
-        <link refid="classSR__PTYPES__NS_1_1PhysicsMaterial"/>
-        <childnode refid="21" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="11">
         <label>SR_PTYPES_NS::Rigidbody</label>
         <link refid="classSR__PTYPES__NS_1_1Rigidbody"/>
@@ -266,9 +260,6 @@
         </childnode>
         <childnode refid="18" relation="usage">
           <edgelabel>m_rotation</edgelabel>
-        </childnode>
-        <childnode refid="20" relation="usage">
-          <edgelabel>m_material</edgelabel>
         </childnode>
       </node>
       <node id="17">
@@ -304,27 +295,9 @@
         <childnode refid="13" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="21">
-        <label>SR_UTILS_NS::IResource</label>
-        <link refid="classSR__UTILS__NS_1_1IResource"/>
-        <childnode refid="22" relation="public-inheritance">
-        </childnode>
-        <childnode refid="23" relation="public-inheritance">
-        </childnode>
-        <childnode refid="24" relation="usage">
-          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
-          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
-        </childnode>
-      </node>
       <node id="10">
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
-      </node>
-      <node id="22">
-        <label>SR_UTILS_NS::ResourceContainer</label>
-        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
-        <childnode refid="10" relation="public-inheritance">
-        </childnode>
       </node>
       <node id="8">
         <label>SR_UTILS_NS::SRClass</label>
@@ -335,14 +308,6 @@
         <link refid="classSR__UTILS__NS_1_1Serializable"/>
         <childnode refid="8" relation="public-inheritance">
         </childnode>
-      </node>
-      <node id="24">
-        <label>SR_UTILS_NS::StringAtom</label>
-        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
-      </node>
-      <node id="23">
-        <label>SR_UTILS_NS::SubscriptionHolder</label>
-        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
       <node id="15">
         <label>SR_WORLD_NS::Scene</label>
@@ -428,7 +393,7 @@
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a18d31de7e76a270ccbf6399af87032f0" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>PhysicsScenePtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>PolymorphicCast</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a964d06a9debef4224caf3e79cab1557f" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Ptr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a54f8031259b5b3ea78a9f794143e681d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>RawMeshPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a164db9b7fa7f3789548e3fb65af02155" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>RawMeshPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>RecursiveLockIfValid</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1afed952eb55d7441a18c4d3381d315fcf" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>RegisterPropertiesCodegen</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1aa9f46865f61b3173fb4196cddebafa02" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>ReInitDebugShape</name></member>

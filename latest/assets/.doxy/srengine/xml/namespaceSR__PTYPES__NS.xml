@@ -7,7 +7,6 @@
     <innerclass refid="classSR__PTYPES__NS_1_1CollisionShape" prot="public">SR_PTYPES_NS::CollisionShape</innerclass>
     <innerclass refid="classSR__PTYPES__NS_1_1CollisionShapeImpl" prot="public">SR_PTYPES_NS::CollisionShapeImpl</innerclass>
     <innerclass refid="classSR__PTYPES__NS_1_1PhysicsMaterial" prot="public">SR_PTYPES_NS::PhysicsMaterial</innerclass>
-    <innerclass refid="structSR__PTYPES__NS_1_1PhysicsMaterialData" prot="public">SR_PTYPES_NS::PhysicsMaterialData</innerclass>
     <innerclass refid="classSR__PTYPES__NS_1_1PhysicsMaterialImpl" prot="public">SR_PTYPES_NS::PhysicsMaterialImpl</innerclass>
     <innerclass refid="classSR__PTYPES__NS_1_1PhysXCollisionShape" prot="public">SR_PTYPES_NS::PhysXCollisionShape</innerclass>
     <innerclass refid="classSR__PTYPES__NS_1_1PhysXMaterialImpl" prot="public">SR_PTYPES_NS::PhysXMaterialImpl</innerclass>

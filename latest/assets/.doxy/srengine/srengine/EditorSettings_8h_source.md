@@ -20,8 +20,8 @@
 namespace SR_CORE_NS {
     SR_ENUM_NS_CLASS_T(EditorIcon, uint32_t,
           Unknown,
-          Material,
-          File,
+          Material, Prefab, Asset,
+          File, Shader,
           Back,
           Play,
           Stop,

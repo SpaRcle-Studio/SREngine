@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="28" column="5" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="28" bodyend="32"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="29" column="5" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="29" bodyend="33"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="typedef">

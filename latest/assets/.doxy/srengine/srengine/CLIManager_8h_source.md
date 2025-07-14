@@ -2,7 +2,7 @@
 
 # File CLIManager.h
 
-[**File List**](files.md) **>** [**Engine**](dir_0b6ee6e7e9547e675db4add2e5de97da.md) **>** [**inc**](dir_384e30eefdcc60ad4aa259e47cd19ad6.md) **>** [**Engine**](dir_92c4f4d9e201e1e90834671676ddd6c7.md) **>** [**CLIManager.h**](CLIManager_8h.md)
+[**File List**](files.md) **>** [**Common**](dir_3494e32b0a79d085f92ff9f3955f97da.md) **>** [**CLIManager.h**](CLIManager_8h.md)
 
 [Go to the documentation of this file](CLIManager_8h.md)
 
@@ -12,17 +12,19 @@
 // Created by innerviewer on 2025-04-15.
 //
 
-#ifndef SR_ENGINE_CORE_CLI_MANAGER_H
-#define SR_ENGINE_CORE_CLI_MANAGER_H
+#ifndef SR_ENGINE_COMMON_CLI_MANAGER_H
+#define SR_ENGINE_COMMON_CLI_MANAGER_H
 
 #include <Utils/Common/Singleton.h>
 #include <Utils/Common/Enumerations.h>
+#include <Utils/Math/Mathematics.h>
 
-namespace SR_CORE_NS {
+namespace SR_UTILS_NS {
     SR_ENUM_NS_STRUCT_T(CLIFlags, uint32_t,
         None = 0,
-        UnitTests = 1 << 0,
-        DeleteOldApp = 1 << 1
+        UnitTests          = 1 << 0,
+        ContinueAfterTests = 1 << 1,
+        DeleteOldApp       = 1 << 2
     );
 
     SR_ENUM_NS_STRUCT_T(CLIOptions, uint32_t,
@@ -50,7 +52,7 @@ namespace SR_CORE_NS {
     };
 }
 
-#endif //SR_ENGINE_CORE_CLI_MANAGER_H
+#endif //SR_ENGINE_COMMON_CLI_MANAGER_H
 ```
 
 

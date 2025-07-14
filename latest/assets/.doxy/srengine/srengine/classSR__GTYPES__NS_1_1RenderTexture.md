@@ -28,6 +28,11 @@ Inherits the following classes: SR_UTILS_NS::Settings
 
 
 
+## Public Types
+
+| Type | Name |
+| ---: | :--- |
+| typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**RenderTexture**](classSR__GTYPES__NS_1_1RenderTexture.md) &gt; | [**Ptr**](#typedef-ptr)  <br> |
 
 
 
@@ -48,13 +53,19 @@ Inherits the following classes: SR_UTILS_NS::Settings
 
 
 
+## Public Functions
+
+| Type | Name |
+| ---: | :--- |
+|   | [**RenderTexture**](#function-rendertexture) () <br> |
+|   | [**~RenderTexture**](#function-rendertexture) () override<br> |
 
 
 ## Public Static Functions
 
 | Type | Name |
 | ---: | :--- |
-|  [**RenderTexture**](classSR__GTYPES__NS_1_1RenderTexture.md) \* | [**Load**](#function-load) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
+|  RenderTexture::Ptr | [**Load**](#function-load) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 
 
 
@@ -87,6 +98,49 @@ Inherits the following classes: SR_UTILS_NS::Settings
 
 
 
+## Public Types Documentation
+
+
+
+
+### typedef Ptr 
+
+```C++
+using SR_GTYPES_NS::RenderTexture::Ptr =  SR_HTYPES_NS::SharedPtr<RenderTexture>;
+```
+
+
+
+
+<hr>
+## Public Functions Documentation
+
+
+
+
+### function RenderTexture 
+
+```C++
+SR_GTYPES_NS::RenderTexture::RenderTexture () 
+```
+
+
+
+
+<hr>
+
+
+
+### function ~RenderTexture 
+
+```C++
+SR_GTYPES_NS::RenderTexture::~RenderTexture () override
+```
+
+
+
+
+<hr>
 ## Public Static Functions Documentation
 
 
@@ -95,7 +149,7 @@ Inherits the following classes: SR_UTILS_NS::Settings
 ### function Load 
 
 ```C++
-static RenderTexture * SR_GTYPES_NS::RenderTexture::Load (
+static RenderTexture::Ptr SR_GTYPES_NS::RenderTexture::Load (
     const SR_UTILS_NS::Path & path
 ) 
 ```

@@ -15,7 +15,10 @@
 #ifndef SR_ENGINE_CORE_SRSL_TEST_H
 #define SR_ENGINE_CORE_SRSL_TEST_H
 
+#include <Engine/macros.h>
+
 #include <Utils/Resources/ResourceManager.h>
+#include <Utils/Tests/TestManager.h>
 
 #include <Graphics/SRSL/Shader.h>
 #include <Graphics/SRSL/GLSLCodeGenerator.h>
@@ -24,9 +27,10 @@
 #include <Enum/ShaderStage.hpp>
 
 namespace SR_CORE_NS::Tests {
-    class SRSLTest {
+    class SRSLTest : public SR_UTILS_NS::ITestController {
+        SR_CLASS()
     public:
-        static bool Run() {
+        SR_UTILS_NS::TestExecutionResult Run() override {
             const SR_UTILS_NS::Path path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("ModuleTests/SRSL");
             auto&& expectedFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("ModuleTests/SRSL/Expected");
             auto&& resultFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("ModuleTests/SRSL/Result");
@@ -43,7 +47,7 @@ namespace SR_CORE_NS::Tests {
                     SR_SRSL_NS::ISRSLCodeGenerator::SRSLCodeGenRes result = SR_SRSL_NS::GLSLCodeGenerator::Instance().GenerateStages(pShader.get());
                     if (result.first.HasAny()) {
                         SR_ERROR("SRSLTest::Run() : failed to generate shader stages for SRSL shader: {}\n\tResult: {}", file, result.first.ToString(pShader->GetIncludes()));
-                        return false;
+                        return SR_UTILS_NS::TestExecutionResult::Error;
                     }
 
                     for (auto&& [stage, code] : result.second) {
@@ -51,13 +55,13 @@ namespace SR_CORE_NS::Tests {
                         auto outputFile = resultFolder.Concat(file.GetBaseNameAndExt()).ConcatExt(SR_UTILS_NS::EnumReflector::ToStringAtom(stage).ToString() + ".glsl");
                         if (!SR_UTILS_NS::FileSystem::WriteToFile(outputFile, code)) {
                             SR_ERROR("SRSLTest::Run() : failed to write shader stage to file: {}", outputFile);
-                            return false;
+                            return SR_UTILS_NS::TestExecutionResult::Error;
                         }
                     }
                 }
                 else {
                     SR_ERROR("SRSLTest::Run() : failed to load SRSL shader: {}", file);
-                    return false;
+                    return SR_UTILS_NS::TestExecutionResult::Error;
                 }
             }
 
@@ -66,7 +70,7 @@ namespace SR_CORE_NS::Tests {
 
             if (expectedCount != resultCount) {
                 SR_ERROR("SRSLTest::Run() : expected {} shader files, but found {} in result folder!", expectedCount, resultCount);
-                return false;
+                return SR_UTILS_NS::TestExecutionResult::Error;
             }
 
             uint32_t errors = 0;
@@ -75,7 +79,7 @@ namespace SR_CORE_NS::Tests {
             for (auto file : expectedFolder.GetFiles()) {
                 if (file.GetExtension() != "glsl") {
                     SR_ERROR("SRSLTest::Run() : expected file is not a GLSL shader: {}", file);
-                    return false;
+                    return SR_UTILS_NS::TestExecutionResult::Error;
                 }
 
                 auto expectedFile = expectedFolder.Concat(file.GetBaseNameAndExt());
@@ -83,7 +87,7 @@ namespace SR_CORE_NS::Tests {
 
                 if (!resultFile.Exists()) {
                     SR_ERROR("SRSLTest::Run() : result file does not exist: {}", resultFile);
-                    return false;
+                    return SR_UTILS_NS::TestExecutionResult::Error;
                 }
 
                 std::vector<std::string> expectedCode = SR_UTILS_NS::FileSystem::ReadAllLines(expectedFile);
@@ -91,7 +95,7 @@ namespace SR_CORE_NS::Tests {
 
                 if (expectedCode.size() != resultCode.size()) {
                     SR_ERROR("SRSLTest::Run() : expected and result shader files have different number of lines: {} vs {}", expectedFile, resultFile);
-                    return false;
+                    return SR_UTILS_NS::TestExecutionResult::Error;
                 }
 
                 for (size_t i = 0; i < expectedCode.size(); ++i) {
@@ -100,13 +104,17 @@ namespace SR_CORE_NS::Tests {
                         ++errors;
                         if (errors >= maxErrors) {
                             SR_ERROR("SRSLTest::Run() : too many errors, stopping test!");
-                            return false;
+                            return SR_UTILS_NS::TestExecutionResult::Error;
                         }
                     }
                 }
             }
 
-            return errors == 0;
+            if (errors > 0) {
+                SR_ERROR("SRSLTest::Run() : found {} errors in shader files!", errors);
+                return SR_UTILS_NS::TestExecutionResult::Error;
+            }
+            return SR_UTILS_NS::TestExecutionResult::Success;
         }
     };
 }

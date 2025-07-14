@@ -430,7 +430,7 @@
       <node id="125">
         <label>Utils/Resources/ResourceContainer.h</label>
         <link refid="ResourceContainer_8h_source"/>
-        <childnode refid="4" relation="include">
+        <childnode refid="104" relation="include">
         </childnode>
       </node>
       <node id="123">
@@ -1080,7 +1080,7 @@
 <codeline lineno="17" refid="classSR__GRAPH__NS_1_1FlatClusterPass_1a95532ec93a62461517c6dc6bb9164496" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classSR__GRAPH__NS_1_1FlatClusterPass_1a95532ec93a62461517c6dc6bb9164496" kindref="member">Update</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="18" refid="classSR__GRAPH__NS_1_1FlatClusterPass_1aaa1cfb5e478b2ac881f6d66bdc8c4a99" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classSR__GRAPH__NS_1_1FlatClusterPass_1aaa1cfb5e478b2ac881f6d66bdc8c4a99" kindref="member">Render</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UseSharedUniforms(<ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref>*<sp/>pShader)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//void<sp/>UseSharedUniforms(SR_GTYPES_NS::Shader*<sp/>pShader)<sp/>override;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnClusterDirty()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="23"><highlight class="normal">}</highlight></codeline>

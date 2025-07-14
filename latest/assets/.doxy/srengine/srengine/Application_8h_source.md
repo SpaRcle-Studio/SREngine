@@ -37,17 +37,15 @@ namespace SR_CORE_NS {
         void SwitchResourcesFolder(const SR_UTILS_NS::Path& path);
         void Reload();
 
-        virtual bool InitializeResourcesFolder();
-
         SR_NODISCARD const SR_UTILS_NS::Path& GetResourcesPath() const { return m_resourcesPath; }
         SR_NODISCARD const SR_HTYPES_NS::SharedPtr<Engine>& GetEngine() const { return m_engine; }
         SR_NODISCARD SR_HTYPES_NS::SharedPtr<Engine>& GetEngine() { return m_engine; }
 
+    protected:
+        bool InitializeResourcesFolder();
+
     private:
-        bool InitResourceTypes();
         bool InitLogger(const SR_UTILS_NS::Path& logDir);
-        bool FindResourcesFolder();
-        //void TryPlayStartSound()
 
     private:
         SR_UTILS_NS::Path m_applicationPath;

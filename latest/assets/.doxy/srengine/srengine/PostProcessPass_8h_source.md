@@ -34,7 +34,7 @@ namespace SR_GRAPH_NS {
 
         using Super = BasePass;
         using Properties = std::vector<Property>;
-        using ShaderPtr = SR_GTYPES_NS::Shader*;
+        using ShaderPtr = SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Shader>;
     public:
         ~PostProcessPass() override;
 
@@ -52,7 +52,7 @@ namespace SR_GRAPH_NS {
         void OnResourceUpdated(SR_UTILS_NS::ResourceContainer* pContainer, int32_t depth) override;
 
     protected:
-        void SetShader(SR_GTYPES_NS::Shader* pShader);
+        void SetShader(const SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Shader>& pShader);
         void SetRenderTechnique(IRenderTechnique* pRenderTechnique) override;
 
         void DeInit() override;

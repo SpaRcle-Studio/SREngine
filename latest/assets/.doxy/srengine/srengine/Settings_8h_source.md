@@ -36,28 +36,35 @@ namespace SR_UTILS_NS {
     )
 
     class SR_COMMON_DLL_API Settings : public IResource {
-    protected:
+        SR_CLASS()
+    public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<Settings>;
+
+    public:
         Settings();
         ~Settings() override;
 
     public:
         bool Destroy() final;
+        bool Reload() final;
 
         void Do(const SR_HTYPES_NS::Function<void(Settings*)>& fun);
+        SR_NODISCARD const SR_XML_NS::Document& GetDocument() const;
+        SR_NODISCARD SR_XML_NS::Document LoadDocument() const;
 
     protected:
         virtual void ClearSettings();
         virtual bool LoadSettings(const Xml::Node& node);
 
-        bool Reload() final;
-
     protected:
         SR_NODISCARD Path GetAssociatedPath() const override;
-        SR_NODISCARD SR_XML_NS::Document LoadDocument() const;
 
     protected:
         bool Load() override;
         bool Unload() override;
+
+    private:
+        SR_XML_NS::Document m_document;
 
     };
 

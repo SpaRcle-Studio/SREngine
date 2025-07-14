@@ -5,22 +5,8 @@
     <basecompoundref refid="classSR__UTILS__NS_1_1IResource" prot="public" virt="non-virtual">SR_UTILS_NS::IResource</basecompoundref>
     <basecompoundref prot="public" virt="non-virtual">Memory::IGraphicsResource</basecompoundref>
     <includes refid="Framebuffer_8h" local="no">Framebuffer.h</includes>
-    <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="classSR__GTYPES__NS_1_1Framebuffer_1aed8fc168887c2e869c64f32e331b4e48" prot="public" static="no">
-        <type><ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">Framebuffer</ref> *</type>
-        <definition>using SR_GTYPES_NS::Framebuffer::Ptr =  Framebuffer*</definition>
-        <argsstring></argsstring>
-        <name>Ptr</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::Ptr</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="32" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="32" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classSR__GTYPES__NS_1_1Framebuffer_1a7d20951bf0e40f9fb2f644a82a4f8073" prot="public" static="no">
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__GTYPES__NS_1_1Framebuffer_1a7d20951bf0e40f9fb2f644a82a4f8073" prot="private" static="no">
         <type><ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">SR_UTILS_NS::IResource</ref></type>
         <definition>using SR_GTYPES_NS::Framebuffer::Super =  SR_UTILS_NS::IResource</definition>
         <argsstring></argsstring>
@@ -32,8 +18,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="33" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="32" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="32" bodyend="-1"/>
       </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
       <memberdef kind="typedef" id="classSR__GTYPES__NS_1_1Framebuffer_1a96e155624c9c16722563eee5b1d6ca2f" prot="public" static="no">
         <type>std::vector&lt; <ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">SR_MATH_NS::FColor</ref> &gt;</type>
         <definition>using SR_GTYPES_NS::Framebuffer::ClearColors =  std::vector&lt;SR_MATH_NS::FColor&gt;</definition>
@@ -62,6 +50,20 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="35" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="35" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="typedef" id="classSR__GTYPES__NS_1_1Framebuffer_1acd7f983cdc8e6289726380a1d63c5bd4" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">Framebuffer</ref> &gt;</type>
+        <definition>using SR_GTYPES_NS::Framebuffer::Ptr =  SR_HTYPES_NS::SharedPtr&lt;Framebuffer&gt;</definition>
+        <argsstring></argsstring>
+        <name>Ptr</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::Ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="36" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Framebuffer_1a14cb226e515e11a155526bcd64718f9e" prot="private" static="no" mutable="no">
@@ -76,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="92" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="92" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="94" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="94" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Framebuffer_1a2d4b4589e9eceec85ee83056cb3eb4b6" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -91,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="94" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="94" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="96" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="96" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Framebuffer_1a4461863808838671497f0a4095133a93" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -106,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="95" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="95" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="97" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="97" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Framebuffer_1a1463e41167b18250dcbd2f8b6cb14e84" prot="private" static="no" mutable="no">
         <type>std::vector&lt; ColorLayer &gt;</type>
@@ -121,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="97" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="97" bodyend="97"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="99" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="99" bodyend="99"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Framebuffer_1aeaeff35e6c65ef23a7c05f101bab82c4" prot="private" static="no" mutable="no">
         <type>DepthLayer</type>
@@ -136,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="98" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="98" bodyend="98"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="100" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="100" bodyend="100"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Framebuffer_1aead102964fd4d220738723681d122c4e" prot="private" static="no" mutable="no">
         <type>int32_t</type>
@@ -151,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="99" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="99" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="101" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="101" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Framebuffer_1a0bf22f6243c85ea53978180a0d3e4de8" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::IVector2</type>
@@ -166,7 +168,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="101" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="101" bodyend="101"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="103" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="103" bodyend="103"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Framebuffer_1a9a8c78804eb222478db6be022206ea06" prot="private" static="no" mutable="no">
         <type>uint8_t</type>
@@ -181,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="103" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="103" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="105" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="105" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Framebuffer_1a97932d38aed0f329969d00f5868230b8" prot="private" static="no" mutable="no">
         <type>uint8_t</type>
@@ -196,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="105" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="105" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="107" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="107" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Framebuffer_1a9e7b86fef05ff9c07ffd07ac3f64b55c" prot="private" static="no" mutable="no">
         <type>uint8_t</type>
@@ -211,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="106" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="106" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="108" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="108" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Framebuffer_1a87b38c3c5f1d1b2d8cdf9b8d886bd1a2" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -226,11 +228,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="107" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="107" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="109" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="109" bodyend="-1"/>
       </memberdef>
     </sectiondef>
-    <sectiondef kind="private-func">
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1aa2149e1926d747e99e1cb0d25172309a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1aa2149e1926d747e99e1cb0d25172309a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_GTYPES_NS::Framebuffer::Framebuffer</definition>
         <argsstring>()</argsstring>
@@ -242,9 +244,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="37" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="39" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a55f8b7209b623ceae972194dc0dc6f64" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a55f8b7209b623ceae972194dc0dc6f64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_GTYPES_NS::Framebuffer::~Framebuffer</definition>
         <argsstring>() override</argsstring>
@@ -256,12 +258,526 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="38" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="40" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a2cd76fd192f7fd3a54e8020e87c57804" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::Framebuffer::Update</definition>
+        <argsstring>()</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::Update</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="51" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a402146a5c15d9123e39f1f8c674d920a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::Framebuffer::Bind</definition>
+        <argsstring>()</argsstring>
+        <name>Bind</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::Bind</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="52" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a09456a96c045cbc5bcbbaa4e4850d52c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::Framebuffer::BeginCmdBuffer</definition>
+        <argsstring>()</argsstring>
+        <name>BeginCmdBuffer</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::BeginCmdBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="54" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1ae952c9cd2c4206659d06bfda81af42af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::Framebuffer::BeginCmdBuffer</definition>
+        <argsstring>(const ClearColors &amp;clearColors, std::optional&lt; float_t &gt; depth)</argsstring>
+        <name>BeginCmdBuffer</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::BeginCmdBuffer</qualifiedname>
+        <param>
+          <type>const ClearColors &amp;</type>
+          <declname>clearColors</declname>
+        </param>
+        <param>
+          <type>std::optional&lt; float_t &gt;</type>
+          <declname>depth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="55" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1adc1c38f272e9002734940e2960ad1ee8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::Framebuffer::BeginCmdBuffer</definition>
+        <argsstring>(const SR_MATH_NS::FColor &amp;clearColor, float_t depth)</argsstring>
+        <name>BeginCmdBuffer</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::BeginCmdBuffer</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">SR_MATH_NS::FColor</ref> &amp;</type>
+          <declname>clearColor</declname>
+        </param>
+        <param>
+          <type>float_t</type>
+          <declname>depth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="56" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a70f41293701156bc4dcee1e591b4fe40" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Framebuffer::SetViewportScissor</definition>
+        <argsstring>()</argsstring>
+        <name>SetViewportScissor</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::SetViewportScissor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="58" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1abe35a42a8f90ce55771c31dfb33e1b52" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::Framebuffer::BeginRender</definition>
+        <argsstring>()</argsstring>
+        <name>BeginRender</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::BeginRender</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="59" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a6f8576a851d44ea06e26aab274af07a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Framebuffer::EndCmdBuffer</definition>
+        <argsstring>()</argsstring>
+        <name>EndCmdBuffer</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::EndCmdBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="61" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a3428ed4a7dc4fc3e9f884cfc1c27f5d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Framebuffer::EndRender</definition>
+        <argsstring>()</argsstring>
+        <name>EndRender</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::EndRender</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="62" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a6ebd176c3fffc04ca7db442f5756c257" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Framebuffer::SetDirty</definition>
+        <argsstring>()</argsstring>
+        <name>SetDirty</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::SetDirty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="64" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a219049578534b89e6626112f67061bbe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Framebuffer::SetSize</definition>
+        <argsstring>(const SR_MATH_NS::IVector2 &amp;size)</argsstring>
+        <name>SetSize</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::SetSize</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::IVector2 &amp;</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="65" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a59b34aba63aa4f175c699080d4fe1872" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Framebuffer::SetDepthEnabled</definition>
+        <argsstring>(bool depthEnabled)</argsstring>
+        <name>SetDepthEnabled</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::SetDepthEnabled</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>depthEnabled</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="66" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1abf8e6917d5ef7f95f5acc2f9f23c1888" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Framebuffer::SetSampleCount</definition>
+        <argsstring>(uint8_t samples)</argsstring>
+        <name>SetSampleCount</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::SetSampleCount</qualifiedname>
+        <param>
+          <type>uint8_t</type>
+          <declname>samples</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="67" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1ae3c161b517803626a8c29a82ceee9da3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Framebuffer::SetLayersCount</definition>
+        <argsstring>(uint32_t layersCount)</argsstring>
+        <name>SetLayersCount</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::SetLayersCount</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>layersCount</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="68" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1ac5f28f665420fb2287205c3080a9646a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Framebuffer::SetDepthAspect</definition>
+        <argsstring>(ImageAspect depthAspect)</argsstring>
+        <name>SetDepthAspect</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::SetDepthAspect</qualifiedname>
+        <param>
+          <type>ImageAspect</type>
+          <declname>depthAspect</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="69" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1ae00d4087480b29a611f32d047e29d5ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Framebuffer::SetFeatures</definition>
+        <argsstring>(const FrameBufferFeatures &amp;features)</argsstring>
+        <name>SetFeatures</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::SetFeatures</qualifiedname>
+        <param>
+          <type>const FrameBufferFeatures &amp;</type>
+          <declname>features</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="70" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a490b71f8dc30b82757fbfd22e6b5ce08" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GTYPES_NS::Framebuffer::IsFileResource</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>IsFileResource</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::IsFileResource</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IResource_1a91fdfb42142b2e37139e4742442a2fee">IsFileResource</reimplements>
+        <briefdescription>
+<para>является ли ресурс файловым </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="72" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="72" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a0afd31f4d6d436bc0feaa7710be061c5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint8_t</type>
+        <definition>SR_NODISCARD uint8_t SR_GTYPES_NS::Framebuffer::GetSamplesCount</definition>
+        <argsstring>() const</argsstring>
+        <name>GetSamplesCount</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetSamplesCount</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="73" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a8f35400d24010d372058047d10b771c2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_GTYPES_NS::Framebuffer::GetColorLayersCount</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetColorLayersCount</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetColorLayersCount</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="74" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a1e22b8ec6fc5cf210fe3777d8f01a65f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_GTYPES_NS::Framebuffer::GetLayersCount</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetLayersCount</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetLayersCount</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="75" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1af9d48c4d866af444eb8c8057dff19cb1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD ImageAspect</type>
+        <definition>SR_NODISCARD ImageAspect SR_GTYPES_NS::Framebuffer::GetDepthAspect</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetDepthAspect</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetDepthAspect</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="76" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="76" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a5cf763c8a4c1cdda7c6d49d2e80139aa" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GTYPES_NS::Framebuffer::IsDepthEnabled</definition>
+        <argsstring>() const</argsstring>
+        <name>IsDepthEnabled</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::IsDepthEnabled</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="77" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="77" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a0b0498681dde18808a96c9312e9eb233" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GTYPES_NS::Framebuffer::IsDirty</definition>
+        <argsstring>() const</argsstring>
+        <name>IsDirty</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::IsDirty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="78" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="78" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a44aa6e41472a67870bb5114a06f5ef50" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GTYPES_NS::Framebuffer::IsValid</definition>
+        <argsstring>() const</argsstring>
+        <name>IsValid</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::IsValid</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="79" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="79" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1ae528ca2428c5128aa87a9bcbb72f95bb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const FrameBufferFeatures &amp;</type>
+        <definition>SR_NODISCARD const FrameBufferFeatures &amp; SR_GTYPES_NS::Framebuffer::GetFeatures</definition>
+        <argsstring>() const</argsstring>
+        <name>GetFeatures</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetFeatures</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="80" column="48" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="80" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a2977be0dc79dce7fac2cdf74113cb246" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD int32_t</type>
+        <definition>SR_NODISCARD int32_t SR_GTYPES_NS::Framebuffer::GetId</definition>
+        <argsstring>() const</argsstring>
+        <name>GetId</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetId</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="82" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1ad671bc5d31bb5b1cfd4695ae6c78a1cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD int32_t</type>
+        <definition>SR_NODISCARD int32_t SR_GTYPES_NS::Framebuffer::GetColorTexture</definition>
+        <argsstring>(uint32_t layer)</argsstring>
+        <name>GetColorTexture</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetColorTexture</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>layer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="83" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1ac1d086f329f2a7682f3f66a053bec0f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD int32_t</type>
+        <definition>SR_NODISCARD int32_t SR_GTYPES_NS::Framebuffer::GetDepthTexture</definition>
+        <argsstring>(int32_t layer=-1)</argsstring>
+        <name>GetDepthTexture</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetDepthTexture</qualifiedname>
+        <param>
+          <type>int32_t</type>
+          <declname>layer</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="84" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a658dd83c2c08be614c39f4b4bcbaeb95" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_GTYPES_NS::Framebuffer::GetWidth</definition>
+        <argsstring>() const</argsstring>
+        <name>GetWidth</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetWidth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="86" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a6c8648fbee25560f26371e9c82202da2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_GTYPES_NS::Framebuffer::GetHeight</definition>
+        <argsstring>() const</argsstring>
+        <name>GetHeight</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetHeight</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="87" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a0b13806cfd2efb6cf9a98a7c28a238d5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::IVector2</type>
+        <definition>SR_NODISCARD SR_MATH_NS::IVector2 SR_GTYPES_NS::Framebuffer::GetSize</definition>
+        <argsstring>() const</argsstring>
+        <name>GetSize</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="88" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="88" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a6079ec94cacf2f955cc9ab23c6fae7e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Framebuffer::FreeVideoMemory</definition>
+        <argsstring>() override</argsstring>
+        <name>FreeVideoMemory</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::FreeVideoMemory</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="90" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a7f4513af80dd3c1cfeb4c6211ea2df75" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_GTYPES_NS::Framebuffer::GetFileHash</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetFileHash</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetFileHash</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IResource_1ac7b0f5ba1910f845c4f0d2ae3c220fbe">GetFileHash</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="91" column="18"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a4dcf77ad42931cc0c067e086398fa916" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">Ptr</ref></type>
+        <type>Ptr</type>
         <definition>static Ptr SR_GTYPES_NS::Framebuffer::Create</definition>
         <argsstring>(uint32_t images, const SR_MATH_NS::IVector2 &amp;size)</argsstring>
         <name>Create</name>
@@ -280,10 +796,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="41" column="20"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="43" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a36493bec7ef67c2230b3e7165d622dfa" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">Ptr</ref></type>
+        <type>Ptr</type>
         <definition>static Ptr SR_GTYPES_NS::Framebuffer::Create</definition>
         <argsstring>(const std::list&lt; ImageFormat &gt; &amp;colors, ImageFormat depth)</argsstring>
         <name>Create</name>
@@ -302,10 +818,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="42" column="20"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="44" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a34955bd5290f36eb0c51e6bfe0c76978" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">Ptr</ref></type>
+        <type>Ptr</type>
         <definition>static Ptr SR_GTYPES_NS::Framebuffer::Create</definition>
         <argsstring>(const std::list&lt; ImageFormat &gt; &amp;colors, ImageFormat depth, const SR_MATH_NS::IVector2 &amp;size)</argsstring>
         <name>Create</name>
@@ -328,10 +844,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="43" column="20"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="45" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1af0b891a4c2ae514da44482fe98eeffad" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">Ptr</ref></type>
+        <type>Ptr</type>
         <definition>static Ptr SR_GTYPES_NS::Framebuffer::Create</definition>
         <argsstring>(const std::list&lt; ImageFormat &gt; &amp;colors, ImageFormat depth, const SR_MATH_NS::IVector2 &amp;size, uint8_t samples)</argsstring>
         <name>Create</name>
@@ -358,10 +874,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="44" column="20"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="46" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1ae27b66cfe38e35e80266b318a8bbbfd1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">Ptr</ref></type>
+        <type>Ptr</type>
         <definition>static Ptr SR_GTYPES_NS::Framebuffer::Create</definition>
         <argsstring>(const std::list&lt; ImageFormat &gt; &amp;colors, ImageFormat depth, const SR_MATH_NS::IVector2 &amp;size, uint8_t samples, uint32_t layersCount)</argsstring>
         <name>Create</name>
@@ -392,10 +908,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="45" column="20"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="47" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a63d8008f83f08a6d4f9a3a2d42762228" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">Ptr</ref></type>
+        <type>Ptr</type>
         <definition>static Ptr SR_GTYPES_NS::Framebuffer::Create</definition>
         <argsstring>(const std::list&lt; ImageFormat &gt; &amp;colors, ImageFormat depth, const SR_MATH_NS::IVector2 &amp;size, uint8_t samples, uint32_t layersCount, ImageAspect depthAspect)</argsstring>
         <name>Create</name>
@@ -430,523 +946,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="46" column="20"/>
-      </memberdef>
-    </sectiondef>
-    <sectiondef kind="public-func">
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a2cd76fd192f7fd3a54e8020e87c57804" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool SR_GTYPES_NS::Framebuffer::Update</definition>
-        <argsstring>()</argsstring>
-        <name>Update</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::Update</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="49" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a402146a5c15d9123e39f1f8c674d920a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool SR_GTYPES_NS::Framebuffer::Bind</definition>
-        <argsstring>()</argsstring>
-        <name>Bind</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::Bind</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="50" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a09456a96c045cbc5bcbbaa4e4850d52c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool SR_GTYPES_NS::Framebuffer::BeginCmdBuffer</definition>
-        <argsstring>()</argsstring>
-        <name>BeginCmdBuffer</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::BeginCmdBuffer</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="52" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1ae952c9cd2c4206659d06bfda81af42af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool SR_GTYPES_NS::Framebuffer::BeginCmdBuffer</definition>
-        <argsstring>(const ClearColors &amp;clearColors, std::optional&lt; float_t &gt; depth)</argsstring>
-        <name>BeginCmdBuffer</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::BeginCmdBuffer</qualifiedname>
-        <param>
-          <type>const ClearColors &amp;</type>
-          <declname>clearColors</declname>
-        </param>
-        <param>
-          <type>std::optional&lt; float_t &gt;</type>
-          <declname>depth</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="53" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1adc1c38f272e9002734940e2960ad1ee8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool SR_GTYPES_NS::Framebuffer::BeginCmdBuffer</definition>
-        <argsstring>(const SR_MATH_NS::FColor &amp;clearColor, float_t depth)</argsstring>
-        <name>BeginCmdBuffer</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::BeginCmdBuffer</qualifiedname>
-        <param>
-          <type>const <ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">SR_MATH_NS::FColor</ref> &amp;</type>
-          <declname>clearColor</declname>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>depth</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="54" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a70f41293701156bc4dcee1e591b4fe40" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_GTYPES_NS::Framebuffer::SetViewportScissor</definition>
-        <argsstring>()</argsstring>
-        <name>SetViewportScissor</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::SetViewportScissor</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="56" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1abe35a42a8f90ce55771c31dfb33e1b52" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool SR_GTYPES_NS::Framebuffer::BeginRender</definition>
-        <argsstring>()</argsstring>
-        <name>BeginRender</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::BeginRender</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="57" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a6f8576a851d44ea06e26aab274af07a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_GTYPES_NS::Framebuffer::EndCmdBuffer</definition>
-        <argsstring>()</argsstring>
-        <name>EndCmdBuffer</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::EndCmdBuffer</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="59" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a3428ed4a7dc4fc3e9f884cfc1c27f5d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_GTYPES_NS::Framebuffer::EndRender</definition>
-        <argsstring>()</argsstring>
-        <name>EndRender</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::EndRender</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="60" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a6ebd176c3fffc04ca7db442f5756c257" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_GTYPES_NS::Framebuffer::SetDirty</definition>
-        <argsstring>()</argsstring>
-        <name>SetDirty</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::SetDirty</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="62" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a219049578534b89e6626112f67061bbe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_GTYPES_NS::Framebuffer::SetSize</definition>
-        <argsstring>(const SR_MATH_NS::IVector2 &amp;size)</argsstring>
-        <name>SetSize</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::SetSize</qualifiedname>
-        <param>
-          <type>const SR_MATH_NS::IVector2 &amp;</type>
-          <declname>size</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="63" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a59b34aba63aa4f175c699080d4fe1872" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_GTYPES_NS::Framebuffer::SetDepthEnabled</definition>
-        <argsstring>(bool depthEnabled)</argsstring>
-        <name>SetDepthEnabled</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::SetDepthEnabled</qualifiedname>
-        <param>
-          <type>bool</type>
-          <declname>depthEnabled</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="64" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1abf8e6917d5ef7f95f5acc2f9f23c1888" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_GTYPES_NS::Framebuffer::SetSampleCount</definition>
-        <argsstring>(uint8_t samples)</argsstring>
-        <name>SetSampleCount</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::SetSampleCount</qualifiedname>
-        <param>
-          <type>uint8_t</type>
-          <declname>samples</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="65" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1ae3c161b517803626a8c29a82ceee9da3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_GTYPES_NS::Framebuffer::SetLayersCount</definition>
-        <argsstring>(uint32_t layersCount)</argsstring>
-        <name>SetLayersCount</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::SetLayersCount</qualifiedname>
-        <param>
-          <type>uint32_t</type>
-          <declname>layersCount</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="66" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1ac5f28f665420fb2287205c3080a9646a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_GTYPES_NS::Framebuffer::SetDepthAspect</definition>
-        <argsstring>(ImageAspect depthAspect)</argsstring>
-        <name>SetDepthAspect</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::SetDepthAspect</qualifiedname>
-        <param>
-          <type>ImageAspect</type>
-          <declname>depthAspect</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="67" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1ae00d4087480b29a611f32d047e29d5ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_GTYPES_NS::Framebuffer::SetFeatures</definition>
-        <argsstring>(const FrameBufferFeatures &amp;features)</argsstring>
-        <name>SetFeatures</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::SetFeatures</qualifiedname>
-        <param>
-          <type>const FrameBufferFeatures &amp;</type>
-          <declname>features</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="68" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a490b71f8dc30b82757fbfd22e6b5ce08" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
-        <type>SR_NODISCARD bool</type>
-        <definition>SR_NODISCARD bool SR_GTYPES_NS::Framebuffer::IsFileResource</definition>
-        <argsstring>() const noexcept override</argsstring>
-        <name>IsFileResource</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::IsFileResource</qualifiedname>
-        <reimplements refid="classSR__UTILS__NS_1_1IResource_1a91fdfb42142b2e37139e4742442a2fee">IsFileResource</reimplements>
-        <briefdescription>
-<para>является ли ресурс файловым </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="70" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="70" bodyend="70"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a0afd31f4d6d436bc0feaa7710be061c5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD uint8_t</type>
-        <definition>SR_NODISCARD uint8_t SR_GTYPES_NS::Framebuffer::GetSamplesCount</definition>
-        <argsstring>() const</argsstring>
-        <name>GetSamplesCount</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetSamplesCount</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="71" column="30"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a8f35400d24010d372058047d10b771c2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD uint32_t</type>
-        <definition>SR_NODISCARD uint32_t SR_GTYPES_NS::Framebuffer::GetColorLayersCount</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>GetColorLayersCount</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetColorLayersCount</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="72" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="72" bodyend="72"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a1e22b8ec6fc5cf210fe3777d8f01a65f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD uint32_t</type>
-        <definition>SR_NODISCARD uint32_t SR_GTYPES_NS::Framebuffer::GetLayersCount</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>GetLayersCount</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetLayersCount</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="73" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="73" bodyend="73"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1af9d48c4d866af444eb8c8057dff19cb1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD ImageAspect</type>
-        <definition>SR_NODISCARD ImageAspect SR_GTYPES_NS::Framebuffer::GetDepthAspect</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>GetDepthAspect</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetDepthAspect</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="74" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="74" bodyend="74"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a5cf763c8a4c1cdda7c6d49d2e80139aa" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>SR_NODISCARD bool</type>
-        <definition>SR_NODISCARD bool SR_GTYPES_NS::Framebuffer::IsDepthEnabled</definition>
-        <argsstring>() const</argsstring>
-        <name>IsDepthEnabled</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::IsDepthEnabled</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="75" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="75" bodyend="75"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a0b0498681dde18808a96c9312e9eb233" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>SR_NODISCARD bool</type>
-        <definition>SR_NODISCARD bool SR_GTYPES_NS::Framebuffer::IsDirty</definition>
-        <argsstring>() const</argsstring>
-        <name>IsDirty</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::IsDirty</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="76" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="76" bodyend="76"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a44aa6e41472a67870bb5114a06f5ef50" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>SR_NODISCARD bool</type>
-        <definition>SR_NODISCARD bool SR_GTYPES_NS::Framebuffer::IsValid</definition>
-        <argsstring>() const</argsstring>
-        <name>IsValid</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::IsValid</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="77" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="77" bodyend="77"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1ae528ca2428c5128aa87a9bcbb72f95bb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>SR_NODISCARD const FrameBufferFeatures &amp;</type>
-        <definition>SR_NODISCARD const FrameBufferFeatures &amp; SR_GTYPES_NS::Framebuffer::GetFeatures</definition>
-        <argsstring>() const</argsstring>
-        <name>GetFeatures</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetFeatures</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="78" column="48" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="78" bodyend="78"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a2977be0dc79dce7fac2cdf74113cb246" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD int32_t</type>
-        <definition>SR_NODISCARD int32_t SR_GTYPES_NS::Framebuffer::GetId</definition>
-        <argsstring>() const</argsstring>
-        <name>GetId</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetId</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="80" column="30"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1ad671bc5d31bb5b1cfd4695ae6c78a1cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD int32_t</type>
-        <definition>SR_NODISCARD int32_t SR_GTYPES_NS::Framebuffer::GetColorTexture</definition>
-        <argsstring>(uint32_t layer)</argsstring>
-        <name>GetColorTexture</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetColorTexture</qualifiedname>
-        <param>
-          <type>uint32_t</type>
-          <declname>layer</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="81" column="30"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1ac1d086f329f2a7682f3f66a053bec0f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD int32_t</type>
-        <definition>SR_NODISCARD int32_t SR_GTYPES_NS::Framebuffer::GetDepthTexture</definition>
-        <argsstring>(int32_t layer=-1)</argsstring>
-        <name>GetDepthTexture</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetDepthTexture</qualifiedname>
-        <param>
-          <type>int32_t</type>
-          <declname>layer</declname>
-          <defval>-1</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="82" column="30"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a658dd83c2c08be614c39f4b4bcbaeb95" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD uint32_t</type>
-        <definition>SR_NODISCARD uint32_t SR_GTYPES_NS::Framebuffer::GetWidth</definition>
-        <argsstring>() const</argsstring>
-        <name>GetWidth</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetWidth</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="84" column="31"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a6c8648fbee25560f26371e9c82202da2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD uint32_t</type>
-        <definition>SR_NODISCARD uint32_t SR_GTYPES_NS::Framebuffer::GetHeight</definition>
-        <argsstring>() const</argsstring>
-        <name>GetHeight</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetHeight</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="85" column="31"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a0b13806cfd2efb6cf9a98a7c28a238d5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>SR_NODISCARD SR_MATH_NS::IVector2</type>
-        <definition>SR_NODISCARD SR_MATH_NS::IVector2 SR_GTYPES_NS::Framebuffer::GetSize</definition>
-        <argsstring>() const</argsstring>
-        <name>GetSize</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetSize</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="86" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="86" bodyend="86"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a6079ec94cacf2f955cc9ab23c6fae7e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_GTYPES_NS::Framebuffer::FreeVideoMemory</definition>
-        <argsstring>() override</argsstring>
-        <name>FreeVideoMemory</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::FreeVideoMemory</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="88" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a7f4513af80dd3c1cfeb4c6211ea2df75" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
-        <type>uint64_t</type>
-        <definition>uint64_t SR_GTYPES_NS::Framebuffer::GetFileHash</definition>
-        <argsstring>() const override</argsstring>
-        <name>GetFileHash</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::GetFileHash</qualifiedname>
-        <reimplements refid="classSR__UTILS__NS_1_1IResource_1ac7b0f5ba1910f845c4f0d2ae3c220fbe">GetFileHash</reimplements>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="89" column="18"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="48" column="20"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -955,7 +955,7 @@
 <para>\Usage Bing -&gt; BeginRenderBuffer -&gt; BeginRender -&gt; EndRender -&gt; EndRenderBuffer </para>
     </detaileddescription>
     <inheritancegraph>
-      <node id="6">
+      <node id="9">
         <label>Memory::IGraphicsResource</label>
       </node>
       <node id="1">
@@ -963,20 +963,28 @@
         <link refid="classSR__GTYPES__NS_1_1Framebuffer"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="6" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
       </node>
       <node id="2">
         <label>SR_UTILS_NS::IResource</label>
         <link refid="classSR__UTILS__NS_1_1IResource"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
-        <childnode refid="5" relation="public-inheritance">
+        <childnode refid="6" relation="public-inheritance">
         </childnode>
-      </node>
-      <node id="4">
-        <label>SR_UTILS_NS::NonCopyable</label>
-        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
       </node>
       <node id="3">
         <label>SR_UTILS_NS::ResourceContainer</label>
@@ -984,13 +992,23 @@
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="5">
+      <node id="8">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="7">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
         <label>SR_UTILS_NS::SubscriptionHolder</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="7">
+      <node id="11">
         <label>Memory::IGraphicsResource</label>
       </node>
       <node id="1">
@@ -998,24 +1016,39 @@
         <link refid="classSR__GTYPES__NS_1_1Framebuffer"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="7" relation="public-inheritance">
+        <childnode refid="11" relation="public-inheritance">
         </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
       </node>
       <node id="2">
         <label>SR_UTILS_NS::IResource</label>
         <link refid="classSR__UTILS__NS_1_1IResource"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
-        <childnode refid="5" relation="public-inheritance">
+        <childnode refid="7" relation="public-inheritance">
         </childnode>
-        <childnode refid="6" relation="usage">
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+        <childnode refid="10" relation="usage">
           <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
           <edgelabel>RELOAD_DONE_EVENT</edgelabel>
         </childnode>
-      </node>
-      <node id="4">
-        <label>SR_UTILS_NS::NonCopyable</label>
-        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
       <node id="3">
         <label>SR_UTILS_NS::ResourceContainer</label>
@@ -1023,19 +1056,33 @@
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="6">
+      <node id="9">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="8">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
         <label>SR_UTILS_NS::StringAtom</label>
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
-      <node id="5">
+      <node id="7">
         <label>SR_UTILS_NS::SubscriptionHolder</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="30" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="30" bodyend="109"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="30" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="30" bodyend="111"/>
     <listofallmembers>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>AddDependency</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1af9087ca5182397a9c7d3b92fb5591523" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>AddDependency</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1abcf6bc4fde8bd87a0f1d72d0183af0cf" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>AddUsePoint</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>AllocateStatic</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>AutoFree</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a09456a96c045cbc5bcbbaa4e4850d52c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>BeginCmdBuffer</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1ae952c9cd2c4206659d06bfda81af42af" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>BeginCmdBuffer</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1adc1c38f272e9002734940e2960ad1ee8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>BeginCmdBuffer</name></member>
@@ -1045,25 +1092,30 @@
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a543a91c5e997ad287249110180f9cea2" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Broadcast</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a6aad227ccd12d3dd92ac9010ba6ac404" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>CheckResourceUsage</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a96e155624c9c16722563eee5b1d6ca2f" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>ClearColors</name></member>
-      <member refid="classSR__UTILS__NS_1_1IResource_1a8d8a3783594a705609284b2d94121de2" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>CopyResource</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a4dcf77ad42931cc0c067e086398fa916" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Create</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a36493bec7ef67c2230b3e7165d622dfa" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Create</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a34955bd5290f36eb0c51e6bfe0c76978" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Create</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1af0b891a4c2ae514da44482fe98eeffad" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Create</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1ae27b66cfe38e35e80266b318a8bbbfd1" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Create</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a63d8008f83f08a6d4f9a3a2d42762228" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Create</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>DecrementPointer</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a1321f66c455d7f59eebb314fe2c83062" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>DeleteResource</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a700794249e341d5228920451cedf9ee7" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Destroy</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>DynamicCast</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a6f8576a851d44ea06e26aab274af07a9" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>EndCmdBuffer</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a3428ed4a7dc4fc3e9f884cfc1c27f5d3" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>EndRender</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a5dd9749c79cb65452e9e4d10efda42f8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Execute</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a56bb33e9f5864b6fa62e473389a517b7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>ForceDestroy</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Framebuffer_1aa2149e1926d747e99e1cb0d25172309a" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Framebuffer</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Framebuffer_1aa2149e1926d747e99e1cb0d25172309a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Framebuffer</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a6079ec94cacf2f955cc9ab23c6fae7e5" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>FreeVideoMemory</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Get</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1aeabd3a189fe8c7c0c31c1fb6713c5043" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetAssociatedPath</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetBaseMetas</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetClassStaticName</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a8f35400d24010d372058047d10b771c2" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetColorLayersCount</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1ad671bc5d31bb5b1cfd4695ae6c78a1cc" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetColorTexture</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac6c46124f5261f90e4392fd749afc0e1" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetContainerParents</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a725e3e44aa2830a8a799d71e13693a73" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetContainerParents</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ab4dd8bb36d912a3d541d63dd00570561" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetCountUses</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1af9d48c4d866af444eb8c8057dff19cb1" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetDepthAspect</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1ac1d086f329f2a7682f3f66a053bec0f4" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetDepthTexture</name></member>
@@ -1073,20 +1125,30 @@
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a2977be0dc79dce7fac2cdf74113cb246" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetId</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a1e22b8ec6fc5cf210fe3777d8f01a65f" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetLayersCount</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ae6953f64e0856bd2ba3891c1a4529f73" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetLifetime</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16a351eac01dde110e273cfd05f1f7ed" prot="public" virt="pure-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetMeta</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16837ff730fb4e276450a124d70eb2e4" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetMetaStatic</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetRawPtr</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ab9a8347f2812fce37f53741a5865758c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetReloadCount</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a0186b5dcde6ac4e0d251590619639406" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetResourceHash</name></member>
-      <member refid="classSR__UTILS__NS_1_1IResource_1aa31a633243b797e85108ff82e91ddbac" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetResourceHashName</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ac4d26a90ba1c28b82f71b28d1eb77dc9" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetResourceId</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1abbc56086aaf55e5a1ec9788dcecee316" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetResourceInfo</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ac663dc33feca74c372905c497dae10d0" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetResourceLoadState</name></member>
-      <member refid="classSR__UTILS__NS_1_1IResource_1abd5268fda05070754a11971a1acbd797" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetResourceName</name></member>
-      <member refid="classSR__UTILS__NS_1_1IResource_1a4ad5ddd9e1b2c4349ea8e57c310c3447" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetResourcePath</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a4aff4255b8a8bcf7b1424927b450b274" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetResourcePath</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a0afd31f4d6d436bc0feaa7710be061c5" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetSamplesCount</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a0b13806cfd2efb6cf9a98a7c28a238d5" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetSize</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a658dd83c2c08be614c39f4b4bcbaeb95" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetWidth</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>HasSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a2a266b012e03eec86b0050d2ff3c9f30" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>HasSubscriptions</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>IncrementPointer</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a9035e8e13821bbcf09633e80365d0643" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>InitializeResourcePath</name></member>
-      <member refid="classSR__UTILS__NS_1_1IResource_1a4be1db5eacb30d9690f21288ff39eb62" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>IResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac810662984eb60e0bea8b08e455ea2a2" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>IResource</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ad94ef18d58f13582b7411b749ae81089" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>IsAlive</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a6ad69fde6a46a6f50fab83b27b3db5b0" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>IsAllowedToRevive</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a5cf763c8a4c1cdda7c6d49d2e80139aa" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>IsDepthEnabled</name></member>
@@ -1097,15 +1159,17 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1a84c1674173da29d57d1528ccb9d9c1b9" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>IsLoaded</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a3361a06ad632161eec6f69a4e9aab092" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>IsRegistered</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1aee782635ef745075e9776c3f667904a5" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>IsResourceFromMemory</name></member>
-      <member refid="classSR__UTILS__NS_1_1IResource_1af251cc87f482b27ee3573d27d3a44a61" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>IsResourceType</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a3656bd90f2dfdf9f0df66098d72b2058" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>IsResourceWillBeDeleted</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a44aa6e41472a67870bb5114a06f5ef50" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>IsValid</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a6c232e1ee7d10fd08a637cdb85da789b" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Kill</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a88e5a84b8ca231eff9e93904fe2543c5" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Load</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1afbc9947b694481f8478c1a75a2fc465e" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Serializable::"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Load</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a0183032aa64809526edb04282f504e4b" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>LoadState</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>m_basicManually</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a1463e41167b18250dcbd2f8b6cb14e84" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>m_colors</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1adab7288944ca1d4f558cc95cbf099cb8" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>m_countUses</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a9e7b86fef05ff9c07ffd07ac3f64b55c" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>m_currentSampleCount</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>m_data</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ae7bda7ba4fbfba62c2c72b1894bbfe71" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>m_debugUnUseStackTraces</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a020496a1d169218d5379f54ba99cf6a5" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>m_debugUseStackTraces</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1aeaeff35e6c65ef23a7c05f101bab82c4" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>m_depth</name></member>
@@ -1117,27 +1181,45 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1a45c441a3f4c53aafeb3de6c5aa64766c" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>m_isFromMemory</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a9a8c78804eb222478db6be022206ea06" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>m_layersCount</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a8600327689c36a9c20b5ae589acd4cfa" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>m_loadState</name></member>
-      <member refid="classSR__UTILS__NS_1_1IResource_1af0144fd07d3ddcf76669ebe112a597ca" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>m_resourceHashName</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a97932d38aed0f329969d00f5868230b8" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>m_sampleCount</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a0bf22f6243c85ea53978180a0d3e4de8" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>m_size</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1afb7bbbb99bc610ce2ec7c9eeefffca59" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>m_watchers</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>NonCopyable</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>MakeShared</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a27569f8d47ee0c52ed5e385253e14460" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>OnPostLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1afbe2a50f0f69bc0f52b51151058830d8" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>OnPostSave</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a2978d969c09702719b2ed5c84453b02d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>OnPreLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a8281e1a68416fd493dce2a48fa8ea660" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>OnPreSave</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a5b375df8373037b2e3a8d4d824bed858" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>OnReloadDone</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a2a19e0855b7bbd67d6a964c08191cdce" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>OnResourceRegistered</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a833f3da55449659aeb8df7992155dd69" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>OnResourceUpdated</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GTYPES_NS::Framebuffer</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GTYPES_NS::Framebuffer</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GTYPES_NS::Framebuffer</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GTYPES_NS::Framebuffer</scope><name>operator=</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a0823f7c426d7757297b991c63c4a674d" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::SubscriptionHolder::"><scope>SR_GTYPES_NS::Framebuffer</scope><name>operator=</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a142ac6c73a3e99175210848dec991313" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::SubscriptionHolder::"><scope>SR_GTYPES_NS::Framebuffer</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>operator==</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1ac8b16fec8d4003ae41fd3fe294595b36" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>OriginType</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a2e7e349552fae77f10bee04d1ed0e1db" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>PipelinePtr</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Framebuffer_1aed8fc168887c2e869c64f32e331b4e48" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Framebuffer_1acd7f983cdc8e6289726380a1d63c5bd4" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1afed952eb55d7441a18c4d3381d315fcf" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>RegisterPropertiesCodegen</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>ReinterpretCast</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1afbba2810b28b1d82a121eeb91c6f247c" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Reload</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ab44f094d50d755e9872b7373881d5c05" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>RELOAD_BEGIN_EVENT</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a7f7efd6d454b1324163980ee73d54f08" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>RELOAD_DONE_EVENT</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ab3931d45e2b3c2fd69160c76748dd95d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>RemoveDependency</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac21f24c643f3298ec89225361ce96a9f" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>RemoveDependency</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1ab5d15ff431f7405c8ad940333e6417a5" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>RemoveSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1acfb5ac9abad809ecb7f6453ddd9f581d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>RemoveUPResult</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ac0cb7963e3bd5008d28412c0aa6196de" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>RemoveUsePoint</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Reset</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a4fb6331893e314c01da26b361197a75e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>ResourceContainer</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a70da9b49736de59bddc1f26575f5da33" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>ReviveResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Save</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1ac5f28f665420fb2287205c3080a9646a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SetDepthAspect</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a59b34aba63aa4f175c699080d4fe1872" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SetDepthEnabled</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a6ebd176c3fffc04ca7db442f5756c257" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SetDirty</name></member>
@@ -1145,27 +1227,43 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1a0981532a88fdeb242d295a04690ec4dd" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SetId</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1ae3c161b517803626a8c29a82ceee9da3" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SetLayersCount</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a992fe5635f43333348b9c9445293e23b" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SetLifetime</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SetPointerFromBase</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a2f72c195e91ef30f20f84ca3d56f7147" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SetResourceHash</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1abf8e6917d5ef7f95f5acc2f9f23c1888" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SetSampleCount</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a219049578534b89e6626112f67061bbe" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SetSize</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a70f41293701156bc4dcee1e591b4fe40" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SetViewportScissor</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1af7628077663a2e55a7cf9bff31717743" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SignalWatch</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a390fbb6e6cd4a4c42f5dc34c0d342e3c" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>StartWatch</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>StaticCast</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a73e9141c84030a503c6a1e51efe33b09" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>StopWatch</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a6e28623e3665ee8d0e153c59497be1f2" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Subscribe</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a974c352e7a7fa0786b9b5caa886d96c0" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SubscriptionHolder</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a1308e9577474f509d5d70ec6e025f22a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SubscriptionHolder</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1add12e4faa76ffece1b1df5ca31da4218" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>SubscriptionHolder</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a7d20951bf0e40f9fb2f644a82a4f8073" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Super</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a7d20951bf0e40f9fb2f644a82a4f8073" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Super</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>TryRecursiveLockIfValid</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1aace2e1cee108563a8d9fa93adadade9b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Unload</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Unlock</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a9020c161e4bc8453d005eb5fab808490" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Unsubscribe</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a2cd76fd192f7fd3a54e8020e87c57804" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Update</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a8374f937e659f29170b1db2b81ba2594" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>UpdateResourceLifeTime</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac84a44cf058fa5cb53715e250ae7157c" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>UpdateResources</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a55f8b7209b623ceae972194dc0dc6f64" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>~Framebuffer</name></member>
-      <member refid="classSR__UTILS__NS_1_1IResource_1ac4450e90e1fbd14d29931a362b9c05eb" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>~IResource</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>~NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a25f84a35792474f3b2e2eff6431695d3" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>~ResourceContainer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Valid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>VerifyAfterLoad</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a55f8b7209b623ceae972194dc0dc6f64" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>~Framebuffer</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac4450e90e1fbd14d29931a362b9c05eb" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>~IResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a25f84a35792474f3b2e2eff6431695d3" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>~ResourceContainer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1ad88a80732713966d7759d768bd65bbe5" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>~SRClass</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a4ae7f1f1d739e95f4a1c7216e1e07586" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>~SubscriptionHolder</name></member>
     </listofallmembers>
   </compounddef>

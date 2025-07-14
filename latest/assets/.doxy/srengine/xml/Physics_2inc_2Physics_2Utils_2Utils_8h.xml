@@ -584,6 +584,8 @@
         <link refid="PhysicsMaterial_8h_source"/>
         <childnode refid="23" relation="include">
         </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
       </node>
       <node id="17">
         <label>Engine/libs/Physics/inc/Physics/PhysicsScene.h</label>

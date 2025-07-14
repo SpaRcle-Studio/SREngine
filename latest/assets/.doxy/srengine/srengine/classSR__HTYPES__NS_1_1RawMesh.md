@@ -28,6 +28,11 @@ Inherits the following classes: IResource
 
 
 
+## Public Types
+
+| Type | Name |
+| ---: | :--- |
+| typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**RawMesh**](classSR__HTYPES__NS_1_1RawMesh.md) &gt; | [**Ptr**](#typedef-ptr)  <br> |
 
 
 
@@ -73,14 +78,16 @@ Inherits the following classes: IResource
 |  SR\_NODISCARD uint32\_t | [**GetVerticesCount**](#function-getverticescount) (uint32\_t id) const<br> |
 |  [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**InitializeResourcePath**](#function-initializeresourcepath) () override const<br> |
 |  SR\_NODISCARD bool | [**IsAllowedToRevive**](#function-isallowedtorevive) () override const<br> |
+|   | [**RawMesh**](#function-rawmesh) () <br> |
+|   | [**~RawMesh**](#function-rawmesh) () override<br> |
 
 
 ## Public Static Functions
 
 | Type | Name |
 | ---: | :--- |
-|  [**RawMesh**](classSR__HTYPES__NS_1_1RawMesh.md) \* | [**Load**](#function-load-13) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path, [**RawMeshParams**](structSR__HTYPES__NS_1_1RawMeshParams.md) params) <br> |
-|  [**RawMesh**](classSR__HTYPES__NS_1_1RawMesh.md) \* | [**Load**](#function-load-23) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
+|  RawMesh::Ptr | [**Load**](#function-load-13) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path, [**RawMeshParams**](structSR__HTYPES__NS_1_1RawMeshParams.md) params) <br> |
+|  RawMesh::Ptr | [**Load**](#function-load-23) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 
 
 
@@ -113,6 +120,21 @@ Inherits the following classes: IResource
 
 
 
+## Public Types Documentation
+
+
+
+
+### typedef Ptr 
+
+```C++
+using SR_HTYPES_NS::RawMesh::Ptr =  SR_HTYPES_NS::SharedPtr<RawMesh>;
+```
+
+
+
+
+<hr>
 ## Public Functions Documentation
 
 
@@ -410,6 +432,32 @@ SR_NODISCARD bool SR_HTYPES_NS::RawMesh::IsAllowedToRevive () override const
 
 
 <hr>
+
+
+
+### function RawMesh 
+
+```C++
+SR_HTYPES_NS::RawMesh::RawMesh () 
+```
+
+
+
+
+<hr>
+
+
+
+### function ~RawMesh 
+
+```C++
+SR_HTYPES_NS::RawMesh::~RawMesh () override
+```
+
+
+
+
+<hr>
 ## Public Static Functions Documentation
 
 
@@ -418,7 +466,7 @@ SR_NODISCARD bool SR_HTYPES_NS::RawMesh::IsAllowedToRevive () override const
 ### function Load [1/3]
 
 ```C++
-static RawMesh * SR_HTYPES_NS::RawMesh::Load (
+static RawMesh::Ptr SR_HTYPES_NS::RawMesh::Load (
     const SR_UTILS_NS::Path & path,
     RawMeshParams params
 ) 
@@ -434,7 +482,7 @@ static RawMesh * SR_HTYPES_NS::RawMesh::Load (
 ### function Load [2/3]
 
 ```C++
-static RawMesh * SR_HTYPES_NS::RawMesh::Load (
+static RawMesh::Ptr SR_HTYPES_NS::RawMesh::Load (
     const SR_UTILS_NS::Path & path
 ) 
 ```

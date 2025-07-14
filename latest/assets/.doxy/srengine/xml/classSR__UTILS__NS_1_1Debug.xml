@@ -334,13 +334,12 @@
         <name>MakeCrash</name>
         <qualifiedname>SR_UTILS_NS::Debug::MakeCrash</qualifiedname>
         <briefdescription>
-<para>@method </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="48" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="47" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a3d173aa00b5c99c278edf9e9c4fb53ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -349,20 +348,19 @@
         <name>TestPrint</name>
         <qualifiedname>SR_UTILS_NS::Debug::TestPrint</qualifiedname>
         <briefdescription>
-<para>@method </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="50" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="48" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a7513ef0cf316f88f30e0b88471621c75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1aef3791c88e51d0758b97752ac24c996b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
-        <definition>void SR_UTILS_NS::Debug::Init</definition>
+        <definition>void SR_UTILS_NS::Debug::Initialize</definition>
         <argsstring>(const std::string &amp;log_path, bool ShowUsedMemory, Theme colorTheme=Theme::Light)</argsstring>
-        <name>Init</name>
-        <qualifiedname>SR_UTILS_NS::Debug::Init</qualifiedname>
+        <name>Initialize</name>
+        <qualifiedname>SR_UTILS_NS::Debug::Initialize</qualifiedname>
         <param>
           <type>const std::string &amp;</type>
           <declname>log_path</declname>
@@ -382,22 +380,36 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="52" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="50" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a865c4c1f62fe3f53a78e00d75a72979c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a6fd30616928acbbd11924117564e6506" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
-        <definition>void SR_UTILS_NS::Debug::OnSingletonDestroy</definition>
-        <argsstring>() override</argsstring>
-        <name>OnSingletonDestroy</name>
-        <qualifiedname>SR_UTILS_NS::Debug::OnSingletonDestroy</qualifiedname>
-        <reimplements refid="classSR__UTILS__NS_1_1SingletonBase_1a8d801220802e887b834edb520b1bf342">OnSingletonDestroy</reimplements>
+        <definition>void SR_UTILS_NS::Debug::DeInitialize</definition>
+        <argsstring>()</argsstring>
+        <name>DeInitialize</name>
+        <qualifiedname>SR_UTILS_NS::Debug::DeInitialize</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="53" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="51" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a1860500e8db8ce23e0acca2a1c96c33d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::Debug::IsSingletonCanBeDestroyed</definition>
+        <argsstring>() const override</argsstring>
+        <name>IsSingletonCanBeDestroyed</name>
+        <qualifiedname>SR_UTILS_NS::Debug::IsSingletonCanBeDestroyed</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc">IsSingletonCanBeDestroyed</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="53" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="53" bodyend="53"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a459ba596f0584e86e70588b5f49f8b8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -768,6 +780,7 @@
       <member refid="classSR__UTILS__NS_1_1Debug_1aeeae05719d836dcf73aa370c06b4f498" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Assert</name></member>
       <member refid="classSR__UTILS__NS_1_1Debug_1afba9ea475b6f08e3d60c9aa3dc0a9b74" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>AssertOnceCheck</name></member>
       <member refid="classSR__UTILS__NS_1_1Debug_1aa0eaade2f835e644c2d7163e54ef517f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Debug</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a6fd30616928acbbd11924117564e6506" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>DeInitialize</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>DestroySingleton</name></member>
       <member refid="classSR__UTILS__NS_1_1Debug_1adad79dd9e6c21fcb7c40f3acb348f8dd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Error</name></member>
       <member refid="classSR__UTILS__NS_1_1Debug_1a757f652572ebf514fcbe983eec06f087" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>GetLevel</name></member>
@@ -775,12 +788,12 @@
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_UTILS_NS::Debug</scope><name>GetSingletonName</name></member>
       <member refid="classSR__UTILS__NS_1_1Debug_1aed1795cb83a907c49e69f1968e244555" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Graph</name></member>
       <member refid="classSR__UTILS__NS_1_1Debug_1adf5b93fca5b5ebd6d5b1888b20245058" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Info</name></member>
-      <member refid="classSR__UTILS__NS_1_1Debug_1a7513ef0cf316f88f30e0b88471621c75" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Init</name></member>
       <member refid="classSR__UTILS__NS_1_1Debug_1a83863c5637f6142415badd003c3dcd27" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>InitColorTheme</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1aef3791c88e51d0758b97752ac24c996b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Initialize</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332" prot="protected" virt="virtual"><scope>SR_UTILS_NS::Debug</scope><name>InitSingleton</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1ad6f59c12e431ce503ac7316ceaa4a5f2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Instance</name></member>
       <member refid="classSR__UTILS__NS_1_1Debug_1a4b54df4a0dc8f207aa1baec0442842ae" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>IsInitialized</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::Debug</scope><name>IsSingletonCanBeDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a1860500e8db8ce23e0acca2a1c96c33d" prot="public" virt="virtual"><scope>SR_UTILS_NS::Debug</scope><name>IsSingletonCanBeDestroyed</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a31931d2cbc17f064e27db243b971e202" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>IsSingletonInitialized</name></member>
       <member refid="classSR__UTILS__NS_1_1Debug_1aa3bbbac43d02b757f4c9adad4fceb51b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Level</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1adab1931732d186e76c89e282c748f253" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>LockSingleton</name></member>
@@ -798,7 +811,7 @@
       <member refid="classSR__UTILS__NS_1_1Debug_1ae69a23e3a38dd5beb0222c1f2e6a6991" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>MakeCrash</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1Debug_1a865c4c1f62fe3f53a78e00d75a72979c" prot="public" virt="virtual"><scope>SR_UTILS_NS::Debug</scope><name>OnSingletonDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8d801220802e887b834edb520b1bf342" prot="protected" virt="virtual"><scope>SR_UTILS_NS::Debug</scope><name>OnSingletonDestroy</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_UTILS_NS::Debug</scope><name>operator=</name></member>
       <member refid="classSR__UTILS__NS_1_1Debug_1a2c99f3989aa4a2622f553e6df0a0f100" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Print</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a2e34219de0ab53d51b60dd970d07c6ff" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>ScopeLockSingleton</name></member>

@@ -242,6 +242,23 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
+      <node id="8">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="10" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="10">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
       <node id="1">
         <label>SR_SRLM_NS::ConvertorNode</label>
         <link refid="classSR__SRLM__NS_1_1ConvertorNode"/>
@@ -274,9 +291,11 @@
         <link refid="classSR__UTILS__NS_1_1IResource"/>
         <childnode refid="7" relation="public-inheritance">
         </childnode>
-        <childnode refid="8" relation="public-inheritance">
+        <childnode refid="11" relation="public-inheritance">
         </childnode>
-        <childnode refid="9" relation="usage">
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+        <childnode refid="14" relation="usage">
           <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
           <edgelabel>RELOAD_DONE_EVENT</edgelabel>
         </childnode>
@@ -288,14 +307,24 @@
       <node id="7">
         <label>SR_UTILS_NS::ResourceContainer</label>
         <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
-        <childnode refid="4" relation="public-inheritance">
+        <childnode refid="8" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="9">
+      <node id="13">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="12">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
         <label>SR_UTILS_NS::StringAtom</label>
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
-      <node id="8">
+      <node id="11">
         <label>SR_UTILS_NS::SubscriptionHolder</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>

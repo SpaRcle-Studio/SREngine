@@ -36,27 +36,6 @@
         <location file="Engine/libs/Graphics/inc/Graphics/Pass/TransparentPass.h" line="15" column="38"/>
       </memberdef>
     </sectiondef>
-    <sectiondef kind="protected-func">
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TransparentPass_1ad6eea1b23585279e5abe90567d84fc24" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type>void</type>
-        <definition>void SR_GRAPH_NS::TransparentPass::UseSharedUniforms</definition>
-        <argsstring>(ShaderPtr pShader) override</argsstring>
-        <name>UseSharedUniforms</name>
-        <qualifiedname>SR_GRAPH_NS::TransparentPass::UseSharedUniforms</qualifiedname>
-        <reimplements refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1a6e0b0be7192ee6c3ad407830f047d192">UseSharedUniforms</reimplements>
-        <param>
-          <type>ShaderPtr</type>
-          <declname>pShader</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/TransparentPass.h" line="18" column="14"/>
-      </memberdef>
-    </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -67,7 +46,7 @@
         <link refid="classSR__GRAPH__NS_1_1BasePass"/>
         <childnode refid="5" relation="public-inheritance">
         </childnode>
-        <childnode refid="7" relation="public-inheritance">
+        <childnode refid="8" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
@@ -88,19 +67,29 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="7">
-        <label>SR_SRLM_NS::IExecutableNode</label>
-        <link refid="classSR__SRLM__NS_1_1IExecutableNode"/>
-        <childnode refid="8" relation="public-inheritance">
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="7" relation="public-inheritance">
         </childnode>
+      </node>
+      <node id="7">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
       </node>
       <node id="8">
-        <label>SR_SRLM_NS::LogicalNode</label>
-        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
-        <childnode refid="6" relation="public-inheritance">
+        <label>SR_SRLM_NS::IExecutableNode</label>
+        <link refid="classSR__SRLM__NS_1_1IExecutableNode"/>
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="6">
+      <node id="9">
+        <label>SR_SRLM_NS::LogicalNode</label>
+        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
@@ -112,7 +101,7 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="15">
+      <node id="20">
         <label>Entity</label>
       </node>
       <node id="4">
@@ -120,34 +109,34 @@
         <link refid="classSR__GRAPH__NS_1_1BasePass"/>
         <childnode refid="5" relation="public-inheritance">
         </childnode>
-        <childnode refid="7" relation="public-inheritance">
-        </childnode>
-        <childnode refid="13" relation="usage">
-          <edgelabel>m_camera</edgelabel>
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
         <childnode refid="18" relation="usage">
+          <edgelabel>m_camera</edgelabel>
+        </childnode>
+        <childnode refid="23" relation="usage">
           <edgelabel>m_uboManager</edgelabel>
         </childnode>
-        <childnode refid="21" relation="usage">
+        <childnode refid="26" relation="usage">
           <edgelabel>m_descriptorManager</edgelabel>
         </childnode>
       </node>
-      <node id="26">
+      <node id="31">
         <label>SR_GRAPH_NS::CascadedShadowMapPass</label>
         <link refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass"/>
-        <childnode refid="27" relation="public-inheritance">
+        <childnode refid="32" relation="public-inheritance">
         </childnode>
-        <childnode refid="33" relation="usage">
+        <childnode refid="38" relation="usage">
           <edgelabel>m_cameraRotation</edgelabel>
         </childnode>
       </node>
-      <node id="21">
+      <node id="26">
         <label>SR_GRAPH_NS::DescriptorManager</label>
         <link refid="classSR__GRAPH__NS_1_1DescriptorManager"/>
-        <childnode refid="22" relation="public-inheritance">
+        <childnode refid="27" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="25">
+      <node id="30">
         <label>SR_GRAPH_NS::IFramebufferPass</label>
         <link refid="classSR__GRAPH__NS_1_1IFramebufferPass"/>
       </node>
@@ -156,10 +145,10 @@
         <link refid="classSR__GRAPH__NS_1_1IMesh3DClusterPass"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
-        <childnode refid="23" relation="usage">
+        <childnode refid="28" relation="usage">
           <edgelabel>m_shadowMapPass</edgelabel>
         </childnode>
-        <childnode refid="26" relation="usage">
+        <childnode refid="31" relation="usage">
           <edgelabel>m_cascadedShadowMapPass</edgelabel>
         </childnode>
       </node>
@@ -169,62 +158,62 @@
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="29">
+      <node id="34">
         <label>SR_GRAPH_NS::ISamplersPass</label>
         <link refid="classSR__GRAPH__NS_1_1ISamplersPass"/>
       </node>
-      <node id="30">
+      <node id="35">
         <label>SR_GRAPH_NS::LayerFilterPredicate</label>
         <link refid="classSR__GRAPH__NS_1_1LayerFilterPredicate"/>
       </node>
-      <node id="18">
+      <node id="23">
         <label>SR_GRAPH_NS::Memory::UBOManager</label>
         <link refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager"/>
-        <childnode refid="19" relation="public-inheritance">
+        <childnode refid="24" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="28">
+      <node id="33">
         <label>SR_GRAPH_NS::MeshDrawerPass</label>
         <link refid="classSR__GRAPH__NS_1_1MeshDrawerPass"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
-        <childnode refid="29" relation="public-inheritance">
+        <childnode refid="34" relation="public-inheritance">
         </childnode>
-        <childnode refid="30" relation="public-inheritance">
+        <childnode refid="35" relation="public-inheritance">
         </childnode>
-        <childnode refid="31" relation="public-inheritance">
+        <childnode refid="36" relation="public-inheritance">
         </childnode>
-        <childnode refid="32" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="27">
-        <label>SR_GRAPH_NS::OffScreenMeshDrawerPass</label>
-        <link refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass"/>
-        <childnode refid="25" relation="public-inheritance">
-        </childnode>
-        <childnode refid="28" relation="public-inheritance">
+        <childnode refid="37" relation="public-inheritance">
         </childnode>
       </node>
       <node id="32">
+        <label>SR_GRAPH_NS::OffScreenMeshDrawerPass</label>
+        <link refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+        <childnode refid="33" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="37">
         <label>SR_GRAPH_NS::PriorityFilterPredicate</label>
         <link refid="classSR__GRAPH__NS_1_1PriorityFilterPredicate"/>
       </node>
-      <node id="24">
+      <node id="29">
         <label>SR_GRAPH_NS::ShaderOverridePass</label>
         <link refid="classSR__GRAPH__NS_1_1ShaderOverridePass"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="25" relation="public-inheritance">
+        <childnode refid="30" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="31">
+      <node id="36">
         <label>SR_GRAPH_NS::ShaderReplacePredicate</label>
         <link refid="classSR__GRAPH__NS_1_1ShaderReplacePredicate"/>
       </node>
-      <node id="23">
+      <node id="28">
         <label>SR_GRAPH_NS::ShadowMapPass</label>
         <link refid="classSR__GRAPH__NS_1_1ShadowMapPass"/>
-        <childnode refid="24" relation="public-inheritance">
+        <childnode refid="29" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
@@ -233,68 +222,87 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="13">
+      <node id="18">
         <label>SR_GTYPES_NS::Camera</label>
         <link refid="classSR__GTYPES__NS_1_1Camera"/>
-        <childnode refid="14" relation="public-inheritance">
+        <childnode refid="19" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="33">
-        <label>SR_MATH_NS::Quaternion</label>
-        <link refid="classSR__MATH__NS_1_1Quaternion"/>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
       </node>
       <node id="7">
-        <label>SR_SRLM_NS::IExecutableNode</label>
-        <link refid="classSR__SRLM__NS_1_1IExecutableNode"/>
-        <childnode refid="8" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="9">
-        <label>SR_SRLM_NS::LogicalMachine</label>
-        <link refid="classSR__SRLM__NS_1_1LogicalMachine"/>
-        <childnode refid="10" relation="public-inheritance">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="8" relation="usage">
+          <edgelabel>m_data</edgelabel>
         </childnode>
       </node>
       <node id="8">
-        <label>SR_SRLM_NS::LogicalNode</label>
-        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
-        <childnode refid="6" relation="public-inheritance">
-        </childnode>
-        <childnode refid="9" relation="usage">
-          <edgelabel>m_machine</edgelabel>
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="38">
+        <label>SR_MATH_NS::Quaternion</label>
+        <link refid="classSR__MATH__NS_1_1Quaternion"/>
+      </node>
+      <node id="9">
+        <label>SR_SRLM_NS::IExecutableNode</label>
+        <link refid="classSR__SRLM__NS_1_1IExecutableNode"/>
+        <childnode refid="10" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="14">
-        <label>SR_UTILS_NS::Component</label>
-        <link refid="classSR__UTILS__NS_1_1Component"/>
-        <childnode refid="15" relation="public-inheritance">
-        </childnode>
-        <childnode refid="16" relation="usage">
-          <edgelabel>m_parent</edgelabel>
-        </childnode>
-        <childnode refid="17" relation="usage">
-          <edgelabel>m_scene</edgelabel>
-        </childnode>
-      </node>
-      <node id="16">
-        <label>SR_UTILS_NS::IComponentable</label>
-        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
-        <childnode refid="15" relation="public-inheritance">
+      <node id="12">
+        <label>SR_SRLM_NS::LogicalMachine</label>
+        <link refid="classSR__SRLM__NS_1_1LogicalMachine"/>
+        <childnode refid="13" relation="public-inheritance">
         </childnode>
       </node>
       <node id="10">
+        <label>SR_SRLM_NS::LogicalNode</label>
+        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>m_machine</edgelabel>
+        </childnode>
+      </node>
+      <node id="19">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="20" relation="public-inheritance">
+        </childnode>
+        <childnode refid="21" relation="usage">
+          <edgelabel>m_parent</edgelabel>
+        </childnode>
+        <childnode refid="22" relation="usage">
+          <edgelabel>m_scene</edgelabel>
+        </childnode>
+      </node>
+      <node id="21">
+        <label>SR_UTILS_NS::IComponentable</label>
+        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
+        <childnode refid="20" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
         <label>SR_UTILS_NS::IResource</label>
         <link refid="classSR__UTILS__NS_1_1IResource"/>
         <childnode refid="5" relation="public-inheritance">
         </childnode>
-        <childnode refid="11" relation="public-inheritance">
+        <childnode refid="14" relation="public-inheritance">
         </childnode>
-        <childnode refid="12" relation="usage">
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+        <childnode refid="17" relation="usage">
           <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
           <edgelabel>RELOAD_DONE_EVENT</edgelabel>
         </childnode>
       </node>
-      <node id="6">
+      <node id="11">
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
@@ -304,48 +312,60 @@
         <childnode refid="6" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="22">
-        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="20" relation="public-inheritance">
+      <node id="16">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="15">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="16" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="19">
+      <node id="27">
         <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="20" relation="public-inheritance">
+        <childnode refid="25" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="20">
+      <node id="24">
+        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="25" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="25">
         <label>SR_UTILS_NS::SingletonBase</label>
         <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
-        <childnode refid="6" relation="public-inheritance">
+        <childnode refid="11" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="12">
+      <node id="17">
         <label>SR_UTILS_NS::StringAtom</label>
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
-      <node id="11">
+      <node id="14">
         <label>SR_UTILS_NS::SubscriptionHolder</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
-      <node id="17">
+      <node id="22">
         <label>SR_WORLD_NS::Scene</label>
         <link refid="classSR__WORLD__NS_1_1Scene"/>
-        <childnode refid="16" relation="public-inheritance">
+        <childnode refid="21" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>
     <location file="Engine/libs/Graphics/inc/Graphics/Pass/TransparentPass.h" line="11" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/TransparentPass.h" bodystart="11" bodyend="20"/>
     <listofallmembers>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>AddDependency</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1af9087ca5182397a9c7d3b92fb5591523" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>AddDependency</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>AddInputConnection</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a451d30d4d677248caa80bb7ac74baad9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>AddInputData</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a72915afde33f4d0c714e454cab1544c7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>AddInputData</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac528a232f2481034bf0c9c866aadf580" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>AddOutputConnection</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a968e3caf521de3d586f0ffb6cd9c2e07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>AddOutputData</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a70d337798b8e852a40f5f3a74fe35d79" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>AddOutputData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>AutoFree</name></member>
       <member refid="classSR__SRLM__NS_1_1IExecutableNode_1a52d82db24c1ba529cf2c3fb289188eae" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>Base</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a0d095ccdf074b9c91026a4f1b7e46f91" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>BasePass</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1afffc5aa7bc9b5e340f99221abdf47be0" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>Bind</name></member>
@@ -353,12 +373,16 @@
       <member refid="classSR__GRAPH__NS_1_1BasePass_1acc31a125e0f4886b1afcb196b55b75ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>CameraPtr</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4b0351f30fc7afe7f45854cde8e09f64" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>ClearLogicalNode</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8ff68384102d0f025a1dd259b1d57c17" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>Context</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>DecrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1aaf1e896ff56e5067a68b3f511bbe8ede" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>DeInit</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>DynamicCast</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab95638d1f3f8a9b82a1dfdaa63d28d1f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>Execute</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1afa26f4e1c7996747e682952a429ede33" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>FramebufferPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>Get</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac38d38ae8e248a1b1ad573f3e2ac7ccf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetBaseLogicalNode</name></member>
       <member refid="classSR__GRAPH__NS_1_1TransparentPass_1ac695de216270a606136e4f94e4904cac" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetClusterType</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac6c46124f5261f90e4392fd749afc0e1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetContainerParents</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a725e3e44aa2830a8a799d71e13693a73" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetContainerParents</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a149dec24886d7c8700a1b117c469307f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetContext</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a0928ede3e5d5886b93cb7eba8d77b744" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetFrameBuffers</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a7fcb00a1223a4547e39260ce606a3630" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetInputs</name></member>
@@ -370,11 +394,19 @@
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1aa14e801043f55bacd8b6ae930d1b063b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetOutputs</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8f05935a0013471af3796065104ddd87" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetParent</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a95b0ad3eee1d6801d720bc7eab40bc6e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetPassPipeline</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetRawPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a2d00f38853dae5296edc23d4c7bfa75c" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetRenderScene</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1a3684868d9a3ba99fe4ee0116985d830e" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetShader</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetSRClass</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae8e205c3d55f751a1cffabd6ae2cbafa" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetStatus</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ace5d758ae98e877e7fe6b9b311ca8976" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetTechnique</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetThis</name></member>
       <member refid="classSR__SRLM__NS_1_1IExecutableNode_1a5e765eb12571b7a44b7f1dc9cfcf2b4e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a39f67280ae696a53716dbe19ef2461ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>HasErrors</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4b0bdf3803c8a5163c579feab8e93704" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>Hash</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a05a08258b94dbd0e17d74634384ebed4" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>HasPostRender</name></member>
@@ -382,6 +414,7 @@
       <member refid="classSR__GRAPH__NS_1_1BasePass_1af5020f5a4113aab60f3feb34277ca1ea" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>HasRender</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a63b89d1da5c027690ec57549d061677f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>HasUpdate</name></member>
       <member refid="classSR__SRLM__NS_1_1IExecutableNode_1a72369ad750e0cbaa06007623f7a5a6aa" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>IExecutableNode</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>IncrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMesh3DClusterPass_1a09b0a395bbca9251af130eeed0702b8e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>Init</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae6934733a21e34c45488912bdac8b9a4" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>InitNode</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a46d4de6ffa829b0ac09255febc01f8c3" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>InitValues</name></member>
@@ -393,8 +426,10 @@
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a0f333ecbc614fc619a47de757b06b048" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>IsSuccessfullyCompleted</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1ab5b2d079289e877e97e3cb7462362246" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>Load</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a6bcd14ebcd882a6f89e531c1789f7037" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>LoadXml</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>m_basicManually</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad98f4d77d135b01f81a76f9534b393c1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>m_camera</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMesh3DClusterPass_1ae1015f7439077ddb795f5ae8f147260c" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>m_cascadedShadowMapPass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>m_data</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a25fe2fa123f3a2a1fee0ca8ec9e64fa2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>m_descriptorManager</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1a140d5d68d3d18c30e4b731af12d02352" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>m_dirtySamplers</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1a32fe7e993964f539b7caf8031e5536dc" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>m_hasRendered</name></member>
@@ -408,30 +443,41 @@
       <member refid="classSR__GRAPH__NS_1_1IMesh3DClusterPass_1ac20d62da280b636086cdcb1b1de8e8a0" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>m_shadowMapPass</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a326155de44e7fe4f9a7f6f905f239e83" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>m_status</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8b2e3a39351e9141029bea133f380465" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>m_uboManager</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>MakeShared</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1abeb669de15f340d47b81aff73c8494a7" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>MarkDirty</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMesh3DClusterPass_1acc29ece7c7478ec95f38c1145d799b28" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>MarkDirtyCluster</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1a684233bafb23bbe800d34090c9ec5be7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>MeshPtr</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::TransparentPass</scope><name>NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::TransparentPass</scope><name>NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual" ambiguityscope="SR_SRLM_NS::IExecutableNode::"><scope>SR_GRAPH_NS::TransparentPass</scope><name>NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual" ambiguityscope="SR_SRLM_NS::IExecutableNode::"><scope>SR_GRAPH_NS::TransparentPass</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>NonCopyable</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMesh3DClusterPass_1a01d96c81b02c2e7b77232e762b642fa1" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>OnClusterDirty</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad6e7d35a53f2d509bf057186f66481e6" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>OnMeshAdded</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a5f7298ff562c16372c6c233189be0d49" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>OnMeshRemoved</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1ae1818ca6d02dce41e492539ff8540212" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>OnMultisampleChanged</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1a808a79d7f71dcb4477199fd4555aee3f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>OnResize</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a833f3da55449659aeb8df7992155dd69" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>OnResourceUpdated</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::TransparentPass</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::TransparentPass</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::TransparentPass</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_SRLM_NS::IExecutableNode::"><scope>SR_GRAPH_NS::TransparentPass</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>operator==</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a16df7383e3420c9291cb97ec92c2d537" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>Overlay</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a9a07bf1f90447c55603ffa6b1e0bed70" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>Pins</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ac2790f23f7796eb36002c30dc817f1ba" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>PipelinePtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>PolymorphicCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a2618cec5cb8f6f4c384b88bb3878c781" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>PostRender</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ac907cd9eeb58321011db7473671aead2" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>PostUpdate</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1abefde6903c1310e9469844939695ae29" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>Prepare</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1a795817c2cc41326b2f417c25391f9b43" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>PrepareFBODependencies</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1a71e3824091a19f27f99e6a07fd277436" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>PrepareSamplers</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad2075554ddda52bbe8c83f514951a680" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>PreRender</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ab3931d45e2b3c2fd69160c76748dd95d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>RemoveDependency</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a2db19e6bfa97da6d7089665a0edfc3fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac21f24c643f3298ec89225361ce96a9f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>RemoveDependency</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae81c72460b1aeba9e7a6d61cfd26ab69" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>RemoveInput</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3dd7841012e531003e34e7b8cee39c8a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>RemoveInputConnection</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a1d32f0aa31055f7327c207e687fd159f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>RemoveOutput</name></member>
@@ -439,10 +485,12 @@
       <member refid="classSR__GRAPH__NS_1_1IMesh3DClusterPass_1a4ed4b0fed3a2c488362afb6010f13b2b" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>Render</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMesh3DClusterPass_1a92456c3398ec188373e40fe28ae52891" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>RenderCluster</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad5832c5a9f8abf85ac97967105d3a953" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>RenderScenePtr</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4fe38d653d32f3462b0f932fe1db83a7" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>Reset</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::TransparentPass</scope><name>Reset</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4fe38d653d32f3462b0f932fe1db83a7" prot="public" virt="virtual" ambiguityscope="SR_SRLM_NS::IExecutableNode::"><scope>SR_GRAPH_NS::TransparentPass</scope><name>Reset</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac04e4fd8681f829b225da3d92de851f9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>ResetInputFlows</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ad119153e52e8ea5c69fc41d600a6f98b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>ResetOutputFlows</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a26cb3321be56bb940227895f39e39585" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>ResetStatus</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a4fb6331893e314c01da26b361197a75e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>ResourceContainer</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1aedae5fefb8168c32c3e42bb21abf28fe" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>Samplers</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a1d2f00105677e74286e1d1c8dee82255" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>SaveXml</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a62227cc4ae3b9feee5afcca5f23bc919" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>SetContext</name></member>
@@ -451,20 +499,35 @@
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a1f1fe9682ea099f5ca3fbbfb6bc6a9e5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>SetName</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a915d9919621e79a3ee48ddb15799123c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>SetNodeIndex</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ab5e34c676e9594e60de4ca2e962a0cf7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>SetParent</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>SetPointerFromBase</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1af58022a7df1f3d5b8343647ab9ad78f8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>SetRenderTechnique</name></member>
-      <member refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1a74434745e7881638eece076d9ae393d3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>ShaderPtr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1a98d72bea22707a917039fae05fdcfd33" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>ShaderPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>StaticCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1TransparentPass_1a199d8cf252a50dbf0630e93faa943ed6" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>Super</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>Unlock</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMesh3DClusterPass_1a641d7bed746885545c3bf544b10f7f44" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>Update</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMesh3DClusterPass_1ac74275471827d7eb4dfb5e0abec5694a" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>UpdateCluster</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac84a44cf058fa5cb53715e250ae7157c" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>UpdateResources</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1aa612145aa1e1d722faa1ae623ca7c7af" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>UseConstants</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1aacc9b50a9de0afb675cd6df2d16b8ad4" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>UseSamplers</name></member>
-      <member refid="classSR__GRAPH__NS_1_1TransparentPass_1ad6eea1b23585279e5abe90567d84fc24" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>UseSharedUniforms</name></member>
+      <member refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1a6e0b0be7192ee6c3ad407830f047d192" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>UseSharedUniforms</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1a6026d0e1f621e32e404127267db784bf" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>UseUniforms</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>Valid</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a127a21b6754f470eeddf8af6f2c16cb3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>~BasePass</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a19b262ecaf034d84c1783c24712ccf2d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>~LogicalNode</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>~NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a25f84a35792474f3b2e2eff6431695d3" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>~ResourceContainer</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a25f84a35792474f3b2e2eff6431695d3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>~ResourceContainer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentPass</scope><name>~SharedPtrBase</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

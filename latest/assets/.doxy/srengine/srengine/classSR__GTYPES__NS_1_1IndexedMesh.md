@@ -41,7 +41,7 @@ See [SR\_GTYPES\_NS::Mesh](classSR__GTYPES__NS_1_1Mesh.md)
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Mesh**](classSR__GTYPES__NS_1_1Mesh.md) &gt; | [**Ptr**](classSR__GTYPES__NS_1_1Mesh.md#typedef-ptr)  <br> |
 | typedef [**SR\_HTYPES\_NS::SortedVector**](classSR__HTYPES__NS_1_1SortedVector.md)&lt; [**SR\_GRAPH\_NS::RenderQueueInfo**](structSR__GRAPH__NS_1_1RenderQueueInfo.md), [**SR\_GRAPH\_NS::RenderQueuePredicate**](structSR__GRAPH__NS_1_1RenderQueuePredicate.md) &gt; | [**RenderQueues**](classSR__GTYPES__NS_1_1Mesh.md#typedef-renderqueues)  <br> |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; RenderScene &gt; | [**RenderScenePtr**](classSR__GTYPES__NS_1_1Mesh.md#typedef-rendersceneptr)  <br> |
-| typedef [**Shader**](classSR__GTYPES__NS_1_1Shader.md) \* | [**ShaderPtr**](classSR__GTYPES__NS_1_1Mesh.md#typedef-shaderptr)  <br> |
+| typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Shader**](classSR__GTYPES__NS_1_1Shader.md) &gt; | [**ShaderPtr**](classSR__GTYPES__NS_1_1Mesh.md#typedef-shaderptr)  <br> |
 
 
 ## Public Types inherited from SR_GTYPES_NS::IRenderComponent
@@ -179,7 +179,7 @@ See [SR\_GTYPES\_NS::Mesh](classSR__GTYPES__NS_1_1Mesh.md)
 |  SR\_NODISCARD const MeshRegistrationInfo & | [**GetMeshRegistrationInfo**](classSR__GTYPES__NS_1_1Mesh.md#function-getmeshregistrationinfo) () noexcept const<br> |
 | virtual SR\_NODISCARD MeshType | [**GetMeshType**](classSR__GTYPES__NS_1_1Mesh.md#function-getmeshtype) () noexcept const = 0<br> |
 |  SR\_NODISCARD RenderQueues & | [**GetRenderQueues**](classSR__GTYPES__NS_1_1Mesh.md#function-getrenderqueues) () noexcept<br> |
-|  SR\_NODISCARD [**ShaderPtr**](classSR__GTYPES__NS_1_1Shader.md) | [**GetShader**](classSR__GTYPES__NS_1_1Mesh.md#function-getshader) () const<br> |
+|  SR\_NODISCARD ShaderPtr | [**GetShader**](classSR__GTYPES__NS_1_1Mesh.md#function-getshader) () const<br> |
 | virtual SR\_NODISCARD int64\_t | [**GetSortingPriority**](classSR__GTYPES__NS_1_1Mesh.md#function-getsortingpriority) () const<br> |
 | virtual SR\_NODISCARD int32\_t | [**GetVBO**](classSR__GTYPES__NS_1_1Mesh.md#function-getvbo) () <br> |
 | virtual SR\_NODISCARD uint32\_t | [**GetVerticesCount**](classSR__GTYPES__NS_1_1Mesh.md#function-getverticescount) () const<br> |
@@ -203,7 +203,7 @@ See [SR\_GTYPES\_NS::Mesh](classSR__GTYPES__NS_1_1Mesh.md)
 | virtual void | [**OnMatrixDirty**](classSR__GTYPES__NS_1_1Mesh.md#function-onmatrixdirty) () override<br> |
 | virtual void | [**OnPriorityChanged**](classSR__GTYPES__NS_1_1Mesh.md#function-onprioritychanged) () override<br> |
 |  void | [**OnReRegistered**](classSR__GTYPES__NS_1_1Mesh.md#function-onreregistered) () <br> |
-| virtual bool | [**OnResourceReloaded**](classSR__GTYPES__NS_1_1Mesh.md#function-onresourcereloaded) ([**SR\_UTILS\_NS::IResource**](classSR__UTILS__NS_1_1IResource.md) \* pResource) <br> |
+| virtual bool | [**OnResourceReloaded**](classSR__GTYPES__NS_1_1Mesh.md#function-onresourcereloaded) (const [**SR\_UTILS\_NS::IResource**](classSR__UTILS__NS_1_1IResource.md) \* pResource) <br> |
 |  void | [**ReRegisterMesh**](classSR__GTYPES__NS_1_1Mesh.md#function-reregistermesh) () <br> |
 |  void | [**SetErrorsClean**](classSR__GTYPES__NS_1_1Mesh.md#function-seterrorsclean) () <br> |
 |  void | [**SetMaterial**](classSR__GTYPES__NS_1_1Mesh.md#function-setmaterial-12) (const MaterialPtr & pMaterial) <br> |

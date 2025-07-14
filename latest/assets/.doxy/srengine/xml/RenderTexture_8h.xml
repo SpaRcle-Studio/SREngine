@@ -5,10 +5,10 @@
     <includes refid="Settings_8h" local="no">Utils/Settings.h</includes>
     <includes refid="TextureHelper_8h" local="no">Graphics/Pipeline/TextureHelper.h</includes>
     <incdepgraph>
-      <node id="132">
+      <node id="142">
         <label>Graphics/Pipeline/TextureHelper.h</label>
         <link refid="TextureHelper_8h_source"/>
-        <childnode refid="133" relation="include">
+        <childnode refid="143" relation="include">
         </childnode>
         <childnode refid="94" relation="include">
         </childnode>
@@ -20,10 +20,10 @@
         <link refid="RenderTexture_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="132" relation="include">
+        <childnode refid="142" relation="include">
         </childnode>
       </node>
-      <node id="133">
+      <node id="143">
         <label>Graphics/macros.h</label>
         <link refid="libs_2Graphics_2inc_2Graphics_2macros_8h_source"/>
         <childnode refid="7" relation="include">
@@ -151,6 +151,12 @@
         <childnode refid="86" relation="include">
         </childnode>
       </node>
+      <node id="127">
+        <label>Utils/Common/StringAtomLiterals.h</label>
+        <link refid="StringAtomLiterals_8h_source"/>
+        <childnode refid="89" relation="include">
+        </childnode>
+      </node>
       <node id="99">
         <label>Utils/Common/StringFormat.h</label>
         <link refid="StringFormat_8h_source"/>
@@ -265,6 +271,16 @@
         <childnode refid="70" relation="include">
         </childnode>
       </node>
+      <node id="129">
+        <label>Utils/Math/Rect.h</label>
+        <link refid="Rect_8h_source"/>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+      </node>
       <node id="112">
         <label>Utils/Math/Size.h</label>
         <link refid="Size_8h_source"/>
@@ -325,11 +341,11 @@
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="131">
+      <node id="141">
         <label>Utils/Profile/TracyContext.h</label>
         <link refid="TracyContext_8h_source"/>
       </node>
-      <node id="129">
+      <node id="139">
         <label>Utils/Resources/FileSystemWatcher.h</label>
         <link refid="FileSystemWatcher_8h_source"/>
         <childnode refid="109" relation="include">
@@ -337,7 +353,7 @@
         <childnode refid="106" relation="include">
         </childnode>
       </node>
-      <node id="126">
+      <node id="136">
         <label>Utils/Resources/FileWatcher.h</label>
         <link refid="FileWatcher_8h_source"/>
         <childnode refid="4" relation="include">
@@ -372,16 +388,18 @@
         </childnode>
         <childnode refid="125" relation="include">
         </childnode>
-        <childnode refid="126" relation="include">
+        <childnode refid="135" relation="include">
+        </childnode>
+        <childnode refid="136" relation="include">
         </childnode>
       </node>
-      <node id="125">
+      <node id="135">
         <label>Utils/Resources/ResourceContainer.h</label>
         <link refid="ResourceContainer_8h_source"/>
-        <childnode refid="83" relation="include">
+        <childnode refid="109" relation="include">
         </childnode>
       </node>
-      <node id="130">
+      <node id="140">
         <label>Utils/Resources/ResourceInfo.h</label>
         <link refid="ResourceInfo_8h_source"/>
         <childnode refid="4" relation="include">
@@ -393,12 +411,12 @@
         <childnode refid="86" relation="include">
         </childnode>
       </node>
-      <node id="127">
+      <node id="137">
         <label>Utils/Resources/ResourceManager.h</label>
         <link refid="ResourceManager_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="128" relation="include">
+        <childnode refid="138" relation="include">
         </childnode>
         <childnode refid="109" relation="include">
         </childnode>
@@ -406,11 +424,11 @@
         </childnode>
         <childnode refid="105" relation="include">
         </childnode>
-        <childnode refid="129" relation="include">
+        <childnode refid="139" relation="include">
         </childnode>
-        <childnode refid="130" relation="include">
+        <childnode refid="140" relation="include">
         </childnode>
-        <childnode refid="131" relation="include">
+        <childnode refid="141" relation="include">
         </childnode>
       </node>
       <node id="3">
@@ -431,6 +449,14 @@
         <childnode refid="104" relation="include">
         </childnode>
       </node>
+      <node id="133">
+        <label>Utils/Serialization/DefaultCheckers.inl.h</label>
+        <link refid="DefaultCheckers_8inl_8h_source"/>
+      </node>
+      <node id="131">
+        <label>Utils/Serialization/DefaultObjectMakers.inl.h</label>
+        <link refid="DefaultObjectMakers_8inl_8h_source"/>
+      </node>
       <node id="124">
         <label>Utils/Serialization/Deserializer.h</label>
         <link refid="Deserializer_8h_source"/>
@@ -441,6 +467,56 @@
         <label>Utils/Serialization/ObjectDataAccessor.h</label>
         <link refid="ObjectDataAccessor_8h_source"/>
         <childnode refid="80" relation="include">
+        </childnode>
+      </node>
+      <node id="134">
+        <label>Utils/Serialization/ObjectDataAccessors.inl.h</label>
+        <link refid="ObjectDataAccessors_8inl_8h_source"/>
+      </node>
+      <node id="132">
+        <label>Utils/Serialization/SaveCheckers.inl.h</label>
+        <link refid="SaveCheckers_8inl_8h_source"/>
+      </node>
+      <node id="125">
+        <label>Utils/Serialization/Serializable.h</label>
+        <link refid="Serializable_8h_source"/>
+        <childnode refid="114" relation="include">
+        </childnode>
+        <childnode refid="126" relation="include">
+        </childnode>
+        <childnode refid="128" relation="include">
+        </childnode>
+      </node>
+      <node id="128">
+        <label>Utils/Serialization/Serialization.h</label>
+        <link refid="Serialization_8h_source"/>
+        <childnode refid="123" relation="include">
+        </childnode>
+        <childnode refid="124" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+        <childnode refid="126" relation="include">
+        </childnode>
+        <childnode refid="113" relation="include">
+        </childnode>
+        <childnode refid="109" relation="include">
+        </childnode>
+        <childnode refid="112" relation="include">
+        </childnode>
+        <childnode refid="129" relation="include">
+        </childnode>
+        <childnode refid="127" relation="include">
+        </childnode>
+        <childnode refid="130" relation="include">
+        </childnode>
+        <childnode refid="131" relation="include">
+        </childnode>
+        <childnode refid="132" relation="include">
+        </childnode>
+        <childnode refid="133" relation="include">
+        </childnode>
+        <childnode refid="134" relation="include">
         </childnode>
       </node>
       <node id="123">
@@ -456,7 +532,7 @@
         </childnode>
         <childnode refid="105" relation="include">
         </childnode>
-        <childnode refid="127" relation="include">
+        <childnode refid="137" relation="include">
         </childnode>
         <childnode refid="82" relation="include">
         </childnode>
@@ -469,6 +545,18 @@
         <childnode refid="75" relation="include">
         </childnode>
         <childnode refid="121" relation="include">
+        </childnode>
+      </node>
+      <node id="126">
+        <label>Utils/TypeTraits/Factory.h</label>
+        <link refid="Factory_8h_source"/>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="127" relation="include">
+        </childnode>
+        <childnode refid="109" relation="include">
+        </childnode>
+        <childnode refid="122" relation="include">
         </childnode>
       </node>
       <node id="114">
@@ -611,7 +699,7 @@
         <childnode refid="76" relation="include">
         </childnode>
       </node>
-      <node id="128">
+      <node id="138">
         <label>Utils/Types/Thread.h</label>
         <link refid="Thread_8h_source"/>
         <childnode refid="4" relation="include">
@@ -762,6 +850,9 @@
         </childnode>
         <childnode refid="69" relation="include">
         </childnode>
+      </node>
+      <node id="130">
+        <label>Codegen/Enums.generated.hpp</label>
       </node>
       <node id="91">
         <label>Codegen/EnumsFwd.generated.hpp</label>
@@ -992,24 +1083,28 @@
 <codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Framebuffer;</highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight></codeline>
 <codeline lineno="14" refid="classSR__GTYPES__NS_1_1RenderTexture" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__GTYPES__NS_1_1RenderTexture" kindref="compound">RenderTexture</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>SR_UTILS_NS::Settings<sp/>{</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GTYPES__NS_1_1RenderTexture" kindref="compound">RenderTexture</ref>();</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GTYPES__NS_1_1RenderTexture" kindref="compound">~RenderTexture</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_CLASS()</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Ptr<sp/>=<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;RenderTexture&gt;</ref>;</highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight></codeline>
 <codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classSR__GTYPES__NS_1_1RenderTexture" kindref="compound">RenderTexture</ref>*<sp/>Load(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref>&amp;<sp/>path);</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"></highlight></codeline>
-<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ClearSettings()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>LoadSettings(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_XML_NS::Node&amp;<sp/>node)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GTYPES__NS_1_1RenderTexture" kindref="compound">RenderTexture</ref>();</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GTYPES__NS_1_1RenderTexture" kindref="compound">~RenderTexture</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>RenderTexture::Ptr<sp/>Load(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref>&amp;<sp/>path);</highlight></codeline>
 <codeline lineno="25"><highlight class="normal"></highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">Framebuffer</ref>*<sp/>m_fbo<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="30"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"></highlight></codeline>
-<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_RENDERTEXTURE_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ClearSettings()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>LoadSettings(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_XML_NS::Node&amp;<sp/>node)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">Framebuffer</ref>*<sp/>m_fbo<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="34"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_RENDERTEXTURE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="Engine/libs/Graphics/inc/Graphics/Types/RenderTexture.h"/>
   </compounddef>

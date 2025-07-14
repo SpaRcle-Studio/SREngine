@@ -10,7 +10,7 @@
 
 
 
-* `#include <Utils/Types/SharedPtr.h>`
+* `#include <Utils/Tests/TestManager.h>`
 
 
 
@@ -39,6 +39,7 @@
 | class | [**AutomaticallySharedPtrTestClass**](classSR__UTILS__NS_1_1AutoTests_1_1AutomaticallySharedPtrTestClass.md) <br> |
 | class | [**ManuallySharedPtrTestClass**](classSR__UTILS__NS_1_1AutoTests_1_1ManuallySharedPtrTestClass.md) <br> |
 | class | [**ManuallySharedPtrTestClassInherit**](classSR__UTILS__NS_1_1AutoTests_1_1ManuallySharedPtrTestClassInherit.md) <br> |
+| class | [**SharedPtrTest**](classSR__UTILS__NS_1_1SharedPtrTest.md) <br> |
 
 
 

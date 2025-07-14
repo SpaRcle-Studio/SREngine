@@ -40,7 +40,7 @@ See [SR\_GTYPES\_NS::Mesh](classSR__GTYPES__NS_1_1Mesh.md)
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Mesh**](classSR__GTYPES__NS_1_1Mesh.md) &gt; | [**Ptr**](classSR__GTYPES__NS_1_1Mesh.md#typedef-ptr)  <br> |
 | typedef [**SR\_HTYPES\_NS::SortedVector**](classSR__HTYPES__NS_1_1SortedVector.md)&lt; [**SR\_GRAPH\_NS::RenderQueueInfo**](structSR__GRAPH__NS_1_1RenderQueueInfo.md), [**SR\_GRAPH\_NS::RenderQueuePredicate**](structSR__GRAPH__NS_1_1RenderQueuePredicate.md) &gt; | [**RenderQueues**](classSR__GTYPES__NS_1_1Mesh.md#typedef-renderqueues)  <br> |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; RenderScene &gt; | [**RenderScenePtr**](classSR__GTYPES__NS_1_1Mesh.md#typedef-rendersceneptr)  <br> |
-| typedef [**Shader**](classSR__GTYPES__NS_1_1Shader.md) \* | [**ShaderPtr**](classSR__GTYPES__NS_1_1Mesh.md#typedef-shaderptr)  <br> |
+| typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Shader**](classSR__GTYPES__NS_1_1Shader.md) &gt; | [**ShaderPtr**](classSR__GTYPES__NS_1_1Mesh.md#typedef-shaderptr)  <br> |
 
 
 ## Public Types inherited from SR_GTYPES_NS::IRenderComponent
@@ -146,7 +146,7 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |  void | [**FreeVideoMemory**](#function-freevideomemory) () override<br> |
 |  SR\_NODISCARD uint32\_t | [**GetAtlasHeight**](#function-getatlasheight) () noexcept const<br> |
 |  SR\_NODISCARD uint32\_t | [**GetAtlasWidth**](#function-getatlaswidth) () noexcept const<br> |
-|  SR\_NODISCARD SR\_FORCE\_INLINE [**Font**](classSR__GTYPES__NS_1_1Font.md) \* | [**GetFont**](#function-getfont) () noexcept const<br> |
+|  SR\_NODISCARD SR\_FORCE\_INLINE const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Font**](classSR__GTYPES__NS_1_1Font.md) &gt; & | [**GetFont**](#function-getfont) () noexcept const<br> |
 |  SR\_NODISCARD [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**GetFontPath**](#function-getfontpath) () noexcept const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE uint16\_t | [**GetFontSize**](#function-getfontsize) () noexcept const<br> |
 | virtual SR\_NODISCARD uint32\_t | [**GetIndicesCount**](#function-getindicescount) () override const<br>_TODO: можно сделать при помощи 4х вершин_  |
@@ -160,7 +160,7 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |  SR\_NODISCARD SR\_FORCE\_INLINE bool | [**IsPreprocessorEnabled**](#function-ispreprocessorenabled) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsSupportVBO**](#function-issupportvbo) () override const<br> |
 |  void | [**SetDebug**](#function-setdebug) (bool enabled) <br> |
-|  void | [**SetFont**](#function-setfont-12) ([**Font**](classSR__GTYPES__NS_1_1Font.md) \* pFont) <br> |
+|  void | [**SetFont**](#function-setfont-12) (const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Font**](classSR__GTYPES__NS_1_1Font.md) &gt; & pFont) <br> |
 |  void | [**SetFont**](#function-setfont-22) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 |  void | [**SetFontSize**](#function-setfontsize) (const uint16\_t & size) <br> |
 |  void | [**SetKerning**](#function-setkerning) (bool enabled) <br> |
@@ -196,7 +196,7 @@ See [SR\_GTYPES\_NS::Mesh](classSR__GTYPES__NS_1_1Mesh.md)
 |  SR\_NODISCARD const MeshRegistrationInfo & | [**GetMeshRegistrationInfo**](classSR__GTYPES__NS_1_1Mesh.md#function-getmeshregistrationinfo) () noexcept const<br> |
 | virtual SR\_NODISCARD MeshType | [**GetMeshType**](classSR__GTYPES__NS_1_1Mesh.md#function-getmeshtype) () noexcept const = 0<br> |
 |  SR\_NODISCARD RenderQueues & | [**GetRenderQueues**](classSR__GTYPES__NS_1_1Mesh.md#function-getrenderqueues) () noexcept<br> |
-|  SR\_NODISCARD [**ShaderPtr**](classSR__GTYPES__NS_1_1Shader.md) | [**GetShader**](classSR__GTYPES__NS_1_1Mesh.md#function-getshader) () const<br> |
+|  SR\_NODISCARD ShaderPtr | [**GetShader**](classSR__GTYPES__NS_1_1Mesh.md#function-getshader) () const<br> |
 | virtual SR\_NODISCARD int64\_t | [**GetSortingPriority**](classSR__GTYPES__NS_1_1Mesh.md#function-getsortingpriority) () const<br> |
 | virtual SR\_NODISCARD int32\_t | [**GetVBO**](classSR__GTYPES__NS_1_1Mesh.md#function-getvbo) () <br> |
 | virtual SR\_NODISCARD uint32\_t | [**GetVerticesCount**](classSR__GTYPES__NS_1_1Mesh.md#function-getverticescount) () const<br> |
@@ -220,7 +220,7 @@ See [SR\_GTYPES\_NS::Mesh](classSR__GTYPES__NS_1_1Mesh.md)
 | virtual void | [**OnMatrixDirty**](classSR__GTYPES__NS_1_1Mesh.md#function-onmatrixdirty) () override<br> |
 | virtual void | [**OnPriorityChanged**](classSR__GTYPES__NS_1_1Mesh.md#function-onprioritychanged) () override<br> |
 |  void | [**OnReRegistered**](classSR__GTYPES__NS_1_1Mesh.md#function-onreregistered) () <br> |
-| virtual bool | [**OnResourceReloaded**](classSR__GTYPES__NS_1_1Mesh.md#function-onresourcereloaded) ([**SR\_UTILS\_NS::IResource**](classSR__UTILS__NS_1_1IResource.md) \* pResource) <br> |
+| virtual bool | [**OnResourceReloaded**](classSR__GTYPES__NS_1_1Mesh.md#function-onresourcereloaded) (const [**SR\_UTILS\_NS::IResource**](classSR__UTILS__NS_1_1IResource.md) \* pResource) <br> |
 |  void | [**ReRegisterMesh**](classSR__GTYPES__NS_1_1Mesh.md#function-reregistermesh) () <br> |
 |  void | [**SetErrorsClean**](classSR__GTYPES__NS_1_1Mesh.md#function-seterrorsclean) () <br> |
 |  void | [**SetMaterial**](classSR__GTYPES__NS_1_1Mesh.md#function-setmaterial-12) (const MaterialPtr & pMaterial) <br> |
@@ -559,7 +559,7 @@ inline SR_NODISCARD uint32_t SR_GTYPES_NS::Text::GetAtlasWidth () noexcept const
 ### function GetFont 
 
 ```C++
-inline SR_NODISCARD SR_FORCE_INLINE Font * SR_GTYPES_NS::Text::GetFont () noexcept const
+inline SR_NODISCARD SR_FORCE_INLINE const SR_HTYPES_NS::SharedPtr < Font > & SR_GTYPES_NS::Text::GetFont () noexcept const
 ```
 
 
@@ -755,7 +755,7 @@ void SR_GTYPES_NS::Text::SetDebug (
 
 ```C++
 void SR_GTYPES_NS::Text::SetFont (
-    Font * pFont
+    const SR_HTYPES_NS::SharedPtr < Font > & pFont
 ) 
 ```
 

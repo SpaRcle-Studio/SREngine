@@ -37,7 +37,7 @@ Inherited by the following classes: [SR\_GTYPES\_NS::DebugLine](classSR__GTYPES_
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Mesh**](classSR__GTYPES__NS_1_1Mesh.md) &gt; | [**Ptr**](#typedef-ptr)  <br> |
 | typedef [**SR\_HTYPES\_NS::SortedVector**](classSR__HTYPES__NS_1_1SortedVector.md)&lt; [**SR\_GRAPH\_NS::RenderQueueInfo**](structSR__GRAPH__NS_1_1RenderQueueInfo.md), [**SR\_GRAPH\_NS::RenderQueuePredicate**](structSR__GRAPH__NS_1_1RenderQueuePredicate.md) &gt; | [**RenderQueues**](#typedef-renderqueues)  <br> |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; RenderScene &gt; | [**RenderScenePtr**](#typedef-rendersceneptr)  <br> |
-| typedef [**Shader**](classSR__GTYPES__NS_1_1Shader.md) \* | [**ShaderPtr**](#typedef-shaderptr)  <br> |
+| typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Shader**](classSR__GTYPES__NS_1_1Shader.md) &gt; | [**ShaderPtr**](#typedef-shaderptr)  <br> |
 
 
 ## Public Types inherited from SR_GTYPES_NS::IRenderComponent
@@ -135,7 +135,7 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |  SR\_NODISCARD const MeshRegistrationInfo & | [**GetMeshRegistrationInfo**](#function-getmeshregistrationinfo) () noexcept const<br> |
 | virtual SR\_NODISCARD MeshType | [**GetMeshType**](#function-getmeshtype) () noexcept const = 0<br> |
 |  SR\_NODISCARD RenderQueues & | [**GetRenderQueues**](#function-getrenderqueues) () noexcept<br> |
-|  SR\_NODISCARD [**ShaderPtr**](classSR__GTYPES__NS_1_1Shader.md) | [**GetShader**](#function-getshader) () const<br> |
+|  SR\_NODISCARD ShaderPtr | [**GetShader**](#function-getshader) () const<br> |
 | virtual SR\_NODISCARD int64\_t | [**GetSortingPriority**](#function-getsortingpriority) () const<br> |
 | virtual SR\_NODISCARD int32\_t | [**GetVBO**](#function-getvbo) () <br> |
 | virtual SR\_NODISCARD uint32\_t | [**GetVerticesCount**](#function-getverticescount) () const<br> |
@@ -159,7 +159,7 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 | virtual void | [**OnMatrixDirty**](#function-onmatrixdirty) () override<br> |
 | virtual void | [**OnPriorityChanged**](#function-onprioritychanged) () override<br> |
 |  void | [**OnReRegistered**](#function-onreregistered) () <br> |
-| virtual bool | [**OnResourceReloaded**](#function-onresourcereloaded) ([**SR\_UTILS\_NS::IResource**](classSR__UTILS__NS_1_1IResource.md) \* pResource) <br> |
+| virtual bool | [**OnResourceReloaded**](#function-onresourcereloaded) (const [**SR\_UTILS\_NS::IResource**](classSR__UTILS__NS_1_1IResource.md) \* pResource) <br> |
 |  void | [**ReRegisterMesh**](#function-reregistermesh) () <br> |
 |  void | [**SetErrorsClean**](#function-seterrorsclean) () <br> |
 |  void | [**SetMaterial**](#function-setmaterial-12) (const MaterialPtr & pMaterial) <br> |
@@ -446,7 +446,7 @@ using SR_GTYPES_NS::Mesh::RenderScenePtr =  SR_HTYPES_NS::SharedPtr<RenderScene>
 ### typedef ShaderPtr 
 
 ```C++
-using SR_GTYPES_NS::Mesh::ShaderPtr =  Shader*;
+using SR_GTYPES_NS::Mesh::ShaderPtr =  SR_HTYPES_NS::SharedPtr<Shader>;
 ```
 
 
@@ -976,7 +976,7 @@ void SR_GTYPES_NS::Mesh::OnReRegistered ()
 
 ```C++
 virtual bool SR_GTYPES_NS::Mesh::OnResourceReloaded (
-    SR_UTILS_NS::IResource * pResource
+    const SR_UTILS_NS::IResource * pResource
 ) 
 ```
 

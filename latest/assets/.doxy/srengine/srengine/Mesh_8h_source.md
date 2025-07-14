@@ -56,7 +56,7 @@ namespace SR_GTYPES_NS {
         using Super = SR_GTYPES_NS::IRenderComponent;
     public:
         using RenderScenePtr = SR_HTYPES_NS::SharedPtr<RenderScene>;
-        using ShaderPtr = Shader*;
+        using ShaderPtr = SR_HTYPES_NS::SharedPtr<Shader>;
         using MaterialPtr = SR_HTYPES_NS::SharedPtr<BaseMaterial>;
         using Ptr = SR_HTYPES_NS::SharedPtr<Mesh>;
 
@@ -115,7 +115,7 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD virtual const SR_MATH_NS::Matrix4x4& GetMatrix() const;
 
-        virtual bool OnResourceReloaded(SR_UTILS_NS::IResource* pResource);
+        virtual bool OnResourceReloaded(const SR_UTILS_NS::IResource* pResource);
         virtual bool BindMesh();
 
         virtual void Draw();

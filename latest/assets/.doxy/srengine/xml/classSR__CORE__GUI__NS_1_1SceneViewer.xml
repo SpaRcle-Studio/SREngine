@@ -823,6 +823,7 @@
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1ae85cf628c834de01ced199c4c0b2f50e" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>EnginePtr</name></member>
       <member refid="classSR__UTILS__NS_1_1Event_1a583e75807829d0eeae4b8def1d73eb19" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>Event</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a885e401283889b2349d8c952cb7b6c1a" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>FixedUpdate</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a2ca0c5942f5e6a6d743a83b08f7817a7" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>Focus</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a19743b79b3979d0faab465cc1c2c6571" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>GameObjectPtr</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1afe5e46c56d62178290ebe24ce4d87026" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>GetContext</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a8eca6dcf0c61bdb55ece66191763f83d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>GetGizmo</name></member>
@@ -885,6 +886,7 @@
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a7bff25e1a88f404238a28fd6eb459a0b" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>SelectMesh</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1aaf7f8c0400980d8d3e7f2fd627869c34" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>SetCameraEnabled</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a6344cd24337dddf086e04093a7f7b279" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>SetCenter</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a9e088783939e6d5aa8bdf158c52e295a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>SetDefaultSize</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a6221bbe02c9c66ce324814da3ae8377c" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>SetFlags</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1ac7a49cfdfbd0c5fab56b347564339935" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>SetGizmoEnabled</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a628d6e08d267e2bab19fa6a0247f2de6" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>SetManager</name></member>

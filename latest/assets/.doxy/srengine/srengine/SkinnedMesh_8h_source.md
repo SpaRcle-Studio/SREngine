@@ -54,7 +54,7 @@ namespace SR_GTYPES_NS {
     private:
         bool PopulateSkeletonMatrices();
 
-        bool OnResourceReloaded(SR_UTILS_NS::IResource* pResource) override;
+        bool OnResourceReloaded(const SR_UTILS_NS::IResource* pResource) override;
         void OnRawMeshChanged() override;
         bool Calculate() override;
 

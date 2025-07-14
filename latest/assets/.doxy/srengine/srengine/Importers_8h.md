@@ -31,7 +31,7 @@
 | namespace | [**SR\_ANIMATIONS\_NS**](namespaceSR__ANIMATIONS__NS.md) <br> |
 | namespace | [**SR\_CORE\_NS**](namespaceSR__CORE__NS.md) <br> |
 | namespace | [**Importers**](namespaceSR__CORE__NS_1_1Importers.md) <br> |
-| namespace | [**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md) <br> |
+| namespace | [**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md) <br>_#define SR\_SHARED\_PTR\_TRACE_  |
 
 
 

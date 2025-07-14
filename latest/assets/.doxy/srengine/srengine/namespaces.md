@@ -38,7 +38,7 @@ Here is a list of all namespaces with brief descriptions:
     * **namespace** [**WinAPI**](namespaceSR__GRAPH__NS_1_1WinAPI.md) _TODO: move to platform class._     
 * **namespace** [**SR\_GRAPH\_UI\_NS**](namespaceSR__GRAPH__UI__NS.md)     
 * **namespace** [**SR\_GTYPES\_NS**](namespaceSR__GTYPES__NS.md)     
-* **namespace** [**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md)     
+* **namespace** [**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md) _#define SR\_SHARED\_PTR\_TRACE_     
     * **namespace** [**SHA256**](namespaceSR__HTYPES__NS_1_1SHA256.md)     
         * **namespace** [**Details**](namespaceSR__HTYPES__NS_1_1SHA256_1_1Details.md)     
 * **namespace** [**SR\_MATH\_NS**](namespaceSR__MATH__NS.md)     

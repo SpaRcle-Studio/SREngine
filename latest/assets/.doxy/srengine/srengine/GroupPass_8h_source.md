@@ -54,17 +54,17 @@ namespace SR_GRAPH_NS {
         void SR_FASTCALL OnMeshRemoved(SR_GTYPES_NS::Mesh* pMesh, bool transparent) override;
 
     protected:
-        std::vector<BasePass*> m_passes;
+        std::vector<BasePass::Ptr> m_passes;
 
     };
 
     template<typename T> T* GroupPass::FindPass() const {
         for (auto&& pPass : m_passes) {
-            if (auto&& pFoundPass = dynamic_cast<T*>(pPass)) {
-                return pFoundPass;
+            if (auto&& pFoundPass = pPass.DynamicCast<T>()) {
+                return const_cast<T*>(pFoundPass.Get());
             }
 
-            if (auto&& pGroupPass = dynamic_cast<GroupPass*>(pPass)) {
+            if (auto&& pGroupPass = pPass.DynamicCast<GroupPass>()) {
                 if (auto&& pFoundPass = pGroupPass->FindPass<T>()) {
                     return pFoundPass;
                 }

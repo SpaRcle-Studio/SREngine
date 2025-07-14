@@ -24,15 +24,19 @@ namespace SR_GTYPES_NS {
     class Shader;
 
     class Skybox : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {
-    private:
+        SR_CLASS()
+    public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<Skybox>;
+
+    public:
         Skybox();
         ~Skybox() override;
 
     public:
-        static Skybox* Load(const SR_UTILS_NS::Path& path);
+        static Skybox::Ptr Load(const SR_UTILS_NS::Path& path);
 
     public:
-        SR_NODISCARD Shader* GetShader() const noexcept { return m_shader; }
+        SR_NODISCARD Shader::Ptr GetShader() const noexcept { return m_shader; }
         SR_NODISCARD int32_t GetVBO();
         SR_NODISCARD int32_t GetIBO();
         SR_NODISCARD int32_t GetVirtualUBO() const;
@@ -42,7 +46,7 @@ namespace SR_GTYPES_NS {
         void FreeVideoMemory() override;
         void Draw();
 
-        void SetShader(Shader *shader);
+        void SetShader(const SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Shader>& shader);
 
         void StartWatch() override;
 
@@ -54,7 +58,7 @@ namespace SR_GTYPES_NS {
         bool Calculate();
 
     private:
-        Shader* m_shader = nullptr;
+        Shader::Ptr m_shader = nullptr;
 
         int32_t m_VBO = SR_ID_INVALID;
         int32_t m_IBO = SR_ID_INVALID;

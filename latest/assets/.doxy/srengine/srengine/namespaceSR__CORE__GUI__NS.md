@@ -31,6 +31,7 @@
 | ---: | :--- |
 | class | [**About**](classSR__CORE__GUI__NS_1_1About.md) <br> |
 | class | [**AnimatorEditor**](classSR__CORE__GUI__NS_1_1AnimatorEditor.md) <br> |
+| class | [**AssetInspector**](classSR__CORE__GUI__NS_1_1AssetInspector.md) <br> |
 | class | [**BehaviourNamePropertyDrawer**](classSR__CORE__GUI__NS_1_1BehaviourNamePropertyDrawer.md) <br> |
 | class | [**BehaviourPropertyDrawer**](classSR__CORE__GUI__NS_1_1BehaviourPropertyDrawer.md) <br> |
 | class | [**BitMapPropertyDrawer**](classSR__CORE__GUI__NS_1_1BitMapPropertyDrawer.md) <br> |
@@ -52,7 +53,6 @@
 | class | [**NumericPropertyDrawer**](classSR__CORE__GUI__NS_1_1NumericPropertyDrawer.md) <br> |
 | class | [**ObjectPropertyDrawer**](classSR__CORE__GUI__NS_1_1ObjectPropertyDrawer.md) <br> |
 | class | [**PathPropertyDrawer**](classSR__CORE__GUI__NS_1_1PathPropertyDrawer.md) <br> |
-| class | [**PhysicsMaterialEditor**](classSR__CORE__GUI__NS_1_1PhysicsMaterialEditor.md) <br> |
 | class | [**PointerPropertyDrawer**](classSR__CORE__GUI__NS_1_1PointerPropertyDrawer.md) <br> |
 | class | [**PropertyDrawerBase**](classSR__CORE__GUI__NS_1_1PropertyDrawerBase.md) <br> |
 | struct | [**PropertyDrawerContext**](structSR__CORE__GUI__NS_1_1PropertyDrawerContext.md) <br> |
@@ -94,7 +94,6 @@
 | ---: | :--- |
 |  SR\_MAYBE\_UNUSED bool | [**DragDropTargetEntityRef**](#function-dragdroptargetentityref) ([**EditorGUI**](classSR__CORE__GUI__NS_1_1EditorGUI.md) \* pContext, [**SR\_UTILS\_NS::EntityRef**](classSR__UTILS__NS_1_1EntityRef.md) & entityRef, const char \* id, float\_t width=300.f) <br> |
 |  SR\_MAYBE\_UNUSED [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetValueInspector**](#function-getvalueinspector) (const [**SR\_UTILS\_NS::Reflection::Value**](classSR__UTILS__NS_1_1Reflection_1_1Value.md) & value) <br> |
-|   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (ButtonType, uint8\_t, ChooseMaterial, Discard, Save) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (EditorSceneViewMode, uint8\_t, FreeAspect, WindowSize) <br> |
 
 
@@ -152,25 +151,6 @@ SR_MAYBE_UNUSED bool SR_CORE_GUI_NS::DragDropTargetEntityRef (
 ```C++
 SR_MAYBE_UNUSED SR_UTILS_NS::StringAtom SR_CORE_GUI_NS::GetValueInspector (
     const SR_UTILS_NS::Reflection::Value & value
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function SR\_ENUM\_NS\_CLASS\_T 
-
-```C++
-SR_CORE_GUI_NS::SR_ENUM_NS_CLASS_T (
-    ButtonType,
-    uint8_t,
-    ChooseMaterial,
-    Discard,
-    Save
 ) 
 ```
 

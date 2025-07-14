@@ -52,7 +52,7 @@ Inherited by the following classes: [SR\_GRAPH\_NS::MeshDrawerPass](classSR__GRA
 
 | Type | Name |
 | ---: | :--- |
-| virtual SR\_NODISCARD [**SR\_GRAPH\_NS::ShaderUseInfo**](structSR__GRAPH__NS_1_1ShaderUseInfo.md) | [**ReplaceShader**](#function-replaceshader) ([**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader) const = 0<br> |
+| virtual SR\_NODISCARD [**SR\_GRAPH\_NS::ShaderUseInfo**](structSR__GRAPH__NS_1_1ShaderUseInfo.md) | [**ReplaceShader**](#function-replaceshader) (const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) &gt; & pShader) const = 0<br> |
 | virtual  | [**~ShaderReplacePredicate**](#function-shaderreplacepredicate) () = default<br> |
 
 
@@ -91,7 +91,7 @@ Inherited by the following classes: [SR\_GRAPH\_NS::MeshDrawerPass](classSR__GRA
 
 ```C++
 virtual SR_NODISCARD SR_GRAPH_NS::ShaderUseInfo SR_GRAPH_NS::ShaderReplacePredicate::ReplaceShader (
-    SR_GTYPES_NS::Shader * pShader
+    const SR_HTYPES_NS::SharedPtr < SR_GTYPES_NS::Shader > & pShader
 ) const = 0
 ```
 

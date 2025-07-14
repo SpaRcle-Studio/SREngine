@@ -87,7 +87,7 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 |  SR\_NODISCARD bool | [**IsNeedCheckMeshActivity**](#function-isneedcheckmeshactivity) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsUniformsDirty**](#function-isuniformsdirty) () noexcept const<br> |
 |  void | [**MarkUniformsDirty**](#function-markuniformsdirty) () <br> |
-|  void | [**OnResourceReloaded**](#function-onresourcereloaded) ([**SR\_UTILS\_NS::IResource**](classSR__UTILS__NS_1_1IResource.md) \* pResource) const<br> |
+|  void | [**OnResourceReloaded**](#function-onresourcereloaded) (const SR\_UTILS\_NS::IResource::Ptr & pResource) const<br> |
 |  void | [**Prepare**](#function-prepare) () <br> |
 |  void | [**ReRegisterMesh**](#function-reregistermesh) (const [**MeshRegistrationInfo**](structSR__GRAPH__NS_1_1MeshRegistrationInfo.md) & info) <br> |
 |  void | [**RegisterMesh**](#function-registermesh-12) ([**SR\_GTYPES\_NS::Mesh**](classSR__GTYPES__NS_1_1Mesh.md) \* pMesh) <br> |
@@ -396,7 +396,7 @@ inline void SR_GRAPH_NS::RenderStrategy::MarkUniformsDirty ()
 
 ```C++
 void SR_GRAPH_NS::RenderStrategy::OnResourceReloaded (
-    SR_UTILS_NS::IResource * pResource
+    const SR_UTILS_NS::IResource::Ptr & pResource
 ) const
 ```
 

@@ -17,6 +17,7 @@
 * `#include <Utils/Common/SubscriptionHolder.h>`
 * `#include <Utils/Types/Function.h>`
 * `#include <Utils/Types/SharedPtr.h>`
+* `#include <Utils/Serialization/Serializable.h>`
 * `#include <Utils/Resources/ResourceContainer.h>`
 * `#include <Utils/Resources/FileWatcher.h>`
 

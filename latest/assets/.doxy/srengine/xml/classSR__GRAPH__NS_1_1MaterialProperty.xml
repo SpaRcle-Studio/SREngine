@@ -428,14 +428,14 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MaterialProperty_1a0ee22397798f2bf888822fa8c5aab280" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MaterialProperty_1ad25f2f2b21451c0e41388fd40c563fd2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void SR_GRAPH_NS::MaterialProperty::SetTextureInternal</definition>
-        <argsstring>(SR_GTYPES_NS::Texture *pTexture)</argsstring>
+        <argsstring>(SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Texture &gt; pTexture)</argsstring>
         <name>SetTextureInternal</name>
         <qualifiedname>SR_GRAPH_NS::MaterialProperty::SetTextureInternal</qualifiedname>
         <param>
-          <type><ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> *</type>
+          <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> &gt;</type>
           <declname>pTexture</declname>
         </param>
         <briefdescription>
@@ -563,7 +563,7 @@
       <member refid="classSR__UTILS__NS_1_1Property_1a1c10f300f030edd5bb5f032c0fb33580" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialProperty</scope><name>SetReadOnly</name></member>
       <member refid="classSR__UTILS__NS_1_1Property_1a02319afa5aa0a16b2b294dd0e2fbd4bc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialProperty</scope><name>SetSameLine</name></member>
       <member refid="classSR__GRAPH__NS_1_1MaterialProperty_1a2fc01f2177540ae7708bde0f122c9bbb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialProperty</scope><name>SetShaderVarType</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MaterialProperty_1a0ee22397798f2bf888822fa8c5aab280" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialProperty</scope><name>SetTextureInternal</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MaterialProperty_1ad25f2f2b21451c0e41388fd40c563fd2" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialProperty</scope><name>SetTextureInternal</name></member>
       <member refid="classSR__UTILS__NS_1_1Property_1a44ce1cb0781ff4b7621146e393325fcd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialProperty</scope><name>SetWidth</name></member>
       <member refid="classSR__GRAPH__NS_1_1MaterialProperty_1a87eb9e86e57d322fa56ccd8a22961378" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialProperty</scope><name>Super</name></member>
       <member refid="classSR__GRAPH__NS_1_1MaterialProperty_1a49a8b286264689aa889245fb1ca9b13b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialProperty</scope><name>Use</name></member>

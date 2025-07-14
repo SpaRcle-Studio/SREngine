@@ -40,7 +40,7 @@
 |  const [**BaseMaterial**](classSR__GRAPH__NS_1_1BaseMaterial.md) \* | [**pMaterial**](#variable-pmaterial)   = `nullptr`<br> |
 |  [**SR\_GTYPES\_NS::Mesh**](classSR__GTYPES__NS_1_1Mesh.md) \* | [**pMesh**](#variable-pmesh)   = `nullptr`<br> |
 |  [**SR\_GRAPH\_NS::RenderScene**](classSR__GRAPH__NS_1_1RenderScene.md) \* | [**pScene**](#variable-pscene)   = `nullptr`<br> |
-|  [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* | [**pShader**](#variable-pshader)   = `nullptr`<br> |
+|  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) &gt; | [**pShader**](#variable-pshader)  <br> |
 |  uint32\_t | [**poolId**](#variable-poolid)   = `static\_cast&lt;uint32\_t&gt;(SR\_ID\_INVALID)`<br> |
 |  std::optional&lt; int64\_t &gt; | [**priority**](#variable-priority)  <br> |
 
@@ -160,7 +160,7 @@ SR_GRAPH_NS::RenderScene* SR_GRAPH_NS::MeshRegistrationInfo::pScene;
 ### variable pShader 
 
 ```C++
-SR_GTYPES_NS::Shader* SR_GRAPH_NS::MeshRegistrationInfo::pShader;
+SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Shader> SR_GRAPH_NS::MeshRegistrationInfo::pShader;
 ```
 
 

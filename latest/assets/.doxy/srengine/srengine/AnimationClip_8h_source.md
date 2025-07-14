@@ -19,8 +19,6 @@
 
 #include <Utils/Resources/IResource.h>
 
-class aiAnimation;
-
 namespace SR_HTYPES_NS {
     class RawMesh;
 }
@@ -29,14 +27,18 @@ namespace SR_ANIMATIONS_NS {
     class AnimationChannel;
 
     class AnimationClip : public SR_UTILS_NS::IResource {
+        SR_CLASS()
         using Super = SR_UTILS_NS::IResource;
+    public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<AnimationClip>;
+
     public:
         AnimationClip();
         ~AnimationClip() override;
 
     public:
-        static std::vector<AnimationClip*> Load(const SR_UTILS_NS::Path& path, const SR_UTILS_NS::Path& skeleton);
-        static AnimationClip* Load(const SR_UTILS_NS::Path& path, const SR_UTILS_NS::Path& skeleton, SR_UTILS_NS::StringAtom name);
+        static std::vector<AnimationClip::Ptr> Load(const SR_UTILS_NS::Path& path, const SR_UTILS_NS::Path& skeleton);
+        static AnimationClip::Ptr Load(const SR_UTILS_NS::Path& path, const SR_UTILS_NS::Path& skeleton, SR_UTILS_NS::StringAtom name);
 
     public:
         SR_NODISCARD const std::vector<AnimationChannel*>& GetChannels() const { return m_channels; }

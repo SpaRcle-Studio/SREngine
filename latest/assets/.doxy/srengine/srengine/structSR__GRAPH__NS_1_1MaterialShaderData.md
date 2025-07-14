@@ -52,7 +52,7 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 | Type | Name |
 | ---: | :--- |
 |  [**MaterialData**](classSR__GRAPH__NS_1_1MaterialData.md) \* | [**pOwnedMaterialData**](#variable-pownedmaterialdata)   = `nullptr`<br> |
-|  [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* | [**pShader**](#variable-pshader)   = `nullptr`<br> |
+|  SR\_GTYPES\_NS::Shader::Ptr | [**pShader**](#variable-pshader)   = `nullptr`<br> |
 |  std::vector&lt; [**MaterialShaderProperty**](structSR__GRAPH__NS_1_1MaterialShaderProperty.md) &gt; | [**samplers**](#variable-samplers)  <br> |
 |  std::vector&lt; [**MaterialShaderProperty**](structSR__GRAPH__NS_1_1MaterialShaderProperty.md) &gt; | [**uniforms**](#variable-uniforms)  <br> |
 
@@ -252,7 +252,7 @@ MaterialData* SR_GRAPH_NS::MaterialShaderData::pOwnedMaterialData;
 ### variable pShader 
 
 ```C++
-SR_GTYPES_NS::Shader* SR_GRAPH_NS::MaterialShaderData::pShader;
+SR_GTYPES_NS::Shader::Ptr SR_GRAPH_NS::MaterialShaderData::pShader;
 ```
 
 

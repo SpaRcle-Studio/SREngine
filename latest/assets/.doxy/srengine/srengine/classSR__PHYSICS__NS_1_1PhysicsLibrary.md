@@ -113,7 +113,7 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 | Type | Name |
 | ---: | :--- |
 |  SR\_NODISCARD [**LibraryImpl**](classSR__PHYSICS__NS_1_1LibraryImpl.md) \* | [**GetActiveLibrary**](#function-getactivelibrary) (Space space) <br> |
-|  SR\_NODISCARD [**SR\_PTYPES\_NS::PhysicsMaterial**](classSR__PTYPES__NS_1_1PhysicsMaterial.md) \* | [**GetDefaultMaterial**](#function-getdefaultmaterial) () noexcept const<br> |
+|  SR\_NODISCARD [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_PTYPES\_NS::PhysicsMaterial**](classSR__PTYPES__NS_1_1PhysicsMaterial.md) &gt; | [**GetDefaultMaterial**](#function-getdefaultmaterial) () noexcept const<br> |
 |  SR\_NODISCARD [**LibraryImpl**](classSR__PHYSICS__NS_1_1LibraryImpl.md) \* | [**GetLibrary**](#function-getlibrary) (LibraryType type) <br> |
 |  SR\_NODISCARD LibraryTypes | [**GetSupportedLibraries**](#function-getsupportedlibraries) () const<br> |
 |   | [**PhysicsLibrary**](#function-physicslibrary) () <br> |
@@ -321,7 +321,7 @@ SR_NODISCARD LibraryImpl * SR_PHYSICS_NS::PhysicsLibrary::GetActiveLibrary (
 ### function GetDefaultMaterial 
 
 ```C++
-inline SR_NODISCARD SR_PTYPES_NS::PhysicsMaterial * SR_PHYSICS_NS::PhysicsLibrary::GetDefaultMaterial () noexcept const
+inline SR_NODISCARD SR_HTYPES_NS::SharedPtr < SR_PTYPES_NS::PhysicsMaterial > SR_PHYSICS_NS::PhysicsLibrary::GetDefaultMaterial () noexcept const
 ```
 
 

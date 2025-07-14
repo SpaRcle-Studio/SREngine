@@ -4,8 +4,9 @@
     <compoundname>SSAOPass.h</compoundname>
     <includes refid="PostProcessPass_8h" local="no">Graphics/Pass/PostProcessPass.h</includes>
     <includes refid="IFramebufferPass_8h" local="no">Graphics/Pass/IFramebufferPass.h</includes>
+    <includes refid="Texture_8h" local="no">Graphics/Types/Texture.h</includes>
     <incdepgraph>
-      <node id="151">
+      <node id="160">
         <label>Graphics/Loaders/ShaderProperties.h</label>
         <link refid="ShaderProperties_8h_source"/>
         <childnode refid="137" relation="include">
@@ -18,7 +19,17 @@
         </childnode>
         <childnode refid="123" relation="include">
         </childnode>
-        <childnode refid="152" relation="include">
+        <childnode refid="161" relation="include">
+        </childnode>
+      </node>
+      <node id="171">
+        <label>Graphics/Loaders/TextureLoader.h</label>
+        <link refid="TextureLoader_8h_source"/>
+        <childnode refid="104" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+        <childnode refid="169" relation="include">
         </childnode>
       </node>
       <node id="138">
@@ -31,6 +42,22 @@
         <childnode refid="104" relation="include">
         </childnode>
         <childnode refid="139" relation="include">
+        </childnode>
+      </node>
+      <node id="170">
+        <label>Graphics/Memory/IGraphicsResource.h</label>
+        <link refid="IGraphicsResource_8h_source"/>
+        <childnode refid="137" relation="include">
+        </childnode>
+        <childnode refid="109" relation="include">
+        </childnode>
+      </node>
+      <node id="169">
+        <label>Graphics/Memory/TextureConfigs.h</label>
+        <link refid="TextureConfigs_8h_source"/>
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="167" relation="include">
         </childnode>
       </node>
       <node id="136">
@@ -100,6 +127,8 @@
         </childnode>
         <childnode refid="166" relation="include">
         </childnode>
+        <childnode refid="168" relation="include">
+        </childnode>
       </node>
       <node id="140">
         <label>Graphics/Pipeline/IShaderProgram.h</label>
@@ -114,11 +143,11 @@
         </childnode>
         <childnode refid="76" relation="include">
         </childnode>
-        <childnode refid="147" relation="include">
+        <childnode refid="156" relation="include">
         </childnode>
-        <childnode refid="148" relation="include">
+        <childnode refid="157" relation="include">
         </childnode>
-        <childnode refid="150" relation="include">
+        <childnode refid="159" relation="include">
         </childnode>
       </node>
       <node id="167">
@@ -131,10 +160,10 @@
         <childnode refid="123" relation="include">
         </childnode>
       </node>
-      <node id="150">
+      <node id="159">
         <label>Graphics/SRSL/ShaderType.h</label>
         <link refid="ShaderType_8h_source"/>
-        <childnode refid="151" relation="include">
+        <childnode refid="160" relation="include">
         </childnode>
       </node>
       <node id="139">
@@ -145,7 +174,23 @@
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="147">
+      <node id="168">
+        <label>Graphics/Types/Texture.h</label>
+        <link refid="Texture_8h_source"/>
+        <childnode refid="144" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="167" relation="include">
+        </childnode>
+        <childnode refid="169" relation="include">
+        </childnode>
+        <childnode refid="170" relation="include">
+        </childnode>
+        <childnode refid="171" relation="include">
+        </childnode>
+      </node>
+      <node id="156">
         <label>Graphics/Types/Uniforms.h</label>
         <link refid="Uniforms_8h_source"/>
         <childnode refid="137" relation="include">
@@ -153,7 +198,7 @@
         <childnode refid="76" relation="include">
         </childnode>
       </node>
-      <node id="148">
+      <node id="157">
         <label>Graphics/Types/Vertices.h</label>
         <link refid="Graphics_2inc_2Graphics_2Types_2Vertices_8h_source"/>
         <childnode refid="137" relation="include">
@@ -166,7 +211,7 @@
         </childnode>
         <childnode refid="92" relation="include">
         </childnode>
-        <childnode refid="149" relation="include">
+        <childnode refid="158" relation="include">
         </childnode>
         <childnode refid="76" relation="include">
         </childnode>
@@ -301,7 +346,7 @@
         <childnode refid="85" relation="include">
         </childnode>
       </node>
-      <node id="159">
+      <node id="147">
         <label>Utils/Common/StringAtomLiterals.h</label>
         <link refid="StringAtomLiterals_8h_source"/>
         <childnode refid="88" relation="include">
@@ -375,7 +420,7 @@
         <childnode refid="108" relation="include">
         </childnode>
       </node>
-      <node id="149">
+      <node id="158">
         <label>Utils/Common/Vertices.h</label>
         <link refid="Utils_2inc_2Utils_2Common_2Vertices_8h_source"/>
         <childnode refid="109" relation="include">
@@ -395,20 +440,20 @@
         <childnode refid="110" relation="include">
         </childnode>
       </node>
-      <node id="155">
+      <node id="164">
         <label>Utils/ECS/EntityRef.h</label>
         <link refid="EntityRef_8h_source"/>
-        <childnode refid="156" relation="include">
+        <childnode refid="165" relation="include">
         </childnode>
-        <childnode refid="154" relation="include">
+        <childnode refid="163" relation="include">
         </childnode>
       </node>
-      <node id="156">
+      <node id="165">
         <label>Utils/ECS/EntityRefUtils.h</label>
         <link refid="EntityRefUtils_8h_source"/>
         <childnode refid="76" relation="include">
         </childnode>
-        <childnode refid="157" relation="include">
+        <childnode refid="145" relation="include">
         </childnode>
         <childnode refid="91" relation="include">
         </childnode>
@@ -465,7 +510,7 @@
         <childnode refid="70" relation="include">
         </childnode>
       </node>
-      <node id="161">
+      <node id="149">
         <label>Utils/Math/Rect.h</label>
         <link refid="Rect_8h_source"/>
         <childnode refid="70" relation="include">
@@ -539,7 +584,7 @@
         <label>Utils/Profile/TracyContext.h</label>
         <link refid="TracyContext_8h_source"/>
       </node>
-      <node id="145">
+      <node id="154">
         <label>Utils/Resources/FileSystemWatcher.h</label>
         <link refid="FileSystemWatcher_8h_source"/>
         <childnode refid="104" relation="include">
@@ -580,6 +625,8 @@
         </childnode>
         <childnode refid="104" relation="include">
         </childnode>
+        <childnode refid="145" relation="include">
+        </childnode>
         <childnode refid="125" relation="include">
         </childnode>
         <childnode refid="132" relation="include">
@@ -588,10 +635,10 @@
       <node id="125">
         <label>Utils/Resources/ResourceContainer.h</label>
         <link refid="ResourceContainer_8h_source"/>
-        <childnode refid="4" relation="include">
+        <childnode refid="104" relation="include">
         </childnode>
       </node>
-      <node id="146">
+      <node id="155">
         <label>Utils/Resources/ResourceInfo.h</label>
         <link refid="ResourceInfo_8h_source"/>
         <childnode refid="109" relation="include">
@@ -616,9 +663,9 @@
         </childnode>
         <childnode refid="144" relation="include">
         </childnode>
-        <childnode refid="145" relation="include">
+        <childnode refid="154" relation="include">
         </childnode>
-        <childnode refid="146" relation="include">
+        <childnode refid="155" relation="include">
         </childnode>
         <childnode refid="103" relation="include">
         </childnode>
@@ -691,11 +738,11 @@
         <childnode refid="132" relation="include">
         </childnode>
       </node>
-      <node id="164">
+      <node id="152">
         <label>Utils/Serialization/DefaultCheckers.inl.h</label>
         <link refid="DefaultCheckers_8inl_8h_source"/>
       </node>
-      <node id="162">
+      <node id="150">
         <label>Utils/Serialization/DefaultObjectMakers.inl.h</label>
         <link refid="DefaultObjectMakers_8inl_8h_source"/>
       </node>
@@ -711,25 +758,25 @@
         <childnode refid="100" relation="include">
         </childnode>
       </node>
-      <node id="165">
+      <node id="153">
         <label>Utils/Serialization/ObjectDataAccessors.inl.h</label>
         <link refid="ObjectDataAccessors_8inl_8h_source"/>
       </node>
-      <node id="163">
+      <node id="151">
         <label>Utils/Serialization/SaveCheckers.inl.h</label>
         <link refid="SaveCheckers_8inl_8h_source"/>
       </node>
-      <node id="157">
+      <node id="145">
         <label>Utils/Serialization/Serializable.h</label>
         <link refid="Serializable_8h_source"/>
         <childnode refid="111" relation="include">
         </childnode>
-        <childnode refid="158" relation="include">
+        <childnode refid="146" relation="include">
         </childnode>
-        <childnode refid="160" relation="include">
+        <childnode refid="148" relation="include">
         </childnode>
       </node>
-      <node id="160">
+      <node id="148">
         <label>Utils/Serialization/Serialization.h</label>
         <link refid="Serialization_8h_source"/>
         <childnode refid="120" relation="include">
@@ -738,7 +785,7 @@
         </childnode>
         <childnode refid="99" relation="include">
         </childnode>
-        <childnode refid="158" relation="include">
+        <childnode refid="146" relation="include">
         </childnode>
         <childnode refid="108" relation="include">
         </childnode>
@@ -746,19 +793,19 @@
         </childnode>
         <childnode refid="107" relation="include">
         </childnode>
-        <childnode refid="161" relation="include">
+        <childnode refid="149" relation="include">
         </childnode>
-        <childnode refid="159" relation="include">
+        <childnode refid="147" relation="include">
         </childnode>
         <childnode refid="128" relation="include">
         </childnode>
-        <childnode refid="162" relation="include">
+        <childnode refid="150" relation="include">
         </childnode>
-        <childnode refid="163" relation="include">
+        <childnode refid="151" relation="include">
         </childnode>
-        <childnode refid="164" relation="include">
+        <childnode refid="152" relation="include">
         </childnode>
-        <childnode refid="165" relation="include">
+        <childnode refid="153" relation="include">
         </childnode>
       </node>
       <node id="120">
@@ -777,27 +824,27 @@
         <childnode refid="118" relation="include">
         </childnode>
       </node>
-      <node id="158">
+      <node id="146">
         <label>Utils/TypeTraits/Factory.h</label>
         <link refid="Factory_8h_source"/>
         <childnode refid="78" relation="include">
         </childnode>
-        <childnode refid="159" relation="include">
+        <childnode refid="147" relation="include">
         </childnode>
         <childnode refid="104" relation="include">
         </childnode>
         <childnode refid="119" relation="include">
         </childnode>
       </node>
-      <node id="152">
+      <node id="161">
         <label>Utils/TypeTraits/Properties.h</label>
         <link refid="Properties_8h_source"/>
-        <childnode refid="153" relation="include">
+        <childnode refid="162" relation="include">
         </childnode>
-        <childnode refid="155" relation="include">
+        <childnode refid="164" relation="include">
         </childnode>
       </node>
-      <node id="154">
+      <node id="163">
         <label>Utils/TypeTraits/Property.h</label>
         <link refid="TypeTraits_2Property_8h_source"/>
         <childnode refid="4" relation="include">
@@ -837,10 +884,10 @@
         <childnode refid="121" relation="include">
         </childnode>
       </node>
-      <node id="153">
+      <node id="162">
         <label>Utils/TypeTraits/StandardProperty.h</label>
         <link refid="StandardProperty_8h_source"/>
-        <childnode refid="154" relation="include">
+        <childnode refid="163" relation="include">
         </childnode>
       </node>
       <node id="100">
@@ -1347,7 +1394,6 @@
       </node>
     </incdepgraph>
     <innerclass refid="classSR__GRAPH__NS_1_1SSAOPass" prot="public">SR_GRAPH_NS::SSAOPass</innerclass>
-    <innernamespace refid="namespaceSR__GTYPES__NS">SR_GTYPES_NS</innernamespace>
     <innernamespace refid="namespaceSR__GRAPH__NS">SR_GRAPH_NS</innernamespace>
     <briefdescription>
     </briefdescription>
@@ -1363,44 +1409,41 @@
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Graphics/Pass/PostProcessPass.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Graphics/Pass/IFramebufferPass.h&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceSR__GTYPES__NS" kindref="compound">SR_GTYPES_NS</ref><sp/>{</highlight></codeline>
-<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Texture;</highlight></codeline>
-<codeline lineno="13"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight></codeline>
-<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SR_GRAPH_NS<sp/>{</highlight></codeline>
-<codeline lineno="16" refid="classSR__GRAPH__NS_1_1SSAOPass" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__GRAPH__NS_1_1SSAOPass" kindref="compound">SSAOPass</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__GRAPH__NS_1_1PostProcessPass" kindref="compound">PostProcessPass</ref>,<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__GRAPH__NS_1_1IFramebufferPass" kindref="compound">IFramebufferPass</ref><sp/>{</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_REGISTER_LOGICAL_NODE(<ref refid="classSR__GRAPH__NS_1_1SSAOPass" kindref="compound">SSAOPass</ref>,<sp/>SSAO<sp/>Pass,<sp/>{<sp/></highlight><highlight class="stringliteral">&quot;Passes&quot;</highlight><highlight class="normal"><sp/>})</highlight></codeline>
-<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>SSAOKernel<sp/>=<sp/>std::vector&lt;SR_MATH_NS::FVector4&gt;;</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Init()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DeInit()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Graphics/Types/Texture.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SR_GRAPH_NS<sp/>{</highlight></codeline>
+<codeline lineno="13" refid="classSR__GRAPH__NS_1_1SSAOPass" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__GRAPH__NS_1_1SSAOPass" kindref="compound">SSAOPass</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__GRAPH__NS_1_1PostProcessPass" kindref="compound">PostProcessPass</ref>,<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__GRAPH__NS_1_1IFramebufferPass" kindref="compound">IFramebufferPass</ref><sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_REGISTER_LOGICAL_NODE(<ref refid="classSR__GRAPH__NS_1_1SSAOPass" kindref="compound">SSAOPass</ref>,<sp/>SSAO<sp/>Pass,<sp/>{<sp/></highlight><highlight class="stringliteral">&quot;Passes&quot;</highlight><highlight class="normal"><sp/>})</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>SSAOKernel<sp/>=<sp/>std::vector&lt;SR_MATH_NS::FVector4&gt;;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Init()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DeInit()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20" refid="classSR__GRAPH__NS_1_1SSAOPass_1a117e63f90fa13a3a6b99fff395f8dfb8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classSR__GRAPH__NS_1_1SSAOPass_1a117e63f90fa13a3a6b99fff395f8dfb8" kindref="member">Render</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="21" refid="classSR__GRAPH__NS_1_1SSAOPass_1a852fcbdd62931d9e0cc2cf32982226f9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classSR__GRAPH__NS_1_1SSAOPass_1a852fcbdd62931d9e0cc2cf32982226f9" kindref="member">Update</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight></codeline>
-<codeline lineno="23" refid="classSR__GRAPH__NS_1_1SSAOPass_1a117e63f90fa13a3a6b99fff395f8dfb8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classSR__GRAPH__NS_1_1SSAOPass_1a117e63f90fa13a3a6b99fff395f8dfb8" kindref="member">Render</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="24" refid="classSR__GRAPH__NS_1_1SSAOPass_1a852fcbdd62931d9e0cc2cf32982226f9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classSR__GRAPH__NS_1_1SSAOPass_1a852fcbdd62931d9e0cc2cf32982226f9" kindref="member">Update</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"></highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnResize(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::UVector2&amp;<sp/>size)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"></highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Load(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_XML_NS::Node&amp;<sp/>passNode)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"></highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UseSamplers(<ref refid="structSR__GRAPH__NS_1_1ShaderUseInfo" kindref="compound">ShaderUseInfo</ref><sp/>info)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"></highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>std::vector&lt;SR_GTYPES_NS::Framebuffer*&gt;<sp/>GetFrameBuffers()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"></highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SSAOKernel<sp/>CreateKernel()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref>*<sp/>CreateNoise()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref>*<sp/>GetFrameBufferRenderTechnique()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"></highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SSAOKernel<sp/>m_kernel;</highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref>*<sp/>m_noise<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnResize(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::UVector2&amp;<sp/>size)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Load(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_XML_NS::Node&amp;<sp/>passNode)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UseSamplers(<ref refid="structSR__GRAPH__NS_1_1ShaderUseInfo" kindref="compound">ShaderUseInfo</ref><sp/>info)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>std::vector&lt;SR_GTYPES_NS::Framebuffer*&gt;<sp/>GetFrameBuffers()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SSAOKernel<sp/>CreateKernel()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_GTYPES_NS::Texture::Ptr<sp/>CreateNoise()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref>*<sp/>GetFrameBufferRenderTechnique()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SSAOKernel<sp/>m_kernel;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_GTYPES_NS::Texture::Ptr<sp/>m_noise;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="41"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="42"><highlight class="normal"></highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="44"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"></highlight></codeline>
-<codeline lineno="46"><highlight class="normal"></highlight></codeline>
-<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_SSAOPASS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_SSAOPASS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h"/>
   </compounddef>

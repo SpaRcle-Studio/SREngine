@@ -33,7 +33,7 @@ namespace SR_GRAPH_NS {
     public:
         using ColorFormats = std::list<ImageFormat>;
         using ClearColors = std::vector<SR_MATH_NS::FColor>;
-        using FramebufferPtr = SR_GTYPES_NS::Framebuffer*;
+        using FramebufferPtr = SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Framebuffer>;
 
     public:
         IFramebufferPass();

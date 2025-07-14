@@ -101,7 +101,8 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | Type | Name |
 | ---: | :--- |
 |   | [**FrameBufferController**](#function-framebuffercontroller) () <br> |
-|  SR\_NODISCARD [**SR\_GTYPES\_NS::Framebuffer**](classSR__GTYPES__NS_1_1Framebuffer.md) \* | [**GetFramebuffer**](#function-getframebuffer) () noexcept const<br> |
+|  SR\_NODISCARD const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_GTYPES\_NS::Framebuffer**](classSR__GTYPES__NS_1_1Framebuffer.md) &gt; & | [**GetFramebuffer**](#function-getframebuffer-12) () noexcept const<br> |
+|  SR\_NODISCARD [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_GTYPES\_NS::Framebuffer**](classSR__GTYPES__NS_1_1Framebuffer.md) &gt; & | [**GetFramebuffer**](#function-getframebuffer-22) () noexcept<br> |
 |  SR\_NODISCARD uint8\_t | [**GetLayersCount**](#function-getlayerscount) () noexcept const<br> |
 |  bool | [**InitializeFramebuffer**](#function-initializeframebuffer) ([**RenderContext**](classSR__GRAPH__NS_1_1RenderContext.md) \* pContext) <br> |
 |  bool | [**LoadFramebufferSettings**](#function-loadframebuffersettings) (const SR\_XML\_NS::Node & settingsNode) <br> |
@@ -282,10 +283,23 @@ SR_GRAPH_NS::FrameBufferController::FrameBufferController ()
 
 
 
-### function GetFramebuffer 
+### function GetFramebuffer [1/2]
 
 ```C++
-inline SR_NODISCARD SR_GTYPES_NS::Framebuffer * SR_GRAPH_NS::FrameBufferController::GetFramebuffer () noexcept const
+inline SR_NODISCARD const SR_HTYPES_NS::SharedPtr < SR_GTYPES_NS::Framebuffer > & SR_GRAPH_NS::FrameBufferController::GetFramebuffer () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetFramebuffer [2/2]
+
+```C++
+inline SR_NODISCARD SR_HTYPES_NS::SharedPtr < SR_GTYPES_NS::Framebuffer > & SR_GRAPH_NS::FrameBufferController::GetFramebuffer () noexcept
 ```
 
 

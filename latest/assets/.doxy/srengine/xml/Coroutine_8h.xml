@@ -3,7 +3,7 @@
   <compounddef id="Coroutine_8h" kind="file" language="C++">
     <compoundname>Coroutine.h</compoundname>
     <includes refid="stdInclude_8h" local="no">Utils/stdInclude.h</includes>
-    <includedby refid="TestManager_8h" local="no">Engine/inc/Engine/Tests/TestManager.h</includedby>
+    <includedby refid="TestManager_8h" local="no">Engine/libs/Utils/inc/Utils/Tests/TestManager.h</includedby>
     <incdepgraph>
       <node id="1">
         <label>Engine/libs/Utils/inc/Utils/Common/Coroutine.h</label>
@@ -334,14 +334,26 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="2">
-        <label>Engine/inc/Engine/Tests/TestManager.h</label>
-        <link refid="TestManager_8h_source"/>
+      <node id="3">
+        <label>Engine/inc/Engine/Tests/SRSLTest.h</label>
+        <link refid="SRSLTest_8h_source"/>
       </node>
       <node id="1">
         <label>Engine/libs/Utils/inc/Utils/Common/Coroutine.h</label>
         <link refid="Coroutine_8h"/>
         <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Engine/libs/Utils/inc/Utils/Tests/SharedPtrAutotests.h</label>
+        <link refid="SharedPtrAutotests_8h_source"/>
+      </node>
+      <node id="2">
+        <label>Engine/libs/Utils/inc/Utils/Tests/TestManager.h</label>
+        <link refid="TestManager_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

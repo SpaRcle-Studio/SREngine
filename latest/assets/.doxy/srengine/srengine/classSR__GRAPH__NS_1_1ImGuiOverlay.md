@@ -133,6 +133,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual void | [**Destroy**](#function-destroy) () override<br> |
 |  SR\_NODISCARD void \* | [**GetIconFont**](#function-geticonfont) () const<br> |
 |  SR\_NODISCARD void \* | [**GetMainFont**](#function-getmainfont) () const<br> |
+|  SR\_NODISCARD void \* | [**GetSmallFont**](#function-getsmallfont) () const<br> |
 |   | [**ImGuiOverlay**](#function-imguioverlay) (PipelinePtr pPipeline) <br> |
 | virtual SR\_NODISCARD bool | [**Init**](#function-init) () override<br> |
 | virtual SR\_NODISCARD bool | [**IsUndockingActive**](#function-isundockingactive) () override const<br> |
@@ -267,6 +268,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**m\_iniPathEditor**](#variable-m_inipatheditor)  <br> |
 |  [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**m\_iniPathWidgets**](#variable-m_inipathwidgets)  <br> |
 |  void \* | [**m\_mainFont**](#variable-m_mainfont)   = `nullptr`<br> |
+|  void \* | [**m\_smallFont**](#variable-m_smallfont)   = `nullptr`<br> |
 
 
 ## Protected Attributes inherited from SR_GRAPH_NS::Overlay
@@ -408,6 +410,19 @@ inline SR_NODISCARD void * SR_GRAPH_NS::ImGuiOverlay::GetIconFont () const
 
 ```C++
 inline SR_NODISCARD void * SR_GRAPH_NS::ImGuiOverlay::GetMainFont () const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetSmallFont 
+
+```C++
+inline SR_NODISCARD void * SR_GRAPH_NS::ImGuiOverlay::GetSmallFont () const
 ```
 
 
@@ -574,6 +589,19 @@ SR_UTILS_NS::Path SR_GRAPH_NS::ImGuiOverlay::m_iniPathWidgets;
 
 ```C++
 void* SR_GRAPH_NS::ImGuiOverlay::m_mainFont;
+```
+
+
+
+
+<hr>
+
+
+
+### variable m\_smallFont 
+
+```C++
+void* SR_GRAPH_NS::ImGuiOverlay::m_smallFont;
 ```
 
 

@@ -21,7 +21,7 @@
 
 namespace SR_CORE_GUI_NS {
 
-    SR_ENUM_NS_CLASS_T(ButtonType, uint8_t,
+    /*SR_ENUM_NS_CLASS_T(ButtonType, uint8_t,
         ChooseMaterial,
         Discard,
         Save
@@ -60,7 +60,7 @@ namespace SR_CORE_GUI_NS {
         std::array<std::function<void()>, static_cast<uint32_t>(ButtonType::ButtonTypeMAX)> m_buttonActions;
         SR_PTYPES_NS::PhysicsMaterialData m_materialData;
         SR_UTILS_NS::Path m_materialPath;
-    };
+    };*/
 }
 
 #endif //SR_ENGINE_PHYSICSMATERIALEDITOR_H

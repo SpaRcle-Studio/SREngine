@@ -11,7 +11,7 @@
 
 
 * `#include <Physics/macros.h>`
-* `#include <Utils/Resources/IResource.h>`
+* `#include <Utils/Resources/Asset.h>`
 * `#include <Utils/Common/Enumerations.h>`
 * `#include <Physics/Utils/Utils.h>`
 
@@ -40,7 +40,6 @@
 | Type | Name |
 | ---: | :--- |
 | class | [**PhysicsMaterial**](classSR__PTYPES__NS_1_1PhysicsMaterial.md) <br> |
-| struct | [**PhysicsMaterialData**](structSR__PTYPES__NS_1_1PhysicsMaterialData.md) <br> |
 
 
 

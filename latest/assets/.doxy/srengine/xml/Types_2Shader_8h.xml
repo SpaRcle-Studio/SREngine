@@ -23,7 +23,7 @@
         <link refid="SRSL_8h_source"/>
         <childnode refid="149" relation="include">
         </childnode>
-        <childnode refid="131" relation="include">
+        <childnode refid="140" relation="include">
         </childnode>
         <childnode refid="157" relation="include">
         </childnode>
@@ -35,15 +35,15 @@
         <link refid="SRSLParser_8h_source"/>
         <childnode refid="82" relation="include">
         </childnode>
-        <childnode refid="125" relation="include">
+        <childnode refid="134" relation="include">
         </childnode>
         <childnode refid="149" relation="include">
         </childnode>
       </node>
-      <node id="131">
+      <node id="140">
         <label>Graphics/Loaders/ShaderProperties.h</label>
         <link refid="ShaderProperties_8h_source"/>
-        <childnode refid="126" relation="include">
+        <childnode refid="135" relation="include">
         </childnode>
         <childnode refid="101" relation="include">
         </childnode>
@@ -51,15 +51,15 @@
         </childnode>
         <childnode refid="93" relation="include">
         </childnode>
-        <childnode refid="132" relation="include">
+        <childnode refid="141" relation="include">
         </childnode>
-        <childnode refid="134" relation="include">
+        <childnode refid="143" relation="include">
         </childnode>
       </node>
       <node id="159">
         <label>Graphics/Memory/IGraphicsResource.h</label>
         <link refid="IGraphicsResource_8h_source"/>
-        <childnode refid="126" relation="include">
+        <childnode refid="135" relation="include">
         </childnode>
         <childnode refid="70" relation="include">
         </childnode>
@@ -76,10 +76,10 @@
         <childnode refid="149" relation="include">
         </childnode>
       </node>
-      <node id="130">
+      <node id="139">
         <label>Graphics/Memory/ShaderUBOBlock.h</label>
         <link refid="ShaderUBOBlock_8h_source"/>
-        <childnode refid="131" relation="include">
+        <childnode refid="140" relation="include">
         </childnode>
         <childnode refid="85" relation="include">
         </childnode>
@@ -89,7 +89,7 @@
       <node id="160">
         <label>Graphics/Memory/UBOManager.h</label>
         <link refid="UBOManager_8h_source"/>
-        <childnode refid="126" relation="include">
+        <childnode refid="135" relation="include">
         </childnode>
         <childnode refid="82" relation="include">
         </childnode>
@@ -113,9 +113,9 @@
         </childnode>
         <childnode refid="93" relation="include">
         </childnode>
-        <childnode refid="129" relation="include">
+        <childnode refid="138" relation="include">
         </childnode>
-        <childnode refid="125" relation="include">
+        <childnode refid="134" relation="include">
         </childnode>
         <childnode refid="155" relation="include">
         </childnode>
@@ -123,7 +123,7 @@
       <node id="155">
         <label>Graphics/SRSL/ShaderType.h</label>
         <link refid="ShaderType_8h_source"/>
-        <childnode refid="131" relation="include">
+        <childnode refid="140" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -135,13 +135,13 @@
         </childnode>
         <childnode refid="69" relation="include">
         </childnode>
-        <childnode refid="124" relation="include">
+        <childnode refid="126" relation="include">
         </childnode>
-        <childnode refid="125" relation="include">
+        <childnode refid="134" relation="include">
         </childnode>
-        <childnode refid="129" relation="include">
+        <childnode refid="138" relation="include">
         </childnode>
-        <childnode refid="130" relation="include">
+        <childnode refid="139" relation="include">
         </childnode>
         <childnode refid="156" relation="include">
         </childnode>
@@ -152,18 +152,18 @@
         <childnode refid="160" relation="include">
         </childnode>
       </node>
-      <node id="129">
+      <node id="138">
         <label>Graphics/Types/Uniforms.h</label>
         <link refid="Uniforms_8h_source"/>
-        <childnode refid="126" relation="include">
+        <childnode refid="135" relation="include">
         </childnode>
         <childnode refid="93" relation="include">
         </childnode>
       </node>
-      <node id="125">
+      <node id="134">
         <label>Graphics/Types/Vertices.h</label>
         <link refid="Graphics_2inc_2Graphics_2Types_2Vertices_8h_source"/>
-        <childnode refid="126" relation="include">
+        <childnode refid="135" relation="include">
         </childnode>
         <childnode refid="91" relation="include">
         </childnode>
@@ -173,14 +173,14 @@
         </childnode>
         <childnode refid="98" relation="include">
         </childnode>
-        <childnode refid="127" relation="include">
+        <childnode refid="136" relation="include">
         </childnode>
         <childnode refid="93" relation="include">
         </childnode>
-        <childnode refid="128" relation="include">
+        <childnode refid="137" relation="include">
         </childnode>
       </node>
-      <node id="126">
+      <node id="135">
         <label>Graphics/macros.h</label>
         <link refid="libs_2Graphics_2inc_2Graphics_2macros_8h_source"/>
         <childnode refid="4" relation="include">
@@ -308,7 +308,7 @@
         <childnode refid="85" relation="include">
         </childnode>
       </node>
-      <node id="141">
+      <node id="124">
         <label>Utils/Common/StringAtomLiterals.h</label>
         <link refid="StringAtomLiterals_8h_source"/>
         <childnode refid="88" relation="include">
@@ -374,7 +374,7 @@
         <childnode refid="110" relation="include">
         </childnode>
       </node>
-      <node id="127">
+      <node id="136">
         <label>Utils/Common/Vertices.h</label>
         <link refid="Utils_2inc_2Utils_2Common_2Vertices_8h_source"/>
         <childnode refid="70" relation="include">
@@ -394,20 +394,20 @@
         <childnode refid="102" relation="include">
         </childnode>
       </node>
-      <node id="137">
+      <node id="146">
         <label>Utils/ECS/EntityRef.h</label>
         <link refid="EntityRef_8h_source"/>
-        <childnode refid="138" relation="include">
+        <childnode refid="147" relation="include">
         </childnode>
-        <childnode refid="136" relation="include">
+        <childnode refid="145" relation="include">
         </childnode>
       </node>
-      <node id="138">
+      <node id="147">
         <label>Utils/ECS/EntityRefUtils.h</label>
         <link refid="EntityRefUtils_8h_source"/>
         <childnode refid="93" relation="include">
         </childnode>
-        <childnode refid="139" relation="include">
+        <childnode refid="122" relation="include">
         </childnode>
         <childnode refid="148" relation="include">
         </childnode>
@@ -464,7 +464,7 @@
         <childnode refid="72" relation="include">
         </childnode>
       </node>
-      <node id="124">
+      <node id="126">
         <label>Utils/Math/Rect.h</label>
         <link refid="Rect_8h_source"/>
         <childnode refid="72" relation="include">
@@ -534,7 +534,7 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="128">
+      <node id="137">
         <label>Utils/Profile/TracyContext.h</label>
         <link refid="TracyContext_8h_source"/>
       </node>
@@ -546,7 +546,7 @@
         <childnode refid="103" relation="include">
         </childnode>
       </node>
-      <node id="123">
+      <node id="133">
         <label>Utils/Resources/FileWatcher.h</label>
         <link refid="FileWatcher_8h_source"/>
         <childnode refid="70" relation="include">
@@ -581,13 +581,15 @@
         </childnode>
         <childnode refid="122" relation="include">
         </childnode>
-        <childnode refid="123" relation="include">
+        <childnode refid="132" relation="include">
+        </childnode>
+        <childnode refid="133" relation="include">
         </childnode>
       </node>
-      <node id="122">
+      <node id="132">
         <label>Utils/Resources/ResourceContainer.h</label>
         <link refid="ResourceContainer_8h_source"/>
-        <childnode refid="2" relation="include">
+        <childnode refid="106" relation="include">
         </childnode>
       </node>
       <node id="154">
@@ -619,10 +621,10 @@
         </childnode>
         <childnode refid="154" relation="include">
         </childnode>
-        <childnode refid="128" relation="include">
+        <childnode refid="137" relation="include">
         </childnode>
       </node>
-      <node id="132">
+      <node id="141">
         <label>Utils/Resources/Xml.h</label>
         <link refid="Xml_8h_source"/>
         <childnode refid="70" relation="include">
@@ -637,14 +639,14 @@
         </childnode>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="133" relation="include">
+        <childnode refid="142" relation="include">
         </childnode>
       </node>
-      <node id="146">
+      <node id="130">
         <label>Utils/Serialization/DefaultCheckers.inl.h</label>
         <link refid="DefaultCheckers_8inl_8h_source"/>
       </node>
-      <node id="144">
+      <node id="128">
         <label>Utils/Serialization/DefaultObjectMakers.inl.h</label>
         <link refid="DefaultObjectMakers_8inl_8h_source"/>
       </node>
@@ -660,25 +662,25 @@
         <childnode refid="80" relation="include">
         </childnode>
       </node>
-      <node id="147">
+      <node id="131">
         <label>Utils/Serialization/ObjectDataAccessors.inl.h</label>
         <link refid="ObjectDataAccessors_8inl_8h_source"/>
       </node>
-      <node id="145">
+      <node id="129">
         <label>Utils/Serialization/SaveCheckers.inl.h</label>
         <link refid="SaveCheckers_8inl_8h_source"/>
       </node>
-      <node id="139">
+      <node id="122">
         <label>Utils/Serialization/Serializable.h</label>
         <link refid="Serializable_8h_source"/>
         <childnode refid="111" relation="include">
         </childnode>
-        <childnode refid="140" relation="include">
+        <childnode refid="123" relation="include">
         </childnode>
-        <childnode refid="142" relation="include">
+        <childnode refid="125" relation="include">
         </childnode>
       </node>
-      <node id="142">
+      <node id="125">
         <label>Utils/Serialization/Serialization.h</label>
         <link refid="Serialization_8h_source"/>
         <childnode refid="120" relation="include">
@@ -687,7 +689,7 @@
         </childnode>
         <childnode refid="79" relation="include">
         </childnode>
-        <childnode refid="140" relation="include">
+        <childnode refid="123" relation="include">
         </childnode>
         <childnode refid="110" relation="include">
         </childnode>
@@ -695,19 +697,19 @@
         </childnode>
         <childnode refid="109" relation="include">
         </childnode>
+        <childnode refid="126" relation="include">
+        </childnode>
         <childnode refid="124" relation="include">
         </childnode>
-        <childnode refid="141" relation="include">
+        <childnode refid="127" relation="include">
         </childnode>
-        <childnode refid="143" relation="include">
+        <childnode refid="128" relation="include">
         </childnode>
-        <childnode refid="144" relation="include">
+        <childnode refid="129" relation="include">
         </childnode>
-        <childnode refid="145" relation="include">
+        <childnode refid="130" relation="include">
         </childnode>
-        <childnode refid="146" relation="include">
-        </childnode>
-        <childnode refid="147" relation="include">
+        <childnode refid="131" relation="include">
         </childnode>
       </node>
       <node id="120">
@@ -726,27 +728,27 @@
         <childnode refid="118" relation="include">
         </childnode>
       </node>
-      <node id="140">
+      <node id="123">
         <label>Utils/TypeTraits/Factory.h</label>
         <link refid="Factory_8h_source"/>
         <childnode refid="82" relation="include">
         </childnode>
-        <childnode refid="141" relation="include">
+        <childnode refid="124" relation="include">
         </childnode>
         <childnode refid="106" relation="include">
         </childnode>
         <childnode refid="119" relation="include">
         </childnode>
       </node>
-      <node id="134">
+      <node id="143">
         <label>Utils/TypeTraits/Properties.h</label>
         <link refid="Properties_8h_source"/>
-        <childnode refid="135" relation="include">
+        <childnode refid="144" relation="include">
         </childnode>
-        <childnode refid="137" relation="include">
+        <childnode refid="146" relation="include">
         </childnode>
       </node>
-      <node id="136">
+      <node id="145">
         <label>Utils/TypeTraits/Property.h</label>
         <link refid="TypeTraits_2Property_8h_source"/>
         <childnode refid="2" relation="include">
@@ -786,10 +788,10 @@
         <childnode refid="121" relation="include">
         </childnode>
       </node>
-      <node id="135">
+      <node id="144">
         <label>Utils/TypeTraits/StandardProperty.h</label>
         <link refid="StandardProperty_8h_source"/>
-        <childnode refid="136" relation="include">
+        <childnode refid="145" relation="include">
         </childnode>
       </node>
       <node id="80">
@@ -871,7 +873,7 @@
         </childnode>
         <childnode refid="89" relation="include">
         </childnode>
-        <childnode refid="128" relation="include">
+        <childnode refid="137" relation="include">
         </childnode>
         <childnode refid="106" relation="include">
         </childnode>
@@ -1074,7 +1076,7 @@
         <childnode refid="66" relation="include">
         </childnode>
       </node>
-      <node id="143">
+      <node id="127">
         <label>Codegen/Enums.generated.hpp</label>
       </node>
       <node id="90">
@@ -1089,7 +1091,7 @@
       <node id="8">
         <label>array</label>
       </node>
-      <node id="133">
+      <node id="142">
         <label>assimp/contrib/pugixml/src/pugixml.hpp</label>
       </node>
       <node id="42">
@@ -1287,6 +1289,10 @@
     </incdepgraph>
     <invincdepgraph>
       <node id="5">
+        <label>Engine/inc/Engine/GUI/AssetInspector.h</label>
+        <link refid="AssetInspector_8h_source"/>
+      </node>
+      <node id="6">
         <label>Engine/inc/Engine/GUI/Inspector.h</label>
         <link refid="Inspector_8h_source"/>
       </node>
@@ -1303,72 +1309,78 @@
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="17" relation="include">
         </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
       </node>
-      <node id="6">
+      <node id="7">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/BehaviourNamePropertyDrawer.h</label>
         <link refid="BehaviourNamePropertyDrawer_8h_source"/>
       </node>
-      <node id="10">
+      <node id="11">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.h</label>
         <link refid="BehaviourPropertyDrawer_8h_source"/>
       </node>
-      <node id="7">
+      <node id="8">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/BitMapPropertyDrawer.h</label>
         <link refid="BitMapPropertyDrawer_8h_source"/>
       </node>
-      <node id="8">
+      <node id="9">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/EnumPropertyDrawer.h</label>
         <link refid="EnumPropertyDrawer_8h_source"/>
       </node>
-      <node id="11">
+      <node id="12">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h</label>
         <link refid="MaterialDataPropertyDrawer_8h_source"/>
       </node>
-      <node id="14">
+      <node id="15">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/MaterialPropertyDrawer.h</label>
         <link refid="MaterialPropertyDrawer_8h_source"/>
       </node>
-      <node id="9">
+      <node id="10">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h</label>
         <link refid="ObjectPropertyDrawer_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
       </node>
-      <node id="12">
+      <node id="13">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/PathPropertyDrawer.h</label>
         <link refid="PathPropertyDrawer_8h_source"/>
       </node>
-      <node id="13">
+      <node id="14">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h</label>
         <link refid="PointerPropertyDrawer_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="15">
+      <node id="16">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/RectPropertyDrawer.h</label>
         <link refid="RectPropertyDrawer_8h_source"/>
       </node>
-      <node id="16">
+      <node id="17">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/StringPropertyDrawer.h</label>
         <link refid="StringPropertyDrawer_8h_source"/>
       </node>
-      <node id="17">
+      <node id="18">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/VectorPropertyDrawer.h</label>
         <link refid="VectorPropertyDrawer_8h_source"/>
       </node>
@@ -1377,12 +1389,12 @@
         <link refid="BaseMaterial_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
         <childnode refid="19" relation="include">
         </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
       </node>
-      <node id="18">
+      <node id="19">
         <label>Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h</label>
         <link refid="FileMaterial_8h_source"/>
       </node>
@@ -1392,37 +1404,37 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="19">
+      <node id="20">
         <label>Engine/libs/Graphics/inc/Graphics/Material/UniqueMaterial.h</label>
         <link refid="UniqueMaterial_8h_source"/>
       </node>
-      <node id="21">
+      <node id="22">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
         <link refid="DebugPass_8h_source"/>
       </node>
-      <node id="24">
+      <node id="25">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
         <link refid="HTMLDrawerPass_8h_source"/>
       </node>
-      <node id="20">
+      <node id="21">
         <label>Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</label>
         <link refid="DebugRenderer_8h_source"/>
-        <childnode refid="21" relation="include">
-        </childnode>
-      </node>
-      <node id="22">
-        <label>Engine/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
-        <link refid="HTMLDrawableElement_8h_source"/>
-        <childnode refid="23" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
       </node>
       <node id="23">
-        <label>Engine/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
-        <link refid="HTMLRenderer_8h_source"/>
+        <label>Engine/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
+        <link refid="HTMLDrawableElement_8h_source"/>
         <childnode refid="24" relation="include">
         </childnode>
       </node>
-      <node id="25">
+      <node id="24">
+        <label>Engine/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
+        <link refid="HTMLRenderer_8h_source"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
         <label>Engine/libs/Graphics/inc/Graphics/Types/ComputeShader.h</label>
         <link refid="ComputeShader_8h_source"/>
       </node>
@@ -1431,11 +1443,11 @@
         <link refid="Types_2Shader_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -1480,146 +1492,147 @@
 <codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Shader;</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight></codeline>
 <codeline lineno="33" refid="classSR__GTYPES__NS_1_1Shader" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">Shader</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">SR_UTILS_NS::IResource</ref>,<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>Memory::IGraphicsResource<sp/>{</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ShaderProgram<sp/>=<sp/>int32_t;</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">Ptr</ref><sp/>=<sp/><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">Shader</ref>*;</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"></highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">Shader</ref>();</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">~Shader</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="41"><highlight class="normal"></highlight></codeline>
-<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">Shader</ref>*<sp/>Load(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref>&amp;<sp/>rawPath);</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"></highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ShaderBindResult<sp/>Use()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"></highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Init();</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UnUse()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Flush()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>FlushSamplers();</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>FlushConstants();</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>FreeVideoMemory()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Dispatch(uint32_t<sp/>x,<sp/>uint32_t<sp/>y,<sp/>uint32_t<sp/>z);</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Dispatch();</highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>StartWatch()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"></highlight></codeline>
-<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>AttachDescriptorSets();</highlight></codeline>
-<codeline lineno="58"><highlight class="normal"></highlight></codeline>
-<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>BeginSharedUBO();</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>EndSharedUBO();</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"></highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ResetUBOToDefaults();</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"></highlight></codeline>
-<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref><sp/>GetAssociatedPath()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_DEPRECATED<sp/>SR_NODISCARD<sp/>int32_t<sp/>GetID();</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>int32_t<sp/>GetId()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>ShaderProgram<sp/>GetVirtualProgram()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_shaderProgram;<sp/>}</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Ready()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>uint64_t<sp/>GetUBOBlockSize()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>uint32_t<sp/>GetSamplersCount()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>ShaderProperties<sp/>GetProperties();</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ShaderSamplers&amp;<sp/>GetSamplers()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_samplers;<sp/>};</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsBlendEnabled()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsAvailable()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsSamplersValid()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>HasSharedUBO()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_uniformSharedBlock.Valid();<sp/>}</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>HasSSBOBindings()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!m_ssboBindings.empty();<sp/>}</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_SRSL_NS::ShaderType<sp/>GetType()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::UVector3&amp;<sp/>GetComputeWorkGroupSize()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_computeWorkGroupSize;<sp/>}</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"></highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>constant,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetValue(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T*<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(constant)<sp/>{</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_constBlock.SetField(hashId,<sp/>v);</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_sharedUBOMode)<sp/>SR_UNLIKELY_ATTRIBUTE<sp/>{</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_uniformSharedBlock.SetField(hashId,<sp/>v);</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_uniformBlock.SetField(hashId,<sp/>v);</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"></highlight></codeline>
-<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetBool(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetFloat(uint64_t<sp/>hashId,<sp/>float_t<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetInt(uint64_t<sp/>hashId,<sp/>int32_t<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetMat4(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref>&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetVec3(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetVec4(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector4&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetColor(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">SR_MATH_NS::FColor</ref>&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetRect(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FRect&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetVec2(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector2&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetIVec2(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::IVector2&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetIVec3(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::IVector3&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"></highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetConstBool(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetConstFloat(uint64_t<sp/>hashId,<sp/>float_t<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetConstInt(uint64_t<sp/>hashId,<sp/>int32_t<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetConstMat4(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref>&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetConstVec4(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector4&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetConstColor(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">SR_MATH_NS::FColor</ref>&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetConstVec3(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetConstVec2(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector2&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetConstIVec2(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::IVector2&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetConstIVec3(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::IVector3&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"></highlight></codeline>
-<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetSampler2D(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>name,<sp/><ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">Texture</ref>*<sp/>sampler)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetSampler2D(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>name,<sp/>int32_t<sp/>sampler)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetSamplerCube(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>name,<sp/>int32_t<sp/>sampler)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="123"><highlight class="normal"></highlight></codeline>
-<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BindSSBO(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>name,<sp/>uint32_t<sp/>ssbo)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="125"><highlight class="normal"></highlight></codeline>
-<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>HasErrors()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_hasErrors;<sp/>}</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"></highlight></codeline>
-<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsAllowedToRevive()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ReviveResource()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="131"><highlight class="normal"></highlight></codeline>
-<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Load()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Unload()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="134"><highlight class="normal"></highlight></codeline>
-<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnReloadDone()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="136"><highlight class="normal"></highlight></codeline>
-<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>LoadDefaultSampler(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>name);</highlight></codeline>
-<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UnloadDefaultSamplers();</highlight></codeline>
-<codeline lineno="139"><highlight class="normal"></highlight></codeline>
-<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetSampler(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>name,<sp/>int32_t<sp/>sampler)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="142"><highlight class="normal"></highlight></codeline>
-<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Memory::UBOManager&amp;<sp/>m_uboManager;</highlight></codeline>
-<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Memory::ShaderProgramManager&amp;<sp/>m_manager;</highlight></codeline>
-<codeline lineno="146"><highlight class="normal"></highlight></codeline>
-<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ShaderProgram<sp/>m_shaderProgram<sp/>=<sp/>SR_ID_INVALID;</highlight></codeline>
-<codeline lineno="148"><highlight class="normal"></highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_hasErrors<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_isRegistered<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_sharedUBOMode<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="152"><highlight class="normal"></highlight></codeline>
-<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SRShaderCreateInfo<sp/>m_shaderCreateInfo<sp/>=<sp/>{<sp/>};</highlight></codeline>
-<codeline lineno="154"><highlight class="normal"></highlight></codeline>
-<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::pair&lt;int32_t,<sp/>bool&gt;<sp/>m_virtualUBO<sp/>=<sp/>{<sp/>SR_ID_INVALID,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal"><sp/>};</highlight></codeline>
-<codeline lineno="156"><highlight class="normal"></highlight></codeline>
-<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_MATH_NS::UVector3<sp/>m_computeWorkGroupSize<sp/>=<sp/>{<sp/>1,<sp/>1,<sp/>1<sp/>};</highlight></codeline>
-<codeline lineno="158"><highlight class="normal"></highlight></codeline>
-<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;SR_UTILS_NS::StringAtom&gt;<sp/>m_includes;</highlight></codeline>
-<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Memory::ShaderUBOBlock<sp/>m_uniformBlock;</highlight></codeline>
-<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Memory::ShaderUBOBlock<sp/>m_uniformSharedBlock;</highlight></codeline>
-<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Memory::ShaderUBOBlock<sp/>m_constBlock;</highlight></codeline>
-<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ShaderSamplers<sp/>m_samplers;</highlight></codeline>
-<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ShaderProperties<sp/>m_properties;</highlight></codeline>
-<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SSBOBindings<sp/>m_ssboBindings;</highlight></codeline>
-<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;SR_UTILS_NS::StringAtom,<sp/>Texture*&gt;<sp/>m_defaultSamplers;</highlight></codeline>
-<codeline lineno="167"><highlight class="normal"></highlight></codeline>
-<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_SRSL_NS::ShaderType<sp/>m_type<sp/>=<sp/>SR_SRSL_NS::ShaderType::Unknown;</highlight></codeline>
-<codeline lineno="169"><highlight class="normal"></highlight></codeline>
-<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="171"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="172"><highlight class="normal"></highlight></codeline>
-<codeline lineno="173"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GRAPHICS_SHADER_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_CLASS()</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ShaderProgram<sp/>=<sp/>int32_t;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Ptr<sp/>=<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;Shader&gt;</ref>;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">Shader</ref>();</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">~Shader</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>Shader::Ptr<sp/>Load(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref>&amp;<sp/>rawPath);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ShaderBindResult<sp/>Use()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Init();</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UnUse()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Flush()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>FlushSamplers();</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>FlushConstants();</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>FreeVideoMemory()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Dispatch(uint32_t<sp/>x,<sp/>uint32_t<sp/>y,<sp/>uint32_t<sp/>z);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Dispatch();</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>StartWatch()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>AttachDescriptorSets();</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>BeginSharedUBO();</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>EndSharedUBO();</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ResetUBOToDefaults();</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref><sp/>GetAssociatedPath()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_DEPRECATED<sp/>SR_NODISCARD<sp/>int32_t<sp/>GetID();</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>int32_t<sp/>GetId()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>ShaderProgram<sp/>GetVirtualProgram()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_shaderProgram;<sp/>}</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Ready()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>uint64_t<sp/>GetUBOBlockSize()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>uint32_t<sp/>GetSamplersCount()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>ShaderProperties<sp/>GetProperties();</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ShaderSamplers&amp;<sp/>GetSamplers()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_samplers;<sp/>};</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsBlendEnabled()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsAvailable()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsSamplersValid()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>HasSharedUBO()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_uniformSharedBlock.Valid();<sp/>}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>HasSSBOBindings()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!m_ssboBindings.empty();<sp/>}</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_SRSL_NS::ShaderType<sp/>GetType()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::UVector3&amp;<sp/>GetComputeWorkGroupSize()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_computeWorkGroupSize;<sp/>}</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>constant,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetValue(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T*<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(constant)<sp/>{</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_constBlock.SetField(hashId,<sp/>v);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_sharedUBOMode)<sp/>SR_UNLIKELY_ATTRIBUTE<sp/>{</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_uniformSharedBlock.SetField(hashId,<sp/>v);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_uniformBlock.SetField(hashId,<sp/>v);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetBool(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetFloat(uint64_t<sp/>hashId,<sp/>float_t<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetInt(uint64_t<sp/>hashId,<sp/>int32_t<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetMat4(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref>&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetVec3(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetVec4(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector4&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetColor(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">SR_MATH_NS::FColor</ref>&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetRect(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FRect&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetVec2(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector2&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetIVec2(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::IVector2&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetIVec3(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::IVector3&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetConstBool(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetConstFloat(uint64_t<sp/>hashId,<sp/>float_t<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetConstInt(uint64_t<sp/>hashId,<sp/>int32_t<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetConstMat4(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref>&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetConstVec4(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector4&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetConstColor(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">SR_MATH_NS::FColor</ref>&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetConstVec3(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetConstVec2(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector2&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetConstIVec2(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::IVector2&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetConstIVec3(uint64_t<sp/>hashId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::IVector3&amp;<sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetSampler2D(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>name,<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;Texture&gt;</ref><sp/>pSampler)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetSampler2D(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>name,<sp/>int32_t<sp/>sampler)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SR_FASTCALL<sp/>SetSamplerCube(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>name,<sp/>int32_t<sp/>sampler)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BindSSBO(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>name,<sp/>uint32_t<sp/>ssbo)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>HasErrors()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_hasErrors;<sp/>}</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsAllowedToRevive()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ReviveResource()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Load()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Unload()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnReloadDone()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>LoadDefaultSampler(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>name);</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UnloadDefaultSamplers();</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetSampler(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>name,<sp/>int32_t<sp/>sampler)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Memory::UBOManager&amp;<sp/>m_uboManager;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Memory::ShaderProgramManager&amp;<sp/>m_manager;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ShaderProgram<sp/>m_shaderProgram<sp/>=<sp/>SR_ID_INVALID;</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_hasErrors<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_isRegistered<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_sharedUBOMode<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SRShaderCreateInfo<sp/>m_shaderCreateInfo<sp/>=<sp/>{<sp/>};</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::pair&lt;int32_t,<sp/>bool&gt;<sp/>m_virtualUBO<sp/>=<sp/>{<sp/>SR_ID_INVALID,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal"><sp/>};</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_MATH_NS::UVector3<sp/>m_computeWorkGroupSize<sp/>=<sp/>{<sp/>1,<sp/>1,<sp/>1<sp/>};</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;SR_UTILS_NS::StringAtom&gt;<sp/>m_includes;</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Memory::ShaderUBOBlock<sp/>m_uniformBlock;</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Memory::ShaderUBOBlock<sp/>m_uniformSharedBlock;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Memory::ShaderUBOBlock<sp/>m_constBlock;</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ShaderSamplers<sp/>m_samplers;</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ShaderProperties<sp/>m_properties;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SSBOBindings<sp/>m_ssboBindings;</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;SR_UTILS_NS::StringAtom,<sp/>SR_HTYPES_NS::SharedPtr&lt;Texture&gt;&gt;<sp/>m_defaultSamplers;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_SRSL_NS::ShaderType<sp/>m_type<sp/>=<sp/>SR_SRSL_NS::ShaderType::Unknown;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="172"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GRAPHICS_SHADER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="Engine/libs/Graphics/inc/Graphics/Types/Shader.h"/>
   </compounddef>

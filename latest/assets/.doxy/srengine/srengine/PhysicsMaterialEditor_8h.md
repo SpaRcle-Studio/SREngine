@@ -32,11 +32,6 @@
 | namespace | [**SR\_CORE\_GUI\_NS**](namespaceSR__CORE__GUI__NS.md) <br> |
 
 
-## Classes
-
-| Type | Name |
-| ---: | :--- |
-| class | [**PhysicsMaterialEditor**](classSR__CORE__GUI__NS_1_1PhysicsMaterialEditor.md) <br> |
 
 
 

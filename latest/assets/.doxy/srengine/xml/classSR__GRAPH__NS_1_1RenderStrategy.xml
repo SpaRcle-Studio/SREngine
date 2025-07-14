@@ -310,14 +310,14 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderStrategy.h" line="313" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderStrategy_1a161df9e468f220eea4f2c05b55f279ed" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderStrategy_1af27386ee5ae33eefbd8f55806cd10557" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void SR_GRAPH_NS::RenderStrategy::OnResourceReloaded</definition>
-        <argsstring>(SR_UTILS_NS::IResource *pResource) const</argsstring>
+        <argsstring>(const SR_UTILS_NS::IResource::Ptr &amp;pResource) const</argsstring>
         <name>OnResourceReloaded</name>
         <qualifiedname>SR_GRAPH_NS::RenderStrategy::OnResourceReloaded</qualifiedname>
         <param>
-          <type><ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">SR_UTILS_NS::IResource</ref> *</type>
+          <type>const SR_UTILS_NS::IResource::Ptr &amp;</type>
           <declname>pResource</declname>
         </param>
         <briefdescription>
@@ -741,7 +741,7 @@
       <member refid="classSR__GRAPH__NS_1_1RenderStrategy_1a1afa46e70b58b0a8c29edf5b902cd63a" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderStrategy</scope><name>MeshPtr</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::RenderStrategy</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderStrategy</scope><name>NonCopyable</name></member>
-      <member refid="classSR__GRAPH__NS_1_1RenderStrategy_1a161df9e468f220eea4f2c05b55f279ed" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderStrategy</scope><name>OnResourceReloaded</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderStrategy_1af27386ee5ae33eefbd8f55806cd10557" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderStrategy</scope><name>OnResourceReloaded</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::RenderStrategy</scope><name>operator=</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderStrategy_1a73b8a69e661edaceb3af3f329d4e2c72" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderStrategy</scope><name>Prepare</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderStrategy_1abe7027777b3f3e069f23869d89b3970b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderStrategy</scope><name>RegisterMesh</name></member>

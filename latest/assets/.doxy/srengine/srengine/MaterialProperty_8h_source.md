@@ -73,8 +73,8 @@ namespace SR_GRAPH_NS {
                 m_data = static_cast<int32_t>(value);
                 OnPropertyChanged(true);
             }
-            else if constexpr (std::is_same_v<T, SR_GTYPES_NS::Texture*>) {
-                if (std::get<SR_GTYPES_NS::Texture*>(m_data) == value) {
+            else if constexpr (std::is_same_v<T, SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Texture>>) {
+                if (std::get<SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Texture>>(m_data) == value) {
                     return *this;
                 }
                 SetTextureInternal(value);
@@ -117,7 +117,7 @@ namespace SR_GRAPH_NS {
         void Use(SR_GTYPES_NS::Shader* pShader) const noexcept;
 
     private:
-        void SetTextureInternal(SR_GTYPES_NS::Texture* pTexture);
+        void SetTextureInternal(SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Texture> pTexture);
         void OnPropertyChanged(bool onlyUniforms);
 
     private:
@@ -175,7 +175,6 @@ namespace SR_GRAPH_NS {
     };
 
     void LoadMaterialProperties(const std::string& materialDebugIdentifier, const SR_XML_NS::Node& propertiesNode, MaterialProperties* pProperties);
-    std::list<SR_GTYPES_NS::Texture*> GetTexturesFromMatProperties(const MaterialProperties& properties);
 }
 
 #endif //SR_ENGINE_GRAOHICS_MATERIAL_PROPERTY_H

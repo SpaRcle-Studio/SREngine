@@ -41,16 +41,17 @@ namespace SR_GTYPES_NS {
     class Shader;
 
     class Shader : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {
+        SR_CLASS()
         using ShaderProgram = int32_t;
     public:
-        using Ptr = Shader*;
+        using Ptr = SR_HTYPES_NS::SharedPtr<Shader>;
 
-    private:
+    public:
         Shader();
         ~Shader() override;
 
     public:
-        static Shader* Load(const SR_UTILS_NS::Path& rawPath);
+        static Shader::Ptr Load(const SR_UTILS_NS::Path& rawPath);
 
         ShaderBindResult Use() noexcept;
 
@@ -127,7 +128,7 @@ namespace SR_GTYPES_NS {
         void SR_FASTCALL SetConstIVec2(uint64_t hashId, const SR_MATH_NS::IVector2& v) noexcept;
         void SR_FASTCALL SetConstIVec3(uint64_t hashId, const SR_MATH_NS::IVector3& v) noexcept;
 
-        void SR_FASTCALL SetSampler2D(SR_UTILS_NS::StringAtom name, Texture* sampler) noexcept;
+        void SR_FASTCALL SetSampler2D(SR_UTILS_NS::StringAtom name, SR_HTYPES_NS::SharedPtr<Texture> pSampler) noexcept;
         void SR_FASTCALL SetSampler2D(SR_UTILS_NS::StringAtom name, int32_t sampler) noexcept;
         void SR_FASTCALL SetSamplerCube(SR_UTILS_NS::StringAtom name, int32_t sampler) noexcept;
 
@@ -173,7 +174,7 @@ namespace SR_GTYPES_NS {
         ShaderSamplers m_samplers;
         ShaderProperties m_properties;
         SSBOBindings m_ssboBindings;
-        std::map<SR_UTILS_NS::StringAtom, Texture*> m_defaultSamplers;
+        std::map<SR_UTILS_NS::StringAtom, SR_HTYPES_NS::SharedPtr<Texture>> m_defaultSamplers;
 
         SR_SRSL_NS::ShaderType m_type = SR_SRSL_NS::ShaderType::Unknown;
 

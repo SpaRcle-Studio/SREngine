@@ -40,7 +40,6 @@ namespace SR_GTYPES_NS {
 namespace SR_GRAPH_NS {
     class RenderScene;
     class RenderContext;
-    class RenderTechnique;
     class IRenderTechnique;
     class Pipeline;
     class BasePass;
@@ -51,12 +50,15 @@ namespace SR_GRAPH_NS {
     class BasePass : public SR_UTILS_NS::ResourceContainer, public SR_SRLM_NS::IExecutableNode {
         using Super = SR_UTILS_NS::ResourceContainer;
     public:
-        using ShaderPtr = SR_GTYPES_NS::Shader*;
+        using ShaderPtr = SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Shader>;
         using MeshPtr = SR_GTYPES_NS::Mesh*;
         using CameraPtr = SR_GTYPES_NS::Camera*;
         using Context = RenderContext*;
         using PipelinePtr = SR_HTYPES_NS::SharedPtr<Pipeline>;
         using RenderScenePtr = SR_HTYPES_NS::SharedPtr<RenderScene>;
+    public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<BasePass>;
+
     public:
         BasePass();
         ~BasePass() override = default;

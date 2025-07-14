@@ -24,7 +24,7 @@ namespace SR_HTYPES_NS {
 
     class IRawMeshHolder {
     public:
-        using RawMeshPtr = SR_HTYPES_NS::RawMesh*;
+        using RawMeshPtr = SR_HTYPES_NS::SharedPtr<SR_HTYPES_NS::RawMesh>;
         using MeshIndex = int32_t;
 
         virtual ~IRawMeshHolder();

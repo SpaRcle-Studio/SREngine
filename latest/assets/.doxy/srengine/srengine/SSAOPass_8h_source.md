@@ -17,10 +17,7 @@
 
 #include <Graphics/Pass/PostProcessPass.h>
 #include <Graphics/Pass/IFramebufferPass.h>
-
-namespace SR_GTYPES_NS {
-    class Texture;
-}
+#include <Graphics/Types/Texture.h>
 
 namespace SR_GRAPH_NS {
     class SSAOPass : public PostProcessPass, public IFramebufferPass {
@@ -43,12 +40,12 @@ namespace SR_GRAPH_NS {
 
     protected:
         SR_NODISCARD SSAOKernel CreateKernel() const;
-        SR_NODISCARD SR_GTYPES_NS::Texture* CreateNoise() const;
+        SR_NODISCARD SR_GTYPES_NS::Texture::Ptr CreateNoise() const;
         SR_NODISCARD IRenderTechnique* GetFrameBufferRenderTechnique() const override;
 
     private:
         SSAOKernel m_kernel;
-        SR_GTYPES_NS::Texture* m_noise = nullptr;
+        SR_GTYPES_NS::Texture::Ptr m_noise;
 
     };
 }

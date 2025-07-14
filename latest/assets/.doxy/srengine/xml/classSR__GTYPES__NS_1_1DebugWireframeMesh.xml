@@ -113,15 +113,15 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h" line="27" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a8b4bae459592a401bf9a665c7ceefda1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a9f0dc593969d81389bf023a1baeb355f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
         <definition>bool SR_GTYPES_NS::DebugWireframeMesh::OnResourceReloaded</definition>
-        <argsstring>(SR_UTILS_NS::IResource *pResource) override</argsstring>
+        <argsstring>(const SR_UTILS_NS::IResource *pResource) override</argsstring>
         <name>OnResourceReloaded</name>
         <qualifiedname>SR_GTYPES_NS::DebugWireframeMesh::OnResourceReloaded</qualifiedname>
-        <reimplements refid="classSR__GTYPES__NS_1_1Mesh_1a1beb296af0e07a7ca16aafeb8879294b">OnResourceReloaded</reimplements>
+        <reimplements refid="classSR__GTYPES__NS_1_1Mesh_1a38cd9c334fee6452c42dd5a7d2fdd41d">OnResourceReloaded</reimplements>
         <param>
-          <type><ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">SR_UTILS_NS::IResource</ref> *</type>
+          <type>const <ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">SR_UTILS_NS::IResource</ref> *</type>
           <declname>pResource</declname>
         </param>
         <briefdescription>
@@ -540,13 +540,13 @@
       <member refid="classSR__GTYPES__NS_1_1Mesh_1af3caea0c23c92bd870b87a3e52840645" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>OnPriorityChanged</name></member>
       <member refid="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a71647c3497766a65ce2eb7835762aa05" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>OnRawMeshChanged</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1ab78cc1eaebe6f734293b577b6d9ab1dd" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>OnReRegistered</name></member>
-      <member refid="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a8b4bae459592a401bf9a665c7ceefda1" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>OnResourceReloaded</name></member>
+      <member refid="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a9f0dc593969d81389bf023a1baeb355f" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>OnResourceReloaded</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aac7babfab0aaf8e811e05f8f55dbebb1" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>OnTriggerEnter</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a54e04b235d9aaa0f027996b71362242b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>OnTriggerExit</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a9bb3f2e63ed778951c409dba0bd1915f" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>OnTriggerStay</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a5b3c94dcc9fd4c8f2ed748601d0c4e2a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>OriginType</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a8ccf477eb64e1da05d8b6e0f0e82b0ae" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>Ptr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a54f8031259b5b3ea78a9f794143e681d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>RawMeshPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a164db9b7fa7f3789548e3fb65af02155" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>RawMeshPtr</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a63ebff43aced52991bb2c7a97bccbb5a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>RenderQueues</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1add25474bae10f83e8854f3e93c4f7070" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>RenderScenePtr</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a16b24e7c8796db2f1d87bb2fdf22b5c0" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>ReRegisterMesh</name></member>
@@ -565,7 +565,7 @@
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a8f54083212793185d112dfc01e612baf" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>SetRawMesh</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1ad5f9834371708471d3f6712e145aa7ae" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>SetRawMesh</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a73a3904579729c1939e4e6757b39ab51" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>SetUniformsClean</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Mesh_1aa763366331082200de8fffc15b9edb1e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>ShaderPtr</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a293bad07f36ba94ea55b3ca8d192d92a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>ShaderPtr</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a572b27823d61376ebbd0c33758ea5d6f" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>Start</name></member>
       <member refid="classSR__GTYPES__NS_1_1DebugWireframeMesh_1afde8483284727fba0841039524ae5118" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>Super</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a55ba0d3b4c08092148668bae579366ff" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugWireframeMesh</scope><name>TryGetParent</name></member>

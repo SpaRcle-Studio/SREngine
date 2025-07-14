@@ -394,7 +394,7 @@
 <para>Состояние графического конвейера Сбрасывается каждый кадр </para>
     </detaileddescription>
     <collaborationgraph>
-      <node id="8">
+      <node id="12">
         <label>Memory::IGraphicsResource</label>
       </node>
       <node id="1">
@@ -403,25 +403,25 @@
         <childnode refid="2" relation="usage">
           <edgelabel>pShader</edgelabel>
         </childnode>
-        <childnode refid="9" relation="usage">
+        <childnode refid="13" relation="usage">
           <edgelabel>pFrameBuffer</edgelabel>
         </childnode>
-        <childnode refid="10" relation="usage">
+        <childnode refid="14" relation="usage">
           <edgelabel>pRenderStrategy</edgelabel>
         </childnode>
       </node>
-      <node id="10">
+      <node id="14">
         <label>SR_GRAPH_NS::RenderStrategy</label>
         <link refid="classSR__GRAPH__NS_1_1RenderStrategy"/>
-        <childnode refid="5" relation="public-inheritance">
+        <childnode refid="15" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="9">
+      <node id="13">
         <label>SR_GTYPES_NS::Framebuffer</label>
         <link refid="classSR__GTYPES__NS_1_1Framebuffer"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
-        <childnode refid="8" relation="public-inheritance">
+        <childnode refid="12" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
@@ -429,22 +429,41 @@
         <link refid="classSR__GTYPES__NS_1_1Shader"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
-        <childnode refid="8" relation="public-inheritance">
+        <childnode refid="12" relation="public-inheritance">
         </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
       </node>
       <node id="3">
         <label>SR_UTILS_NS::IResource</label>
         <link refid="classSR__UTILS__NS_1_1IResource"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
-        <childnode refid="6" relation="public-inheritance">
+        <childnode refid="8" relation="public-inheritance">
         </childnode>
-        <childnode refid="7" relation="usage">
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+        <childnode refid="11" relation="usage">
           <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
           <edgelabel>RELOAD_DONE_EVENT</edgelabel>
         </childnode>
       </node>
-      <node id="5">
+      <node id="15">
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
@@ -454,11 +473,21 @@
         <childnode refid="5" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="7">
+      <node id="10">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="9">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
         <label>SR_UTILS_NS::StringAtom</label>
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
-      <node id="6">
+      <node id="8">
         <label>SR_UTILS_NS::SubscriptionHolder</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>

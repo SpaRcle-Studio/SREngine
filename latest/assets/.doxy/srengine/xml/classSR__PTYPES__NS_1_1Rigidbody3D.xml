@@ -278,12 +278,6 @@
         <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="12">
-        <label>SR_PTYPES_NS::PhysicsMaterial</label>
-        <link refid="classSR__PTYPES__NS_1_1PhysicsMaterial"/>
-        <childnode refid="13" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="2">
         <label>SR_PTYPES_NS::Rigidbody</label>
         <link refid="classSR__PTYPES__NS_1_1Rigidbody"/>
@@ -302,9 +296,6 @@
         </childnode>
         <childnode refid="10" relation="usage">
           <edgelabel>m_rotation</edgelabel>
-        </childnode>
-        <childnode refid="12" relation="usage">
-          <edgelabel>m_material</edgelabel>
         </childnode>
       </node>
       <node id="1">
@@ -346,35 +337,9 @@
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="13">
-        <label>SR_UTILS_NS::IResource</label>
-        <link refid="classSR__UTILS__NS_1_1IResource"/>
-        <childnode refid="14" relation="public-inheritance">
-        </childnode>
-        <childnode refid="15" relation="public-inheritance">
-        </childnode>
-        <childnode refid="16" relation="usage">
-          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
-          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
-        </childnode>
-      </node>
       <node id="9">
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
-      </node>
-      <node id="14">
-        <label>SR_UTILS_NS::ResourceContainer</label>
-        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
-        <childnode refid="9" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="16">
-        <label>SR_UTILS_NS::StringAtom</label>
-        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
-      </node>
-      <node id="15">
-        <label>SR_UTILS_NS::SubscriptionHolder</label>
-        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
       <node id="6">
         <label>SR_WORLD_NS::Scene</label>
@@ -417,7 +382,7 @@
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a7e379c9556c3315218ff96bb5ab77796" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetMass</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody3D_1a33e8dc2c2917cd7c2f437b89b8765582" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetMeasurement</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ae81e0c4dd084a7d3d4620e53c10ca2fc" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetParent</name></member>
-      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a2387c690be0dabaffda7618325f14937" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetPhysicsMaterial</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1ae4f143109f962a743ba423ee86c6e43a" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetPhysicsMaterial</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1afcffc336186393fff3ef13e44f46d063" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetPhysicsScene</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a499a53cb08f173222c9a0bbc06af98fd" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetRoot</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aff96b9c3a8d4d54dd60d6462d4e2d959" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetRotation</name></member>
@@ -467,7 +432,7 @@
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aed08208749be420ad1b023ebb2c2913b" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_library</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody3D_1af8e4fc2b63138bbd4871b909baf1c17d" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_linearLock</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a526956950f5acfc4b0b2aad5dfae0895" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_mass</name></member>
-      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a7c357d7908649bb884f001b74038665b" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_material</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aa19173288dcf9f86621fc5f0dca1ae5a" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_material</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a9dddd30253cd78eb28f504e1afb66514" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_parent</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a5791f0b028bda41452be41ab59d8beca" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_physicsScene</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a4928c92a79aa48c51ac74947733f789d" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_rotation</name></member>
@@ -508,7 +473,7 @@
       <member refid="classSR__PTYPES__NS_1_1Rigidbody3D_1a60fa92abd4f5aae8903611580f6bc783" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetLinearLock</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody3D_1a9361586e246603bdb1d5d01de4696ba0" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetLinearVelocity</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a4ecd16cddd8b0df30345daf0041fb74f" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetMass</name></member>
-      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1adb0b5b7493617663924532cce930c2d7" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetMaterial</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1acee9d7c5ffbccdb4eb4eda9efd2135e8" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetMaterial</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a4445f1afdadd8f48a5623c9cc455d1c9" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetMaterial</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aa7725c58c8f77e15a16ecb07a2295b1f" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetMatrixDirty</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ac9780c1f95cd3106101f4e1595550816" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetParent</name></member>

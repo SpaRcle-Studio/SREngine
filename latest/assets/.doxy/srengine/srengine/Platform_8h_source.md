@@ -84,6 +84,7 @@ namespace SR_UTILS_NS::Platform {
     SR_COMMON_DLL_API extern MouseState GetMouseState();
     SR_COMMON_DLL_API extern bool GetSystemKeyboardState(uint8_t* pKeyCodes);
     SR_COMMON_DLL_API extern std::string GetClipboardText();
+    SR_COMMON_DLL_API extern Path GetApplicationResourcesPath();
     SR_COMMON_DLL_API extern Path GetApplicationPath();
     SR_COMMON_DLL_API extern Path GetApplicationDirectory();
     SR_COMMON_DLL_API extern Path GetApplicationName();

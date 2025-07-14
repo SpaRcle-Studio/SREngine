@@ -6,6 +6,7 @@
     <includes refid="Measurement_8h" local="no">Utils/Common/Measurement.h</includes>
     <includes refid="Singleton_8h" local="no">Utils/Common/Singleton.h</includes>
     <includes refid="Vector3_8h" local="no">Utils/Math/Vector3.h</includes>
+    <includes refid="SharedPtr_8h" local="no">Utils/Types/SharedPtr.h</includes>
     <includes refid="Physics_2inc_2Physics_2Utils_2Utils_8h" local="no">Physics/Utils/Utils.h</includes>
     <includedby refid="Bullet3PhysicsLib_8h" local="no">Engine/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h</includedby>
     <includedby refid="CollisionShape_8h" local="no">Engine/libs/Physics/inc/Physics/CollisionShape.h</includedby>
@@ -26,8 +27,10 @@
         </childnode>
         <childnode refid="93" relation="include">
         </childnode>
+        <childnode refid="120" relation="include">
+        </childnode>
       </node>
-      <node id="93">
+      <node id="120">
         <label>Physics/Utils/Utils.h</label>
         <link refid="Physics_2inc_2Physics_2Utils_2Utils_8h_source"/>
         <childnode refid="2" relation="include">
@@ -41,10 +44,48 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
+      <node id="112">
+        <label>Utils/Common/AnyMarshal.h</label>
+        <link refid="AnyMarshal_8h_source"/>
+        <childnode refid="113" relation="include">
+        </childnode>
+        <childnode refid="114" relation="include">
+        </childnode>
+      </node>
+      <node id="104">
+        <label>Utils/Common/AnyVisitor.h</label>
+        <link refid="AnyVisitor_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="113">
+        <label>Utils/Common/BaseMarshal.h</label>
+        <link refid="BaseMarshal_8h_source"/>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="114" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="103" relation="include">
+        </childnode>
+        <childnode refid="106" relation="include">
+        </childnode>
+        <childnode refid="107" relation="include">
+        </childnode>
+      </node>
       <node id="72">
         <label>Utils/Common/Breakpoint.h</label>
         <link refid="Breakpoint_8h_source"/>
         <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="108">
+        <label>Utils/Common/CastUtils.h</label>
+        <link refid="CastUtils_8h_source"/>
+        <childnode refid="96" relation="include">
         </childnode>
       </node>
       <node id="8">
@@ -87,6 +128,22 @@
         <childnode refid="76" relation="include">
         </childnode>
       </node>
+      <node id="111">
+        <label>Utils/Common/MarshalUtils.h</label>
+        <link refid="MarshalUtils_8h_source"/>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="103" relation="include">
+        </childnode>
+        <childnode refid="112" relation="include">
+        </childnode>
+        <childnode refid="113" relation="include">
+        </childnode>
+      </node>
       <node id="6">
         <label>Utils/Common/Measurement.h</label>
         <link refid="Measurement_8h_source"/>
@@ -115,6 +172,82 @@
         <childnode refid="78" relation="include">
         </childnode>
       </node>
+      <node id="94">
+        <label>Utils/Common/StringFormat.h</label>
+        <link refid="StringFormat_8h_source"/>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="102" relation="include">
+        </childnode>
+      </node>
+      <node id="102">
+        <label>Utils/Common/StringUtils.h</label>
+        <link refid="Utils_2inc_2Utils_2Common_2StringUtils_8h_source"/>
+        <childnode refid="86" relation="include">
+        </childnode>
+      </node>
+      <node id="97">
+        <label>Utils/Common/ThreadUtils.h</label>
+        <link refid="ThreadUtils_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="103">
+        <label>Utils/Common/TypeInfo.h</label>
+        <link refid="Utils_2inc_2Utils_2Common_2TypeInfo_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="104" relation="include">
+        </childnode>
+        <childnode refid="105" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="101" relation="include">
+        </childnode>
+        <childnode refid="106" relation="include">
+        </childnode>
+      </node>
+      <node id="107">
+        <label>Utils/Debug.h</label>
+        <link refid="Debug_8h_source"/>
+        <childnode refid="98" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="108" relation="include">
+        </childnode>
+      </node>
+      <node id="98">
+        <label>Utils/FileSystem/Path.h</label>
+        <link refid="Path_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="99" relation="include">
+        </childnode>
+      </node>
       <node id="91">
         <label>Utils/Math/Axis.h</label>
         <link refid="Axis_8h_source"/>
@@ -141,6 +274,14 @@
         <childnode refid="86" relation="include">
         </childnode>
       </node>
+      <node id="105">
+        <label>Utils/Math/Size.h</label>
+        <link refid="Size_8h_source"/>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
       <node id="85">
         <label>Utils/Math/Vector2.h</label>
         <link refid="Vector2_8h_source"/>
@@ -157,14 +298,106 @@
         <childnode refid="92" relation="include">
         </childnode>
       </node>
+      <node id="95">
+        <label>Utils/Math/Vector4.h</label>
+        <link refid="Vector4_8h_source"/>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
+      </node>
+      <node id="101">
+        <label>Utils/Math/Vector6.h</label>
+        <link refid="Vector6_8h_source"/>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
+      </node>
       <node id="5">
         <label>Utils/Memory/Allocator.h</label>
         <link refid="Allocator_8h_source"/>
+      </node>
+      <node id="96">
+        <label>Utils/Platform/Platform.h</label>
+        <link refid="Platform_8h_source"/>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+        <childnode refid="98" relation="include">
+        </childnode>
       </node>
       <node id="73">
         <label>Utils/Platform/Stacktrace.h</label>
         <link refid="Stacktrace_8h_source"/>
         <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="119">
+        <label>Utils/Serialization/Deserializer.h</label>
+        <link refid="Deserializer_8h_source"/>
+        <childnode refid="100" relation="include">
+        </childnode>
+      </node>
+      <node id="99">
+        <label>Utils/Serialization/ObjectDataAccessor.h</label>
+        <link refid="ObjectDataAccessor_8h_source"/>
+        <childnode refid="100" relation="include">
+        </childnode>
+      </node>
+      <node id="118">
+        <label>Utils/Serialization/Serializer.h</label>
+        <link refid="Serializer_8h_source"/>
+        <childnode refid="100" relation="include">
+        </childnode>
+      </node>
+      <node id="115">
+        <label>Utils/TypeTraits/ClassDB.h</label>
+        <link refid="ClassDB_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="116" relation="include">
+        </childnode>
+      </node>
+      <node id="109">
+        <label>Utils/TypeTraits/SRClass.h</label>
+        <link refid="SRClass_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="110" relation="include">
+        </childnode>
+        <childnode refid="115" relation="include">
+        </childnode>
+        <childnode refid="117" relation="include">
+        </childnode>
+      </node>
+      <node id="117">
+        <label>Utils/TypeTraits/SRClassMeta.h</label>
+        <link refid="SRClassMeta_8h_source"/>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="118" relation="include">
+        </childnode>
+        <childnode refid="119" relation="include">
+        </childnode>
+      </node>
+      <node id="100">
+        <label>Utils/TypeTraits/TypeTraits.h</label>
+        <link refid="TypeTraits_8h_source"/>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="101" relation="include">
         </childnode>
       </node>
       <node id="82">
@@ -183,10 +416,34 @@
         <childnode refid="80" relation="include">
         </childnode>
       </node>
+      <node id="110">
+        <label>Utils/Types/Marshal.h</label>
+        <link refid="Marshal_8h_source"/>
+        <childnode refid="111" relation="include">
+        </childnode>
+        <childnode refid="98" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="114" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+      </node>
       <node id="76">
         <label>Utils/Types/MerkleTree.h</label>
         <link refid="MerkleTree_8h_source"/>
         <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="116">
+        <label>Utils/Types/Mutex.h</label>
+        <link refid="Mutex_8h_source"/>
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
       <node id="77">
@@ -195,12 +452,42 @@
         <childnode refid="10" relation="include">
         </childnode>
       </node>
+      <node id="93">
+        <label>Utils/Types/SharedPtr.h</label>
+        <link refid="SharedPtr_8h_source"/>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="103" relation="include">
+        </childnode>
+        <childnode refid="107" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="109" relation="include">
+        </childnode>
+        <childnode refid="100" relation="include">
+        </childnode>
+      </node>
+      <node id="114">
+        <label>Utils/Types/Stream.h</label>
+        <link refid="Stream_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
       <node id="74">
         <label>Utils/Types/StringAtom.h</label>
         <link refid="StringAtom_8h_source"/>
         <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="75" relation="include">
+        </childnode>
+      </node>
+      <node id="106">
+        <label>Utils/Types/UnicodeString.h</label>
+        <link refid="UnicodeString_8h_source"/>
+        <childnode refid="11" relation="include">
         </childnode>
       </node>
       <node id="3">
@@ -662,46 +949,47 @@
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Common/Measurement.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Common/Singleton.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Math/Vector3.h&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Physics/Utils/Utils.h&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="15"><highlight class="normal"></highlight></codeline>
-<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SR_PTYPES_NS<sp/>{</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">PhysicsMaterial;</highlight></codeline>
-<codeline lineno="18"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"></highlight></codeline>
-<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SR_PHYSICS_NS<sp/>{</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">LibraryImpl;</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"></highlight></codeline>
-<codeline lineno="23" refid="classSR__PHYSICS__NS_1_1PhysicsLibrary" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__PHYSICS__NS_1_1PhysicsLibrary" kindref="compound">PhysicsLibrary</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Singleton" kindref="compound">SR_UTILS_NS::Singleton</ref>&lt;PhysicsLibrary&gt;<sp/>{</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_REGISTER_SINGLETON(<ref refid="classSR__PHYSICS__NS_1_1PhysicsLibrary" kindref="compound">PhysicsLibrary</ref>)</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Super<sp/>=<sp/><ref refid="classSR__UTILS__NS_1_1Singleton" kindref="compound">SR_UTILS_NS::Singleton&lt;PhysicsLibrary&gt;</ref>;</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Space<sp/>=<sp/>SR_UTILS_NS::Measurement;</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">LibraryTypes<sp/>=<sp/>std::vector&lt;LibraryType&gt;;</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__PHYSICS__NS_1_1PhysicsLibrary" kindref="compound">PhysicsLibrary</ref>();</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__PHYSICS__NS_1_1PhysicsLibrary" kindref="compound">~PhysicsLibrary</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"></highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__PHYSICS__NS_1_1LibraryImpl" kindref="compound">LibraryImpl</ref>*<sp/>GetLibrary(LibraryType<sp/>type);</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__PHYSICS__NS_1_1LibraryImpl" kindref="compound">LibraryImpl</ref>*<sp/>GetActiveLibrary(Space<sp/>space);</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>LibraryTypes<sp/>GetSupportedLibraries()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"></highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__PTYPES__NS_1_1PhysicsMaterial" kindref="compound">SR_PTYPES_NS::PhysicsMaterial</ref>*<sp/>GetDefaultMaterial()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_defaultMaterial;<sp/>}</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"></highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>InitSingleton()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnSingletonDestroy()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="42"><highlight class="normal"></highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;LibraryImpl*&gt;<sp/>m_libraries;</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;Space,<sp/>LibraryType&gt;<sp/>m_activeLibs;</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::set&lt;LibraryType&gt;<sp/>m_supportedLibs;</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"></highlight></codeline>
-<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__PTYPES__NS_1_1PhysicsMaterial" kindref="compound">SR_PTYPES_NS::PhysicsMaterial</ref>*<sp/>m_defaultMaterial<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="50"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"></highlight></codeline>
-<codeline lineno="52"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_PHYSICSLIB_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Types/SharedPtr.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Physics/Utils/Utils.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SR_PTYPES_NS<sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">PhysicsMaterial;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SR_PHYSICS_NS<sp/>{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">LibraryImpl;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24" refid="classSR__PHYSICS__NS_1_1PhysicsLibrary" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__PHYSICS__NS_1_1PhysicsLibrary" kindref="compound">PhysicsLibrary</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Singleton" kindref="compound">SR_UTILS_NS::Singleton</ref>&lt;PhysicsLibrary&gt;<sp/>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_REGISTER_SINGLETON(<ref refid="classSR__PHYSICS__NS_1_1PhysicsLibrary" kindref="compound">PhysicsLibrary</ref>)</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Super<sp/>=<sp/><ref refid="classSR__UTILS__NS_1_1Singleton" kindref="compound">SR_UTILS_NS::Singleton&lt;PhysicsLibrary&gt;</ref>;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Space<sp/>=<sp/>SR_UTILS_NS::Measurement;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">LibraryTypes<sp/>=<sp/>std::vector&lt;LibraryType&gt;;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__PHYSICS__NS_1_1PhysicsLibrary" kindref="compound">PhysicsLibrary</ref>();</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__PHYSICS__NS_1_1PhysicsLibrary" kindref="compound">~PhysicsLibrary</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__PHYSICS__NS_1_1LibraryImpl" kindref="compound">LibraryImpl</ref>*<sp/>GetLibrary(LibraryType<sp/>type);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__PHYSICS__NS_1_1LibraryImpl" kindref="compound">LibraryImpl</ref>*<sp/>GetActiveLibrary(Space<sp/>space);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>LibraryTypes<sp/>GetSupportedLibraries()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;SR_PTYPES_NS::PhysicsMaterial&gt;</ref><sp/>GetDefaultMaterial()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_defaultMaterial;<sp/>}</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>InitSingleton()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnSingletonDestroy()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;LibraryImpl*&gt;<sp/>m_libraries;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;Space,<sp/>LibraryType&gt;<sp/>m_activeLibs;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::set&lt;LibraryType&gt;<sp/>m_supportedLibs;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;SR_PTYPES_NS::PhysicsMaterial&gt;</ref><sp/>m_defaultMaterial<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="51"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_PHYSICSLIB_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="Engine/libs/Physics/inc/Physics/PhysicsLib.h"/>
   </compounddef>

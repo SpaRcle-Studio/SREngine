@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="30" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="30" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="29" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GTYPES__NS_1_1Camera_1a3d9676df2b6ce44e5b77bc86c4754097" prot="private" static="no">
         <type><ref refid="classSR__UTILS__NS_1_1Component" kindref="compound">SR_UTILS_NS::Component</ref></type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="31" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="31" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="30" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="30" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="33" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="32" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="32" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="107" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="107" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="106" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="106" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1afdb73795290cf3daafbcc2499a4df8ea" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -80,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="110" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="110" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="109" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="109" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1ac5a5693a64386be267a9ec1a41aeb019" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -95,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="112" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="112" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="111" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="111" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1a3db184c7a6032e3f099f22fd5afaace7" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -110,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="114" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="114" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="113" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="113" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1a9c234cfb26cb79b89b40a6e11fef4fb3" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -125,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="120" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="120" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="119" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="119" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1a009a3030f8f4ca0d30e51e465a1320cd" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -140,7 +140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="122" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="122" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="121" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="121" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1a0abb413f8d64e1ed04246f600b81bea1" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -155,7 +155,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="124" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="124" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="123" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="123" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1ad4acb4a26aa1ce68b8663c7fdd27e578" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref></type>
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="126" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="126" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="125" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="125" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1acdff47ce44509b47c32be3cc28695920" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref></type>
@@ -183,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="127" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="127" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="126" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="126" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1ade6e1f3d207c13d64520ad380191bfb8" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref></type>
@@ -197,7 +197,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="128" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="128" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="127" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="127" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1aaea4fb538507b750bdf87ee94e3d895b" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref></type>
@@ -211,7 +211,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="129" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="129" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="128" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="128" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1a221a61bc7ebdc3ada6e5c51b647c98e7" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref></type>
@@ -225,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="130" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="130" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="129" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="129" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1a513aa8cb9cd718164b8ceae2e7ab5562" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref></type>
@@ -239,7 +239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="132" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="132" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="131" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="131" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1a8c4dfc3c3e5cfa117171ef749f1cc4d8" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -253,7 +253,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="134" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="134" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="133" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="133" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1a8aa94abca619f1fd6b9ba5da2c7d5408" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -267,7 +267,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="135" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="135" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="134" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="134" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1aa5e5121308becf5735bc6b77169fe127" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::UVector2</type>
@@ -281,7 +281,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="136" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="136" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="135" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="135" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1a164c6cc9f0f74e24c58af7dadb0d69ec" prot="private" static="no" mutable="no">
         <type>RenderTechniqueInfo</type>
@@ -296,7 +296,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="138" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="138" bodyend="138"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="137" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="137" bodyend="137"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -312,7 +312,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="36" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="35" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ac242de34bd62c6f38840bf37f8a8acfe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -326,7 +326,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="37" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="36" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a6f77bb2633d24b9b2a8e1fa3849e0e05" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -341,7 +341,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="40" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="39" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a08a31e8f19278cf24c8d370612983b4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -356,7 +356,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="41" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="40" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a80415b28eefa8c58dc1503fc65eb93e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -372,7 +372,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="42" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="41" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a0f0854c8d45651dc55c6a44f20528b2b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -394,7 +394,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="43" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="42" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a4cbe75de74328d6615d636a811847cee" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -413,7 +413,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="44" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="43" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1aadc4129a4d23df36a858973ab8ca58de" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -428,7 +428,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="46" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="46" bodyend="46"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="45" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="45" bodyend="45"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ac043be8e33d3e1bf2c08b06466f187dd" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
@@ -442,7 +442,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="49" column="66" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="49" bodyend="49"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="48" column="66" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="48" bodyend="48"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a3b7e9d3f4240eb89881154169692cc63" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
@@ -456,7 +456,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="50" column="66" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="50" bodyend="50"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="49" column="66" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="49" bodyend="49"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ad5c03a0932eaa69b6693771c1d0076cb" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
@@ -470,7 +470,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="51" column="66" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="51" bodyend="51"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="50" column="66" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="50" bodyend="50"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a79b93c612e02ed390531ea901cdd12d6" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
@@ -484,7 +484,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="52" column="66" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="52" bodyend="52"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="51" column="66" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="51" bodyend="51"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a887736d7f50d77c5f8b133614f300448" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
@@ -498,7 +498,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="53" column="66" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="53" bodyend="53"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="52" column="66" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="52" bodyend="52"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a418836a2a691249d942b88437b58d33c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref> &amp;</type>
@@ -512,7 +512,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="54" column="67" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="54" bodyend="54"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="53" column="67" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="53" bodyend="53"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ae677337d7264a0b069d02bf136d89570" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::UVector2</type>
@@ -526,7 +526,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="55" column="59" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="55" bodyend="55"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="54" column="59" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="54" bodyend="54"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a9beac6ee9a3a369748d20c573c2c03b8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -540,7 +540,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="56" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="55" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1af47099ba966e1e925987e7084d78379b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -554,7 +554,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="57" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="56" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1aaeac6e6c7b9560a49cf7b6ed22234c5a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -568,7 +568,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="58" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="57" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ad7904a1e9902362f3c720999538c276d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::FVector3 &amp;</type>
@@ -582,7 +582,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="59" column="65" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="59" bodyend="59"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="58" column="65" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="58" bodyend="58"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a6e080a7fd94c6139d5ae4cee2df26d12" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE glm::vec3</type>
@@ -596,7 +596,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="60" column="48" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="60" bodyend="60"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="59" column="48" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="59" bodyend="59"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a491365285fecd62019ca1c5aaa9c8910" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE float_t</type>
@@ -610,7 +610,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="61" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="61" bodyend="61"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="60" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="60" bodyend="60"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1aaf438a0365dfd08692aebdc1570e419b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE float_t</type>
@@ -624,7 +624,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="62" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="62" bodyend="62"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="61" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="61" bodyend="61"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a21584738fd44c76be964931a576a61ac" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE float_t</type>
@@ -638,7 +638,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="63" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="63" bodyend="63"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="62" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="62" bodyend="62"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a59e725361492b0c90c1103d41a6c7f85" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE float_t</type>
@@ -652,7 +652,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="64" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="64" bodyend="64"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="63" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="63" bodyend="63"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1aef018d22216b905182903fc1bce5557c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE int32_t</type>
@@ -666,7 +666,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="65" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="65" bodyend="65"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="64" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="64" bodyend="64"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ac03a4e3c575c08d9932d213729688d6d" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref></type>
@@ -680,7 +680,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="67" column="44"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="66" column="44"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a217a05198270499cef2c71e0d53007bd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const SR_MATH_NS::FVector3 &amp;</type>
@@ -694,7 +694,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="68" column="49"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="67" column="49"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ad1c14a9ef337688e881bcb172c82d4d4" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -712,7 +712,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="69" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="68" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a4a903be3a90733dbad3fe9e3e26ecc89" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD IRenderTechnique *</type>
@@ -726,7 +726,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="71" column="39"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="70" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a56f1a4720ad71a7ac8e65263629c99fb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD RenderScenePtr</type>
@@ -740,7 +740,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="72" column="37"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="71" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1af6318d76959d6567b2d4ea416c4b3445" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD RenderScenePtr</type>
@@ -754,7 +754,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="73" column="37"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="72" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a03e5ff8cbac4acec0dd8043a6732855d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
@@ -768,7 +768,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="74" column="46"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="73" column="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ac26989ed1043d04a05f562f31c95c4aa" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::FPoint</type>
@@ -783,7 +783,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="76" column="49"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="75" column="49"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ae0637533222c48a57acd0e1ec3f52959" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -809,7 +809,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="78" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="77" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a00252585d867c3e26a0f3e73ff363a5a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -839,7 +839,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="79" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="78" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ae0cfb85dc121a617331069bfd291ebff" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Ray" kindref="compound">SR_MATH_NS::Ray</ref></type>
@@ -861,7 +861,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="81" column="38"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="80" column="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a8feef148afcbadac678bffcffe25514e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Ray" kindref="compound">SR_MATH_NS::Ray</ref></type>
@@ -887,7 +887,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="82" column="38"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="81" column="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1aa923dea811e3ff96d420ce4d0b7b98c9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -905,7 +905,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="83" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="82" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a804eded6c3d2b51649c307280b045e02" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -923,7 +923,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="84" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="83" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1aab51d4b350f2e2331c563fe06f0ac24a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -945,7 +945,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="85" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="84" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1af720096a6ae5ad8517abb6d280fc4685" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -963,7 +963,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="87" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="86" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a2d3b02b93f204910985291199cb21224" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -981,7 +981,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="88" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="87" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a638d9fe2a73684c15bd909437a50903f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -999,7 +999,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="89" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="88" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a35eb89ae4b657d17073f9ae0d2a79c23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1017,7 +1017,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="90" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="89" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a76a5738d5676b9207c723d854d107547" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1035,7 +1035,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="92" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="91" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -1051,7 +1051,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="95" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="94" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a38cce93b8062f6f8f6c79fb1f57928be" prot="protected" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -1065,7 +1065,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="97" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="96" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a1970aad1257d0a5d231fb34a1f3f56df" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -1081,7 +1081,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="99" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="98" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a60300722f479a824b9903f08ecd1ac82" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -1096,7 +1096,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="100" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="99" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a314c3616df8aa102db40392e6b9e0658" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -1111,7 +1111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="101" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="100" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1176,7 +1176,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="24" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="24" bodyend="140"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" line="23" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="23" bodyend="139"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>BaseComponent</name></member>

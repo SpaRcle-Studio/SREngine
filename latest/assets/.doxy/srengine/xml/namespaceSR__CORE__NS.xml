@@ -4,7 +4,6 @@
     <compoundname>SR_CORE_NS</compoundname>
     <innerclass refid="classSR__CORE__NS_1_1Application" prot="public">SR_CORE_NS::Application</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1ChunkSystemState" prot="public">SR_CORE_NS::ChunkSystemState</innerclass>
-    <innerclass refid="classSR__CORE__NS_1_1CLIManager" prot="public">SR_CORE_NS::CLIManager</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1DeltaTimeState" prot="public">SR_CORE_NS::DeltaTimeState</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1DrawState" prot="public">SR_CORE_NS::DrawState</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1EditorSettings" prot="public">SR_CORE_NS::EditorSettings</innerclass>
@@ -18,7 +17,6 @@
     <innerclass refid="structSR__CORE__NS_1_1ScriptableContext" prot="public">SR_CORE_NS::ScriptableContext</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1StopState" prot="public">SR_CORE_NS::StopState</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1SubmitState" prot="public">SR_CORE_NS::SubmitState</innerclass>
-    <innerclass refid="classSR__CORE__NS_1_1TestManager" prot="public">SR_CORE_NS::TestManager</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1VisualChunk" prot="public">SR_CORE_NS::VisualChunk</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1VisualRegion" prot="public">SR_CORE_NS::VisualRegion</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1World" prot="public">SR_CORE_NS::World</innerclass>
@@ -28,68 +26,10 @@
     <innernamespace refid="namespaceSR__CORE__NS_1_1Resources">SR_CORE_NS::Resources</innernamespace>
     <innernamespace refid="namespaceSR__CORE__NS_1_1Tests">SR_CORE_NS::Tests</innernamespace>
     <sectiondef kind="func">
-      <memberdef kind="function" id="namespaceSR__CORE__NS_1a0e334548ca299d3c9183583efbf7f988" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type></type>
-        <definition>SR_CORE_NS::SR_ENUM_NS_STRUCT_T</definition>
-        <argsstring>(CLIFlags, uint32_t, None=0, UnitTests=1&lt;&lt; 0, DeleteOldApp=1&lt;&lt; 1)</argsstring>
-        <name>SR_ENUM_NS_STRUCT_T</name>
-        <qualifiedname>SR_CORE_NS::SR_ENUM_NS_STRUCT_T</qualifiedname>
-        <param>
-          <type>CLIFlags</type>
-        </param>
-        <param>
-          <type>uint32_t</type>
-        </param>
-        <param>
-          <type>None</type>
-          <defval>0</defval>
-        </param>
-        <param>
-          <type>UnitTests</type>
-          <defval>1&lt;&lt; 0</defval>
-        </param>
-        <param>
-          <type>DeleteOldApp</type>
-          <defval>1&lt;&lt; 1</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/inc/Engine/CLIManager.h" line="12" column="5" declfile="Engine/inc/Engine/CLIManager.h" declline="12" declcolumn="5"/>
-      </memberdef>
-      <memberdef kind="function" id="namespaceSR__CORE__NS_1af675ea75d8844e2a4221c98f61d22f44" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type></type>
-        <definition>SR_CORE_NS::SR_ENUM_NS_STRUCT_T</definition>
-        <argsstring>(CLIOptions, uint32_t, Resources, LogDir)</argsstring>
-        <name>SR_ENUM_NS_STRUCT_T</name>
-        <qualifiedname>SR_CORE_NS::SR_ENUM_NS_STRUCT_T</qualifiedname>
-        <param>
-          <type>CLIOptions</type>
-        </param>
-        <param>
-          <type>uint32_t</type>
-        </param>
-        <param>
-          <type>Resources</type>
-        </param>
-        <param>
-          <type>LogDir</type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/inc/Engine/CLIManager.h" line="18" column="5" declfile="Engine/inc/Engine/CLIManager.h" declline="18" declcolumn="5"/>
-      </memberdef>
-      <memberdef kind="function" id="namespaceSR__CORE__NS_1a1b7065090cb28cddf59270370fc79aa4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="namespaceSR__CORE__NS_1a108eb46f5fb37c8c979e5d46f8f05d80" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_CORE_NS::SR_ENUM_NS_CLASS_T</definition>
-        <argsstring>(EditorIcon, uint32_t, Unknown, Material, File, Back, Play, Stop, PauseActive, Pause, FrameSkip, EmptyFolder, Folder, Script, Reset, Shapes, Game, ZIP, JPG, TXT, XML, PNG, DLL, Font, Audio)</argsstring>
+        <argsstring>(EditorIcon, uint32_t, Unknown, Material, Prefab, Asset, File, Shader, Back, Play, Stop, PauseActive, Pause, FrameSkip, EmptyFolder, Folder, Script, Reset, Shapes, Game, ZIP, JPG, TXT, XML, PNG, DLL, Font, Audio)</argsstring>
         <name>SR_ENUM_NS_CLASS_T</name>
         <qualifiedname>SR_CORE_NS::SR_ENUM_NS_CLASS_T</qualifiedname>
         <param>
@@ -105,7 +45,16 @@
           <type>Material</type>
         </param>
         <param>
+          <type>Prefab</type>
+        </param>
+        <param>
+          <type>Asset</type>
+        </param>
+        <param>
           <type>File</type>
+        </param>
+        <param>
+          <type>Shader</type>
         </param>
         <param>
           <type>Back</type>

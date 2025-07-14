@@ -35,7 +35,7 @@ namespace SR_GTYPES_NS {
     public:
         void SetColor(const SR_MATH_NS::FVector4& color);
 
-        bool OnResourceReloaded(SR_UTILS_NS::IResource* pResource) override;
+        bool OnResourceReloaded(const SR_UTILS_NS::IResource* pResource) override;
 
         void OnRawMeshChanged() override;
 

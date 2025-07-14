@@ -45,7 +45,7 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**fboName**](#variable-fboname)  <br> |
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**id**](#variable-id)  <br> |
 |  uint64\_t | [**index**](#variable-index)   = `0`<br> |
-|  [**SR\_GTYPES\_NS::Texture**](classSR__GTYPES__NS_1_1Texture.md) \* | [**pTexture**](#variable-ptexture)   = `nullptr`<br> |
+|  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_GTYPES\_NS::Texture**](classSR__GTYPES__NS_1_1Texture.md) &gt; | [**pTexture**](#variable-ptexture)  <br> |
 |  uint32\_t | [**textureId**](#variable-textureid)   = `SR\_ID\_INVALID`<br> |
 
 
@@ -232,7 +232,7 @@ uint64_t SR_GRAPH_NS::ISamplersPass::Sampler::index;
 ### variable pTexture 
 
 ```C++
-SR_GTYPES_NS::Texture* SR_GRAPH_NS::ISamplersPass::Sampler::pTexture;
+SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Texture> SR_GRAPH_NS::ISamplersPass::Sampler::pTexture;
 ```
 
 

@@ -65,9 +65,9 @@
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD [**IResource**](classSR__UTILS__NS_1_1IResource.md) \* | [**GetFirstResource**](#function-getfirstresource) () const<br> |
+|  SR\_NODISCARD IResource::Ptr | [**GetFirstResource**](#function-getfirstresource) () const<br> |
 |  SR\_NODISCARD [**IResourceReloader**](classSR__UTILS__NS_1_1IResourceReloader.md) \* | [**GetReloader**](#function-getreloader) () const<br> |
-|  SR\_NODISCARD [**IResource**](classSR__UTILS__NS_1_1IResource.md) \* | [**GetResource**](#function-getresource) () const<br> |
+|  SR\_NODISCARD IResource::Ptr | [**GetResource**](#function-getresource) () const<br> |
 |   | [**ResourceInfo**](#function-resourceinfo) (uint64\_t resourceHash, [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) path, [**ResourceType**](classSR__UTILS__NS_1_1ResourceType.md) \* pResourceType) <br> |
 
 
@@ -189,7 +189,7 @@ ResourceType* SR_UTILS_NS::ResourceInfo::m_resourceType;
 ### function GetFirstResource 
 
 ```C++
-SR_NODISCARD IResource * SR_UTILS_NS::ResourceInfo::GetFirstResource () const
+SR_NODISCARD IResource::Ptr SR_UTILS_NS::ResourceInfo::GetFirstResource () const
 ```
 
 
@@ -215,7 +215,7 @@ SR_NODISCARD IResourceReloader * SR_UTILS_NS::ResourceInfo::GetReloader () const
 ### function GetResource 
 
 ```C++
-SR_NODISCARD IResource * SR_UTILS_NS::ResourceInfo::GetResource () const
+SR_NODISCARD IResource::Ptr SR_UTILS_NS::ResourceInfo::GetResource () const
 ```
 
 

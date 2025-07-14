@@ -108,7 +108,6 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  SR\_NODISCARD [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Engine**](classSR__CORE__NS_1_1Engine.md) &gt; & | [**GetEngine**](#function-getengine-22) () <br> |
 |  SR\_NODISCARD const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & | [**GetResourcesPath**](#function-getresourcespath) () const<br> |
 |  bool | [**Init**](#function-init) () <br> |
-| virtual bool | [**InitializeResourcesFolder**](#function-initializeresourcesfolder) () <br> |
 |  bool | [**PreInit**](#function-preinit) () <br> |
 |  void | [**Reload**](#function-reload) () <br> |
 |  void | [**SwitchResourcesFolder**](#function-switchresourcesfolder) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
@@ -258,6 +257,11 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 
 
 
+## Protected Functions
+
+| Type | Name |
+| ---: | :--- |
+|  bool | [**InitializeResourcesFolder**](#function-initializeresourcesfolder) () <br> |
 
 
 
@@ -379,19 +383,6 @@ bool SR_CORE_NS::Application::Init ()
 
 
 
-### function InitializeResourcesFolder 
-
-```C++
-virtual bool SR_CORE_NS::Application::InitializeResourcesFolder () 
-```
-
-
-
-
-<hr>
-
-
-
 ### function PreInit 
 
 ```C++
@@ -437,6 +428,21 @@ void SR_CORE_NS::Application::SwitchResourcesFolder (
 
 ```C++
 SR_CORE_NS::Application::~Application () 
+```
+
+
+
+
+<hr>
+## Protected Functions Documentation
+
+
+
+
+### function InitializeResourcesFolder 
+
+```C++
+bool SR_CORE_NS::Application::InitializeResourcesFolder () 
 ```
 
 

@@ -30,8 +30,6 @@ namespace SR_UTILS_NS {
 
     SR_INLINE_STATIC SR_UTILS_NS::StringAtom RESOURCE_ID_SEPARATOR = "→→→";
 
-    std::optional<Path> GetResourceFolder(const Path& appFolder);
-
     class ResourceManager final : public Singleton<ResourceManager> {
         SR_REGISTER_SINGLETON(ResourceManager)
         using Hash = uint64_t;
@@ -39,57 +37,53 @@ namespace SR_UTILS_NS {
         static const uint64_t ResourceLifeTime;
 
     public:
-        SR_NODISCARD bool IsLastResource(IResource* resource);
+        SR_NODISCARD bool IsInitialized() const { return m_isInit; }
+        SR_NODISCARD bool IsLastResource(const IResource::Ptr& pResource);
         SR_NODISCARD bool IsUsePointStackTraceProfilingEnabled() const { return m_usePointStackTraceProfiling; }
         SR_NODISCARD Path GetResPath() const;
         SR_NODISCARD const Path& GetResPathRef() const;
         SR_NODISCARD Path GetCachePath() const;
-        SR_NODISCARD std::string_view GetTypeName(Hash hashName) const;
         SR_NODISCARD FileSystemWatcher::Ptr GetFileSystemWatcher() const { return m_fileSystemWatcher; }
 
-        SR_NODISCARD IResource* Find(uint64_t hashTypeName, const std::string& ID);
+        SR_NODISCARD IResource::Ptr Find(SR_UTILS_NS::StringAtom typeName, SR_UTILS_NS::StringAtom id) const;
 
         void Synchronize(bool force);
 
-        void ReloadResource(IResource* pResource);
+        void ReloadResource(const IResource::Ptr& pResource);
 
         void Execute(const SR_HTYPES_NS::Function<void()>& fun);
-        void InspectResources(const SR_HTYPES_NS::Function<void(const ResourcesTypes &)>& callback);
+        void InspectResources(const SR_HTYPES_NS::Function<void(ResourcesTypes &)>& callback);
 
-        template<typename T> T* Find(const std::string& id) {
-            return dynamic_cast<T*>(Find(SR_COMPILE_TIME_CRC32_TYPE_NAME(T), id));
-        }
-
-        template<typename T> T* Find(const Path& path) {
+        template<typename T> SR_HTYPES_NS::SharedPtr<T> Find(const SR_UTILS_NS::StringAtom& id) {
             SR_TRACY_ZONE;
-            return dynamic_cast<T*>(Find(SR_COMPILE_TIME_CRC32_TYPE_NAME(T), path.ToStringRef()));
+            return Find(T::GetClassStaticName(), id).template DynamicCast<T>();
         }
 
-        template<typename T> bool RegisterType() {
-            if constexpr (!std::is_base_of_v<IResource, T>) {
-                static_assert(std::is_base_of_v<IResource, T>, "Resource must be derived from IResource");
-            }
-            return RegisterType(typeid(T).name(), SR_COMPILE_TIME_CRC32_TYPE_NAME(T));
+        template<typename T> SR_HTYPES_NS::SharedPtr<T> Find(const Path& path) {
+            SR_TRACY_ZONE;
+            return Find(T::GetClassStaticName(), path.ToStringRef()).template DynamicCast<T>();
         }
+
+        template<typename T> SR_HTYPES_NS::SharedPtr<T> GetOrLoadResource(const Path& rawPath);
 
         template<typename ResourceT, typename ReloaderT, typename ...Args> bool RegisterReloader(Args&&... args) {
             if constexpr (!std::is_base_of_v<IResource, ResourceT>) {
                 static_assert(std::is_base_of_v<IResource, ResourceT>, "Resource must be derived from IResource");
             }
-            return RegisterReloader(new ReloaderT(std::forward<Args>(args)...), SR_COMPILE_TIME_CRC32_TYPE_NAME(ResourceT));
+            return RegisterReloader(new ReloaderT(std::forward<Args>(args)...), ResourceT::GetClassStaticName());
         }
 
-        void RegisterResource(IResource* pResource);
+        void RegisterResource(const IResource::Ptr& pResource);
 
-        bool Destroy(IResource* pResource);
+        bool Destroy(const IResource::Ptr& pResource);
 
-        bool ReviveResource(IResource* pResource);
+        bool ReviveResource(const IResource::Ptr& pResource);
+
+        bool IsSingletonCanBeDestroyed() const override { return false; }
 
     public:
-        bool Init(const SR_UTILS_NS::Path& resourcesFolder);
-        bool Run();
-
-        void OnSingletonDestroy() override;
+        bool Initialize(const SR_UTILS_NS::Path& resourcesFolder);
+        void DeInitialize();
 
         void ReloadResources(float_t dt);
 
@@ -99,10 +93,11 @@ namespace SR_UTILS_NS {
         void EnableStackTraceProfiling();
 
     private:
-        bool RegisterType(const std::string& name, uint64_t hashTypeName);
-        bool RegisterReloader(IResourceReloader* pReloader, uint64_t hashTypeName);
+        SR_NODISCARD ResourceType* GetOrCreateResourceType(SR_UTILS_NS::StringAtom typeName);
 
-        void Remove(IResource *resource);
+        bool RegisterReloader(IResourceReloader* pReloader, SR_UTILS_NS::StringAtom typeName);
+
+        void Remove(const IResource::Ptr& pResource);
         void GC();
         void Thread();
 
@@ -131,6 +126,44 @@ namespace SR_UTILS_NS {
         uint64_t m_GCDt = 0;
 
     };
+
+    template<typename T>
+    SR_HTYPES_NS::SharedPtr<T> ResourceManager::GetOrLoadResource(const Path& rawPath) {
+        SR_TRACY_ZONE;
+        SR_LOCK_GUARD;
+
+        if (rawPath.IsEmpty()) {
+            SR_ERROR("ResourceManager::GetOrLoadResource() : path is empty! Type: {}", T::GetClassStaticName());
+            return nullptr;
+        }
+
+        Path&& path = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetResPath());
+
+        SR_HTYPES_NS::SharedPtr<T> pResource = Find<T>(path);
+
+        if (pResource) {
+            return pResource;
+        }
+
+        if (!GetResPathRef().Concat(path).Exists()) {
+            SR_ERROR("ResourceManager::GetOrLoadResource() : resource \"{}\" not existing!\n\tPath: {}", T::GetClassStaticName(), path);
+            return nullptr;
+        }
+
+        pResource = T::template MakeShared<T>();
+        pResource->SetId(path.ToStringRef(), false );
+
+        if (!pResource->Reload()) {
+            SR_ERROR("ResourceManager::GetOrLoadResource() : failed to load {}! \n\tPath: {}",
+                     T::GetClassStaticName(), path.ToStringRef());
+            pResource->DeleteResource();
+            return nullptr;
+        }
+
+        RegisterResource(pResource.template StaticCast<IResource>());
+
+        return pResource;
+    }
 }
 
 #endif //HELPER_RESOURCEMANAGER_H

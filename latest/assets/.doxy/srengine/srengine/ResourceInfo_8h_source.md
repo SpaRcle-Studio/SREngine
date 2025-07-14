@@ -21,8 +21,8 @@
 #include <Utils/Types/Map.h>
 
 namespace SR_UTILS_NS {
-    typedef std::list<IResource*> ResourcesList;
-    typedef std::unordered_set<IResource*> ResourcesSet;
+    typedef std::list<IResource::Ptr> ResourcesList;
+    typedef std::unordered_set<IResource::Ptr> ResourcesSet;
 
     class ResourceManager;
     class IResourceReloader;
@@ -38,8 +38,8 @@ namespace SR_UTILS_NS {
             , m_path(path)
         { }
 
-        SR_NODISCARD IResource* GetResource() const;
-        SR_NODISCARD IResource* GetFirstResource() const;
+        SR_NODISCARD IResource::Ptr GetResource() const;
+        SR_NODISCARD IResource::Ptr GetFirstResource() const;
         SR_NODISCARD IResourceReloader* GetReloader() const;
 
         ResourceType* m_resourceType = nullptr;
@@ -54,8 +54,10 @@ namespace SR_UTILS_NS {
         friend class ResourceManager;
         using ResourceId = SR_UTILS_NS::StringAtom;
         using ResourcePath = SR_UTILS_NS::StringAtom;
-        using CopiesMap = std::unordered_map<ResourceId, std::unordered_set<IResource*>>;
+    public:
+        using CopiesMap = std::unordered_map<ResourceId, std::unordered_set<IResource::Ptr>>;
         using Info = std::unordered_map<ResourcePath, ResourceInfo::HardPtr>;
+
     public:
         explicit ResourceType(std::string name)
             : m_name(std::move(name))
@@ -64,16 +66,17 @@ namespace SR_UTILS_NS {
         ~ResourceType() override;
 
     public:
-        SR_NODISCARD IResource* Find(const ResourceId& id);
+        SR_NODISCARD IResource::Ptr Find(const ResourceId& id);
         SR_NODISCARD bool IsLast(const ResourceId& id);
+        SR_NODISCARD CopiesMap& GetCopiesRef();
         SR_NODISCARD const CopiesMap& GetCopiesRef() const;
         SR_NODISCARD Info& GetInfo();
         SR_NODISCARD std::pair<ResourcePath, ResourceInfo::HardPtr> GetInfoByIndex(uint64_t index);
         SR_NODISCARD IResourceReloader* GetReloader() const noexcept { return m_reloader; }
         SR_NODISCARD const std::string& GetName() const { return m_name; }
 
-        void Remove(IResource* pResource);
-        void Add(IResource* pResource);
+        void Remove(const IResource::Ptr& pResource);
+        void Add(const IResource::Ptr& pResource);
 
         void SetReloader(IResourceReloader* pReloader);
 
@@ -88,7 +91,7 @@ namespace SR_UTILS_NS {
 
     };
 
-    typedef ska::flat_hash_map<uint64_t, ResourceType*> ResourcesTypes;
+    typedef ska::flat_hash_map<SR_UTILS_NS::StringAtom, ResourceType*> ResourcesTypes;
 }
 
 #endif //SR_ENGINE_RESOURCEINFO_H

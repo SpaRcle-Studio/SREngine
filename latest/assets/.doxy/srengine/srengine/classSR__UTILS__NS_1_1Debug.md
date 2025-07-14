@@ -121,16 +121,17 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 | ---: | :--- |
 |  bool | [**Assert**](#function-assert) (const std::string & msg) <br> |
 |  bool | [**AssertOnceCheck**](#function-assertoncecheck) (const std::string & msg) <br> |
+|  void | [**DeInitialize**](#function-deinitialize) () <br> |
 |   | [**Debug**](#function-debug) () <br> |
 |  void | [**Error**](#function-error) (const std::string & msg) <br> |
 |  SR\_NODISCARD Level | [**GetLevel**](#function-getlevel) () <br> |
 |  void | [**Graph**](#function-graph) (const std::string & msg) <br> |
 |  void | [**Info**](#function-info) (const std::string & msg) <br> |
-|  void | [**Init**](#function-init) (const std::string & log\_path, bool ShowUsedMemory, Theme colorTheme=Theme::Light) <br> |
+|  void | [**Initialize**](#function-initialize) (const std::string & log\_path, bool ShowUsedMemory, Theme colorTheme=Theme::Light) <br> |
 |  SR\_NODISCARD bool | [**IsInitialized**](#function-isinitialized) () const<br> |
+| virtual bool | [**IsSingletonCanBeDestroyed**](#function-issingletoncanbedestroyed) () override const<br> |
 |  void | [**Log**](#function-log) (const std::string & msg) <br> |
-|  void | [**MakeCrash**](#function-makecrash) () <br>_@method_  |
-| virtual void | [**OnSingletonDestroy**](#function-onsingletondestroy) () override<br> |
+|  void | [**MakeCrash**](#function-makecrash) () <br> |
 |  void | [**Print**](#function-print) (std::string msg, DebugLogType type) <br> |
 |  void | [**Script**](#function-script) (const std::string & msg) <br> |
 |  void | [**ScriptError**](#function-scripterror) (const std::string & msg) <br> |
@@ -139,7 +140,7 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 |  void | [**Shader**](#function-shader) (const std::string & msg) <br> |
 |  void | [**Success**](#function-success) (const std::string & msg) <br> |
 |  void | [**System**](#function-system) (const std::string & msg) <br> |
-|  void | [**TestPrint**](#function-testprint) () <br>_@method_  |
+|  void | [**TestPrint**](#function-testprint) () <br> |
 |  void | [**Vulkan**](#function-vulkan) (const std::string & msg) <br> |
 |  void | [**VulkanError**](#function-vulkanerror) (const std::string & msg) <br> |
 |  void | [**VulkanLog**](#function-vulkanlog) (const std::string & msg) <br> |
@@ -391,6 +392,19 @@ bool SR_UTILS_NS::Debug::AssertOnceCheck (
 
 
 
+### function DeInitialize 
+
+```C++
+void SR_UTILS_NS::Debug::DeInitialize () 
+```
+
+
+
+
+<hr>
+
+
+
 ### function Debug 
 
 ```C++
@@ -462,10 +476,10 @@ void SR_UTILS_NS::Debug::Info (
 
 
 
-### function Init 
+### function Initialize 
 
 ```C++
-void SR_UTILS_NS::Debug::Init (
+void SR_UTILS_NS::Debug::Initialize (
     const std::string & log_path,
     bool ShowUsedMemory,
     Theme colorTheme=Theme::Light
@@ -492,6 +506,21 @@ SR_NODISCARD bool SR_UTILS_NS::Debug::IsInitialized () const
 
 
 
+### function IsSingletonCanBeDestroyed 
+
+```C++
+inline virtual bool SR_UTILS_NS::Debug::IsSingletonCanBeDestroyed () override const
+```
+
+
+
+Implements [*SR\_UTILS\_NS::SingletonBase::IsSingletonCanBeDestroyed*](classSR__UTILS__NS_1_1SingletonBase.md#function-issingletoncanbedestroyed)
+
+
+<hr>
+
+
+
 ### function Log 
 
 ```C++
@@ -509,27 +538,11 @@ void SR_UTILS_NS::Debug::Log (
 
 ### function MakeCrash 
 
-_@method_ 
 ```C++
 void SR_UTILS_NS::Debug::MakeCrash () 
 ```
 
 
-
-
-<hr>
-
-
-
-### function OnSingletonDestroy 
-
-```C++
-virtual void SR_UTILS_NS::Debug::OnSingletonDestroy () override
-```
-
-
-
-Implements [*SR\_UTILS\_NS::SingletonBase::OnSingletonDestroy*](classSR__UTILS__NS_1_1SingletonBase.md#function-onsingletondestroy)
 
 
 <hr>
@@ -659,7 +672,6 @@ void SR_UTILS_NS::Debug::System (
 
 ### function TestPrint 
 
-_@method_ 
 ```C++
 void SR_UTILS_NS::Debug::TestPrint () 
 ```

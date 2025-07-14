@@ -22,12 +22,16 @@ namespace SR_GTYPES_NS {
     class Framebuffer;
 
     class RenderTexture : public SR_UTILS_NS::Settings {
-    private:
+        SR_CLASS()
+    public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<RenderTexture>;
+
+    public:
         RenderTexture();
         ~RenderTexture() override;
 
     public:
-        static RenderTexture* Load(const SR_UTILS_NS::Path& path);
+        static RenderTexture::Ptr Load(const SR_UTILS_NS::Path& path);
 
     protected:
         void ClearSettings() override;

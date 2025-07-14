@@ -51,9 +51,9 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Pass/IFramebufferPass.h" line="25" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/IFramebufferPass.h" bodystart="25" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1IFramebufferPass_1a4c9a862c7abb7935d1e112e5f1761da5" prot="public" static="no">
-        <type><ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">SR_GTYPES_NS::Framebuffer</ref> *</type>
-        <definition>using SR_GRAPH_NS::IFramebufferPass::FramebufferPtr =  SR_GTYPES_NS::Framebuffer*</definition>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1IFramebufferPass_1a8fd00ce8264bf9dff6363cc0c4b699cb" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">SR_GTYPES_NS::Framebuffer</ref> &gt;</type>
+        <definition>using SR_GRAPH_NS::IFramebufferPass::FramebufferPtr =  SR_HTYPES_NS::SharedPtr&lt;SR_GTYPES_NS::Framebuffer&gt;</definition>
         <argsstring></argsstring>
         <name>FramebufferPtr</name>
         <qualifiedname>SR_GRAPH_NS::IFramebufferPass::FramebufferPtr</qualifiedname>
@@ -481,7 +481,7 @@
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a91d94c55763ed513496dede464a0cdfb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IFramebufferPass</scope><name>ClearColors</name></member>
       <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a6f6e571576126604b2fac770137bdb70" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IFramebufferPass</scope><name>ColorFormats</name></member>
-      <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a4c9a862c7abb7935d1e112e5f1761da5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IFramebufferPass</scope><name>FramebufferPtr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a8fd00ce8264bf9dff6363cc0c4b699cb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IFramebufferPass</scope><name>FramebufferPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a93387ebe5820fb69594970f92c2b97be" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IFramebufferPass</scope><name>GetClearColors</name></member>
       <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a2c7f6783a7d03ea990fd4642b3d7043d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IFramebufferPass</scope><name>GetClearDepth</name></member>
       <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a3173139e9ba2929ad7e5c71b8d06e7c3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IFramebufferPass</scope><name>GetFramebuffer</name></member>

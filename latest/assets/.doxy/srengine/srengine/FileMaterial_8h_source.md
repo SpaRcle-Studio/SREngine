@@ -21,14 +21,16 @@ namespace SR_GRAPH_NS {
     class FileMaterialResource final : public SR_UTILS_NS::IResource {
         using Super = SR_UTILS_NS::IResource;
     public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<FileMaterialResource>;
+
+    public:
         FileMaterialResource();
 
     public:
         SR_NODISCARD static bool CreateTemplateMaterial(const SR_UTILS_NS::Path& path);
-        static FileMaterialResource* Load(const SR_UTILS_NS::Path& rawPath);
+        SR_NODISCARD static FileMaterialResource::Ptr Load(const SR_UTILS_NS::Path& rawPath);
 
     public:
-        SR_NODISCARD SR_UTILS_NS::IResource::Ptr CopyResource(SR_UTILS_NS::IResource::Ptr pDestination) const override;
         SR_NODISCARD const SR_GRAPH_NS::MaterialData::Ptr& GetData() const noexcept { return m_data; }
 
     private:
@@ -66,7 +68,7 @@ namespace SR_GRAPH_NS {
         SR_VIRTUAL_PROPERTY
         SR_VIRTUAL_PROPERTY
 
-        FileMaterialResource* m_pResource = nullptr;
+        FileMaterialResource::Ptr m_pResource = nullptr;
 
         SR_UTILS_NS::Subscription m_reloadBeginSubscription;
         SR_UTILS_NS::Subscription m_reloadDoneSubscription;

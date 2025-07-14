@@ -59,8 +59,10 @@ Inherits the following classes: Singleton< Factory >
 | ---: | :--- |
 |  bool | [**Create**](#function-create) ([**Ptr**](classSR__HTYPES__NS_1_1Thread.md) & pThread, Functor && fn, Args &&... args) <br> |
 |  SR\_NODISCARD [**Ptr**](classSR__HTYPES__NS_1_1Thread.md) | [**CreateEmpty**](#function-createempty) () <br> |
+|  void | [**DeInitialize**](#function-deinitialize) () <br> |
 |  SR\_NODISCARD [**Ptr**](classSR__HTYPES__NS_1_1Thread.md) | [**GetMainThread**](#function-getmainthread) () <br> |
 |  SR\_NODISCARD [**Ptr**](classSR__HTYPES__NS_1_1Thread.md) | [**GetThisThread**](#function-getthisthread) () <br> |
+|  bool | [**IsSingletonCanBeDestroyed**](#function-issingletoncanbedestroyed) () override const<br> |
 |  void | [**PrintThreads**](#function-printthreads) () <br> |
 |  void | [**SetMainThread**](#function-setmainthread) () <br> |
 |  SR\_NODISCARD [**Ptr**](classSR__HTYPES__NS_1_1Thread.md) | [**TryGetThisThread**](#function-trygetthisthread) () <br> |
@@ -149,6 +151,19 @@ SR_NODISCARD Ptr SR_HTYPES_NS::Thread::Factory::CreateEmpty ()
 
 
 
+### function DeInitialize 
+
+```C++
+void SR_HTYPES_NS::Thread::Factory::DeInitialize () 
+```
+
+
+
+
+<hr>
+
+
+
 ### function GetMainThread 
 
 ```C++
@@ -166,6 +181,19 @@ SR_NODISCARD Ptr SR_HTYPES_NS::Thread::Factory::GetMainThread ()
 
 ```C++
 SR_NODISCARD Ptr SR_HTYPES_NS::Thread::Factory::GetThisThread () 
+```
+
+
+
+
+<hr>
+
+
+
+### function IsSingletonCanBeDestroyed 
+
+```C++
+inline bool SR_HTYPES_NS::Thread::Factory::IsSingletonCanBeDestroyed () override const
 ```
 
 

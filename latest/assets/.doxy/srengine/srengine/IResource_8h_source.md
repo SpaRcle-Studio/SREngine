@@ -22,6 +22,7 @@
 #include <Utils/Common/SubscriptionHolder.h>
 #include <Utils/Types/Function.h>
 #include <Utils/Types/SharedPtr.h>
+#include <Utils/Serialization/Serializable.h>
 #include <Utils/Resources/ResourceContainer.h>
 #include <Utils/Resources/FileWatcher.h>
 
@@ -32,15 +33,15 @@ namespace SR_UTILS_NS {
 
     struct ResourceInfo;
 
-    class SR_COMMON_DLL_API IResource : public ResourceContainer, public SubscriptionHolder {
+    class SR_COMMON_DLL_API IResource : public ResourceContainer, public SubscriptionHolder, public Serializable {
+        SR_CLASS()
         friend class ResourceType;
-        using Super = ResourceContainer;
         using ResourceInfoWeakPtr = std::weak_ptr<ResourceInfo>;
     public:
         SR_INLINE_STATIC const StringAtom RELOAD_BEGIN_EVENT = "ReloadBegin";
         SR_INLINE_STATIC const StringAtom RELOAD_DONE_EVENT = "ReloadDone";
 
-        using Ptr = IResource*;
+        using Ptr = SR_HTYPES_NS::SharedPtr<IResource>;
 
         enum class LoadState : uint8_t {
             Unknown, Loaded, Reloading, Loading, Unloading, Unloaded, Error
@@ -50,8 +51,8 @@ namespace SR_UTILS_NS {
             Delete, Destroy, Success, Error
         };
 
-    protected:
-        explicit IResource(uint64_t hashName);
+    public:
+        IResource();
         ~IResource() override;
 
     public:
@@ -73,18 +74,14 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool IsAlive() const { return m_lifetime > 0; }
         SR_NODISCARD uint16_t GetReloadCount() const noexcept;
         SR_NODISCARD uint64_t GetLifetime() const noexcept { return m_lifetime; }
-        SR_NODISCARD uint64_t GetResourceHashName() const noexcept { return m_resourceHashName; }
         SR_NODISCARD SR_UTILS_NS::StringAtom GetResourceId() const noexcept;
         SR_NODISCARD LoadState GetResourceLoadState() const { return m_loadState; }
         SR_NODISCARD uint64_t GetResourceHash() const noexcept { return m_resourceHash; }
         SR_NODISCARD ResourceInfoWeakPtr GetResourceInfo() const noexcept { return m_resourceInfo; }
         SR_NODISCARD bool IsResourceFromMemory() const noexcept { return m_isFromMemory; }
 
-        SR_NODISCARD std::string_view GetResourceName() const;
-        SR_NODISCARD StringAtom GetResourcePath() const;
+        SR_NODISCARD SR_UTILS_NS::Path GetResourcePath() const;
         SR_NODISCARD uint16_t GetCountUses() const noexcept;
-
-        SR_NODISCARD virtual IResource* CopyResource(IResource* destination) const;
 
         void AddUsePoint();
 
@@ -121,13 +118,7 @@ namespace SR_UTILS_NS {
 
         virtual void ReviveResource();
 
-        template<typename T> bool IsResourceType() const noexcept {
-            return m_resourceHashName == SR_COMPILE_TIME_CRC32_TYPE_NAME(T);
-        }
-
     protected:
-        const uint64_t m_resourceHashName = 0;
-
         std::atomic<LoadState> m_loadState = LoadState::Unknown;
 
         std::atomic<uint16_t> m_countUses = 0;
@@ -145,7 +136,7 @@ namespace SR_UTILS_NS {
         uint64_t m_resourceHash = 0;
 
         SR_UTILS_NS::StringAtom m_resourceId;
-        SR_UTILS_NS::StringAtom m_resourcePath;
+        SR_UTILS_NS::Path m_resourcePath;
 
         uint16_t m_reloadCount = 0;
 

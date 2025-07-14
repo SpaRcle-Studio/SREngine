@@ -14,6 +14,7 @@
 * `#include <Utils/Types/SafePointer.h>`
 * `#include <Utils/ECS/SceneObject.h>`
 * `#include <Graphics/GUI/WidgetManager.h>`
+* `#include <Graphics/Types/Texture.h>`
 
 
 
@@ -34,7 +35,6 @@
 | namespace | [**SR\_CORE\_GUI\_NS**](namespaceSR__CORE__GUI__NS.md) <br> |
 | namespace | [**SR\_CORE\_NS**](namespaceSR__CORE__NS.md) <br> |
 | namespace | [**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md) <br> |
-| namespace | [**SR\_GTYPES\_NS**](namespaceSR__GTYPES__NS.md) <br> |
 | namespace | [**SR\_WORLD\_NS**](namespaceSR__WORLD__NS.md) <br> |
 
 

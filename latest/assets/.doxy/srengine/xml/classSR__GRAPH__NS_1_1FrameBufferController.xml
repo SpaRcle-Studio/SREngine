@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="38" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="39" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FrameBufferController_1ab7fd688b91d2e177a6a9f5b45327e4c4" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="39" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="39" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="40" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FrameBufferController_1a99cda2916a8382be9731353bf46a8b4b" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector2</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="41" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="41" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="42" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FrameBufferController_1a34c9d2c0ebf1a311ef4d860b89ab8771" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::IVector2</type>
@@ -105,22 +105,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="42" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="42" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="43" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="43" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FrameBufferController_1ac39755ba386b37cb4024eecfebcc892c" prot="private" static="no" mutable="no">
-        <type><ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">SR_GTYPES_NS::Framebuffer</ref> *</type>
-        <definition>SR_GTYPES_NS::Framebuffer* SR_GRAPH_NS::FrameBufferController::m_framebuffer</definition>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FrameBufferController_1ab71df1ad87d331df8fb50ce4f5491fd5" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">SR_GTYPES_NS::Framebuffer</ref> &gt;</type>
+        <definition>SR_HTYPES_NS::SharedPtr&lt;SR_GTYPES_NS::Framebuffer&gt; SR_GRAPH_NS::FrameBufferController::m_framebuffer</definition>
         <argsstring></argsstring>
         <name>m_framebuffer</name>
         <qualifiedname>SR_GRAPH_NS::FrameBufferController::m_framebuffer</qualifiedname>
-        <initializer>= nullptr</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="44" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="45" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FrameBufferController_1a7d4dcfae43720d9a4b6acbe25e6ae360" prot="private" static="no" mutable="no">
         <type>ColorFormats</type>
@@ -134,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="46" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="46" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="47" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FrameBufferController_1a90bb5a2caec9f5c95faa0c3fc6f7edcd" prot="private" static="no" mutable="no">
         <type><ref refid="structSR__GRAPH__NS_1_1FrameBufferFeatures" kindref="compound">FrameBufferFeatures</ref></type>
@@ -148,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="48" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="48" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="49" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FrameBufferController_1a1a166157ee11b1b70106481bcc8838ca" prot="private" static="no" mutable="no">
         <type>uint8_t</type>
@@ -163,7 +162,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="49" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="49" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="50" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="50" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FrameBufferController_1ae06a9a193e72ba1e652f314710676914" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -178,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="50" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="50" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="51" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FrameBufferController_1ab9c292a80e8616b92618fa1c2f8d884c" prot="private" static="no" mutable="no">
         <type>ImageFormat</type>
@@ -193,7 +192,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="51" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="52" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FrameBufferController_1a55fffe6708b2ede0a39b1b75c1f7ba56" prot="private" static="no" mutable="no">
         <type>ImageAspect</type>
@@ -208,7 +207,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="52" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="52" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="53" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="53" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -240,9 +239,9 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="26" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1FrameBufferController_1a542d4243ee6296ff0bdc7ddd13f5602b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD <ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">SR_GTYPES_NS::Framebuffer</ref> *</type>
-        <definition>SR_NODISCARD SR_GTYPES_NS::Framebuffer * SR_GRAPH_NS::FrameBufferController::GetFramebuffer</definition>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1FrameBufferController_1ab6e11602d1e0346422468e9026144765" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">SR_GTYPES_NS::Framebuffer</ref> &gt; &amp;</type>
+        <definition>SR_NODISCARD const SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Framebuffer &gt; &amp; SR_GRAPH_NS::FrameBufferController::GetFramebuffer</definition>
         <argsstring>() const noexcept</argsstring>
         <name>GetFramebuffer</name>
         <qualifiedname>SR_GRAPH_NS::FrameBufferController::GetFramebuffer</qualifiedname>
@@ -252,7 +251,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="29" column="48" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="29" bodyend="29"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="29" column="52" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1FrameBufferController_1aa6931a873b05b26234c0be9acd3815d5" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">SR_GTYPES_NS::Framebuffer</ref> &gt; &amp;</type>
+        <definition>SR_NODISCARD SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Framebuffer &gt; &amp; SR_GRAPH_NS::FrameBufferController::GetFramebuffer</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>GetFramebuffer</name>
+        <qualifiedname>SR_GRAPH_NS::FrameBufferController::GetFramebuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="30" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="30" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FrameBufferController_1a4b3a25d1947ccbe17eae07731a7880c9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint8_t</type>
@@ -266,7 +279,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="30" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="30" bodyend="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="31" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="31" bodyend="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FrameBufferController_1adcd956ceb5ee15a2b94cd7a3576abea6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -284,7 +297,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="32" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="33" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FrameBufferController_1a5427a7a1de770ed4c28b11c62a0eb774" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -302,7 +315,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="33" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="34" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FrameBufferController_1a1c5df9597dbc3c142def9743fb67fa02" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -320,7 +333,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="35" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="36" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -370,7 +383,7 @@
         <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="20" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="20" bodyend="54"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" line="20" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h" bodystart="20" bodyend="55"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferController</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferController</scope><name>AutoFree</name></member>
@@ -381,7 +394,8 @@
       <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a9937bca0e5866e6478d61da952f1a171" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferController</scope><name>FrameBufferController</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferController</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferController</scope><name>Get</name></member>
-      <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a542d4243ee6296ff0bdc7ddd13f5602b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferController</scope><name>GetFramebuffer</name></member>
+      <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1ab6e11602d1e0346422468e9026144765" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferController</scope><name>GetFramebuffer</name></member>
+      <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1aa6931a873b05b26234c0be9acd3815d5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferController</scope><name>GetFramebuffer</name></member>
       <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a4b3a25d1947ccbe17eae07731a7880c9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferController</scope><name>GetLayersCount</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferController</scope><name>GetPtrData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferController</scope><name>GetPtrData</name></member>
@@ -402,7 +416,7 @@
       <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1ab9c292a80e8616b92618fa1c2f8d884c" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferController</scope><name>m_depthFormat</name></member>
       <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a8838749bcc10e90ac0500360f663a15e" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferController</scope><name>m_dynamicResizing</name></member>
       <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a90bb5a2caec9f5c95faa0c3fc6f7edcd" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferController</scope><name>m_features</name></member>
-      <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1ac39755ba386b37cb4024eecfebcc892c" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferController</scope><name>m_framebuffer</name></member>
+      <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1ab71df1ad87d331df8fb50ce4f5491fd5" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferController</scope><name>m_framebuffer</name></member>
       <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1ae06a9a193e72ba1e652f314710676914" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferController</scope><name>m_layersCount</name></member>
       <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a99cda2916a8382be9731353bf46a8b4b" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferController</scope><name>m_preScale</name></member>
       <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a1a166157ee11b1b70106481bcc8838ca" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferController</scope><name>m_samples</name></member>

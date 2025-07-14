@@ -36,7 +36,8 @@ namespace SR_GRAPH_NS {
         ~FrameBufferController();
 
     public:
-        SR_NODISCARD SR_GTYPES_NS::Framebuffer* GetFramebuffer() const noexcept { return m_framebuffer; }
+        SR_NODISCARD const SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Framebuffer>& GetFramebuffer() const noexcept { return m_framebuffer; }
+        SR_NODISCARD SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Framebuffer>& GetFramebuffer() noexcept { return m_framebuffer; }
         SR_NODISCARD uint8_t GetLayersCount() const noexcept { return m_layersCount; }
 
         bool LoadFramebufferSettings(const SR_XML_NS::Node& settingsNode);
@@ -51,7 +52,7 @@ namespace SR_GRAPH_NS {
         SR_MATH_NS::FVector2 m_preScale = SR_MATH_NS::FVector2(1.f);
         SR_MATH_NS::IVector2 m_size;
 
-        SR_GTYPES_NS::Framebuffer* m_framebuffer = nullptr;
+        SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Framebuffer> m_framebuffer;
 
         ColorFormats m_colorFormats;
 

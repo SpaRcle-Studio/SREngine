@@ -58,9 +58,11 @@
 | struct | [**AnyVisitor**](structSR__UTILS__NS_1_1AnyVisitor.md) &lt;Ts&gt;<br> |
 | struct | [**AnyVisitor&lt;&gt;**](structSR__UTILS__NS_1_1AnyVisitor_3_4.md) &lt;&gt;<br> |
 | class | [**ArrayReferenceProperty**](classSR__UTILS__NS_1_1ArrayReferenceProperty.md) <br>_---------------------------------------_  __[_**ArrayReferenceProperty**_](classSR__UTILS__NS_1_1ArrayReferenceProperty.md) _-------------------------------------------_ __ |
+| class | [**Asset**](classSR__UTILS__NS_1_1Asset.md) <br> |
 | class | [**AtlasBuilderTest**](classSR__UTILS__NS_1_1AtlasBuilderTest.md) <br> |
 | class | [**BaseFactory**](classSR__UTILS__NS_1_1BaseFactory.md) <br> |
 | class | [**Broadcaster**](classSR__UTILS__NS_1_1Broadcaster.md) <br> |
+| class | [**CLIManager**](classSR__UTILS__NS_1_1CLIManager.md) <br> |
 | class | [**CameraFlyMover**](classSR__UTILS__NS_1_1CameraFlyMover.md) <br> |
 | struct | [**CheckOperatorUsable**](structSR__UTILS__NS_1_1CheckOperatorUsable.md) &lt;Op, class X, class Y, typename&gt;<br> |
 | struct | [**CheckOperatorUsable&lt; CheckerEqualityComparable, std::optional&lt; T &gt;, std::optional&lt; T &gt; &gt;**](structSR__UTILS__NS_1_1CheckOperatorUsable_3_01CheckerEqualityComparable_00_01std_1_1optional_3_835c32e76e2a52d0e0f22fbe39d31aa3.md) &lt;typename T&gt;<br> |
@@ -119,6 +121,7 @@
 | class | [**IResource**](classSR__UTILS__NS_1_1IResource.md) <br> |
 | class | [**IResourceReloader**](classSR__UTILS__NS_1_1IResourceReloader.md) <br> |
 | class | [**ISerializer**](classSR__UTILS__NS_1_1ISerializer.md) <br> |
+| class | [**ITestController**](classSR__UTILS__NS_1_1ITestController.md) <br> |
 | class | [**Input**](classSR__UTILS__NS_1_1Input.md) <br> |
 | class | [**InputDeviceData**](classSR__UTILS__NS_1_1InputDeviceData.md) <br> |
 | class | [**InputDispatcher**](classSR__UTILS__NS_1_1InputDispatcher.md) <br> |
@@ -199,6 +202,7 @@
 | struct | [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) <br> |
 | struct | [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) <br> |
 | struct | [**SerializationTraits**](structSR__UTILS__NS_1_1SerializationTraits.md) &lt;typename T&gt;<br> |
+| class | [**SharedPtrTest**](classSR__UTILS__NS_1_1SharedPtrTest.md) <br> |
 | class | [**Singleton**](classSR__UTILS__NS_1_1Singleton.md) &lt;typename T&gt;<br> |
 | class | [**SingletonBase**](classSR__UTILS__NS_1_1SingletonBase.md) <br> |
 | class | [**SingletonManager**](classSR__UTILS__NS_1_1SingletonManager.md) <br> |
@@ -219,6 +223,9 @@
 | class | [**TagManager**](classSR__UTILS__NS_1_1TagManager.md) <br> |
 | class | [**Task**](classSR__UTILS__NS_1_1Task.md) <br> |
 | class | [**TaskManager**](classSR__UTILS__NS_1_1TaskManager.md) <br> |
+| class | [**TestGroupController**](classSR__UTILS__NS_1_1TestGroupController.md) <br> |
+| class | [**TestManager**](classSR__UTILS__NS_1_1TestManager.md) <br> |
+| class | [**TestManagerAsset**](classSR__UTILS__NS_1_1TestManagerAsset.md) <br> |
 | class | [**ThreadWorker**](classSR__UTILS__NS_1_1ThreadWorker.md) <br> |
 | class | [**ThreadWorkerStateBase**](classSR__UTILS__NS_1_1ThreadWorkerStateBase.md) <br> |
 | class | [**ThreadWorkerStateRegistration**](classSR__UTILS__NS_1_1ThreadWorkerStateRegistration.md) <br> |
@@ -257,9 +264,9 @@
 | typedef typename [**RemoveCVRef**](structSR__UTILS__NS_1_1RemoveCVRef.md)&lt; T &gt;::type | [**RemoveCVRefT**](#typedef-removecvreft)  <br> |
 | typedef std::remove\_const\_t&lt; std::remove\_reference\_t&lt; std::remove\_const\_t&lt; std::remove\_volatile\_t&lt; T &gt; &gt; &gt; &gt; | [**RemoveQualifiersT**](#typedef-removequalifierst)  <br> |
 | typedef typename [**RemoveReference**](structSR__UTILS__NS_1_1RemoveReference.md)&lt; T &gt;::Type | [**RemoveReferenceT**](#typedef-removereferencet)  <br> |
-| typedef std::list&lt; [**IResource**](classSR__UTILS__NS_1_1IResource.md) \* &gt; | [**ResourcesList**](#typedef-resourceslist)  <br> |
-| typedef std::unordered\_set&lt; [**IResource**](classSR__UTILS__NS_1_1IResource.md) \* &gt; | [**ResourcesSet**](#typedef-resourcesset)  <br> |
-| typedef ska::flat\_hash\_map&lt; uint64\_t, [**ResourceType**](classSR__UTILS__NS_1_1ResourceType.md) \* &gt; | [**ResourcesTypes**](#typedef-resourcestypes)  <br> |
+| typedef std::list&lt; IResource::Ptr &gt; | [**ResourcesList**](#typedef-resourceslist)  <br> |
+| typedef std::unordered\_set&lt; IResource::Ptr &gt; | [**ResourcesSet**](#typedef-resourcesset)  <br> |
+| typedef ska::flat\_hash\_map&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md), [**ResourceType**](classSR__UTILS__NS_1_1ResourceType.md) \* &gt; | [**ResourcesTypes**](#typedef-resourcestypes)  <br> |
 | typedef uint64\_t | [**SRHashType**](#typedef-srhashtype)  <br> |
 | union  | [**SerializationTrivialDataType**](#union-serializationtrivialdatatype)  <br> |
 | union  | [**StandardData**](#union-standarddata)  <br> |
@@ -357,7 +364,6 @@
 |  constexpr uint8\_t | [**GetMathVectorDim**](#function-getmathvectordim) () <br> |
 |  constexpr StandardType | [**GetMathVectorType**](#function-getmathvectortype) (const StandardType type) <br> |
 |  constexpr StandardType | [**GetMathVectorType**](#function-getmathvectortype) () <br> |
-|  std::optional&lt; [**Path**](classSR__UTILS__NS_1_1Path.md) &gt; | [**GetResourceFolder**](#function-getresourcefolder) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & appFolder) <br> |
 |  SR\_COMMON\_DLL\_API [**SingletonManager**](classSR__UTILS__NS_1_1SingletonManager.md) \* | [**GetSingletonManager**](#function-getsingletonmanager) () noexcept<br> |
 |  SR\_COMMON\_DLL\_API std::string | [**GetStacktrace**](#function-getstacktrace) () <br> |
 |  constexpr StandardType | [**GetStandardType**](#function-getstandardtype) () <br> |
@@ -399,6 +405,9 @@
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (PlatformType, uint8\_t, Unknown, Windows, Linux, Android, MacOS, Emscripten) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (ThreadWorkerState, uint8\_t, Idle, Working, Ready) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (ThreadWorkerResult, uint8\_t, Success, Working, Repeat, Break) <br> |
+|   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (TestExecutionResult, uint8\_t, Success, Error, Fatal, Skipped, Count) <br> |
+|   | [**SR\_ENUM\_NS\_STRUCT\_T**](#function-sr_enum_ns_struct_t) (CLIFlags, uint32\_t, None=0, UnitTests=1&lt;&lt; 0, ContinueAfterTests=1&lt;&lt; 1, DeleteOldApp=1&lt;&lt; 2) <br> |
+|   | [**SR\_ENUM\_NS\_STRUCT\_T**](#function-sr_enum_ns_struct_t) (CLIOptions, uint32\_t, Resources, LogDir) <br> |
 |   | [**SR\_ENUM\_NS\_STRUCT\_T**](#function-sr_enum_ns_struct_t) (SerializationFlags, uint64\_t, None=1&lt;&lt; 0, Compress=1&lt;&lt; 1, NoUID=1&lt;&lt; 2, DontSave=1&lt;&lt; 3) <br>_Флаги для сериализатора объектов_  |
 |   | [**SR\_ENUM\_NS\_T**](#function-sr_enum_ns_t) (ThreadPriority, int8\_t, SR\_THREAD\_PRIORITY\_ABOVE\_NORMAL, SR\_THREAD\_PRIORITY\_BELOW\_NORMAL, SR\_THREAD\_PRIORITY\_HIGHEST, SR\_THREAD\_PRIORITY\_IDLE, SR\_THREAD\_PRIORITY\_LOWEST, SR\_THREAD\_PRIORITY\_NORMAL, SR\_THREAD\_PRIORITY\_TIME\_CRITICAL) <br> |
 |  SR\_COMMON\_DLL\_API void | [**StacktraceInit**](#function-stacktraceinit) () <br> |
@@ -419,7 +428,6 @@
 |  SR\_MAYBE\_UNUSED uint64\_t | [**GetTypeSize**](#function-gettypesize) (const StandardType & type) <br> |
 |  std::vector&lt; T &gt; | [**IndexedVerticesToNonIndexed**](#function-indexedverticestononindexed) (const std::vector&lt; T &gt; & vertices, const std::vector&lt; uint32\_t &gt; & indices) <br> |
 |  SR\_MAYBE\_UNUSED bool | [**IsNumber**](#function-isnumber) (const StandardType & type) <br> |
-|  bool | [**RunTestSharedPtr**](#function-runtestsharedptr) () <br> |
 |  SR\_MAYBE\_UNUSED std::wstring | [**s2ws**](#function-s2ws) (const std::string & str) <br> |
 |  SR\_MAYBE\_UNUSED std::string | [**ws2s**](#function-ws2s) (const std::wstring & wstr) <br> |
 
@@ -721,7 +729,7 @@ using SR_UTILS_NS::RemoveReferenceT = typedef typename RemoveReference<T>::Type;
 ### typedef ResourcesList 
 
 ```C++
-typedef std::list<IResource*> SR_UTILS_NS::ResourcesList;
+typedef std::list<IResource::Ptr> SR_UTILS_NS::ResourcesList;
 ```
 
 
@@ -734,7 +742,7 @@ typedef std::list<IResource*> SR_UTILS_NS::ResourcesList;
 ### typedef ResourcesSet 
 
 ```C++
-typedef std::unordered_set<IResource*> SR_UTILS_NS::ResourcesSet;
+typedef std::unordered_set<IResource::Ptr> SR_UTILS_NS::ResourcesSet;
 ```
 
 
@@ -747,7 +755,7 @@ typedef std::unordered_set<IResource*> SR_UTILS_NS::ResourcesSet;
 ### typedef ResourcesTypes 
 
 ```C++
-typedef ska::flat_hash_map<uint64_t, ResourceType*> SR_UTILS_NS::ResourcesTypes;
+typedef ska::flat_hash_map<SR_UTILS_NS::StringAtom, ResourceType*> SR_UTILS_NS::ResourcesTypes;
 ```
 
 
@@ -1746,21 +1754,6 @@ constexpr StandardType SR_UTILS_NS::GetMathVectorType ()
 
 
 
-### function GetResourceFolder 
-
-```C++
-std::optional< Path > SR_UTILS_NS::GetResourceFolder (
-    const Path & appFolder
-) 
-```
-
-
-
-
-<hr>
-
-
-
 ### function GetSingletonManager 
 
 ```C++
@@ -2573,6 +2566,65 @@ SR_UTILS_NS::SR_ENUM_NS_CLASS_T (
 
 
 
+### function SR\_ENUM\_NS\_CLASS\_T 
+
+```C++
+SR_UTILS_NS::SR_ENUM_NS_CLASS_T (
+    TestExecutionResult,
+    uint8_t,
+    Success,
+    Error,
+    Fatal,
+    Skipped,
+    Count
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SR\_ENUM\_NS\_STRUCT\_T 
+
+```C++
+SR_UTILS_NS::SR_ENUM_NS_STRUCT_T (
+    CLIFlags,
+    uint32_t,
+    None=0,
+    UnitTests=1<< 0,
+    ContinueAfterTests=1<< 1,
+    DeleteOldApp=1<< 2
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SR\_ENUM\_NS\_STRUCT\_T 
+
+```C++
+SR_UTILS_NS::SR_ENUM_NS_STRUCT_T (
+    CLIOptions,
+    uint32_t,
+    Resources,
+    LogDir
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function SR\_ENUM\_NS\_STRUCT\_T 
 
 _Флаги для сериализатора объектов_ 
@@ -2796,19 +2848,6 @@ static std::vector< T > SR_UTILS_NS::IndexedVerticesToNonIndexed (
 static SR_MAYBE_UNUSED bool SR_UTILS_NS::IsNumber (
     const StandardType & type
 ) 
-```
-
-
-
-
-<hr>
-
-
-
-### function RunTestSharedPtr 
-
-```C++
-static bool SR_UTILS_NS::RunTestSharedPtr () 
 ```
 
 

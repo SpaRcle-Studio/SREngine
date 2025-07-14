@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classSR__GRAPH__NS_1_1FileRenderTechniqueResource" kind="class" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::FileRenderTechniqueResource</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">SR_UTILS_NS::Settings</basecompoundref>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a79910eb909860f5c88cd36e74c67e3ba" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource" kindref="compound">FileRenderTechniqueResource</ref> &gt;</type>
+        <definition>using SR_GRAPH_NS::FileRenderTechniqueResource::Ptr =  SR_HTYPES_NS::SharedPtr&lt;FileRenderTechniqueResource&gt;</definition>
+        <argsstring></argsstring>
+        <name>Ptr</name>
+        <qualifiedname>SR_GRAPH_NS::FileRenderTechniqueResource::Ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="41" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a358d57d767e6d0c5c2c2a8ff9a6edd40" prot="protected" static="no" mutable="no">
+        <type>std::set&lt; FileRenderTechnique::Ptr &gt;</type>
+        <definition>std::set&lt;FileRenderTechnique::Ptr&gt; SR_GRAPH_NS::FileRenderTechniqueResource::m_renderTechniques</definition>
+        <argsstring></argsstring>
+        <name>m_renderTechniques</name>
+        <qualifiedname>SR_GRAPH_NS::FileRenderTechniqueResource::m_renderTechniques</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="63" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1ab1bed88dcaddcda43b7bd6ddbe50fb1f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::FileRenderTechniqueResource::FileRenderTechniqueResource</definition>
+        <argsstring>()=default</argsstring>
+        <name>FileRenderTechniqueResource</name>
+        <qualifiedname>SR_GRAPH_NS::FileRenderTechniqueResource::FileRenderTechniqueResource</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="44" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a693236ed0b85763ea58c614cb9bde62c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::FileRenderTechniqueResource::RegisterRenderTechnique</definition>
+        <argsstring>(const FileRenderTechnique::Ptr &amp;renderTechnique)</argsstring>
+        <name>RegisterRenderTechnique</name>
+        <qualifiedname>SR_GRAPH_NS::FileRenderTechniqueResource::RegisterRenderTechnique</qualifiedname>
+        <param>
+          <type>const FileRenderTechnique::Ptr &amp;</type>
+          <declname>renderTechnique</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="50" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" bodystart="50" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a0fbba58a4904c8e27fda0aef49ec5a89" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::FileRenderTechniqueResource::UnregisterRenderTechnique</definition>
+        <argsstring>(const FileRenderTechnique::Ptr &amp;renderTechnique)</argsstring>
+        <name>UnregisterRenderTechnique</name>
+        <qualifiedname>SR_GRAPH_NS::FileRenderTechniqueResource::UnregisterRenderTechnique</qualifiedname>
+        <param>
+          <type>const FileRenderTechnique::Ptr &amp;</type>
+          <declname>renderTechnique</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="54" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" bodystart="54" bodyend="56"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a5f9504bcc4a141d3e1c6784a4b348159" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>FileRenderTechniqueResource::Ptr</type>
+        <definition>static FileRenderTechniqueResource::Ptr SR_GRAPH_NS::FileRenderTechniqueResource::Load</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;path)</argsstring>
+        <name>Load</name>
+        <qualifiedname>SR_GRAPH_NS::FileRenderTechniqueResource::Load</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="47" column="49"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1ab9f89cfdaa2cafcd347c93f3c907cedc" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::FileRenderTechniqueResource::Load</definition>
+        <argsstring>() override</argsstring>
+        <name>Load</name>
+        <qualifiedname>SR_GRAPH_NS::FileRenderTechniqueResource::Load</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="59" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a9303cf33087e9b44c416a271e567f5af" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::FileRenderTechniqueResource::Unload</definition>
+        <argsstring>() override</argsstring>
+        <name>Unload</name>
+        <qualifiedname>SR_GRAPH_NS::FileRenderTechniqueResource::Unload</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="60" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::FileRenderTechniqueResource</label>
+        <link refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Settings</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::FileRenderTechniqueResource</label>
+        <link refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Settings</label>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="38" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" bodystart="38" bodyend="65"/>
+    <listofallmembers>
+      <member refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1ab1bed88dcaddcda43b7bd6ddbe50fb1f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechniqueResource</scope><name>FileRenderTechniqueResource</name></member>
+      <member refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a5f9504bcc4a141d3e1c6784a4b348159" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechniqueResource</scope><name>Load</name></member>
+      <member refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1ab9f89cfdaa2cafcd347c93f3c907cedc" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechniqueResource</scope><name>Load</name></member>
+      <member refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a358d57d767e6d0c5c2c2a8ff9a6edd40" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechniqueResource</scope><name>m_renderTechniques</name></member>
+      <member refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a79910eb909860f5c88cd36e74c67e3ba" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechniqueResource</scope><name>Ptr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a693236ed0b85763ea58c614cb9bde62c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechniqueResource</scope><name>RegisterRenderTechnique</name></member>
+      <member refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a9303cf33087e9b44c416a271e567f5af" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechniqueResource</scope><name>Unload</name></member>
+      <member refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a0fbba58a4904c8e27fda0aef49ec5a89" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechniqueResource</scope><name>UnregisterRenderTechnique</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

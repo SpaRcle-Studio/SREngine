@@ -5,6 +5,7 @@
     <innerclass refid="structSR__UTILS__NS_1_1AnyVisitor" prot="public">SR_UTILS_NS::AnyVisitor</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1AnyVisitor_3_4" prot="public">SR_UTILS_NS::AnyVisitor&lt;&gt;</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1ArrayReferenceProperty" prot="public">SR_UTILS_NS::ArrayReferenceProperty</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1Asset" prot="public">SR_UTILS_NS::Asset</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1AtlasBuilderTest" prot="public">SR_UTILS_NS::AtlasBuilderTest</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1BaseFactory" prot="public">SR_UTILS_NS::BaseFactory</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1Broadcaster" prot="public">SR_UTILS_NS::Broadcaster</innerclass>
@@ -14,6 +15,7 @@
     <innerclass refid="structSR__UTILS__NS_1_1CheckOperatorUsable_3_01Op_00_01X_00_01Y_00_01std_1_1enable__if__t_3_01stc413c9f9798c835c9db20a200ab862b9" prot="public">SR_UTILS_NS::CheckOperatorUsable&lt; Op, X, Y, std::enable_if_t&lt; std::is_same_v&lt; Y, std::nullptr_t &gt; &amp;&amp;!SupportsNullptrComparisonV&lt; X &gt; &gt; &gt;</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1ClassDB" prot="public">SR_UTILS_NS::ClassDB</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1ClassInfo" prot="public">SR_UTILS_NS::ClassInfo</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1CLIManager" prot="public">SR_UTILS_NS::CLIManager</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1CmdManager" prot="public">SR_UTILS_NS::CmdManager</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1CollisionData" prot="public">SR_UTILS_NS::CollisionData</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1Component" prot="public">SR_UTILS_NS::Component</innerclass>
@@ -90,6 +92,7 @@
     <innerclass refid="structSR__UTILS__NS_1_1IsTypeFromClassTemplate_3_01Tmpl_3_01Args_8_8_8_01_4_00_01Tmpl_01_4" prot="public">SR_UTILS_NS::IsTypeFromClassTemplate&lt; Tmpl&lt; Args... &gt;, Tmpl &gt;</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1IsTypeFromStdArrayTemplate" prot="public">SR_UTILS_NS::IsTypeFromStdArrayTemplate</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1IsTypeFromStdArrayTemplate_3_01std_1_1array_3_01T_00_01N_01_4_01_4" prot="public">SR_UTILS_NS::IsTypeFromStdArrayTemplate&lt; std::array&lt; T, N &gt; &gt;</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1ITestController" prot="public">SR_UTILS_NS::ITestController</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1KeyboardInputData" prot="public">SR_UTILS_NS::KeyboardInputData</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1LabelProperty" prot="public">SR_UTILS_NS::LabelProperty</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1LayerManager" prot="public">SR_UTILS_NS::LayerManager</innerclass>
@@ -128,6 +131,7 @@
     <innerclass refid="structSR__UTILS__NS_1_1SerializationNode" prot="public">SR_UTILS_NS::SerializationNode</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1SerializationTraits" prot="public">SR_UTILS_NS::SerializationTraits</innerclass>
     <innerclass refid="unionSR__UTILS__NS_1_1SerializationTrivialDataType" prot="public">SR_UTILS_NS::SerializationTrivialDataType</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1SharedPtrTest" prot="public">SR_UTILS_NS::SharedPtrTest</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1Singleton" prot="public">SR_UTILS_NS::Singleton</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1SingletonBase" prot="public">SR_UTILS_NS::SingletonBase</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1SingletonManager" prot="public">SR_UTILS_NS::SingletonManager</innerclass>
@@ -168,6 +172,9 @@
     <innerclass refid="classSR__UTILS__NS_1_1TagManager" prot="public">SR_UTILS_NS::TagManager</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1Task" prot="public">SR_UTILS_NS::Task</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1TaskManager" prot="public">SR_UTILS_NS::TaskManager</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1TestGroupController" prot="public">SR_UTILS_NS::TestGroupController</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1TestManager" prot="public">SR_UTILS_NS::TestManager</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1TestManagerAsset" prot="public">SR_UTILS_NS::TestManagerAsset</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1ThreadsWorker" prot="public">SR_UTILS_NS::ThreadsWorker</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1ThreadWorker" prot="public">SR_UTILS_NS::ThreadWorker</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase" prot="public">SR_UTILS_NS::ThreadWorkerStateBase</innerclass>
@@ -594,9 +601,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/macros.h" line="384" column="5" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="384" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a03b692b2fe07bf51db84e2c155bf2245" prot="public" static="no">
-        <type>std::list&lt; <ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">IResource</ref> * &gt;</type>
-        <definition>typedef std::list&lt;IResource*&gt; SR_UTILS_NS::ResourcesList</definition>
+      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a82cc699d8c44225ad19521205bfe0d6d" prot="public" static="no">
+        <type>std::list&lt; IResource::Ptr &gt;</type>
+        <definition>typedef std::list&lt;IResource::Ptr&gt; SR_UTILS_NS::ResourcesList</definition>
         <argsstring></argsstring>
         <name>ResourcesList</name>
         <qualifiedname>SR_UTILS_NS::ResourcesList</qualifiedname>
@@ -608,9 +615,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="14" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="14" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1aeae9074628aecbee9bb8d1409bfc7da0" prot="public" static="no">
-        <type>std::unordered_set&lt; <ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">IResource</ref> * &gt;</type>
-        <definition>typedef std::unordered_set&lt;IResource*&gt; SR_UTILS_NS::ResourcesSet</definition>
+      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a3bf07fe932333027b75075c8d8614c56" prot="public" static="no">
+        <type>std::unordered_set&lt; IResource::Ptr &gt;</type>
+        <definition>typedef std::unordered_set&lt;IResource::Ptr&gt; SR_UTILS_NS::ResourcesSet</definition>
         <argsstring></argsstring>
         <name>ResourcesSet</name>
         <qualifiedname>SR_UTILS_NS::ResourcesSet</qualifiedname>
@@ -622,9 +629,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="15" column="32" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="15" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a78b72ed6f09b03bf7d3fb77a450a4a44" prot="public" static="no">
-        <type>ska::flat_hash_map&lt; uint64_t, <ref refid="classSR__UTILS__NS_1_1ResourceType" kindref="compound">ResourceType</ref> * &gt;</type>
-        <definition>typedef ska::flat_hash_map&lt;uint64_t, ResourceType*&gt; SR_UTILS_NS::ResourcesTypes</definition>
+      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1ad502c4c096e6bba91d387a3f860a4d95" prot="public" static="no">
+        <type>ska::flat_hash_map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, <ref refid="classSR__UTILS__NS_1_1ResourceType" kindref="compound">ResourceType</ref> * &gt;</type>
+        <definition>typedef ska::flat_hash_map&lt;SR_UTILS_NS::StringAtom, ResourceType*&gt; SR_UTILS_NS::ResourcesTypes</definition>
         <argsstring></argsstring>
         <name>ResourcesTypes</name>
         <qualifiedname>SR_UTILS_NS::ResourcesTypes</qualifiedname>
@@ -634,7 +641,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="84" column="32" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="87" column="32" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="87" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a0694a4a9cf90cf0b54e22dde7aaefd1f" prot="public" static="no">
         <templateparamlist>
@@ -1173,7 +1180,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="544" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="544" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="547" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="547" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1ac2a989d78110ff2e67225cef26356de0" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1695,6 +1702,68 @@
         <inbodydescription>
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Common/CastUtils.h" line="11" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Common/CastUtils.h" bodystart="11" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceSR__UTILS__NS_1a0b02dc4ccd06323ce7393f050adb1add" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::SR_ENUM_NS_STRUCT_T</definition>
+        <argsstring>(CLIFlags, uint32_t, None=0, UnitTests=1&lt;&lt; 0, ContinueAfterTests=1&lt;&lt; 1, DeleteOldApp=1&lt;&lt; 2)</argsstring>
+        <name>SR_ENUM_NS_STRUCT_T</name>
+        <qualifiedname>SR_UTILS_NS::SR_ENUM_NS_STRUCT_T</qualifiedname>
+        <param>
+          <type>CLIFlags</type>
+        </param>
+        <param>
+          <type>uint32_t</type>
+        </param>
+        <param>
+          <type>None</type>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>UnitTests</type>
+          <defval>1&lt;&lt; 0</defval>
+        </param>
+        <param>
+          <type>ContinueAfterTests</type>
+          <defval>1&lt;&lt; 1</defval>
+        </param>
+        <param>
+          <type>DeleteOldApp</type>
+          <defval>1&lt;&lt; 2</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/CLIManager.h" line="13" column="5" declfile="Engine/libs/Utils/inc/Utils/Common/CLIManager.h" declline="13" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceSR__UTILS__NS_1a927f87242579260a5a7e99ecf2fc721c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::SR_ENUM_NS_STRUCT_T</definition>
+        <argsstring>(CLIOptions, uint32_t, Resources, LogDir)</argsstring>
+        <name>SR_ENUM_NS_STRUCT_T</name>
+        <qualifiedname>SR_UTILS_NS::SR_ENUM_NS_STRUCT_T</qualifiedname>
+        <param>
+          <type>CLIOptions</type>
+        </param>
+        <param>
+          <type>uint32_t</type>
+        </param>
+        <param>
+          <type>Resources</type>
+        </param>
+        <param>
+          <type>LogDir</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/CLIManager.h" line="20" column="5" declfile="Engine/libs/Utils/inc/Utils/Common/CLIManager.h" declline="20" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a15791cf350662a5b9c01c67c915f139e" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -3759,24 +3828,6 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Platform/Stacktrace.h" line="13" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Stacktrace.h" declline="13" declcolumn="35"/>
       </memberdef>
-      <memberdef kind="function" id="namespaceSR__UTILS__NS_1a11c2c38b0b3129c6412e1ab3da3b552a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>std::optional&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &gt;</type>
-        <definition>std::optional&lt; Path &gt; SR_UTILS_NS::GetResourceFolder</definition>
-        <argsstring>(const Path &amp;appFolder)</argsstring>
-        <name>GetResourceFolder</name>
-        <qualifiedname>SR_UTILS_NS::GetResourceFolder</qualifiedname>
-        <param>
-          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &amp;</type>
-          <declname>appFolder</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="23" column="19" declfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" declline="23" declcolumn="19"/>
-      </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a225de49af3b44557eaa1cc8420b06512" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
@@ -4057,21 +4108,40 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="22" column="5" declfile="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" declline="22" declcolumn="5"/>
       </memberdef>
-      <memberdef kind="function" id="namespaceSR__UTILS__NS_1a2cfb16839d8aaae57999903b7d4d0203" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>static bool SR_UTILS_NS::RunTestSharedPtr</definition>
-        <argsstring>()</argsstring>
-        <name>RunTestSharedPtr</name>
-        <qualifiedname>SR_UTILS_NS::RunTestSharedPtr</qualifiedname>
+      <memberdef kind="function" id="namespaceSR__UTILS__NS_1a302d1be38422f325b790c2e5123f11fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::SR_ENUM_NS_CLASS_T</definition>
+        <argsstring>(TestExecutionResult, uint8_t, Success, Error, Fatal, Skipped, Count)</argsstring>
+        <name>SR_ENUM_NS_CLASS_T</name>
+        <qualifiedname>SR_UTILS_NS::SR_ENUM_NS_CLASS_T</qualifiedname>
+        <param>
+          <type>TestExecutionResult</type>
+        </param>
+        <param>
+          <type>uint8_t</type>
+        </param>
+        <param>
+          <type>Success</type>
+        </param>
+        <param>
+          <type>Error</type>
+        </param>
+        <param>
+          <type>Fatal</type>
+        </param>
+        <param>
+          <type>Skipped</type>
+        </param>
+        <param>
+          <type>Count</type>
+        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
-<para>crash SR_HTYPES_NS::SharedPtr&lt;int&gt; pInt3 = pInt2.Get();</para>
-<para>crash SR_HTYPES_NS::SharedPtr&lt;int&gt; pInt3 = pInt2.Get();</para>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/SharedPtrAutotests.h" line="42" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Tests/SharedPtrAutotests.h" bodystart="42" bodyend="208"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/TestManager.h" line="14" column="5" declfile="Engine/libs/Utils/inc/Utils/Tests/TestManager.h" declline="14" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1aad478264b1a59cd3ae66c45e07320750" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>

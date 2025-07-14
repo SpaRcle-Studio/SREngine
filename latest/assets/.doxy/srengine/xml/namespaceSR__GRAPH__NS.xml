@@ -24,6 +24,8 @@
     <innerclass refid="classSR__GRAPH__NS_1_1EmptyPipeline" prot="public">SR_GRAPH_NS::EmptyPipeline</innerclass>
     <innerclass refid="classSR__GRAPH__NS_1_1FileMaterial" prot="public">SR_GRAPH_NS::FileMaterial</innerclass>
     <innerclass refid="classSR__GRAPH__NS_1_1FileMaterialResource" prot="public">SR_GRAPH_NS::FileMaterialResource</innerclass>
+    <innerclass refid="classSR__GRAPH__NS_1_1FileRenderTechnique" prot="public">SR_GRAPH_NS::FileRenderTechnique</innerclass>
+    <innerclass refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource" prot="public">SR_GRAPH_NS::FileRenderTechniqueResource</innerclass>
     <innerclass refid="classSR__GRAPH__NS_1_1FlatClusterPass" prot="public">SR_GRAPH_NS::FlatClusterPass</innerclass>
     <innerclass refid="classSR__GRAPH__NS_1_1FlatMeshCluster" prot="public">SR_GRAPH_NS::FlatMeshCluster</innerclass>
     <innerclass refid="classSR__GRAPH__NS_1_1FrameBufferController" prot="public">SR_GRAPH_NS::FrameBufferController</innerclass>
@@ -86,7 +88,6 @@
     <innerclass refid="classSR__GRAPH__NS_1_1RenderScene" prot="public">SR_GRAPH_NS::RenderScene</innerclass>
     <innerclass refid="classSR__GRAPH__NS_1_1RenderSettings" prot="public">SR_GRAPH_NS::RenderSettings</innerclass>
     <innerclass refid="classSR__GRAPH__NS_1_1RenderStrategy" prot="public">SR_GRAPH_NS::RenderStrategy</innerclass>
-    <innerclass refid="classSR__GRAPH__NS_1_1RenderTechnique" prot="public">SR_GRAPH_NS::RenderTechnique</innerclass>
     <innerclass refid="classSR__GRAPH__NS_1_1ScriptableRenderTechnique" prot="public">SR_GRAPH_NS::ScriptableRenderTechnique</innerclass>
     <innerclass refid="classSR__GRAPH__NS_1_1ShadedMeshSubCluster" prot="public">SR_GRAPH_NS::ShadedMeshSubCluster</innerclass>
     <innerclass refid="classSR__GRAPH__NS_1_1ShaderOverridePass" prot="public">SR_GRAPH_NS::ShaderOverridePass</innerclass>
@@ -177,7 +178,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="23" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="23" bodyend="25"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="24" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="24" bodyend="26"/>
       </memberdef>
       <memberdef kind="enum" id="Descriptors_8h_1ab4d7079c85da7d96afc756df4c227ad8" prot="public" static="no" strong="yes">
         <type></type>
@@ -261,9 +262,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="ShaderProperties_8h_1ab245485401e1ffed6b5beead8f9d61b5" prot="public" static="no">
-        <type>std::variant&lt; <ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> *, float_t, int32_t, SR_MATH_NS::FVector2, SR_MATH_NS::FVector3, SR_MATH_NS::IVector3, SR_MATH_NS::FVector4 &gt;</type>
-        <definition>typedef std::variant&lt; SR_GTYPES_NS::Texture*, float_t, int32_t, SR_MATH_NS::FVector2, SR_MATH_NS::FVector3, SR_MATH_NS::IVector3, SR_MATH_NS::FVector4 &gt; SR_GRAPH_NS::ShaderPropertyVariant</definition>
+      <memberdef kind="typedef" id="ShaderProperties_8h_1acf09b1714a10251f5840b4faee2a2c0c" prot="public" static="no">
+        <type>std::variant&lt; <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> &gt;, float_t, int32_t, SR_MATH_NS::FVector2, SR_MATH_NS::FVector3, SR_MATH_NS::IVector3, SR_MATH_NS::FVector4 &gt;</type>
+        <definition>typedef std::variant&lt; SR_HTYPES_NS::SharedPtr&lt;SR_GTYPES_NS::Texture&gt;, float_t, int32_t, SR_MATH_NS::FVector2, SR_MATH_NS::FVector3, SR_MATH_NS::IVector3, SR_MATH_NS::FVector4 &gt; SR_GRAPH_NS::ShaderPropertyVariant</definition>
         <argsstring></argsstring>
         <name>ShaderPropertyVariant</name>
         <qualifiedname>SR_GRAPH_NS::ShaderPropertyVariant</qualifiedname>
@@ -330,7 +331,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="38" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="37" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="PassQueue_8h_1a04a3c7cbc375fae47bc12d9206d62ff7" prot="public" static="no">
         <type>std::vector&lt; <ref refid="classSR__GRAPH__NS_1_1BasePass" kindref="compound">BasePass</ref> * &gt;</type>
@@ -1638,24 +1639,6 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialProperty.h" line="168" column="10" declfile="Engine/libs/Graphics/inc/Graphics/Material/MaterialProperty.h" declline="168" declcolumn="10"/>
       </memberdef>
-      <memberdef kind="function" id="MaterialProperty_8h_1aa3c7af8f495826234a27669189208d3f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>std::list&lt; <ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> * &gt;</type>
-        <definition>std::list&lt; SR_GTYPES_NS::Texture * &gt; SR_GRAPH_NS::GetTexturesFromMatProperties</definition>
-        <argsstring>(const MaterialProperties &amp;properties)</argsstring>
-        <name>GetTexturesFromMatProperties</name>
-        <qualifiedname>SR_GRAPH_NS::GetTexturesFromMatProperties</qualifiedname>
-        <param>
-          <type>const <ref refid="classSR__GRAPH__NS_1_1MaterialProperties" kindref="compound">MaterialProperties</ref> &amp;</type>
-          <declname>properties</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialProperty.h" line="169" column="15" declfile="Engine/libs/Graphics/inc/Graphics/Material/MaterialProperty.h" declline="169" declcolumn="15"/>
-      </memberdef>
       <memberdef kind="function" id="MaterialType_8h_1a0a88d6b4c3c203aed23dca3da6214a4c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_GRAPH_NS::SR_ENUM_NS_CLASS_T</definition>
@@ -1732,7 +1715,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="39" column="19" declfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" declline="39" declcolumn="19"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="38" column="19" declfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" declline="38" declcolumn="19"/>
       </memberdef>
       <memberdef kind="function" id="Device_8h_1a8eb3dbb71fa6c483453523527e35ee00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -2542,7 +2525,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderContext.h" line="33" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Render/RenderContext.h" declline="33" declcolumn="5"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderContext.h" line="34" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Render/RenderContext.h" declline="34" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="RenderSettings_8h_1a360b0ad5c8c7c9184211a28f726dfc18" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>

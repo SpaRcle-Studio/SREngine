@@ -35,7 +35,7 @@ namespace SR_GRAPH_NS {
         bool Init() override;
 
     private:
-        SR_GTYPES_NS::Skybox* m_skybox = nullptr;
+        SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Skybox> m_skybox;
 
     };
 }

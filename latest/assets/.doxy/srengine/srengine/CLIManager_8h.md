@@ -4,7 +4,7 @@
 
 
 
-[**FileList**](files.md) **>** [**Engine**](dir_0b6ee6e7e9547e675db4add2e5de97da.md) **>** [**inc**](dir_384e30eefdcc60ad4aa259e47cd19ad6.md) **>** [**Engine**](dir_92c4f4d9e201e1e90834671676ddd6c7.md) **>** [**CLIManager.h**](CLIManager_8h.md)
+[**FileList**](files.md) **>** [**Common**](dir_3494e32b0a79d085f92ff9f3955f97da.md) **>** [**CLIManager.h**](CLIManager_8h.md)
 
 [Go to the source code of this file](CLIManager_8h_source.md)
 
@@ -12,6 +12,7 @@
 
 * `#include <Utils/Common/Singleton.h>`
 * `#include <Utils/Common/Enumerations.h>`
+* `#include <Utils/Math/Mathematics.h>`
 
 
 
@@ -29,14 +30,14 @@
 
 | Type | Name |
 | ---: | :--- |
-| namespace | [**SR\_CORE\_NS**](namespaceSR__CORE__NS.md) <br> |
+| namespace | [**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md) <br> |
 
 
 ## Classes
 
 | Type | Name |
 | ---: | :--- |
-| class | [**CLIManager**](classSR__CORE__NS_1_1CLIManager.md) <br> |
+| class | [**CLIManager**](classSR__UTILS__NS_1_1CLIManager.md) <br> |
 
 
 
@@ -89,5 +90,5 @@
 
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/inc/Engine/CLIManager.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/Common/CLIManager.h`
 

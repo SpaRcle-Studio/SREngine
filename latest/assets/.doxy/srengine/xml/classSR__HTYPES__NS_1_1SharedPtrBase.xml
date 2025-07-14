@@ -37,6 +37,8 @@
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; FileSystemWatcher &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; FileWatcher &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; IMigrator &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; ITestController &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; ResourceContainer &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; ReflectionTestComponentLogicBase &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; ThreadWorker &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; ThreadWorkerStateBase &gt;</derivedcompoundref>
@@ -46,13 +48,16 @@
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; HTMLContainerInterface &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; HTMLPage &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SceneLogic &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_ANIMATIONS_NS::AnimationClip &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_ANIMATIONS_NS::Skeleton &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_UTILS_NS::GameObject &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_AUDIO_NS::RawSound &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_ANIMATIONS_NS::Animator &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; Asset &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; PointerPropertyDrawer &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; ObjectPropertyDrawer &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_CORE_NS::Engine &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; Scene &gt;</derivedcompoundref>
-    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; PointerPropertyDrawer &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; Component &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; MathVectorPropertyDrawer &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; NumericPropertyDrawer &gt;</derivedcompoundref>
@@ -63,16 +68,29 @@
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::RenderScene &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Camera &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; PopupItemSubWidget &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; Shader &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::Pipeline &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::FileRenderTechniqueResource &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Framebuffer &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::FrameBufferController &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Texture &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Shader &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::BaseMaterial &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::RenderStrategy &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::IRenderTechnique &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; Texture &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Skybox &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Mesh &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; GameObject &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Font &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_HTYPES_NS::RawMesh &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_NETWORK_NS::Socket &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_PTYPES_NS::PhysicsMaterial &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; PhysicsMaterial &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; Entity &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_UTILS_NS::Transform &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; TestManagerAsset &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_UTILS_NS::SceneObject &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_WORLD_NS::SceneLogic &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; T &gt;</derivedcompoundref>
@@ -264,6 +282,24 @@
         <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc">GetSRClass</reimplementedby>
         <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc">GetSRClass</reimplementedby>
         <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc">GetSRClass</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc">GetSRClass</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc">GetSRClass</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc">GetSRClass</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc">GetSRClass</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc">GetSRClass</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc">GetSRClass</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc">GetSRClass</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc">GetSRClass</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc">GetSRClass</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc">GetSRClass</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc">GetSRClass</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc">GetSRClass</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc">GetSRClass</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc">GetSRClass</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc">GetSRClass</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc">GetSRClass</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc">GetSRClass</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc">GetSRClass</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -278,6 +314,24 @@
         <argsstring>()=0</argsstring>
         <name>Reset</name>
         <qualifiedname>SR_HTYPES_NS::SharedPtrBase::Reset</qualifiedname>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11">Reset</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11">Reset</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11">Reset</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11">Reset</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11">Reset</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11">Reset</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11">Reset</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11">Reset</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11">Reset</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11">Reset</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11">Reset</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11">Reset</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11">Reset</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11">Reset</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11">Reset</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11">Reset</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11">Reset</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11">Reset</reimplementedby>
         <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11">Reset</reimplementedby>
         <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11">Reset</reimplementedby>
         <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11">Reset</reimplementedby>
@@ -440,6 +494,24 @@
         <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14">IncrementPointer</reimplementedby>
         <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14">IncrementPointer</reimplementedby>
         <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14">IncrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14">IncrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14">IncrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14">IncrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14">IncrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14">IncrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14">IncrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14">IncrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14">IncrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14">IncrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14">IncrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14">IncrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14">IncrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14">IncrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14">IncrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14">IncrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14">IncrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14">IncrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14">IncrementPointer</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -454,6 +526,24 @@
         <argsstring>()=0</argsstring>
         <name>DecrementPointer</name>
         <qualifiedname>SR_HTYPES_NS::SharedPtrBase::DecrementPointer</qualifiedname>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d">DecrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d">DecrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d">DecrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d">DecrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d">DecrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d">DecrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d">DecrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d">DecrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d">DecrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d">DecrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d">DecrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d">DecrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d">DecrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d">DecrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d">DecrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d">DecrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d">DecrementPointer</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d">DecrementPointer</reimplementedby>
         <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d">DecrementPointer</reimplementedby>
         <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d">DecrementPointer</reimplementedby>
         <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d">DecrementPointer</reimplementedby>
@@ -616,6 +706,24 @@
         <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25">SetPointerFromBase</reimplementedby>
         <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25">SetPointerFromBase</reimplementedby>
         <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25">SetPointerFromBase</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25">SetPointerFromBase</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25">SetPointerFromBase</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25">SetPointerFromBase</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25">SetPointerFromBase</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25">SetPointerFromBase</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25">SetPointerFromBase</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25">SetPointerFromBase</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25">SetPointerFromBase</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25">SetPointerFromBase</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25">SetPointerFromBase</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25">SetPointerFromBase</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25">SetPointerFromBase</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25">SetPointerFromBase</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25">SetPointerFromBase</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25">SetPointerFromBase</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25">SetPointerFromBase</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25">SetPointerFromBase</reimplementedby>
+        <reimplementedby refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25">SetPointerFromBase</reimplementedby>
         <param>
           <type><ref refid="classSR__HTYPES__NS_1_1SharedPtrBase" kindref="compound">SharedPtrBase</ref> *</type>
           <declname>pBase</declname>
@@ -634,301 +742,519 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="76">
-        <label>SR_ANIMATIONS_NS::Bone&lt; Bone &gt;</label>
-        <link refid="structSR__ANIMATIONS__NS_1_1Bone"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="78">
-        <label>SR_CORE_GUI_NS::BehaviourNamePropertyDrawer</label>
-        <link refid="classSR__CORE__GUI__NS_1_1BehaviourNamePropertyDrawer"/>
-        <childnode refid="77" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="87">
-        <label>SR_CORE_GUI_NS::BehaviourPropertyDrawer</label>
-        <link refid="classSR__CORE__GUI__NS_1_1BehaviourPropertyDrawer"/>
-        <childnode refid="86" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="79">
-        <label>SR_CORE_GUI_NS::BitMapPropertyDrawer</label>
-        <link refid="classSR__CORE__GUI__NS_1_1BitMapPropertyDrawer"/>
-        <childnode refid="77" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="80">
-        <label>SR_CORE_GUI_NS::BoolPropertyDrawer</label>
-        <link refid="classSR__CORE__GUI__NS_1_1BoolPropertyDrawer"/>
-        <childnode refid="77" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="81">
-        <label>SR_CORE_GUI_NS::EnumPropertyDrawer</label>
-        <link refid="classSR__CORE__GUI__NS_1_1EnumPropertyDrawer"/>
-        <childnode refid="77" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="82">
-        <label>SR_CORE_GUI_NS::MarginPropertyDrawer</label>
-        <link refid="classSR__CORE__GUI__NS_1_1MarginPropertyDrawer"/>
-        <childnode refid="77" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="88">
-        <label>SR_CORE_GUI_NS::MaterialDataPropertyDrawer</label>
-        <link refid="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer"/>
-        <childnode refid="86" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="91">
-        <label>SR_CORE_GUI_NS::MaterialPropertyDrawer</label>
-        <link refid="classSR__CORE__GUI__NS_1_1MaterialPropertyDrawer"/>
-        <childnode refid="90" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="83">
-        <label>SR_CORE_GUI_NS::MathSizePropertyDrawer</label>
-        <link refid="classSR__CORE__GUI__NS_1_1MathSizePropertyDrawer"/>
-        <childnode refid="77" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="84">
-        <label>SR_CORE_GUI_NS::MathVectorPropertyDrawer</label>
-        <link refid="classSR__CORE__GUI__NS_1_1MathVectorPropertyDrawer"/>
-        <childnode refid="77" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="85">
-        <label>SR_CORE_GUI_NS::NumericPropertyDrawer</label>
-        <link refid="classSR__CORE__GUI__NS_1_1NumericPropertyDrawer"/>
-        <childnode refid="77" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="86">
-        <label>SR_CORE_GUI_NS::ObjectPropertyDrawer</label>
-        <link refid="classSR__CORE__GUI__NS_1_1ObjectPropertyDrawer"/>
-        <childnode refid="77" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="89">
-        <label>SR_CORE_GUI_NS::PathPropertyDrawer</label>
-        <link refid="classSR__CORE__GUI__NS_1_1PathPropertyDrawer"/>
-        <childnode refid="77" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="90">
-        <label>SR_CORE_GUI_NS::PointerPropertyDrawer</label>
-        <link refid="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer"/>
-        <childnode refid="77" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="77">
-        <label>SR_CORE_GUI_NS::PropertyDrawerBase&lt; PropertyDrawerBase &gt;</label>
-        <link refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="92">
-        <label>SR_CORE_GUI_NS::RectPropertyDrawer</label>
-        <link refid="classSR__CORE__GUI__NS_1_1RectPropertyDrawer"/>
-        <childnode refid="77" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="93">
-        <label>SR_CORE_GUI_NS::StringPropertyDrawer</label>
-        <link refid="classSR__CORE__GUI__NS_1_1StringPropertyDrawer"/>
-        <childnode refid="77" relation="public-inheritance">
+      <node id="191">
+        <label>SR_ANIMATIONS_NS::AnimationClip</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationClip"/>
+        <childnode refid="190" relation="public-inheritance">
         </childnode>
       </node>
       <node id="94">
-        <label>SR_CORE_GUI_NS::VectorPropertyDrawer</label>
-        <link refid="classSR__CORE__GUI__NS_1_1VectorPropertyDrawer"/>
-        <childnode refid="77" relation="public-inheritance">
+        <label>SR_ANIMATIONS_NS::Bone&lt; Bone &gt;</label>
+        <link refid="structSR__ANIMATIONS__NS_1_1Bone"/>
+        <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="95">
-        <label>SR_CORE_NS::Application&lt; Application &gt;</label>
-        <link refid="classSR__CORE__NS_1_1Application"/>
-        <childnode refid="75" relation="public-inheritance">
+      <node id="192">
+        <label>SR_AUDIO_NS::RawSound</label>
+        <link refid="classSR__AUDIO__NS_1_1RawSound"/>
+        <childnode refid="190" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="146">
-        <label>SR_CORE_NS::ChunkSystemState</label>
-        <link refid="classSR__CORE__NS_1_1ChunkSystemState"/>
-        <childnode refid="145" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="147">
-        <label>SR_CORE_NS::DeltaTimeState</label>
-        <link refid="classSR__CORE__NS_1_1DeltaTimeState"/>
-        <childnode refid="145" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="148">
-        <label>SR_CORE_NS::DrawState</label>
-        <link refid="classSR__CORE__NS_1_1DrawState"/>
-        <childnode refid="145" relation="public-inheritance">
+      <node id="193">
+        <label>SR_AUDIO_NS::Sound</label>
+        <link refid="classSR__AUDIO__NS_1_1Sound"/>
+        <childnode refid="190" relation="public-inheritance">
         </childnode>
       </node>
       <node id="96">
-        <label>SR_CORE_NS::Engine&lt; Engine &gt;</label>
-        <link refid="classSR__CORE__NS_1_1Engine"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="149">
-        <label>SR_CORE_NS::InitializeState</label>
-        <link refid="classSR__CORE__NS_1_1InitializeState"/>
-        <childnode refid="145" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="150">
-        <label>SR_CORE_NS::PollEventsState</label>
-        <link refid="classSR__CORE__NS_1_1PollEventsState"/>
-        <childnode refid="145" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="151">
-        <label>SR_CORE_NS::PrepareState</label>
-        <link refid="classSR__CORE__NS_1_1PrepareState"/>
-        <childnode refid="145" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="152">
-        <label>SR_CORE_NS::SceneUpdateState</label>
-        <link refid="classSR__CORE__NS_1_1SceneUpdateState"/>
-        <childnode refid="145" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="153">
-        <label>SR_CORE_NS::StopState</label>
-        <link refid="classSR__CORE__NS_1_1StopState"/>
-        <childnode refid="145" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="154">
-        <label>SR_CORE_NS::SubmitState</label>
-        <link refid="classSR__CORE__NS_1_1SubmitState"/>
-        <childnode refid="145" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="97">
-        <label>SR_GRAPH_GUI_NS::WidgetContainerElement&lt; WidgetContainerElement &gt;</label>
-        <link refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="98">
-        <label>SR_GRAPH_NS::BaseMaterial&lt; BaseMaterial &gt;</label>
-        <link refid="classSR__GRAPH__NS_1_1BaseMaterial"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="112">
-        <label>SR_GRAPH_NS::ColorBufferRenderQueue</label>
-        <link refid="classSR__GRAPH__NS_1_1ColorBufferRenderQueue"/>
-        <childnode refid="111" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="103">
-        <label>SR_GRAPH_NS::DebugRenderer</label>
-        <link refid="classSR__GRAPH__NS_1_1DebugRenderer"/>
-        <childnode refid="102" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="99">
-        <label>SR_GRAPH_NS::FileMaterial</label>
-        <link refid="classSR__GRAPH__NS_1_1FileMaterial"/>
-        <childnode refid="98" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="101">
-        <label>SR_GRAPH_NS::FrameBufferController&lt; FrameBufferController &gt;</label>
-        <link refid="classSR__GRAPH__NS_1_1FrameBufferController"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="102">
-        <label>SR_GRAPH_NS::IRenderer&lt; IRenderer &gt;</label>
-        <link refid="classSR__GRAPH__NS_1_1IRenderer"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="107">
-        <label>SR_GRAPH_NS::ImGuiOverlay</label>
-        <link refid="classSR__GRAPH__NS_1_1ImGuiOverlay"/>
-        <childnode refid="106" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="104">
-        <label>SR_GRAPH_NS::MaterialData&lt; MaterialData &gt;</label>
-        <link refid="classSR__GRAPH__NS_1_1MaterialData"/>
-        <childnode refid="75" relation="public-inheritance">
+        <label>SR_CORE_GUI_NS::BehaviourNamePropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1BehaviourNamePropertyDrawer"/>
+        <childnode refid="95" relation="public-inheritance">
         </childnode>
       </node>
       <node id="105">
-        <label>SR_GRAPH_NS::Memory::BakedMesh&lt; BakedMesh &gt;</label>
-        <link refid="classSR__GRAPH__NS_1_1Memory_1_1BakedMesh"/>
-        <childnode refid="75" relation="public-inheritance">
+        <label>SR_CORE_GUI_NS::BehaviourPropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1BehaviourPropertyDrawer"/>
+        <childnode refid="104" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="106">
-        <label>SR_GRAPH_NS::Overlay&lt; Overlay &gt;</label>
-        <link refid="classSR__GRAPH__NS_1_1Overlay"/>
-        <childnode refid="75" relation="public-inheritance">
+      <node id="97">
+        <label>SR_CORE_GUI_NS::BitMapPropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1BitMapPropertyDrawer"/>
+        <childnode refid="95" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="109">
-        <label>SR_GRAPH_NS::Pipeline&lt; Pipeline &gt;</label>
-        <link refid="classSR__GRAPH__NS_1_1Pipeline"/>
-        <childnode refid="75" relation="public-inheritance">
+      <node id="98">
+        <label>SR_CORE_GUI_NS::BoolPropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1BoolPropertyDrawer"/>
+        <childnode refid="95" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="111">
-        <label>SR_GRAPH_NS::RenderQueue&lt; RenderQueue &gt;</label>
-        <link refid="classSR__GRAPH__NS_1_1RenderQueue"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="113">
-        <label>SR_GRAPH_NS::RenderScene&lt; RenderScene &gt;</label>
-        <link refid="classSR__GRAPH__NS_1_1RenderScene"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="114">
-        <label>SR_GRAPH_NS::TextureData&lt; TextureData &gt;</label>
-        <link refid="classSR__GRAPH__NS_1_1TextureData"/>
-        <childnode refid="75" relation="public-inheritance">
+      <node id="99">
+        <label>SR_CORE_GUI_NS::EnumPropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1EnumPropertyDrawer"/>
+        <childnode refid="95" relation="public-inheritance">
         </childnode>
       </node>
       <node id="100">
-        <label>SR_GRAPH_NS::UniqueMaterial</label>
-        <link refid="classSR__GRAPH__NS_1_1UniqueMaterial"/>
-        <childnode refid="98" relation="public-inheritance">
+        <label>SR_CORE_GUI_NS::MarginPropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1MarginPropertyDrawer"/>
+        <childnode refid="95" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="106">
+        <label>SR_CORE_GUI_NS::MaterialDataPropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer"/>
+        <childnode refid="104" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="109">
+        <label>SR_CORE_GUI_NS::MaterialPropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1MaterialPropertyDrawer"/>
+        <childnode refid="108" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="101">
+        <label>SR_CORE_GUI_NS::MathSizePropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1MathSizePropertyDrawer"/>
+        <childnode refid="95" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="102">
+        <label>SR_CORE_GUI_NS::MathVectorPropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1MathVectorPropertyDrawer"/>
+        <childnode refid="95" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="103">
+        <label>SR_CORE_GUI_NS::NumericPropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1NumericPropertyDrawer"/>
+        <childnode refid="95" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="104">
+        <label>SR_CORE_GUI_NS::ObjectPropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1ObjectPropertyDrawer"/>
+        <childnode refid="95" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="107">
+        <label>SR_CORE_GUI_NS::PathPropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1PathPropertyDrawer"/>
+        <childnode refid="95" relation="public-inheritance">
         </childnode>
       </node>
       <node id="108">
-        <label>SR_GRAPH_NS::VulkanImGuiOverlay</label>
-        <link refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay"/>
-        <childnode refid="107" relation="public-inheritance">
+        <label>SR_CORE_GUI_NS::PointerPropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer"/>
+        <childnode refid="95" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="95">
+        <label>SR_CORE_GUI_NS::PropertyDrawerBase&lt; PropertyDrawerBase &gt;</label>
+        <link refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase"/>
+        <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
       <node id="110">
-        <label>SR_GRAPH_NS::VulkanPipeline</label>
-        <link refid="classSR__GRAPH__NS_1_1VulkanPipeline"/>
-        <childnode refid="109" relation="public-inheritance">
+        <label>SR_CORE_GUI_NS::RectPropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1RectPropertyDrawer"/>
+        <childnode refid="95" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="111">
+        <label>SR_CORE_GUI_NS::StringPropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1StringPropertyDrawer"/>
+        <childnode refid="95" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="112">
+        <label>SR_CORE_GUI_NS::VectorPropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1VectorPropertyDrawer"/>
+        <childnode refid="95" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="113">
+        <label>SR_CORE_NS::Application&lt; Application &gt;</label>
+        <link refid="classSR__CORE__NS_1_1Application"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="210">
+        <label>SR_CORE_NS::ChunkSystemState</label>
+        <link refid="classSR__CORE__NS_1_1ChunkSystemState"/>
+        <childnode refid="209" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="211">
+        <label>SR_CORE_NS::DeltaTimeState</label>
+        <link refid="classSR__CORE__NS_1_1DeltaTimeState"/>
+        <childnode refid="209" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="212">
+        <label>SR_CORE_NS::DrawState</label>
+        <link refid="classSR__CORE__NS_1_1DrawState"/>
+        <childnode refid="209" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="114">
+        <label>SR_CORE_NS::Engine&lt; Engine &gt;</label>
+        <link refid="classSR__CORE__NS_1_1Engine"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="213">
+        <label>SR_CORE_NS::InitializeState</label>
+        <link refid="classSR__CORE__NS_1_1InitializeState"/>
+        <childnode refid="209" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="214">
+        <label>SR_CORE_NS::PollEventsState</label>
+        <link refid="classSR__CORE__NS_1_1PollEventsState"/>
+        <childnode refid="209" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="215">
+        <label>SR_CORE_NS::PrepareState</label>
+        <link refid="classSR__CORE__NS_1_1PrepareState"/>
+        <childnode refid="209" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="216">
+        <label>SR_CORE_NS::SceneUpdateState</label>
+        <link refid="classSR__CORE__NS_1_1SceneUpdateState"/>
+        <childnode refid="209" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="217">
+        <label>SR_CORE_NS::StopState</label>
+        <link refid="classSR__CORE__NS_1_1StopState"/>
+        <childnode refid="209" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="218">
+        <label>SR_CORE_NS::SubmitState</label>
+        <link refid="classSR__CORE__NS_1_1SubmitState"/>
+        <childnode refid="209" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="160">
+        <label>SR_CORE_NS::Tests::SRSLTest</label>
+        <link refid="classSR__CORE__NS_1_1Tests_1_1SRSLTest"/>
+        <childnode refid="159" relation="public-inheritance">
         </childnode>
       </node>
       <node id="115">
-        <label>SR_GRAPH_NS::Window&lt; Window &gt;</label>
-        <link refid="classSR__GRAPH__NS_1_1Window"/>
-        <childnode refid="75" relation="public-inheritance">
+        <label>SR_GRAPH_GUI_NS::WidgetContainerElement&lt; WidgetContainerElement &gt;</label>
+        <link refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement"/>
+        <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="75">
+      <node id="116">
+        <label>SR_GRAPH_NS::BaseMaterial&lt; BaseMaterial &gt;</label>
+        <link refid="classSR__GRAPH__NS_1_1BaseMaterial"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="164">
+        <label>SR_GRAPH_NS::BasePass</label>
+        <link refid="classSR__GRAPH__NS_1_1BasePass"/>
+        <childnode refid="163" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="183">
+        <label>SR_GRAPH_NS::CascadedShadowMapPass</label>
+        <link refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass"/>
+        <childnode refid="182" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="165">
+        <label>SR_GRAPH_NS::ClearBuffersPass</label>
+        <link refid="classSR__GRAPH__NS_1_1ClearBuffersPass"/>
+        <childnode refid="164" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="185">
+        <label>SR_GRAPH_NS::ColorBufferPass</label>
+        <link refid="classSR__GRAPH__NS_1_1ColorBufferPass"/>
+        <childnode refid="182" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="130">
+        <label>SR_GRAPH_NS::ColorBufferRenderQueue</label>
+        <link refid="classSR__GRAPH__NS_1_1ColorBufferRenderQueue"/>
+        <childnode refid="129" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="166">
+        <label>SR_GRAPH_NS::DebugPass</label>
+        <link refid="classSR__GRAPH__NS_1_1DebugPass"/>
+        <childnode refid="164" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="121">
+        <label>SR_GRAPH_NS::DebugRenderer</label>
+        <link refid="classSR__GRAPH__NS_1_1DebugRenderer"/>
+        <childnode refid="120" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="178">
+        <label>SR_GRAPH_NS::DepthBufferPass</label>
+        <link refid="classSR__GRAPH__NS_1_1DepthBufferPass"/>
+        <childnode refid="177" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="117">
+        <label>SR_GRAPH_NS::FileMaterial</label>
+        <link refid="classSR__GRAPH__NS_1_1FileMaterial"/>
+        <childnode refid="116" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="194">
+        <label>SR_GRAPH_NS::FileMaterialResource</label>
+        <link refid="classSR__GRAPH__NS_1_1FileMaterialResource"/>
+        <childnode refid="190" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="170">
+        <label>SR_GRAPH_NS::FileRenderTechnique</label>
+        <link refid="classSR__GRAPH__NS_1_1FileRenderTechnique"/>
+        <childnode refid="169" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="174">
+        <label>SR_GRAPH_NS::FlatClusterPass</label>
+        <link refid="classSR__GRAPH__NS_1_1FlatClusterPass"/>
+        <childnode refid="173" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="119">
+        <label>SR_GRAPH_NS::FrameBufferController&lt; FrameBufferController &gt;</label>
+        <link refid="classSR__GRAPH__NS_1_1FrameBufferController"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="168">
+        <label>SR_GRAPH_NS::FramebufferPass</label>
+        <link refid="classSR__GRAPH__NS_1_1FramebufferPass"/>
+        <childnode refid="167" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="167">
+        <label>SR_GRAPH_NS::GroupPass</label>
+        <link refid="classSR__GRAPH__NS_1_1GroupPass"/>
+        <childnode refid="164" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="175">
+        <label>SR_GRAPH_NS::IMesh3DClusterPass</label>
+        <link refid="classSR__GRAPH__NS_1_1IMesh3DClusterPass"/>
+        <childnode refid="173" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="173">
+        <label>SR_GRAPH_NS::IMeshClusterPass</label>
+        <link refid="classSR__GRAPH__NS_1_1IMeshClusterPass"/>
+        <childnode refid="164" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="169">
+        <label>SR_GRAPH_NS::IRenderTechnique</label>
+        <link refid="classSR__GRAPH__NS_1_1IRenderTechnique"/>
+        <childnode refid="167" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="120">
+        <label>SR_GRAPH_NS::IRenderer&lt; IRenderer &gt;</label>
+        <link refid="classSR__GRAPH__NS_1_1IRenderer"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="125">
+        <label>SR_GRAPH_NS::ImGuiOverlay</label>
+        <link refid="classSR__GRAPH__NS_1_1ImGuiOverlay"/>
+        <childnode refid="124" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="122">
+        <label>SR_GRAPH_NS::MaterialData&lt; MaterialData &gt;</label>
+        <link refid="classSR__GRAPH__NS_1_1MaterialData"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="123">
+        <label>SR_GRAPH_NS::Memory::BakedMesh&lt; BakedMesh &gt;</label>
+        <link refid="classSR__GRAPH__NS_1_1Memory_1_1BakedMesh"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="181">
+        <label>SR_GRAPH_NS::MeshDrawerPass</label>
+        <link refid="classSR__GRAPH__NS_1_1MeshDrawerPass"/>
+        <childnode refid="164" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="182">
+        <label>SR_GRAPH_NS::OffScreenMeshDrawerPass</label>
+        <link refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass"/>
+        <childnode refid="181" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="176">
+        <label>SR_GRAPH_NS::OpaquePass</label>
+        <link refid="classSR__GRAPH__NS_1_1OpaquePass"/>
+        <childnode refid="175" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="124">
+        <label>SR_GRAPH_NS::Overlay&lt; Overlay &gt;</label>
+        <link refid="classSR__GRAPH__NS_1_1Overlay"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="127">
+        <label>SR_GRAPH_NS::Pipeline&lt; Pipeline &gt;</label>
+        <link refid="classSR__GRAPH__NS_1_1Pipeline"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="186">
+        <label>SR_GRAPH_NS::PostProcessPass</label>
+        <link refid="classSR__GRAPH__NS_1_1PostProcessPass"/>
+        <childnode refid="164" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="129">
+        <label>SR_GRAPH_NS::RenderQueue&lt; RenderQueue &gt;</label>
+        <link refid="classSR__GRAPH__NS_1_1RenderQueue"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="131">
+        <label>SR_GRAPH_NS::RenderScene&lt; RenderScene &gt;</label>
+        <link refid="classSR__GRAPH__NS_1_1RenderScene"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="187">
+        <label>SR_GRAPH_NS::SSAOPass</label>
+        <link refid="classSR__GRAPH__NS_1_1SSAOPass"/>
+        <childnode refid="186" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="171">
+        <label>SR_GRAPH_NS::ScriptableRenderTechnique</label>
+        <link refid="classSR__GRAPH__NS_1_1ScriptableRenderTechnique"/>
+        <childnode refid="169" relation="public-inheritance">
+        </childnode>
+        <childnode refid="200" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="177">
+        <label>SR_GRAPH_NS::ShaderOverridePass</label>
+        <link refid="classSR__GRAPH__NS_1_1ShaderOverridePass"/>
+        <childnode refid="175" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="179">
+        <label>SR_GRAPH_NS::ShadowMapPass</label>
+        <link refid="classSR__GRAPH__NS_1_1ShadowMapPass"/>
+        <childnode refid="177" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="188">
+        <label>SR_GRAPH_NS::SkyboxPass</label>
+        <link refid="classSR__GRAPH__NS_1_1SkyboxPass"/>
+        <childnode refid="164" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="172">
+        <label>SR_GRAPH_NS::SwapchainPass</label>
+        <link refid="classSR__GRAPH__NS_1_1SwapchainPass"/>
+        <childnode refid="167" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="132">
+        <label>SR_GRAPH_NS::TextureData&lt; TextureData &gt;</label>
+        <link refid="classSR__GRAPH__NS_1_1TextureData"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="180">
+        <label>SR_GRAPH_NS::TransparentPass</label>
+        <link refid="classSR__GRAPH__NS_1_1TransparentPass"/>
+        <childnode refid="175" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="118">
+        <label>SR_GRAPH_NS::UniqueMaterial</label>
+        <link refid="classSR__GRAPH__NS_1_1UniqueMaterial"/>
+        <childnode refid="116" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="184">
+        <label>SR_GRAPH_NS::VarianceShadowMapPass</label>
+        <link refid="classSR__GRAPH__NS_1_1VarianceShadowMapPass"/>
+        <childnode refid="183" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="126">
+        <label>SR_GRAPH_NS::VulkanImGuiOverlay</label>
+        <link refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay"/>
+        <childnode refid="125" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="128">
+        <label>SR_GRAPH_NS::VulkanPipeline</label>
+        <link refid="classSR__GRAPH__NS_1_1VulkanPipeline"/>
+        <childnode refid="127" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="189">
+        <label>SR_GRAPH_NS::WidgetPass</label>
+        <link refid="classSR__GRAPH__NS_1_1WidgetPass"/>
+        <childnode refid="164" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="133">
+        <label>SR_GRAPH_NS::Window&lt; Window &gt;</label>
+        <link refid="classSR__GRAPH__NS_1_1Window"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="195">
+        <label>SR_GTYPES_NS::Font</label>
+        <link refid="classSR__GTYPES__NS_1_1Font"/>
+        <childnode refid="190" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="196">
+        <label>SR_GTYPES_NS::Framebuffer</label>
+        <link refid="classSR__GTYPES__NS_1_1Framebuffer"/>
+        <childnode refid="190" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="197">
+        <label>SR_GTYPES_NS::Shader</label>
+        <link refid="classSR__GTYPES__NS_1_1Shader"/>
+        <childnode refid="190" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="198">
+        <label>SR_GTYPES_NS::Skybox</label>
+        <link refid="classSR__GTYPES__NS_1_1Skybox"/>
+        <childnode refid="190" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="199">
+        <label>SR_GTYPES_NS::Texture</label>
+        <link refid="classSR__GTYPES__NS_1_1Texture"/>
+        <childnode refid="190" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="93">
         <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
@@ -938,262 +1264,322 @@
         <label>SR_HTYPES_NS::SharedPtrBase</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
       </node>
-      <node id="116">
+      <node id="134">
         <label>SR_NETWORK_NS::Acceptor&lt; Acceptor &gt;</label>
         <link refid="classSR__NETWORK__NS_1_1Acceptor"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="120">
-        <label>SR_NETWORK_NS::AsioContext</label>
-        <link refid="classSR__NETWORK__NS_1_1AsioContext"/>
-        <childnode refid="119" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="125">
-        <label>SR_NETWORK_NS::AsioICMPSocket</label>
-        <link refid="classSR__NETWORK__NS_1_1AsioICMPSocket"/>
-        <childnode refid="124" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="117">
-        <label>SR_NETWORK_NS::AsioTCPAcceptor</label>
-        <link refid="classSR__NETWORK__NS_1_1AsioTCPAcceptor"/>
-        <childnode refid="116" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="126">
-        <label>SR_NETWORK_NS::AsioTCPSocket</label>
-        <link refid="classSR__NETWORK__NS_1_1AsioTCPSocket"/>
-        <childnode refid="124" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="118">
-        <label>SR_NETWORK_NS::Client&lt; Client &gt;</label>
-        <link refid="classSR__NETWORK__NS_1_1Client"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="119">
-        <label>SR_NETWORK_NS::Context&lt; Context &gt;</label>
-        <link refid="classSR__NETWORK__NS_1_1Context"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="121">
-        <label>SR_NETWORK_NS::DataPackage&lt; DataPackage &gt;</label>
-        <link refid="classSR__NETWORK__NS_1_1DataPackage"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="122">
-        <label>SR_NETWORK_NS::PeerToPeer&lt; PeerToPeer &gt;</label>
-        <link refid="classSR__NETWORK__NS_1_1PeerToPeer"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="123">
-        <label>SR_NETWORK_NS::Server&lt; Server &gt;</label>
-        <link refid="classSR__NETWORK__NS_1_1Server"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="124">
-        <label>SR_NETWORK_NS::Socket&lt; Socket &gt;</label>
-        <link refid="classSR__NETWORK__NS_1_1Socket"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="128">
-        <label>SR_PTYPES_NS::Bullet3CollisionShape</label>
-        <link refid="classSR__PTYPES__NS_1_1Bullet3CollisionShape"/>
-        <childnode refid="127" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="127">
-        <label>SR_PTYPES_NS::CollisionShape&lt; CollisionShape &gt;</label>
-        <link refid="classSR__PTYPES__NS_1_1CollisionShape"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="129">
-        <label>SR_SCRIPTING_NS::CppBehaviour&lt; CppBehaviour &gt;</label>
-        <link refid="classSR__SCRIPTING__NS_1_1CppBehaviour"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="130">
-        <label>SR_SCRIPTING_NS::CppCodeGenerator&lt; CppCodeGenerator &gt;</label>
-        <link refid="classSR__SCRIPTING__NS_1_1CppCodeGenerator"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="131">
-        <label>SR_SCRIPTING_NS::CppCompiler&lt; CppCompiler &gt;</label>
-        <link refid="classSR__SCRIPTING__NS_1_1CppCompiler"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="132">
-        <label>SR_SCRIPTING_NS::ModuleManager&lt; ModuleManager &gt;</label>
-        <link refid="classSR__SCRIPTING__NS_1_1ModuleManager"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="133">
-        <label>SR_SCRIPTING_NS::ScriptHolder&lt; ScriptHolder &gt;</label>
-        <link refid="classSR__SCRIPTING__NS_1_1ScriptHolder"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="134">
-        <label>SR_UTILS_NS::AutoTests::AutomaticallySharedPtrTestClass&lt; AutomaticallySharedPtrTestClass &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1AutoTests_1_1AutomaticallySharedPtrTestClass"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="135">
-        <label>SR_UTILS_NS::AutoTests::ManuallySharedPtrTestClass&lt; ManuallySharedPtrTestClass &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1AutoTests_1_1ManuallySharedPtrTestClass"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="136">
-        <label>SR_UTILS_NS::AutoTests::ManuallySharedPtrTestClassInherit</label>
-        <link refid="classSR__UTILS__NS_1_1AutoTests_1_1ManuallySharedPtrTestClassInherit"/>
-        <childnode refid="135" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="137">
-        <label>SR_UTILS_NS::EntityController&lt; EntityController &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1EntityController"/>
-        <childnode refid="75" relation="public-inheritance">
+        <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
       <node id="138">
-        <label>SR_UTILS_NS::FileSystemWatcher&lt; FileSystemWatcher &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1FileSystemWatcher"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="139">
-        <label>SR_UTILS_NS::FileWatcher&lt; FileWatcher &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1FileWatcher"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="140">
-        <label>SR_UTILS_NS::IMigrator&lt; IMigrator &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1IMigrator"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="141">
-        <label>SR_UTILS_NS::Tests::ReflectionTestComponentLogicBase&lt; ReflectionTestComponentLogicBase &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicBase"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="142">
-        <label>SR_UTILS_NS::Tests::ReflectionTestComponentLogicComplex</label>
-        <link refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicComplex"/>
-        <childnode refid="141" relation="public-inheritance">
+        <label>SR_NETWORK_NS::AsioContext</label>
+        <link refid="classSR__NETWORK__NS_1_1AsioContext"/>
+        <childnode refid="137" relation="public-inheritance">
         </childnode>
       </node>
       <node id="143">
-        <label>SR_UTILS_NS::Tests::ReflectionTestComponentLogicSimple</label>
-        <link refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicSimple"/>
-        <childnode refid="141" relation="public-inheritance">
+        <label>SR_NETWORK_NS::AsioICMPSocket</label>
+        <link refid="classSR__NETWORK__NS_1_1AsioICMPSocket"/>
+        <childnode refid="142" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="135">
+        <label>SR_NETWORK_NS::AsioTCPAcceptor</label>
+        <link refid="classSR__NETWORK__NS_1_1AsioTCPAcceptor"/>
+        <childnode refid="134" relation="public-inheritance">
         </childnode>
       </node>
       <node id="144">
-        <label>SR_UTILS_NS::ThreadWorker&lt; ThreadWorker &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1ThreadWorker"/>
-        <childnode refid="75" relation="public-inheritance">
+        <label>SR_NETWORK_NS::AsioTCPSocket</label>
+        <link refid="classSR__NETWORK__NS_1_1AsioTCPSocket"/>
+        <childnode refid="142" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="136">
+        <label>SR_NETWORK_NS::Client&lt; Client &gt;</label>
+        <link refid="classSR__NETWORK__NS_1_1Client"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="137">
+        <label>SR_NETWORK_NS::Context&lt; Context &gt;</label>
+        <link refid="classSR__NETWORK__NS_1_1Context"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="139">
+        <label>SR_NETWORK_NS::DataPackage&lt; DataPackage &gt;</label>
+        <link refid="classSR__NETWORK__NS_1_1DataPackage"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="140">
+        <label>SR_NETWORK_NS::PeerToPeer&lt; PeerToPeer &gt;</label>
+        <link refid="classSR__NETWORK__NS_1_1PeerToPeer"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="141">
+        <label>SR_NETWORK_NS::Server&lt; Server &gt;</label>
+        <link refid="classSR__NETWORK__NS_1_1Server"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="142">
+        <label>SR_NETWORK_NS::Socket&lt; Socket &gt;</label>
+        <link refid="classSR__NETWORK__NS_1_1Socket"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="146">
+        <label>SR_PTYPES_NS::Bullet3CollisionShape</label>
+        <link refid="classSR__PTYPES__NS_1_1Bullet3CollisionShape"/>
+        <childnode refid="145" relation="public-inheritance">
         </childnode>
       </node>
       <node id="145">
-        <label>SR_UTILS_NS::ThreadWorkerStateBase&lt; ThreadWorkerStateBase &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase"/>
-        <childnode refid="75" relation="public-inheritance">
+        <label>SR_PTYPES_NS::CollisionShape&lt; CollisionShape &gt;</label>
+        <link refid="classSR__PTYPES__NS_1_1CollisionShape"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="202">
+        <label>SR_PTYPES_NS::PhysicsMaterial</label>
+        <link refid="classSR__PTYPES__NS_1_1PhysicsMaterial"/>
+        <childnode refid="201" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="147">
+        <label>SR_SCRIPTING_NS::CppBehaviour&lt; CppBehaviour &gt;</label>
+        <link refid="classSR__SCRIPTING__NS_1_1CppBehaviour"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="148">
+        <label>SR_SCRIPTING_NS::CppCodeGenerator&lt; CppCodeGenerator &gt;</label>
+        <link refid="classSR__SCRIPTING__NS_1_1CppCodeGenerator"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="149">
+        <label>SR_SCRIPTING_NS::CppCompiler&lt; CppCompiler &gt;</label>
+        <link refid="classSR__SCRIPTING__NS_1_1CppCompiler"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="150">
+        <label>SR_SCRIPTING_NS::ModuleManager&lt; ModuleManager &gt;</label>
+        <link refid="classSR__SCRIPTING__NS_1_1ModuleManager"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="151">
+        <label>SR_SCRIPTING_NS::ScriptHolder&lt; ScriptHolder &gt;</label>
+        <link refid="classSR__SCRIPTING__NS_1_1ScriptHolder"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="200">
+        <label>SR_SRLM_NS::LogicalMachine</label>
+        <link refid="classSR__SRLM__NS_1_1LogicalMachine"/>
+        <childnode refid="190" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="201">
+        <label>SR_UTILS_NS::Asset</label>
+        <link refid="classSR__UTILS__NS_1_1Asset"/>
+        <childnode refid="190" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="152">
+        <label>SR_UTILS_NS::AutoTests::AutomaticallySharedPtrTestClass&lt; AutomaticallySharedPtrTestClass &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1AutoTests_1_1AutomaticallySharedPtrTestClass"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="153">
+        <label>SR_UTILS_NS::AutoTests::ManuallySharedPtrTestClass&lt; ManuallySharedPtrTestClass &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1AutoTests_1_1ManuallySharedPtrTestClass"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="154">
+        <label>SR_UTILS_NS::AutoTests::ManuallySharedPtrTestClassInherit</label>
+        <link refid="classSR__UTILS__NS_1_1AutoTests_1_1ManuallySharedPtrTestClassInherit"/>
+        <childnode refid="153" relation="public-inheritance">
         </childnode>
       </node>
       <node id="155">
-        <label>SR_UTILS_NS::ThreadsWorker&lt; ThreadsWorker &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1ThreadsWorker"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="157">
-        <label>SR_UTILS_NS::Transform2D</label>
-        <link refid="classSR__UTILS__NS_1_1Transform2D"/>
-        <childnode refid="156" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="158">
-        <label>SR_UTILS_NS::Transform3D</label>
-        <link refid="classSR__UTILS__NS_1_1Transform3D"/>
-        <childnode refid="156" relation="public-inheritance">
+        <label>SR_UTILS_NS::EntityController&lt; EntityController &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1EntityController"/>
+        <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
       <node id="156">
-        <label>SR_UTILS_NS::Transform&lt; Transform &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Transform"/>
-        <childnode refid="75" relation="public-inheritance">
+        <label>SR_UTILS_NS::FileSystemWatcher&lt; FileSystemWatcher &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1FileSystemWatcher"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="157">
+        <label>SR_UTILS_NS::FileWatcher&lt; FileWatcher &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1FileWatcher"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="158">
+        <label>SR_UTILS_NS::IMigrator&lt; IMigrator &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1IMigrator"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="190">
+        <label>SR_UTILS_NS::IResource</label>
+        <link refid="classSR__UTILS__NS_1_1IResource"/>
+        <childnode refid="163" relation="public-inheritance">
         </childnode>
       </node>
       <node id="159">
-        <label>SR_UTILS_NS::TransformHolder</label>
-        <link refid="classSR__UTILS__NS_1_1TransformHolder"/>
-        <childnode refid="156" relation="public-inheritance">
+        <label>SR_UTILS_NS::ITestController&lt; ITestController &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1ITestController"/>
+        <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="160">
-        <label>SR_UTILS_NS::TransformZero</label>
-        <link refid="classSR__UTILS__NS_1_1TransformZero"/>
-        <childnode refid="156" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="161">
-        <label>SR_UTILS_NS::Web::CSS&lt; CSS &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Web_1_1CSS"/>
-        <childnode refid="75" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="162">
-        <label>SR_UTILS_NS::Web::HTMLContainerInterface&lt; HTMLContainerInterface &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Web_1_1HTMLContainerInterface"/>
-        <childnode refid="75" relation="public-inheritance">
+      <node id="204">
+        <label>SR_UTILS_NS::Prefab</label>
+        <link refid="classSR__UTILS__NS_1_1Prefab"/>
+        <childnode refid="190" relation="public-inheritance">
         </childnode>
       </node>
       <node id="163">
+        <label>SR_UTILS_NS::ResourceContainer&lt; ResourceContainer &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="161">
+        <label>SR_UTILS_NS::SharedPtrTest</label>
+        <link refid="classSR__UTILS__NS_1_1SharedPtrTest"/>
+        <childnode refid="159" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="162">
+        <label>SR_UTILS_NS::TestGroupController</label>
+        <link refid="classSR__UTILS__NS_1_1TestGroupController"/>
+        <childnode refid="159" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="203">
+        <label>SR_UTILS_NS::TestManagerAsset</label>
+        <link refid="classSR__UTILS__NS_1_1TestManagerAsset"/>
+        <childnode refid="201" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="205">
+        <label>SR_UTILS_NS::Tests::ReflectionTestComponentLogicBase&lt; ReflectionTestComponentLogicBase &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicBase"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="206">
+        <label>SR_UTILS_NS::Tests::ReflectionTestComponentLogicComplex</label>
+        <link refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicComplex"/>
+        <childnode refid="205" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="207">
+        <label>SR_UTILS_NS::Tests::ReflectionTestComponentLogicSimple</label>
+        <link refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicSimple"/>
+        <childnode refid="205" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="208">
+        <label>SR_UTILS_NS::ThreadWorker&lt; ThreadWorker &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1ThreadWorker"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="209">
+        <label>SR_UTILS_NS::ThreadWorkerStateBase&lt; ThreadWorkerStateBase &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="219">
+        <label>SR_UTILS_NS::ThreadsWorker&lt; ThreadsWorker &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1ThreadsWorker"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="221">
+        <label>SR_UTILS_NS::Transform2D</label>
+        <link refid="classSR__UTILS__NS_1_1Transform2D"/>
+        <childnode refid="220" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="222">
+        <label>SR_UTILS_NS::Transform3D</label>
+        <link refid="classSR__UTILS__NS_1_1Transform3D"/>
+        <childnode refid="220" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="220">
+        <label>SR_UTILS_NS::Transform&lt; Transform &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Transform"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="223">
+        <label>SR_UTILS_NS::TransformHolder</label>
+        <link refid="classSR__UTILS__NS_1_1TransformHolder"/>
+        <childnode refid="220" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="224">
+        <label>SR_UTILS_NS::TransformZero</label>
+        <link refid="classSR__UTILS__NS_1_1TransformZero"/>
+        <childnode refid="220" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="225">
+        <label>SR_UTILS_NS::Web::CSS&lt; CSS &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Web_1_1CSS"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="226">
+        <label>SR_UTILS_NS::Web::HTMLContainerInterface&lt; HTMLContainerInterface &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Web_1_1HTMLContainerInterface"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="227">
         <label>SR_UTILS_NS::Web::HTMLPage&lt; HTMLPage &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Web_1_1HTMLPage"/>
-        <childnode refid="75" relation="public-inheritance">
+        <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="165">
+      <node id="229">
         <label>SR_WORLD_NS::SceneAssetLogic</label>
         <link refid="classSR__WORLD__NS_1_1SceneAssetLogic"/>
-        <childnode refid="164" relation="public-inheritance">
+        <childnode refid="228" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="166">
+      <node id="230">
         <label>SR_WORLD_NS::SceneCubeChunkLogic</label>
         <link refid="classSR__WORLD__NS_1_1SceneCubeChunkLogic"/>
-        <childnode refid="164" relation="public-inheritance">
+        <childnode refid="228" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="164">
+      <node id="228">
         <label>SR_WORLD_NS::SceneLogic&lt; SceneLogic &gt;</label>
         <link refid="classSR__WORLD__NS_1_1SceneLogic"/>
-        <childnode refid="75" relation="public-inheritance">
+        <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="167">
+      <node id="231">
         <label>SR_WORLD_NS::ScenePrefabLogic</label>
         <link refid="classSR__WORLD__NS_1_1ScenePrefabLogic"/>
-        <childnode refid="164" relation="public-inheritance">
+        <childnode refid="228" relation="public-inheritance">
         </childnode>
       </node>
       <node id="18">
@@ -1204,6 +1590,12 @@
       </node>
       <node id="4">
         <label>SR_HTYPES_NS::SharedPtr&lt; Application &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>SR_HTYPES_NS::SharedPtr&lt; Asset &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
@@ -1232,13 +1624,13 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="56">
+      <node id="61">
         <label>SR_HTYPES_NS::SharedPtr&lt; BoolPropertyDrawer &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="42">
+      <node id="44">
         <label>SR_HTYPES_NS::SharedPtr&lt; CSS &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1256,7 +1648,7 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="53">
+      <node id="58">
         <label>SR_HTYPES_NS::SharedPtr&lt; Component &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1298,7 +1690,7 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="71">
+      <node id="88">
         <label>SR_HTYPES_NS::SharedPtr&lt; Entity &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1328,19 +1720,19 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="68">
+      <node id="81">
         <label>SR_HTYPES_NS::SharedPtr&lt; GameObject &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="43">
+      <node id="45">
         <label>SR_HTYPES_NS::SharedPtr&lt; HTMLContainerInterface &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="44">
+      <node id="46">
         <label>SR_HTYPES_NS::SharedPtr&lt; HTMLPage &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1358,6 +1750,12 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="37">
+        <label>SR_HTYPES_NS::SharedPtr&lt; ITestController &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
       <node id="32">
         <label>SR_HTYPES_NS::SharedPtr&lt; ManuallySharedPtrTestClass &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
@@ -1370,7 +1768,7 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="54">
+      <node id="59">
         <label>SR_HTYPES_NS::SharedPtr&lt; MathVectorPropertyDrawer &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1382,13 +1780,13 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="55">
+      <node id="60">
         <label>SR_HTYPES_NS::SharedPtr&lt; NumericPropertyDrawer &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="49">
+      <node id="55">
         <label>SR_HTYPES_NS::SharedPtr&lt; ObjectPropertyDrawer &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1400,7 +1798,7 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="57">
+      <node id="62">
         <label>SR_HTYPES_NS::SharedPtr&lt; PathPropertyDrawer &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1412,19 +1810,25 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="86">
+        <label>SR_HTYPES_NS::SharedPtr&lt; PhysicsMaterial &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
       <node id="13">
         <label>SR_HTYPES_NS::SharedPtr&lt; Pipeline &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="52">
+      <node id="54">
         <label>SR_HTYPES_NS::SharedPtr&lt; PointerPropertyDrawer &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="62">
+      <node id="67">
         <label>SR_HTYPES_NS::SharedPtr&lt; PopupItemSubWidget &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1436,7 +1840,7 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="37">
+      <node id="39">
         <label>SR_HTYPES_NS::SharedPtr&lt; ReflectionTestComponentLogicBase &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1454,121 +1858,193 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="38">
+        <label>SR_HTYPES_NS::SharedPtr&lt; ResourceContainer &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
       <node id="48">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_ANIMATIONS_NS::AnimationClip &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="52">
         <label>SR_HTYPES_NS::SharedPtr&lt; SR_ANIMATIONS_NS::Animator &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="46">
+      <node id="49">
         <label>SR_HTYPES_NS::SharedPtr&lt; SR_ANIMATIONS_NS::Skeleton &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="50">
+      <node id="51">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_AUDIO_NS::RawSound &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="56">
         <label>SR_HTYPES_NS::SharedPtr&lt; SR_CORE_NS::Engine &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="65">
+      <node id="75">
         <label>SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::BaseMaterial &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="64">
-        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::FrameBufferController &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="63">
-        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::Pipeline &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="60">
-        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::RenderScene &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="66">
-        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::RenderStrategy &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="58">
-        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::Window &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="61">
-        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Camera &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="67">
-        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Mesh &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="69">
-        <label>SR_HTYPES_NS::SharedPtr&lt; SR_NETWORK_NS::Socket &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="47">
-        <label>SR_HTYPES_NS::SharedPtr&lt; SR_UTILS_NS::GameObject &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="73">
-        <label>SR_HTYPES_NS::SharedPtr&lt; SR_UTILS_NS::SceneObject &gt;</label>
+      <node id="70">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::FileRenderTechniqueResource &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="72">
-        <label>SR_HTYPES_NS::SharedPtr&lt; SR_UTILS_NS::Transform &gt;</label>
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::FrameBufferController &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="59">
-        <label>SR_HTYPES_NS::SharedPtr&lt; SR_WORLD_NS::Scene &gt;</label>
+      <node id="77">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::IRenderTechnique &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::Pipeline &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::RenderScene &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="76">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::RenderStrategy &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="63">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::Window &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="66">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Camera &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="82">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Font &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="71">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Framebuffer &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="80">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Mesh &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="74">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Shader &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="79">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Skybox &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="73">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Texture &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="83">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_HTYPES_NS::RawMesh &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="84">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_NETWORK_NS::Socket &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="85">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_PTYPES_NS::PhysicsMaterial &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_UTILS_NS::GameObject &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="91">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_UTILS_NS::SceneObject &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="89">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_UTILS_NS::Transform &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="64">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_WORLD_NS::Scene &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="92">
         <label>SR_HTYPES_NS::SharedPtr&lt; SR_WORLD_NS::SceneLogic &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="51">
+      <node id="57">
         <label>SR_HTYPES_NS::SharedPtr&lt; Scene &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="45">
+      <node id="47">
         <label>SR_HTYPES_NS::SharedPtr&lt; SceneLogic &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="70">
+      <node id="87">
         <label>SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1586,8 +2062,26 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="68">
+        <label>SR_HTYPES_NS::SharedPtr&lt; Shader &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
       <node id="24">
         <label>SR_HTYPES_NS::SharedPtr&lt; Socket &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="90">
+        <label>SR_HTYPES_NS::SharedPtr&lt; TestManagerAsset &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="78">
+        <label>SR_HTYPES_NS::SharedPtr&lt; Texture &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
@@ -1598,25 +2092,25 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="38">
+      <node id="40">
         <label>SR_HTYPES_NS::SharedPtr&lt; ThreadWorker &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="39">
+      <node id="41">
         <label>SR_HTYPES_NS::SharedPtr&lt; ThreadWorkerStateBase &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="40">
+      <node id="42">
         <label>SR_HTYPES_NS::SharedPtr&lt; ThreadsWorker &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="41">
+      <node id="43">
         <label>SR_HTYPES_NS::SharedPtr&lt; Transform &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">

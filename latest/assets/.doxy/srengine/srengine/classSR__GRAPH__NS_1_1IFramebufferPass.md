@@ -34,7 +34,7 @@ Inherited by the following classes: [SR\_GRAPH\_NS::FramebufferPass](classSR__GR
 | ---: | :--- |
 | typedef std::vector&lt; [**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md) &gt; | [**ClearColors**](#typedef-clearcolors)  <br> |
 | typedef std::list&lt; ImageFormat &gt; | [**ColorFormats**](#typedef-colorformats)  <br> |
-| typedef [**SR\_GTYPES\_NS::Framebuffer**](classSR__GTYPES__NS_1_1Framebuffer.md) \* | [**FramebufferPtr**](#typedef-framebufferptr)  <br> |
+| typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_GTYPES\_NS::Framebuffer**](classSR__GTYPES__NS_1_1Framebuffer.md) &gt; | [**FramebufferPtr**](#typedef-framebufferptr)  <br> |
 
 
 
@@ -144,7 +144,7 @@ using SR_GRAPH_NS::IFramebufferPass::ColorFormats =  std::list<ImageFormat>;
 ### typedef FramebufferPtr 
 
 ```C++
-using SR_GRAPH_NS::IFramebufferPass::FramebufferPtr =  SR_GTYPES_NS::Framebuffer*;
+using SR_GRAPH_NS::IFramebufferPass::FramebufferPtr =  SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Framebuffer>;
 ```
 
 

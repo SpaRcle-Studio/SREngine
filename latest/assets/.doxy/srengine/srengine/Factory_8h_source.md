@@ -111,11 +111,11 @@ namespace SR_UTILS_NS {
             auto&& name = pMeta->GetFactoryName();
 
             if (m_types.count(name) > 0) {
-                WriteError("Factory::Register() : type \"{}\" is already registered!\n"_format(name));
+                WriteError("Factory::Register() : type \"{}\" is already registered!"_format(name));
                 return false;
             }
 
-            WriteLog("Factory::Register() : registering type \"{}\"\n"_format(name));
+            WriteLog("Factory::Register() : registering type \"{}\""_format(name));
 
             TypeInfo& info = m_types[name];
 
@@ -143,11 +143,11 @@ namespace SR_UTILS_NS {
 
             auto&& pIt = m_types.find(name);
             if (pIt == m_types.end()) {
-                WriteError("Factory::Register() : type \"{}\" is not registered!\n"_format(name));
+                WriteError("Factory::Register() : type \"{}\" is not registered!"_format(name));
                 return false;
             }
 
-            WriteLog("Factory::Unregister() : unregistering type \"{}\"\n"_format(name));
+            WriteLog("Factory::Unregister() : unregistering type \"{}\""_format(name));
 
             m_types.erase(pIt);
             return true;

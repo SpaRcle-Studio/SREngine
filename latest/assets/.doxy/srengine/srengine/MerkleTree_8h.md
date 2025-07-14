@@ -28,7 +28,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| namespace | [**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md) <br> |
+| namespace | [**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md) <br>_#define SR\_SHARED\_PTR\_TRACE_  |
 | namespace | [**SHA256**](namespaceSR__HTYPES__NS_1_1SHA256.md) <br> |
 | namespace | [**Details**](namespaceSR__HTYPES__NS_1_1SHA256_1_1Details.md) <br> |
 

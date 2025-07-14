@@ -39,7 +39,6 @@
 | Type | Name |
 | ---: | :--- |
 | class | [**Application**](classSR__CORE__NS_1_1Application.md) <br> |
-| class | [**CLIManager**](classSR__CORE__NS_1_1CLIManager.md) <br> |
 | class | [**ChunkSystemState**](classSR__CORE__NS_1_1ChunkSystemState.md) <br> |
 | class | [**DeltaTimeState**](classSR__CORE__NS_1_1DeltaTimeState.md) <br> |
 | class | [**DrawState**](classSR__CORE__NS_1_1DrawState.md) <br> |
@@ -54,7 +53,6 @@
 | struct | [**ScriptableContext**](structSR__CORE__NS_1_1ScriptableContext.md) <br>_@scriptableClass_  |
 | class | [**StopState**](classSR__CORE__NS_1_1StopState.md) <br> |
 | class | [**SubmitState**](classSR__CORE__NS_1_1SubmitState.md) <br> |
-| class | [**TestManager**](classSR__CORE__NS_1_1TestManager.md) <br> |
 | class | [**VisualChunk**](classSR__CORE__NS_1_1VisualChunk.md) <br> |
 | class | [**VisualRegion**](classSR__CORE__NS_1_1VisualRegion.md) <br> |
 | class | [**World**](classSR__CORE__NS_1_1World.md) <br> |
@@ -84,9 +82,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (EditorIcon, uint32\_t, Unknown, Material, File, Back, Play, Stop, PauseActive, Pause, FrameSkip, EmptyFolder, Folder, Script, Reset, Shapes, Game, ZIP, JPG, TXT, XML, PNG, DLL, Font, Audio) <br>_Здесь хранятся названия иконок, движок получает иконку по пути, указанному для названия в файле SREngine/Resources/Editor/Configs/EditorSettings.xml._  |
-|   | [**SR\_ENUM\_NS\_STRUCT\_T**](#function-sr_enum_ns_struct_t) (CLIFlags, uint32\_t, None=0, UnitTests=1&lt;&lt; 0, DeleteOldApp=1&lt;&lt; 1) <br> |
-|   | [**SR\_ENUM\_NS\_STRUCT\_T**](#function-sr_enum_ns_struct_t) (CLIOptions, uint32\_t, Resources, LogDir) <br> |
+|   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (EditorIcon, uint32\_t, Unknown, Material, Prefab, Asset, File, Shader, Back, Play, Stop, PauseActive, Pause, FrameSkip, EmptyFolder, Folder, Script, Reset, Shapes, Game, ZIP, JPG, TXT, XML, PNG, DLL, Font, Audio) <br>_Здесь хранятся названия иконок, движок получает иконку по пути, указанному для названия в файле SREngine/Resources/Editor/Configs/EditorSettings.xml._  |
 
 
 
@@ -136,7 +132,10 @@ SR_CORE_NS::SR_ENUM_NS_CLASS_T (
     uint32_t,
     Unknown,
     Material,
+    Prefab,
+    Asset,
     File,
+    Shader,
     Back,
     Play,
     Stop,
@@ -157,43 +156,6 @@ SR_CORE_NS::SR_ENUM_NS_CLASS_T (
     DLL,
     Font,
     Audio
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function SR\_ENUM\_NS\_STRUCT\_T 
-
-```C++
-SR_CORE_NS::SR_ENUM_NS_STRUCT_T (
-    CLIFlags,
-    uint32_t,
-    None=0,
-    UnitTests=1<< 0,
-    DeleteOldApp=1<< 1
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function SR\_ENUM\_NS\_STRUCT\_T 
-
-```C++
-SR_CORE_NS::SR_ENUM_NS_STRUCT_T (
-    CLIOptions,
-    uint32_t,
-    Resources,
-    LogDir
 ) 
 ```
 

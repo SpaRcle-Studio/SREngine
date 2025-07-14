@@ -271,20 +271,20 @@
         </childnode>
       </node>
       <node id="7">
+        <label>SR_CORE_GUI_NS::AssetInspector</label>
+        <link refid="classSR__CORE__GUI__NS_1_1AssetInspector"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
         <label>SR_CORE_GUI_NS::EngineSettings</label>
         <link refid="classSR__CORE__GUI__NS_1_1EngineSettings"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="8">
+      <node id="9">
         <label>SR_CORE_GUI_NS::Inspector</label>
         <link refid="classSR__CORE__GUI__NS_1_1Inspector"/>
-        <childnode refid="4" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="9">
-        <label>SR_CORE_GUI_NS::PhysicsMaterialEditor</label>
-        <link refid="classSR__CORE__GUI__NS_1_1PhysicsMaterialEditor"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>

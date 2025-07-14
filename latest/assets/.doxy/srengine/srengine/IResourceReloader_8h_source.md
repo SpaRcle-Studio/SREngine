@@ -24,7 +24,7 @@ namespace SR_UTILS_NS {
 
     class SR_COMMON_DLL_API IResourceReloader : public SR_UTILS_NS::NonCopyable {
     public:
-        SR_NODISCARD virtual bool IsResourceSuitableForReload(IResource* pResource) const;
+        SR_NODISCARD virtual bool IsResourceSuitableForReload(const IResource::Ptr& pResource) const;
         SR_NODISCARD virtual bool Reload(const SR_UTILS_NS::Path& path, ResourceInfo* pResourceInfo) = 0;
 
     protected:

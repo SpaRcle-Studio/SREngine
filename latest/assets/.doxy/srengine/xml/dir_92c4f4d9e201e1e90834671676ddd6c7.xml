@@ -14,7 +14,6 @@
     <innerdir refid="dir_28dae956caee7d361b94ee0c634a2896">Engine/inc/Engine/Utils</innerdir>
     <innerdir refid="dir_748c98af40e9646c77253b96f05954cd">Engine/inc/Engine/World</innerdir>
     <innerfile refid="Application_8h">Application.h</innerfile>
-    <innerfile refid="CLIManager_8h">CLIManager.h</innerfile>
     <innerfile refid="Engine_8h">Engine.h</innerfile>
     <innerfile refid="EngineCommands_8h">EngineCommands.h</innerfile>
     <innerfile refid="EngineMigrators_8h">EngineMigrators.h</innerfile>

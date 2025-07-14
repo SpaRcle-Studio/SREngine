@@ -34,7 +34,7 @@ namespace SR_GRAPH_NS {
             bool depth = false;
         };
         using Samplers = std::vector<Sampler>;
-        using ShaderPtr = SR_GTYPES_NS::Shader*;
+        using ShaderPtr = SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Shader>;
         using MeshPtr = SR_GTYPES_NS::Mesh*;
         using FramebufferPtr = SR_GTYPES_NS::Framebuffer*;
     public:

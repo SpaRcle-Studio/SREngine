@@ -62,20 +62,19 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="28" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" bodystart="28" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a48a9d0fdecd5e8788e27afa1605920e7" prot="public" static="no" mutable="no">
-        <type><ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> *</type>
-        <definition>SR_GTYPES_NS::Texture* SR_GRAPH_NS::ISamplersPass::Sampler::pTexture</definition>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1adf85af5127a0b90dc12526110bf07192" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> &gt;</type>
+        <definition>SR_HTYPES_NS::SharedPtr&lt;SR_GTYPES_NS::Texture&gt; SR_GRAPH_NS::ISamplersPass::Sampler::pTexture</definition>
         <argsstring></argsstring>
         <name>pTexture</name>
         <qualifiedname>SR_GRAPH_NS::ISamplersPass::Sampler::pTexture</qualifiedname>
-        <initializer>= nullptr</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="29" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="29" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a36a3b486c568dd637bd7664527f648cb" prot="public" static="no" mutable="no">
         <type>uint64_t</type>
@@ -190,9 +189,6 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="8">
-        <label>Memory::IGraphicsResource</label>
-      </node>
       <node id="1">
         <label>SR_GRAPH_NS::ISamplersPass::Sampler</label>
         <childnode refid="2" relation="public-inheritance">
@@ -201,47 +197,14 @@
           <edgelabel>fboName</edgelabel>
           <edgelabel>id</edgelabel>
         </childnode>
-        <childnode refid="4" relation="usage">
-          <edgelabel>pTexture</edgelabel>
-        </childnode>
-      </node>
-      <node id="4">
-        <label>SR_GTYPES_NS::Texture</label>
-        <link refid="classSR__GTYPES__NS_1_1Texture"/>
-        <childnode refid="5" relation="public-inheritance">
-        </childnode>
-        <childnode refid="8" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="5">
-        <label>SR_UTILS_NS::IResource</label>
-        <link refid="classSR__UTILS__NS_1_1IResource"/>
-        <childnode refid="6" relation="public-inheritance">
-        </childnode>
-        <childnode refid="7" relation="public-inheritance">
-        </childnode>
-        <childnode refid="3" relation="usage">
-          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
-          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
-        </childnode>
       </node>
       <node id="2">
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
-      <node id="6">
-        <label>SR_UTILS_NS::ResourceContainer</label>
-        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
-        <childnode refid="2" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="3">
         <label>SR_UTILS_NS::StringAtom</label>
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
-      </node>
-      <node id="7">
-        <label>SR_UTILS_NS::SubscriptionHolder</label>
-        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
     <location file="Engine/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="18" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" bodystart="18" bodyend="32"/>
@@ -255,7 +218,7 @@
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>NonCopyable</name></member>
       <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a0c29d4745694de751ea6d2f404e45a20" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>operator=</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::NonCopyable::"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>operator=</name></member>
-      <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a48a9d0fdecd5e8788e27afa1605920e7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>pTexture</name></member>
+      <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1adf85af5127a0b90dc12526110bf07192" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>pTexture</name></member>
       <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1ab225fe44556cd912294c79b1c014ba50" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>Sampler</name></member>
       <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1adf1c9cbcf06c604821544edae7761a09" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>Sampler</name></member>
       <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a5594f24a47c3a97a22cad3493f20de48" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>textureId</name></member>

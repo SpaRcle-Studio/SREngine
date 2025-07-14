@@ -32,7 +32,7 @@ namespace SR_GRAPH_NS {
     class BaseMaterial;
 
     typedef std::variant<
-        SR_GTYPES_NS::Texture*,
+        SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Texture>,
         float_t,
         int32_t,
         SR_MATH_NS::FVector2,

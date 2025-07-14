@@ -3,6 +3,7 @@
   <compounddef id="ComponentDrawer_8h" kind="file" language="C++">
     <compoundname>ComponentDrawer.h</compoundname>
     <includes refid="stdInclude_8h" local="no">Utils/stdInclude.h</includes>
+    <includedby refid="AssetInspector_8h" local="no">Engine/inc/Engine/GUI/AssetInspector.h</includedby>
     <includedby refid="Inspector_8h" local="no">Engine/inc/Engine/GUI/Inspector.h</includedby>
     <incdepgraph>
       <node id="1">
@@ -334,13 +335,19 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
+      <node id="2">
+        <label>Engine/inc/Engine/GUI/AssetInspector.h</label>
+        <link refid="AssetInspector_8h_source"/>
+      </node>
       <node id="1">
         <label>Engine/inc/Engine/GUI/ComponentDrawer.h</label>
         <link refid="ComponentDrawer_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
       </node>
-      <node id="2">
+      <node id="3">
         <label>Engine/inc/Engine/GUI/Inspector.h</label>
         <link refid="Inspector_8h_source"/>
       </node>

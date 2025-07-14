@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="52" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Types/Thread.h" bodystart="52" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="53" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Types/Thread.h" bodystart="53" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -52,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="62" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Types/Thread.h" bodystart="62" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="65" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Types/Thread.h" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1ad341e152e836310a9d802b30c02bd179" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Thread" kindref="compound">Thread</ref> *</type>
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="63" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Types/Thread.h" bodystart="63" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="66" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Types/Thread.h" bodystart="66" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -129,6 +129,20 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="45" column="18"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a31c2ff07aa66378123c07b67c689375a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::Thread::Factory::DeInitialize</definition>
+        <argsstring>()</argsstring>
+        <name>DeInitialize</name>
+        <qualifiedname>SR_HTYPES_NS::Thread::Factory::DeInitialize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="46" column="18"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a21814e8c45b606dcf33622d523ca731f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1Thread" kindref="compound">Ptr</ref></type>
         <definition>SR_NODISCARD Ptr SR_HTYPES_NS::Thread::Factory::GetMainThread</definition>
@@ -141,7 +155,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="47" column="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="48" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a246dc300ee941bd96c0a487012414ab7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1Thread" kindref="compound">Ptr</ref></type>
@@ -155,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="48" column="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="49" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1ae8555f5cdb69090e1be967631b05f49c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1Thread" kindref="compound">Ptr</ref></type>
@@ -169,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="49" column="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="50" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1ab821f58b44d7f2023f3efacfdfb32795" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1Thread" kindref="compound">Ptr</ref></type>
@@ -183,7 +197,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="54" column="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="55" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a465ba0d1196f11310269294edc04ba77" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -219,7 +233,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="56" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Types/Thread.h" bodystart="114" bodyend="140"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="57" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Types/Thread.h" bodystart="117" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a770734fbd523b59392bcd524e120dcee" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_HTYPES_NS::Thread::Factory::IsSingletonCanBeDestroyed</definition>
+        <argsstring>() const override</argsstring>
+        <name>IsSingletonCanBeDestroyed</name>
+        <qualifiedname>SR_HTYPES_NS::Thread::Factory::IsSingletonCanBeDestroyed</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="59" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Types/Thread.h" bodystart="59" bodyend="59"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -239,7 +267,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="59" column="18"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="62" column="18"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -280,14 +308,16 @@
         <label>Singleton&lt; Factory &gt;</label>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="36" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/Thread.h" bodystart="36" bodyend="65"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/Thread.h" line="36" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/Thread.h" bodystart="36" bodyend="68"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a465ba0d1196f11310269294edc04ba77" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>Create</name></member>
       <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1ab821f58b44d7f2023f3efacfdfb32795" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>CreateEmpty</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a31c2ff07aa66378123c07b67c689375a" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>DeInitialize</name></member>
       <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a8266175a219b9402ddefa1368a36a599" prot="protected" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>Factory</name></member>
       <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a21814e8c45b606dcf33622d523ca731f" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>GetMainThread</name></member>
       <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a246dc300ee941bd96c0a487012414ab7" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>GetThisThread</name></member>
       <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a508ef3a0d2ab9780001f44462d597e69" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>GetThreadsCount</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a770734fbd523b59392bcd524e120dcee" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>IsSingletonCanBeDestroyed</name></member>
       <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1ad341e152e836310a9d802b30c02bd179" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>m_main</name></member>
       <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1addd11e30e30a396f84ec6c536be258b9" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>m_threads</name></member>
       <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1add7157af0d2b1f88007ff24eff82733d" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>PrintThreads</name></member>

@@ -38,9 +38,9 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="38" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="38" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BaseMaterial_1ae80ca5583683cd6ab3db00f5fc315871" prot="protected" static="no">
-        <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
-        <definition>using SR_GRAPH_NS::BaseMaterial::ShaderPtr =  SR_GTYPES_NS::Shader*</definition>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BaseMaterial_1adcdc6abd219d68f67c2bd1f61a4f1825" prot="protected" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> &gt;</type>
+        <definition>using SR_GRAPH_NS::BaseMaterial::ShaderPtr =  SR_HTYPES_NS::SharedPtr&lt;SR_GTYPES_NS::Shader&gt;</definition>
         <argsstring></argsstring>
         <name>ShaderPtr</name>
         <qualifiedname>SR_GRAPH_NS::BaseMaterial::ShaderPtr</qualifiedname>
@@ -234,10 +234,10 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="50" column="26"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a63ce489b511922a2922f35cc3b3e91bf" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a27b3576be524d33169433cf81e4bc074" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
         <definition>void SR_FASTCALL SR_GRAPH_NS::BaseMaterial::SetTexture</definition>
-        <argsstring>(SR_UTILS_NS::StringAtom id, SR_GTYPES_NS::Texture *pTexture) noexcept</argsstring>
+        <argsstring>(SR_UTILS_NS::StringAtom id, const SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Texture &gt; &amp;pTexture) noexcept</argsstring>
         <name>SetTexture</name>
         <qualifiedname>SR_GRAPH_NS::BaseMaterial::SetTexture</qualifiedname>
         <param>
@@ -245,7 +245,7 @@
           <declname>id</declname>
         </param>
         <param>
-          <type><ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> *</type>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> &gt; &amp;</type>
           <declname>pTexture</declname>
         </param>
         <briefdescription>
@@ -712,9 +712,9 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SetPointerFromBase</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1aab3c58af7c559c0d45faab3c45334500" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SetShader</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a8b70231d2e3a61312c808e89d3f69836" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SetShader</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a63ce489b511922a2922f35cc3b3e91bf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SetTexture</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a27b3576be524d33169433cf81e4bc074" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SetTexture</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a49bcd5177ade3cc781423acc8fb97588" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SetVec4</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1ae80ca5583683cd6ab3db00f5fc315871" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>ShaderPtr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1adcdc6abd219d68f67c2bd1f61a4f1825" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>ShaderPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SharedPointerType</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SharedPtr</name></member>

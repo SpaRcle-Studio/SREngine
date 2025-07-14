@@ -34,6 +34,7 @@ namespace SR_GRAPH_NS {
 
         SR_NODISCARD void* GetIconFont() const { return m_iconFont; }
         SR_NODISCARD void* GetMainFont() const { return m_mainFont; }
+        SR_NODISCARD void* GetSmallFont() const { return m_smallFont; }
 
         void Prepare() override;
         void Destroy() override;
@@ -44,6 +45,7 @@ namespace SR_GRAPH_NS {
     protected:
         void* m_context = nullptr;
         void* m_mainFont = nullptr;
+        void* m_smallFont = nullptr;
         void* m_iconFont = nullptr;
 
         float_t m_fontSize = 12.0f;

@@ -29,7 +29,6 @@ namespace SR_UTILS_NS {
     };
 }
 
-// #define SR_SHARED_PTR_TRACE
 
 namespace SR_HTYPES_NS {
     class SharedPtrDynamicData;
@@ -472,6 +471,9 @@ namespace SR_HTYPES_NS {
             const auto pPtr = m_ptr;
             SharedPtrDynamicData* pData = m_data;
 
+            SharedPtr<T> pCopy = *this;
+            Reset();
+
             if (valid) {
                 pData->deallocated = true;
                 freeFun(pPtr);
@@ -550,7 +552,7 @@ namespace SR_UTILS_NS {
 namespace std {
     template<typename T> struct hash<SR_HTYPES_NS::SharedPtr<T>> {
         size_t operator()(SR_HTYPES_NS::SharedPtr<T> const& ptr) const {
-            return std::hash<void*>()(ptr.GetRawPtr());
+            return std::hash<const void*>()(ptr.GetRawPtr());
         }
     };
 

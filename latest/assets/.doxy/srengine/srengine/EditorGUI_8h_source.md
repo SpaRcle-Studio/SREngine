@@ -20,13 +20,10 @@
 #include <Utils/ECS/SceneObject.h>
 
 #include <Graphics/GUI/WidgetManager.h>
+#include <Graphics/Types/Texture.h>
 
 namespace SR_WORLD_NS {
     class Scene;
-}
-
-namespace SR_GTYPES_NS {
-    class Texture;
 }
 
 namespace SR_GRAPH_NS {
@@ -50,7 +47,7 @@ namespace SR_CORE_GUI_NS {
     class EditorGUI : public SR_GRAPH_GUI_NS::WidgetManager {
         using Super = SR_GRAPH_GUI_NS::WidgetManager;
         using Widgets = std::unordered_map<size_t, SR_GRAPH_NS::GUI::Widget*>;
-        using Icons = std::map<EditorIcon, SR_GTYPES_NS::Texture*>;
+        using Icons = std::map<EditorIcon, SR_GTYPES_NS::Texture::Ptr>;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>;
         using WindowPtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::Window>;
         using ScenePtr = SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>;
@@ -110,7 +107,7 @@ namespace SR_CORE_GUI_NS {
         SR_NODISCARD bool Enabled() const { return m_enabled; }
         SR_NODISCARD bool IsDockingEnabled() const { return m_useDocking; }
         SR_NODISCARD void* GetIconDescriptor(EditorIcon icon) const;
-        SR_NODISCARD SR_GTYPES_NS::Texture* GetIcon(EditorIcon icon) const;
+        SR_NODISCARD const SR_GTYPES_NS::Texture* GetIcon(EditorIcon icon) const;
         SR_NODISCARD const EnginePtr& GetEngine() const { return m_engine; }
         SR_NODISCARD bool IsInitialized() const { return m_isInit; }
 
