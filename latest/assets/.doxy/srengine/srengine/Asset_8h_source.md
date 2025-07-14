@@ -16,6 +16,7 @@
 #define SR_ENGINE_COMMON_ASSET_H
 
 #include <Utils/Resources/IResource.h>
+#include <Utils/Resources/ResourceManager.h>
 
 namespace SR_UTILS_NS {
     class Asset : public IResource {

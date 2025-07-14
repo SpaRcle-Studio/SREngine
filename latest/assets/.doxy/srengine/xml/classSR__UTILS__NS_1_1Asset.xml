@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="13" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Asset.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="14" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Asset.h" bodystart="14" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="16" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Asset.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="17" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Asset.h" bodystart="17" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__UTILS__NS_1_1Asset_1a6eeb6555020c09fedd47ad7f6a03e7ba" prot="public" static="no">
         <type><ref refid="classSR__UTILS__NS_1_1Asset" kindref="compound">Asset</ref></type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="17" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Asset.h" bodystart="17" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="18" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Asset.h" bodystart="18" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-attrib">
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="15" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Asset.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="16" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Asset.h" bodystart="16" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -85,7 +85,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="20" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="21" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Asset_1a07b1f378c5b353d51439a74147c03cef" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -99,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="21" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="22" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Asset_1a5a22f80bda8941e508875eb30553d80b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -122,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="38" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Asset.h" bodystart="38" bodyend="62"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="39" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Asset.h" bodystart="39" bodyend="63"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Asset_1aadb6e03703c9ff6d510dfaab757451fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="64" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Asset.h" bodystart="64" bodyend="89"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="65" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Asset.h" bodystart="65" bodyend="90"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -171,7 +171,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="23" column="66"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="24" column="66"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Asset_1a149c0fd2cf25a101eb8f8c4e8f1796ce" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -194,7 +194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="24" column="64"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="25" column="64"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -211,7 +211,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="27" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Asset.h" bodystart="27" bodyend="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="28" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Asset.h" bodystart="28" bodyend="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Asset_1ad242cbf64717dcaee131a89411d489a6" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -226,7 +226,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="33" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="34" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Asset_1a519b0e89f7e316149b0464e393ea4600" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -242,7 +242,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="34" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="35" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-func">
@@ -262,7 +262,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="30" column="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="31" column="40"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -392,7 +392,7 @@
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="11" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Asset.h" bodystart="11" bodyend="36"/>
+    <location file="Engine/libs/Utils/inc/Utils/Resources/Asset.h" line="12" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Resources/Asset.h" bodystart="12" bodyend="37"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1af9087ca5182397a9c7d3b92fb5591523" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Asset</scope><name>AddDependency</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Asset</scope><name>AddSerializationFlags</name></member>

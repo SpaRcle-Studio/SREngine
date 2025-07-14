@@ -11,6 +11,7 @@
 
 
 * `#include <Utils/Resources/IResource.h>`
+* `#include <Utils/Resources/ResourceManager.h>`
 
 
 
