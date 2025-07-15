@@ -5735,6 +5735,7 @@
 * **WriteHashToFile** ([**SR\_UTILS\_NS::FileSystem**](classSR__UTILS__NS_1_1FileSystem.md))
 * **WriteToFile** ([**SR\_UTILS\_NS::FileSystem**](classSR__UTILS__NS_1_1FileSystem.md))
 * **WatchPull** ([**SR\_UTILS\_NS::FileSystemWatcher**](classSR__UTILS__NS_1_1FileSystemWatcher.md))
+* **WriteNode** ([**SR\_UTILS\_NS::IBaseSerialization**](classSR__UTILS__NS_1_1IBaseSerialization.md))
 * **WriteBool** ([**SR\_UTILS\_NS::IBaseSerializer**](classSR__UTILS__NS_1_1IBaseSerializer.md), [**SR\_UTILS\_NS::ISerializer**](classSR__UTILS__NS_1_1ISerializer.md))
 * **WriteDouble** ([**SR\_UTILS\_NS::IBaseSerializer**](classSR__UTILS__NS_1_1IBaseSerializer.md), [**SR\_UTILS\_NS::ISerializer**](classSR__UTILS__NS_1_1ISerializer.md))
 * **WriteFloat** ([**SR\_UTILS\_NS::IBaseSerializer**](classSR__UTILS__NS_1_1IBaseSerializer.md), [**SR\_UTILS\_NS::ISerializer**](classSR__UTILS__NS_1_1ISerializer.md))

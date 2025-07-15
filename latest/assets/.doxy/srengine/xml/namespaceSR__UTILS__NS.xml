@@ -1180,7 +1180,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="547" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="547" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="550" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="550" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1ac2a989d78110ff2e67225cef26356de0" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -2238,6 +2238,115 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Common/Singleton.h" line="80" column="40" declfile="Engine/libs/Utils/inc/Utils/Common/Singleton.h" declline="80" declcolumn="40"/>
       </memberdef>
+      <memberdef kind="function" id="namespaceSR__UTILS__NS_1ae508fd7ebf04163f5b7a696e668d5137" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SR_INLINE_STATIC uint32_t</type>
+        <definition>SR_NODISCARD SR_INLINE_STATIC uint32_t SR_UTILS_NS::FastSToU</definition>
+        <argsstring>(const char *str)</argsstring>
+        <name>FastSToU</name>
+        <qualifiedname>SR_UTILS_NS::FastSToU</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Функция для преобразования hex символа в целое число </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="19" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="19" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceSR__UTILS__NS_1ae3f6b0bce85928900e014b817aa1d02f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SR_INLINE_STATIC int32_t</type>
+        <definition>SR_NODISCARD SR_INLINE_STATIC int32_t SR_UTILS_NS::FastSToI</definition>
+        <argsstring>(const char *str)</argsstring>
+        <name>FastSToI</name>
+        <qualifiedname>SR_UTILS_NS::FastSToI</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="28" column="43" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="28" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceSR__UTILS__NS_1a8729a9294d31a61c28f89cb0edccd24d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SR_INLINE_STATIC int64_t</type>
+        <definition>SR_NODISCARD SR_INLINE_STATIC int64_t SR_UTILS_NS::FastSToL</definition>
+        <argsstring>(std::string_view sv)</argsstring>
+        <name>FastSToL</name>
+        <qualifiedname>SR_UTILS_NS::FastSToL</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>sv</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="45" column="43" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="45" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceSR__UTILS__NS_1a144856ef47ce4f7f174f70546191f950" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SR_INLINE_STATIC double_t</type>
+        <definition>SR_NODISCARD SR_INLINE_STATIC double_t SR_UTILS_NS::FastSToD</definition>
+        <argsstring>(std::string_view sv)</argsstring>
+        <name>FastSToD</name>
+        <qualifiedname>SR_UTILS_NS::FastSToD</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>sv</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="65" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="65" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceSR__UTILS__NS_1aabfa849586583b8f98fed49b886b4c96" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SR_INLINE_STATIC uint32_t</type>
+        <definition>SR_NODISCARD SR_INLINE_STATIC uint32_t SR_UTILS_NS::FastSToU</definition>
+        <argsstring>(std::string_view sv)</argsstring>
+        <name>FastSToU</name>
+        <qualifiedname>SR_UTILS_NS::FastSToU</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>sv</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="103" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="103" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceSR__UTILS__NS_1afb4c7f8f2d39fc42d9165217600cbc6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SR_INLINE_STATIC int32_t</type>
+        <definition>SR_NODISCARD SR_INLINE_STATIC int32_t SR_UTILS_NS::FastSToI</definition>
+        <argsstring>(std::string_view sv)</argsstring>
+        <name>FastSToI</name>
+        <qualifiedname>SR_UTILS_NS::FastSToI</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>sv</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="113" column="43" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="113" bodyend="132"/>
+      </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1afeff80e8160ae6c5d2049b892e6e57b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_INLINE_STATIC uint8_t</type>
         <definition>SR_NODISCARD SR_INLINE_STATIC uint8_t SR_UTILS_NS::HexCharToUInt8</definition>
@@ -2249,13 +2358,12 @@
           <declname>c</declname>
         </param>
         <briefdescription>
-<para>Функция для преобразования hex символа в целое число </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="18" column="43" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="18" bodyend="23"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="134" column="43" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="134" bodyend="139"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a9c0b789ca13119e6bd68017ce4ceb56a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_INLINE_STATIC uint8_t</type>
@@ -2277,7 +2385,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="25" column="43" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="25" bodyend="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="141" column="43" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="141" bodyend="143"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a8f46959601121926fcb8a03d58b133ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_INLINE_STATIC bool</type>
@@ -2295,7 +2403,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="29" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="29" bodyend="36"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="145" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="145" bodyend="152"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1ab0f625cab0d8edf9bcfc36c3688a0846" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_INLINE_STATIC uint8_t</type>
@@ -2314,7 +2422,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="39" column="43" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="39" bodyend="41"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="155" column="43" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="155" bodyend="157"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1ae8bf089bf5ac52f47228a5dbc3a7f580" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_INLINE_STATIC uint8_t</type>
@@ -2332,7 +2440,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="43" column="43" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="43" bodyend="45"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="159" column="43" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="159" bodyend="161"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1ae95d8968291cf5b170faa5d1650dfee1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_INLINE_STATIC uint8_t</type>
@@ -2350,7 +2458,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="47" column="43" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="47" bodyend="58"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="163" column="43" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="163" bodyend="174"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1af6ba209cc7c3b697990f5791461b1721" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -2374,7 +2482,7 @@
         <inbodydescription>
 <para>RRGGBBAA format</para>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="60" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="60" bodyend="184"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="176" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="176" bodyend="302"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a1f4d3744ebe5f4ff6d2504a1f5a15526" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -2404,7 +2512,7 @@
         <inbodydescription>
 <para>NOLINT</para>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="186" column="42" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="186" bodyend="195"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="304" column="42" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="304" bodyend="313"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a099032240793afbd2a66b0ff8ee1591e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -2434,7 +2542,7 @@
         <inbodydescription>
 <para>NOLINT</para>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="197" column="42" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="197" bodyend="206"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="315" column="42" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="315" bodyend="324"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a284f821fc1608703ed165377f586f269" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -2463,7 +2571,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="208" column="42" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="208" bodyend="210"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" line="326" column="42" bodyfile="Engine/libs/Utils/inc/Utils/Common/StringFormat.h" bodystart="326" bodyend="328"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1ac193473466442675f9ee7ba480273334" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED std::wstring</type>

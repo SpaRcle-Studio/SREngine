@@ -77,10 +77,16 @@ namespace SR_HTYPES_NS {
         }
 
         template<class Ty> SR_NODISCARD Iterator LowerBound(const Ty& value) {
+            if (m_data.empty()) {
+                return m_data.end();
+            }
             return std::lower_bound(m_data.begin(), m_data.end(), value, m_predicate);
         }
 
         template<class Ty, typename CustomPred = Predicate> SR_NODISCARD Iterator LowerBound(const Ty& value, const CustomPred& predicate) {
+            if (m_data.empty()) {
+                return m_data.end();
+            }
             return std::lower_bound(m_data.begin(), m_data.end(), value, predicate);
         }
 

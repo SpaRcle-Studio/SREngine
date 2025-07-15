@@ -100,6 +100,8 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SerializationNode& GetWalkNode() noexcept { return GetNode(m_walker); }
         SR_NODISCARD const SerializationNode& GetWalkNode() const noexcept { return GetNode(m_walker); }
 
+        void WriteNode(const SerializationNode& node) noexcept;
+
     protected:
         SR_NODISCARD virtual bool IsAllowEmptyElementsInArrayImpl() const noexcept { return true; }
         SR_NODISCARD bool SaveToFileImpl(const SR_UTILS_NS::Path& path) const;

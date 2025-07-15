@@ -71,7 +71,7 @@
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="105">
+      <node id="106">
         <label>Utils/Common/CastUtils.h</label>
         <link refid="CastUtils_8h_source"/>
         <childnode refid="102" relation="include">
@@ -154,6 +154,8 @@
         </childnode>
         <childnode refid="104" relation="include">
         </childnode>
+        <childnode refid="105" relation="include">
+        </childnode>
       </node>
       <node id="104">
         <label>Utils/Common/StringUtils.h</label>
@@ -178,7 +180,7 @@
         </childnode>
         <childnode refid="101" relation="include">
         </childnode>
-        <childnode refid="105" relation="include">
+        <childnode refid="106" relation="include">
         </childnode>
       </node>
       <node id="7">
@@ -273,7 +275,7 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="106">
+      <node id="105">
         <label>Utils/Profile/TracyContext.h</label>
         <link refid="TracyContext_8h_source"/>
       </node>
@@ -332,7 +334,7 @@
         <link refid="SortedVector_8h_source"/>
         <childnode refid="112" relation="include">
         </childnode>
-        <childnode refid="106" relation="include">
+        <childnode refid="105" relation="include">
         </childnode>
       </node>
       <node id="112">
@@ -358,7 +360,7 @@
         </childnode>
         <childnode refid="84" relation="include">
         </childnode>
-        <childnode refid="106" relation="include">
+        <childnode refid="105" relation="include">
         </childnode>
       </node>
       <node id="9">

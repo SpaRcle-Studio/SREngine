@@ -151,6 +151,7 @@
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1aabb53dc9898915e869ce8da89e8505a3" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRAISerialization</scope><name>SaveToFileImpl</name></member>
       <member refid="classSR__UTILS__NS_1_1SRAISerialization_1a929313320a3ebbf7e5dcb9fc6c364e38" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRAISerialization</scope><name>SetUseTabs</name></member>
       <member refid="classSR__UTILS__NS_1_1SRAISerialization_1ac4923d2272f3e99b4ac177df6b4af898" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRAISerialization</scope><name>ToStringBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a7d1004a49c47662eab249f165d64d233" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRAISerialization</scope><name>WriteNode</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -60,7 +60,9 @@ namespace SR_UTILS_NS {
             {
                 using TestClass = AutoTests::ManuallySharedPtrTestClass;
                 SR_HTYPES_NS::SharedPtr<TestClass> pInt = new TestClass();
-                pInt->AutoFree();
+                pInt.AutoFree();
+                pInt = new TestClass();
+                pInt.AutoFree();
             }
 
             {
@@ -209,6 +211,18 @@ namespace SR_UTILS_NS {
                 SR_HTYPES_NS::SharedPtr<int> pInt4 = pInt2.GetThis();
                 SR_HTYPES_NS::SharedPtr<int> pInt5 = std::move(pInt2);
                 pInt5.AutoFree();
+            }
+
+            {
+                std::vector<SR_HTYPES_NS::SharedPtr<AutoTests::AutomaticallySharedPtrTestClass>> v;
+                v.emplace_back(new AutoTests::AutomaticallySharedPtrTestClass());
+                v.emplace_back(new AutoTests::AutomaticallySharedPtrTestClass());
+                for (auto&& pInt : v) {
+                    pInt.AutoFree();
+                }
+                auto newVector = std::vector<SR_HTYPES_NS::SharedPtr<AutoTests::AutomaticallySharedPtrTestClass>>({ new AutoTests::AutomaticallySharedPtrTestClass() });
+                v = newVector;
+                v.emplace_back(new AutoTests::AutomaticallySharedPtrTestClass());
             }
 
             auto&& pointersCountCurrent = SR_HTYPES_NS::SharedPtrDynamicDataCounter::Instance().GetCount();

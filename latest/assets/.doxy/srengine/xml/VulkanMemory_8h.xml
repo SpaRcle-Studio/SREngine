@@ -24,14 +24,14 @@
         <childnode refid="91" relation="include">
         </childnode>
       </node>
-      <node id="113">
+      <node id="114">
         <label>Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h</label>
         <link refid="DynamicTextureDescriptorSet_8h_source"/>
         <childnode refid="76" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="114" relation="include">
+        <childnode refid="115" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -57,7 +57,7 @@
         </childnode>
         <childnode refid="75" relation="include">
         </childnode>
-        <childnode refid="113" relation="include">
+        <childnode refid="114" relation="include">
         </childnode>
       </node>
       <node id="76">
@@ -72,7 +72,7 @@
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="111">
+      <node id="112">
         <label>Utils/Common/CastUtils.h</label>
         <link refid="CastUtils_8h_source"/>
         <childnode refid="108" relation="include">
@@ -155,6 +155,8 @@
         </childnode>
         <childnode refid="110" relation="include">
         </childnode>
+        <childnode refid="111" relation="include">
+        </childnode>
       </node>
       <node id="110">
         <label>Utils/Common/StringUtils.h</label>
@@ -179,7 +181,7 @@
         </childnode>
         <childnode refid="107" relation="include">
         </childnode>
-        <childnode refid="111" relation="include">
+        <childnode refid="112" relation="include">
         </childnode>
       </node>
       <node id="93">
@@ -274,6 +276,10 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
+      <node id="111">
+        <label>Utils/Profile/TracyContext.h</label>
+        <link refid="TracyContext_8h_source"/>
+      </node>
       <node id="91">
         <label>Utils/Resources/Xml.h</label>
         <link refid="Xml_8h_source"/>
@@ -289,7 +295,7 @@
         </childnode>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="112" relation="include">
+        <childnode refid="113" relation="include">
         </childnode>
       </node>
       <node id="99">
@@ -496,7 +502,7 @@
       <node id="73">
         <label>EvoVulkan/DescriptorManager.h</label>
       </node>
-      <node id="114">
+      <node id="115">
         <label>EvoVulkan/Memory/Allocator.h</label>
       </node>
       <node id="74">
@@ -520,7 +526,7 @@
       <node id="8">
         <label>array</label>
       </node>
-      <node id="112">
+      <node id="113">
         <label>assimp/contrib/pugixml/src/pugixml.hpp</label>
       </node>
       <node id="42">

@@ -4661,6 +4661,7 @@
     <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a4db644f026964230f3933efe8655f8f2" kind="function"><name>GetCurrentNode</name></member>
     <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1ad4afdab87bcec0fc25bf96c7490d10fe" kind="function"><name>GetWalkNode</name></member>
     <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a2268f719568d46427de3da07aed3b477" kind="function"><name>GetWalkNode</name></member>
+    <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a7d1004a49c47662eab249f165d64d233" kind="function"><name>WriteNode</name></member>
     <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1aeff9dc19052b786fcd07eb9c2da6f5af" kind="function"><name>IsAllowEmptyElementsInArrayImpl</name></member>
     <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1aabb53dc9898915e869ce8da89e8505a3" kind="function"><name>SaveToFileImpl</name></member>
     <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a44738c1f287d67625d1e757b1bff1b5c" kind="function"><name>GetNode</name></member>
@@ -10274,8 +10275,8 @@
     <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a642ded2e25bdb37a68410a7497993ae1" kind="function"><name>SetPointerFromBase</name></member>
   </compound>
   <compound refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData" kind="struct"><name>SR_HTYPES_NS::SharedPtrDynamicData</name>
-    <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a31fe45ec07c1c29c38a238e29fba8be9" kind="variable"><name>strongCount</name></member>
-    <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a27fe254f9ee0f40088432c90dbae0fe6" kind="variable"><name>weakCount</name></member>
+    <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a849b8cfc69de84ef8dbaa2baa746b13c" kind="variable"><name>strongCount</name></member>
+    <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a589b1cae236b7f2a03e03a2a26a3ac5b" kind="variable"><name>weakCount</name></member>
     <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a8cffdfea7aa99fe9be9d2ebbd64f9752" kind="variable"><name>valid</name></member>
     <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a0b7857f246571b22541bc4c96ac22649" kind="variable"><name>deallocated</name></member>
     <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1acc433e8736ab15ef769894164521fe69" kind="variable"><name>policy</name></member>
@@ -14945,6 +14946,12 @@
     <member refid="namespaceSR__UTILS__NS_1ac6d3d240a0136bbb1757e43c3bb44808" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="namespaceSR__UTILS__NS_1a0ca1d8e7032bd3b12a950ebfb5abd664" kind="function"><name>Passkey</name></member>
     <member refid="namespaceSR__UTILS__NS_1aebc385c697cbdc5ddd7960797de0f67b" kind="function"><name>GetSingletonManager</name></member>
+    <member refid="namespaceSR__UTILS__NS_1ae508fd7ebf04163f5b7a696e668d5137" kind="function"><name>FastSToU</name></member>
+    <member refid="namespaceSR__UTILS__NS_1ae3f6b0bce85928900e014b817aa1d02f" kind="function"><name>FastSToI</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a8729a9294d31a61c28f89cb0edccd24d" kind="function"><name>FastSToL</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a144856ef47ce4f7f174f70546191f950" kind="function"><name>FastSToD</name></member>
+    <member refid="namespaceSR__UTILS__NS_1aabfa849586583b8f98fed49b886b4c96" kind="function"><name>FastSToU</name></member>
+    <member refid="namespaceSR__UTILS__NS_1afb4c7f8f2d39fc42d9165217600cbc6c" kind="function"><name>FastSToI</name></member>
     <member refid="namespaceSR__UTILS__NS_1afeff80e8160ae6c5d2049b892e6e57b7" kind="function"><name>HexCharToUInt8</name></member>
     <member refid="namespaceSR__UTILS__NS_1a9c0b789ca13119e6bd68017ce4ceb56a" kind="function"><name>HexCharToUInt8</name></member>
     <member refid="namespaceSR__UTILS__NS_1a8f46959601121926fcb8a03d58b133ef" kind="function"><name>IsHexString</name></member>

@@ -57,6 +57,7 @@ Inherited by the following classes: [SR\_UTILS\_NS::SRAISerialization](classSR__
 |  SR\_NODISCARD [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) & | [**GetWalkNode**](#function-getwalknode-12) () noexcept<br> |
 |  SR\_NODISCARD const [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) & | [**GetWalkNode**](#function-getwalknode-22) () noexcept const<br> |
 | virtual SR\_NODISCARD std::string | [**ToStringBase**](#function-tostringbase) () noexcept const = 0<br> |
+|  void | [**WriteNode**](#function-writenode) (const [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) & node) noexcept<br> |
 
 
 
@@ -161,6 +162,21 @@ inline SR_NODISCARD const SerializationNode & SR_UTILS_NS::IBaseSerialization::G
 
 ```C++
 virtual SR_NODISCARD std::string SR_UTILS_NS::IBaseSerialization::ToStringBase () noexcept const = 0
+```
+
+
+
+
+<hr>
+
+
+
+### function WriteNode 
+
+```C++
+void SR_UTILS_NS::IBaseSerialization::WriteNode (
+    const SerializationNode & node
+) noexcept
 ```
 
 

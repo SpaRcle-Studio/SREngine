@@ -663,7 +663,7 @@
 <para>Делаем копию, так как в процессе удаления можем потярять this, а так же зануляем m_data, чтобы не войти в рекурсию</para>
 <para>тут может быть потенциально висячий указатель.</para>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="300" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="496" bodyend="528"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="300" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="494" bodyend="531"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -677,7 +677,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="302" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="488" bodyend="490"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="302" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="486" bodyend="488"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -691,7 +691,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="303" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="492" bodyend="494"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="303" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="490" bodyend="492"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -761,7 +761,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="307" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="464" bodyend="486"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="307" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="464" bodyend="484"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

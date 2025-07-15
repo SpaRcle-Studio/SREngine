@@ -183,6 +183,7 @@
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1aef89ec223c6e2c8dde294e03725c41c6" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteInt</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a6e046632a673f405b1bd2b84d55ef987" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteInt</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a35b1c1889df4d949f7ba06420bdb3f4d" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a7d1004a49c47662eab249f165d64d233" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteNode</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a200057522395fa29259d1e0f1fdeb105" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteString</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a63021025645194651fb6418eb6af41ce" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteString</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a6dd45d963ff639b998b1ee2d02307b1c" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteUInt</name></member>

@@ -345,6 +345,12 @@
 |  SR\_NODISCARD SR\_CONSTEXPR uint64\_t | [**Distance**](#function-distance) (InIt pFirst, InIt pLast) <br> |
 |  SR\_NODISCARD constexpr SR\_INLINE\_STATIC uint64\_t | [**FNV1AAppendBytes**](#function-fnv1aappendbytes) (uint64\_t value, const unsigned char \*const first, const uint64\_t count) noexcept<br> |
 |  SR\_NODISCARD SR\_INLINE\_STATIC constexpr uint64\_t | [**FNV1AAppendValue**](#function-fnv1aappendvalue) (const uint64\_t value, const T & keyValue) noexcept<br> |
+|  SR\_NODISCARD SR\_INLINE\_STATIC double\_t | [**FastSToD**](#function-faststod) (std::string\_view sv) <br> |
+|  SR\_NODISCARD SR\_INLINE\_STATIC int32\_t | [**FastSToI**](#function-faststoi) (const char \* str) <br> |
+|  SR\_NODISCARD SR\_INLINE\_STATIC int32\_t | [**FastSToI**](#function-faststoi) (std::string\_view sv) <br> |
+|  SR\_NODISCARD SR\_INLINE\_STATIC int64\_t | [**FastSToL**](#function-faststol) (std::string\_view sv) <br> |
+|  SR\_NODISCARD SR\_INLINE\_STATIC uint32\_t | [**FastSToU**](#function-faststou) (const char \* str) <br>_Функция для преобразования hex символа в целое число_  |
+|  SR\_NODISCARD SR\_INLINE\_STATIC uint32\_t | [**FastSToU**](#function-faststou) (std::string\_view sv) <br> |
 |  bool | [**ForEach**](#function-foreach) (const std::function&lt; bool(T &type, const uint32\_t &index)&gt; & fn, std::vector&lt; U &gt; & vector) <br> |
 |  bool | [**ForEach**](#function-foreach) (const std::function&lt; bool(T &type, const uint32\_t &index)&gt; & fn, std::list&lt; U &gt; & vector) <br> |
 |  bool | [**ForEach**](#function-foreach) (const std::function&lt; bool(const T &type, const uint32\_t &index)&gt; & fn, const std::vector&lt; U &gt; & vector) <br> |
@@ -374,7 +380,7 @@
 |  SR\_NODISCARD constexpr uint64\_t | [**HashArrayRepresentation**](#function-hasharrayrepresentation) (const T \*const first, const size\_t count) noexcept<br> |
 |  constexpr uint64\_t | [**HashCombine**](#function-hashcombine) (const T & value, uint64\_t hash=0) <br> |
 |  SR\_NODISCARD constexpr uint64\_t | [**HashRepresentation**](#function-hashrepresentation) (const T & keyVal) noexcept<br> |
-|  SR\_NODISCARD SR\_INLINE\_STATIC uint8\_t | [**HexCharToUInt8**](#function-hexchartouint8) (const char c) <br>_Функция для преобразования hex символа в целое число_  |
+|  SR\_NODISCARD SR\_INLINE\_STATIC uint8\_t | [**HexCharToUInt8**](#function-hexchartouint8) (const char c) <br> |
 |  SR\_NODISCARD SR\_INLINE\_STATIC uint8\_t | [**HexCharToUInt8**](#function-hexchartouint8) (const char high, const char low) <br> |
 |  SR\_NODISCARD SR\_INLINE\_STATIC uint8\_t | [**HexToByte**](#function-hextobyte) (const char \* str) <br>_Функция для преобразования двух символов hex в байт (8 бит)_  |
 |  SR\_NODISCARD SR\_INLINE\_STATIC uint8\_t | [**HexToByte**](#function-hextobyte) (const std::string\_view str) <br> |
@@ -1459,6 +1465,97 @@ SR_NODISCARD SR_INLINE_STATIC constexpr uint64_t SR_UTILS_NS::FNV1AAppendValue (
 
 
 
+### function FastSToD 
+
+```C++
+SR_NODISCARD SR_INLINE_STATIC double_t SR_UTILS_NS::FastSToD (
+    std::string_view sv
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function FastSToI 
+
+```C++
+SR_NODISCARD SR_INLINE_STATIC int32_t SR_UTILS_NS::FastSToI (
+    const char * str
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function FastSToI 
+
+```C++
+SR_NODISCARD SR_INLINE_STATIC int32_t SR_UTILS_NS::FastSToI (
+    std::string_view sv
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function FastSToL 
+
+```C++
+SR_NODISCARD SR_INLINE_STATIC int64_t SR_UTILS_NS::FastSToL (
+    std::string_view sv
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function FastSToU 
+
+_Функция для преобразования hex символа в целое число_ 
+```C++
+SR_NODISCARD SR_INLINE_STATIC uint32_t SR_UTILS_NS::FastSToU (
+    const char * str
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function FastSToU 
+
+```C++
+SR_NODISCARD SR_INLINE_STATIC uint32_t SR_UTILS_NS::FastSToU (
+    std::string_view sv
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function ForEach 
 
 ```C++
@@ -1905,7 +2002,6 @@ SR_NODISCARD constexpr uint64_t SR_UTILS_NS::HashRepresentation (
 
 ### function HexCharToUInt8 
 
-_Функция для преобразования hex символа в целое число_ 
 ```C++
 SR_NODISCARD SR_INLINE_STATIC uint8_t SR_UTILS_NS::HexCharToUInt8 (
     const char c

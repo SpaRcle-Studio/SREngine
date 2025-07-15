@@ -3,9 +3,9 @@
   <compounddef id="structSR__HTYPES__NS_1_1SharedPtrDynamicData" kind="struct" language="C++" prot="public">
     <compoundname>SR_HTYPES_NS::SharedPtrDynamicData</compoundname>
     <sectiondef kind="public-attrib">
-      <memberdef kind="variable" id="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a31fe45ec07c1c29c38a238e29fba8be9" prot="public" static="no" mutable="no">
-        <type>uint16_t</type>
-        <definition>uint16_t SR_HTYPES_NS::SharedPtrDynamicData::strongCount</definition>
+      <memberdef kind="variable" id="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a849b8cfc69de84ef8dbaa2baa746b13c" prot="public" static="no" mutable="no">
+        <type>std::atomic&lt; uint16_t &gt;</type>
+        <definition>std::atomic&lt;uint16_t&gt; SR_HTYPES_NS::SharedPtrDynamicData::strongCount</definition>
         <argsstring></argsstring>
         <name>strongCount</name>
         <qualifiedname>SR_HTYPES_NS::SharedPtrDynamicData::strongCount</qualifiedname>
@@ -16,11 +16,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="95" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="95" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="95" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="95" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a27fe254f9ee0f40088432c90dbae0fe6" prot="public" static="no" mutable="no">
-        <type>uint16_t</type>
-        <definition>uint16_t SR_HTYPES_NS::SharedPtrDynamicData::weakCount</definition>
+      <memberdef kind="variable" id="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a589b1cae236b7f2a03e03a2a26a3ac5b" prot="public" static="no" mutable="no">
+        <type>std::atomic&lt; uint16_t &gt;</type>
+        <definition>std::atomic&lt;uint16_t&gt; SR_HTYPES_NS::SharedPtrDynamicData::weakCount</definition>
         <argsstring></argsstring>
         <name>weakCount</name>
         <qualifiedname>SR_HTYPES_NS::SharedPtrDynamicData::weakCount</qualifiedname>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="96" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="96" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="96" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="96" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a8cffdfea7aa99fe9be9d2ebbd64f9752" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -194,9 +194,9 @@
       <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1abb6c1e4a4fa28365ef156ace4fd67e0d" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtrDynamicData</scope><name>IncrementStrong</name></member>
       <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1acc433e8736ab15ef769894164521fe69" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtrDynamicData</scope><name>policy</name></member>
       <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1ac20a0c56189b0c39c80bd538e828ed9c" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtrDynamicData</scope><name>SharedPtrDynamicData</name></member>
-      <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a31fe45ec07c1c29c38a238e29fba8be9" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtrDynamicData</scope><name>strongCount</name></member>
+      <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a849b8cfc69de84ef8dbaa2baa746b13c" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtrDynamicData</scope><name>strongCount</name></member>
       <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a8cffdfea7aa99fe9be9d2ebbd64f9752" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtrDynamicData</scope><name>valid</name></member>
-      <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a27fe254f9ee0f40088432c90dbae0fe6" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtrDynamicData</scope><name>weakCount</name></member>
+      <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a589b1cae236b7f2a03e03a2a26a3ac5b" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtrDynamicData</scope><name>weakCount</name></member>
       <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1ab55eceecd5cfda804f3575f2c72ae46e" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtrDynamicData</scope><name>~SharedPtrDynamicData</name></member>
     </listofallmembers>
   </compounddef>

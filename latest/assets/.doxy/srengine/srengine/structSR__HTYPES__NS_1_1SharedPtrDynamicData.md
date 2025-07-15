@@ -37,9 +37,9 @@
 | ---: | :--- |
 |  bool | [**deallocated**](#variable-deallocated)   = `false`<br> |
 |  SR\_UTILS\_NS::SharedPtrPolicy | [**policy**](#variable-policy)   = `SR\_UTILS\_NS::SharedPtrPolicy::Automatic`<br> |
-|  uint16\_t | [**strongCount**](#variable-strongcount)   = `0`<br> |
+|  std::atomic&lt; uint16\_t &gt; | [**strongCount**](#variable-strongcount)   = `0`<br> |
 |  bool | [**valid**](#variable-valid)   = `false`<br> |
-|  uint16\_t | [**weakCount**](#variable-weakcount)   = `0`<br> |
+|  std::atomic&lt; uint16\_t &gt; | [**weakCount**](#variable-weakcount)   = `0`<br> |
 
 
 
@@ -128,7 +128,7 @@ SR_UTILS_NS::SharedPtrPolicy SR_HTYPES_NS::SharedPtrDynamicData::policy;
 ### variable strongCount 
 
 ```C++
-uint16_t SR_HTYPES_NS::SharedPtrDynamicData::strongCount;
+std::atomic<uint16_t> SR_HTYPES_NS::SharedPtrDynamicData::strongCount;
 ```
 
 
@@ -154,7 +154,7 @@ bool SR_HTYPES_NS::SharedPtrDynamicData::valid;
 ### variable weakCount 
 
 ```C++
-uint16_t SR_HTYPES_NS::SharedPtrDynamicData::weakCount;
+std::atomic<uint16_t> SR_HTYPES_NS::SharedPtrDynamicData::weakCount;
 ```
 
 

@@ -87,6 +87,8 @@
         </childnode>
         <childnode refid="99" relation="include">
         </childnode>
+        <childnode refid="100" relation="include">
+        </childnode>
       </node>
       <node id="99">
         <label>Utils/Common/StringUtils.h</label>
@@ -197,6 +199,10 @@
         <link refid="Stacktrace_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
+      </node>
+      <node id="100">
+        <label>Utils/Profile/TracyContext.h</label>
+        <link refid="TracyContext_8h_source"/>
       </node>
       <node id="96">
         <label>Utils/Serialization/ObjectDataAccessor.h</label>

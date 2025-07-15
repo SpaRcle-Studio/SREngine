@@ -21,8 +21,124 @@
 #include <Utils/Math/Vector4.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/Common/StringUtils.h>
+#include <Utils/Profile/TracyContext.h>
 
 namespace SR_UTILS_NS {
+
+    SR_NODISCARD SR_INLINE_STATIC uint32_t FastSToU(const char* str) {
+        uint32_t result = 0;
+        while (*str >= '0' && *str <= '9') {
+            result = result * 10 + (*str - '0');
+            ++str;
+        }
+        return result;
+    }
+
+    SR_NODISCARD SR_INLINE_STATIC int32_t FastSToI(const char* str) {
+        int32_t result = 0;
+        bool negative = false;
+
+        if (*str == '-') {
+            negative = true;
+            ++str;
+        }
+
+        while (*str >= '0' && *str <= '9') {
+            result = result * 10 + (*str - '0');
+            ++str;
+        }
+
+        return negative ? -result : result;
+    }
+
+    SR_NODISCARD SR_INLINE_STATIC int64_t FastSToL(std::string_view sv) {
+        int64_t result = 0;
+        bool negative = false;
+        size_t i = 0;
+
+        if (!sv.empty() && sv[0] == '-') {
+            negative = true;
+            ++i;
+        }
+
+        for (; i < sv.size(); ++i) {
+            char c = sv[i];
+            if (c < '0' || c > '9')
+                break;
+            result = result * 10 + (c - '0');
+        }
+
+        return negative ? -result : result;
+    }
+
+    SR_NODISCARD SR_INLINE_STATIC double_t FastSToD(std::string_view sv) {
+        double_t result = 0.0;
+        bool negative = false;
+        size_t i = 0;
+
+        if (!sv.empty() && sv[0] == '-') {
+            negative = true;
+            ++i;
+        }
+
+        // Целая часть
+        for (; i < sv.size(); ++i) {
+            char c = sv[i];
+            if (c == '.' || c < '0' || c > '9')
+                break;
+            result = result * 10.0 + (c - '0');
+        }
+
+        // Дробная часть
+        if (i < sv.size() && sv[i] == '.') {
+            ++i;
+            double_t frac = 0.0;
+            double_t divisor = 10.0;
+
+            for (; i < sv.size(); ++i) {
+                char c = sv[i];
+                if (c < '0' || c > '9')
+                    break;
+                frac += (c - '0') / divisor;
+                divisor *= 10.0;
+            }
+
+            result += frac;
+        }
+
+        return negative ? -result : result;
+    }
+
+    SR_NODISCARD SR_INLINE_STATIC uint32_t FastSToU(std::string_view sv) {
+        uint32_t result = 0;
+        for (char c : sv) {
+            if (c < '0' || c > '9')
+                break;
+            result = result * 10 + (c - '0');
+        }
+        return result;
+    }
+
+    SR_NODISCARD SR_INLINE_STATIC int32_t FastSToI(std::string_view sv) {
+        int32_t result = 0;
+        bool negative = false;
+        size_t i = 0;
+
+        if (!sv.empty() && sv[0] == '-') {
+            negative = true;
+            ++i;
+        }
+
+        for (; i < sv.size(); ++i) {
+            char c = sv[i];
+            if (c < '0' || c > '9') {
+                break;
+            }
+            result = result * 10 + (c - '0');
+        }
+
+        return negative ? -result : result;
+    }
 
     SR_NODISCARD SR_INLINE_STATIC uint8_t HexCharToUInt8(const char c) {
         if (c >= '0' && c <= '9') return c - '0';
@@ -66,6 +182,8 @@ namespace SR_UTILS_NS {
     }
 
     template<typename T> SR_NODISCARD T LexicalCast(std::string_view str) {
+        SR_TRACY_ZONE;
+
         try {
             if constexpr (std::is_same<T, bool>()) {
                 const char c = str.front();
