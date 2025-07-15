@@ -32,13 +32,37 @@ enum ERROR_CODES {
 };
 
 #if defined(WIN32)
+	#include <Windows.h>
+	std::string GetLastErrorAsString()
+	{
+	    //Get the error message ID, if any.
+	    DWORD errorMessageID = ::GetLastError();
+	    if (errorMessageID == 0) {
+	        return std::string(); //No error message has been recorded
+	    }
+	    LPSTR messageBuffer = nullptr;
+	    //Ask Win32 to give us the string version of that message ID.
+	    //The parameters we pass in, tell Win32 to create the buffer that holds the message for us (because we don't yet know how long the message string will be).
+	    size_t size = FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+	        NULL, errorMessageID, MAKELANGID(LANG_ENGLISH, SUBLANG_DEFAULT), (LPSTR)&messageBuffer, 0, NULL);
+	    //Copy the error message into a std::string.
+	    std::string message(messageBuffer, size - 3);
+	    //Free the Win32's string's buffer.
+	    LocalFree(messageBuffer);
+	    return message;
+	}
+
     constexpr bool SR_IS_WINDOWS = true;
     constexpr bool SR_IS_LINUX = false;
     constexpr bool SR_IS_MACOS = false;
-    #include <Windows.h>
     const char* DYNAMIC_MODULE_EXTENSION = ".dll";
     void* LoadDynamicModule(const char* moduleName) {
-        return LoadLibraryA(moduleName);
+        auto&& pLibrary = LoadLibraryA(moduleName);
+        if (!pLibrary) {
+            auto&& errorMsg = GetLastErrorAsString();
+            fprintf(stderr, "LoadDynamicModule() : LoadLibraryA failed, reason: %s\n", errorMsg.c_str());
+        }
+        return pLibrary;
     }
     bool UnloadDynamicModule(void* pModule) {
         return FreeLibrary((HMODULE)pModule);
@@ -99,13 +123,15 @@ int SREngineEntryPointFromExternalModule(int argc, char** argv, bool notFoundAsE
     void* pModuleHandle = nullptr;
     namespace fs = std::filesystem;
 
-    for (const auto& entry : fs::directory_iterator(fs::absolute(fs::current_path()))) {
+    auto&& currentPath = fs::absolute(argv[0]).parent_path();
+    for (const auto& entry : fs::directory_iterator(currentPath)) {
         if (!entry.is_regular_file() || entry.path().extension() != DYNAMIC_MODULE_EXTENSION) {
             continue;
         }
         
         if (entry.path().filename().string().find("Engine") != std::string::npos) {
-            pModuleHandle = LoadDynamicModule(entry.path().string().c_str());
+            std::string modulePath = entry.path().generic_string();
+            pModuleHandle = LoadDynamicModule(modulePath.c_str());
             if (!pModuleHandle) {
                 std::cerr << "Failed to load engine library: " << entry.path() << std::endl;
                 std::cerr << "Enter any key to continue..." << std::endl;

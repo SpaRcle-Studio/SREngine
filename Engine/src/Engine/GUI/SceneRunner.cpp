@@ -18,6 +18,8 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneRunner::Draw() {
+        SR_TRACY_ZONE;
+
         auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
         auto&& pOverlay = pEngine->GetRenderContext()->GetPipeline()->GetOverlay(SR_GRAPH_NS::OverlayType::ImGui);
         auto&& pFont = pOverlay.DynamicCast<SR_GRAPH_NS::ImGuiOverlay>()->GetIconFont();
@@ -132,6 +134,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     bool SceneRunner::PlayScene() {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD;
 
         SR_LOG("SceneRunner::PlayScene() : playing scene \"" + m_lastPath.ToString() + "\"");
@@ -176,6 +179,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneRunner::ReturnScene() {
+        SR_TRACY_ZONE;
         SR_LOG("SceneRunner::ReturnScene() : stopping scene \"" + m_lastPath.ToString() + "\"");
 
         auto&& originalScene = SR_WORLD_NS::Scene::LoadScene(m_scenePath);

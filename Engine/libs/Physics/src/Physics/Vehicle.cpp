@@ -17,7 +17,7 @@ namespace SR_PTYPES_NS {
 
     void Vehicle::OnDestroy() {
         Super::OnDestroy();
-        AutoFree([](auto&& pData) {
+        GetThis().AutoFree([](auto&& pData) {
             delete pData;
         });
     }

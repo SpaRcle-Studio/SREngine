@@ -170,6 +170,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EditorGUI::DrawDockingSpace() {
+        SR_TRACY_ZONE;
         m_dragWindow = false;
 
         SR_GRAPH_GUI_NS::Immediate::BeginDocking();

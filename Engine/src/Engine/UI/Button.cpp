@@ -8,7 +8,7 @@ namespace SR_CORE_UI_NS {
     void Button::OnDestroy() {
         Super::OnDestroy();
 
-        AutoFree([](auto&& pData) {
+        GetThis().AutoFree([](auto&& pData) {
             delete pData;
         });
     }

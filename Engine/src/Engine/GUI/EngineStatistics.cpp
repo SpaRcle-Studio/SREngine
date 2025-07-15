@@ -500,7 +500,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::Separator();
 
-        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Pipeline use count: {}", pPipeline->GetPtrData()->strongCount));
+        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Pipeline use count: {}", pPipeline->GetPtrData()->strongCount.load()));
 
         if (pPipeline->GetPreviousState().transferredMemory >= 1024) {
             const uint32_t transferredKBytes = pPipeline->GetPreviousState().transferredMemory / 1024;

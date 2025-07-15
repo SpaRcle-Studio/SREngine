@@ -51,7 +51,7 @@ namespace SR_SCRIPTING_NS {
 
         Super::OnDestroy();
 
-        AutoFree([](auto&& pData) {
+        GetThis().AutoFree([](auto&& pData) {
             delete pData;
         });
     }
@@ -124,6 +124,10 @@ namespace SR_SCRIPTING_NS {
             serializer.BeginObject(dataId);
             m_cppBehaviour->GetBehaviour()->Save(serializer);
             serializer.EndObject();
+        }
+        else if (m_serializationNode) {
+            auto&& impl = dynamic_cast<SR_UTILS_NS::IBaseSerialization&>(serializer);
+            impl.WriteNode(*m_serializationNode);
         }
     }
 

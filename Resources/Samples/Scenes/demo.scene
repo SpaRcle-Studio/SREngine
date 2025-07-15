@@ -716,6 +716,8 @@ sra format
 										10-s:Engine/Models/statue.obj
 					5-v:name
 						6-s:Statue
+					5-v:isEnabled
+						6-b:false
 					5-o:transform
 						6-v:type
 							7-s:Transform3D
@@ -779,6 +781,8 @@ sra format
 										10-s:Engine/Models/monkey.obj
 					5-v:name
 						6-s:Monkey
+					5-v:isEnabled
+						6-b:false
 					5-o:transform
 						6-v:type
 							7-s:Transform3D
@@ -6806,19 +6810,17 @@ ddddцццゔぅヾボ
 										10-v:type
 											11-s:Transform3D
 										10-o:ptr
-					5-v:isEnabled
-						6-b:false
 					5-o:transform
 						6-v:type
 							7-s:Transform3D
 						6-o:ptr
-							7-o:translation
+							7-o:scale
 								8-v:x
-									9-f:19.956665
+									9-f:5.000000
 								8-v:y
-									9-f:42.954899
+									9-f:5.000000
 								8-v:z
-									9-f:16.487627
+									9-f:5.000000
 		2-k:i
 			3-o:d
 				4-v:type
@@ -7262,6 +7264,8 @@ ddddцццゔぅヾボ
 											11-o:translation
 												12-v:z
 													13-f:62.000000
+					5-v:isEnabled
+						6-b:false
 					5-o:transform
 						6-v:type
 							7-s:Transform3D

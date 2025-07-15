@@ -1,6 +1,6 @@
 sra format
 0-r:Root
-    1-v:moduleName
-        2-s:SREngine
-    1-v:linkMode
-        2-s:Dynamic
+	1-v:moduleName
+		2-s:SREngine
+	1-v:linkMode
+		2-s:Dynamic

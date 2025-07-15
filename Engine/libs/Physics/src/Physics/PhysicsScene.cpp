@@ -17,7 +17,7 @@ namespace SR_PHYSICS_NS {
     { }
 
     PhysicsScene::~PhysicsScene() {
-        auto&& removeRigidbody = [&](const SR_PTYPES_NS::Rigidbody::Ptr& pRigidbody) {
+        auto&& removeRigidbody = [&](SR_PTYPES_NS::Rigidbody::Ptr pRigidbody) {
             if (!pRigidbody) {
                 return;
             }
@@ -38,7 +38,7 @@ namespace SR_PHYSICS_NS {
             }
 
             if (!pRigidbody->HasParent()) {
-                pRigidbody->AutoFree([](auto&& pData) {
+                pRigidbody.AutoFree([](auto&& pData) {
                     delete pData;
                 });
             }
@@ -159,7 +159,7 @@ namespace SR_PHYSICS_NS {
             }
 
             if (!pRigidbody->HasParent()) {
-                pRigidbody->AutoFree([](auto&& pData) {
+                pRigidbody.AutoFree([](auto&& pData) {
                     delete pData;
                 });
             }

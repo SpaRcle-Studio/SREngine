@@ -257,10 +257,12 @@ namespace SR_CORE_NS {
     }
 
     void Engine::AddSceneToQueue(const SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>& pScene)  {
+        SR_TRACY_ZONE;
         m_sceneQueue.Push(pScene);
     }
 
     void Engine::Reload() {
+        SR_TRACY_ZONE;
         m_application->Reload();
     }
 
@@ -401,6 +403,8 @@ namespace SR_CORE_NS {
     }
 
     void Engine::SetGameMode(bool enabled) {
+        SR_TRACY_ZONE;
+
         m_isGameMode = enabled;
 
         if (m_editor) {
