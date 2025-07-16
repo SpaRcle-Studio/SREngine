@@ -15,6 +15,7 @@
 #include <Utils/Serialization/Serializer.h>
 #include <Utils/Serialization/Deserializer.h>
 #include <Utils/Localization/Encoding.h>
+#include <Utils/Types/FastMemoryArray.h>
 
 #ifndef SR_ENGINE_BASE_SERIALIZATION_H
 #define SR_ENGINE_BASE_SERIALIZATION_H
@@ -93,24 +94,24 @@ namespace SR_UTILS_NS {
         friend IBaseSerializer;
         friend IBaseDeserializer;
     public:
+        IBaseSerialization();
+
         SR_NODISCARD virtual std::string ToStringBase() const noexcept = 0;
 
-        SR_NODISCARD SerializationNode& GetCurrentNode() noexcept { return GetNode(m_stack); }
-        SR_NODISCARD const SerializationNode& GetCurrentNode() const noexcept { return GetNode(m_stack); }
-        SR_NODISCARD SerializationNode& GetWalkNode() noexcept { return GetNode(m_walker); }
-        SR_NODISCARD const SerializationNode& GetWalkNode() const noexcept { return GetNode(m_walker); }
+        SR_NODISCARD SerializationNode& GetCurrentNode() noexcept { return *m_stack.back(); }
+        SR_NODISCARD const SerializationNode& GetCurrentNode() const noexcept { return *m_stack.back(); }
+        SR_NODISCARD SerializationNode& GetWalkNode() noexcept { return *m_walker.back(); }
+        SR_NODISCARD const SerializationNode& GetWalkNode() const noexcept { return *m_walker.back(); }
 
         void WriteNode(const SerializationNode& node) noexcept;
 
     protected:
         SR_NODISCARD virtual bool IsAllowEmptyElementsInArrayImpl() const noexcept { return true; }
         SR_NODISCARD bool SaveToFileImpl(const SR_UTILS_NS::Path& path) const;
-        SR_NODISCARD SerializationNode& GetNode(const std::vector<uint64_t>& stack) noexcept;
-        SR_NODISCARD const SerializationNode& GetNode(const std::vector<uint64_t>& stack) const noexcept;
 
     protected:
-        std::vector<uint64_t> m_stack;
-        std::vector<uint64_t> m_walker;
+        SR_HTYPES_NS::FastMemoryArray<SerializationNode*> m_stack;
+        SR_HTYPES_NS::FastMemoryArray<SerializationNode*> m_walker;
         SerializationNode m_root;
 
     };
@@ -158,12 +159,15 @@ namespace SR_UTILS_NS {
     };
 
     class IBaseDeserializer : public IDeserializer {
+        using Super = IDeserializer;
     public:
+        IBaseDeserializer();
+
         SR_NODISCARD bool SaveToFile(const SR_UTILS_NS::Path& path) const override { return GetImpl().SaveToFileImpl(path); }
 
         SR_NODISCARD bool IsDefault(const SerializationId& name) const noexcept override;
 
-        void ResetWalker() override { GetImpl().m_walker.clear(); }
+        void ResetWalker() override { GetImpl().m_walker.resize(1); }
 
         bool BeginItem(const SerializationId& id, uint32_t index) override;
         void EndItem() override;

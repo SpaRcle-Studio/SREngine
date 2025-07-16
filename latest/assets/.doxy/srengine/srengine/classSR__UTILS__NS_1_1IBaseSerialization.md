@@ -56,6 +56,7 @@ Inherited by the following classes: [SR\_UTILS\_NS::SRAISerialization](classSR__
 |  SR\_NODISCARD const [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) & | [**GetCurrentNode**](#function-getcurrentnode-22) () noexcept const<br> |
 |  SR\_NODISCARD [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) & | [**GetWalkNode**](#function-getwalknode-12) () noexcept<br> |
 |  SR\_NODISCARD const [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) & | [**GetWalkNode**](#function-getwalknode-22) () noexcept const<br> |
+|   | [**IBaseSerialization**](#function-ibaseserialization) () <br> |
 | virtual SR\_NODISCARD std::string | [**ToStringBase**](#function-tostringbase) () noexcept const = 0<br> |
 |  void | [**WriteNode**](#function-writenode) (const [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) & node) noexcept<br> |
 
@@ -71,8 +72,8 @@ Inherited by the following classes: [SR\_UTILS\_NS::SRAISerialization](classSR__
 | Type | Name |
 | ---: | :--- |
 |  [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) | [**m\_root**](#variable-m_root)  <br> |
-|  std::vector&lt; uint64\_t &gt; | [**m\_stack**](#variable-m_stack)  <br> |
-|  std::vector&lt; uint64\_t &gt; | [**m\_walker**](#variable-m_walker)  <br> |
+|  [**SR\_HTYPES\_NS::FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md)&lt; [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) \* &gt; | [**m\_stack**](#variable-m_stack)  <br> |
+|  [**SR\_HTYPES\_NS::FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md)&lt; [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) \* &gt; | [**m\_walker**](#variable-m_walker)  <br> |
 
 
 
@@ -93,8 +94,6 @@ Inherited by the following classes: [SR\_UTILS\_NS::SRAISerialization](classSR__
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) & | [**GetNode**](#function-getnode-12) (const std::vector&lt; uint64\_t &gt; & stack) noexcept<br> |
-|  SR\_NODISCARD const [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) & | [**GetNode**](#function-getnode-22) (const std::vector&lt; uint64\_t &gt; & stack) noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsAllowEmptyElementsInArrayImpl**](#function-isallowemptyelementsinarrayimpl) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**SaveToFileImpl**](#function-savetofileimpl) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) const<br> |
 
@@ -158,6 +157,19 @@ inline SR_NODISCARD const SerializationNode & SR_UTILS_NS::IBaseSerialization::G
 
 
 
+### function IBaseSerialization 
+
+```C++
+SR_UTILS_NS::IBaseSerialization::IBaseSerialization () 
+```
+
+
+
+
+<hr>
+
+
+
 ### function ToStringBase 
 
 ```C++
@@ -204,7 +216,7 @@ SerializationNode SR_UTILS_NS::IBaseSerialization::m_root;
 ### variable m\_stack 
 
 ```C++
-std::vector<uint64_t> SR_UTILS_NS::IBaseSerialization::m_stack;
+SR_HTYPES_NS::FastMemoryArray<SerializationNode*> SR_UTILS_NS::IBaseSerialization::m_stack;
 ```
 
 
@@ -217,7 +229,7 @@ std::vector<uint64_t> SR_UTILS_NS::IBaseSerialization::m_stack;
 ### variable m\_walker 
 
 ```C++
-std::vector<uint64_t> SR_UTILS_NS::IBaseSerialization::m_walker;
+SR_HTYPES_NS::FastMemoryArray<SerializationNode*> SR_UTILS_NS::IBaseSerialization::m_walker;
 ```
 
 
@@ -226,36 +238,6 @@ std::vector<uint64_t> SR_UTILS_NS::IBaseSerialization::m_walker;
 <hr>
 ## Protected Functions Documentation
 
-
-
-
-### function GetNode [1/2]
-
-```C++
-SR_NODISCARD SerializationNode & SR_UTILS_NS::IBaseSerialization::GetNode (
-    const std::vector< uint64_t > & stack
-) noexcept
-```
-
-
-
-
-<hr>
-
-
-
-### function GetNode [2/2]
-
-```C++
-SR_NODISCARD const SerializationNode & SR_UTILS_NS::IBaseSerialization::GetNode (
-    const std::vector< uint64_t > & stack
-) noexcept const
-```
-
-
-
-
-<hr>
 
 
 

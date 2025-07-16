@@ -138,16 +138,15 @@
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a6c2ed40e88068d5558157bb4238fc2c9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRAISerialization</scope><name>GetCurrentNode</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a4db644f026964230f3933efe8655f8f2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRAISerialization</scope><name>GetCurrentNode</name></member>
-      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a44738c1f287d67625d1e757b1bff1b5c" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRAISerialization</scope><name>GetNode</name></member>
-      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a3ada5c5722382f3ba36fbeb607a4017a" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRAISerialization</scope><name>GetNode</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1ad4afdab87bcec0fc25bf96c7490d10fe" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRAISerialization</scope><name>GetWalkNode</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a2268f719568d46427de3da07aed3b477" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRAISerialization</scope><name>GetWalkNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1af900b222452342a5ca5bb68b487df1ca" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRAISerialization</scope><name>IBaseSerialization</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1aeff9dc19052b786fcd07eb9c2da6f5af" prot="protected" virt="virtual"><scope>SR_UTILS_NS::SRAISerialization</scope><name>IsAllowEmptyElementsInArrayImpl</name></member>
       <member refid="classSR__UTILS__NS_1_1SRAISerialization_1ae186b0817ce5617ebd3ee89fe1d27172" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRAISerialization</scope><name>IsNeedUseTabs</name></member>
       <member refid="classSR__UTILS__NS_1_1SRAISerialization_1a3429c6ad5a41e45c8d8426ea03ff4901" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::SRAISerialization</scope><name>m_isNeedUseTabs</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1ae494a0fc533f5482207b5d2ad5ac2a9e" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRAISerialization</scope><name>m_root</name></member>
-      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a2309dce220bbbf13e3c82ccc3b193dd6" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRAISerialization</scope><name>m_stack</name></member>
-      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a4f35e011acf0daf2bef0d11e7e8a47b0" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRAISerialization</scope><name>m_walker</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a42270d8477f62a974e3bec8d7d62b785" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRAISerialization</scope><name>m_stack</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a6bcffd4f9ffcd402a6ba674ec96e97e9" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRAISerialization</scope><name>m_walker</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1aabb53dc9898915e869ce8da89e8505a3" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRAISerialization</scope><name>SaveToFileImpl</name></member>
       <member refid="classSR__UTILS__NS_1_1SRAISerialization_1a929313320a3ebbf7e5dcb9fc6c364e38" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRAISerialization</scope><name>SetUseTabs</name></member>
       <member refid="classSR__UTILS__NS_1_1SRAISerialization_1ac4923d2272f3e99b4ac177df6b4af898" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRAISerialization</scope><name>ToStringBase</name></member>

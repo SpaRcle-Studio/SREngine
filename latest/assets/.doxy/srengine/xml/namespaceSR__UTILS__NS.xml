@@ -477,7 +477,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="19" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="19" bodyend="29"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="20" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="20" bodyend="30"/>
       </memberdef>
       <memberdef kind="enum" id="namespaceSR__UTILS__NS_1af51bfa3dbeb9285cef7dd48d48b76311" prot="public" static="no" strong="yes">
         <type>uint8_t</type>

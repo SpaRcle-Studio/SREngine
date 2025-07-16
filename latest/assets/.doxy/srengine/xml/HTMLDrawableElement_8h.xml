@@ -46,14 +46,14 @@
         <childnode refid="152" relation="include">
         </childnode>
       </node>
-      <node id="190">
+      <node id="191">
         <label>Graphics/Loaders/TextureLoader.h</label>
         <link refid="TextureLoader_8h_source"/>
         <childnode refid="112" relation="include">
         </childnode>
         <childnode refid="91" relation="include">
         </childnode>
-        <childnode refid="189" relation="include">
+        <childnode refid="190" relation="include">
         </childnode>
       </node>
       <node id="168">
@@ -86,12 +86,12 @@
         <childnode refid="158" relation="include">
         </childnode>
       </node>
-      <node id="189">
+      <node id="190">
         <label>Graphics/Memory/TextureConfigs.h</label>
         <link refid="TextureConfigs_8h_source"/>
         <childnode refid="79" relation="include">
         </childnode>
-        <childnode refid="188" relation="include">
+        <childnode refid="189" relation="include">
         </childnode>
       </node>
       <node id="169">
@@ -128,7 +128,7 @@
         <childnode refid="164" relation="include">
         </childnode>
       </node>
-      <node id="188">
+      <node id="189">
         <label>Graphics/Pipeline/TextureHelper.h</label>
         <link refid="TextureHelper_8h_source"/>
         <childnode refid="145" relation="include">
@@ -147,7 +147,7 @@
         </childnode>
         <childnode refid="170" relation="include">
         </childnode>
-        <childnode refid="187" relation="include">
+        <childnode refid="188" relation="include">
         </childnode>
       </node>
       <node id="164">
@@ -167,7 +167,7 @@
         </childnode>
         <childnode refid="97" relation="include">
         </childnode>
-        <childnode refid="185" relation="include">
+        <childnode refid="186" relation="include">
         </childnode>
       </node>
       <node id="130">
@@ -196,20 +196,20 @@
         <childnode refid="169" relation="include">
         </childnode>
       </node>
-      <node id="187">
+      <node id="188">
         <label>Graphics/Types/Texture.h</label>
         <link refid="Texture_8h_source"/>
         <childnode refid="131" relation="include">
         </childnode>
         <childnode refid="157" relation="include">
         </childnode>
-        <childnode refid="188" relation="include">
-        </childnode>
         <childnode refid="189" relation="include">
+        </childnode>
+        <childnode refid="190" relation="include">
         </childnode>
         <childnode refid="168" relation="include">
         </childnode>
-        <childnode refid="190" relation="include">
+        <childnode refid="191" relation="include">
         </childnode>
       </node>
       <node id="147">
@@ -634,7 +634,7 @@
         <childnode refid="75" relation="include">
         </childnode>
       </node>
-      <node id="185">
+      <node id="186">
         <label>Utils/Math/Matrix4x4.h</label>
         <link refid="Matrix4x4_8h_source"/>
         <childnode refid="98" relation="include">
@@ -643,7 +643,7 @@
         </childnode>
         <childnode refid="99" relation="include">
         </childnode>
-        <childnode refid="186" relation="include">
+        <childnode refid="187" relation="include">
         </childnode>
       </node>
       <node id="98">
@@ -839,6 +839,8 @@
         </childnode>
         <childnode refid="181" relation="include">
         </childnode>
+        <childnode refid="185" relation="include">
+        </childnode>
       </node>
       <node id="140">
         <label>Utils/Serialization/DefaultCheckers.inl.h</label>
@@ -1022,6 +1024,12 @@
         <childnode refid="90" relation="include">
         </childnode>
         <childnode refid="107" relation="include">
+        </childnode>
+      </node>
+      <node id="185">
+        <label>Utils/Types/FastMemoryArray.h</label>
+        <link refid="FastMemoryArray_8h_source"/>
+        <childnode refid="80" relation="include">
         </childnode>
       </node>
       <node id="91">
@@ -1469,7 +1477,7 @@
       <node id="73">
         <label>glm/gtc/type_ptr.hpp</label>
       </node>
-      <node id="186">
+      <node id="187">
         <label>glm/gtx/matrix_decompose.hpp</label>
       </node>
       <node id="74">

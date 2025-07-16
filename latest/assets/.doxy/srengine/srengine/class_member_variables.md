@@ -1717,6 +1717,7 @@
 
 ## p
 
+* **PTR\_ID** ([**ObjectDataAccessor&lt; SR\_HTYPES\_NS::SharedPtr&lt; T &gt;, std::enable\_if\_t&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt; &gt;**](structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_32bd86362c60b521e671c70984ad6674.md))
 * **pParent** ([**SR\_ANIMATIONS\_NS::Bone**](structSR__ANIMATIONS__NS_1_1Bone.md))
 * **pRoot** ([**SR\_ANIMATIONS\_NS::Bone**](structSR__ANIMATIONS__NS_1_1Bone.md))
 * **pSkeleton** ([**SR\_ANIMATIONS\_NS::Bone**](structSR__ANIMATIONS__NS_1_1Bone.md), [**SR\_ANIMATIONS\_NS::CompileContext**](structSR__ANIMATIONS__NS_1_1CompileContext.md))
@@ -1906,6 +1907,7 @@
 
 ## t
 
+* **TYPE\_ID** ([**ObjectDataAccessor&lt; SR\_HTYPES\_NS::SharedPtr&lt; T &gt;, std::enable\_if\_t&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt; &gt;**](structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_32bd86362c60b521e671c70984ad6674.md))
 * **translation** ([**SR\_ANIMATIONS\_NS::AnimationGameObjectData**](structSR__ANIMATIONS__NS_1_1AnimationGameObjectData.md), [**SR\_ANIMATIONS\_NS::TranslationKey**](structSR__ANIMATIONS__NS_1_1TranslationKey.md))
 * **time** ([**SR\_ANIMATIONS\_NS::UnionAnimationKey**](structSR__ANIMATIONS__NS_1_1UnionAnimationKey.md))
 * **type** ([**SR\_ANIMATIONS\_NS::UnionAnimationKey**](structSR__ANIMATIONS__NS_1_1UnionAnimationKey.md), [**SR\_GRAPH\_NS::DebugRenderer::DrawInfo**](structSR__GRAPH__NS_1_1DebugRenderer_1_1DrawInfo.md), [**SR\_GRAPH\_NS::MaterialShaderProperty**](structSR__GRAPH__NS_1_1MaterialShaderProperty.md), [**SR\_GRAPH\_NS::SRSL::SRSLUnit**](structSR__GRAPH__NS_1_1SRSL_1_1SRSLUnit.md), [**SR\_GRAPH\_NS::SRSL::SRSLVariable**](structSR__GRAPH__NS_1_1SRSL_1_1SRSLVariable.md), [**SR\_GRAPH\_NS::Uniform**](structSR__GRAPH__NS_1_1Uniform.md), [**SR\_GRAPH\_NS::PostProcessPass::Property**](structSR__GRAPH__NS_1_1PostProcessPass_1_1Property.md), [**SR\_NETWORK\_NS::P2PAnnounceHeader**](structSR__NETWORK__NS_1_1P2PAnnounceHeader.md), [**SR\_NETWORK\_NS::P2PConnectionHeader**](structSR__NETWORK__NS_1_1P2PConnectionHeader.md), [**SR\_NETWORK\_NS::P2PDisconnectionHeader**](structSR__NETWORK__NS_1_1P2PDisconnectionHeader.md), [**SR\_NETWORK\_NS::P2PKnownHostHeader**](structSR__NETWORK__NS_1_1P2PKnownHostHeader.md), [**SR\_NETWORK\_NS::P2PKnownHostsListInfoHeader**](structSR__NETWORK__NS_1_1P2PKnownHostsListInfoHeader.md), [**SR\_SRSL\_NS::SRSLSampler**](structSR__SRSL__NS_1_1SRSLSampler.md), [**SR\_SRSL\_NS::SRSLUniformBlock::Field**](structSR__SRSL__NS_1_1SRSLUniformBlock_1_1Field.md), [**SR\_UTILS\_NS::FileSystemWatcher::Event**](structSR__UTILS__NS_1_1FileSystemWatcher_1_1Event.md), [**SR\_UTILS\_NS::SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md), [**SR\_UTILS\_NS::Web::CSSDirection**](structSR__UTILS__NS_1_1Web_1_1CSSDirection.md), [**SR\_UTILS\_NS::SRPropertyVariant::Object**](structSR__UTILS__NS_1_1SRPropertyVariant_1_1Object.md), [**SR\_UTILS\_NS::StoreUtils::Storage::ValueHolder**](structSR__UTILS__NS_1_1StoreUtils_1_1Storage_1_1ValueHolder.md))

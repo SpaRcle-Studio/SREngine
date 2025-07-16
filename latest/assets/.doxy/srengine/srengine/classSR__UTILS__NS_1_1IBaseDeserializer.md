@@ -87,6 +87,7 @@ See [SR\_UTILS\_NS::IDeserializer](classSR__UTILS__NS_1_1IDeserializer.md)
 | virtual void | [**EndArray**](#function-endarray) () override<br> |
 | virtual void | [**EndItem**](#function-enditem) () override<br> |
 | virtual void | [**EndObject**](#function-endobject) () override<br> |
+|   | [**IBaseDeserializer**](#function-ibasedeserializer) () <br> |
 | virtual SR\_NODISCARD bool | [**IsDefault**](#function-isdefault) (const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & name) noexcept override const<br> |
 | virtual void | [**ReadBool**](#function-readbool) (bool & value, const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & name) override<br> |
 | virtual void | [**ReadDouble**](#function-readdouble) (double\_t & value, const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & name) override<br> |
@@ -301,6 +302,19 @@ virtual void SR_UTILS_NS::IBaseDeserializer::EndObject () override
 
 
 Implements [*SR\_UTILS\_NS::IDeserializer::EndObject*](classSR__UTILS__NS_1_1IDeserializer.md#function-endobject)
+
+
+<hr>
+
+
+
+### function IBaseDeserializer 
+
+```C++
+SR_UTILS_NS::IBaseDeserializer::IBaseDeserializer () 
+```
+
+
 
 
 <hr>

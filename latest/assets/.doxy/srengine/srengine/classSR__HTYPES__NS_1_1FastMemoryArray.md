@@ -64,15 +64,20 @@
 |   | [**FastMemoryArray**](#function-fastmemoryarray-44) (const std::vector&lt; T &gt; & other) <br> |
 |  void | [**FillInt**](#function-fillint) (int32\_t value) noexcept<br> |
 |  void | [**FillZero**](#function-fillzero) () noexcept<br> |
+|  T & | [**back**](#function-back-12) () <br> |
+|  const T & | [**back**](#function-back-22) () const<br> |
 |  SR\_NODISCARD SizeType | [**capacity**](#function-capacity) () noexcept const<br> |
 |  void | [**clear**](#function-clear) () noexcept<br> |
 |  SR\_NODISCARD T \* | [**data**](#function-data-12) () noexcept<br> |
 |  SR\_NODISCARD const T \* | [**data**](#function-data-22) () noexcept const<br> |
+|  void | [**emplace\_back**](#function-emplace_back-12) (T && value) <br> |
+|  void | [**emplace\_back**](#function-emplace_back-22) (const T & value) <br> |
 |  SR\_NODISCARD bool | [**empty**](#function-empty) () noexcept const<br> |
 |  [**FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md) & | [**operator=**](#function-operator) (const [**FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md) & other) <br> |
 |  [**FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md) & | [**operator=**](#function-operator_1) ([**FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md) && other) noexcept<br> |
 |  SR\_NODISCARD T & | [**operator[]**](#function-operator_2) (SizeType index) noexcept<br> |
 |  SR\_NODISCARD const T & | [**operator[]**](#function-operator_3) (SizeType index) noexcept const<br> |
+|  void | [**pop\_back**](#function-pop_back) () <br> |
 |  void | [**push\_back**](#function-push_back-12) (const T & value) <br> |
 |  void | [**push\_back**](#function-push_back-22) (T && value) <br> |
 |  void | [**reserve**](#function-reserve) (SizeType newCapacity) <br> |
@@ -214,6 +219,32 @@ inline void SR_HTYPES_NS::FastMemoryArray::FillZero () noexcept
 
 
 
+### function back [1/2]
+
+```C++
+inline T & SR_HTYPES_NS::FastMemoryArray::back () 
+```
+
+
+
+
+<hr>
+
+
+
+### function back [2/2]
+
+```C++
+inline const T & SR_HTYPES_NS::FastMemoryArray::back () const
+```
+
+
+
+
+<hr>
+
+
+
 ### function capacity 
 
 ```C++
@@ -257,6 +288,36 @@ inline SR_NODISCARD T * SR_HTYPES_NS::FastMemoryArray::data () noexcept
 
 ```C++
 inline SR_NODISCARD const T * SR_HTYPES_NS::FastMemoryArray::data () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function emplace\_back [1/2]
+
+```C++
+inline void SR_HTYPES_NS::FastMemoryArray::emplace_back (
+    T && value
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function emplace\_back [2/2]
+
+```C++
+inline void SR_HTYPES_NS::FastMemoryArray::emplace_back (
+    const T & value
+) 
 ```
 
 
@@ -330,6 +391,19 @@ inline SR_NODISCARD T & SR_HTYPES_NS::FastMemoryArray::operator[] (
 inline SR_NODISCARD const T & SR_HTYPES_NS::FastMemoryArray::operator[] (
     SizeType index
 ) noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function pop\_back 
+
+```C++
+inline void SR_HTYPES_NS::FastMemoryArray::pop_back () 
 ```
 
 

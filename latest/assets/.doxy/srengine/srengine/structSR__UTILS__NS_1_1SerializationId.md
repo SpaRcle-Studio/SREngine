@@ -51,8 +51,8 @@
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD uint64\_t | [**GetHash**](#function-gethash) () noexcept const<br> |
-|  SR\_NODISCARD const char \* | [**GetName**](#function-getname) () noexcept const<br> |
+|  SR\_NODISCARD SR\_INLINE uint64\_t | [**GetHash**](#function-gethash) () noexcept const<br> |
+|  SR\_NODISCARD SR\_INLINE const char \* | [**GetName**](#function-getname) () noexcept const<br> |
 |  SR\_CONSTEXPR | [**SerializationId**](#function-serializationid) () noexcept<br> |
 |  SR\_CONSTEXPR | [**~SerializationId**](#function-serializationid) () noexcept<br> |
 
@@ -98,7 +98,7 @@
 ### function GetHash 
 
 ```C++
-inline SR_NODISCARD uint64_t SR_UTILS_NS::SerializationId::GetHash () noexcept const
+inline SR_NODISCARD SR_INLINE uint64_t SR_UTILS_NS::SerializationId::GetHash () noexcept const
 ```
 
 
@@ -111,7 +111,7 @@ inline SR_NODISCARD uint64_t SR_UTILS_NS::SerializationId::GetHash () noexcept c
 ### function GetName 
 
 ```C++
-inline SR_NODISCARD const char * SR_UTILS_NS::SerializationId::GetName () noexcept const
+inline SR_NODISCARD SR_INLINE const char * SR_UTILS_NS::SerializationId::GetName () noexcept const
 ```
 
 

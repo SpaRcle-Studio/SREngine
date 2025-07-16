@@ -689,6 +689,9 @@ struct ObjectDataAccessor<T, typename std::enable_if<IsSREnumV<T>>::type> {
 
 template<typename T>
 struct ObjectDataAccessor<SR_HTYPES_NS::SharedPtr<T>, std::enable_if_t<SerializationTraits<T>::IsSerializable>> {
+    static constexpr SerializationId TYPE_ID = SerializationId::Create("type");
+    static constexpr SerializationId PTR_ID = SerializationId::Create("ptr");
+
     static void Save(ISerializer& serializer, const SR_HTYPES_NS::SharedPtr<T>& value, const SerializationId& id) {
         if (!value) {
             return;
@@ -710,9 +713,9 @@ struct ObjectDataAccessor<SR_HTYPES_NS::SharedPtr<T>, std::enable_if_t<Serializa
 
         serializer.BeginObject(id);
 
-        serializer.WriteString(typeName, SerializationId::Create("type"));
+        serializer.WriteString(typeName, TYPE_ID);
 
-        Serialization::Save(serializer, *value, SerializationId::Create("ptr"));
+        Serialization::Save(serializer, *value, PTR_ID);
 
         serializer.EndObject();
     }
@@ -723,9 +726,9 @@ struct ObjectDataAccessor<SR_HTYPES_NS::SharedPtr<T>, std::enable_if_t<Serializa
         }
 
         std::string type;
-        deserializer.ReadString(type, SerializationId::Create("type"));
+        deserializer.ReadString(type, TYPE_ID);
 
-        if (deserializer.IsDefault(SerializationId::Create("ptr"))) {
+        if (deserializer.IsDefault(PTR_ID)) {
             deserializer.EndObject();
             return;
         }
@@ -749,7 +752,7 @@ struct ObjectDataAccessor<SR_HTYPES_NS::SharedPtr<T>, std::enable_if_t<Serializa
         }
 
         if (value) {
-            Serialization::Load(deserializer, *value, SerializationId::Create("ptr"));
+            Serialization::Load(deserializer, *value, PTR_ID);
 
             SR_UTILS_NS::SerializableVerifyContext context;
             value->VerifyAfterLoad(context);

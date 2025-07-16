@@ -151,8 +151,8 @@ namespace SR_UTILS_NS::Reflection {
         return SR_UTILS_NS::StringAtom();
     }
 
-    SR_UTILS_NS::StringAtom MakeSerializePropertyName(std::string_view name);
-    SR_UTILS_NS::StringAtom MakeDisplayName(std::string_view name);
+    std::string_view MakeSerializePropertyName(std::string_view name);
+    SR_UTILS_NS::StringAtom MakeDisplayName(SR_UTILS_NS::StringAtom name);
 }
 
 #endif //SR_ENGINE_UTILS_REFLECTION_PROPERTY_H

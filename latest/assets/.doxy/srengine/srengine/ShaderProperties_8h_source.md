@@ -186,6 +186,8 @@ namespace SR_GRAPH_NS {
     }
 
     SR_MAYBE_UNUSED static ShaderPropertyVariant GetVariantFromShaderVarType(ShaderVarType type) {
+        SR_TRACY_ZONE;
+
         switch (type) {
             case ShaderVarType::Bool:
                 return static_cast<int32_t>(0);

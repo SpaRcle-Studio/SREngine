@@ -17,69 +17,67 @@
         </childnode>
         <childnode refid="120" relation="include">
         </childnode>
-        <childnode refid="166" relation="include">
+        <childnode refid="167" relation="include">
         </childnode>
-        <childnode refid="174" relation="include">
+        <childnode refid="175" relation="include">
         </childnode>
       </node>
-      <node id="166">
+      <node id="167">
         <label>Graphics/GUI/WidgetManager.h</label>
         <link refid="WidgetManager_8h_source"/>
-        <childnode refid="167" relation="include">
+        <childnode refid="168" relation="include">
         </childnode>
         <childnode refid="150" relation="include">
         </childnode>
         <childnode refid="82" relation="include">
         </childnode>
-        <childnode refid="168" relation="include">
+        <childnode refid="169" relation="include">
         </childnode>
-        <childnode refid="172" relation="include">
+        <childnode refid="173" relation="include">
         </childnode>
       </node>
-      <node id="178">
+      <node id="179">
         <label>Graphics/Loaders/TextureLoader.h</label>
         <link refid="TextureLoader_8h_source"/>
         <childnode refid="102" relation="include">
         </childnode>
         <childnode refid="80" relation="include">
         </childnode>
-        <childnode refid="176" relation="include">
+        <childnode refid="177" relation="include">
         </childnode>
       </node>
-      <node id="177">
+      <node id="178">
         <label>Graphics/Memory/IGraphicsResource.h</label>
         <link refid="IGraphicsResource_8h_source"/>
-        <childnode refid="167" relation="include">
+        <childnode refid="168" relation="include">
         </childnode>
         <childnode refid="107" relation="include">
         </childnode>
       </node>
-      <node id="176">
+      <node id="177">
         <label>Graphics/Memory/TextureConfigs.h</label>
         <link refid="TextureConfigs_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="175" relation="include">
+        <childnode refid="176" relation="include">
         </childnode>
       </node>
-      <node id="175">
+      <node id="176">
         <label>Graphics/Pipeline/TextureHelper.h</label>
         <link refid="TextureHelper_8h_source"/>
-        <childnode refid="167" relation="include">
+        <childnode refid="168" relation="include">
         </childnode>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="141" relation="include">
         </childnode>
       </node>
-      <node id="174">
+      <node id="175">
         <label>Graphics/Types/Texture.h</label>
         <link refid="Texture_8h_source"/>
         <childnode refid="143" relation="include">
         </childnode>
         <childnode refid="82" relation="include">
-        </childnode>
-        <childnode refid="175" relation="include">
         </childnode>
         <childnode refid="176" relation="include">
         </childnode>
@@ -87,8 +85,10 @@
         </childnode>
         <childnode refid="178" relation="include">
         </childnode>
+        <childnode refid="179" relation="include">
+        </childnode>
       </node>
-      <node id="167">
+      <node id="168">
         <label>Graphics/macros.h</label>
         <link refid="libs_2Graphics_2inc_2Graphics_2macros_8h_source"/>
         <childnode refid="7" relation="include">
@@ -430,7 +430,7 @@
         <childnode refid="153" relation="include">
         </childnode>
       </node>
-      <node id="171">
+      <node id="172">
         <label>Utils/Events/Event.h</label>
         <link refid="Event_8h_source"/>
         <childnode refid="107" relation="include">
@@ -450,49 +450,49 @@
         <childnode refid="97" relation="include">
         </childnode>
       </node>
-      <node id="173">
+      <node id="174">
         <label>Utils/Input/InputDevice.h</label>
         <link refid="InputDevice_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="170" relation="include">
+        <childnode refid="171" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+      </node>
+      <node id="170">
+        <label>Utils/Input/InputEvents.h</label>
+        <link refid="InputEvents_8h_source"/>
+        <childnode refid="171" relation="include">
         </childnode>
         <childnode refid="91" relation="include">
         </childnode>
       </node>
       <node id="169">
-        <label>Utils/Input/InputEvents.h</label>
-        <link refid="InputEvents_8h_source"/>
-        <childnode refid="170" relation="include">
-        </childnode>
-        <childnode refid="91" relation="include">
-        </childnode>
-      </node>
-      <node id="168">
         <label>Utils/Input/InputHandler.h</label>
         <link refid="InputHandler_8h_source"/>
-        <childnode refid="169" relation="include">
-        </childnode>
-        <childnode refid="171" relation="include">
+        <childnode refid="170" relation="include">
         </childnode>
         <childnode refid="172" relation="include">
         </childnode>
         <childnode refid="173" relation="include">
         </childnode>
+        <childnode refid="174" relation="include">
+        </childnode>
       </node>
-      <node id="172">
+      <node id="173">
         <label>Utils/Input/InputSystem.h</label>
         <link refid="InputSystem_8h_source"/>
         <childnode refid="91" relation="include">
         </childnode>
-        <childnode refid="170" relation="include">
+        <childnode refid="171" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="144" relation="include">
         </childnode>
       </node>
-      <node id="170">
+      <node id="171">
         <label>Utils/Input/KeyCodes.h</label>
         <link refid="KeyCodes_8h_source"/>
         <childnode refid="107" relation="include">
@@ -737,6 +737,8 @@
         </childnode>
         <childnode refid="162" relation="include">
         </childnode>
+        <childnode refid="166" relation="include">
+        </childnode>
       </node>
       <node id="131">
         <label>Utils/Serialization/DefaultCheckers.inl.h</label>
@@ -932,6 +934,12 @@
         <childnode refid="79" relation="include">
         </childnode>
         <childnode refid="107" relation="include">
+        </childnode>
+      </node>
+      <node id="166">
+        <label>Utils/Types/FastMemoryArray.h</label>
+        <link refid="FastMemoryArray_8h_source"/>
+        <childnode refid="5" relation="include">
         </childnode>
       </node>
       <node id="80">

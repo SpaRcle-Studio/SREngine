@@ -3643,8 +3643,13 @@
     <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a933f8b40601509bacae46379046d5578" kind="function"><name>FillInt</name></member>
     <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a675c0bb34ad6b2b2056ab091a582b2a2" kind="function"><name>clear</name></member>
     <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a5c183590e3e938f8d04c1bd8228f300d" kind="function"><name>shrink_to_fit</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a44c5eeabd9c9bacdd455b943c818a3e4" kind="function"><name>back</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a4d6dc33ebeac8645c560613fe05a2666" kind="function"><name>back</name></member>
     <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a49e62e6f0183beef5b9bc28de2ab7cdb" kind="function"><name>push_back</name></member>
     <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a42cfafc1ec4b3a85401475a317941b87" kind="function"><name>push_back</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1ac879058691447ca5696247e75cd231c1" kind="function"><name>pop_back</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a048c8fb534b9f4ee7dad5f3792c730ac" kind="function"><name>emplace_back</name></member>
+    <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a34929b4079394e1571ab7c46311fa77b" kind="function"><name>emplace_back</name></member>
     <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a6c595feee0d4b1f1b128d311d8a3fd38" kind="function"><name>resize</name></member>
     <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1afd8712192e67c20e66131164956ca7c9" kind="function"><name>reserve</name></member>
   </compound>
@@ -3837,6 +3842,7 @@
     <member refid="classSR__UTILS__NS_1_1FileSystem_1a3f1f66f80a53de3ee54c3dd6382d71a5" kind="function"><name>ReadFileAsVector</name></member>
     <member refid="classSR__UTILS__NS_1_1FileSystem_1a130872fa1d95120f2146133cc496050b" kind="function"><name>ReadFileAsBlob</name></member>
     <member refid="classSR__UTILS__NS_1_1FileSystem_1a00eb3069c3d392f38cf65e556103476e" kind="function"><name>ReadAllText</name></member>
+    <member refid="classSR__UTILS__NS_1_1FileSystem_1a65663de54064085323dee8ee322ed908" kind="function"><name>ReadAllTextAsStringViewVector</name></member>
     <member refid="classSR__UTILS__NS_1_1FileSystem_1a9eb999135687292a6d360b8c9ae29939" kind="function"><name>Load</name></member>
     <member refid="classSR__UTILS__NS_1_1FileSystem_1aab99625c73688424e48ea396f717fde8" kind="function"><name>ForEachFileInFolder</name></member>
     <member refid="classSR__UTILS__NS_1_1FileSystem_1a7a90dc93438587656467ae60dce25216" kind="function"><name>GetFileHash</name></member>
@@ -4620,7 +4626,9 @@
     <member refid="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1a58fa101351f7dd3f658d83faa496f722" kind="function"><name>~IAnimationDataSet</name></member>
   </compound>
   <compound refid="classSR__UTILS__NS_1_1IBaseDeserializer" kind="class"><name>SR_UTILS_NS::IBaseDeserializer</name>
+    <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a6b660d4856edd943c37acdc06d17f37d" kind="typedef"><name>Super</name></member>
     <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1ad965e3125c4d16e6bc3912f5ddf8bfff" kind="variable"><name>m_pBaseSerialization</name></member>
+    <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a1179be82cb7a8fc94c5f8c33c20b4cf9" kind="function"><name>IBaseDeserializer</name></member>
     <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a5180495b760dc6af6944549e49b9011c" kind="function"><name>SaveToFile</name></member>
     <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a97255b60cbd191f5bf7f79077f000a8c" kind="function"><name>IsDefault</name></member>
     <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a7886e3df1897f3be8f32f9366eff5e1f" kind="function"><name>ResetWalker</name></member>
@@ -4653,9 +4661,10 @@
   <compound refid="classSR__UTILS__NS_1_1IBaseSerialization" kind="class"><name>SR_UTILS_NS::IBaseSerialization</name>
     <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a2ce032a97262733dfa282a569cb11b2d" kind="variable"><name>IBaseSerializer</name></member>
     <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a77eee2b984fdd3a9772bfbbd034f5982" kind="variable"><name>IBaseDeserializer</name></member>
-    <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a2309dce220bbbf13e3c82ccc3b193dd6" kind="variable"><name>m_stack</name></member>
-    <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a4f35e011acf0daf2bef0d11e7e8a47b0" kind="variable"><name>m_walker</name></member>
+    <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a42270d8477f62a974e3bec8d7d62b785" kind="variable"><name>m_stack</name></member>
+    <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a6bcffd4f9ffcd402a6ba674ec96e97e9" kind="variable"><name>m_walker</name></member>
     <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1ae494a0fc533f5482207b5d2ad5ac2a9e" kind="variable"><name>m_root</name></member>
+    <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1af900b222452342a5ca5bb68b487df1ca" kind="function"><name>IBaseSerialization</name></member>
     <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a95c50ea8e9b7c8ccf6f014ce951a7e1c" kind="function"><name>ToStringBase</name></member>
     <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a6c2ed40e88068d5558157bb4238fc2c9" kind="function"><name>GetCurrentNode</name></member>
     <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a4db644f026964230f3933efe8655f8f2" kind="function"><name>GetCurrentNode</name></member>
@@ -4664,8 +4673,6 @@
     <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a7d1004a49c47662eab249f165d64d233" kind="function"><name>WriteNode</name></member>
     <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1aeff9dc19052b786fcd07eb9c2da6f5af" kind="function"><name>IsAllowEmptyElementsInArrayImpl</name></member>
     <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1aabb53dc9898915e869ce8da89e8505a3" kind="function"><name>SaveToFileImpl</name></member>
-    <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a44738c1f287d67625d1e757b1bff1b5c" kind="function"><name>GetNode</name></member>
-    <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a3ada5c5722382f3ba36fbeb607a4017a" kind="function"><name>GetNode</name></member>
   </compound>
   <compound refid="classSR__UTILS__NS_1_1IBaseSerializer" kind="class"><name>SR_UTILS_NS::IBaseSerializer</name>
     <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1aaabefe03d8e50afee3a8741193b09811" kind="variable"><name>m_pBaseSerialization</name></member>
@@ -6959,6 +6966,8 @@
     <member refid="structObjectDataAccessor_3_01float__t_01_4_1a743d3c65a40e7873aa9f0441a9aed1a1" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_32bd86362c60b521e671c70984ad6674" kind="struct"><name>ObjectDataAccessor&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt;, std::enable_if_t&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt; &gt;</name>
+    <member refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_32bd86362c60b521e671c70984ad6674_1ad3f1d6697d7ba00ab98e5aa48504bf67" kind="variable"><name>TYPE_ID</name></member>
+    <member refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_32bd86362c60b521e671c70984ad6674_1ae223c936fab43bba28cc89bf14417e69" kind="variable"><name>PTR_ID</name></member>
     <member refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_32bd86362c60b521e671c70984ad6674_1a35012ecf3ed8b1821943fcfe50f56d44" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_32bd86362c60b521e671c70984ad6674_1a6d60d036a2270765ce1fc9c638d4f17c" kind="function"><name>Load</name></member>
   </compound>
@@ -9946,8 +9955,8 @@
     <member refid="structSR__UTILS__NS_1_1SerializationId_1a03a0de48b5947138423c20d449d4b176" kind="variable"><name>name</name></member>
     <member refid="structSR__UTILS__NS_1_1SerializationId_1a0dbfe9de0b61f716ad2faf340f4b5019" kind="function"><name>SerializationId</name></member>
     <member refid="structSR__UTILS__NS_1_1SerializationId_1abda5fb9828142c3bdcc485f194802203" kind="function"><name>~SerializationId</name></member>
-    <member refid="structSR__UTILS__NS_1_1SerializationId_1a1d6fdbbf28420049dbeb9f565f34bdb7" kind="function"><name>GetName</name></member>
-    <member refid="structSR__UTILS__NS_1_1SerializationId_1aba3af465784f658aa0940b503be5e7c1" kind="function"><name>GetHash</name></member>
+    <member refid="structSR__UTILS__NS_1_1SerializationId_1a0134c33a1f0d0dae296931953dd33a81" kind="function"><name>GetName</name></member>
+    <member refid="structSR__UTILS__NS_1_1SerializationId_1adc009b913b265a1600d6b834f6c7c7e5" kind="function"><name>GetHash</name></member>
     <member refid="structSR__UTILS__NS_1_1SerializationId_1a4bb40d69e29c7929ee058b5b2001d869" kind="function"><name>Create</name></member>
     <member refid="structSR__UTILS__NS_1_1SerializationId_1ac77baf0f1db4ed045cbca89c30e8b22a" kind="function"><name>CreateFromCStr</name></member>
     <member refid="structSR__UTILS__NS_1_1SerializationId_1a36b98aeaf3b8722c37ad571d711974b2" kind="function"><name>CreateFromString</name></member>
@@ -10052,7 +10061,7 @@
     <member refid="classSR__GTYPES__NS_1_1Shader_1a6aede1af04731ba7ed203d822199b5a6" kind="function"><name>Ready</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1af8decc0f4f681ed0c34e4c805a61e558" kind="function"><name>GetUBOBlockSize</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1af6a3f06353ab71b5085ff02d6cedcfcc" kind="function"><name>GetSamplersCount</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Shader_1a40875f5fb48c2420d2d72c3a2e18c4ec" kind="function"><name>GetProperties</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Shader_1ae8b8a0fffe44620cee39f8878a7fb9d4" kind="function"><name>GetProperties</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a581c28bd28cc2dd862a2a9c0c7bee48e" kind="function"><name>GetSamplers</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a6db10ee76d99a971a96f25f41ee9a739" kind="function"><name>IsBlendEnabled</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1afdb1bb97823d9a331d706cc1072a709b" kind="function"><name>IsAvailable</name></member>
@@ -10822,6 +10831,7 @@
     <member refid="classSR__UTILS__NS_1_1SRADeserializer_1ae7e250e8ea6d1f90ad1b1b58e2a16207" kind="function"><name>IsPreserveMode</name></member>
     <member refid="classSR__UTILS__NS_1_1SRADeserializer_1a738a00dcd6015aaa7f11d45f8c06f4f6" kind="function"><name>AllowReAllocPointer</name></member>
     <member refid="classSR__UTILS__NS_1_1SRADeserializer_1a26a8b21e1852d7428a65d70b99a0c03e" kind="function"><name>ReportError</name></member>
+    <member refid="classSR__UTILS__NS_1_1SRADeserializer_1a9a763ac67a9b7eac6e5776edd44d550b" kind="function"><name>LoadFromStringsBuffer</name></member>
   </compound>
   <compound refid="classSR__UTILS__NS_1_1SRAISerialization" kind="class"><name>SR_UTILS_NS::SRAISerialization</name>
     <member refid="classSR__UTILS__NS_1_1SRAISerialization_1a3429c6ad5a41e45c8d8426ea03ff4901" kind="variable"><name>m_isNeedUseTabs</name></member>
@@ -15162,8 +15172,8 @@
   </compound>
   <compound refid="namespaceSR__UTILS__NS_1_1Reflection" kind="namespace"><name>SR_UTILS_NS::Reflection</name>
     <member refid="Reflection_2Property_8h_1a0306e1b958ab48a66303f30d8459e624" kind="function"><name>GetPropertyInspector</name></member>
-    <member refid="Reflection_2Property_8h_1a9fb70cc066a772ac6296cdcd2daf6772" kind="function"><name>MakeSerializePropertyName</name></member>
-    <member refid="Reflection_2Property_8h_1a09b8fcb9fe79fb1815c2163a249f63d3" kind="function"><name>MakeDisplayName</name></member>
+    <member refid="Reflection_2Property_8h_1a45d60c6771f8daffd7b5df8afea32fc9" kind="function"><name>MakeSerializePropertyName</name></member>
+    <member refid="Reflection_2Property_8h_1a5e9c0c3ec6d09bdb73844647915ae0d8" kind="function"><name>MakeDisplayName</name></member>
   </compound>
   <compound refid="namespaceSR__UTILS__NS_1_1Serialization" kind="namespace"><name>SR_UTILS_NS::Serialization</name>
     <member refid="namespaceSR__UTILS__NS_1_1Serialization_1a281e754151ed0d0e572be301aa0fdac4" kind="function"><name>IsValidValue</name></member>

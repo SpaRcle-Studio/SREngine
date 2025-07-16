@@ -80,9 +80,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="20" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="structSR__UTILS__NS_1_1SerializationId_1a1d6fdbbf28420049dbeb9f565f34bdb7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD const char *</type>
-        <definition>SR_NODISCARD const char * SR_UTILS_NS::SerializationId::GetName</definition>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1SerializationId_1a0134c33a1f0d0dae296931953dd33a81" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_INLINE const char *</type>
+        <definition>SR_NODISCARD SR_INLINE const char * SR_UTILS_NS::SerializationId::GetName</definition>
         <argsstring>() const noexcept</argsstring>
         <name>GetName</name>
         <qualifiedname>SR_UTILS_NS::SerializationId::GetName</qualifiedname>
@@ -92,11 +92,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="48" column="25" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="48" bodyend="48"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="48" column="36" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="48" bodyend="48"/>
       </memberdef>
-      <memberdef kind="function" id="structSR__UTILS__NS_1_1SerializationId_1aba3af465784f658aa0940b503be5e7c1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD uint64_t</type>
-        <definition>SR_NODISCARD uint64_t SR_UTILS_NS::SerializationId::GetHash</definition>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1SerializationId_1adc009b913b265a1600d6b834f6c7c7e5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_INLINE uint64_t</type>
+        <definition>SR_NODISCARD SR_INLINE uint64_t SR_UTILS_NS::SerializationId::GetHash</definition>
         <argsstring>() const noexcept</argsstring>
         <name>GetHash</name>
         <qualifiedname>SR_UTILS_NS::SerializationId::GetHash</qualifiedname>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="49" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="49" bodyend="49"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="49" column="34" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="49" bodyend="49"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -182,8 +182,8 @@
       <member refid="structSR__UTILS__NS_1_1SerializationId_1a4bb40d69e29c7929ee058b5b2001d869" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationId</scope><name>Create</name></member>
       <member refid="structSR__UTILS__NS_1_1SerializationId_1ac77baf0f1db4ed045cbca89c30e8b22a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationId</scope><name>CreateFromCStr</name></member>
       <member refid="structSR__UTILS__NS_1_1SerializationId_1a36b98aeaf3b8722c37ad571d711974b2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationId</scope><name>CreateFromString</name></member>
-      <member refid="structSR__UTILS__NS_1_1SerializationId_1aba3af465784f658aa0940b503be5e7c1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationId</scope><name>GetHash</name></member>
-      <member refid="structSR__UTILS__NS_1_1SerializationId_1a1d6fdbbf28420049dbeb9f565f34bdb7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationId</scope><name>GetName</name></member>
+      <member refid="structSR__UTILS__NS_1_1SerializationId_1adc009b913b265a1600d6b834f6c7c7e5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationId</scope><name>GetHash</name></member>
+      <member refid="structSR__UTILS__NS_1_1SerializationId_1a0134c33a1f0d0dae296931953dd33a81" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationId</scope><name>GetName</name></member>
       <member refid="structSR__UTILS__NS_1_1SerializationId_1a9b9fff399f35419bdf081084ba6aee6c" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::SerializationId</scope><name>hash</name></member>
       <member refid="structSR__UTILS__NS_1_1SerializationId_1a00a6d4bb84a85a73fb8edc7b3b095f99" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::SerializationId</scope><name>MaxNameLength</name></member>
       <member refid="structSR__UTILS__NS_1_1SerializationId_1a03a0de48b5947138423c20d449d4b176" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::SerializationId</scope><name>name</name></member>

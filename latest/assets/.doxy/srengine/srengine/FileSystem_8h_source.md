@@ -43,6 +43,7 @@ namespace SR_UTILS_NS {
         static std::shared_ptr<std::vector<uint8_t>> ReadFileAsBlob(const std::string& path);
 
         static std::string ReadAllText(const std::string& path);
+        static std::vector<std::string_view> ReadAllTextAsStringViewVector(const Path& path, std::string& buffer);
 
         static char* Load(std::string path);
 

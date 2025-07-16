@@ -80,7 +80,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD bool Ready() const;
         SR_NODISCARD uint64_t GetUBOBlockSize() const;
         SR_NODISCARD uint32_t GetSamplersCount() const;
-        SR_NODISCARD ShaderProperties GetProperties();
+        SR_NODISCARD const ShaderProperties& GetProperties() const;
         SR_NODISCARD const ShaderSamplers& GetSamplers() const noexcept { return m_samplers; };
         SR_NODISCARD bool IsBlendEnabled() const;
         SR_NODISCARD bool IsAvailable() const;

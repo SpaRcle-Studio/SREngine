@@ -61,8 +61,8 @@
 | Type | Name |
 | ---: | :--- |
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetPropertyInspector**](#function-getpropertyinspector) () <br> |
-|  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**MakeDisplayName**](#function-makedisplayname) (std::string\_view name) <br> |
-|  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**MakeSerializePropertyName**](#function-makeserializepropertyname) (std::string\_view name) <br> |
+|  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**MakeDisplayName**](#function-makedisplayname) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) <br> |
+|  std::string\_view | [**MakeSerializePropertyName**](#function-makeserializepropertyname) (std::string\_view name) <br> |
 
 
 
@@ -114,7 +114,7 @@ SR_UTILS_NS::StringAtom SR_UTILS_NS::Reflection::GetPropertyInspector ()
 
 ```C++
 SR_UTILS_NS::StringAtom SR_UTILS_NS::Reflection::MakeDisplayName (
-    std::string_view name
+    SR_UTILS_NS::StringAtom name
 ) 
 ```
 
@@ -128,7 +128,7 @@ SR_UTILS_NS::StringAtom SR_UTILS_NS::Reflection::MakeDisplayName (
 ### function MakeSerializePropertyName 
 
 ```C++
-SR_UTILS_NS::StringAtom SR_UTILS_NS::Reflection::MakeSerializePropertyName (
+std::string_view SR_UTILS_NS::Reflection::MakeSerializePropertyName (
     std::string_view name
 ) 
 ```

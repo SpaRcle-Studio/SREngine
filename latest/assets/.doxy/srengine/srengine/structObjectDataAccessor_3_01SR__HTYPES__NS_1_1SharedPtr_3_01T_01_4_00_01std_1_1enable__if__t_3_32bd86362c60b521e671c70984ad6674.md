@@ -35,6 +35,12 @@
 
 
 
+## Public Static Attributes
+
+| Type | Name |
+| ---: | :--- |
+|  constexpr SerializationId | [**PTR\_ID**](#variable-ptr_id)   = `SerializationId::Create("ptr")`<br> |
+|  constexpr SerializationId | [**TYPE\_ID**](#variable-type_id)   = `SerializationId::Create("type")`<br> |
 
 
 
@@ -83,6 +89,34 @@
 
 
 
+## Public Static Attributes Documentation
+
+
+
+
+### variable PTR\_ID 
+
+```C++
+constexpr SerializationId ObjectDataAccessor< SR_HTYPES_NS::SharedPtr< T >, std::enable_if_t< SerializationTraits< T >::IsSerializable > >::PTR_ID;
+```
+
+
+
+
+<hr>
+
+
+
+### variable TYPE\_ID 
+
+```C++
+constexpr SerializationId ObjectDataAccessor< SR_HTYPES_NS::SharedPtr< T >, std::enable_if_t< SerializationTraits< T >::IsSerializable > >::TYPE_ID;
+```
+
+
+
+
+<hr>
 ## Public Static Functions Documentation
 
 

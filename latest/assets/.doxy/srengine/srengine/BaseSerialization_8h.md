@@ -13,6 +13,7 @@
 * `#include <Utils/Serialization/Serializer.h>`
 * `#include <Utils/Serialization/Deserializer.h>`
 * `#include <Utils/Localization/Encoding.h>`
+* `#include <Utils/Types/FastMemoryArray.h>`
 
 
 

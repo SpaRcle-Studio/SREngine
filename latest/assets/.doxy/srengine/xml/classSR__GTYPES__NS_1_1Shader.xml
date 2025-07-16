@@ -635,10 +635,10 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Types/Shader.h" line="72" column="31"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a40875f5fb48c2420d2d72c3a2e18c4ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD ShaderProperties</type>
-        <definition>SR_NODISCARD ShaderProperties SR_GTYPES_NS::Shader::GetProperties</definition>
-        <argsstring>()</argsstring>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1ae8b8a0fffe44620cee39f8878a7fb9d4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const ShaderProperties &amp;</type>
+        <definition>SR_NODISCARD const ShaderProperties &amp; SR_GTYPES_NS::Shader::GetProperties</definition>
+        <argsstring>() const</argsstring>
         <name>GetProperties</name>
         <qualifiedname>SR_GTYPES_NS::Shader::GetProperties</qualifiedname>
         <briefdescription>
@@ -647,7 +647,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Shader.h" line="73" column="39"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Shader.h" line="73" column="45"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a581c28bd28cc2dd862a2a9c0c7bee48e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const ShaderSamplers &amp;</type>
@@ -1677,7 +1677,7 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1ae6953f64e0856bd2ba3891c1a4529f73" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>GetLifetime</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a16a351eac01dde110e273cfd05f1f7ed" prot="public" virt="pure-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>GetMeta</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a16837ff730fb4e276450a124d70eb2e4" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>GetMetaStatic</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Shader_1a40875f5fb48c2420d2d72c3a2e18c4ec" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>GetProperties</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Shader_1ae8b8a0fffe44620cee39f8878a7fb9d4" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>GetProperties</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>GetPtrData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>GetPtrData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>GetRawPtr</name></member>

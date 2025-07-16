@@ -121,7 +121,7 @@ namespace SR_HTYPES_NS {
 
         void shrink_to_fit() {
             SR_TRACY_ZONE;
-            if (m_size < m_capacity) {
+            if (m_size < m_capacity) SR_UNLIKELY_ATTRIBUTE {
                 T* pNewData = new T[m_size];
                 if (m_data) {
                     memcpy(pNewData, m_data, m_size * sizeof(T));
@@ -132,9 +132,24 @@ namespace SR_HTYPES_NS {
             }
         }
 
+        T& back() {
+            if (m_size == 0) SR_UNLIKELY_ATTRIBUTE {
+                SR_PLATFORM_NS::WriteConsoleError("FastMemoryArray::back() : array is empty!");
+                SR_UTILS_NS::Breakpoint();
+            }
+            return m_data[m_size - 1];
+        }
+
+        const T& back() const {
+            if (m_size == 0) SR_UNLIKELY_ATTRIBUTE {
+                SR_PLATFORM_NS::WriteConsoleError("FastMemoryArray::back() : array is empty!");
+                SR_UTILS_NS::Breakpoint();
+            }
+            return m_data[m_size - 1];
+        }
+
         void push_back(const T& value) {
-            SR_TRACY_ZONE;
-            if (m_size >= m_capacity) {
+            if (m_size >= m_capacity) SR_UNLIKELY_ATTRIBUTE {
                 SizeType newCapacity = m_capacity == 0 ? 1 : m_capacity * 2;
                 T* pNewData = new T[newCapacity];
                 if (m_data) {
@@ -148,8 +163,7 @@ namespace SR_HTYPES_NS {
         }
 
         void push_back(T&& value) {
-            SR_TRACY_ZONE;
-            if (m_size >= m_capacity) {
+            if (m_size >= m_capacity) SR_UNLIKELY_ATTRIBUTE {
                 SizeType newCapacity = m_capacity == 0 ? 1 : m_capacity * 2;
                 T* pNewData = new T[newCapacity];
                 if (m_data) {
@@ -160,6 +174,40 @@ namespace SR_HTYPES_NS {
                 m_capacity = newCapacity;
             }
             m_data[m_size++] = std::move(value);
+        }
+
+        void pop_back() {
+            if (m_size > 0) SR_LIKELY_ATTRIBUTE {
+                --m_size;
+            }
+        }
+
+        void emplace_back(T&& value) {
+            if (m_size >= m_capacity) SR_UNLIKELY_ATTRIBUTE {
+                SizeType newCapacity = m_capacity == 0 ? 1 : m_capacity * 2;
+                T* pNewData = new T[newCapacity];
+                if (m_data) {
+                    memcpy(pNewData, m_data, m_size * sizeof(T));
+                    delete[] m_data;
+                }
+                m_data = pNewData;
+                m_capacity = newCapacity;
+            }
+            m_data[m_size++] = std::move(value);
+        }
+
+        void emplace_back(const T& value) {
+            if (m_size >= m_capacity) SR_UNLIKELY_ATTRIBUTE {
+                SizeType newCapacity = m_capacity == 0 ? 1 : m_capacity * 2;
+                T* pNewData = new T[newCapacity];
+                if (m_data) {
+                    memcpy(pNewData, m_data, m_size * sizeof(T));
+                    delete[] m_data;
+                }
+                m_data = pNewData;
+                m_capacity = newCapacity;
+            }
+            m_data[m_size++] = value;
         }
 
         void resize(SizeType newSize) {

@@ -180,6 +180,26 @@
         <location file="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="52" column="14"/>
       </memberdef>
     </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1SRADeserializer_1a9a763ac67a9b7eac6e5776edd44d550b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::SRADeserializer::LoadFromStringsBuffer</definition>
+        <argsstring>(const std::vector&lt; std::string_view &gt; &amp;lines)</argsstring>
+        <name>LoadFromStringsBuffer</name>
+        <qualifiedname>SR_UTILS_NS::SRADeserializer::LoadFromStringsBuffer</qualifiedname>
+        <param>
+          <type>const std::vector&lt; std::string_view &gt; &amp;</type>
+          <declname>lines</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="55" column="27"/>
+      </memberdef>
+    </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -265,7 +285,7 @@
         <link refid="unionSR__UTILS__NS_1_1SerializationTrivialDataType"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="39" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="39" bodyend="54"/>
+    <location file="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="39" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="39" bodyend="57"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1IDeserializer_1a6519dc44ffc28952180e63430bf2ad69" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>AddDontLoadTag</name></member>
       <member refid="classSR__UTILS__NS_1_1SRADeserializer_1a67181fd654516e454c45e063e5f4bbd9" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>AllowNewMapKeys</name></member>
@@ -279,10 +299,10 @@
       <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a6095a9c03e5caef545618b09c1085fe6" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>EndObject</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a6c2ed40e88068d5558157bb4238fc2c9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>GetCurrentNode</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a4db644f026964230f3933efe8655f8f2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>GetCurrentNode</name></member>
-      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a44738c1f287d67625d1e757b1bff1b5c" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>GetNode</name></member>
-      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a3ada5c5722382f3ba36fbeb607a4017a" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>GetNode</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1ad4afdab87bcec0fc25bf96c7490d10fe" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>GetWalkNode</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a2268f719568d46427de3da07aed3b477" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>GetWalkNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a1179be82cb7a8fc94c5f8c33c20b4cf9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>IBaseDeserializer</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1af900b222452342a5ca5bb68b487df1ca" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>IBaseSerialization</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1aeff9dc19052b786fcd07eb9c2da6f5af" prot="protected" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>IsAllowEmptyElementsInArrayImpl</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a97255b60cbd191f5bf7f79077f000a8c" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>IsDefault</name></member>
       <member refid="classSR__UTILS__NS_1_1SRAISerialization_1ae186b0817ce5617ebd3ee89fe1d27172" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>IsNeedUseTabs</name></member>
@@ -290,9 +310,10 @@
       <member refid="classSR__UTILS__NS_1_1SRADeserializer_1ac3154d51e2e43816876a60a42cd3e194" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>LoadFromFile</name></member>
       <member refid="classSR__UTILS__NS_1_1SRADeserializer_1a7f4250d699fe7f88140c2358c58f2729" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>LoadFromNode</name></member>
       <member refid="classSR__UTILS__NS_1_1SRADeserializer_1a32090fcffef7d279921a145599e56362" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>LoadFromString</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRADeserializer_1a9a763ac67a9b7eac6e5776edd44d550b" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>LoadFromStringsBuffer</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1ae494a0fc533f5482207b5d2ad5ac2a9e" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>m_root</name></member>
-      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a2309dce220bbbf13e3c82ccc3b193dd6" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>m_stack</name></member>
-      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a4f35e011acf0daf2bef0d11e7e8a47b0" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>m_walker</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a42270d8477f62a974e3bec8d7d62b785" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>m_stack</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a6bcffd4f9ffcd402a6ba674ec96e97e9" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>m_walker</name></member>
       <member refid="classSR__UTILS__NS_1_1IDeserializer_1ab4c031eb7f954afb66aa97cbeda6fd89" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ReadAny</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a5e9020baaac2f2639122919f9eb07a62" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ReadBool</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a4150c0fedeccfe74530749733d86b119" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ReadDouble</name></member>

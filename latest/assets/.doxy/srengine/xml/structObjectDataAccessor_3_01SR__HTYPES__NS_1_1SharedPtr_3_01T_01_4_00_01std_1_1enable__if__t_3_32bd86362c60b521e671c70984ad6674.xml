@@ -7,6 +7,38 @@
         <type>typename T</type>
       </param>
     </templateparamlist>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_32bd86362c60b521e671c70984ad6674_1ad3f1d6697d7ba00ab98e5aa48504bf67" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr SerializationId</type>
+        <definition>constexpr SerializationId ObjectDataAccessor&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt;, std::enable_if_t&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt; &gt;::TYPE_ID</definition>
+        <argsstring></argsstring>
+        <name>TYPE_ID</name>
+        <qualifiedname>ObjectDataAccessor&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt;, std::enable_if_t&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt; &gt;::TYPE_ID</qualifiedname>
+        <initializer>= SerializationId::Create(&quot;type&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="682" column="38" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="682" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_32bd86362c60b521e671c70984ad6674_1ae223c936fab43bba28cc89bf14417e69" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr SerializationId</type>
+        <definition>constexpr SerializationId ObjectDataAccessor&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt;, std::enable_if_t&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt; &gt;::PTR_ID</definition>
+        <argsstring></argsstring>
+        <name>PTR_ID</name>
+        <qualifiedname>ObjectDataAccessor&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt;, std::enable_if_t&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt; &gt;::PTR_ID</qualifiedname>
+        <initializer>= SerializationId::Create(&quot;ptr&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="683" column="38" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="683" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="public-static-func">
       <memberdef kind="function" id="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_32bd86362c60b521e671c70984ad6674_1a35012ecf3ed8b1821943fcfe50f56d44" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -32,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="682" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="682" bodyend="708"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="685" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="685" bodyend="711"/>
       </memberdef>
       <memberdef kind="function" id="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_32bd86362c60b521e671c70984ad6674_1a6d60d036a2270765ce1fc9c638d4f17c" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -58,17 +90,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="710" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="710" bodyend="756"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="713" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="713" bodyend="759"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="681" column="1" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="681" bodyend="757"/>
+    <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="681" column="1" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="681" bodyend="760"/>
     <listofallmembers>
       <member refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_32bd86362c60b521e671c70984ad6674_1a6d60d036a2270765ce1fc9c638d4f17c" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt;, std::enable_if_t&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt; &gt;</scope><name>Load</name></member>
+      <member refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_32bd86362c60b521e671c70984ad6674_1ae223c936fab43bba28cc89bf14417e69" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt;, std::enable_if_t&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt; &gt;</scope><name>PTR_ID</name></member>
       <member refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_32bd86362c60b521e671c70984ad6674_1a35012ecf3ed8b1821943fcfe50f56d44" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt;, std::enable_if_t&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt; &gt;</scope><name>Save</name></member>
+      <member refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_32bd86362c60b521e671c70984ad6674_1ad3f1d6697d7ba00ab98e5aa48504bf67" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt;, std::enable_if_t&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt; &gt;</scope><name>TYPE_ID</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

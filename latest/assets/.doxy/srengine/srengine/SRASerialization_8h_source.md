@@ -60,6 +60,9 @@ namespace SR_UTILS_NS {
 
         void ReportError(const std::string& message) override;
 
+    private:
+        SR_NODISCARD bool LoadFromStringsBuffer(const std::vector<std::string_view>& lines);
+
     };
 }
 

@@ -69,6 +69,7 @@
 |  std::string | [**NormalizePath**](#function-normalizepath) (const std::string & path) <br> |
 |  std::vector&lt; std::string &gt; | [**ReadAllLines**](#function-readalllines) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 |  std::string | [**ReadAllText**](#function-readalltext) (const std::string & path) <br> |
+|  std::vector&lt; std::string\_view &gt; | [**ReadAllTextAsStringViewVector**](#function-readalltextasstringviewvector) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path, std::string & buffer) <br> |
 |  std::vector&lt; char &gt; | [**ReadBinary**](#function-readbinary) (std::string\_view path) <br> |
 |  std::string | [**ReadBinaryAsString**](#function-readbinaryasstring) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path, bool checkError=true) <br> |
 |  std::shared\_ptr&lt; std::vector&lt; uint8\_t &gt; &gt; | [**ReadFileAsBlob**](#function-readfileasblob) (const std::string & path) <br> |
@@ -278,6 +279,22 @@ static std::vector< std::string > SR_UTILS_NS::FileSystem::ReadAllLines (
 ```C++
 static std::string SR_UTILS_NS::FileSystem::ReadAllText (
     const std::string & path
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function ReadAllTextAsStringViewVector 
+
+```C++
+static std::vector< std::string_view > SR_UTILS_NS::FileSystem::ReadAllTextAsStringViewVector (
+    const Path & path,
+    std::string & buffer
 ) 
 ```
 

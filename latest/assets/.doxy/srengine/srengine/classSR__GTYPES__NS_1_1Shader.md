@@ -250,7 +250,7 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  SR\_NODISCARD const SR\_MATH\_NS::UVector3 & | [**GetComputeWorkGroupSize**](#function-getcomputeworkgroupsize) () noexcept const<br> |
 |  SR\_DEPRECATED SR\_NODISCARD int32\_t | [**GetID**](#function-getid) () <br> |
 |  SR\_NODISCARD int32\_t | [**GetId**](#function-getid) () noexcept<br> |
-|  SR\_NODISCARD ShaderProperties | [**GetProperties**](#function-getproperties) () <br> |
+|  SR\_NODISCARD const ShaderProperties & | [**GetProperties**](#function-getproperties) () const<br> |
 |  SR\_NODISCARD const ShaderSamplers & | [**GetSamplers**](#function-getsamplers) () noexcept const<br> |
 |  SR\_NODISCARD uint32\_t | [**GetSamplersCount**](#function-getsamplerscount) () const<br> |
 |  SR\_NODISCARD SR\_SRSL\_NS::ShaderType | [**GetType**](#function-gettype) () noexcept const<br> |
@@ -954,7 +954,7 @@ SR_NODISCARD int32_t SR_GTYPES_NS::Shader::GetId () noexcept
 ### function GetProperties 
 
 ```C++
-SR_NODISCARD ShaderProperties SR_GTYPES_NS::Shader::GetProperties () 
+SR_NODISCARD const ShaderProperties & SR_GTYPES_NS::Shader::GetProperties () const
 ```
 
 

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="83" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="83" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="84" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1IBaseSerialization_1a77eee2b984fdd3a9772bfbbd034f5982" prot="private" static="no" mutable="no">
         <type>friend</type>
@@ -30,13 +30,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="84" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="85" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="85" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
-      <memberdef kind="variable" id="classSR__UTILS__NS_1_1IBaseSerialization_1a2309dce220bbbf13e3c82ccc3b193dd6" prot="protected" static="no" mutable="no">
-        <type>std::vector&lt; uint64_t &gt;</type>
-        <definition>std::vector&lt;uint64_t&gt; SR_UTILS_NS::IBaseSerialization::m_stack</definition>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1IBaseSerialization_1a42270d8477f62a974e3bec8d7d62b785" prot="protected" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1FastMemoryArray" kindref="compound">SR_HTYPES_NS::FastMemoryArray</ref>&lt; <ref refid="structSR__UTILS__NS_1_1SerializationNode" kindref="compound">SerializationNode</ref> * &gt;</type>
+        <definition>SR_HTYPES_NS::FastMemoryArray&lt;SerializationNode*&gt; SR_UTILS_NS::IBaseSerialization::m_stack</definition>
         <argsstring></argsstring>
         <name>m_stack</name>
         <qualifiedname>SR_UTILS_NS::IBaseSerialization::m_stack</qualifiedname>
@@ -46,11 +46,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="102" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="102" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="103" column="39" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="103" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__UTILS__NS_1_1IBaseSerialization_1a4f35e011acf0daf2bef0d11e7e8a47b0" prot="protected" static="no" mutable="no">
-        <type>std::vector&lt; uint64_t &gt;</type>
-        <definition>std::vector&lt;uint64_t&gt; SR_UTILS_NS::IBaseSerialization::m_walker</definition>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1IBaseSerialization_1a6bcffd4f9ffcd402a6ba674ec96e97e9" prot="protected" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1FastMemoryArray" kindref="compound">SR_HTYPES_NS::FastMemoryArray</ref>&lt; <ref refid="structSR__UTILS__NS_1_1SerializationNode" kindref="compound">SerializationNode</ref> * &gt;</type>
+        <definition>SR_HTYPES_NS::FastMemoryArray&lt;SerializationNode*&gt; SR_UTILS_NS::IBaseSerialization::m_walker</definition>
         <argsstring></argsstring>
         <name>m_walker</name>
         <qualifiedname>SR_UTILS_NS::IBaseSerialization::m_walker</qualifiedname>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="103" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="103" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="104" column="39" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="104" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1IBaseSerialization_1ae494a0fc533f5482207b5d2ad5ac2a9e" prot="protected" static="no" mutable="no">
         <type><ref refid="structSR__UTILS__NS_1_1SerializationNode" kindref="compound">SerializationNode</ref></type>
@@ -74,10 +74,24 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="104" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="104" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="105" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="105" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseSerialization_1af900b222452342a5ca5bb68b487df1ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::IBaseSerialization::IBaseSerialization</definition>
+        <argsstring>()</argsstring>
+        <name>IBaseSerialization</name>
+        <qualifiedname>SR_UTILS_NS::IBaseSerialization::IBaseSerialization</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="87" column="9"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseSerialization_1a95c50ea8e9b7c8ccf6f014ce951a7e1c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
         <type>SR_NODISCARD std::string</type>
         <definition>virtual SR_NODISCARD std::string SR_UTILS_NS::IBaseSerialization::ToStringBase</definition>
@@ -91,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="86" column="42"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="89" column="42"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseSerialization_1a6c2ed40e88068d5558157bb4238fc2c9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__UTILS__NS_1_1SerializationNode" kindref="compound">SerializationNode</ref> &amp;</type>
@@ -105,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="88" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="88" bodyend="88"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="91" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="91" bodyend="91"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseSerialization_1a4db644f026964230f3933efe8655f8f2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="structSR__UTILS__NS_1_1SerializationNode" kindref="compound">SerializationNode</ref> &amp;</type>
@@ -119,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="89" column="46" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="89" bodyend="89"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="92" column="46" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="92" bodyend="92"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseSerialization_1ad4afdab87bcec0fc25bf96c7490d10fe" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__UTILS__NS_1_1SerializationNode" kindref="compound">SerializationNode</ref> &amp;</type>
@@ -133,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="90" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="90" bodyend="90"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="93" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="93" bodyend="93"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseSerialization_1a2268f719568d46427de3da07aed3b477" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="structSR__UTILS__NS_1_1SerializationNode" kindref="compound">SerializationNode</ref> &amp;</type>
@@ -147,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="91" column="46" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="91" bodyend="91"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="94" column="46" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="94" bodyend="94"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseSerialization_1a7d1004a49c47662eab249f165d64d233" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -165,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="93" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="96" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -182,7 +196,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="96" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="96" bodyend="96"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="99" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="99" bodyend="99"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseSerialization_1aabb53dc9898915e869ce8da89e8505a3" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -200,43 +214,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="97" column="27"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseSerialization_1a44738c1f287d67625d1e757b1bff1b5c" prot="protected" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD <ref refid="structSR__UTILS__NS_1_1SerializationNode" kindref="compound">SerializationNode</ref> &amp;</type>
-        <definition>SR_NODISCARD SerializationNode &amp; SR_UTILS_NS::IBaseSerialization::GetNode</definition>
-        <argsstring>(const std::vector&lt; uint64_t &gt; &amp;stack) noexcept</argsstring>
-        <name>GetNode</name>
-        <qualifiedname>SR_UTILS_NS::IBaseSerialization::GetNode</qualifiedname>
-        <param>
-          <type>const std::vector&lt; uint64_t &gt; &amp;</type>
-          <declname>stack</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="98" column="40"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1IBaseSerialization_1a3ada5c5722382f3ba36fbeb607a4017a" prot="protected" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD const <ref refid="structSR__UTILS__NS_1_1SerializationNode" kindref="compound">SerializationNode</ref> &amp;</type>
-        <definition>SR_NODISCARD const SerializationNode &amp; SR_UTILS_NS::IBaseSerialization::GetNode</definition>
-        <argsstring>(const std::vector&lt; uint64_t &gt; &amp;stack) const noexcept</argsstring>
-        <name>GetNode</name>
-        <qualifiedname>SR_UTILS_NS::IBaseSerialization::GetNode</qualifiedname>
-        <param>
-          <type>const std::vector&lt; uint64_t &gt; &amp;</type>
-          <declname>stack</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="99" column="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="100" column="27"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -294,20 +272,19 @@
         <link refid="unionSR__UTILS__NS_1_1SerializationTrivialDataType"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="82" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="82" bodyend="106"/>
+    <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="83" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="83" bodyend="107"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a6c2ed40e88068d5558157bb4238fc2c9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IBaseSerialization</scope><name>GetCurrentNode</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a4db644f026964230f3933efe8655f8f2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IBaseSerialization</scope><name>GetCurrentNode</name></member>
-      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a44738c1f287d67625d1e757b1bff1b5c" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::IBaseSerialization</scope><name>GetNode</name></member>
-      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a3ada5c5722382f3ba36fbeb607a4017a" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::IBaseSerialization</scope><name>GetNode</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1ad4afdab87bcec0fc25bf96c7490d10fe" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IBaseSerialization</scope><name>GetWalkNode</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a2268f719568d46427de3da07aed3b477" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IBaseSerialization</scope><name>GetWalkNode</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a77eee2b984fdd3a9772bfbbd034f5982" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::IBaseSerialization</scope><name>IBaseDeserializer</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1af900b222452342a5ca5bb68b487df1ca" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IBaseSerialization</scope><name>IBaseSerialization</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a2ce032a97262733dfa282a569cb11b2d" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::IBaseSerialization</scope><name>IBaseSerializer</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1aeff9dc19052b786fcd07eb9c2da6f5af" prot="protected" virt="virtual"><scope>SR_UTILS_NS::IBaseSerialization</scope><name>IsAllowEmptyElementsInArrayImpl</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1ae494a0fc533f5482207b5d2ad5ac2a9e" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::IBaseSerialization</scope><name>m_root</name></member>
-      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a2309dce220bbbf13e3c82ccc3b193dd6" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::IBaseSerialization</scope><name>m_stack</name></member>
-      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a4f35e011acf0daf2bef0d11e7e8a47b0" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::IBaseSerialization</scope><name>m_walker</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a42270d8477f62a974e3bec8d7d62b785" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::IBaseSerialization</scope><name>m_stack</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a6bcffd4f9ffcd402a6ba674ec96e97e9" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::IBaseSerialization</scope><name>m_walker</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1aabb53dc9898915e869ce8da89e8505a3" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::IBaseSerialization</scope><name>SaveToFileImpl</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a95c50ea8e9b7c8ccf6f014ce951a7e1c" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IBaseSerialization</scope><name>ToStringBase</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a7d1004a49c47662eab249f165d64d233" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IBaseSerialization</scope><name>WriteNode</name></member>

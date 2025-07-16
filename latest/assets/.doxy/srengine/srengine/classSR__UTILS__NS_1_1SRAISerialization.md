@@ -89,6 +89,7 @@ See [SR\_UTILS\_NS::IBaseSerialization](classSR__UTILS__NS_1_1IBaseSerialization
 |  SR\_NODISCARD const [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) & | [**GetCurrentNode**](classSR__UTILS__NS_1_1IBaseSerialization.md#function-getcurrentnode-22) () noexcept const<br> |
 |  SR\_NODISCARD [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) & | [**GetWalkNode**](classSR__UTILS__NS_1_1IBaseSerialization.md#function-getwalknode-12) () noexcept<br> |
 |  SR\_NODISCARD const [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) & | [**GetWalkNode**](classSR__UTILS__NS_1_1IBaseSerialization.md#function-getwalknode-22) () noexcept const<br> |
+|   | [**IBaseSerialization**](classSR__UTILS__NS_1_1IBaseSerialization.md#function-ibaseserialization) () <br> |
 | virtual SR\_NODISCARD std::string | [**ToStringBase**](classSR__UTILS__NS_1_1IBaseSerialization.md#function-tostringbase) () noexcept const = 0<br> |
 |  void | [**WriteNode**](classSR__UTILS__NS_1_1IBaseSerialization.md#function-writenode) (const [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) & node) noexcept<br> |
 
@@ -114,8 +115,8 @@ See [SR\_UTILS\_NS::IBaseSerialization](classSR__UTILS__NS_1_1IBaseSerialization
 | Type | Name |
 | ---: | :--- |
 |  [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) | [**m\_root**](classSR__UTILS__NS_1_1IBaseSerialization.md#variable-m_root)  <br> |
-|  std::vector&lt; uint64\_t &gt; | [**m\_stack**](classSR__UTILS__NS_1_1IBaseSerialization.md#variable-m_stack)  <br> |
-|  std::vector&lt; uint64\_t &gt; | [**m\_walker**](classSR__UTILS__NS_1_1IBaseSerialization.md#variable-m_walker)  <br> |
+|  [**SR\_HTYPES\_NS::FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md)&lt; [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) \* &gt; | [**m\_stack**](classSR__UTILS__NS_1_1IBaseSerialization.md#variable-m_stack)  <br> |
+|  [**SR\_HTYPES\_NS::FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md)&lt; [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) \* &gt; | [**m\_walker**](classSR__UTILS__NS_1_1IBaseSerialization.md#variable-m_walker)  <br> |
 
 
 
@@ -154,8 +155,6 @@ See [SR\_UTILS\_NS::IBaseSerialization](classSR__UTILS__NS_1_1IBaseSerialization
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) & | [**GetNode**](classSR__UTILS__NS_1_1IBaseSerialization.md#function-getnode-12) (const std::vector&lt; uint64\_t &gt; & stack) noexcept<br> |
-|  SR\_NODISCARD const [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) & | [**GetNode**](classSR__UTILS__NS_1_1IBaseSerialization.md#function-getnode-22) (const std::vector&lt; uint64\_t &gt; & stack) noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsAllowEmptyElementsInArrayImpl**](classSR__UTILS__NS_1_1IBaseSerialization.md#function-isallowemptyelementsinarrayimpl) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**SaveToFileImpl**](classSR__UTILS__NS_1_1IBaseSerialization.md#function-savetofileimpl) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) const<br> |
 

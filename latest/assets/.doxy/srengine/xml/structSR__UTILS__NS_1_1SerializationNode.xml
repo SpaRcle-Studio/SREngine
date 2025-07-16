@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="72" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="72" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="73" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="73" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1SerializationNode_1a7caff2e4f2d20f5195bc2acb2ea93390" prot="public" static="no" mutable="no">
         <type>SerializationDataType</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="73" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="73" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="74" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="74" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1SerializationNode_1a18debdbcd8b4b9864e6e94dc199d8919" prot="public" static="no" mutable="no">
         <type>std::string</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="74" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="74" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="75" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="75" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1SerializationNode_1ab364b02cea111befb6cf39f52c1744d0" prot="public" static="no" mutable="no">
         <type><ref refid="unionSR__UTILS__NS_1_1SerializationTrivialDataType" kindref="compound">SerializationTrivialDataType</ref></type>
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="75" column="38" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="75" bodyend="75"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="76" column="38" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="76" bodyend="76"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1SerializationNode_1a8fda161f5757951a4dca3352dee593ed" prot="public" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="structSR__UTILS__NS_1_1SerializationNode" kindref="compound">SerializationNode</ref> &gt;</type>
@@ -73,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="76" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="76" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="77" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="77" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="32" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="33" column="9"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1SerializationNode_1a6966aab415bcbe2e3374f8bf2d255f8d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -111,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="33" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="33" bodyend="36"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="34" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="34" bodyend="37"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1SerializationNode_1a21bcf551a9f878e7fdd460c9a53f7372" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -129,7 +129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="38" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="38" bodyend="44"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="39" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="39" bodyend="45"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1SerializationNode_1a07a590359ac17cc6d80f1b0c2309994f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="46" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="46" bodyend="52"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="47" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="47" bodyend="53"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1SerializationNode_1ad76364c7da0accb1fd2829d68da1fb72" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="structSR__UTILS__NS_1_1SerializationNode" kindref="compound">SerializationNode</ref> &amp;</type>
@@ -165,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="54" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="54" bodyend="61"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="55" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="55" bodyend="62"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1SerializationNode_1a1be4d1af003d2b4c4fff8563ba877218" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="structSR__UTILS__NS_1_1SerializationNode" kindref="compound">SerializationNode</ref> &amp;</type>
@@ -183,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="63" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="63" bodyend="70"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="64" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="64" bodyend="71"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -210,7 +210,7 @@
         <link refid="unionSR__UTILS__NS_1_1SerializationTrivialDataType"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="31" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="31" bodyend="77"/>
+    <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="32" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="32" bodyend="78"/>
     <listofallmembers>
       <member refid="structSR__UTILS__NS_1_1SerializationNode_1a8fda161f5757951a4dca3352dee593ed" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationNode</scope><name>children</name></member>
       <member refid="structSR__UTILS__NS_1_1SerializationNode_1ab364b02cea111befb6cf39f52c1744d0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationNode</scope><name>data</name></member>

@@ -151,10 +151,9 @@
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a6c2ed40e88068d5558157bb4238fc2c9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>GetCurrentNode</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a4db644f026964230f3933efe8655f8f2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>GetCurrentNode</name></member>
       <member refid="classSR__UTILS__NS_1_1ISerializer_1af18eff7354ce1f620d499e6754388737" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>GetDontSaveTags</name></member>
-      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a44738c1f287d67625d1e757b1bff1b5c" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>GetNode</name></member>
-      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a3ada5c5722382f3ba36fbeb607a4017a" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>GetNode</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1ad4afdab87bcec0fc25bf96c7490d10fe" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>GetWalkNode</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a2268f719568d46427de3da07aed3b477" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>GetWalkNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1af900b222452342a5ca5bb68b487df1ca" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>IBaseSerialization</name></member>
       <member refid="classSR__UTILS__NS_1_1ISerializer_1ae4b033390c22e8da5dc2fef7ca2f2a81" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>IsAllowEmptyElementsInArray</name></member>
       <member refid="classSR__UTILS__NS_1_1SRASerializer_1acd495200692eb8d308d503c1c682e9d6" prot="private" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>IsAllowEmptyElementsInArrayImpl</name></member>
       <member refid="classSR__UTILS__NS_1_1ISerializer_1af1665ef0d8643f2265738be86e6a642e" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>IsEditorAllowed</name></member>
@@ -162,8 +161,8 @@
       <member refid="classSR__UTILS__NS_1_1ISerializer_1af250ffd18f218d2b3a482f64fc47881a" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>IsWriteDefaults</name></member>
       <member refid="classSR__UTILS__NS_1_1ISerializer_1ab0c87bc1d2f1f7e2e06c45796e6febd2" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>IsWriteVersion</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1ae494a0fc533f5482207b5d2ad5ac2a9e" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>m_root</name></member>
-      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a2309dce220bbbf13e3c82ccc3b193dd6" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>m_stack</name></member>
-      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a4f35e011acf0daf2bef0d11e7e8a47b0" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>m_walker</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a42270d8477f62a974e3bec8d7d62b785" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>m_stack</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a6bcffd4f9ffcd402a6ba674ec96e97e9" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>m_walker</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a1d47a52833734c95cf13338741066db9" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>SaveToFile</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1aabb53dc9898915e869ce8da89e8505a3" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>SaveToFileImpl</name></member>
       <member refid="classSR__UTILS__NS_1_1ISerializer_1ac4a3fb08a1f9b139ad0f6bc4f8e66602" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>SetAllowEmptyElementsInArray</name></member>

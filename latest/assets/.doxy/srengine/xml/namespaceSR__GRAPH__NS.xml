@@ -1593,7 +1593,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="180" column="50" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="180" bodyend="207"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="180" column="50" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="180" bodyend="209"/>
       </memberdef>
       <memberdef kind="function" id="ShaderProperties_8h_1a9a86036beda9df8f5528639675b796d6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED ShaderVarType</type>
@@ -1611,7 +1611,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="209" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="209" bodyend="215"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="211" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="211" bodyend="217"/>
       </memberdef>
       <memberdef kind="function" id="MaterialProperty_8h_1a9eaaa5acc46da23e2fee720736f502ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>

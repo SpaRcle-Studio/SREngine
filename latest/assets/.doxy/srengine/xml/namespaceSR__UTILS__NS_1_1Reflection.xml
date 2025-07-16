@@ -27,9 +27,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Reflection/Property.h" line="119" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="119" bodyend="142"/>
       </memberdef>
-      <memberdef kind="function" id="Reflection_2Property_8h_1a9fb70cc066a772ac6296cdcd2daf6772" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
-        <definition>SR_UTILS_NS::StringAtom SR_UTILS_NS::Reflection::MakeSerializePropertyName</definition>
+      <memberdef kind="function" id="Reflection_2Property_8h_1a45d60c6771f8daffd7b5df8afea32fc9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string_view</type>
+        <definition>std::string_view SR_UTILS_NS::Reflection::MakeSerializePropertyName</definition>
         <argsstring>(std::string_view name)</argsstring>
         <name>MakeSerializePropertyName</name>
         <qualifiedname>SR_UTILS_NS::Reflection::MakeSerializePropertyName</qualifiedname>
@@ -43,16 +43,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Property.h" line="144" column="29" declfile="Engine/libs/Utils/inc/Utils/Reflection/Property.h" declline="144" declcolumn="29"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Property.h" line="144" column="22" declfile="Engine/libs/Utils/inc/Utils/Reflection/Property.h" declline="144" declcolumn="22"/>
       </memberdef>
-      <memberdef kind="function" id="Reflection_2Property_8h_1a09b8fcb9fe79fb1815c2163a249f63d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="Reflection_2Property_8h_1a5e9c0c3ec6d09bdb73844647915ae0d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
         <definition>SR_UTILS_NS::StringAtom SR_UTILS_NS::Reflection::MakeDisplayName</definition>
-        <argsstring>(std::string_view name)</argsstring>
+        <argsstring>(SR_UTILS_NS::StringAtom name)</argsstring>
         <name>MakeDisplayName</name>
         <qualifiedname>SR_UTILS_NS::Reflection::MakeDisplayName</qualifiedname>
         <param>
-          <type>std::string_view</type>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
           <declname>name</declname>
         </param>
         <briefdescription>

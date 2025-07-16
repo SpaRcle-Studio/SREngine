@@ -64,6 +64,8 @@ namespace SR_UTILS_NS {
         }
 
         template<typename T> SR_NODISCARD SR_HTYPES_NS::SharedPtr<T> Create(SR_UTILS_NS::StringAtom name) const noexcept {
+            SR_TRACY_ZONE;
+
             if constexpr (SR_UTILS_NS::IsSharedPointerV<T>) {
                 if (auto&& pClass = CreateBase(name)) {
                     if (auto&& pCasted = dynamic_cast<T*>(pClass)) {

@@ -358,7 +358,7 @@
         <link refid="Utils_2inc_2Utils_2ECS_2Node_8h_source"/>
         <childnode refid="95" relation="include">
         </childnode>
-        <childnode refid="169" relation="include">
+        <childnode refid="170" relation="include">
         </childnode>
       </node>
       <node id="95">
@@ -431,7 +431,7 @@
         <childnode refid="73" relation="include">
         </childnode>
       </node>
-      <node id="169">
+      <node id="170">
         <label>Utils/Math/Matrix4x4.h</label>
         <link refid="Matrix4x4_8h_source"/>
         <childnode refid="93" relation="include">
@@ -440,7 +440,7 @@
         </childnode>
         <childnode refid="103" relation="include">
         </childnode>
-        <childnode refid="170" relation="include">
+        <childnode refid="171" relation="include">
         </childnode>
       </node>
       <node id="93">
@@ -635,6 +635,8 @@
         <childnode refid="125" relation="include">
         </childnode>
         <childnode refid="165" relation="include">
+        </childnode>
+        <childnode refid="169" relation="include">
         </childnode>
       </node>
       <node id="133">
@@ -831,6 +833,12 @@
         <childnode refid="89" relation="include">
         </childnode>
         <childnode refid="119" relation="include">
+        </childnode>
+      </node>
+      <node id="169">
+        <label>Utils/Types/FastMemoryArray.h</label>
+        <link refid="FastMemoryArray_8h_source"/>
+        <childnode refid="79" relation="include">
         </childnode>
       </node>
       <node id="90">
@@ -1210,7 +1218,7 @@
       <node id="71">
         <label>glm/gtc/type_ptr.hpp</label>
       </node>
-      <node id="170">
+      <node id="171">
         <label>glm/gtx/matrix_decompose.hpp</label>
       </node>
       <node id="72">
