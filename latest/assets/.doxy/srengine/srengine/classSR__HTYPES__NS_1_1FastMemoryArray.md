@@ -58,6 +58,7 @@
 
 | Type | Name |
 | ---: | :--- |
+|  void | [**Destroy**](#function-destroy) () noexcept<br> |
 |   | [**FastMemoryArray**](#function-fastmemoryarray-14) () = default<br> |
 |   | [**FastMemoryArray**](#function-fastmemoryarray-24) (const [**FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md) & other) <br> |
 |   | [**FastMemoryArray**](#function-fastmemoryarray-34) ([**FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md) && other) noexcept<br> |
@@ -130,6 +131,19 @@ using SR_HTYPES_NS::FastMemoryArray< T >::ValueType =  T;
 <hr>
 ## Public Functions Documentation
 
+
+
+
+### function Destroy 
+
+```C++
+inline void SR_HTYPES_NS::FastMemoryArray::Destroy () noexcept
+```
+
+
+
+
+<hr>
 
 
 

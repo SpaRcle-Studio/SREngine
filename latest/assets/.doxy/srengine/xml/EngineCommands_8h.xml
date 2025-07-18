@@ -516,8 +516,8 @@
         </childnode>
       </node>
       <node id="149">
-        <label>Utils/ECS/EntityRef.h</label>
-        <link refid="EntityRef_8h_source"/>
+        <label>Utils/ECS/EntityRefOld.h</label>
+        <link refid="EntityRefOld_8h_source"/>
         <childnode refid="150" relation="include">
         </childnode>
         <childnode refid="151" relation="include">

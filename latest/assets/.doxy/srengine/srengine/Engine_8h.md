@@ -56,7 +56,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**Engine**](classSR__CORE__NS_1_1Engine.md) <br>_@scriptableClass_  |
+| class | [**Engine**](classSR__CORE__NS_1_1Engine.md) <br> |
 
 
 

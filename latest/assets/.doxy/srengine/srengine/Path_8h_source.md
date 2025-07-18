@@ -38,7 +38,7 @@ namespace SR_UTILS_NS {
         Path(SR_UTILS_NS::StringAtom stringAtom);
         Path(std::string path);
         Path(std::string_view path);
-        Path(std::wstring path);
+        Path(const std::wstring& path);
 
         Path(Path&& path) noexcept;
         ~Path();
@@ -48,7 +48,6 @@ namespace SR_UTILS_NS {
         Path& operator=(const Path& path);
         bool operator==(const Path& path) const noexcept;
         char operator[](size_t index) const noexcept;
-        char& operator[](size_t index) noexcept;
         bool operator<(const Path& path) const noexcept;
         bool operator>(const Path& path) const noexcept;
 
@@ -78,18 +77,15 @@ namespace SR_UTILS_NS {
         SR_NODISCARD Path GetPrevious() const;
         SR_NODISCARD Path GetFolder() const;
         SR_NODISCARD Path Concat(const Path& path) const;
-        SR_NODISCARD Path EmplaceFront(const std::string& str) const;
         SR_NODISCARD Path ConcatExt(const std::string& ext) const;
         SR_NODISCARD Path ConcatExt(const std::string_view& ext) const;
         SR_NODISCARD Path ConcatExt(const char* ext) const;
         SR_NODISCARD Path ConcatExt(SR_UTILS_NS::StringAtom ext) const;
         SR_NODISCARD Path RemoveSubPath(const Path& subPath) const;
-        SR_NODISCARD Path SelfRemoveSubPath(const Path& subPath) const;
 
-        SR_NODISCARD bool Valid() const;
         SR_NODISCARD bool empty() const;
         SR_NODISCARD bool IsSubPath(const Path& subPath) const;
-        SR_NODISCARD bool Contains(const std::string& str) const;
+        SR_NODISCARD bool Contains(const std::string_view& str) const;
         SR_NODISCARD bool IsHidden() const;
         SR_NODISCARD bool Exists() const;
         SR_NODISCARD bool Exists(Type type) const;
@@ -105,27 +101,23 @@ namespace SR_UTILS_NS {
         SR_NODISCARD std::list<Path> GetFolders() const;
         SR_NODISCARD std::list<Path> GetAll() const;
 
-        SR_NODISCARD std::string GetWithoutExtension() const;
         SR_NODISCARD std::string_view GetExtensionView() const;
         SR_NODISCARD std::string_view GetBaseNameView() const;
         SR_NODISCARD std::string_view View() const;
         SR_NODISCARD std::string GetExtension() const;
         SR_NODISCARD std::string GetBaseName() const;
         SR_NODISCARD std::string GetBaseNameAndExt() const;
+        SR_NODISCARD std::string_view GetBaseNameAndExtView() const;
+        SR_NODISCARD std::string_view GetWithoutExtensionView() const;
+        SR_NODISCARD std::string GetWithoutExtension() const;
 
     private:
-        void Update();
-
-        Path Normalize();
-        void NormalizeSelf();
-        void ExtractNameAndExt();
+        const std::string& GetNormalized() const;
 
     private:
-        std::string m_path;
-        std::string_view m_name;
-        std::string_view m_ext;
-        uint64_t m_hash;
-        Type m_type;
+        mutable std::string m_path;
+        mutable uint64_t m_hash = SR_UINT64_MAX;
+        mutable bool m_isNormalized = false;
 
     };
 }

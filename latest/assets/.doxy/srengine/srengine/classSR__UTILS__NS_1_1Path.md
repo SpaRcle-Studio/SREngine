@@ -62,17 +62,17 @@
 |  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**ConcatExt**](#function-concatext-24) (const std::string\_view & ext) const<br> |
 |  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**ConcatExt**](#function-concatext-34) (const char \* ext) const<br> |
 |  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**ConcatExt**](#function-concatext-44) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) ext) const<br> |
-|  SR\_NODISCARD bool | [**Contains**](#function-contains) (const std::string & str) const<br> |
+|  SR\_NODISCARD bool | [**Contains**](#function-contains) (const std::string\_view & str) const<br> |
 |  SR\_NODISCARD std::string | [**ConvertToFileName**](#function-converttofilename) () const<br> |
 |  SR\_NODISCARD bool | [**Copy**](#function-copy) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & destination) const<br> |
 |  bool | [**Create**](#function-create) () const<br> |
 |  bool | [**CreateIfNotExists**](#function-createifnotexists) () const<br> |
-|  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**EmplaceFront**](#function-emplacefront) (const std::string & str) const<br> |
 |  SR\_NODISCARD bool | [**Exists**](#function-exists-12) () const<br> |
 |  SR\_NODISCARD bool | [**Exists**](#function-exists-22) (Type type) const<br> |
 |  SR\_NODISCARD std::list&lt; [**Path**](classSR__UTILS__NS_1_1Path.md) &gt; | [**GetAll**](#function-getall) () const<br> |
 |  SR\_NODISCARD std::string | [**GetBaseName**](#function-getbasename) () const<br> |
 |  SR\_NODISCARD std::string | [**GetBaseNameAndExt**](#function-getbasenameandext) () const<br> |
+|  SR\_NODISCARD std::string\_view | [**GetBaseNameAndExtView**](#function-getbasenameandextview) () const<br> |
 |  SR\_NODISCARD std::string\_view | [**GetBaseNameView**](#function-getbasenameview) () const<br> |
 |  SR\_NODISCARD std::string | [**GetExtension**](#function-getextension) () const<br> |
 |  SR\_NODISCARD std::string\_view | [**GetExtensionView**](#function-getextensionview) () const<br> |
@@ -85,6 +85,7 @@
 |  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetPrevious**](#function-getprevious) () const<br> |
 |  SR\_NODISCARD Type | [**GetType**](#function-gettype) () const<br> |
 |  SR\_NODISCARD std::string | [**GetWithoutExtension**](#function-getwithoutextension) () const<br> |
+|  SR\_NODISCARD std::string\_view | [**GetWithoutExtensionView**](#function-getwithoutextensionview) () const<br> |
 |  SR\_NODISCARD bool | [**IsAbs**](#function-isabs) () const<br> |
 |  SR\_NODISCARD bool | [**IsDir**](#function-isdir) () const<br> |
 |  SR\_NODISCARD bool | [**IsDirEmpty**](#function-isdirempty) () const<br> |
@@ -100,18 +101,16 @@
 |   | [**Path**](#function-path-48) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) stringAtom) <br> |
 |   | [**Path**](#function-path-58) (std::string path) <br> |
 |   | [**Path**](#function-path-68) (std::string\_view path) <br> |
-|   | [**Path**](#function-path-78) (std::wstring path) <br> |
+|   | [**Path**](#function-path-78) (const std::wstring & path) <br> |
 |   | [**Path**](#function-path-88) ([**Path**](classSR__UTILS__NS_1_1Path.md) && path) noexcept<br> |
 |  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**RemoveSubPath**](#function-removesubpath) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & subPath) const<br> |
 |  void | [**Save**](#function-save) ([**ISerializer**](classSR__UTILS__NS_1_1ISerializer.md) & serializer, const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & id) const<br> |
-|  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**SelfRemoveSubPath**](#function-selfremovesubpath) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & subPath) const<br> |
 |  SR\_NODISCARD std::string | [**ToString**](#function-tostring) () const<br> |
 |  SR\_NODISCARD std::string \* | [**ToStringPtr**](#function-tostringptr) () <br> |
 |  SR\_NODISCARD const std::string & | [**ToStringRef**](#function-tostringref) () const<br> |
 |  SR\_NODISCARD std::string\_view | [**ToStringView**](#function-tostringview) () const<br> |
 |  SR\_NODISCARD std::wstring | [**ToUnicodeString**](#function-tounicodestring) () const<br> |
 |  SR\_NODISCARD std::wstring | [**ToWinApiPath**](#function-towinapipath) () const<br> |
-|  SR\_NODISCARD bool | [**Valid**](#function-valid) () const<br> |
 |  SR\_NODISCARD std::string\_view | [**View**](#function-view) () const<br> |
 |  SR\_NODISCARD const char \* | [**c\_str**](#function-c_str) () const<br> |
 |  SR\_NODISCARD bool | [**empty**](#function-empty) () const<br> |
@@ -122,7 +121,6 @@
 |  bool | [**operator==**](#function-operator_3) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) noexcept const<br> |
 |  bool | [**operator&gt;**](#function-operator_4) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) noexcept const<br> |
 |  char | [**operator[]**](#function-operator_5) (size\_t index) noexcept const<br> |
-|  char & | [**operator[]**](#function-operator_6) (size\_t index) noexcept<br> |
 |   | [**~Path**](#function-path) () <br> |
 
 
@@ -268,7 +266,7 @@ SR_NODISCARD Path SR_UTILS_NS::Path::ConcatExt (
 
 ```C++
 SR_NODISCARD bool SR_UTILS_NS::Path::Contains (
-    const std::string & str
+    const std::string_view & str
 ) const
 ```
 
@@ -324,21 +322,6 @@ bool SR_UTILS_NS::Path::Create () const
 
 ```C++
 bool SR_UTILS_NS::Path::CreateIfNotExists () const
-```
-
-
-
-
-<hr>
-
-
-
-### function EmplaceFront 
-
-```C++
-SR_NODISCARD Path SR_UTILS_NS::Path::EmplaceFront (
-    const std::string & str
-) const
 ```
 
 
@@ -406,6 +389,19 @@ SR_NODISCARD std::string SR_UTILS_NS::Path::GetBaseName () const
 
 ```C++
 SR_NODISCARD std::string SR_UTILS_NS::Path::GetBaseNameAndExt () const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetBaseNameAndExtView 
+
+```C++
+SR_NODISCARD std::string_view SR_UTILS_NS::Path::GetBaseNameAndExtView () const
 ```
 
 
@@ -564,6 +560,19 @@ SR_NODISCARD Type SR_UTILS_NS::Path::GetType () const
 
 ```C++
 SR_NODISCARD std::string SR_UTILS_NS::Path::GetWithoutExtension () const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetWithoutExtensionView 
+
+```C++
+SR_NODISCARD std::string_view SR_UTILS_NS::Path::GetWithoutExtensionView () const
 ```
 
 
@@ -789,7 +798,7 @@ SR_UTILS_NS::Path::Path (
 
 ```C++
 SR_UTILS_NS::Path::Path (
-    std::wstring path
+    const std::wstring & path
 ) 
 ```
 
@@ -836,21 +845,6 @@ SR_NODISCARD Path SR_UTILS_NS::Path::RemoveSubPath (
 void SR_UTILS_NS::Path::Save (
     ISerializer & serializer,
     const SerializationId & id
-) const
-```
-
-
-
-
-<hr>
-
-
-
-### function SelfRemoveSubPath 
-
-```C++
-SR_NODISCARD Path SR_UTILS_NS::Path::SelfRemoveSubPath (
-    const Path & subPath
 ) const
 ```
 
@@ -930,19 +924,6 @@ SR_NODISCARD std::wstring SR_UTILS_NS::Path::ToUnicodeString () const
 
 ```C++
 SR_NODISCARD std::wstring SR_UTILS_NS::Path::ToWinApiPath () const
-```
-
-
-
-
-<hr>
-
-
-
-### function Valid 
-
-```C++
-SR_NODISCARD bool SR_UTILS_NS::Path::Valid () const
 ```
 
 
@@ -1089,21 +1070,6 @@ bool SR_UTILS_NS::Path::operator> (
 char SR_UTILS_NS::Path::operator[] (
     size_t index
 ) noexcept const
-```
-
-
-
-
-<hr>
-
-
-
-### function operator[] 
-
-```C++
-char & SR_UTILS_NS::Path::operator[] (
-    size_t index
-) noexcept
 ```
 
 

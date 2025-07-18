@@ -1651,6 +1651,8 @@
         </childnode>
         <childnode refid="129" relation="include">
         </childnode>
+        <childnode refid="130" relation="include">
+        </childnode>
       </node>
       <node id="125">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h</label>
@@ -1675,6 +1677,10 @@
       <node id="129">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h</label>
         <link refid="UIViewportNode_8h_source"/>
+      </node>
+      <node id="130">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UIWindowNode.h</label>
+        <link refid="UIWindowNode_8h_source"/>
       </node>
       <node id="88">
         <label>Engine/libs/Physics/inc/Physics/2D/Rigidbody2D.h</label>
@@ -1791,10 +1797,10 @@
         </childnode>
         <childnode refid="123" relation="include">
         </childnode>
-        <childnode refid="130" relation="include">
+        <childnode refid="131" relation="include">
         </childnode>
       </node>
-      <node id="131">
+      <node id="132">
         <label>Engine/libs/Utils/inc/Utils/ECS/TagManager.h</label>
         <link refid="TagManager_8h_source"/>
         <childnode refid="113" relation="include">
@@ -1835,7 +1841,7 @@
         </childnode>
         <childnode refid="96" relation="include">
         </childnode>
-        <childnode refid="132" relation="include">
+        <childnode refid="133" relation="include">
         </childnode>
       </node>
       <node id="94">
@@ -1855,10 +1861,10 @@
         </childnode>
         <childnode refid="102" relation="include">
         </childnode>
-        <childnode refid="131" relation="include">
+        <childnode refid="132" relation="include">
         </childnode>
       </node>
-      <node id="132">
+      <node id="133">
         <label>Engine/libs/Utils/inc/Utils/Tests/AtlasBuilderTest.h</label>
         <link refid="libs_2Utils_2inc_2Utils_2Tests_2AtlasBuilderTest_8h_source"/>
       </node>
@@ -1874,7 +1880,7 @@
         <childnode refid="93" relation="include">
         </childnode>
       </node>
-      <node id="130">
+      <node id="131">
         <label>Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h</label>
         <link refid="SceneCubeChunkLogic_8h_source"/>
       </node>

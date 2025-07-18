@@ -10,8 +10,8 @@
 
 
 
-* `#include <Utils/ECS/EntityRefUtils.h>`
-* `#include <Utils/TypeTraits/Property.h>`
+* `#include <Utils/Serialization/Serializable.h>`
+* `#include <Utils/ECS/EntityController.h>`
 
 
 
@@ -36,8 +36,8 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**EntityRef**](classSR__UTILS__NS_1_1EntityRef.md) <br> |
-| class | [**EntityRefProperty**](classSR__UTILS__NS_1_1EntityRefProperty.md) <br> |
+| class | [**EntityRef**](classSR__UTILS__NS_1_1EntityRef.md) &lt;class T&gt;<br> |
+| class | [**EntityRefBase**](classSR__UTILS__NS_1_1EntityRefBase.md) <br> |
 
 
 

@@ -60,6 +60,7 @@
 
 | Type | Name |
 | ---: | :--- |
+|  void | [**Clear**](#function-clear) () noexcept<br> |
 |   | [**SerializationNode**](#function-serializationnode-14) () = default<br> |
 |   | [**SerializationNode**](#function-serializationnode-24) (const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & id, SerializationDataType type) <br> |
 |   | [**SerializationNode**](#function-serializationnode-34) ([**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) && other) noexcept<br> |
@@ -163,6 +164,19 @@ SerializationDataType SR_UTILS_NS::SerializationNode::type;
 <hr>
 ## Public Functions Documentation
 
+
+
+
+### function Clear 
+
+```C++
+inline void SR_UTILS_NS::SerializationNode::Clear () noexcept
+```
+
+
+
+
+<hr>
 
 
 

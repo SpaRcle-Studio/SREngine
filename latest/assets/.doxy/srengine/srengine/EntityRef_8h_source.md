@@ -9,74 +9,49 @@
 
 ```C++
 //
-// Created by Monika on 26.11.2022.
+// Created by Monika on 16.07.2025.
 //
 
 #ifndef SR_ENGINE_UTILS_ENTITY_REF_H
 #define SR_ENGINE_UTILS_ENTITY_REF_H
 
-#include <Utils/ECS/EntityRefUtils.h>
-#include <Utils/TypeTraits/Property.h>
+#include <Utils/Serialization/Serializable.h>
+#include <Utils/ECS/EntityController.h>
 
 namespace SR_UTILS_NS {
-    class GameObject;
-    class SceneObject;
-    class Component;
-
-    class EntityRef final : public SR_UTILS_NS::Serializable {
+    class EntityRefBase : public SR_UTILS_NS::Serializable {
+        using Super = SR_UTILS_NS::Serializable;
         SR_CLASS()
     public:
-        EntityRef() = default;
-        explicit EntityRef(EntityRefUtils::OwnerRef owner);
+        EntityRefBase();
 
     public:
-        void OnPreSave() override;
+        SR_NODISCARD virtual StringAtom GetTypeName() const noexcept;
+        SR_NODISCARD Entity::Ptr GetEntity() const noexcept;
 
-        SR_NODISCARD EntityRef Copy(const EntityRefUtils::OwnerRef& owner) const;
-        SR_NODISCARD const SR_HTYPES_NS::SharedPtr<Entity>& GetTarget() const { return m_target; }
+        void SetEntityController(EntityController* pEntityController) noexcept;
+        void OnEntityIdReplaced(const EntityReplaceMap& replaceMap);
 
-        template<typename T> SR_NODISCARD SR_HTYPES_NS::SharedPtr<T> GetComponent() const {
-            if (auto&& pComponent = GetComponent()) {
-                return pComponent.DynamicCast<T>();
-            }
-            return nullptr;
-        }
-
-        SR_NODISCARD SR_HTYPES_NS::SharedPtr<GameObject> GetGameObject() const;
-        SR_NODISCARD SR_HTYPES_NS::SharedPtr<SceneObject> GetSceneObject() const;
-        SR_NODISCARD SR_HTYPES_NS::SharedPtr<Component> GetComponent() const;
-        SR_NODISCARD bool IsValid() const;
-        SR_NODISCARD bool IsRelative() const { return m_relative; }
-
-        void SetRelative(bool relative);
-        EntityRef& SetPathTo(const SR_HTYPES_NS::SharedPtr<Entity>& pEntity);
-        void SetOwner(const EntityRefUtils::OwnerRef& owner);
-
-        void UpdateTarget() const;
+        void Resolve() const noexcept;
 
     private:
-        void UpdatePath() const;
+        EntityId m_entityId = SR_ID_INVALID;
 
-    private:
-        mutable SR_UTILS_NS::EntityRefUtils::RefPath m_path;
-        bool m_relative = true;
-
-        EntityRefUtils::OwnerRef m_owner;
-        mutable SR_HTYPES_NS::SharedPtr<Entity> m_target;
+        mutable Entity::Ptr m_pEntity;
+        EntityController* m_pEntityController = nullptr;
 
     };
 
-    class EntityRefProperty : public SR_UTILS_NS::Property {
-        SR_REGISTER_TYPE_TRAITS_PROPERTY(EntityRefProperty, 1001)
+    template<class T> class EntityRef : public EntityRefBase {
+        using Super = EntityRefBase;
     public:
-        //void SaveProperty(MarshalRef marshal) const noexcept override;
-        //void LoadProperty(MarshalRef marshal) noexcept override;
+        SR_NODISCARD StringAtom GetTypeName() const noexcept override {
+            return T::GetClassStaticName();
+        }
 
-        SR_UTILS_NS::EntityRef& GetEntityRef() noexcept { return m_entityRef; }
-
-    private:
-        SR_UTILS_NS::EntityRef m_entityRef;
-
+        SR_NODISCARD SR_HTYPES_NS::SharedPtr<T> Get() const noexcept {
+            return GetEntity().template StaticCast<T>();
+        }
     };
 }
 

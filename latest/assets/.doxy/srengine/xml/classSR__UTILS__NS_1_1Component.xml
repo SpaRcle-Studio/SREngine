@@ -9,7 +9,6 @@
     <derivedcompoundref refid="classSR__AUDIO__NS_1_1AudioListener" prot="public" virt="non-virtual">SR_AUDIO_NS::AudioListener</derivedcompoundref>
     <derivedcompoundref refid="classSR__AUDIO__NS_1_1AudioSource" prot="public" virt="non-virtual">SR_AUDIO_NS::AudioSource</derivedcompoundref>
     <derivedcompoundref refid="classSR__GRAPH__UI__NS_1_1Canvas" prot="public" virt="non-virtual">SR_GRAPH_UI_NS::Canvas</derivedcompoundref>
-    <derivedcompoundref refid="classSR__GRAPH__UI__NS_1_1UIWindow" prot="public" virt="non-virtual">SR_GRAPH_UI_NS::UIWindow</derivedcompoundref>
     <derivedcompoundref refid="classSR__GTYPES__NS_1_1Camera" prot="public" virt="non-virtual">SR_GTYPES_NS::Camera</derivedcompoundref>
     <derivedcompoundref refid="classSR__GTYPES__NS_1_1IRenderComponent" prot="public" virt="non-virtual">SR_GTYPES_NS::IRenderComponent</derivedcompoundref>
     <derivedcompoundref refid="classSR__PTYPES__NS_1_1Rigidbody" prot="public" virt="non-virtual">SR_PTYPES_NS::Rigidbody</derivedcompoundref>
@@ -1232,64 +1231,64 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="11">
+      <node id="10">
         <label>SR_CORE_GUI_NS::EditorCamera</label>
         <link refid="classSR__CORE__GUI__NS_1_1EditorCamera"/>
-        <childnode refid="10" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="22">
+      <node id="21">
         <label>SR_CORE_GUI_NS::EditorGizmo</label>
         <link refid="classSR__CORE__GUI__NS_1_1EditorGizmo"/>
-        <childnode refid="21" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="14">
-        <label>SR_CORE_UI_NS::Button</label>
-        <link refid="classSR__CORE__UI__NS_1_1Button"/>
-        <childnode refid="13" relation="public-inheritance">
+        <childnode refid="20" relation="public-inheritance">
         </childnode>
       </node>
       <node id="13">
-        <label>SR_CORE_UI_NS::IButton</label>
-        <link refid="classSR__CORE__UI__NS_1_1IButton"/>
+        <label>SR_CORE_UI_NS::Button</label>
+        <link refid="classSR__CORE__UI__NS_1_1Button"/>
         <childnode refid="12" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="16">
-        <label>SR_GRAPH_NS::AreaLight</label>
-        <link refid="classSR__GRAPH__NS_1_1AreaLight"/>
-        <childnode refid="15" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="17">
-        <label>SR_GRAPH_NS::DirectionalLight</label>
-        <link refid="classSR__GRAPH__NS_1_1DirectionalLight"/>
-        <childnode refid="15" relation="public-inheritance">
+      <node id="12">
+        <label>SR_CORE_UI_NS::IButton</label>
+        <link refid="classSR__CORE__UI__NS_1_1IButton"/>
+        <childnode refid="11" relation="public-inheritance">
         </childnode>
       </node>
       <node id="15">
+        <label>SR_GRAPH_NS::AreaLight</label>
+        <link refid="classSR__GRAPH__NS_1_1AreaLight"/>
+        <childnode refid="14" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>SR_GRAPH_NS::DirectionalLight</label>
+        <link refid="classSR__GRAPH__NS_1_1DirectionalLight"/>
+        <childnode refid="14" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
         <label>SR_GRAPH_NS::ILightComponent</label>
         <link refid="classSR__GRAPH__NS_1_1ILightComponent"/>
-        <childnode refid="12" relation="public-inheritance">
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>SR_GRAPH_NS::PointLight</label>
+        <link refid="classSR__GRAPH__NS_1_1PointLight"/>
+        <childnode refid="14" relation="public-inheritance">
         </childnode>
       </node>
       <node id="18">
-        <label>SR_GRAPH_NS::PointLight</label>
-        <link refid="classSR__GRAPH__NS_1_1PointLight"/>
-        <childnode refid="15" relation="public-inheritance">
+        <label>SR_GRAPH_NS::ProbeLight</label>
+        <link refid="classSR__GRAPH__NS_1_1ProbeLight"/>
+        <childnode refid="14" relation="public-inheritance">
         </childnode>
       </node>
       <node id="19">
-        <label>SR_GRAPH_NS::ProbeLight</label>
-        <link refid="classSR__GRAPH__NS_1_1ProbeLight"/>
-        <childnode refid="15" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="20">
         <label>SR_GRAPH_NS::SpotLight</label>
         <link refid="classSR__GRAPH__NS_1_1SpotLight"/>
-        <childnode refid="15" relation="public-inheritance">
+        <childnode refid="14" relation="public-inheritance">
         </childnode>
       </node>
       <node id="8">
@@ -1298,139 +1297,133 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="21">
+      <node id="20">
         <label>SR_GRAPH_UI_NS::Gizmo</label>
         <link refid="classSR__GRAPH__UI__NS_1_1Gizmo"/>
-        <childnode refid="12" relation="public-inheritance">
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>SR_GRAPH_UI_NS::UICanvasComponent</label>
+        <link refid="classSR__GRAPH__UI__NS_1_1UICanvasComponent"/>
+        <childnode refid="42" relation="public-inheritance">
         </childnode>
       </node>
       <node id="44">
-        <label>SR_GRAPH_UI_NS::UICanvasComponent</label>
-        <link refid="classSR__GRAPH__UI__NS_1_1UICanvasComponent"/>
-        <childnode refid="43" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="45">
         <label>SR_GRAPH_UI_NS::UISizeComponent</label>
         <link refid="classSR__GRAPH__UI__NS_1_1UISizeComponent"/>
-        <childnode refid="43" relation="public-inheritance">
+        <childnode refid="42" relation="public-inheritance">
         </childnode>
       </node>
       <node id="9">
-        <label>SR_GRAPH_UI_NS::UIWindow</label>
-        <link refid="classSR__GRAPH__UI__NS_1_1UIWindow"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="10">
         <label>SR_GTYPES_NS::Camera</label>
         <link refid="classSR__GTYPES__NS_1_1Camera"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="24">
+      <node id="23">
         <label>SR_GTYPES_NS::DebugLine</label>
         <link refid="classSR__GTYPES__NS_1_1DebugLine"/>
-        <childnode refid="23" relation="public-inheritance">
+        <childnode refid="22" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="26">
+      <node id="25">
         <label>SR_GTYPES_NS::DebugWireframeMesh</label>
         <link refid="classSR__GTYPES__NS_1_1DebugWireframeMesh"/>
-        <childnode refid="25" relation="public-inheritance">
+        <childnode refid="24" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="12">
+      <node id="11">
         <label>SR_GTYPES_NS::IRenderComponent</label>
         <link refid="classSR__GTYPES__NS_1_1IRenderComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="25">
+      <node id="24">
         <label>SR_GTYPES_NS::IndexedMesh</label>
         <link refid="classSR__GTYPES__NS_1_1IndexedMesh"/>
-        <childnode refid="23" relation="public-inheritance">
+        <childnode refid="22" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="23">
+      <node id="22">
         <label>SR_GTYPES_NS::Mesh</label>
         <link refid="classSR__GTYPES__NS_1_1Mesh"/>
-        <childnode refid="12" relation="public-inheritance">
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>SR_GTYPES_NS::Mesh3D</label>
+        <link refid="classSR__GTYPES__NS_1_1Mesh3D"/>
+        <childnode refid="24" relation="public-inheritance">
         </childnode>
       </node>
       <node id="27">
-        <label>SR_GTYPES_NS::Mesh3D</label>
-        <link refid="classSR__GTYPES__NS_1_1Mesh3D"/>
-        <childnode refid="25" relation="public-inheritance">
+        <label>SR_GTYPES_NS::ProceduralMesh</label>
+        <link refid="classSR__GTYPES__NS_1_1ProceduralMesh"/>
+        <childnode refid="24" relation="public-inheritance">
         </childnode>
       </node>
       <node id="28">
-        <label>SR_GTYPES_NS::ProceduralMesh</label>
-        <link refid="classSR__GTYPES__NS_1_1ProceduralMesh"/>
-        <childnode refid="25" relation="public-inheritance">
+        <label>SR_GTYPES_NS::SkinnedMesh</label>
+        <link refid="classSR__GTYPES__NS_1_1SkinnedMesh"/>
+        <childnode refid="24" relation="public-inheritance">
         </childnode>
       </node>
       <node id="29">
-        <label>SR_GTYPES_NS::SkinnedMesh</label>
-        <link refid="classSR__GTYPES__NS_1_1SkinnedMesh"/>
-        <childnode refid="25" relation="public-inheritance">
+        <label>SR_GTYPES_NS::Sprite</label>
+        <link refid="classSR__GTYPES__NS_1_1Sprite"/>
+        <childnode refid="22" relation="public-inheritance">
         </childnode>
       </node>
       <node id="30">
-        <label>SR_GTYPES_NS::Sprite</label>
-        <link refid="classSR__GTYPES__NS_1_1Sprite"/>
-        <childnode refid="23" relation="public-inheritance">
+        <label>SR_GTYPES_NS::Text</label>
+        <link refid="classSR__GTYPES__NS_1_1Text"/>
+        <childnode refid="22" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>SR_PTYPES_NS::Bullet3Rigidbody3D</label>
+        <link refid="classSR__PTYPES__NS_1_1Bullet3Rigidbody3D"/>
+        <childnode refid="33" relation="public-inheritance">
         </childnode>
       </node>
       <node id="31">
-        <label>SR_GTYPES_NS::Text</label>
-        <link refid="classSR__GTYPES__NS_1_1Text"/>
-        <childnode refid="23" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="35">
-        <label>SR_PTYPES_NS::Bullet3Rigidbody3D</label>
-        <link refid="classSR__PTYPES__NS_1_1Bullet3Rigidbody3D"/>
-        <childnode refid="34" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="32">
         <label>SR_PTYPES_NS::Rigidbody</label>
         <link refid="classSR__PTYPES__NS_1_1Rigidbody"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="33">
+      <node id="32">
         <label>SR_PTYPES_NS::Rigidbody2D</label>
         <link refid="classSR__PTYPES__NS_1_1Rigidbody2D"/>
-        <childnode refid="32" relation="public-inheritance">
+        <childnode refid="31" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="34">
+      <node id="33">
         <label>SR_PTYPES_NS::Rigidbody3D</label>
         <link refid="classSR__PTYPES__NS_1_1Rigidbody3D"/>
-        <childnode refid="32" relation="public-inheritance">
+        <childnode refid="31" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="36">
+      <node id="35">
         <label>SR_PTYPES_NS::Vehicle</label>
         <link refid="classSR__PTYPES__NS_1_1Vehicle"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="37">
+      <node id="36">
         <label>SR_PTYPES_NS::Vehicle4W3D</label>
         <link refid="classSR__PTYPES__NS_1_1Vehicle4W3D"/>
-        <childnode refid="36" relation="public-inheritance">
+        <childnode refid="35" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="38">
+      <node id="37">
         <label>SR_SCRIPTING_NS::Behaviour</label>
         <link refid="classSR__SCRIPTING__NS_1_1Behaviour"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="39">
+      <node id="38">
         <label>SR_UTILS_NS::CameraFlyMover</label>
         <link refid="classSR__UTILS__NS_1_1CameraFlyMover"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1442,25 +1435,25 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="40">
+      <node id="39">
         <label>SR_UTILS_NS::DebugLogComponent</label>
         <link refid="classSR__UTILS__NS_1_1DebugLogComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="41">
+      <node id="40">
         <label>SR_UTILS_NS::LookAtComponent</label>
         <link refid="classSR__UTILS__NS_1_1LookAtComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="42">
+      <node id="41">
         <label>SR_UTILS_NS::Tests::ReflectionTestComponent</label>
         <link refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="43">
+      <node id="42">
         <label>SR_UTILS_NS::UI::UIModifierComponent</label>
         <link refid="classSR__UTILS__NS_1_1UI_1_1UIModifierComponent"/>
         <childnode refid="1" relation="public-inheritance">

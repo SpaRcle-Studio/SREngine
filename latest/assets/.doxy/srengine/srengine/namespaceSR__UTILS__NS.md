@@ -76,7 +76,7 @@
 | class | [**Compression**](classSR__UTILS__NS_1_1Compression.md) <br> |
 | struct | [**ConstexprStringHashEntry**](structSR__UTILS__NS_1_1ConstexprStringHashEntry.md) <br> |
 | class | [**CursorLock**](classSR__UTILS__NS_1_1CursorLock.md) <br> |
-| class | [**Debug**](classSR__UTILS__NS_1_1Debug.md) <br>_@scriptableClass_  |
+| class | [**Debug**](classSR__UTILS__NS_1_1Debug.md) <br> |
 | class | [**DebugDraw**](classSR__UTILS__NS_1_1DebugDraw.md) <br> |
 | class | [**DebugLogComponent**](classSR__UTILS__NS_1_1DebugLogComponent.md) <br> |
 | struct | [**DefaultChecker**](structSR__UTILS__NS_1_1DefaultChecker.md) &lt;typename T, typename Enable&gt;<br> |
@@ -84,7 +84,9 @@
 | struct | [**DetectedOr**](structSR__UTILS__NS_1_1DetectedOr.md) &lt;class Default, Op, Args&gt;<br> |
 | class | [**EntityController**](classSR__UTILS__NS_1_1EntityController.md) <br> |
 | class | [**EntityIdList**](classSR__UTILS__NS_1_1EntityIdList.md) <br> |
-| class | [**EntityRef**](classSR__UTILS__NS_1_1EntityRef.md) <br> |
+| class | [**EntityRef**](classSR__UTILS__NS_1_1EntityRef.md) &lt;class T&gt;<br> |
+| class | [**EntityRefBase**](classSR__UTILS__NS_1_1EntityRefBase.md) <br> |
+| class | [**EntityRefOld**](classSR__UTILS__NS_1_1EntityRefOld.md) <br> |
 | class | [**EntityRefProperty**](classSR__UTILS__NS_1_1EntityRefProperty.md) <br> |
 | class | [**EnumProperty**](classSR__UTILS__NS_1_1EnumProperty.md) <br>_---------------------------------------_  __[_**EnumProperty**_](classSR__UTILS__NS_1_1EnumProperty.md) _-----------------------------------------------------_ __ |
 | class | [**EnumReflector**](classSR__UTILS__NS_1_1EnumReflector.md) <br> |
@@ -114,7 +116,7 @@
 | class | [**IBaseSerializer**](classSR__UTILS__NS_1_1IBaseSerializer.md) <br> |
 | class | [**ICloneable**](classSR__UTILS__NS_1_1ICloneable.md) <br> |
 | class | [**ICommand**](classSR__UTILS__NS_1_1ICommand.md) <br> |
-| class | [**IComponentable**](classSR__UTILS__NS_1_1IComponentable.md) <br>_@scriptableClass_  |
+| class | [**IComponentable**](classSR__UTILS__NS_1_1IComponentable.md) <br> |
 | class | [**IDeserializer**](classSR__UTILS__NS_1_1IDeserializer.md) <br> |
 | class | [**IEvent**](classSR__UTILS__NS_1_1IEvent.md) <br> |
 | class | [**IMigrator**](classSR__UTILS__NS_1_1IMigrator.md) <br> |
@@ -122,6 +124,8 @@
 | class | [**IResourceReloader**](classSR__UTILS__NS_1_1IResourceReloader.md) <br> |
 | class | [**ISerializer**](classSR__UTILS__NS_1_1ISerializer.md) <br> |
 | class | [**ITestController**](classSR__UTILS__NS_1_1ITestController.md) <br> |
+| struct | [**InnerType**](structSR__UTILS__NS_1_1InnerType.md) &lt;typename T&gt;<br> |
+| struct | [**InnerType&lt; std::vector&lt; T, Alloc &gt; &gt;**](structSR__UTILS__NS_1_1InnerType_3_01std_1_1vector_3_01T_00_01Alloc_01_4_01_4.md) &lt;typename T, typename Alloc&gt;<br> |
 | class | [**Input**](classSR__UTILS__NS_1_1Input.md) <br> |
 | class | [**InputDeviceData**](classSR__UTILS__NS_1_1InputDeviceData.md) <br> |
 | class | [**InputDispatcher**](classSR__UTILS__NS_1_1InputDispatcher.md) <br> |
@@ -140,6 +144,12 @@
 | struct | [**IsSameClassTemplate&lt; Tmpl, Tmpl &gt;**](structSR__UTILS__NS_1_1IsSameClassTemplate_3_01Tmpl_00_01Tmpl_01_4.md) &lt;Tmpl&gt;<br> |
 | struct | [**IsStdArrayTemplate**](structSR__UTILS__NS_1_1IsStdArrayTemplate.md) &lt;Tmpl1&gt;<br> |
 | struct | [**IsStdArrayTemplate&lt; std::array &gt;**](structSR__UTILS__NS_1_1IsStdArrayTemplate_3_01std_1_1array_01_4.md) &lt;&gt;<br> |
+| struct | [**IsStdMap**](structSR__UTILS__NS_1_1IsStdMap.md) &lt;typename T&gt;<br> |
+| struct | [**IsStdMap&lt; std::map&lt; Key, Value, Compare, Alloc &gt; &gt;**](structSR__UTILS__NS_1_1IsStdMap_3_01std_1_1map_3_01Key_00_01Value_00_01Compare_00_01Alloc_01_4_01_4.md) &lt;typename Key, typename Value, typename Compare, typename Alloc&gt;<br> |
+| struct | [**IsStdSet**](structSR__UTILS__NS_1_1IsStdSet.md) &lt;typename T&gt;<br> |
+| struct | [**IsStdSet&lt; std::set&lt; T, Compare, Alloc &gt; &gt;**](structSR__UTILS__NS_1_1IsStdSet_3_01std_1_1set_3_01T_00_01Compare_00_01Alloc_01_4_01_4.md) &lt;typename T, typename Compare, typename Alloc&gt;<br> |
+| struct | [**IsStdVector**](structSR__UTILS__NS_1_1IsStdVector.md) &lt;typename T&gt;<br> |
+| struct | [**IsStdVector&lt; std::vector&lt; T, Alloc &gt; &gt;**](structSR__UTILS__NS_1_1IsStdVector_3_01std_1_1vector_3_01T_00_01Alloc_01_4_01_4.md) &lt;typename T, typename Alloc&gt;<br> |
 | struct | [**IsTemplateClass**](structSR__UTILS__NS_1_1IsTemplateClass.md) &lt;typename&gt;<br> |
 | struct | [**IsTemplateClass&lt; Tmpl&lt; Args... &gt; &gt;**](structSR__UTILS__NS_1_1IsTemplateClass_3_01Tmpl_3_01Args_8_8_8_01_4_01_4.md) &lt;Tmpl, Args&gt;<br> |
 | struct | [**IsTypeFromClassTemplate**](structSR__UTILS__NS_1_1IsTypeFromClassTemplate.md) &lt;typename, typename&gt;<br> |
@@ -207,7 +217,7 @@
 | class | [**SingletonBase**](classSR__UTILS__NS_1_1SingletonBase.md) <br> |
 | class | [**SingletonManager**](classSR__UTILS__NS_1_1SingletonManager.md) <br> |
 | class | [**StandardProperty**](classSR__UTILS__NS_1_1StandardProperty.md) <br>_-------------------------------------_  __[_**StandardProperty**_](classSR__UTILS__NS_1_1StandardProperty.md) _---------------------------------------------------_ __ |
-| class | [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) <br>_@scriptableClass_  |
+| class | [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) <br> |
 | struct | [**StringHashInfo**](structSR__UTILS__NS_1_1StringHashInfo.md) <br> |
 | class | [**StringUtils**](classSR__UTILS__NS_1_1StringUtils.md) <br> |
 | class | [**Subscription**](classSR__UTILS__NS_1_1Subscription.md) <br> |
@@ -252,10 +262,12 @@
 | typedef typename Details::Detector&lt; Details::Empty, void, Op, Args... &gt;::type | [**DetectedT**](#typedef-detectedt)  <br> |
 | typedef std::function&lt; Entity::Ptr(void)&gt; | [**EntityAllocator**](#typedef-entityallocator)  <br> |
 | typedef uint64\_t | [**EntityId**](#typedef-entityid)  <br> |
+| typedef ska::flat\_hash\_map&lt; EntityId, EntityId &gt; | [**EntityReplaceMap**](#typedef-entityreplacemap)  <br> |
 | enum uint8\_t | [**EnumVariant**](#enum-enumvariant)  <br> |
 | typedef typename decltype(Details::GetFromPackResolver&lt; Index, Types... &gt;())::type | [**GetPromPackT**](#typedef-getprompackt)  <br> |
 | typedef decltype(std::declval&lt; const T & &gt;().empty()) | [**HasMethodEmptyT**](#typedef-hasmethodemptyt)  <br> |
 | typedef decltype(std::declval&lt; const T &gt;()==nullptr) | [**HasNullptrComparison**](#typedef-hasnullptrcomparison)  <br> |
+| typedef typename [**InnerType**](structSR__UTILS__NS_1_1InnerType.md)&lt; RemoveQualifiersT&lt; T &gt; &gt;::type | [**InnerTypeT**](#typedef-innertypet)  <br> |
 | enum uint8\_t | [**KeyState**](#enum-keystate)  <br> |
 | enum uint8\_t | [**KeyboardLayout**](#enum-keyboardlayout)  <br> |
 | enum  | [**MarshalSaveMode**](#enum-marshalsavemode)  <br> |
@@ -298,10 +310,14 @@
 |  constexpr bool | [**IsDetectedV**](#variable-isdetectedv)   = `[**IsDetected**](structSR__UTILS__NS_1_1IsDetected.md)&lt;Op, Args...&gt;::value`<br> |
 |  SR\_INLINE constexpr bool | [**IsECharT**](#variable-isechart)   = `IsAnyOfV&lt;T, char, wchar\_t, char8\_t, char16\_t, char32\_t&gt;`<br> |
 |  constexpr bool | [**IsEnumV**](#variable-isenumv)   = `[**IsEnum**](structSR__UTILS__NS_1_1IsEnum.md)&lt;T&gt;::value`<br> |
+|  constexpr bool | [**IsSRClassV**](#variable-issrclassv)   = `std::is\_base\_of\_v&lt;[**SRClass**](classSR__UTILS__NS_1_1SRClass.md), RemoveQualifiersT&lt;T&gt;&gt; \|\| std::is\_same\_v&lt;[**SRClass**](classSR__UTILS__NS_1_1SRClass.md), RemoveQualifiersT&lt;T&gt;&gt;`<br> |
 |  constexpr bool | [**IsSREnumV**](#variable-issrenumv)   = `[**IsSREnum**](structSR__UTILS__NS_1_1IsSREnum.md)&lt;T&gt;::value`<br> |
 |  constexpr bool | [**IsSTLVectorV**](#variable-isstlvectorv)   = `IsSTLVector&lt;T&gt;()`<br> |
 |  constexpr bool | [**IsSameClassTemplateV**](#variable-issameclasstemplatev)   = `[**IsSameClassTemplate**](structSR__UTILS__NS_1_1IsSameClassTemplate.md)&lt;Tmpl1, Tmpl2&gt;::value`<br> |
 |  SR\_INLINE constexpr bool | [**IsStdArrayTemplateV**](#variable-isstdarraytemplatev)   = `[**IsStdArrayTemplate**](structSR__UTILS__NS_1_1IsStdArrayTemplate.md)&lt;Tmpl&gt;::value`<br> |
+|  constexpr bool | [**IsStdMapV**](#variable-isstdmapv)   = `[**IsStdMap**](structSR__UTILS__NS_1_1IsStdMap.md)&lt;RemoveQualifiersT&lt;T&gt;&gt;::value`<br> |
+|  constexpr bool | [**IsStdSetV**](#variable-isstdsetv)   = `[**IsStdSet**](structSR__UTILS__NS_1_1IsStdSet.md)&lt;RemoveQualifiersT&lt;T&gt;&gt;::value`<br> |
+|  constexpr bool | [**IsStdVectorV**](#variable-isstdvectorv)   = `[**IsStdVector**](structSR__UTILS__NS_1_1IsStdVector.md)&lt;RemoveQualifiersT&lt;T&gt;&gt;::value`<br> |
 |  constexpr bool | [**IsTemplateClassV**](#variable-istemplateclassv)   = `[**IsTemplateClass**](structSR__UTILS__NS_1_1IsTemplateClass.md)&lt;T&gt;::value`<br> |
 |  constexpr bool | [**IsTypeFromClassTemplateV**](#variable-istypefromclasstemplatev)   = `[**IsTypeFromClassTemplate**](structSR__UTILS__NS_1_1IsTypeFromClassTemplate.md)&lt;T, Tmpl&gt;::value`<br> |
 |  SR\_INLINE constexpr bool | [**IsTypeFromStdArrayTemplateV**](#variable-istypefromstdarraytemplatev)   = `[**IsTypeFromStdArrayTemplate**](structSR__UTILS__NS_1_1IsTypeFromStdArrayTemplate.md)&lt;T&gt;::value`<br> |
@@ -553,6 +569,19 @@ typedef uint64_t SR_UTILS_NS::EntityId;
 
 
 
+### typedef EntityReplaceMap 
+
+```C++
+typedef ska::flat_hash_map<EntityId, EntityId> SR_UTILS_NS::EntityReplaceMap;
+```
+
+
+
+
+<hr>
+
+
+
 ### enum EnumVariant 
 
 ```C++
@@ -600,6 +629,19 @@ using SR_UTILS_NS::HasMethodEmptyT = typedef decltype(std::declval<const T&>().e
 
 ```C++
 using SR_UTILS_NS::HasNullptrComparison = typedef decltype(std::declval<const T>() == nullptr);
+```
+
+
+
+
+<hr>
+
+
+
+### typedef InnerTypeT 
+
+```C++
+using SR_UTILS_NS::InnerTypeT = typedef typename InnerType<RemoveQualifiersT<T> >::type;
 ```
 
 
@@ -1089,6 +1131,19 @@ constexpr bool SR_UTILS_NS::IsEnumV;
 
 
 
+### variable IsSRClassV 
+
+```C++
+constexpr bool SR_UTILS_NS::IsSRClassV;
+```
+
+
+
+
+<hr>
+
+
+
 ### variable IsSREnumV 
 
 ```C++
@@ -1132,6 +1187,45 @@ constexpr bool SR_UTILS_NS::IsSameClassTemplateV;
 
 ```C++
 SR_INLINE constexpr bool SR_UTILS_NS::IsStdArrayTemplateV;
+```
+
+
+
+
+<hr>
+
+
+
+### variable IsStdMapV 
+
+```C++
+constexpr bool SR_UTILS_NS::IsStdMapV;
+```
+
+
+
+
+<hr>
+
+
+
+### variable IsStdSetV 
+
+```C++
+constexpr bool SR_UTILS_NS::IsStdSetV;
+```
+
+
+
+
+<hr>
+
+
+
+### variable IsStdVectorV 
+
+```C++
+constexpr bool SR_UTILS_NS::IsStdVectorV;
 ```
 
 

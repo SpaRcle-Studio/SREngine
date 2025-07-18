@@ -535,11 +535,15 @@ namespace SR_HTYPES_NS {
 
 namespace SR_UTILS_NS {
     namespace SharedPointerTraits {
-        template<class, class = std::void_t<>>
+        /*template<class, class = std::void_t<>>
         struct IsSharedPointer : std::false_type { };
 
         template<class T>
-        struct IsSharedPointer<T, std::void_t<typename T::SharedPointerType>> : std::true_type { };
+        struct IsSharedPointer<T, std::void_t<typename T::SharedPointerType>> : std::true_type { };*/
+
+        template<typename T> struct IsSharedPointer : std::false_type { };
+
+        template<typename T> struct IsSharedPointer<SR_HTYPES_NS::SharedPtr<T>> : std::true_type { };
 
         //template<class T>
         //struct IsSharedPointer : std::false_type { };
@@ -549,7 +553,14 @@ namespace SR_UTILS_NS {
     }
 
     template<class T>
-    constexpr bool IsSharedPointerV = SharedPointerTraits::IsSharedPointer<T>::value;
+    constexpr bool IsSharedPointerV = SharedPointerTraits::IsSharedPointer<RemoveQualifiersT<T>>::value;
+
+    template<class T>
+    constexpr bool IsBaseOfSharedPointer = std::is_base_of_v<SR_HTYPES_NS::SharedPtrBase, RemoveQualifiersT<T>>;
+
+    template<typename T> struct InnerType<SR_HTYPES_NS::SharedPtr<T>> {
+        using type = typename InnerType<T>::type;
+    };
 }
 
 namespace std {

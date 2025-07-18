@@ -24,14 +24,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="287" column="33" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="287" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="350" column="33" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="350" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="285" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="286" bodyend="288"/>
+    <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="348" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="349" bodyend="351"/>
     <listofallmembers>
       <member refid="structSR__UTILS__NS_1_1GetFirstOfTypeFromSequence_3_01T_00_01Pair_01_4_1a3b3f4c72dcac88761004bf72684e0a53" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GetFirstOfTypeFromSequence&lt; T, Pair &gt;</scope><name>value</name></member>
     </listofallmembers>

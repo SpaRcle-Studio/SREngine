@@ -12,7 +12,7 @@
     <innerclass refid="classSR__GRAPH__UI__NS_1_1UISizeComponent" prot="public">SR_GRAPH_UI_NS::UISizeComponent</innerclass>
     <innerclass refid="classSR__GRAPH__UI__NS_1_1UIVBoxContainerNode" prot="public">SR_GRAPH_UI_NS::UIVBoxContainerNode</innerclass>
     <innerclass refid="classSR__GRAPH__UI__NS_1_1UIViewportNode" prot="public">SR_GRAPH_UI_NS::UIViewportNode</innerclass>
-    <innerclass refid="classSR__GRAPH__UI__NS_1_1UIWindow" prot="public">SR_GRAPH_UI_NS::UIWindow</innerclass>
+    <innerclass refid="classSR__GRAPH__UI__NS_1_1UIWindowNode" prot="public">SR_GRAPH_UI_NS::UIWindowNode</innerclass>
     <sectiondef kind="var">
       <memberdef kind="variable" id="UIControlNode_8h_1a64ac4a61ee9d5532b3a52625a96e9912" prot="public" static="no" mutable="no">
         <type></type>
@@ -405,7 +405,7 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h" line="22" column="5"/>
       </memberdef>
-      <memberdef kind="function" id="UIWindow_8h_1af8332c5d96379e836088713a7362370d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="UIWindowNode_8h_1af8332c5d96379e836088713a7362370d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_GRAPH_UI_NS::SR_ENUM_NS_STRUCT_T</definition>
         <argsstring>(UIWindowAttributes, uint32_t, None=0, Dockable=1&lt;&lt; 0, Resizable=1&lt;&lt; 1, Movable=1&lt;&lt; 2, Closable=1&lt;&lt; 3, Minimizable=1&lt;&lt; 4, Maximizable=1&lt;&lt; 5)</argsstring>
@@ -451,7 +451,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="11" column="5" declfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h" declline="11" declcolumn="5"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIWindowNode.h" line="17" column="5" declfile="Engine/libs/Graphics/inc/Graphics/UI/UIWindowNode.h" declline="17" declcolumn="5"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

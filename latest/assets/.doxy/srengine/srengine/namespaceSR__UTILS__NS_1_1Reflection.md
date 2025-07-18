@@ -40,6 +40,11 @@
 
 
 
+## Public Attributes
+
+| Type | Name |
+| ---: | :--- |
+|  constexpr bool | [**ContainsSRClassV**](#variable-containssrclassv)   = `IsSRClassV&lt;InnerTypeT&lt;T&gt;&gt;`<br> |
 
 
 
@@ -60,6 +65,7 @@
 
 | Type | Name |
 | ---: | :--- |
+|  SR\_INLINE void | [**ForEachSRClass**](#function-foreachsrclass) (T && object, const auto & func) <br> |
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetPropertyInspector**](#function-getpropertyinspector) () <br> |
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**MakeDisplayName**](#function-makedisplayname) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) <br> |
 |  std::string\_view | [**MakeSerializePropertyName**](#function-makeserializepropertyname) (std::string\_view name) <br> |
@@ -91,8 +97,40 @@
 
 
 
+## Public Attributes Documentation
+
+
+
+
+### variable ContainsSRClassV 
+
+```C++
+constexpr bool SR_UTILS_NS::Reflection::ContainsSRClassV;
+```
+
+
+
+
+<hr>
 ## Public Functions Documentation
 
+
+
+
+### function ForEachSRClass 
+
+```C++
+template<typename T>
+SR_INLINE void SR_UTILS_NS::Reflection::ForEachSRClass (
+    T && object,
+    const auto & func
+) 
+```
+
+
+
+
+<hr>
 
 
 

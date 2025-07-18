@@ -148,6 +148,7 @@
 * **Forward** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **FromUtf** ([**SR\_UTILS\_NS::Localization**](namespaceSR__UTILS__NS_1_1Localization.md))
 * **FileIsHidden** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
+* **ForEachSRClass** ([**SR\_UTILS\_NS::Reflection**](namespaceSR__UTILS__NS_1_1Reflection.md))
 
 
 ## g

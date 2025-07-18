@@ -43,14 +43,14 @@
 | class | [**DeltaTimeState**](classSR__CORE__NS_1_1DeltaTimeState.md) <br> |
 | class | [**DrawState**](classSR__CORE__NS_1_1DrawState.md) <br> |
 | class | [**EditorSettings**](classSR__CORE__NS_1_1EditorSettings.md) <br> |
-| class | [**Engine**](classSR__CORE__NS_1_1Engine.md) <br>_@scriptableClass_  |
+| class | [**Engine**](classSR__CORE__NS_1_1Engine.md) <br> |
 | struct | [**EngineScene**](structSR__CORE__NS_1_1EngineScene.md) <br> |
 | class | [**GraphicsResourceReloader**](classSR__CORE__NS_1_1GraphicsResourceReloader.md) <br> |
 | class | [**InitializeState**](classSR__CORE__NS_1_1InitializeState.md) <br> |
 | class | [**PollEventsState**](classSR__CORE__NS_1_1PollEventsState.md) <br> |
 | class | [**PrepareState**](classSR__CORE__NS_1_1PrepareState.md) <br> |
 | class | [**SceneUpdateState**](classSR__CORE__NS_1_1SceneUpdateState.md) <br> |
-| struct | [**ScriptableContext**](structSR__CORE__NS_1_1ScriptableContext.md) <br>_@scriptableClass_  |
+| struct | [**ScriptableContext**](structSR__CORE__NS_1_1ScriptableContext.md) <br> |
 | class | [**StopState**](classSR__CORE__NS_1_1StopState.md) <br> |
 | class | [**SubmitState**](classSR__CORE__NS_1_1SubmitState.md) <br> |
 | class | [**VisualChunk**](classSR__CORE__NS_1_1VisualChunk.md) <br> |

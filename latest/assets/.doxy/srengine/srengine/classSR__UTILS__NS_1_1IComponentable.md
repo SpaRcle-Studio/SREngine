@@ -8,9 +8,8 @@
 
 
 
-_@scriptableClass_ 
 
-* `#include <IComponentable.h>`
+
 
 
 

@@ -89,7 +89,7 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetDirection**](#function-getdirection) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**GetMirror**](#function-getmirror) () noexcept const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetOffset**](#function-getoffset) () noexcept const<br> |
-|  SR\_NODISCARD [**SR\_UTILS\_NS::EntityRef**](classSR__UTILS__NS_1_1EntityRef.md) & | [**GetTarget**](#function-gettarget) () <br> |
+|  SR\_NODISCARD [**SR\_UTILS\_NS::EntityRefOld**](classSR__UTILS__NS_1_1EntityRefOld.md) & | [**GetTarget**](#function-gettarget) () <br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetUp**](#function-getup) () noexcept const<br> |
 |   | [**LookAtComponent**](#function-lookatcomponent) () <br> |
 | virtual void | [**OnDestroy**](#function-ondestroy) () override<br>_Вызывается когда компонент убирается с объекта, либо объект уничтожается. Может произойти отложенно._  |
@@ -325,7 +325,7 @@ inline SR_NODISCARD SR_MATH_NS::FVector3 SR_UTILS_NS::LookAtComponent::GetOffset
 ### function GetTarget 
 
 ```C++
-inline SR_NODISCARD SR_UTILS_NS::EntityRef & SR_UTILS_NS::LookAtComponent::GetTarget () 
+inline SR_NODISCARD SR_UTILS_NS::EntityRefOld & SR_UTILS_NS::LookAtComponent::GetTarget () 
 ```
 
 

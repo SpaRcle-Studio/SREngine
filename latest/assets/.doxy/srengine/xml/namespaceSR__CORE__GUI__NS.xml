@@ -40,10 +40,10 @@
     <innerclass refid="classSR__CORE__GUI__NS_1_1VectorPropertyDrawer" prot="public">SR_CORE_GUI_NS::VectorPropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1WorldEdit" prot="public">SR_CORE_GUI_NS::WorldEdit</innerclass>
     <sectiondef kind="func">
-      <memberdef kind="function" id="DragNDropHelper_8h_1a8f583e598c3ad9bcd8b97d5a4981a2f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="DragNDropHelper_8h_1a4214c3ea2e4f01b84cea7adc7bb303c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
         <definition>SR_MAYBE_UNUSED bool SR_CORE_GUI_NS::DragDropTargetEntityRef</definition>
-        <argsstring>(EditorGUI *pContext, SR_UTILS_NS::EntityRef &amp;entityRef, const char *id, float_t width=300.f)</argsstring>
+        <argsstring>(EditorGUI *pContext, SR_UTILS_NS::EntityRefOld &amp;entityRef, const char *id, float_t width=300.f)</argsstring>
         <name>DragDropTargetEntityRef</name>
         <qualifiedname>SR_CORE_GUI_NS::DragDropTargetEntityRef</qualifiedname>
         <param>
@@ -51,7 +51,7 @@
           <declname>pContext</declname>
         </param>
         <param>
-          <type><ref refid="classSR__UTILS__NS_1_1EntityRef" kindref="compound">SR_UTILS_NS::EntityRef</ref> &amp;</type>
+          <type><ref refid="classSR__UTILS__NS_1_1EntityRefOld" kindref="compound">SR_UTILS_NS::EntityRefOld</ref> &amp;</type>
           <declname>entityRef</declname>
         </param>
         <param>

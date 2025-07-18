@@ -3,6 +3,7 @@
   <compounddef id="dir_b9e652b456a4d9b315741a759a2b0c5c" kind="dir">
     <compoundname>Engine/libs/Utils/inc/Utils/Reflection</compoundname>
     <innerfile refid="Reflection_2Property_8h">Property.h</innerfile>
+    <innerfile refid="SRClassUtils_8h">SRClassUtils.h</innerfile>
     <innerfile refid="Value_8h">Value.h</innerfile>
     <innerfile refid="ValueImpl_8h">ValueImpl.h</innerfile>
     <briefdescription>

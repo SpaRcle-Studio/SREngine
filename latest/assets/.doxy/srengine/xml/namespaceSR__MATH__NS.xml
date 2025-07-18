@@ -283,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="768" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="768" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="763" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="763" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector3_8h_1add6b330eb901c035034dd90071be1fd3" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; int32_t &gt;</type>
@@ -297,7 +297,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="769" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="769" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="764" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="764" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector3_8h_1a8094d49587a7bdbb32095580b21f3569" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; uint32_t &gt;</type>
@@ -311,7 +311,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="770" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="770" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="765" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="765" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector3_8h_1a2e21de6b81820721056fa8a6f478873f" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; bool &gt;</type>
@@ -325,7 +325,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="771" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="771" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="766" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="766" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector4_8h_1afea3818a990ae3c65e79ef5aa83fd9e4" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">Vector4</ref>&lt; Unit &gt;</type>
@@ -546,7 +546,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="773" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="773" bodyend="773"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="768" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="768" bodyend="768"/>
       </memberdef>
       <memberdef kind="variable" id="Vector3_8h_1a2273f6a66c33776961808f35ac2add59" prot="public" static="yes" mutable="no">
         <type>SR_INLINE const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref></type>
@@ -565,7 +565,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="774" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="774" bodyend="778"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="769" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="769" bodyend="773"/>
       </memberdef>
       <memberdef kind="variable" id="Vector4_8h_1a3c1b358c33546a81df1e0a72caad36ee" prot="public" static="no" extern="yes" mutable="no">
         <type>std::unordered_map&lt; SRHashType, <ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref> &gt;</type>

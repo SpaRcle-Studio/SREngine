@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="231" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="231" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="241" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="241" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1FastMemoryArray_1a70f2104c30bbc2739890d7464daca6c8" prot="private" static="no" mutable="no">
         <type>SizeType</type>
@@ -52,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="232" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="232" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="242" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="242" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1FastMemoryArray_1a98f827960b14eea2906e5a9d23cc3e7c" prot="private" static="no" mutable="no">
         <type>T *</type>
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="233" column="11" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="233" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="243" column="11" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="243" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -189,6 +189,20 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="82" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="82" bodyend="86"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1FastMemoryArray_1a881fc1cf365b95748b52802d7d1fa556" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::FastMemoryArray&lt; T &gt;::Destroy</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>Destroy</name>
+        <qualifiedname>SR_HTYPES_NS::FastMemoryArray::Destroy</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="88" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="88" bodyend="96"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1FastMemoryArray_1acd41a0aa67ba13c5bfd3b1485def7500" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SizeType</type>
         <definition>SR_NODISCARD SizeType SR_HTYPES_NS::FastMemoryArray&lt; T &gt;::size</definition>
@@ -201,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="88" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="88" bodyend="88"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="98" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="98" bodyend="98"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1FastMemoryArray_1adc0df515c03b6b445f2187629aafb9ab" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SizeType</type>
@@ -215,7 +229,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="89" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="89" bodyend="89"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="99" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="99" bodyend="99"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1FastMemoryArray_1a2e8a5168db8ac0addf0ad2d73aa1d9bf" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -229,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="90" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="90" bodyend="90"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="100" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="100" bodyend="100"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1FastMemoryArray_1accf1aded974a53849d47e51aa5be2e3c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD T *</type>
@@ -243,7 +257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="91" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="91" bodyend="91"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="101" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="101" bodyend="101"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1FastMemoryArray_1a6907fccf74adfb1a5d447bca496ac405" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const T *</type>
@@ -257,7 +271,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="92" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="92" bodyend="92"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="102" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="102" bodyend="102"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1FastMemoryArray_1a3f0eeb18fe72c27fca75224560556f22" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD T &amp;</type>
@@ -275,7 +289,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="93" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="93" bodyend="93"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="103" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="103" bodyend="103"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1FastMemoryArray_1ab4594a718599bee211d00c61762f2b66" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const T &amp;</type>
@@ -293,7 +307,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="94" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="94" bodyend="94"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="104" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="104" bodyend="104"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1FastMemoryArray_1a0a73c9b19769a5f420fef93045009355" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -307,7 +321,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="96" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="96" bodyend="101"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="106" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="106" bodyend="111"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1FastMemoryArray_1a933f8b40601509bacae46379046d5578" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -325,7 +339,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="103" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="103" bodyend="108"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="113" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="113" bodyend="118"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1FastMemoryArray_1a675c0bb34ad6b2b2056ab091a582b2a2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -339,7 +353,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="110" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="110" bodyend="110"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="120" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="120" bodyend="120"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1FastMemoryArray_1a5c183590e3e938f8d04c1bd8228f300d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -353,7 +367,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="112" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="112" bodyend="123"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="122" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="122" bodyend="133"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1FastMemoryArray_1a44c5eeabd9c9bacdd455b943c818a3e4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>T &amp;</type>
@@ -367,7 +381,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="125" column="11" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="125" bodyend="131"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="135" column="11" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="135" bodyend="141"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1FastMemoryArray_1a4d6dc33ebeac8645c560613fe05a2666" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>const T &amp;</type>
@@ -381,7 +395,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="133" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="133" bodyend="139"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="143" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="143" bodyend="149"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1FastMemoryArray_1a49e62e6f0183beef5b9bc28de2ab7cdb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -399,7 +413,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="141" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="141" bodyend="153"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="151" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="151" bodyend="163"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1FastMemoryArray_1a42cfafc1ec4b3a85401475a317941b87" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -417,7 +431,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="155" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="155" bodyend="167"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="165" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="165" bodyend="177"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1FastMemoryArray_1ac879058691447ca5696247e75cd231c1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -431,7 +445,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="169" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="169" bodyend="173"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="179" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="179" bodyend="183"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1FastMemoryArray_1a048c8fb534b9f4ee7dad5f3792c730ac" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -449,7 +463,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="175" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="175" bodyend="187"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="185" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="185" bodyend="197"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1FastMemoryArray_1a34929b4079394e1571ab7c46311fa77b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -467,7 +481,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="189" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="189" bodyend="201"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="199" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="199" bodyend="211"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1FastMemoryArray_1a6c595feee0d4b1f1b128d311d8a3fd38" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -485,7 +499,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="203" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="203" bodyend="215"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="213" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="213" bodyend="225"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1FastMemoryArray_1afd8712192e67c20e66131164956ca7c9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -503,14 +517,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="217" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="217" bodyend="228"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="227" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="227" bodyend="238"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="11" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="11" bodyend="235"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" line="11" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h" bodystart="11" bodyend="245"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a44c5eeabd9c9bacdd455b943c818a3e4" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::FastMemoryArray</scope><name>back</name></member>
       <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a4d6dc33ebeac8645c560613fe05a2666" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::FastMemoryArray</scope><name>back</name></member>
@@ -518,6 +532,7 @@
       <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a675c0bb34ad6b2b2056ab091a582b2a2" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::FastMemoryArray</scope><name>clear</name></member>
       <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1accf1aded974a53849d47e51aa5be2e3c" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::FastMemoryArray</scope><name>data</name></member>
       <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a6907fccf74adfb1a5d447bca496ac405" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::FastMemoryArray</scope><name>data</name></member>
+      <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a881fc1cf365b95748b52802d7d1fa556" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::FastMemoryArray</scope><name>Destroy</name></member>
       <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a048c8fb534b9f4ee7dad5f3792c730ac" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::FastMemoryArray</scope><name>emplace_back</name></member>
       <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a34929b4079394e1571ab7c46311fa77b" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::FastMemoryArray</scope><name>emplace_back</name></member>
       <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1a2e8a5168db8ac0addf0ad2d73aa1d9bf" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::FastMemoryArray</scope><name>empty</name></member>

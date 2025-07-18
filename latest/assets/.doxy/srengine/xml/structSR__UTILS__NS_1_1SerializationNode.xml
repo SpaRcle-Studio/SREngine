@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="73" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="73" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="81" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="81" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1SerializationNode_1a7caff2e4f2d20f5195bc2acb2ea93390" prot="public" static="no" mutable="no">
         <type>SerializationDataType</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="74" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="74" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="82" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="82" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1SerializationNode_1a18debdbcd8b4b9864e6e94dc199d8919" prot="public" static="no" mutable="no">
         <type>std::string</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="75" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="75" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="83" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="83" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1SerializationNode_1ab364b02cea111befb6cf39f52c1744d0" prot="public" static="no" mutable="no">
         <type><ref refid="unionSR__UTILS__NS_1_1SerializationTrivialDataType" kindref="compound">SerializationTrivialDataType</ref></type>
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="76" column="38" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="76" bodyend="76"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="84" column="38" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="84" bodyend="84"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1SerializationNode_1a8fda161f5757951a4dca3352dee593ed" prot="public" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="structSR__UTILS__NS_1_1SerializationNode" kindref="compound">SerializationNode</ref> &gt;</type>
@@ -73,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="77" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="77" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="85" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="85" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -185,6 +185,20 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="64" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="64" bodyend="71"/>
       </memberdef>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1SerializationNode_1add88764839e4b7780af377d9090e51f3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::SerializationNode::Clear</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>Clear</name>
+        <qualifiedname>SR_UTILS_NS::SerializationNode::Clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="73" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="73" bodyend="79"/>
+      </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
@@ -210,9 +224,10 @@
         <link refid="unionSR__UTILS__NS_1_1SerializationTrivialDataType"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="32" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="32" bodyend="78"/>
+    <location file="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" line="32" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/BaseSerialization.h" bodystart="32" bodyend="86"/>
     <listofallmembers>
       <member refid="structSR__UTILS__NS_1_1SerializationNode_1a8fda161f5757951a4dca3352dee593ed" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationNode</scope><name>children</name></member>
+      <member refid="structSR__UTILS__NS_1_1SerializationNode_1add88764839e4b7780af377d9090e51f3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationNode</scope><name>Clear</name></member>
       <member refid="structSR__UTILS__NS_1_1SerializationNode_1ab364b02cea111befb6cf39f52c1744d0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationNode</scope><name>data</name></member>
       <member refid="structSR__UTILS__NS_1_1SerializationNode_1a71d5b634bf3ee7ba96adbdc6ef17bf48" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationNode</scope><name>id</name></member>
       <member refid="structSR__UTILS__NS_1_1SerializationNode_1ad76364c7da0accb1fd2829d68da1fb72" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationNode</scope><name>operator=</name></member>

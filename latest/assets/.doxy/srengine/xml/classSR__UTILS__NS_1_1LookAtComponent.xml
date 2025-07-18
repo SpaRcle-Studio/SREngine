@@ -49,9 +49,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="44" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="44" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__UTILS__NS_1_1LookAtComponent_1a5661f223ba4b3cde7630314cb163c289" prot="private" static="no" mutable="no">
-        <type><ref refid="classSR__UTILS__NS_1_1EntityRef" kindref="compound">SR_UTILS_NS::EntityRef</ref></type>
-        <definition>SR_UTILS_NS::EntityRef SR_UTILS_NS::LookAtComponent::m_target</definition>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1LookAtComponent_1a8071da8a35de5e8fbd901d2ce245c652" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1EntityRefOld" kindref="compound">SR_UTILS_NS::EntityRefOld</ref></type>
+        <definition>SR_UTILS_NS::EntityRefOld SR_UTILS_NS::LookAtComponent::m_target</definition>
         <argsstring></argsstring>
         <name>m_target</name>
         <qualifiedname>SR_UTILS_NS::LookAtComponent::m_target</qualifiedname>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="47" column="32" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="47" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1LookAtComponent_1a4eb6a8c8b95dde264f0f7f32f599b3b6" prot="private" static="no" mutable="no">
         <type>LookAtAxis</type>
@@ -367,9 +367,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="37" column="43" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="37" bodyend="37"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1affaa5757e4bf01274493ce1452c7767a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1EntityRef" kindref="compound">SR_UTILS_NS::EntityRef</ref> &amp;</type>
-        <definition>SR_NODISCARD SR_UTILS_NS::EntityRef &amp; SR_UTILS_NS::LookAtComponent::GetTarget</definition>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1adddd22c4ddc255b54845268ad7f270ab" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1EntityRefOld" kindref="compound">SR_UTILS_NS::EntityRefOld</ref> &amp;</type>
+        <definition>SR_NODISCARD SR_UTILS_NS::EntityRefOld &amp; SR_UTILS_NS::LookAtComponent::GetTarget</definition>
         <argsstring>()</argsstring>
         <name>GetTarget</name>
         <qualifiedname>SR_UTILS_NS::LookAtComponent::GetTarget</qualifiedname>
@@ -379,7 +379,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="38" column="45" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="38" bodyend="38"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="38" column="48" bodyfile="Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="38" bodyend="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1a09fed0a61caff6f19940cc9785f9eb40" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -489,7 +489,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1a499a53cb08f173222c9a0bbc06af98fd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>GetRoot</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a0baa97c9e541c9150845fcd338b6f4f8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>GetScene</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a95a4325a27a80c7fbbf65c8ab86579a5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>GetSceneObject</name></member>
-      <member refid="classSR__UTILS__NS_1_1LookAtComponent_1affaa5757e4bf01274493ce1452c7767a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>GetTarget</name></member>
+      <member refid="classSR__UTILS__NS_1_1LookAtComponent_1adddd22c4ddc255b54845268ad7f270ab" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>GetTarget</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab6d313e3075c5dabf5b41189b10f236e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>GetTransform</name></member>
       <member refid="classSR__UTILS__NS_1_1LookAtComponent_1ad64c79ba2d98e425779d9408ec934df9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>GetUp</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a0255fd473a25f237c833df1d507bdbfb" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>HasParent</name></member>
@@ -523,7 +523,7 @@
       <member refid="classSR__UTILS__NS_1_1LookAtComponent_1ae19c563deb541d21473002b1bc92c0bc" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>m_reached</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ae7b09faaab768e65bf45cef6d3a84666" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>m_scene</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a5bbd2e2f1ed3059025e390d428d4d6ac" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>m_sceneObject</name></member>
-      <member refid="classSR__UTILS__NS_1_1LookAtComponent_1a5661f223ba4b3cde7630314cb163c289" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>m_target</name></member>
+      <member refid="classSR__UTILS__NS_1_1LookAtComponent_1a8071da8a35de5e8fbd901d2ce245c652" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>m_target</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a6e3f39cd7894486df8af8336c6778036" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>OnAttached</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a1a42ced6421db34114f544ba2d7b6c6d" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>OnBeforeLayerChanged</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aaa0c5a5e6d07bf4d4516229fe544dd49" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>OnCollisionEnter</name></member>

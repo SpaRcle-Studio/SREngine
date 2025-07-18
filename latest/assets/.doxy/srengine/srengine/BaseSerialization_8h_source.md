@@ -80,6 +80,14 @@ namespace SR_UTILS_NS {
             return *this;
         }
 
+        void Clear() noexcept {
+            id = SerializationId();
+            type = SerializationDataType::Unknown;
+            string.clear();
+            data = {};
+            children.clear();
+        }
+
         SerializationId id;
         SerializationDataType type = SerializationDataType::Unknown;
         std::string string;
@@ -95,6 +103,7 @@ namespace SR_UTILS_NS {
         friend IBaseDeserializer;
     public:
         IBaseSerialization();
+        ~IBaseSerialization();
 
         SR_NODISCARD virtual std::string ToStringBase() const noexcept = 0;
 

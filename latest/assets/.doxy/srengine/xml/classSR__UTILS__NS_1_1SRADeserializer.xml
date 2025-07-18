@@ -344,6 +344,7 @@
       <member refid="classSR__UTILS__NS_1_1SRAISerialization_1ac4923d2272f3e99b4ac177df6b4af898" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ToStringBase</name></member>
       <member refid="classSR__UTILS__NS_1_1IDeserializer_1ae91b8af83592f3a9e46f46e953a292a9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>UniquePtr</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a7d1004a49c47662eab249f165d64d233" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>WriteNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1ac611c3a4f40b626eb327155f6f7704df" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>~IBaseSerialization</name></member>
       <member refid="classSR__UTILS__NS_1_1IDeserializer_1aa8f3b9a70102c6be70594dec1046ae87" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>~IDeserializer</name></member>
     </listofallmembers>
   </compounddef>

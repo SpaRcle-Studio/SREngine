@@ -2,7 +2,6 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__UTILS__NS_1_1StringAtom" kind="class" language="C++" prot="public">
     <compoundname>SR_UTILS_NS::StringAtom</compoundname>
-    <includes refid="StringAtom_8h" local="no">StringAtom.h</includes>
     <sectiondef kind="private-static-attrib">
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1StringAtom_1aa7f7062c5c23e86f0d248a383e9f87c1" prot="private" static="yes" mutable="no">
         <type>std::string</type>
@@ -16,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="16" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="15" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="15" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1StringAtom_1afb20a94505df9a4bb108ed78e434d30f" prot="private" static="yes" mutable="no">
         <type><ref refid="structSR__UTILS__NS_1_1StringHashInfo" kindref="compound">StringHashInfo</ref> *</type>
@@ -30,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="17" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="17" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="16" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="16" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -47,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="78" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="78" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="77" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="77" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -64,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="20" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="19" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a4691740cd2ea7b209175c6ea35aee968" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -82,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="22" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="21" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a5bc07dd5a6f63ad6c675bac19342de95" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -100,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="24" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="23" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a467f806df1ebe22c1d613439d5b7ac04" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -120,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="26" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="25" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a3e56505927f2a77256bc47cfe78820d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -139,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="27" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="26" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a1f3e21f5ffd55123cb837bfae62ebcf4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -158,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="28" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="27" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a9b041f3c427b3d05cf26fd6c43d2af44" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -173,7 +172,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="31" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="30" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1ae5651d0d06a9a8b7c1303895f4e4892b" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -188,7 +187,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="32" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="31" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a707656e026015b6486b1346bbb3fb9c3" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -208,7 +207,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="34" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="33" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a2be08302877e448155a9a5479efdcf13" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -226,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="35" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="34" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a33f885206ffab681dca1cf21c193a920" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -244,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="36" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="35" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1ab94219c79738b4a65e400605a6b43f45" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -263,7 +262,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="38" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="37" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1ab8aba12eb42e4c854f930021f1dc33a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &amp;</type>
@@ -281,7 +280,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="39" column="20"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="38" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a1da92cddd5af9cf9ea831b014626ae9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &amp;</type>
@@ -300,7 +299,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="41" column="20"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="40" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1af11c22175cc1c6e80d3d1940f8df60c7" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -319,7 +318,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="44" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="43" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1ade79e26106f5eab175a1e1d9ceeb9ea8" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -338,7 +337,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="46" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="45" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1ae5eaf4f59329fc0b9ae575126ff35202" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD</type>
@@ -352,7 +351,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="48" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="47" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a892765a214535e664ae08c4cb2406a04" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD char</type>
@@ -371,7 +370,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="51" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="50" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a45142cc3c03c3ded059cc59e7b83420b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -386,7 +385,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="55" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="54" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a28c60fb77b7d01c23844e7adcde7e1fd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -401,7 +400,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="57" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="56" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1adb0f573da6286d4e4903a609fc5ed969" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -419,7 +418,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="58" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="57" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a6b63fb0924a8c6d00163f11f99e8f3c5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -434,7 +433,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="60" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="59" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a99a16e6786feda6bf2eab2976805b861" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -449,7 +448,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="62" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="61" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a9471f1e33bc3220f6e29daac58bfba4b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -463,7 +462,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="63" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="62" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a26addb610911e3bb4db528c6365ac31a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -477,7 +476,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="64" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="63" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1ab0ef14075264e72746f76894e2da0abd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const char *</type>
@@ -492,7 +491,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="66" column="33"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="65" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1addd3dd1d6bfbd07db2854821a71ebbaf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const char *</type>
@@ -507,7 +506,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="68" column="33"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="67" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a50f98deaabdb50345367e165e905ffd6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const char *</type>
@@ -522,7 +521,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="70" column="33"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="69" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a50b4a9be09fde0a89def8eb926a63c0f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const std::string &amp;</type>
@@ -536,7 +535,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="71" column="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="70" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a2d6b12be3522926e36786143561c2ecc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string_view</type>
@@ -550,7 +549,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="72" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="71" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1abe9cdcf67f3a7cf9808212daf4a3f890" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -564,7 +563,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="74" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="73" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a481555c58c062f7e5899336caf84e578" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -578,15 +577,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="75" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="74" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>@scriptableClass </para>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="15" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="15" bodyend="80"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="14" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="14" bodyend="79"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1StringAtom_1addd3dd1d6bfbd07db2854821a71ebbaf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>c_str</name></member>
       <member refid="classSR__UTILS__NS_1_1StringAtom_1a481555c58c062f7e5899336caf84e578" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>Clear</name></member>

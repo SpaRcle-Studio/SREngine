@@ -2,7 +2,7 @@
 
 # Struct SR\_UTILS\_NS::SharedPointerTraits::IsSharedPointer
 
-**template &lt;class, class&gt;**
+**template &lt;typename T&gt;**
 
 
 

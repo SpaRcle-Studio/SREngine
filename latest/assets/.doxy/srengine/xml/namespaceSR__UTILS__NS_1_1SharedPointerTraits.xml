@@ -3,7 +3,7 @@
   <compounddef id="namespaceSR__UTILS__NS_1_1SharedPointerTraits" kind="namespace" language="C++">
     <compoundname>SR_UTILS_NS::SharedPointerTraits</compoundname>
     <innerclass refid="structSR__UTILS__NS_1_1SharedPointerTraits_1_1IsSharedPointer" prot="private">SR_UTILS_NS::SharedPointerTraits::IsSharedPointer</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1SharedPointerTraits_1_1IsSharedPointer_3_01T_00_01std_1_1void__t_3_01type8b5a899015c84ec6e1379d34fe0870f5" prot="private">SR_UTILS_NS::SharedPointerTraits::IsSharedPointer&lt; T, std::void_t&lt; typename T::SharedPointerType &gt; &gt;</innerclass>
+    <innerclass refid="structSR__UTILS__NS_1_1SharedPointerTraits_1_1IsSharedPointer_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4" prot="private">SR_UTILS_NS::SharedPointerTraits::IsSharedPointer&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt; &gt;</innerclass>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

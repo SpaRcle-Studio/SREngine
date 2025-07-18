@@ -8,13 +8,13 @@
     <innerclass refid="structstd_1_1hash_3_01SR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_01_4" prot="public">std::hash&lt; SR_GRAPH_NS::Vertices::StaticMeshVertex &gt;</innerclass>
     <innerclass refid="structstd_1_1hash_3_01SR__GRAPH__NS_1_1Vertices_1_1UIVertex_01_4" prot="public">std::hash&lt; SR_GRAPH_NS::Vertices::UIVertex &gt;</innerclass>
     <innerclass refid="structstd_1_1hash_3_01SR__HTYPES__NS_1_1SafePtr_3_01T_01_4_01_4" prot="private">std::hash&lt; SR_HTYPES_NS::SafePtr&lt; T &gt; &gt;</innerclass>
-    <innerclass refid="structstd_1_1hash_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4" prot="private">std::hash&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt; &gt;</innerclass>
+    <innerclass refid="structstd_1_1hash_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4" prot="public">std::hash&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt; &gt;</innerclass>
     <innerclass refid="structstd_1_1hash_3_01SR__MATH__NS_1_1Vector2_3_01U_01_4_01_4" prot="public">std::hash&lt; SR_MATH_NS::Vector2&lt; U &gt; &gt;</innerclass>
     <innerclass refid="structstd_1_1hash_3_01SR__MATH__NS_1_1Vector3_3_01U_01_4_01_4" prot="public">std::hash&lt; SR_MATH_NS::Vector3&lt; U &gt; &gt;</innerclass>
     <innerclass refid="structstd_1_1hash_3_01SR__UTILS__NS_1_1StringAtom_01_4" prot="private">std::hash&lt; SR_UTILS_NS::StringAtom &gt;</innerclass>
     <innerclass refid="structstd_1_1hash_3_01SR__WORLD__NS_1_1TensorKey_01_4" prot="public">std::hash&lt; SR_WORLD_NS::TensorKey &gt;</innerclass>
     <innerclass refid="structstd_1_1less_3_01SR__HTYPES__NS_1_1SafePtr_3_01T_01_4_01_4" prot="private">std::less&lt; SR_HTYPES_NS::SafePtr&lt; T &gt; &gt;</innerclass>
-    <innerclass refid="structstd_1_1less_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4" prot="private">std::less&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt; &gt;</innerclass>
+    <innerclass refid="structstd_1_1less_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4" prot="public">std::less&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt; &gt;</innerclass>
     <innerclass refid="structstd_1_1less_3_01SR__UTILS__NS_1_1StringAtom_01_4" prot="private">std::less&lt; SR_UTILS_NS::StringAtom &gt;</innerclass>
     <sectiondef kind="var">
       <memberdef kind="variable" id="UintWide__t_8h_1a7d30e0b15a3595eb9d6379233ba16196" prot="public" static="no" mutable="no">
@@ -141,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="812" column="36" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="812" bodyend="815"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="807" column="36" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="807" bodyend="810"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

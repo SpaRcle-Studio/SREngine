@@ -81,12 +81,12 @@
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; Texture &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Skybox &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Mesh &gt;</derivedcompoundref>
-    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; GameObject &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Font &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_HTYPES_NS::RawMesh &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_NETWORK_NS::Socket &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_PTYPES_NS::PhysicsMaterial &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; PhysicsMaterial &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; GameObject &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; Entity &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_UTILS_NS::Transform &gt;</derivedcompoundref>
@@ -1720,7 +1720,7 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="81">
+      <node id="86">
         <label>SR_HTYPES_NS::SharedPtr&lt; GameObject &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1810,7 +1810,7 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="86">
+      <node id="85">
         <label>SR_HTYPES_NS::SharedPtr&lt; PhysicsMaterial &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1948,7 +1948,7 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="82">
+      <node id="81">
         <label>SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Font &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1984,19 +1984,19 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="83">
+      <node id="82">
         <label>SR_HTYPES_NS::SharedPtr&lt; SR_HTYPES_NS::RawMesh &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="84">
+      <node id="83">
         <label>SR_HTYPES_NS::SharedPtr&lt; SR_NETWORK_NS::Socket &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="85">
+      <node id="84">
         <label>SR_HTYPES_NS::SharedPtr&lt; SR_PTYPES_NS::PhysicsMaterial &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">

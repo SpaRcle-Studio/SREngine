@@ -314,8 +314,8 @@
         </childnode>
       </node>
       <node id="135">
-        <label>Utils/ECS/EntityRef.h</label>
-        <link refid="EntityRef_8h_source"/>
+        <label>Utils/ECS/EntityRefOld.h</label>
+        <link refid="EntityRefOld_8h_source"/>
         <childnode refid="136" relation="include">
         </childnode>
         <childnode refid="138" relation="include">
@@ -1343,6 +1343,8 @@
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
       </node>
       <node id="1">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h</label>
@@ -1361,6 +1363,10 @@
       <node id="5">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h</label>
         <link refid="UIViewportNode_8h_source"/>
+      </node>
+      <node id="6">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UIWindowNode.h</label>
+        <link refid="UIWindowNode_8h_source"/>
       </node>
     </invincdepgraph>
     <innerclass refid="structSR__GRAPH__UI__NS_1_1UILayout" prot="public">SR_GRAPH_UI_NS::UILayout</innerclass>

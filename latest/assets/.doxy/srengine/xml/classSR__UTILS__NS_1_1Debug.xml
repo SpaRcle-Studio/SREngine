@@ -3,7 +3,6 @@
   <compounddef id="classSR__UTILS__NS_1_1Debug" kind="class" language="C++" prot="public">
     <compoundname>SR_UTILS_NS::Debug</compoundname>
     <basecompoundref refid="classSR__UTILS__NS_1_1Singleton" prot="public" virt="non-virtual">SR_UTILS_NS::Singleton&lt; Debug &gt;</basecompoundref>
-    <includes refid="Debug_8h" local="no">Debug.h</includes>
     <sectiondef kind="public-type">
       <memberdef kind="enum" id="classSR__UTILS__NS_1_1Debug_1aa3bbbac43d02b757f4c9adad4fceb51b" prot="public" static="no" strong="yes">
         <type></type>
@@ -55,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="26" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="26" bodyend="28"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="25" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="25" bodyend="27"/>
       </memberdef>
       <memberdef kind="enum" id="classSR__UTILS__NS_1_1Debug_1a8dcfb3fa3acb42d68c439b55a9ffcaf4" prot="public" static="no" strong="yes">
         <type></type>
@@ -81,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="30" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="30" bodyend="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="29" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="29" bodyend="31"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -98,7 +97,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="77" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="77" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="76" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="76" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Debug_1a8ec0e161110f460f735b9b8807896ba3" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -113,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="78" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="78" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="77" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="77" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Debug_1a634512f7e7cf76b57eee9fb459be2741" prot="private" static="no" mutable="no">
         <type>Theme</type>
@@ -128,7 +127,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="80" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="80" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="79" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="79" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Debug_1a153ff07f4eb76e3f05e0bbf463c5de2c" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -143,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="82" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="82" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="81" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="81" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Debug_1ab8931ca9161bf3330e02406ebb8e1fcf" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
@@ -157,7 +156,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="83" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="83" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="82" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="82" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Debug_1a28c2cd2f67c99bae4be38beacfaaee54" prot="private" static="no" mutable="no">
         <type>std::ofstream</type>
@@ -171,7 +170,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="84" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="83" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="83" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Debug_1ac4ceb1fdd56a9784631994b0e248a09d" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; Level &gt;</type>
@@ -186,7 +185,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="85" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="85" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="84" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Debug_1a253516fe278f997cfa650b33110302e0" prot="private" static="no" mutable="no">
         <type>size_t</type>
@@ -201,7 +200,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="86" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="86" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="85" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="85" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Debug_1a449e280a0ce702f1715a7242a84e15a3" prot="private" static="no" mutable="no">
         <type>size_t</type>
@@ -216,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="87" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="87" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="86" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="86" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -235,7 +234,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="24" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="23" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a83863c5637f6142415badd003c3dcd27" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -249,7 +248,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="39" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="38" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -265,7 +264,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="35" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="34" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1aeb25ac7281e6bd6b03f0d0fd0d595929" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -279,7 +278,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="36" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="35" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a8dc331dfa7f79664ca753a835616d920" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -297,7 +296,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="42" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="41" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a757f652572ebf514fcbe983eec06f087" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD Level</type>
@@ -311,7 +310,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="44" column="28"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="43" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a4b54df4a0dc8f207aa1baec0442842ae" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -325,7 +324,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="45" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="44" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1ae69a23e3a38dd5beb0222c1f2e6a6991" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -339,7 +338,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="47" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="46" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a3d173aa00b5c99c278edf9e9c4fb53ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -353,7 +352,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="48" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="47" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1aef3791c88e51d0758b97752ac24c996b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -380,7 +379,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="50" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="49" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a6fd30616928acbbd11924117564e6506" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -394,7 +393,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="51" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="50" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a1860500e8db8ce23e0acca2a1c96c33d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -409,7 +408,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="53" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="53" bodyend="53"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="52" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="52" bodyend="52"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a459ba596f0584e86e70588b5f49f8b8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -427,7 +426,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="56" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="55" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a3550e51d57e74a47529ccd84aa159468" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -445,7 +444,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="57" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="56" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a621bf8b0292943e0a1803fb17b60018b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -463,7 +462,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="58" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="57" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1adf5b93fca5b5ebd6d5b1888b20245058" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -481,7 +480,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="59" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="58" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1aed1795cb83a907c49e69f1968e244555" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -499,7 +498,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="60" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="59" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a087387605273058286777e492be9c6b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -517,7 +516,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="61" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="60" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a8319c0aea9a5aeeae2919afed0c1391b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -535,7 +534,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="62" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="61" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1aa967c62d97fc139a78952716e1961055" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -553,7 +552,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="63" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="62" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a622d4095839a8bf382d09094ad0af7c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -571,7 +570,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="64" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="63" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a12c50f20648f927bd8fbb1ac31515f92" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -589,7 +588,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="65" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="64" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1adad79dd9e6c21fcb7c40f3acb348f8dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -607,7 +606,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="66" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="65" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a9a2d61e56b833e31c0995e97a9de51df" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -625,7 +624,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="67" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="66" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1aeeae05719d836dcf73aa370c06b4f498" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -643,7 +642,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="68" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="67" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1afba9ea475b6f08e3d60c9aa3dc0a9b74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -661,7 +660,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="69" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="68" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1ad27a8e9ac65a3e90555eecd824bee9fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -679,7 +678,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="71" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="70" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a1c0dba348af79e5c3850ecd894af55b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -697,7 +696,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="72" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="71" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a2c99f3989aa4a2622f553e6df0a0f100" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -719,11 +718,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="74" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="73" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>@scriptableClass </para>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
@@ -775,7 +773,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="23" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="23" bodyend="89"/>
+    <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="22" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Debug.h" bodystart="22" bodyend="88"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Debug_1aeeae05719d836dcf73aa370c06b4f498" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Assert</name></member>
       <member refid="classSR__UTILS__NS_1_1Debug_1afba9ea475b6f08e3d60c9aa3dc0a9b74" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>AssertOnceCheck</name></member>

@@ -133,6 +133,69 @@ namespace SR_UTILS_NS {
         }
     }
 
+    template<typename T> struct InnerType {
+        using type = T;
+    };
+
+    template<typename T, typename Alloc> struct InnerType<std::vector<T, Alloc>> {
+        using type = typename InnerType<T>::type;
+    };
+
+    /*template<typename T, size_t N> struct InnerType<std::array<T, N>> {
+        using type = typename InnerType<T>::type;
+    };
+
+    template<typename T> struct InnerType<std::set<T>> {
+        using type = typename InnerType<T>::type;
+    };
+
+    template<typename T> struct InnerType<std::unordered_set<T>> {
+        using type = typename InnerType<T>::type;
+    };
+
+    template<typename T> struct InnerType<std::list<T>> {
+        using type = typename InnerType<T>::type;
+    };
+
+    template<typename Key, typename Value, typename Hash, typename KeyEqual, typename Alloc>
+    struct InnerType<std::unordered_map<Key, Value, Hash, KeyEqual, Alloc>> {
+        using type = typename InnerType<Value>::type;
+    };
+
+    template<typename Key, typename Value, typename Compare, typename Alloc>
+    struct InnerType<std::map<Key, Value, Compare, Alloc>> {
+        using type = typename InnerType<Value>::type;
+    };*/
+
+    template<typename T> using InnerTypeT = typename InnerType<RemoveQualifiersT<T>>::type;
+
+    template<typename T>
+    struct IsStdVector : std::false_type {};
+
+    template<typename T, typename Alloc>
+    struct IsStdVector<std::vector<T, Alloc>> : std::true_type {};
+
+    template<typename T>
+    constexpr bool IsStdVectorV = IsStdVector<RemoveQualifiersT<T>>::value;
+
+    template<typename T>
+    struct IsStdSet : std::false_type {};
+
+    template<typename T, typename Compare, typename Alloc>
+    struct IsStdSet<std::set<T, Compare, Alloc>> : std::true_type {};
+
+    template<typename T>
+    constexpr bool IsStdSetV = IsStdSet<RemoveQualifiersT<T>>::value;
+
+    template<typename T>
+    struct IsStdMap : std::false_type {};
+
+    template<typename Key, typename Value, typename Compare, typename Alloc>
+    struct IsStdMap<std::map<Key, Value, Compare, Alloc>> : std::true_type {};
+
+    template<typename T>
+    constexpr bool IsStdMapV = IsStdMap<RemoveQualifiersT<T>>::value;
+
     template<template<class...> class Op, class... Args>
     struct IsDetected : Details::Detector<Details::Empty, void, Op, Args...>::value_t
     {};

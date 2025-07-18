@@ -4,9 +4,9 @@
     <compoundname>SR_UTILS_NS::EntityRefProperty</compoundname>
     <basecompoundref refid="classSR__UTILS__NS_1_1Property" prot="public" virt="non-virtual">SR_UTILS_NS::Property</basecompoundref>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classSR__UTILS__NS_1_1EntityRefProperty_1a11beacfb58d51fae90a5553fa57ef779" prot="private" static="no" mutable="no">
-        <type><ref refid="classSR__UTILS__NS_1_1EntityRef" kindref="compound">SR_UTILS_NS::EntityRef</ref></type>
-        <definition>SR_UTILS_NS::EntityRef SR_UTILS_NS::EntityRefProperty::m_entityRef</definition>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1EntityRefProperty_1a7bb34abb4799f30f03b66eb400ac041f" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1EntityRefOld" kindref="compound">SR_UTILS_NS::EntityRefOld</ref></type>
+        <definition>SR_UTILS_NS::EntityRefOld SR_UTILS_NS::EntityRefProperty::m_entityRef</definition>
         <argsstring></argsstring>
         <name>m_entityRef</name>
         <qualifiedname>SR_UTILS_NS::EntityRefProperty::m_entityRef</qualifiedname>
@@ -16,13 +16,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityRef.h" line="70" column="32" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityRef.h" bodystart="70" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityRefOld.h" line="70" column="35" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityRefOld.h" bodystart="70" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityRefProperty_1a284519a391b5f25c8abdb46ee178a7e8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type><ref refid="classSR__UTILS__NS_1_1EntityRef" kindref="compound">SR_UTILS_NS::EntityRef</ref> &amp;</type>
-        <definition>SR_UTILS_NS::EntityRef &amp; SR_UTILS_NS::EntityRefProperty::GetEntityRef</definition>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityRefProperty_1a27b767608076111aa6a61b13e5e32c82" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1EntityRefOld" kindref="compound">SR_UTILS_NS::EntityRefOld</ref> &amp;</type>
+        <definition>SR_UTILS_NS::EntityRefOld &amp; SR_UTILS_NS::EntityRefProperty::GetEntityRef</definition>
         <argsstring>() noexcept</argsstring>
         <name>GetEntityRef</name>
         <qualifiedname>SR_UTILS_NS::EntityRefProperty::GetEntityRef</qualifiedname>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityRef.h" line="67" column="32" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityRef.h" bodystart="67" bodyend="67"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityRefOld.h" line="67" column="35" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityRefOld.h" bodystart="67" bodyend="67"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -75,12 +75,12 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/ECS/EntityRef.h" line="61" column="5" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityRef.h" bodystart="61" bodyend="72"/>
+    <location file="Engine/libs/Utils/inc/Utils/ECS/EntityRefOld.h" line="61" column="5" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityRefOld.h" bodystart="61" bodyend="72"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Property_1ad10eb1ac5384dcd8db5377da438bb98a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefProperty</scope><name>ActiveConditionFn</name></member>
       <member refid="classSR__UTILS__NS_1_1Property_1ac72cf8f65b3de91dfea85a3bdc6c46a3" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefProperty</scope><name>AllocatePropertyBlock</name></member>
       <member refid="classSR__UTILS__NS_1_1Property_1a048491d16dea0903a7e67103f6bede8a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefProperty</scope><name>Base</name></member>
-      <member refid="classSR__UTILS__NS_1_1EntityRefProperty_1a284519a391b5f25c8abdb46ee178a7e8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefProperty</scope><name>GetEntityRef</name></member>
+      <member refid="classSR__UTILS__NS_1_1EntityRefProperty_1a27b767608076111aa6a61b13e5e32c82" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefProperty</scope><name>GetEntityRef</name></member>
       <member refid="classSR__UTILS__NS_1_1Property_1a029d55370bdb669bc4e68eaa144993d9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefProperty</scope><name>GetName</name></member>
       <member refid="classSR__UTILS__NS_1_1Property_1a1506f0edabe49f86277de07aa3f792e6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefProperty</scope><name>GetOptional</name></member>
       <member refid="classSR__UTILS__NS_1_1Property_1a97914998743bd61fcbe6392ff236ddb2" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::EntityRefProperty</scope><name>GetPropertyTypeName</name></member>
@@ -93,7 +93,7 @@
       <member refid="classSR__UTILS__NS_1_1Property_1a9803e4edca20ecf477ca0cb04adf9fe6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefProperty</scope><name>IsSameLine</name></member>
       <member refid="classSR__UTILS__NS_1_1Property_1ac2bb845328aaf4affd8f7a7c23e8ccd7" prot="public" virt="virtual"><scope>SR_UTILS_NS::EntityRefProperty</scope><name>LoadProperty</name></member>
       <member refid="classSR__UTILS__NS_1_1Property_1a1fd0a4ec98e445bc2fbc193e321cf7a5" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefProperty</scope><name>LoadPropertyBase</name></member>
-      <member refid="classSR__UTILS__NS_1_1EntityRefProperty_1a11beacfb58d51fae90a5553fa57ef779" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefProperty</scope><name>m_entityRef</name></member>
+      <member refid="classSR__UTILS__NS_1_1EntityRefProperty_1a7bb34abb4799f30f03b66eb400ac041f" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefProperty</scope><name>m_entityRef</name></member>
       <member refid="classSR__UTILS__NS_1_1Property_1afdf203b715fe62050253dbb52ab7a587" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefProperty</scope><name>MarshalPtr</name></member>
       <member refid="classSR__UTILS__NS_1_1Property_1a44d961f66cc045a9946b22c6a76853f9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefProperty</scope><name>MarshalRef</name></member>
       <member refid="classSR__UTILS__NS_1_1Property_1a7638578d661dfc1fb0b836340617520b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefProperty</scope><name>MarshalUniquePtr</name></member>

@@ -21,14 +21,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="96" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="96" bodyend="98"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="95" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="95" bodyend="97"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="95" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="95" bodyend="99"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="94" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="94" bodyend="98"/>
     <listofallmembers>
       <member refid="structstd_1_1hash_3_01SR__UTILS__NS_1_1StringAtom_01_4_1a2c301e57b1ddccdfcc221d84c89bedad" prot="public" virt="non-virtual"><scope>std::hash&lt; SR_UTILS_NS::StringAtom &gt;</scope><name>operator()</name></member>
     </listofallmembers>

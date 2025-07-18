@@ -59,6 +59,7 @@ Inherited by the following classes: [SR\_UTILS\_NS::SRAISerialization](classSR__
 |   | [**IBaseSerialization**](#function-ibaseserialization) () <br> |
 | virtual SR\_NODISCARD std::string | [**ToStringBase**](#function-tostringbase) () noexcept const = 0<br> |
 |  void | [**WriteNode**](#function-writenode) (const [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) & node) noexcept<br> |
+|   | [**~IBaseSerialization**](#function-ibaseserialization) () <br> |
 
 
 
@@ -189,6 +190,19 @@ virtual SR_NODISCARD std::string SR_UTILS_NS::IBaseSerialization::ToStringBase (
 void SR_UTILS_NS::IBaseSerialization::WriteNode (
     const SerializationNode & node
 ) noexcept
+```
+
+
+
+
+<hr>
+
+
+
+### function ~IBaseSerialization 
+
+```C++
+SR_UTILS_NS::IBaseSerialization::~IBaseSerialization () 
 ```
 
 

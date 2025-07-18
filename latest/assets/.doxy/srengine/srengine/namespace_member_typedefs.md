@@ -43,6 +43,7 @@
 
 * **EntityAllocator** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **EntityId** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
+* **EntityReplaceMap** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 
 
 ## f
@@ -95,6 +96,7 @@
 * **int64\_t** ([**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
 * **int65536\_t** ([**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
 * **int8192\_t** ([**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
+* **InnerTypeT** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **IsDefaultCheckerAlwaysFalseT** ([**SR\_UTILS\_NS::Details**](namespaceSR__UTILS__NS_1_1Details.md))
 
 

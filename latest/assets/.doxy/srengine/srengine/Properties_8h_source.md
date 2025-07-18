@@ -16,7 +16,7 @@
 #define SR_ENGINE_TYPE_TRAITS_PROPERTIES_H
 
 #include <Utils/TypeTraits/StandardProperty.h>
-#include <Utils/ECS/EntityRef.h>
+#include <Utils/ECS/EntityRefOld.h>
 
 namespace SR_UTILS_NS {
     class PropertyContainer : public Property {

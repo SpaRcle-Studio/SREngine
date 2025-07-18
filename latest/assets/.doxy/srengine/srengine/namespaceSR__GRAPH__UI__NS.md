@@ -39,7 +39,7 @@
 | class | [**UISizeComponent**](classSR__GRAPH__UI__NS_1_1UISizeComponent.md) <br> |
 | class | [**UIVBoxContainerNode**](classSR__GRAPH__UI__NS_1_1UIVBoxContainerNode.md) <br> |
 | class | [**UIViewportNode**](classSR__GRAPH__UI__NS_1_1UIViewportNode.md) <br> |
-| class | [**UIWindow**](classSR__GRAPH__UI__NS_1_1UIWindow.md) <br> |
+| class | [**UIWindowNode**](classSR__GRAPH__UI__NS_1_1UIWindowNode.md) <br> |
 
 
 

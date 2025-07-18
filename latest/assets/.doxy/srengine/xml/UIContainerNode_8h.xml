@@ -6,6 +6,7 @@
     <includedby refid="UIHBoxContainerNode_8h" local="no">Engine/libs/Graphics/inc/Graphics/UI/UIHBoxContainerNode.h</includedby>
     <includedby refid="UIVBoxContainerNode_8h" local="no">Engine/libs/Graphics/inc/Graphics/UI/UIVBoxContainerNode.h</includedby>
     <includedby refid="UIViewportNode_8h" local="no">Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h</includedby>
+    <includedby refid="UIWindowNode_8h" local="no">Engine/libs/Graphics/inc/Graphics/UI/UIWindowNode.h</includedby>
     <incdepgraph>
       <node id="1">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UIContainerNode.h</label>
@@ -322,8 +323,8 @@
         </childnode>
       </node>
       <node id="136">
-        <label>Utils/ECS/EntityRef.h</label>
-        <link refid="EntityRef_8h_source"/>
+        <label>Utils/ECS/EntityRefOld.h</label>
+        <link refid="EntityRefOld_8h_source"/>
         <childnode refid="137" relation="include">
         </childnode>
         <childnode refid="139" relation="include">
@@ -1351,6 +1352,8 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
       </node>
       <node id="2">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UIHBoxContainerNode.h</label>
@@ -1363,6 +1366,10 @@
       <node id="4">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h</label>
         <link refid="UIViewportNode_8h_source"/>
+      </node>
+      <node id="5">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UIWindowNode.h</label>
+        <link refid="UIWindowNode_8h_source"/>
       </node>
     </invincdepgraph>
     <innernamespace refid="namespaceSR__GRAPH__UI__NS">SR_GRAPH_UI_NS</innernamespace>

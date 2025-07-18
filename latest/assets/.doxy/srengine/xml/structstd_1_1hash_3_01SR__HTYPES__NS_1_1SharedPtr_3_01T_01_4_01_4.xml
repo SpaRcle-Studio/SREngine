@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
-  <compounddef id="structstd_1_1hash_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4" kind="struct" language="C++" prot="private">
+  <compounddef id="structstd_1_1hash_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4" kind="struct" language="C++" prot="public">
     <compoundname>std::hash&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt; &gt;</compoundname>
     <templateparamlist>
       <param>
@@ -24,14 +24,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="555" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="555" bodyend="557"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="566" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="566" bodyend="568"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="554" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="554" bodyend="558"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="565" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="565" bodyend="569"/>
     <listofallmembers>
       <member refid="structstd_1_1hash_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4_1ab40772c69dabaffd59f4cb69587b0c8f" prot="public" virt="non-virtual"><scope>std::hash&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt; &gt;</scope><name>operator()</name></member>
     </listofallmembers>

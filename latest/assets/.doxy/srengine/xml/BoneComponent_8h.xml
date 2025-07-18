@@ -3,7 +3,7 @@
   <compounddef id="BoneComponent_8h" kind="file" language="C++">
     <compoundname>BoneComponent.h</compoundname>
     <includes refid="libs_2Graphics_2inc_2Graphics_2macros_8h" local="no">Graphics/macros.h</includes>
-    <includes refid="EntityRef_8h" local="no">Utils/ECS/EntityRef.h</includes>
+    <includes refid="EntityRefOld_8h" local="no">Utils/ECS/EntityRefOld.h</includes>
     <includes refid="Component_8h" local="no">Utils/ECS/Component.h</includes>
     <incdepgraph>
       <node id="1">
@@ -269,8 +269,8 @@
         </childnode>
       </node>
       <node id="6">
-        <label>Utils/ECS/EntityRef.h</label>
-        <link refid="EntityRef_8h_source"/>
+        <label>Utils/ECS/EntityRefOld.h</label>
+        <link refid="EntityRefOld_8h_source"/>
         <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="133" relation="include">
@@ -1036,7 +1036,7 @@
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Graphics/macros.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/ECS/EntityRef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/ECS/EntityRefOld.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/ECS/Component.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SR_ANIMATIONS_NS<sp/>{</highlight></codeline>
@@ -1055,7 +1055,7 @@
 <codeline lineno="27"><highlight class="normal"></highlight></codeline>
 <codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint16_t<sp/>m_boneIndex<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1EntityRef" kindref="compound">SR_UTILS_NS::EntityRef</ref><sp/>m_skeleton;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1EntityRefOld" kindref="compound">SR_UTILS_NS::EntityRefOld</ref><sp/>m_skeleton;</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight></codeline>
 <codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="33"><highlight class="normal">}</highlight></codeline>

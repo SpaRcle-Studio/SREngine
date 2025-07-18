@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="DebugLogComponent_8h" kind="file" language="C++">
     <compoundname>DebugLogComponent.h</compoundname>
-    <includes refid="EntityRef_8h" local="no">Utils/ECS/EntityRef.h</includes>
+    <includes refid="EntityRefOld_8h" local="no">Utils/ECS/EntityRefOld.h</includes>
     <includes refid="Component_8h" local="no">Utils/ECS/Component.h</includes>
     <includes refid="GameObject_8h" local="no">Utils/ECS/GameObject.h</includes>
     <includes refid="Transform_8h" local="no">Utils/ECS/Transform.h</includes>
@@ -300,8 +300,8 @@
         </childnode>
       </node>
       <node id="2">
-        <label>Utils/ECS/EntityRef.h</label>
-        <link refid="EntityRef_8h_source"/>
+        <label>Utils/ECS/EntityRefOld.h</label>
+        <link refid="EntityRefOld_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="132" relation="include">
@@ -1397,7 +1397,7 @@
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SR_ENGINE_UTILS_DEBUG_LOG_COMPONENT_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ENGINE_UTILS_DEBUG_LOG_COMPONENT_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/ECS/EntityRef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/ECS/EntityRefOld.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/ECS/Component.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/ECS/GameObject.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/ECS/Transform.h&gt;</highlight><highlight class="normal"></highlight></codeline>

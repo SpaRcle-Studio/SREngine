@@ -818,7 +818,7 @@
         <label>Engine/inc/Engine/World/EngineScene.h</label>
         <link refid="EngineScene_8h_source"/>
       </node>
-      <node id="157">
+      <node id="158">
         <label>Engine/inc/Engine/World/VisualRegion.h</label>
         <link refid="VisualRegion_8h_source"/>
       </node>
@@ -1485,6 +1485,8 @@
         </childnode>
         <childnode refid="153" relation="include">
         </childnode>
+        <childnode refid="154" relation="include">
+        </childnode>
       </node>
       <node id="149">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h</label>
@@ -1509,6 +1511,10 @@
       <node id="153">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h</label>
         <link refid="UIViewportNode_8h_source"/>
+      </node>
+      <node id="154">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UIWindowNode.h</label>
+        <link refid="UIWindowNode_8h_source"/>
       </node>
       <node id="107">
         <label>Engine/libs/Graphics/inc/Graphics/Utils/AtlasBuilder.h</label>
@@ -1615,10 +1621,10 @@
         </childnode>
         <childnode refid="147" relation="include">
         </childnode>
-        <childnode refid="154" relation="include">
+        <childnode refid="155" relation="include">
         </childnode>
       </node>
-      <node id="155">
+      <node id="156">
         <label>Engine/libs/Utils/inc/Utils/ECS/TagManager.h</label>
         <link refid="TagManager_8h_source"/>
         <childnode refid="137" relation="include">
@@ -1655,7 +1661,7 @@
         </childnode>
         <childnode refid="129" relation="include">
         </childnode>
-        <childnode refid="156" relation="include">
+        <childnode refid="157" relation="include">
         </childnode>
       </node>
       <node id="127">
@@ -1707,20 +1713,20 @@
         </childnode>
         <childnode refid="131" relation="include">
         </childnode>
-        <childnode refid="155" relation="include">
+        <childnode refid="156" relation="include">
         </childnode>
       </node>
       <node id="109">
         <label>Engine/libs/Utils/inc/Utils/Tests/AtlasBuilderTest.h</label>
         <link refid="libs_2Utils_2inc_2Utils_2Tests_2AtlasBuilderTest_8h_source"/>
       </node>
-      <node id="156">
+      <node id="157">
         <label>Engine/libs/Utils/inc/Utils/World/Region.h</label>
         <link refid="Region_8h_source"/>
-        <childnode refid="157" relation="include">
+        <childnode refid="158" relation="include">
         </childnode>
       </node>
-      <node id="154">
+      <node id="155">
         <label>Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h</label>
         <link refid="SceneCubeChunkLogic_8h_source"/>
       </node>

@@ -66,6 +66,9 @@ namespace SR_UTILS_NS {
 
     };
 
+    template<typename T>
+    constexpr bool IsSRClassV = std::is_base_of_v<SRClass, RemoveQualifiersT<T>> || std::is_same_v<SRClass, RemoveQualifiersT<T>>;
+
     //template<class T> static T* PostAllocationInitialize(T* pObject) {
     //    if constexpr (std::is_base_of_v<SRClass, T>) {
     //        pObject->InitializeClass();

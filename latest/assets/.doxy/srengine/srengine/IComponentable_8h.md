@@ -40,7 +40,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**IComponentable**](classSR__UTILS__NS_1_1IComponentable.md) <br>_@scriptableClass_  |
+| class | [**IComponentable**](classSR__UTILS__NS_1_1IComponentable.md) <br> |
 
 
 

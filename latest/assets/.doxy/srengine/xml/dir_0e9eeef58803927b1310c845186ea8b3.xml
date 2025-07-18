@@ -13,7 +13,7 @@
     <innerfile refid="UISizeComponent_8h">UISizeComponent.h</innerfile>
     <innerfile refid="UIVBoxContainerNode_8h">UIVBoxContainerNode.h</innerfile>
     <innerfile refid="UIViewportNode_8h">UIViewportNode.h</innerfile>
-    <innerfile refid="UIWindow_8h">UIWindow.h</innerfile>
+    <innerfile refid="UIWindowNode_8h">UIWindowNode.h</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

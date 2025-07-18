@@ -298,8 +298,8 @@
         </childnode>
       </node>
       <node id="131">
-        <label>Utils/ECS/EntityRef.h</label>
-        <link refid="EntityRef_8h_source"/>
+        <label>Utils/ECS/EntityRefOld.h</label>
+        <link refid="EntityRefOld_8h_source"/>
         <childnode refid="132" relation="include">
         </childnode>
         <childnode refid="134" relation="include">
@@ -1386,6 +1386,8 @@
         </childnode>
         <childnode refid="32" relation="include">
         </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
       </node>
       <node id="28">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h</label>
@@ -1410,6 +1412,10 @@
       <node id="32">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h</label>
         <link refid="UIViewportNode_8h_source"/>
+      </node>
+      <node id="33">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UIWindowNode.h</label>
+        <link refid="UIWindowNode_8h_source"/>
       </node>
       <node id="4">
         <label>Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h</label>
@@ -1484,7 +1490,7 @@
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>
-        <childnode refid="33" relation="include">
+        <childnode refid="34" relation="include">
         </childnode>
       </node>
       <node id="24">
@@ -1495,7 +1501,7 @@
         <label>Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h</label>
         <link refid="LookAtComponent_8h_source"/>
       </node>
-      <node id="33">
+      <node id="34">
         <label>Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h</label>
         <link refid="SceneCubeChunkLogic_8h_source"/>
       </node>

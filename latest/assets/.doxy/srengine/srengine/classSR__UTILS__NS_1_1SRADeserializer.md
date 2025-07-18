@@ -254,6 +254,7 @@ See [SR\_UTILS\_NS::IBaseSerialization](classSR__UTILS__NS_1_1IBaseSerialization
 |   | [**IBaseSerialization**](classSR__UTILS__NS_1_1IBaseSerialization.md#function-ibaseserialization) () <br> |
 | virtual SR\_NODISCARD std::string | [**ToStringBase**](classSR__UTILS__NS_1_1IBaseSerialization.md#function-tostringbase) () noexcept const = 0<br> |
 |  void | [**WriteNode**](classSR__UTILS__NS_1_1IBaseSerialization.md#function-writenode) (const [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) & node) noexcept<br> |
+|   | [**~IBaseSerialization**](classSR__UTILS__NS_1_1IBaseSerialization.md#function-ibaseserialization) () <br> |
 
 
 

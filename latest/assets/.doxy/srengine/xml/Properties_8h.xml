@@ -3,7 +3,7 @@
   <compounddef id="Properties_8h" kind="file" language="C++">
     <compoundname>Properties.h</compoundname>
     <includes refid="StandardProperty_8h" local="no">Utils/TypeTraits/StandardProperty.h</includes>
-    <includes refid="EntityRef_8h" local="no">Utils/ECS/EntityRef.h</includes>
+    <includes refid="EntityRefOld_8h" local="no">Utils/ECS/EntityRefOld.h</includes>
     <includedby refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h" local="no">Engine/libs/Graphics/inc/Graphics/GUI/Utils.h</includedby>
     <includedby refid="ShaderProperties_8h" local="no">Engine/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h</includedby>
     <includedby refid="MeshMaterialProperty_8h" local="no">Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h</includedby>
@@ -204,8 +204,8 @@
         </childnode>
       </node>
       <node id="114">
-        <label>Utils/ECS/EntityRef.h</label>
-        <link refid="EntityRef_8h_source"/>
+        <label>Utils/ECS/EntityRefOld.h</label>
+        <link refid="EntityRefOld_8h_source"/>
         <childnode refid="115" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
@@ -950,17 +950,17 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="118">
+      <node id="117">
         <label>Engine/inc/Engine/Engine.h</label>
         <link refid="Engine_8h_source"/>
-        <childnode refid="119" relation="include">
+        <childnode refid="118" relation="include">
         </childnode>
-        <childnode refid="120" relation="include">
+        <childnode refid="119" relation="include">
         </childnode>
         <childnode refid="90" relation="include">
         </childnode>
       </node>
-      <node id="119">
+      <node id="118">
         <label>Engine/inc/Engine/EngineCommands.h</label>
         <link refid="EngineCommands_8h_source"/>
       </node>
@@ -972,7 +972,7 @@
         <label>Engine/inc/Engine/GUI/EditorCamera.h</label>
         <link refid="EditorCamera_8h_source"/>
       </node>
-      <node id="115">
+      <node id="114">
         <label>Engine/inc/Engine/GUI/EditorGUI.h</label>
         <link refid="EditorGUI_8h_source"/>
       </node>
@@ -982,11 +982,11 @@
         <childnode refid="47" relation="include">
         </childnode>
       </node>
-      <node id="122">
+      <node id="121">
         <label>Engine/inc/Engine/GUI/Guizmo.h</label>
         <link refid="Guizmo_8h_source"/>
       </node>
-      <node id="123">
+      <node id="122">
         <label>Engine/inc/Engine/GUI/Hierarchy.h</label>
         <link refid="Hierarchy_8h_source"/>
       </node>
@@ -1090,7 +1090,7 @@
         <label>Engine/inc/Engine/GUI/SceneTools.h</label>
         <link refid="SceneTools_8h_source"/>
       </node>
-      <node id="124">
+      <node id="123">
         <label>Engine/inc/Engine/GUI/SceneViewer.h</label>
         <link refid="SceneViewer_8h_source"/>
       </node>
@@ -1098,7 +1098,7 @@
         <label>Engine/inc/Engine/GUI/WorldEdit.h</label>
         <link refid="WorldEdit_8h_source"/>
       </node>
-      <node id="120">
+      <node id="119">
         <label>Engine/inc/Engine/Scripting/ScriptableContext.h</label>
         <link refid="ScriptableContext_8h_source"/>
       </node>
@@ -1132,22 +1132,22 @@
         <label>Engine/libs/Audio/inc/Audio/Types/AudioSource.h</label>
         <link refid="AudioSource_8h_source"/>
       </node>
-      <node id="127">
+      <node id="126">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h</label>
         <link refid="AnimationChannel_8h_source"/>
       </node>
-      <node id="126">
+      <node id="125">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h</label>
         <link refid="AnimationKey_8h_source"/>
-        <childnode refid="127" relation="include">
+        <childnode refid="126" relation="include">
         </childnode>
         <childnode refid="35" relation="include">
         </childnode>
       </node>
-      <node id="125">
+      <node id="124">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationPose.h</label>
         <link refid="AnimationPose_8h_source"/>
-        <childnode refid="126" relation="include">
+        <childnode refid="125" relation="include">
         </childnode>
       </node>
       <node id="35">
@@ -1636,9 +1636,11 @@
         <label>Engine/libs/Graphics/inc/Graphics/UI/UICanvasComponent.h</label>
         <link refid="UICanvasComponent_8h_source"/>
       </node>
-      <node id="134">
+      <node id="133">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UIContainerNode.h</label>
         <link refid="UIContainerNode_8h_source"/>
+        <childnode refid="134" relation="include">
+        </childnode>
         <childnode refid="135" relation="include">
         </childnode>
         <childnode refid="136" relation="include">
@@ -1646,37 +1648,37 @@
         <childnode refid="137" relation="include">
         </childnode>
       </node>
-      <node id="133">
+      <node id="132">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h</label>
         <link refid="UIControlNode_8h_source"/>
-        <childnode refid="134" relation="include">
+        <childnode refid="133" relation="include">
         </childnode>
       </node>
-      <node id="135">
+      <node id="134">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UIHBoxContainerNode.h</label>
         <link refid="UIHBoxContainerNode_8h_source"/>
       </node>
-      <node id="132">
+      <node id="131">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UINode.h</label>
         <link refid="UINode_8h_source"/>
-        <childnode refid="133" relation="include">
+        <childnode refid="132" relation="include">
         </childnode>
       </node>
       <node id="147">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UISizeComponent.h</label>
         <link refid="UISizeComponent_8h_source"/>
       </node>
-      <node id="136">
+      <node id="135">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UIVBoxContainerNode.h</label>
         <link refid="UIVBoxContainerNode_8h_source"/>
       </node>
-      <node id="137">
+      <node id="136">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h</label>
         <link refid="UIViewportNode_8h_source"/>
       </node>
-      <node id="106">
-        <label>Engine/libs/Graphics/inc/Graphics/UI/UIWindow.h</label>
-        <link refid="UIWindow_8h_source"/>
+      <node id="137">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UIWindowNode.h</label>
+        <link refid="UIWindowNode_8h_source"/>
       </node>
       <node id="85">
         <label>Engine/libs/Physics/inc/Physics/2D/Rigidbody2D.h</label>
@@ -1690,10 +1692,10 @@
         <childnode refid="88" relation="include">
         </childnode>
       </node>
-      <node id="108">
+      <node id="107">
         <label>Engine/libs/Physics/inc/Physics/3D/Vehicle4W3D.h</label>
         <link refid="Vehicle4W3D_8h_source"/>
-        <childnode refid="109" relation="include">
+        <childnode refid="108" relation="include">
         </childnode>
       </node>
       <node id="82">
@@ -1722,7 +1724,7 @@
         <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h</label>
         <link refid="PhysXRigidbody3D_8h_source"/>
       </node>
-      <node id="109">
+      <node id="108">
         <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXVehicle4W3D.h</label>
         <link refid="PhysXVehicle4W3D_8h_source"/>
       </node>
@@ -1734,39 +1736,39 @@
         <childnode refid="86" relation="include">
         </childnode>
       </node>
-      <node id="107">
+      <node id="106">
         <label>Engine/libs/Physics/inc/Physics/Vehicle.h</label>
         <link refid="Vehicle_8h_source"/>
-        <childnode refid="108" relation="include">
+        <childnode refid="107" relation="include">
         </childnode>
       </node>
-      <node id="110">
+      <node id="109">
         <label>Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h</label>
         <link refid="Behaviour_8h_source"/>
-        <childnode refid="111" relation="include">
+        <childnode refid="110" relation="include">
         </childnode>
       </node>
-      <node id="128">
+      <node id="127">
         <label>Engine/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h</label>
         <link refid="CppBehaviour_8h_source"/>
+        <childnode refid="115" relation="include">
+        </childnode>
+      </node>
+      <node id="115">
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h</label>
+        <link refid="ModuleManager_8h_source"/>
+        <childnode refid="109" relation="include">
+        </childnode>
         <childnode refid="116" relation="include">
         </childnode>
       </node>
       <node id="116">
-        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h</label>
-        <link refid="ModuleManager_8h_source"/>
-        <childnode refid="110" relation="include">
-        </childnode>
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h</label>
+        <link refid="ScriptSystem_8h_source"/>
         <childnode refid="117" relation="include">
         </childnode>
       </node>
-      <node id="117">
-        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h</label>
-        <link refid="ScriptSystem_8h_source"/>
-        <childnode refid="118" relation="include">
-        </childnode>
-      </node>
-      <node id="111">
+      <node id="110">
         <label>Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h</label>
         <link refid="EvoBehaviour_8h_source"/>
       </node>
@@ -1793,30 +1795,28 @@
         </childnode>
         <childnode refid="72" relation="include">
         </childnode>
-        <childnode refid="106" relation="include">
-        </childnode>
         <childnode refid="84" relation="include">
         </childnode>
-        <childnode refid="107" relation="include">
+        <childnode refid="106" relation="include">
         </childnode>
-        <childnode refid="110" relation="include">
+        <childnode refid="109" relation="include">
+        </childnode>
+        <childnode refid="111" relation="include">
         </childnode>
         <childnode refid="112" relation="include">
         </childnode>
-        <childnode refid="113" relation="include">
-        </childnode>
         <childnode refid="144" relation="include">
         </childnode>
-        <childnode refid="129" relation="include">
+        <childnode refid="128" relation="include">
         </childnode>
-        <childnode refid="130" relation="include">
+        <childnode refid="129" relation="include">
         </childnode>
         <childnode refid="143" relation="include">
         </childnode>
         <childnode refid="145" relation="include">
         </childnode>
       </node>
-      <node id="112">
+      <node id="111">
         <label>Engine/libs/Utils/inc/Utils/ECS/ComponentManager.h</label>
         <link refid="ComponentManager_8h_source"/>
         <childnode refid="92" relation="include">
@@ -1827,7 +1827,7 @@
         </childnode>
         <childnode refid="84" relation="include">
         </childnode>
-        <childnode refid="113" relation="include">
+        <childnode refid="112" relation="include">
         </childnode>
         <childnode refid="143" relation="include">
         </childnode>
@@ -1839,69 +1839,77 @@
         </childnode>
         <childnode refid="150" relation="include">
         </childnode>
-        <childnode refid="113" relation="include">
+        <childnode refid="112" relation="include">
         </childnode>
       </node>
       <node id="150">
         <label>Engine/libs/Utils/inc/Utils/ECS/EntityController.h</label>
         <link refid="EntityController_8h_source"/>
-        <childnode refid="119" relation="include">
+        <childnode refid="118" relation="include">
         </childnode>
-        <childnode refid="112" relation="include">
+        <childnode refid="111" relation="include">
         </childnode>
-        <childnode refid="114" relation="include">
+        <childnode refid="151" relation="include">
+        </childnode>
+        <childnode refid="113" relation="include">
         </childnode>
       </node>
-      <node id="121">
+      <node id="151">
+        <label>Engine/libs/Utils/inc/Utils/ECS/EntityRef.h</label>
+        <link refid="EntityRef_8h_source"/>
+        <childnode refid="137" relation="include">
+        </childnode>
+      </node>
+      <node id="120">
         <label>Engine/libs/Utils/inc/Utils/ECS/GameObject.h</label>
         <link refid="GameObject_8h_source"/>
-        <childnode refid="119" relation="include">
+        <childnode refid="118" relation="include">
+        </childnode>
+        <childnode refid="121" relation="include">
         </childnode>
         <childnode refid="122" relation="include">
         </childnode>
-        <childnode refid="123" relation="include">
-        </childnode>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="124" relation="include">
+        <childnode refid="123" relation="include">
         </childnode>
         <childnode refid="90" relation="include">
         </childnode>
-        <childnode refid="125" relation="include">
+        <childnode refid="124" relation="include">
         </childnode>
         <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="127" relation="include">
         </childnode>
         <childnode refid="128" relation="include">
         </childnode>
         <childnode refid="129" relation="include">
         </childnode>
-        <childnode refid="130" relation="include">
-        </childnode>
       </node>
-      <node id="113">
+      <node id="112">
         <label>Engine/libs/Utils/inc/Utils/ECS/IComponentable.h</label>
         <link refid="IComponentable_8h_source"/>
-        <childnode refid="114" relation="include">
+        <childnode refid="113" relation="include">
         </childnode>
         <childnode refid="139" relation="include">
         </childnode>
       </node>
-      <node id="131">
+      <node id="130">
         <label>Engine/libs/Utils/inc/Utils/ECS/Node.h</label>
         <link refid="Utils_2inc_2Utils_2ECS_2Node_8h_source"/>
-        <childnode refid="132" relation="include">
+        <childnode refid="131" relation="include">
         </childnode>
       </node>
-      <node id="114">
+      <node id="113">
         <label>Engine/libs/Utils/inc/Utils/ECS/SceneObject.h</label>
         <link refid="SceneObject_8h_source"/>
+        <childnode refid="114" relation="include">
+        </childnode>
         <childnode refid="115" relation="include">
         </childnode>
-        <childnode refid="116" relation="include">
+        <childnode refid="120" relation="include">
         </childnode>
-        <childnode refid="121" relation="include">
-        </childnode>
-        <childnode refid="131" relation="include">
+        <childnode refid="130" relation="include">
         </childnode>
         <childnode refid="138" relation="include">
         </childnode>
@@ -1909,18 +1917,18 @@
       <node id="148">
         <label>Engine/libs/Utils/inc/Utils/ECS/Transform2D.h</label>
         <link refid="Transform2D_8h_source"/>
-        <childnode refid="122" relation="include">
+        <childnode refid="121" relation="include">
         </childnode>
       </node>
       <node id="144">
         <label>Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h</label>
         <link refid="CameraFlyMover_8h_source"/>
       </node>
-      <node id="129">
+      <node id="128">
         <label>Engine/libs/Utils/inc/Utils/Game/DebugLogComponent.h</label>
         <link refid="DebugLogComponent_8h_source"/>
       </node>
-      <node id="130">
+      <node id="129">
         <label>Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h</label>
         <link refid="LookAtComponent_8h_source"/>
       </node>
@@ -1957,15 +1965,15 @@
       <node id="139">
         <label>Engine/libs/Utils/inc/Utils/World/Scene.h</label>
         <link refid="Scene_8h_source"/>
-        <childnode refid="119" relation="include">
+        <childnode refid="118" relation="include">
         </childnode>
-        <childnode refid="123" relation="include">
+        <childnode refid="122" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="140" relation="include">
         </childnode>
-        <childnode refid="124" relation="include">
+        <childnode refid="123" relation="include">
         </childnode>
         <childnode refid="141" relation="include">
         </childnode>
@@ -1997,7 +2005,7 @@
 <codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ENGINE_TYPE_TRAITS_PROPERTIES_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/TypeTraits/StandardProperty.h&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/ECS/EntityRef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/ECS/EntityRefOld.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceSR__UTILS__NS" kindref="compound">SR_UTILS_NS</ref><sp/>{</highlight></codeline>
 <codeline lineno="12" refid="classSR__UTILS__NS_1_1PropertyContainer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__UTILS__NS_1_1PropertyContainer" kindref="compound">PropertyContainer</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Property" kindref="compound">Property</ref><sp/>{</highlight></codeline>

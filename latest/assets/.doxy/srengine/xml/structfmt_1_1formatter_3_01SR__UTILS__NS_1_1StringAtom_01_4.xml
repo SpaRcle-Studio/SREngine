@@ -26,7 +26,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="111" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="111" bodyend="111"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="110" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="110" bodyend="110"/>
       </memberdef>
       <memberdef kind="function" id="structfmt_1_1formatter_3_01SR__UTILS__NS_1_1StringAtom_01_4_1a17f2871a4bd18ddf0cd787cb1edfcb9a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -53,14 +53,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="114" column="10" bodyfile="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="114" bodyend="116"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="113" column="10" bodyfile="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="113" bodyend="115"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="108" column="10" bodyfile="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="109" bodyend="117"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" line="107" column="10" bodyfile="Engine/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="108" bodyend="116"/>
     <listofallmembers>
       <member refid="structfmt_1_1formatter_3_01SR__UTILS__NS_1_1StringAtom_01_4_1a17f2871a4bd18ddf0cd787cb1edfcb9a" prot="public" virt="non-virtual"><scope>fmt::formatter&lt; SR_UTILS_NS::StringAtom &gt;</scope><name>format</name></member>
       <member refid="structfmt_1_1formatter_3_01SR__UTILS__NS_1_1StringAtom_01_4_1aed2b57c6b4872f16166d7fd2c725dfa5" prot="public" virt="non-virtual"><scope>fmt::formatter&lt; SR_UTILS_NS::StringAtom &gt;</scope><name>parse</name></member>

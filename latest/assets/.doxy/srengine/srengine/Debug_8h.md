@@ -39,7 +39,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**Debug**](classSR__UTILS__NS_1_1Debug.md) <br>_@scriptableClass_  |
+| class | [**Debug**](classSR__UTILS__NS_1_1Debug.md) <br> |
 
 
 

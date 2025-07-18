@@ -95,6 +95,16 @@ namespace SR_HTYPES_NS {
             }
         }
 
+        void Destroy() noexcept {
+            SR_TRACY_ZONE;
+            if (m_data) {
+                delete[] m_data;
+                m_data = nullptr;
+            }
+            m_size = 0;
+            m_capacity = 0;
+        }
+
         SR_NODISCARD SizeType size() const noexcept { return m_size; }
         SR_NODISCARD SizeType capacity() const noexcept { return m_capacity; }
         SR_NODISCARD bool empty() const noexcept { return m_size == 0; }

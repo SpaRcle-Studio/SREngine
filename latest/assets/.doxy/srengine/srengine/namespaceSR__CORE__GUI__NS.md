@@ -92,7 +92,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_MAYBE\_UNUSED bool | [**DragDropTargetEntityRef**](#function-dragdroptargetentityref) ([**EditorGUI**](classSR__CORE__GUI__NS_1_1EditorGUI.md) \* pContext, [**SR\_UTILS\_NS::EntityRef**](classSR__UTILS__NS_1_1EntityRef.md) & entityRef, const char \* id, float\_t width=300.f) <br> |
+|  SR\_MAYBE\_UNUSED bool | [**DragDropTargetEntityRef**](#function-dragdroptargetentityref) ([**EditorGUI**](classSR__CORE__GUI__NS_1_1EditorGUI.md) \* pContext, [**SR\_UTILS\_NS::EntityRefOld**](classSR__UTILS__NS_1_1EntityRefOld.md) & entityRef, const char \* id, float\_t width=300.f) <br> |
 |  SR\_MAYBE\_UNUSED [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetValueInspector**](#function-getvalueinspector) (const [**SR\_UTILS\_NS::Reflection::Value**](classSR__UTILS__NS_1_1Reflection_1_1Value.md) & value) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (EditorSceneViewMode, uint8\_t, FreeAspect, WindowSize) <br> |
 
@@ -133,7 +133,7 @@
 ```C++
 SR_MAYBE_UNUSED bool SR_CORE_GUI_NS::DragDropTargetEntityRef (
     EditorGUI * pContext,
-    SR_UTILS_NS::EntityRef & entityRef,
+    SR_UTILS_NS::EntityRefOld & entityRef,
     const char * id,
     float_t width=300.f
 ) 

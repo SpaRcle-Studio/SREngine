@@ -15,7 +15,7 @@
 #ifndef SR_ENGINE_UTILS_DEBUG_LOG_COMPONENT_H
 #define SR_ENGINE_UTILS_DEBUG_LOG_COMPONENT_H
 
-#include <Utils/ECS/EntityRef.h>
+#include <Utils/ECS/EntityRefOld.h>
 #include <Utils/ECS/Component.h>
 #include <Utils/ECS/GameObject.h>
 #include <Utils/ECS/Transform.h>

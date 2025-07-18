@@ -103,7 +103,7 @@ See [SR\_UTILS\_NS::Property](classSR__UTILS__NS_1_1Property.md)
 
 | Type | Name |
 | ---: | :--- |
-|  [**SR\_UTILS\_NS::EntityRef**](classSR__UTILS__NS_1_1EntityRef.md) & | [**GetEntityRef**](#function-getentityref) () noexcept<br> |
+|  [**SR\_UTILS\_NS::EntityRefOld**](classSR__UTILS__NS_1_1EntityRefOld.md) & | [**GetEntityRef**](#function-getentityref) () noexcept<br> |
 
 
 ## Public Functions inherited from SR_UTILS_NS::Property
@@ -251,7 +251,7 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 ### function GetEntityRef 
 
 ```C++
-inline SR_UTILS_NS::EntityRef & SR_UTILS_NS::EntityRefProperty::GetEntityRef () noexcept
+inline SR_UTILS_NS::EntityRefOld & SR_UTILS_NS::EntityRefProperty::GetEntityRef () noexcept
 ```
 
 
@@ -260,5 +260,5 @@ inline SR_UTILS_NS::EntityRef & SR_UTILS_NS::EntityRefProperty::GetEntityRef () 
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/ECS/EntityRef.h`
+The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/ECS/EntityRefOld.h`
 

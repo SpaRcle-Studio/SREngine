@@ -80,6 +80,7 @@ See [SR\_UTILS\_NS::SRClassMeta](classSR__UTILS__NS_1_1SRClassMeta.md)
 | ---: | :--- |
 | virtual SR\_NODISCARD [**SRClass**](classSR__UTILS__NS_1_1SRClass.md) \* | [**Allocate**](classSR__UTILS__NS_1_1SRClassMeta.md#function-allocate) () noexcept const<br> |
 |  void | [**ForEachProperty**](classSR__UTILS__NS_1_1SRClassMeta.md#function-foreachproperty) (const std::function&lt; void(const [**SR\_UTILS\_NS::Reflection::Property**](classSR__UTILS__NS_1_1Reflection_1_1Property.md) &property, uint64\_t index)&gt; & func, uint64\_t \* pIndex=nullptr) const<br> |
+| virtual void | [**ForEachSRClass**](classSR__UTILS__NS_1_1SRClassMeta.md#function-foreachsrclass) ([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) & srClass, const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) &)&gt; & function) noexcept const<br> |
 | virtual SR\_NODISCARD std::span&lt; const [**SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \* &gt; | [**GetBaseMetas**](classSR__UTILS__NS_1_1SRClassMeta.md#function-getbasemetas) () noexcept const<br> |
 | virtual SR\_NODISCARD std::span&lt; const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; | [**GetCategory**](classSR__UTILS__NS_1_1SRClassMeta.md#function-getcategory) () noexcept const<br> |
 | virtual SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetFactoryName**](classSR__UTILS__NS_1_1SRClassMeta.md#function-getfactoryname) () noexcept const<br> |
@@ -90,6 +91,7 @@ See [SR\_UTILS\_NS::SRClassMeta](classSR__UTILS__NS_1_1SRClassMeta.md)
 | virtual SR\_NODISCARD bool | [**IsEditorOnly**](classSR__UTILS__NS_1_1SRClassMeta.md#function-iseditoronly) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsHidden**](classSR__UTILS__NS_1_1SRClassMeta.md#function-ishidden) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsInherited**](classSR__UTILS__NS_1_1SRClassMeta.md#function-isinherited) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) baseClass) noexcept const<br> |
+|  SR\_NODISCARD bool | [**IsSameOrInherited**](classSR__UTILS__NS_1_1SRClassMeta.md#function-issameorinherited) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) const<br> |
 | virtual bool | [**Load**](classSR__UTILS__NS_1_1SRClassMeta.md#function-load) ([**SR\_UTILS\_NS::IDeserializer**](classSR__UTILS__NS_1_1IDeserializer.md) & deserializer, [**SR\_UTILS\_NS::Serializable**](classSR__UTILS__NS_1_1Serializable.md) & obj) const<br> |
 | virtual void | [**Save**](classSR__UTILS__NS_1_1SRClassMeta.md#function-save) ([**SR\_UTILS\_NS::ISerializer**](classSR__UTILS__NS_1_1ISerializer.md) & serializer, const [**SR\_UTILS\_NS::Serializable**](classSR__UTILS__NS_1_1Serializable.md) & obj) const<br> |
 | virtual  | [**~SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md#function-srclassmeta) () <br> |

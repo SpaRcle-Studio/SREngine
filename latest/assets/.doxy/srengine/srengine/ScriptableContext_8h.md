@@ -35,7 +35,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| struct | [**ScriptableContext**](structSR__CORE__NS_1_1ScriptableContext.md) <br>_@scriptableClass_  |
+| struct | [**ScriptableContext**](structSR__CORE__NS_1_1ScriptableContext.md) <br> |
 
 
 

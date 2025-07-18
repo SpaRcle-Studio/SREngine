@@ -48,6 +48,8 @@
 | class | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md) <br> |
 | struct | [**SharedPtrDynamicData**](structSR__HTYPES__NS_1_1SharedPtrDynamicData.md) <br> |
 | class | [**SharedPtrDynamicDataCounter**](classSR__HTYPES__NS_1_1SharedPtrDynamicDataCounter.md) <br> |
+| struct | [**hash&lt; SR\_HTYPES\_NS::SharedPtr&lt; T &gt; &gt;**](structstd_1_1hash_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4.md) &lt;typename T&gt;<br> |
+| struct | [**less&lt; SR\_HTYPES\_NS::SharedPtr&lt; T &gt; &gt;**](structstd_1_1less_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4.md) &lt;typename T&gt;<br> |
 
 
 

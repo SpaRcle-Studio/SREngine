@@ -23,6 +23,7 @@
 * **CheckOperatorUsableV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **ConstexprStringsMaxEntries** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **crc\_table** ([**SR\_UTILS\_NS::Hash::Detail**](namespaceSR__UTILS__NS_1_1Hash_1_1Detail.md))
+* **ContainsSRClassV** ([**SR\_UTILS\_NS::Reflection**](namespaceSR__UTILS__NS_1_1Reflection.md))
 
 
 ## d
@@ -80,6 +81,7 @@
 * **Int32MAX** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **int** ([**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
 * **IsAnyOfV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
+* **IsBaseOfSharedPointer** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **IsBaseOfV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **IsCompleteTypeV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **IsDefaultCheckerAlwaysFalse** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
@@ -88,11 +90,15 @@
 * **IsDetectedV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **IsECharT** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **IsEnumV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
+* **IsSRClassV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **IsSREnumV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **IsSTLVectorV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **IsSameClassTemplateV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **IsSharedPointerV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **IsStdArrayTemplateV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
+* **IsStdMapV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
+* **IsStdSetV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
+* **IsStdVectorV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **IsTemplateClassV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **IsTypeFromClassTemplateV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **IsTypeFromStdArrayTemplateV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))

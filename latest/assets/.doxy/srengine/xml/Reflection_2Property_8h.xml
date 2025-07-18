@@ -5,6 +5,7 @@
     <includes refid="Value_8h" local="no">Utils/Reflection/Value.h</includes>
     <includes refid="StringAtomLiterals_8h" local="no">Utils/Common/StringAtomLiterals.h</includes>
     <includedby refid="PropertyDrawer_8h" local="no">Engine/inc/Engine/GUI/PropertyDrawer.h</includedby>
+    <includedby refid="SRClassUtils_8h" local="no">Engine/libs/Utils/inc/Utils/Reflection/SRClassUtils.h</includedby>
     <incdepgraph>
       <node id="113">
         <label>Utils/Common/AnyMarshal.h</label>
@@ -930,6 +931,12 @@
         <link refid="Reflection_2Property_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>Engine/libs/Utils/inc/Utils/Reflection/SRClassUtils.h</label>
+        <link refid="SRClassUtils_8h_source"/>
       </node>
     </invincdepgraph>
     <innerclass refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams" prot="public">SR_UTILS_NS::Reflection::EditorPropertyParams</innerclass>

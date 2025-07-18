@@ -48,6 +48,8 @@
 | struct | [**GetFirstOfTypeFromSequence**](structSR__UTILS__NS_1_1GetFirstOfTypeFromSequence.md) &lt;class T, class Pair, Pairs&gt;<br> |
 | struct | [**GetFirstOfTypeFromSequence&lt; T, Pair &gt;**](structSR__UTILS__NS_1_1GetFirstOfTypeFromSequence_3_01T_00_01Pair_01_4.md) &lt;class T, class Pair&gt;<br> |
 | struct | [**GetFirstOfTypeFromSequenceAssert**](structSR__UTILS__NS_1_1GetFirstOfTypeFromSequenceAssert.md) &lt;class T&gt;<br> |
+| struct | [**InnerType**](structSR__UTILS__NS_1_1InnerType.md) &lt;typename T&gt;<br> |
+| struct | [**InnerType&lt; std::vector&lt; T, Alloc &gt; &gt;**](structSR__UTILS__NS_1_1InnerType_3_01std_1_1vector_3_01T_00_01Alloc_01_4_01_4.md) &lt;typename T, typename Alloc&gt;<br> |
 | struct | [**IsCompleteType**](structSR__UTILS__NS_1_1IsCompleteType.md) &lt;typename T, typename&gt;<br> |
 | struct | [**IsCompleteType&lt; T, std::void\_t&lt; decltype(sizeof(T))&gt; &gt;**](structSR__UTILS__NS_1_1IsCompleteType_3_01T_00_01std_1_1void__t_3_01decltype_07sizeof_07T_08_08_4_01_4.md) &lt;typename T&gt;<br> |
 | struct | [**IsDetected**](structSR__UTILS__NS_1_1IsDetected.md) &lt;Op, Args&gt;<br> |
@@ -59,6 +61,12 @@
 | struct | [**IsSameClassTemplate&lt; Tmpl, Tmpl &gt;**](structSR__UTILS__NS_1_1IsSameClassTemplate_3_01Tmpl_00_01Tmpl_01_4.md) &lt;Tmpl&gt;<br> |
 | struct | [**IsStdArrayTemplate**](structSR__UTILS__NS_1_1IsStdArrayTemplate.md) &lt;Tmpl1&gt;<br> |
 | struct | [**IsStdArrayTemplate&lt; std::array &gt;**](structSR__UTILS__NS_1_1IsStdArrayTemplate_3_01std_1_1array_01_4.md) &lt;&gt;<br> |
+| struct | [**IsStdMap**](structSR__UTILS__NS_1_1IsStdMap.md) &lt;typename T&gt;<br> |
+| struct | [**IsStdMap&lt; std::map&lt; Key, Value, Compare, Alloc &gt; &gt;**](structSR__UTILS__NS_1_1IsStdMap_3_01std_1_1map_3_01Key_00_01Value_00_01Compare_00_01Alloc_01_4_01_4.md) &lt;typename Key, typename Value, typename Compare, typename Alloc&gt;<br> |
+| struct | [**IsStdSet**](structSR__UTILS__NS_1_1IsStdSet.md) &lt;typename T&gt;<br> |
+| struct | [**IsStdSet&lt; std::set&lt; T, Compare, Alloc &gt; &gt;**](structSR__UTILS__NS_1_1IsStdSet_3_01std_1_1set_3_01T_00_01Compare_00_01Alloc_01_4_01_4.md) &lt;typename T, typename Compare, typename Alloc&gt;<br> |
+| struct | [**IsStdVector**](structSR__UTILS__NS_1_1IsStdVector.md) &lt;typename T&gt;<br> |
+| struct | [**IsStdVector&lt; std::vector&lt; T, Alloc &gt; &gt;**](structSR__UTILS__NS_1_1IsStdVector_3_01std_1_1vector_3_01T_00_01Alloc_01_4_01_4.md) &lt;typename T, typename Alloc&gt;<br> |
 | struct | [**IsTemplateClass**](structSR__UTILS__NS_1_1IsTemplateClass.md) &lt;typename&gt;<br> |
 | struct | [**IsTemplateClass&lt; Tmpl&lt; Args... &gt; &gt;**](structSR__UTILS__NS_1_1IsTemplateClass_3_01Tmpl_3_01Args_8_8_8_01_4_01_4.md) &lt;Tmpl, Args&gt;<br> |
 | struct | [**IsTypeFromClassTemplate**](structSR__UTILS__NS_1_1IsTypeFromClassTemplate.md) &lt;typename, typename&gt;<br> |

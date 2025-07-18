@@ -189,6 +189,7 @@
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a9020f4caea106a897013b875488f9ddd" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteUInt</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1adc5ff76299ea8efadaf6bdda036989ad" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteUInt</name></member>
       <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1ac543808617269ccb51431f2b05c0f40d" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteUInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1ac611c3a4f40b626eb327155f6f7704df" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>~IBaseSerialization</name></member>
       <member refid="classSR__UTILS__NS_1_1ISerializer_1a1f645723d59ecfbfadee61c1c05c3311" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>~ISerializer</name></member>
     </listofallmembers>
   </compounddef>

@@ -5,11 +5,7 @@
     <basecompoundref prot="public" virt="non-virtual">std::false_type</basecompoundref>
     <templateparamlist>
       <param>
-        <type>class</type>
-      </param>
-      <param>
-        <type>class</type>
-        <defval>std::void_t&lt;&gt;</defval>
+        <type>typename T</type>
       </param>
     </templateparamlist>
     <briefdescription>
@@ -18,7 +14,7 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="1">
-        <label>SR_UTILS_NS::SharedPointerTraits::IsSharedPointer&lt; class, class &gt;</label>
+        <label>SR_UTILS_NS::SharedPointerTraits::IsSharedPointer&lt; T &gt;</label>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
@@ -28,7 +24,7 @@
     </inheritancegraph>
     <collaborationgraph>
       <node id="1">
-        <label>SR_UTILS_NS::SharedPointerTraits::IsSharedPointer&lt; class, class &gt;</label>
+        <label>SR_UTILS_NS::SharedPointerTraits::IsSharedPointer&lt; T &gt;</label>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
@@ -36,7 +32,7 @@
         <label>std::false_type</label>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="537" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="537" bodyend="537"/>
+    <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="542" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="542" bodyend="542"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

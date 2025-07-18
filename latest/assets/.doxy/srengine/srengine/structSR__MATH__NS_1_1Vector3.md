@@ -10,9 +10,8 @@
 
 
 
-[More...](#detailed-description)
 
-* `#include <Vector3.h>`
+
 
 
 
@@ -226,13 +225,6 @@
 
 
 
-## Detailed Description
-
-
-@scriptableClass @templateImpl(FVector3, T = float\_t) @templateImpl(IVector3, T = int32\_t) @templateImpl(UVector3, T = uint32\_t) @templateImpl(BVector3, T = bool) 
-
-
-    
 ## Public Types Documentation
 
 

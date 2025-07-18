@@ -36,9 +36,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classSR__UTILS__NS_1_1EntityController_1aef33f1d2b6115b42e653a20c780ec3be" prot="private" static="no" mutable="no">
-        <type>std::unordered_map&lt; EntityId, Entity::Ptr &gt;</type>
-        <definition>std::unordered_map&lt;EntityId, Entity::Ptr&gt; SR_UTILS_NS::EntityController::m_entities</definition>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1EntityController_1a37826a0aad5250fedd2ccd02ad623846" prot="private" static="no" mutable="no">
+        <type>ska::flat_hash_map&lt; EntityId, Entity::Ptr &gt;</type>
+        <definition>ska::flat_hash_map&lt;EntityId, Entity::Ptr&gt; SR_UTILS_NS::EntityController::m_entities</definition>
         <argsstring></argsstring>
         <name>m_entities</name>
         <qualifiedname>SR_UTILS_NS::EntityController::m_entities</qualifiedname>
@@ -50,9 +50,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="36" column="28" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="36" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__UTILS__NS_1_1EntityController_1a017fce18a718e550ffd87e9cfbda4420" prot="private" static="no" mutable="no">
-        <type>std::unordered_set&lt; EntityId &gt;</type>
-        <definition>std::unordered_set&lt;EntityId&gt; SR_UTILS_NS::EntityController::m_reserved</definition>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1EntityController_1a7cd794fdacd8c1f30091f5195f5925cd" prot="private" static="no" mutable="no">
+        <type>ska::flat_hash_set&lt; EntityId &gt;</type>
+        <definition>ska::flat_hash_set&lt;EntityId&gt; SR_UTILS_NS::EntityController::m_reserved</definition>
         <argsstring></argsstring>
         <name>m_reserved</name>
         <qualifiedname>SR_UTILS_NS::EntityController::m_reserved</qualifiedname>
@@ -333,9 +333,9 @@
       <member refid="classSR__UTILS__NS_1_1EntityController_1a433134afb21809ab23efb0c15cf84d55" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>IsIdUsed</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>m_basicManually</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>m_data</name></member>
-      <member refid="classSR__UTILS__NS_1_1EntityController_1aef33f1d2b6115b42e653a20c780ec3be" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>m_entities</name></member>
+      <member refid="classSR__UTILS__NS_1_1EntityController_1a37826a0aad5250fedd2ccd02ad623846" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>m_entities</name></member>
       <member refid="classSR__UTILS__NS_1_1EntityController_1a80a080d61c4832264dd3e98107116f83" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>m_nextId</name></member>
-      <member refid="classSR__UTILS__NS_1_1EntityController_1a017fce18a718e550ffd87e9cfbda4420" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>m_reserved</name></member>
+      <member refid="classSR__UTILS__NS_1_1EntityController_1a7cd794fdacd8c1f30091f5195f5925cd" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>m_reserved</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>MakeShared</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>operator bool</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>operator!=</name></member>

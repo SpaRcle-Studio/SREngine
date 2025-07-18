@@ -7,6 +7,7 @@
     <innerfile refid="Entity_8h">Entity.h</innerfile>
     <innerfile refid="EntityController_8h">EntityController.h</innerfile>
     <innerfile refid="EntityRef_8h">EntityRef.h</innerfile>
+    <innerfile refid="EntityRefOld_8h">EntityRefOld.h</innerfile>
     <innerfile refid="EntityRefUtils_8h">EntityRefUtils.h</innerfile>
     <innerfile refid="GameObject_8h">GameObject.h</innerfile>
     <innerfile refid="IComponentable_8h">IComponentable.h</innerfile>

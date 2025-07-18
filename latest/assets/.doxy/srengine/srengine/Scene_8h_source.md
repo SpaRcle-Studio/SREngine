@@ -123,8 +123,8 @@ namespace SR_WORLD_NS {
         void ProcessNewSO(const SceneObjectPtr& pSO);
 
     private:
-        mutable std::map<EntityId, EntityId> m_registerEntityIdReplaceCache;
-        mutable std::map<SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::Prefab>, std::vector<Entity*>> m_registerEntityCache;
+        mutable EntityReplaceMap m_registerEntityIdReplaceCache;
+        mutable ska::flat_hash_map<const void*, std::vector<Entity*>> m_registerEntityCache;
 
         SceneUpdater* m_sceneUpdater = nullptr;
 

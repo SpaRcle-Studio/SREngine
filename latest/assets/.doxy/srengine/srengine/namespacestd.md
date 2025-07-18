@@ -32,9 +32,11 @@
 | struct | [**hash&lt; SR\_GRAPH\_NS::Vertices::SimpleVertex &gt;**](structstd_1_1hash_3_01SR__GRAPH__NS_1_1Vertices_1_1SimpleVertex_01_4.md) &lt;&gt;<br> |
 | struct | [**hash&lt; SR\_GRAPH\_NS::Vertices::StaticMeshVertex &gt;**](structstd_1_1hash_3_01SR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_01_4.md) &lt;&gt;<br> |
 | struct | [**hash&lt; SR\_GRAPH\_NS::Vertices::UIVertex &gt;**](structstd_1_1hash_3_01SR__GRAPH__NS_1_1Vertices_1_1UIVertex_01_4.md) &lt;&gt;<br> |
+| struct | [**hash&lt; SR\_HTYPES\_NS::SharedPtr&lt; T &gt; &gt;**](structstd_1_1hash_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4.md) &lt;typename T&gt;<br> |
 | struct | [**hash&lt; SR\_MATH\_NS::Vector2&lt; U &gt; &gt;**](structstd_1_1hash_3_01SR__MATH__NS_1_1Vector2_3_01U_01_4_01_4.md) &lt;typename U&gt;<br> |
 | struct | [**hash&lt; SR\_MATH\_NS::Vector3&lt; U &gt; &gt;**](structstd_1_1hash_3_01SR__MATH__NS_1_1Vector3_3_01U_01_4_01_4.md) &lt;typename U&gt;<br> |
 | struct | [**hash&lt; SR\_WORLD\_NS::TensorKey &gt;**](structstd_1_1hash_3_01SR__WORLD__NS_1_1TensorKey_01_4.md) &lt;&gt;<br> |
+| struct | [**less&lt; SR\_HTYPES\_NS::SharedPtr&lt; T &gt; &gt;**](structstd_1_1less_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4.md) &lt;typename T&gt;<br> |
 
 
 
