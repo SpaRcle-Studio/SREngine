@@ -8,7 +8,6 @@
 #include <Engine/Engine.h>
 
 namespace SR_CORE_NS {
-    /// @scriptableClass
     struct ScriptableContext {
         /// @method
         SR_CORE_NS::Engine& GetEngine() {

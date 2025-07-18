@@ -53,7 +53,6 @@ namespace SR_CORE_NS {
     class EngineScene;
     class Application;
 
-    /// @scriptableClass
     class Engine : public SR_HTYPES_NS::SharedPtr<Engine> {
         using Super = SR_HTYPES_NS::SharedPtr<Engine>;
         using Ptr = SR_HTYPES_NS::SharedPtr<Engine>;

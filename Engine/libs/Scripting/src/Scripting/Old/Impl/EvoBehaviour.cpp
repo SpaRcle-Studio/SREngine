@@ -65,7 +65,7 @@ namespace SR_SCRIPTING_NS {
             path = GetAssociatedPath().Concat(path);
         }
 
-        path = path.GetWithoutExtension();
+        //path = path.GetWithoutExtension();
 
         auto&& cpp = path.ConcatExt("cpp");
         auto&& header = path.ConcatExt("h");

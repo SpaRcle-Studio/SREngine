@@ -17,26 +17,7 @@
 namespace SR_CORE_UI_NS {
     IButton::IButton()
         : Super()
-    {
-        m_entityMessages.AddCustomProperty<SR_UTILS_NS::LabelProperty>("Idle")
-                .SetLabel("Button is idle.")
-                .SetColor(SR_MATH_NS::FColor(1.f, 1.f, 1.f, 1.f))
-                .SetActiveCondition([this] { return IsIdle(); })
-                .SetDontSave()
-                .SetReadOnly();
-        m_entityMessages.AddCustomProperty<SR_UTILS_NS::LabelProperty>("Hovered")
-                .SetLabel("Button is hovered.")
-                .SetColor(SR_MATH_NS::FColor(0.f, 1.f, 0.f, 1.f))
-                .SetActiveCondition([this] { return IsHovered(); })
-                .SetDontSave()
-                .SetReadOnly();
-        m_entityMessages.AddCustomProperty<SR_UTILS_NS::LabelProperty>("Pressed")
-                .SetLabel("Button is pressed.")
-                .SetColor(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f))
-                .SetActiveCondition([this] { return IsPressed(); })
-                .SetDontSave()
-                .SetReadOnly();
-    }
+    { }
 
     void IButton::Update(float_t dt) {
         auto&& pCamera = GetCamera();

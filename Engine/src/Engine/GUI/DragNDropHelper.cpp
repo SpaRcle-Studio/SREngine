@@ -8,7 +8,7 @@
 #include <Utils/ECS/Component.h>
 
 namespace SR_CORE_GUI_NS {
-    bool DragDropTargetEntityRef(EditorGUI* pContext, SR_UTILS_NS::EntityRef& entityRef, const char* id, float_t width) {
+    bool DragDropTargetEntityRef(EditorGUI* pContext, SR_UTILS_NS::EntityRefOld& entityRef, const char* id, float_t width) {
         std::string preview;
 
         if (auto&& pGameObject = entityRef.GetGameObject()) {

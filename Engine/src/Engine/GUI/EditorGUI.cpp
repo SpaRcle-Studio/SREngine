@@ -378,7 +378,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     bool EditorGUI::LoadSceneFromCachedPath() {
-        if (!m_cachedScenePath.Valid() && !m_cachedScenePath.Exists()) {
+        if (!m_cachedScenePath.Exists()) {
             if (SR_UTILS_NS::Debug::Instance().GetLevel() == SR_UTILS_NS::Debug::Level::High) {
                 SR_LOG("EditorGUI::LoadSceneFromCachedPath() : cached file of scene path wasn't found!");
             }

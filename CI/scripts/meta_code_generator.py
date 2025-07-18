@@ -15,6 +15,30 @@ def generate_stub_vulkan_h(codegen_directory):
         f.write(sparcle_utils.codegen_cpp_header_comment)
         f.write('// Stub file for clang code analyzer.\n')
 
+def generate_class_meta_for_each_sr_class(f, class_structures, class_obj, tabs):
+    is_sr_class = class_obj.name == 'SRClass'
+    if len(class_obj.variables) == 0 and not is_sr_class:
+        return
+
+    class_name = '::'.join(class_obj.namespaces) + '::' + class_obj.name
+
+    f.write('\t' * tabs + f'void ForEachSRClass(SR_UTILS_NS::SRClass& srClass, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::SRClass&)>& function) const noexcept final {{\n')
+
+    if is_sr_class:
+        f.write('\t' * (tabs + 1) + f'function(srClass);\n')
+    else:
+        f.write('\t' * (tabs + 1) + f'SR_UTILS_NS::SRClassMeta::ForEachSRClass(srClass, function);\n\n')
+
+        f.write('\t' * (tabs + 1) + f'SR_MAYBE_UNUSED auto&& object = static_cast<{class_name}&>(srClass);\n\n')
+
+        for prop in class_obj.variables:
+            if prop.virtual:
+                continue
+            f.write('\t' * (tabs + 1) + f'SR_UTILS_NS::Reflection::ForEachSRClass(object.{prop.name}, function);\n')
+
+    f.write('\t' * tabs + '}\n\n')
+
+
 def generate_class_meta_properties(f, class_structures, class_obj, tabs):
     if len(class_obj.variables) == 0:
         return
@@ -389,6 +413,7 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
 
     generate_class_meta_get_base_metas(f, class_structures, class_obj, tabs)
     generate_class_meta_properties(f, class_structures, class_obj, tabs)
+    generate_class_meta_for_each_sr_class(f, class_structures, class_obj, tabs)
 
     #has_serializable_fields = len(class_obj.variables) > 0
     #f.write('\t' * tabs + f'SR_NODISCARD virtual bool HasSerializableFields() const noexcept final {{\n')
@@ -996,6 +1021,7 @@ def generate_classes_code(logger: logger_utils.Logger, context: codegen_context.
                     f.write(f'#include "{os.path.abspath(os.path.normpath(class_obj.path))}"' + '\n\n')
 
                 f.write('#include <Utils/Reflection/Property.h>\n')
+                f.write('#include <Utils/Reflection/SRClassUtils.h>\n')
                 f.write('#include <Utils/TypeTraits/ClassDB.h>\n')
                 f.write('#include <Utils/TypeTraits/SRClass.h>\n')
                 f.write('#include <Utils/TypeTraits/Factory.h>\n')
