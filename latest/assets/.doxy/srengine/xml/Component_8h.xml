@@ -1092,15 +1092,15 @@
         </childnode>
         <childnode refid="87" relation="include">
         </childnode>
-        <childnode refid="90" relation="include">
-        </childnode>
         <childnode refid="91" relation="include">
         </childnode>
-        <childnode refid="93" relation="include">
+        <childnode refid="92" relation="include">
         </childnode>
         <childnode refid="94" relation="include">
         </childnode>
         <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
         </childnode>
       </node>
       <node id="84">
@@ -1115,15 +1115,19 @@
         <label>Engine/inc/Engine/GUI/PropertyDrawers/BitMapPropertyDrawer.h</label>
         <link refid="BitMapPropertyDrawer_8h_source"/>
       </node>
+      <node id="89">
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/EntityRefPropertyDrawer.h</label>
+        <link refid="EntityRefPropertyDrawer_8h_source"/>
+      </node>
       <node id="86">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/EnumPropertyDrawer.h</label>
         <link refid="EnumPropertyDrawer_8h_source"/>
       </node>
-      <node id="89">
+      <node id="90">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h</label>
         <link refid="MaterialDataPropertyDrawer_8h_source"/>
       </node>
-      <node id="92">
+      <node id="93">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/MaterialPropertyDrawer.h</label>
         <link refid="MaterialPropertyDrawer_8h_source"/>
       </node>
@@ -1138,30 +1142,32 @@
         </childnode>
         <childnode refid="89" relation="include">
         </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
       </node>
-      <node id="90">
+      <node id="91">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/PathPropertyDrawer.h</label>
         <link refid="PathPropertyDrawer_8h_source"/>
       </node>
-      <node id="91">
+      <node id="92">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h</label>
         <link refid="PointerPropertyDrawer_8h_source"/>
         <childnode refid="83" relation="include">
         </childnode>
         <childnode refid="60" relation="include">
         </childnode>
-        <childnode refid="92" relation="include">
+        <childnode refid="93" relation="include">
         </childnode>
       </node>
-      <node id="93">
+      <node id="94">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/RectPropertyDrawer.h</label>
         <link refid="RectPropertyDrawer_8h_source"/>
       </node>
-      <node id="94">
+      <node id="95">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/StringPropertyDrawer.h</label>
         <link refid="StringPropertyDrawer_8h_source"/>
       </node>
-      <node id="95">
+      <node id="96">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/VectorPropertyDrawer.h</label>
         <link refid="VectorPropertyDrawer_8h_source"/>
       </node>
@@ -1407,7 +1413,7 @@
         <childnode refid="29" relation="include">
         </childnode>
       </node>
-      <node id="99">
+      <node id="100">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UICanvasComponent.h</label>
         <link refid="UICanvasComponent_8h_source"/>
       </node>
@@ -1439,7 +1445,7 @@
         <childnode refid="70" relation="include">
         </childnode>
       </node>
-      <node id="100">
+      <node id="101">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UISizeComponent.h</label>
         <link refid="UISizeComponent_8h_source"/>
       </node>
@@ -1562,15 +1568,15 @@
         </childnode>
         <childnode refid="49" relation="include">
         </childnode>
-        <childnode refid="97" relation="include">
+        <childnode refid="98" relation="include">
         </childnode>
         <childnode refid="66" relation="include">
         </childnode>
         <childnode refid="67" relation="include">
         </childnode>
-        <childnode refid="96" relation="include">
+        <childnode refid="97" relation="include">
         </childnode>
-        <childnode refid="98" relation="include">
+        <childnode refid="99" relation="include">
         </childnode>
       </node>
       <node id="48">
@@ -1586,7 +1592,7 @@
         </childnode>
         <childnode refid="49" relation="include">
         </childnode>
-        <childnode refid="96" relation="include">
+        <childnode refid="97" relation="include">
         </childnode>
       </node>
       <node id="57">
@@ -1643,13 +1649,13 @@
         <childnode refid="76" relation="include">
         </childnode>
       </node>
-      <node id="101">
+      <node id="102">
         <label>Engine/libs/Utils/inc/Utils/ECS/Transform2D.h</label>
         <link refid="Transform2D_8h_source"/>
         <childnode refid="58" relation="include">
         </childnode>
       </node>
-      <node id="97">
+      <node id="98">
         <label>Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h</label>
         <link refid="CameraFlyMover_8h_source"/>
       </node>
@@ -1661,18 +1667,18 @@
         <label>Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h</label>
         <link refid="LookAtComponent_8h_source"/>
       </node>
-      <node id="96">
+      <node id="97">
         <label>Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h</label>
         <link refid="ReflectionTestComponent_8h_source"/>
       </node>
-      <node id="98">
+      <node id="99">
         <label>Engine/libs/Utils/inc/Utils/UI/UIModifier.h</label>
         <link refid="UIModifier_8h_source"/>
-        <childnode refid="99" relation="include">
-        </childnode>
         <childnode refid="100" relation="include">
         </childnode>
         <childnode refid="101" relation="include">
+        </childnode>
+        <childnode refid="102" relation="include">
         </childnode>
       </node>
       <node id="77">

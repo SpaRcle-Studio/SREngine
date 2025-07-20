@@ -165,6 +165,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **class** [**EditorGUI**](classSR__CORE__GUI__NS_1_1EditorGUI.md)     
     * **class** [**EditorGizmo**](classSR__CORE__GUI__NS_1_1EditorGizmo.md)     
     * **class** [**EngineSettings**](classSR__CORE__GUI__NS_1_1EngineSettings.md)     
+    * **class** [**EntityRefPropertyDrawer**](classSR__CORE__GUI__NS_1_1EntityRefPropertyDrawer.md)     
     * **class** [**EnumPropertyDrawer**](classSR__CORE__GUI__NS_1_1EnumPropertyDrawer.md)     
     * **class** [**Hierarchy**](classSR__CORE__GUI__NS_1_1Hierarchy.md)     
     * **class** [**Inspector**](classSR__CORE__GUI__NS_1_1Inspector.md)     
@@ -817,7 +818,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **class** [**EntityController**](classSR__UTILS__NS_1_1EntityController.md)     
     * **class** [**EntityIdList**](classSR__UTILS__NS_1_1EntityIdList.md)     
     * **class** [**EntityRef**](classSR__UTILS__NS_1_1EntityRef.md)     
-    * **class** [**EntityRefBase**](classSR__UTILS__NS_1_1EntityRefBase.md)     
+    * **class** [**EntityRefBase**](classSR__UTILS__NS_1_1EntityRefBase.md) _@inspector(EntityRefPropertyDrawer)_     
     * **class** [**EntityRefOld**](classSR__UTILS__NS_1_1EntityRefOld.md)     
     * **class** [**EntityRefProperty**](classSR__UTILS__NS_1_1EntityRefProperty.md)     
     * **namespace** [**EntityRefUtils**](namespaceSR__UTILS__NS_1_1EntityRefUtils.md)     

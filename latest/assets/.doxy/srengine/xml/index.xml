@@ -3268,11 +3268,13 @@
   <compound refid="classSR__UTILS__NS_1_1EntityController" kind="class"><name>SR_UTILS_NS::EntityController</name>
     <member refid="classSR__UTILS__NS_1_1EntityController_1ac7ddd5fbbd8ff90ceba7d50f16554ac3" kind="typedef"><name>Super</name></member>
     <member refid="classSR__UTILS__NS_1_1EntityController_1a8a331099fe02b251fb43d804929d0873" kind="typedef"><name>Ptr</name></member>
+    <member refid="classSR__UTILS__NS_1_1EntityController_1a2e2643876ce4f763ad265fc0b9e6c94c" kind="variable"><name>ACTIVE_CONTROLLER</name></member>
     <member refid="classSR__UTILS__NS_1_1EntityController_1a37826a0aad5250fedd2ccd02ad623846" kind="variable"><name>m_entities</name></member>
     <member refid="classSR__UTILS__NS_1_1EntityController_1a7cd794fdacd8c1f30091f5195f5925cd" kind="variable"><name>m_reserved</name></member>
     <member refid="classSR__UTILS__NS_1_1EntityController_1a80a080d61c4832264dd3e98107116f83" kind="variable"><name>m_nextId</name></member>
     <member refid="classSR__UTILS__NS_1_1EntityController_1aca211e0acbec3a8414f5ae3291a9d7a6" kind="function"><name>EntityController</name></member>
     <member refid="classSR__UTILS__NS_1_1EntityController_1acf6e1f2fa44d0bdb370fd6b02bdd23cd" kind="function"><name>~EntityController</name></member>
+    <member refid="classSR__UTILS__NS_1_1EntityController_1a86f59e5af5658fcdf30c3ef88652b363" kind="function"><name>SetActiveController</name></member>
     <member refid="classSR__UTILS__NS_1_1EntityController_1ad65bc5f56ba28174680c8a095b91badf" kind="function"><name>Register</name></member>
     <member refid="classSR__UTILS__NS_1_1EntityController_1ab537f9e0c7db049ca63d3280d753201a" kind="function"><name>Unregister</name></member>
     <member refid="classSR__UTILS__NS_1_1EntityController_1a5c24257dc3e3a77fcca6fd871e1b321b" kind="function"><name>Reserve</name></member>
@@ -3281,6 +3283,7 @@
     <member refid="classSR__UTILS__NS_1_1EntityController_1ace8a7f2b69bfdc7e775a2a7a68e4d286" kind="function"><name>GetReserved</name></member>
     <member refid="classSR__UTILS__NS_1_1EntityController_1ad16c496ec816d0214edcd0e9b2d21fc7" kind="function"><name>FindById</name></member>
     <member refid="classSR__UTILS__NS_1_1EntityController_1a433134afb21809ab23efb0c15cf84d55" kind="function"><name>IsIdUsed</name></member>
+    <member refid="classSR__UTILS__NS_1_1EntityController_1a04881027f6f7a154a3fc10a28cbedae1" kind="function"><name>GetActiveController</name></member>
   </compound>
   <compound refid="classSR__CORE__NS_1_1Commands_1_1EntityEnable" kind="class"><name>SR_CORE_NS::Commands::EntityEnable</name>
     <member refid="classSR__CORE__NS_1_1Commands_1_1EntityEnable_1a7aaf078076f8715bd04fd91e099f332e" kind="typedef"><name>Super</name></member>
@@ -3318,13 +3321,15 @@
     <member refid="classSR__UTILS__NS_1_1EntityRefBase_1a984142acea040a64f1378badd751ec40" kind="typedef"><name>Super</name></member>
     <member refid="classSR__UTILS__NS_1_1EntityRefBase_1a2d3d3dcf87d2587b41cae0a846b93ed9" kind="variable"><name>m_entityId</name></member>
     <member refid="classSR__UTILS__NS_1_1EntityRefBase_1a8062582767e7572e320eaf37940de3de" kind="variable"><name>m_pEntity</name></member>
-    <member refid="classSR__UTILS__NS_1_1EntityRefBase_1a83966eeb317692f2b62a339012835fd3" kind="variable"><name>m_pEntityController</name></member>
     <member refid="classSR__UTILS__NS_1_1EntityRefBase_1a355bbcbbab741e868e07ed7ac9a1bafe" kind="function"><name>EntityRefBase</name></member>
     <member refid="classSR__UTILS__NS_1_1EntityRefBase_1ae08c0bc69a7bffe43f4b357fb518315b" kind="function"><name>GetTypeName</name></member>
-    <member refid="classSR__UTILS__NS_1_1EntityRefBase_1a46610e17565d9211947b0dff93f0467d" kind="function"><name>GetEntity</name></member>
-    <member refid="classSR__UTILS__NS_1_1EntityRefBase_1a5d3eaff71df6c0fbdfe96924842080b8" kind="function"><name>SetEntityController</name></member>
+    <member refid="classSR__UTILS__NS_1_1EntityRefBase_1a0a0b3627000d352e5b8bd379254b0ca5" kind="function"><name>GetEntity</name></member>
+    <member refid="classSR__UTILS__NS_1_1EntityRefBase_1a8fe3549212dc29e0714eeb61330649f5" kind="function"><name>GetEntityId</name></member>
+    <member refid="classSR__UTILS__NS_1_1EntityRefBase_1a329c79e6bfc0c55fbb0989d34027609e" kind="function"><name>IsResolved</name></member>
     <member refid="classSR__UTILS__NS_1_1EntityRefBase_1a1e0a330ad17fb5215b5a3f8d0a13e07e" kind="function"><name>OnEntityIdReplaced</name></member>
+    <member refid="classSR__UTILS__NS_1_1EntityRefBase_1a0b81e153b6c4a08dd2a6cd1f9a2ea7ce" kind="function"><name>SetEntityId</name></member>
     <member refid="classSR__UTILS__NS_1_1EntityRefBase_1a5253d9e675d84b24cccf63b4e9f4a4f5" kind="function"><name>Resolve</name></member>
+    <member refid="classSR__UTILS__NS_1_1EntityRefBase_1a18ab209a16e4b7c84cbe76c3e09bdba8" kind="function"><name>operator bool</name></member>
   </compound>
   <compound refid="classSR__UTILS__NS_1_1EntityRefOld" kind="class"><name>SR_UTILS_NS::EntityRefOld</name>
     <member refid="classSR__UTILS__NS_1_1EntityRefOld_1aed2c69250664b3af0ae40ea73312650a" kind="variable"><name>m_path</name></member>
@@ -3351,6 +3356,10 @@
   <compound refid="classSR__UTILS__NS_1_1EntityRefProperty" kind="class"><name>SR_UTILS_NS::EntityRefProperty</name>
     <member refid="classSR__UTILS__NS_1_1EntityRefProperty_1a7bb34abb4799f30f03b66eb400ac041f" kind="variable"><name>m_entityRef</name></member>
     <member refid="classSR__UTILS__NS_1_1EntityRefProperty_1a27b767608076111aa6a61b13e5e32c82" kind="function"><name>GetEntityRef</name></member>
+  </compound>
+  <compound refid="classSR__CORE__GUI__NS_1_1EntityRefPropertyDrawer" kind="class"><name>SR_CORE_GUI_NS::EntityRefPropertyDrawer</name>
+    <member refid="classSR__CORE__GUI__NS_1_1EntityRefPropertyDrawer_1ad4759f711988bafd2094aa8228f794b7" kind="typedef"><name>Ptr</name></member>
+    <member refid="classSR__CORE__GUI__NS_1_1EntityRefPropertyDrawer_1a8d5ef4add13345ccaeb5673ffedfad15" kind="function"><name>Draw</name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1EnumReflector_1_1Enumerator" kind="struct"><name>SR_UTILS_NS::EnumReflector::Enumerator</name>
     <member refid="structSR__UTILS__NS_1_1EnumReflector_1_1Enumerator_1afde2fb7381e2195ab16a06871068831e" kind="variable"><name>name</name></member>
@@ -3757,6 +3766,7 @@
   </compound>
   <compound refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser" kind="class"><name>SR_CORE_NS::GUI::FileBrowser</name>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a960bf968aa1b7a70e8a0e70eaa00cb3c" kind="typedef"><name>Hash</name></member>
+    <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a756822722f568082f2e6e3407f03671d" kind="typedef"><name>Super</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a1cc48d6a6b3c37a41e5b83603fe90d49" kind="typedef"><name>CallbackFn</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a04a2af5405694ba45213b3cd76a40a92" kind="variable"><name>m_itemsScale</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a00beae1763e0f21b666d32fdde39a46b" kind="variable"><name>m_defaultRoot</name></member>
@@ -3764,14 +3774,16 @@
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a6a3040f6984eef2ec05026baa6ea8d65" kind="variable"><name>m_callbackFunction</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a32644bf20d277dd2d6527c9e29893e30" kind="variable"><name>m_assetWidth</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1aad487b99c15300826345a61b6235f381" kind="variable"><name>m_foldersTree</name></member>
+    <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a3771e0f40350f8b7c781ffb81a307d13" kind="variable"><name>m_currentDirTextures</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a4039d5c88790b5ed6ec707ed6d8a621f" kind="variable"><name>m_dirtySelectedDir</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a2dea14df3b860a439dd8aeba87571314" kind="variable"><name>m_dirtyFoldersTree</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1ac21726c25521bb52894c513e4a9c5f58" kind="variable"><name>m_elements</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a00d951f45b1a0d65fc0cce57949f46d3" kind="function"><name>FileBrowser</name></member>
-    <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1aebda9399b6acb709ab62873ed0c28392" kind="function"><name>~FileBrowser</name></member>
+    <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a9927ee0ecd85fc23dcaf5e642f438d73" kind="function"><name>~FileBrowser</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a199fe655e9d01a3b85db25031f89ed85" kind="function"><name>SetFolder</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a7465e18614ac04e1da609024e9ce177c" kind="function"><name>SetCallback</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a33f127d23f628f8b0f3c5f2d4a38ab29" kind="function"><name>Draw</name></member>
+    <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1ae3423bed7415c04a2199b2749bfabb79" kind="function"><name>OnClose</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a48f904bbbbd4a3d3915962b9e4d34fe3" kind="function"><name>FileContextMenu</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1af05ebff01f2883da79171d95a40b827d" kind="function"><name>CurrentDirectoryContextMenu</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1ab8bf40ba295d55ef9447b822f15f5d32" kind="function"><name>CurrentDirectoryPanel</name></member>
@@ -3781,6 +3793,7 @@
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a6c77b350d196828590be6b83069de167" kind="function"><name>OpenFileWithApp</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a36a1b14d310ff8a14c499e9ff37b4bac" kind="function"><name>DrawFoldersTree</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a214227a288095ebc4b081d51143c6708" kind="function"><name>LoadFoldersTree</name></member>
+    <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1ae38c6e43c6c47e654cd0e85b36cea0a4" kind="function"><name>FreeTextures</name></member>
   </compound>
   <compound refid="classSR__UTILS__NS_1_1FileDialog" kind="class"><name>SR_UTILS_NS::FileDialog</name>
     <member refid="classSR__UTILS__NS_1_1FileDialog_1a45e23b55851d5069eaf1758102d1aa09" kind="typedef"><name>Filter</name></member>
@@ -10500,12 +10513,13 @@
   </compound>
   <compound refid="classSR__GTYPES__NS_1_1SkinnedMesh" kind="class"><name>SR_GTYPES_NS::SkinnedMesh</name>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a07a72aaea02697fba7a50182227d6396" kind="typedef"><name>Super</name></member>
+    <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1ab7f489fee329ff6aa31bae9c0dfea736" kind="typedef"><name>SkeletonRef</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a652dc254b5c29c2d69473e2059788a90" kind="typedef"><name>Ptr</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a8ccc9d2644a4b78c5639aec643a642d3" kind="typedef"><name>VertexType</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a8353d76f5f64ec8599fdcb8a5f71c4a7" kind="variable"><name>m_skeletonIsBroken</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1ab05d8daea896649e20c455db3309295a" kind="variable"><name>m_ssboBones</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a56d66bbf33447ad9f2e90085f9c58397" kind="variable"><name>m_ssboOffsets</name></member>
-    <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a7482a603b846690806500633954939d7" kind="variable"><name>m_skeleton</name></member>
+    <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1af7710d08ac0288902fc977876440653c" kind="variable"><name>m_skeleton</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a53700f994bf34f8465d2edfd2136151b" kind="function"><name>SkinnedMesh</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1aac8383df19fbed15c4d227f7de6662bf" kind="function"><name>GetMeshType</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1ad0bdf32ee9a2d8d5aa0ebaf8df5483ad" kind="function"><name>LateUpdate</name></member>
@@ -10515,8 +10529,8 @@
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1acb1c5d3dbde2c12c7b317e3d0106129a" kind="function"><name>IsCalculatable</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1aa730e74cb28847c43704b36a50940195" kind="function"><name>IsUpdatable</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a5b8a1064f113a20c908fc4184bd7e5bd" kind="function"><name>GetMeshIdentifier</name></member>
-    <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a1f6ca49814c049089230d5db7c613dbd" kind="function"><name>GetSkeleton</name></member>
-    <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1adaf2b16a10eecd05949472550fe4f346" kind="function"><name>GetSkeleton</name></member>
+    <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a76f2368ff33497245826c71a26ad3a30" kind="function"><name>GetSkeletonRef</name></member>
+    <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a1cea0e11ad39db087938dba00f6bac82" kind="function"><name>GetSkeletonRef</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a713668b44ac1423a7d7a66b69876e8e6" kind="function"><name>FreeVideoMemory</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1aed5fe44d2a612d6d6dfd4f1bb3ccb253" kind="function"><name>UseSSBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1aa1bbce47acf9a51d7324767dab34b822" kind="function"><name>PopulateSkeletonMatrices</name></member>
@@ -14169,7 +14183,7 @@
     <member refid="SceneTools_8h_1aa8b2ff84ec70c0ece49bc053c93d89de" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
   </compound>
   <compound refid="namespaceSR__CORE__NS" kind="namespace"><name>SR_CORE_NS</name>
-    <member refid="namespaceSR__CORE__NS_1a108eb46f5fb37c8c979e5d46f8f05d80" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
+    <member refid="namespaceSR__CORE__NS_1afddb4f940e36c2c423e7c000520f9caa" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
   </compound>
   <compound refid="namespaceSR__CORE__NS_1_1Commands" kind="namespace"><name>SR_CORE_NS::Commands</name>
     <member refid="EngineCommands_8h_1a40b72919bedb33bd37e1cf7de6f7d7ab" kind="function"><name>CreateSerializer</name></member>
@@ -15459,6 +15473,8 @@
   <compound refid="BehaviourPropertyDrawer_8h" kind="file"><name>BehaviourPropertyDrawer.h</name>
   </compound>
   <compound refid="BitMapPropertyDrawer_8h" kind="file"><name>BitMapPropertyDrawer.h</name>
+  </compound>
+  <compound refid="EntityRefPropertyDrawer_8h" kind="file"><name>EntityRefPropertyDrawer.h</name>
   </compound>
   <compound refid="EnumPropertyDrawer_8h" kind="file"><name>EnumPropertyDrawer.h</name>
   </compound>

@@ -11,7 +11,7 @@
 
 
 * `#include <Utils/Types/IRawMeshHolder.h>`
-* `#include <Utils/ECS/EntityRefOld.h>`
+* `#include <Utils/ECS/EntityRef.h>`
 * `#include <Graphics/Types/Geometry/MeshComponent.h>`
 * `#include <Graphics/Animations/Skeleton.h>`
 

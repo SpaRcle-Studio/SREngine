@@ -12,6 +12,7 @@
 
 * `#include <Graphics/Material/BaseMaterial.h>`
 * `#include <Graphics/Render/RenderContext.h>`
+* `#include <Graphics/GUI/ImmediateGUI.h>`
 * `#include <Utils/TypeTraits/SRClass.h>`
 * `#include <Utils/Reflection/Property.h>`
 

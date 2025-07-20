@@ -132,11 +132,14 @@ See [SR\_UTILS\_NS::EntityRefBase](classSR__UTILS__NS_1_1EntityRefBase.md)
 | Type | Name |
 | ---: | :--- |
 |   | [**EntityRefBase**](classSR__UTILS__NS_1_1EntityRefBase.md#function-entityrefbase) () <br> |
-|  SR\_NODISCARD Entity::Ptr | [**GetEntity**](classSR__UTILS__NS_1_1EntityRefBase.md#function-getentity) () noexcept const<br> |
+|  SR\_NODISCARD const Entity::Ptr & | [**GetEntity**](classSR__UTILS__NS_1_1EntityRefBase.md#function-getentity) () noexcept const<br> |
+|  SR\_NODISCARD EntityId | [**GetEntityId**](classSR__UTILS__NS_1_1EntityRefBase.md#function-getentityid) () noexcept const<br> |
 | virtual SR\_NODISCARD [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetTypeName**](classSR__UTILS__NS_1_1EntityRefBase.md#function-gettypename) () noexcept const<br> |
+|  SR\_NODISCARD bool | [**IsResolved**](classSR__UTILS__NS_1_1EntityRefBase.md#function-isresolved) () noexcept const<br> |
 |  void | [**OnEntityIdReplaced**](classSR__UTILS__NS_1_1EntityRefBase.md#function-onentityidreplaced) (const EntityReplaceMap & replaceMap) <br> |
 |  void | [**Resolve**](classSR__UTILS__NS_1_1EntityRefBase.md#function-resolve) () noexcept const<br> |
-|  void | [**SetEntityController**](classSR__UTILS__NS_1_1EntityRefBase.md#function-setentitycontroller) ([**EntityController**](classSR__UTILS__NS_1_1EntityController.md) \* pEntityController) noexcept<br> |
+|  void | [**SetEntityId**](classSR__UTILS__NS_1_1EntityRefBase.md#function-setentityid) (EntityId entityId) noexcept<br> |
+|  SR\_NODISCARD | [**operator bool**](classSR__UTILS__NS_1_1EntityRefBase.md#function-operator-bool) () noexcept const<br> |
 
 
 ## Public Functions inherited from SR_UTILS_NS::Serializable

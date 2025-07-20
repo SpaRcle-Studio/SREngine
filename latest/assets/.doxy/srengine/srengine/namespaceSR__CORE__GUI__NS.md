@@ -41,6 +41,7 @@
 | class | [**EditorGUI**](classSR__CORE__GUI__NS_1_1EditorGUI.md) <br> |
 | class | [**EditorGizmo**](classSR__CORE__GUI__NS_1_1EditorGizmo.md) <br> |
 | class | [**EngineSettings**](classSR__CORE__GUI__NS_1_1EngineSettings.md) <br> |
+| class | [**EntityRefPropertyDrawer**](classSR__CORE__GUI__NS_1_1EntityRefPropertyDrawer.md) <br> |
 | class | [**EnumPropertyDrawer**](classSR__CORE__GUI__NS_1_1EnumPropertyDrawer.md) <br> |
 | class | [**Hierarchy**](classSR__CORE__GUI__NS_1_1Hierarchy.md) <br> |
 | class | [**Inspector**](classSR__CORE__GUI__NS_1_1Inspector.md) <br> |

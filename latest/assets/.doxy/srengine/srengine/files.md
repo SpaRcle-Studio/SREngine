@@ -29,6 +29,7 @@ Here is a list of all files with brief descriptions:
                     * **file** [**BehaviourNamePropertyDrawer.h**](BehaviourNamePropertyDrawer_8h.md)     
                     * **file** [**BehaviourPropertyDrawer.h**](BehaviourPropertyDrawer_8h.md)     
                     * **file** [**BitMapPropertyDrawer.h**](BitMapPropertyDrawer_8h.md)     
+                    * **file** [**EntityRefPropertyDrawer.h**](EntityRefPropertyDrawer_8h.md)     
                     * **file** [**EnumPropertyDrawer.h**](EnumPropertyDrawer_8h.md)     
                     * **file** [**MaterialDataPropertyDrawer.h**](MaterialDataPropertyDrawer_8h.md)     
                     * **file** [**MaterialPropertyDrawer.h**](MaterialPropertyDrawer_8h.md)     

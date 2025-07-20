@@ -5,6 +5,7 @@
     <innerfile refid="BehaviourNamePropertyDrawer_8h">BehaviourNamePropertyDrawer.h</innerfile>
     <innerfile refid="BehaviourPropertyDrawer_8h">BehaviourPropertyDrawer.h</innerfile>
     <innerfile refid="BitMapPropertyDrawer_8h">BitMapPropertyDrawer.h</innerfile>
+    <innerfile refid="EntityRefPropertyDrawer_8h">EntityRefPropertyDrawer.h</innerfile>
     <innerfile refid="EnumPropertyDrawer_8h">EnumPropertyDrawer.h</innerfile>
     <innerfile refid="MaterialDataPropertyDrawer_8h">MaterialDataPropertyDrawer.h</innerfile>
     <innerfile refid="MaterialPropertyDrawer_8h">MaterialPropertyDrawer.h</innerfile>

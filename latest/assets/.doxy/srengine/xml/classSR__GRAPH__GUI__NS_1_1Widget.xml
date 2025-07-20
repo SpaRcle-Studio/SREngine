@@ -773,6 +773,7 @@
         <argsstring>()</argsstring>
         <name>OnClose</name>
         <qualifiedname>SR_GRAPH_GUI_NS::Widget::OnClose</qualifiedname>
+        <reimplementedby refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1ae3423bed7415c04a2199b2749bfabb79">OnClose</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1SceneViewer_1ac210dc06e0ed6fda17809b2cb59d05ae">OnClose</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a32da4f2ba831d4b13c687bc829beb7a7">OnClose</reimplementedby>
         <briefdescription>

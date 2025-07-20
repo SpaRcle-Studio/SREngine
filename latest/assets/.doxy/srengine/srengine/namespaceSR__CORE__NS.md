@@ -82,7 +82,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (EditorIcon, uint32\_t, Unknown, Material, Prefab, Asset, File, Shader, Back, Play, Stop, PauseActive, Pause, FrameSkip, EmptyFolder, Folder, Script, Reset, Shapes, Game, ZIP, JPG, TXT, XML, PNG, DLL, Font, Audio) <br>_Здесь хранятся названия иконок, движок получает иконку по пути, указанному для названия в файле SREngine/Resources/Editor/Configs/EditorSettings.xml._  |
+|   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (EditorIcon, uint32\_t, Unknown, Material, Prefab, Asset, File, Shader, Scene, Back, Play, Stop, PauseActive, Pause, FrameSkip, EmptyFolder, Folder, Script, Reset, Shapes, Game, ZIP, JPG, TXT, XML, PNG, DLL, Font, Audio) <br>_Здесь хранятся названия иконок, движок получает иконку по пути, указанному для названия в файле SREngine/Resources/Editor/Configs/EditorSettings.xml._  |
 
 
 
@@ -136,6 +136,7 @@ SR_CORE_NS::SR_ENUM_NS_CLASS_T (
     Asset,
     File,
     Shader,
+    Scene,
     Back,
     Play,
     Stop,

@@ -57,7 +57,6 @@ namespace SR_UTILS_NS {
         void SetEntityId(EntityId id);
         void UnregisterEntity();
 
-        void ResolveRefs();
         void OnEntityIdReplaced(const EntityReplaceMap& replaceMap);
 
         void OnPostLoad() override;

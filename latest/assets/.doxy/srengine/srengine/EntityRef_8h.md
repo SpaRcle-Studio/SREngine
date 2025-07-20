@@ -37,7 +37,7 @@
 | Type | Name |
 | ---: | :--- |
 | class | [**EntityRef**](classSR__UTILS__NS_1_1EntityRef.md) &lt;class T&gt;<br> |
-| class | [**EntityRefBase**](classSR__UTILS__NS_1_1EntityRefBase.md) <br> |
+| class | [**EntityRefBase**](classSR__UTILS__NS_1_1EntityRefBase.md) <br>_@inspector(EntityRefPropertyDrawer)_  |
 
 
 

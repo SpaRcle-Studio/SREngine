@@ -519,6 +519,8 @@
 ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * [**EntityRefProperty**](classSR__UTILS__NS_1_1EntityRefProperty.md)
 ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
+* [**EntityRefPropertyDrawer**](classSR__CORE__GUI__NS_1_1EntityRefPropertyDrawer.md)
+([**SR\_CORE\_GUI\_NS**](namespaceSR__CORE__GUI__NS.md))
 * [**Enumerator**](structSR__UTILS__NS_1_1EnumReflector_1_1Enumerator.md)
 ([**SR\_UTILS\_NS::EnumReflector**](classSR__UTILS__NS_1_1EnumReflector.md))
 * [**EnumProperty**](classSR__UTILS__NS_1_1EnumProperty.md)

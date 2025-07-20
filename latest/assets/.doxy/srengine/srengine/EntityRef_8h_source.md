@@ -27,18 +27,20 @@ namespace SR_UTILS_NS {
 
     public:
         SR_NODISCARD virtual StringAtom GetTypeName() const noexcept;
-        SR_NODISCARD Entity::Ptr GetEntity() const noexcept;
+        SR_NODISCARD const Entity::Ptr& GetEntity() const noexcept;
+        SR_NODISCARD EntityId GetEntityId() const noexcept { return m_entityId; }
+        SR_NODISCARD bool IsResolved() const noexcept;
 
-        void SetEntityController(EntityController* pEntityController) noexcept;
         void OnEntityIdReplaced(const EntityReplaceMap& replaceMap);
+        void SetEntityId(EntityId entityId) noexcept;
 
         void Resolve() const noexcept;
 
+        SR_NODISCARD operator bool() const noexcept;
+
     private:
         EntityId m_entityId = SR_ID_INVALID;
-
         mutable Entity::Ptr m_pEntity;
-        EntityController* m_pEntityController = nullptr;
 
     };
 
@@ -46,11 +48,23 @@ namespace SR_UTILS_NS {
         using Super = EntityRefBase;
     public:
         SR_NODISCARD StringAtom GetTypeName() const noexcept override {
-            return T::GetClassStaticName();
+            if constexpr (SR_UTILS_NS::IsCompleteTypeV<T>) {
+                return T::GetClassStaticName();
+            }
+            else {
+                SRHalt("EntityRef<T>::GetTypeName() : type T is not complete!");
+                return SR_UTILS_NS::StringAtom();
+            }
         }
 
         SR_NODISCARD SR_HTYPES_NS::SharedPtr<T> Get() const noexcept {
-            return GetEntity().template StaticCast<T>();
+            if constexpr (SR_UTILS_NS::IsCompleteTypeV<T>) {
+                return GetEntity().template StaticCast<T>();
+            }
+            else {
+                SRHalt("EntityRef<T>::Get() : type T is not complete!");
+                return SR_HTYPES_NS::SharedPtr<T>();
+            }
         }
     };
 }

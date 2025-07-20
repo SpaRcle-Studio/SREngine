@@ -8,15 +8,16 @@
 
 
 
+_@inspector(EntityRefPropertyDrawer)_ 
 
-
+* `#include <EntityRef.h>`
 
 
 
 Inherits the following classes: [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 
 
-Inherited by the following classes: [SR\_UTILS\_NS::EntityRef](classSR__UTILS__NS_1_1EntityRef.md),  [SR\_UTILS\_NS::EntityRef](classSR__UTILS__NS_1_1EntityRef.md)
+Inherited by the following classes: [SR\_UTILS\_NS::EntityRef](classSR__UTILS__NS_1_1EntityRef.md),  [SR\_UTILS\_NS::EntityRef](classSR__UTILS__NS_1_1EntityRef.md),  [SR\_UTILS\_NS::EntityRef](classSR__UTILS__NS_1_1EntityRef.md)
 
 
 
@@ -101,11 +102,14 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 | Type | Name |
 | ---: | :--- |
 |   | [**EntityRefBase**](#function-entityrefbase) () <br> |
-|  SR\_NODISCARD Entity::Ptr | [**GetEntity**](#function-getentity) () noexcept const<br> |
+|  SR\_NODISCARD const Entity::Ptr & | [**GetEntity**](#function-getentity) () noexcept const<br> |
+|  SR\_NODISCARD EntityId | [**GetEntityId**](#function-getentityid) () noexcept const<br> |
 | virtual SR\_NODISCARD [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetTypeName**](#function-gettypename) () noexcept const<br> |
+|  SR\_NODISCARD bool | [**IsResolved**](#function-isresolved) () noexcept const<br> |
 |  void | [**OnEntityIdReplaced**](#function-onentityidreplaced) (const EntityReplaceMap & replaceMap) <br> |
 |  void | [**Resolve**](#function-resolve) () noexcept const<br> |
-|  void | [**SetEntityController**](#function-setentitycontroller) ([**EntityController**](classSR__UTILS__NS_1_1EntityController.md) \* pEntityController) noexcept<br> |
+|  void | [**SetEntityId**](#function-setentityid) (EntityId entityId) noexcept<br> |
+|  SR\_NODISCARD | [**operator bool**](#function-operator-bool) () noexcept const<br> |
 
 
 ## Public Functions inherited from SR_UTILS_NS::Serializable
@@ -246,7 +250,20 @@ SR_UTILS_NS::EntityRefBase::EntityRefBase ()
 ### function GetEntity 
 
 ```C++
-SR_NODISCARD Entity::Ptr SR_UTILS_NS::EntityRefBase::GetEntity () noexcept const
+SR_NODISCARD const Entity::Ptr & SR_UTILS_NS::EntityRefBase::GetEntity () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetEntityId 
+
+```C++
+inline SR_NODISCARD EntityId SR_UTILS_NS::EntityRefBase::GetEntityId () noexcept const
 ```
 
 
@@ -260,6 +277,19 @@ SR_NODISCARD Entity::Ptr SR_UTILS_NS::EntityRefBase::GetEntity () noexcept const
 
 ```C++
 virtual SR_NODISCARD StringAtom SR_UTILS_NS::EntityRefBase::GetTypeName () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function IsResolved 
+
+```C++
+SR_NODISCARD bool SR_UTILS_NS::EntityRefBase::IsResolved () noexcept const
 ```
 
 
@@ -297,12 +327,25 @@ void SR_UTILS_NS::EntityRefBase::Resolve () noexcept const
 
 
 
-### function SetEntityController 
+### function SetEntityId 
 
 ```C++
-void SR_UTILS_NS::EntityRefBase::SetEntityController (
-    EntityController * pEntityController
+void SR_UTILS_NS::EntityRefBase::SetEntityId (
+    EntityId entityId
 ) noexcept
+```
+
+
+
+
+<hr>
+
+
+
+### function operator bool 
+
+```C++
+SR_NODISCARD SR_UTILS_NS::EntityRefBase::operator bool () noexcept const
 ```
 
 

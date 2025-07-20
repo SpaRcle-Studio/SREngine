@@ -85,7 +85,7 @@
 | class | [**EntityController**](classSR__UTILS__NS_1_1EntityController.md) <br> |
 | class | [**EntityIdList**](classSR__UTILS__NS_1_1EntityIdList.md) <br> |
 | class | [**EntityRef**](classSR__UTILS__NS_1_1EntityRef.md) &lt;class T&gt;<br> |
-| class | [**EntityRefBase**](classSR__UTILS__NS_1_1EntityRefBase.md) <br> |
+| class | [**EntityRefBase**](classSR__UTILS__NS_1_1EntityRefBase.md) <br>_@inspector(EntityRefPropertyDrawer)_  |
 | class | [**EntityRefOld**](classSR__UTILS__NS_1_1EntityRefOld.md) <br> |
 | class | [**EntityRefProperty**](classSR__UTILS__NS_1_1EntityRefProperty.md) <br> |
 | class | [**EnumProperty**](classSR__UTILS__NS_1_1EnumProperty.md) <br>_---------------------------------------_  __[_**EnumProperty**_](classSR__UTILS__NS_1_1EnumProperty.md) _-----------------------------------------------------_ __ |

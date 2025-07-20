@@ -22,6 +22,7 @@ namespace SR_UTILS_NS {
 
     class EntityController final : public SR_HTYPES_NS::SharedPtr<EntityController> {
         using Super = SR_HTYPES_NS::SharedPtr<EntityController>;
+        static std::atomic<EntityController*> ACTIVE_CONTROLLER;
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<EntityController>;
 
@@ -30,6 +31,10 @@ namespace SR_UTILS_NS {
         ~EntityController() override;
 
     public:
+        static EntityController* GetActiveController();
+
+        void SetActiveController();
+
         EntityId Register(const Entity::Ptr& pEntity, EntityId wantedId = SR_ID_INVALID);
 
         void Unregister(const EntityId& id);

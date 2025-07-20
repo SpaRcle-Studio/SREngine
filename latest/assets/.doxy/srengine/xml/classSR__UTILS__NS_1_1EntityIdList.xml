@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="44" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="49" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="49" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="86" column="21" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="86" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="91" column="21" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="91" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1EntityIdList_1ab806758737c5b6ddd9383ec9753272aa" prot="private" static="no" mutable="no">
         <type>EntityController::Ptr</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="87" column="31" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="87" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="92" column="31" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="92" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1EntityIdList_1a2ca64b7d03d909b1770c7573d2ba4d3f" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="88" column="14" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="88" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="93" column="14" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="93" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="46" column="18" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="46" bodyend="48"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="51" column="18" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="51" bodyend="53"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1adcadecd6762be097d5d87e4dfa1068af" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -95,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="50" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="50" bodyend="54"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="55" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="55" bodyend="59"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1a4718350e5d24641606fddcfdc9e20741" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -113,7 +113,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="56" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="56" bodyend="60"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="61" column="9" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="61" bodyend="65"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1ac27ffb72577262c4f8b4ac5f07811b1d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1EntityIdList" kindref="compound">EntityIdList</ref> &amp;</type>
@@ -131,7 +131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="62" column="22" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="62" bodyend="69"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="67" column="22" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="67" bodyend="74"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1ad6d4caca699c6d921cf5da98e69fc33b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="72" column="27" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="72" bodyend="72"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="77" column="27" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="77" bodyend="77"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1a16325b4cdb884ae842ed4a97275641ac" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -163,7 +163,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="74" column="14" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="74" bodyend="74"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="79" column="14" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="79" bodyend="79"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1a389c21f7b4c8f6f8ebf16e7cd8ad8889" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -177,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="76" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="81" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1ab838d1671997f009adbee90ba8d12dbe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -191,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="77" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="82" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1a410926800b078e449c9a5b44e2346be8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -205,7 +205,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="79" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="84" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1af32324ff014a17a4562abf0d4a032c54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -223,7 +223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="81" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="86" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1aace57ba6a351040fe5dace99b6d753a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -241,7 +241,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="82" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="87" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1a9d8ee90f9f507e85adaca88f07c2633e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -259,7 +259,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="83" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="88" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -290,7 +290,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="42" column="5" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="42" bodyend="90"/>
+    <location file="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" line="47" column="5" bodyfile="Engine/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="47" bodyend="95"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1EntityIdList_1af32324ff014a17a4562abf0d4a032c54" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityIdList</scope><name>Add</name></member>
       <member refid="classSR__UTILS__NS_1_1EntityIdList_1aace57ba6a351040fe5dace99b6d753a4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityIdList</scope><name>Add</name></member>

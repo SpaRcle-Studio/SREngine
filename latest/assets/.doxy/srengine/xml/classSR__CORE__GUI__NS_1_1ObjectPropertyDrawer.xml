@@ -4,6 +4,7 @@
     <compoundname>SR_CORE_GUI_NS::ObjectPropertyDrawer</compoundname>
     <basecompoundref refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" prot="public" virt="non-virtual">SR_CORE_GUI_NS::PropertyDrawerBase</basecompoundref>
     <derivedcompoundref refid="classSR__CORE__GUI__NS_1_1BehaviourPropertyDrawer" prot="public" virt="non-virtual">SR_CORE_GUI_NS::BehaviourPropertyDrawer</derivedcompoundref>
+    <derivedcompoundref refid="classSR__CORE__GUI__NS_1_1EntityRefPropertyDrawer" prot="public" virt="non-virtual">SR_CORE_GUI_NS::EntityRefPropertyDrawer</derivedcompoundref>
     <derivedcompoundref refid="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer" prot="public" virt="non-virtual">SR_CORE_GUI_NS::MaterialDataPropertyDrawer</derivedcompoundref>
     <sectiondef kind="public-type">
       <memberdef kind="typedef" id="classSR__CORE__GUI__NS_1_1ObjectPropertyDrawer_1a6fe7d8be9876c765262f0631644f277d" prot="public" static="no">
@@ -105,6 +106,12 @@
         </childnode>
       </node>
       <node id="7">
+        <label>SR_CORE_GUI_NS::EntityRefPropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1EntityRefPropertyDrawer"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
         <label>SR_CORE_GUI_NS::MaterialDataPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer"/>
         <childnode refid="1" relation="public-inheritance">

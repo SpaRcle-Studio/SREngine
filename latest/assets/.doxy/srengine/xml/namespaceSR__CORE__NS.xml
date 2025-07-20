@@ -26,10 +26,10 @@
     <innernamespace refid="namespaceSR__CORE__NS_1_1Resources">SR_CORE_NS::Resources</innernamespace>
     <innernamespace refid="namespaceSR__CORE__NS_1_1Tests">SR_CORE_NS::Tests</innernamespace>
     <sectiondef kind="func">
-      <memberdef kind="function" id="namespaceSR__CORE__NS_1a108eb46f5fb37c8c979e5d46f8f05d80" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="namespaceSR__CORE__NS_1afddb4f940e36c2c423e7c000520f9caa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_CORE_NS::SR_ENUM_NS_CLASS_T</definition>
-        <argsstring>(EditorIcon, uint32_t, Unknown, Material, Prefab, Asset, File, Shader, Back, Play, Stop, PauseActive, Pause, FrameSkip, EmptyFolder, Folder, Script, Reset, Shapes, Game, ZIP, JPG, TXT, XML, PNG, DLL, Font, Audio)</argsstring>
+        <argsstring>(EditorIcon, uint32_t, Unknown, Material, Prefab, Asset, File, Shader, Scene, Back, Play, Stop, PauseActive, Pause, FrameSkip, EmptyFolder, Folder, Script, Reset, Shapes, Game, ZIP, JPG, TXT, XML, PNG, DLL, Font, Audio)</argsstring>
         <name>SR_ENUM_NS_CLASS_T</name>
         <qualifiedname>SR_CORE_NS::SR_ENUM_NS_CLASS_T</qualifiedname>
         <param>
@@ -55,6 +55,9 @@
         </param>
         <param>
           <type>Shader</type>
+        </param>
+        <param>
+          <type>Scene</type>
         </param>
         <param>
           <type>Back</type>

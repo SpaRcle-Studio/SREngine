@@ -21,7 +21,7 @@ namespace SR_CORE_NS {
     SR_ENUM_NS_CLASS_T(EditorIcon, uint32_t,
           Unknown,
           Material, Prefab, Asset,
-          File, Shader,
+          File, Shader, Scene,
           Back,
           Play,
           Stop,

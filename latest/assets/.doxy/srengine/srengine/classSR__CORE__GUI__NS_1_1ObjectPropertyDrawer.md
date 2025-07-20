@@ -16,7 +16,7 @@
 Inherits the following classes: [SR\_CORE\_GUI\_NS::PropertyDrawerBase](classSR__CORE__GUI__NS_1_1PropertyDrawerBase.md)
 
 
-Inherited by the following classes: [SR\_CORE\_GUI\_NS::BehaviourPropertyDrawer](classSR__CORE__GUI__NS_1_1BehaviourPropertyDrawer.md),  [SR\_CORE\_GUI\_NS::MaterialDataPropertyDrawer](classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer.md)
+Inherited by the following classes: [SR\_CORE\_GUI\_NS::BehaviourPropertyDrawer](classSR__CORE__GUI__NS_1_1BehaviourPropertyDrawer.md),  [SR\_CORE\_GUI\_NS::EntityRefPropertyDrawer](classSR__CORE__GUI__NS_1_1EntityRefPropertyDrawer.md),  [SR\_CORE\_GUI\_NS::MaterialDataPropertyDrawer](classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer.md)
 
 
 

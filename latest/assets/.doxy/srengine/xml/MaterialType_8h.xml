@@ -467,10 +467,10 @@
         <label>Engine/inc/Engine/GUI/AssetInspector.h</label>
         <link refid="AssetInspector_8h_source"/>
       </node>
-      <node id="35">
+      <node id="36">
         <label>Engine/inc/Engine/GUI/EditorGizmo.h</label>
         <link refid="EditorGizmo_8h_source"/>
-        <childnode refid="36" relation="include">
+        <childnode refid="37" relation="include">
         </childnode>
       </node>
       <node id="5">
@@ -492,15 +492,15 @@
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
         </childnode>
       </node>
       <node id="6">
@@ -515,15 +515,19 @@
         <label>Engine/inc/Engine/GUI/PropertyDrawers/BitMapPropertyDrawer.h</label>
         <link refid="BitMapPropertyDrawer_8h_source"/>
       </node>
+      <node id="11">
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/EntityRefPropertyDrawer.h</label>
+        <link refid="EntityRefPropertyDrawer_8h_source"/>
+      </node>
       <node id="8">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/EnumPropertyDrawer.h</label>
         <link refid="EnumPropertyDrawer_8h_source"/>
       </node>
-      <node id="11">
+      <node id="12">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h</label>
         <link refid="MaterialDataPropertyDrawer_8h_source"/>
       </node>
-      <node id="14">
+      <node id="15">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/MaterialPropertyDrawer.h</label>
         <link refid="MaterialPropertyDrawer_8h_source"/>
       </node>
@@ -538,56 +542,58 @@
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
       </node>
-      <node id="12">
+      <node id="13">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/PathPropertyDrawer.h</label>
         <link refid="PathPropertyDrawer_8h_source"/>
       </node>
-      <node id="13">
+      <node id="14">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h</label>
         <link refid="PointerPropertyDrawer_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="15">
+      <node id="16">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/RectPropertyDrawer.h</label>
         <link refid="RectPropertyDrawer_8h_source"/>
       </node>
-      <node id="16">
+      <node id="17">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/StringPropertyDrawer.h</label>
         <link refid="StringPropertyDrawer_8h_source"/>
       </node>
-      <node id="17">
+      <node id="18">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/VectorPropertyDrawer.h</label>
         <link refid="VectorPropertyDrawer_8h_source"/>
       </node>
-      <node id="36">
+      <node id="37">
         <label>Engine/inc/Engine/GUI/SceneTools.h</label>
         <link refid="SceneTools_8h_source"/>
       </node>
-      <node id="24">
+      <node id="25">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
         <link refid="Animator_8h_source"/>
       </node>
-      <node id="22">
+      <node id="23">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/Bone.h</label>
         <link refid="Bone_8h_source"/>
-        <childnode refid="23" relation="include">
-        </childnode>
-      </node>
-      <node id="23">
-        <label>Engine/libs/Graphics/inc/Graphics/Animations/Skeleton.h</label>
-        <link refid="Skeleton_8h_source"/>
         <childnode refid="24" relation="include">
         </childnode>
+      </node>
+      <node id="24">
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/Skeleton.h</label>
+        <link refid="Skeleton_8h_source"/>
         <childnode refid="25" relation="include">
         </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
       </node>
-      <node id="26">
+      <node id="27">
         <label>Engine/libs/Graphics/inc/Graphics/Font/Text.h</label>
         <link refid="Text_8h_source"/>
       </node>
@@ -596,12 +602,12 @@
         <link refid="BaseMaterial_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
         <childnode refid="19" relation="include">
         </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
       </node>
-      <node id="18">
+      <node id="19">
         <label>Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h</label>
         <link refid="FileMaterial_8h_source"/>
       </node>
@@ -610,81 +616,81 @@
         <link refid="MaterialType_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-      </node>
-      <node id="20">
-        <label>Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h</label>
-        <link refid="MeshMaterialProperty_8h_source"/>
         <childnode refid="21" relation="include">
         </childnode>
       </node>
-      <node id="19">
+      <node id="21">
+        <label>Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h</label>
+        <link refid="MeshMaterialProperty_8h_source"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
         <label>Engine/libs/Graphics/inc/Graphics/Material/UniqueMaterial.h</label>
         <link refid="UniqueMaterial_8h_source"/>
       </node>
-      <node id="27">
+      <node id="28">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h</label>
         <link refid="DebugLine_8h_source"/>
       </node>
-      <node id="29">
+      <node id="30">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</label>
         <link refid="DebugWireframeMesh_8h_source"/>
       </node>
-      <node id="28">
+      <node id="29">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h</label>
         <link refid="IndexedMesh_8h_source"/>
-        <childnode refid="29" relation="include">
-        </childnode>
         <childnode refid="30" relation="include">
         </childnode>
-      </node>
-      <node id="31">
-        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</label>
-        <link refid="Mesh3D_8h_source"/>
-      </node>
-      <node id="30">
-        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/MeshComponent.h</label>
-        <link refid="MeshComponent_8h_source"/>
         <childnode refid="31" relation="include">
-        </childnode>
-        <childnode refid="32" relation="include">
-        </childnode>
-        <childnode refid="25" relation="include">
-        </childnode>
-        <childnode refid="33" relation="include">
-        </childnode>
-        <childnode refid="34" relation="include">
         </childnode>
       </node>
       <node id="32">
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</label>
+        <link refid="Mesh3D_8h_source"/>
+      </node>
+      <node id="31">
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/MeshComponent.h</label>
+        <link refid="MeshComponent_8h_source"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h</label>
         <link refid="ProceduralMesh_8h_source"/>
       </node>
-      <node id="25">
+      <node id="26">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
         <link refid="SkinnedMesh_8h_source"/>
       </node>
-      <node id="33">
+      <node id="34">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h</label>
         <link refid="Sprite_8h_source"/>
       </node>
-      <node id="21">
+      <node id="22">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Mesh.h</label>
         <link refid="Mesh_8h_source"/>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="26" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
         <childnode refid="27" relation="include">
         </childnode>
         <childnode refid="28" relation="include">
         </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
       </node>
-      <node id="34">
+      <node id="35">
         <label>Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h</label>
         <link refid="Gizmo_8h_source"/>
-        <childnode refid="35" relation="include">
+        <childnode refid="36" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

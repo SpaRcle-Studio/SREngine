@@ -11,15 +11,27 @@
         </childnode>
         <childnode refid="171" relation="include">
         </childnode>
+        <childnode refid="211" relation="include">
+        </childnode>
         <childnode refid="115" relation="include">
         </childnode>
-        <childnode refid="211" relation="include">
+        <childnode refid="213" relation="include">
         </childnode>
       </node>
       <node id="1">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/EnumPropertyDrawer.h</label>
         <link refid="EnumPropertyDrawer_8h"/>
         <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="211">
+        <label>Graphics/GUI/ImmediateGUI.h</label>
+        <link refid="ImmediateGUI_8h_source"/>
+        <childnode refid="208" relation="include">
+        </childnode>
+        <childnode refid="130" relation="include">
+        </childnode>
+        <childnode refid="212" relation="include">
         </childnode>
       </node>
       <node id="161">
@@ -912,25 +924,25 @@
         <label>Utils/Profile/TracyContext.h</label>
         <link refid="TracyContext_8h_source"/>
       </node>
-      <node id="211">
+      <node id="213">
         <label>Utils/Reflection/Property.h</label>
         <link refid="Reflection_2Property_8h_source"/>
-        <childnode refid="212" relation="include">
+        <childnode refid="214" relation="include">
         </childnode>
         <childnode refid="128" relation="include">
         </childnode>
       </node>
-      <node id="212">
+      <node id="214">
         <label>Utils/Reflection/Value.h</label>
         <link refid="Value_8h_source"/>
-        <childnode refid="213" relation="include">
+        <childnode refid="215" relation="include">
         </childnode>
         <childnode refid="110" relation="include">
         </childnode>
-        <childnode refid="214" relation="include">
+        <childnode refid="216" relation="include">
         </childnode>
       </node>
-      <node id="213">
+      <node id="215">
         <label>Utils/Reflection/ValueImpl.h</label>
         <link refid="ValueImpl_8h_source"/>
         <childnode refid="96" relation="include">
@@ -1666,6 +1678,9 @@
       <node id="93">
         <label>Codegen/EnumsFwd.generated.hpp</label>
       </node>
+      <node id="212">
+        <label>Enum/TreeNodeFlags.hpp</label>
+      </node>
       <node id="52">
         <label>algorithm</label>
       </node>
@@ -1726,7 +1741,7 @@
       <node id="57">
         <label>ctime</label>
       </node>
-      <node id="214">
+      <node id="216">
         <label>entt/entt.hpp</label>
       </node>
       <node id="50">

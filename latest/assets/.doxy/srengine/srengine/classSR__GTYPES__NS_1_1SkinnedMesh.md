@@ -199,8 +199,8 @@ See [SR\_HTYPES\_NS::IRawMeshHolder](classSR__HTYPES__NS_1_1IRawMeshHolder.md)
 |  void | [**FreeVideoMemory**](#function-freevideomemory) () override<br> |
 | virtual SR\_NODISCARD std::string | [**GetMeshIdentifier**](#function-getmeshidentifier) () override const<br> |
 | virtual SR\_NODISCARD MeshType | [**GetMeshType**](#function-getmeshtype) () noexcept override const<br> |
-|  SR\_NODISCARD const [**SR\_UTILS\_NS::EntityRefOld**](classSR__UTILS__NS_1_1EntityRefOld.md) & | [**GetSkeleton**](#function-getskeleton-12) () noexcept const<br> |
-|  SR\_NODISCARD [**SR\_UTILS\_NS::EntityRefOld**](classSR__UTILS__NS_1_1EntityRefOld.md) & | [**GetSkeleton**](#function-getskeleton-22) () noexcept<br> |
+|  SR\_NODISCARD const SkeletonRef & | [**GetSkeletonRef**](#function-getskeletonref-12) () noexcept const<br> |
+|  SR\_NODISCARD SkeletonRef & | [**GetSkeletonRef**](#function-getskeletonref-22) () noexcept<br> |
 | virtual SR\_NODISCARD bool | [**IsCalculatable**](#function-iscalculatable) () override const<br> |
 |  SR\_NODISCARD bool | [**IsSkeletonUsable**](#function-isskeletonusable) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsUpdatable**](#function-isupdatable) () noexcept override const<br>_Активен и компонент и его родительский объект_  |
@@ -701,10 +701,10 @@ Implements [*SR\_GTYPES\_NS::Mesh::GetMeshType*](classSR__GTYPES__NS_1_1Mesh.md#
 
 
 
-### function GetSkeleton [1/2]
+### function GetSkeletonRef [1/2]
 
 ```C++
-inline SR_NODISCARD const SR_UTILS_NS::EntityRefOld & SR_GTYPES_NS::SkinnedMesh::GetSkeleton () noexcept const
+inline SR_NODISCARD const SkeletonRef & SR_GTYPES_NS::SkinnedMesh::GetSkeletonRef () noexcept const
 ```
 
 
@@ -714,10 +714,10 @@ inline SR_NODISCARD const SR_UTILS_NS::EntityRefOld & SR_GTYPES_NS::SkinnedMesh:
 
 
 
-### function GetSkeleton [2/2]
+### function GetSkeletonRef [2/2]
 
 ```C++
-inline SR_NODISCARD SR_UTILS_NS::EntityRefOld & SR_GTYPES_NS::SkinnedMesh::GetSkeleton () noexcept
+inline SR_NODISCARD SkeletonRef & SR_GTYPES_NS::SkinnedMesh::GetSkeletonRef () noexcept
 ```
 
 

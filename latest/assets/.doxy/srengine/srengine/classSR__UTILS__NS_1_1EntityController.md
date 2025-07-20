@@ -111,6 +111,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  SR\_NODISCARD bool | [**IsIdUsed**](#function-isidused) (const EntityId & id) const<br> |
 |  EntityId | [**Register**](#function-register) (const Entity::Ptr & pEntity, EntityId wantedId=SR\_ID\_INVALID) <br> |
 |  bool | [**Reserve**](#function-reserve) (const EntityId & id) <br> |
+|  void | [**SetActiveController**](#function-setactivecontroller) () <br> |
 |  bool | [**TryUnReserve**](#function-tryunreserve) (const EntityId & id) <br> |
 |  bool | [**UnReserve**](#function-unreserve) (const EntityId & id) <br> |
 |  void | [**Unregister**](#function-unregister) (const EntityId & id) <br> |
@@ -179,6 +180,11 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 | virtual  | [**~SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase) () <br> |
 
 
+## Public Static Functions
+
+| Type | Name |
+| ---: | :--- |
+|  [**EntityController**](classSR__UTILS__NS_1_1EntityController.md) \* | [**GetActiveController**](#function-getactivecontroller) () <br> |
 
 
 ## Public Static Functions inherited from SR_HTYPES_NS::SharedPtr
@@ -382,6 +388,19 @@ bool SR_UTILS_NS::EntityController::Reserve (
 
 
 
+### function SetActiveController 
+
+```C++
+void SR_UTILS_NS::EntityController::SetActiveController () 
+```
+
+
+
+
+<hr>
+
+
+
 ### function TryUnReserve 
 
 ```C++
@@ -431,6 +450,21 @@ void SR_UTILS_NS::EntityController::Unregister (
 
 ```C++
 SR_UTILS_NS::EntityController::~EntityController () override
+```
+
+
+
+
+<hr>
+## Public Static Functions Documentation
+
+
+
+
+### function GetActiveController 
+
+```C++
+static EntityController * SR_UTILS_NS::EntityController::GetActiveController () 
 ```
 
 

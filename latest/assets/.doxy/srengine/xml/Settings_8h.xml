@@ -1048,17 +1048,17 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="31">
+      <node id="32">
         <label>Engine/inc/Engine/Engine.h</label>
         <link refid="Engine_8h_source"/>
-        <childnode refid="32" relation="include">
-        </childnode>
         <childnode refid="33" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
       </node>
-      <node id="32">
+      <node id="33">
         <label>Engine/inc/Engine/EngineCommands.h</label>
         <link refid="EngineCommands_8h_source"/>
       </node>
@@ -1066,15 +1066,15 @@
         <label>Engine/inc/Engine/GUI/AssetInspector.h</label>
         <link refid="AssetInspector_8h_source"/>
       </node>
-      <node id="26">
+      <node id="27">
         <label>Engine/inc/Engine/GUI/EditorGUI.h</label>
         <link refid="EditorGUI_8h_source"/>
       </node>
-      <node id="36">
+      <node id="37">
         <label>Engine/inc/Engine/GUI/Guizmo.h</label>
         <link refid="Guizmo_8h_source"/>
       </node>
-      <node id="37">
+      <node id="38">
         <label>Engine/inc/Engine/GUI/Hierarchy.h</label>
         <link refid="Hierarchy_8h_source"/>
       </node>
@@ -1097,15 +1097,15 @@
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
         <childnode refid="15" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="18" relation="include">
         </childnode>
         <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
         </childnode>
       </node>
       <node id="8">
@@ -1120,15 +1120,19 @@
         <label>Engine/inc/Engine/GUI/PropertyDrawers/BitMapPropertyDrawer.h</label>
         <link refid="BitMapPropertyDrawer_8h_source"/>
       </node>
+      <node id="13">
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/EntityRefPropertyDrawer.h</label>
+        <link refid="EntityRefPropertyDrawer_8h_source"/>
+      </node>
       <node id="10">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/EnumPropertyDrawer.h</label>
         <link refid="EnumPropertyDrawer_8h_source"/>
       </node>
-      <node id="13">
+      <node id="14">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h</label>
         <link refid="MaterialDataPropertyDrawer_8h_source"/>
       </node>
-      <node id="16">
+      <node id="17">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/MaterialPropertyDrawer.h</label>
         <link refid="MaterialPropertyDrawer_8h_source"/>
       </node>
@@ -1143,38 +1147,40 @@
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
       </node>
-      <node id="14">
+      <node id="15">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/PathPropertyDrawer.h</label>
         <link refid="PathPropertyDrawer_8h_source"/>
       </node>
-      <node id="15">
+      <node id="16">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h</label>
         <link refid="PointerPropertyDrawer_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="17">
+      <node id="18">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/RectPropertyDrawer.h</label>
         <link refid="RectPropertyDrawer_8h_source"/>
       </node>
-      <node id="18">
+      <node id="19">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/StringPropertyDrawer.h</label>
         <link refid="StringPropertyDrawer_8h_source"/>
       </node>
-      <node id="19">
+      <node id="20">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/VectorPropertyDrawer.h</label>
         <link refid="VectorPropertyDrawer_8h_source"/>
       </node>
-      <node id="38">
+      <node id="39">
         <label>Engine/inc/Engine/GUI/SceneViewer.h</label>
         <link refid="SceneViewer_8h_source"/>
       </node>
-      <node id="33">
+      <node id="34">
         <label>Engine/inc/Engine/Scripting/ScriptableContext.h</label>
         <link refid="ScriptableContext_8h_source"/>
       </node>
@@ -1182,48 +1188,48 @@
         <label>Engine/inc/Engine/Settings/EditorSettings.h</label>
         <link refid="EditorSettings_8h_source"/>
       </node>
-      <node id="20">
+      <node id="21">
         <label>Engine/inc/Engine/World/EngineScene.h</label>
         <link refid="EngineScene_8h_source"/>
       </node>
-      <node id="34">
+      <node id="35">
         <label>Engine/inc/Engine/World/World.h</label>
         <link refid="World_8h_source"/>
       </node>
-      <node id="41">
+      <node id="42">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h</label>
         <link refid="AnimationChannel_8h_source"/>
       </node>
-      <node id="40">
+      <node id="41">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationKey.h</label>
         <link refid="AnimationKey_8h_source"/>
-        <childnode refid="41" relation="include">
-        </childnode>
         <childnode refid="42" relation="include">
         </childnode>
-      </node>
-      <node id="39">
-        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationPose.h</label>
-        <link refid="AnimationPose_8h_source"/>
-        <childnode refid="40" relation="include">
+        <childnode refid="43" relation="include">
         </childnode>
       </node>
-      <node id="42">
+      <node id="40">
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationPose.h</label>
+        <link refid="AnimationPose_8h_source"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
         <link refid="Animator_8h_source"/>
       </node>
-      <node id="43">
+      <node id="44">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/Bone.h</label>
         <link refid="Bone_8h_source"/>
-        <childnode refid="44" relation="include">
+        <childnode refid="45" relation="include">
         </childnode>
       </node>
-      <node id="44">
+      <node id="45">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/Skeleton.h</label>
         <link refid="Skeleton_8h_source"/>
-        <childnode refid="42" relation="include">
+        <childnode refid="43" relation="include">
         </childnode>
-        <childnode refid="45" relation="include">
+        <childnode refid="46" relation="include">
         </childnode>
       </node>
       <node id="3">
@@ -1231,9 +1237,9 @@
         <link refid="IRenderTechnique_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
         <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
         </childnode>
       </node>
       <node id="4">
@@ -1241,160 +1247,160 @@
         <link refid="RenderContext_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-      </node>
-      <node id="21">
-        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h</label>
-        <link refid="RenderTechnique_8h_source"/>
-        <childnode refid="20" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
       </node>
       <node id="22">
+        <label>Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h</label>
+        <link refid="RenderTechnique_8h_source"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
         <label>Engine/libs/Graphics/inc/Graphics/Render/ScriptableRenderTechnique.h</label>
         <link refid="ScriptableRenderTechnique_8h_source"/>
       </node>
-      <node id="45">
+      <node id="46">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
         <link refid="SkinnedMesh_8h_source"/>
       </node>
-      <node id="23">
+      <node id="24">
         <label>Engine/libs/Graphics/inc/Graphics/Types/RenderTexture.h</label>
         <link refid="RenderTexture_8h_source"/>
       </node>
-      <node id="52">
+      <node id="53">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UIContainerNode.h</label>
         <link refid="UIContainerNode_8h_source"/>
-        <childnode refid="53" relation="include">
-        </childnode>
         <childnode refid="54" relation="include">
         </childnode>
         <childnode refid="55" relation="include">
         </childnode>
         <childnode refid="56" relation="include">
         </childnode>
-      </node>
-      <node id="51">
-        <label>Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h</label>
-        <link refid="UIControlNode_8h_source"/>
-        <childnode refid="52" relation="include">
+        <childnode refid="57" relation="include">
         </childnode>
       </node>
-      <node id="53">
-        <label>Engine/libs/Graphics/inc/Graphics/UI/UIHBoxContainerNode.h</label>
-        <link refid="UIHBoxContainerNode_8h_source"/>
-      </node>
-      <node id="50">
-        <label>Engine/libs/Graphics/inc/Graphics/UI/UINode.h</label>
-        <link refid="UINode_8h_source"/>
-        <childnode refid="51" relation="include">
+      <node id="52">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UIControlNode.h</label>
+        <link refid="UIControlNode_8h_source"/>
+        <childnode refid="53" relation="include">
         </childnode>
       </node>
       <node id="54">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UIHBoxContainerNode.h</label>
+        <link refid="UIHBoxContainerNode_8h_source"/>
+      </node>
+      <node id="51">
+        <label>Engine/libs/Graphics/inc/Graphics/UI/UINode.h</label>
+        <link refid="UINode_8h_source"/>
+        <childnode refid="52" relation="include">
+        </childnode>
+      </node>
+      <node id="55">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UIVBoxContainerNode.h</label>
         <link refid="UIVBoxContainerNode_8h_source"/>
       </node>
-      <node id="55">
+      <node id="56">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h</label>
         <link refid="UIViewportNode_8h_source"/>
       </node>
-      <node id="56">
+      <node id="57">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UIWindowNode.h</label>
         <link refid="UIWindowNode_8h_source"/>
       </node>
-      <node id="28">
+      <node id="29">
         <label>Engine/libs/Scripting/inc/Scripting/Base/Behaviour.h</label>
         <link refid="Behaviour_8h_source"/>
-        <childnode refid="29" relation="include">
-        </childnode>
-      </node>
-      <node id="46">
-        <label>Engine/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h</label>
-        <link refid="CppBehaviour_8h_source"/>
-        <childnode refid="27" relation="include">
-        </childnode>
-      </node>
-      <node id="27">
-        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h</label>
-        <link refid="ModuleManager_8h_source"/>
-        <childnode refid="28" relation="include">
-        </childnode>
         <childnode refid="30" relation="include">
         </childnode>
       </node>
-      <node id="30">
-        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h</label>
-        <link refid="ScriptSystem_8h_source"/>
+      <node id="47">
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h</label>
+        <link refid="CppBehaviour_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h</label>
+        <link refid="ModuleManager_8h_source"/>
+        <childnode refid="29" relation="include">
+        </childnode>
         <childnode refid="31" relation="include">
         </childnode>
       </node>
-      <node id="29">
+      <node id="31">
+        <label>Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h</label>
+        <link refid="ScriptSystem_8h_source"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
         <label>Engine/libs/Scripting/inc/Scripting/Old/Impl/EvoBehaviour.h</label>
         <link refid="EvoBehaviour_8h_source"/>
       </node>
-      <node id="35">
+      <node id="36">
         <label>Engine/libs/Utils/inc/Utils/ECS/GameObject.h</label>
         <link refid="GameObject_8h_source"/>
-        <childnode refid="32" relation="include">
-        </childnode>
-        <childnode refid="36" relation="include">
+        <childnode refid="33" relation="include">
         </childnode>
         <childnode refid="37" relation="include">
         </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
         <childnode refid="38" relation="include">
         </childnode>
-        <childnode refid="34" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="39" relation="include">
         </childnode>
-        <childnode refid="43" relation="include">
+        <childnode refid="35" relation="include">
         </childnode>
-        <childnode refid="46" relation="include">
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
         </childnode>
         <childnode refid="47" relation="include">
         </childnode>
         <childnode refid="48" relation="include">
         </childnode>
-      </node>
-      <node id="24">
-        <label>Engine/libs/Utils/inc/Utils/ECS/LayerManager.h</label>
-        <link refid="LayerManager_8h_source"/>
-        <childnode refid="25" relation="include">
-        </childnode>
-      </node>
-      <node id="49">
-        <label>Engine/libs/Utils/inc/Utils/ECS/Node.h</label>
-        <link refid="Utils_2inc_2Utils_2ECS_2Node_8h_source"/>
-        <childnode refid="50" relation="include">
+        <childnode refid="49" relation="include">
         </childnode>
       </node>
       <node id="25">
-        <label>Engine/libs/Utils/inc/Utils/ECS/SceneObject.h</label>
-        <link refid="SceneObject_8h_source"/>
+        <label>Engine/libs/Utils/inc/Utils/ECS/LayerManager.h</label>
+        <link refid="LayerManager_8h_source"/>
         <childnode refid="26" relation="include">
         </childnode>
+      </node>
+      <node id="50">
+        <label>Engine/libs/Utils/inc/Utils/ECS/Node.h</label>
+        <link refid="Utils_2inc_2Utils_2ECS_2Node_8h_source"/>
+        <childnode refid="51" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>Engine/libs/Utils/inc/Utils/ECS/SceneObject.h</label>
+        <link refid="SceneObject_8h_source"/>
         <childnode refid="27" relation="include">
         </childnode>
-        <childnode refid="35" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
-        <childnode refid="49" relation="include">
+        <childnode refid="36" relation="include">
         </childnode>
-        <childnode refid="57" relation="include">
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
         </childnode>
       </node>
-      <node id="58">
+      <node id="59">
         <label>Engine/libs/Utils/inc/Utils/ECS/TagManager.h</label>
         <link refid="TagManager_8h_source"/>
-        <childnode refid="35" relation="include">
+        <childnode refid="36" relation="include">
         </childnode>
       </node>
-      <node id="47">
+      <node id="48">
         <label>Engine/libs/Utils/inc/Utils/Game/DebugLogComponent.h</label>
         <link refid="DebugLogComponent_8h_source"/>
       </node>
-      <node id="48">
+      <node id="49">
         <label>Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h</label>
         <link refid="LookAtComponent_8h_source"/>
       </node>
@@ -1405,14 +1411,14 @@
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="23" relation="include">
-        </childnode>
         <childnode refid="24" relation="include">
         </childnode>
-        <childnode refid="58" relation="include">
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
         </childnode>
       </node>
-      <node id="57">
+      <node id="58">
         <label>Engine/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h</label>
         <link refid="SceneCubeChunkLogic_8h_source"/>
       </node>
