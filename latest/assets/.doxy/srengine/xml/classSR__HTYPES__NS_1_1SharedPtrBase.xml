@@ -67,6 +67,7 @@
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_WORLD_NS::Scene &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::RenderScene &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Camera &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; Texture &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; PopupItemSubWidget &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; Shader &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::Pipeline &gt;</derivedcompoundref>
@@ -78,7 +79,6 @@
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::BaseMaterial &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::RenderStrategy &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::IRenderTechnique &gt;</derivedcompoundref>
-    <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; Texture &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Skybox &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Mesh &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Font &gt;</derivedcompoundref>
@@ -1834,7 +1834,7 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="67">
+      <node id="68">
         <label>SR_HTYPES_NS::SharedPtr&lt; PopupItemSubWidget &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1900,31 +1900,31 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="75">
+      <node id="76">
         <label>SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::BaseMaterial &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="70">
+      <node id="71">
         <label>SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::FileRenderTechniqueResource &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="72">
+      <node id="73">
         <label>SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::FrameBufferController &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="77">
+      <node id="78">
         <label>SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::IRenderTechnique &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="69">
+      <node id="70">
         <label>SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::Pipeline &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1936,7 +1936,7 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="76">
+      <node id="77">
         <label>SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::RenderStrategy &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1960,7 +1960,7 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="71">
+      <node id="72">
         <label>SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Framebuffer &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1972,7 +1972,7 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="74">
+      <node id="75">
         <label>SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Shader &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1984,7 +1984,7 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="73">
+      <node id="74">
         <label>SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Texture &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
@@ -2068,7 +2068,7 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="68">
+      <node id="69">
         <label>SR_HTYPES_NS::SharedPtr&lt; Shader &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">
@@ -2086,7 +2086,7 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="78">
+      <node id="67">
         <label>SR_HTYPES_NS::SharedPtr&lt; Texture &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="1" relation="public-inheritance">

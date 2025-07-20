@@ -3206,6 +3206,7 @@
     <member refid="classSR__CORE__NS_1_1Engine_1ab186d905c75aa35e1cf8e5b3072a6979" kind="function"><name>Init</name></member>
     <member refid="classSR__CORE__NS_1_1Engine_1a5723b049df6ed3337b4dd4e14dce020c" kind="function"><name>Run</name></member>
     <member refid="classSR__CORE__NS_1_1Engine_1a5457d505746869e0d64772d3b4a2d4db" kind="function"><name>Close</name></member>
+    <member refid="classSR__CORE__NS_1_1Engine_1aa9f17fd40ac84f492fbb9cd7ca0ec267" kind="function"><name>DestroyEditor</name></member>
     <member refid="classSR__CORE__NS_1_1Engine_1a2df3dba684100244c6c73b9d9da9653e" kind="function"><name>CreateMainWindow</name></member>
   </compound>
   <compound refid="structSR__CORE__NS_1_1EngineScene" kind="struct"><name>SR_CORE_NS::EngineScene</name>
@@ -3681,6 +3682,7 @@
     <member refid="classSR__HTYPES__NS_1_1FastMemoryArray_1afd8712192e67c20e66131164956ca7c9" kind="function"><name>reserve</name></member>
   </compound>
   <compound refid="structSR__CORE__NS_1_1GUI_1_1FBElement" kind="struct"><name>SR_CORE_NS::GUI::FBElement</name>
+    <member refid="structSR__CORE__NS_1_1GUI_1_1FBElement_1aad50f85b4346cf3f47d371a4865a48df" kind="variable"><name>pTexture</name></member>
     <member refid="structSR__CORE__NS_1_1GUI_1_1FBElement_1a9cd36d3abdf40a0de59737013877b46a" kind="variable"><name>filename</name></member>
     <member refid="structSR__CORE__NS_1_1GUI_1_1FBElement_1a41b6e9b14bfb5991d90d624a3ae33887" kind="variable"><name>cutName</name></member>
     <member refid="structSR__CORE__NS_1_1GUI_1_1FBElement_1a4fedc8defdc7066cd1818bcaa51d4f1d" kind="variable"><name>iconType</name></member>
@@ -3774,7 +3776,6 @@
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a6a3040f6984eef2ec05026baa6ea8d65" kind="variable"><name>m_callbackFunction</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a32644bf20d277dd2d6527c9e29893e30" kind="variable"><name>m_assetWidth</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1aad487b99c15300826345a61b6235f381" kind="variable"><name>m_foldersTree</name></member>
-    <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a3771e0f40350f8b7c781ffb81a307d13" kind="variable"><name>m_currentDirTextures</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a4039d5c88790b5ed6ec707ed6d8a621f" kind="variable"><name>m_dirtySelectedDir</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a2dea14df3b860a439dd8aeba87571314" kind="variable"><name>m_dirtyFoldersTree</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1ac21726c25521bb52894c513e4a9c5f58" kind="variable"><name>m_elements</name></member>

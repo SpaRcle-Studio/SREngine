@@ -104,6 +104,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  void | [**AddWindow**](#function-addwindow) (WindowPtr pWindow) <br> |
 |  bool | [**Close**](#function-close) () <br> |
 |  bool | [**Create**](#function-create) () <br> |
+|  void | [**DestroyEditor**](#function-destroyeditor) () <br> |
 |   | [**Engine**](#function-engine) ([**Application**](classSR__CORE__NS_1_1Application.md) \* pApplication) <br> |
 |  SR\_NODISCARD bool | [**Execute**](#function-execute) () <br> |
 |  void | [**FixedUpdate**](#function-fixedupdate) () <br> |
@@ -344,6 +345,19 @@ bool SR_CORE_NS::Engine::Close ()
 
 ```C++
 bool SR_CORE_NS::Engine::Create () 
+```
+
+
+
+
+<hr>
+
+
+
+### function DestroyEditor 
+
+```C++
+void SR_CORE_NS::Engine::DestroyEditor () 
 ```
 
 

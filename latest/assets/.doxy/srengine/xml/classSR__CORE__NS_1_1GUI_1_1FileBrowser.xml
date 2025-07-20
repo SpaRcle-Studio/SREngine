@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="27" column="9" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="28" column="9" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a756822722f568082f2e6e3407f03671d" prot="private" static="no">
         <type><ref refid="classSR__GRAPH__GUI__NS_1_1Widget" kindref="compound">SR_GRAPH_GUI_NS::Widget</ref></type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="28" column="9" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="29" column="9" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a1cc48d6a6b3c37a41e5b83603fe90d49" prot="private" static="no">
         <type>std::function&lt; void(const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;path)&gt;</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="29" column="9" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="30" column="9" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="30" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="57" column="17" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="57" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="58" column="17" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a00beae1763e0f21b666d32fdde39a46b" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="59" column="27" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="59" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="60" column="27" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1ad27398f51795f6b2607dafed04a6d9a7" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="60" column="27" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="60" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="61" column="27" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="61" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a6a3040f6984eef2ec05026baa6ea8d65" prot="private" static="no" mutable="no">
         <type>CallbackFn</type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="62" column="20" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="62" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="63" column="20" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="63" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a32644bf20d277dd2d6527c9e29893e30" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="64" column="17" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="64" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="65" column="17" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1aad487b99c15300826345a61b6235f381" prot="private" static="no" mutable="no">
         <type><ref refid="structSR__CORE__NS_1_1GUI_1_1FBFolder" kindref="compound">FBFolder</ref></type>
@@ -132,21 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="66" column="18" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="66" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a3771e0f40350f8b7c781ffb81a307d13" prot="private" static="no" mutable="no">
-        <type>std::map&lt; std::string, SR_GTYPES_NS::Texture::Ptr &gt;</type>
-        <definition>std::map&lt;std::string, SR_GTYPES_NS::Texture::Ptr&gt; SR_CORE_NS::GUI::FileBrowser::m_currentDirTextures</definition>
-        <argsstring></argsstring>
-        <name>m_currentDirTextures</name>
-        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::m_currentDirTextures</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="68" column="18" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="68" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="67" column="18" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="67" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a4039d5c88790b5ed6ec707ed6d8a621f" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -160,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="70" column="21" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="70" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="69" column="21" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="69" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a2dea14df3b860a439dd8aeba87571314" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -174,7 +160,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="71" column="21" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="71" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="70" column="21" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="70" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1ac21726c25521bb52894c513e4a9c5f58" prot="private" static="no" mutable="no">
         <type>std::list&lt; <ref refid="structSR__CORE__NS_1_1GUI_1_1FBElement" kindref="compound">FBElement</ref> &gt;</type>
@@ -188,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="73" column="19" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="73" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="72" column="19" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="72" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -204,7 +190,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="31" column="9"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="32" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a9927ee0ecd85fc23dcaf5e642f438d73" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -218,7 +204,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="32" column="9"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="33" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a199fe655e9d01a3b85db25031f89ed85" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -236,7 +222,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="35" column="14"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="36" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a7465e18614ac04e1da609024e9ce177c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -254,7 +240,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="36" column="14" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="36" bodyend="36"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="37" column="14" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="37" bodyend="37"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -271,7 +257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="39" column="14"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="40" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1ae3423bed7415c04a2199b2749bfabb79" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -286,7 +272,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="42" column="14"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="43" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a48f904bbbbd4a3d3915962b9e4d34fe3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -304,7 +290,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="43" column="14"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="44" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1af05ebff01f2883da79171d95a40b827d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -318,7 +304,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="44" column="14"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="45" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1ab8bf40ba295d55ef9447b822f15f5d32" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -332,7 +318,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="45" column="14"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="46" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a026915e321de53030e2a1e596e67811a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -346,7 +332,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="46" column="14"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="47" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1ae113fee515821b70b3615274e510a77e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -364,7 +350,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="47" column="14"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="48" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a3ac3c1cc6bf5f1d7c207212a36b3fd0e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -382,7 +368,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="48" column="14"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="49" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a6c77b350d196828590be6b83069de167" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -400,7 +386,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="49" column="14"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="50" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a36a1b14d310ff8a14c499e9ff37b4bac" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -418,7 +404,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="52" column="14"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="53" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a214227a288095ebc4b081d51143c6708" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -436,7 +422,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="53" column="14"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="54" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1ae38c6e43c6c47e654cd0e85b36cea0a4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -450,7 +436,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="54" column="14"/>
+        <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="55" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -529,7 +515,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="26" column="5" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="26" bodyend="74"/>
+    <location file="Engine/inc/Engine/GUI/FileBrowser.h" line="27" column="5" bodyfile="Engine/inc/Engine/GUI/FileBrowser.h" bodystart="27" bodyend="73"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a4a04e0628b5729444eca1c24a9011fa2" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>AddFlags</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1adb2cb15cb7a11b055f8659f1db8c5521" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>AddSubWidget</name></member>
@@ -569,7 +555,6 @@
       <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a214227a288095ebc4b081d51143c6708" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>LoadFoldersTree</name></member>
       <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a32644bf20d277dd2d6527c9e29893e30" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>m_assetWidth</name></member>
       <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a6a3040f6984eef2ec05026baa6ea8d65" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>m_callbackFunction</name></member>
-      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a3771e0f40350f8b7c781ffb81a307d13" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>m_currentDirTextures</name></member>
       <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a00beae1763e0f21b666d32fdde39a46b" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>m_defaultRoot</name></member>
       <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a2dea14df3b860a439dd8aeba87571314" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>m_dirtyFoldersTree</name></member>
       <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a4039d5c88790b5ed6ec707ed6d8a621f" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>m_dirtySelectedDir</name></member>

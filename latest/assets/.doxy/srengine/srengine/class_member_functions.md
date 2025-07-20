@@ -498,6 +498,7 @@
 * **DrawShaderProperty** ([**SR\_CORE\_GUI\_NS::MaterialDataPropertyDrawer**](classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer.md))
 * **DrawLeftPanel** ([**SR\_CORE\_GUI\_NS::RenderTechniqueEditor**](classSR__CORE__GUI__NS_1_1RenderTechniqueEditor.md), [**SR\_GRAPH\_GUI\_NS::NodeWidget**](classSR__GRAPH__GUI__NS_1_1NodeWidget.md))
 * **DrawTexture** ([**SR\_CORE\_GUI\_NS::SceneViewer**](classSR__CORE__GUI__NS_1_1SceneViewer.md))
+* **DestroyEditor** ([**SR\_CORE\_NS::Engine**](classSR__CORE__NS_1_1Engine.md))
 * **DrawMeshDrawerPass** ([**SR\_CORE\_NS::GUI::EngineStatistics**](classSR__CORE__NS_1_1GUI_1_1EngineStatistics.md))
 * **DrawRenderQueue** ([**SR\_CORE\_NS::GUI::EngineStatistics**](classSR__CORE__NS_1_1GUI_1_1EngineStatistics.md))
 * **DrawRenderTechnique** ([**SR\_CORE\_NS::GUI::EngineStatistics**](classSR__CORE__NS_1_1GUI_1_1EngineStatistics.md))

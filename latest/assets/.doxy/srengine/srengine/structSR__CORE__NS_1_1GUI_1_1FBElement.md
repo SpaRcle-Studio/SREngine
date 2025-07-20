@@ -39,6 +39,7 @@
 |  std::string | [**filename**](#variable-filename)  <br> |
 |  EditorIcon | [**iconType**](#variable-icontype)  <br> |
 |  bool | [**isDir**](#variable-isdir)  <br> |
+|  SR\_GTYPES\_NS::Texture::Ptr | [**pTexture**](#variable-ptexture)  <br> |
 
 
 
@@ -131,6 +132,19 @@ EditorIcon SR_CORE_NS::GUI::FBElement::iconType;
 
 ```C++
 bool SR_CORE_NS::GUI::FBElement::isDir;
+```
+
+
+
+
+<hr>
+
+
+
+### variable pTexture 
+
+```C++
+SR_GTYPES_NS::Texture::Ptr SR_CORE_NS::GUI::FBElement::pTexture;
 ```
 
 
