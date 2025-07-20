@@ -374,6 +374,10 @@ namespace SR_CORE_NS {
             m_editor->SetScene(m_engineScene->pScene);
         }
 
+        if (m_engineScene && m_engineScene->pScene) {
+            m_engineScene->pScene->GetEntityController()->SetActiveController();
+        }
+
         return true;
     }
 

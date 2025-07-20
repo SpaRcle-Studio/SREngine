@@ -25,10 +25,11 @@ namespace SR_CORE_NS::GUI {
 
     class FileBrowser : public SR_GRAPH_GUI_NS::Widget {
         using Hash = std::size_t;
+        using Super = SR_GRAPH_GUI_NS::Widget;
         using CallbackFn = std::function<void(const SR_UTILS_NS::Path& path)>;
     public:
         FileBrowser();
-        ~FileBrowser() override = default;
+        ~FileBrowser() override;
 
     public:
         void SetFolder(const SR_UTILS_NS::Path& path);
@@ -38,6 +39,7 @@ namespace SR_CORE_NS::GUI {
         void Draw() override;
 
     private:
+        void OnClose() override;
         void FileContextMenu(const std::string &element);
         void CurrentDirectoryContextMenu();
         void CurrentDirectoryPanel();
@@ -49,6 +51,7 @@ namespace SR_CORE_NS::GUI {
     private:
         void DrawFoldersTree(const FBFolder& parentFolder); // Отрисовка созданного дерева
         void LoadFoldersTree(FBFolder& parentFolder); // Создание дерева файлов и его кеширования
+        void FreeTextures();
 
     private:
         float_t m_itemsScale = 1.0f;
@@ -61,6 +64,8 @@ namespace SR_CORE_NS::GUI {
         float_t m_assetWidth = 0.0f;
 
         FBFolder m_foldersTree;
+
+        std::map<std::string, SR_GTYPES_NS::Texture::Ptr> m_currentDirTextures;
 
         std::atomic<bool> m_dirtySelectedDir;
         std::atomic<bool> m_dirtyFoldersTree;

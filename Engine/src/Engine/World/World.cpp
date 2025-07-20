@@ -118,7 +118,7 @@ namespace SR_CORE_NS {
         if (pSkeleton) {
             root->AddComponent(pSkeleton.StaticCast<SR_UTILS_NS::Component>());
             for (auto&& pSkinnedMesh : skinnedMeshes) {
-                pSkinnedMesh->GetSkeleton().SetPathTo(pSkeleton.StaticCast<SR_UTILS_NS::Entity>());
+                pSkinnedMesh->GetSkeletonRef().SetEntityId(pSkeleton->GetEntityId());
             }
         }
     #endif

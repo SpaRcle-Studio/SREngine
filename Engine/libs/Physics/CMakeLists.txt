@@ -15,6 +15,8 @@ add_definitions(
     -DFLAC__NO_DLL
 )
 
+SRUseAssimpIfPossible(Physics)
+
 # ----------------------------------------------------------------------------------------------------------------------
 if (SR_PHYSICS_USE_BOX2D)
     add_compile_definitions(SR_PHYSICS_USE_BOX2D)

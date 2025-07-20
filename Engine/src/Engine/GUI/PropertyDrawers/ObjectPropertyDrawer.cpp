@@ -94,6 +94,13 @@ namespace SR_CORE_GUI_NS {
                         inspector = GetValueInspector(property.Get(pClassValue));
                     }
 
+                    if (inspector == ObjectPropertyDrawer::GetClassStaticName()) {
+                        /// возможно, это не безопасно, и может привести к UB
+                        if (SR_UTILS_NS::SRClass* pValueClass = property.Get(pClassValue).GetSRClass()) {
+                            inspector = pValueClass->GetMeta()->GetInspectorName();
+                        }
+                    }
+
                     if (inspector.Empty()) {
                         SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Missing inspector for element!");
                         return;

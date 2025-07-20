@@ -19,6 +19,10 @@ namespace SR_CORE_NS::GUI {
         : Widget("Assets")
     { }
 
+    FileBrowser::~FileBrowser() {
+        FreeTextures();
+    }
+
     void FileBrowser::SetFolder(const SR_UTILS_NS::Path &path) {
         m_selectedDir = m_defaultRoot = path;
         m_dirtySelectedDir = true;
@@ -47,6 +51,9 @@ namespace SR_CORE_NS::GUI {
 
     void FileBrowser::CacheElements(const SR_UTILS_NS::Path& root) {
         m_elements.clear();
+
+        FreeTextures();
+
         for (const auto &path : root.GetAll()) {
             if (path.GetBaseName().empty()) {
                 continue;
@@ -89,16 +96,26 @@ namespace SR_CORE_NS::GUI {
                     current.iconType = Core::EditorIcon::Prefab;
                 } else if (extension == "sras") {
                     current.iconType = Core::EditorIcon::Asset;
+                } else if (extension == "scene") {
+                    current.iconType = Core::EditorIcon::Scene;
                 } else if (extension == "cpp" || extension == "h" || extension == "hpp") {
                     current.iconType = Core::EditorIcon::Script;
                 } else if (extension == "xml") {
                     current.iconType = Core::EditorIcon::XML;
                 } else if (extension == "png") {
                     current.iconType = Core::EditorIcon::PNG;
-                } else if (extension == "dll") {
+                }
+                else if (extension == "dll") {
                     current.iconType = Core::EditorIcon::DLL;
                 } else {
                     current.iconType = Core::EditorIcon::File;
+                }
+
+                if (extension == "png" || extension == "jpg") {
+                    if (auto&& pTexture = SR_GTYPES_NS::Texture::Load(path)) {
+                        pTexture->AddUsePoint();
+                        m_currentDirTextures[current.filename] = pTexture;
+                    }
                 }
                 
                 m_elements.emplace_back(current);
@@ -291,7 +308,15 @@ namespace SR_CORE_NS::GUI {
                     FileContextMenu(element.filename);
                 }
                 else {
-                    void* descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.iconType);
+                    void* descriptor = nullptr;
+
+                    if (auto&& pIt = m_currentDirTextures.find(element.filename); pIt != m_currentDirTextures.end()) {
+                        descriptor = pIt->second->GetDescriptor();
+                    }
+
+                    if (!descriptor) {
+                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.iconType);
+                    }
 
                     if (SR_GRAPH_GUI_NS::Immediate::ImageButtonDouble(headerid, descriptor, SR_MATH_NS::FVector2(iconSize), iconSize / 3.f)) {
                         SR_UTILS_NS::Path path = m_selectedDir.Concat(element.filename);
@@ -396,7 +421,26 @@ namespace SR_CORE_NS::GUI {
                 }
                 return;
             }
+            else if (path.GetExtensionView() == SR_UTILS_NS::Prefab::EXTENSION || path.GetExtensionView() == "scene") {
+                auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+                if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(path)) {
+                    pEngine->AddSceneToQueue(pScene);
+                }
+                return;
+            }
             SR_UTILS_NS::Platform::OpenWithAssociatedApp(path);
         }
+    }
+
+    void FileBrowser::FreeTextures() {
+        for (auto&& [path, pTexture] : m_currentDirTextures) {
+            pTexture->RemoveUsePoint();
+        }
+        m_currentDirTextures.clear();
+    }
+
+    void FileBrowser::OnClose() {
+        FreeTextures();
+        Super::OnClose();
     }
 }

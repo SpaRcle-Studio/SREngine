@@ -4,6 +4,8 @@
 
 #include <Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.h>
 
+#include <Utils/Events/Broadcaster.h>
+
 #include <Scripting/Base/Behaviour.h>
 #include <Scripting/Cpp/CppBehaviour.h>
 #include <Scripting/Cpp/ModuleManager.h>

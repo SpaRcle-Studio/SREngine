@@ -75,6 +75,8 @@ add_compile_definitions(SR_COMMON_GIT_METADATA)
 message(STATUS "SpaRcle Engine: CONFIGURING Utils")
 add_subdirectory(libs/Utils)
 
+SRUseAssimpIfPossible(Engine)
+
 if (NOT SR_EMSCRIPTEN AND NOT SR_COMMON_USE_CLANG_EMULATION)
     set(SR_PHYSICS_USE_PHYSX ON)
 else()
@@ -97,6 +99,7 @@ set(SR_ENGINE_CORE_SOURCES
     ${CORE_ROOT_DIR}/cxx/Codegen.cxx
     ${CORE_ROOT_DIR}/cxx/States.cxx
     ${CORE_ROOT_DIR}/cxx/Tests.cxx
+    ${CORE_ROOT_DIR}/cxx/PropertyDrawers.cxx
     ${CORE_ROOT_DIR}/src/Engine/EntryPoint.cpp
 )
 

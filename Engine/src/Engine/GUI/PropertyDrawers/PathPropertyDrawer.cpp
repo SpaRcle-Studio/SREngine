@@ -4,6 +4,8 @@
 
 #include <Engine/GUI/PropertyDrawers/PathPropertyDrawer.h>
 
+#include <Utils/FileSystem/FileDialog.h>
+
 #include <Codegen/PathPropertyDrawer.generated.hpp>
 
 namespace SR_CORE_GUI_NS {

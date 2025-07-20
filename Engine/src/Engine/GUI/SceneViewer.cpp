@@ -66,8 +66,8 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
                 m_platform->GetTransform()->SetScale(5.f, 1.f, 5.f);
+                m_platform->AddEditorFlags(SR_UTILS_NS::EditorFlags::Hidden);
             }
-            m_platform->AddEditorFlags(SR_UTILS_NS::EditorFlags::Hidden);
         }
 
         if (!m_camera) {
