@@ -415,7 +415,7 @@ namespace SR_CORE_NS::GUI {
             m_callbackFunction = CallbackFn();
         }
         else {
-            if (path.GetExtensionView() == SR_UTILS_NS::Asset::EXTENSION_NAME) {
+            if (path.GetExtensionView() == SR_UTILS_NS::Asset::EXTENSION_NAME || path.GetExtensionView() == "mat") {
                 if (auto&& pAssetInspector = GetManager()->GetWidget<AssetInspector>()) {
                     pAssetInspector->Inspect(path);
                 }
