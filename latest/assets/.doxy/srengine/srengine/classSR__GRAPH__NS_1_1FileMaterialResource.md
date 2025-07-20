@@ -13,7 +13,7 @@
 
 
 
-Inherits the following classes: [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
+Inherits the following classes: [SR\_UTILS\_NS::Asset](classSR__UTILS__NS_1_1Asset.md)
 
 
 
@@ -33,6 +33,16 @@ Inherits the following classes: [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_
 | Type | Name |
 | ---: | :--- |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**FileMaterialResource**](classSR__GRAPH__NS_1_1FileMaterialResource.md) &gt; | [**Ptr**](#typedef-ptr)  <br> |
+
+
+## Public Types inherited from SR_UTILS_NS::Asset
+
+See [SR\_UTILS\_NS::Asset](classSR__UTILS__NS_1_1Asset.md)
+
+| Type | Name |
+| ---: | :--- |
+| typedef [**Asset**](classSR__UTILS__NS_1_1Asset.md) | [**OriginType**](classSR__UTILS__NS_1_1Asset.md#typedef-origintype)  <br> |
+| typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Asset**](classSR__UTILS__NS_1_1Asset.md) &gt; | [**Ptr**](classSR__UTILS__NS_1_1Asset.md#typedef-ptr)  <br> |
 
 
 ## Public Types inherited from SR_UTILS_NS::IResource
@@ -98,6 +108,10 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 
 
 
+
+
+
+
 ## Public Attributes inherited from SR_UTILS_NS::IResource
 
 See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
@@ -108,6 +122,27 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  SR\_INLINE\_STATIC const [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**RELOAD\_DONE\_EVENT**](classSR__UTILS__NS_1_1IResource.md#variable-reload_done_event)   = `"ReloadDone"`<br> |
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Public Static Attributes inherited from SR_UTILS_NS::Asset
+
+See [SR\_UTILS\_NS::Asset](classSR__UTILS__NS_1_1Asset.md)
+
+| Type | Name |
+| ---: | :--- |
+|  SR\_INLINE const char \* | [**EXTENSION\_NAME**](classSR__UTILS__NS_1_1Asset.md#variable-extension_name)   = `"sras"`<br> |
 
 
 
@@ -238,6 +273,19 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 | ---: | :--- |
 |   | [**FileMaterialResource**](#function-filematerialresource) () <br> |
 |  SR\_NODISCARD const SR\_GRAPH\_NS::MaterialData::Ptr & | [**GetData**](#function-getdata) () noexcept const<br> |
+|  void | [**SetData**](#function-setdata) (const SR\_GRAPH\_NS::MaterialData::Ptr & pData) noexcept<br> |
+
+
+## Public Functions inherited from SR_UTILS_NS::Asset
+
+See [SR\_UTILS\_NS::Asset](classSR__UTILS__NS_1_1Asset.md)
+
+| Type | Name |
+| ---: | :--- |
+|  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; AssetT &gt; | [**CreateNew**](classSR__UTILS__NS_1_1Asset.md#function-createnew-12) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & rawPath) <br> |
+|  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; AssetT &gt; | [**Load**](classSR__UTILS__NS_1_1Asset.md#function-load-13) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
+|  SR\_NODISCARD bool | [**SaveAsset**](classSR__UTILS__NS_1_1Asset.md#function-saveasset-12) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) const<br> |
+|  SR\_NODISCARD bool | [**SaveAsset**](classSR__UTILS__NS_1_1Asset.md#function-saveasset-22) () const<br> |
 
 
 ## Public Functions inherited from SR_UTILS_NS::IResource
@@ -262,9 +310,11 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  SR\_NODISCARD ResourceInfoWeakPtr | [**GetResourceInfo**](classSR__UTILS__NS_1_1IResource.md#function-getresourceinfo) () noexcept const<br> |
 |  SR\_NODISCARD LoadState | [**GetResourceLoadState**](classSR__UTILS__NS_1_1IResource.md#function-getresourceloadstate) () const<br> |
 |  SR\_NODISCARD [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**GetResourcePath**](classSR__UTILS__NS_1_1IResource.md#function-getresourcepath) () const<br> |
+| virtual SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetResourceType**](classSR__UTILS__NS_1_1IResource.md#function-getresourcetype) () noexcept const<br> |
 |   | [**IResource**](classSR__UTILS__NS_1_1IResource.md#function-iresource) () <br> |
 | virtual SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**InitializeResourcePath**](classSR__UTILS__NS_1_1IResource.md#function-initializeresourcepath) () const<br> |
 |  SR\_NODISCARD bool | [**IsAlive**](classSR__UTILS__NS_1_1IResource.md#function-isalive) () const<br> |
+| virtual SR\_NODISCARD bool | [**IsAllowedMultiInstance**](classSR__UTILS__NS_1_1IResource.md#function-isallowedmultiinstance) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsAllowedToRevive**](classSR__UTILS__NS_1_1IResource.md#function-isallowedtorevive) () const<br> |
 |  SR\_NODISCARD bool | [**IsDestroyed**](classSR__UTILS__NS_1_1IResource.md#function-isdestroyed) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsFileResource**](classSR__UTILS__NS_1_1IResource.md#function-isfileresource) () noexcept const<br>_является ли ресурс файловым_  |
@@ -418,7 +468,16 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 | Type | Name |
 | ---: | :--- |
 |  SR\_NODISCARD bool | [**CreateTemplateMaterial**](#function-createtemplatematerial) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
-|  SR\_NODISCARD FileMaterialResource::Ptr | [**Load**](#function-load-12) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & rawPath) <br> |
+
+
+## Public Static Functions inherited from SR_UTILS_NS::Asset
+
+See [SR\_UTILS\_NS::Asset](classSR__UTILS__NS_1_1Asset.md)
+
+| Type | Name |
+| ---: | :--- |
+|  SR\_NODISCARD [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; AssetT &gt; | [**CreateNew**](classSR__UTILS__NS_1_1Asset.md#function-createnew-22) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
+|  SR\_NODISCARD [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; AssetT &gt; | [**Load**](classSR__UTILS__NS_1_1Asset.md#function-load-23) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 
 
 
@@ -451,6 +510,12 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetClassStaticName**](classSR__UTILS__NS_1_1SRClass.md#function-getclassstaticname) () noexcept<br> |
 |  const [**SR\_UTILS\_NS::SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \* | [**GetMetaStatic**](classSR__UTILS__NS_1_1SRClass.md#function-getmetastatic) () noexcept<br> |
 |  bool | [**RegisterPropertiesCodegen**](classSR__UTILS__NS_1_1SRClass.md#function-registerpropertiescodegen) () <br> |
+
+
+
+
+
+
 
 
 
@@ -637,6 +702,31 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+## Protected Functions inherited from SR_UTILS_NS::Asset
+
+See [SR\_UTILS\_NS::Asset](classSR__UTILS__NS_1_1Asset.md)
+
+| Type | Name |
+| ---: | :--- |
+| virtual bool | [**Load**](classSR__UTILS__NS_1_1Asset.md#function-load-33) () override<br> |
+| virtual void | [**OnAssetLoaded**](classSR__UTILS__NS_1_1Asset.md#function-onassetloaded) () <br> |
+| virtual bool | [**Unload**](classSR__UTILS__NS_1_1Asset.md#function-unload) () override<br> |
+
+
+
+
 ## Protected Functions inherited from SR_UTILS_NS::ResourceContainer
 
 See [SR\_UTILS\_NS::ResourceContainer](classSR__UTILS__NS_1_1ResourceContainer.md)
@@ -645,6 +735,8 @@ See [SR\_UTILS\_NS::ResourceContainer](classSR__UTILS__NS_1_1ResourceContainer.m
 | ---: | :--- |
 | virtual void | [**OnResourceUpdated**](classSR__UTILS__NS_1_1ResourceContainer.md#function-onresourceupdated) ([**ResourceContainer**](classSR__UTILS__NS_1_1ResourceContainer.md) \* pContainer, int32\_t depth) <br> |
 |  void | [**UpdateResources**](classSR__UTILS__NS_1_1ResourceContainer.md#function-updateresources) (int32\_t depth=0) <br> |
+
+
 
 
 
@@ -716,6 +808,21 @@ inline SR_NODISCARD const SR_GRAPH_NS::MaterialData::Ptr & SR_GRAPH_NS::FileMate
 
 
 <hr>
+
+
+
+### function SetData 
+
+```C++
+inline void SR_GRAPH_NS::FileMaterialResource::SetData (
+    const SR_GRAPH_NS::MaterialData::Ptr & pData
+) noexcept
+```
+
+
+
+
+<hr>
 ## Public Static Functions Documentation
 
 
@@ -726,21 +833,6 @@ inline SR_NODISCARD const SR_GRAPH_NS::MaterialData::Ptr & SR_GRAPH_NS::FileMate
 ```C++
 static SR_NODISCARD bool SR_GRAPH_NS::FileMaterialResource::CreateTemplateMaterial (
     const SR_UTILS_NS::Path & path
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function Load [1/2]
-
-```C++
-static SR_NODISCARD FileMaterialResource::Ptr SR_GRAPH_NS::FileMaterialResource::Load (
-    const SR_UTILS_NS::Path & rawPath
 ) 
 ```
 

@@ -16,7 +16,7 @@
 Inherits the following classes: [SR\_UTILS\_NS::ResourceContainer](classSR__UTILS__NS_1_1ResourceContainer.md),  [SR\_UTILS\_NS::SubscriptionHolder](classSR__UTILS__NS_1_1SubscriptionHolder.md),  [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 
 
-Inherited by the following classes: [SR\_ANIMATIONS\_NS::AnimationClip](classSR__ANIMATIONS__NS_1_1AnimationClip.md),  [SR\_AUDIO\_NS::RawSound](classSR__AUDIO__NS_1_1RawSound.md),  [SR\_AUDIO\_NS::Sound](classSR__AUDIO__NS_1_1Sound.md),  [SR\_GRAPH\_NS::FileMaterialResource](classSR__GRAPH__NS_1_1FileMaterialResource.md),  [SR\_GTYPES\_NS::Font](classSR__GTYPES__NS_1_1Font.md),  [SR\_GTYPES\_NS::Framebuffer](classSR__GTYPES__NS_1_1Framebuffer.md),  [SR\_GTYPES\_NS::Shader](classSR__GTYPES__NS_1_1Shader.md),  [SR\_GTYPES\_NS::Skybox](classSR__GTYPES__NS_1_1Skybox.md),  [SR\_GTYPES\_NS::Texture](classSR__GTYPES__NS_1_1Texture.md),  [SR\_SRLM\_NS::LogicalMachine](classSR__SRLM__NS_1_1LogicalMachine.md),  [SR\_UTILS\_NS::Asset](classSR__UTILS__NS_1_1Asset.md),  [SR\_UTILS\_NS::Prefab](classSR__UTILS__NS_1_1Prefab.md)
+Inherited by the following classes: [SR\_ANIMATIONS\_NS::AnimationClip](classSR__ANIMATIONS__NS_1_1AnimationClip.md),  [SR\_AUDIO\_NS::RawSound](classSR__AUDIO__NS_1_1RawSound.md),  [SR\_AUDIO\_NS::Sound](classSR__AUDIO__NS_1_1Sound.md),  [SR\_GTYPES\_NS::Font](classSR__GTYPES__NS_1_1Font.md),  [SR\_GTYPES\_NS::Framebuffer](classSR__GTYPES__NS_1_1Framebuffer.md),  [SR\_GTYPES\_NS::Shader](classSR__GTYPES__NS_1_1Shader.md),  [SR\_GTYPES\_NS::Skybox](classSR__GTYPES__NS_1_1Skybox.md),  [SR\_GTYPES\_NS::Texture](classSR__GTYPES__NS_1_1Texture.md),  [SR\_SRLM\_NS::LogicalMachine](classSR__SRLM__NS_1_1LogicalMachine.md),  [SR\_UTILS\_NS::Asset](classSR__UTILS__NS_1_1Asset.md),  [SR\_UTILS\_NS::Prefab](classSR__UTILS__NS_1_1Prefab.md)
 
 
 
@@ -224,9 +224,11 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 |  SR\_NODISCARD ResourceInfoWeakPtr | [**GetResourceInfo**](#function-getresourceinfo) () noexcept const<br> |
 |  SR\_NODISCARD LoadState | [**GetResourceLoadState**](#function-getresourceloadstate) () const<br> |
 |  SR\_NODISCARD [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**GetResourcePath**](#function-getresourcepath) () const<br> |
+| virtual SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetResourceType**](#function-getresourcetype) () noexcept const<br> |
 |   | [**IResource**](#function-iresource) () <br> |
 | virtual SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**InitializeResourcePath**](#function-initializeresourcepath) () const<br> |
 |  SR\_NODISCARD bool | [**IsAlive**](#function-isalive) () const<br> |
+| virtual SR\_NODISCARD bool | [**IsAllowedMultiInstance**](#function-isallowedmultiinstance) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsAllowedToRevive**](#function-isallowedtorevive) () const<br> |
 |  SR\_NODISCARD bool | [**IsDestroyed**](#function-isdestroyed) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsFileResource**](#function-isfileresource) () noexcept const<br>_является ли ресурс файловым_  |
@@ -910,6 +912,19 @@ SR_NODISCARD SR_UTILS_NS::Path SR_UTILS_NS::IResource::GetResourcePath () const
 
 
 
+### function GetResourceType 
+
+```C++
+virtual SR_NODISCARD SR_UTILS_NS::StringAtom SR_UTILS_NS::IResource::GetResourceType () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
 ### function IResource 
 
 ```C++
@@ -940,6 +955,19 @@ virtual SR_NODISCARD Path SR_UTILS_NS::IResource::InitializeResourcePath () cons
 
 ```C++
 inline SR_NODISCARD bool SR_UTILS_NS::IResource::IsAlive () const
+```
+
+
+
+
+<hr>
+
+
+
+### function IsAllowedMultiInstance 
+
+```C++
+inline virtual SR_NODISCARD bool SR_UTILS_NS::IResource::IsAllowedMultiInstance () const
 ```
 
 

@@ -62,6 +62,8 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD virtual bool IsFileResource() const noexcept { return true; }
 
+        SR_NODISCARD virtual bool IsAllowedMultiInstance() const { return false; }
+
         SR_NODISCARD virtual uint64_t GetFileHash() const;
         SR_NODISCARD virtual bool IsAllowedToRevive() const { return false; }
         SR_NODISCARD virtual Path GetAssociatedPath() const;
@@ -75,6 +77,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD uint16_t GetReloadCount() const noexcept;
         SR_NODISCARD uint64_t GetLifetime() const noexcept { return m_lifetime; }
         SR_NODISCARD SR_UTILS_NS::StringAtom GetResourceId() const noexcept;
+        SR_NODISCARD virtual SR_UTILS_NS::StringAtom GetResourceType() const noexcept;
         SR_NODISCARD LoadState GetResourceLoadState() const { return m_loadState; }
         SR_NODISCARD uint64_t GetResourceHash() const noexcept { return m_resourceHash; }
         SR_NODISCARD ResourceInfoWeakPtr GetResourceInfo() const noexcept { return m_resourceInfo; }

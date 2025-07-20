@@ -235,10 +235,10 @@
         <childnode refid="17" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="34">
+      <node id="41">
         <label>SR_GRAPH_NS::FileMaterialResource</label>
         <link refid="classSR__GRAPH__NS_1_1FileMaterialResource"/>
-        <childnode refid="30" relation="public-inheritance">
+        <childnode refid="40" relation="public-inheritance">
         </childnode>
       </node>
       <node id="10">
@@ -318,7 +318,7 @@
         <link refid="classSR__GRAPH__NS_1_1ScriptableRenderTechnique"/>
         <childnode refid="9" relation="public-inheritance">
         </childnode>
-        <childnode refid="40" relation="public-inheritance">
+        <childnode refid="39" relation="public-inheritance">
         </childnode>
       </node>
       <node id="17">
@@ -363,31 +363,31 @@
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="35">
+      <node id="34">
         <label>SR_GTYPES_NS::Font</label>
         <link refid="classSR__GTYPES__NS_1_1Font"/>
         <childnode refid="30" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="36">
+      <node id="35">
         <label>SR_GTYPES_NS::Framebuffer</label>
         <link refid="classSR__GTYPES__NS_1_1Framebuffer"/>
         <childnode refid="30" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="37">
+      <node id="36">
         <label>SR_GTYPES_NS::Shader</label>
         <link refid="classSR__GTYPES__NS_1_1Shader"/>
         <childnode refid="30" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="38">
+      <node id="37">
         <label>SR_GTYPES_NS::Skybox</label>
         <link refid="classSR__GTYPES__NS_1_1Skybox"/>
         <childnode refid="30" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="39">
+      <node id="38">
         <label>SR_GTYPES_NS::Texture</label>
         <link refid="classSR__GTYPES__NS_1_1Texture"/>
         <childnode refid="30" relation="public-inheritance">
@@ -406,16 +406,16 @@
       <node id="42">
         <label>SR_PTYPES_NS::PhysicsMaterial</label>
         <link refid="classSR__PTYPES__NS_1_1PhysicsMaterial"/>
-        <childnode refid="41" relation="public-inheritance">
+        <childnode refid="40" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="40">
+      <node id="39">
         <label>SR_SRLM_NS::LogicalMachine</label>
         <link refid="classSR__SRLM__NS_1_1LogicalMachine"/>
         <childnode refid="30" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="41">
+      <node id="40">
         <label>SR_UTILS_NS::Asset</label>
         <link refid="classSR__UTILS__NS_1_1Asset"/>
         <childnode refid="30" relation="public-inheritance">
@@ -442,7 +442,7 @@
       <node id="43">
         <label>SR_UTILS_NS::TestManagerAsset</label>
         <link refid="classSR__UTILS__NS_1_1TestManagerAsset"/>
-        <childnode refid="41" relation="public-inheritance">
+        <childnode refid="40" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>

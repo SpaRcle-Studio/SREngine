@@ -2,11 +2,11 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__GRAPH__NS_1_1FileMaterialResource" kind="class" language="C++" prot="public" final="yes">
     <compoundname>SR_GRAPH_NS::FileMaterialResource</compoundname>
-    <basecompoundref refid="classSR__UTILS__NS_1_1IResource" prot="public" virt="non-virtual">SR_UTILS_NS::IResource</basecompoundref>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Asset" prot="public" virt="non-virtual">SR_UTILS_NS::Asset</basecompoundref>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1FileMaterialResource_1ac3ec732f8a54d5aeb8f7eb9712cd1583" prot="private" static="no">
-        <type><ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">SR_UTILS_NS::IResource</ref></type>
-        <definition>using SR_GRAPH_NS::FileMaterialResource::Super =  SR_UTILS_NS::IResource</definition>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1FileMaterialResource_1a9960a62e7292c9d98dd37f5cdb062f99" prot="private" static="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Asset" kindref="compound">SR_UTILS_NS::Asset</ref></type>
+        <definition>using SR_GRAPH_NS::FileMaterialResource::Super =  SR_UTILS_NS::Asset</definition>
         <argsstring></argsstring>
         <name>Super</name>
         <qualifiedname>SR_GRAPH_NS::FileMaterialResource::Super</qualifiedname>
@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" line="12" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" bodystart="12" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" line="15" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" bodystart="15" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" line="14" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" line="17" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" bodystart="17" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" line="17" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" line="20" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FileMaterialResource_1a273c546a1ac43057bf0d266bdf0c8e60" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const SR_GRAPH_NS::MaterialData::Ptr &amp;</type>
@@ -78,7 +78,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" line="24" column="59" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" bodystart="24" bodyend="24"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" line="26" column="59" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" bodystart="26" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1FileMaterialResource_1a3c4774d63c2dfa5ba261c49ed99e1fa1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::FileMaterialResource::SetData</definition>
+        <argsstring>(const SR_GRAPH_NS::MaterialData::Ptr &amp;pData) noexcept</argsstring>
+        <name>SetData</name>
+        <qualifiedname>SR_GRAPH_NS::FileMaterialResource::SetData</qualifiedname>
+        <param>
+          <type>const SR_GRAPH_NS::MaterialData::Ptr &amp;</type>
+          <declname>pData</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" line="27" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" bodystart="27" bodyend="27"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -98,57 +116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" line="20" column="34"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1FileMaterialResource_1a9bec483fa04844e45407594ce30e82b3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD FileMaterialResource::Ptr</type>
-        <definition>static SR_NODISCARD FileMaterialResource::Ptr SR_GRAPH_NS::FileMaterialResource::Load</definition>
-        <argsstring>(const SR_UTILS_NS::Path &amp;rawPath)</argsstring>
-        <name>Load</name>
-        <qualifiedname>SR_GRAPH_NS::FileMaterialResource::Load</qualifiedname>
-        <param>
-          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
-          <declname>rawPath</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" line="21" column="55"/>
-      </memberdef>
-    </sectiondef>
-    <sectiondef kind="private-func">
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1FileMaterialResource_1a55656fa5871721de5df9d1cb2e0a7918" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type>bool</type>
-        <definition>bool SR_GRAPH_NS::FileMaterialResource::Load</definition>
-        <argsstring>() override</argsstring>
-        <name>Load</name>
-        <qualifiedname>SR_GRAPH_NS::FileMaterialResource::Load</qualifiedname>
-        <reimplements refid="classSR__UTILS__NS_1_1IResource_1a88e5a84b8ca231eff9e93904fe2543c5">Load</reimplements>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" line="27" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1FileMaterialResource_1aa3a0ed76b5e1fe60a086f2c93e8c4fd1" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type>bool</type>
-        <definition>bool SR_GRAPH_NS::FileMaterialResource::Unload</definition>
-        <argsstring>() override</argsstring>
-        <name>Unload</name>
-        <qualifiedname>SR_GRAPH_NS::FileMaterialResource::Unload</qualifiedname>
-        <reimplements refid="classSR__UTILS__NS_1_1IResource_1aace2e1cee108563a8d9fa93adadade9b">Unload</reimplements>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" line="28" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" line="23" column="34"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -162,89 +130,36 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="4">
+      <node id="5">
         <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="5" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="5">
-        <label>SR_HTYPES_NS::SharedPtrBase</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
-      </node>
-      <node id="2">
-        <label>SR_UTILS_NS::IResource</label>
-        <link refid="classSR__UTILS__NS_1_1IResource"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
         <childnode refid="6" relation="public-inheritance">
         </childnode>
-        <childnode refid="7" relation="public-inheritance">
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Asset</label>
+        <link refid="classSR__UTILS__NS_1_1Asset"/>
+        <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
-        <label>SR_UTILS_NS::ResourceContainer</label>
-        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <label>SR_UTILS_NS::IResource</label>
+        <link refid="classSR__UTILS__NS_1_1IResource"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
-      </node>
-      <node id="8">
-        <label>SR_UTILS_NS::SRClass</label>
-        <link refid="classSR__UTILS__NS_1_1SRClass"/>
-      </node>
-      <node id="7">
-        <label>SR_UTILS_NS::Serializable</label>
-        <link refid="classSR__UTILS__NS_1_1Serializable"/>
-        <childnode refid="8" relation="public-inheritance">
+        <childnode refid="7" relation="public-inheritance">
         </childnode>
-      </node>
-      <node id="6">
-        <label>SR_UTILS_NS::SubscriptionHolder</label>
-        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
-      </node>
-    </inheritancegraph>
-    <collaborationgraph>
-      <node id="1">
-        <label>SR_GRAPH_NS::FileMaterialResource</label>
-        <link refid="classSR__GRAPH__NS_1_1FileMaterialResource"/>
-        <childnode refid="2" relation="public-inheritance">
+        <childnode refid="8" relation="public-inheritance">
         </childnode>
       </node>
       <node id="4">
-        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="5" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="5">
-        <label>SR_HTYPES_NS::SharedPtrBase</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
-        <childnode refid="6" relation="usage">
-          <edgelabel>m_data</edgelabel>
-        </childnode>
-      </node>
-      <node id="6">
-        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
-        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
-      </node>
-      <node id="2">
-        <label>SR_UTILS_NS::IResource</label>
-        <link refid="classSR__UTILS__NS_1_1IResource"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-        <childnode refid="7" relation="public-inheritance">
-        </childnode>
-        <childnode refid="8" relation="public-inheritance">
-        </childnode>
-        <childnode refid="10" relation="usage">
-          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
-          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
-        </childnode>
-      </node>
-      <node id="3">
         <label>SR_UTILS_NS::ResourceContainer</label>
         <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
-        <childnode refid="4" relation="public-inheritance">
+        <childnode refid="5" relation="public-inheritance">
         </childnode>
       </node>
       <node id="9">
@@ -257,16 +172,81 @@
         <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="10">
-        <label>SR_UTILS_NS::StringAtom</label>
-        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
-      </node>
       <node id="7">
         <label>SR_UTILS_NS::SubscriptionHolder</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::FileMaterialResource</label>
+        <link refid="classSR__GRAPH__NS_1_1FileMaterialResource"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Asset</label>
+        <link refid="classSR__UTILS__NS_1_1Asset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::IResource</label>
+        <link refid="classSR__UTILS__NS_1_1IResource"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
+          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::ResourceContainer</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="9">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+      <node id="8">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" line="11" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" bodystart="11" bodyend="33"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" line="13" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/FileMaterial.h" bodystart="13" bodyend="33"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1af9087ca5182397a9c7d3b92fb5591523" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>AddDependency</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>AddSerializationFlags</name></member>
@@ -277,12 +257,15 @@
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a459ed22e0064b69639129562ea9aad38" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Broadcast</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a543a91c5e997ad287249110180f9cea2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Broadcast</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a6aad227ccd12d3dd92ac9010ba6ac404" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>CheckResourceUsage</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1a149c0fd2cf25a101eb8f8c4e8f1796ce" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>CreateNew</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1aadb6e03703c9ff6d510dfaab757451fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>CreateNew</name></member>
       <member refid="classSR__GRAPH__NS_1_1FileMaterialResource_1a42a4f4e8e170f9560a2b2657974c9637" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>CreateTemplateMaterial</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>DecrementPointer</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a1321f66c455d7f59eebb314fe2c83062" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>DeleteResource</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a700794249e341d5228920451cedf9ee7" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Destroy</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>DynamicCast</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a5dd9749c79cb65452e9e4d10efda42f8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Execute</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1a0d4fff684ea928b986f9ee3de5b3af2a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>EXTENSION_NAME</name></member>
       <member refid="classSR__GRAPH__NS_1_1FileMaterialResource_1a7e850e616502f004c9078b98a2619314" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>FileMaterialResource</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a56bb33e9f5864b6fa62e473389a517b7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>ForceDestroy</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Get</name></member>
@@ -307,6 +290,7 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1abbc56086aaf55e5a1ec9788dcecee316" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>GetResourceInfo</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ac663dc33feca74c372905c497dae10d0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>GetResourceLoadState</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a4aff4255b8a8bcf7b1424927b450b274" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>GetResourcePath</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1aeba9dea35c61deaebe82cdda4ea7559e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>GetResourceType</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>GetSRClass</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>GetThis</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>GetUncheckedRef</name></member>
@@ -317,6 +301,7 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1a9035e8e13821bbcf09633e80365d0643" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>InitializeResourcePath</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ac810662984eb60e0bea8b08e455ea2a2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>IResource</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ad94ef18d58f13582b7411b749ae81089" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>IsAlive</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a7f41c08e67a57cca18fb3b2c2c350768" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>IsAllowedMultiInstance</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a6ad69fde6a46a6f50fab83b27b3db5b0" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>IsAllowedToRevive</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a47131cd914c3a6c8a7c03a4764559716" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>IsDestroyed</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a91fdfb42142b2e37139e4742442a2fee" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>IsFileResource</name></member>
@@ -326,8 +311,9 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1aee782635ef745075e9776c3f667904a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>IsResourceFromMemory</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a3656bd90f2dfdf9f0df66098d72b2058" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>IsResourceWillBeDeleted</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a6c232e1ee7d10fd08a637cdb85da789b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Kill</name></member>
-      <member refid="classSR__GRAPH__NS_1_1FileMaterialResource_1a9bec483fa04844e45407594ce30e82b3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Load</name></member>
-      <member refid="classSR__GRAPH__NS_1_1FileMaterialResource_1a55656fa5871721de5df9d1cb2e0a7918" prot="private" virt="virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Load</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1a31ef8f792e6c96ff93a01defb07b5af3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Load</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1ad242cbf64717dcaee131a89411d489a6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Load</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1a5a22f80bda8941e508875eb30553d80b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Load</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1afbc9947b694481f8478c1a75a2fc465e" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Serializable::"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Load</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a0183032aa64809526edb04282f504e4b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>LoadState</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>m_basicManually</name></member>
@@ -339,6 +325,7 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1a8600327689c36a9c20b5ae589acd4cfa" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>m_loadState</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1afb7bbbb99bc610ce2ec7c9eeefffca59" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>m_watchers</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>MakeShared</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1af82dec72f353a197667fa49266d3c74b" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>OnAssetLoaded</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a27569f8d47ee0c52ed5e385253e14460" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>OnPostLoad</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1afbe2a50f0f69bc0f52b51151058830d8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>OnPostSave</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a2978d969c09702719b2ed5c84453b02d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>OnPreLoad</name></member>
@@ -356,7 +343,7 @@
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a0823f7c426d7757297b991c63c4a674d" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::SubscriptionHolder::"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>operator=</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a142ac6c73a3e99175210848dec991313" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::SubscriptionHolder::"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>operator=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>operator==</name></member>
-      <member refid="classSR__UTILS__NS_1_1Serializable_1ac8b16fec8d4003ae41fd3fe294595b36" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>OriginType</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1a6eeb6555020c09fedd47ad7f6a03e7ba" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>OriginType</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>PolymorphicCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1FileMaterialResource_1a32f897d869b62ecc1f7c1f3d072d2d55" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Ptr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>RecursiveLockIfValid</name></member>
@@ -373,6 +360,9 @@
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a4fb6331893e314c01da26b361197a75e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>ResourceContainer</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a70da9b49736de59bddc1f26575f5da33" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>ReviveResource</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Save</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1a00710e54037c06621a41e4c5404c725a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>SaveAsset</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1a07b1f378c5b353d51439a74147c03cef" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>SaveAsset</name></member>
+      <member refid="classSR__GRAPH__NS_1_1FileMaterialResource_1a3c4774d63c2dfa5ba261c49ed99e1fa1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>SetData</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a0981532a88fdeb242d295a04690ec4dd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>SetId</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a992fe5635f43333348b9c9445293e23b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>SetLifetime</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>SetPointerFromBase</name></member>
@@ -393,9 +383,9 @@
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a974c352e7a7fa0786b9b5caa886d96c0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>SubscriptionHolder</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a1308e9577474f509d5d70ec6e025f22a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>SubscriptionHolder</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1add12e4faa76ffece1b1df5ca31da4218" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>SubscriptionHolder</name></member>
-      <member refid="classSR__GRAPH__NS_1_1FileMaterialResource_1ac3ec732f8a54d5aeb8f7eb9712cd1583" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Super</name></member>
+      <member refid="classSR__GRAPH__NS_1_1FileMaterialResource_1a9960a62e7292c9d98dd37f5cdb062f99" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Super</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>TryRecursiveLockIfValid</name></member>
-      <member refid="classSR__GRAPH__NS_1_1FileMaterialResource_1aa3a0ed76b5e1fe60a086f2c93e8c4fd1" prot="private" virt="virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Unload</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1a519b0e89f7e316149b0464e393ea4600" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Unload</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Unlock</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a9020c161e4bc8453d005eb5fab808490" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Unsubscribe</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a8374f937e659f29170b1db2b81ba2594" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>UpdateResourceLifeTime</name></member>

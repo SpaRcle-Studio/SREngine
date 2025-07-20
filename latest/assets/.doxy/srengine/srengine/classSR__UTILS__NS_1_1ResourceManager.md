@@ -121,9 +121,10 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 |  bool | [**Destroy**](#function-destroy) (const IResource::Ptr & pResource) <br>_Register resource to destroy in resource manager._  |
 |  void | [**EnableStackTraceProfiling**](#function-enablestacktraceprofiling) () <br> |
 |  void | [**Execute**](#function-execute) (const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void()&gt; & fun) <br> |
-|  SR\_NODISCARD IResource::Ptr | [**Find**](#function-find-13) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) typeName, [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id) const<br> |
+|  SR\_NODISCARD IResource::Ptr | [**Find**](#function-find-13) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) typeName) const<br> |
 |  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; | [**Find**](#function-find-23) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & id) <br> |
 |  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; | [**Find**](#function-find-33) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
+|  SR\_NODISCARD IResource::Ptr | [**FindAnyType**](#function-findanytype) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id) const<br> |
 |  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetCachePath**](#function-getcachepath) () const<br> |
 |  SR\_NODISCARD [**FileSystemWatcher::Ptr**](classSR__HTYPES__NS_1_1SharedPtr.md) | [**GetFileSystemWatcher**](#function-getfilesystemwatcher) () const<br> |
 |  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; | [**GetOrLoadResource**](#function-getorloadresource) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & rawPath) <br> |
@@ -409,8 +410,8 @@ void SR_UTILS_NS::ResourceManager::Execute (
 
 ```C++
 SR_NODISCARD IResource::Ptr SR_UTILS_NS::ResourceManager::Find (
-    SR_UTILS_NS::StringAtom typeName,
-    SR_UTILS_NS::StringAtom id
+    SR_UTILS_NS::StringAtom id,
+    SR_UTILS_NS::StringAtom typeName
 ) const
 ```
 
@@ -444,6 +445,21 @@ template<typename T>
 inline SR_HTYPES_NS::SharedPtr < T > SR_UTILS_NS::ResourceManager::Find (
     const Path & path
 ) 
+```
+
+
+
+
+<hr>
+
+
+
+### function FindAnyType 
+
+```C++
+SR_NODISCARD IResource::Ptr SR_UTILS_NS::ResourceManager::FindAnyType (
+    SR_UTILS_NS::StringAtom id
+) const
 ```
 
 

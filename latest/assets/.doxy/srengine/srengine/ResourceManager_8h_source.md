@@ -45,7 +45,8 @@ namespace SR_UTILS_NS {
         SR_NODISCARD Path GetCachePath() const;
         SR_NODISCARD FileSystemWatcher::Ptr GetFileSystemWatcher() const { return m_fileSystemWatcher; }
 
-        SR_NODISCARD IResource::Ptr Find(SR_UTILS_NS::StringAtom typeName, SR_UTILS_NS::StringAtom id) const;
+        SR_NODISCARD IResource::Ptr Find(SR_UTILS_NS::StringAtom id, SR_UTILS_NS::StringAtom typeName) const;
+        SR_NODISCARD IResource::Ptr FindAnyType(SR_UTILS_NS::StringAtom id) const;
 
         void Synchronize(bool force);
 
@@ -56,12 +57,12 @@ namespace SR_UTILS_NS {
 
         template<typename T> SR_HTYPES_NS::SharedPtr<T> Find(const SR_UTILS_NS::StringAtom& id) {
             SR_TRACY_ZONE;
-            return Find(T::GetClassStaticName(), id).template DynamicCast<T>();
+            return Find(id, T::GetClassStaticName()).template DynamicCast<T>();
         }
 
         template<typename T> SR_HTYPES_NS::SharedPtr<T> Find(const Path& path) {
             SR_TRACY_ZONE;
-            return Find(T::GetClassStaticName(), path.ToStringRef()).template DynamicCast<T>();
+            return Find(path.ToStringRef(), T::GetClassStaticName()).template DynamicCast<T>();
         }
 
         template<typename T> SR_HTYPES_NS::SharedPtr<T> GetOrLoadResource(const Path& rawPath);

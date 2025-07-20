@@ -622,6 +622,7 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1abbc56086aaf55e5a1ec9788dcecee316" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetResourceInfo</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ac663dc33feca74c372905c497dae10d0" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetResourceLoadState</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a4aff4255b8a8bcf7b1424927b450b274" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetResourcePath</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1aeba9dea35c61deaebe82cdda4ea7559e" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetResourceType</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetSRClass</name></member>
       <member refid="classSR__GTYPES__NS_1_1Texture_1aca68df4e81970699c0294a2c8ce6b13b" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetTextureConfig</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetThis</name></member>
@@ -634,6 +635,7 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1a9035e8e13821bbcf09633e80365d0643" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>InitializeResourcePath</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ac810662984eb60e0bea8b08e455ea2a2" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>IResource</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ad94ef18d58f13582b7411b749ae81089" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>IsAlive</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a7f41c08e67a57cca18fb3b2c2c350768" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>IsAllowedMultiInstance</name></member>
       <member refid="classSR__GTYPES__NS_1_1Texture_1a6614b8299bfa1078c37628ae8686439b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>IsAllowedToRevive</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a47131cd914c3a6c8a7c03a4764559716" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>IsDestroyed</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a91fdfb42142b2e37139e4742442a2fee" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>IsFileResource</name></member>

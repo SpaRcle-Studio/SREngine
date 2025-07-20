@@ -17,9 +17,12 @@
 
 #include <Graphics/Material/BaseMaterial.h>
 
+#include <Utils/Resources/Asset.h>
+
 namespace SR_GRAPH_NS {
-    class FileMaterialResource final : public SR_UTILS_NS::IResource {
-        using Super = SR_UTILS_NS::IResource;
+    class FileMaterialResource final : public SR_UTILS_NS::Asset {
+        SR_CLASS()
+        using Super = SR_UTILS_NS::Asset;
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<FileMaterialResource>;
 
@@ -28,14 +31,10 @@ namespace SR_GRAPH_NS {
 
     public:
         SR_NODISCARD static bool CreateTemplateMaterial(const SR_UTILS_NS::Path& path);
-        SR_NODISCARD static FileMaterialResource::Ptr Load(const SR_UTILS_NS::Path& rawPath);
 
     public:
         SR_NODISCARD const SR_GRAPH_NS::MaterialData::Ptr& GetData() const noexcept { return m_data; }
-
-    private:
-        bool Load() override;
-        bool Unload() override;
+        void SetData(const SR_GRAPH_NS::MaterialData::Ptr& pData) noexcept { m_data = pData; }
 
     private:
         SR_GRAPH_NS::MaterialData::Ptr m_data;

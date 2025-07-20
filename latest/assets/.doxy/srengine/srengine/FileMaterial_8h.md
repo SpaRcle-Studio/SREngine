@@ -11,6 +11,7 @@
 
 
 * `#include <Graphics/Material/BaseMaterial.h>`
+* `#include <Utils/Resources/Asset.h>`
 
 
 

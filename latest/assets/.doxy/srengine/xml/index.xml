@@ -3825,15 +3825,13 @@
     <member refid="classSR__GRAPH__NS_1_1FileMaterial_1a23cb42553712cc57475a68afd465e197" kind="function"><name>Init</name></member>
   </compound>
   <compound refid="classSR__GRAPH__NS_1_1FileMaterialResource" kind="class"><name>SR_GRAPH_NS::FileMaterialResource</name>
-    <member refid="classSR__GRAPH__NS_1_1FileMaterialResource_1ac3ec732f8a54d5aeb8f7eb9712cd1583" kind="typedef"><name>Super</name></member>
+    <member refid="classSR__GRAPH__NS_1_1FileMaterialResource_1a9960a62e7292c9d98dd37f5cdb062f99" kind="typedef"><name>Super</name></member>
     <member refid="classSR__GRAPH__NS_1_1FileMaterialResource_1a32f897d869b62ecc1f7c1f3d072d2d55" kind="typedef"><name>Ptr</name></member>
     <member refid="classSR__GRAPH__NS_1_1FileMaterialResource_1a269776d7d4fd264ccac0d8ead998e9c4" kind="variable"><name>m_data</name></member>
     <member refid="classSR__GRAPH__NS_1_1FileMaterialResource_1a7e850e616502f004c9078b98a2619314" kind="function"><name>FileMaterialResource</name></member>
     <member refid="classSR__GRAPH__NS_1_1FileMaterialResource_1a273c546a1ac43057bf0d266bdf0c8e60" kind="function"><name>GetData</name></member>
+    <member refid="classSR__GRAPH__NS_1_1FileMaterialResource_1a3c4774d63c2dfa5ba261c49ed99e1fa1" kind="function"><name>SetData</name></member>
     <member refid="classSR__GRAPH__NS_1_1FileMaterialResource_1a42a4f4e8e170f9560a2b2657974c9637" kind="function"><name>CreateTemplateMaterial</name></member>
-    <member refid="classSR__GRAPH__NS_1_1FileMaterialResource_1a9bec483fa04844e45407594ce30e82b3" kind="function"><name>Load</name></member>
-    <member refid="classSR__GRAPH__NS_1_1FileMaterialResource_1a55656fa5871721de5df9d1cb2e0a7918" kind="function"><name>Load</name></member>
-    <member refid="classSR__GRAPH__NS_1_1FileMaterialResource_1aa3a0ed76b5e1fe60a086f2c93e8c4fd1" kind="function"><name>Unload</name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1Platform_1_1FileMetadata" kind="struct"><name>SR_UTILS_NS::Platform::FileMetadata</name>
     <member refid="structSR__UTILS__NS_1_1Platform_1_1FileMetadata_1aba5a8b3239ab1ea438c1a925a0df1aa1" kind="variable"><name>lastWriteTime</name></member>
@@ -4071,6 +4069,7 @@
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1ac5f28f665420fb2287205c3080a9646a" kind="function"><name>SetDepthAspect</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1ae00d4087480b29a611f32d047e29d5ff" kind="function"><name>SetFeatures</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a490b71f8dc30b82757fbfd22e6b5ce08" kind="function"><name>IsFileResource</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a666b0b1b2b08322017e1a7fd00b8d314" kind="function"><name>IsAllowedMultiInstance</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a0afd31f4d6d436bc0feaa7710be061c5" kind="function"><name>GetSamplesCount</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a8f35400d24010d372058047d10b771c2" kind="function"><name>GetColorLayersCount</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a1e22b8ec6fc5cf210fe3777d8f01a65f" kind="function"><name>GetLayersCount</name></member>
@@ -5411,6 +5410,7 @@
     <member refid="classSR__UTILS__NS_1_1IResource_1a9035e8e13821bbcf09633e80365d0643" kind="function"><name>InitializeResourcePath</name></member>
     <member refid="classSR__UTILS__NS_1_1IResource_1a5dd9749c79cb65452e9e4d10efda42f8" kind="function"><name>Execute</name></member>
     <member refid="classSR__UTILS__NS_1_1IResource_1a91fdfb42142b2e37139e4742442a2fee" kind="function"><name>IsFileResource</name></member>
+    <member refid="classSR__UTILS__NS_1_1IResource_1a7f41c08e67a57cca18fb3b2c2c350768" kind="function"><name>IsAllowedMultiInstance</name></member>
     <member refid="classSR__UTILS__NS_1_1IResource_1ac7b0f5ba1910f845c4f0d2ae3c220fbe" kind="function"><name>GetFileHash</name></member>
     <member refid="classSR__UTILS__NS_1_1IResource_1a6ad69fde6a46a6f50fab83b27b3db5b0" kind="function"><name>IsAllowedToRevive</name></member>
     <member refid="classSR__UTILS__NS_1_1IResource_1aeabd3a189fe8c7c0c31c1fb6713c5043" kind="function"><name>GetAssociatedPath</name></member>
@@ -5423,6 +5423,7 @@
     <member refid="classSR__UTILS__NS_1_1IResource_1ab9a8347f2812fce37f53741a5865758c" kind="function"><name>GetReloadCount</name></member>
     <member refid="classSR__UTILS__NS_1_1IResource_1ae6953f64e0856bd2ba3891c1a4529f73" kind="function"><name>GetLifetime</name></member>
     <member refid="classSR__UTILS__NS_1_1IResource_1ac4d26a90ba1c28b82f71b28d1eb77dc9" kind="function"><name>GetResourceId</name></member>
+    <member refid="classSR__UTILS__NS_1_1IResource_1aeba9dea35c61deaebe82cdda4ea7559e" kind="function"><name>GetResourceType</name></member>
     <member refid="classSR__UTILS__NS_1_1IResource_1ac663dc33feca74c372905c497dae10d0" kind="function"><name>GetResourceLoadState</name></member>
     <member refid="classSR__UTILS__NS_1_1IResource_1a0186b5dcde6ac4e0d251590619639406" kind="function"><name>GetResourceHash</name></member>
     <member refid="classSR__UTILS__NS_1_1IResource_1abbc56086aaf55e5a1ec9788dcecee316" kind="function"><name>GetResourceInfo</name></member>
@@ -9127,7 +9128,8 @@
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1a66549d95268696d269d39eb1d07f8fe4" kind="function"><name>GetResPathRef</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1a42409fce9a9f88cc32fbfde31f52aae0" kind="function"><name>GetCachePath</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1a12d8581f43c1320da08966f9276f3b88" kind="function"><name>GetFileSystemWatcher</name></member>
-    <member refid="classSR__UTILS__NS_1_1ResourceManager_1a706647db8e756c08c88142c400d9e2b9" kind="function"><name>Find</name></member>
+    <member refid="classSR__UTILS__NS_1_1ResourceManager_1a53733ffadc5f799ab2b3699393d1437c" kind="function"><name>Find</name></member>
+    <member refid="classSR__UTILS__NS_1_1ResourceManager_1a333d17895fe07ef13842ee35575a1e31" kind="function"><name>FindAnyType</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1a230e4c1b1dc0aadb6a3947d57002fef0" kind="function"><name>Synchronize</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1ab4fca6c03f1459d9811c987cb9fad1f4" kind="function"><name>ReloadResource</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1a02d82466fe8c70874a807cf3d7d7f55e" kind="function"><name>Execute</name></member>

@@ -77,6 +77,7 @@ namespace SR_GTYPES_NS {
         void SetFeatures(const FrameBufferFeatures& features);
 
         SR_NODISCARD bool IsFileResource() const noexcept override { return false; }
+        SR_NODISCARD bool IsAllowedMultiInstance() const override { return true; }
         SR_NODISCARD uint8_t GetSamplesCount() const;
         SR_NODISCARD uint32_t GetColorLayersCount() const noexcept { return m_colors.size(); }
         SR_NODISCARD uint32_t GetLayersCount() const noexcept { return m_layersCount; }

@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="94" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="94" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="95" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="95" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Framebuffer_1a2d4b4589e9eceec85ee83056cb3eb4b6" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="96" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="96" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="97" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="97" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Framebuffer_1a4461863808838671497f0a4095133a93" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="97" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="97" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="98" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="98" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Framebuffer_1a1463e41167b18250dcbd2f8b6cb14e84" prot="private" static="no" mutable="no">
         <type>std::vector&lt; ColorLayer &gt;</type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="99" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="99" bodyend="99"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="100" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="100" bodyend="100"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Framebuffer_1aeaeff35e6c65ef23a7c05f101bab82c4" prot="private" static="no" mutable="no">
         <type>DepthLayer</type>
@@ -138,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="100" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="100" bodyend="100"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="101" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="101" bodyend="101"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Framebuffer_1aead102964fd4d220738723681d122c4e" prot="private" static="no" mutable="no">
         <type>int32_t</type>
@@ -153,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="101" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="101" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="102" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="102" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Framebuffer_1a0bf22f6243c85ea53978180a0d3e4de8" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::IVector2</type>
@@ -168,7 +168,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="103" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="103" bodyend="103"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="104" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="104" bodyend="104"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Framebuffer_1a9a8c78804eb222478db6be022206ea06" prot="private" static="no" mutable="no">
         <type>uint8_t</type>
@@ -183,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="105" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="105" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="106" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="106" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Framebuffer_1a97932d38aed0f329969d00f5868230b8" prot="private" static="no" mutable="no">
         <type>uint8_t</type>
@@ -198,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="107" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="107" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="108" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="108" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Framebuffer_1a9e7b86fef05ff9c07ffd07ac3f64b55c" prot="private" static="no" mutable="no">
         <type>uint8_t</type>
@@ -213,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="108" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="108" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="109" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="109" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Framebuffer_1a87b38c3c5f1d1b2d8cdf9b8d886bd1a2" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -228,7 +228,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="109" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="109" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="110" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="110" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -540,6 +540,21 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="72" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="72" bodyend="72"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a666b0b1b2b08322017e1a7fd00b8d314" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GTYPES_NS::Framebuffer::IsAllowedMultiInstance</definition>
+        <argsstring>() const override</argsstring>
+        <name>IsAllowedMultiInstance</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::IsAllowedMultiInstance</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IResource_1a7f41c08e67a57cca18fb3b2c2c350768">IsAllowedMultiInstance</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="73" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="73" bodyend="73"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a0afd31f4d6d436bc0feaa7710be061c5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint8_t</type>
         <definition>SR_NODISCARD uint8_t SR_GTYPES_NS::Framebuffer::GetSamplesCount</definition>
@@ -552,7 +567,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="73" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="74" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a8f35400d24010d372058047d10b771c2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -566,7 +581,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="74" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="74" bodyend="74"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="75" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="75" bodyend="75"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a1e22b8ec6fc5cf210fe3777d8f01a65f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -580,7 +595,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="75" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="75" bodyend="75"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="76" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="76" bodyend="76"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1af9d48c4d866af444eb8c8057dff19cb1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD ImageAspect</type>
@@ -594,7 +609,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="76" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="76" bodyend="76"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="77" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="77" bodyend="77"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a5cf763c8a4c1cdda7c6d49d2e80139aa" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -608,7 +623,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="77" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="77" bodyend="77"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="78" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="78" bodyend="78"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a0b0498681dde18808a96c9312e9eb233" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -622,7 +637,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="78" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="78" bodyend="78"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="79" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="79" bodyend="79"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a44aa6e41472a67870bb5114a06f5ef50" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -636,7 +651,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="79" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="79" bodyend="79"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="80" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="80" bodyend="80"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1ae528ca2428c5128aa87a9bcbb72f95bb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const FrameBufferFeatures &amp;</type>
@@ -650,7 +665,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="80" column="48" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="80" bodyend="80"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="81" column="48" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="81" bodyend="81"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a2977be0dc79dce7fac2cdf74113cb246" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -664,7 +679,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="82" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="83" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1ad671bc5d31bb5b1cfd4695ae6c78a1cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -682,7 +697,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="83" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="84" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1ac1d086f329f2a7682f3f66a053bec0f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -701,7 +716,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="84" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="85" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a658dd83c2c08be614c39f4b4bcbaeb95" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -715,7 +730,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="86" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="87" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a6c8648fbee25560f26371e9c82202da2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -729,7 +744,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="87" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="88" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a0b13806cfd2efb6cf9a98a7c28a238d5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::IVector2</type>
@@ -743,7 +758,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="88" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="88" bodyend="88"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="89" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="89" bodyend="89"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a6079ec94cacf2f955cc9ab23c6fae7e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -757,7 +772,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="90" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="91" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a7f4513af80dd3c1cfeb4c6211ea2df75" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>uint64_t</type>
@@ -772,7 +787,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="91" column="18"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="92" column="18"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -1075,7 +1090,7 @@
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="30" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="30" bodyend="111"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="30" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="30" bodyend="112"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1af9087ca5182397a9c7d3b92fb5591523" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>AddDependency</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>AddSerializationFlags</name></member>
@@ -1137,6 +1152,7 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1abbc56086aaf55e5a1ec9788dcecee316" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetResourceInfo</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ac663dc33feca74c372905c497dae10d0" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetResourceLoadState</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a4aff4255b8a8bcf7b1424927b450b274" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetResourcePath</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1aeba9dea35c61deaebe82cdda4ea7559e" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetResourceType</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a0afd31f4d6d436bc0feaa7710be061c5" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetSamplesCount</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a0b13806cfd2efb6cf9a98a7c28a238d5" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetSize</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetSRClass</name></member>
@@ -1150,6 +1166,7 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1a9035e8e13821bbcf09633e80365d0643" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>InitializeResourcePath</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ac810662984eb60e0bea8b08e455ea2a2" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>IResource</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ad94ef18d58f13582b7411b749ae81089" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>IsAlive</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a666b0b1b2b08322017e1a7fd00b8d314" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>IsAllowedMultiInstance</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a6ad69fde6a46a6f50fab83b27b3db5b0" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>IsAllowedToRevive</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a5cf763c8a4c1cdda7c6d49d2e80139aa" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>IsDepthEnabled</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a47131cd914c3a6c8a7c03a4764559716" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>IsDestroyed</name></member>
