@@ -11,6 +11,7 @@
 
 namespace SR_CORE_NS::GUI {
     struct FBElement {
+        SR_GTYPES_NS::Texture::Ptr pTexture;
         std::string filename;
         std::string cutName;
         EditorIcon iconType;
@@ -64,8 +65,6 @@ namespace SR_CORE_NS::GUI {
         float_t m_assetWidth = 0.0f;
 
         FBFolder m_foldersTree;
-
-        std::map<std::string, SR_GTYPES_NS::Texture::Ptr> m_currentDirTextures;
 
         std::atomic<bool> m_dirtySelectedDir;
         std::atomic<bool> m_dirtyFoldersTree;

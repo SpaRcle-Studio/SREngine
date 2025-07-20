@@ -124,6 +124,8 @@ namespace SR_CORE_NS {
         }
         while (pEngine->FlushScene());
 
+        pEngine->DestroyEditor();
+
         auto&& pRenderContext = pEngine->GetRenderContext();
         if (pRenderContext) {
             pRenderContext->Close();

@@ -50,8 +50,6 @@ namespace SR_CORE_NS::GUI {
     }
 
     void FileBrowser::CacheElements(const SR_UTILS_NS::Path& root) {
-        m_elements.clear();
-
         FreeTextures();
 
         for (const auto &path : root.GetAll()) {
@@ -112,9 +110,11 @@ namespace SR_CORE_NS::GUI {
                 }
 
                 if (extension == "png" || extension == "jpg") {
-                    if (auto&& pTexture = SR_GTYPES_NS::Texture::Load(path)) {
-                        pTexture->AddUsePoint();
-                        m_currentDirTextures[current.filename] = pTexture;
+                    if (!current.pTexture) {
+                        if (auto &&pTexture = SR_GTYPES_NS::Texture::Load(path)) {
+                            pTexture->AddUsePoint();
+                            current.pTexture = pTexture;
+                        }
                     }
                 }
                 
@@ -310,8 +310,8 @@ namespace SR_CORE_NS::GUI {
                 else {
                     void* descriptor = nullptr;
 
-                    if (auto&& pIt = m_currentDirTextures.find(element.filename); pIt != m_currentDirTextures.end()) {
-                        descriptor = pIt->second->GetDescriptor();
+                    if (element.pTexture) {
+                        descriptor = element.pTexture->GetDescriptor();
                     }
 
                     if (!descriptor) {
@@ -433,10 +433,12 @@ namespace SR_CORE_NS::GUI {
     }
 
     void FileBrowser::FreeTextures() {
-        for (auto&& [path, pTexture] : m_currentDirTextures) {
-            pTexture->RemoveUsePoint();
+        for (auto&& element : m_elements) {
+            if (element.pTexture) {
+                element.pTexture->RemoveUsePoint();
+            }
         }
-        m_currentDirTextures.clear();
+        m_elements.clear();
     }
 
     void FileBrowser::OnClose() {

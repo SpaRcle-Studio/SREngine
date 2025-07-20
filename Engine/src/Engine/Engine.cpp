@@ -209,15 +209,30 @@ namespace SR_CORE_NS {
         return true;
     }
 
+    void Engine::DestroyEditor() {
+        SR_SYSTEM_LOG("Engine::DestroyEditor() : destroying editor...");
+
+        if (m_editor && m_editor->Enabled()) {
+            SR_SYSTEM_LOG("Engine::DestroyEditor() : saving editor gui...");
+            m_editor->Save();
+        }
+
+        SR_INFO("Engine::DestroyEditor() : destroying the editor...");
+
+        if (m_editor && m_editor->Enabled()) {
+            SR_SYSTEM_LOG("Engine::DestroyEditor() : disabling editor gui...");
+            m_editor->Enable(false);
+            m_input->Unregister(m_editor);
+        }
+        SR_SAFE_DELETE_PTR(m_editor);
+    }
+
     bool Engine::Close() {
         SR_TRACY_ZONE;
 
         SR_INFO("Engine::Close() : closing game engine...");
 
-        if (m_editor && m_editor->Enabled()) {
-            SR_SYSTEM_LOG("Engine::Close() : saving editor gui...");
-            m_editor->Save();
-        }
+        SRAssert2(!m_editor, "Engine::Close() : editor is not destroyed! Call DestroyEditor() before closing the engine!");
 
         m_isRun = false;
 
@@ -227,15 +242,6 @@ namespace SR_CORE_NS {
             }
             m_threadsWorker.Reset();
         }
-
-        SR_INFO("Engine::Close() : destroying the editor...");
-
-        if (m_editor && m_editor->Enabled()) {
-            SR_SYSTEM_LOG("Engine::Await() : disabling editor gui...");
-            m_editor->Enable(false);
-            m_input->Unregister(m_editor);
-        }
-        SR_SAFE_DELETE_PTR(m_editor);
 
         if (m_input) {
             m_input->UnregisterAll();
