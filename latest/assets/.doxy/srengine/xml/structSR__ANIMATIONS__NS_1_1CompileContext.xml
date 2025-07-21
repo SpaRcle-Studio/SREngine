@@ -73,6 +73,12 @@
         <link refid="classSR__ANIMATIONS__NS_1_1Skeleton"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_HTYPES_NS::IRawMeshHolder</label>
+        <link refid="classSR__HTYPES__NS_1_1IRawMeshHolder"/>
       </node>
       <node id="3">
         <label>SR_UTILS_NS::Component</label>

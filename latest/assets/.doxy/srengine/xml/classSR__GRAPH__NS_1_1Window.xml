@@ -673,8 +673,8 @@
       <member refid="classSR__GRAPH__NS_1_1Window_1a2992f0f791479ec6f391e21db7d562bb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>DrawCallback</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>DynamicCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1aad6e9f0a012d94382d77d9ee110ce304" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>FocusCallback</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Get</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1ab84cba3ea60b64bed4e62cc3716d4fb5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>GetBaseWindow</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1af51eb0467156e136fb780a8e8f113deb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>GetHandle</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1ac468e68e17f7e42152209886bcd490d9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>GetImplementation</name></member>

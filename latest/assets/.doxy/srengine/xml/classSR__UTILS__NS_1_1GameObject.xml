@@ -94,9 +94,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="34" column="38" bodyfile="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" bodystart="34" bodyend="34"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1GameObject_1a0f9e853804f190444e064f4d9ecc9b5f" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__UTILS__NS_1_1Transform" kindref="compound">Transform</ref> &gt;</type>
-        <definition>SR_NODISCARD SR_HTYPES_NS::SharedPtr&lt; Transform &gt; SR_UTILS_NS::GameObject::GetTransform</definition>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1GameObject_1a5354401d60f300fca3c38f94da17e4ee" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__UTILS__NS_1_1Transform" kindref="compound">Transform</ref> &gt; &amp;</type>
+        <definition>SR_NODISCARD const SR_HTYPES_NS::SharedPtr&lt; Transform &gt; &amp; SR_UTILS_NS::GameObject::GetTransform</definition>
         <argsstring>() const noexcept</argsstring>
         <name>GetTransform</name>
         <qualifiedname>SR_UTILS_NS::GameObject::GetTransform</qualifiedname>
@@ -106,11 +106,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="35" column="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="35" column="52"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1GameObject_1a9e2e7e3130259bf72368ef8ea81eaae0" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__UTILS__NS_1_1Transform" kindref="compound">Transform</ref> &gt;</type>
-        <definition>SR_NODISCARD SR_HTYPES_NS::SharedPtr&lt; Transform &gt; SR_UTILS_NS::GameObject::GetParentTransform</definition>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1GameObject_1ad5b095da3c723a90a98b09bda1c1920e" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__UTILS__NS_1_1Transform" kindref="compound">Transform</ref> &gt; &amp;</type>
+        <definition>SR_NODISCARD const SR_HTYPES_NS::SharedPtr&lt; Transform &gt; &amp; SR_UTILS_NS::GameObject::GetParentTransform</definition>
         <argsstring>() const noexcept</argsstring>
         <name>GetParentTransform</name>
         <qualifiedname>SR_UTILS_NS::GameObject::GetParentTransform</qualifiedname>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="36" column="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/ECS/GameObject.h" line="36" column="52"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1GameObject_1a15c305becf732cd4e047d717303d7822" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD GameObject::Ptr</type>
@@ -238,9 +238,9 @@
       <member refid="classSR__UTILS__NS_1_1GameObject_1a15c305becf732cd4e047d717303d7822" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GameObject</scope><name>CreateChild</name></member>
       <member refid="classSR__UTILS__NS_1_1GameObject_1a4a924800254de314a98a83bf5f292333" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GameObject</scope><name>GameObject</name></member>
       <member refid="classSR__UTILS__NS_1_1GameObject_1a103f6199f7e970f5aa1c21dacddeb21a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GameObject</scope><name>GetOrCreateChild</name></member>
-      <member refid="classSR__UTILS__NS_1_1GameObject_1a9e2e7e3130259bf72368ef8ea81eaae0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GameObject</scope><name>GetParentTransform</name></member>
+      <member refid="classSR__UTILS__NS_1_1GameObject_1ad5b095da3c723a90a98b09bda1c1920e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GameObject</scope><name>GetParentTransform</name></member>
       <member refid="classSR__UTILS__NS_1_1GameObject_1ab82b3c4e515c0c75a965c1ce3a9b3970" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GameObject</scope><name>GetSceneObjectType</name></member>
-      <member refid="classSR__UTILS__NS_1_1GameObject_1a0f9e853804f190444e064f4d9ecc9b5f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GameObject</scope><name>GetTransform</name></member>
+      <member refid="classSR__UTILS__NS_1_1GameObject_1a5354401d60f300fca3c38f94da17e4ee" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GameObject</scope><name>GetTransform</name></member>
       <member refid="classSR__UTILS__NS_1_1GameObject_1ac4e4f0231a3202ed69ed43018773b945" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::GameObject</scope><name>m_transform</name></member>
       <member refid="classSR__UTILS__NS_1_1GameObject_1a288871a4299d57b9024079e016d67907" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GameObject</scope><name>OnAttachedToParent</name></member>
       <member refid="classSR__UTILS__NS_1_1GameObject_1a6f90410d91168d623a2a94f65388cce9" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::GameObject</scope><name>OnHierarchyChanged</name></member>

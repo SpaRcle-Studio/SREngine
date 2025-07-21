@@ -597,8 +597,8 @@
       <member refid="classSR__GRAPH__NS_1_1DebugRenderer_1af0b188afe319cbed1696ab30832f06e6" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>DeInit</name></member>
       <member refid="classSR__GRAPH__NS_1_1DebugRenderer_1aef8879be56ddfadf9a1657b978124118" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>DrawType</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>DynamicCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>Get</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>GetBaseMetas</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>GetClassStaticName</name></member>
       <member refid="classSR__GRAPH__NS_1_1DebugRenderer_1a5c02d37c343e102ea98b9b280ced0efb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>GetEmptyIdsPoolSize</name></member>

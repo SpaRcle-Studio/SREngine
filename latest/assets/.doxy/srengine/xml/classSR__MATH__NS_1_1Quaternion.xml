@@ -122,9 +122,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1ab664debdc7816b834a65a4aee9ff8b3a" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD glm::quat</type>
-        <definition>SR_NODISCARD glm::quat SR_MATH_NS::Quaternion::ToGLM</definition>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a179c2e578f0e3fdc2bf5eadc77d33124" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const glm::quat &amp;</type>
+        <definition>SR_NODISCARD const glm::quat &amp; SR_MATH_NS::Quaternion::ToGLM</definition>
         <argsstring>() const noexcept</argsstring>
         <name>ToGLM</name>
         <qualifiedname>SR_MATH_NS::Quaternion::ToGLM</qualifiedname>
@@ -134,7 +134,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="31" column="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="31" column="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a4a696622ed6c48cd8d1ed490dbd65e9e" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">Vector4</ref>&lt; Unit &gt;</type>
@@ -1070,7 +1070,7 @@
       <member refid="classSR__MATH__NS_1_1Quaternion_1abbedcf8940f95f2bda08846b8dc77fb2" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Slerp</name></member>
       <member refid="classSR__MATH__NS_1_1Quaternion_1a3433ab628de291a8ba71285bcde22e09" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>SquaredNorm</name></member>
       <member refid="classSR__MATH__NS_1_1Quaternion_1ac9f0df28912279d26a764ea3d2995e63" prot="private" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>T</name></member>
-      <member refid="classSR__MATH__NS_1_1Quaternion_1ab664debdc7816b834a65a4aee9ff8b3a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>ToGLM</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a179c2e578f0e3fdc2bf5eadc77d33124" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>ToGLM</name></member>
       <member refid="classSR__MATH__NS_1_1Quaternion_1a55b975570e644056f46a43a382726134" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>ToMat4x4</name></member>
       <member refid="classSR__MATH__NS_1_1Quaternion_1ab0da5b9dfb9f5c7789748002e81a6002" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>ToMat4x4GLM</name></member>
       <member refid="classSR__MATH__NS_1_1Quaternion_1a073b93162d54e779963c85fd2e882c23" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>ToString</name></member>

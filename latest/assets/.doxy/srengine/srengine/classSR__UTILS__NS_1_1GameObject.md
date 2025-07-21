@@ -60,9 +60,9 @@ Inherits the following classes: SceneObject
 |  SR\_NODISCARD GameObject::Ptr | [**CreateChild**](#function-createchild) ([**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) <br> |
 |   | [**GameObject**](#function-gameobject) () = default<br> |
 |  SR\_NODISCARD GameObject::Ptr | [**GetOrCreateChild**](#function-getorcreatechild) ([**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) <br> |
-|  SR\_NODISCARD [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Transform**](classSR__UTILS__NS_1_1Transform.md) &gt; | [**GetParentTransform**](#function-getparenttransform) () noexcept const<br> |
+|  SR\_NODISCARD const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Transform**](classSR__UTILS__NS_1_1Transform.md) &gt; & | [**GetParentTransform**](#function-getparenttransform) () noexcept const<br> |
 |  SR\_NODISCARD SceneObjectType | [**GetSceneObjectType**](#function-getsceneobjecttype) () noexcept override const<br> |
-|  SR\_NODISCARD [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Transform**](classSR__UTILS__NS_1_1Transform.md) &gt; | [**GetTransform**](#function-gettransform) () noexcept const<br> |
+|  SR\_NODISCARD const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Transform**](classSR__UTILS__NS_1_1Transform.md) &gt; & | [**GetTransform**](#function-gettransform) () noexcept const<br> |
 |  void | [**OnAttachedToParent**](#function-onattachedtoparent) () override<br> |
 |  void | [**SetTransform**](#function-settransform) (const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Transform**](classSR__UTILS__NS_1_1Transform.md) &gt; & pTransform) <br> |
 |   | [**~GameObject**](#function-gameobject) () override<br> |
@@ -165,7 +165,7 @@ SR_NODISCARD GameObject::Ptr SR_UTILS_NS::GameObject::GetOrCreateChild (
 ### function GetParentTransform 
 
 ```C++
-SR_NODISCARD SR_HTYPES_NS::SharedPtr < Transform > SR_UTILS_NS::GameObject::GetParentTransform () noexcept const
+SR_NODISCARD const SR_HTYPES_NS::SharedPtr < Transform > & SR_UTILS_NS::GameObject::GetParentTransform () noexcept const
 ```
 
 
@@ -191,7 +191,7 @@ inline SR_NODISCARD SceneObjectType SR_UTILS_NS::GameObject::GetSceneObjectType 
 ### function GetTransform 
 
 ```C++
-SR_NODISCARD SR_HTYPES_NS::SharedPtr < Transform > SR_UTILS_NS::GameObject::GetTransform () noexcept const
+SR_NODISCARD const SR_HTYPES_NS::SharedPtr < Transform > & SR_UTILS_NS::GameObject::GetTransform () noexcept const
 ```
 
 

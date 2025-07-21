@@ -37,6 +37,8 @@ namespace SR_GTYPES_NS {
     public:
         static Font::Ptr Load(const SR_UTILS_NS::Path& rawPath);
 
+        SR_NODISCARD bool IsAllowedToRevive() const override { return true; }
+
         SR_NODISCARD bool HasColor() const noexcept { return m_hasColor; }
         SR_NODISCARD bool IsColorEmoji() const noexcept { return m_isColorEmoji; }
 

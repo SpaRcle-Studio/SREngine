@@ -13,7 +13,7 @@
 
 
 
-Inherits the following classes: [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
+Inherits the following classes: [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md),  [SR\_HTYPES\_NS::IRawMeshHolder](classSR__HTYPES__NS_1_1IRawMeshHolder.md)
 
 
 
@@ -47,6 +47,34 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Component**](classSR__UTILS__NS_1_1Component.md) &gt; | [**Ptr**](classSR__UTILS__NS_1_1Component.md#typedef-ptr)  <br> |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; SceneObject &gt; | [**SceneObjectPtr**](classSR__UTILS__NS_1_1Component.md#typedef-sceneobjectptr)  <br> |
 | typedef [**SR\_WORLD\_NS::Scene**](classSR__WORLD__NS_1_1Scene.md) \* | [**ScenePtr**](classSR__UTILS__NS_1_1Component.md#typedef-sceneptr)  <br> |
+
+
+## Public Types inherited from SR_HTYPES_NS::IRawMeshHolder
+
+See [SR\_HTYPES\_NS::IRawMeshHolder](classSR__HTYPES__NS_1_1IRawMeshHolder.md)
+
+| Type | Name |
+| ---: | :--- |
+| typedef int32\_t | [**MeshIndex**](classSR__HTYPES__NS_1_1IRawMeshHolder.md#typedef-meshindex)  <br> |
+| typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_HTYPES\_NS::RawMesh**](classSR__HTYPES__NS_1_1RawMesh.md) &gt; | [**RawMeshPtr**](classSR__HTYPES__NS_1_1IRawMeshHolder.md#typedef-rawmeshptr)  <br> |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -90,7 +118,6 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 | Type | Name |
 | ---: | :--- |
 |  [**Bone**](structSR__ANIMATIONS__NS_1_1Bone.md) \* | [**AddBone**](#function-addbone) ([**Bone**](structSR__ANIMATIONS__NS_1_1Bone.md) \* pParent, [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name, bool recalculate) <br> |
-|  void | [**CalculateMatrices**](#function-calculatematrices) () <br> |
 | virtual SR\_NODISCARD bool | [**ExecuteInEditMode**](#function-executeineditmode) () override const<br> |
 |  SR\_NODISCARD [**Bone**](structSR__ANIMATIONS__NS_1_1Bone.md) \* | [**GetBone**](#function-getbone) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) <br> |
 |  SR\_NODISCARD [**Bone**](structSR__ANIMATIONS__NS_1_1Bone.md) \* | [**GetBoneByIndex**](#function-getbonebyindex) (uint16\_t index) const<br> |
@@ -98,21 +125,19 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |  SR\_NODISCARD const std::vector&lt; [**Bone**](structSR__ANIMATIONS__NS_1_1Bone.md) \* &gt; & | [**GetBones**](#function-getbones) () noexcept const<br> |
 |  SR\_NODISCARD const std::vector&lt; [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) &gt; & | [**GetMatrices**](#function-getmatrices) () noexcept<br> |
 |  const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & | [**GetMatrixByIndex**](#function-getmatrixbyindex) (uint16\_t index) noexcept<br> |
-|  SR\_NODISCARD const std::vector&lt; [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) &gt; & | [**GetOffsets**](#function-getoffsets) () noexcept<br> |
+|  SR\_NODISCARD const std::vector&lt; [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) &gt; & | [**GetOffsets**](#function-getoffsets) () noexcept const<br> |
+|  SR\_NODISCARD int32\_t | [**GetOffsetsSSBO**](#function-getoffsetsssbo) () noexcept const<br> |
 |  SR\_NODISCARD const ska::flat\_hash\_map&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md), uint16\_t &gt; & | [**GetOptimizedBones**](#function-getoptimizedbones) () noexcept const<br> |
 |  SR\_NODISCARD const [**Bone**](structSR__ANIMATIONS__NS_1_1Bone.md) \* | [**GetRootBone**](#function-getrootbone-12) () noexcept const<br> |
 |  SR\_NODISCARD [**Bone**](structSR__ANIMATIONS__NS_1_1Bone.md) \* | [**GetRootBone**](#function-getrootbone-22) () noexcept<br> |
-|  [**SR\_UTILS\_NS::Transform**](classSR__UTILS__NS_1_1Transform.md) \* | [**GetTransformByIndex**](#function-gettransformbyindex) (uint16\_t index) noexcept<br> |
 |  SR\_NODISCARD bool | [**IsDebugEnabled**](#function-isdebugenabled) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsDirtyMatrices**](#function-isdirtymatrices) () noexcept const<br> |
 | virtual void | [**OnAttached**](#function-onattached) () override<br>_Вызывается после добавления компонента к игровому объекту_  |
 | virtual void | [**OnDestroy**](#function-ondestroy) () override<br>_Вызывается когда компонент убирается с объекта, либо объект уничтожается. Может произойти отложенно._  |
 |  void | [**OnPostLoad**](#function-onpostload) () override<br> |
+| virtual void | [**OnRawMeshChanged**](#function-onrawmeshchanged) () override<br> |
 |  bool | [**ReCalculateSkeleton**](#function-recalculateskeleton) () <br> |
-|  void | [**ResetSkeleton**](#function-resetskeleton) () <br> |
-|  void | [**SetBonesOffsets**](#function-setbonesoffsets) (const std::vector&lt; [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) &gt; & offsets) <br> |
 |  void | [**SetDebugEnabled**](#function-setdebugenabled) (bool enabled) <br> |
-|  void | [**SetOptimizedBones**](#function-setoptimizedbones) (const ska::flat\_hash\_map&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md), uint16\_t &gt; & bones) <br> |
 |  SR\_NODISCARD [**Bone**](structSR__ANIMATIONS__NS_1_1Bone.md) \* | [**TryGetBone**](#function-trygetbone) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) <br> |
 | virtual void | [**Update**](#function-update) (float\_t dt) override<br> |
 |   | [**~Skeleton**](#function-skeleton) () override<br> |
@@ -143,10 +168,10 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |  SR\_NODISCARD bool | [**HasParent**](classSR__UTILS__NS_1_1Component.md#function-hasparent) () const<br> |
 |  SR\_NODISCARD bool | [**HasScene**](classSR__UTILS__NS_1_1Component.md#function-hasscene) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsActive**](classSR__UTILS__NS_1_1Component.md#function-isactive) () noexcept const<br>_Активен и компонент и его родительский объект_  |
-| virtual SR\_NODISCARD bool | [**IsAttached**](classSR__UTILS__NS_1_1Component.md#function-isattached) () noexcept const<br> |
+|  SR\_NODISCARD bool | [**IsAttached**](classSR__UTILS__NS_1_1Component.md#function-isattached) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsAwake**](classSR__UTILS__NS_1_1Component.md#function-isawake) () noexcept const<br> |
-| virtual SR\_NODISCARD bool | [**IsComponentLoaded**](classSR__UTILS__NS_1_1Component.md#function-iscomponentloaded) () noexcept const<br> |
-| virtual SR\_NODISCARD bool | [**IsComponentValid**](classSR__UTILS__NS_1_1Component.md#function-iscomponentvalid) () noexcept const<br> |
+|  SR\_NODISCARD bool | [**IsComponentLoaded**](classSR__UTILS__NS_1_1Component.md#function-iscomponentloaded) () noexcept const<br> |
+|  SR\_NODISCARD bool | [**IsComponentValid**](classSR__UTILS__NS_1_1Component.md#function-iscomponentvalid) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsEnabled**](classSR__UTILS__NS_1_1Component.md#function-isenabled) () noexcept const<br>_Активен сам компонент, независимо от объекта_  |
 |  SR\_NODISCARD bool | [**IsPausedMode**](classSR__UTILS__NS_1_1Component.md#function-ispausedmode) () const<br>_На паузе ли сцена (если запущена)_  |
 |  SR\_NODISCARD bool | [**IsPlayingMode**](classSR__UTILS__NS_1_1Component.md#function-isplayingmode) () const<br>_Запущена ли сцена_  |
@@ -176,6 +201,32 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |  SR\_NODISCARD ScenePtr | [**TryGetScene**](classSR__UTILS__NS_1_1Component.md#function-trygetscene) () const<br> |
 | virtual void | [**Update**](classSR__UTILS__NS_1_1Component.md#function-update) (float\_t dt) <br> |
 |   | [**~Component**](classSR__UTILS__NS_1_1Component.md#function-component) () override<br> |
+
+
+## Public Functions inherited from SR_HTYPES_NS::IRawMeshHolder
+
+See [SR\_HTYPES\_NS::IRawMeshHolder](classSR__HTYPES__NS_1_1IRawMeshHolder.md)
+
+| Type | Name |
+| ---: | :--- |
+|  SR\_NODISCARD std::string\_view | [**GetGeometryName**](classSR__HTYPES__NS_1_1IRawMeshHolder.md#function-getgeometryname) () noexcept const<br> |
+|  SR\_NODISCARD MeshIndex | [**GetMeshId**](classSR__HTYPES__NS_1_1IRawMeshHolder.md#function-getmeshid) () noexcept const<br> |
+|  SR\_NODISCARD [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**GetMeshPath**](classSR__HTYPES__NS_1_1IRawMeshHolder.md#function-getmeshpath) () noexcept const<br> |
+|  SR\_NODISCARD std::string | [**GetMeshStringPath**](classSR__HTYPES__NS_1_1IRawMeshHolder.md#function-getmeshstringpath) () noexcept const<br> |
+|  SR\_NODISCARD const RawMeshPtr & | [**GetRawMesh**](classSR__HTYPES__NS_1_1IRawMeshHolder.md#function-getrawmesh) () noexcept const<br> |
+|  SR\_NODISCARD std::vector&lt; [**SR\_UTILS\_NS::Vertex**](structSR__UTILS__NS_1_1Vertex.md) &gt; | [**GetVertices**](classSR__HTYPES__NS_1_1IRawMeshHolder.md#function-getvertices) () noexcept const<br> |
+|  SR\_NODISCARD bool | [**IsValidMeshId**](classSR__HTYPES__NS_1_1IRawMeshHolder.md#function-isvalidmeshid) () noexcept const<br> |
+| virtual void | [**OnRawMeshChanged**](classSR__HTYPES__NS_1_1IRawMeshHolder.md#function-onrawmeshchanged) () <br> |
+|  void | [**SetMeshId**](classSR__HTYPES__NS_1_1IRawMeshHolder.md#function-setmeshid) (MeshIndex meshIndex, bool forceReload=false) <br> |
+|  void | [**SetRawMesh**](classSR__HTYPES__NS_1_1IRawMeshHolder.md#function-setrawmesh-12) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
+|  void | [**SetRawMesh**](classSR__HTYPES__NS_1_1IRawMeshHolder.md#function-setrawmesh-22) (RawMeshPtr pRawMesh) <br> |
+| virtual  | [**~IRawMeshHolder**](classSR__HTYPES__NS_1_1IRawMeshHolder.md#function-irawmeshholder) () <br> |
+
+
+
+
+
+
 
 
 
@@ -240,6 +291,22 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Protected Functions inherited from SR_UTILS_NS::Component
 
 See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
@@ -247,6 +314,10 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 | Type | Name |
 | ---: | :--- |
 |  void | [**SetParent**](classSR__UTILS__NS_1_1Component.md#function-setparent) ([**IComponentable**](classSR__UTILS__NS_1_1IComponentable.md) \* pParent) <br> |
+
+
+
+
 
 
 
@@ -294,19 +365,6 @@ Bone * SR_ANIMATIONS_NS::Skeleton::AddBone (
     SR_UTILS_NS::StringAtom name,
     bool recalculate
 ) 
-```
-
-
-
-
-<hr>
-
-
-
-### function CalculateMatrices 
-
-```C++
-void SR_ANIMATIONS_NS::Skeleton::CalculateMatrices () 
 ```
 
 
@@ -420,7 +478,20 @@ const SR_MATH_NS::Matrix4x4 & SR_ANIMATIONS_NS::Skeleton::GetMatrixByIndex (
 ### function GetOffsets 
 
 ```C++
-inline SR_NODISCARD const std::vector< SR_MATH_NS::Matrix4x4 > & SR_ANIMATIONS_NS::Skeleton::GetOffsets () noexcept
+SR_NODISCARD const std::vector< SR_MATH_NS::Matrix4x4 > & SR_ANIMATIONS_NS::Skeleton::GetOffsets () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetOffsetsSSBO 
+
+```C++
+SR_NODISCARD int32_t SR_ANIMATIONS_NS::Skeleton::GetOffsetsSSBO () noexcept const
 ```
 
 
@@ -433,7 +504,7 @@ inline SR_NODISCARD const std::vector< SR_MATH_NS::Matrix4x4 > & SR_ANIMATIONS_N
 ### function GetOptimizedBones 
 
 ```C++
-inline SR_NODISCARD const ska::flat_hash_map< SR_UTILS_NS::StringAtom , uint16_t > & SR_ANIMATIONS_NS::Skeleton::GetOptimizedBones () noexcept const
+SR_NODISCARD const ska::flat_hash_map< SR_UTILS_NS::StringAtom , uint16_t > & SR_ANIMATIONS_NS::Skeleton::GetOptimizedBones () noexcept const
 ```
 
 
@@ -460,21 +531,6 @@ inline SR_NODISCARD const Bone * SR_ANIMATIONS_NS::Skeleton::GetRootBone () noex
 
 ```C++
 inline SR_NODISCARD Bone * SR_ANIMATIONS_NS::Skeleton::GetRootBone () noexcept
-```
-
-
-
-
-<hr>
-
-
-
-### function GetTransformByIndex 
-
-```C++
-SR_UTILS_NS::Transform * SR_ANIMATIONS_NS::Skeleton::GetTransformByIndex (
-    uint16_t index
-) noexcept
 ```
 
 
@@ -555,38 +611,25 @@ void SR_ANIMATIONS_NS::Skeleton::OnPostLoad () override
 
 
 
+### function OnRawMeshChanged 
+
+```C++
+virtual void SR_ANIMATIONS_NS::Skeleton::OnRawMeshChanged () override
+```
+
+
+
+Implements [*SR\_HTYPES\_NS::IRawMeshHolder::OnRawMeshChanged*](classSR__HTYPES__NS_1_1IRawMeshHolder.md#function-onrawmeshchanged)
+
+
+<hr>
+
+
+
 ### function ReCalculateSkeleton 
 
 ```C++
 bool SR_ANIMATIONS_NS::Skeleton::ReCalculateSkeleton () 
-```
-
-
-
-
-<hr>
-
-
-
-### function ResetSkeleton 
-
-```C++
-void SR_ANIMATIONS_NS::Skeleton::ResetSkeleton () 
-```
-
-
-
-
-<hr>
-
-
-
-### function SetBonesOffsets 
-
-```C++
-void SR_ANIMATIONS_NS::Skeleton::SetBonesOffsets (
-    const std::vector< SR_MATH_NS::Matrix4x4 > & offsets
-) 
 ```
 
 
@@ -601,21 +644,6 @@ void SR_ANIMATIONS_NS::Skeleton::SetBonesOffsets (
 ```C++
 inline void SR_ANIMATIONS_NS::Skeleton::SetDebugEnabled (
     bool enabled
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function SetOptimizedBones 
-
-```C++
-void SR_ANIMATIONS_NS::Skeleton::SetOptimizedBones (
-    const ska::flat_hash_map< SR_UTILS_NS::StringAtom , uint16_t > & bones
 ) 
 ```
 

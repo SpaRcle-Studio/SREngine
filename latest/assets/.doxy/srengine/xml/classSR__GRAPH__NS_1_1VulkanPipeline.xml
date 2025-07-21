@@ -2155,8 +2155,8 @@
       <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1afa5861e7baeeb1bb5a68ccce852f39ff" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>FreeTexture</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a8a3a178479ecc85096b41be7558bcd20" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>FreeUBO</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a57f9cd004b65854f9a9922c0bab18e3b" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>FreeVBO</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>Get</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a19732eada27b8ef894723ef421c9c351" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>GetBuildIterationsCount</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a93baf7bc732e7059c0dd05aa6dab12c3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>GetBuildState</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1af4af287c45563874f48c377cd1387921" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>GetCurrentBuildIteration</name></member>

@@ -365,8 +365,8 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>DynamicCast</name></member>
       <member refid="classSR__UTILS__NS_1_1EntityController_1aca211e0acbec3a8414f5ae3291a9d7a6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>EntityController</name></member>
       <member refid="classSR__UTILS__NS_1_1EntityController_1ad16c496ec816d0214edcd0e9b2d21fc7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>FindById</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>Get</name></member>
       <member refid="classSR__UTILS__NS_1_1EntityController_1a04881027f6f7a154a3fc10a28cbedae1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>GetActiveController</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>GetPtrData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>GetPtrData</name></member>

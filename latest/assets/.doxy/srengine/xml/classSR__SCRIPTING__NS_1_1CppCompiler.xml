@@ -360,8 +360,8 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCompiler</scope><name>DynamicCast</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1CppCompiler_1a2aa6591f1a78ccda93af7b9622281e2a" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCompiler</scope><name>FindEngineLibs</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1CppCompiler_1aae761ddae6e326ed60ae3b89e3757884" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCompiler</scope><name>FindWindowsCompiler</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCompiler</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCompiler</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCompiler</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCompiler</scope><name>Get</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1CppCompiler_1a80e7b03513226616f6bd8cd26f3cad51" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCompiler</scope><name>GetBuiltInMSVCCompilerPath</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1CppCompiler_1ac082db0ccda9d608628a9f4e027d8e96" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCompiler</scope><name>GetCompilerVersion</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCompiler</scope><name>GetPtrData</name></member>

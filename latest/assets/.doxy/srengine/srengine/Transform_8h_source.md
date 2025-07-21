@@ -116,12 +116,12 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_HTYPES_NS::SharedPtr<GameObject> GetGameObject() const;
 
         SR_NODISCARD virtual Measurement GetMeasurement() const = 0;
+        SR_NODISCARD SR_FORCE_INLINE bool IsDirty() const noexcept { return m_dirtyMatrix; }
 
-        virtual void UpdateTree();
+        void UpdateTree();
         virtual void OnHierarchyChanged();
 
     protected:
-        SR_NODISCARD virtual bool IsDirty() const noexcept;
         virtual void UpdateMatrix() const;
 
     protected:

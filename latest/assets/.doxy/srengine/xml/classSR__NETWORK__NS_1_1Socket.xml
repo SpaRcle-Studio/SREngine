@@ -663,8 +663,8 @@
       <member refid="classSR__NETWORK__NS_1_1Socket_1ac26c806e60ca4a0547680edb68f6e39b" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::Socket</scope><name>Context</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_NETWORK_NS::Socket</scope><name>DecrementPointer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Socket</scope><name>DynamicCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Socket</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Socket</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Socket</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Socket</scope><name>Get</name></member>
       <member refid="classSR__NETWORK__NS_1_1Socket_1abd2a2384e44ec0f12503b03ead52d1da" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Socket</scope><name>GetContext</name></member>
       <member refid="classSR__NETWORK__NS_1_1Socket_1a9acb7d23ab906b0701393bc94ff1615b" prot="public" virt="pure-virtual"><scope>SR_NETWORK_NS::Socket</scope><name>GetLocalAddress</name></member>
       <member refid="classSR__NETWORK__NS_1_1Socket_1a097340f1f608ec8e3262c6de6f63790b" prot="public" virt="pure-virtual"><scope>SR_NETWORK_NS::Socket</scope><name>GetLocalPort</name></member>

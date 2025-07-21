@@ -237,8 +237,8 @@ namespace SR_HTYPES_NS {
             SR_SAFE_PTR_ASSERT(false, "Incomplete or invalid type!");
         }
 
-        SR_NODISCARD const T* Get() const { return m_ptr; }
-        SR_NODISCARD T* Get() { return m_ptr; }
+        SR_NODISCARD SR_FORCE_INLINE const T* Get() const { return m_ptr; }
+        SR_NODISCARD SR_FORCE_INLINE T* Get() { return m_ptr; }
 
         SR_NODISCARD SR_FORCE_INLINE const T& SR_FASTCALL GetUncheckedRef() const { return *m_ptr; }
         SR_NODISCARD SR_FORCE_INLINE T& SR_FASTCALL GetUncheckedRef() { return *m_ptr; }

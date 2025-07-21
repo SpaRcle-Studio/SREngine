@@ -171,6 +171,8 @@
     #define SR_FORCE_INLINE __forceinline
 #endif
 
+#define SR_RESTRICT __restrict
+
 #define SR_CLOCKS_PER_SEC 1000
 
 #ifdef SR_GCC

@@ -166,6 +166,7 @@
 | define  | [**SR\_PROTECT**](libs_2Utils_2inc_2Utils_2macros_8h.md#define-sr_protect) (...) `\_\_VA\_ARGS\_\_`<br> |
 | define  | [**SR\_PTYPES\_NS**](libs_2Utils_2inc_2Utils_2macros_8h.md#define-sr_ptypes_ns)  `SR\_PHYSICS\_NS::Types`<br> |
 | define  | [**SR\_RENDERER\_DLL\_API**](libs_2Utils_2inc_2Utils_2macros_8h.md#define-sr_renderer_dll_api)  <br> |
+| define  | [**SR\_RESTRICT**](libs_2Utils_2inc_2Utils_2macros_8h.md#define-sr_restrict)  `\_\_restrict`<br> |
 | define  | [**SR\_SAFE\_DELETE\_ARRAY\_PTR**](libs_2Utils_2inc_2Utils_2macros_8h.md#define-sr_safe_delete_array_ptr) (ptr) `/* multi line expression */`<br> |
 | define  | [**SR\_SAFE\_DELETE\_PTR**](libs_2Utils_2inc_2Utils_2macros_8h.md#define-sr_safe_delete_ptr) (ptr) `/* multi line expression */`<br> |
 | define  | [**SR\_SCRIPTING\_NS**](libs_2Utils_2inc_2Utils_2macros_8h.md#define-sr_scripting_ns)  `SpaRcle::Scripting`<br> |
@@ -1311,6 +1312,19 @@
 
 ```C++
 #define SR_RENDERER_DLL_API 
+```
+
+
+
+
+<hr>
+
+
+
+### define SR\_RESTRICT 
+
+```C++
+#define SR_RESTRICT `__restrict`
 ```
 
 

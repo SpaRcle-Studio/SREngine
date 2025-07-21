@@ -16,7 +16,7 @@ _Этот класс предоставляет удобный интерфей�
 
 
 
-Inherited by the following classes: [SR\_GTYPES\_NS::DebugWireframeMesh](classSR__GTYPES__NS_1_1DebugWireframeMesh.md),  [SR\_GTYPES\_NS::Mesh3D](classSR__GTYPES__NS_1_1Mesh3D.md),  [SR\_GTYPES\_NS::SkinnedMesh](classSR__GTYPES__NS_1_1SkinnedMesh.md),  [SR\_PTYPES\_NS::CollisionShape](classSR__PTYPES__NS_1_1CollisionShape.md)
+Inherited by the following classes: [SR\_ANIMATIONS\_NS::Skeleton](classSR__ANIMATIONS__NS_1_1Skeleton.md),  [SR\_GTYPES\_NS::DebugWireframeMesh](classSR__GTYPES__NS_1_1DebugWireframeMesh.md),  [SR\_GTYPES\_NS::Mesh3D](classSR__GTYPES__NS_1_1Mesh3D.md),  [SR\_GTYPES\_NS::SkinnedMesh](classSR__GTYPES__NS_1_1SkinnedMesh.md),  [SR\_PTYPES\_NS::CollisionShape](classSR__PTYPES__NS_1_1CollisionShape.md)
 
 
 
@@ -63,7 +63,7 @@ Inherited by the following classes: [SR\_GTYPES\_NS::DebugWireframeMesh](classSR
 |  SR\_NODISCARD MeshIndex | [**GetMeshId**](#function-getmeshid) () noexcept const<br> |
 |  SR\_NODISCARD [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**GetMeshPath**](#function-getmeshpath) () noexcept const<br> |
 |  SR\_NODISCARD std::string | [**GetMeshStringPath**](#function-getmeshstringpath) () noexcept const<br> |
-|  SR\_NODISCARD RawMeshPtr | [**GetRawMesh**](#function-getrawmesh) () noexcept const<br> |
+|  SR\_NODISCARD const RawMeshPtr & | [**GetRawMesh**](#function-getrawmesh) () noexcept const<br> |
 |  SR\_NODISCARD std::vector&lt; [**SR\_UTILS\_NS::Vertex**](structSR__UTILS__NS_1_1Vertex.md) &gt; | [**GetVertices**](#function-getvertices) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsValidMeshId**](#function-isvalidmeshid) () noexcept const<br> |
 | virtual void | [**OnRawMeshChanged**](#function-onrawmeshchanged) () <br> |
@@ -187,7 +187,7 @@ SR_NODISCARD std::string SR_HTYPES_NS::IRawMeshHolder::GetMeshStringPath () noex
 ### function GetRawMesh 
 
 ```C++
-inline SR_NODISCARD RawMeshPtr SR_HTYPES_NS::IRawMeshHolder::GetRawMesh () noexcept const
+inline SR_NODISCARD const RawMeshPtr & SR_HTYPES_NS::IRawMeshHolder::GetRawMesh () noexcept const
 ```
 
 

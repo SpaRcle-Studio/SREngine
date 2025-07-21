@@ -283,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="763" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="763" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="761" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="761" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector3_8h_1add6b330eb901c035034dd90071be1fd3" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; int32_t &gt;</type>
@@ -297,7 +297,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="764" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="764" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="762" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="762" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector3_8h_1a8094d49587a7bdbb32095580b21f3569" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; uint32_t &gt;</type>
@@ -311,7 +311,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="765" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="765" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="763" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="763" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector3_8h_1a2e21de6b81820721056fa8a6f478873f" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; bool &gt;</type>
@@ -325,7 +325,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="766" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="766" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="764" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="764" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector4_8h_1afea3818a990ae3c65e79ef5aa83fd9e4" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">Vector4</ref>&lt; Unit &gt;</type>
@@ -546,7 +546,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="768" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="768" bodyend="768"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="766" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="766" bodyend="766"/>
       </memberdef>
       <memberdef kind="variable" id="Vector3_8h_1a2273f6a66c33776961808f35ac2add59" prot="public" static="yes" mutable="no">
         <type>SR_INLINE const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref></type>
@@ -565,7 +565,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="769" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="769" bodyend="773"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="767" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="767" bodyend="771"/>
       </memberdef>
       <memberdef kind="variable" id="Vector4_8h_1a3c1b358c33546a81df1e0a72caad36ee" prot="public" static="no" extern="yes" mutable="no">
         <type>std::unordered_map&lt; SRHashType, <ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref> &gt;</type>
@@ -1002,7 +1002,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="100" column="30" declfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" declline="100" declcolumn="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="102" column="30" declfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" declline="102" declcolumn="30"/>
       </memberdef>
       <memberdef kind="function" id="Matrix4x4_8h_1aaa425deeeb3003229794a4e12492e7ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED <ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">FVector4</ref></type>
@@ -1028,7 +1028,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="101" column="30" declfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" declline="101" declcolumn="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="103" column="30" declfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" declline="103" declcolumn="30"/>
       </memberdef>
       <memberdef kind="function" id="Matrix4x4_8h_1a3b5fe39db0707f5ec4b3e2e3af31bdd2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED <ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">FVector4</ref></type>
@@ -1050,7 +1050,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="102" column="30" declfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" declline="102" declcolumn="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="104" column="30" declfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" declline="104" declcolumn="30"/>
       </memberdef>
       <memberdef kind="function" id="Matrix4x4_8h_1abf7c88a92b276534f22075fed67b09a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -1080,7 +1080,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="103" column="26" declfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" declline="103" declcolumn="26"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="105" column="26" declfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h" declline="105" declcolumn="26"/>
       </memberdef>
       <memberdef kind="function" id="Matrix4x4Utils_8h_1a8ad40cfbdda796ce03a5f53336546b97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_INLINE_STATIC void SR_FASTCALL</type>
@@ -1194,7 +1194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="80" column="39" bodyfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="80" bodyend="115"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="80" column="39" bodyfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="80" bodyend="139"/>
       </memberdef>
       <memberdef kind="function" id="Matrix4x4Utils_8h_1a3e60fc1e3eab9cd1636f460a0afa5294" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_INLINE_STATIC void SR_FASTCALL</type>
@@ -1220,7 +1220,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="117" column="39" bodyfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="117" bodyend="151"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="141" column="39" bodyfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="141" bodyend="175"/>
       </memberdef>
       <memberdef kind="function" id="Matrix4x4Utils_8h_1acfbe00e5483ecd634fe8a5f89aa2f6a5" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_INLINE_STATIC glm::mat4 SR_FASTCALL</type>
@@ -1242,7 +1242,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="153" column="57" bodyfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="153" bodyend="157"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="177" column="57" bodyfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="177" bodyend="181"/>
       </memberdef>
       <memberdef kind="function" id="Matrix4x4Utils_8h_1ab0862f51c1ed658154fe370aede89184" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_INLINE_STATIC void SR_FASTCALL</type>
@@ -1265,7 +1265,7 @@
         <inbodydescription>
 <para>rotation matrix</para>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="159" column="39" bodyfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="159" bodyend="194"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="183" column="39" bodyfile="Engine/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="183" bodyend="218"/>
       </memberdef>
       <memberdef kind="function" id="Noise_8h_1a8a925a10a3f2bd3498867acad2ebfccc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint8_t</type>

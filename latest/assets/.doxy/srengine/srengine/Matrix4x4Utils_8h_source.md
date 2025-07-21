@@ -88,7 +88,31 @@ namespace SR_MATH_NS {
     }
 
     SR_INLINE_STATIC void SR_FASTCALL GLMMultiplyMat4x4(glm::mat4& result, const glm::mat4& m1, const glm::mat4& m2) noexcept {
-        typename glm::mat4::col_type& SrcA0 = *(typename glm::mat4::col_type*)(((char*)&m1) + sizeof(typename glm::mat4::col_type) * 0);
+        const float* SR_RESTRICT a = &(m1[0].x);
+        const float* SR_RESTRICT b = &(m2[0].x);
+        float* SR_RESTRICT r = &(result[0].x);
+
+        r[0]  = a[0] * b[0]  + a[4] * b[1]  + a[8]  * b[2]  + a[12] * b[3];
+        r[1]  = a[1] * b[0]  + a[5] * b[1]  + a[9]  * b[2]  + a[13] * b[3];
+        r[2]  = a[2] * b[0]  + a[6] * b[1]  + a[10] * b[2]  + a[14] * b[3];
+        r[3]  = a[3] * b[0]  + a[7] * b[1]  + a[11] * b[2]  + a[15] * b[3];
+
+        r[4]  = a[0] * b[4]  + a[4] * b[5]  + a[8]  * b[6]  + a[12] * b[7];
+        r[5]  = a[1] * b[4]  + a[5] * b[5]  + a[9]  * b[6]  + a[13] * b[7];
+        r[6]  = a[2] * b[4]  + a[6] * b[5]  + a[10] * b[6]  + a[14] * b[7];
+        r[7]  = a[3] * b[4]  + a[7] * b[5]  + a[11] * b[6]  + a[15] * b[7];
+
+        r[8]  = a[0] * b[8]  + a[4] * b[9]  + a[8]  * b[10] + a[12] * b[11];
+        r[9]  = a[1] * b[8]  + a[5] * b[9]  + a[9]  * b[10] + a[13] * b[11];
+        r[10] = a[2] * b[8]  + a[6] * b[9]  + a[10] * b[10] + a[14] * b[11];
+        r[11] = a[3] * b[8]  + a[7] * b[9]  + a[11] * b[10] + a[15] * b[11];
+
+        r[12] = a[0] * b[12] + a[4] * b[13] + a[8]  * b[14] + a[12] * b[15];
+        r[13] = a[1] * b[12] + a[5] * b[13] + a[9]  * b[14] + a[13] * b[15];
+        r[14] = a[2] * b[12] + a[6] * b[13] + a[10] * b[14] + a[14] * b[15];
+        r[15] = a[3] * b[12] + a[7] * b[13] + a[11] * b[14] + a[15] * b[15];
+
+        /*typename glm::mat4::col_type& SrcA0 = *(typename glm::mat4::col_type*)(((char*)&m1) + sizeof(typename glm::mat4::col_type) * 0);
         typename glm::mat4::col_type& SrcA1 = *(typename glm::mat4::col_type*)(((char*)&m1) + sizeof(typename glm::mat4::col_type) * 1);
         typename glm::mat4::col_type& SrcA2 = *(typename glm::mat4::col_type*)(((char*)&m1) + sizeof(typename glm::mat4::col_type) * 2);
         typename glm::mat4::col_type& SrcA3 = *(typename glm::mat4::col_type*)(((char*)&m1) + sizeof(typename glm::mat4::col_type) * 3);
@@ -121,7 +145,7 @@ namespace SR_MATH_NS {
         DstB3.x = SrcA0.x * SrcB3.x + SrcA1.x * SrcB3.y + SrcA2.x * SrcB3.z + SrcA3.x * SrcB3.w;
         DstB3.y = SrcA0.y * SrcB3.x + SrcA1.y * SrcB3.y + SrcA2.y * SrcB3.z + SrcA3.y * SrcB3.w;
         DstB3.z = SrcA0.z * SrcB3.x + SrcA1.z * SrcB3.y + SrcA2.z * SrcB3.z + SrcA3.z * SrcB3.w;
-        DstB3.w = SrcA0.w * SrcB3.x + SrcA1.w * SrcB3.y + SrcA2.w * SrcB3.z + SrcA3.w * SrcB3.w;
+        DstB3.w = SrcA0.w * SrcB3.x + SrcA1.w * SrcB3.y + SrcA2.w * SrcB3.z + SrcA3.w * SrcB3.w;*/
     }
 
     SR_INLINE_STATIC void SR_FASTCALL GLMMultiplyMat4x4(glm::mat4& result, const glm::mat4& m1, const glm::mat3& m2) noexcept {

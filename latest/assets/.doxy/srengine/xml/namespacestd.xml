@@ -141,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="807" column="36" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="807" bodyend="810"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="805" column="36" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="805" bodyend="808"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

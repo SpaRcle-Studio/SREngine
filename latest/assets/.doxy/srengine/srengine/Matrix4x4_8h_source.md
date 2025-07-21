@@ -51,6 +51,8 @@ namespace SR_MATH_NS {
         Matrix4x4(const Quaternion& rotation, const FVector3& scale) noexcept;
         Matrix4x4(const FVector3& translate, const Quaternion& rotation, const FVector3& scale, const FVector3& skew) noexcept;
 
+        static void SR_FASTCALL Multiply(Matrix4x4& result, const Matrix4x4& left, const Matrix4x4& right);
+
         static Matrix4x4 CreateViewMat(Unit pitch = 0, Unit yaw = 0, Unit roll = 0);
         static Matrix4x4 Identity();
         static Matrix4x4 RotationYawPitchRoll(const FVector3& angles);

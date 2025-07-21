@@ -359,8 +359,6 @@ namespace SR_MATH_NS {
                 return false;
             }
 
-            SR_NOOP;
-
             return true;
         }
 

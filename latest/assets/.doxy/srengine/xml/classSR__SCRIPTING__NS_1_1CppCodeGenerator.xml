@@ -449,8 +449,8 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppCodeGenerator</scope><name>DecrementPointer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodeGenerator</scope><name>DynamicCast</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1CppCodeGenerator_1afbcb569236a992e2738478ff8644275a" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodeGenerator</scope><name>GenerateModule</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodeGenerator</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodeGenerator</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodeGenerator</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodeGenerator</scope><name>Get</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1CppCodeGenerator_1a5ce2439f5b65014f8db1eeceeefe3af3" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodeGenerator</scope><name>GetDependenciesRecursive</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1CppCodeGenerator_1ac28c4dd5d670123efd9f457cc1e41986" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodeGenerator</scope><name>GetModule</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1CppCodeGenerator_1a324a076947f2ae9f93b17a5a42e56433" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodeGenerator</scope><name>GetModules</name></member>

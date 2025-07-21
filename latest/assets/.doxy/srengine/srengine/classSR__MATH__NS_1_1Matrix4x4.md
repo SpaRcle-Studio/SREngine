@@ -140,6 +140,7 @@
 |  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**FromTranslate**](#function-fromtranslate) (const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & translation) <br> |
 |  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**Identity**](#function-identity) () <br> |
 |  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**LookAt**](#function-lookat) (const SR\_MATH\_NS::FVector3 & eye, const SR\_MATH\_NS::FVector3 & center, const SR\_MATH\_NS::FVector3 & up) <br> |
+|  void SR\_FASTCALL | [**Multiply**](#function-multiply) ([**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & result, const [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & left, const [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & right) <br> |
 |  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**Ortho**](#function-ortho) (Unit left, Unit right, Unit bottom, Unit top, Unit zNear, Unit zFar) <br> |
 |  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**Perspective**](#function-perspective) (float\_t FOV, float\_t aspect, float\_t nearValue, float\_t farValue) <br> |
 |  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**RotationAxis**](#function-rotationaxis-12) (const SR\_MATH\_NS::FVector4 & axis, Unit angle) <br> |
@@ -1323,6 +1324,23 @@ static Matrix4x4 SR_MATH_NS::Matrix4x4::LookAt (
     const SR_MATH_NS::FVector3 & eye,
     const SR_MATH_NS::FVector3 & center,
     const SR_MATH_NS::FVector3 & up
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function Multiply 
+
+```C++
+static void SR_FASTCALL SR_MATH_NS::Matrix4x4::Multiply (
+    Matrix4x4 & result,
+    const Matrix4x4 & left,
+    const Matrix4x4 & right
 ) 
 ```
 

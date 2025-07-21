@@ -108,8 +108,8 @@
       <member refid="classSR__CORE__NS_1_1DrawState_1a24a83fdc2ea640ff0f53e98177441905" prot="public" virt="virtual"><scope>SR_CORE_NS::DrawState</scope><name>ExecuteImpl</name></member>
       <member refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase_1a811ecfa6f376fdec68576470f5a4b830" prot="public" virt="non-virtual"><scope>SR_CORE_NS::DrawState</scope><name>Finalize</name></member>
       <member refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase_1a22c60d82696bcd57ecad96771baa4aff" prot="protected" virt="virtual"><scope>SR_CORE_NS::DrawState</scope><name>FinalizeImpl</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_CORE_NS::DrawState</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_CORE_NS::DrawState</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_CORE_NS::DrawState</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_CORE_NS::DrawState</scope><name>Get</name></member>
       <member refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase_1af7270ead7656442eadd903005a69feb0" prot="public" virt="non-virtual"><scope>SR_CORE_NS::DrawState</scope><name>GetContext</name></member>
       <member refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase_1a04596f43c01d0f11e94ad939255d7040" prot="public" virt="pure-virtual"><scope>SR_CORE_NS::DrawState</scope><name>GetName</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::DrawState</scope><name>GetPtrData</name></member>

@@ -373,7 +373,7 @@
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1af16c3ef83f6a6e8b98a62fc85a6928d0" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>GetMeshStringPath</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh3D_1a6e4f14eb69451418d19b4347e3bec2d5" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>GetMeshType</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ae81e0c4dd084a7d3d4620e53c10ca2fc" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>GetParent</name></member>
-      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a4df7afb95a7b0b85ebd5791dcc87a650" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>GetRawMesh</name></member>
+      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a699eb97dff6b2823a8606b356546d256" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>GetRawMesh</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a2c67cc73081e7682937fe2aaf59c65de" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>GetRenderQueues</name></member>
       <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1af32114a133ad6f5455d0e5ee95161fe5" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>GetRenderScene</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a499a53cb08f173222c9a0bbc06af98fd" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>GetRoot</name></member>
@@ -391,11 +391,11 @@
       <member refid="classSR__GTYPES__NS_1_1Mesh_1ab13165b3e9a49610b34cda27b2ca1b72" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>HasSortingPriority</name></member>
       <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1a868fac91b752871f21ac64976dfba9c5" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>IndexedMesh</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a6dbb5d1a94533162f27ebed42894eb29" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>IsActive</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a1d7984f57df2fb1519bca8e2346cbcdd" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>IsAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a3e946a2df87f7f239b757e7c95c3a7dc" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>IsAttached</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aaa40b9cae6a7b9c771bcf20671f80455" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>IsAwake</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh3D_1a725199ac6ffd3df2bd2f9caad2ab7fce" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>IsCalculatable</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1abf90394b84e3af5e16c18d992de38d41" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>IsComponentLoaded</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a34593c73db55cbd4c58e983b23190c56" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>IsComponentValid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ac2786bf69d61b8eea8560256d1dee009" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>IsComponentLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a26327e3091acd6936c2fd29a5a5c9330" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>IsComponentValid</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a8f95ff169b8df189b211b036ba06def5" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>IsEnabled</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1ab6fd84bd06b28605b72477f4b7e4601e" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>IsFlatMesh</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1ac6c840cbd67eab2a2defb04f0bd3c323" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh3D</scope><name>IsMeshRegistered</name></member>

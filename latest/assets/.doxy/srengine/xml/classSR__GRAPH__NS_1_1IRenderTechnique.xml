@@ -977,8 +977,8 @@
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1a81ad67862db2e023140ea7f197d6b119" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>ForEachPass</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1aabe916f28e0ba33fad1f0c3b6808e83c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>FrameBufferControllerPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a596a4017cc0261fcf3d1163958f00ac7" prot="public" virt="virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>FreeVideoMemory</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>Get</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac38d38ae8e248a1b1ad573f3e2ac7ccf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetBaseLogicalNode</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a35e5446ff2b8a8b8abd694446a8a2308" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetCamera</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a725e3e44aa2830a8a799d71e13693a73" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetContainerParents</name></member>
@@ -994,7 +994,7 @@
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1aa14e801043f55bacd8b6ae930d1b063b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetOutputs</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8f05935a0013471af3796065104ddd87" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetParent</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a95b0ad3eee1d6801d720bc7eab40bc6e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetPassPipeline</name></member>
-      <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ae8747567cc979bc69b84be32896e03b0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetPipeline</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ac0a8d051e122d28b14ed80660c938ab8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetPipeline</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetPtrData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetPtrData</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a1a5ccb8771ac2927a04f1c2225bec749" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IRenderTechnique</scope><name>GetQueues</name></member>

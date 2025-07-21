@@ -268,8 +268,8 @@
       <member refid="classSR__UTILS__NS_1_1Asset_1a0d4fff684ea928b986f9ee3de5b3af2a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>EXTENSION_NAME</name></member>
       <member refid="classSR__GRAPH__NS_1_1FileMaterialResource_1a7e850e616502f004c9078b98a2619314" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>FileMaterialResource</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a56bb33e9f5864b6fa62e473389a517b7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>ForceDestroy</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>Get</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1aeabd3a189fe8c7c0c31c1fb6713c5043" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>GetAssociatedPath</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>GetBaseMetas</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileMaterialResource</scope><name>GetClassStaticName</name></member>

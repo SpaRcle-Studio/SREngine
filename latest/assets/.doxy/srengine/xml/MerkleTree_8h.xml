@@ -1085,6 +1085,8 @@
       <node id="66">
         <label>Engine/libs/Graphics/inc/Graphics/Memory/SSBO.h</label>
         <link refid="SSBO_8h_source"/>
+        <childnode refid="36" relation="include">
+        </childnode>
       </node>
       <node id="426">
         <label>Engine/libs/Graphics/inc/Graphics/Memory/SSBOManager.h</label>
@@ -1528,6 +1530,10 @@
         <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
         </childnode>
       </node>
       <node id="70">
@@ -2959,6 +2965,8 @@
         </childnode>
         <childnode refid="156" relation="include">
         </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
       </node>
       <node id="223">
         <label>Engine/libs/Utils/inc/Utils/ECS/TransformZero.h</label>
@@ -4017,6 +4025,8 @@
       <node id="316">
         <label>Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h</label>
         <link refid="IRawMeshHolder_8h_source"/>
+        <childnode refid="36" relation="include">
+        </childnode>
         <childnode refid="42" relation="include">
         </childnode>
         <childnode refid="44" relation="include">

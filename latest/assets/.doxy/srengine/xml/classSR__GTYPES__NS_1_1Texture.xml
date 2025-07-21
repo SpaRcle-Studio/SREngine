@@ -597,8 +597,8 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1a56bb33e9f5864b6fa62e473389a517b7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>ForceDestroy</name></member>
       <member refid="classSR__GTYPES__NS_1_1Texture_1a63924b06d63077ef25209c5142491bf4" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>FreeTextureData</name></member>
       <member refid="classSR__GTYPES__NS_1_1Texture_1ade6f800bc468ec796f1d1636cc6c20ff" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>FreeVideoMemory</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>Get</name></member>
       <member refid="classSR__GTYPES__NS_1_1Texture_1a743e324e8a7ea5c622ed02b2d04df30d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetAssociatedPath</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetBaseMetas</name></member>
       <member refid="classSR__GTYPES__NS_1_1Texture_1a92241348bdcef2d2abdfe38e044380b4" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetChannels</name></member>

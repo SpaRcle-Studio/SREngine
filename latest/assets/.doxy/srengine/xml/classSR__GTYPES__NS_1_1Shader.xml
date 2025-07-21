@@ -1663,8 +1663,8 @@
       <member refid="classSR__GTYPES__NS_1_1Shader_1ae2190a8714ad803492bdd57a2a0ea9aa" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>FlushSamplers</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a56bb33e9f5864b6fa62e473389a517b7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>ForceDestroy</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1a909881db8b32e99d5f4051ca8436e870" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>FreeVideoMemory</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>Get</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1a45e1b1cf851a4e8cbd721915d6e4c8ca" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Shader</scope><name>GetAssociatedPath</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>GetBaseMetas</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>GetClassStaticName</name></member>

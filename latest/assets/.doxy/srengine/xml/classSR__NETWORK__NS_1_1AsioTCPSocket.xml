@@ -409,8 +409,8 @@
       <member refid="classSR__NETWORK__NS_1_1AsioTCPSocket_1ad3f28227af510528b69da419e99efed0" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Connect</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>DecrementPointer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>DynamicCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Get</name></member>
       <member refid="classSR__NETWORK__NS_1_1Socket_1abd2a2384e44ec0f12503b03ead52d1da" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetContext</name></member>
       <member refid="classSR__NETWORK__NS_1_1AsioTCPSocket_1a60c6f0be4838db23861b833fc45502e8" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetLocalAddress</name></member>
       <member refid="classSR__NETWORK__NS_1_1AsioTCPSocket_1aaef1f5579abd1d48f696ce5da3891fb2" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetLocalPort</name></member>

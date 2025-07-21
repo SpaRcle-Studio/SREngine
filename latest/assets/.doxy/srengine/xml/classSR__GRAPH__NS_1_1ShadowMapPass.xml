@@ -526,8 +526,8 @@
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab95638d1f3f8a9b82a1dfdaa63d28d1f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ShadowMapPass</scope><name>Execute</name></member>
       <member refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1afa26f4e1c7996747e682952a429ede33" prot="public" virt="non-virtual" ambiguityscope="SR_GRAPH_NS::"><scope>SR_GRAPH_NS::ShadowMapPass</scope><name>FramebufferPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a8fd00ce8264bf9dff6363cc0c4b699cb" prot="public" virt="non-virtual" ambiguityscope="SR_GRAPH_NS::IFramebufferPass::"><scope>SR_GRAPH_NS::ShadowMapPass</scope><name>FramebufferPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ShadowMapPass</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ShadowMapPass</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ShadowMapPass</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ShadowMapPass</scope><name>Get</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac38d38ae8e248a1b1ad573f3e2ac7ccf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ShadowMapPass</scope><name>GetBaseLogicalNode</name></member>
       <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a93387ebe5820fb69594970f92c2b97be" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ShadowMapPass</scope><name>GetClearColors</name></member>
       <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a2c7f6783a7d03ea990fd4642b3d7043d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ShadowMapPass</scope><name>GetClearDepth</name></member>

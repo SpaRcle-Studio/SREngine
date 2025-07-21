@@ -457,9 +457,9 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="220" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="220" bodyend="234"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>SR_NODISCARD const T *</type>
-        <definition>SR_NODISCARD const T * SR_HTYPES_NS::SharedPtr&lt; T &gt;::Get</definition>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE const T *</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE const T * SR_HTYPES_NS::SharedPtr&lt; T &gt;::Get</definition>
         <argsstring>() const</argsstring>
         <name>Get</name>
         <qualifiedname>SR_HTYPES_NS::SharedPtr::Get</qualifiedname>
@@ -469,11 +469,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="236" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="236" bodyend="236"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="236" column="46" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="236" bodyend="236"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>SR_NODISCARD T *</type>
-        <definition>SR_NODISCARD T * SR_HTYPES_NS::SharedPtr&lt; T &gt;::Get</definition>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE T *</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE T * SR_HTYPES_NS::SharedPtr&lt; T &gt;::Get</definition>
         <argsstring>()</argsstring>
         <name>Get</name>
         <qualifiedname>SR_HTYPES_NS::SharedPtr::Get</qualifiedname>
@@ -483,7 +483,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="237" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="237" bodyend="237"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="237" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="237" bodyend="237"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE const T &amp;SR_FASTCALL</type>
@@ -1643,8 +1643,8 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>DecrementPointer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>DynamicCast</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a25c4e886709bb9b08ed8baee292ea3c1" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>FreeImpl</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>GetPtrData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>GetPtrData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>GetRawPtr</name></member>

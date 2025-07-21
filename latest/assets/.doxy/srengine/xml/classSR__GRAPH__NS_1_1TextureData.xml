@@ -466,8 +466,8 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>DecrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1TextureData_1a62900dae4128e47dc9a30a8e8d9a7d65" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>DeleterFn</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>DynamicCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>Get</name></member>
       <member refid="classSR__GRAPH__NS_1_1TextureData_1a09727299522c1daaa22417e257e55066" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>GetChannels</name></member>
       <member refid="classSR__GRAPH__NS_1_1TextureData_1a5e1947f3421b92d9bd1a4dc82251e8ff" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>GetData</name></member>
       <member refid="classSR__GRAPH__NS_1_1TextureData_1a3bf548fefa260dd96cf0e6426149f6af" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>GetFormat</name></member>

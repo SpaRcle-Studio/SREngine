@@ -41,7 +41,6 @@ namespace SR_GTYPES_NS {
         void UseMaterial() override;
         void UseModelMatrix() override;
 
-        SR_NODISCARD bool IsSkeletonUsable() const;
         SR_NODISCARD bool IsCalculatable() const override;
         SR_NODISCARD bool IsUpdatable() const noexcept override { return true; }
         SR_NODISCARD std::string GetMeshIdentifier() const override;
@@ -53,8 +52,6 @@ namespace SR_GTYPES_NS {
         void UseSSBO() override;
 
     private:
-        bool PopulateSkeletonMatrices();
-
         bool OnResourceReloaded(const SR_UTILS_NS::IResource* pResource) override;
         void OnRawMeshChanged() override;
         bool Calculate() override;

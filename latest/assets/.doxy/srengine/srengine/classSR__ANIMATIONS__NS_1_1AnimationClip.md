@@ -242,6 +242,7 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  SR\_NODISCARD float\_t | [**GetDuration**](#function-getduration) () noexcept const<br> |
 |  SR\_NODISCARD uint32\_t | [**GetMaxKeyFrame**](#function-getmaxkeyframe) () noexcept const<br> |
 | virtual SR\_NODISCARD [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**InitializeResourcePath**](#function-initializeresourcepath) () override const<br> |
+| virtual SR\_NODISCARD bool | [**IsAllowedMultiInstance**](#function-isallowedmultiinstance) () override const<br> |
 | virtual SR\_NODISCARD bool | [**IsAllowedToRevive**](#function-isallowedtorevive) () override const<br> |
 |   | [**~AnimationClip**](#function-animationclip) () override<br> |
 
@@ -322,8 +323,8 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  bool | [**AutoFree**](classSR__HTYPES__NS_1_1SharedPtr.md#function-autofree-22) () <br> |
 | virtual void | [**DecrementPointer**](classSR__HTYPES__NS_1_1SharedPtr.md#function-decrementpointer) () override<br> |
 |  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; U &gt; | [**DynamicCast**](classSR__HTYPES__NS_1_1SharedPtr.md#function-dynamiccast) () const<br> |
-|  SR\_NODISCARD const T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-12) () const<br> |
-|  SR\_NODISCARD T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-22) () <br> |
+|  SR\_NODISCARD SR\_FORCE\_INLINE const T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-12) () const<br> |
+|  SR\_NODISCARD SR\_FORCE\_INLINE T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-22) () <br> |
 |  SR\_NODISCARD const void \* | [**GetRawPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getrawptr-12) () const<br> |
 |  SR\_NODISCARD void \* | [**GetRawPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getrawptr-22) () <br>_NOLINT(modernize-use-nodiscard)_  |
 | virtual SR\_NODISCARD SRClass \* | [**GetSRClass**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getsrclass) () override const<br>_NOLINT(modernize-use-nodiscard)_  |
@@ -781,6 +782,21 @@ virtual SR_NODISCARD SR_UTILS_NS::Path SR_ANIMATIONS_NS::AnimationClip::Initiali
 
 
 Implements [*SR\_UTILS\_NS::IResource::InitializeResourcePath*](classSR__UTILS__NS_1_1IResource.md#function-initializeresourcepath)
+
+
+<hr>
+
+
+
+### function IsAllowedMultiInstance 
+
+```C++
+inline virtual SR_NODISCARD bool SR_ANIMATIONS_NS::AnimationClip::IsAllowedMultiInstance () override const
+```
+
+
+
+Implements [*SR\_UTILS\_NS::IResource::IsAllowedMultiInstance*](classSR__UTILS__NS_1_1IResource.md#function-isallowedmultiinstance)
 
 
 <hr>

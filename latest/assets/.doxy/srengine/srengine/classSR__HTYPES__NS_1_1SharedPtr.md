@@ -86,8 +86,8 @@ Inherited by the following classes: [SR\_ANIMATIONS\_NS::Bone](structSR__ANIMATI
 |  bool | [**AutoFree**](#function-autofree-22) () <br> |
 | virtual void | [**DecrementPointer**](#function-decrementpointer) () override<br> |
 |  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; U &gt; | [**DynamicCast**](#function-dynamiccast) () const<br> |
-|  SR\_NODISCARD const T \* | [**Get**](#function-get-12) () const<br> |
-|  SR\_NODISCARD T \* | [**Get**](#function-get-22) () <br> |
+|  SR\_NODISCARD SR\_FORCE\_INLINE const T \* | [**Get**](#function-get-12) () const<br> |
+|  SR\_NODISCARD SR\_FORCE\_INLINE T \* | [**Get**](#function-get-22) () <br> |
 |  SR\_NODISCARD const void \* | [**GetRawPtr**](#function-getrawptr-12) () const<br> |
 |  SR\_NODISCARD void \* | [**GetRawPtr**](#function-getrawptr-22) () <br>_NOLINT(modernize-use-nodiscard)_  |
 | virtual SR\_NODISCARD SRClass \* | [**GetSRClass**](#function-getsrclass) () override const<br>_NOLINT(modernize-use-nodiscard)_  |
@@ -296,7 +296,7 @@ inline SharedPtr < U > SR_HTYPES_NS::SharedPtr::DynamicCast () const
 ### function Get [1/2]
 
 ```C++
-inline SR_NODISCARD const T * SR_HTYPES_NS::SharedPtr::Get () const
+inline SR_NODISCARD SR_FORCE_INLINE const T * SR_HTYPES_NS::SharedPtr::Get () const
 ```
 
 
@@ -309,7 +309,7 @@ inline SR_NODISCARD const T * SR_HTYPES_NS::SharedPtr::Get () const
 ### function Get [2/2]
 
 ```C++
-inline SR_NODISCARD T * SR_HTYPES_NS::SharedPtr::Get () 
+inline SR_NODISCARD SR_FORCE_INLINE T * SR_HTYPES_NS::SharedPtr::Get () 
 ```
 
 

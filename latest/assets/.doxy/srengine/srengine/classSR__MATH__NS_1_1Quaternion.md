@@ -85,7 +85,7 @@
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**RotateZ**](#function-rotatez) (Unit angle) const<br> |
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**Slerp**](#function-slerp) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q, Unit t) const<br> |
 |  SR\_NODISCARD Unit | [**SquaredNorm**](#function-squarednorm) () noexcept const<br> |
-|  SR\_NODISCARD glm::quat | [**ToGLM**](#function-toglm) () noexcept const<br> |
+|  SR\_NODISCARD const glm::quat & | [**ToGLM**](#function-toglm) () noexcept const<br> |
 |  SR\_NODISCARD [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**ToMat4x4**](#function-tomat4x4) () const<br> |
 |  SR\_NODISCARD glm::mat4 | [**ToMat4x4GLM**](#function-tomat4x4glm) () noexcept const<br> |
 |  SR\_NODISCARD std::string | [**ToString**](#function-tostring) () const<br> |
@@ -580,7 +580,7 @@ SR_NODISCARD Unit SR_MATH_NS::Quaternion::SquaredNorm () noexcept const
 ### function ToGLM 
 
 ```C++
-SR_NODISCARD glm::quat SR_MATH_NS::Quaternion::ToGLM () noexcept const
+SR_NODISCARD const glm::quat & SR_MATH_NS::Quaternion::ToGLM () noexcept const
 ```
 
 

@@ -38,7 +38,7 @@ namespace SR_MATH_NS {
             glm::quat self{};
         };
     public:
-        SR_NODISCARD glm::quat ToGLM() const noexcept;
+        SR_NODISCARD const glm::quat& ToGLM() const noexcept;
         SR_NODISCARD Vector4<Unit> Vector() const noexcept;
         SR_NODISCARD Matrix4x4 ToMat4x4() const;
         SR_NODISCARD glm::mat4 ToMat4x4GLM() const noexcept;

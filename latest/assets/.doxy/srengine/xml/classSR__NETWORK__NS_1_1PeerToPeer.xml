@@ -589,8 +589,8 @@
       <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1ac26c806e60ca4a0547680edb68f6e39b" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Context</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>DecrementPointer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>DynamicCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Get</name></member>
       <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a21598dea4f6bd657f2986a9f4548da89" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>GetAcceptor</name></member>
       <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a6e2b8e0c437b5a3e92865cd299d04730" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>GetConnectionsCount</name></member>
       <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1ac6ee3f326a78e918b4f30d84ab60c4ad" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>GetNewPeersCount</name></member>

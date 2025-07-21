@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="63" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" bodystart="63" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="65" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" bodystart="65" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -86,6 +86,20 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="54" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" bodystart="54" bodyend="56"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a3848e285f4e3f8e0e69188ea7a2ea793" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GRAPH_NS::FileRenderTechniqueResource::IsAllowedMultiInstance</definition>
+        <argsstring>() const override</argsstring>
+        <name>IsAllowedMultiInstance</name>
+        <qualifiedname>SR_GRAPH_NS::FileRenderTechniqueResource::IsAllowedMultiInstance</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="58" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" bodystart="58" bodyend="58"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a5f9504bcc4a141d3e1c6784a4b348159" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -120,7 +134,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="59" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="61" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a9303cf33087e9b44c416a271e567f5af" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -134,7 +148,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="60" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="62" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -163,9 +177,10 @@
         <label>SR_UTILS_NS::Settings</label>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="38" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" bodystart="38" bodyend="65"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" line="38" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h" bodystart="38" bodyend="67"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1ab1bed88dcaddcda43b7bd6ddbe50fb1f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechniqueResource</scope><name>FileRenderTechniqueResource</name></member>
+      <member refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a3848e285f4e3f8e0e69188ea7a2ea793" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechniqueResource</scope><name>IsAllowedMultiInstance</name></member>
       <member refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a5f9504bcc4a141d3e1c6784a4b348159" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechniqueResource</scope><name>Load</name></member>
       <member refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1ab9f89cfdaa2cafcd347c93f3c907cedc" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechniqueResource</scope><name>Load</name></member>
       <member refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a358d57d767e6d0c5c2c2a8ff9a6edd40" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechniqueResource</scope><name>m_renderTechniques</name></member>

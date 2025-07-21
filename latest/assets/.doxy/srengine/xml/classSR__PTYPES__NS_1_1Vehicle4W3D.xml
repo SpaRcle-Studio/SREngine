@@ -177,10 +177,10 @@
       <member refid="classSR__UTILS__NS_1_1Component_1a5dc93a6f5bb2867f7a20476c569451ed" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Vehicle4W3D</scope><name>HasScene</name></member>
       <member refid="classSR__PTYPES__NS_1_1Vehicle_1acf1ded5441c740e40e385e65ecd16a51" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Vehicle4W3D</scope><name>InitVehicle</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a1601529fb5946634c4e4d235769b4b80" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Vehicle4W3D</scope><name>IsActive</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a1d7984f57df2fb1519bca8e2346cbcdd" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Vehicle4W3D</scope><name>IsAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a3e946a2df87f7f239b757e7c95c3a7dc" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Vehicle4W3D</scope><name>IsAttached</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aaa40b9cae6a7b9c771bcf20671f80455" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Vehicle4W3D</scope><name>IsAwake</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1abf90394b84e3af5e16c18d992de38d41" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Vehicle4W3D</scope><name>IsComponentLoaded</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a34593c73db55cbd4c58e983b23190c56" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Vehicle4W3D</scope><name>IsComponentValid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ac2786bf69d61b8eea8560256d1dee009" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Vehicle4W3D</scope><name>IsComponentLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a26327e3091acd6936c2fd29a5a5c9330" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Vehicle4W3D</scope><name>IsComponentValid</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a8f95ff169b8df189b211b036ba06def5" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Vehicle4W3D</scope><name>IsEnabled</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af9ad40b9b09d748d7e0b591f4b78b60f" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Vehicle4W3D</scope><name>IsPausedMode</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a3d09e0388a5a982e6fe71cbf59f8c813" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Vehicle4W3D</scope><name>IsPlayingMode</name></member>

@@ -23,6 +23,9 @@ namespace SR_UTILS_NS {
         friend class GameObject;
         using Super = Transform;
     public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<Transform3D>;
+
+    public:
         void Translate(const SR_MATH_NS::FVector3& translation) override;
         void Rotate(const SR_MATH_NS::FVector3& eulers) override;
         void Scale(const SR_MATH_NS::FVector3& scale) override;

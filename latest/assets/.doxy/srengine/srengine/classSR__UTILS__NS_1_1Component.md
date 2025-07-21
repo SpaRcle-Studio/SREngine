@@ -81,10 +81,10 @@ Inherited by the following classes: [SR\_ANIMATIONS\_NS::Animator](classSR__ANIM
 |  SR\_NODISCARD bool | [**HasParent**](#function-hasparent) () const<br> |
 |  SR\_NODISCARD bool | [**HasScene**](#function-hasscene) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsActive**](#function-isactive) () noexcept const<br>_Активен и компонент и его родительский объект_  |
-| virtual SR\_NODISCARD bool | [**IsAttached**](#function-isattached) () noexcept const<br> |
+|  SR\_NODISCARD bool | [**IsAttached**](#function-isattached) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsAwake**](#function-isawake) () noexcept const<br> |
-| virtual SR\_NODISCARD bool | [**IsComponentLoaded**](#function-iscomponentloaded) () noexcept const<br> |
-| virtual SR\_NODISCARD bool | [**IsComponentValid**](#function-iscomponentvalid) () noexcept const<br> |
+|  SR\_NODISCARD bool | [**IsComponentLoaded**](#function-iscomponentloaded) () noexcept const<br> |
+|  SR\_NODISCARD bool | [**IsComponentValid**](#function-iscomponentvalid) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsEnabled**](#function-isenabled) () noexcept const<br>_Активен сам компонент, независимо от объекта_  |
 |  SR\_NODISCARD bool | [**IsPausedMode**](#function-ispausedmode) () const<br>_На паузе ли сцена (если запущена)_  |
 |  SR\_NODISCARD bool | [**IsPlayingMode**](#function-isplayingmode) () const<br>_Запущена ли сцена_  |
@@ -484,7 +484,7 @@ virtual SR_NODISCARD bool SR_UTILS_NS::Component::IsActive () noexcept const
 ### function IsAttached 
 
 ```C++
-virtual SR_NODISCARD bool SR_UTILS_NS::Component::IsAttached () noexcept const
+SR_NODISCARD bool SR_UTILS_NS::Component::IsAttached () noexcept const
 ```
 
 
@@ -510,7 +510,7 @@ virtual SR_NODISCARD bool SR_UTILS_NS::Component::IsAwake () noexcept const
 ### function IsComponentLoaded 
 
 ```C++
-virtual SR_NODISCARD bool SR_UTILS_NS::Component::IsComponentLoaded () noexcept const
+SR_NODISCARD bool SR_UTILS_NS::Component::IsComponentLoaded () noexcept const
 ```
 
 
@@ -523,7 +523,7 @@ virtual SR_NODISCARD bool SR_UTILS_NS::Component::IsComponentLoaded () noexcept 
 ### function IsComponentValid 
 
 ```C++
-virtual SR_NODISCARD bool SR_UTILS_NS::Component::IsComponentValid () noexcept const
+SR_NODISCARD bool SR_UTILS_NS::Component::IsComponentValid () noexcept const
 ```
 
 

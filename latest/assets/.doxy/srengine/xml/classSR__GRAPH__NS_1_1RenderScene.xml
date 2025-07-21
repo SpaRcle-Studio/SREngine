@@ -1274,8 +1274,8 @@
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1af1d5c65c4710c6ffebec88495dee80f6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>DeInit</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>DynamicCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1ac594b3ac760f3c755dd58a5b62bcd252" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>ForEachTechnique</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Get</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1abf00de6a73918396d0241000cd2f9829" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetCameras</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1a80aa3e928aee62c11a4f5005aabf0d5f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetContext</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1a7987e8d85a22e78cbb22945cf317569b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetCurrentSkeleton</name></member>

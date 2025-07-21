@@ -532,8 +532,8 @@
       <member refid="classSR__SRLM__NS_1_1LogicalMachine_1a222b793409ed4280aeaa2c739fad3506" prot="private" virt="non-virtual"><scope>SR_SRLM_NS::LogicalMachine</scope><name>Execute</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a5dd9749c79cb65452e9e4d10efda42f8" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::IResource::"><scope>SR_SRLM_NS::LogicalMachine</scope><name>Execute</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a56bb33e9f5864b6fa62e473389a517b7" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalMachine</scope><name>ForceDestroy</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalMachine</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalMachine</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalMachine</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalMachine</scope><name>Get</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1aeabd3a189fe8c7c0c31c1fb6713c5043" prot="public" virt="virtual"><scope>SR_SRLM_NS::LogicalMachine</scope><name>GetAssociatedPath</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalMachine</scope><name>GetBaseMetas</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalMachine</scope><name>GetClassStaticName</name></member>

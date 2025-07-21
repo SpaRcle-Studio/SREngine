@@ -242,6 +242,7 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  SR\_NODISCARD FT\_Glyph | [**GetGlyph**](#function-getglyph-22) (char32\_t code, FT\_Render\_Mode renderMode) const<br> |
 |  SR\_NODISCARD FT\_Pos | [**GetKerning**](#function-getkerning) (uint32\_t leftCharCode, uint32\_t rightCharCode) const<br> |
 |  SR\_NODISCARD bool | [**HasColor**](#function-hascolor) () noexcept const<br> |
+| virtual SR\_NODISCARD bool | [**IsAllowedToRevive**](#function-isallowedtorevive) () override const<br> |
 |  SR\_NODISCARD bool | [**IsColorEmoji**](#function-iscoloremoji) () noexcept const<br> |
 |  bool | [**SetCharSize**](#function-setcharsize) (uint32\_t w, uint32\_t h, uint32\_t wRes, uint32\_t hRes) <br> |
 |  bool | [**SetPixelSizes**](#function-setpixelsizes) (uint32\_t w, uint32\_t h) <br> |
@@ -324,8 +325,8 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  bool | [**AutoFree**](classSR__HTYPES__NS_1_1SharedPtr.md#function-autofree-22) () <br> |
 | virtual void | [**DecrementPointer**](classSR__HTYPES__NS_1_1SharedPtr.md#function-decrementpointer) () override<br> |
 |  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; U &gt; | [**DynamicCast**](classSR__HTYPES__NS_1_1SharedPtr.md#function-dynamiccast) () const<br> |
-|  SR\_NODISCARD const T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-12) () const<br> |
-|  SR\_NODISCARD T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-22) () <br> |
+|  SR\_NODISCARD SR\_FORCE\_INLINE const T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-12) () const<br> |
+|  SR\_NODISCARD SR\_FORCE\_INLINE T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-22) () <br> |
 |  SR\_NODISCARD const void \* | [**GetRawPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getrawptr-12) () const<br> |
 |  SR\_NODISCARD void \* | [**GetRawPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getrawptr-22) () <br>_NOLINT(modernize-use-nodiscard)_  |
 | virtual SR\_NODISCARD SRClass \* | [**GetSRClass**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getsrclass) () override const<br>_NOLINT(modernize-use-nodiscard)_  |
@@ -793,6 +794,21 @@ inline SR_NODISCARD bool SR_GTYPES_NS::Font::HasColor () noexcept const
 ```
 
 
+
+
+<hr>
+
+
+
+### function IsAllowedToRevive 
+
+```C++
+inline virtual SR_NODISCARD bool SR_GTYPES_NS::Font::IsAllowedToRevive () override const
+```
+
+
+
+Implements [*SR\_UTILS\_NS::IResource::IsAllowedToRevive*](classSR__UTILS__NS_1_1IResource.md#function-isallowedtorevive)
 
 
 <hr>

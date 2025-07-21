@@ -379,6 +379,7 @@
 * **SR\_PROTECT** ([**macros.h**](libs_2Utils_2inc_2Utils_2macros_8h.md))
 * **SR\_PTYPES\_NS** ([**macros.h**](libs_2Utils_2inc_2Utils_2macros_8h.md))
 * **SR\_RENDERER\_DLL\_API** ([**macros.h**](libs_2Utils_2inc_2Utils_2macros_8h.md))
+* **SR\_RESTRICT** ([**macros.h**](libs_2Utils_2inc_2Utils_2macros_8h.md))
 * **SR\_SAFE\_DELETE\_ARRAY\_PTR** ([**macros.h**](libs_2Utils_2inc_2Utils_2macros_8h.md))
 * **SR\_SAFE\_DELETE\_PTR** ([**macros.h**](libs_2Utils_2inc_2Utils_2macros_8h.md))
 * **SR\_SCRIPTING\_NS** ([**macros.h**](libs_2Utils_2inc_2Utils_2macros_8h.md))

@@ -3025,8 +3025,8 @@
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a5e980d2254ac1d64638e1be4d0e4c933" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>FreeTexture</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ab5074c05db24bd7c6d9ba1e907de104b" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>FreeUBO</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a3dcb36dde792890be71a9dd8a10c45c1" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>FreeVBO</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Get</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a16fca09b49251d2d0652ad62fdf05d93" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetBuildIterationsCount</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a93baf7bc732e7059c0dd05aa6dab12c3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetBuildState</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1af4af287c45563874f48c377cd1387921" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetCurrentBuildIteration</name></member>

@@ -58,8 +58,8 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_FORCE_INLINE const SR_HTYPES_NS::SharedPtr<Prefab>& GetPrefab() const noexcept { return m_prefabInfo.pPrefab; }
         SR_NODISCARD SR_FORCE_INLINE bool IsPrefabOwner() const noexcept { return m_prefabInfo.isOwner; }
 
-        SR_NODISCARD SR_FORCE_INLINE SceneObject::Ptr GetParent() const noexcept { return m_parent; }
-        SR_NODISCARD SR_FORCE_INLINE SceneObject::Ptr GetRoot() const noexcept { return m_root; }
+        SR_NODISCARD SR_FORCE_INLINE const SceneObject::Ptr& GetParent() const noexcept { return m_parent; }
+        SR_NODISCARD SR_FORCE_INLINE const SceneObject::Ptr& GetRoot() const noexcept { return m_root; }
 
         SR_NODISCARD SR_FORCE_INLINE bool HasChildren() const { return !m_children.empty(); }
         SR_NODISCARD SR_FORCE_INLINE ChildrenType& GetChildrenRef() { return m_children; }

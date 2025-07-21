@@ -360,8 +360,8 @@
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1a20c3fb2bf3786cd776f09f008371ba7c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>FindPass</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1a9a955888dae260a30ee590bc3afb5bf9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>FindPass</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1a81ad67862db2e023140ea7f197d6b119" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>ForEachPass</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>Get</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac38d38ae8e248a1b1ad573f3e2ac7ccf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>GetBaseLogicalNode</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a725e3e44aa2830a8a799d71e13693a73" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>GetContainerParents</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a149dec24886d7c8700a1b117c469307f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>GetContext</name></member>

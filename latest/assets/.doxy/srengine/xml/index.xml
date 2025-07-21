@@ -169,6 +169,7 @@
     <member refid="classSR__ANIMATIONS__NS_1_1AnimationClip_1ab59e815f4a205dcdc88bc0809ca4b8d3" kind="function"><name>GetChannels</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1AnimationClip_1a931204ffbe4f45be3cbc81b18d579e30" kind="function"><name>IsAllowedToRevive</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1AnimationClip_1afb6f7a265cb7ba5f5ce23cd2131f6689" kind="function"><name>InitializeResourcePath</name></member>
+    <member refid="classSR__ANIMATIONS__NS_1_1AnimationClip_1a603df0da779ff29d93778f146885bbeb" kind="function"><name>IsAllowedMultiInstance</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1AnimationClip_1a3f2790e795ccdb909015c83c6c8764aa" kind="function"><name>GetClipName</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1AnimationClip_1abfe4c07dd4e7c9d12c5ccf77395cc5b2" kind="function"><name>GetDuration</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1AnimationClip_1a579f9dec8e8c5f0de94100c85ab22de3" kind="function"><name>GetMaxKeyFrame</name></member>
@@ -1688,9 +1689,9 @@
     <member refid="classSR__UTILS__NS_1_1Component_1af21012e67de013634a8e25e8900f4f7c" kind="function"><name>Detach</name></member>
     <member refid="classSR__UTILS__NS_1_1Component_1ad94a8ad5e03600e4f9bdae868ba6021b" kind="function"><name>SetEnabled</name></member>
     <member refid="classSR__UTILS__NS_1_1Component_1af57bdc6a2c4f4ed50fec8a5175bcbf8f" kind="function"><name>SetIndexIdSceneUpdater</name></member>
-    <member refid="classSR__UTILS__NS_1_1Component_1abf90394b84e3af5e16c18d992de38d41" kind="function"><name>IsComponentLoaded</name></member>
-    <member refid="classSR__UTILS__NS_1_1Component_1a34593c73db55cbd4c58e983b23190c56" kind="function"><name>IsComponentValid</name></member>
-    <member refid="classSR__UTILS__NS_1_1Component_1a1d7984f57df2fb1519bca8e2346cbcdd" kind="function"><name>IsAttached</name></member>
+    <member refid="classSR__UTILS__NS_1_1Component_1ac2786bf69d61b8eea8560256d1dee009" kind="function"><name>IsComponentLoaded</name></member>
+    <member refid="classSR__UTILS__NS_1_1Component_1a26327e3091acd6936c2fd29a5a5c9330" kind="function"><name>IsComponentValid</name></member>
+    <member refid="classSR__UTILS__NS_1_1Component_1a3e946a2df87f7f239b757e7c95c3a7dc" kind="function"><name>IsAttached</name></member>
     <member refid="classSR__UTILS__NS_1_1Component_1ace675f265b886fef357651e43c29c5d4" kind="function"><name>IsUpdatable</name></member>
     <member refid="classSR__UTILS__NS_1_1Component_1a1601529fb5946634c4e4d235769b4b80" kind="function"><name>IsActive</name></member>
     <member refid="classSR__UTILS__NS_1_1Component_1a8f95ff169b8df189b211b036ba06def5" kind="function"><name>IsEnabled</name></member>
@@ -3853,6 +3854,7 @@
     <member refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1ab1bed88dcaddcda43b7bd6ddbe50fb1f" kind="function"><name>FileRenderTechniqueResource</name></member>
     <member refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a693236ed0b85763ea58c614cb9bde62c" kind="function"><name>RegisterRenderTechnique</name></member>
     <member refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a0fbba58a4904c8e27fda0aef49ec5a89" kind="function"><name>UnregisterRenderTechnique</name></member>
+    <member refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a3848e285f4e3f8e0e69188ea7a2ea793" kind="function"><name>IsAllowedMultiInstance</name></member>
     <member refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a5f9504bcc4a141d3e1c6784a4b348159" kind="function"><name>Load</name></member>
     <member refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1ab9f89cfdaa2cafcd347c93f3c907cedc" kind="function"><name>Load</name></member>
     <member refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource_1a9303cf33087e9b44c416a271e567f5af" kind="function"><name>Unload</name></member>
@@ -4001,6 +4003,7 @@
     <member refid="classSR__GTYPES__NS_1_1Font_1a773c7c445b979b9ebd997db68ae6bdf6" kind="variable"><name>m_isColorEmoji</name></member>
     <member refid="classSR__GTYPES__NS_1_1Font_1a17e5567ef2f72f4cbd17ca5a57069778" kind="function"><name>Font</name></member>
     <member refid="classSR__GTYPES__NS_1_1Font_1a60f37db41f862036be605c0e1ec47086" kind="function"><name>~Font</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Font_1a5f4dfb0959826a6b0537caf80e84a95d" kind="function"><name>IsAllowedToRevive</name></member>
     <member refid="classSR__GTYPES__NS_1_1Font_1a8063e9edf0b5b67d4dd116dac6419e46" kind="function"><name>HasColor</name></member>
     <member refid="classSR__GTYPES__NS_1_1Font_1a6407e27781cee155c7d5d97ba29b5ab1" kind="function"><name>IsColorEmoji</name></member>
     <member refid="classSR__GTYPES__NS_1_1Font_1ae96f022bc6b631115afad5373544145c" kind="function"><name>GetGlyph</name></member>
@@ -4232,8 +4235,8 @@
     <member refid="classSR__UTILS__NS_1_1GameObject_1a4a924800254de314a98a83bf5f292333" kind="function"><name>GameObject</name></member>
     <member refid="classSR__UTILS__NS_1_1GameObject_1afe46dbd74fc22dc7733df81682e47fab" kind="function"><name>~GameObject</name></member>
     <member refid="classSR__UTILS__NS_1_1GameObject_1ab82b3c4e515c0c75a965c1ce3a9b3970" kind="function"><name>GetSceneObjectType</name></member>
-    <member refid="classSR__UTILS__NS_1_1GameObject_1a0f9e853804f190444e064f4d9ecc9b5f" kind="function"><name>GetTransform</name></member>
-    <member refid="classSR__UTILS__NS_1_1GameObject_1a9e2e7e3130259bf72368ef8ea81eaae0" kind="function"><name>GetParentTransform</name></member>
+    <member refid="classSR__UTILS__NS_1_1GameObject_1a5354401d60f300fca3c38f94da17e4ee" kind="function"><name>GetTransform</name></member>
+    <member refid="classSR__UTILS__NS_1_1GameObject_1ad5b095da3c723a90a98b09bda1c1920e" kind="function"><name>GetParentTransform</name></member>
     <member refid="classSR__UTILS__NS_1_1GameObject_1a15c305becf732cd4e047d717303d7822" kind="function"><name>CreateChild</name></member>
     <member refid="classSR__UTILS__NS_1_1GameObject_1a103f6199f7e970f5aa1c21dacddeb21a" kind="function"><name>GetOrCreateChild</name></member>
     <member refid="classSR__UTILS__NS_1_1GameObject_1a288871a4299d57b9024079e016d67907" kind="function"><name>OnAttachedToParent</name></member>
@@ -4959,7 +4962,7 @@
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a6ca6f83374c1df29261ad60d1470dd26" kind="function"><name>FreeVideoMemory</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a798d0be5203c28d4754826bc95a25d82" kind="function"><name>MarkPipelineUnBuild</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a97892e608c168ea6f1937e19d4e6e685" kind="function"><name>SetRenderContext</name></member>
-    <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ae8747567cc979bc69b84be32896e03b0" kind="function"><name>GetPipeline</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ac0a8d051e122d28b14ed80660c938ab8" kind="function"><name>GetPipeline</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ac6a1c5c4af59a5ad1764c67147ed6966" kind="function"><name>GetRenderContext</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1aae869a130c9a754487b0d5dfa2bf3e38" kind="function"><name>IsCalculated</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a19797a20b2b1281e696e87082e302106" kind="function"><name>IsGraphicsResourceRegistered</name></member>
@@ -5290,7 +5293,7 @@
     <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a48bbd761d0762ba3b63fac9aa34daff5" kind="variable"><name>m_meshId</name></member>
     <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a13569cf849ebce2239302bf23a63690a" kind="function"><name>~IRawMeshHolder</name></member>
     <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a1f90420ae0c606687c75766d55d95621" kind="function"><name>GetMeshId</name></member>
-    <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a4df7afb95a7b0b85ebd5791dcc87a650" kind="function"><name>GetRawMesh</name></member>
+    <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a699eb97dff6b2823a8606b356546d256" kind="function"><name>GetRawMesh</name></member>
     <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a39436d2cc283eb4a57a268d6448f4fd3" kind="function"><name>GetMeshPath</name></member>
     <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1af16c3ef83f6a6e8b98a62fc85a6928d0" kind="function"><name>GetMeshStringPath</name></member>
     <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a38601beec7f801e569e00c1236d9e487" kind="function"><name>IsValidMeshId</name></member>
@@ -6219,6 +6222,7 @@
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1afc8cc6c6d87835eb27e0475627e18a3a" kind="function"><name>operator/</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1a134e58038f84acfe1fa18b4decde08d6" kind="function"><name>operator+</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1a22b058fcf7a0285bbe2ca010e91a6df3" kind="function"><name>operator-</name></member>
+    <member refid="classSR__MATH__NS_1_1Matrix4x4_1af8e0f53fd05a22f84e01fe0169ac21d9" kind="function"><name>Multiply</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1a56170ae6cd2abb075629e94ca1ad1ad4" kind="function"><name>CreateViewMat</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1aa5ff792f751c58d764e899868265c05d" kind="function"><name>Identity</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1ae645f352aa1b0c06335230fa3f73244f" kind="function"><name>RotationYawPitchRoll</name></member>
@@ -8411,7 +8415,7 @@
     <member refid="classSR__MATH__NS_1_1Quaternion_1ad2c38e39ed9b5df736cdadb3a5e3697c" kind="variable"><name>w</name></member>
     <member refid="classSR__MATH__NS_1_1Quaternion_1ae01300185f7bd611c9af2f9e87ed1de7" kind="variable"><name>self</name></member>
     <member refid="classSR__MATH__NS_1_1Quaternion_1ad70bdc1474a49695989b8f673ce6c3a4" kind="variable"><name></name></member>
-    <member refid="classSR__MATH__NS_1_1Quaternion_1ab664debdc7816b834a65a4aee9ff8b3a" kind="function"><name>ToGLM</name></member>
+    <member refid="classSR__MATH__NS_1_1Quaternion_1a179c2e578f0e3fdc2bf5eadc77d33124" kind="function"><name>ToGLM</name></member>
     <member refid="classSR__MATH__NS_1_1Quaternion_1a4a696622ed6c48cd8d1ed490dbd65e9e" kind="function"><name>Vector</name></member>
     <member refid="classSR__MATH__NS_1_1Quaternion_1a55b975570e644056f46a43a382726134" kind="function"><name>ToMat4x4</name></member>
     <member refid="classSR__MATH__NS_1_1Quaternion_1ab0da5b9dfb9f5c7789748002e81a6002" kind="function"><name>ToMat4x4GLM</name></member>
@@ -10299,8 +10303,8 @@
     <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" kind="function"><name>StaticCast</name></member>
     <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" kind="function"><name>ReinterpretCast</name></member>
     <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" kind="function"><name>SetPointerFromBase</name></member>
-    <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" kind="function"><name>Get</name></member>
-    <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" kind="function"><name>Get</name></member>
+    <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" kind="function"><name>Get</name></member>
+    <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" kind="function"><name>Get</name></member>
     <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" kind="function"><name>GetUncheckedRef</name></member>
     <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" kind="function"><name>GetUncheckedRef</name></member>
     <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" kind="function"><name>GetRawPtr</name></member>
@@ -10478,9 +10482,13 @@
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a6c9d2921f8a54e18f1a754b769783c0e" kind="variable"><name>m_debugLines</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1afbbff383aae07f00b0bf2ebc6c1656f5" kind="variable"><name>m_bonesByName</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a95b213c63394df966cffefbacaafff76" kind="variable"><name>m_bonesByIndex</name></member>
-    <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a846b90e6574f6af3745b13f1f41e3c1b" kind="variable"><name>m_optimizedBones</name></member>
+    <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1ae5cc276cff1969303b7e1b951ad00755" kind="variable"><name>m_hasInvalidBones</name></member>
+    <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a3f03bccfd6af1bfdefc90b0a7c1dee7e" kind="variable"><name>m_isNeedRecalcTransforms</name></member>
+    <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a7c0619dc4da3dd766116b68c5da41952" kind="variable"><name>m_isSSBODirty</name></member>
+    <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a5bd6d6f4bb9bfb244c40bc9a094da56b" kind="variable"><name>m_indices</name></member>
+    <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a7f78b66f55eae1ae9f96d819f8f89518" kind="variable"><name>m_transforms</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a009efbefd54ac84a209002474892ba4f" kind="variable"><name>m_matrices</name></member>
-    <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a59282c08ced2f24e654aff16bfe8d6a9" kind="variable"><name>m_skeletonOffsets</name></member>
+    <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a9be06bf8f70e3fe1e4f2de38756f8c4f" kind="variable"><name>m_bonesSSBO</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a189680d2676606ab614d5ae37c310bab" kind="variable"><name>m_rootBone</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1ab08f846a887d4c14f63f00686a4e2af5" kind="variable"><name>m_debugEnabled</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1abed0e7cb79b6edab0397a8bcfaa528ca" kind="variable"><name>m_dirtyMatrices</name></member>
@@ -10490,17 +10498,13 @@
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1af7cab0877c6f06d9e32f40d58eb7b395" kind="function"><name>OnAttached</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a849a5a2b8638c0937425ce1dd4fa4920" kind="function"><name>OnDestroy</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1ac95942eead485fe7b01d9e8354d57e30" kind="function"><name>ReCalculateSkeleton</name></member>
-    <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a2d4848376a3b633e519f0822d3b1e7b9" kind="function"><name>CalculateMatrices</name></member>
-    <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1aa69b1b79352875c917ba7765fef9aca3" kind="function"><name>ResetSkeleton</name></member>
-    <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a36d0b2e03274ea8212edaf1182d68098" kind="function"><name>SetOptimizedBones</name></member>
-    <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a5add662000221b5fff583ccf6151d50c" kind="function"><name>SetBonesOffsets</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a464538b223b97c8c06ce5a9126183c8f" kind="function"><name>AddBone</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a8419594882e1bcc57357548f5943c2d1" kind="function"><name>GetRootBone</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1aaf01a245304b5fab5f9aba633a6adb4f" kind="function"><name>GetRootBone</name></member>
+    <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a9c68e0828bb6150575f6bd6077ac8b72" kind="function"><name>GetOffsetsSSBO</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1aca3985dc5faf5a190de411b7053e3d4a" kind="function"><name>GetMatrixByIndex</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a84a6b578b41458517ec0bb8175e706bf" kind="function"><name>GetMatrices</name></member>
-    <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1afcb631aed76393974248ecb164d2a2bc" kind="function"><name>GetOffsets</name></member>
-    <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a159d5859d35363212bf34b294790c4ec" kind="function"><name>GetTransformByIndex</name></member>
+    <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a94ddb40dfe168037f3dd39955590bf6a" kind="function"><name>GetOffsets</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1ab635d8f1badccae1ba887b52e64967b9" kind="function"><name>GetBones</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1ab4202634e38b5c5cdd96a134b14d04ef" kind="function"><name>TryGetBone</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a7ecc030a476318b9cc4348b97e8e692b" kind="function"><name>GetBone</name></member>
@@ -10511,8 +10515,10 @@
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a30d9fe350ae624c5abb0716a8fc61280" kind="function"><name>GetOptimizedBones</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1aa735b33514639e120718331162c1b337" kind="function"><name>SetDebugEnabled</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1ad6718d0d6a8ed2c22870b891b75af880" kind="function"><name>ExecuteInEditMode</name></member>
+    <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a2d1ea357edf23d877234a3b858e800d5" kind="function"><name>OnRawMeshChanged</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a698d775c4209d6d50387439fe953ec62" kind="function"><name>UpdateDebug</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a0b2506b690d6a8aefb5b47646ae14b77" kind="function"><name>DisableDebug</name></member>
+    <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1aca654510c1c95dece538fe1969298aac" kind="function"><name>CalculateTransforms</name></member>
   </compound>
   <compound refid="classSR__GTYPES__NS_1_1SkinnedMesh" kind="class"><name>SR_GTYPES_NS::SkinnedMesh</name>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a07a72aaea02697fba7a50182227d6396" kind="typedef"><name>Super</name></member>
@@ -10528,7 +10534,6 @@
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1ad0bdf32ee9a2d8d5aa0ebaf8df5483ad" kind="function"><name>LateUpdate</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1ae936a8109ab76da9ae3878f2b6b5332e" kind="function"><name>UseMaterial</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1ae957c15800961614c9fe81e35b2670ce" kind="function"><name>UseModelMatrix</name></member>
-    <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1ad3e99fe89f8732ff4cb746d4200e3aa7" kind="function"><name>IsSkeletonUsable</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1acb1c5d3dbde2c12c7b317e3d0106129a" kind="function"><name>IsCalculatable</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1aa730e74cb28847c43704b36a50940195" kind="function"><name>IsUpdatable</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a5b8a1064f113a20c908fc4184bd7e5bd" kind="function"><name>GetMeshIdentifier</name></member>
@@ -10536,7 +10541,6 @@
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a1cea0e11ad39db087938dba00f6bac82" kind="function"><name>GetSkeletonRef</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a713668b44ac1423a7d7a66b69876e8e6" kind="function"><name>FreeVideoMemory</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1aed5fe44d2a612d6d6dfd4f1bb3ccb253" kind="function"><name>UseSSBO</name></member>
-    <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1aa1bbce47acf9a51d7324767dab34b822" kind="function"><name>PopulateSkeletonMatrices</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1ae0b37688ee2bb345e805d176583c6fb8" kind="function"><name>OnResourceReloaded</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a5882874deab2bb403553f7a28ffdc43d" kind="function"><name>OnRawMeshChanged</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1ac956768308c8cc73915daeb35ae81219" kind="function"><name>Calculate</name></member>
@@ -12389,9 +12393,9 @@
     <member refid="classSR__UTILS__NS_1_1Transform_1a0cf06aa11a23d65e2465e140084d8941" kind="function"><name>GetParentTransform</name></member>
     <member refid="classSR__UTILS__NS_1_1Transform_1a3c31b4e72f7c0216150f07c3db1a7260" kind="function"><name>GetGameObject</name></member>
     <member refid="classSR__UTILS__NS_1_1Transform_1a2ca70eca500cae911616d22030fd31c9" kind="function"><name>GetMeasurement</name></member>
-    <member refid="classSR__UTILS__NS_1_1Transform_1aca6932ea6b4e30845d5651e9606df6f8" kind="function"><name>UpdateTree</name></member>
+    <member refid="classSR__UTILS__NS_1_1Transform_1a427da3a4b16214106530c06876c6971a" kind="function"><name>IsDirty</name></member>
+    <member refid="classSR__UTILS__NS_1_1Transform_1ac4c1bc6acc78f9711350e70a97699d56" kind="function"><name>UpdateTree</name></member>
     <member refid="classSR__UTILS__NS_1_1Transform_1acc9696fec9faa7f5ae1cb8cb668da396" kind="function"><name>OnHierarchyChanged</name></member>
-    <member refid="classSR__UTILS__NS_1_1Transform_1a022430c488568f4d0fd8f60c608287a4" kind="function"><name>IsDirty</name></member>
     <member refid="classSR__UTILS__NS_1_1Transform_1a07c15ed68f83cbe8a6f832fdccd6dd46" kind="function"><name>UpdateMatrix</name></member>
   </compound>
   <compound refid="classSR__UTILS__NS_1_1Transform2D" kind="class"><name>SR_UTILS_NS::Transform2D</name>
@@ -12445,6 +12449,7 @@
   </compound>
   <compound refid="classSR__UTILS__NS_1_1Transform3D" kind="class"><name>SR_UTILS_NS::Transform3D</name>
     <member refid="classSR__UTILS__NS_1_1Transform3D_1a577768ac90cf8391f95b7adb7235b96e" kind="typedef"><name>Super</name></member>
+    <member refid="classSR__UTILS__NS_1_1Transform3D_1a2018f2b4badde60e2fd49d75b84d0f79" kind="typedef"><name>Ptr</name></member>
     <member refid="classSR__UTILS__NS_1_1Transform3D_1a00df87c957d8f7ee0fc51f07a0542f4a" kind="friend"><name>GameObject</name></member>
     <member refid="classSR__UTILS__NS_1_1Transform3D_1ad7441fafbb031324ebb9f5e981405275" kind="variable"><name>RIGHT</name></member>
     <member refid="classSR__UTILS__NS_1_1Transform3D_1a00e295def9660765e087fa00ac70758a" kind="variable"><name>UP</name></member>
@@ -15614,6 +15619,7 @@
     <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a0aa792aeb9cc49c0c147cde87abdcc7a" kind="define"><name>SR_INLINE</name></member>
     <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ad4e3884dd6f5f9aef0843a2dcb78d2b5" kind="define"><name>SR_FASTCALL</name></member>
     <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1af28f49e3d796382879e675917ad8f8b4" kind="define"><name>SR_FORCE_INLINE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a54f2504cfb42f2c88f8d088aaa192841" kind="define"><name>SR_RESTRICT</name></member>
     <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a7e99847fb00b39f363ce87a554cc02b1" kind="define"><name>SR_CLOCKS_PER_SEC</name></member>
     <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a5ed4ecb53271983f9f546867278c2c3a" kind="define"><name>SR_NODISCARD</name></member>
     <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ae57e254b6bf4eae3590548092ecbf31c" kind="define"><name>SR_FALLTHROUGH</name></member>

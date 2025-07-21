@@ -58,6 +58,7 @@ Inherits the following classes: SR_UTILS_NS::Settings
 | Type | Name |
 | ---: | :--- |
 |   | [**FileRenderTechniqueResource**](#function-filerendertechniqueresource) () = default<br> |
+|  SR\_NODISCARD bool | [**IsAllowedMultiInstance**](#function-isallowedmultiinstance) () override const<br> |
 |  void | [**RegisterRenderTechnique**](#function-registerrendertechnique) (const FileRenderTechnique::Ptr & renderTechnique) <br> |
 |  void | [**UnregisterRenderTechnique**](#function-unregisterrendertechnique) (const FileRenderTechnique::Ptr & renderTechnique) <br> |
 
@@ -128,6 +129,19 @@ using SR_GRAPH_NS::FileRenderTechniqueResource::Ptr =  SR_HTYPES_NS::SharedPtr<F
 
 ```C++
 SR_GRAPH_NS::FileRenderTechniqueResource::FileRenderTechniqueResource () = default
+```
+
+
+
+
+<hr>
+
+
+
+### function IsAllowedMultiInstance 
+
+```C++
+inline SR_NODISCARD bool SR_GRAPH_NS::FileRenderTechniqueResource::IsAllowedMultiInstance () override const
 ```
 
 

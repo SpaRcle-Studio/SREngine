@@ -5,6 +5,7 @@
     <includes refid="SRClass_8h" local="no">Utils/TypeTraits/SRClass.h</includes>
     <includes refid="Utils_2inc_2Utils_2Common_2Vertices_8h" local="no">Utils/Common/Vertices.h</includes>
     <includes refid="SubscriptionHolder_8h" local="no">Utils/Common/SubscriptionHolder.h</includes>
+    <includedby refid="Skeleton_8h" local="no">Engine/libs/Graphics/inc/Graphics/Animations/Skeleton.h</includedby>
     <includedby refid="DebugWireframeMesh_8h" local="no">Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</includedby>
     <includedby refid="Mesh3D_8h" local="no">Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</includedby>
     <includedby refid="SkinnedMesh_8h" local="no">Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</includedby>
@@ -824,11 +825,23 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
+      <node id="3">
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
+        <link refid="Animator_8h_source"/>
+      </node>
       <node id="2">
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/Skeleton.h</label>
+        <link refid="Skeleton_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</label>
         <link refid="DebugWireframeMesh_8h_source"/>
       </node>
-      <node id="3">
+      <node id="6">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</label>
         <link refid="Mesh3D_8h_source"/>
       </node>
@@ -836,50 +849,50 @@
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
         <link refid="SkinnedMesh_8h_source"/>
       </node>
-      <node id="9">
+      <node id="11">
         <label>Engine/libs/Physics/inc/Physics/2D/Rigidbody2D.h</label>
         <link refid="Rigidbody2D_8h_source"/>
       </node>
-      <node id="10">
+      <node id="12">
         <label>Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h</label>
         <link refid="Rigidbody3D_8h_source"/>
-        <childnode refid="11" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
       </node>
-      <node id="6">
+      <node id="8">
         <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h</label>
         <link refid="Bullet3CollisionShape_8h_source"/>
       </node>
-      <node id="11">
+      <node id="13">
         <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h</label>
         <link refid="Bullet3Rigidbody3D_8h_source"/>
       </node>
-      <node id="5">
+      <node id="7">
         <label>Engine/libs/Physics/inc/Physics/CollisionShape.h</label>
         <link refid="CollisionShape_8h_source"/>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-      </node>
-      <node id="7">
-        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h</label>
-        <link refid="PhysXCollisionShape_8h_source"/>
-      </node>
-      <node id="12">
-        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h</label>
-        <link refid="PhysXRigidbody3D_8h_source"/>
-      </node>
-      <node id="8">
-        <label>Engine/libs/Physics/inc/Physics/Rigidbody.h</label>
-        <link refid="Rigidbody_8h_source"/>
         <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h</label>
+        <link refid="PhysXCollisionShape_8h_source"/>
+      </node>
+      <node id="14">
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h</label>
+        <link refid="PhysXRigidbody3D_8h_source"/>
+      </node>
+      <node id="10">
+        <label>Engine/libs/Physics/inc/Physics/Rigidbody.h</label>
+        <link refid="Rigidbody_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -887,11 +900,13 @@
         <link refid="IRawMeshHolder_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="3" relation="include">
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -925,7 +940,7 @@
 <codeline lineno="22"><highlight class="normal"></highlight></codeline>
 <codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>MeshIndex<sp/>GetMeshId()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_meshId;<sp/>}</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>RawMeshPtr<sp/>GetRawMesh()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_rawMesh;<sp/>}</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>RawMeshPtr&amp;<sp/>GetRawMesh()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_rawMesh;<sp/>}</highlight></codeline>
 <codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref><sp/>GetMeshPath()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>std::string<sp/>GetMeshStringPath()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsValidMeshId()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>

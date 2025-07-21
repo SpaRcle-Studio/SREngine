@@ -45,6 +45,7 @@ namespace SR_ANIMATIONS_NS {
         SR_NODISCARD bool IsAllowedToRevive() const override { return true; }
 
         SR_NODISCARD SR_UTILS_NS::Path InitializeResourcePath() const override;
+        SR_NODISCARD bool IsAllowedMultiInstance() const override { return true; }
 
         SR_NODISCARD SR_UTILS_NS::StringAtom GetClipName() const noexcept;
 

@@ -207,9 +207,9 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="42" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ae8747567cc979bc69b84be32896e03b0" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD PipelinePtr</type>
-        <definition>SR_NODISCARD PipelinePtr SR_GRAPH_NS::Memory::IGraphicsResource::GetPipeline</definition>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ac0a8d051e122d28b14ed80660c938ab8" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const PipelinePtr &amp;</type>
+        <definition>SR_NODISCARD const PipelinePtr &amp; SR_GRAPH_NS::Memory::IGraphicsResource::GetPipeline</definition>
         <argsstring>() const noexcept</argsstring>
         <name>GetPipeline</name>
         <qualifiedname>SR_GRAPH_NS::Memory::IGraphicsResource::GetPipeline</qualifiedname>
@@ -219,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="44" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="44" bodyend="46"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="44" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="44" bodyend="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ac6a1c5c4af59a5ad1764c67147ed6966" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">RenderContextPtr</ref></type>
@@ -316,7 +316,7 @@
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ab417478adc60452e564a0ec2ac2d7f2b" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>DeInitGraphicsResource</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a6ca6f83374c1df29261ad60d1470dd26" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>FreeVideoMemory</name></member>
-      <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ae8747567cc979bc69b84be32896e03b0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>GetPipeline</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ac0a8d051e122d28b14ed80660c938ab8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>GetPipeline</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ac6a1c5c4af59a5ad1764c67147ed6966" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>GetRenderContext</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a2674e73b6c08f0962a2036d6b37f8c0d" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>IGraphicsResource</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1afcc66f98c8ca1ccde9afaeb65fe6d9ee" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>IGraphicsResource</name></member>

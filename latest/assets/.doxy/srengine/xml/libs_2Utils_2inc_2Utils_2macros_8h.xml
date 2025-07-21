@@ -102,10 +102,10 @@
         <label>Engine/inc/Engine/GUI/EditorGUI.h</label>
         <link refid="EditorGUI_8h_source"/>
       </node>
-      <node id="97">
+      <node id="98">
         <label>Engine/inc/Engine/GUI/EditorGizmo.h</label>
         <link refid="EditorGizmo_8h_source"/>
-        <childnode refid="98" relation="include">
+        <childnode refid="99" relation="include">
         </childnode>
       </node>
       <node id="139">
@@ -234,7 +234,7 @@
         <label>Engine/inc/Engine/GUI/SceneRunner.h</label>
         <link refid="SceneRunner_8h_source"/>
       </node>
-      <node id="98">
+      <node id="99">
         <label>Engine/inc/Engine/GUI/SceneTools.h</label>
         <link refid="SceneTools_8h_source"/>
       </node>
@@ -539,7 +539,7 @@
         <link refid="AnimationGraph_8h_source"/>
         <childnode refid="115" relation="include">
         </childnode>
-        <childnode refid="86" relation="include">
+        <childnode refid="62" relation="include">
         </childnode>
       </node>
       <node id="113">
@@ -553,7 +553,7 @@
         <link refid="AnimationKey_8h_source"/>
         <childnode refid="112" relation="include">
         </childnode>
-        <childnode refid="86" relation="include">
+        <childnode refid="62" relation="include">
         </childnode>
       </node>
       <node id="121">
@@ -577,7 +577,7 @@
       <node id="120">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/AnimationStateMachine.h</label>
         <link refid="AnimationStateMachine_8h_source"/>
-        <childnode refid="86" relation="include">
+        <childnode refid="62" relation="include">
         </childnode>
       </node>
       <node id="118">
@@ -586,14 +586,14 @@
         <childnode refid="119" relation="include">
         </childnode>
       </node>
-      <node id="86">
+      <node id="62">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
         <link refid="Animator_8h_source"/>
       </node>
-      <node id="84">
+      <node id="88">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/Bone.h</label>
         <link refid="Bone_8h_source"/>
-        <childnode refid="85" relation="include">
+        <childnode refid="61" relation="include">
         </childnode>
       </node>
       <node id="122">
@@ -606,12 +606,12 @@
         <childnode refid="116" relation="include">
         </childnode>
       </node>
-      <node id="85">
+      <node id="61">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/Skeleton.h</label>
         <link refid="Skeleton_8h_source"/>
-        <childnode refid="86" relation="include">
+        <childnode refid="62" relation="include">
         </childnode>
-        <childnode refid="87" relation="include">
+        <childnode refid="63" relation="include">
         </childnode>
       </node>
       <node id="28">
@@ -656,7 +656,7 @@
         <label>Engine/libs/Graphics/inc/Graphics/Font/SDF.h</label>
         <link refid="SDF_8h_source"/>
       </node>
-      <node id="88">
+      <node id="89">
         <label>Engine/libs/Graphics/inc/Graphics/Font/Text.h</label>
         <link refid="Text_8h_source"/>
       </node>
@@ -781,7 +781,7 @@
       <node id="148">
         <label>Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h</label>
         <link refid="WidgetContainer_8h_source"/>
-        <childnode refid="98" relation="include">
+        <childnode refid="99" relation="include">
         </childnode>
       </node>
       <node id="149">
@@ -814,7 +814,7 @@
         <childnode refid="250" relation="include">
         </childnode>
       </node>
-      <node id="101">
+      <node id="102">
         <label>Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h</label>
         <link refid="LightSystem_8h_source"/>
       </node>
@@ -893,7 +893,7 @@
         <link refid="MaterialProperty_8h_source"/>
         <childnode refid="157" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
       </node>
       <node id="179">
@@ -907,7 +907,7 @@
       <node id="180">
         <label>Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h</label>
         <link refid="MeshMaterialProperty_8h_source"/>
-        <childnode refid="83" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
       </node>
       <node id="159">
@@ -923,7 +923,7 @@
         <link refid="DescriptorManager_8h_source"/>
         <childnode refid="38" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
       </node>
       <node id="182">
@@ -935,7 +935,7 @@
         </childnode>
         <childnode refid="183" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
         <childnode refid="155" relation="include">
         </childnode>
@@ -949,12 +949,14 @@
         <link refid="MeshManager_8h_source"/>
         <childnode refid="160" relation="include">
         </childnode>
-        <childnode refid="90" relation="include">
+        <childnode refid="91" relation="include">
         </childnode>
       </node>
-      <node id="102">
+      <node id="64">
         <label>Engine/libs/Graphics/inc/Graphics/Memory/SSBO.h</label>
         <link refid="SSBO_8h_source"/>
+        <childnode refid="61" relation="include">
+        </childnode>
       </node>
       <node id="186">
         <label>Engine/libs/Graphics/inc/Graphics/Memory/SSBOManager.h</label>
@@ -993,7 +995,7 @@
         </childnode>
         <childnode refid="171" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
         <childnode refid="155" relation="include">
         </childnode>
@@ -1021,7 +1023,7 @@
         <link refid="OverlayType_8h_source"/>
         <childnode refid="193" relation="include">
         </childnode>
-        <childnode refid="100" relation="include">
+        <childnode refid="101" relation="include">
         </childnode>
       </node>
       <node id="191">
@@ -1033,44 +1035,44 @@
         <link refid="BasePass_8h_source"/>
         <childnode refid="39" relation="include">
         </childnode>
-        <childnode refid="63" relation="include">
+        <childnode refid="67" relation="include">
         </childnode>
-        <childnode refid="64" relation="include">
+        <childnode refid="68" relation="include">
         </childnode>
-        <childnode refid="74" relation="include">
+        <childnode refid="78" relation="include">
         </childnode>
-        <childnode refid="79" relation="include">
+        <childnode refid="83" relation="include">
         </childnode>
-        <childnode refid="81" relation="include">
+        <childnode refid="85" relation="include">
         </childnode>
-        <childnode refid="82" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
       </node>
-      <node id="76">
+      <node id="80">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h</label>
         <link refid="CascadedShadowMapPass_8h_source"/>
-        <childnode refid="77" relation="include">
+        <childnode refid="81" relation="include">
         </childnode>
       </node>
-      <node id="78">
+      <node id="82">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
         <link refid="ColorBufferPass_8h_source"/>
       </node>
-      <node id="68">
+      <node id="72">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
         <link refid="DebugPass_8h_source"/>
       </node>
-      <node id="71">
+      <node id="75">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h</label>
         <link refid="DepthBufferPass_8h_source"/>
       </node>
-      <node id="65">
+      <node id="69">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/FlatClusterPass.h</label>
         <link refid="FlatClusterPass_8h_source"/>
-        <childnode refid="66" relation="include">
+        <childnode refid="70" relation="include">
         </childnode>
       </node>
-      <node id="66">
+      <node id="70">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/FlatColorBufferPass.h</label>
         <link refid="FlatColorBufferPass_8h_source"/>
       </node>
@@ -1088,73 +1090,73 @@
         <childnode refid="42" relation="include">
         </childnode>
       </node>
-      <node id="63">
+      <node id="67">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
         <link refid="HTMLDrawerPass_8h_source"/>
       </node>
       <node id="195">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h</label>
         <link refid="IColorBufferPass_8h_source"/>
-        <childnode refid="78" relation="include">
+        <childnode refid="82" relation="include">
         </childnode>
-        <childnode refid="66" relation="include">
+        <childnode refid="70" relation="include">
         </childnode>
       </node>
       <node id="188">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/IFramebufferPass.h</label>
         <link refid="IFramebufferPass_8h_source"/>
-        <childnode refid="66" relation="include">
+        <childnode refid="70" relation="include">
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
-        <childnode refid="75" relation="include">
+        <childnode refid="79" relation="include">
         </childnode>
-        <childnode refid="80" relation="include">
+        <childnode refid="84" relation="include">
         </childnode>
-        <childnode refid="70" relation="include">
+        <childnode refid="74" relation="include">
         </childnode>
       </node>
-      <node id="67">
+      <node id="71">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/IMesh3DClusterPass.h</label>
         <link refid="IMesh3DClusterPass_8h_source"/>
-        <childnode refid="68" relation="include">
-        </childnode>
-        <childnode refid="69" relation="include">
-        </childnode>
-        <childnode refid="70" relation="include">
+        <childnode refid="72" relation="include">
         </childnode>
         <childnode refid="73" relation="include">
         </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
       </node>
-      <node id="64">
+      <node id="68">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h</label>
         <link refid="IMeshClusterPass_8h_source"/>
-        <childnode refid="65" relation="include">
+        <childnode refid="69" relation="include">
         </childnode>
-        <childnode refid="67" relation="include">
+        <childnode refid="71" relation="include">
         </childnode>
       </node>
       <node id="169">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h</label>
         <link refid="ISamplersPass_8h_source"/>
-        <childnode refid="74" relation="include">
-        </childnode>
-      </node>
-      <node id="74">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
-        <link refid="MeshDrawerPass_8h_source"/>
-        <childnode refid="75" relation="include">
-        </childnode>
-      </node>
-      <node id="75">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
-        <link refid="OffScreenMeshDrawerPass_8h_source"/>
-        <childnode refid="76" relation="include">
-        </childnode>
         <childnode refid="78" relation="include">
         </childnode>
       </node>
-      <node id="69">
+      <node id="78">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
+        <link refid="MeshDrawerPass_8h_source"/>
+        <childnode refid="79" relation="include">
+        </childnode>
+      </node>
+      <node id="79">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
+        <link refid="OffScreenMeshDrawerPass_8h_source"/>
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+      </node>
+      <node id="73">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/OpaquePass.h</label>
         <link refid="OpaquePass_8h_source"/>
       </node>
@@ -1166,29 +1168,29 @@
         <childnode refid="151" relation="include">
         </childnode>
       </node>
-      <node id="79">
+      <node id="83">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h</label>
         <link refid="PostProcessPass_8h_source"/>
-        <childnode refid="80" relation="include">
+        <childnode refid="84" relation="include">
         </childnode>
       </node>
-      <node id="80">
+      <node id="84">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h</label>
         <link refid="SSAOPass_8h_source"/>
       </node>
-      <node id="70">
+      <node id="74">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h</label>
         <link refid="ShaderOverridePass_8h_source"/>
-        <childnode refid="71" relation="include">
+        <childnode refid="75" relation="include">
         </childnode>
-        <childnode refid="72" relation="include">
+        <childnode refid="76" relation="include">
         </childnode>
       </node>
-      <node id="72">
+      <node id="76">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/ShadowMapPass.h</label>
         <link refid="ShadowMapPass_8h_source"/>
       </node>
-      <node id="81">
+      <node id="85">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h</label>
         <link refid="SkyboxPass_8h_source"/>
       </node>
@@ -1196,15 +1198,15 @@
         <label>Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h</label>
         <link refid="SwapchainPass_8h_source"/>
       </node>
-      <node id="73">
+      <node id="77">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/TransparentPass.h</label>
         <link refid="TransparentPass_8h_source"/>
       </node>
-      <node id="77">
+      <node id="81">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h</label>
         <link refid="VarianceShadowMapPass_8h_source"/>
       </node>
-      <node id="82">
+      <node id="86">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/WidgetPass.h</label>
         <link refid="WidgetPass_8h_source"/>
       </node>
@@ -1219,7 +1221,7 @@
       <node id="198">
         <label>Engine/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h</label>
         <link refid="FrameBufferFeatures_8h_source"/>
-        <childnode refid="99" relation="include">
+        <childnode refid="100" relation="include">
         </childnode>
         <childnode refid="199" relation="include">
         </childnode>
@@ -1229,7 +1231,7 @@
       <node id="200">
         <label>Engine/libs/Graphics/inc/Graphics/Pipeline/FrameBufferQueue.h</label>
         <link refid="FrameBufferQueue_8h_source"/>
-        <childnode refid="100" relation="include">
+        <childnode refid="101" relation="include">
         </childnode>
       </node>
       <node id="166">
@@ -1249,11 +1251,11 @@
         </childnode>
         <childnode refid="169" relation="include">
         </childnode>
-        <childnode refid="74" relation="include">
+        <childnode refid="78" relation="include">
         </childnode>
-        <childnode refid="79" relation="include">
+        <childnode refid="83" relation="include">
         </childnode>
-        <childnode refid="100" relation="include">
+        <childnode refid="101" relation="include">
         </childnode>
         <childnode refid="106" relation="include">
         </childnode>
@@ -1265,15 +1267,15 @@
         </childnode>
         <childnode refid="175" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
       </node>
-      <node id="100">
+      <node id="101">
         <label>Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h</label>
         <link refid="Pipeline_8h_source"/>
-        <childnode refid="101" relation="include">
-        </childnode>
         <childnode refid="102" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
         </childnode>
         <childnode refid="103" relation="include">
         </childnode>
@@ -1281,13 +1283,13 @@
         </childnode>
         <childnode refid="105" relation="include">
         </childnode>
-        <childnode refid="90" relation="include">
+        <childnode refid="91" relation="include">
         </childnode>
       </node>
-      <node id="99">
+      <node id="100">
         <label>Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h</label>
         <link refid="PipelineState_8h_source"/>
-        <childnode refid="100" relation="include">
+        <childnode refid="101" relation="include">
         </childnode>
       </node>
       <node id="201">
@@ -1297,11 +1299,11 @@
         </childnode>
         <childnode refid="203" relation="include">
         </childnode>
-        <childnode refid="71" relation="include">
+        <childnode refid="75" relation="include">
         </childnode>
-        <childnode refid="70" relation="include">
+        <childnode refid="74" relation="include">
         </childnode>
-        <childnode refid="99" relation="include">
+        <childnode refid="100" relation="include">
         </childnode>
         <childnode refid="43" relation="include">
         </childnode>
@@ -1311,13 +1313,13 @@
       <node id="214">
         <label>Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h</label>
         <link refid="TextureHelper_8h_source"/>
-        <childnode refid="102" relation="include">
+        <childnode refid="64" relation="include">
         </childnode>
         <childnode refid="215" relation="include">
         </childnode>
         <childnode refid="188" relation="include">
         </childnode>
-        <childnode refid="99" relation="include">
+        <childnode refid="100" relation="include">
         </childnode>
         <childnode refid="35" relation="include">
         </childnode>
@@ -1361,7 +1363,7 @@
       <node id="160">
         <label>Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</label>
         <link refid="DebugRenderer_8h_source"/>
-        <childnode refid="68" relation="include">
+        <childnode refid="72" relation="include">
         </childnode>
       </node>
       <node id="224">
@@ -1387,7 +1389,7 @@
       <node id="162">
         <label>Engine/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
         <link refid="HTMLRenderer_8h_source"/>
-        <childnode refid="63" relation="include">
+        <childnode refid="67" relation="include">
         </childnode>
       </node>
       <node id="42">
@@ -1395,9 +1397,9 @@
         <link refid="IRenderTechnique_8h_source"/>
         <childnode refid="43" relation="include">
         </childnode>
-        <childnode refid="61" relation="include">
+        <childnode refid="65" relation="include">
         </childnode>
-        <childnode refid="62" relation="include">
+        <childnode refid="66" relation="include">
         </childnode>
       </node>
       <node id="226">
@@ -1409,7 +1411,7 @@
       <node id="227">
         <label>Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h</label>
         <link refid="MeshCluster_8h_source"/>
-        <childnode refid="64" relation="include">
+        <childnode refid="68" relation="include">
         </childnode>
         <childnode refid="43" relation="include">
         </childnode>
@@ -1423,11 +1425,15 @@
         </childnode>
         <childnode refid="60" relation="include">
         </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
       </node>
       <node id="170">
         <label>Engine/libs/Graphics/inc/Graphics/Render/RenderPredicates.h</label>
         <link refid="RenderPredicates_8h_source"/>
-        <childnode refid="74" relation="include">
+        <childnode refid="78" relation="include">
         </childnode>
         <childnode refid="171" relation="include">
         </childnode>
@@ -1435,7 +1441,7 @@
       <node id="189">
         <label>Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h</label>
         <link refid="RenderQueue_8h_source"/>
-        <childnode refid="83" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
       </node>
       <node id="151">
@@ -1458,13 +1464,13 @@
         <childnode refid="151" relation="include">
         </childnode>
       </node>
-      <node id="61">
+      <node id="65">
         <label>Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h</label>
         <link refid="RenderTechnique_8h_source"/>
         <childnode refid="60" relation="include">
         </childnode>
       </node>
-      <node id="62">
+      <node id="66">
         <label>Engine/libs/Graphics/inc/Graphics/Render/ScriptableRenderTechnique.h</label>
         <link refid="ScriptableRenderTechnique_8h_source"/>
       </node>
@@ -1563,7 +1569,7 @@
         <link refid="ShaderType_8h_source"/>
         <childnode refid="154" relation="include">
         </childnode>
-        <childnode refid="74" relation="include">
+        <childnode refid="78" relation="include">
         </childnode>
         <childnode refid="166" relation="include">
         </childnode>
@@ -1603,7 +1609,7 @@
         <link refid="Descriptors_8h_source"/>
         <childnode refid="37" relation="include">
         </childnode>
-        <childnode refid="99" relation="include">
+        <childnode refid="100" relation="include">
         </childnode>
         <childnode refid="106" relation="include">
         </childnode>
@@ -1616,49 +1622,49 @@
         <label>Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h</label>
         <link refid="Framebuffer_8h_source"/>
       </node>
-      <node id="89">
+      <node id="90">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h</label>
         <link refid="DebugLine_8h_source"/>
       </node>
-      <node id="91">
+      <node id="92">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</label>
         <link refid="DebugWireframeMesh_8h_source"/>
       </node>
-      <node id="90">
+      <node id="91">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h</label>
         <link refid="IndexedMesh_8h_source"/>
-        <childnode refid="91" relation="include">
-        </childnode>
         <childnode refid="92" relation="include">
         </childnode>
-      </node>
-      <node id="93">
-        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</label>
-        <link refid="Mesh3D_8h_source"/>
-      </node>
-      <node id="92">
-        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/MeshComponent.h</label>
-        <link refid="MeshComponent_8h_source"/>
         <childnode refid="93" relation="include">
-        </childnode>
-        <childnode refid="94" relation="include">
-        </childnode>
-        <childnode refid="87" relation="include">
-        </childnode>
-        <childnode refid="95" relation="include">
-        </childnode>
-        <childnode refid="96" relation="include">
         </childnode>
       </node>
       <node id="94">
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</label>
+        <link refid="Mesh3D_8h_source"/>
+      </node>
+      <node id="93">
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/MeshComponent.h</label>
+        <link refid="MeshComponent_8h_source"/>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+      </node>
+      <node id="95">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h</label>
         <link refid="ProceduralMesh_8h_source"/>
       </node>
-      <node id="87">
+      <node id="63">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
         <link refid="SkinnedMesh_8h_source"/>
       </node>
-      <node id="95">
+      <node id="96">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h</label>
         <link refid="Sprite_8h_source"/>
       </node>
@@ -1673,23 +1679,23 @@
         </childnode>
         <childnode refid="245" relation="include">
         </childnode>
-        <childnode refid="92" relation="include">
+        <childnode refid="93" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
-        <childnode refid="96" relation="include">
+        <childnode refid="97" relation="include">
         </childnode>
       </node>
-      <node id="83">
+      <node id="87">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Mesh.h</label>
         <link refid="Mesh_8h_source"/>
-        <childnode refid="84" relation="include">
-        </childnode>
         <childnode refid="88" relation="include">
         </childnode>
         <childnode refid="89" relation="include">
         </childnode>
         <childnode refid="90" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
         </childnode>
       </node>
       <node id="220">
@@ -1721,7 +1727,7 @@
         </childnode>
         <childnode refid="169" relation="include">
         </childnode>
-        <childnode refid="80" relation="include">
+        <childnode refid="84" relation="include">
         </childnode>
         <childnode refid="161" relation="include">
         </childnode>
@@ -1731,9 +1737,9 @@
         <link refid="Uniforms_8h_source"/>
         <childnode refid="166" relation="include">
         </childnode>
-        <childnode refid="89" relation="include">
+        <childnode refid="90" relation="include">
         </childnode>
-        <childnode refid="91" relation="include">
+        <childnode refid="92" relation="include">
         </childnode>
         <childnode refid="155" relation="include">
         </childnode>
@@ -1741,7 +1747,7 @@
       <node id="252">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Vertices.h</label>
         <link refid="Graphics_2inc_2Graphics_2Types_2Vertices_8h_source"/>
-        <childnode refid="88" relation="include">
+        <childnode refid="89" relation="include">
         </childnode>
         <childnode refid="167" relation="include">
         </childnode>
@@ -1751,9 +1757,9 @@
         </childnode>
         <childnode refid="175" relation="include">
         </childnode>
-        <childnode refid="89" relation="include">
+        <childnode refid="90" relation="include">
         </childnode>
-        <childnode refid="91" relation="include">
+        <childnode refid="92" relation="include">
         </childnode>
         <childnode refid="155" relation="include">
         </childnode>
@@ -1766,10 +1772,10 @@
         <label>Engine/libs/Graphics/inc/Graphics/UI/Canvas.h</label>
         <link refid="Canvas_8h_source"/>
       </node>
-      <node id="96">
+      <node id="97">
         <label>Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h</label>
         <link refid="Gizmo_8h_source"/>
-        <childnode refid="97" relation="include">
+        <childnode refid="98" relation="include">
         </childnode>
       </node>
       <node id="342">
@@ -1843,7 +1849,7 @@
         <link refid="MeshUtils_8h_source"/>
         <childnode refid="171" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
       </node>
       <node id="205">
@@ -2503,7 +2509,7 @@
         </childnode>
         <childnode refid="230" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
         <childnode refid="251" relation="include">
         </childnode>
@@ -3077,9 +3083,9 @@
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
-        <childnode refid="86" relation="include">
+        <childnode refid="62" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="88" relation="include">
         </childnode>
         <childnode refid="122" relation="include">
         </childnode>
@@ -3117,7 +3123,7 @@
         <link refid="ComponentManager_8h_source"/>
         <childnode refid="15" relation="include">
         </childnode>
-        <childnode refid="86" relation="include">
+        <childnode refid="62" relation="include">
         </childnode>
         <childnode refid="238" relation="include">
         </childnode>
@@ -3153,7 +3159,7 @@
       <node id="350">
         <label>Engine/libs/Utils/inc/Utils/ECS/EntityRef.h</label>
         <link refid="EntityRef_8h_source"/>
-        <childnode refid="87" relation="include">
+        <childnode refid="63" relation="include">
         </childnode>
         <childnode refid="260" relation="include">
         </childnode>
@@ -3199,7 +3205,7 @@
         </childnode>
         <childnode refid="121" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="88" relation="include">
         </childnode>
         <childnode refid="300" relation="include">
         </childnode>
@@ -3286,6 +3292,8 @@
         <childnode refid="316" relation="include">
         </childnode>
         <childnode refid="212" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
         </childnode>
       </node>
       <node id="322">
@@ -3527,7 +3535,7 @@
       <node id="491">
         <label>Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h</label>
         <link refid="Matrix4x4_8h_source"/>
-        <childnode refid="76" relation="include">
+        <childnode refid="80" relation="include">
         </childnode>
         <childnode refid="201" relation="include">
         </childnode>
@@ -3535,7 +3543,7 @@
         </childnode>
         <childnode refid="238" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
         <childnode refid="265" relation="include">
         </childnode>
@@ -3683,7 +3691,7 @@
         </childnode>
         <childnode refid="41" relation="include">
         </childnode>
-        <childnode refid="100" relation="include">
+        <childnode refid="101" relation="include">
         </childnode>
         <childnode refid="160" relation="include">
         </childnode>
@@ -4125,7 +4133,7 @@
       <node id="366">
         <label>Engine/libs/Utils/inc/Utils/SRLM/LogicalMachine.h</label>
         <link refid="LogicalMachine_8h_source"/>
-        <childnode refid="62" relation="include">
+        <childnode refid="66" relation="include">
         </childnode>
       </node>
       <node id="454">
@@ -4433,9 +4441,9 @@
       <node id="540">
         <label>Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h</label>
         <link refid="FastMemoryArray_8h_source"/>
-        <childnode refid="90" relation="include">
+        <childnode refid="91" relation="include">
         </childnode>
-        <childnode refid="94" relation="include">
+        <childnode refid="95" relation="include">
         </childnode>
         <childnode refid="448" relation="include">
         </childnode>
@@ -4463,7 +4471,7 @@
         </childnode>
         <childnode refid="227" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
         <childnode refid="204" relation="include">
         </childnode>
@@ -4517,11 +4525,13 @@
       <node id="378">
         <label>Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h</label>
         <link refid="IRawMeshHolder_8h_source"/>
-        <childnode refid="91" relation="include">
+        <childnode refid="61" relation="include">
         </childnode>
-        <childnode refid="93" relation="include">
+        <childnode refid="92" relation="include">
         </childnode>
-        <childnode refid="87" relation="include">
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
         </childnode>
         <childnode refid="265" relation="include">
         </childnode>
@@ -4655,7 +4665,7 @@
       <node id="555">
         <label>Engine/libs/Utils/inc/Utils/Types/PoolSet.h</label>
         <link refid="PoolSet_8h_source"/>
-        <childnode refid="100" relation="include">
+        <childnode refid="101" relation="include">
         </childnode>
       </node>
       <node id="372">
@@ -4697,7 +4707,7 @@
         </childnode>
         <childnode refid="38" relation="include">
         </childnode>
-        <childnode refid="100" relation="include">
+        <childnode refid="101" relation="include">
         </childnode>
         <childnode refid="223" relation="include">
         </childnode>
@@ -4707,7 +4717,7 @@
         </childnode>
         <childnode refid="151" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
         <childnode refid="185" relation="include">
         </childnode>
@@ -4871,7 +4881,7 @@
         </childnode>
         <childnode refid="189" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
       </node>
       <node id="476">
@@ -4987,7 +4997,7 @@
       <node id="567">
         <label>Engine/libs/Utils/inc/Utils/Types/UnicodeString.h</label>
         <link refid="UnicodeString_8h_source"/>
-        <childnode refid="88" relation="include">
+        <childnode refid="89" relation="include">
         </childnode>
         <childnode refid="327" relation="include">
         </childnode>
@@ -5519,6 +5529,17 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/macros.h" line="166" column="13" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="166" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a54f2504cfb42f2c88f8d088aaa192841" prot="public" static="no">
+        <name>SR_RESTRICT</name>
+        <initializer>__restrict</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="169" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="169" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a7e99847fb00b39f363ce87a554cc02b1" prot="public" static="no">
         <name>SR_CLOCKS_PER_SEC</name>
         <initializer>1000</initializer>
@@ -5528,7 +5549,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="169" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="169" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="171" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="171" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a5ed4ecb53271983f9f546867278c2c3a" prot="public" static="no">
         <name>SR_NODISCARD</name>
@@ -5539,7 +5560,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="174" column="14" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="174" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="176" column="14" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="176" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1ae57e254b6bf4eae3590548092ecbf31c" prot="public" static="no">
         <name>SR_FALLTHROUGH</name>
@@ -5550,7 +5571,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="177" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="177" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="179" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="179" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a5ed4630e2bcf2c8168a8f4cb806022b3" prot="public" static="no">
         <name>SR_DEPRECATED</name>
@@ -5561,7 +5582,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="180" column="13" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="180" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="182" column="13" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="182" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1ab480da21ad07010bf19f94707f896bcd" prot="public" static="no">
         <name>SR_DEPRECATED_EX</name>
@@ -5573,7 +5594,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="181" column="13" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="181" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="183" column="13" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="183" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a4927892346728e324508bcb1943536d4" prot="public" static="no">
         <name>SR_MAYBE_UNUSED</name>
@@ -5584,7 +5605,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="182" column="13" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="182" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="184" column="13" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="184" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a03e5d0d1872131df12bef49d4fa2bca0" prot="public" static="no">
         <name>SR_MAYBE_UNUSED_VAR</name>
@@ -5595,7 +5616,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="190" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="190" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="192" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="192" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a6bd3bcd09f90af6f0648791b598dba27" prot="public" static="no">
         <name>SR_INLINE_STATIC</name>
@@ -5606,7 +5627,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="191" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="191" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="193" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="193" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a57fad190a3dadff42987f408685255d7" prot="public" static="no">
         <name>SR_NULL</name>
@@ -5617,7 +5638,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="192" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="192" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="194" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="194" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a90d32338b66c081bdefe5efcdef2adf0" prot="public" static="no">
         <name>SR_MARSHAL_USE_LIST</name>
@@ -5628,7 +5649,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="193" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="193" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="195" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="195" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a5d917c412008f1ef22f4b13cb9fd45fb" prot="public" static="no">
         <name>SR_MARSHAL_ENCODE_AND_DECODE</name>
@@ -5639,7 +5660,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="194" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="194" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="196" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="196" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1ab0a9f8483bfcea04a2adf34d136aab0b" prot="public" static="no">
         <name>SR_INVALID_STR_POS</name>
@@ -5650,7 +5671,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="195" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="195" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="197" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="197" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1ac0e82a756dcc374f5aa21729f6701d91" prot="public" static="no">
         <name>SR_ID_INVALID</name>
@@ -5661,7 +5682,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="196" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="196" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="198" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="198" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a88ea964e413c77498c6cba2886545efc" prot="public" static="no">
         <name>SR_SHADER_PROGRAM</name>
@@ -5672,7 +5693,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="197" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="197" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="199" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="199" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a86607188aa700ba0c36b12b779790ff5" prot="public" static="no">
         <name>SR_NULL_SHADER</name>
@@ -5683,7 +5704,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="198" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="198" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="200" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="200" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a15e82f15c3d7dbf323b6c5258e2e47b3" prot="public" static="no">
         <name>SR_VERTEX_DESCRIPTION</name>
@@ -5694,7 +5715,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="199" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="199" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="201" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="201" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1abd75661fe7969e19439052a5f69ba5d1" prot="public" static="no">
         <name>GLM_ENABLE_EXPERIMENTAL</name>
@@ -5704,7 +5725,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="200" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="200" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="202" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="202" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a00502f698de5bf20e6d979d0cdb00765" prot="public" static="no">
         <name>SR_NOOP</name>
@@ -5715,7 +5736,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="201" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="201" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="203" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="203" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a9635bf9d5897ba7f5f02f8bd4b324a74" prot="public" static="no">
         <name>SR_FLT_EPSILON</name>
@@ -5726,7 +5747,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="202" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="202" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="204" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="204" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1ac8d27c03feecf16430debe4b495b8c4e" prot="public" static="no">
         <name>SR_NORETURN</name>
@@ -5737,7 +5758,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="203" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="203" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="205" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="205" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a819a2273e0e6fea4e84c5046a4860c5e" prot="public" static="no">
         <name>SR_MAX_BONES_ON_VERTEX</name>
@@ -5748,7 +5769,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="205" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="205" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="207" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="207" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1affc597af11259f495bdd804566dbc1d2" prot="public" static="no">
         <name>SR_HUMANOID_MAX_BONES</name>
@@ -5759,7 +5780,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="206" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="206" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="208" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="208" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a0d9c5465ae4bfd0873d409539114919f" prot="public" static="no">
         <name>SR_FAST_CONSTRUCTOR</name>
@@ -5770,7 +5791,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="208" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="208" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="210" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="210" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a8a222dd5c009d13644e0fb5b4f96013d" prot="public" static="no">
         <name>SR_UNUSED_VARIABLE</name>
@@ -5782,7 +5803,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="222" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="222" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="224" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="224" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1ae60710434468ed7b7e0d0b7e9258d42f" prot="public" static="no">
         <name>SR_WIN32_BOOL</name>
@@ -5793,7 +5814,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="232" column="14" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="232" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="234" column="14" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="234" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a2774df9818d72a6be270ea375bf9650b" prot="public" static="no">
         <name>SR_SIMD_SUPPORT</name>
@@ -5804,7 +5825,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="238" column="14" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="238" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="240" column="14" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="240" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1aaceb6c766e952dcd626fb0b944fc47a5" prot="public" static="no">
         <name>SR_MACRO_CONCAT_UTIL</name>
@@ -5817,7 +5838,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="241" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="241" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="243" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="243" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1aaedcdfbfafeeec1634e2d4ddb40e11a6" prot="public" static="no">
         <name>SR_MACRO_CONCAT</name>
@@ -5830,7 +5851,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="242" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="242" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="244" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="244" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a8205a64da40fa9df39a2432561116d0d" prot="public" static="no">
         <name>SR_STRINGIFY</name>
@@ -5842,7 +5863,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="243" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="243" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="245" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="245" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1afff02dfb9b1ceac78eeb06fee6c76cbd" prot="public" static="no">
         <name>SR_EXPAND_AND_STRINGIFY</name>
@@ -5854,7 +5875,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="244" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="244" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="246" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="246" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a85be71c7a7d0066e3c7d1373bc563763" prot="public" static="no">
         <name>SR_PROTECT</name>
@@ -5866,7 +5887,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="245" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="245" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="247" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="247" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1ad68a0520ffad979c9546b30f6eb97a3e" prot="public" static="no">
         <name>SR_EXPAND</name>
@@ -5878,7 +5899,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="246" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="246" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="248" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="248" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1af6236fdef49652b3904e5c97417c7f15" prot="public" static="no">
         <name>SR_LINE</name>
@@ -5889,7 +5910,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="248" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="248" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="250" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="250" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a6c7209aa879d2a79acd14d6458821ad2" prot="public" static="no">
         <name>SR_AF_INET</name>
@@ -5900,7 +5921,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="250" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="250" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="252" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="252" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a7b4115f749d66a20e8eaabc76af5e4bf" prot="public" static="no">
         <name>SR_SOCK_STREAM</name>
@@ -5911,7 +5932,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="251" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="251" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="253" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="253" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a5bece2d6d52e45af832a2b72b045324b" prot="public" static="no">
         <name>SR_INADDR_ANY</name>
@@ -5922,7 +5943,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="252" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="252" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="254" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="254" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a10ddbe4c51d33c325875196ef89c685b" prot="public" static="no">
         <name>SR_XML_NS</name>
@@ -5933,7 +5954,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="254" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="254" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="256" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="256" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a050d4c5991eb39d026ef44e08f607bd7" prot="public" static="no">
         <name>SR_YAML_NS</name>
@@ -5944,7 +5965,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="255" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="255" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="257" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="257" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a071a2e9d76180094796d980c1c9aea17" prot="public" static="no">
         <name>SR_PHYSICS_NS</name>
@@ -5955,7 +5976,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="256" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="256" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="258" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="258" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1ae69d521522be5f1e2a77d271b1b72991" prot="public" static="no">
         <name>SR_PTYPES_NS</name>
@@ -5966,7 +5987,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="257" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="257" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="259" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="259" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a10f3816984e322927f26e3d258856743" prot="public" static="no">
         <name>SR_PHYSICS_UTILS_NS</name>
@@ -5977,7 +5998,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="258" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="258" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="260" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="260" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1ad435cd8ff2653f6f18232fff22d8a983" prot="public" static="no">
         <name>SR_UTILS_NS</name>
@@ -5988,7 +6009,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="259" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="259" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="261" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="261" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1ae5c50cb7ca1ab1b3e0904463d9060787" prot="public" static="no">
         <name>SR_SRLM_NS</name>
@@ -5999,7 +6020,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="260" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="260" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="262" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="262" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1aa22cc1609ccf32185836c25b7473acbe" prot="public" static="no">
         <name>SR_NETWORK_NS</name>
@@ -6010,7 +6031,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="261" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="261" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="263" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="263" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1ad48137f6b266a09652634fe6c475e8a2" prot="public" static="no">
         <name>SR_PLATFORM_NS</name>
@@ -6021,7 +6042,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="262" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="262" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="264" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="264" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a1242779feef05131e72c86a892262f80" prot="public" static="no">
         <name>SR_MATH_NS</name>
@@ -6032,7 +6053,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="263" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="263" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="265" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="265" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a424b80f0ecc4b98e95a2e592e83e4333" prot="public" static="no">
         <name>SR_GRAPH_NS</name>
@@ -6043,7 +6064,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="264" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="264" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="266" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="266" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1ac6f061f35fb40f50057a35bca0caaaad" prot="public" static="no">
         <name>SR_SRSL_NS</name>
@@ -6054,7 +6075,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="265" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="265" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="267" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="267" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a9ad611b14cdb01f53ea00c2f32a05e12" prot="public" static="no">
         <name>SR_GRAPH_UI_NS</name>
@@ -6065,7 +6086,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="266" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="266" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="268" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="268" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1aa9a7d2658a527d59dd87642e8a175112" prot="public" static="no">
         <name>SR_GRAPH_GUI_NS</name>
@@ -6076,7 +6097,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="267" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="267" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="269" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="269" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a05d1591858b5a562711e4cccecd8aefc" prot="public" static="no">
         <name>SR_ANIMATIONS_NS</name>
@@ -6087,7 +6108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="268" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="268" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="270" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="270" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a0014e080ea159193c4c6361dbd5b6f15" prot="public" static="no">
         <name>SR_HTYPES_NS</name>
@@ -6098,7 +6119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="269" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="269" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="271" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="271" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a21fe194564e3a4bbcbc0dcdbdc56e9c2" prot="public" static="no">
         <name>SR_GTYPES_NS</name>
@@ -6109,7 +6130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="270" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="270" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="272" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="272" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1ab65e97039b6e8e5a9a9a7c6136b1038c" prot="public" static="no">
         <name>SR_WORLD_NS</name>
@@ -6120,7 +6141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="271" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="271" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="273" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="273" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1ab1949e5415321dd829e9a3f44609bcba" prot="public" static="no">
         <name>SR_CORE_NS</name>
@@ -6131,7 +6152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="272" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="272" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="274" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="274" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a75d40e18bf07fa8f1bcc3073bb723163" prot="public" static="no">
         <name>SR_CORE_UI_NS</name>
@@ -6142,7 +6163,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="273" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="273" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="275" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="275" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a1d4cea11e28ba600838cf71237c8ea6e" prot="public" static="no">
         <name>SR_CORE_GUI_NS</name>
@@ -6153,7 +6174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="274" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="274" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="276" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="276" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a4f0c0ef2f81e5f0c6c9bdf866f3dc9fc" prot="public" static="no">
         <name>SR_SCRIPTING_NS</name>
@@ -6164,7 +6185,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="275" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="275" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="277" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="277" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a9e0f16862cffa3345985f16591c30714" prot="public" static="no">
         <name>SR_AUDIO_NS</name>
@@ -6175,7 +6196,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="276" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="276" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="278" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="278" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a907d1ea4c8c3b9c91b3c57f3b00def3f" prot="public" static="no">
         <name>SR_UTILS_GUI_NS</name>
@@ -6186,7 +6207,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="277" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="277" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="279" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="279" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1aa134a6d1e33aaa41d3d0230315a0fb5f" prot="public" static="no">
         <name>SR_COUNT_ARGS_IMPL2</name>
@@ -6324,7 +6345,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="292" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="279" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="294" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="281" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a5c5cb0389ad7d23245af13997794b577" prot="public" static="no">
         <name>SR_COUNT_ARGS_IMPL</name>
@@ -6336,7 +6357,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="294" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="294" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="296" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="296" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1aeb77752aad0b749ab4266bc2dd1970c2" prot="public" static="no">
         <name>SR_COUNT_ARGS</name>
@@ -6358,7 +6379,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="296" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="296" bodyend="306"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="298" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="298" bodyend="308"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a514adad1320c745f8c7f6b9babb76d42" prot="public" static="no">
         <name>SR_GLOBAL_LOCK</name>
@@ -6369,7 +6390,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="308" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="308" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="310" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="310" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1abbd4b76667b7d7aa594aaf44d57ac83f" prot="public" static="no">
         <name>SR_STATIC_ASSERT2</name>
@@ -6382,7 +6403,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="310" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="310" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="312" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="312" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a22fa442b99a5d96433c10a5b67a3e7f3" prot="public" static="no">
         <name>SR_STATIC_ASSERT</name>
@@ -6394,7 +6415,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="315" column="14" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="315" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="317" column="14" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="317" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a295e7aec1eceffe473a297f46a4b4e71" prot="public" static="no">
         <name>SR_RENDERER_DLL_API</name>
@@ -6404,7 +6425,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="318" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="318" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="320" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="320" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a522703230a4e759b921e95958799fc14" prot="public" static="no">
         <name>SR_CORE_DLL_API</name>
@@ -6414,7 +6435,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="319" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="319" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="321" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="321" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a84af508d0e9e1c956bce88c776757849" prot="public" static="no">
         <name>SR_DLL_API_IMPORT</name>
@@ -6425,7 +6446,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="328" column="14" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="328" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="330" column="14" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="330" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a7ecb9b3834ba4c72e7c15fa192a48ebe" prot="public" static="no">
         <name>SR_DLL_API_EXPORT</name>
@@ -6436,7 +6457,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="329" column="13" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="329" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="331" column="13" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="331" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1afdd5d4651cde3b3141d03d993dbdcabc" prot="public" static="no">
         <name>SR_CODEGEN_DLL_API_IMPORT</name>
@@ -6447,7 +6468,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="336" column="14" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="336" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="338" column="14" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="338" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1abc5c96e0559f2dd941f6e318f8d44ac2" prot="public" static="no">
         <name>SR_CODEGEN_DLL_API_EXPORT</name>
@@ -6458,7 +6479,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="337" column="13" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="337" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="339" column="13" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="339" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1af6f55d5bc7a7a14d3cd2c10648d4f22b" prot="public" static="no">
         <name>SR_COMMON_DLL_API</name>
@@ -6469,7 +6490,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="343" column="14" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="343" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="345" column="14" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="345" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a29bf9b95e3d36b498d1c96f126b77340" prot="public" static="no">
         <name>SR_STRCMPI</name>
@@ -6480,7 +6501,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="350" column="14" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="350" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="352" column="14" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="352" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1af6d72565571625ce242f7b32ddfdd4b8" prot="public" static="no">
         <name>SR_STRNCPY</name>
@@ -6491,7 +6512,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="351" column="13" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="351" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="353" column="13" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="353" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a98f527cf0d63142b6b6dc4be01cdff14" prot="public" static="no">
         <name>SR_FUNCTION_SIGNATURE</name>
@@ -6502,7 +6523,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="357" column="10" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="357" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="359" column="10" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="359" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1adba5c3290b0282780b1d6052dbfe8b15" prot="public" static="no">
         <name>SR_GCC_CLANG_REMOVE_PADDING_ATTRIB</name>
@@ -6512,7 +6533,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="363" column="14" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="363" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="365" column="14" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="365" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a074582c33e07e707faa8017cc5726ca3" prot="public" static="no">
         <name>SR_CODEGEN_HEADER_COMMENT</name>
@@ -6523,7 +6544,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="366" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="366" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="368" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="368" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="libs_2Utils_2inc_2Utils_2macros_8h_1a2f4af09115b4b3f8fe6c0bb412b005f3" prot="public" static="no">
         <name>SR_OFFSETOF</name>
@@ -6536,7 +6557,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="368" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="368" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="370" column="9" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="370" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -6707,237 +6728,239 @@
 <codeline lineno="166"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_FORCE_INLINE<sp/>__forceinline</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="167"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="168"><highlight class="normal"></highlight></codeline>
-<codeline lineno="169"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_CLOCKS_PER_SEC<sp/>1000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_RESTRICT<sp/>__restrict</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="170"><highlight class="normal"></highlight></codeline>
-<codeline lineno="171"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>SR_GCC</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="172"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_NODISCARD<sp/>__attribute__<sp/>((__warn_unused_result__))</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="173"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="174"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_NODISCARD<sp/>[[nodiscard]]</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="175"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="176"><highlight class="normal"></highlight></codeline>
-<codeline lineno="177"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_FALLTHROUGH<sp/>[[fallthrough]]</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_CLOCKS_PER_SEC<sp/>1000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>SR_GCC</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_NODISCARD<sp/>__attribute__<sp/>((__warn_unused_result__))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_NODISCARD<sp/>[[nodiscard]]</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="178"><highlight class="normal"></highlight></codeline>
-<codeline lineno="179"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SR_ANDROID</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="180"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_DEPRECATED<sp/>[[deprecated]]</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="181"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_DEPRECATED_EX(text)<sp/>[[deprecated(text)]]</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="182"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_MAYBE_UNUSED<sp/>[[maybe_unused]]</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="183"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>int32_t;</highlight></codeline>
-<codeline lineno="185"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_DEPRECATED</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="186"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_DEPRECATED_EX(text)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="187"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_MAYBE_UNUSED</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="188"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="189"><highlight class="normal"></highlight></codeline>
-<codeline lineno="190"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_MAYBE_UNUSED_VAR<sp/>SR_MAYBE_UNUSED<sp/>auto&amp;&amp;<sp/>SR_COMBINE(unused_var,<sp/>__LINE__)<sp/>=</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="191"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_INLINE_STATIC<sp/>SR_INLINE<sp/>static</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="192"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_NULL<sp/>0</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="193"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_MARSHAL_USE_LIST<sp/>1</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="194"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_MARSHAL_ENCODE_AND_DECODE<sp/>0</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="195"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_INVALID_STR_POS<sp/>(-1)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="196"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ID_INVALID<sp/>(-1)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="197"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_SHADER_PROGRAM<sp/>int32_t</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="198"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_NULL_SHADER<sp/>(-1)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="199"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_VERTEX_DESCRIPTION<sp/>size_t</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="200"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>GLM_ENABLE_EXPERIMENTAL</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="201"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_NOOP<sp/>(void)0</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="202"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_FLT_EPSILON<sp/>FLT_EPSILON</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="203"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_NORETURN<sp/>[[noreturn]]</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="204"><highlight class="normal"></highlight></codeline>
-<codeline lineno="205"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_MAX_BONES_ON_VERTEX<sp/>16</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="206"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_HUMANOID_MAX_BONES<sp/>128</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="207"><highlight class="normal"></highlight></codeline>
-<codeline lineno="208"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_FAST_CONSTRUCTOR<sp/>SR_FORCE_INLINE<sp/>SR_CONSTEXPR</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_FALLTHROUGH<sp/>[[fallthrough]]</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SR_ANDROID</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_DEPRECATED<sp/>[[deprecated]]</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_DEPRECATED_EX(text)<sp/>[[deprecated(text)]]</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_MAYBE_UNUSED<sp/>[[maybe_unused]]</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>int32_t;</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_DEPRECATED</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_DEPRECATED_EX(text)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_MAYBE_UNUSED</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_MAYBE_UNUSED_VAR<sp/>SR_MAYBE_UNUSED<sp/>auto&amp;&amp;<sp/>SR_COMBINE(unused_var,<sp/>__LINE__)<sp/>=</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_INLINE_STATIC<sp/>SR_INLINE<sp/>static</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_NULL<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_MARSHAL_USE_LIST<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_MARSHAL_ENCODE_AND_DECODE<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_INVALID_STR_POS<sp/>(-1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ID_INVALID<sp/>(-1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_SHADER_PROGRAM<sp/>int32_t</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_NULL_SHADER<sp/>(-1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_VERTEX_DESCRIPTION<sp/>size_t</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>GLM_ENABLE_EXPERIMENTAL</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_NOOP<sp/>(void)0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_FLT_EPSILON<sp/>FLT_EPSILON</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="205"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_NORETURN<sp/>[[noreturn]]</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_MAX_BONES_ON_VERTEX<sp/>16</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_HUMANOID_MAX_BONES<sp/>128</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="209"><highlight class="normal"></highlight></codeline>
-<codeline lineno="210"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>SR_USE_VULKAN</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="211"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>VK_PROTOTYPES</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="212"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="213"><highlight class="normal"></highlight></codeline>
-<codeline lineno="214"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>SR_USE_OPENGL</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="215"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>IMGUI_IMPL_OPENGL_LOADER_GLFW</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//#define<sp/>GL_GLEXT_PROTOTYPES</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//#define<sp/>GL_VERSION_1_0</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//#define<sp/>GL_VERSION_1_1</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//#define<sp/>GL_VERSION_1_3</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="220"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="221"><highlight class="normal"></highlight></codeline>
-<codeline lineno="222"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_UNUSED_VARIABLE(x)<sp/>do<sp/>{<sp/>(void)(x);<sp/>}<sp/>while<sp/>(0)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="210"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_FAST_CONSTRUCTOR<sp/>SR_FORCE_INLINE<sp/>SR_CONSTEXPR</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal"></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>SR_USE_VULKAN</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>VK_PROTOTYPES</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight></codeline>
+<codeline lineno="216"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>SR_USE_OPENGL</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>IMGUI_IMPL_OPENGL_LOADER_GLFW</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//#define<sp/>GL_GLEXT_PROTOTYPES</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//#define<sp/>GL_VERSION_1_0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//#define<sp/>GL_VERSION_1_1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//#define<sp/>GL_VERSION_1_3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="223"><highlight class="normal"></highlight></codeline>
-<codeline lineno="224"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>WIN32</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="225"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_WIN32_BOOL<sp/>true</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="226"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_WIN32</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="227"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>WIN32_WINNT<sp/>0x0A00</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="228"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>WIN32_LEAN_AND_MEAN<sp/></highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="229"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>GLFW_EXPOSE_NATIVE_WIN32</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="230"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>VK_USE_PLATFORM_WIN32_KHR</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="231"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="232"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_WIN32_BOOL<sp/>false</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="233"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="234"><highlight class="normal"></highlight></codeline>
-<codeline lineno="235"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(WIN32)<sp/>&amp;&amp;<sp/>!defined(SR_COMMON_USE_CLANG_EMULATION)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="236"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_SIMD_SUPPORT<sp/>1</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="237"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="238"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_SIMD_SUPPORT<sp/>0</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="239"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="240"><highlight class="normal"></highlight></codeline>
-<codeline lineno="241"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_MACRO_CONCAT_UTIL(a,<sp/>b)<sp/>a<sp/>##<sp/>b</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="242"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_MACRO_CONCAT(a,<sp/>b)<sp/>SR_MACRO_CONCAT_UTIL(a,<sp/>b)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="243"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_STRINGIFY(x)<sp/>#x</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="244"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_EXPAND_AND_STRINGIFY(x)<sp/>SR_STRINGIFY(x)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="245"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_PROTECT(...)<sp/>__VA_ARGS__</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="246"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_EXPAND(x)<sp/>x</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="247"><highlight class="normal"></highlight></codeline>
-<codeline lineno="248"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_LINE<sp/>__LINE__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_UNUSED_VARIABLE(x)<sp/>do<sp/>{<sp/>(void)(x);<sp/>}<sp/>while<sp/>(0)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="225"><highlight class="normal"></highlight></codeline>
+<codeline lineno="226"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>WIN32</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="227"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_WIN32_BOOL<sp/>true</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_WIN32</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>WIN32_WINNT<sp/>0x0A00</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>WIN32_LEAN_AND_MEAN<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="231"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>GLFW_EXPOSE_NATIVE_WIN32</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>VK_USE_PLATFORM_WIN32_KHR</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="234"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_WIN32_BOOL<sp/>false</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="235"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="236"><highlight class="normal"></highlight></codeline>
+<codeline lineno="237"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(WIN32)<sp/>&amp;&amp;<sp/>!defined(SR_COMMON_USE_CLANG_EMULATION)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="238"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_SIMD_SUPPORT<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_SIMD_SUPPORT<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_MACRO_CONCAT_UTIL(a,<sp/>b)<sp/>a<sp/>##<sp/>b</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_MACRO_CONCAT(a,<sp/>b)<sp/>SR_MACRO_CONCAT_UTIL(a,<sp/>b)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="245"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_STRINGIFY(x)<sp/>#x</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="246"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_EXPAND_AND_STRINGIFY(x)<sp/>SR_STRINGIFY(x)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="247"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_PROTECT(...)<sp/>__VA_ARGS__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_EXPAND(x)<sp/>x</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="249"><highlight class="normal"></highlight></codeline>
-<codeline lineno="250"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_AF_INET<sp/>2<sp/></highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="251"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_SOCK_STREAM<sp/>1<sp/></highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="252"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_INADDR_ANY<sp/>(ULONG)0x00000000</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="253"><highlight class="normal"></highlight></codeline>
-<codeline lineno="254"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_XML_NS<sp/>SpaRcle::Utils::Xml</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="255"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_YAML_NS<sp/>SpaRcle::Utils::Yaml</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="256"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_PHYSICS_NS<sp/>SpaRcle::Physics</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="257"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_PTYPES_NS<sp/>SR_PHYSICS_NS::Types</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="258"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_PHYSICS_UTILS_NS<sp/>SR_PHYSICS_NS::Utils</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="259"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_UTILS_NS<sp/>SpaRcle::Utils</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="260"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_SRLM_NS<sp/>SR_UTILS_NS::SRLM</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="261"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_NETWORK_NS<sp/>SR_UTILS_NS::Network</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="262"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_PLATFORM_NS<sp/>SpaRcle::Utils::Platform</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="263"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_MATH_NS<sp/>SpaRcle::Utils::Math</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="264"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_GRAPH_NS<sp/>SpaRcle::Graphics</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="265"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_SRSL_NS<sp/>SpaRcle::Graphics::SRSL2</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="266"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_GRAPH_UI_NS<sp/>SpaRcle::Graphics::UI</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="267"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_GRAPH_GUI_NS<sp/>SpaRcle::Graphics::GUI</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="268"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ANIMATIONS_NS<sp/>SpaRcle::Graphics::Animations</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="269"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_HTYPES_NS<sp/>SR_UTILS_NS::Types</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="270"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_GTYPES_NS<sp/>SR_GRAPH_NS::Types</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="271"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_WORLD_NS<sp/>SpaRcle::Utils::World</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="272"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_CORE_NS<sp/>SpaRcle::Core</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="273"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_CORE_UI_NS<sp/>SpaRcle::Core::UI</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="274"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_CORE_GUI_NS<sp/>SpaRcle::Core::GUI</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="275"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_SCRIPTING_NS<sp/>SpaRcle::Scripting</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="276"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_AUDIO_NS<sp/>SpaRcle::Audio</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="277"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_UTILS_GUI_NS<sp/>SR_UTILS_NS::GUI</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="278"><highlight class="normal"></highlight></codeline>
-<codeline lineno="279"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_COUNT_ARGS_IMPL2(<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="280"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_1,<sp/>_2,<sp/>_3,<sp/>_4,<sp/>_5,<sp/>_6,<sp/>_7,<sp/>_8,<sp/>_9,<sp/>_10,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="281"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_11,<sp/>_12,<sp/>_13,<sp/>_14,<sp/>_15,<sp/>_16,<sp/>_17,<sp/>_18,<sp/>_19,<sp/>_20,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="282"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_21,<sp/>_22,<sp/>_23,<sp/>_24,<sp/>_25,<sp/>_26,<sp/>_27,<sp/>_28,<sp/>_29,<sp/>_30,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="283"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_31,<sp/>_32,<sp/>_33,<sp/>_34,<sp/>_35,<sp/>_36,<sp/>_37,<sp/>_38,<sp/>_39,<sp/>_40,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="284"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_41,<sp/>_42,<sp/>_43,<sp/>_44,<sp/>_45,<sp/>_46,<sp/>_47,<sp/>_48,<sp/>_49,<sp/>_50,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="285"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_51,<sp/>_52,<sp/>_53,<sp/>_54,<sp/>_55,<sp/>_56,<sp/>_57,<sp/>_58,<sp/>_59,<sp/>_60,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="286"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_61,<sp/>_62,<sp/>_63,<sp/>_64,<sp/>_65,<sp/>_66,<sp/>_67,<sp/>_68,<sp/>_69,<sp/>_70,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="287"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_71,<sp/>_72,<sp/>_73,<sp/>_74,<sp/>_75,<sp/>_76,<sp/>_77,<sp/>_78,<sp/>_79,<sp/>_80,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="288"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_81,<sp/>_82,<sp/>_83,<sp/>_84,<sp/>_85,<sp/>_86,<sp/>_87,<sp/>_88,<sp/>_89,<sp/>_90,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="289"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_91,<sp/>_92,<sp/>_93,<sp/>_94,<sp/>_95,<sp/>_96,<sp/>_97,<sp/>_98,<sp/>_99,<sp/>_100,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="290"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_101,<sp/>_102,<sp/>_103,<sp/>_104,<sp/>_105,<sp/>_106,<sp/>_107,<sp/>_108,<sp/>_109,<sp/>_110,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="291"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_111,<sp/>_112,<sp/>_113,<sp/>_114,<sp/>_115,<sp/>_116,<sp/>_117,<sp/>_118,<sp/>_119,<sp/>_120,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="292"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_121,<sp/>_122,<sp/>_123,<sp/>_124,<sp/>_125,<sp/>N,<sp/>...)<sp/>N</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="293"><highlight class="normal"></highlight></codeline>
-<codeline lineno="294"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_COUNT_ARGS_IMPL(...)<sp/>SR_EXPAND(SR_COUNT_ARGS_IMPL2(__VA_ARGS__))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="250"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_LINE<sp/>__LINE__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="251"><highlight class="normal"></highlight></codeline>
+<codeline lineno="252"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_AF_INET<sp/>2<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="253"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_SOCK_STREAM<sp/>1<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="254"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_INADDR_ANY<sp/>(ULONG)0x00000000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="255"><highlight class="normal"></highlight></codeline>
+<codeline lineno="256"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_XML_NS<sp/>SpaRcle::Utils::Xml</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="257"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_YAML_NS<sp/>SpaRcle::Utils::Yaml</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="258"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_PHYSICS_NS<sp/>SpaRcle::Physics</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="259"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_PTYPES_NS<sp/>SR_PHYSICS_NS::Types</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="260"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_PHYSICS_UTILS_NS<sp/>SR_PHYSICS_NS::Utils</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="261"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_UTILS_NS<sp/>SpaRcle::Utils</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="262"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_SRLM_NS<sp/>SR_UTILS_NS::SRLM</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="263"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_NETWORK_NS<sp/>SR_UTILS_NS::Network</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="264"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_PLATFORM_NS<sp/>SpaRcle::Utils::Platform</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="265"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_MATH_NS<sp/>SpaRcle::Utils::Math</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="266"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_GRAPH_NS<sp/>SpaRcle::Graphics</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="267"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_SRSL_NS<sp/>SpaRcle::Graphics::SRSL2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="268"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_GRAPH_UI_NS<sp/>SpaRcle::Graphics::UI</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="269"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_GRAPH_GUI_NS<sp/>SpaRcle::Graphics::GUI</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="270"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ANIMATIONS_NS<sp/>SpaRcle::Graphics::Animations</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="271"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_HTYPES_NS<sp/>SR_UTILS_NS::Types</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_GTYPES_NS<sp/>SR_GRAPH_NS::Types</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="273"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_WORLD_NS<sp/>SpaRcle::Utils::World</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="274"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_CORE_NS<sp/>SpaRcle::Core</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="275"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_CORE_UI_NS<sp/>SpaRcle::Core::UI</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="276"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_CORE_GUI_NS<sp/>SpaRcle::Core::GUI</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="277"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_SCRIPTING_NS<sp/>SpaRcle::Scripting</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="278"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_AUDIO_NS<sp/>SpaRcle::Audio</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="279"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_UTILS_GUI_NS<sp/>SR_UTILS_NS::GUI</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="280"><highlight class="normal"></highlight></codeline>
+<codeline lineno="281"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_COUNT_ARGS_IMPL2(<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="282"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_1,<sp/>_2,<sp/>_3,<sp/>_4,<sp/>_5,<sp/>_6,<sp/>_7,<sp/>_8,<sp/>_9,<sp/>_10,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="283"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_11,<sp/>_12,<sp/>_13,<sp/>_14,<sp/>_15,<sp/>_16,<sp/>_17,<sp/>_18,<sp/>_19,<sp/>_20,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="284"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_21,<sp/>_22,<sp/>_23,<sp/>_24,<sp/>_25,<sp/>_26,<sp/>_27,<sp/>_28,<sp/>_29,<sp/>_30,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="285"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_31,<sp/>_32,<sp/>_33,<sp/>_34,<sp/>_35,<sp/>_36,<sp/>_37,<sp/>_38,<sp/>_39,<sp/>_40,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="286"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_41,<sp/>_42,<sp/>_43,<sp/>_44,<sp/>_45,<sp/>_46,<sp/>_47,<sp/>_48,<sp/>_49,<sp/>_50,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="287"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_51,<sp/>_52,<sp/>_53,<sp/>_54,<sp/>_55,<sp/>_56,<sp/>_57,<sp/>_58,<sp/>_59,<sp/>_60,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="288"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_61,<sp/>_62,<sp/>_63,<sp/>_64,<sp/>_65,<sp/>_66,<sp/>_67,<sp/>_68,<sp/>_69,<sp/>_70,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="289"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_71,<sp/>_72,<sp/>_73,<sp/>_74,<sp/>_75,<sp/>_76,<sp/>_77,<sp/>_78,<sp/>_79,<sp/>_80,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="290"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_81,<sp/>_82,<sp/>_83,<sp/>_84,<sp/>_85,<sp/>_86,<sp/>_87,<sp/>_88,<sp/>_89,<sp/>_90,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="291"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_91,<sp/>_92,<sp/>_93,<sp/>_94,<sp/>_95,<sp/>_96,<sp/>_97,<sp/>_98,<sp/>_99,<sp/>_100,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="292"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_101,<sp/>_102,<sp/>_103,<sp/>_104,<sp/>_105,<sp/>_106,<sp/>_107,<sp/>_108,<sp/>_109,<sp/>_110,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="293"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_111,<sp/>_112,<sp/>_113,<sp/>_114,<sp/>_115,<sp/>_116,<sp/>_117,<sp/>_118,<sp/>_119,<sp/>_120,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="294"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>_121,<sp/>_122,<sp/>_123,<sp/>_124,<sp/>_125,<sp/>N,<sp/>...)<sp/>N</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="295"><highlight class="normal"></highlight></codeline>
-<codeline lineno="296"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_COUNT_ARGS(...)<sp/>SR_COUNT_ARGS_IMPL(SR_PROTECT(__VA_ARGS__),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="297"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>125,<sp/>124,<sp/>123,<sp/>122,<sp/>121,<sp/>120,<sp/>119,<sp/>118,<sp/>117,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="298"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>116,<sp/>115,<sp/>114,<sp/>113,<sp/>112,<sp/>111,<sp/>110,<sp/>109,<sp/>108,<sp/>107,<sp/>106,<sp/>105,<sp/>104,<sp/>103,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="299"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>102,<sp/>101,<sp/>100,<sp/>99,<sp/>98,<sp/>97,<sp/>96,<sp/>95,<sp/>94,<sp/>93,<sp/>92,<sp/>91,<sp/>90,<sp/>89,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="300"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>88,<sp/>87,<sp/>86,<sp/>85,<sp/>84,<sp/>83,<sp/>82,<sp/>81,<sp/>80,<sp/>79,<sp/>78,<sp/>77,<sp/>76,<sp/>75,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="301"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>74,<sp/>73,<sp/>72,<sp/>71,<sp/>70,<sp/>69,<sp/>68,<sp/>67,<sp/>66,<sp/>65,<sp/>64,<sp/>63,<sp/>62,<sp/>61,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="302"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>60,<sp/>59,<sp/>58,<sp/>57,<sp/>56,<sp/>55,<sp/>54,<sp/>53,<sp/>52,<sp/>51,<sp/>50,<sp/>49,<sp/>48,<sp/>47,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="303"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>46,<sp/>45,<sp/>44,<sp/>43,<sp/>42,<sp/>41,<sp/>40,<sp/>39,<sp/>38,<sp/>37,<sp/>36,<sp/>35,<sp/>34,<sp/>33,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="304"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>32,<sp/>31,<sp/>30,<sp/>29,<sp/>28,<sp/>27,<sp/>26,<sp/>25,<sp/>24,<sp/>23,<sp/>22,<sp/>21,<sp/>20,<sp/>19,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="305"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>18,<sp/>17,<sp/>16,<sp/>15,<sp/>14,<sp/>13,<sp/>12,<sp/>11,<sp/>10,<sp/>9,<sp/>8,<sp/>7,<sp/>6,<sp/>5,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="306"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>4,<sp/>3,<sp/>2,<sp/>1,<sp/>0)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="307"><highlight class="normal"></highlight></codeline>
-<codeline lineno="308"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_GLOBAL_LOCK<sp/>static<sp/>std::mutex<sp/>codegenGlobalMutex##__LINE__;<sp/>std::lock_guard&lt;std::mutex&gt;<sp/>codegenLock##__LINE__(codegenGlobalMutex##__LINE__);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="296"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_COUNT_ARGS_IMPL(...)<sp/>SR_EXPAND(SR_COUNT_ARGS_IMPL2(__VA_ARGS__))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="297"><highlight class="normal"></highlight></codeline>
+<codeline lineno="298"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_COUNT_ARGS(...)<sp/>SR_COUNT_ARGS_IMPL(SR_PROTECT(__VA_ARGS__),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="299"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>125,<sp/>124,<sp/>123,<sp/>122,<sp/>121,<sp/>120,<sp/>119,<sp/>118,<sp/>117,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="300"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>116,<sp/>115,<sp/>114,<sp/>113,<sp/>112,<sp/>111,<sp/>110,<sp/>109,<sp/>108,<sp/>107,<sp/>106,<sp/>105,<sp/>104,<sp/>103,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="301"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>102,<sp/>101,<sp/>100,<sp/>99,<sp/>98,<sp/>97,<sp/>96,<sp/>95,<sp/>94,<sp/>93,<sp/>92,<sp/>91,<sp/>90,<sp/>89,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="302"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>88,<sp/>87,<sp/>86,<sp/>85,<sp/>84,<sp/>83,<sp/>82,<sp/>81,<sp/>80,<sp/>79,<sp/>78,<sp/>77,<sp/>76,<sp/>75,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="303"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>74,<sp/>73,<sp/>72,<sp/>71,<sp/>70,<sp/>69,<sp/>68,<sp/>67,<sp/>66,<sp/>65,<sp/>64,<sp/>63,<sp/>62,<sp/>61,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="304"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>60,<sp/>59,<sp/>58,<sp/>57,<sp/>56,<sp/>55,<sp/>54,<sp/>53,<sp/>52,<sp/>51,<sp/>50,<sp/>49,<sp/>48,<sp/>47,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="305"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>46,<sp/>45,<sp/>44,<sp/>43,<sp/>42,<sp/>41,<sp/>40,<sp/>39,<sp/>38,<sp/>37,<sp/>36,<sp/>35,<sp/>34,<sp/>33,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="306"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>32,<sp/>31,<sp/>30,<sp/>29,<sp/>28,<sp/>27,<sp/>26,<sp/>25,<sp/>24,<sp/>23,<sp/>22,<sp/>21,<sp/>20,<sp/>19,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="307"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>18,<sp/>17,<sp/>16,<sp/>15,<sp/>14,<sp/>13,<sp/>12,<sp/>11,<sp/>10,<sp/>9,<sp/>8,<sp/>7,<sp/>6,<sp/>5,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="308"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>4,<sp/>3,<sp/>2,<sp/>1,<sp/>0)</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="309"><highlight class="normal"></highlight></codeline>
-<codeline lineno="310"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_STATIC_ASSERT2(expr,<sp/>msg)<sp/>static_assert(expr,<sp/>msg)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="310"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_GLOBAL_LOCK<sp/>static<sp/>std::mutex<sp/>codegenGlobalMutex##__LINE__;<sp/>std::lock_guard&lt;std::mutex&gt;<sp/>codegenLock##__LINE__(codegenGlobalMutex##__LINE__);</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="311"><highlight class="normal"></highlight></codeline>
-<codeline lineno="312"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(SR_MINGW)<sp/>||<sp/>(SR_MSC_VERSION<sp/>&gt;<sp/>1929)<sp/>||<sp/>defined(SR_ANDROID)<sp/>||<sp/>defined(SR_LINUX)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="313"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_STATIC_ASSERT(msg)<sp/>static_assert(msg)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="314"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="315"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_STATIC_ASSERT(msg)<sp/>static_assert(false,<sp/>msg)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="316"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="317"><highlight class="normal"></highlight></codeline>
-<codeline lineno="318"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_RENDERER_DLL_API</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="319"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_CORE_DLL_API</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="320"><highlight class="normal"></highlight></codeline>
-<codeline lineno="321"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(SR_ANDROID)<sp/>||<sp/>defined(SR_EMSCRIPTEN)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="322"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_DLL_API_IMPORT</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="323"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_DLL_API_EXPORT</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="324"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(SR_LINUX)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="325"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_DLL_API_IMPORT<sp/>__attribute__((visibility(&quot;default&quot;)))</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="326"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_DLL_API_EXPORT<sp/>__attribute__((visibility(&quot;default&quot;)))</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="327"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="328"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_DLL_API_IMPORT<sp/>__declspec(dllimport)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="329"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_DLL_API_EXPORT<sp/>__declspec(dllexport)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="330"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="331"><highlight class="normal"></highlight></codeline>
-<codeline lineno="332"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>SR_ENGINE_SCRIPT_API_MODE</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="333"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_CODEGEN_DLL_API_IMPORT</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="334"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_CODEGEN_DLL_API_EXPORT</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="335"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="336"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_CODEGEN_DLL_API_IMPORT<sp/>SR_DLL_API_IMPORT</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="337"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_CODEGEN_DLL_API_EXPORT<sp/>SR_DLL_API_EXPORT</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="338"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="339"><highlight class="normal"></highlight></codeline>
-<codeline lineno="340"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>SR_COMMON_DLL_EXPORTS</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="341"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_COMMON_DLL_API<sp/>SR_DLL_API_EXPORT</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="342"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="343"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_COMMON_DLL_API<sp/>SR_DLL_API_IMPORT</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="344"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="345"><highlight class="normal"></highlight></codeline>
-<codeline lineno="346"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(SR_MSVC)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="347"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_STRCMPI<sp/>_strcmpi</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="348"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_STRNCPY<sp/>strncpy_s</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="349"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="350"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_STRCMPI<sp/>strcasecmp</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="351"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_STRNCPY<sp/>strncpy</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="352"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="353"><highlight class="normal"></highlight></codeline>
-<codeline lineno="354"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>SR_MSVC</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="355"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_FUNCTION_SIGNATURE<sp/>__FUNCSIG__</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="356"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="357"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_FUNCTION_SIGNATURE<sp/>__PRETTY_FUNCTION__</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="358"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="359"><highlight class="normal"></highlight></codeline>
-<codeline lineno="360"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(__GNUC__)<sp/>||<sp/>defined(__clang__)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="361"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_GCC_CLANG_REMOVE_PADDING_ATTRIB<sp/>__attribute__((packed));<sp/></highlight><highlight class="comment">//<sp/>GCC/Clang:<sp/>Убирает<sp/>паддинг</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="362"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="363"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_GCC_CLANG_REMOVE_PADDING_ATTRIB</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="364"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="365"><highlight class="normal"></highlight></codeline>
-<codeline lineno="366"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_CODEGEN_HEADER_COMMENT<sp/>&quot;This<sp/>file<sp/>is<sp/>generated<sp/>by<sp/>SpaRcle<sp/>Studio<sp/>code-generator<sp/>^_^&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="312"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_STATIC_ASSERT2(expr,<sp/>msg)<sp/>static_assert(expr,<sp/>msg)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="313"><highlight class="normal"></highlight></codeline>
+<codeline lineno="314"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(SR_MINGW)<sp/>||<sp/>(SR_MSC_VERSION<sp/>&gt;<sp/>1929)<sp/>||<sp/>defined(SR_ANDROID)<sp/>||<sp/>defined(SR_LINUX)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="315"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_STATIC_ASSERT(msg)<sp/>static_assert(msg)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="316"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="317"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_STATIC_ASSERT(msg)<sp/>static_assert(false,<sp/>msg)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="318"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="319"><highlight class="normal"></highlight></codeline>
+<codeline lineno="320"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_RENDERER_DLL_API</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="321"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_CORE_DLL_API</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="322"><highlight class="normal"></highlight></codeline>
+<codeline lineno="323"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(SR_ANDROID)<sp/>||<sp/>defined(SR_EMSCRIPTEN)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="324"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_DLL_API_IMPORT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="325"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_DLL_API_EXPORT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="326"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(SR_LINUX)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="327"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_DLL_API_IMPORT<sp/>__attribute__((visibility(&quot;default&quot;)))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="328"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_DLL_API_EXPORT<sp/>__attribute__((visibility(&quot;default&quot;)))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="329"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="330"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_DLL_API_IMPORT<sp/>__declspec(dllimport)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="331"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_DLL_API_EXPORT<sp/>__declspec(dllexport)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="332"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="333"><highlight class="normal"></highlight></codeline>
+<codeline lineno="334"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>SR_ENGINE_SCRIPT_API_MODE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="335"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_CODEGEN_DLL_API_IMPORT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="336"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_CODEGEN_DLL_API_EXPORT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="337"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="338"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_CODEGEN_DLL_API_IMPORT<sp/>SR_DLL_API_IMPORT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="339"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_CODEGEN_DLL_API_EXPORT<sp/>SR_DLL_API_EXPORT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="340"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="341"><highlight class="normal"></highlight></codeline>
+<codeline lineno="342"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>SR_COMMON_DLL_EXPORTS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="343"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_COMMON_DLL_API<sp/>SR_DLL_API_EXPORT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="344"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="345"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_COMMON_DLL_API<sp/>SR_DLL_API_IMPORT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="346"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="347"><highlight class="normal"></highlight></codeline>
+<codeline lineno="348"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(SR_MSVC)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="349"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_STRCMPI<sp/>_strcmpi</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="350"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_STRNCPY<sp/>strncpy_s</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="351"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="352"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_STRCMPI<sp/>strcasecmp</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="353"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_STRNCPY<sp/>strncpy</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="354"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="355"><highlight class="normal"></highlight></codeline>
+<codeline lineno="356"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>SR_MSVC</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="357"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_FUNCTION_SIGNATURE<sp/>__FUNCSIG__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="358"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="359"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_FUNCTION_SIGNATURE<sp/>__PRETTY_FUNCTION__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="360"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="361"><highlight class="normal"></highlight></codeline>
+<codeline lineno="362"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(__GNUC__)<sp/>||<sp/>defined(__clang__)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="363"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_GCC_CLANG_REMOVE_PADDING_ATTRIB<sp/>__attribute__((packed));<sp/></highlight><highlight class="comment">//<sp/>GCC/Clang:<sp/>Убирает<sp/>паддинг</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="364"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="365"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_GCC_CLANG_REMOVE_PADDING_ATTRIB</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="366"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="367"><highlight class="normal"></highlight></codeline>
-<codeline lineno="368"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_OFFSETOF(s,m)<sp/>((::size_t)&amp;reinterpret_cast&lt;char<sp/>const<sp/>volatile&amp;&gt;((((s*)0)-&gt;m)))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="368"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_CODEGEN_HEADER_COMMENT<sp/>&quot;This<sp/>file<sp/>is<sp/>generated<sp/>by<sp/>SpaRcle<sp/>Studio<sp/>code-generator<sp/>^_^&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="369"><highlight class="normal"></highlight></codeline>
-<codeline lineno="370"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceSR__UTILS__NS" kindref="compound">SR_UTILS_NS</ref><sp/>{</highlight></codeline>
-<codeline lineno="371"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(SR_ANDROID)<sp/>||<sp/>defined(SR_EMSCRIPTEN)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="372"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SizeType<sp/>=<sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>long;</highlight></codeline>
-<codeline lineno="373"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(SR_LINUX)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="374"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SizeType<sp/>=<sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>int;</highlight></codeline>
-<codeline lineno="375"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="376"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SizeType<sp/>=<sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>int;</highlight></codeline>
-<codeline lineno="377"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="378"><highlight class="normal"></highlight></codeline>
-<codeline lineno="379" refid="structSR__UTILS__NS_1_1RemoveReference" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__UTILS__NS_1_1RemoveReference" kindref="compound">RemoveReference</ref><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Type<sp/>=<sp/>T;<sp/>};</highlight></codeline>
-<codeline lineno="380" refid="structSR__UTILS__NS_1_1RemoveReference_3_01T_01_6_01_4" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__UTILS__NS_1_1RemoveReference" kindref="compound">RemoveReference</ref>&lt;T&amp;&gt;<sp/><sp/>{<sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Type<sp/>=<sp/>T;<sp/>};</highlight></codeline>
-<codeline lineno="381" refid="structSR__UTILS__NS_1_1RemoveReference_3_01T_01_6_6_01_4" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__UTILS__NS_1_1RemoveReference" kindref="compound">RemoveReference</ref>&lt;T&amp;&amp;&gt;<sp/>{<sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Type<sp/>=<sp/>T;<sp/>};</highlight></codeline>
-<codeline lineno="382"><highlight class="normal"></highlight></codeline>
-<codeline lineno="383"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="384"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">RemoveReferenceT<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RemoveReference&lt;T&gt;::Type;</highlight></codeline>
-<codeline lineno="385"><highlight class="normal"></highlight></codeline>
-<codeline lineno="386"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>T&amp;&amp;<sp/>Forward(RemoveReferenceT<sp/>&lt;T&gt;&amp;<sp/>t)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="387"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T<sp/>&amp;&amp;</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(t);</highlight></codeline>
-<codeline lineno="388"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="389"><highlight class="normal"></highlight></codeline>
-<codeline lineno="390"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>T&amp;&amp;<sp/>Forward(RemoveReferenceT<sp/>&lt;T&gt;&amp;&amp;<sp/>t)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="391"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T<sp/>&amp;&amp;</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(t);</highlight></codeline>
-<codeline lineno="392"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="393"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="394"><highlight class="normal"></highlight></codeline>
-<codeline lineno="395"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdlib&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="370"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_OFFSETOF(s,m)<sp/>((::size_t)&amp;reinterpret_cast&lt;char<sp/>const<sp/>volatile&amp;&gt;((((s*)0)-&gt;m)))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="371"><highlight class="normal"></highlight></codeline>
+<codeline lineno="372"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceSR__UTILS__NS" kindref="compound">SR_UTILS_NS</ref><sp/>{</highlight></codeline>
+<codeline lineno="373"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(SR_ANDROID)<sp/>||<sp/>defined(SR_EMSCRIPTEN)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="374"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SizeType<sp/>=<sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>long;</highlight></codeline>
+<codeline lineno="375"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(SR_LINUX)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="376"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SizeType<sp/>=<sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>int;</highlight></codeline>
+<codeline lineno="377"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="378"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SizeType<sp/>=<sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>int;</highlight></codeline>
+<codeline lineno="379"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="380"><highlight class="normal"></highlight></codeline>
+<codeline lineno="381" refid="structSR__UTILS__NS_1_1RemoveReference" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__UTILS__NS_1_1RemoveReference" kindref="compound">RemoveReference</ref><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Type<sp/>=<sp/>T;<sp/>};</highlight></codeline>
+<codeline lineno="382" refid="structSR__UTILS__NS_1_1RemoveReference_3_01T_01_6_01_4" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__UTILS__NS_1_1RemoveReference" kindref="compound">RemoveReference</ref>&lt;T&amp;&gt;<sp/><sp/>{<sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Type<sp/>=<sp/>T;<sp/>};</highlight></codeline>
+<codeline lineno="383" refid="structSR__UTILS__NS_1_1RemoveReference_3_01T_01_6_6_01_4" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__UTILS__NS_1_1RemoveReference" kindref="compound">RemoveReference</ref>&lt;T&amp;&amp;&gt;<sp/>{<sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Type<sp/>=<sp/>T;<sp/>};</highlight></codeline>
+<codeline lineno="384"><highlight class="normal"></highlight></codeline>
+<codeline lineno="385"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="386"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">RemoveReferenceT<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RemoveReference&lt;T&gt;::Type;</highlight></codeline>
+<codeline lineno="387"><highlight class="normal"></highlight></codeline>
+<codeline lineno="388"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>T&amp;&amp;<sp/>Forward(RemoveReferenceT<sp/>&lt;T&gt;&amp;<sp/>t)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="389"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T<sp/>&amp;&amp;</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(t);</highlight></codeline>
+<codeline lineno="390"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="391"><highlight class="normal"></highlight></codeline>
+<codeline lineno="392"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>T&amp;&amp;<sp/>Forward(RemoveReferenceT<sp/>&lt;T&gt;&amp;&amp;<sp/>t)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="393"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T<sp/>&amp;&amp;</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(t);</highlight></codeline>
+<codeline lineno="394"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="395"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="396"><highlight class="normal"></highlight></codeline>
-<codeline lineno="397"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Memory/Allocator.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="397"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdlib&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="398"><highlight class="normal"></highlight></codeline>
-<codeline lineno="399"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_COMMON_MACROS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="399"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Memory/Allocator.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="400"><highlight class="normal"></highlight></codeline>
+<codeline lineno="401"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_COMMON_MACROS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="Engine/libs/Utils/inc/Utils/macros.h"/>
   </compounddef>

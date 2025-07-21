@@ -475,8 +475,8 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>DecrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1BakedMesh_1a03e3a8639562176611a7b4a31af1a0f2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>Destroy</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>DynamicCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>Get</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1BakedMesh_1a42bb87f4e3fbe684e5d0d2bab3f15dbc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>GetCountIndices</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1BakedMesh_1ae159d335f6d2cbeec2560d63b2573c04" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>GetCountVertices</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1BakedMesh_1abb203262947e83d4433260896135f375" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>GetIBO</name></member>

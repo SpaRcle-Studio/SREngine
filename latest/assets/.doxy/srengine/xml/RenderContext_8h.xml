@@ -12,6 +12,8 @@
     <includes refid="PipelineType_8h" local="no">Graphics/Pipeline/PipelineType.h</includes>
     <includedby refid="PropertyDrawer_8h" local="no">Engine/inc/Engine/GUI/PropertyDrawer.h</includedby>
     <includedby refid="EngineScene_8h" local="no">Engine/inc/Engine/World/EngineScene.h</includedby>
+    <includedby refid="Skeleton_8h" local="no">Engine/libs/Graphics/inc/Graphics/Animations/Skeleton.h</includedby>
+    <includedby refid="SSBO_8h" local="no">Engine/libs/Graphics/inc/Graphics/Memory/SSBO.h</includedby>
     <incdepgraph>
       <node id="183">
         <label>Graphics/Memory/DescriptorManager.h</label>
@@ -1692,6 +1694,24 @@
         <label>Engine/inc/Engine/World/EngineScene.h</label>
         <link refid="EngineScene_8h_source"/>
       </node>
+      <node id="20">
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
+        <link refid="Animator_8h_source"/>
+      </node>
+      <node id="19">
+        <label>Engine/libs/Graphics/inc/Graphics/Animations/Skeleton.h</label>
+        <link refid="Skeleton_8h_source"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>Engine/libs/Graphics/inc/Graphics/Memory/SSBO.h</label>
+        <link refid="SSBO_8h_source"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
       <node id="1">
         <label>Engine/libs/Graphics/inc/Graphics/Render/RenderContext.h</label>
         <link refid="RenderContext_8h"/>
@@ -1699,6 +1719,14 @@
         </childnode>
         <childnode refid="18" relation="include">
         </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
+        <link refid="SkinnedMesh_8h_source"/>
       </node>
     </invincdepgraph>
     <innerclass refid="classSR__GRAPH__NS_1_1RenderContext" prot="public">SR_GRAPH_NS::RenderContext</innerclass>

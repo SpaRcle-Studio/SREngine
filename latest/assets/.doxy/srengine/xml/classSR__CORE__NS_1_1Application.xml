@@ -345,8 +345,8 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>DynamicCast</name></member>
       <member refid="classSR__CORE__NS_1_1Application_1a89007c2cdb2d6e5e2005fb172e916866" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>EarlyInit</name></member>
       <member refid="classSR__CORE__NS_1_1Application_1a760502cfa2fc0410344bd635c5ca10bb" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>Execute</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>Get</name></member>
       <member refid="classSR__CORE__NS_1_1Application_1a23d58bfc090ba72d69d439dcc72b8db2" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>GetEngine</name></member>
       <member refid="classSR__CORE__NS_1_1Application_1a7f96884faa28ef03576dff9f664c74dd" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>GetEngine</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>GetPtrData</name></member>

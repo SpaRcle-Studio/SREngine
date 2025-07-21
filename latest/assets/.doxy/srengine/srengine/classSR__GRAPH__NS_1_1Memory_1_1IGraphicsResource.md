@@ -61,7 +61,7 @@ Inherited by the following classes: [SR\_GRAPH\_NS::IRenderTechnique](classSR__G
 | ---: | :--- |
 | virtual void | [**DeInitGraphicsResource**](#function-deinitgraphicsresource) () <br> |
 | virtual void | [**FreeVideoMemory**](#function-freevideomemory) () <br> |
-|  SR\_NODISCARD PipelinePtr | [**GetPipeline**](#function-getpipeline) () noexcept const<br> |
+|  SR\_NODISCARD const PipelinePtr & | [**GetPipeline**](#function-getpipeline) () noexcept const<br> |
 |  SR\_NODISCARD [**RenderContextPtr**](classSR__GRAPH__NS_1_1RenderContext.md) | [**GetRenderContext**](#function-getrendercontext) () noexcept const<br> |
 |   | [**IGraphicsResource**](#function-igraphicsresource-22) (const [**IGraphicsResource**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md) &) = delete<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE bool | [**IsCalculated**](#function-iscalculated) () const<br> |
@@ -176,7 +176,7 @@ inline virtual void SR_GRAPH_NS::Memory::IGraphicsResource::FreeVideoMemory ()
 ### function GetPipeline 
 
 ```C++
-inline SR_NODISCARD PipelinePtr SR_GRAPH_NS::Memory::IGraphicsResource::GetPipeline () noexcept const
+inline SR_NODISCARD const PipelinePtr & SR_GRAPH_NS::Memory::IGraphicsResource::GetPipeline () noexcept const
 ```
 
 

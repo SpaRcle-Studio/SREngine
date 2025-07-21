@@ -310,8 +310,8 @@
       <member refid="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1a29750a8ec0b88fcd11dca90793679c60" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Close</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>DecrementPointer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>DynamicCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Get</name></member>
       <member refid="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1a8777dc9c16713f3dfeb7cb57fea940f7" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>GetLocalAddress</name></member>
       <member refid="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1a6f3a3581303ffa626b5b11cc36c8da22" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>GetLocalPort</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>GetPtrData</name></member>

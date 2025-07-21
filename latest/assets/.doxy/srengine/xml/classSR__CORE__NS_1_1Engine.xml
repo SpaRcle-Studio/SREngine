@@ -1063,8 +1063,8 @@
       <member refid="classSR__CORE__NS_1_1Engine_1abc7a82809662be98c2587e694f21a058" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Execute</name></member>
       <member refid="classSR__CORE__NS_1_1Engine_1ac2237ad40ab6f4bfd3c546cb17a1c6f7" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>FixedUpdate</name></member>
       <member refid="classSR__CORE__NS_1_1Engine_1a6dd6bfb56af824ee9dcc964e89909535" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>FlushScene</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Get</name></member>
       <member refid="classSR__CORE__NS_1_1Engine_1a397b219a76e9ce984f6a36656884717f" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetCmdManager</name></member>
       <member refid="classSR__CORE__NS_1_1Engine_1a30a538ae0887beae90b1e8422463ff33" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetDebugger</name></member>
       <member refid="classSR__CORE__NS_1_1Engine_1ac64778aea118a32264e6d6a530ab743e" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetEditor</name></member>

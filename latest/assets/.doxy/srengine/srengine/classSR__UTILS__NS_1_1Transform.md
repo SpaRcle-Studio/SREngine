@@ -171,6 +171,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual void | [**GlobalScale**](#function-globalscale) (const SR\_MATH\_NS::FVector3 & scale) <br> |
 | virtual void | [**GlobalSkew**](#function-globalskew) (const SR\_MATH\_NS::FVector3 & skew) <br> |
 | virtual void | [**GlobalTranslate**](#function-globaltranslate) (const SR\_MATH\_NS::FVector3 & translation) <br> |
+|  SR\_NODISCARD SR\_FORCE\_INLINE bool | [**IsDirty**](#function-isdirty) () noexcept const<br> |
 | virtual void | [**LookAt**](#function-lookat-12) (const SR\_MATH\_NS::FVector3 & position) <br> |
 | virtual void | [**LookAt**](#function-lookat-22) (const SR\_MATH\_NS::FVector3 & position, LookAtAxis axis) <br> |
 | virtual void | [**OnHierarchyChanged**](#function-onhierarchychanged) () <br> |
@@ -201,7 +202,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual void | [**Translate**](#function-translate-12) (const SR\_MATH\_NS::FVector3 & translation) <br> |
 | virtual void | [**Translate**](#function-translate-22) (SR\_MATH\_NS::Unit x, SR\_MATH\_NS::Unit y, SR\_MATH\_NS::Unit z) <br> |
 | virtual SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**Up**](#function-up) () const<br> |
-| virtual void | [**UpdateTree**](#function-updatetree) () <br> |
+|  void | [**UpdateTree**](#function-updatetree) () <br> |
 |   | [**~Transform**](#function-transform) () override<br> |
 
 
@@ -243,8 +244,8 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  bool | [**AutoFree**](classSR__HTYPES__NS_1_1SharedPtr.md#function-autofree-22) () <br> |
 | virtual void | [**DecrementPointer**](classSR__HTYPES__NS_1_1SharedPtr.md#function-decrementpointer) () override<br> |
 |  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; U &gt; | [**DynamicCast**](classSR__HTYPES__NS_1_1SharedPtr.md#function-dynamiccast) () const<br> |
-|  SR\_NODISCARD const T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-12) () const<br> |
-|  SR\_NODISCARD T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-22) () <br> |
+|  SR\_NODISCARD SR\_FORCE\_INLINE const T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-12) () const<br> |
+|  SR\_NODISCARD SR\_FORCE\_INLINE T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-22) () <br> |
 |  SR\_NODISCARD const void \* | [**GetRawPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getrawptr-12) () const<br> |
 |  SR\_NODISCARD void \* | [**GetRawPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getrawptr-22) () <br>_NOLINT(modernize-use-nodiscard)_  |
 | virtual SR\_NODISCARD SRClass \* | [**GetSRClass**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getsrclass) () override const<br>_NOLINT(modernize-use-nodiscard)_  |
@@ -440,7 +441,6 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 
 | Type | Name |
 | ---: | :--- |
-| virtual SR\_NODISCARD bool | [**IsDirty**](#function-isdirty) () noexcept const<br> |
 | virtual void | [**UpdateMatrix**](#function-updatematrix) () const<br> |
 
 
@@ -721,6 +721,19 @@ virtual void SR_UTILS_NS::Transform::GlobalSkew (
 virtual void SR_UTILS_NS::Transform::GlobalTranslate (
     const SR_MATH_NS::FVector3 & translation
 ) 
+```
+
+
+
+
+<hr>
+
+
+
+### function IsDirty 
+
+```C++
+inline SR_NODISCARD SR_FORCE_INLINE bool SR_UTILS_NS::Transform::IsDirty () noexcept const
 ```
 
 
@@ -1194,7 +1207,7 @@ virtual SR_NODISCARD SR_MATH_NS::FVector3 SR_UTILS_NS::Transform::Up () const
 ### function UpdateTree 
 
 ```C++
-virtual void SR_UTILS_NS::Transform::UpdateTree () 
+void SR_UTILS_NS::Transform::UpdateTree () 
 ```
 
 
@@ -1231,19 +1244,6 @@ GameObject* SR_UTILS_NS::Transform::m_gameObject;
 <hr>
 ## Protected Functions Documentation
 
-
-
-
-### function IsDirty 
-
-```C++
-virtual SR_NODISCARD bool SR_UTILS_NS::Transform::IsDirty () noexcept const
-```
-
-
-
-
-<hr>
 
 
 

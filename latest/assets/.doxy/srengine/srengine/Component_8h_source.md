@@ -99,9 +99,9 @@ namespace SR_UTILS_NS {
         void SetEnabled(bool value);
         void SetIndexIdSceneUpdater(int32_t index);
 
-        SR_NODISCARD virtual bool IsComponentLoaded() const noexcept;
-        SR_NODISCARD virtual bool IsComponentValid() const noexcept;
-        SR_NODISCARD virtual bool IsAttached() const noexcept;
+        SR_NODISCARD bool IsComponentLoaded() const noexcept;
+        SR_NODISCARD bool IsComponentValid() const noexcept;
+        SR_NODISCARD bool IsAttached() const noexcept;
 
         SR_NODISCARD virtual bool IsUpdatable() const noexcept;
         SR_NODISCARD virtual bool IsActive() const noexcept;

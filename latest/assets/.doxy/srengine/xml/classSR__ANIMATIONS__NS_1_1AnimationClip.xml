@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="52" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="52" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="53" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationClip_1a47d676129a9fc1dc5b6a587d3aeabb5e" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classSR__ANIMATIONS__NS_1_1AnimationChannel" kindref="compound">AnimationChannel</ref> * &gt;</type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="53" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="54" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="54" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationClip_1abf9981f2375388280fb54af4e62dcc25" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="55" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="55" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="56" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationClip_1a511cba213e993391b18dcb601c3440f8" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -92,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="56" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="56" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="57" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="57" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -168,6 +168,21 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="37" column="40"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationClip_1a603df0da779ff29d93778f146885bbeb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_ANIMATIONS_NS::AnimationClip::IsAllowedMultiInstance</definition>
+        <argsstring>() const override</argsstring>
+        <name>IsAllowedMultiInstance</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationClip::IsAllowedMultiInstance</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IResource_1a7f41c08e67a57cca18fb3b2c2c350768">IsAllowedMultiInstance</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="38" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="38" bodyend="38"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationClip_1a3f2790e795ccdb909015c83c6c8764aa" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
         <definition>SR_NODISCARD SR_UTILS_NS::StringAtom SR_ANIMATIONS_NS::AnimationClip::GetClipName</definition>
@@ -180,7 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="39" column="46"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="40" column="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationClip_1abfe4c07dd4e7c9d12c5ccf77395cc5b2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -194,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="41" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="41" bodyend="41"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="42" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="42" bodyend="42"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationClip_1a579f9dec8e8c5f0de94100c85ab22de3" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -208,7 +223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="42" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="42" bodyend="42"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="43" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="43" bodyend="43"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -275,7 +290,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="45" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="46" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationClip_1ac39e70a82c5485891de83becb2b15c59" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -290,7 +305,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="46" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="47" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -318,7 +333,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="49" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="50" column="27"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -436,7 +451,7 @@
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="19" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="19" bodyend="58"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="19" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="19" bodyend="59"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1af9087ca5182397a9c7d3b92fb5591523" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>AddDependency</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>AddSerializationFlags</name></member>
@@ -454,8 +469,8 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>DynamicCast</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a5dd9749c79cb65452e9e4d10efda42f8" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>Execute</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a56bb33e9f5864b6fa62e473389a517b7" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>ForceDestroy</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>Get</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1aeabd3a189fe8c7c0c31c1fb6713c5043" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>GetAssociatedPath</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>GetBaseMetas</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationClip_1ab59e815f4a205dcdc88bc0809ca4b8d3" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>GetChannels</name></member>
@@ -490,7 +505,7 @@
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationClip_1afb6f7a265cb7ba5f5ce23cd2131f6689" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>InitializeResourcePath</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ac810662984eb60e0bea8b08e455ea2a2" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>IResource</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ad94ef18d58f13582b7411b749ae81089" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>IsAlive</name></member>
-      <member refid="classSR__UTILS__NS_1_1IResource_1a7f41c08e67a57cca18fb3b2c2c350768" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>IsAllowedMultiInstance</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationClip_1a603df0da779ff29d93778f146885bbeb" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>IsAllowedMultiInstance</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationClip_1a931204ffbe4f45be3cbc81b18d579e30" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>IsAllowedToRevive</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a47131cd914c3a6c8a7c03a4764559716" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>IsDestroyed</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a91fdfb42142b2e37139e4742442a2fee" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>IsFileResource</name></member>
