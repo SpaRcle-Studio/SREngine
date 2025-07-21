@@ -371,7 +371,7 @@ Implements [*SR\_UTILS\_NS::ISerializer::WriteDouble*](classSR__UTILS__NS_1_1ISe
 ### function WriteFloat 
 
 ```C++
-inline virtual void SR_UTILS_NS::IBaseSerializer::WriteFloat (
+virtual void SR_UTILS_NS::IBaseSerializer::WriteFloat (
     float_t value,
     const SerializationId & name
 ) override

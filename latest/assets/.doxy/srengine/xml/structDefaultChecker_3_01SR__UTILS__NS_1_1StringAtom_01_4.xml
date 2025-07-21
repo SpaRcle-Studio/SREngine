@@ -21,14 +21,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/DefaultCheckers.inl.h" line="12" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/DefaultCheckers.inl.h" bodystart="12" bodyend="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/DefaultCheckers.inl.h" line="20" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/DefaultCheckers.inl.h" bodystart="20" bodyend="22"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/Serialization/DefaultCheckers.inl.h" line="11" column="10" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/DefaultCheckers.inl.h" bodystart="11" bodyend="15"/>
+    <location file="Engine/libs/Utils/inc/Utils/Serialization/DefaultCheckers.inl.h" line="19" column="10" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/DefaultCheckers.inl.h" bodystart="19" bodyend="23"/>
     <listofallmembers>
       <member refid="structDefaultChecker_3_01SR__UTILS__NS_1_1StringAtom_01_4_1a57c4db8580f22221dfc561766c76d60e" prot="public" virt="non-virtual"><scope>DefaultChecker&lt; SR_UTILS_NS::StringAtom &gt;</scope><name>IsDefault</name></member>
     </listofallmembers>

@@ -41,7 +41,7 @@
         <argsstring></argsstring>
         <name>m_tolerance</name>
         <qualifiedname>SR_ANIMATIONS_NS::Animator::m_tolerance</qualifiedname>
-        <initializer>= 0.001f</initializer>
+        <initializer>= 0.1f</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>

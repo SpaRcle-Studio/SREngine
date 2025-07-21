@@ -19,6 +19,18 @@
 #include <Utils/Math/Mathematics.h>
 
 namespace SR_UTILS_NS {
+    static SR_INLINE std::string SerializeDouble(double_t value) {
+        char buffer[64];
+        std::snprintf(buffer, sizeof(buffer), "%.17g", value);
+        return std::string(buffer);
+    }
+
+    static SR_INLINE std::string SerializeFloat(float value) {
+        char buffer[64];
+        std::snprintf(buffer, sizeof(buffer), "%.9g", value);
+        return std::string(buffer);
+    }
+
     template<typename T> std::string ToString(const T& value) {
         if constexpr (IsLogical<T>()) {
             return value ? "true" : "false";

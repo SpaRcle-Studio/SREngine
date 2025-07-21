@@ -25,6 +25,26 @@
 
 namespace SR_UTILS_NS {
 
+    static SR_INLINE double_t ParseDouble(std::string_view sv) {
+        double_t result = 0.0;
+        auto [ptr, ec] = std::from_chars(sv.data(), sv.data() + sv.size(), result);
+        if (ec != std::errc()) {
+            // ошибка парсинга — можно обработать
+            return 0.0;
+        }
+        return result;
+    }
+
+    static SR_INLINE float_t ParseFloat(std::string_view sv) {
+        float_t result = 0.0f;
+        auto [ptr, ec] = std::from_chars(sv.data(), sv.data() + sv.size(), result);
+        if (ec != std::errc()) {
+            // Обработка ошибки (например, лог или исключение)
+            return 0.0f;
+        }
+        return result;
+    }
+
     SR_NODISCARD SR_INLINE_STATIC uint32_t FastSToU(const char* str) {
         uint32_t result = 0;
         while (*str >= '0' && *str <= '9') {

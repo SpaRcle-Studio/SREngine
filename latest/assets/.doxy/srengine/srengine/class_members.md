@@ -4619,6 +4619,7 @@
 * **Resume** ([**SR\_UTILS\_NS::FileWatcher**](classSR__UTILS__NS_1_1FileWatcher.md))
 * **ReadBool** ([**SR\_UTILS\_NS::IBaseDeserializer**](classSR__UTILS__NS_1_1IBaseDeserializer.md), [**SR\_UTILS\_NS::IDeserializer**](classSR__UTILS__NS_1_1IDeserializer.md))
 * **ReadDouble** ([**SR\_UTILS\_NS::IBaseDeserializer**](classSR__UTILS__NS_1_1IBaseDeserializer.md), [**SR\_UTILS\_NS::IDeserializer**](classSR__UTILS__NS_1_1IDeserializer.md))
+* **ReadDoubleImpl** ([**SR\_UTILS\_NS::IBaseDeserializer**](classSR__UTILS__NS_1_1IBaseDeserializer.md))
 * **ReadFloat** ([**SR\_UTILS\_NS::IBaseDeserializer**](classSR__UTILS__NS_1_1IBaseDeserializer.md), [**SR\_UTILS\_NS::IDeserializer**](classSR__UTILS__NS_1_1IDeserializer.md))
 * **ReadFloatingImpl** ([**SR\_UTILS\_NS::IBaseDeserializer**](classSR__UTILS__NS_1_1IBaseDeserializer.md))
 * **ReadInt** ([**SR\_UTILS\_NS::IBaseDeserializer**](classSR__UTILS__NS_1_1IBaseDeserializer.md), [**SR\_UTILS\_NS::IDeserializer**](classSR__UTILS__NS_1_1IDeserializer.md))

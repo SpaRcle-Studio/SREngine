@@ -76,7 +76,6 @@ namespace SR_ANIMATIONS_NS {
 
         std::vector<Bone*> m_bonesByIndex;
 
-        bool m_hasInvalidBones = false;
         bool m_isNeedRecalcTransforms = true;
         mutable bool m_isSSBODirty = true;
 
@@ -90,6 +89,7 @@ namespace SR_ANIMATIONS_NS {
         Bone::Ptr m_rootBone = nullptr;
         bool m_debugEnabled = false;
         bool m_dirtyMatrices = false;
+        bool m_hasInvalidBones = false;
         SR_VIRTUAL_PROPERTY
         SR_VIRTUAL_PROPERTY
 

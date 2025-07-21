@@ -53,7 +53,7 @@ namespace SR_ANIMATIONS_NS {
 
     private:
         uint32_t m_frameRate = 1;
-        float_t m_tolerance = 0.001f;
+        float_t m_tolerance = 0.1f;
         bool m_sync = false;
         bool m_fpsCompensation = false;
 

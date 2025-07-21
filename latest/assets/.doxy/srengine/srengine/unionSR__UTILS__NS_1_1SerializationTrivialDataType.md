@@ -36,7 +36,8 @@
 | Type | Name |
 | ---: | :--- |
 |  bool | [**boolean**](#variable-boolean)  <br> |
-|  double\_t | [**floating**](#variable-floating)  <br> |
+|  float\_t | [**floating**](#variable-floating)  <br> |
+|  double\_t | [**floatingDouble**](#variable-floatingdouble)  <br> |
 |  int64\_t | [**integer**](#variable-integer)  <br> |
 
 
@@ -103,7 +104,20 @@ bool SR_UTILS_NS::SerializationTrivialDataType::boolean;
 ### variable floating 
 
 ```C++
-double_t SR_UTILS_NS::SerializationTrivialDataType::floating;
+float_t SR_UTILS_NS::SerializationTrivialDataType::floating;
+```
+
+
+
+
+<hr>
+
+
+
+### variable floatingDouble 
+
+```C++
+double_t SR_UTILS_NS::SerializationTrivialDataType::floatingDouble;
 ```
 
 

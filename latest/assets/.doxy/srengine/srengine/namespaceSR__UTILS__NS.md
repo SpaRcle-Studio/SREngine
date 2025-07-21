@@ -365,7 +365,7 @@
 |  SR\_NODISCARD SR\_INLINE\_STATIC int32\_t | [**FastSToI**](#function-faststoi) (const char \* str) <br> |
 |  SR\_NODISCARD SR\_INLINE\_STATIC int32\_t | [**FastSToI**](#function-faststoi) (std::string\_view sv) <br> |
 |  SR\_NODISCARD SR\_INLINE\_STATIC int64\_t | [**FastSToL**](#function-faststol) (std::string\_view sv) <br> |
-|  SR\_NODISCARD SR\_INLINE\_STATIC uint32\_t | [**FastSToU**](#function-faststou) (const char \* str) <br>_Функция для преобразования hex символа в целое число_  |
+|  SR\_NODISCARD SR\_INLINE\_STATIC uint32\_t | [**FastSToU**](#function-faststou) (const char \* str) <br> |
 |  SR\_NODISCARD SR\_INLINE\_STATIC uint32\_t | [**FastSToU**](#function-faststou) (std::string\_view sv) <br> |
 |  bool | [**ForEach**](#function-foreach) (const std::function&lt; bool(T &type, const uint32\_t &index)&gt; & fn, std::vector&lt; U &gt; & vector) <br> |
 |  bool | [**ForEach**](#function-foreach) (const std::function&lt; bool(T &type, const uint32\_t &index)&gt; & fn, std::list&lt; U &gt; & vector) <br> |
@@ -450,6 +450,10 @@
 |  SR\_MAYBE\_UNUSED uint64\_t | [**GetTypeSize**](#function-gettypesize) (const StandardType & type) <br> |
 |  std::vector&lt; T &gt; | [**IndexedVerticesToNonIndexed**](#function-indexedverticestononindexed) (const std::vector&lt; T &gt; & vertices, const std::vector&lt; uint32\_t &gt; & indices) <br> |
 |  SR\_MAYBE\_UNUSED bool | [**IsNumber**](#function-isnumber) (const StandardType & type) <br> |
+|  SR\_INLINE double\_t | [**ParseDouble**](#function-parsedouble) (std::string\_view sv) <br>_Функция для преобразования hex символа в целое число_  |
+|  SR\_INLINE float\_t | [**ParseFloat**](#function-parsefloat) (std::string\_view sv) <br> |
+|  SR\_INLINE std::string | [**SerializeDouble**](#function-serializedouble) (double\_t value) <br> |
+|  SR\_INLINE std::string | [**SerializeFloat**](#function-serializefloat) (float value) <br> |
 |  SR\_MAYBE\_UNUSED std::wstring | [**s2ws**](#function-s2ws) (const std::string & str) <br> |
 |  SR\_MAYBE\_UNUSED std::string | [**ws2s**](#function-ws2s) (const std::wstring & wstr) <br> |
 
@@ -862,6 +866,7 @@ enum SR_UTILS_NS::SerializationDataType {
     Boolean,
     Integer,
     Floating,
+    Double,
     Object,
     Item,
     Array
@@ -1621,7 +1626,6 @@ SR_NODISCARD SR_INLINE_STATIC int64_t SR_UTILS_NS::FastSToL (
 
 ### function FastSToU 
 
-_Функция для преобразования hex символа в целое число_ 
 ```C++
 SR_NODISCARD SR_INLINE_STATIC uint32_t SR_UTILS_NS::FastSToU (
     const char * str
@@ -3037,6 +3041,67 @@ static std::vector< T > SR_UTILS_NS::IndexedVerticesToNonIndexed (
 ```C++
 static SR_MAYBE_UNUSED bool SR_UTILS_NS::IsNumber (
     const StandardType & type
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function ParseDouble 
+
+_Функция для преобразования hex символа в целое число_ 
+```C++
+static SR_INLINE double_t SR_UTILS_NS::ParseDouble (
+    std::string_view sv
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function ParseFloat 
+
+```C++
+static SR_INLINE float_t SR_UTILS_NS::ParseFloat (
+    std::string_view sv
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SerializeDouble 
+
+```C++
+static SR_INLINE std::string SR_UTILS_NS::SerializeDouble (
+    double_t value
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SerializeFloat 
+
+```C++
+static SR_INLINE std::string SR_UTILS_NS::SerializeFloat (
+    float value
 ) 
 ```
 

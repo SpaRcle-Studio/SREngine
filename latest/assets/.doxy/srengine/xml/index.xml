@@ -4689,6 +4689,7 @@
     <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a4150c0fedeccfe74530749733d86b119" kind="function"><name>ReadDouble</name></member>
     <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1ab22005ef922756fe5b6e4bb655e515cc" kind="function"><name>ReadIntegerImpl</name></member>
     <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1aa62ea592530e1eec4cc2dff0459210f0" kind="function"><name>ReadFloatingImpl</name></member>
+    <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1ab1b916889dc7a679cfcdf73f66feb103" kind="function"><name>ReadDoubleImpl</name></member>
     <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1aea9c933380d97a679fc7a6d342372908" kind="function"><name>ReadStringImpl</name></member>
     <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1ab3eb9c11f4d3f3f27b6239e262e17ad7" kind="function"><name>GetImpl</name></member>
   </compound>
@@ -10035,7 +10036,8 @@
   <compound refid="unionSR__UTILS__NS_1_1SerializationTrivialDataType" kind="union"><name>SR_UTILS_NS::SerializationTrivialDataType</name>
     <member refid="unionSR__UTILS__NS_1_1SerializationTrivialDataType_1a487a27b9cc9ae6abe81532863c8b8189" kind="variable"><name>boolean</name></member>
     <member refid="unionSR__UTILS__NS_1_1SerializationTrivialDataType_1a027bf038552346d6342df35d1af2a189" kind="variable"><name>integer</name></member>
-    <member refid="unionSR__UTILS__NS_1_1SerializationTrivialDataType_1ab4dcd3891f38fd93b9dd6e851bba544f" kind="variable"><name>floating</name></member>
+    <member refid="unionSR__UTILS__NS_1_1SerializationTrivialDataType_1a1cc893d073d506e6da8c309c4d0276a0" kind="variable"><name>floatingDouble</name></member>
+    <member refid="unionSR__UTILS__NS_1_1SerializationTrivialDataType_1a928b80b94ce28d2e5c20f87909665d8e" kind="variable"><name>floating</name></member>
   </compound>
   <compound refid="classSR__NETWORK__NS_1_1Server" kind="class"><name>SR_NETWORK_NS::Server</name>
     <member refid="classSR__NETWORK__NS_1_1Server_1a9e1093ca34b300a65ff34ca9e0cb7924" kind="typedef"><name>Super</name></member>
@@ -10482,7 +10484,6 @@
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a6c9d2921f8a54e18f1a754b769783c0e" kind="variable"><name>m_debugLines</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1afbbff383aae07f00b0bf2ebc6c1656f5" kind="variable"><name>m_bonesByName</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a95b213c63394df966cffefbacaafff76" kind="variable"><name>m_bonesByIndex</name></member>
-    <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1ae5cc276cff1969303b7e1b951ad00755" kind="variable"><name>m_hasInvalidBones</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a3f03bccfd6af1bfdefc90b0a7c1dee7e" kind="variable"><name>m_isNeedRecalcTransforms</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a7c0619dc4da3dd766116b68c5da41952" kind="variable"><name>m_isSSBODirty</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a5bd6d6f4bb9bfb244c40bc9a094da56b" kind="variable"><name>m_indices</name></member>
@@ -10492,6 +10493,7 @@
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a189680d2676606ab614d5ae37c310bab" kind="variable"><name>m_rootBone</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1ab08f846a887d4c14f63f00686a4e2af5" kind="variable"><name>m_debugEnabled</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1abed0e7cb79b6edab0397a8bcfaa528ca" kind="variable"><name>m_dirtyMatrices</name></member>
+    <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1ae5cc276cff1969303b7e1b951ad00755" kind="variable"><name>m_hasInvalidBones</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1ab67487848c602afde31448ff1ebea7dd" kind="function"><name>~Skeleton</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a5dccf08ae83a9f1a8b16dc8b835f0823" kind="function"><name>Update</name></member>
     <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a34a125bce290ad83c6716fe12a332483" kind="function"><name>OnPostLoad</name></member>
@@ -14913,6 +14915,7 @@
     <member refid="namespaceSR__UTILS__NS_1ab71d8ac2ea06361a979a52d03569163ca27226c864bac7454a8504f8edb15d95b" kind="enumvalue"><name>Boolean</name></member>
     <member refid="namespaceSR__UTILS__NS_1ab71d8ac2ea06361a979a52d03569163caa0faef0851b4294c06f2b94bb1cb2044" kind="enumvalue"><name>Integer</name></member>
     <member refid="namespaceSR__UTILS__NS_1ab71d8ac2ea06361a979a52d03569163cac8df43648942ec3a9aec140f07f47b7c" kind="enumvalue"><name>Floating</name></member>
+    <member refid="namespaceSR__UTILS__NS_1ab71d8ac2ea06361a979a52d03569163cad909d38d705ce75386dd86e611a82f5b" kind="enumvalue"><name>Double</name></member>
     <member refid="namespaceSR__UTILS__NS_1ab71d8ac2ea06361a979a52d03569163ca497031794414a552435f90151ac3b54b" kind="enumvalue"><name>Object</name></member>
     <member refid="namespaceSR__UTILS__NS_1ab71d8ac2ea06361a979a52d03569163ca7d74f3b92b19da5e606d737d339a9679" kind="enumvalue"><name>Item</name></member>
     <member refid="namespaceSR__UTILS__NS_1ab71d8ac2ea06361a979a52d03569163ca4410ec34d9e6c1a68100ca0ce033fb17" kind="enumvalue"><name>Array</name></member>
@@ -15006,6 +15009,8 @@
     <member refid="namespaceSR__UTILS__NS_1ac6d3d240a0136bbb1757e43c3bb44808" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="namespaceSR__UTILS__NS_1a0ca1d8e7032bd3b12a950ebfb5abd664" kind="function"><name>Passkey</name></member>
     <member refid="namespaceSR__UTILS__NS_1aebc385c697cbdc5ddd7960797de0f67b" kind="function"><name>GetSingletonManager</name></member>
+    <member refid="namespaceSR__UTILS__NS_1ada138995ed7aa51462018cab4c0dc971" kind="function"><name>ParseDouble</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a0abe99d01c5b39e41bcfc6e617148e84" kind="function"><name>ParseFloat</name></member>
     <member refid="namespaceSR__UTILS__NS_1ae508fd7ebf04163f5b7a696e668d5137" kind="function"><name>FastSToU</name></member>
     <member refid="namespaceSR__UTILS__NS_1ae3f6b0bce85928900e014b817aa1d02f" kind="function"><name>FastSToI</name></member>
     <member refid="namespaceSR__UTILS__NS_1a8729a9294d31a61c28f89cb0edccd24d" kind="function"><name>FastSToL</name></member>
@@ -15027,6 +15032,8 @@
     <member refid="namespaceSR__UTILS__NS_1ac9effbbfa3029940ca824981a909a4a9" kind="function"><name>SR_ENUM_NS_T</name></member>
     <member refid="namespaceSR__UTILS__NS_1a674bfe375b1d886214e23c05cc075fda" kind="function"><name>GetThreadId</name></member>
     <member refid="namespaceSR__UTILS__NS_1a312ab15e8d11e671a2cfaaecfc3a07fd" kind="function"><name>GetThisThreadId</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a0b25d6c8f44806d455943a5bc52bd536" kind="function"><name>SerializeDouble</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a24190d918c8acf9052122fee4abf61a6" kind="function"><name>SerializeFloat</name></member>
     <member refid="namespaceSR__UTILS__NS_1a340fa2160ceb9ebc307b0afe04020cf7" kind="function"><name>ToString</name></member>
     <member refid="namespaceSR__UTILS__NS_1ae403390415fcf3eb114eec3ee2a615b8" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="namespaceSR__UTILS__NS_1a278e6437bc5e502fc22882effb2f374a" kind="function"><name>GetStandardType</name></member>
