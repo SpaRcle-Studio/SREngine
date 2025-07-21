@@ -702,6 +702,17 @@ sra format
 											11-o:ptr
 												12-v:name
 													13-s:Tops
+						6-v:meshPath
+							7-s:Samples/Liza/Liza.fbx
+			3-k:i
+				4-o:d
+					5-v:type
+						6-s:Animator
+					5-o:ptr
+						6-v:entityId
+							7-i:4271257092295291732
+						6-v:graph
+							7-s:Samples/Liza/Animator.xml
 		2-v:name
 			3-s:Liza/Liza
 		2-a:children

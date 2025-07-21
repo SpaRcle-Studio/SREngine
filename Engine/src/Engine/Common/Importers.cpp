@@ -25,6 +25,9 @@ namespace SR_CORE_NS {
             return false;
         }
 
+
+        pSkeleton->SetRawMesh(pRawMesh);
+
         const SR_HTYPES_NS::Function<void(aiNode*, SR_ANIMATIONS_NS::Bone*)> processNode = [&](aiNode* node, SR_ANIMATIONS_NS::Bone* pBone) {
             pBone = pSkeleton->AddBone(pBone, node->mName.C_Str(), false);
 

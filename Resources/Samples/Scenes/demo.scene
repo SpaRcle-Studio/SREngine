@@ -264,6 +264,8 @@ sra format
 												12-b:false
 					5-v:name
 						6-s:Sphere
+					5-v:isEnabled
+						6-b:false
 					5-o:transform
 						6-v:type
 							7-s:Transform3D
@@ -444,6 +446,8 @@ sra format
 										10-i:3445474946150253867
 					5-v:name
 						6-s:GameCamera
+					5-v:isEnabled
+						6-b:false
 					5-o:transform
 						6-v:type
 							7-s:Transform3D
@@ -2328,9 +2332,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1216.000000
+											11-f:1544.000000
 										10-v:height
-											11-f:874.000000
+											11-f:1078.000000
 									9-v:direction
 										10-s:Column
 									9-v:containerAlign
@@ -2765,9 +2769,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1216.000000
+											11-f:1544.000000
 										10-v:height
-											11-f:874.000000
+											11-f:1078.000000
 						6-k:i
 							7-o:d
 								8-v:type
@@ -3206,9 +3210,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1216.000000
+											11-f:1544.000000
 										10-v:height
-											11-f:874.000000
+											11-f:1078.000000
 										10-v:align
 											11-s:End
 									9-v:direction
@@ -4149,9 +4153,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1216.000000
+											11-f:1544.000000
 										10-v:height
-											11-f:874.000000
+											11-f:1078.000000
 									9-v:containerAlign
 										10-s:Center
 									9-v:justify
@@ -4536,9 +4540,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1216.000000
+											11-f:1544.000000
 										10-v:height
-											11-f:874.000000
+											11-f:1078.000000
 									9-v:direction
 										10-s:Column
 									9-v:containerAlign
@@ -5483,9 +5487,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1216.000000
+											11-f:1544.000000
 										10-v:height
-											11-f:874.000000
+											11-f:1078.000000
 									9-v:direction
 										10-s:Column
 									9-v:containerAlign
@@ -5653,7 +5657,7 @@ ddddцццゔぅヾボ
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:0.861273
+									9-f:2.059724
 		2-k:i
 			3-o:d
 				4-v:type
@@ -5669,11 +5673,6 @@ ddddцццゔぅヾボ
 						6-v:type
 							7-s:Transform3D
 						6-o:ptr
-							7-o:translation
-								8-v:x
-									9-f:-0.558858
-								8-v:z
-									9-f:0.513930
 							7-o:scale
 								8-v:x
 									9-f:2.000000
@@ -5681,3 +5680,28 @@ ddddцццゔぅヾボ
 									9-f:2.000000
 								8-v:z
 									9-f:2.000000
+		2-k:i
+			3-o:d
+				4-v:type
+					5-s:GameObject
+				4-o:ptr
+					5-v:entityId
+						6-i:3165779197900876662
+					5-v:name
+						6-s:Liza/Liza
+					5-v:prefab
+						6-s:Samples/Liza/Liza.prefab
+					5-o:transform
+						6-v:type
+							7-s:Transform3D
+						6-o:ptr
+							7-o:translation
+								8-v:x
+									9-f:-3.135545
+							7-o:scale
+								8-v:x
+									9-f:3.000000
+								8-v:y
+									9-f:3.000000
+								8-v:z
+									9-f:3.000000
