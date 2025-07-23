@@ -388,7 +388,7 @@
 * **powm** ([**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
 * **ParseDouble** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **ParseFloat** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
-* **Passkey** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
+* **PassKey** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **PolymorphicCast** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **PasteFilesFromClipboard** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 

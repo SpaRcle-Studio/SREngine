@@ -76,6 +76,7 @@
 | class | [**Compression**](classSR__UTILS__NS_1_1Compression.md) <br> |
 | struct | [**ConstexprStringHashEntry**](structSR__UTILS__NS_1_1ConstexprStringHashEntry.md) <br> |
 | class | [**CursorLock**](classSR__UTILS__NS_1_1CursorLock.md) <br> |
+| struct | [**CursorLockInfo**](structSR__UTILS__NS_1_1CursorLockInfo.md) <br> |
 | class | [**Debug**](classSR__UTILS__NS_1_1Debug.md) <br> |
 | class | [**DebugDraw**](classSR__UTILS__NS_1_1DebugDraw.md) <br> |
 | class | [**DebugLogComponent**](classSR__UTILS__NS_1_1DebugLogComponent.md) <br> |
@@ -169,7 +170,7 @@
 | struct | [**ObjectDataAccessor&lt; SR\_UTILS\_NS::Path &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__UTILS__NS_1_1Path_01_4.md) &lt;&gt;<br> |
 | struct | [**ObjectDataAccessor&lt; T, typename std::enable\_if&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt;::type &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01Serializatb1990b5be6994cf28e51d156d88ddbc2.md) &lt;typename T&gt;<br> |
 | struct | [**Overloaded**](structSR__UTILS__NS_1_1Overloaded.md) &lt;Fs&gt;<br> |
-| class | [**Passkey**](classSR__UTILS__NS_1_1Passkey.md) &lt;typename T, AllowSuccessor, Others&gt;<br> |
+| class | [**PassKey**](classSR__UTILS__NS_1_1PassKey.md) &lt;typename T, AllowSuccessor, Others&gt;<br> |
 | class | [**Path**](classSR__UTILS__NS_1_1Path.md) <br> |
 | class | [**PathProperty**](classSR__UTILS__NS_1_1PathProperty.md) <br>_---------------------------------------_  __[_**PathProperty**_](classSR__UTILS__NS_1_1PathProperty.md) _-----------------------------------------------------_ __ |
 | class | [**Prefab**](classSR__UTILS__NS_1_1Prefab.md) <br> |
@@ -258,6 +259,7 @@
 | ---: | :--- |
 | typedef decltype(std::declval&lt; const X &gt;()==std::declval&lt; const Y &gt;()) | [**CheckerEqualityComparable**](#typedef-checkerequalitycomparable)  <br> |
 | typedef decltype(std::declval&lt; const X &gt;() - std::declval&lt; const Y &gt;()) | [**CheckerOperatorMinus**](#typedef-checkeroperatorminus)  <br> |
+| enum uint8\_t | [**CursorLockMode**](#enum-cursorlockmode)  <br> |
 | typedef typename [**DetectedOr**](structSR__UTILS__NS_1_1DetectedOr.md)&lt; Default, Op, Args... &gt;::type | [**DetectedOrT**](#typedef-detectedort)  <br> |
 | typedef typename Details::Detector&lt; Details::Empty, void, Op, Args... &gt;::type | [**DetectedT**](#typedef-detectedt)  <br> |
 | typedef std::function&lt; Entity::Ptr(void)&gt; | [**EntityAllocator**](#typedef-entityallocator)  <br> |
@@ -412,7 +414,7 @@
 |  constexpr bool | [**IsVolatile**](#function-isvolatile) () <br> |
 |  SR\_NODISCARD T | [**LexicalCast**](#function-lexicalcast) (std::string\_view str) <br> |
 |   | [**Overloaded**](#function-overloaded) (Fs && ...) <br> |
-|   | [**Passkey**](#function-passkey) (const T \*) <br> |
+|   | [**PassKey**](#function-passkey) (const T \*) <br> |
 |  B | [**PolymorphicCast**](#function-polymorphiccast) (A pA) <br> |
 |  SR\_NODISCARD std::string | [**SPrintF**](#function-sprintf) (const char \* format\_str, Args &&... args) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (BoolExt, int8\_t, None=-1, False=0, True=1) <br> |
@@ -512,6 +514,23 @@ using SR_UTILS_NS::CheckerEqualityComparable = typedef decltype(std::declval<con
 
 ```C++
 using SR_UTILS_NS::CheckerOperatorMinus = typedef decltype(std::declval<const X>() - std::declval<const Y>());
+```
+
+
+
+
+<hr>
+
+
+
+### enum CursorLockMode 
+
+```C++
+enum SR_UTILS_NS::CursorLockMode {
+    Everywhere,
+    Editor,
+    PlayMode
+};
 ```
 
 
@@ -2338,11 +2357,11 @@ SR_UTILS_NS::Overloaded (
 
 
 
-### function Passkey 
+### function PassKey 
 
 ```C++
 template<typename T>
-SR_UTILS_NS::Passkey (
+SR_UTILS_NS::PassKey (
     const T *
 ) 
 ```

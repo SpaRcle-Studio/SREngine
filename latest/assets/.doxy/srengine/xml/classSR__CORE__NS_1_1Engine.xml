@@ -144,7 +144,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="119" column="38" bodyfile="Engine/inc/Engine/Engine.h" bodystart="119" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Engine.h" line="120" column="38" bodyfile="Engine/inc/Engine/Engine.h" bodystart="120" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a95b7a5f35b636abe5a49e2ed6eed6030" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="121" column="21" bodyfile="Engine/inc/Engine/Engine.h" bodystart="121" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Engine.h" line="122" column="21" bodyfile="Engine/inc/Engine/Engine.h" bodystart="122" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a7b053d0ff00e7074ce06d9b31e23dde3" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -174,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="122" column="21" bodyfile="Engine/inc/Engine/Engine.h" bodystart="122" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Engine.h" line="123" column="21" bodyfile="Engine/inc/Engine/Engine.h" bodystart="123" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a88304c0b49d400806ef6559f2e12b37b" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -189,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="123" column="21" bodyfile="Engine/inc/Engine/Engine.h" bodystart="123" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Engine.h" line="124" column="21" bodyfile="Engine/inc/Engine/Engine.h" bodystart="124" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a9d7525b35890260ea90cf7e94b92c7eb" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -204,7 +204,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="125" column="21" bodyfile="Engine/inc/Engine/Engine.h" bodystart="125" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Engine.h" line="126" column="21" bodyfile="Engine/inc/Engine/Engine.h" bodystart="126" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a9c9c94460e287ac7d05ed3d072ec7034" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -219,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="126" column="21" bodyfile="Engine/inc/Engine/Engine.h" bodystart="126" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Engine.h" line="127" column="21" bodyfile="Engine/inc/Engine/Engine.h" bodystart="127" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a03470fba931f7809e7ecd615d2243630" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -234,7 +234,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="127" column="21" bodyfile="Engine/inc/Engine/Engine.h" bodystart="127" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Engine.h" line="128" column="21" bodyfile="Engine/inc/Engine/Engine.h" bodystart="128" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a0679f214eb84184696eb2cee1960485b" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -249,7 +249,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="128" column="21" bodyfile="Engine/inc/Engine/Engine.h" bodystart="128" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Engine.h" line="129" column="21" bodyfile="Engine/inc/Engine/Engine.h" bodystart="129" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a769a53580eb32aee01b5da6fff2820c4" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -264,7 +264,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="129" column="21" bodyfile="Engine/inc/Engine/Engine.h" bodystart="129" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Engine.h" line="130" column="21" bodyfile="Engine/inc/Engine/Engine.h" bodystart="130" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a55a055e708c60c51d9758188d9cba545" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -279,7 +279,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="131" column="17" bodyfile="Engine/inc/Engine/Engine.h" bodystart="131" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Engine.h" line="132" column="17" bodyfile="Engine/inc/Engine/Engine.h" bodystart="132" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1afe717c6725804eb191d159f0a264f86d" prot="private" static="no" mutable="no">
         <type>SR_UTILS_NS::TimePointType</type>
@@ -293,7 +293,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="132" column="36" bodyfile="Engine/inc/Engine/Engine.h" bodystart="132" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Engine.h" line="133" column="36" bodyfile="Engine/inc/Engine/Engine.h" bodystart="133" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a4ff0045550ab2590cd44d6df15bf7e64" prot="private" static="no" mutable="no">
         <type>SR_UTILS_NS::ThreadsWorker::Ptr</type>
@@ -307,7 +307,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="134" column="41" bodyfile="Engine/inc/Engine/Engine.h" bodystart="134" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Engine.h" line="135" column="41" bodyfile="Engine/inc/Engine/Engine.h" bodystart="135" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a30596774b30341115310c2977cf87387" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1CmdManager" kindref="compound">SR_UTILS_NS::CmdManager</ref> *</type>
@@ -322,7 +322,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="136" column="33" bodyfile="Engine/inc/Engine/Engine.h" bodystart="136" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Engine.h" line="137" column="33" bodyfile="Engine/inc/Engine/Engine.h" bodystart="137" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a53340de89719093a4ca0fb8f71125e6a" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1InputDispatcher" kindref="compound">SR_UTILS_NS::InputDispatcher</ref> *</type>
@@ -337,7 +337,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="137" column="38" bodyfile="Engine/inc/Engine/Engine.h" bodystart="137" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Engine.h" line="138" column="38" bodyfile="Engine/inc/Engine/Engine.h" bodystart="138" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a8c2d3b7ac3f61bc57ef8b24971b6382c" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SafeQueue" kindref="compound">SR_HTYPES_NS::SafeQueue</ref>&lt; ScenePtr &gt;</type>
@@ -351,7 +351,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="139" column="33" bodyfile="Engine/inc/Engine/Engine.h" bodystart="139" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Engine.h" line="140" column="33" bodyfile="Engine/inc/Engine/Engine.h" bodystart="140" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a6bfe25422aa530ff0ff2037b202242ba" prot="private" static="no" mutable="no">
         <type><ref refid="structSR__CORE__NS_1_1EngineScene" kindref="compound">EngineScene</ref> *</type>
@@ -366,7 +366,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="141" column="21" bodyfile="Engine/inc/Engine/Engine.h" bodystart="141" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Engine.h" line="142" column="21" bodyfile="Engine/inc/Engine/Engine.h" bodystart="142" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a31a22d69c6595c2f9be5c891bda56829" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__CORE__NS_1_1Application" kindref="compound">Application</ref> *</type>
@@ -381,7 +381,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="142" column="21" bodyfile="Engine/inc/Engine/Engine.h" bodystart="142" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Engine.h" line="143" column="21" bodyfile="Engine/inc/Engine/Engine.h" bodystart="143" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1aa790e71a2fb58484d22403f66652e456" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager" kindref="compound">SR_UTILS_NS::Localization::LocalizationManager</ref> *</type>
@@ -396,7 +396,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="144" column="56" bodyfile="Engine/inc/Engine/Engine.h" bodystart="144" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Engine.h" line="145" column="56" bodyfile="Engine/inc/Engine/Engine.h" bodystart="145" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a72babce9f71c513b2741e8cd8f18c430" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__CORE__GUI__NS_1_1EditorGUI" kindref="compound">SR_CORE_GUI_NS::EditorGUI</ref> *</type>
@@ -411,7 +411,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="146" column="35" bodyfile="Engine/inc/Engine/Engine.h" bodystart="146" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Engine.h" line="147" column="35" bodyfile="Engine/inc/Engine/Engine.h" bodystart="147" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a891fce8af8ec98ffef618892d33ee0d1" prot="private" static="no" mutable="no">
         <type>RenderContextPtr</type>
@@ -426,7 +426,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="148" column="26" bodyfile="Engine/inc/Engine/Engine.h" bodystart="148" bodyend="148"/>
+        <location file="Engine/inc/Engine/Engine.h" line="149" column="26" bodyfile="Engine/inc/Engine/Engine.h" bodystart="149" bodyend="149"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a888a280aa52e9df93d5d3983fe8939e1" prot="private" static="no" mutable="no">
         <type>std::vector&lt; WindowPtr &gt;</type>
@@ -440,7 +440,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="150" column="21" bodyfile="Engine/inc/Engine/Engine.h" bodystart="150" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Engine.h" line="151" column="21" bodyfile="Engine/inc/Engine/Engine.h" bodystart="151" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -770,6 +770,20 @@
         </inbodydescription>
         <location file="Engine/inc/Engine/Engine.h" line="94" column="32" bodyfile="Engine/inc/Engine/Engine.h" bodystart="94" bodyend="94"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a8f14f00214dee82c471bb5186838fce0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD WindowPtr</type>
+        <definition>SR_NODISCARD WindowPtr SR_CORE_NS::Engine::GetFocusedWindow</definition>
+        <argsstring>() const</argsstring>
+        <name>GetFocusedWindow</name>
+        <qualifiedname>SR_CORE_NS::Engine::GetFocusedWindow</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/Engine.h" line="95" column="32"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1ac299c8794259158fe78a80089331e3b0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__WORLD__NS_1_1SceneUpdater" kindref="compound">SR_WORLD_NS::SceneUpdater</ref> *</type>
         <definition>SR_NODISCARD SR_WORLD_NS::SceneUpdater * SR_CORE_NS::Engine::GetSceneBuilder</definition>
@@ -782,7 +796,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="95" column="48"/>
+        <location file="Engine/inc/Engine/Engine.h" line="96" column="48"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a9dd439bf37486363a3fe51d79146d187" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -796,7 +810,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="96" column="27" bodyfile="Engine/inc/Engine/Engine.h" bodystart="96" bodyend="96"/>
+        <location file="Engine/inc/Engine/Engine.h" line="97" column="27" bodyfile="Engine/inc/Engine/Engine.h" bodystart="97" bodyend="97"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1ae6725f69a58ca7382d255585cba1d5c2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -810,7 +824,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="97" column="27" bodyfile="Engine/inc/Engine/Engine.h" bodystart="97" bodyend="97"/>
+        <location file="Engine/inc/Engine/Engine.h" line="98" column="27" bodyfile="Engine/inc/Engine/Engine.h" bodystart="98" bodyend="98"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a188dbe4374c6e380603e633ba0f18c19" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -824,7 +838,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="98" column="27" bodyfile="Engine/inc/Engine/Engine.h" bodystart="98" bodyend="98"/>
+        <location file="Engine/inc/Engine/Engine.h" line="99" column="27" bodyfile="Engine/inc/Engine/Engine.h" bodystart="99" bodyend="99"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1ab58d57c54b116c3920f54f6d20989983" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -838,7 +852,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="99" column="27" bodyfile="Engine/inc/Engine/Engine.h" bodystart="99" bodyend="99"/>
+        <location file="Engine/inc/Engine/Engine.h" line="100" column="27" bodyfile="Engine/inc/Engine/Engine.h" bodystart="100" bodyend="100"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1ac64778aea118a32264e6d6a530ab743e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__CORE__GUI__NS_1_1EditorGUI" kindref="compound">SR_CORE_GUI_NS::EditorGUI</ref> *</type>
@@ -852,7 +866,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="100" column="48" bodyfile="Engine/inc/Engine/Engine.h" bodystart="100" bodyend="100"/>
+        <location file="Engine/inc/Engine/Engine.h" line="101" column="48" bodyfile="Engine/inc/Engine/Engine.h" bodystart="101" bodyend="101"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a397b219a76e9ce984f6a36656884717f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1CmdManager" kindref="compound">SR_UTILS_NS::CmdManager</ref> *</type>
@@ -866,7 +880,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="101" column="46" bodyfile="Engine/inc/Engine/Engine.h" bodystart="101" bodyend="101"/>
+        <location file="Engine/inc/Engine/Engine.h" line="102" column="46" bodyfile="Engine/inc/Engine/Engine.h" bodystart="102" bodyend="102"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a093606430f8826179fca90ee1537260d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__CORE__NS_1_1EngineScene" kindref="compound">EngineScene</ref> *</type>
@@ -880,7 +894,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="102" column="34" bodyfile="Engine/inc/Engine/Engine.h" bodystart="102" bodyend="102"/>
+        <location file="Engine/inc/Engine/Engine.h" line="103" column="34" bodyfile="Engine/inc/Engine/Engine.h" bodystart="103" bodyend="103"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a45d625800f46ec311d434a5a0ea33123" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -894,7 +908,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="103" column="27"/>
+        <location file="Engine/inc/Engine/Engine.h" line="104" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a30a538ae0887beae90b1e8422463ff33" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Debug" kindref="compound">SR_UTILS_NS::Debug</ref> &amp;</type>
@@ -909,7 +923,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="106" column="41"/>
+        <location file="Engine/inc/Engine/Engine.h" line="107" column="41"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a0b20e548f72827ddc802c0d6bf563c0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -923,7 +937,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="109" column="14"/>
+        <location file="Engine/inc/Engine/Engine.h" line="110" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1ab186d905c75aa35e1cf8e5b3072a6979" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -937,7 +951,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="110" column="14"/>
+        <location file="Engine/inc/Engine/Engine.h" line="111" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a5723b049df6ed3337b4dd4e14dce020c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -951,7 +965,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="111" column="14"/>
+        <location file="Engine/inc/Engine/Engine.h" line="112" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a5457d505746869e0d64772d3b4a2d4db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -965,7 +979,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="112" column="14"/>
+        <location file="Engine/inc/Engine/Engine.h" line="113" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1aa9f17fd40ac84f492fbb9cd7ca0ec267" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -979,7 +993,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="113" column="14"/>
+        <location file="Engine/inc/Engine/Engine.h" line="114" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-func">
@@ -995,7 +1009,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="116" column="26"/>
+        <location file="Engine/inc/Engine/Engine.h" line="117" column="26"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1045,7 +1059,7 @@
         <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/inc/Engine/Engine.h" line="56" column="5" bodyfile="Engine/inc/Engine/Engine.h" bodystart="56" bodyend="153"/>
+    <location file="Engine/inc/Engine/Engine.h" line="56" column="5" bodyfile="Engine/inc/Engine/Engine.h" bodystart="56" bodyend="154"/>
     <listofallmembers>
       <member refid="classSR__CORE__NS_1_1Engine_1a261f6940aecbe15d68cbc4691bba7a75" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>AddSceneToQueue</name></member>
       <member refid="classSR__CORE__NS_1_1Engine_1a6382d281e4a1169fd4fd816f04f41b02" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>AddWindow</name></member>
@@ -1069,6 +1083,7 @@
       <member refid="classSR__CORE__NS_1_1Engine_1a30a538ae0887beae90b1e8422463ff33" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetDebugger</name></member>
       <member refid="classSR__CORE__NS_1_1Engine_1ac64778aea118a32264e6d6a530ab743e" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetEditor</name></member>
       <member refid="classSR__CORE__NS_1_1Engine_1a093606430f8826179fca90ee1537260d" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetEngineScene</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a8f14f00214dee82c471bb5186838fce0" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetFocusedWindow</name></member>
       <member refid="classSR__CORE__NS_1_1Engine_1a5e9965b2b205350c9f27f93cb4667a39" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetMainWindow</name></member>
       <member refid="classSR__CORE__NS_1_1Engine_1a05d06feb6c7b722d30626af28e40baf1" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetPhysicsScene</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetPtrData</name></member>

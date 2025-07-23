@@ -102,6 +102,7 @@ namespace SR_CORE_NS {
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
         SR_NODISCARD PhysicsScenePtr GetPhysicsScene() const;
         SR_NODISCARD WindowPtr GetMainWindow() const { return m_windows.empty() ? nullptr : m_windows.front(); }
+        SR_NODISCARD WindowPtr GetFocusedWindow() const;
         SR_NODISCARD SR_WORLD_NS::SceneUpdater* GetSceneBuilder() const;
         SR_NODISCARD bool IsActive() const { return m_isActive; }
         SR_NODISCARD bool IsRun() const { return m_isRun; }

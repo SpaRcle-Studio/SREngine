@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structSR__UTILS__NS_1_1CursorLockInfo" kind="struct" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::CursorLockInfo</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__UTILS__NS_1_1CursorLockInfo_1ac0dd055a997ecc4e7fd6c04bfd0e0f99" prot="public" static="no" mutable="no">
+        <type>std::optional&lt; SR_MATH_NS::FRect &gt;</type>
+        <definition>std::optional&lt;SR_MATH_NS::FRect&gt; SR_UTILS_NS::CursorLockInfo::lockRect</definition>
+        <argsstring></argsstring>
+        <name>lockRect</name>
+        <qualifiedname>SR_UTILS_NS::CursorLockInfo::lockRect</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="21" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__UTILS__NS_1_1CursorLockInfo_1a84fe2dda224bb58ff1837bb3edb6277b" prot="public" static="no" mutable="no">
+        <type>CursorLockMode</type>
+        <definition>CursorLockMode SR_UTILS_NS::CursorLockInfo::lockMode</definition>
+        <argsstring></argsstring>
+        <name>lockMode</name>
+        <qualifiedname>SR_UTILS_NS::CursorLockInfo::lockMode</qualifiedname>
+        <initializer>= CursorLockMode::Everywhere</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="22" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__UTILS__NS_1_1CursorLockInfo_1aefddefeb1d75c14acdde3fc177d355f6" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_UTILS_NS::CursorLockInfo::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <qualifiedname>SR_UTILS_NS::CursorLockInfo::id</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="23" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="20" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="20" bodyend="24"/>
+    <listofallmembers>
+      <member refid="structSR__UTILS__NS_1_1CursorLockInfo_1aefddefeb1d75c14acdde3fc177d355f6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::CursorLockInfo</scope><name>id</name></member>
+      <member refid="structSR__UTILS__NS_1_1CursorLockInfo_1a84fe2dda224bb58ff1837bb3edb6277b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::CursorLockInfo</scope><name>lockMode</name></member>
+      <member refid="structSR__UTILS__NS_1_1CursorLockInfo_1ac0dd055a997ecc4e7fd6c04bfd0e0f99" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::CursorLockInfo</scope><name>lockRect</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

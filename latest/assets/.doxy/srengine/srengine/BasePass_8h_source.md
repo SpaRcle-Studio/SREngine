@@ -126,12 +126,12 @@ namespace SR_GRAPH_NS {
 
     };
 
-    class StartPassNode : public SR_SRLM_NS::IExecutableNode {
-        SR_REGISTER_LOGICAL_NODE(StartPassNode, Start Pass, { "Passes" })
-    public:
-        void InitNode() override;
+  //class StartPassNode : public SR_SRLM_NS::IExecutableNode {
+  //    SR_REGISTER_LOGICAL_NODE(StartPassNode, Start Pass, { "Passes" })
+  //public:
+  //    void InitNode() override;
 
-    };
+  //};
 }
 
 #define SR_REGISTER_RENDER_PASS(name)                                                                                   \

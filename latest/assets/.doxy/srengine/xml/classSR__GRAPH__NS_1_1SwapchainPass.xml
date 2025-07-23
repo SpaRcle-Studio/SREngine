@@ -86,21 +86,6 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h" line="17" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1SwapchainPass_1abb45d046801ace0096bebcb65a0aeefe" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type>void</type>
-        <definition>void SR_GRAPH_NS::SwapchainPass::InitNode</definition>
-        <argsstring>() override</argsstring>
-        <name>InitNode</name>
-        <qualifiedname>SR_GRAPH_NS::SwapchainPass::InitNode</qualifiedname>
-        <reimplements refid="classSR__SRLM__NS_1_1LogicalNode_1ae6934733a21e34c45488912bdac8b9a4">InitNode</reimplements>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h" line="18" column="14"/>
-      </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
@@ -339,10 +324,8 @@
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1af9087ca5182397a9c7d3b92fb5591523" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>AddDependency</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>AddInputConnection</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a451d30d4d677248caa80bb7ac74baad9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>AddInputData</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a72915afde33f4d0c714e454cab1544c7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>AddInputData</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac528a232f2481034bf0c9c866aadf580" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>AddOutputConnection</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a968e3caf521de3d586f0ffb6cd9c2e07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>AddOutputData</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a70d337798b8e852a40f5f3a74fe35d79" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>AddOutputData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>AutoFree</name></member>
       <member refid="classSR__SRLM__NS_1_1IExecutableNode_1a52d82db24c1ba529cf2c3fb289188eae" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>Base</name></member>
@@ -396,7 +379,7 @@
       <member refid="classSR__SRLM__NS_1_1IExecutableNode_1a72369ad750e0cbaa06007623f7a5a6aa" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>IExecutableNode</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>IncrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1ad5c1af15b98c42ac465ace7d9dc1d520" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>Init</name></member>
-      <member refid="classSR__GRAPH__NS_1_1SwapchainPass_1abb45d046801ace0096bebcb65a0aeefe" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>InitNode</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae6934733a21e34c45488912bdac8b9a4" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>InitNode</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a46d4de6ffa829b0ac09255febc01f8c3" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>InitValues</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a7a198b9924e270e946544b410c7e4429" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>IsDirty</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae3301d2d44de7af8fc7e186f8691a854" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>IsEntryPoint</name></member>

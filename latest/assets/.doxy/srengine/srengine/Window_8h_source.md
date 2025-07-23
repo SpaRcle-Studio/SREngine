@@ -19,14 +19,11 @@
 #include <Utils/Types/Thread.h>
 #include <Utils/Types/Function.h>
 #include <Utils/Math/Vector2.h>
+#include <Utils/Math/Rect.h>
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Types/SharedPtr.h>
 
 #include <Graphics/Window/BasicWindowImpl.h>
-
-namespace SR_GTYPES_NS {
-    class Camera;
-}
 
 namespace SR_GRAPH_NS {
     namespace GUI {
@@ -63,6 +60,7 @@ namespace SR_GRAPH_NS {
 
         SR_NODISCARD SR_MATH_NS::UVector2 GetSize() const;
         SR_NODISCARD SR_MATH_NS::IVector2 GetPosition() const;
+        SR_NODISCARD SR_MATH_NS::FRect GetWindowRect() const;
         SR_NODISCARD bool IsWindowFocus() const;
         SR_NODISCARD bool IsWindowCollapsed() const;
         SR_NODISCARD bool IsValid() const;

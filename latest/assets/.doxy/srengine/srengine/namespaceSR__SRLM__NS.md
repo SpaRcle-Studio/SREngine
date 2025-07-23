@@ -48,7 +48,6 @@
 | class | [**DataOperatorMultiplication**](classSR__SRLM__NS_1_1DataOperatorMultiplication.md) <br> |
 | class | [**DataOperatorSubtraction**](classSR__SRLM__NS_1_1DataOperatorSubtraction.md) <br> |
 | class | [**DataType**](classSR__SRLM__NS_1_1DataType.md) <br> |
-| class | [**DataTypeAllocator**](classSR__SRLM__NS_1_1DataTypeAllocator.md) <br> |
 | class | [**DataTypeArray**](classSR__SRLM__NS_1_1DataTypeArray.md) <br> |
 | class | [**DataTypeBool**](classSR__SRLM__NS_1_1DataTypeBool.md) <br> |
 | class | [**DataTypeDouble**](classSR__SRLM__NS_1_1DataTypeDouble.md) <br> |

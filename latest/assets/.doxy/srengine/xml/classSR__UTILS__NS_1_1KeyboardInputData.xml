@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="81" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="81" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="69" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="69" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1KeyboardInputData_1af9a787a0d703bc1359692a296111b5a7" prot="public" static="no" mutable="no">
         <type>KeyState</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="82" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="82" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="70" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="70" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="67" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="67" bodyend="70"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="55" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="55" bodyend="58"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1KeyboardInputData_1acc4c3966cae835e6518cd8a201c9e8a4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="72" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="72" bodyend="74"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="60" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="60" bodyend="62"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1KeyboardInputData_1a47b9f51b4de7bc1a7ce68b5f256b099b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>InputDeviceType</type>
@@ -83,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="77" column="25"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="65" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1KeyboardInputData_1a38fa775ff4a7a478da03b57bacb7271c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD KeyCode</type>
@@ -97,7 +97,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="78" column="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="66" column="30"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -140,7 +140,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="65" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="65" bodyend="84"/>
+    <location file="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" line="53" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="53" bodyend="72"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1KeyboardInputData_1a38fa775ff4a7a478da03b57bacb7271c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>GetKeyCode</name></member>
       <member refid="classSR__UTILS__NS_1_1KeyboardInputData_1a47b9f51b4de7bc1a7ce68b5f256b099b" prot="public" virt="virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>GetType</name></member>

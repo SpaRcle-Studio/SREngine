@@ -33,26 +33,26 @@ namespace SR_SRLM_NS {
 
     class DataType;
 
-    class DataTypeAllocator : public SR_UTILS_NS::Singleton<DataTypeAllocator> {
-        SR_REGISTER_SINGLETON(DataTypeAllocator)
-        using Hash = uint64_t;
-        using Allocator = SR_HTYPES_NS::Function<DataType*()>;
-        static constexpr uint32_t EnumMax = static_cast<int>(DataTypeClass::DataTypeClassMAX);
-    public:
-        SR_NODISCARD bool IsSingletonCanBeDestroyed() const override {
-            return false;
-        }
+  //class DataTypeAllocator : public SR_UTILS_NS::Singleton<DataTypeAllocator> {
+  //    //SR_REGISTER_SINGLETON(DataTypeAllocator)
+  //    using Hash = uint64_t;
+  //    using Allocator = SR_HTYPES_NS::Function<DataType*()>;
+  //    static constexpr uint32_t EnumMax = static_cast<int>(DataTypeClass::DataTypeClassMAX);
+  //public:
+  //    SR_NODISCARD bool IsSingletonCanBeDestroyed() const override {
+  //        return false;
+  //    }
 
-        bool Register(DataTypeClass dataTypeClass, Hash hashName, Allocator allocator);
+  //    bool Register(DataTypeClass dataTypeClass, Hash hashName, Allocator allocator);
 
-        DataType* Allocate(DataTypeClass dataTypeClass);
-        DataType* Allocate(Hash hashName);
+  //    DataType* Allocate(DataTypeClass dataTypeClass);
+  //    DataType* Allocate(Hash hashName);
 
-    private:
-        Hash m_hashes[EnumMax];
-        Allocator m_allocators[EnumMax];
+  //private:
+  //    Hash m_hashes[EnumMax];
+  //    Allocator m_allocators[EnumMax];
 
-    };
+  //};
 
 
     class DataType : SR_UTILS_NS::NonCopyable {
@@ -64,9 +64,11 @@ namespace SR_SRLM_NS {
         virtual void Reset() = 0;
         virtual void CopyTo(DataType* pData) const = 0;
 
-        void SaveXml(SR_XML_NS::Node& xmlNode);
+        void SaveXml(SR_XML_NS::Node& xmlNode) { }
 
-        static DataType* LoadXml(const SR_XML_NS::Node& xmlNode);
+        static DataType* LoadXml(const SR_XML_NS::Node& xmlNode) {
+            return nullptr;
+        }
 
         SR_NODISCARD virtual std::vector<DataType*> GetMetaData() const { return std::vector<DataType*>(); }
         SR_NODISCARD virtual DataType* Copy() const = 0;
@@ -101,9 +103,9 @@ namespace SR_SRLM_NS {
 
 
     class DataTypeNone : public DataType {
-        SR_LM_REGISTER_TYPE(DataTypeNone, None);
+        //SR_LM_REGISTER_TYPE(DataTypeNone, None);
     public:
-        SR_NODISCARD DataType* Copy() const override { return new DataTypeNone(); }
+        //SR_NODISCARD DataType* Copy() const override { return new DataTypeNone(); }
         void CopyTo(DataType* pData) const override { }
         void Reset() override { }
 
@@ -111,64 +113,64 @@ namespace SR_SRLM_NS {
 
 
     class DataTypeInt8 : public DataType {
-        SR_LM_REGISTER_TYPE_FULL(DataTypeInt8, DataType, Int8, int8_t, 0)
+        //SR_LM_REGISTER_TYPE_FULL(DataTypeInt8, DataType, Int8, int8_t, 0)
     };
 
     class DataTypeInt16 : public DataType {
-        SR_LM_REGISTER_TYPE_FULL(DataTypeInt16, DataType, Int16, int16_t, 0)
+        //SR_LM_REGISTER_TYPE_FULL(DataTypeInt16, DataType, Int16, int16_t, 0)
 
     };
 
     class DataTypeInt32 : public DataType {
-        SR_LM_REGISTER_TYPE_FULL(DataTypeInt32, DataType, Int32, int32_t, 0)
+        //SR_LM_REGISTER_TYPE_FULL(DataTypeInt32, DataType, Int32, int32_t, 0)
     };
 
     class DataTypeInt64 : public DataType {
-        SR_LM_REGISTER_TYPE_FULL(DataTypeInt64, DataType, Int64, int64_t, 0)
+        //SR_LM_REGISTER_TYPE_FULL(DataTypeInt64, DataType, Int64, int64_t, 0)
     };
 
     class DataTypeUInt8 : public DataType {
-        SR_LM_REGISTER_TYPE_FULL(DataTypeUInt8, DataType, UInt8, uint8_t, 0)
+        //SR_LM_REGISTER_TYPE_FULL(DataTypeUInt8, DataType, UInt8, uint8_t, 0)
     };
 
     class DataTypeUInt16 : public DataType {
-        SR_LM_REGISTER_TYPE_FULL(DataTypeUInt16, DataType, UInt16, uint16_t, 0)
+        //SR_LM_REGISTER_TYPE_FULL(DataTypeUInt16, DataType, UInt16, uint16_t, 0)
     };
 
     class DataTypeUInt32 : public DataType {
-        SR_LM_REGISTER_TYPE_FULL(DataTypeUInt32, DataType, UInt32, uint32_t, 0)
+        //SR_LM_REGISTER_TYPE_FULL(DataTypeUInt32, DataType, UInt32, uint32_t, 0)
     };
 
     class DataTypeUInt64 : public DataType {
-        SR_LM_REGISTER_TYPE_FULL(DataTypeUInt64, DataType, UInt64, uint64_t, 0)
+        //SR_LM_REGISTER_TYPE_FULL(DataTypeUInt64, DataType, UInt64, uint64_t, 0)
     };
 
     class DataTypeBool : public DataType {
-        SR_LM_REGISTER_TYPE_FULL(DataTypeBool, DataType, Bool, bool, false)
+        //SR_LM_REGISTER_TYPE_FULL(DataTypeBool, DataType, Bool, bool, false)
     };
 
     class DataTypeFloat : public DataType {
-        SR_LM_REGISTER_TYPE_FULL(DataTypeFloat, DataType, Float, float_t, 0.f)
+        //SR_LM_REGISTER_TYPE_FULL(DataTypeFloat, DataType, Float, float_t, 0.f)
     };
 
     class DataTypeDouble : public DataType {
-        SR_LM_REGISTER_TYPE_FULL(DataTypeDouble, DataType, Double, double_t, 0.0)
+        //SR_LM_REGISTER_TYPE_FULL(DataTypeDouble, DataType, Double, double_t, 0.0)
     };
 
     class DataTypeString : public DataType {
-        SR_LM_REGISTER_TYPE_FULL_MOVE(DataTypeString, DataType, String, std::string, std::string())
+        //SR_LM_REGISTER_TYPE_FULL_MOVE(DataTypeString, DataType, String, std::string, std::string())
     };
 
 
     class DataTypeEnum : public DataTypeInt64 {
-        SR_LM_REGISTER_BASE(DataTypeEnum, Enum)
+        //SR_LM_REGISTER_BASE(DataTypeEnum, Enum)
     public:
         DataTypeEnum() = default;
 
-        explicit DataTypeEnum(int64_t value, EnumReflector* pReflector)
-            : DataTypeInt64(value)
-            , m_reflector(pReflector)
-        { }
+        //explicit DataTypeEnum(int64_t value, EnumReflector* pReflector)
+        //    : DataTypeInt64(value)
+        //    , m_reflector(pReflector)
+        //{ }
 
         explicit DataTypeEnum(EnumReflector* pReflector)
             : DataTypeInt64()
@@ -180,9 +182,9 @@ namespace SR_SRLM_NS {
         SR_NODISCARD std::string GetName() const noexcept override;
         SR_NODISCARD EnumReflector* GetReflector() const { return m_reflector; }
 
-        SR_NODISCARD DataType* Copy() const override {
-            return new DataTypeEnum(m_value, m_reflector);
-        }
+        //SR_NODISCARD DataType* Copy() const override {
+        //    return new DataTypeEnum(m_value, m_reflector);
+        //}
 
         void SetReflector(EnumReflector* pReflector) { m_reflector = pReflector; }
 
@@ -198,26 +200,26 @@ namespace SR_SRLM_NS {
 
 
     class DataTypeFlow : public DataTypeEnum {
-        SR_LM_REGISTER_TYPE(DataTypeFlow, Flow)
+        //SR_LM_REGISTER_TYPE(DataTypeFlow, Flow)
 
-        explicit DataTypeFlow(FlowState flowState)
-            : DataTypeEnum(static_cast<int64_t>(flowState), SR_UTILS_NS::EnumReflector::GetReflector<FlowState>())
-        { }
+       //explicit DataTypeFlow(FlowState flowState)
+       //    : DataTypeEnum(static_cast<int64_t>(flowState), SR_UTILS_NS::EnumReflector::GetReflector<FlowState>())
+       //{ }
 
-        DataTypeFlow()
-            : DataTypeFlow(FlowState::NotAvailable)
-        { }
+      //DataTypeFlow()
+      //    : DataTypeFlow(FlowState::NotAvailable)
+      //{ }
 
-        SR_NODISCARD DataType* Copy() const override {
-            return new DataTypeFlow(static_cast<FlowState>(*GetEnum()));
-        }
+      // SR_NODISCARD DataType* Copy() const override {
+      //     return new DataTypeFlow(static_cast<FlowState>(*GetEnum()));
+      // }
     };
 
 
     class DataTypeArray : public DataType {
-        SR_LM_REGISTER_TYPE_NO_META(DataTypeArray, Array)
+       // SR_LM_REGISTER_TYPE_NO_META(DataTypeArray, Array)
     public:
-        DataTypeArray();
+       // DataTypeArray();
         ~DataTypeArray() override;
 
     public:
@@ -225,7 +227,7 @@ namespace SR_SRLM_NS {
         void SetType(DataType* pData);
         void Reset() override;
 
-        SR_NODISCARD DataType* Copy() const override;
+       // SR_NODISCARD DataType* Copy() const override;
         SR_NODISCARD Meta GetMeta() const noexcept override;
 
     private:
@@ -236,14 +238,14 @@ namespace SR_SRLM_NS {
 
 
     class DataTypeStruct : public DataType {
-        SR_LM_REGISTER_TYPE(DataTypeStruct, Struct)
+        //SR_LM_REGISTER_TYPE(DataTypeStruct, Struct)
     public:
-        DataTypeStruct() = default;
+    //   DataTypeStruct() = default;
 
-        explicit DataTypeStruct(Hash name)
-            : DataType()
-            , m_name(name)
-        { }
+    //   explicit DataTypeStruct(Hash name)
+    //       : DataType()
+    //       , m_name(name)
+    //   { }
 
         ~DataTypeStruct() override;
 
@@ -254,7 +256,7 @@ namespace SR_SRLM_NS {
         void Reset() override;
         void SetStructHashName(Hash hashName) { m_name = hashName; }
 
-        SR_NODISCARD DataType* Copy() const override;
+      //  SR_NODISCARD DataType* Copy() const override;
         SR_NODISCARD std::vector<DataType*> GetMetaData() const override;
         SR_NODISCARD const std::map<Hash, DataType*>& GetVariables() const { return m_variables; };
         SR_NODISCARD Hash GetStructName() const { return m_name; };

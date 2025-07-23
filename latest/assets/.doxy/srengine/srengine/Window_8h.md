@@ -14,6 +14,7 @@
 * `#include <Utils/Types/Thread.h>`
 * `#include <Utils/Types/Function.h>`
 * `#include <Utils/Math/Vector2.h>`
+* `#include <Utils/Math/Rect.h>`
 * `#include <Utils/Types/SafePointer.h>`
 * `#include <Utils/Types/SharedPtr.h>`
 * `#include <Graphics/Window/BasicWindowImpl.h>`
@@ -36,7 +37,6 @@
 | ---: | :--- |
 | namespace | [**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md) <br> |
 | namespace | [**GUI**](namespaceSR__GRAPH__NS_1_1GUI.md) <br> |
-| namespace | [**SR\_GTYPES\_NS**](namespaceSR__GTYPES__NS.md) <br> |
 
 
 ## Classes

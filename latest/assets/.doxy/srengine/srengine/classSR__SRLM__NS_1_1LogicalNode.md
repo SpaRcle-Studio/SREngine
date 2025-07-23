@@ -86,11 +86,9 @@ Inherited by the following classes: [SR\_SRLM\_NS::ConnectorNode](classSR__SRLM_
 | Type | Name |
 | ---: | :--- |
 |  void | [**AddInputConnection**](#function-addinputconnection) ([**LogicalNode**](classSR__SRLM__NS_1_1LogicalNode.md) \* pNode, uint32\_t nodePinIndex, uint32\_t pinIndex) <br> |
-|  [**NodePin**](structSR__SRLM__NS_1_1LogicalNode_1_1NodePin.md) & | [**AddInputData**](#function-addinputdata-12) ([**DataType**](classSR__SRLM__NS_1_1DataType.md) \* pData, uint64\_t hashName=SR\_UINT64\_MAX) <br> |
-|  [**NodePin**](structSR__SRLM__NS_1_1LogicalNode_1_1NodePin.md) & | [**AddInputData**](#function-addinputdata-22) (uint64\_t hashName=SR\_UINT64\_MAX) <br> |
+|  [**NodePin**](structSR__SRLM__NS_1_1LogicalNode_1_1NodePin.md) & | [**AddInputData**](#function-addinputdata) ([**DataType**](classSR__SRLM__NS_1_1DataType.md) \* pData, uint64\_t hashName=SR\_UINT64\_MAX) <br> |
 |  void | [**AddOutputConnection**](#function-addoutputconnection) ([**LogicalNode**](classSR__SRLM__NS_1_1LogicalNode.md) \* pNode, uint32\_t nodePinIndex, uint32\_t pinIndex) <br> |
-|  [**NodePin**](structSR__SRLM__NS_1_1LogicalNode_1_1NodePin.md) & | [**AddOutputData**](#function-addoutputdata-12) ([**DataType**](classSR__SRLM__NS_1_1DataType.md) \* pData, uint64\_t hashName=SR\_UINT64\_MAX) <br> |
-|  [**NodePin**](structSR__SRLM__NS_1_1LogicalNode_1_1NodePin.md) & | [**AddOutputData**](#function-addoutputdata-22) (uint64\_t hashName=SR\_UINT64\_MAX) <br> |
+|  [**NodePin**](structSR__SRLM__NS_1_1LogicalNode_1_1NodePin.md) & | [**AddOutputData**](#function-addoutputdata) ([**DataType**](classSR__SRLM__NS_1_1DataType.md) \* pData, uint64\_t hashName=SR\_UINT64\_MAX) <br> |
 |  SR\_NODISCARD const [**DataType**](classSR__SRLM__NS_1_1DataType.md) \* | [**CalcInput**](#function-calcinput) (uint32\_t index) <br> |
 |  void | [**ClearLogicalNode**](#function-clearlogicalnode) () <br> |
 | virtual void | [**Execute**](#function-execute) (float\_t dt) <br> |
@@ -261,27 +259,11 @@ void SR_SRLM_NS::LogicalNode::AddInputConnection (
 
 
 
-### function AddInputData [1/2]
+### function AddInputData 
 
 ```C++
 NodePin & SR_SRLM_NS::LogicalNode::AddInputData (
     DataType * pData,
-    uint64_t hashName=SR_UINT64_MAX
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function AddInputData [2/2]
-
-```C++
-template<typename T>
-inline NodePin & SR_SRLM_NS::LogicalNode::AddInputData (
     uint64_t hashName=SR_UINT64_MAX
 ) 
 ```
@@ -310,27 +292,11 @@ void SR_SRLM_NS::LogicalNode::AddOutputConnection (
 
 
 
-### function AddOutputData [1/2]
+### function AddOutputData 
 
 ```C++
 NodePin & SR_SRLM_NS::LogicalNode::AddOutputData (
     DataType * pData,
-    uint64_t hashName=SR_UINT64_MAX
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function AddOutputData [2/2]
-
-```C++
-template<typename T>
-inline NodePin & SR_SRLM_NS::LogicalNode::AddOutputData (
     uint64_t hashName=SR_UINT64_MAX
 ) 
 ```

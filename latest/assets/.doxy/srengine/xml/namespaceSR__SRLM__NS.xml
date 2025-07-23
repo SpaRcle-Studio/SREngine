@@ -21,7 +21,6 @@
     <innerclass refid="classSR__SRLM__NS_1_1DataOperatorMultiplication" prot="public">SR_SRLM_NS::DataOperatorMultiplication</innerclass>
     <innerclass refid="classSR__SRLM__NS_1_1DataOperatorSubtraction" prot="public">SR_SRLM_NS::DataOperatorSubtraction</innerclass>
     <innerclass refid="classSR__SRLM__NS_1_1DataType" prot="public">SR_SRLM_NS::DataType</innerclass>
-    <innerclass refid="classSR__SRLM__NS_1_1DataTypeAllocator" prot="public">SR_SRLM_NS::DataTypeAllocator</innerclass>
     <innerclass refid="classSR__SRLM__NS_1_1DataTypeArray" prot="public">SR_SRLM_NS::DataTypeArray</innerclass>
     <innerclass refid="classSR__SRLM__NS_1_1DataTypeBool" prot="public">SR_SRLM_NS::DataTypeBool</innerclass>
     <innerclass refid="classSR__SRLM__NS_1_1DataTypeDouble" prot="public">SR_SRLM_NS::DataTypeDouble</innerclass>
@@ -159,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="191" column="5" declfile="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" declline="191" declcolumn="5"/>
+        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="193" column="5" declfile="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" declline="193" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="LogicalNode_8h_1ab068929b001b003d7834a91505f675cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>

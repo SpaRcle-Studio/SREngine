@@ -17,7 +17,7 @@
 Inherits the following classes: [SR\_SRLM\_NS::LogicalNode](classSR__SRLM__NS_1_1LogicalNode.md)
 
 
-Inherited by the following classes: [SR\_GRAPH\_NS::BasePass](classSR__GRAPH__NS_1_1BasePass.md),  [SR\_GRAPH\_NS::StartPassNode](classSR__GRAPH__NS_1_1StartPassNode.md),  [SR\_SRLM\_NS::BranchNode](classSR__SRLM__NS_1_1BranchNode.md),  [SR\_SRLM\_NS::DebugPrintNode](classSR__SRLM__NS_1_1DebugPrintNode.md),  [SR\_SRLM\_NS::SequenceNode](classSR__SRLM__NS_1_1SequenceNode.md),  [SR\_SRLM\_NS::StartNode](classSR__SRLM__NS_1_1StartNode.md),  [SR\_SRLM\_NS::SynchronizeNode](classSR__SRLM__NS_1_1SynchronizeNode.md)
+Inherited by the following classes: [SR\_GRAPH\_NS::BasePass](classSR__GRAPH__NS_1_1BasePass.md),  [SR\_SRLM\_NS::BranchNode](classSR__SRLM__NS_1_1BranchNode.md),  [SR\_SRLM\_NS::DebugPrintNode](classSR__SRLM__NS_1_1DebugPrintNode.md),  [SR\_SRLM\_NS::SequenceNode](classSR__SRLM__NS_1_1SequenceNode.md),  [SR\_SRLM\_NS::StartNode](classSR__SRLM__NS_1_1StartNode.md),  [SR\_SRLM\_NS::SynchronizeNode](classSR__SRLM__NS_1_1SynchronizeNode.md)
 
 
 
@@ -112,11 +112,9 @@ See [SR\_SRLM\_NS::LogicalNode](classSR__SRLM__NS_1_1LogicalNode.md)
 | Type | Name |
 | ---: | :--- |
 |  void | [**AddInputConnection**](classSR__SRLM__NS_1_1LogicalNode.md#function-addinputconnection) ([**LogicalNode**](classSR__SRLM__NS_1_1LogicalNode.md) \* pNode, uint32\_t nodePinIndex, uint32\_t pinIndex) <br> |
-|  [**NodePin**](structSR__SRLM__NS_1_1LogicalNode_1_1NodePin.md) & | [**AddInputData**](classSR__SRLM__NS_1_1LogicalNode.md#function-addinputdata-12) ([**DataType**](classSR__SRLM__NS_1_1DataType.md) \* pData, uint64\_t hashName=SR\_UINT64\_MAX) <br> |
-|  [**NodePin**](structSR__SRLM__NS_1_1LogicalNode_1_1NodePin.md) & | [**AddInputData**](classSR__SRLM__NS_1_1LogicalNode.md#function-addinputdata-22) (uint64\_t hashName=SR\_UINT64\_MAX) <br> |
+|  [**NodePin**](structSR__SRLM__NS_1_1LogicalNode_1_1NodePin.md) & | [**AddInputData**](classSR__SRLM__NS_1_1LogicalNode.md#function-addinputdata) ([**DataType**](classSR__SRLM__NS_1_1DataType.md) \* pData, uint64\_t hashName=SR\_UINT64\_MAX) <br> |
 |  void | [**AddOutputConnection**](classSR__SRLM__NS_1_1LogicalNode.md#function-addoutputconnection) ([**LogicalNode**](classSR__SRLM__NS_1_1LogicalNode.md) \* pNode, uint32\_t nodePinIndex, uint32\_t pinIndex) <br> |
-|  [**NodePin**](structSR__SRLM__NS_1_1LogicalNode_1_1NodePin.md) & | [**AddOutputData**](classSR__SRLM__NS_1_1LogicalNode.md#function-addoutputdata-12) ([**DataType**](classSR__SRLM__NS_1_1DataType.md) \* pData, uint64\_t hashName=SR\_UINT64\_MAX) <br> |
-|  [**NodePin**](structSR__SRLM__NS_1_1LogicalNode_1_1NodePin.md) & | [**AddOutputData**](classSR__SRLM__NS_1_1LogicalNode.md#function-addoutputdata-22) (uint64\_t hashName=SR\_UINT64\_MAX) <br> |
+|  [**NodePin**](structSR__SRLM__NS_1_1LogicalNode_1_1NodePin.md) & | [**AddOutputData**](classSR__SRLM__NS_1_1LogicalNode.md#function-addoutputdata) ([**DataType**](classSR__SRLM__NS_1_1DataType.md) \* pData, uint64\_t hashName=SR\_UINT64\_MAX) <br> |
 |  SR\_NODISCARD const [**DataType**](classSR__SRLM__NS_1_1DataType.md) \* | [**CalcInput**](classSR__SRLM__NS_1_1LogicalNode.md#function-calcinput) (uint32\_t index) <br> |
 |  void | [**ClearLogicalNode**](classSR__SRLM__NS_1_1LogicalNode.md#function-clearlogicalnode) () <br> |
 | virtual void | [**Execute**](classSR__SRLM__NS_1_1LogicalNode.md#function-execute) (float\_t dt) <br> |

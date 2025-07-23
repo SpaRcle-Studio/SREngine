@@ -123,8 +123,8 @@ namespace SR_SRLM_NS {
         void AddInputConnection(LogicalNode* pNode, uint32_t nodePinIndex, uint32_t pinIndex);
         void AddOutputConnection(LogicalNode* pNode, uint32_t nodePinIndex, uint32_t pinIndex);
 
-        template<typename T> NodePin& AddInputData(uint64_t hashName = SR_UINT64_MAX) { return AddInputData(new T(), hashName); }
-        template<typename T> NodePin& AddOutputData(uint64_t hashName = SR_UINT64_MAX) { return AddOutputData(new T(), hashName); }
+       // template<typename T> NodePin& AddInputData(uint64_t hashName = SR_UINT64_MAX) { return AddInputData(new T(), hashName); }
+       // template<typename T> NodePin& AddOutputData(uint64_t hashName = SR_UINT64_MAX) { return AddOutputData(new T(), hashName); }
 
     protected:
         mutable LogicalNodeStatus m_status = LogicalNodeStatus::None;

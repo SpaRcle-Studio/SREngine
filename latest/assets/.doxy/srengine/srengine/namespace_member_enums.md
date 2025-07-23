@@ -11,6 +11,7 @@
 ## c
 
 * **CastingType** ([**EvoScript**](namespaceEvoScript.md))
+* **CursorLockMode** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **CSSBoxSizing** ([**SR\_UTILS\_NS::Web**](namespaceSR__UTILS__NS_1_1Web.md))
 * **CSSDisplay** ([**SR\_UTILS\_NS::Web**](namespaceSR__UTILS__NS_1_1Web.md))
 * **CSSGradientSide** ([**SR\_UTILS\_NS::Web**](namespaceSR__UTILS__NS_1_1Web.md))

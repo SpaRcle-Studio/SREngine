@@ -49,7 +49,6 @@
 | Type | Name |
 | ---: | :--- |
 | class | [**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) <br> |
-| class | [**StartPassNode**](classSR__GRAPH__NS_1_1StartPassNode.md) <br> |
 
 
 

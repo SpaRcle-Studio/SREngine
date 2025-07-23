@@ -113,6 +113,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  SR\_NODISCARD [**SR\_UTILS\_NS::Debug**](classSR__UTILS__NS_1_1Debug.md) & | [**GetDebugger**](#function-getdebugger) () const<br>_@method_  |
 |  SR\_NODISCARD [**SR\_CORE\_GUI\_NS::EditorGUI**](classSR__CORE__GUI__NS_1_1EditorGUI.md) \* | [**GetEditor**](#function-geteditor) () const<br> |
 |  SR\_NODISCARD [**EngineScene**](structSR__CORE__NS_1_1EngineScene.md) \* | [**GetEngineScene**](#function-getenginescene) () const<br> |
+|  SR\_NODISCARD WindowPtr | [**GetFocusedWindow**](#function-getfocusedwindow) () const<br> |
 |  SR\_NODISCARD WindowPtr | [**GetMainWindow**](#function-getmainwindow) () const<br> |
 |  SR\_NODISCARD PhysicsScenePtr | [**GetPhysicsScene**](#function-getphysicsscene) () const<br> |
 |  SR\_NODISCARD RenderContextPtr | [**GetRenderContext**](#function-getrendercontext) () const<br> |
@@ -465,6 +466,19 @@ inline SR_NODISCARD SR_CORE_GUI_NS::EditorGUI * SR_CORE_NS::Engine::GetEditor ()
 
 ```C++
 inline SR_NODISCARD EngineScene * SR_CORE_NS::Engine::GetEngineScene () const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetFocusedWindow 
+
+```C++
+SR_NODISCARD WindowPtr SR_CORE_NS::Engine::GetFocusedWindow () const
 ```
 
 

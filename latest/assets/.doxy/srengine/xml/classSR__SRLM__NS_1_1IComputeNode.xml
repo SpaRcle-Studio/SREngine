@@ -250,10 +250,8 @@
     <listofallmembers>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::IComputeNode</scope><name>AddInputConnection</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a451d30d4d677248caa80bb7ac74baad9" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::IComputeNode</scope><name>AddInputData</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a72915afde33f4d0c714e454cab1544c7" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::IComputeNode</scope><name>AddInputData</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac528a232f2481034bf0c9c866aadf580" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::IComputeNode</scope><name>AddOutputConnection</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a968e3caf521de3d586f0ffb6cd9c2e07" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::IComputeNode</scope><name>AddOutputData</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a70d337798b8e852a40f5f3a74fe35d79" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::IComputeNode</scope><name>AddOutputData</name></member>
       <member refid="classSR__SRLM__NS_1_1IComputeNode_1a5e22889178ee3335e3642482014a728f" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::IComputeNode</scope><name>Base</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a45ac417b161b1412c23159c307dd5fc7" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::IComputeNode</scope><name>CalcInput</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4b0351f30fc7afe7f45854cde8e09f64" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::IComputeNode</scope><name>ClearLogicalNode</name></member>

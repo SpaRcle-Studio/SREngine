@@ -514,7 +514,7 @@ virtual void SR_SRLM_NS::DataType::Reset () = 0
 ### function SaveXml 
 
 ```C++
-void SR_SRLM_NS::DataType::SaveXml (
+inline void SR_SRLM_NS::DataType::SaveXml (
     SR_XML_NS::Node & xmlNode
 ) 
 ```
@@ -562,7 +562,7 @@ inline virtual DataType * SR_SRLM_NS::DataType::SetRawValue (
 ### function LoadXml 
 
 ```C++
-static DataType * SR_SRLM_NS::DataType::LoadXml (
+static inline DataType * SR_SRLM_NS::DataType::LoadXml (
     const SR_XML_NS::Node & xmlNode
 ) 
 ```

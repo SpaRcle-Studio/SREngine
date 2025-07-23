@@ -120,6 +120,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  SR\_NODISCARD T \* | [**GetImplementation**](#function-getimplementation) () const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::IVector2 | [**GetPosition**](#function-getposition) () const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::UVector2 | [**GetSize**](#function-getsize) () const<br> |
+|  SR\_NODISCARD SR\_MATH\_NS::FRect | [**GetWindowRect**](#function-getwindowrect) () const<br> |
 |  bool | [**Initialize**](#function-initialize) (const std::string & name, const SR\_MATH\_NS::UVector2 & size) <br> |
 |  SR\_NODISCARD bool | [**IsFullScreen**](#function-isfullscreen) () const<br> |
 |  SR\_NODISCARD bool | [**IsMaximized**](#function-ismaximized) () const<br> |
@@ -504,6 +505,19 @@ SR_NODISCARD SR_MATH_NS::IVector2 SR_GRAPH_NS::Window::GetPosition () const
 
 ```C++
 SR_NODISCARD SR_MATH_NS::UVector2 SR_GRAPH_NS::Window::GetSize () const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetWindowRect 
+
+```C++
+SR_NODISCARD SR_MATH_NS::FRect SR_GRAPH_NS::Window::GetWindowRect () const
 ```
 
 

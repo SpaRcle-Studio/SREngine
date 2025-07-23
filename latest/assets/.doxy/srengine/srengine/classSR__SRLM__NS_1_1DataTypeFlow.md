@@ -144,10 +144,8 @@ See [SR\_SRLM\_NS::DataTypeEnum](classSR__SRLM__NS_1_1DataTypeEnum.md)
 
 | Type | Name |
 | ---: | :--- |
-| virtual SR\_NODISCARD [**DataType**](classSR__SRLM__NS_1_1DataType.md) \* | [**Copy**](classSR__SRLM__NS_1_1DataTypeEnum.md#function-copy) () override const<br> |
-|   | [**DataTypeEnum**](classSR__SRLM__NS_1_1DataTypeEnum.md#function-datatypeenum-13) () = default<br> |
-|   | [**DataTypeEnum**](classSR__SRLM__NS_1_1DataTypeEnum.md#function-datatypeenum-23) (int64\_t value, EnumReflector \* pReflector) <br> |
-|   | [**DataTypeEnum**](classSR__SRLM__NS_1_1DataTypeEnum.md#function-datatypeenum-33) (EnumReflector \* pReflector) <br> |
+|   | [**DataTypeEnum**](classSR__SRLM__NS_1_1DataTypeEnum.md#function-datatypeenum-12) () = default<br> |
+|   | [**DataTypeEnum**](classSR__SRLM__NS_1_1DataTypeEnum.md#function-datatypeenum-22) (EnumReflector \* pReflector) <br> |
 | virtual SR\_NODISCARD Hash | [**GetHashName**](classSR__SRLM__NS_1_1DataTypeEnum.md#function-gethashname) () noexcept override const<br> |
 | virtual SR\_NODISCARD std::string | [**GetName**](classSR__SRLM__NS_1_1DataTypeEnum.md#function-getname) () noexcept override const<br> |
 |  SR\_NODISCARD EnumReflector \* | [**GetReflector**](classSR__SRLM__NS_1_1DataTypeEnum.md#function-getreflector) () const<br> |

@@ -152,7 +152,6 @@
 | class | [**SortedTransparentMeshQueue**](classSR__GRAPH__NS_1_1SortedTransparentMeshQueue.md) <br> |
 | struct | [**SourceShader**](structSR__GRAPH__NS_1_1SourceShader.md) <br> |
 | class | [**SpotLight**](classSR__GRAPH__NS_1_1SpotLight.md) <br> |
-| class | [**StartPassNode**](classSR__GRAPH__NS_1_1StartPassNode.md) <br> |
 | class | [**SwapchainPass**](classSR__GRAPH__NS_1_1SwapchainPass.md) <br> |
 | class | [**TextBuilder**](classSR__GRAPH__NS_1_1TextBuilder.md) <br> |
 | class | [**TextureData**](classSR__GRAPH__NS_1_1TextureData.md) <br> |

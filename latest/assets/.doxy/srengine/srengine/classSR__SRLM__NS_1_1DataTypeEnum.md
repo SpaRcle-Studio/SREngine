@@ -122,10 +122,8 @@ See [SR\_SRLM\_NS::DataType](classSR__SRLM__NS_1_1DataType.md)
 
 | Type | Name |
 | ---: | :--- |
-| virtual SR\_NODISCARD [**DataType**](classSR__SRLM__NS_1_1DataType.md) \* | [**Copy**](#function-copy) () override const<br> |
-|   | [**DataTypeEnum**](#function-datatypeenum-13) () = default<br> |
-|   | [**DataTypeEnum**](#function-datatypeenum-23) (int64\_t value, EnumReflector \* pReflector) <br> |
-|   | [**DataTypeEnum**](#function-datatypeenum-33) (EnumReflector \* pReflector) <br> |
+|   | [**DataTypeEnum**](#function-datatypeenum-12) () = default<br> |
+|   | [**DataTypeEnum**](#function-datatypeenum-22) (EnumReflector \* pReflector) <br> |
 | virtual SR\_NODISCARD Hash | [**GetHashName**](#function-gethashname) () noexcept override const<br> |
 | virtual SR\_NODISCARD std::string | [**GetName**](#function-getname) () noexcept override const<br> |
 |  SR\_NODISCARD EnumReflector \* | [**GetReflector**](#function-getreflector) () const<br> |
@@ -309,22 +307,7 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 
 
-### function Copy 
-
-```C++
-inline virtual SR_NODISCARD DataType * SR_SRLM_NS::DataTypeEnum::Copy () override const
-```
-
-
-
-Implements [*SR\_SRLM\_NS::DataType::Copy*](classSR__SRLM__NS_1_1DataType.md#function-copy)
-
-
-<hr>
-
-
-
-### function DataTypeEnum [1/3]
+### function DataTypeEnum [1/2]
 
 ```C++
 SR_SRLM_NS::DataTypeEnum::DataTypeEnum () = default
@@ -337,23 +320,7 @@ SR_SRLM_NS::DataTypeEnum::DataTypeEnum () = default
 
 
 
-### function DataTypeEnum [2/3]
-
-```C++
-inline explicit SR_SRLM_NS::DataTypeEnum::DataTypeEnum (
-    int64_t value,
-    EnumReflector * pReflector
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function DataTypeEnum [3/3]
+### function DataTypeEnum [2/2]
 
 ```C++
 inline explicit SR_SRLM_NS::DataTypeEnum::DataTypeEnum (

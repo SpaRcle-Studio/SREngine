@@ -72,10 +72,10 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 
 | Type | Name |
 | ---: | :--- |
-|   | [**CursorLock**](#function-cursorlock-12) () <br> |
-|   | [**CursorLock**](#function-cursorlock-22) ([**CursorLock**](classSR__UTILS__NS_1_1CursorLock.md) && ref) noexcept<br> |
+|   | [**CursorLock**](#function-cursorlock-12) (CursorLockMode lockMode, std::optional&lt; SR\_MATH\_NS::FRect &gt; lockRect=std::nullopt) <br> |
+|   | [**CursorLock**](#function-cursorlock-22) ([**CursorLock**](classSR__UTILS__NS_1_1CursorLock.md) && other) noexcept<br> |
 |  [**CursorLock**](classSR__UTILS__NS_1_1CursorLock.md) & | [**operator=**](#function-operator) ([**CursorLock**](classSR__UTILS__NS_1_1CursorLock.md) && other) noexcept<br> |
-|   | [**~CursorLock**](#function-cursorlock) () <br> |
+|   | [**~CursorLock**](#function-cursorlock) () override<br> |
 
 
 ## Public Functions inherited from SR_UTILS_NS::NonCopyable
@@ -156,7 +156,10 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 ### function CursorLock [1/2]
 
 ```C++
-SR_UTILS_NS::CursorLock::CursorLock () 
+explicit SR_UTILS_NS::CursorLock::CursorLock (
+    CursorLockMode lockMode,
+    std::optional< SR_MATH_NS::FRect > lockRect=std::nullopt
+) 
 ```
 
 
@@ -170,7 +173,7 @@ SR_UTILS_NS::CursorLock::CursorLock ()
 
 ```C++
 SR_UTILS_NS::CursorLock::CursorLock (
-    CursorLock && ref
+    CursorLock && other
 ) noexcept
 ```
 
@@ -199,7 +202,7 @@ CursorLock & SR_UTILS_NS::CursorLock::operator= (
 ### function ~CursorLock 
 
 ```C++
-SR_UTILS_NS::CursorLock::~CursorLock () 
+SR_UTILS_NS::CursorLock::~CursorLock () override
 ```
 
 

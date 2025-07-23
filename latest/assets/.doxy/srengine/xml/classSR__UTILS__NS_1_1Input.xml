@@ -43,52 +43,23 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="17" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="17" bodyend="19"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1Input_1af1685e66ae07a70c6277ec618bb3acab" prot="private" static="no">
-        <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void()&gt;</type>
-        <definition>using SR_UTILS_NS::Input::CursorLockCallback =  SR_HTYPES_NS::Function&lt;void()&gt;</definition>
-        <argsstring></argsstring>
-        <name>CursorLockCallback</name>
-        <qualifiedname>SR_UTILS_NS::Input::CursorLockCallback</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="20" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="20" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="28" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="28" bodyend="30"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1ad9f11baca354abe30c3b6febcca76a61" prot="private" static="no" mutable="no">
-        <type>uint32_t</type>
-        <definition>uint32_t SR_UTILS_NS::Input::m_counterLock</definition>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a5421c023e8334113e7f53e777d44f844" prot="private" static="no" mutable="no">
+        <type>std::array&lt; std::vector&lt; <ref refid="structSR__UTILS__NS_1_1CursorLockInfo" kindref="compound">CursorLockInfo</ref> &gt;, 3 &gt;</type>
+        <definition>std::array&lt;std::vector&lt;CursorLockInfo&gt;, 3&gt; SR_UTILS_NS::Input::m_cursorLocks</definition>
         <argsstring></argsstring>
-        <name>m_counterLock</name>
-        <qualifiedname>SR_UTILS_NS::Input::m_counterLock</qualifiedname>
-        <initializer>= 0</initializer>
+        <name>m_cursorLocks</name>
+        <qualifiedname>SR_UTILS_NS::Input::m_cursorLocks</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="59" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="59" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1aec5b7059362e8b3db6571b264fb4e3fd" prot="private" static="no" mutable="no">
-        <type>CursorLockCallback</type>
-        <definition>CursorLockCallback SR_UTILS_NS::Input::m_lockCursorCallback</definition>
-        <argsstring></argsstring>
-        <name>m_lockCursorCallback</name>
-        <qualifiedname>SR_UTILS_NS::Input::m_lockCursorCallback</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="60" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="60" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="71" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="71" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a0554e61402372b514896e600f9669a63" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector2</type>
@@ -102,21 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="62" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="62" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a7726db6cc327a33297bc550d72a49653" prot="private" static="no" mutable="no">
-        <type>SR_MATH_NS::FVector2</type>
-        <definition>SR_MATH_NS::FVector2 SR_UTILS_NS::Input::m_mousePrev</definition>
-        <argsstring></argsstring>
-        <name>m_mousePrev</name>
-        <qualifiedname>SR_UTILS_NS::Input::m_mousePrev</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="63" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="63" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="73" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="73" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a268b3bf151074f0081ab9d4361ed5ff8" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector2</type>
@@ -130,7 +87,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="64" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="64" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="74" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a7726db6cc327a33297bc550d72a49653" prot="private" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector2</type>
+        <definition>SR_MATH_NS::FVector2 SR_UTILS_NS::Input::m_mousePrev</definition>
+        <argsstring></argsstring>
+        <name>m_mousePrev</name>
+        <qualifiedname>SR_UTILS_NS::Input::m_mousePrev</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="75" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="75" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a21cac5ac144fd41b3fe96f9f0b55cf3e" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector2</type>
@@ -144,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="65" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="65" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="76" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="76" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a7bbb9eeafc7e72d0679fb6673699ae2d" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector2</type>
@@ -158,7 +129,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="66" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="66" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="77" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1aa912162627a05e4b8e32f8d719cbaeee" prot="private" static="no" mutable="no">
+        <type>std::optional&lt; SR_MATH_NS::FRect &gt;</type>
+        <definition>std::optional&lt;SR_MATH_NS::FRect&gt; SR_UTILS_NS::Input::m_focusedWindowRect</definition>
+        <argsstring></argsstring>
+        <name>m_focusedWindowRect</name>
+        <qualifiedname>SR_UTILS_NS::Input::m_focusedWindowRect</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="79" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="79" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a9a63247d52b0b09ab8caa5cf295a1a38" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -173,7 +158,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="68" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="68" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="81" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a67b9109e5345a568e61fdfe4ea1ceb84" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_UTILS_NS::Input::m_isLocked</definition>
+        <argsstring></argsstring>
+        <name>m_isLocked</name>
+        <qualifiedname>SR_UTILS_NS::Input::m_isLocked</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="82" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="82" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a43749af9a310ce498fef965d937301ba" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -188,7 +188,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="69" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="69" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="83" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a9b5ff561695c9786acfd4cf927eafe7b" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_UTILS_NS::Input::m_isPlayMode</definition>
+        <argsstring></argsstring>
+        <name>m_isPlayMode</name>
+        <qualifiedname>SR_UTILS_NS::Input::m_isPlayMode</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="84" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a4b998cf3045d13646c7460999e574fc4" prot="private" static="no" mutable="no">
         <type>State</type>
@@ -203,14 +218,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="71" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="71" bodyend="71"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="86" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="86" bodyend="86"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a3977fe32159fe75e3a332aa8f7683836" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a62924dd1ddb069755134db14f250a6ed" prot="private" static="no" mutable="no">
         <type>uint8_t *</type>
-        <definition>uint8_t* SR_UTILS_NS::Input::m_arr</definition>
+        <definition>uint8_t* SR_UTILS_NS::Input::m_keysArray</definition>
         <argsstring></argsstring>
-        <name>m_arr</name>
-        <qualifiedname>SR_UTILS_NS::Input::m_arr</qualifiedname>
+        <name>m_keysArray</name>
+        <qualifiedname>SR_UTILS_NS::Input::m_keysArray</qualifiedname>
         <initializer>= nullptr</initializer>
         <briefdescription>
         </briefdescription>
@@ -218,7 +233,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="72" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="72" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="87" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="87" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -234,7 +249,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="23" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="32" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -258,21 +273,39 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="26" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="35" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1ab1879fe2750f438d6cf1b9902314191f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1aa9741dd8fa34e4376b35aad4f5e9aa15" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
-        <definition>void SR_UTILS_NS::Input::Check</definition>
-        <argsstring>()</argsstring>
-        <name>Check</name>
-        <qualifiedname>SR_UTILS_NS::Input::Check</qualifiedname>
+        <definition>void SR_UTILS_NS::Input::SetFocusedWindowRect</definition>
+        <argsstring>(const std::optional&lt; SR_MATH_NS::FRect &gt; &amp;rect)</argsstring>
+        <name>SetFocusedWindowRect</name>
+        <qualifiedname>SR_UTILS_NS::Input::SetFocusedWindowRect</qualifiedname>
+        <param>
+          <type>const std::optional&lt; SR_MATH_NS::FRect &gt; &amp;</type>
+          <declname>rect</declname>
+        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="28" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="36" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a402256759f9352e33475a6d493efcd36" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Input::Update</definition>
+        <argsstring>()</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_UTILS_NS::Input::Update</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="38" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1aa89a32584ab7db00a635025cd773310a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -286,7 +319,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="29" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="39" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a2c21f73cfb791e2095dacbd1bcaf70e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -300,7 +333,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="30" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="40" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a397012e0b56087d512a0b04b226ff766" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector2</type>
@@ -314,7 +347,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="32" column="43"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="42" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a7f6a2cf42f8cf347d0049dbf7e571323" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector2</type>
@@ -328,40 +361,40 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="33" column="43"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="43" column="43"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1add45ebf3175cc1715a25334cf445388a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD SR_MATH_NS::FVector2</type>
-        <definition>SR_NODISCARD SR_MATH_NS::FVector2 SR_UTILS_NS::Input::GetPrevMousePos</definition>
-        <argsstring>() const</argsstring>
-        <name>GetPrevMousePos</name>
-        <qualifiedname>SR_UTILS_NS::Input::GetPrevMousePos</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="34" column="43"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a11f65a21c1ac6eaa2daf7d66be88de1b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1aedc0d417b0475c629acda98ea04c0d87" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
-        <definition>SR_NODISCARD bool SR_UTILS_NS::Input::IsMouseMoved</definition>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Input::IsPlayMode</definition>
         <argsstring>() const</argsstring>
-        <name>IsMouseMoved</name>
-        <qualifiedname>SR_UTILS_NS::Input::IsMouseMoved</qualifiedname>
+        <name>IsPlayMode</name>
+        <qualifiedname>SR_UTILS_NS::Input::IsPlayMode</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="35" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="44" column="27"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1ae736334f348f8253988f566c4471e1e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>int32_t</type>
-        <definition>int32_t SR_UTILS_NS::Input::GetMouseWheel</definition>
-        <argsstring>()</argsstring>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a4ffe74de934071aad29727097aa6cd38" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Input::IsAppFocused</definition>
+        <argsstring>() const</argsstring>
+        <name>IsAppFocused</name>
+        <qualifiedname>SR_UTILS_NS::Input::IsAppFocused</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="45" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a92f1d26244f85e28884da90b2219b493" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD int32_t</type>
+        <definition>SR_NODISCARD int32_t SR_UTILS_NS::Input::GetMouseWheel</definition>
+        <argsstring>() const</argsstring>
         <name>GetMouseWheel</name>
         <qualifiedname>SR_UTILS_NS::Input::GetMouseWheel</qualifiedname>
         <briefdescription>
@@ -370,7 +403,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="37" column="17"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="46" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1ad9969bccbd1dbcbb36dd5bc70187cec0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -388,7 +421,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="39" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="48" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a8258dd2f44de087443c3119fc922e684" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -406,7 +439,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="40" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="49" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1af6479e3f691f3cfebe1622c936d16be5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -424,7 +457,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="41" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="50" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a89c3ee69b057cf802aa77847064c6b49" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -442,7 +475,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="43" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="52" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a28b67ece023a843ba05d44a647c4c201" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -460,7 +493,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="44" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="53" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1afc404aa825ef6ad7c4b2a0a0327dd587" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -478,9 +511,65 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="45" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="54" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a8e8d82e4cbb1b14c9c8c375212719d50" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a37cc319cdd46d10945ee2ba97e277447" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Input::LockCursor</definition>
+        <argsstring>(CursorLockInfo &amp;info)</argsstring>
+        <name>LockCursor</name>
+        <qualifiedname>SR_UTILS_NS::Input::LockCursor</qualifiedname>
+        <param>
+          <type><ref refid="structSR__UTILS__NS_1_1CursorLockInfo" kindref="compound">CursorLockInfo</ref> &amp;</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="56" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a7b7993fad5a86e3cc21601010be3869d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Input::UnlockCursor</definition>
+        <argsstring>(const CursorLockInfo &amp;info)</argsstring>
+        <name>UnlockCursor</name>
+        <qualifiedname>SR_UTILS_NS::Input::UnlockCursor</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1CursorLockInfo" kindref="compound">CursorLockInfo</ref> &amp;</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="57" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a1b93dff439078c026552d16308c20ad2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Input::SetPlayMode</definition>
+        <argsstring>(bool isPlayMode)</argsstring>
+        <name>SetPlayMode</name>
+        <qualifiedname>SR_UTILS_NS::Input::SetPlayMode</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>isPlayMode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="59" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a8e8d82e4cbb1b14c9c8c375212719d50" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void SR_UTILS_NS::Input::SetCursorVisible</definition>
         <argsstring>(bool isVisible)</argsstring>
@@ -496,70 +585,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="47" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="62" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a581c59eb754f49c0ce8d7c554d4b59f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_UTILS_NS::Input::SetCursorLockCallback</definition>
-        <argsstring>(CursorLockCallback &amp;&amp;callback)</argsstring>
-        <name>SetCursorLockCallback</name>
-        <qualifiedname>SR_UTILS_NS::Input::SetCursorLockCallback</qualifiedname>
-        <param>
-          <type>CursorLockCallback &amp;&amp;</type>
-          <declname>callback</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="48" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1ae8f9fd59e96fd70003bae45fd3928bae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_UTILS_NS::Input::LockCursor</definition>
-        <argsstring>()</argsstring>
-        <name>LockCursor</name>
-        <qualifiedname>SR_UTILS_NS::Input::LockCursor</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="50" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a10d2ecb685865a2931568011cea31ae2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_UTILS_NS::Input::UnlockCursor</definition>
-        <argsstring>()</argsstring>
-        <name>UnlockCursor</name>
-        <qualifiedname>SR_UTILS_NS::Input::UnlockCursor</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="51" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a9a3ed5820587782934f00b78db900ff4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_UTILS_NS::Input::ForceUnlockCursor</definition>
-        <argsstring>()</argsstring>
-        <name>ForceUnlockCursor</name>
-        <qualifiedname>SR_UTILS_NS::Input::ForceUnlockCursor</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="52" column="14"/>
-      </memberdef>
-    </sectiondef>
-    <sectiondef kind="private-func">
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a53af6477f866ebcb0e806265afae1f09" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void SR_UTILS_NS::Input::Reset</definition>
@@ -572,7 +599,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="55" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="63" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a2f35d49d0f6e50b8a80a13dd8e38fd18" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -594,7 +621,49 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="56" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="64" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a6fcc7cdab12f9bf7485c3e7ad822f637" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Input::UpdateMouse</definition>
+        <argsstring>()</argsstring>
+        <name>UpdateMouse</name>
+        <qualifiedname>SR_UTILS_NS::Input::UpdateMouse</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="65" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a3640fb96d3796a77b2f1826af11bfab9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Input::UpdateKeyboard</definition>
+        <argsstring>()</argsstring>
+        <name>UpdateKeyboard</name>
+        <qualifiedname>SR_UTILS_NS::Input::UpdateKeyboard</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="66" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a5543f2212d39d4f373ca7b5e394a4e16" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="structSR__UTILS__NS_1_1CursorLockInfo" kindref="compound">CursorLockInfo</ref> *</type>
+        <definition>SR_NODISCARD const CursorLockInfo * SR_UTILS_NS::Input::GetActiveLock</definition>
+        <argsstring>() const</argsstring>
+        <name>GetActiveLock</name>
+        <qualifiedname>SR_UTILS_NS::Input::GetActiveLock</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="68" column="43"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -661,14 +730,12 @@
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="14" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="14" bodyend="73"/>
+    <location file="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" line="26" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="26" bodyend="89"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a459ed22e0064b69639129562ea9aad38" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>Broadcast</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a543a91c5e997ad287249110180f9cea2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>Broadcast</name></member>
-      <member refid="classSR__UTILS__NS_1_1Input_1ab1879fe2750f438d6cf1b9902314191f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>Check</name></member>
-      <member refid="classSR__UTILS__NS_1_1Input_1af1685e66ae07a70c6277ec618bb3acab" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>CursorLockCallback</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>DestroySingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1Input_1a9a3ed5820587782934f00b78db900ff4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>ForceUnlockCursor</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a5543f2212d39d4f373ca7b5e394a4e16" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetActiveLock</name></member>
       <member refid="classSR__UTILS__NS_1_1Input_1afc404aa825ef6ad7c4b2a0a0327dd587" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetKey</name></member>
       <member refid="classSR__UTILS__NS_1_1Input_1a89c3ee69b057cf802aa77847064c6b49" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetKeyDown</name></member>
       <member refid="classSR__UTILS__NS_1_1Input_1a28b67ece023a843ba05d44a647c4c201" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetKeyUp</name></member>
@@ -677,24 +744,26 @@
       <member refid="classSR__UTILS__NS_1_1Input_1a397012e0b56087d512a0b04b226ff766" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetMouseDrag</name></member>
       <member refid="classSR__UTILS__NS_1_1Input_1a7f6a2cf42f8cf347d0049dbf7e571323" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetMousePos</name></member>
       <member refid="classSR__UTILS__NS_1_1Input_1a8258dd2f44de087443c3119fc922e684" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetMouseUp</name></member>
-      <member refid="classSR__UTILS__NS_1_1Input_1ae736334f348f8253988f566c4471e1e3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetMouseWheel</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a92f1d26244f85e28884da90b2219b493" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetMouseWheel</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a6f131e2fa1b2641f7e9ea8662ba8da53" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetMutex</name></member>
-      <member refid="classSR__UTILS__NS_1_1Input_1add45ebf3175cc1715a25334cf445388a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetPrevMousePos</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetSingletonName</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a2a266b012e03eec86b0050d2ff3c9f30" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>HasSubscriptions</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332" prot="protected" virt="virtual"><scope>SR_UTILS_NS::Input</scope><name>InitSingleton</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1ad6f59c12e431ce503ac7316ceaa4a5f2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>Instance</name></member>
-      <member refid="classSR__UTILS__NS_1_1Input_1a11f65a21c1ac6eaa2daf7d66be88de1b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>IsMouseMoved</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a4ffe74de934071aad29727097aa6cd38" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>IsAppFocused</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1aedc0d417b0475c629acda98ea04c0d87" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>IsPlayMode</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::Input</scope><name>IsSingletonCanBeDestroyed</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a31931d2cbc17f064e27db243b971e202" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>IsSingletonInitialized</name></member>
-      <member refid="classSR__UTILS__NS_1_1Input_1ae8f9fd59e96fd70003bae45fd3928bae" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>LockCursor</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a37cc319cdd46d10945ee2ba97e277447" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>LockCursor</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1adab1931732d186e76c89e282c748f253" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>LockSingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1Input_1a3977fe32159fe75e3a332aa8f7683836" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_arr</name></member>
-      <member refid="classSR__UTILS__NS_1_1Input_1ad9f11baca354abe30c3b6febcca76a61" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_counterLock</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a5421c023e8334113e7f53e777d44f844" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_cursorLocks</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1aa912162627a05e4b8e32f8d719cbaeee" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_focusedWindowRect</name></member>
       <member refid="classSR__UTILS__NS_1_1Input_1a9a63247d52b0b09ab8caa5cf295a1a38" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_init</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a67b9109e5345a568e61fdfe4ea1ceb84" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_isLocked</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a9b5ff561695c9786acfd4cf927eafe7b" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_isPlayMode</name></member>
       <member refid="classSR__UTILS__NS_1_1Input_1a43749af9a310ce498fef965d937301ba" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_isVisible</name></member>
       <member refid="classSR__UTILS__NS_1_1Input_1a4b998cf3045d13646c7460999e574fc4" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_keys</name></member>
-      <member refid="classSR__UTILS__NS_1_1Input_1aec5b7059362e8b3db6571b264fb4e3fd" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_lockCursorCallback</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a62924dd1ddb069755134db14f250a6ed" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_keysArray</name></member>
       <member refid="classSR__UTILS__NS_1_1Input_1a268b3bf151074f0081ab9d4361ed5ff8" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_mouse</name></member>
       <member refid="classSR__UTILS__NS_1_1Input_1a0554e61402372b514896e600f9669a63" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_mouseDrag</name></member>
       <member refid="classSR__UTILS__NS_1_1Input_1a7726db6cc327a33297bc550d72a49653" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_mousePrev</name></member>
@@ -711,9 +780,10 @@
       <member refid="classSR__UTILS__NS_1_1Input_1a53af6477f866ebcb0e806265afae1f09" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>Reset</name></member>
       <member refid="classSR__UTILS__NS_1_1Input_1a2c21f73cfb791e2095dacbd1bcaf70e5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>ResetMouse</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a2e34219de0ab53d51b60dd970d07c6ff" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>ScopeLockSingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1Input_1a581c59eb754f49c0ce8d7c554d4b59f1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>SetCursorLockCallback</name></member>
-      <member refid="classSR__UTILS__NS_1_1Input_1a8e8d82e4cbb1b14c9c8c375212719d50" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>SetCursorVisible</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a8e8d82e4cbb1b14c9c8c375212719d50" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>SetCursorVisible</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1aa9741dd8fa34e4376b35aad4f5e9aa15" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>SetFocusedWindowRect</name></member>
       <member refid="classSR__UTILS__NS_1_1Input_1a2a0eb7912e9ab75a50242a9560dcb110" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>SetMouseScroll</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a1b93dff439078c026552d16308c20ad2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>SetPlayMode</name></member>
       <member refid="classSR__UTILS__NS_1_1Input_1a2f35d49d0f6e50b8a80a13dd8e38fd18" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>SetState</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a0e21dfc9afab45b0a6a70f6665ce5819" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>Singleton</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8ae4876316f0fa28dc67547db6f64ec6" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>SingletonBase</name></member>
@@ -722,9 +792,12 @@
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a974c352e7a7fa0786b9b5caa886d96c0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>SubscriptionHolder</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a1308e9577474f509d5d70ec6e025f22a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>SubscriptionHolder</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1add12e4faa76ffece1b1df5ca31da4218" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>SubscriptionHolder</name></member>
-      <member refid="classSR__UTILS__NS_1_1Input_1a10d2ecb685865a2931568011cea31ae2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>UnlockCursor</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a7b7993fad5a86e3cc21601010be3869d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>UnlockCursor</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a0338ed248f78e467760d3095f4a4a71a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>UnlockSingleton</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a9020c161e4bc8453d005eb5fab808490" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>Unsubscribe</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a402256759f9352e33475a6d493efcd36" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>Update</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a3640fb96d3796a77b2f1826af11bfab9" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>UpdateKeyboard</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a6fcc7cdab12f9bf7485c3e7ad822f637" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>UpdateMouse</name></member>
       <member refid="classSR__UTILS__NS_1_1Input_1a9427192377d92b5b27866c5e3ea4694a" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>~Input</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_UTILS_NS::Input</scope><name>~NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>~Singleton</name></member>

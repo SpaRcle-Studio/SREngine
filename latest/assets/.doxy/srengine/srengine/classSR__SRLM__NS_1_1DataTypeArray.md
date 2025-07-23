@@ -101,9 +101,7 @@ See [SR\_SRLM\_NS::DataType](classSR__SRLM__NS_1_1DataType.md)
 
 | Type | Name |
 | ---: | :--- |
-| virtual SR\_NODISCARD [**DataType**](classSR__SRLM__NS_1_1DataType.md) \* | [**Copy**](#function-copy) () override const<br> |
 | virtual void | [**CopyTo**](#function-copyto) ([**DataType**](classSR__SRLM__NS_1_1DataType.md) \* pData) override const<br> |
-|   | [**DataTypeArray**](#function-datatypearray) () <br> |
 | virtual SR\_NODISCARD Meta | [**GetMeta**](#function-getmeta) () noexcept override const<br> |
 | virtual void | [**Reset**](#function-reset) () override<br> |
 |  void | [**SetType**](#function-settype) ([**DataType**](classSR__SRLM__NS_1_1DataType.md) \* pData) <br> |
@@ -259,21 +257,6 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 
 
-### function Copy 
-
-```C++
-virtual SR_NODISCARD DataType * SR_SRLM_NS::DataTypeArray::Copy () override const
-```
-
-
-
-Implements [*SR\_SRLM\_NS::DataType::Copy*](classSR__SRLM__NS_1_1DataType.md#function-copy)
-
-
-<hr>
-
-
-
 ### function CopyTo 
 
 ```C++
@@ -285,19 +268,6 @@ virtual void SR_SRLM_NS::DataTypeArray::CopyTo (
 
 
 Implements [*SR\_SRLM\_NS::DataType::CopyTo*](classSR__SRLM__NS_1_1DataType.md#function-copyto)
-
-
-<hr>
-
-
-
-### function DataTypeArray 
-
-```C++
-SR_SRLM_NS::DataTypeArray::DataTypeArray () 
-```
-
-
 
 
 <hr>

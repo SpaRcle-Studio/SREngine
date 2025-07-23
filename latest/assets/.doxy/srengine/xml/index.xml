@@ -1879,7 +1879,7 @@
   <compound refid="classSR__SCRIPTING__NS_1_1CppBehaviourInstance" kind="class"><name>SR_SCRIPTING_NS::CppBehaviourInstance</name>
     <member refid="classSR__SCRIPTING__NS_1_1CppBehaviourInstance_1a0bd5189b938a64edbb8be8c06d7a1d95" kind="typedef"><name>LoadedCallback</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1CppBehaviourInstance_1a4b93bf700429dbff75ac86f381ff4913" kind="typedef"><name>PreReloadCalback</name></member>
-    <member refid="classSR__SCRIPTING__NS_1_1CppBehaviourInstance_1a51a74640ff6848e194476a0a8d626dc2" kind="typedef"><name>ManagerPasskey</name></member>
+    <member refid="classSR__SCRIPTING__NS_1_1CppBehaviourInstance_1a469050e82ab073fd08ed1854bd819ca1" kind="typedef"><name>ManagerPasskey</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1CppBehaviourInstance_1a42dbce0efdac6bdf14ba361ccdaf3656" kind="variable"><name>m_pBehaviour</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1CppBehaviourInstance_1ad1e25008bc2ef187ec778faa622201fb" kind="variable"><name>m_moduleName</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1CppBehaviourInstance_1aea578c17b21f5ae814fadbea02aff6e0" kind="variable"><name>m_behaviourName</name></member>
@@ -2205,11 +2205,18 @@
     <member refid="classSR__CORE__NS_1_1Tests_1_1CSSTest_1afa8f30b7e3fbc22beb1e71e83c3e7424" kind="function"><name>Run</name></member>
   </compound>
   <compound refid="classSR__UTILS__NS_1_1CursorLock" kind="class"><name>SR_UTILS_NS::CursorLock</name>
+    <member refid="classSR__UTILS__NS_1_1CursorLock_1abc5658d4bfb99a2fb681e4b1b6f1ed4b" kind="typedef"><name>Super</name></member>
+    <member refid="classSR__UTILS__NS_1_1CursorLock_1adf9f55fb3787052c43f93aa7ec8b8026" kind="variable"><name>m_info</name></member>
     <member refid="classSR__UTILS__NS_1_1CursorLock_1a02ec1db24a71d5457f2ce36e82887d1d" kind="variable"><name>m_isLock</name></member>
-    <member refid="classSR__UTILS__NS_1_1CursorLock_1ae1dab9068ca0905a561b3550257429cf" kind="function"><name>CursorLock</name></member>
-    <member refid="classSR__UTILS__NS_1_1CursorLock_1a69ca57ee64938fb85d2c95656001bdc8" kind="function"><name>~CursorLock</name></member>
-    <member refid="classSR__UTILS__NS_1_1CursorLock_1ab9dd9dd138841b1f88b3573197e9676c" kind="function"><name>CursorLock</name></member>
+    <member refid="classSR__UTILS__NS_1_1CursorLock_1a1ae96b8ec9552a97569d5a051d89da38" kind="function"><name>CursorLock</name></member>
+    <member refid="classSR__UTILS__NS_1_1CursorLock_1a88cd23cfc56ef0599234ba3bbc41b06e" kind="function"><name>~CursorLock</name></member>
+    <member refid="classSR__UTILS__NS_1_1CursorLock_1a2c7c983b41dc0701dc704aea60976c78" kind="function"><name>CursorLock</name></member>
     <member refid="classSR__UTILS__NS_1_1CursorLock_1a6c59cdd62512fa4258a32446944cc0ce" kind="function"><name>operator=</name></member>
+  </compound>
+  <compound refid="structSR__UTILS__NS_1_1CursorLockInfo" kind="struct"><name>SR_UTILS_NS::CursorLockInfo</name>
+    <member refid="structSR__UTILS__NS_1_1CursorLockInfo_1ac0dd055a997ecc4e7fd6c04bfd0e0f99" kind="variable"><name>lockRect</name></member>
+    <member refid="structSR__UTILS__NS_1_1CursorLockInfo_1a84fe2dda224bb58ff1837bb3edb6277b" kind="variable"><name>lockMode</name></member>
+    <member refid="structSR__UTILS__NS_1_1CursorLockInfo_1aefddefeb1d75c14acdde3fc177d355f6" kind="variable"><name>id</name></member>
   </compound>
   <compound refid="unionSR__ANIMATIONS__NS_1_1UnionAnimationKey_1_1Data" kind="union"><name>SR_ANIMATIONS_NS::UnionAnimationKey::Data</name>
     <member refid="unionSR__ANIMATIONS__NS_1_1UnionAnimationKey_1_1Data_1aa80b2cc84bb709cd4b2390e974d5e59b" kind="variable"><name>translation</name></member>
@@ -2343,26 +2350,13 @@
     <member refid="classSR__SRLM__NS_1_1DataType_1a1e5afd866562d18c2a5a9dfb2f04c47e" kind="function"><name>SetCustomValue</name></member>
     <member refid="classSR__SRLM__NS_1_1DataType_1a52ab4813b55f3b17d4af99868822370d" kind="function"><name>LoadXml</name></member>
   </compound>
-  <compound refid="classSR__SRLM__NS_1_1DataTypeAllocator" kind="class"><name>SR_SRLM_NS::DataTypeAllocator</name>
-    <member refid="classSR__SRLM__NS_1_1DataTypeAllocator_1aebd8bf9e4ef3bcca8d36d90066473e3b" kind="typedef"><name>Hash</name></member>
-    <member refid="classSR__SRLM__NS_1_1DataTypeAllocator_1a556cf1a4cf27393da046fc7125c524a7" kind="typedef"><name>Allocator</name></member>
-    <member refid="classSR__SRLM__NS_1_1DataTypeAllocator_1a526a3e6315c4e525434fdd4c1c0605c8" kind="variable"><name>EnumMax</name></member>
-    <member refid="classSR__SRLM__NS_1_1DataTypeAllocator_1ab2fd13953ddb89d73ae4cb817a7b5218" kind="variable"><name>m_hashes</name></member>
-    <member refid="classSR__SRLM__NS_1_1DataTypeAllocator_1a1ffef66494c18de10523e8a59689d11b" kind="variable"><name>m_allocators</name></member>
-    <member refid="classSR__SRLM__NS_1_1DataTypeAllocator_1a6e971fcabd52daa8276dda83194f86c7" kind="function"><name>IsSingletonCanBeDestroyed</name></member>
-    <member refid="classSR__SRLM__NS_1_1DataTypeAllocator_1aa42a91164aa97055b1231cd1051e8313" kind="function"><name>Register</name></member>
-    <member refid="classSR__SRLM__NS_1_1DataTypeAllocator_1a00fb8b62e517abd1871891352d628bff" kind="function"><name>Allocate</name></member>
-    <member refid="classSR__SRLM__NS_1_1DataTypeAllocator_1af348f61dcf70f54f22cebbe3bd7147a3" kind="function"><name>Allocate</name></member>
-  </compound>
   <compound refid="classSR__SRLM__NS_1_1DataTypeArray" kind="class"><name>SR_SRLM_NS::DataTypeArray</name>
     <member refid="classSR__SRLM__NS_1_1DataTypeArray_1acc1ccffb5c9152645e60601e2ceabb10" kind="variable"><name>m_value</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeArray_1aafebcab5fad57aee2c4eaa64f7ec4e16" kind="variable"><name>m_type</name></member>
-    <member refid="classSR__SRLM__NS_1_1DataTypeArray_1a0261079dc9622c8d735ea803e91fb8d0" kind="function"><name>DataTypeArray</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeArray_1ae218fae6b427be9cd62d7f618c456feb" kind="function"><name>~DataTypeArray</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeArray_1aa8c41da49796725059a2e92400c96784" kind="function"><name>CopyTo</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeArray_1ac37448cba1d947ecad02a912ca7a00eb" kind="function"><name>SetType</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeArray_1a150a4e8864cd621655ea7883edf0c781" kind="function"><name>Reset</name></member>
-    <member refid="classSR__SRLM__NS_1_1DataTypeArray_1a99c87a75fc8c43f3d20e30b06ca96430" kind="function"><name>Copy</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeArray_1aec74ec7de5b7e7cf1c9e3308561186ab" kind="function"><name>GetMeta</name></member>
   </compound>
   <compound refid="classSR__SRLM__NS_1_1DataTypeBool" kind="class"><name>SR_SRLM_NS::DataTypeBool</name>
@@ -2372,20 +2366,15 @@
   <compound refid="classSR__SRLM__NS_1_1DataTypeEnum" kind="class"><name>SR_SRLM_NS::DataTypeEnum</name>
     <member refid="classSR__SRLM__NS_1_1DataTypeEnum_1a06586d2add201892f0a44cbfdc5d0bb6" kind="variable"><name>m_reflector</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeEnum_1aca4211fa8e756c917d2f3653fff6517e" kind="function"><name>DataTypeEnum</name></member>
-    <member refid="classSR__SRLM__NS_1_1DataTypeEnum_1a965f7ceedf6498f4a56a311d93563949" kind="function"><name>DataTypeEnum</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeEnum_1acdba5647917b2cdecf041885dd404b69" kind="function"><name>DataTypeEnum</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeEnum_1ab1ee37a4b4e2894ca14941ae6947bf53" kind="function"><name>GetHashName</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeEnum_1a40ed83f07157f40ccbeeb5d31f0aee2a" kind="function"><name>GetName</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeEnum_1a9a01e201d47260d556cfeb0b0efb54e6" kind="function"><name>GetReflector</name></member>
-    <member refid="classSR__SRLM__NS_1_1DataTypeEnum_1a4c5b7d58d576fa51dbe96927ed0a6064" kind="function"><name>Copy</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeEnum_1adc31f7a6b872d580c9a65b77fb6b7e58" kind="function"><name>SetReflector</name></member>
   </compound>
   <compound refid="classSR__SRLM__NS_1_1DataTypeFloat" kind="class"><name>SR_SRLM_NS::DataTypeFloat</name>
   </compound>
   <compound refid="classSR__SRLM__NS_1_1DataTypeFlow" kind="class"><name>SR_SRLM_NS::DataTypeFlow</name>
-    <member refid="classSR__SRLM__NS_1_1DataTypeFlow_1abe6ef45689452c1283fb92190f5865ee" kind="function"><name>DataTypeFlow</name></member>
-    <member refid="classSR__SRLM__NS_1_1DataTypeFlow_1a0b787911d889367c2ba93a77c2bf75a4" kind="function"><name>DataTypeFlow</name></member>
-    <member refid="classSR__SRLM__NS_1_1DataTypeFlow_1aaadd50a063d3d3d4b983d934fb9f71b9" kind="function"><name>Copy</name></member>
   </compound>
   <compound refid="classSR__SRLM__NS_1_1DataTypeInt16" kind="class"><name>SR_SRLM_NS::DataTypeInt16</name>
   </compound>
@@ -2411,8 +2400,6 @@
     <member refid="classSR__SRLM__NS_1_1DataTypeManager_1acc0f2bfdcfd2434604fa6b592fdffbee" kind="function"><name>Clear</name></member>
   </compound>
   <compound refid="classSR__SRLM__NS_1_1DataTypeNone" kind="class"><name>SR_SRLM_NS::DataTypeNone</name>
-    <member refid="classSR__SRLM__NS_1_1DataTypeNone_1acb66d386817a5a2ace2476c62b49fd39" kind="function"><name>SR_LM_REGISTER_TYPE</name></member>
-    <member refid="classSR__SRLM__NS_1_1DataTypeNone_1a5a457fc1198a50acdbda7d7ced4dadda" kind="function"><name>Copy</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeNone_1afc4bd2d07f67a0f2227f29f80ae633be" kind="function"><name>CopyTo</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeNone_1a67be0bb7424b4dfea39dfcef0710040a" kind="function"><name>Reset</name></member>
   </compound>
@@ -2421,15 +2408,12 @@
   <compound refid="classSR__SRLM__NS_1_1DataTypeStruct" kind="class"><name>SR_SRLM_NS::DataTypeStruct</name>
     <member refid="classSR__SRLM__NS_1_1DataTypeStruct_1ac614c0b6e19286b7150b2e559649ee6d" kind="variable"><name>m_name</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeStruct_1a712a5e027b2710b0789ef70df0fd1407" kind="variable"><name>m_variables</name></member>
-    <member refid="classSR__SRLM__NS_1_1DataTypeStruct_1acb5eb180b274f5b1288f7e9747d2fa91" kind="function"><name>DataTypeStruct</name></member>
-    <member refid="classSR__SRLM__NS_1_1DataTypeStruct_1ae8a1a024f07fda00d1c227ba355acd2b" kind="function"><name>DataTypeStruct</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeStruct_1a85d51426a652b30c3300c32cd9648461" kind="function"><name>~DataTypeStruct</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeStruct_1a6b1024e351c85ff05ba0cd1ebd4a0718" kind="function"><name>CopyTo</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeStruct_1a1ee51071e30bad2f41fd8027ef92729c" kind="function"><name>AddVariable</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeStruct_1a7074e6106329f28ae93df1545decd09e" kind="function"><name>AddVariable</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeStruct_1a5124b16aaa4fe1865b6a3c7eebd8f015" kind="function"><name>Reset</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeStruct_1a457e116c54a5ce802e527b8a360b0760" kind="function"><name>SetStructHashName</name></member>
-    <member refid="classSR__SRLM__NS_1_1DataTypeStruct_1a9cb390b5d83706b0cda1b71f9203141c" kind="function"><name>Copy</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeStruct_1a25b3c7959a5b0e007c521a5cafbfbb21" kind="function"><name>GetMetaData</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeStruct_1aa7fd7497162ade3c00fdf2a4f84f2176" kind="function"><name>GetVariables</name></member>
     <member refid="classSR__SRLM__NS_1_1DataTypeStruct_1acc8fe64e50447cf92be00ec51f105238" kind="function"><name>GetStructName</name></member>
@@ -3193,6 +3177,7 @@
     <member refid="classSR__CORE__NS_1_1Engine_1aefc6e50f10a45721e8453c774157fedd" kind="function"><name>GetRenderScene</name></member>
     <member refid="classSR__CORE__NS_1_1Engine_1a05d06feb6c7b722d30626af28e40baf1" kind="function"><name>GetPhysicsScene</name></member>
     <member refid="classSR__CORE__NS_1_1Engine_1a5e9965b2b205350c9f27f93cb4667a39" kind="function"><name>GetMainWindow</name></member>
+    <member refid="classSR__CORE__NS_1_1Engine_1a8f14f00214dee82c471bb5186838fce0" kind="function"><name>GetFocusedWindow</name></member>
     <member refid="classSR__CORE__NS_1_1Engine_1ac299c8794259158fe78a80089331e3b0" kind="function"><name>GetSceneBuilder</name></member>
     <member refid="classSR__CORE__NS_1_1Engine_1a9dd439bf37486363a3fe51d79146d187" kind="function"><name>IsActive</name></member>
     <member refid="classSR__CORE__NS_1_1Engine_1ae6725f69a58ca7382d255585cba1d5c2" kind="function"><name>IsRun</name></member>
@@ -5145,41 +5130,45 @@
     <member refid="classSR__UTILS__NS_1_1Input_1ac7c8990837c729192316dfc7d2dc499ca08a38277b0309070706f6652eeae9a53" kind="enumvalue"><name>Down</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1ac7c8990837c729192316dfc7d2dc499cad78a68f6a85421ae121c2cb5b73a1040" kind="enumvalue"><name>Pressed</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1ac7c8990837c729192316dfc7d2dc499ca258f49887ef8d14ac268c92b02503aaa" kind="enumvalue"><name>Up</name></member>
-    <member refid="classSR__UTILS__NS_1_1Input_1af1685e66ae07a70c6277ec618bb3acab" kind="typedef"><name>CursorLockCallback</name></member>
-    <member refid="classSR__UTILS__NS_1_1Input_1ad9f11baca354abe30c3b6febcca76a61" kind="variable"><name>m_counterLock</name></member>
-    <member refid="classSR__UTILS__NS_1_1Input_1aec5b7059362e8b3db6571b264fb4e3fd" kind="variable"><name>m_lockCursorCallback</name></member>
+    <member refid="classSR__UTILS__NS_1_1Input_1a5421c023e8334113e7f53e777d44f844" kind="variable"><name>m_cursorLocks</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1a0554e61402372b514896e600f9669a63" kind="variable"><name>m_mouseDrag</name></member>
-    <member refid="classSR__UTILS__NS_1_1Input_1a7726db6cc327a33297bc550d72a49653" kind="variable"><name>m_mousePrev</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1a268b3bf151074f0081ab9d4361ed5ff8" kind="variable"><name>m_mouse</name></member>
+    <member refid="classSR__UTILS__NS_1_1Input_1a7726db6cc327a33297bc550d72a49653" kind="variable"><name>m_mousePrev</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1a21cac5ac144fd41b3fe96f9f0b55cf3e" kind="variable"><name>m_mouseScroll</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1a7bbb9eeafc7e72d0679fb6673699ae2d" kind="variable"><name>m_mouseScrollCurrent</name></member>
+    <member refid="classSR__UTILS__NS_1_1Input_1aa912162627a05e4b8e32f8d719cbaeee" kind="variable"><name>m_focusedWindowRect</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1a9a63247d52b0b09ab8caa5cf295a1a38" kind="variable"><name>m_init</name></member>
+    <member refid="classSR__UTILS__NS_1_1Input_1a67b9109e5345a568e61fdfe4ea1ceb84" kind="variable"><name>m_isLocked</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1a43749af9a310ce498fef965d937301ba" kind="variable"><name>m_isVisible</name></member>
+    <member refid="classSR__UTILS__NS_1_1Input_1a9b5ff561695c9786acfd4cf927eafe7b" kind="variable"><name>m_isPlayMode</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1a4b998cf3045d13646c7460999e574fc4" kind="variable"><name>m_keys</name></member>
-    <member refid="classSR__UTILS__NS_1_1Input_1a3977fe32159fe75e3a332aa8f7683836" kind="variable"><name>m_arr</name></member>
+    <member refid="classSR__UTILS__NS_1_1Input_1a62924dd1ddb069755134db14f250a6ed" kind="variable"><name>m_keysArray</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1a9427192377d92b5b27866c5e3ea4694a" kind="function"><name>~Input</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1a2a0eb7912e9ab75a50242a9560dcb110" kind="function"><name>SetMouseScroll</name></member>
-    <member refid="classSR__UTILS__NS_1_1Input_1ab1879fe2750f438d6cf1b9902314191f" kind="function"><name>Check</name></member>
+    <member refid="classSR__UTILS__NS_1_1Input_1aa9741dd8fa34e4376b35aad4f5e9aa15" kind="function"><name>SetFocusedWindowRect</name></member>
+    <member refid="classSR__UTILS__NS_1_1Input_1a402256759f9352e33475a6d493efcd36" kind="function"><name>Update</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1aa89a32584ab7db00a635025cd773310a" kind="function"><name>Reload</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1a2c21f73cfb791e2095dacbd1bcaf70e5" kind="function"><name>ResetMouse</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1a397012e0b56087d512a0b04b226ff766" kind="function"><name>GetMouseDrag</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1a7f6a2cf42f8cf347d0049dbf7e571323" kind="function"><name>GetMousePos</name></member>
-    <member refid="classSR__UTILS__NS_1_1Input_1add45ebf3175cc1715a25334cf445388a" kind="function"><name>GetPrevMousePos</name></member>
-    <member refid="classSR__UTILS__NS_1_1Input_1a11f65a21c1ac6eaa2daf7d66be88de1b" kind="function"><name>IsMouseMoved</name></member>
-    <member refid="classSR__UTILS__NS_1_1Input_1ae736334f348f8253988f566c4471e1e3" kind="function"><name>GetMouseWheel</name></member>
+    <member refid="classSR__UTILS__NS_1_1Input_1aedc0d417b0475c629acda98ea04c0d87" kind="function"><name>IsPlayMode</name></member>
+    <member refid="classSR__UTILS__NS_1_1Input_1a4ffe74de934071aad29727097aa6cd38" kind="function"><name>IsAppFocused</name></member>
+    <member refid="classSR__UTILS__NS_1_1Input_1a92f1d26244f85e28884da90b2219b493" kind="function"><name>GetMouseWheel</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1ad9969bccbd1dbcbb36dd5bc70187cec0" kind="function"><name>GetMouseDown</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1a8258dd2f44de087443c3119fc922e684" kind="function"><name>GetMouseUp</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1af6479e3f691f3cfebe1622c936d16be5" kind="function"><name>GetMouse</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1a89c3ee69b057cf802aa77847064c6b49" kind="function"><name>GetKeyDown</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1a28b67ece023a843ba05d44a647c4c201" kind="function"><name>GetKeyUp</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1afc404aa825ef6ad7c4b2a0a0327dd587" kind="function"><name>GetKey</name></member>
+    <member refid="classSR__UTILS__NS_1_1Input_1a37cc319cdd46d10945ee2ba97e277447" kind="function"><name>LockCursor</name></member>
+    <member refid="classSR__UTILS__NS_1_1Input_1a7b7993fad5a86e3cc21601010be3869d" kind="function"><name>UnlockCursor</name></member>
+    <member refid="classSR__UTILS__NS_1_1Input_1a1b93dff439078c026552d16308c20ad2" kind="function"><name>SetPlayMode</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1a8e8d82e4cbb1b14c9c8c375212719d50" kind="function"><name>SetCursorVisible</name></member>
-    <member refid="classSR__UTILS__NS_1_1Input_1a581c59eb754f49c0ce8d7c554d4b59f1" kind="function"><name>SetCursorLockCallback</name></member>
-    <member refid="classSR__UTILS__NS_1_1Input_1ae8f9fd59e96fd70003bae45fd3928bae" kind="function"><name>LockCursor</name></member>
-    <member refid="classSR__UTILS__NS_1_1Input_1a10d2ecb685865a2931568011cea31ae2" kind="function"><name>UnlockCursor</name></member>
-    <member refid="classSR__UTILS__NS_1_1Input_1a9a3ed5820587782934f00b78db900ff4" kind="function"><name>ForceUnlockCursor</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1a53af6477f866ebcb0e806265afae1f09" kind="function"><name>Reset</name></member>
     <member refid="classSR__UTILS__NS_1_1Input_1a2f35d49d0f6e50b8a80a13dd8e38fd18" kind="function"><name>SetState</name></member>
+    <member refid="classSR__UTILS__NS_1_1Input_1a6fcc7cdab12f9bf7485c3e7ad822f637" kind="function"><name>UpdateMouse</name></member>
+    <member refid="classSR__UTILS__NS_1_1Input_1a3640fb96d3796a77b2f1826af11bfab9" kind="function"><name>UpdateKeyboard</name></member>
+    <member refid="classSR__UTILS__NS_1_1Input_1a5543f2212d39d4f373ca7b5e394a4e16" kind="function"><name>GetActiveLock</name></member>
   </compound>
   <compound refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1input__iterator__tag" kind="class"><name>SR_TYPES_NS::detail::iterator_detail::input_iterator_tag</name>
   </compound>
@@ -5932,8 +5921,6 @@
     <member refid="classSR__SRLM__NS_1_1LogicalNode_1afd6d611ab23c3ebcf79120447d4ca783" kind="function"><name>RemoveOutputConnection</name></member>
     <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" kind="function"><name>AddInputConnection</name></member>
     <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac528a232f2481034bf0c9c866aadf580" kind="function"><name>AddOutputConnection</name></member>
-    <member refid="classSR__SRLM__NS_1_1LogicalNode_1a72915afde33f4d0c714e454cab1544c7" kind="function"><name>AddInputData</name></member>
-    <member refid="classSR__SRLM__NS_1_1LogicalNode_1a70d337798b8e852a40f5f3a74fe35d79" kind="function"><name>AddOutputData</name></member>
     <member refid="classSR__SRLM__NS_1_1LogicalNode_1a6bcd14ebcd882a6f89e531c1789f7037" kind="function"><name>LoadXml</name></member>
   </compound>
   <compound refid="classSR__SRLM__NS_1_1LogicalNodeManager" kind="class"><name>SR_SRLM_NS::LogicalNodeManager</name>
@@ -6686,10 +6673,9 @@
     <member refid="classSR__UTILS__NS_1_1MouseInputData_1aa776e1a7a369f4775992e9505c8360ab" kind="variable"><name>m_code</name></member>
     <member refid="classSR__UTILS__NS_1_1MouseInputData_1af7afc4d6634ac7ed628951418aea6b60" kind="variable"><name>m_state</name></member>
     <member refid="classSR__UTILS__NS_1_1MouseInputData_1aae17fc090e20ecac093fc607cca2db2c" kind="variable"><name>m_position</name></member>
-    <member refid="classSR__UTILS__NS_1_1MouseInputData_1a7ac56c40b250344e61a9a9a09ce81774" kind="variable"><name>m_prevPos</name></member>
+    <member refid="classSR__UTILS__NS_1_1MouseInputData_1a563767698c022e8eb800eccebedd50d1" kind="variable"><name>m_drag</name></member>
     <member refid="classSR__UTILS__NS_1_1MouseInputData_1af8b924e6a869e5bbaa92dd147f3f4bc7" kind="variable"><name>m_wheel</name></member>
     <member refid="classSR__UTILS__NS_1_1MouseInputData_1a5b2e95cf1b090cb0b31cbc3a74cc1cb1" kind="function"><name>~MouseInputData</name></member>
-    <member refid="classSR__UTILS__NS_1_1MouseInputData_1a7b69a5e6965484ac28be2d5ee53fb8ca" kind="function"><name>MouseInputData</name></member>
     <member refid="classSR__UTILS__NS_1_1MouseInputData_1a45915d2cf8628391113783eef9a87e86" kind="function"><name>MouseInputData</name></member>
     <member refid="classSR__UTILS__NS_1_1MouseInputData_1aa0d64c28f8852caf958af7c716e105fd" kind="function"><name>GetType</name></member>
     <member refid="classSR__UTILS__NS_1_1MouseInputData_1ac7fd802161f57977917961b529fe1579" kind="function"><name>GetDrag</name></member>
@@ -7402,17 +7388,17 @@
     <member refid="structSR__TYPES__NS_1_1uniform__int__distribution_1_1param__type_1af8837d7eea8220dd5dc557923d1cf7e1" kind="friend"><name>operator==</name></member>
     <member refid="structSR__TYPES__NS_1_1uniform__int__distribution_1_1param__type_1a8551acb71cc69a62ea291cdf5e7c58a8" kind="friend"><name>operator!=</name></member>
   </compound>
-  <compound refid="classSR__UTILS__NS_1_1Passkey" kind="class"><name>SR_UTILS_NS::Passkey</name>
-    <member refid="classSR__UTILS__NS_1_1Passkey_1ac2a0de0ec26eff7c3d68eded59246b95" kind="variable"><name>T</name></member>
-    <member refid="classSR__UTILS__NS_1_1Passkey_1a0486d5621d45d5b02f2ec37321667128" kind="function"><name>Passkey</name></member>
-    <member refid="classSR__UTILS__NS_1_1Passkey_1aa3d6b29dea402bc99d3a368f6014a9de" kind="function"><name>Passkey</name></member>
-    <member refid="classSR__UTILS__NS_1_1Passkey_1a282811bdb3d06d356e6ab3b093788408" kind="function"><name>Passkey</name></member>
-    <member refid="classSR__UTILS__NS_1_1Passkey_1ab1828c8e594a28679fd84c7e3fe04896" kind="function"><name>Passkey</name></member>
-    <member refid="classSR__UTILS__NS_1_1Passkey_1a4903c2303a4caf194e683a0093ff1027" kind="function"><name>Passkey</name></member>
-    <member refid="classSR__UTILS__NS_1_1Passkey_1a631a1856cdcee754c09c37cf4b12c67e" kind="function"><name>Passkey</name></member>
-    <member refid="classSR__UTILS__NS_1_1Passkey_1a38942e14379d71aeb4e3452c7317bb24" kind="function"><name>Passkey</name></member>
-    <member refid="classSR__UTILS__NS_1_1Passkey_1a0cee30aa7e5568419d58da7f28d1de36" kind="function"><name>operator=</name></member>
-    <member refid="classSR__UTILS__NS_1_1Passkey_1a00f8cc561ab593dbae268bafe059aea6" kind="function"><name>operator=</name></member>
+  <compound refid="classSR__UTILS__NS_1_1PassKey" kind="class"><name>SR_UTILS_NS::PassKey</name>
+    <member refid="classSR__UTILS__NS_1_1PassKey_1a43c34a6c4ff8167789fc0b2fd9311efc" kind="variable"><name>T</name></member>
+    <member refid="classSR__UTILS__NS_1_1PassKey_1a3ad7ea6b1e8e24d29d7c966815feb9ed" kind="function"><name>PassKey</name></member>
+    <member refid="classSR__UTILS__NS_1_1PassKey_1aa3a0313a9d55b72fd86fe4c767824cb3" kind="function"><name>PassKey</name></member>
+    <member refid="classSR__UTILS__NS_1_1PassKey_1a626866461817f0c135c6799f74153bca" kind="function"><name>PassKey</name></member>
+    <member refid="classSR__UTILS__NS_1_1PassKey_1af8691aee5ef56cef85f3f178d2cf8db1" kind="function"><name>PassKey</name></member>
+    <member refid="classSR__UTILS__NS_1_1PassKey_1a56ce30817a668bc0db6dfc1b7824c5a5" kind="function"><name>PassKey</name></member>
+    <member refid="classSR__UTILS__NS_1_1PassKey_1a233bac2b688b567238468b08d020a921" kind="function"><name>PassKey</name></member>
+    <member refid="classSR__UTILS__NS_1_1PassKey_1af69c3e461f8c4669db744139834bbd1b" kind="function"><name>PassKey</name></member>
+    <member refid="classSR__UTILS__NS_1_1PassKey_1a09314edc4ca3ffa82e91a8dcdf30d632" kind="function"><name>operator=</name></member>
+    <member refid="classSR__UTILS__NS_1_1PassKey_1ac44718778dad0229709f3af7564034df" kind="function"><name>operator=</name></member>
   </compound>
   <compound refid="classSR__UTILS__NS_1_1Path" kind="class"><name>SR_UTILS_NS::Path</name>
     <member refid="classSR__UTILS__NS_1_1Path_1a7ce07c6a2ade8f891c67eb8a5e3e028a" kind="enum"><name>Type</name></member>
@@ -8632,6 +8618,7 @@
     <member refid="structSR__MATH__NS_1_1Rect_1a965ab8945fd17c5cba4d7bafccc82836" kind="function"><name>Vertical</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1aa06964911a225f92cce7ac1476331fa3" kind="function"><name>XY</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a36d7b28462ec37ac7426c4802956bdc4" kind="function"><name>WH</name></member>
+    <member refid="structSR__MATH__NS_1_1Rect_1a625cf84419be8d837b95c6a7b8f1ff1b" kind="function"><name>Center</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1ac412ed9919879ff897d2708604ac4f85" kind="function"><name>TopBottom</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a98d32fbf083a129317cfa087395dd7a0" kind="function"><name>LeftRight</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a3d5eb72fbe410c5608f3ba54835b5ef0" kind="function"><name>XY0</name></member>
@@ -9837,6 +9824,7 @@
     <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a87bf9d2155e07b1fbc082bba7a5ae975" kind="variable"><name>m_enabled</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a4b786e1f905e6eecef594158da490b2c" kind="variable"><name>m_updateNonHoveredSceneViewer</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a80173e977e3b15f3e1357a69b6211547" kind="variable"><name>m_windowSize</name></member>
+    <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a64f0bebd02013890c2cebc1f6ccb9130" kind="variable"><name>m_cursorLock</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a078a3633e33b1c60a186062f1932417b" kind="variable"><name>m_mousePos</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a7b551ba9206eceadcf3bcf248b86ff6b" kind="function"><name>SceneViewer</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1acc1ed783ff52fb07a4db8b72a9261846" kind="function"><name>SceneViewer</name></member>
@@ -11617,9 +11605,6 @@
     <member refid="classSR__SRLM__NS_1_1StartNode_1a1d053db0c62ccdedceb5f5ce1c6b0639" kind="function"><name>InitNode</name></member>
     <member refid="classSR__SRLM__NS_1_1StartNode_1a76b3ec8022218332e054a17bf34e13a7" kind="function"><name>IsEntryPoint</name></member>
   </compound>
-  <compound refid="classSR__GRAPH__NS_1_1StartPassNode" kind="class"><name>SR_GRAPH_NS::StartPassNode</name>
-    <member refid="classSR__GRAPH__NS_1_1StartPassNode_1a8e212a69fee177e90605a2848cd4d55d" kind="function"><name>InitNode</name></member>
-  </compound>
   <compound refid="classSR__SRLM__NS_1_1StartResetNode" kind="class"><name>SR_SRLM_NS::StartResetNode</name>
     <member refid="classSR__SRLM__NS_1_1StartResetNode_1a04774f3bc5696cfd7b5abf6c4108ef55" kind="typedef"><name>Super</name></member>
     <member refid="classSR__SRLM__NS_1_1StartResetNode_1a1182c0728b30b56e580a556608707428" kind="function"><name>GetType</name></member>
@@ -11910,7 +11895,6 @@
     <member refid="classSR__GRAPH__NS_1_1SwapchainPass_1a87407cb2661bb87518e93cf1d1fc6e88" kind="function"><name>Load</name></member>
     <member refid="classSR__GRAPH__NS_1_1SwapchainPass_1af8ab62e5d15d700db602e5ea8079d5a1" kind="function"><name>Render</name></member>
     <member refid="classSR__GRAPH__NS_1_1SwapchainPass_1ae46fb09d3a4975ecae475dc31844d8f4" kind="function"><name>Update</name></member>
-    <member refid="classSR__GRAPH__NS_1_1SwapchainPass_1abb45d046801ace0096bebcb65a0aeefe" kind="function"><name>InitNode</name></member>
   </compound>
   <compound refid="classSR__SRLM__NS_1_1SynchronizeNode" kind="class"><name>SR_SRLM_NS::SynchronizeNode</name>
     <member refid="classSR__SRLM__NS_1_1SynchronizeNode_1a862f9654cbdd2f2e8e3180c77bf931f6" kind="typedef"><name>Super</name></member>
@@ -13977,6 +13961,7 @@
     <member refid="classSR__GRAPH__NS_1_1Window_1a5c03bd9e0bcf983a36b7c6705337be92" kind="function"><name>PollEvents</name></member>
     <member refid="classSR__GRAPH__NS_1_1Window_1aa2d5a7664f22d643ba5ab776466cc7ce" kind="function"><name>GetSize</name></member>
     <member refid="classSR__GRAPH__NS_1_1Window_1a7db36e22fed9fbd3c997452f216f9897" kind="function"><name>GetPosition</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Window_1aecc8c2cf1219f5e43ba86f22c95fcfdc" kind="function"><name>GetWindowRect</name></member>
     <member refid="classSR__GRAPH__NS_1_1Window_1a617b2d1998c16a5938802a5385e31b44" kind="function"><name>IsWindowFocus</name></member>
     <member refid="classSR__GRAPH__NS_1_1Window_1ad941d1c19bfced92bb270b2101173545" kind="function"><name>IsWindowCollapsed</name></member>
     <member refid="classSR__GRAPH__NS_1_1Window_1a32662725529a69d0fd018ca1a8a4e66f" kind="function"><name>IsValid</name></member>
@@ -14892,6 +14877,10 @@
     <member refid="namespaceSR__UTILS__NS_1a436bfeb743303c9ca2e3f733d769abd2" kind="enum"><name>MarshalSaveMode</name></member>
     <member refid="namespaceSR__UTILS__NS_1a436bfeb743303c9ca2e3f733d769abd2a6ce976e8f061b2b5cfe4d0c50c3405dd" kind="enumvalue"><name>Binary</name></member>
     <member refid="namespaceSR__UTILS__NS_1a436bfeb743303c9ca2e3f733d769abd2aeed8d85b888a6c015834240885ee6333" kind="enumvalue"><name>Json</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a86b1c7c6a54a3e64faf9dede4d23a12c" kind="enum"><name>CursorLockMode</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a86b1c7c6a54a3e64faf9dede4d23a12ca13787cfb1a15ae6690a29d3895c54de9" kind="enumvalue"><name>Everywhere</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a86b1c7c6a54a3e64faf9dede4d23a12ca344a7f427fb765610ef96eb7bce95257" kind="enumvalue"><name>Editor</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a86b1c7c6a54a3e64faf9dede4d23a12ca194ed09f62aaab600e7a9fdc32763f40" kind="enumvalue"><name>PlayMode</name></member>
     <member refid="namespaceSR__UTILS__NS_1a278889307ca06cc416e580d2bcb29194" kind="enum"><name>KeyboardLayout</name></member>
     <member refid="namespaceSR__UTILS__NS_1a278889307ca06cc416e580d2bcb29194aaa85f1840e282d8a8304dbc2c0d7c9b2" kind="enumvalue"><name>EN</name></member>
     <member refid="namespaceSR__UTILS__NS_1a278889307ca06cc416e580d2bcb29194af9308c5d059650ee40cab30bad1e96d0" kind="enumvalue"><name>RU</name></member>
@@ -15007,7 +14996,7 @@
     <member refid="namespaceSR__UTILS__NS_1ad00397809fb88c6b0c6b3fc00f68cb16" kind="function"><name>HashCombine</name></member>
     <member refid="namespaceSR__UTILS__NS_1a74da1f22fe7e8993cec6f59db8816190" kind="function"><name>CombineTwoHashes</name></member>
     <member refid="namespaceSR__UTILS__NS_1ac6d3d240a0136bbb1757e43c3bb44808" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
-    <member refid="namespaceSR__UTILS__NS_1a0ca1d8e7032bd3b12a950ebfb5abd664" kind="function"><name>Passkey</name></member>
+    <member refid="namespaceSR__UTILS__NS_1abf713892d2cc875be22dccc9c0a248e5" kind="function"><name>PassKey</name></member>
     <member refid="namespaceSR__UTILS__NS_1aebc385c697cbdc5ddd7960797de0f67b" kind="function"><name>GetSingletonManager</name></member>
     <member refid="namespaceSR__UTILS__NS_1ada138995ed7aa51462018cab4c0dc971" kind="function"><name>ParseDouble</name></member>
     <member refid="namespaceSR__UTILS__NS_1a0abe99d01c5b39e41bcfc6e617148e84" kind="function"><name>ParseFloat</name></member>

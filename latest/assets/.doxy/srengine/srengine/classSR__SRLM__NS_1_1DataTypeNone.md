@@ -101,7 +101,6 @@ See [SR\_SRLM\_NS::DataType](classSR__SRLM__NS_1_1DataType.md)
 
 | Type | Name |
 | ---: | :--- |
-| virtual SR\_NODISCARD [**DataType**](classSR__SRLM__NS_1_1DataType.md) \* | [**Copy**](#function-copy) () override const<br> |
 | virtual void | [**CopyTo**](#function-copyto) ([**DataType**](classSR__SRLM__NS_1_1DataType.md) \* pData) override const<br> |
 | virtual void | [**Reset**](#function-reset) () override<br> |
 
@@ -252,21 +251,6 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
     
 ## Public Functions Documentation
 
-
-
-
-### function Copy 
-
-```C++
-inline virtual SR_NODISCARD DataType * SR_SRLM_NS::DataTypeNone::Copy () override const
-```
-
-
-
-Implements [*SR\_SRLM\_NS::DataType::Copy*](classSR__SRLM__NS_1_1DataType.md#function-copy)
-
-
-<hr>
 
 
 

@@ -132,8 +132,6 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**Check**](#function-check) () <br> |
-|  void | [**ForceUnlockCursor**](#function-forceunlockcursor) () <br> |
 |  bool | [**GetKey**](#function-getkey) (KeyCode key) <br> |
 |  bool | [**GetKeyDown**](#function-getkeydown) (KeyCode key) <br> |
 |  bool | [**GetKeyUp**](#function-getkeyup) (KeyCode key) <br> |
@@ -142,16 +140,17 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 |  SR\_NODISCARD SR\_MATH\_NS::FVector2 | [**GetMouseDrag**](#function-getmousedrag) () <br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector2 | [**GetMousePos**](#function-getmousepos) () const<br> |
 |  bool | [**GetMouseUp**](#function-getmouseup) (MouseCode code) <br> |
-|  int32\_t | [**GetMouseWheel**](#function-getmousewheel) () <br> |
-|  SR\_NODISCARD SR\_MATH\_NS::FVector2 | [**GetPrevMousePos**](#function-getprevmousepos) () const<br> |
-|  SR\_NODISCARD bool | [**IsMouseMoved**](#function-ismousemoved) () const<br> |
-|  void | [**LockCursor**](#function-lockcursor) () <br> |
+|  SR\_NODISCARD int32\_t | [**GetMouseWheel**](#function-getmousewheel) () const<br> |
+|  SR\_NODISCARD bool | [**IsAppFocused**](#function-isappfocused) () const<br> |
+|  SR\_NODISCARD bool | [**IsPlayMode**](#function-isplaymode) () const<br> |
+|  void | [**LockCursor**](#function-lockcursor) ([**CursorLockInfo**](structSR__UTILS__NS_1_1CursorLockInfo.md) & info) <br> |
 |  void | [**Reload**](#function-reload) () <br> |
 |  void | [**ResetMouse**](#function-resetmouse) () <br> |
-|  void | [**SetCursorLockCallback**](#function-setcursorlockcallback) (CursorLockCallback && callback) <br> |
-|  void | [**SetCursorVisible**](#function-setcursorvisible) (bool isVisible) <br> |
+|  void | [**SetFocusedWindowRect**](#function-setfocusedwindowrect) (const std::optional&lt; SR\_MATH\_NS::FRect &gt; & rect) <br> |
 |  void | [**SetMouseScroll**](#function-setmousescroll) (double\_t xOffset, double\_t yOffset) <br> |
-|  void | [**UnlockCursor**](#function-unlockcursor) () <br> |
+|  void | [**SetPlayMode**](#function-setplaymode) (bool isPlayMode) <br> |
+|  void | [**UnlockCursor**](#function-unlockcursor) (const [**CursorLockInfo**](structSR__UTILS__NS_1_1CursorLockInfo.md) & info) <br> |
+|  void | [**Update**](#function-update) () <br> |
 
 
 
@@ -381,32 +380,6 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 
 
-### function Check 
-
-```C++
-void SR_UTILS_NS::Input::Check () 
-```
-
-
-
-
-<hr>
-
-
-
-### function ForceUnlockCursor 
-
-```C++
-void SR_UTILS_NS::Input::ForceUnlockCursor () 
-```
-
-
-
-
-<hr>
-
-
-
 ### function GetKey 
 
 ```C++
@@ -526,7 +499,7 @@ bool SR_UTILS_NS::Input::GetMouseUp (
 ### function GetMouseWheel 
 
 ```C++
-int32_t SR_UTILS_NS::Input::GetMouseWheel () 
+SR_NODISCARD int32_t SR_UTILS_NS::Input::GetMouseWheel () const
 ```
 
 
@@ -536,10 +509,10 @@ int32_t SR_UTILS_NS::Input::GetMouseWheel ()
 
 
 
-### function GetPrevMousePos 
+### function IsAppFocused 
 
 ```C++
-SR_NODISCARD SR_MATH_NS::FVector2 SR_UTILS_NS::Input::GetPrevMousePos () const
+SR_NODISCARD bool SR_UTILS_NS::Input::IsAppFocused () const
 ```
 
 
@@ -549,10 +522,10 @@ SR_NODISCARD SR_MATH_NS::FVector2 SR_UTILS_NS::Input::GetPrevMousePos () const
 
 
 
-### function IsMouseMoved 
+### function IsPlayMode 
 
 ```C++
-SR_NODISCARD bool SR_UTILS_NS::Input::IsMouseMoved () const
+SR_NODISCARD bool SR_UTILS_NS::Input::IsPlayMode () const
 ```
 
 
@@ -565,7 +538,9 @@ SR_NODISCARD bool SR_UTILS_NS::Input::IsMouseMoved () const
 ### function LockCursor 
 
 ```C++
-void SR_UTILS_NS::Input::LockCursor () 
+void SR_UTILS_NS::Input::LockCursor (
+    CursorLockInfo & info
+) 
 ```
 
 
@@ -601,26 +576,11 @@ void SR_UTILS_NS::Input::ResetMouse ()
 
 
 
-### function SetCursorLockCallback 
+### function SetFocusedWindowRect 
 
 ```C++
-void SR_UTILS_NS::Input::SetCursorLockCallback (
-    CursorLockCallback && callback
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function SetCursorVisible 
-
-```C++
-void SR_UTILS_NS::Input::SetCursorVisible (
-    bool isVisible
+void SR_UTILS_NS::Input::SetFocusedWindowRect (
+    const std::optional< SR_MATH_NS::FRect > & rect
 ) 
 ```
 
@@ -647,10 +607,40 @@ void SR_UTILS_NS::Input::SetMouseScroll (
 
 
 
+### function SetPlayMode 
+
+```C++
+void SR_UTILS_NS::Input::SetPlayMode (
+    bool isPlayMode
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function UnlockCursor 
 
 ```C++
-void SR_UTILS_NS::Input::UnlockCursor () 
+void SR_UTILS_NS::Input::UnlockCursor (
+    const CursorLockInfo & info
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function Update 
+
+```C++
+void SR_UTILS_NS::Input::Update () 
 ```
 
 

@@ -4,7 +4,6 @@
     <compoundname>SR_SRLM_NS::IExecutableNode</compoundname>
     <basecompoundref refid="classSR__SRLM__NS_1_1LogicalNode" prot="public" virt="non-virtual">SR_SRLM_NS::LogicalNode</basecompoundref>
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1BasePass" prot="public" virt="non-virtual">SR_GRAPH_NS::BasePass</derivedcompoundref>
-    <derivedcompoundref refid="classSR__GRAPH__NS_1_1StartPassNode" prot="public" virt="non-virtual">SR_GRAPH_NS::StartPassNode</derivedcompoundref>
     <derivedcompoundref refid="classSR__SRLM__NS_1_1BranchNode" prot="public" virt="non-virtual">SR_SRLM_NS::BranchNode</derivedcompoundref>
     <derivedcompoundref refid="classSR__SRLM__NS_1_1DebugPrintNode" prot="public" virt="non-virtual">SR_SRLM_NS::DebugPrintNode</derivedcompoundref>
     <derivedcompoundref refid="classSR__SRLM__NS_1_1SequenceNode" prot="public" virt="non-virtual">SR_SRLM_NS::SequenceNode</derivedcompoundref>
@@ -215,12 +214,6 @@
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="30">
-        <label>SR_GRAPH_NS::StartPassNode</label>
-        <link refid="classSR__GRAPH__NS_1_1StartPassNode"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="12">
         <label>SR_GRAPH_NS::SwapchainPass</label>
         <link refid="classSR__GRAPH__NS_1_1SwapchainPass"/>
@@ -245,13 +238,13 @@
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="31">
+      <node id="30">
         <label>SR_SRLM_NS::BranchNode</label>
         <link refid="classSR__SRLM__NS_1_1BranchNode"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="32">
+      <node id="31">
         <label>SR_SRLM_NS::DebugPrintNode</label>
         <link refid="classSR__SRLM__NS_1_1DebugPrintNode"/>
         <childnode refid="1" relation="public-inheritance">
@@ -269,19 +262,19 @@
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="33">
+      <node id="32">
         <label>SR_SRLM_NS::SequenceNode</label>
         <link refid="classSR__SRLM__NS_1_1SequenceNode"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="34">
+      <node id="33">
         <label>SR_SRLM_NS::StartNode</label>
         <link refid="classSR__SRLM__NS_1_1StartNode"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="35">
+      <node id="34">
         <label>SR_SRLM_NS::SynchronizeNode</label>
         <link refid="classSR__SRLM__NS_1_1SynchronizeNode"/>
         <childnode refid="1" relation="public-inheritance">
@@ -378,10 +371,8 @@
     <listofallmembers>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::IExecutableNode</scope><name>AddInputConnection</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a451d30d4d677248caa80bb7ac74baad9" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::IExecutableNode</scope><name>AddInputData</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a72915afde33f4d0c714e454cab1544c7" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::IExecutableNode</scope><name>AddInputData</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac528a232f2481034bf0c9c866aadf580" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::IExecutableNode</scope><name>AddOutputConnection</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a968e3caf521de3d586f0ffb6cd9c2e07" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::IExecutableNode</scope><name>AddOutputData</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a70d337798b8e852a40f5f3a74fe35d79" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::IExecutableNode</scope><name>AddOutputData</name></member>
       <member refid="classSR__SRLM__NS_1_1IExecutableNode_1a52d82db24c1ba529cf2c3fb289188eae" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::IExecutableNode</scope><name>Base</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a45ac417b161b1412c23159c307dd5fc7" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::IExecutableNode</scope><name>CalcInput</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4b0351f30fc7afe7f45854cde8e09f64" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::IExecutableNode</scope><name>ClearLogicalNode</name></member>

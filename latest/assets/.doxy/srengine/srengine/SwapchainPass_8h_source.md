@@ -25,7 +25,7 @@ namespace SR_GRAPH_NS {
         bool Load(const SR_XML_NS::Node& passNode) override;
         bool Render() override;
         void Update() override;
-        void InitNode() override;
+        //void InitNode() override;
 
     private:
         float_t m_depth = 1.f;

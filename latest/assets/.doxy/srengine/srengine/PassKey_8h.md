@@ -35,7 +35,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**Passkey**](classSR__UTILS__NS_1_1Passkey.md) &lt;typename T, AllowSuccessor, Others&gt;<br> |
+| class | [**PassKey**](classSR__UTILS__NS_1_1PassKey.md) &lt;typename T, AllowSuccessor, Others&gt;<br> |
 
 
 

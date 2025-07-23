@@ -74,6 +74,8 @@ namespace SR_MATH_NS {
         SR_NODISCARD SR_MATH_NS::Vector2<T> XY() const noexcept;
         SR_NODISCARD SR_MATH_NS::Vector2<T> WH() const noexcept;
 
+        SR_NODISCARD SR_MATH_NS::Vector2<T> Center() const noexcept;
+
         SR_NODISCARD SR_MATH_NS::Vector2<T> TopBottom() const noexcept;
         SR_NODISCARD SR_MATH_NS::Vector2<T> LeftRight() const noexcept;
 
@@ -191,6 +193,11 @@ namespace SR_MATH_NS {
 
     template<typename T> SR_NODISCARD SR_MATH_NS::Vector2<T> Rect<T>::XY() const noexcept { return SR_MATH_NS::Vector2<T>(x, y); }
     template<typename T> SR_NODISCARD SR_MATH_NS::Vector2<T> Rect<T>::WH() const noexcept { return SR_MATH_NS::Vector2<T>(w, h); }
+
+    template<typename T> SR_NODISCARD SR_MATH_NS::Vector2<T> Rect<T>::Center() const noexcept {
+        return SR_MATH_NS::Vector2<T>(x + static_cast<T>(static_cast<double_t>(w) / 2.0),
+                                      y + static_cast<T>(static_cast<double_t>(h) / 2.0));
+    }
 
     template<typename T> SR_NODISCARD SR_MATH_NS::Vector3<T> Rect<T>::XY0() const noexcept { return SR_MATH_NS::Vector3<T>(x, y, 0); }
     template<typename T> SR_NODISCARD SR_MATH_NS::Vector3<T> Rect<T>::WH0() const noexcept { return SR_MATH_NS::Vector3<T>(w, h, 0); }

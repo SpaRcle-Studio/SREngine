@@ -103,10 +103,7 @@ See [SR\_SRLM\_NS::DataType](classSR__SRLM__NS_1_1DataType.md)
 | ---: | :--- |
 |  void | [**AddVariable**](#function-addvariable-12) (Hash name, [**DataType**](classSR__SRLM__NS_1_1DataType.md) \* pData) <br> |
 |  void | [**AddVariable**](#function-addvariable-22) (const std::string & name, [**DataType**](classSR__SRLM__NS_1_1DataType.md) \* pData) <br> |
-| virtual SR\_NODISCARD [**DataType**](classSR__SRLM__NS_1_1DataType.md) \* | [**Copy**](#function-copy) () override const<br> |
 | virtual void | [**CopyTo**](#function-copyto) ([**DataType**](classSR__SRLM__NS_1_1DataType.md) \* pData) override const<br> |
-|   | [**DataTypeStruct**](#function-datatypestruct-12) () = default<br> |
-|   | [**DataTypeStruct**](#function-datatypestruct-22) (Hash name) <br> |
 | virtual SR\_NODISCARD std::vector&lt; [**DataType**](classSR__SRLM__NS_1_1DataType.md) \* &gt; | [**GetMetaData**](#function-getmetadata) () override const<br> |
 |  SR\_NODISCARD Hash | [**GetStructName**](#function-getstructname) () const<br> |
 |  SR\_NODISCARD const std::map&lt; Hash, [**DataType**](classSR__SRLM__NS_1_1DataType.md) \* &gt; & | [**GetVariables**](#function-getvariables) () const<br> |
@@ -296,21 +293,6 @@ void SR_SRLM_NS::DataTypeStruct::AddVariable (
 
 
 
-### function Copy 
-
-```C++
-virtual SR_NODISCARD DataType * SR_SRLM_NS::DataTypeStruct::Copy () override const
-```
-
-
-
-Implements [*SR\_SRLM\_NS::DataType::Copy*](classSR__SRLM__NS_1_1DataType.md#function-copy)
-
-
-<hr>
-
-
-
 ### function CopyTo 
 
 ```C++
@@ -322,34 +304,6 @@ virtual void SR_SRLM_NS::DataTypeStruct::CopyTo (
 
 
 Implements [*SR\_SRLM\_NS::DataType::CopyTo*](classSR__SRLM__NS_1_1DataType.md#function-copyto)
-
-
-<hr>
-
-
-
-### function DataTypeStruct [1/2]
-
-```C++
-SR_SRLM_NS::DataTypeStruct::DataTypeStruct () = default
-```
-
-
-
-
-<hr>
-
-
-
-### function DataTypeStruct [2/2]
-
-```C++
-inline explicit SR_SRLM_NS::DataTypeStruct::DataTypeStruct (
-    Hash name
-) 
-```
-
-
 
 
 <hr>

@@ -45,8 +45,8 @@ Inherits the following classes: [SR\_UTILS\_NS::InputDeviceData](classSR__UTILS_
 | Type | Name |
 | ---: | :--- |
 |  MouseCode | [**m\_code**](#variable-m_code)  <br> |
+|  SR\_MATH\_NS::FVector2 | [**m\_drag**](#variable-m_drag)  <br> |
 |  SR\_MATH\_NS::FVector2 | [**m\_position**](#variable-m_position)  <br> |
-|  SR\_MATH\_NS::FVector2 | [**m\_prevPos**](#variable-m_prevpos)  <br> |
 |  KeyState | [**m\_state**](#variable-m_state)  <br> |
 |  SR\_MATH\_NS::FVector2 | [**m\_wheel**](#variable-m_wheel)  <br> |
 
@@ -104,8 +104,7 @@ Inherits the following classes: [SR\_UTILS\_NS::InputDeviceData](classSR__UTILS_
 |  SR\_NODISCARD SR\_MATH\_NS::FVector2 | [**GetDrag**](#function-getdrag) () const<br> |
 | virtual InputDeviceType | [**GetType**](#function-gettype) () override const<br> |
 |  SR\_NODISCARD bool | [**IsDrag**](#function-isdrag) () const<br> |
-|   | [**MouseInputData**](#function-mouseinputdata-12) (MouseCode code, KeyState state, const SR\_MATH\_NS::FVector2 & pos, const SR\_MATH\_NS::FVector2 & prevPos, const SR\_MATH\_NS::FVector2 & wheel) <br> |
-|   | [**MouseInputData**](#function-mouseinputdata-22) () <br> |
+|   | [**MouseInputData**](#function-mouseinputdata) () <br> |
 |   | [**~MouseInputData**](#function-mouseinputdata) () override<br> |
 
 
@@ -233,10 +232,10 @@ MouseCode SR_UTILS_NS::MouseInputData::m_code;
 
 
 
-### variable m\_position 
+### variable m\_drag 
 
 ```C++
-SR_MATH_NS::FVector2 SR_UTILS_NS::MouseInputData::m_position;
+SR_MATH_NS::FVector2 SR_UTILS_NS::MouseInputData::m_drag;
 ```
 
 
@@ -246,10 +245,10 @@ SR_MATH_NS::FVector2 SR_UTILS_NS::MouseInputData::m_position;
 
 
 
-### variable m\_prevPos 
+### variable m\_position 
 
 ```C++
-SR_MATH_NS::FVector2 SR_UTILS_NS::MouseInputData::m_prevPos;
+SR_MATH_NS::FVector2 SR_UTILS_NS::MouseInputData::m_position;
 ```
 
 
@@ -328,26 +327,7 @@ SR_NODISCARD bool SR_UTILS_NS::MouseInputData::IsDrag () const
 
 
 
-### function MouseInputData [1/2]
-
-```C++
-inline SR_UTILS_NS::MouseInputData::MouseInputData (
-    MouseCode code,
-    KeyState state,
-    const SR_MATH_NS::FVector2 & pos,
-    const SR_MATH_NS::FVector2 & prevPos,
-    const SR_MATH_NS::FVector2 & wheel
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function MouseInputData [2/2]
+### function MouseInputData 
 
 ```C++
 inline SR_UTILS_NS::MouseInputData::MouseInputData () 

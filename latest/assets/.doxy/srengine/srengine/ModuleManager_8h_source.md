@@ -48,7 +48,7 @@ namespace SR_SCRIPTING_NS {
     class CppBehaviourInstance {
         using LoadedCallback = SR_HTYPES_NS::Function<void()>;
         using PreReloadCalback = SR_HTYPES_NS::Function<void()>;
-        using ManagerPasskey = SR_UTILS_NS::Passkey<ModuleManager>;
+        using ManagerPasskey = SR_UTILS_NS::PassKey<ModuleManager>;
     public:
         SR_NODISCARD SR_UTILS_NS::StringAtom GetBehaviourName() const { return m_behaviourName; }
         SR_NODISCARD const LoadedCallback& GetLoadedCallback() const { return m_loadedCallback; }

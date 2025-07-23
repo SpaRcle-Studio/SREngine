@@ -11,8 +11,10 @@
 
 
 * `#include <Utils/Math/Vector2.h>`
+* `#include <Utils/Math/Rect.h>`
 * `#include <Utils/Input/KeyCodes.h>`
 * `#include <Utils/Common/Singleton.h>`
+* `#include <Utils/Common/PassKey.h>`
 * `#include <Utils/Common/SubscriptionHolder.h>`
 
 
@@ -39,6 +41,7 @@
 | Type | Name |
 | ---: | :--- |
 | class | [**CursorLock**](classSR__UTILS__NS_1_1CursorLock.md) <br> |
+| struct | [**CursorLockInfo**](structSR__UTILS__NS_1_1CursorLockInfo.md) <br> |
 | class | [**Input**](classSR__UTILS__NS_1_1Input.md) <br> |
 
 

@@ -111,7 +111,6 @@
     <innerclass refid="classSR__GRAPH__NS_1_1SSAOPass" prot="public">SR_GRAPH_NS::SSAOPass</innerclass>
     <innerclass refid="structSR__GRAPH__NS_1_1SSBOBinding" prot="public">SR_GRAPH_NS::SSBOBinding</innerclass>
     <innerclass refid="classSR__GRAPH__NS_1_1SSBOManager" prot="public">SR_GRAPH_NS::SSBOManager</innerclass>
-    <innerclass refid="classSR__GRAPH__NS_1_1StartPassNode" prot="public">SR_GRAPH_NS::StartPassNode</innerclass>
     <innerclass refid="classSR__GRAPH__NS_1_1SwapchainPass" prot="public">SR_GRAPH_NS::SwapchainPass</innerclass>
     <innerclass refid="classSR__GRAPH__NS_1_1TextBuilder" prot="public">SR_GRAPH_NS::TextBuilder</innerclass>
     <innerclass refid="classSR__GRAPH__NS_1_1TextureData" prot="public">SR_GRAPH_NS::TextureData</innerclass>

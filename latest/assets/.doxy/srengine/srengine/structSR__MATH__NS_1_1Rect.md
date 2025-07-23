@@ -71,6 +71,7 @@
 | Type | Name |
 | ---: | :--- |
 |  SR\_NODISCARD T | [**Bottom**](#function-bottom) () noexcept const<br> |
+|  SR\_NODISCARD [**SR\_MATH\_NS::Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; | [**Center**](#function-center) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**Contains**](#function-contains) (const [**SR\_MATH\_NS::Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; & point) noexcept const<br> |
 |  SR\_NODISCARD T | [**Height**](#function-height) () noexcept const<br> |
 |  SR\_NODISCARD T | [**Horizontal**](#function-horizontal) () noexcept const<br> |
@@ -323,6 +324,19 @@ T SR_MATH_NS::Rect< T >::y;
 
 ```C++
 SR_NODISCARD T SR_MATH_NS::Rect::Bottom () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function Center 
+
+```C++
+SR_NODISCARD SR_MATH_NS::Vector2 < T > SR_MATH_NS::Rect::Center () noexcept const
 ```
 
 

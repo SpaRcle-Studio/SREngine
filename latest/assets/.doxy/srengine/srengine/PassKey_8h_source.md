@@ -19,33 +19,33 @@
 
 namespace SR_UTILS_NS {
     template <typename T, bool AllowSuccessor = false, typename ... Others>
-    class Passkey : private Passkey<Others, false> ... {
+    class PassKey : private PassKey<Others, false> ... {
     public:
         template <typename U, typename = typename std::enable_if<AllowSuccessor && std::is_base_of<T, U>::value && !std::is_same<U, T>::value, T>::type>
-        Passkey(Passkey<U>&&) { }
+        PassKey(PassKey<U>&&) { }
 
-        template <typename U, typename = U, typename = typename std::enable_if<std::is_base_of<Passkey<U>, Passkey<T, AllowSuccessor, Others...>>::value, U>::type>
-        Passkey(Passkey<U>&&) { }
+        template <typename U, typename = U, typename = typename std::enable_if<std::is_base_of<PassKey<U>, PassKey<T, AllowSuccessor, Others...>>::value, U>::type>
+        PassKey(PassKey<U>&&) { }
 
         template <typename U, typename = U, typename = U, typename = typename std::enable_if<(AllowSuccessor || (sizeof...(Others) > 0)) && std::is_same<U, T>::value, T>::type>
-        Passkey(Passkey<U, AllowSuccessor, Others...>&&) { }
+        PassKey(PassKey<U, AllowSuccessor, Others...>&&) { }
 
     protected:
-        Passkey() noexcept = default;
-        explicit Passkey(const T *) noexcept { }
+        PassKey() noexcept = default;
+        explicit PassKey(const T *) noexcept { }
 
     private:
         friend T;
 
-        Passkey(Passkey<T, false>&&) { }
+        PassKey(PassKey<T, false>&&) { }
 
-        Passkey(const Passkey&) = delete;
-        Passkey& operator=(const Passkey&) = delete;
-        Passkey& operator=(Passkey&&) = delete;
+        PassKey(const PassKey&) = delete;
+        PassKey& operator=(const PassKey&) = delete;
+        PassKey& operator=(PassKey&&) = delete;
 
     };
 
-    template<typename T> Passkey(const T*) -> Passkey<T>;
+    template<typename T> PassKey(const T*) -> PassKey<T>;
 }
 
 #endif //SR_COMMON_PASS_KEY_H

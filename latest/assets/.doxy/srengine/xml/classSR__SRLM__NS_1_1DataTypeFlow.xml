@@ -3,55 +3,6 @@
   <compounddef id="classSR__SRLM__NS_1_1DataTypeFlow" kind="class" language="C++" prot="public">
     <compoundname>SR_SRLM_NS::DataTypeFlow</compoundname>
     <basecompoundref refid="classSR__SRLM__NS_1_1DataTypeEnum" prot="public" virt="non-virtual">SR_SRLM_NS::DataTypeEnum</basecompoundref>
-    <sectiondef kind="private-func">
-      <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeFlow_1abe6ef45689452c1283fb92190f5865ee" prot="private" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
-        <type></type>
-        <definition>SR_SRLM_NS::DataTypeFlow::DataTypeFlow</definition>
-        <argsstring>(FlowState flowState)</argsstring>
-        <name>DataTypeFlow</name>
-        <qualifiedname>SR_SRLM_NS::DataTypeFlow::DataTypeFlow</qualifiedname>
-        <param>
-          <type>FlowState</type>
-          <declname>flowState</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="199" column="18" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="199" bodyend="201"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeFlow_1a0b787911d889367c2ba93a77c2bf75a4" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type></type>
-        <definition>SR_SRLM_NS::DataTypeFlow::DataTypeFlow</definition>
-        <argsstring>()</argsstring>
-        <name>DataTypeFlow</name>
-        <qualifiedname>SR_SRLM_NS::DataTypeFlow::DataTypeFlow</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="203" column="9" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="203" bodyend="205"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeFlow_1aaadd50a063d3d3d4b983d934fb9f71b9" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
-        <type>SR_NODISCARD <ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">DataType</ref> *</type>
-        <definition>SR_NODISCARD DataType * SR_SRLM_NS::DataTypeFlow::Copy</definition>
-        <argsstring>() const override</argsstring>
-        <name>Copy</name>
-        <qualifiedname>SR_SRLM_NS::DataTypeFlow::Copy</qualifiedname>
-        <reimplements refid="classSR__SRLM__NS_1_1DataTypeEnum_1a4c5b7d58d576fa51dbe96927ed0a6064">Copy</reimplements>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="207" column="31" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="207" bodyend="209"/>
-      </memberdef>
-    </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -116,15 +67,12 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="196" column="5" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="196" bodyend="210"/>
+    <location file="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" line="198" column="5" bodyfile="Engine/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="198" bodyend="212"/>
     <listofallmembers>
-      <member refid="classSR__SRLM__NS_1_1DataTypeFlow_1aaadd50a063d3d3d4b983d934fb9f71b9" prot="private" virt="virtual"><scope>SR_SRLM_NS::DataTypeFlow</scope><name>Copy</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1adb1141d084ecc8c4c76a68b1fb25f433" prot="public" virt="pure-virtual"><scope>SR_SRLM_NS::DataTypeFlow</scope><name>Copy</name></member>
       <member refid="classSR__SRLM__NS_1_1DataType_1aba8f7bb2e8b7dd6fe69d578cf9ffce5f" prot="public" virt="pure-virtual"><scope>SR_SRLM_NS::DataTypeFlow</scope><name>CopyTo</name></member>
       <member refid="classSR__SRLM__NS_1_1DataTypeEnum_1aca4211fa8e756c917d2f3653fff6517e" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeFlow</scope><name>DataTypeEnum</name></member>
-      <member refid="classSR__SRLM__NS_1_1DataTypeEnum_1a965f7ceedf6498f4a56a311d93563949" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeFlow</scope><name>DataTypeEnum</name></member>
       <member refid="classSR__SRLM__NS_1_1DataTypeEnum_1acdba5647917b2cdecf041885dd404b69" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeFlow</scope><name>DataTypeEnum</name></member>
-      <member refid="classSR__SRLM__NS_1_1DataTypeFlow_1abe6ef45689452c1283fb92190f5865ee" prot="private" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeFlow</scope><name>DataTypeFlow</name></member>
-      <member refid="classSR__SRLM__NS_1_1DataTypeFlow_1a0b787911d889367c2ba93a77c2bf75a4" prot="private" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeFlow</scope><name>DataTypeFlow</name></member>
       <member refid="classSR__SRLM__NS_1_1DataType_1a9b1e5139bd85a1bdefdabc863490a475" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeFlow</scope><name>GetBool</name></member>
       <member refid="classSR__SRLM__NS_1_1DataType_1a1efa84d4845a52aacc81437779276030" prot="public" virt="pure-virtual"><scope>SR_SRLM_NS::DataTypeFlow</scope><name>GetClass</name></member>
       <member refid="classSR__SRLM__NS_1_1DataType_1a8400aad3026b462c114c4f64729dbab4" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeFlow</scope><name>GetDouble</name></member>

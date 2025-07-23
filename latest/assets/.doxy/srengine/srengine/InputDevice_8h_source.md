@@ -40,18 +40,6 @@ namespace SR_UTILS_NS {
     public:
         ~MouseInputData() override = default;
 
-        MouseInputData(MouseCode code, KeyState state,
-            const SR_MATH_NS::FVector2& pos,
-            const SR_MATH_NS::FVector2& prevPos,
-            const SR_MATH_NS::FVector2& wheel
-        )
-            : m_code(code)
-            , m_state(state)
-            , m_position(pos)
-            , m_prevPos(prevPos)
-            , m_wheel(wheel)
-        { }
-
         MouseInputData()
             : m_code(MouseCode::None)
             , m_state(KeyState::None)
@@ -67,7 +55,7 @@ namespace SR_UTILS_NS {
         MouseCode m_code;
         KeyState m_state;
         SR_MATH_NS::FVector2 m_position;
-        SR_MATH_NS::FVector2 m_prevPos;
+        SR_MATH_NS::FVector2 m_drag;
         SR_MATH_NS::FVector2 m_wheel;
 
     };
