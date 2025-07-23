@@ -144,7 +144,7 @@ namespace SR_SCRIPTING_NS {
 
         auto&& pInstance = new CppBehaviourInstance();
 
-        pInstance->SetBehaviourName(behaviourName, SR_UTILS_NS::Passkey<ModuleManager>(this));
+        pInstance->SetBehaviourName(behaviourName, SR_UTILS_NS::PassKey<ModuleManager>(this));
 
         AllocateBehaviourInternalInstance(pInstance);
 
@@ -210,8 +210,8 @@ namespace SR_SCRIPTING_NS {
     }
 
     void ModuleManager::FreeBehaviourInternalInstance(CppBehaviourInstance* pInstance) {
-        pInstance->SetModuleName(SR_UTILS_NS::StringAtom(), SR_UTILS_NS::Passkey<ModuleManager>(this));
-        pInstance->OnBehaviourUnloaded(SR_UTILS_NS::Passkey<ModuleManager>(this));
+        pInstance->SetModuleName(SR_UTILS_NS::StringAtom(), SR_UTILS_NS::PassKey<ModuleManager>(this));
+        pInstance->OnBehaviourUnloaded(SR_UTILS_NS::PassKey<ModuleManager>(this));
     }
 
     bool ModuleManager::AllocateBehaviourInternalInstance(CppBehaviourInstance* pInstance) {
@@ -242,8 +242,8 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
-        pInstance->SetInstance(pBehaviour, SR_UTILS_NS::Passkey<ModuleManager>(this));
-        pInstance->SetModuleName(pTypeInfo->moduleName, SR_UTILS_NS::Passkey<ModuleManager>(this));
+        pInstance->SetInstance(pBehaviour, SR_UTILS_NS::PassKey<ModuleManager>(this));
+        pInstance->SetModuleName(pTypeInfo->moduleName, SR_UTILS_NS::PassKey<ModuleManager>(this));
 
         return true;
     }

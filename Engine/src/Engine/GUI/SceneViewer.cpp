@@ -145,6 +145,22 @@ namespace SR_CORE_GUI_NS {
         const float_t velocityFactor = GetSceneTools()->GetCameraVelocityFactor();
         const bool isDisabled = !IsOpen() || (!IsHovered() && !m_updateNonHoveredSceneViewer);
 
+        auto&& pFocusedWindow = m_engine->GetFocusedWindow();
+
+        const bool isNeedLock = SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseRight) ||
+            SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseMiddle);
+
+        if (isNeedLock && !isDisabled) {
+            const auto rect = SR_MATH_NS::FRect(
+                pFocusedWindow ? pFocusedWindow->GetPosition().CastToFloat() + GetImagePosition() : SR_MATH_NS::FVector2(),
+                m_textureSize
+            );
+            m_cursorLock = SR_UTILS_NS::CursorLock(SR_UTILS_NS::CursorLockMode::Editor, rect);
+        }
+        else {
+            m_cursorLock.reset();
+        }
+
         if (m_camera) {
             if (auto&& pMover = m_camera->GetComponent<SR_UTILS_NS::CameraFlyMover>()) {
                 pMover->SetVelocityFactor(velocityFactor);
@@ -193,7 +209,7 @@ namespace SR_CORE_GUI_NS {
 
         if (enabled) {
             /// сцена может быть уже заблокирована до Engine::SetScene
-            if (SR_UTILS_NS::Features::Instance().Enabled("EditorCamera", true) && m_scene.RecursiveLockIfValid()) {
+            if (SR_UTILS_NS::Features::Instance().Enabled("EditorCamera", true) && m_scene) {
                 pCamera = m_scene->InstanceGameObject("Editor camera"_atom);
                 pCamera->AddSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave);
                 pCamera->AddEditorFlags(SR_UTILS_NS::EditorFlags::Hidden);
@@ -204,7 +220,6 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 m_isPrefab = m_scene->IsPrefab();
-                m_scene.Unlock();
             }
             else {
                 return;
@@ -254,20 +269,11 @@ namespace SR_CORE_GUI_NS {
         Super::OnKeyPress(data);
     }
 
-    void SceneViewer::OnMouseDown(const SR_UTILS_NS::MouseInputData *data) {
-        if(data->m_code == SR_UTILS_NS::MouseCode::MouseRight) {
-            //m_cursorLockOpt.emplace();
-        }
+    void SceneViewer::OnMouseDown(const SR_UTILS_NS::MouseInputData* data) {
     }
 
     void SceneViewer::OnMouseUp(const SR_UTILS_NS::MouseInputData *data) {
         if (!SR_UTILS_NS::Features::Instance().Enabled("ColorBufferPick", false)) {
-            Super::OnMouseUp(data);
-            return;
-        }
-
-        if (data->m_code == SR_UTILS_NS::MouseCode::MouseRight) {
-            //m_cursorLockOpt = std::nullopt;
             Super::OnMouseUp(data);
             return;
         }

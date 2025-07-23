@@ -2,147 +2,158 @@
 // Created by Monika on 14.07.2024.
 //
 
-/*#include <Libraries/Utils/Allocator.h>
-#include <Libraries/Types/Behaviour.h>
-#include <Libraries/Math/Quaternion.h>
+#include <Utils/Input/InputSystem.h>
+#include <Utils/Input/KeyCodes.h>
+#include <Utils/Math/Vector2.h>
+#include <Utils/Math/Noise.h>
+#include <Utils/Math/VectorRanges.h>
+#include <Utils/ECS/EntityRef.h>
 
-#include <Libraries/Debug.h>
-#include <Libraries/Rigidbody3D.h>
-#include <Libraries/Animator.h>
-#include <Libraries/Transform.h>
-#include <Libraries/GameObject.h>
-#include <Libraries/Component.h>
-#include <Libraries/Rigidbody.h>
-#include <Libraries/Raycast.h>
-#include <Libraries/Input.h>
-#include <Libraries/Casts.h>
+#include <Graphics/Types/Geometry/ProceduralMesh.h>
+#include <Graphics/Animations/Animator.h>
 
-class Raptoid : public Behaviour {
-public:
-    FVector3 velocity;
-    float_t maxSpeed = 5.5f;
-    float_t acceleration = 0.3f;
-    float_t deceleration = 5.0f;
-    float_t rotateSpeed = 0.05f;
-    GameObjectPtr cameraTarget;
-    GameObjectPtr camera;
-    float_t rotateY = 0.f;
-    float_t rotateYLim = 0.f;
-    bool rotateState = false;
+#include <Physics/3D/Rigidbody3D.h>
 
-    GameObjectPtr GetCameraTarget() {
-        if (!cameraTarget) {
-            cameraTarget = gameObject
-                ->Find("Dummy058_$AssimpFbx$_PreRotation")
-                ->Find("Dummy058_$AssimpFbx$_Rotation")
-                ->Find("Dummy058")
-                ->Find("Bip001");
-        }
-        return cameraTarget;
-    }
+#include <Scripting/Cpp/CppBehaviour.h>
 
-    void MoveControl(AnimationGraph* pGraph) {
-        auto&& pParent = gameObject->GetParent();
-        if (!pParent) {
-            return;
-        }
+namespace SpaRcle::Scripts::Samples {
+    class RaptoidController : public SpaRcle::Scripting::CppBehaviour {
+        SR_CLASS()
+    public:
+        /// @property @dontSave @readOnly
+        SR_MATH_NS::FVector3 velocity;
+        /// @property @dontSave @readOnly
+        bool rotateState = false;
+        /// @property @dontSave @readOnly
+        float_t rotateY = 0.f;
 
-        auto&& pRigidbody = DynamicCastComponentToRigidbody3D(pParent->GetComponent("Rigidbody3D").Get());
-        if (!pRigidbody) {
-            return;
+        /// @property
+        float_t cameraDistance = 0.6f;
+        /// @property
+        float_t maxSpeed = 5.5f;
+        /// @property
+        float_t acceleration = 0.3f;
+        /// @property
+        float_t deceleration = 5.0f;
+        /// @property
+        float_t rotateSpeed = 0.05f;
+        /// @property
+        float_t rotateYLim = 0.f;
+        /// @property
+        SR_UTILS_NS::EntityRef<SR_UTILS_NS::GameObject> cameraTarget;
+
+        std::optional<SR_UTILS_NS::CursorLock> cursorLock;
+
+        void OnDisable() override {
+            cursorLock.reset();
         }
 
-        if (Input::GetKey(KeyCode::W)) {
-            if (velocity.z < maxSpeed) {
-                velocity.z += acceleration;
+        void MoveControl(SR_ANIMATIONS_NS::AnimationGraph* pGraph) {
+            auto&& pRigidbody = gameObject->GetComponent<SR_PTYPES_NS::Rigidbody3D>();
+            if (!pRigidbody) {
+                return;
             }
-            pGraph->SetBool("IsRunning", true);
-        } else {
-            if (velocity.z > 0) {
-                velocity.z -= deceleration;
-                if (velocity.z < 0) {
-                    velocity.z = 0;
+
+            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::W)) {
+                if (velocity.z < maxSpeed) {
+                    velocity.z += acceleration;
                 }
+                pGraph->SetBool("IsRunning", true);
             }
-            pGraph->SetBool("IsRunning", false);
-        }
-
-        pRigidbody->SetLinearVelocity(pParent->GetTransform()->GetQuaternion() * velocity);
-    }
-
-    void RotateControl(AnimationGraph* pGraph) {
-        auto&& pParent = gameObject->GetParent();
-        if (!pParent) {
-            return;
-        }
-
-        if (rotateYLim > 1) {
-            rotateYLim /= 1.1f;
-        }
-        else {
-            rotateState = false;
-        }
-
-        if (abs(rotateY) >= 10) {
-            float_t value = rotateY / 10.f;
-            rotateY -= value;
-            pParent->GetTransform()->Rotate(FVector3(0.f, value, 0.f));
-            pGraph->SetBool("IsRunning", true);
-        }
-
-        FVector2 drag = Input::GetMouseDrag();
-        if (drag.x == 0 || abs(rotateYLim > 65.f) || rotateState) {
-            if (abs(rotateYLim > 65.f)) {
-                rotateState = true;
+            else {
+                if (velocity.z > 0) {
+                    velocity.z -= deceleration;
+                    if (velocity.z < 0) {
+                        velocity.z = 0;
+                    }
+                }
+                pGraph->SetBool("IsRunning", false);
             }
-            return;
+
+            pRigidbody->SetLinearVelocity(transform->GetQuaternion() * velocity);
         }
 
-        rotateY += drag.x * rotateSpeed;
-        rotateYLim += abs(drag.x) * rotateSpeed;
-    }
+        void RotateControl(SR_ANIMATIONS_NS::AnimationGraph* pGraph) {
+            if (rotateYLim > 1) {
+                rotateYLim /= 1.1f;
+            }
+            else {
+                rotateState = false;
+            }
 
-    void AnimateCamera() {
-        auto&& pCameraGameObject = gameObject->Find("Camera");
-        auto&& pCameraSourceGameObject = gameObject->Find("CameraSource");
-        auto&& pCameraTargetGameObject = GetCameraTarget();
-        if (!pCameraGameObject || !pCameraTargetGameObject) {
-            return;
+            //if (abs(rotateY) >= 10) {
+            //    float_t value = rotateY / 10.f;
+            //    rotateY -= value;
+            //    transform->Rotate(SR_MATH_NS::FVector3(0.f, value, 0.f));
+            //    pGraph->SetBool("IsRunning", true);
+            //}
+
+            if (abs(rotateY) > 0) {
+                transform->Rotate(SR_MATH_NS::FVector3(0.f, rotateY, 0.f));
+                rotateY = 0.f;
+                pGraph->SetBool("IsRunning", true);
+            }
+
+            SR_MATH_NS::FVector2 drag = SR_UTILS_NS::Input::Instance().GetMouseDrag();
+            if (drag.x == 0 || abs(rotateYLim) > 65.f || rotateState) {
+                if (abs(rotateYLim) > 65.f) {
+                    rotateState = true;
+                }
+                return;
+            }
+
+            rotateY += drag.x * rotateSpeed;
+            rotateYLim += abs(drag.x) * rotateSpeed;
         }
 
-        FVector3 postion = pCameraSourceGameObject->GetTransform()->GetTranslation();
-        postion = postion.Lerp(pCameraTargetGameObject->GetTransform()->GetTranslation(), 0.6f);
+        void AnimateCamera() {
+            auto&& pCameraGameObject = gameObject->Find("Camera"_atom).StaticCast<SR_UTILS_NS::GameObject>();
+            auto&& pCameraSourceGameObject = gameObject->Find("CameraSource"_atom).StaticCast<SR_UTILS_NS::GameObject>();
+            auto&& pCameraTargetGameObject = cameraTarget.Get();
+            if (!pCameraGameObject || !pCameraTargetGameObject) {
+                return;
+            }
 
-        pCameraGameObject->GetTransform()->SetTranslation(postion);
-    }
+            SR_MATH_NS::FVector3 position = pCameraSourceGameObject->GetTransform()->GetTranslation();
+            position = position.Lerp(pCameraTargetGameObject->GetTransform()->GetTranslation(), cameraDistance);
 
-    void FixedUpdate() override {
-        if (!gameObject) {
-            return;
+            pCameraGameObject->GetTransform()->SetTranslation(position);
         }
 
-        auto&& pAnimator = DynamicCastComponentToAnimator(gameObject->GetComponent("Animator").Get());
+        void FixedUpdate() override {
+            if (!gameObject) {
+                return;
+            }
 
-        if (!pAnimator) {
-            Debug::Error("Animator is not set");
-            return;
+            if (!SR_UTILS_NS::Input::Instance().IsPlayMode()) {
+                return;
+            }
+
+            cursorLock = SR_UTILS_NS::CursorLock(SR_UTILS_NS::CursorLockMode::PlayMode);
+
+            auto&& pAnimator = gameObject->GetComponent<SR_ANIMATIONS_NS::Animator>();
+
+            if (!pAnimator) {
+                SR_ERROR("Animator is not set");
+                return;
+            }
+
+            auto&& pGraph = pAnimator->GetGraph();
+            if (!pGraph) {
+                SR_ERROR("Graph is not set");
+                return;
+            }
+
+            pGraph->SetBool("IsThreaten", SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F));
+
+            if (!pGraph->IsStateActive("Dummy058|Dummy058|Threaten")) {
+                MoveControl(pGraph);
+                RotateControl(pGraph);
+            }
+
+            AnimateCamera();
         }
+    };
+}
 
-        auto&& pGraph = pAnimator->GetGraph();
-        if (!pGraph) {
-            Debug::Error("Graph is not set");
-            return;
-        }
-
-        pGraph->SetBool("IsThreaten", Input::GetKeyDown(KeyCode::F));
-
-        if (!pGraph->IsStateActive("Dummy058|Dummy058|Threaten")) {
-            MoveControl(pGraph);
-            RotateControl(pGraph);
-        }
-
-        AnimateCamera();
-    }
-};
-
-REGISTER_BEHAVIOUR(Raptoid)*/
+#include <Codegen/Raptoid.generated.hpp>

@@ -275,10 +275,19 @@ namespace SR_CORE_NS {
     void Engine::FixedUpdate() {
         SR_TRACY_ZONE;
 
-        ///В этом блоке находится обработка нажатия клавиш, которая не должна срабатывать, если окно не сфокусированно
-        if (IsApplicationFocused())
-        {
-            SR_UTILS_NS::Input::Instance().Check();
+        const auto&& pFocusedWindow = GetFocusedWindow();
+
+        if (pFocusedWindow) {
+            SR_UTILS_NS::Input::Instance().SetFocusedWindowRect(pFocusedWindow->GetWindowRect());
+        }
+        else {
+            SR_UTILS_NS::Input::Instance().SetFocusedWindowRect(std::nullopt);
+        }
+
+        SR_UTILS_NS::Input::Instance().SetPlayMode(!IsPaused() && IsGameMode());
+        SR_UTILS_NS::Input::Instance().Update();
+
+        if (pFocusedWindow) {
             m_input->Check();
 
             bool lShiftPressed = SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::LShift);
@@ -295,9 +304,9 @@ namespace SR_CORE_NS {
                 }
             }
 
-            if (!IsGameMode() && m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F1)) {
-                m_editor->SetDockingEnabled(!m_editor->IsDockingEnabled());
-            }
+            //if (!IsGameMode() && m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F1)) {
+            //    m_editor->SetDockingEnabled(!m_editor->IsDockingEnabled());
+            //}
 
             // if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F9)) {
             //     SR_UTILS_NS::Input::Instance().LockCursor(!SR_UTILS_NS::Input::Instance().IsCursorLocked());
@@ -313,7 +322,7 @@ namespace SR_CORE_NS {
             }
         }
 
-        if (m_editor && IsApplicationFocused()) {
+        if (m_editor && pFocusedWindow) {
             m_editor->FixedUpdate();
         }
     }
@@ -492,20 +501,20 @@ namespace SR_CORE_NS {
     }
 
     bool Engine::IsApplicationFocused() const {
-        if (m_windows.empty()) {
-            return true;
-        }
-
-        for (auto&& pWindow : m_windows) {
-            if (pWindow->IsWindowFocus()) {
-                return true;
-            }
-        }
-
-        return false;
+        return GetFocusedWindow();
     }
 
     SR_UTILS_NS::Debug& Engine::GetDebugger() const {
         return SR_UTILS_NS::Debug::Instance();
+    }
+
+    Engine::WindowPtr Engine::GetFocusedWindow() const {
+        for (auto&& pWindow : m_windows) {
+            if (pWindow->IsWindowFocus()) {
+                return pWindow;
+            }
+        }
+        static WindowPtr nullWindow;
+        return nullWindow;
     }
 }

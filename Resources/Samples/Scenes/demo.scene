@@ -2332,9 +2332,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1545
+											11-f:874
 										10-v:height
-											11-f:1078
+											11-f:876
 									9-v:direction
 										10-s:Column
 									9-v:containerAlign
@@ -2769,9 +2769,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1545
+											11-f:874
 										10-v:height
-											11-f:1078
+											11-f:876
 						6-k:i
 							7-o:d
 								8-v:type
@@ -3210,9 +3210,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1545
+											11-f:874
 										10-v:height
-											11-f:1078
+											11-f:876
 										10-v:align
 											11-s:End
 									9-v:direction
@@ -4153,9 +4153,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1545
+											11-f:874
 										10-v:height
-											11-f:1078
+											11-f:876
 									9-v:containerAlign
 										10-s:Center
 									9-v:justify
@@ -4540,9 +4540,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1545
+											11-f:874
 										10-v:height
-											11-f:1078
+											11-f:876
 									9-v:direction
 										10-s:Column
 									9-v:containerAlign
@@ -5487,9 +5487,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1545
+											11-f:874
 										10-v:height
-											11-f:1078
+											11-f:876
 									9-v:direction
 										10-s:Column
 									9-v:containerAlign
@@ -7613,6 +7613,57 @@ ddddцццゔぅヾボ
 										10-f:0.00100000005
 									9-v:graph
 										10-s:Samples/Raptoid/Animator.xml
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Behaviour
+								8-o:ptr
+									9-v:entityId
+										10-i:3652470235130918011
+									9-v:behaviourName
+										10-s:RaptoidController
+									9-o:data
+										10-v:cameraDistance
+											11-f:0.200000003
+										10-v:rotateYLim
+											11-f:180
+										10-o:cameraTarget
+											11-v:entityId
+												12-i:4585637248028691741
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Rigidbody3D
+								8-o:ptr
+									9-v:entityId
+										10-i:3520227093907133592
+									9-v:mass
+										10-f:7.25
+									9-o:center
+										10-v:y
+											11-f:0.779999971
+										10-v:z
+											11-f:-0.200000003
+									9-o:shape
+										10-v:type
+											11-s:CollisionShape
+										10-o:ptr
+											11-v:type
+												12-s:Box3D
+											11-o:bounds
+												12-v:x
+													13-f:0.49000001
+												12-v:y
+													13-f:0.769999981
+												12-v:z
+													13-f:0.829999983
+									9-o:angularLock
+										10-v:x
+											11-b:true
+										10-v:y
+											11-b:true
+										10-v:z
+											11-b:true
 					5-v:name
 						6-s:Raptoid/Prop2
 					5-a:children
@@ -13705,15 +13756,13 @@ ddddцццゔぅヾボ
 											11-s:Transform3D
 										10-o:ptr
 											11-o:translation
-												12-v:x
-													13-f:1.482921
 												12-v:z
 													13-f:-0.265691012
 											11-o:quaternion
 												12-v:y
-													13-f:0.0885270014
+													13-f:-0.707106769
 												12-v:w
-													13-f:0.996074021
+													13-f:0.707106769
 						6-k:i
 							7-o:d
 								8-v:type
@@ -14695,6 +14744,57 @@ ddddцццゔぅヾボ
 													13-f:0.707107008
 												12-v:w
 													13-f:0.707107008
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:GameObject
+								8-o:ptr
+									9-v:entityId
+										10-i:4269025308552219840
+									9-v:name
+										10-s:CameraSource
+									9-o:transform
+										10-v:type
+											11-s:Transform3D
+										10-o:ptr
+											11-o:translation
+												12-v:y
+													13-f:2.29549837
+												12-v:z
+													13-f:-2.90558314
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:GameObject
+								8-o:ptr
+									9-v:entityId
+										10-i:3077901194050929234
+									9-a:components
+										10-k:i
+											11-o:d
+												12-v:type
+													13-s:Camera
+												12-o:ptr
+													13-v:entityId
+														14-i:4440690679856616196
+													13-v:renderTechnique
+														14-s:Engine/Configs/MainRenderTechnique.xml
+									9-v:name
+										10-s:Camera
+									9-o:transform
+										10-v:type
+											11-s:Transform3D
+										10-o:ptr
+											11-o:translation
+												12-v:y
+													13-f:1.44967294
+												12-v:z
+													13-f:-1.71429014
+											11-o:quaternion
+												12-v:x
+													13-f:0.0662739053
+												12-v:w
+													13-f:0.997801483
 					5-o:transform
 						6-v:type
 							7-s:Transform3D

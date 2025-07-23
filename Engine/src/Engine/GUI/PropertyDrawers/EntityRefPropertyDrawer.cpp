@@ -5,6 +5,7 @@
 #include <Engine/GUI/PropertyDrawers/EntityRefPropertyDrawer.h>
 
 #include <Utils/ECS/EntityRef.h>
+#include <Utils/ECS/SceneObject.h>
 
 #include <Codegen/EntityRefPropertyDrawer.generated.hpp>
 
@@ -54,11 +55,24 @@ namespace SR_CORE_GUI_NS {
             }
 
             if (SR_GRAPH_GUI_NS::Immediate::BeginDragDropTarget()) {
+                if (auto&& payload = SR_GRAPH_GUI_NS::Immediate::AcceptDragDropPayload("Hierarchy##Payload")) {
+                    if (auto&& pData = SR_GRAPH_GUI_NS::Immediate::GetDataFromDragDropPayload(payload)) {
+                        std::list<SR_UTILS_NS::SceneObject::Ptr> sceneObjects = *(std::list<SR_UTILS_NS::SceneObject::Ptr>*)(pData);
+                        if (!sceneObjects.empty() && sceneObjects.front() && sceneObjects.front()->GetMeta()->GetFactoryName() == entityType) {
+                            if (context.onBeforeChangeCallback) {
+                                context.onBeforeChangeCallback(false);
+                            }
+                            feedback.isChanged = true;
+                            pEntityRef->SetEntityId(sceneObjects.front()->GetEntityId());
+                        }
+                    }
+                }
+
                 if (auto&& payload = SR_GRAPH_GUI_NS::Immediate::AcceptDragDropPayload("InspectorComponent##Payload")) {
                     if (auto&& pData = SR_GRAPH_GUI_NS::Immediate::GetDataFromDragDropPayload(payload)) {
                         std::list<SR_UTILS_NS::Component::Ptr> components = *(std::list<SR_UTILS_NS::Component::Ptr> *)(pData);
                         if (!components.empty() && components.front()) {
-                            if (pEntityRef->GetTypeName() == components.front()->GetMeta()->GetFactoryName()) {
+                            if (entityType == components.front()->GetMeta()->GetFactoryName()) {
                                 if (context.onBeforeChangeCallback) {
                                     context.onBeforeChangeCallback(false);
                                 }
