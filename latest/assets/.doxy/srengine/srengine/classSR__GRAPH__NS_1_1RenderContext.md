@@ -92,10 +92,10 @@ Inherits the following classes: [SR\_HTYPES\_NS::SafePtr](classSR__HTYPES__NS_1_
 |  SR\_NODISCARD const RenderContext::PipelinePtr & | [**GetPipeline**](#function-getpipeline-12) () const<br> |
 |  SR\_NODISCARD RenderContext::PipelinePtr & | [**GetPipeline**](#function-getpipeline-22) () <br> |
 |  SR\_NODISCARD PipelineType | [**GetPipelineType**](#function-getpipelinetype) () const<br> |
-|  SR\_NODISCARD const std::vector&lt; IRenderTechnique::Ptr &gt; & | [**GetRenderTechniques**](#function-getrendertechniques) () noexcept const<br> |
+|  SR\_NODISCARD const std::vector&lt; RenderTechniquePtr &gt; & | [**GetRenderTechniques**](#function-getrendertechniques) () noexcept const<br> |
 |  SR\_NODISCARD const RenderScenes & | [**GetScenes**](#function-getscenes) () noexcept const<br> |
-|  SR\_NODISCARD const std::vector&lt; [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* &gt; & | [**GetShaders**](#function-getshaders) () noexcept const<br> |
-|  SR\_NODISCARD const std::vector&lt; [**SR\_GTYPES\_NS::Skybox**](classSR__GTYPES__NS_1_1Skybox.md) \* &gt; & | [**GetSkyboxes**](#function-getskyboxes) () noexcept const<br> |
+|  SR\_NODISCARD const std::vector&lt; ShaderPtr &gt; & | [**GetShaders**](#function-getshaders) () noexcept const<br> |
+|  SR\_NODISCARD const std::vector&lt; SkyboxPtr &gt; & | [**GetSkyboxes**](#function-getskyboxes) () noexcept const<br> |
 |  SR\_NODISCARD const std::vector&lt; TexturePtr &gt; & | [**GetTextures**](#function-gettextures) () noexcept const<br> |
 |  SR\_NODISCARD WindowPtr | [**GetWindow**](#function-getwindow) () const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::UVector2 | [**GetWindowSize**](#function-getwindowsize) () const<br> |
@@ -106,12 +106,7 @@ Inherits the following classes: [SR\_HTYPES\_NS::SafePtr](classSR__HTYPES__NS_1_
 |  void | [**OnMultiSampleChanged**](#function-onmultisamplechanged) () <br> |
 |  void | [**OnResize**](#function-onresize) (const SR\_MATH\_NS::UVector2 & size) <br> |
 |  void | [**PrepareFrame**](#function-prepareframe) () <br> |
-|  void | [**Register**](#function-register-16) (FramebufferPtr pFrameBuffer) <br> |
-|  void | [**Register**](#function-register-26) ([**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader) <br> |
-|  void | [**Register**](#function-register-36) ([**SR\_GTYPES\_NS::Texture**](classSR__GTYPES__NS_1_1Texture.md) \* pTexture) <br> |
-|  void | [**Register**](#function-register-46) ([**IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* pTechnique) <br> |
-|  void | [**Register**](#function-register-56) (MaterialPtr pMaterial) <br> |
-|  void | [**Register**](#function-register-66) (SkyboxPtr pSkybox) <br> |
+|  void | [**Register**](#function-register) ([**Memory::IGraphicsResource**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md) \* pResource, [**SR\_UTILS\_NS::PassKey**](classSR__UTILS__NS_1_1PassKey.md)&lt; [**Memory::IGraphicsResource**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md) &gt;) <br> |
 |   | [**RenderContext**](#function-rendercontext) () <br> |
 |  bool | [**SetCurrentShader**](#function-setcurrentshader) (ShaderPtr pShader) <br> |
 |  void | [**SetDirty**](#function-setdirty) () <br> |
@@ -441,7 +436,7 @@ SR_NODISCARD PipelineType SR_GRAPH_NS::RenderContext::GetPipelineType () const
 ### function GetRenderTechniques 
 
 ```C++
-SR_NODISCARD const std::vector< IRenderTechnique::Ptr > & SR_GRAPH_NS::RenderContext::GetRenderTechniques () noexcept const
+SR_NODISCARD const std::vector< RenderTechniquePtr > & SR_GRAPH_NS::RenderContext::GetRenderTechniques () noexcept const
 ```
 
 
@@ -467,7 +462,7 @@ inline SR_NODISCARD const RenderScenes & SR_GRAPH_NS::RenderContext::GetScenes (
 ### function GetShaders 
 
 ```C++
-SR_NODISCARD const std::vector< SR_GTYPES_NS::Shader * > & SR_GRAPH_NS::RenderContext::GetShaders () noexcept const
+SR_NODISCARD const std::vector< ShaderPtr > & SR_GRAPH_NS::RenderContext::GetShaders () noexcept const
 ```
 
 
@@ -480,7 +475,7 @@ SR_NODISCARD const std::vector< SR_GTYPES_NS::Shader * > & SR_GRAPH_NS::RenderCo
 ### function GetSkyboxes 
 
 ```C++
-SR_NODISCARD const std::vector< SR_GTYPES_NS::Skybox * > & SR_GRAPH_NS::RenderContext::GetSkyboxes () noexcept const
+SR_NODISCARD const std::vector< SkyboxPtr > & SR_GRAPH_NS::RenderContext::GetSkyboxes () noexcept const
 ```
 
 
@@ -622,86 +617,12 @@ void SR_GRAPH_NS::RenderContext::PrepareFrame ()
 
 
 
-### function Register [1/6]
+### function Register 
 
 ```C++
 void SR_GRAPH_NS::RenderContext::Register (
-    FramebufferPtr pFrameBuffer
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function Register [2/6]
-
-```C++
-void SR_GRAPH_NS::RenderContext::Register (
-    SR_GTYPES_NS::Shader * pShader
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function Register [3/6]
-
-```C++
-void SR_GRAPH_NS::RenderContext::Register (
-    SR_GTYPES_NS::Texture * pTexture
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function Register [4/6]
-
-```C++
-void SR_GRAPH_NS::RenderContext::Register (
-    IRenderTechnique * pTechnique
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function Register [5/6]
-
-```C++
-void SR_GRAPH_NS::RenderContext::Register (
-    MaterialPtr pMaterial
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function Register [6/6]
-
-```C++
-void SR_GRAPH_NS::RenderContext::Register (
-    SkyboxPtr pSkybox
+    Memory::IGraphicsResource * pResource,
+    SR_UTILS_NS::PassKey < Memory::IGraphicsResource >
 ) 
 ```
 

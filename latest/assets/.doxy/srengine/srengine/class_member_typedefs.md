@@ -211,6 +211,7 @@
 * **ResizeCallback** ([**SR\_GRAPH\_NS::BasicWindowImpl**](classSR__GRAPH__NS_1_1BasicWindowImpl.md), [**SR\_GRAPH\_NS::Window**](classSR__GRAPH__NS_1_1Window.md))
 * **RenderQueuePtr** ([**SR\_GRAPH\_NS::MeshDrawerPass**](classSR__GRAPH__NS_1_1MeshDrawerPass.md), [**SR\_GRAPH\_NS::RenderStrategy**](classSR__GRAPH__NS_1_1RenderStrategy.md))
 * **RenderScenes** ([**SR\_GRAPH\_NS::RenderContext**](classSR__GRAPH__NS_1_1RenderContext.md))
+* **RenderTechniquePtr** ([**SR\_GRAPH\_NS::RenderContext**](classSR__GRAPH__NS_1_1RenderContext.md))
 * **ReverseConstIterator** ([**SR\_GRAPH\_NS::SortedMeshQueue**](classSR__GRAPH__NS_1_1SortedMeshQueue.md))
 * **ReverseIterator** ([**SR\_GRAPH\_NS::SortedMeshQueue**](classSR__GRAPH__NS_1_1SortedMeshQueue.md))
 * **RenderQueues** ([**SR\_GTYPES\_NS::Mesh**](classSR__GTYPES__NS_1_1Mesh.md))

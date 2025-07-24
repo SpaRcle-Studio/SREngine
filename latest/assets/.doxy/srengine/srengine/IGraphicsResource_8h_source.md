@@ -18,6 +18,7 @@
 #include <Graphics/macros.h>
 
 #include <Utils/Debug.h>
+#include <Utils/Common/PassKey.h>
 
 namespace SR_GRAPH_NS {
     class RenderContext;
@@ -38,30 +39,17 @@ namespace SR_GRAPH_NS::Memory {
         IGraphicsResource& operator=(const IGraphicsResource&) = delete;
 
     public:
-        virtual void DeInitGraphicsResource();
+        void RegisterGraphicsResource();
+        void DeInitGraphicsResource(SR_UTILS_NS::PassKey<RenderContext>);
 
-        virtual void FreeVideoMemory() {
-            m_isCalculated = false;
-        }
-
-        void MarkPipelineUnBuild();
-
-        void SetRenderContext(const RenderContextPtr& renderContext);
-
-        SR_NODISCARD const PipelinePtr& GetPipeline() const noexcept {
-            return m_pipeline;
-        }
-
-        SR_NODISCARD RenderContextPtr GetRenderContext() const noexcept {
-            return m_renderContext;
-        }
-
-        SR_NODISCARD SR_FORCE_INLINE bool IsCalculated() const { return m_isCalculated; }
-        SR_NODISCARD SR_FORCE_INLINE bool IsGraphicsResourceRegistered() const { return m_pipeline; }
+        SR_NODISCARD const PipelinePtr& GetPipeline() const noexcept { return m_pipeline; }
+        SR_NODISCARD RenderContextPtr GetRenderContext() const noexcept { return m_renderContext; }
+        SR_NODISCARD bool IsGraphicsResourceRegistered() const noexcept { return m_pipeline; }
 
     protected:
-        bool m_isCalculated = false;
+        virtual void FreeVMemory() { }
 
+    private:
         PipelinePtr m_pipeline;
         RenderContextPtr m_renderContext = nullptr;
 

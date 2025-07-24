@@ -196,7 +196,7 @@ See [SR\_HTYPES\_NS::IRawMeshHolder](classSR__HTYPES__NS_1_1IRawMeshHolder.md)
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**FreeVideoMemory**](#function-freevideomemory) () override<br> |
+| virtual void | [**FreeVMemory**](#function-freevmemory) () override<br> |
 | virtual SR\_NODISCARD std::string | [**GetMeshIdentifier**](#function-getmeshidentifier) () override const<br> |
 | virtual SR\_NODISCARD MeshType | [**GetMeshType**](#function-getmeshtype) () noexcept override const<br> |
 |  SR\_NODISCARD const SkeletonRef & | [**GetSkeletonRef**](#function-getskeletonref-12) () noexcept const<br> |
@@ -222,7 +222,7 @@ See [SR\_GTYPES\_NS::IndexedMesh](classSR__GTYPES__NS_1_1IndexedMesh.md)
 |  bool | [**CalculateVBO**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-calculatevbo-22) (const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; [**SR\_HTYPES\_NS::FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md)&lt; Vertex &gt;()&gt; & getter) <br> |
 |  bool | [**FreeIBO**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-freeibo) () <br> |
 |  bool | [**FreeVBO**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-freevbo) () <br> |
-|  void | [**FreeVideoMemory**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-freevideomemory) () override<br> |
+| virtual void | [**FreeVMemory**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-freevmemory) () override<br> |
 | virtual SR\_NODISCARD int32\_t | [**GetIBO**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-getibo) () override<br> |
 | virtual SR\_NODISCARD const [**SR\_HTYPES\_NS::FastMemoryArray**](classSR__HTYPES__NS_1_1FastMemoryArray.md)&lt; uint32\_t &gt; & | [**GetIndices**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-getindices) () const<br> |
 | virtual SR\_NODISCARD uint32\_t | [**GetIndicesCount**](classSR__GTYPES__NS_1_1IndexedMesh.md#function-getindicescount) () override const<br> |
@@ -251,6 +251,7 @@ See [SR\_GTYPES\_NS::Mesh](classSR__GTYPES__NS_1_1Mesh.md)
 | virtual SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetMeshLayer**](classSR__GTYPES__NS_1_1Mesh.md#function-getmeshlayer) () const<br> |
 |  SR\_NODISCARD const MeshRegistrationInfo & | [**GetMeshRegistrationInfo**](classSR__GTYPES__NS_1_1Mesh.md#function-getmeshregistrationinfo) () noexcept const<br> |
 | virtual SR\_NODISCARD MeshType | [**GetMeshType**](classSR__GTYPES__NS_1_1Mesh.md#function-getmeshtype) () noexcept const = 0<br> |
+|  SR\_NODISCARD Pipeline \* | [**GetPipeline**](classSR__GTYPES__NS_1_1Mesh.md#function-getpipeline) () noexcept const<br> |
 |  SR\_NODISCARD RenderQueues & | [**GetRenderQueues**](classSR__GTYPES__NS_1_1Mesh.md#function-getrenderqueues) () noexcept<br> |
 |  SR\_NODISCARD ShaderPtr | [**GetShader**](classSR__GTYPES__NS_1_1Mesh.md#function-getshader) () const<br> |
 | virtual SR\_NODISCARD int64\_t | [**GetSortingPriority**](classSR__GTYPES__NS_1_1Mesh.md#function-getsortingpriority) () const<br> |
@@ -260,6 +261,7 @@ See [SR\_GTYPES\_NS::Mesh](classSR__GTYPES__NS_1_1Mesh.md)
 | virtual SR\_NODISCARD bool | [**HasSortingPriority**](classSR__GTYPES__NS_1_1Mesh.md#function-hassortingpriority) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsActive**](classSR__GTYPES__NS_1_1Mesh.md#function-isactive) () noexcept override const<br>_Активен и компонент и его родительский объект_  |
 | virtual SR\_NODISCARD bool | [**IsCalculatable**](classSR__GTYPES__NS_1_1Mesh.md#function-iscalculatable) () const<br> |
+|  SR\_NODISCARD bool | [**IsCalculated**](classSR__GTYPES__NS_1_1Mesh.md#function-iscalculated) () noexcept const<br> |
 | virtual SR\_NODISCARD SR\_FORCE\_INLINE bool | [**IsFlatMesh**](classSR__GTYPES__NS_1_1Mesh.md#function-isflatmesh) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsMeshRegistered**](classSR__GTYPES__NS_1_1Mesh.md#function-ismeshregistered) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsSupportVBO**](classSR__GTYPES__NS_1_1Mesh.md#function-issupportvbo) () const = 0<br> |
@@ -283,6 +285,7 @@ See [SR\_GTYPES\_NS::Mesh](classSR__GTYPES__NS_1_1Mesh.md)
 |  void | [**SetMaterial**](classSR__GTYPES__NS_1_1Mesh.md#function-setmaterial-22) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 | virtual void | [**SetMatrix**](classSR__GTYPES__NS_1_1Mesh.md#function-setmatrix) (const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & matrix) <br> |
 |  void | [**SetMeshRegistrationInfo**](classSR__GTYPES__NS_1_1Mesh.md#function-setmeshregistrationinfo) (const std::optional&lt; MeshRegistrationInfo &gt; & info) <br> |
+|  void | [**SetPipeline**](classSR__GTYPES__NS_1_1Mesh.md#function-setpipeline) (Pipeline \* pPipeline) <br> |
 |  void | [**SetUniformsClean**](classSR__GTYPES__NS_1_1Mesh.md#function-setuniformsclean) () <br> |
 |  void | [**UnRegisterMesh**](classSR__GTYPES__NS_1_1Mesh.md#function-unregistermesh) () <br> |
 | virtual void | [**UseMaterial**](classSR__GTYPES__NS_1_1Mesh.md#function-usematerial) () <br> |
@@ -456,9 +459,11 @@ See [SR\_GTYPES\_NS::Mesh](classSR__GTYPES__NS_1_1Mesh.md)
 |  bool | [**m\_dirtyMaterial**](classSR__GTYPES__NS_1_1Mesh.md#variable-m_dirtymaterial)   = `false`<br> |
 |  FrustumCullingType | [**m\_frustumCullingType**](classSR__GTYPES__NS_1_1Mesh.md#variable-m_frustumcullingtype)   = `FrustumCullingType::Sphere`<br> |
 |  bool | [**m\_hasErrors**](classSR__GTYPES__NS_1_1Mesh.md#variable-m_haserrors)   = `false`<br> |
+|  bool | [**m\_isCalculated**](classSR__GTYPES__NS_1_1Mesh.md#variable-m_iscalculated)   = `false`<br> |
 |  bool | [**m\_isUniformsDirty**](classSR__GTYPES__NS_1_1Mesh.md#variable-m_isuniformsdirty)   = `false`<br> |
 |  bool | [**m\_isWaitReRegister**](classSR__GTYPES__NS_1_1Mesh.md#variable-m_iswaitreregister)   = `false`<br> |
 |  MaterialPtr | [**m\_material**](classSR__GTYPES__NS_1_1Mesh.md#variable-m_material)  <br> |
+|  Pipeline \* | [**m\_pipeline**](classSR__GTYPES__NS_1_1Mesh.md#variable-m_pipeline)   = `nullptr`<br> |
 |  RenderQueues | [**m\_renderQueues**](classSR__GTYPES__NS_1_1Mesh.md#variable-m_renderqueues)  <br> |
 |  Memory::UBOManager & | [**m\_uboManager**](classSR__GTYPES__NS_1_1Mesh.md#variable-m_ubomanager)  <br> |
 |  int32\_t | [**m\_virtualDescriptor**](classSR__GTYPES__NS_1_1Mesh.md#variable-m_virtualdescriptor)   = `SR\_ID\_INVALID`<br> |
@@ -596,7 +601,7 @@ See [SR\_GTYPES\_NS::Mesh](classSR__GTYPES__NS_1_1Mesh.md)
 | Type | Name |
 | ---: | :--- |
 | virtual bool | [**Calculate**](classSR__GTYPES__NS_1_1Mesh.md#function-calculate) () <br> |
-|  void | [**FreeVideoMemory**](classSR__GTYPES__NS_1_1Mesh.md#function-freevideomemory) () override<br> |
+| virtual void | [**FreeVMemory**](classSR__GTYPES__NS_1_1Mesh.md#function-freevmemory) () <br> |
 
 
 
@@ -657,13 +662,15 @@ typedef Vertices::SkinnedMeshVertex SR_GTYPES_NS::SkinnedMesh::VertexType;
 
 
 
-### function FreeVideoMemory 
+### function FreeVMemory 
 
 ```C++
-void SR_GTYPES_NS::SkinnedMesh::FreeVideoMemory () override
+virtual void SR_GTYPES_NS::SkinnedMesh::FreeVMemory () override
 ```
 
 
+
+Implements [*SR\_GTYPES\_NS::IndexedMesh::FreeVMemory*](classSR__GTYPES__NS_1_1IndexedMesh.md#function-freevmemory)
 
 
 <hr>

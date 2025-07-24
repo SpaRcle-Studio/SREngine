@@ -84,7 +84,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD ImageAspect GetDepthAspect() const noexcept { return m_depth.aspect; }
         SR_NODISCARD bool IsDepthEnabled() const { return m_depthEnabled; }
         SR_NODISCARD bool IsDirty() const { return m_dirty; }
-        SR_NODISCARD bool IsValid() const { return m_frameBuffer != SR_ID_INVALID && !m_hasErrors && IsCalculated() && !IsDirty(); }
+        SR_NODISCARD bool IsValid() const { return m_frameBuffer != SR_ID_INVALID && !m_hasErrors && !IsDirty(); }
         SR_NODISCARD const FrameBufferFeatures& GetFeatures() const { return m_features; }
 
         SR_NODISCARD int32_t GetId() const;
@@ -95,7 +95,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD uint32_t GetHeight() const;
         SR_NODISCARD SR_MATH_NS::IVector2 GetSize() const { return m_size; }
 
-        void FreeVideoMemory() override;
+        void FreeVMemory() override;
         uint64_t GetFileHash() const override;
 
     private:

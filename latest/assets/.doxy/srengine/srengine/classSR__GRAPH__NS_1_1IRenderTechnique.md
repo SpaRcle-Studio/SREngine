@@ -292,7 +292,7 @@ See [SR\_SRLM\_NS::LogicalNode](classSR__SRLM__NS_1_1LogicalNode.md)
 
 | Type | Name |
 | ---: | :--- |
-| virtual void | [**FreeVideoMemory**](#function-freevideomemory) () override<br> |
+| virtual void | [**FreeVMemory**](#function-freevmemory) () override<br> |
 |  SR\_NODISCARD CameraPtr | [**GetCamera**](#function-getcamera) () noexcept const<br> |
 |  SR\_NODISCARD FrameBufferControllerPtr | [**GetFrameBufferController**](#function-getframebuffercontroller) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) const<br> |
 |  SR\_NODISCARD const PassQueues & | [**GetQueues**](#function-getqueues) () const<br> |
@@ -324,15 +324,12 @@ See [SR\_GRAPH\_NS::Memory::IGraphicsResource](classSR__GRAPH__NS_1_1Memory_1_1I
 
 | Type | Name |
 | ---: | :--- |
-| virtual void | [**DeInitGraphicsResource**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md#function-deinitgraphicsresource) () <br> |
-| virtual void | [**FreeVideoMemory**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md#function-freevideomemory) () <br> |
+|  void | [**DeInitGraphicsResource**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md#function-deinitgraphicsresource) ([**SR\_UTILS\_NS::PassKey**](classSR__UTILS__NS_1_1PassKey.md)&lt; [**RenderContext**](classSR__GRAPH__NS_1_1RenderContext.md) &gt;) <br> |
 |  SR\_NODISCARD const PipelinePtr & | [**GetPipeline**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md#function-getpipeline) () noexcept const<br> |
 |  SR\_NODISCARD [**RenderContextPtr**](classSR__GRAPH__NS_1_1RenderContext.md) | [**GetRenderContext**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md#function-getrendercontext) () noexcept const<br> |
 |   | [**IGraphicsResource**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md#function-igraphicsresource-22) (const [**IGraphicsResource**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md) &) = delete<br> |
-|  SR\_NODISCARD SR\_FORCE\_INLINE bool | [**IsCalculated**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md#function-iscalculated) () const<br> |
-|  SR\_NODISCARD SR\_FORCE\_INLINE bool | [**IsGraphicsResourceRegistered**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md#function-isgraphicsresourceregistered) () const<br> |
-|  void | [**MarkPipelineUnBuild**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md#function-markpipelineunbuild) () <br> |
-|  void | [**SetRenderContext**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md#function-setrendercontext) (const [**RenderContextPtr**](classSR__GRAPH__NS_1_1RenderContext.md) & renderContext) <br> |
+|  SR\_NODISCARD bool | [**IsGraphicsResourceRegistered**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md#function-isgraphicsresourceregistered) () noexcept const<br> |
+|  void | [**RegisterGraphicsResource**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md#function-registergraphicsresource) () <br> |
 |  [**IGraphicsResource**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md) & | [**operator=**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md#function-operator) (const [**IGraphicsResource**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md) &) = delete<br> |
 
 
@@ -638,15 +635,6 @@ See [SR\_SRLM\_NS::IExecutableNode](classSR__SRLM__NS_1_1IExecutableNode.md)
 |  RenderScenePtr | [**m\_renderScene**](#variable-m_renderscene)  <br> |
 
 
-## Protected Attributes inherited from SR_GRAPH_NS::Memory::IGraphicsResource
-
-See [SR\_GRAPH\_NS::Memory::IGraphicsResource](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md)
-
-| Type | Name |
-| ---: | :--- |
-|  bool | [**m\_isCalculated**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md#variable-m_iscalculated)   = `false`<br> |
-|  PipelinePtr | [**m\_pipeline**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md#variable-m_pipeline)  <br> |
-|  [**RenderContextPtr**](classSR__GRAPH__NS_1_1RenderContext.md) | [**m\_renderContext**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md#variable-m_rendercontext)   = `nullptr`<br> |
 
 
 ## Protected Attributes inherited from SR_GRAPH_NS::GroupPass
@@ -857,6 +845,7 @@ See [SR\_GRAPH\_NS::Memory::IGraphicsResource](classSR__GRAPH__NS_1_1Memory_1_1I
 
 | Type | Name |
 | ---: | :--- |
+| virtual void | [**FreeVMemory**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md#function-freevmemory) () <br> |
 |   | [**IGraphicsResource**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md#function-igraphicsresource-12) () = default<br> |
 | virtual  | [**~IGraphicsResource**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md#function-igraphicsresource) () <br> |
 
@@ -1020,15 +1009,15 @@ SR_INLINE const std::string SR_GRAPH_NS::IRenderTechnique::DEFAULT_RENDER_TECHNI
 
 
 
-### function FreeVideoMemory 
+### function FreeVMemory 
 
 ```C++
-virtual void SR_GRAPH_NS::IRenderTechnique::FreeVideoMemory () override
+virtual void SR_GRAPH_NS::IRenderTechnique::FreeVMemory () override
 ```
 
 
 
-Implements [*SR\_GRAPH\_NS::Memory::IGraphicsResource::FreeVideoMemory*](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md#function-freevideomemory)
+Implements [*SR\_GRAPH\_NS::Memory::IGraphicsResource::FreeVMemory*](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md#function-freevmemory)
 
 
 <hr>

@@ -1976,6 +1976,9 @@
           <edgelabel>m_fboQueue</edgelabel>
         </childnode>
         <childnode refid="9" relation="usage">
+          <edgelabel>m_renderStageId</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
           <edgelabel>m_buildState</edgelabel>
           <edgelabel>m_previousState</edgelabel>
           <edgelabel>m_state</edgelabel>
@@ -1988,10 +1991,10 @@
           <edgelabel>GLSLCompilerPath</edgelabel>
         </childnode>
       </node>
-      <node id="9">
+      <node id="10">
         <label>SR_GRAPH_NS::PipelineState</label>
         <link refid="structSR__GRAPH__NS_1_1PipelineState"/>
-        <childnode refid="10" relation="usage">
+        <childnode refid="11" relation="usage">
           <edgelabel>pShader</edgelabel>
         </childnode>
         <childnode refid="19" relation="usage">
@@ -2016,15 +2019,15 @@
       <node id="19">
         <label>SR_GTYPES_NS::Framebuffer</label>
         <link refid="classSR__GTYPES__NS_1_1Framebuffer"/>
-        <childnode refid="11" relation="public-inheritance">
+        <childnode refid="12" relation="public-inheritance">
         </childnode>
         <childnode refid="18" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="10">
+      <node id="11">
         <label>SR_GTYPES_NS::Shader</label>
         <link refid="classSR__GTYPES__NS_1_1Shader"/>
-        <childnode refid="11" relation="public-inheritance">
+        <childnode refid="12" relation="public-inheritance">
         </childnode>
         <childnode refid="18" relation="public-inheritance">
         </childnode>
@@ -2035,7 +2038,7 @@
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="13">
+      <node id="14">
         <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="4" relation="public-inheritance">
@@ -2052,16 +2055,16 @@
         <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
         <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
       </node>
-      <node id="11">
+      <node id="12">
         <label>SR_UTILS_NS::IResource</label>
         <link refid="classSR__UTILS__NS_1_1IResource"/>
-        <childnode refid="12" relation="public-inheritance">
-        </childnode>
-        <childnode refid="14" relation="public-inheritance">
+        <childnode refid="13" relation="public-inheritance">
         </childnode>
         <childnode refid="15" relation="public-inheritance">
         </childnode>
-        <childnode refid="17" relation="usage">
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+        <childnode refid="9" relation="usage">
           <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
           <edgelabel>RELOAD_DONE_EVENT</edgelabel>
         </childnode>
@@ -2074,27 +2077,27 @@
         <label>SR_UTILS_NS::Path</label>
         <link refid="classSR__UTILS__NS_1_1Path"/>
       </node>
-      <node id="12">
+      <node id="13">
         <label>SR_UTILS_NS::ResourceContainer</label>
         <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
-        <childnode refid="13" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="16">
-        <label>SR_UTILS_NS::SRClass</label>
-        <link refid="classSR__UTILS__NS_1_1SRClass"/>
-      </node>
-      <node id="15">
-        <label>SR_UTILS_NS::Serializable</label>
-        <link refid="classSR__UTILS__NS_1_1Serializable"/>
-        <childnode refid="16" relation="public-inheritance">
+        <childnode refid="14" relation="public-inheritance">
         </childnode>
       </node>
       <node id="17">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="16">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="17" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
         <label>SR_UTILS_NS::StringAtom</label>
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
-      <node id="14">
+      <node id="15">
         <label>SR_UTILS_NS::SubscriptionHolder</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
@@ -2246,6 +2249,7 @@
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a33a11b6a842c411deae988c93a909a50" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>m_previousState</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a543ddc3c35eb32386f68ccfffcf9e2c2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>m_renderContext</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a412bf91453b3924dbfe36f8ae703cb7c" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>m_renderPassBI</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Pipeline_1ae74915965e28656dd6c88c77b534ca04" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>m_renderStageId</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a9afe91140696dad60bd1981898da2be1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>m_requiredSampleCount</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a01934d0e299da5074b01c55ce26e27c6" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>m_scissor</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a3432ace5be5b2dd4779af91fb0e81a29" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>m_state</name></member>
@@ -2291,6 +2295,7 @@
       <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a559a33a8a84329fd9ef38c30d0af04d7" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>SetOverlayEnabled</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a27b5f31af0335610237640390fa7d205" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>SetOverlaySurfaceDirty</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Pipeline_1ad915a47914a0126d2628f6aef0c7b262" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>SetRenderStageId</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a35f5177f0fd6c04613b59c0be8744fcb" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>SetSampleCount</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a0c42cdfcafe57340e301f3dd5fdec2e2" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>SetScissor</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1acada2fe2cf1179d873918172129bb9ae" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>SetViewport</name></member>

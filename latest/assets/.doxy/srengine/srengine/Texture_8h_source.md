@@ -59,9 +59,7 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD bool IsAllowedToRevive() const override { return true; }
 
-        void FreeVideoMemory() override;
-
-        RemoveUPResult RemoveUsePoint() override;
+        void FreeVMemory() override;
 
     protected:
         bool Unload() override;
@@ -78,6 +76,7 @@ namespace SR_GTYPES_NS {
         int32_t m_id = SR_ID_INVALID;
 
         std::atomic<bool> m_hasErrors = false;
+        std::atomic<bool> m_isDirty = true;
 
         Memory::TextureConfig m_config = Memory::TextureConfig();
 

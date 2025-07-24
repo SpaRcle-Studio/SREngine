@@ -236,7 +236,7 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**FreeVideoMemory**](#function-freevideomemory) () override<br> |
+|  void | [**FreeVMemory**](#function-freevmemory) () override<br> |
 | virtual SR\_NODISCARD [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**GetAssociatedPath**](#function-getassociatedpath) () override const<br> |
 |  SR\_NODISCARD uint32\_t | [**GetChannels**](#function-getchannels) () noexcept const<br> |
 |  SR\_NODISCARD void \* | [**GetDescriptor**](#function-getdescriptor) () <br> |
@@ -245,7 +245,6 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  SR\_NODISCARD const Memory::TextureConfig & | [**GetTextureConfig**](#function-gettextureconfig) () noexcept const<br> |
 |  SR\_NODISCARD uint32\_t | [**GetWidth**](#function-getwidth) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsAllowedToRevive**](#function-isallowedtorevive) () override const<br> |
-| virtual RemoveUPResult | [**RemoveUsePoint**](#function-removeusepoint) () override<br> |
 |   | [**Texture**](#function-texture) () <br> |
 |   | [**~Texture**](#function-texture) () override<br> |
 
@@ -712,10 +711,10 @@ using SR_GTYPES_NS::Texture::Ptr =  SR_HTYPES_NS::SharedPtr<Texture>;
 
 
 
-### function FreeVideoMemory 
+### function FreeVMemory 
 
 ```C++
-void SR_GTYPES_NS::Texture::FreeVideoMemory () override
+void SR_GTYPES_NS::Texture::FreeVMemory () override
 ```
 
 
@@ -827,25 +826,6 @@ inline virtual SR_NODISCARD bool SR_GTYPES_NS::Texture::IsAllowedToRevive () ove
 
 
 Implements [*SR\_UTILS\_NS::IResource::IsAllowedToRevive*](classSR__UTILS__NS_1_1IResource.md#function-isallowedtorevive)
-
-
-<hr>
-
-
-
-### function RemoveUsePoint 
-
-```C++
-virtual RemoveUPResult SR_GTYPES_NS::Texture::RemoveUsePoint () override
-```
-
-
-
-Remove one point from count uses current resource 
-
-
-        
-Implements [*SR\_UTILS\_NS::IResource::RemoveUsePoint*](classSR__UTILS__NS_1_1IResource.md#function-removeusepoint)
 
 
 <hr>

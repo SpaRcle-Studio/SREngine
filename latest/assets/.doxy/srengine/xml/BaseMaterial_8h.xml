@@ -55,14 +55,14 @@
         <childnode refid="140" relation="include">
         </childnode>
       </node>
-      <node id="168">
+      <node id="169">
         <label>Graphics/Loaders/TextureLoader.h</label>
         <link refid="TextureLoader_8h_source"/>
         <childnode refid="109" relation="include">
         </childnode>
         <childnode refid="91" relation="include">
         </childnode>
-        <childnode refid="167" relation="include">
+        <childnode refid="168" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -88,7 +88,7 @@
         </childnode>
         <childnode refid="157" relation="include">
         </childnode>
-        <childnode refid="169" relation="include">
+        <childnode refid="170" relation="include">
         </childnode>
       </node>
       <node id="157">
@@ -98,10 +98,10 @@
         </childnode>
         <childnode refid="158" relation="include">
         </childnode>
-        <childnode refid="165" relation="include">
+        <childnode refid="166" relation="include">
         </childnode>
       </node>
-      <node id="169">
+      <node id="170">
         <label>Graphics/Material/MaterialProperty.h</label>
         <link refid="MaterialProperty_8h_source"/>
         <childnode refid="137" relation="include">
@@ -123,6 +123,8 @@
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="164" relation="include">
         </childnode>
       </node>
       <node id="162">
@@ -147,15 +149,15 @@
         <childnode refid="146" relation="include">
         </childnode>
       </node>
-      <node id="167">
+      <node id="168">
         <label>Graphics/Memory/TextureConfigs.h</label>
         <link refid="TextureConfigs_8h_source"/>
         <childnode refid="83" relation="include">
         </childnode>
-        <childnode refid="166" relation="include">
+        <childnode refid="167" relation="include">
         </childnode>
       </node>
-      <node id="164">
+      <node id="165">
         <label>Graphics/Memory/UBOManager.h</label>
         <link refid="UBOManager_8h_source"/>
         <childnode refid="2" relation="include">
@@ -189,7 +191,7 @@
         <childnode refid="155" relation="include">
         </childnode>
       </node>
-      <node id="166">
+      <node id="167">
         <label>Graphics/Pipeline/TextureHelper.h</label>
         <link refid="TextureHelper_8h_source"/>
         <childnode refid="2" relation="include">
@@ -228,23 +230,23 @@
         </childnode>
         <childnode refid="163" relation="include">
         </childnode>
-        <childnode refid="164" relation="include">
+        <childnode refid="165" relation="include">
         </childnode>
       </node>
-      <node id="165">
+      <node id="166">
         <label>Graphics/Types/Texture.h</label>
         <link refid="Texture_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="145" relation="include">
         </childnode>
-        <childnode refid="166" relation="include">
-        </childnode>
         <childnode refid="167" relation="include">
+        </childnode>
+        <childnode refid="168" relation="include">
         </childnode>
         <childnode refid="163" relation="include">
         </childnode>
-        <childnode refid="168" relation="include">
+        <childnode refid="169" relation="include">
         </childnode>
       </node>
       <node id="152">
@@ -384,6 +386,12 @@
       <node id="84">
         <label>Utils/Common/NonCopyable.h</label>
         <link refid="NonCopyable_8h_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="164">
+        <label>Utils/Common/PassKey.h</label>
+        <link refid="PassKey_8h_source"/>
         <childnode refid="9" relation="include">
         </childnode>
       </node>

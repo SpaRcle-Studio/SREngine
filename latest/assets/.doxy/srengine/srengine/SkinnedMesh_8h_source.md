@@ -47,7 +47,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD const SkeletonRef& GetSkeletonRef() const noexcept { return m_skeleton; }
         SR_NODISCARD SkeletonRef& GetSkeletonRef() noexcept { return m_skeleton; }
 
-        void FreeVideoMemory() override;
+        void FreeVMemory() override;
 
         void UseSSBO() override;
 

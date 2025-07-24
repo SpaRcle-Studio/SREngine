@@ -227,6 +227,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual void | [**SetDirty**](#function-setdirty) (bool dirty) <br> |
 | virtual void | [**SetOverlayEnabled**](#function-setoverlayenabled) (OverlayType overlayType, bool enabled) <br> |
 | virtual void | [**SetOverlaySurfaceDirty**](#function-setoverlaysurfacedirty) () <br> |
+| virtual void | [**SetRenderStageId**](#function-setrenderstageid) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id) <br> |
 | virtual void | [**SetSampleCount**](#function-setsamplecount) (uint8\_t count) <br> |
 | virtual void | [**SetScissor**](#function-setscissor) (int32\_t width=-1, int32\_t height=-1) <br> |
 | virtual void | [**SetVSyncEnabled**](#function-setvsyncenabled) (bool enabled) <br> |
@@ -354,6 +355,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  [**PipelinePreInitInfo**](structSR__GRAPH__NS_1_1PipelinePreInitInfo.md) | [**m\_preInitInfo**](#variable-m_preinitinfo)  <br> |
 |  [**PipelineState**](structSR__GRAPH__NS_1_1PipelineState.md) | [**m\_previousState**](#variable-m_previousstate)  <br> |
 |  RenderContextPtr | [**m\_renderContext**](#variable-m_rendercontext)  <br> |
+|  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**m\_renderStageId**](#variable-m_renderstageid)  <br> |
 |  uint8\_t | [**m\_requiredSampleCount**](#variable-m_requiredsamplecount)   = `0`<br> |
 |  [**PipelineState**](structSR__GRAPH__NS_1_1PipelineState.md) | [**m\_state**](#variable-m_state)  <br> |
 |  uint8\_t | [**m\_supportedSampleCount**](#variable-m_supportedsamplecount)   = `0`<br> |
@@ -2217,6 +2219,21 @@ virtual void SR_GRAPH_NS::Pipeline::SetOverlaySurfaceDirty ()
 
 
 
+### function SetRenderStageId 
+
+```C++
+inline virtual void SR_GRAPH_NS::Pipeline::SetRenderStageId (
+    SR_UTILS_NS::StringAtom id
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function SetSampleCount 
 
 ```C++
@@ -2685,6 +2702,19 @@ PipelineState SR_GRAPH_NS::Pipeline::m_previousState;
 
 ```C++
 RenderContextPtr SR_GRAPH_NS::Pipeline::m_renderContext;
+```
+
+
+
+
+<hr>
+
+
+
+### variable m\_renderStageId 
+
+```C++
+SR_UTILS_NS::StringAtom SR_GRAPH_NS::Pipeline::m_renderStageId;
 ```
 
 

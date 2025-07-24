@@ -69,7 +69,7 @@ namespace SR_GTYPES_NS {
         void SetUsePreprocessor(bool enabled);
 
         bool Calculate() override;
-        void FreeVideoMemory() override;
+        void FreeVMemory() override;
 
     protected:
         void OnTextDirty();

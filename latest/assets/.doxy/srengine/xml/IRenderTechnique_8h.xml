@@ -14,7 +14,7 @@
     <includedby refid="RenderTechnique_8h" local="no">Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h</includedby>
     <includedby refid="ScriptableRenderTechnique_8h" local="no">Engine/libs/Graphics/inc/Graphics/Render/ScriptableRenderTechnique.h</includedby>
     <incdepgraph>
-      <node id="155">
+      <node id="156">
         <label>Graphics/Memory/DescriptorManager.h</label>
         <link refid="DescriptorManager_8h_source"/>
         <childnode refid="84" relation="include">
@@ -23,7 +23,7 @@
         </childnode>
         <childnode refid="112" relation="include">
         </childnode>
-        <childnode refid="156" relation="include">
+        <childnode refid="157" relation="include">
         </childnode>
       </node>
       <node id="146">
@@ -32,6 +32,8 @@
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="147" relation="include">
         </childnode>
       </node>
       <node id="145">
@@ -48,7 +50,7 @@
         <childnode refid="112" relation="include">
         </childnode>
       </node>
-      <node id="148">
+      <node id="149">
         <label>Graphics/Pass/BasePass.h</label>
         <link refid="BasePass_8h_source"/>
         <childnode refid="85" relation="include">
@@ -59,32 +61,32 @@
         </childnode>
         <childnode refid="144" relation="include">
         </childnode>
-        <childnode refid="149" relation="include">
+        <childnode refid="150" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="138" relation="include">
         </childnode>
-        <childnode refid="150" relation="include">
-        </childnode>
-        <childnode refid="152" relation="include">
+        <childnode refid="151" relation="include">
         </childnode>
         <childnode refid="153" relation="include">
         </childnode>
         <childnode refid="154" relation="include">
         </childnode>
-        <childnode refid="145" relation="include">
-        </childnode>
         <childnode refid="155" relation="include">
         </childnode>
-      </node>
-      <node id="147">
-        <label>Graphics/Pass/GroupPass.h</label>
-        <link refid="GroupPass_8h_source"/>
-        <childnode refid="148" relation="include">
+        <childnode refid="145" relation="include">
+        </childnode>
+        <childnode refid="156" relation="include">
         </childnode>
       </node>
-      <node id="157">
+      <node id="148">
+        <label>Graphics/Pass/GroupPass.h</label>
+        <link refid="GroupPass_8h_source"/>
+        <childnode refid="149" relation="include">
+        </childnode>
+      </node>
+      <node id="158">
         <label>Graphics/Pass/PassQueue.h</label>
         <link refid="PassQueue_8h_source"/>
         <childnode refid="2" relation="include">
@@ -107,12 +109,12 @@
         </childnode>
         <childnode refid="146" relation="include">
         </childnode>
-        <childnode refid="147" relation="include">
+        <childnode refid="148" relation="include">
         </childnode>
-        <childnode refid="157" relation="include">
+        <childnode refid="158" relation="include">
         </childnode>
       </node>
-      <node id="156">
+      <node id="157">
         <label>Graphics/Types/Descriptors.h</label>
         <link refid="Descriptors_8h_source"/>
         <childnode refid="2" relation="include">
@@ -232,6 +234,12 @@
         <childnode refid="10" relation="include">
         </childnode>
       </node>
+      <node id="147">
+        <label>Utils/Common/PassKey.h</label>
+        <link refid="PassKey_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
       <node id="84">
         <label>Utils/Common/Singleton.h</label>
         <link refid="Singleton_8h_source"/>
@@ -296,7 +304,7 @@
         <childnode refid="96" relation="include">
         </childnode>
       </node>
-      <node id="151">
+      <node id="152">
         <label>Utils/Common/ToString.h</label>
         <link refid="ToString_8h_source"/>
         <childnode refid="96" relation="include">
@@ -556,15 +564,15 @@
         <childnode refid="107" relation="include">
         </childnode>
       </node>
-      <node id="153">
+      <node id="154">
         <label>Utils/SRLM/DataType.h</label>
         <link refid="DataType_8h_source"/>
-        <childnode refid="154" relation="include">
+        <childnode refid="155" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="150">
+      <node id="151">
         <label>Utils/SRLM/LogicalNode.h</label>
         <link refid="LogicalNode_8h_source"/>
         <childnode refid="85" relation="include">
@@ -573,14 +581,14 @@
         </childnode>
         <childnode refid="96" relation="include">
         </childnode>
-        <childnode refid="151" relation="include">
+        <childnode refid="152" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="133" relation="include">
         </childnode>
       </node>
-      <node id="152">
+      <node id="153">
         <label>Utils/SRLM/LogicalNodeManager.h</label>
         <link refid="LogicalNodeManager_8h_source"/>
         <childnode refid="85" relation="include">
@@ -592,7 +600,7 @@
         <childnode refid="92" relation="include">
         </childnode>
       </node>
-      <node id="154">
+      <node id="155">
         <label>Utils/SRLM/Utils.h</label>
         <link refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_source"/>
         <childnode refid="91" relation="include">
@@ -880,7 +888,7 @@
         <childnode refid="92" relation="include">
         </childnode>
       </node>
-      <node id="149">
+      <node id="150">
         <label>Utils/Types/Time.h</label>
         <link refid="Time_8h_source"/>
         <childnode refid="8" relation="include">
@@ -1472,7 +1480,7 @@
 <codeline lineno="54"><highlight class="normal"></highlight></codeline>
 <codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>KillTechnique()<sp/>{<sp/>SRAssert(!m_isDead);<sp/>m_isDead<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
 <codeline lineno="56"><highlight class="normal"></highlight></codeline>
-<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>FreeVideoMemory()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>FreeVMemory()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="58"><highlight class="normal"></highlight></codeline>
 <codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetCamera(CameraPtr<sp/>pCamera);</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetRenderScene(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>RenderScenePtr&amp;<sp/>pRScene);</highlight></codeline>

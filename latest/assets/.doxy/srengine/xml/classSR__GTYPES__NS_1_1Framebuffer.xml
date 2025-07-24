@@ -760,12 +760,12 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" line="89" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h" bodystart="89" bodyend="89"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1a6079ec94cacf2f955cc9ab23c6fae7e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Framebuffer_1ae61c063edbb8d664f6e16ad5e2829936" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
-        <definition>void SR_GTYPES_NS::Framebuffer::FreeVideoMemory</definition>
+        <definition>void SR_GTYPES_NS::Framebuffer::FreeVMemory</definition>
         <argsstring>() override</argsstring>
-        <name>FreeVideoMemory</name>
-        <qualifiedname>SR_GTYPES_NS::Framebuffer::FreeVideoMemory</qualifiedname>
+        <name>FreeVMemory</name>
+        <qualifiedname>SR_GTYPES_NS::Framebuffer::FreeVMemory</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -1122,7 +1122,7 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1a5dd9749c79cb65452e9e4d10efda42f8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Execute</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a56bb33e9f5864b6fa62e473389a517b7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>ForceDestroy</name></member>
       <member refid="classSR__GTYPES__NS_1_1Framebuffer_1aa2149e1926d747e99e1cb0d25172309a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Framebuffer</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a6079ec94cacf2f955cc9ab23c6fae7e5" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>FreeVideoMemory</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Framebuffer_1ae61c063edbb8d664f6e16ad5e2829936" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>FreeVMemory</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>Get</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1aeabd3a189fe8c7c0c31c1fb6713c5043" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Framebuffer</scope><name>GetAssociatedPath</name></member>

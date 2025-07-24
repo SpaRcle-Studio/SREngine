@@ -51,7 +51,7 @@ namespace SR_GRAPH_NS {
 namespace SR_GTYPES_NS {
     class Shader;
 
-    class Mesh : public SR_GTYPES_NS::IRenderComponent, public Memory::IGraphicsResource {
+    class Mesh : public SR_GTYPES_NS::IRenderComponent {
         SR_CLASS()
         using Super = SR_GTYPES_NS::IRenderComponent;
     public:
@@ -98,6 +98,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD virtual uint32_t GetVerticesCount() const { return 0; }
         SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
 
+        SR_NODISCARD Pipeline* GetPipeline() const noexcept { return m_pipeline; }
         SR_NODISCARD ShaderPtr GetShader() const;
         SR_NODISCARD const MaterialPtr& GetMaterial() const noexcept { return m_material; }
         SR_NODISCARD int32_t GetVirtualUBO() const { return m_virtualUBO; }
@@ -108,8 +109,10 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD const MeshRegistrationInfo& GetMeshRegistrationInfo() const noexcept { return m_registrationInfo.value(); }
         SR_NODISCARD RenderQueues& GetRenderQueues() noexcept { return m_renderQueues; }
         SR_NODISCARD virtual FrustumCullingType GetFrustumCullingType() const noexcept { return m_frustumCullingType; }
+        SR_NODISCARD bool IsCalculated() const noexcept { return m_isCalculated; }
 
         void SetMeshRegistrationInfo(const std::optional<MeshRegistrationInfo>& info) { m_registrationInfo = info; }
+        void SetPipeline(Pipeline* pPipeline) { m_pipeline = pPipeline; }
 
         virtual void SetMatrix(const SR_MATH_NS::Matrix4x4& matrix);
 
@@ -139,14 +142,14 @@ namespace SR_GTYPES_NS {
         void SetUniformsClean() { m_isUniformsDirty = false; }
 
     protected:
-        void FreeVideoMemory() override;
-
+        virtual void FreeVMemory();
         virtual bool Calculate();
 
     protected:
         RenderQueues m_renderQueues;
 
         Memory::UBOManager& m_uboManager;
+        Pipeline* m_pipeline = nullptr;
         SR_GRAPH_NS::DescriptorManager& m_descriptorManager;
 
         int32_t m_virtualUBO = SR_ID_INVALID;
@@ -160,7 +163,7 @@ namespace SR_GTYPES_NS {
         FrustumCullingType m_frustumCullingType = FrustumCullingType::Sphere;
         bool m_isWaitReRegister = false;
         SR_VIRTUAL_PROPERTY
-        SR_VIRTUAL_PROPERTY
+        bool m_isCalculated = false;
         bool m_hasErrors = false;
         bool m_dirtyMaterial = false;
         bool m_isUniformsDirty = false;

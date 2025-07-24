@@ -3,7 +3,6 @@
   <compounddef id="classSR__GTYPES__NS_1_1Mesh" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>SR_GTYPES_NS::Mesh</compoundname>
     <basecompoundref refid="classSR__GTYPES__NS_1_1IRenderComponent" prot="public" virt="non-virtual">SR_GTYPES_NS::IRenderComponent</basecompoundref>
-    <basecompoundref prot="public" virt="non-virtual">Memory::IGraphicsResource</basecompoundref>
     <derivedcompoundref refid="classSR__GTYPES__NS_1_1DebugLine" prot="public" virt="non-virtual">SR_GTYPES_NS::DebugLine</derivedcompoundref>
     <derivedcompoundref refid="classSR__GTYPES__NS_1_1IndexedMesh" prot="public" virt="non-virtual">SR_GTYPES_NS::IndexedMesh</derivedcompoundref>
     <derivedcompoundref refid="classSR__GTYPES__NS_1_1Sprite" prot="public" virt="non-virtual">SR_GTYPES_NS::Sprite</derivedcompoundref>
@@ -109,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="137" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="137" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="139" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="139" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Mesh_1ac6c0dd4752763f730a0909861c7612cf" prot="protected" static="no" mutable="no">
         <type>Memory::UBOManager &amp;</type>
@@ -123,7 +122,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="139" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="139" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="141" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Mesh_1a486362b25304d02d8b76702ba2fde3e9" prot="protected" static="no" mutable="no">
+        <type>Pipeline *</type>
+        <definition>Pipeline* SR_GTYPES_NS::Mesh::m_pipeline</definition>
+        <argsstring></argsstring>
+        <name>m_pipeline</name>
+        <qualifiedname>SR_GTYPES_NS::Mesh::m_pipeline</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="142" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="142" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Mesh_1a025a6751aee4601105000e7c9d960c9a" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1DescriptorManager" kindref="compound">SR_GRAPH_NS::DescriptorManager</ref> &amp;</type>
@@ -137,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="140" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="140" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="143" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="143" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Mesh_1ad4bba700ef6bd6d6e86f2185869011e3" prot="protected" static="no" mutable="no">
         <type>int32_t</type>
@@ -152,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="142" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="142" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="145" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="145" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Mesh_1a8e92536a0dbb2e45e1f2fda2e74ac7bb" prot="protected" static="no" mutable="no">
         <type>int32_t</type>
@@ -167,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="143" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="143" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="146" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="146" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Mesh_1ad418dcf562fe9670d34c11d93711ab83" prot="protected" static="no" mutable="no">
         <type>MaterialPtr</type>
@@ -181,7 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="153" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="153" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="156" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="156" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Mesh_1abbbdef9e59eb97f8eed740c6e96c1a53" prot="protected" static="no" mutable="no">
         <type>FrustumCullingType</type>
@@ -196,7 +210,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="155" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="155" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="158" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="158" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Mesh_1a15373448bde91b633ab94a57483baf36" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -211,7 +225,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="157" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="157" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="160" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="160" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Mesh_1a64f71ac772e672498b13d6ca842ba8f9" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::Mesh::m_isCalculated</definition>
+        <argsstring></argsstring>
+        <name>m_isCalculated</name>
+        <qualifiedname>SR_GTYPES_NS::Mesh::m_isCalculated</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="164" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="164" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Mesh_1aa12c514db6c826253a1d368e7279e02a" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -226,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="163" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="163" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="166" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="166" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Mesh_1a1eedf6ed8926b01f933ce6d17942d928" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -241,7 +270,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="165" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="165" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="168" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="168" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Mesh_1a4f1e404ddd0c7f28dd411d1b15ce7606" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -256,7 +285,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="167" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="167" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="170" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="170" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -273,7 +302,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="170" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="170" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="173" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="173" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Mesh_1a92400458647bb23e099dba07b27152fe" prot="private" static="no" mutable="no">
         <type>std::optional&lt; MeshRegistrationInfo &gt;</type>
@@ -287,7 +316,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="171" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="171" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="174" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="174" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Mesh_1a8cfbff9307d9b02e54a398d4026b3b1d" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -302,7 +331,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="172" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="172" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="175" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="175" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -649,6 +678,20 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="89" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="89" bodyend="89"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a868d8c0cfc9fb205a903daa953446c1b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD Pipeline *</type>
+        <definition>SR_NODISCARD Pipeline * SR_GTYPES_NS::Mesh::GetPipeline</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetPipeline</name>
+        <qualifiedname>SR_GTYPES_NS::Mesh::GetPipeline</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="91" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="91" bodyend="91"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a19c90c90366d059d27a9465ac4c46c8a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD ShaderPtr</type>
         <definition>SR_NODISCARD ShaderPtr SR_GTYPES_NS::Mesh::GetShader</definition>
@@ -661,7 +704,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="91" column="32"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="92" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a1d06cec76546a9849a50b484293b684a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const MaterialPtr &amp;</type>
@@ -675,7 +718,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="92" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="92" bodyend="92"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="93" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="93" bodyend="93"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a53dfdb25e64d474467bdf374cfa227f9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -689,7 +732,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="93" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="93" bodyend="93"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="94" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="94" bodyend="94"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a36d42f741b1a4d6d4120ba5f0e47c02f" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
         <type>SR_NODISCARD MeshType</type>
@@ -710,7 +753,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="94" column="39"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="95" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a2c963fbf2d7b184c1525d1de7e0d3cd4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -724,7 +767,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="95" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="95" bodyend="95"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="96" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="96" bodyend="96"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1ac6c840cbd67eab2a2defb04f0bd3c323" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -738,7 +781,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="96" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="96" bodyend="96"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="97" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="97" bodyend="97"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a0c42f4050860150b1bf7d0e53b4486b1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -752,7 +795,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="97" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="97" bodyend="97"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="98" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="98" bodyend="98"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a5f570e2ab732cb7c42d019ccbc211374" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const MeshRegistrationInfo &amp;</type>
@@ -766,7 +809,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="98" column="49" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="98" bodyend="98"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="99" column="49" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="99" bodyend="99"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a2c67cc73081e7682937fe2aaf59c65de" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD RenderQueues &amp;</type>
@@ -780,7 +823,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="99" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="99" bodyend="99"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="100" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="100" bodyend="100"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a1857b0420fe2a3b300e35246e756e3c9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD FrustumCullingType</type>
@@ -794,7 +837,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="100" column="49" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="100" bodyend="100"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="101" column="49" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="101" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a8f6c24bf3013ae777a3eca72714b3c9e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GTYPES_NS::Mesh::IsCalculated</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsCalculated</name>
+        <qualifiedname>SR_GTYPES_NS::Mesh::IsCalculated</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="102" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="102" bodyend="102"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a4a038ee5096e73f581d8c1ba9a9e5ef7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -812,7 +869,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="102" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="102" bodyend="102"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="104" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="104" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a39b340114c4ceae171114ce2d7efaaf6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Mesh::SetPipeline</definition>
+        <argsstring>(Pipeline *pPipeline)</argsstring>
+        <name>SetPipeline</name>
+        <qualifiedname>SR_GTYPES_NS::Mesh::SetPipeline</qualifiedname>
+        <param>
+          <type>Pipeline *</type>
+          <declname>pPipeline</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="105" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="105" bodyend="105"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1aa4a105cef591fdf2c4d2e9023a729558" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -831,7 +906,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="104" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="107" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1adff93b7a6119dc188a28c6c0eb8a8e37" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
@@ -846,7 +921,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="106" column="58"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="109" column="58"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a38cd9c334fee6452c42dd5a7d2fdd41d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -867,7 +942,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="108" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="111" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1ac081233babf593b4ccac9e5dabaf35d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -882,7 +957,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="109" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="112" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a3c3d60b52d0ff3b84510c3b16348ee4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -896,7 +971,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="111" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="114" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a6e2ff3e57ab3d3d4d3f880f31b29637e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -917,7 +992,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="113" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="116" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1ad02d2261a7521c316812c6e00349dc8d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -936,7 +1011,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="114" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="114" bodyend="114"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="117" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="117" bodyend="117"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a838cad3d42bd1d6e6185b4e8b8ff0ca7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -951,7 +1026,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="115" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="118" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a736239062e920cf16ef80dabc52fe4d3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -967,7 +1042,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="116" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="116" bodyend="116"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="119" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="119" bodyend="119"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1ab78cc1eaebe6f734293b577b6d9ab1dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -981,7 +1056,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="118" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="121" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a486250cec513876fa1e9e09deae7008a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1000,7 +1075,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="119" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="122" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a55e5fd9cabd800e7aceabc257b130a58" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1014,7 +1089,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="120" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="123" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1afee74621d25e156a4ed2e08fa560afb4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1028,7 +1103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="121" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="124" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a16b24e7c8796db2f1d87bb2fdf22b5c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1042,7 +1117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="122" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="125" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1ab75774fcebeb90dc51478685bd577119" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1056,7 +1131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="123" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="126" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a401fac07ce716a41159227743be22be3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1074,7 +1149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="125" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="128" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a6aed03245b902a8b0a1af46d0da4b1ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1092,7 +1167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="126" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="129" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a0459026984bf4bd56d9ceb4f82f48d53" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1106,7 +1181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="128" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="128" bodyend="128"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="131" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="131" bodyend="131"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a73a3904579729c1939e4e6757b39ab51" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1120,7 +1195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="129" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="129" bodyend="129"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="132" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="132" bodyend="132"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -1252,19 +1327,23 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a0539e08ac8e0a491ef3d2f7f4324abb8" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a607b44968faebde0af65f9259677645b" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
-        <definition>void SR_GTYPES_NS::Mesh::FreeVideoMemory</definition>
-        <argsstring>() override</argsstring>
-        <name>FreeVideoMemory</name>
-        <qualifiedname>SR_GTYPES_NS::Mesh::FreeVideoMemory</qualifiedname>
+        <definition>virtual void SR_GTYPES_NS::Mesh::FreeVMemory</definition>
+        <argsstring>()</argsstring>
+        <name>FreeVMemory</name>
+        <qualifiedname>SR_GTYPES_NS::Mesh::FreeVMemory</qualifiedname>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1Text_1a99011b034df9290e2c7ec66f10776691">FreeVMemory</reimplementedby>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1IndexedMesh_1a97d93208ef4f26b746505a922cd684fa">FreeVMemory</reimplementedby>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1ProceduralMesh_1ad15aaf3c317c44bba98e074ab2a918c4">FreeVMemory</reimplementedby>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a9425da8e1dbbaaa550551f6383279616">FreeVMemory</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="132" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="135" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Mesh_1a4395ff39f60bb6b7aeb2775fa02109f7" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1285,7 +1364,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="134" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="136" column="22"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1297,18 +1376,15 @@
         <label>Entity</label>
       </node>
       <node id="5">
-        <label>Memory::IGraphicsResource</label>
-      </node>
-      <node id="6">
         <label>SR_GTYPES_NS::DebugLine</label>
         <link refid="classSR__GTYPES__NS_1_1DebugLine"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="8">
+      <node id="7">
         <label>SR_GTYPES_NS::DebugWireframeMesh</label>
         <link refid="classSR__GTYPES__NS_1_1DebugWireframeMesh"/>
-        <childnode refid="7" relation="public-inheritance">
+        <childnode refid="6" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
@@ -1317,7 +1393,7 @@
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="7">
+      <node id="6">
         <label>SR_GTYPES_NS::IndexedMesh</label>
         <link refid="classSR__GTYPES__NS_1_1IndexedMesh"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1328,34 +1404,32 @@
         <link refid="classSR__GTYPES__NS_1_1Mesh"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="5" relation="public-inheritance">
+      </node>
+      <node id="8">
+        <label>SR_GTYPES_NS::Mesh3D</label>
+        <link refid="classSR__GTYPES__NS_1_1Mesh3D"/>
+        <childnode refid="6" relation="public-inheritance">
         </childnode>
       </node>
       <node id="9">
-        <label>SR_GTYPES_NS::Mesh3D</label>
-        <link refid="classSR__GTYPES__NS_1_1Mesh3D"/>
-        <childnode refid="7" relation="public-inheritance">
+        <label>SR_GTYPES_NS::ProceduralMesh</label>
+        <link refid="classSR__GTYPES__NS_1_1ProceduralMesh"/>
+        <childnode refid="6" relation="public-inheritance">
         </childnode>
       </node>
       <node id="10">
-        <label>SR_GTYPES_NS::ProceduralMesh</label>
-        <link refid="classSR__GTYPES__NS_1_1ProceduralMesh"/>
-        <childnode refid="7" relation="public-inheritance">
+        <label>SR_GTYPES_NS::SkinnedMesh</label>
+        <link refid="classSR__GTYPES__NS_1_1SkinnedMesh"/>
+        <childnode refid="6" relation="public-inheritance">
         </childnode>
       </node>
       <node id="11">
-        <label>SR_GTYPES_NS::SkinnedMesh</label>
-        <link refid="classSR__GTYPES__NS_1_1SkinnedMesh"/>
-        <childnode refid="7" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="12">
         <label>SR_GTYPES_NS::Sprite</label>
         <link refid="classSR__GTYPES__NS_1_1Sprite"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="13">
+      <node id="12">
         <label>SR_GTYPES_NS::Text</label>
         <link refid="classSR__GTYPES__NS_1_1Text"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1373,12 +1447,9 @@
         <label>Entity</label>
       </node>
       <node id="7">
-        <label>Memory::IGraphicsResource</label>
-      </node>
-      <node id="8">
         <label>SR_GRAPH_NS::DescriptorManager</label>
         <link refid="classSR__GRAPH__NS_1_1DescriptorManager"/>
-        <childnode refid="9" relation="public-inheritance">
+        <childnode refid="8" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
@@ -1392,9 +1463,7 @@
         <link refid="classSR__GTYPES__NS_1_1Mesh"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="7" relation="public-inheritance">
-        </childnode>
-        <childnode refid="8" relation="usage">
+        <childnode refid="7" relation="usage">
           <edgelabel>m_descriptorManager</edgelabel>
         </childnode>
       </node>
@@ -1416,20 +1485,20 @@
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="11">
+      <node id="10">
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
-      <node id="9">
+      <node id="8">
         <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="10" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="10">
+      <node id="9">
         <label>SR_UTILS_NS::SingletonBase</label>
         <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
-        <childnode refid="11" relation="public-inheritance">
+        <childnode refid="10" relation="public-inheritance">
         </childnode>
       </node>
       <node id="6">
@@ -1439,7 +1508,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="44" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="44" bodyend="174"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="44" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="44" bodyend="177"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>BaseComponent</name></member>
@@ -1454,7 +1523,7 @@
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a3c3d60b52d0ff3b84510c3b16348ee4f" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>Draw</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a22918d631dae5a7843f30de199b8963b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>ExecuteInEditMode</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1acae95de33825449f163ab99828593fd5" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>FixedUpdate</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Mesh_1a0539e08ac8e0a491ef3d2f7f4324abb8" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>FreeVideoMemory</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a607b44968faebde0af65f9259677645b" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>FreeVMemory</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aebb43fee7f75dd142ad299853208ee1e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>GameObjectPtr</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad0630357a7ef40b1c526565323c1cea0" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>GetBarycenter</name></member>
       <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1a8ffc0a7bba083f7d2703dd38752c7405" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>GetCamera</name></member>
@@ -1470,6 +1539,7 @@
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a5f570e2ab732cb7c42d019ccbc211374" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>GetMeshRegistrationInfo</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a36d42f741b1a4d6d4120ba5f0e47c02f" prot="public" virt="pure-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>GetMeshType</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ae81e0c4dd084a7d3d4620e53c10ca2fc" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>GetParent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a868d8c0cfc9fb205a903daa953446c1b" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>GetPipeline</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a2c67cc73081e7682937fe2aaf59c65de" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>GetRenderQueues</name></member>
       <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1af32114a133ad6f5455d0e5ee95161fe5" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>GetRenderScene</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a499a53cb08f173222c9a0bbc06af98fd" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>GetRoot</name></member>
@@ -1488,6 +1558,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1a3e946a2df87f7f239b757e7c95c3a7dc" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>IsAttached</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aaa40b9cae6a7b9c771bcf20671f80455" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>IsAwake</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a0da7dadb2349196b8fff383928a7081a" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>IsCalculatable</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a8f6c24bf3013ae777a3eca72714b3c9e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>IsCalculated</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ac2786bf69d61b8eea8560256d1dee009" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>IsComponentLoaded</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a26327e3091acd6936c2fd29a5a5c9330" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>IsComponentValid</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a8f95ff169b8df189b211b036ba06def5" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>IsEnabled</name></member>
@@ -1513,6 +1584,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1a58ed325cff4da93cce7d1ffd323e4886" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>m_isActive</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a353c88717dd50e343371ffe0d0d8c068" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>m_isAttached</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a01d2835c4cb9cab3dc85a24cb6330830" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>m_isAwake</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a64f71ac772e672498b13d6ca842ba8f9" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>m_isCalculated</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aa9bfad916eec33a0f4351054194c53e3" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>m_isComponentLoaded</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a572a050c6c986ad39b6786d1acf8fab7" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>m_isDestroyingState</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad9e404095f004e707f755beb764ab8e7" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>m_isEnabled</name></member>
@@ -1522,6 +1594,7 @@
       <member refid="classSR__GTYPES__NS_1_1Mesh_1ad418dcf562fe9670d34c11d93711ab83" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>m_material</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a8cfbff9307d9b02e54a398d4026b3b1d" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>m_materialRegisterId</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a9dddd30253cd78eb28f504e1afb66514" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>m_parent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a486362b25304d02d8b76702ba2fde3e9" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>m_pipeline</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a92400458647bb23e099dba07b27152fe" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>m_registrationInfo</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a3b6365455b15767000675149fb88d932" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>m_renderQueues</name></member>
       <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1adf98d6531d11ca6c8946df21461446b7" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>m_renderScene</name></member>
@@ -1567,6 +1640,7 @@
       <member refid="classSR__GTYPES__NS_1_1Mesh_1aa4a105cef591fdf2c4d2e9023a729558" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>SetMatrix</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a4a038ee5096e73f581d8c1ba9a9e5ef7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>SetMeshRegistrationInfo</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ac9780c1f95cd3106101f4e1595550816" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>SetParent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a39b340114c4ceae171114ce2d7efaaf6" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>SetPipeline</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a73a3904579729c1939e4e6757b39ab51" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>SetUniformsClean</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a293bad07f36ba94ea55b3ca8d192d92a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>ShaderPtr</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a572b27823d61376ebbd0c33758ea5d6f" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Mesh</scope><name>Start</name></member>

@@ -237,7 +237,7 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 | Type | Name |
 | ---: | :--- |
 |  void | [**Draw**](#function-draw) () <br> |
-|  void | [**FreeVideoMemory**](#function-freevideomemory) () override<br> |
+|  void | [**FreeVMemory**](#function-freevmemory) () override<br> |
 |  SR\_NODISCARD int32\_t | [**GetIBO**](#function-getibo) () <br> |
 |  SR\_NODISCARD Shader::Ptr | [**GetShader**](#function-getshader) () noexcept const<br> |
 |  SR\_NODISCARD int32\_t | [**GetVBO**](#function-getvbo) () <br> |
@@ -722,10 +722,10 @@ void SR_GTYPES_NS::Skybox::Draw ()
 
 
 
-### function FreeVideoMemory 
+### function FreeVMemory 
 
 ```C++
-void SR_GTYPES_NS::Skybox::FreeVideoMemory () override
+void SR_GTYPES_NS::Skybox::FreeVMemory () override
 ```
 
 

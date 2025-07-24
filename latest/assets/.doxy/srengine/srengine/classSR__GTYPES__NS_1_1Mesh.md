@@ -13,7 +13,7 @@
 
 
 
-Inherits the following classes: [SR\_GTYPES\_NS::IRenderComponent](classSR__GTYPES__NS_1_1IRenderComponent.md),  Memory::IGraphicsResource
+Inherits the following classes: [SR\_GTYPES\_NS::IRenderComponent](classSR__GTYPES__NS_1_1IRenderComponent.md)
 
 
 Inherited by the following classes: [SR\_GTYPES\_NS::DebugLine](classSR__GTYPES__NS_1_1DebugLine.md),  [SR\_GTYPES\_NS::IndexedMesh](classSR__GTYPES__NS_1_1IndexedMesh.md),  [SR\_GTYPES\_NS::Sprite](classSR__GTYPES__NS_1_1Sprite.md),  [SR\_GTYPES\_NS::Text](classSR__GTYPES__NS_1_1Text.md)
@@ -134,6 +134,7 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 | virtual SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetMeshLayer**](#function-getmeshlayer) () const<br> |
 |  SR\_NODISCARD const MeshRegistrationInfo & | [**GetMeshRegistrationInfo**](#function-getmeshregistrationinfo) () noexcept const<br> |
 | virtual SR\_NODISCARD MeshType | [**GetMeshType**](#function-getmeshtype) () noexcept const = 0<br> |
+|  SR\_NODISCARD Pipeline \* | [**GetPipeline**](#function-getpipeline) () noexcept const<br> |
 |  SR\_NODISCARD RenderQueues & | [**GetRenderQueues**](#function-getrenderqueues) () noexcept<br> |
 |  SR\_NODISCARD ShaderPtr | [**GetShader**](#function-getshader) () const<br> |
 | virtual SR\_NODISCARD int64\_t | [**GetSortingPriority**](#function-getsortingpriority) () const<br> |
@@ -143,6 +144,7 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 | virtual SR\_NODISCARD bool | [**HasSortingPriority**](#function-hassortingpriority) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsActive**](#function-isactive) () noexcept override const<br>_Активен и компонент и его родительский объект_  |
 | virtual SR\_NODISCARD bool | [**IsCalculatable**](#function-iscalculatable) () const<br> |
+|  SR\_NODISCARD bool | [**IsCalculated**](#function-iscalculated) () noexcept const<br> |
 | virtual SR\_NODISCARD SR\_FORCE\_INLINE bool | [**IsFlatMesh**](#function-isflatmesh) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsMeshRegistered**](#function-ismeshregistered) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsSupportVBO**](#function-issupportvbo) () const = 0<br> |
@@ -166,6 +168,7 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |  void | [**SetMaterial**](#function-setmaterial-22) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 | virtual void | [**SetMatrix**](#function-setmatrix) (const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & matrix) <br> |
 |  void | [**SetMeshRegistrationInfo**](#function-setmeshregistrationinfo) (const std::optional&lt; MeshRegistrationInfo &gt; & info) <br> |
+|  void | [**SetPipeline**](#function-setpipeline) (Pipeline \* pPipeline) <br> |
 |  void | [**SetUniformsClean**](#function-setuniformsclean) () <br> |
 |  void | [**UnRegisterMesh**](#function-unregistermesh) () <br> |
 | virtual void | [**UseMaterial**](#function-usematerial) () <br> |
@@ -283,9 +286,11 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |  bool | [**m\_dirtyMaterial**](#variable-m_dirtymaterial)   = `false`<br> |
 |  FrustumCullingType | [**m\_frustumCullingType**](#variable-m_frustumcullingtype)   = `FrustumCullingType::Sphere`<br> |
 |  bool | [**m\_hasErrors**](#variable-m_haserrors)   = `false`<br> |
+|  bool | [**m\_isCalculated**](#variable-m_iscalculated)   = `false`<br> |
 |  bool | [**m\_isUniformsDirty**](#variable-m_isuniformsdirty)   = `false`<br> |
 |  bool | [**m\_isWaitReRegister**](#variable-m_iswaitreregister)   = `false`<br> |
 |  MaterialPtr | [**m\_material**](#variable-m_material)  <br> |
+|  Pipeline \* | [**m\_pipeline**](#variable-m_pipeline)   = `nullptr`<br> |
 |  RenderQueues | [**m\_renderQueues**](#variable-m_renderqueues)  <br> |
 |  Memory::UBOManager & | [**m\_uboManager**](#variable-m_ubomanager)  <br> |
 |  int32\_t | [**m\_virtualDescriptor**](#variable-m_virtualdescriptor)   = `SR\_ID\_INVALID`<br> |
@@ -366,7 +371,7 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 | Type | Name |
 | ---: | :--- |
 | virtual bool | [**Calculate**](#function-calculate) () <br> |
-|  void | [**FreeVideoMemory**](#function-freevideomemory) () override<br> |
+| virtual void | [**FreeVMemory**](#function-freevmemory) () <br> |
 
 
 
@@ -629,6 +634,19 @@ virtual SR_NODISCARD MeshType SR_GTYPES_NS::Mesh::GetMeshType () noexcept const 
 
 
 
+### function GetPipeline 
+
+```C++
+inline SR_NODISCARD Pipeline * SR_GTYPES_NS::Mesh::GetPipeline () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
 ### function GetRenderQueues 
 
 ```C++
@@ -740,6 +758,19 @@ Implements [*SR\_UTILS\_NS::Component::IsActive*](classSR__UTILS__NS_1_1Componen
 
 ```C++
 virtual SR_NODISCARD bool SR_GTYPES_NS::Mesh::IsCalculatable () const
+```
+
+
+
+
+<hr>
+
+
+
+### function IsCalculated 
+
+```C++
+inline SR_NODISCARD bool SR_GTYPES_NS::Mesh::IsCalculated () noexcept const
 ```
 
 
@@ -1073,6 +1104,21 @@ inline void SR_GTYPES_NS::Mesh::SetMeshRegistrationInfo (
 
 
 
+### function SetPipeline 
+
+```C++
+inline void SR_GTYPES_NS::Mesh::SetPipeline (
+    Pipeline * pPipeline
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function SetUniformsClean 
 
 ```C++
@@ -1304,6 +1350,19 @@ bool SR_GTYPES_NS::Mesh::m_hasErrors;
 
 
 
+### variable m\_isCalculated 
+
+```C++
+bool SR_GTYPES_NS::Mesh::m_isCalculated;
+```
+
+
+
+
+<hr>
+
+
+
 ### variable m\_isUniformsDirty 
 
 ```C++
@@ -1334,6 +1393,19 @@ bool SR_GTYPES_NS::Mesh::m_isWaitReRegister;
 
 ```C++
 MaterialPtr SR_GTYPES_NS::Mesh::m_material;
+```
+
+
+
+
+<hr>
+
+
+
+### variable m\_pipeline 
+
+```C++
+Pipeline* SR_GTYPES_NS::Mesh::m_pipeline;
 ```
 
 
@@ -1410,10 +1482,10 @@ virtual bool SR_GTYPES_NS::Mesh::Calculate ()
 
 
 
-### function FreeVideoMemory 
+### function FreeVMemory 
 
 ```C++
-void SR_GTYPES_NS::Mesh::FreeVideoMemory () override
+virtual void SR_GTYPES_NS::Mesh::FreeVMemory () 
 ```
 
 

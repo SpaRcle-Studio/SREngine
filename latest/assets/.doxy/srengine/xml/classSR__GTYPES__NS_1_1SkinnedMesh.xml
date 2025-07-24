@@ -274,12 +274,13 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="39" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="39" bodyend="39"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1SkinnedMesh_1a713668b44ac1423a7d7a66b69876e8e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1SkinnedMesh_1a9425da8e1dbbaaa550551f6383279616" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
-        <definition>void SR_GTYPES_NS::SkinnedMesh::FreeVideoMemory</definition>
+        <definition>void SR_GTYPES_NS::SkinnedMesh::FreeVMemory</definition>
         <argsstring>() override</argsstring>
-        <name>FreeVideoMemory</name>
-        <qualifiedname>SR_GTYPES_NS::SkinnedMesh::FreeVideoMemory</qualifiedname>
+        <name>FreeVMemory</name>
+        <qualifiedname>SR_GTYPES_NS::SkinnedMesh::FreeVMemory</qualifiedname>
+        <reimplements refid="classSR__GTYPES__NS_1_1IndexedMesh_1a97d93208ef4f26b746505a922cd684fa">FreeVMemory</reimplements>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -392,9 +393,6 @@
       <node id="6">
         <label>Entity</label>
       </node>
-      <node id="7">
-        <label>Memory::IGraphicsResource</label>
-      </node>
       <node id="4">
         <label>SR_GTYPES_NS::IRenderComponent</label>
         <link refid="classSR__GTYPES__NS_1_1IRenderComponent"/>
@@ -412,18 +410,16 @@
         <link refid="classSR__GTYPES__NS_1_1Mesh"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
-        <childnode refid="7" relation="public-inheritance">
-        </childnode>
       </node>
       <node id="1">
         <label>SR_GTYPES_NS::SkinnedMesh</label>
         <link refid="classSR__GTYPES__NS_1_1SkinnedMesh"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="8" relation="public-inheritance">
+        <childnode refid="7" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="8">
+      <node id="7">
         <label>SR_HTYPES_NS::IRawMeshHolder</label>
         <link refid="classSR__HTYPES__NS_1_1IRawMeshHolder"/>
       </node>
@@ -439,12 +435,9 @@
         <label>Entity</label>
       </node>
       <node id="9">
-        <label>Memory::IGraphicsResource</label>
-      </node>
-      <node id="10">
         <label>SR_GRAPH_NS::DescriptorManager</label>
         <link refid="classSR__GRAPH__NS_1_1DescriptorManager"/>
-        <childnode refid="11" relation="public-inheritance">
+        <childnode refid="10" relation="public-inheritance">
         </childnode>
       </node>
       <node id="4">
@@ -464,9 +457,7 @@
         <link refid="classSR__GTYPES__NS_1_1Mesh"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
-        <childnode refid="9" relation="public-inheritance">
-        </childnode>
-        <childnode refid="10" relation="usage">
+        <childnode refid="9" relation="usage">
           <edgelabel>m_descriptorManager</edgelabel>
         </childnode>
       </node>
@@ -475,10 +466,10 @@
         <link refid="classSR__GTYPES__NS_1_1SkinnedMesh"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="14" relation="public-inheritance">
+        <childnode refid="13" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="14">
+      <node id="13">
         <label>SR_HTYPES_NS::IRawMeshHolder</label>
         <link refid="classSR__HTYPES__NS_1_1IRawMeshHolder"/>
       </node>
@@ -500,20 +491,20 @@
         <childnode refid="6" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="13">
+      <node id="12">
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
-      <node id="11">
+      <node id="10">
         <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="12" relation="public-inheritance">
+        <childnode refid="11" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="12">
+      <node id="11">
         <label>SR_UTILS_NS::SingletonBase</label>
         <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
-        <childnode refid="13" relation="public-inheritance">
+        <childnode refid="12" relation="public-inheritance">
         </childnode>
       </node>
       <node id="8">
@@ -544,7 +535,7 @@
       <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1aab16bcf36a31cc423dbd4492c9f458d7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>FreeIBO</name></member>
       <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a7c9f4f4a97cbb51d0e1bcf93a8af7ea3" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>FreeSSBO</name></member>
       <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1a0b23120e9e096f7a60733dfac37790ae" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>FreeVBO</name></member>
-      <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a713668b44ac1423a7d7a66b69876e8e6" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>FreeVideoMemory</name></member>
+      <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a9425da8e1dbbaaa550551f6383279616" prot="public" virt="virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>FreeVMemory</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aebb43fee7f75dd142ad299853208ee1e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GameObjectPtr</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad0630357a7ef40b1c526565323c1cea0" prot="public" virt="virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetBarycenter</name></member>
       <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1a8ffc0a7bba083f7d2703dd38752c7405" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetCamera</name></member>
@@ -565,6 +556,7 @@
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1af16c3ef83f6a6e8b98a62fc85a6928d0" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetMeshStringPath</name></member>
       <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1aac8383df19fbed15c4d227f7de6662bf" prot="public" virt="virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetMeshType</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ae81e0c4dd084a7d3d4620e53c10ca2fc" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetParent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a868d8c0cfc9fb205a903daa953446c1b" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetPipeline</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a699eb97dff6b2823a8606b356546d256" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetRawMesh</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a2c67cc73081e7682937fe2aaf59c65de" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetRenderQueues</name></member>
       <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1af32114a133ad6f5455d0e5ee95161fe5" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetRenderScene</name></member>
@@ -588,6 +580,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1a3e946a2df87f7f239b757e7c95c3a7dc" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>IsAttached</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aaa40b9cae6a7b9c771bcf20671f80455" prot="public" virt="virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>IsAwake</name></member>
       <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1acb1c5d3dbde2c12c7b317e3d0106129a" prot="public" virt="virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>IsCalculatable</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a8f6c24bf3013ae777a3eca72714b3c9e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>IsCalculated</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ac2786bf69d61b8eea8560256d1dee009" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>IsComponentLoaded</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a26327e3091acd6936c2fd29a5a5c9330" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>IsComponentValid</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a8f95ff169b8df189b211b036ba06def5" prot="public" virt="virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>IsEnabled</name></member>
@@ -617,6 +610,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1a58ed325cff4da93cce7d1ffd323e4886" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_isActive</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a353c88717dd50e343371ffe0d0d8c068" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_isAttached</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a01d2835c4cb9cab3dc85a24cb6330830" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_isAwake</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a64f71ac772e672498b13d6ca842ba8f9" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_isCalculated</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aa9bfad916eec33a0f4351054194c53e3" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_isComponentLoaded</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad9e404095f004e707f755beb764ab8e7" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_isEnabled</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a4a854563851b2106daf5d678e3a4b3a6" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_isStarted</name></member>
@@ -624,6 +618,7 @@
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a15373448bde91b633ab94a57483baf36" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_isWaitReRegister</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1ad418dcf562fe9670d34c11d93711ab83" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_material</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a9dddd30253cd78eb28f504e1afb66514" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_parent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a486362b25304d02d8b76702ba2fde3e9" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_pipeline</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a3b6365455b15767000675149fb88d932" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_renderQueues</name></member>
       <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1adf98d6531d11ca6c8946df21461446b7" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_renderScene</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ae7b09faaab768e65bf45cef6d3a84666" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_scene</name></member>
@@ -677,6 +672,7 @@
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a5a6bc29a5ae54972e18fb7d61124ecff" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>SetMeshId</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a4a038ee5096e73f581d8c1ba9a9e5ef7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>SetMeshRegistrationInfo</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ac9780c1f95cd3106101f4e1595550816" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>SetParent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a39b340114c4ceae171114ce2d7efaaf6" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>SetPipeline</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a8f54083212793185d112dfc01e612baf" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>SetRawMesh</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1ad5f9834371708471d3f6712e145aa7ae" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>SetRawMesh</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a73a3904579729c1939e4e6757b39ab51" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>SetUniformsClean</name></member>

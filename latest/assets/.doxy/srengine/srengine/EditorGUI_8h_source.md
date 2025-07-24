@@ -94,8 +94,16 @@ namespace SR_CORE_GUI_NS {
             return nullptr;
         }
 
+        template<typename T> T* TryGetWidget() {
+            if (auto&& pIt = m_widgets.find(typeid(T).hash_code()); pIt != m_widgets.end()) {
+                if (auto&& pWidget = dynamic_cast<T*>(pIt->second))
+                    return pWidget;
+            }
+            return nullptr;
+        }
+
         template<typename T> T* OpenWidget() {
-            if (auto&& pWidget = GetWidget<T>()) {
+            if (auto&& pWidget = TryGetWidget<T>()) {
                 pWidget->Open();
                 return pWidget;
             }

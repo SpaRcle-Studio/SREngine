@@ -343,6 +343,7 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 | virtual void | [**SetDirty**](classSR__GRAPH__NS_1_1Pipeline.md#function-setdirty) (bool dirty) <br> |
 | virtual void | [**SetOverlayEnabled**](classSR__GRAPH__NS_1_1Pipeline.md#function-setoverlayenabled) (OverlayType overlayType, bool enabled) <br> |
 | virtual void | [**SetOverlaySurfaceDirty**](classSR__GRAPH__NS_1_1Pipeline.md#function-setoverlaysurfacedirty) () <br> |
+| virtual void | [**SetRenderStageId**](classSR__GRAPH__NS_1_1Pipeline.md#function-setrenderstageid) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id) <br> |
 | virtual void | [**SetSampleCount**](classSR__GRAPH__NS_1_1Pipeline.md#function-setsamplecount) (uint8\_t count) <br> |
 | virtual void | [**SetScissor**](classSR__GRAPH__NS_1_1Pipeline.md#function-setscissor) (int32\_t width=-1, int32\_t height=-1) <br> |
 | virtual void | [**SetVSyncEnabled**](classSR__GRAPH__NS_1_1Pipeline.md#function-setvsyncenabled) (bool enabled) <br> |
@@ -480,6 +481,7 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 |  [**PipelinePreInitInfo**](structSR__GRAPH__NS_1_1PipelinePreInitInfo.md) | [**m\_preInitInfo**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_preinitinfo)  <br> |
 |  [**PipelineState**](structSR__GRAPH__NS_1_1PipelineState.md) | [**m\_previousState**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_previousstate)  <br> |
 |  RenderContextPtr | [**m\_renderContext**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_rendercontext)  <br> |
+|  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**m\_renderStageId**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_renderstageid)  <br> |
 |  uint8\_t | [**m\_requiredSampleCount**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_requiredsamplecount)   = `0`<br> |
 |  [**PipelineState**](structSR__GRAPH__NS_1_1PipelineState.md) | [**m\_state**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_state)  <br> |
 |  uint8\_t | [**m\_supportedSampleCount**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_supportedsamplecount)   = `0`<br> |

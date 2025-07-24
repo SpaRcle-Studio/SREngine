@@ -77,6 +77,7 @@ Inherits the following classes: SR_GRAPH_GUI_NS::WidgetManager
 |  void | [**ResetToDefault**](#function-resettodefault) () <br> |
 |  void | [**Save**](#function-save) () <br> |
 |  void | [**SetDockingEnabled**](#function-setdockingenabled) (bool value) <br> |
+|  T \* | [**TryGetWidget**](#function-trygetwidget) () <br> |
 |  void | [**Update**](#function-update) (float\_t dt) <br> |
 |   | [**~EditorGUI**](#function-editorgui) () override<br> |
 
@@ -451,6 +452,20 @@ void SR_CORE_GUI_NS::EditorGUI::Save ()
 inline void SR_CORE_GUI_NS::EditorGUI::SetDockingEnabled (
     bool value
 ) 
+```
+
+
+
+
+<hr>
+
+
+
+### function TryGetWidget 
+
+```C++
+template<typename T>
+inline T * SR_CORE_GUI_NS::EditorGUI::TryGetWidget () 
 ```
 
 

@@ -164,36 +164,36 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="23">
+      <node id="21">
         <label>Entity</label>
       </node>
-      <node id="7">
+      <node id="5">
         <label>SR_GRAPH_NS::BasePass</label>
         <link refid="classSR__GRAPH__NS_1_1BasePass"/>
-        <childnode refid="8" relation="public-inheritance">
+        <childnode refid="6" relation="public-inheritance">
         </childnode>
-        <childnode refid="12" relation="public-inheritance">
+        <childnode refid="10" relation="public-inheritance">
         </childnode>
-        <childnode refid="21" relation="usage">
+        <childnode refid="19" relation="usage">
           <edgelabel>m_camera</edgelabel>
         </childnode>
-        <childnode refid="26" relation="usage">
+        <childnode refid="24" relation="usage">
           <edgelabel>m_uboManager</edgelabel>
         </childnode>
-        <childnode refid="29" relation="usage">
+        <childnode refid="27" relation="usage">
           <edgelabel>m_descriptorManager</edgelabel>
         </childnode>
       </node>
-      <node id="29">
+      <node id="27">
         <label>SR_GRAPH_NS::DescriptorManager</label>
         <link refid="classSR__GRAPH__NS_1_1DescriptorManager"/>
-        <childnode refid="30" relation="public-inheritance">
+        <childnode refid="28" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="6">
+      <node id="4">
         <label>SR_GRAPH_NS::GroupPass</label>
         <link refid="classSR__GRAPH__NS_1_1GroupPass"/>
-        <childnode refid="7" relation="public-inheritance">
+        <childnode refid="5" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
@@ -201,26 +201,17 @@
         <link refid="classSR__GRAPH__NS_1_1IRenderTechnique"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
-        <childnode refid="6" relation="public-inheritance">
+        <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
         <label>SR_GRAPH_NS::Memory::IGraphicsResource</label>
         <link refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource"/>
-        <childnode refid="4" relation="usage">
-          <edgelabel>m_renderContext</edgelabel>
-        </childnode>
       </node>
-      <node id="26">
+      <node id="24">
         <label>SR_GRAPH_NS::Memory::UBOManager</label>
         <link refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager"/>
-        <childnode refid="27" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>SR_GRAPH_NS::RenderContext</label>
-        <link refid="classSR__GRAPH__NS_1_1RenderContext"/>
-        <childnode refid="5" relation="public-inheritance">
+        <childnode refid="25" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
@@ -228,139 +219,135 @@
         <link refid="classSR__GRAPH__NS_1_1ScriptableRenderTechnique"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="15" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="21">
-        <label>SR_GTYPES_NS::Camera</label>
-        <link refid="classSR__GTYPES__NS_1_1Camera"/>
-        <childnode refid="22" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="5">
-        <label>SR_HTYPES_NS::SafePtr&lt; T &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SafePtr"/>
-      </node>
-      <node id="9">
-        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="10" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="10">
-        <label>SR_HTYPES_NS::SharedPtrBase</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
-        <childnode refid="11" relation="usage">
-          <edgelabel>m_data</edgelabel>
-        </childnode>
-      </node>
-      <node id="11">
-        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
-        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
-      </node>
-      <node id="12">
-        <label>SR_SRLM_NS::IExecutableNode</label>
-        <link refid="classSR__SRLM__NS_1_1IExecutableNode"/>
         <childnode refid="13" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="15">
-        <label>SR_SRLM_NS::LogicalMachine</label>
-        <link refid="classSR__SRLM__NS_1_1LogicalMachine"/>
-        <childnode refid="16" relation="public-inheritance">
+      <node id="19">
+        <label>SR_GTYPES_NS::Camera</label>
+        <link refid="classSR__GTYPES__NS_1_1Camera"/>
+        <childnode refid="20" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="9" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="10">
+        <label>SR_SRLM_NS::IExecutableNode</label>
+        <link refid="classSR__SRLM__NS_1_1IExecutableNode"/>
+        <childnode refid="11" relation="public-inheritance">
         </childnode>
       </node>
       <node id="13">
-        <label>SR_SRLM_NS::LogicalNode</label>
-        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
+        <label>SR_SRLM_NS::LogicalMachine</label>
+        <link refid="classSR__SRLM__NS_1_1LogicalMachine"/>
         <childnode refid="14" relation="public-inheritance">
         </childnode>
-        <childnode refid="15" relation="usage">
+      </node>
+      <node id="11">
+        <label>SR_SRLM_NS::LogicalNode</label>
+        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+        <childnode refid="13" relation="usage">
           <edgelabel>m_machine</edgelabel>
         </childnode>
       </node>
-      <node id="22">
+      <node id="20">
         <label>SR_UTILS_NS::Component</label>
         <link refid="classSR__UTILS__NS_1_1Component"/>
-        <childnode refid="23" relation="public-inheritance">
+        <childnode refid="21" relation="public-inheritance">
         </childnode>
-        <childnode refid="24" relation="usage">
+        <childnode refid="22" relation="usage">
           <edgelabel>m_parent</edgelabel>
         </childnode>
-        <childnode refid="25" relation="usage">
+        <childnode refid="23" relation="usage">
           <edgelabel>m_scene</edgelabel>
         </childnode>
       </node>
-      <node id="24">
+      <node id="22">
         <label>SR_UTILS_NS::IComponentable</label>
         <link refid="classSR__UTILS__NS_1_1IComponentable"/>
-        <childnode refid="23" relation="public-inheritance">
+        <childnode refid="21" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="16">
+      <node id="14">
         <label>SR_UTILS_NS::IResource</label>
         <link refid="classSR__UTILS__NS_1_1IResource"/>
-        <childnode refid="8" relation="public-inheritance">
+        <childnode refid="6" relation="public-inheritance">
         </childnode>
-        <childnode refid="17" relation="public-inheritance">
+        <childnode refid="15" relation="public-inheritance">
         </childnode>
-        <childnode refid="18" relation="public-inheritance">
+        <childnode refid="16" relation="public-inheritance">
         </childnode>
-        <childnode refid="20" relation="usage">
+        <childnode refid="18" relation="usage">
           <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
           <edgelabel>RELOAD_DONE_EVENT</edgelabel>
         </childnode>
       </node>
-      <node id="14">
+      <node id="12">
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
-      <node id="8">
+      <node id="6">
         <label>SR_UTILS_NS::ResourceContainer</label>
         <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
-        <childnode refid="9" relation="public-inheritance">
+        <childnode refid="7" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="19">
+      <node id="17">
         <label>SR_UTILS_NS::SRClass</label>
         <link refid="classSR__UTILS__NS_1_1SRClass"/>
       </node>
-      <node id="18">
+      <node id="16">
         <label>SR_UTILS_NS::Serializable</label>
         <link refid="classSR__UTILS__NS_1_1Serializable"/>
-        <childnode refid="19" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="30">
-        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="27">
-        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="28" relation="public-inheritance">
+        <childnode refid="17" relation="public-inheritance">
         </childnode>
       </node>
       <node id="28">
-        <label>SR_UTILS_NS::SingletonBase</label>
-        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
-        <childnode refid="14" relation="public-inheritance">
+        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="26" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="20">
+      <node id="25">
+        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="26" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
         <label>SR_UTILS_NS::StringAtom</label>
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
-      <node id="17">
+      <node id="15">
         <label>SR_UTILS_NS::SubscriptionHolder</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
-      <node id="25">
+      <node id="23">
         <label>SR_WORLD_NS::Scene</label>
         <link refid="classSR__WORLD__NS_1_1Scene"/>
-        <childnode refid="24" relation="public-inheritance">
+        <childnode refid="22" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>
@@ -394,7 +381,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual" ambiguityscope="SR_SRLM_NS::LogicalMachine::"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>DecrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1abb48510764be0f3f045c46ae7ab67d87" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>DEFAULT_RENDER_TECHNIQUE</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1a29b1bfca493d7c9e93b9d2ccd0919a1e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>DeInit</name></member>
-      <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ab417478adc60452e564a0ec2ac2d7f2b" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>DeInitGraphicsResource</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1aa6b6a44d97575771ed7b6380d9510940" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>DeInitGraphicsResource</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ae42052d285f8ece8d8e26481345e29a2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>DeInitPasses</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a1321f66c455d7f59eebb314fe2c83062" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>DeleteResource</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a700794249e341d5228920451cedf9ee7" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>Destroy</name></member>
@@ -408,7 +395,7 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1a56bb33e9f5864b6fa62e473389a517b7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>ForceDestroy</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1a81ad67862db2e023140ea7f197d6b119" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>ForEachPass</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1aabe916f28e0ba33fad1f0c3b6808e83c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>FrameBufferControllerPtr</name></member>
-      <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a596a4017cc0261fcf3d1163958f00ac7" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>FreeVideoMemory</name></member>
+      <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1afc5dde604ae7dccabdb73aabab3ed79b" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>FreeVMemory</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual" ambiguityscope="SR_GRAPH_NS::"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual" ambiguityscope="SR_GRAPH_NS::"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual" ambiguityscope="SR_SRLM_NS::LogicalMachine::"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>Get</name></member>
@@ -490,14 +477,13 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1ad94ef18d58f13582b7411b749ae81089" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>IsAlive</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a7f41c08e67a57cca18fb3b2c2c350768" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>IsAllowedMultiInstance</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a6ad69fde6a46a6f50fab83b27b3db5b0" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>IsAllowedToRevive</name></member>
-      <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1aae869a130c9a754487b0d5dfa2bf3e38" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>IsCalculated</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a47131cd914c3a6c8a7c03a4764559716" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>IsDestroyed</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a7a198b9924e270e946544b410c7e4429" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>IsDirty</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a9c5f6a49b7b57933fdc7a57330b165aa" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>IsEmpty</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae3301d2d44de7af8fc7e186f8691a854" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>IsEntryPoint</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a91fdfb42142b2e37139e4742442a2fee" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>IsFileResource</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a9276c48812f77bea62428fa4a59792d0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>IsForceDestroyed</name></member>
-      <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a19797a20b2b1281e696e87082e302106" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>IsGraphicsResourceRegistered</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1af8957bbf51d3ceea1ede4c2175480454" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>IsGraphicsResourceRegistered</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a264dd4b976655f217e1386a38e0a6b6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>IsInit</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a84c1674173da29d57d1528ccb9d9c1b9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>IsLoaded</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1aafd12c320ddcfd1850b69560ba7b3131" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>IsNeedPostRepeat</name></member>
@@ -529,7 +515,6 @@
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a2b12363689a7acd7bff08fbdb8c0ca94" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_frameBufferControllers</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ae8c981d2c083b5953b02feb06e294d8e" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_hasErrors</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1aaefebe7fd52cbf14db7c85bbe21b49ef" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_inputs</name></member>
-      <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1adf9d6452fd88d1c578835f72dcc08789" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_isCalculated</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ad6f8c70c4885e0ce6a6a523e794371a7" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_isDead</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a45c441a3f4c53aafeb3de6c5aa64766c" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_isFromMemory</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a8600327689c36a9c20b5ae589acd4cfa" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_loadState</name></member>
@@ -537,9 +522,7 @@
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3a2a6ff04f3fe1f0a7d3691fa9c38bad" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_nodeIndex</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1acdfab2ebb3fe8db5559f506f14207265" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_outputs</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1a8666988960c7b392ef4f63a4eb85f1a3" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_passes</name></member>
-      <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1aab5b6b9c539f265beb0b86d683f7f924" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_pipeline</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1aeb4eff392e88f9c1c64cfd08adbc8e8d" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_queues</name></member>
-      <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1aec3e5a7cc61a197bc507d0d26f239c04" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_renderContext</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a693f9e83b3499d00aff3ec8ba31a2841" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_renderScene</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1a326155de44e7fe4f9a7f6f905f239e83" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_status</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8b2e3a39351e9141029bea133f380465" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_uboManager</name></member>
@@ -547,7 +530,6 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual" ambiguityscope="SR_GRAPH_NS::"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>MakeShared</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual" ambiguityscope="SR_SRLM_NS::LogicalMachine::"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>MakeShared</name></member>
       <member refid="classSR__SRLM__NS_1_1LogicalNode_1abeb669de15f340d47b81aff73c8494a7" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>MarkDirty</name></member>
-      <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a798d0be5203c28d4754826bc95a25d82" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>MarkPipelineUnBuild</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1aa7c29336844c31150ba16812fc82ad7d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>MeshPtr</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>NonCopyable</name></member>
@@ -600,6 +582,7 @@
       <member refid="classSR__GRAPH__NS_1_1ScriptableRenderTechnique_1a50c69c3c5c2f22404119a8d6cba69239" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>Ptr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual" ambiguityscope="SR_GRAPH_NS::"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>RecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual" ambiguityscope="SR_SRLM_NS::LogicalMachine::"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ad9573242ff8320114c1ca150798d26c1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>RegisterGraphicsResource</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1afed952eb55d7441a18c4d3381d315fcf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>RegisterPropertiesCodegen</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual" ambiguityscope="SR_GRAPH_NS::"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>ReinterpretCast</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual" ambiguityscope="SR_SRLM_NS::LogicalMachine::"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>ReinterpretCast</name></member>
@@ -642,7 +625,6 @@
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ab5e34c676e9594e60de4ca2e962a0cf7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>SetParent</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual" ambiguityscope="SR_GRAPH_NS::"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>SetPointerFromBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual" ambiguityscope="SR_SRLM_NS::LogicalMachine::"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>SetPointerFromBase</name></member>
-      <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a97892e608c168ea6f1937e19d4e6e685" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>SetRenderContext</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a2fca4b2845f1c2cec6b501230ad6821f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>SetRenderScene</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1a482bd1243f9b252fa81b99aeaa88617c" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>SetRenderTechnique</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a2f72c195e91ef30f20f84ca3d56f7147" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>SetResourceHash</name></member>

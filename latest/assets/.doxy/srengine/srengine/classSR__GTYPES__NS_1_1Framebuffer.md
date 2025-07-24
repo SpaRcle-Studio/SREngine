@@ -247,7 +247,7 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  void | [**EndCmdBuffer**](#function-endcmdbuffer) () <br> |
 |  void | [**EndRender**](#function-endrender) () <br> |
 |   | [**Framebuffer**](#function-framebuffer) () <br> |
-|  void | [**FreeVideoMemory**](#function-freevideomemory) () override<br> |
+|  void | [**FreeVMemory**](#function-freevmemory) () override<br> |
 |  SR\_NODISCARD uint32\_t | [**GetColorLayersCount**](#function-getcolorlayerscount) () noexcept const<br> |
 |  SR\_NODISCARD int32\_t | [**GetColorTexture**](#function-getcolortexture) (uint32\_t layer) <br> |
 |  SR\_NODISCARD ImageAspect | [**GetDepthAspect**](#function-getdepthaspect) () noexcept const<br> |
@@ -879,10 +879,10 @@ SR_GTYPES_NS::Framebuffer::Framebuffer ()
 
 
 
-### function FreeVideoMemory 
+### function FreeVMemory 
 
 ```C++
-void SR_GTYPES_NS::Framebuffer::FreeVideoMemory () override
+void SR_GTYPES_NS::Framebuffer::FreeVMemory () override
 ```
 
 

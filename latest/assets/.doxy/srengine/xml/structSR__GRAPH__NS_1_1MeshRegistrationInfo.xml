@@ -128,27 +128,24 @@
       <node id="5">
         <label>Entity</label>
       </node>
-      <node id="8">
-        <label>Memory::IGraphicsResource</label>
-      </node>
-      <node id="13">
+      <node id="12">
         <label>SR_GRAPH_NS::BaseMaterial</label>
         <link refid="classSR__GRAPH__NS_1_1BaseMaterial"/>
-        <childnode refid="14" relation="public-inheritance">
+        <childnode refid="13" relation="public-inheritance">
         </childnode>
-        <childnode refid="12" relation="public-inheritance">
+        <childnode refid="11" relation="public-inheritance">
         </childnode>
-        <childnode refid="16" relation="public-inheritance">
+        <childnode refid="15" relation="public-inheritance">
         </childnode>
-        <childnode refid="19" relation="usage">
+        <childnode refid="18" relation="usage">
           <edgelabel>m_propertyChangedSubscription</edgelabel>
           <edgelabel>m_shaderChangedSubscription</edgelabel>
         </childnode>
       </node>
-      <node id="9">
+      <node id="8">
         <label>SR_GRAPH_NS::DescriptorManager</label>
         <link refid="classSR__GRAPH__NS_1_1DescriptorManager"/>
-        <childnode refid="10" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
@@ -157,20 +154,20 @@
         <childnode refid="2" relation="usage">
           <edgelabel>pMesh</edgelabel>
         </childnode>
-        <childnode refid="13" relation="usage">
+        <childnode refid="12" relation="usage">
           <edgelabel>pMaterial</edgelabel>
         </childnode>
-        <childnode refid="20" relation="usage">
+        <childnode refid="19" relation="usage">
           <edgelabel>layer</edgelabel>
         </childnode>
-        <childnode refid="21" relation="usage">
+        <childnode refid="20" relation="usage">
           <edgelabel>pScene</edgelabel>
         </childnode>
       </node>
-      <node id="21">
+      <node id="20">
         <label>SR_GRAPH_NS::RenderScene</label>
         <link refid="classSR__GRAPH__NS_1_1RenderScene"/>
-        <childnode refid="22" relation="public-inheritance">
+        <childnode refid="21" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
@@ -184,32 +181,30 @@
         <link refid="classSR__GTYPES__NS_1_1Mesh"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
-        <childnode refid="8" relation="public-inheritance">
-        </childnode>
-        <childnode refid="9" relation="usage">
+        <childnode refid="8" relation="usage">
           <edgelabel>m_descriptorManager</edgelabel>
         </childnode>
       </node>
+      <node id="15">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
       <node id="16">
-        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="17" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="22">
-        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="17" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="17">
         <label>SR_HTYPES_NS::SharedPtrBase</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
-        <childnode refid="18" relation="usage">
+        <childnode refid="17" relation="usage">
           <edgelabel>m_data</edgelabel>
         </childnode>
       </node>
-      <node id="18">
+      <node id="17">
         <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
         <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
       </node>
@@ -231,40 +226,40 @@
         <childnode refid="5" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="12">
+      <node id="11">
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
-      <node id="15">
+      <node id="14">
         <label>SR_UTILS_NS::SRClass</label>
         <link refid="classSR__UTILS__NS_1_1SRClass"/>
       </node>
-      <node id="14">
+      <node id="13">
         <label>SR_UTILS_NS::Serializable</label>
         <link refid="classSR__UTILS__NS_1_1Serializable"/>
-        <childnode refid="15" relation="public-inheritance">
+        <childnode refid="14" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="10" relation="public-inheritance">
         </childnode>
       </node>
       <node id="10">
-        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
         <childnode refid="11" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="11">
-        <label>SR_UTILS_NS::SingletonBase</label>
-        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
-        <childnode refid="12" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="20">
+      <node id="19">
         <label>SR_UTILS_NS::StringAtom</label>
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
-      <node id="19">
+      <node id="18">
         <label>SR_UTILS_NS::Subscription</label>
         <link refid="classSR__UTILS__NS_1_1Subscription"/>
-        <childnode refid="12" relation="private-inheritance">
+        <childnode refid="11" relation="private-inheritance">
         </childnode>
       </node>
       <node id="7">

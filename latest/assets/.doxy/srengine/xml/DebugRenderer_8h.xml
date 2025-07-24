@@ -55,6 +55,8 @@
         </childnode>
         <childnode refid="85" relation="include">
         </childnode>
+        <childnode refid="168" relation="include">
+        </childnode>
       </node>
       <node id="2">
         <label>Graphics/Memory/MeshManager.h</label>
@@ -96,7 +98,7 @@
         <childnode refid="158" relation="include">
         </childnode>
       </node>
-      <node id="168">
+      <node id="169">
         <label>Graphics/Memory/UBOManager.h</label>
         <link refid="UBOManager_8h_source"/>
         <childnode refid="145" relation="include">
@@ -149,7 +151,7 @@
         </childnode>
         <childnode refid="147" relation="include">
         </childnode>
-        <childnode refid="169" relation="include">
+        <childnode refid="170" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
@@ -158,7 +160,7 @@
         <childnode refid="98" relation="include">
         </childnode>
       </node>
-      <node id="169">
+      <node id="170">
         <label>Graphics/Render/IRenderer.h</label>
         <link refid="IRenderer_8h_source"/>
         <childnode refid="145" relation="include">
@@ -197,7 +199,7 @@
         </childnode>
         <childnode refid="167" relation="include">
         </childnode>
-        <childnode refid="168" relation="include">
+        <childnode refid="169" relation="include">
         </childnode>
       </node>
       <node id="148">
@@ -337,6 +339,12 @@
       <node id="4">
         <label>Utils/Common/NonCopyable.h</label>
         <link refid="NonCopyable_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="168">
+        <label>Utils/Common/PassKey.h</label>
+        <link refid="PassKey_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
       </node>

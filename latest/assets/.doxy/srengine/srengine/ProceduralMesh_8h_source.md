@@ -54,7 +54,7 @@ namespace SR_GTYPES_NS {
         bool Export(const SR_UTILS_NS::Path& path) const;
 
     private:
-        void FreeVideoMemory() override;
+        void FreeVMemory() override;
         bool Calculate() override;
         void SetDirtyMesh();
         void UseSSBO() override;

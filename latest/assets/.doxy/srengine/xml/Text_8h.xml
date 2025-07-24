@@ -32,7 +32,7 @@
         <childnode refid="157" relation="include">
         </childnode>
       </node>
-      <node id="164">
+      <node id="165">
         <label>Graphics/Material/MaterialProperty.h</label>
         <link refid="MaterialProperty_8h_source"/>
         <childnode refid="154" relation="include">
@@ -40,7 +40,7 @@
         <childnode refid="136" relation="include">
         </childnode>
       </node>
-      <node id="168">
+      <node id="169">
         <label>Graphics/Material/MaterialType.h</label>
         <link refid="MaterialType_8h_source"/>
         <childnode refid="3" relation="include">
@@ -48,15 +48,15 @@
         <childnode refid="76" relation="include">
         </childnode>
       </node>
-      <node id="167">
+      <node id="168">
         <label>Graphics/Material/MeshMaterialProperty.h</label>
         <link refid="MeshMaterialProperty_8h_source"/>
         <childnode refid="157" relation="include">
         </childnode>
-        <childnode refid="168" relation="include">
+        <childnode refid="169" relation="include">
         </childnode>
       </node>
-      <node id="165">
+      <node id="166">
         <label>Graphics/Memory/DescriptorManager.h</label>
         <link refid="DescriptorManager_8h_source"/>
         <childnode refid="78" relation="include">
@@ -65,7 +65,7 @@
         </childnode>
         <childnode refid="111" relation="include">
         </childnode>
-        <childnode refid="166" relation="include">
+        <childnode refid="167" relation="include">
         </childnode>
       </node>
       <node id="162">
@@ -75,8 +75,10 @@
         </childnode>
         <childnode refid="105" relation="include">
         </childnode>
+        <childnode refid="163" relation="include">
+        </childnode>
       </node>
-      <node id="163">
+      <node id="164">
         <label>Graphics/Memory/UBOManager.h</label>
         <link refid="UBOManager_8h_source"/>
         <childnode refid="3" relation="include">
@@ -110,7 +112,7 @@
         <childnode refid="153" relation="include">
         </childnode>
       </node>
-      <node id="169">
+      <node id="170">
         <label>Graphics/Render/RenderQueue.h</label>
         <link refid="RenderQueue_8h_source"/>
         <childnode refid="3" relation="include">
@@ -119,7 +121,7 @@
         </childnode>
         <childnode refid="127" relation="include">
         </childnode>
-        <childnode refid="163" relation="include">
+        <childnode refid="164" relation="include">
         </childnode>
       </node>
       <node id="153">
@@ -128,7 +130,7 @@
         <childnode refid="154" relation="include">
         </childnode>
       </node>
-      <node id="166">
+      <node id="167">
         <label>Graphics/Types/Descriptors.h</label>
         <link refid="Descriptors_8h_source"/>
         <childnode refid="3" relation="include">
@@ -136,12 +138,12 @@
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="170">
+      <node id="171">
         <label>Graphics/Types/IRenderComponent.h</label>
         <link refid="IRenderComponent_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="171" relation="include">
+        <childnode refid="172" relation="include">
         </childnode>
       </node>
       <node id="107">
@@ -163,17 +165,17 @@
         </childnode>
         <childnode refid="162" relation="include">
         </childnode>
-        <childnode refid="163" relation="include">
-        </childnode>
         <childnode refid="164" relation="include">
         </childnode>
         <childnode refid="165" relation="include">
         </childnode>
-        <childnode refid="167" relation="include">
+        <childnode refid="166" relation="include">
         </childnode>
-        <childnode refid="169" relation="include">
+        <childnode refid="168" relation="include">
         </childnode>
         <childnode refid="170" relation="include">
+        </childnode>
+        <childnode refid="171" relation="include">
         </childnode>
       </node>
       <node id="152">
@@ -270,7 +272,7 @@
         <childnode refid="96" relation="include">
         </childnode>
       </node>
-      <node id="175">
+      <node id="176">
         <label>Utils/Common/CollisionData.h</label>
         <link refid="CollisionData_8h_source"/>
         <childnode refid="92" relation="include">
@@ -338,10 +340,16 @@
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="173">
+      <node id="174">
         <label>Utils/Common/Numeric.h</label>
         <link refid="Numeric_8h_source"/>
         <childnode refid="78" relation="include">
+        </childnode>
+      </node>
+      <node id="163">
+        <label>Utils/Common/PassKey.h</label>
+        <link refid="PassKey_8h_source"/>
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
       <node id="78">
@@ -448,10 +456,10 @@
         <childnode refid="106" relation="include">
         </childnode>
       </node>
-      <node id="171">
+      <node id="172">
         <label>Utils/ECS/Component.h</label>
         <link refid="Component_8h_source"/>
-        <childnode refid="172" relation="include">
+        <childnode refid="173" relation="include">
         </childnode>
         <childnode refid="92" relation="include">
         </childnode>
@@ -467,21 +475,21 @@
         </childnode>
         <childnode refid="117" relation="include">
         </childnode>
-        <childnode refid="174" relation="include">
-        </childnode>
         <childnode refid="175" relation="include">
+        </childnode>
+        <childnode refid="176" relation="include">
         </childnode>
         <childnode refid="157" relation="include">
         </childnode>
       </node>
-      <node id="172">
+      <node id="173">
         <label>Utils/ECS/Entity.h</label>
         <link refid="Entity_8h_source"/>
         <childnode refid="138" relation="include">
         </childnode>
         <childnode refid="160" relation="include">
         </childnode>
-        <childnode refid="173" relation="include">
+        <childnode refid="174" relation="include">
         </childnode>
         <childnode refid="111" relation="include">
         </childnode>
@@ -992,7 +1000,7 @@
         <childnode refid="79" relation="include">
         </childnode>
       </node>
-      <node id="174">
+      <node id="175">
         <label>Utils/Types/SafeVariable.h</label>
         <link refid="SafeVariable_8h_source"/>
         <childnode refid="90" relation="include">
@@ -1485,7 +1493,7 @@
 <codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetUsePreprocessor(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enabled);</highlight></codeline>
 <codeline lineno="61"><highlight class="normal"></highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Calculate()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>FreeVideoMemory()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>FreeVMemory()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"></highlight></codeline>
 <codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnTextDirty();</highlight></codeline>

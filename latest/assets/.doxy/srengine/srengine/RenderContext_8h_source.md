@@ -57,10 +57,11 @@ namespace SR_GRAPH_NS {
         using Super = SR_HTYPES_NS::SafePtr<RenderContext>;
         using MaterialPtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::BaseMaterial>;
         using TexturePtr = SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Texture>;
-        using SkyboxPtr = SR_GTYPES_NS::Skybox*;
+        using SkyboxPtr = SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Skybox>;
         using FramebufferPtr = SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Framebuffer>;
         using CameraPtr = SR_GTYPES_NS::Camera*;
-        using ShaderPtr = SR_GTYPES_NS::Shader*;
+        using ShaderPtr = SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Shader>;
+        using RenderTechniquePtr = SR_HTYPES_NS::SharedPtr<IRenderTechnique>;
         using WindowPtr = SR_HTYPES_NS::SharedPtr<Window>;
         using RenderScenes = std::list<std::pair<SR_WORLD_NS::Scene::Ptr, RenderScenePtr>>;
     public:
@@ -88,12 +89,7 @@ namespace SR_GRAPH_NS {
     public:
         RenderScenePtr CreateScene(const SR_WORLD_NS::Scene::Ptr& scene);
 
-        void Register(FramebufferPtr pFrameBuffer);
-        void Register(SR_GTYPES_NS::Shader* pShader);
-        void Register(SR_GTYPES_NS::Texture* pTexture);
-        void Register(IRenderTechnique* pTechnique);
-        void Register(MaterialPtr pMaterial);
-        void Register(SkyboxPtr pSkybox);
+        void Register(Memory::IGraphicsResource* pResource, SR_UTILS_NS::PassKey<Memory::IGraphicsResource>);
 
         SR_NODISCARD bool IsOptimizedRenderUpdateEnabled() const noexcept { return m_isOptimizedUpdateEnabled; }
         SR_NODISCARD bool IsEmpty() const;
@@ -110,11 +106,11 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD FramebufferPtr FindFramebuffer(SR_UTILS_NS::StringAtom name) const;
         SR_NODISCARD FramebufferPtr FindFramebuffer(SR_UTILS_NS::StringAtom name, CameraPtr pCamera) const;
         SR_NODISCARD SR_MATH_NS::UVector2 GetWindowSize() const;
-        SR_NODISCARD const std::vector<SR_GTYPES_NS::Shader*>& GetShaders() const noexcept;
+        SR_NODISCARD const std::vector<ShaderPtr>& GetShaders() const noexcept;
         SR_NODISCARD const std::vector<SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Framebuffer>>& GetFramebuffers() const noexcept;
         SR_NODISCARD const std::vector<TexturePtr>& GetTextures() const noexcept;
-        SR_NODISCARD const std::vector<IRenderTechnique::Ptr>& GetRenderTechniques() const noexcept;
-        SR_NODISCARD const std::vector<SR_GTYPES_NS::Skybox*>& GetSkyboxes() const noexcept;
+        SR_NODISCARD const std::vector<RenderTechniquePtr>& GetRenderTechniques() const noexcept;
+        SR_NODISCARD const std::vector<SkyboxPtr>& GetSkyboxes() const noexcept;
         SR_NODISCARD const RenderScenes& GetScenes() const noexcept { return m_scenes; }
 
         void SetOptimizedRenderUpdateEnabled(bool enabled) noexcept { m_isOptimizedUpdateEnabled = enabled; }
@@ -125,33 +121,15 @@ namespace SR_GRAPH_NS {
         bool LoadDefaultResources();
         bool InitPipeline();
 
-        template<typename T> bool RegisterResource(T* pResource) {
-            SRAssert2(!m_isClosed, "RenderContext is closed");
-            if (auto&& pGraphicsResource = dynamic_cast<Memory::IGraphicsResource*>(pResource)) {
-                if (pGraphicsResource->GetRenderContext()) {
-                    SRHalt("Resource already registered in some context!");
-                    return false;
-                }
-
-                pGraphicsResource->SetRenderContext(this);
-            }
-
-            if (auto&& pIResource = dynamic_cast<SR_UTILS_NS::IResource*>(pResource)) {
-                pIResource->AddUsePoint();
-            }
-
-            return true;
-        }
-
         template<typename T> bool Update(T& resourceList) noexcept;
 
     private:
         RCUpdateQueueState m_updateState = RCUpdateQueueState::Begin;
 
         std::vector<SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Framebuffer>> m_framebuffers;
-        std::vector<SR_GTYPES_NS::Shader*> m_shaders;
-        std::vector<TexturePtr> m_textures;
         std::vector<SR_HTYPES_NS::SharedPtr<IRenderTechnique>> m_techniques;
+        std::vector<ShaderPtr> m_shaders;
+        std::vector<TexturePtr> m_textures;
         std::vector<SkyboxPtr> m_skyboxes;
 
         RenderScenes m_scenes;
@@ -191,8 +169,7 @@ namespace SR_GRAPH_NS {
                 }
 
                 if (pRenderTechnique->IsTechniqueDead()) {
-                    pRenderTechnique->FreeVideoMemory();
-                    pRenderTechnique->DeInitGraphicsResource();
+                    pRenderTechnique->DeInitGraphicsResource(SR_UTILS_NS::PassKey<RenderContext>(this));
                     pIt = resourceList.erase(pIt);
                     pRenderTechnique.AutoFree();
                     dirty |= true;
@@ -203,24 +180,18 @@ namespace SR_GRAPH_NS {
             }
         }
         else {
-            static auto&& freeVideoMemory = [](SR_UTILS_NS::IResource* pResource) {
-                if (auto&& pGraphicsResource = dynamic_cast<Memory::IGraphicsResource*>(pResource)) {
-                    pGraphicsResource->FreeVideoMemory();
-                    pGraphicsResource->DeInitGraphicsResource();
-                }
-            };
-
             for (auto pIt = std::begin(resourceList); pIt != std::end(resourceList); ) {
-                auto&& pRenderResource = *pIt;
-
-                auto&& pResource = dynamic_cast<SR_UTILS_NS::IResource*>(pRenderResource->Get());
-
-                if (pResource) {
+                if (auto pResource = *pIt) {
                     const bool removed = pResource->Execute([&]() -> bool {
                         if (pResource->GetCountUses() == 1) {
                             SRAssert(pResource->GetContainerParents().empty());
 
-                            freeVideoMemory(pResource);
+                            if (auto&& pGraphicsResource = dynamic_cast<Memory::IGraphicsResource*>(pResource.Get())) {
+                                pGraphicsResource->DeInitGraphicsResource(SR_UTILS_NS::PassKey<RenderContext>(this));
+                            }
+                            else {
+                                SRHalt("Resource is not IGraphicsResource!");
+                            }
 
                             pResource->RemoveUsePoint();
                             pIt = resourceList.erase(pIt);
@@ -236,8 +207,8 @@ namespace SR_GRAPH_NS {
                     }
                 }
                 else {
-                    freeVideoMemory(pResource);
-                    ++pIt;
+                    SRHalt("Resource is nullptr!");
+                    pIt = resourceList.erase(pIt);
                 }
             }
         }

@@ -156,6 +156,21 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="64" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="64" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Skybox_1aa56b67cdc8cfcff5543ec03ddc4615b7" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::Skybox::m_idDirty</definition>
+        <argsstring></argsstring>
+        <name>m_idDirty</name>
+        <qualifiedname>SR_GTYPES_NS::Skybox::m_idDirty</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="65" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Skybox_1a7821ed61e472d266ae06783efccbe027" prot="private" static="no" mutable="no">
         <type>bool</type>
         <definition>bool SR_GTYPES_NS::Skybox::m_dirtyShader</definition>
@@ -169,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="65" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="65" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="66" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="66" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Skybox_1a532a944ad2a1347f27987eb4a1538fa0" prot="private" static="no" mutable="no">
         <type>Memory::UBOManager &amp;</type>
@@ -183,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="67" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="67" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="68" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="68" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Skybox_1a902ac7d2ba7496ef1b6a7605c3a134fe" prot="private" static="no" mutable="no">
         <type>DescriptorManager &amp;</type>
@@ -197,7 +212,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="68" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="68" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="69" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="69" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Skybox_1a49e706cf3a8664cd011b7bcebe2fe8d7" prot="private" static="no" mutable="no">
         <type>std::array&lt; TextureData::Ptr, 6 &gt;</type>
@@ -211,7 +226,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="70" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="70" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="71" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="71" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -314,12 +329,12 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="34" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="34" bodyend="34"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Skybox_1ab6e78d4a1f033a335c08b4de04d3d0a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Skybox_1aa38d813427889024a4269b3fe7db8de9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
-        <definition>void SR_GTYPES_NS::Skybox::FreeVideoMemory</definition>
+        <definition>void SR_GTYPES_NS::Skybox::FreeVMemory</definition>
         <argsstring>() override</argsstring>
-        <name>FreeVideoMemory</name>
-        <qualifiedname>SR_GTYPES_NS::Skybox::FreeVideoMemory</qualifiedname>
+        <name>FreeVMemory</name>
+        <qualifiedname>SR_GTYPES_NS::Skybox::FreeVMemory</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -577,7 +592,7 @@
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="16" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="16" bodyend="72"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="16" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" bodystart="16" bodyend="73"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1af9087ca5182397a9c7d3b92fb5591523" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>AddDependency</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>AddSerializationFlags</name></member>
@@ -596,7 +611,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>DynamicCast</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a5dd9749c79cb65452e9e4d10efda42f8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>Execute</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a56bb33e9f5864b6fa62e473389a517b7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>ForceDestroy</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Skybox_1ab6e78d4a1f033a335c08b4de04d3d0a2" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>FreeVideoMemory</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Skybox_1aa38d813427889024a4269b3fe7db8de9" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>FreeVMemory</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>Get</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1aeabd3a189fe8c7c0c31c1fb6713c5043" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>GetAssociatedPath</name></member>
@@ -658,6 +673,7 @@
       <member refid="classSR__GTYPES__NS_1_1Skybox_1a2424cfe5a3bed3b627d960f46a4beb7f" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>m_hasErrors</name></member>
       <member refid="classSR__GTYPES__NS_1_1Skybox_1a91d4041ad95ec057abf0cfaf788edd89" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>m_height</name></member>
       <member refid="classSR__GTYPES__NS_1_1Skybox_1a5f5189a5c25df434881ac40ef801d2e0" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>m_IBO</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Skybox_1aa56b67cdc8cfcff5543ec03ddc4615b7" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>m_idDirty</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a45c441a3f4c53aafeb3de6c5aa64766c" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>m_isFromMemory</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a8600327689c36a9c20b5ae589acd4cfa" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>m_loadState</name></member>
       <member refid="classSR__GTYPES__NS_1_1Skybox_1ae46fd8bfb81c805cbad941b049b487c7" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>m_shader</name></member>

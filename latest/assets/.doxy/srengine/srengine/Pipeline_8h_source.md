@@ -128,8 +128,9 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual uint8_t GetSupportedSamples() const noexcept { return m_supportedSampleCount; }
         SR_NODISCARD virtual bool IsShaderConstantSupport() const { ++m_state.operations; return false; }
         SR_NODISCARD virtual SR_MATH_NS::FColor GetPixelColor(uint32_t textureId, uint32_t x, uint32_t y) { return SR_MATH_NS::FColor(0.f); }
-        SR_NODISCARD virtual SR_UTILS_NS::StringAtom GetRenderStageId() const { return SR_UTILS_NS::StringAtom(); }
+        SR_NODISCARD virtual SR_UTILS_NS::StringAtom GetRenderStageId() const { return m_renderStageId; }
 
+        virtual void SetRenderStageId(SR_UTILS_NS::StringAtom id) { m_renderStageId = id; }
         virtual void SetCurrentShader(ShaderPtr pShader) { ++m_state.operations; m_state.pShader = pShader; }
         virtual void SetCurrentShaderId(int32_t id) { ++m_state.operations; m_state.shaderId = id; }
         virtual void SetCurrentFrameBufferLayer(uint32_t layer) { ++m_state.operations; m_state.frameBufferLayer = layer; }
@@ -255,6 +256,8 @@ namespace SR_GRAPH_NS {
         mutable uint64_t m_errorsCount = 0;
 
         std::atomic<bool> m_dirty = false;
+
+        SR_UTILS_NS::StringAtom m_renderStageId;
 
         WindowPtr m_window;
         RenderContextPtr m_renderContext;

@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="66" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="66" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="64" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="64" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Texture_1a3f4746ac09bce22bb9f757a5eaf6286e" prot="private" static="no" mutable="no">
         <type>int32_t</type>
@@ -83,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="68" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="68" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="66" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="66" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Texture_1a77a07c5d8f099331ce5194d65a62e466" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -98,7 +98,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="70" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="70" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="68" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Texture_1a100c7b20c2f677251e35a781834e627b" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_GTYPES_NS::Texture::m_isDirty</definition>
+        <argsstring></argsstring>
+        <name>m_isDirty</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::m_isDirty</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="69" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="69" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Texture_1a3402aac74de069bac90fd1e9ace3f5ae" prot="private" static="no" mutable="no">
         <type>Memory::TextureConfig</type>
@@ -113,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="72" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="72" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="71" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="71" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -259,12 +274,12 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="50" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="50" bodyend="50"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1ade6f800bc468ec796f1d1636cc6c20ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1a6a41b8dfb1840e91f667096d053cedd4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
-        <definition>void SR_GTYPES_NS::Texture::FreeVideoMemory</definition>
+        <definition>void SR_GTYPES_NS::Texture::FreeVMemory</definition>
         <argsstring>() override</argsstring>
-        <name>FreeVideoMemory</name>
-        <qualifiedname>SR_GTYPES_NS::Texture::FreeVideoMemory</qualifiedname>
+        <name>FreeVMemory</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::FreeVMemory</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -272,22 +287,6 @@
         <inbodydescription>
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="52" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1a7cc424f41115c31297fe77ba0b2c4213" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type>RemoveUPResult</type>
-        <definition>RemoveUPResult SR_GTYPES_NS::Texture::RemoveUsePoint</definition>
-        <argsstring>() override</argsstring>
-        <name>RemoveUsePoint</name>
-        <qualifiedname>SR_GTYPES_NS::Texture::RemoveUsePoint</qualifiedname>
-        <reimplements refid="classSR__UTILS__NS_1_1IResource_1ac0cb7963e3bd5008d28412c0aa6196de">RemoveUsePoint</reimplements>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-<para>Remove one point from count uses current resource </para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="54" column="24"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -385,7 +384,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="57" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="55" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1aca045e656905ad2a6a68c646802e296c" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -400,7 +399,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="58" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="56" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -416,7 +415,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="61" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="59" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1a7c9a6cfcebe7f8d9c0cadf72c46c4585" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -434,7 +433,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="62" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="60" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1a63924b06d63077ef25209c5142491bf4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -448,7 +447,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="63" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="61" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -576,7 +575,7 @@
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="25" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="25" bodyend="74"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" line="25" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="25" bodyend="73"/>
     <listofallmembers>
       <member refid="classSR__GTYPES__NS_1_1Texture_1a03eea82555b23d66152bd999ba135529" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>::SR_GRAPH_NS::TextureLoader</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1af9087ca5182397a9c7d3b92fb5591523" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>AddDependency</name></member>
@@ -596,7 +595,7 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1a5dd9749c79cb65452e9e4d10efda42f8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>Execute</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a56bb33e9f5864b6fa62e473389a517b7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>ForceDestroy</name></member>
       <member refid="classSR__GTYPES__NS_1_1Texture_1a63924b06d63077ef25209c5142491bf4" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>FreeTextureData</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Texture_1ade6f800bc468ec796f1d1636cc6c20ff" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>FreeVideoMemory</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1a6a41b8dfb1840e91f667096d053cedd4" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>FreeVMemory</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>Get</name></member>
       <member refid="classSR__GTYPES__NS_1_1Texture_1a743e324e8a7ea5c622ed02b2d04df30d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetAssociatedPath</name></member>
@@ -659,6 +658,7 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1a020496a1d169218d5379f54ba99cf6a5" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>m_debugUseStackTraces</name></member>
       <member refid="classSR__GTYPES__NS_1_1Texture_1a77a07c5d8f099331ce5194d65a62e466" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>m_hasErrors</name></member>
       <member refid="classSR__GTYPES__NS_1_1Texture_1a3f4746ac09bce22bb9f757a5eaf6286e" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>m_id</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1a100c7b20c2f677251e35a781834e627b" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>m_isDirty</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a45c441a3f4c53aafeb3de6c5aa64766c" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>m_isFromMemory</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a8600327689c36a9c20b5ae589acd4cfa" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>m_loadState</name></member>
       <member refid="classSR__GTYPES__NS_1_1Texture_1ae0e75130b0108dace3b8f6fdfd8773f3" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>m_textureData</name></member>
@@ -693,7 +693,7 @@
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac21f24c643f3298ec89225361ce96a9f" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>RemoveDependency</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1ab5d15ff431f7405c8ad940333e6417a5" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>RemoveSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1acfb5ac9abad809ecb7f6453ddd9f581d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>RemoveUPResult</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Texture_1a7cc424f41115c31297fe77ba0b2c4213" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>RemoveUsePoint</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac0cb7963e3bd5008d28412c0aa6196de" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>RemoveUsePoint</name></member>
       <member refid="classSR__GTYPES__NS_1_1Texture_1a625800f070c00033b47a367c808bbff0" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>RenderContextPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>Reset</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a4fb6331893e314c01da26b361197a75e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>ResourceContainer</name></member>

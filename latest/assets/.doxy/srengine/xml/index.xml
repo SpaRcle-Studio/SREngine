@@ -3033,6 +3033,7 @@
     <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1ab46994c0ea32a17d329236c7d252eec2" kind="function"><name>GetWindow</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a8b20695d0afe72065b2b5475717b50dd" kind="function"><name>GetWidget</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a5f7be886daa6e4893804ac70680f216c" kind="function"><name>GetWidget</name></member>
+    <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1adb481756961b3fc99980f85d29f9142d" kind="function"><name>TryGetWidget</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a826c7bec3cef42bc103e4fe59139945c" kind="function"><name>OpenWidget</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1aec3c96078d9c08ad7232ba63580beb73" kind="function"><name>CloseAllWidgets</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a42d8502fca54c75536ac621a27d230e9" kind="function"><name>Enabled</name></member>
@@ -4072,7 +4073,7 @@
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a658dd83c2c08be614c39f4b4bcbaeb95" kind="function"><name>GetWidth</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a6c8648fbee25560f26371e9c82202da2" kind="function"><name>GetHeight</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a0b13806cfd2efb6cf9a98a7c28a238d5" kind="function"><name>GetSize</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a6079ec94cacf2f955cc9ab23c6fae7e5" kind="function"><name>FreeVideoMemory</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Framebuffer_1ae61c063edbb8d664f6e16ad5e2829936" kind="function"><name>FreeVMemory</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a7f4513af80dd3c1cfeb4c6211ea2df75" kind="function"><name>GetFileHash</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a4dcf77ad42931cc0c067e086398fa916" kind="function"><name>Create</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a36493bec7ef67c2230b3e7165d622dfa" kind="function"><name>Create</name></member>
@@ -4937,21 +4938,18 @@
   <compound refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource" kind="class"><name>SR_GRAPH_NS::Memory::IGraphicsResource</name>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ab9a2f99532e7a296100c1323b7e632c4" kind="typedef"><name>RenderContextPtr</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a6dc9bedad0df3df80fb9b4bdc0296873" kind="typedef"><name>PipelinePtr</name></member>
-    <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1adf9d6452fd88d1c578835f72dcc08789" kind="variable"><name>m_isCalculated</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1aab5b6b9c539f265beb0b86d683f7f924" kind="variable"><name>m_pipeline</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1aec3e5a7cc61a197bc507d0d26f239c04" kind="variable"><name>m_renderContext</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a2674e73b6c08f0962a2036d6b37f8c0d" kind="function"><name>IGraphicsResource</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ada3d293778fe4fb07865aaf7eca8c8d9" kind="function"><name>~IGraphicsResource</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1aeb06d428cd3d206ad391a48803599476" kind="function"><name>FreeVMemory</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1afcc66f98c8ca1ccde9afaeb65fe6d9ee" kind="function"><name>IGraphicsResource</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a99a9f5fd64c904f5fee0a8c932b1c017" kind="function"><name>operator=</name></member>
-    <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ab417478adc60452e564a0ec2ac2d7f2b" kind="function"><name>DeInitGraphicsResource</name></member>
-    <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a6ca6f83374c1df29261ad60d1470dd26" kind="function"><name>FreeVideoMemory</name></member>
-    <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a798d0be5203c28d4754826bc95a25d82" kind="function"><name>MarkPipelineUnBuild</name></member>
-    <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a97892e608c168ea6f1937e19d4e6e685" kind="function"><name>SetRenderContext</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ad9573242ff8320114c1ca150798d26c1" kind="function"><name>RegisterGraphicsResource</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1aa6b6a44d97575771ed7b6380d9510940" kind="function"><name>DeInitGraphicsResource</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ac0a8d051e122d28b14ed80660c938ab8" kind="function"><name>GetPipeline</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ac6a1c5c4af59a5ad1764c67147ed6966" kind="function"><name>GetRenderContext</name></member>
-    <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1aae869a130c9a754487b0d5dfa2bf3e38" kind="function"><name>IsCalculated</name></member>
-    <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a19797a20b2b1281e696e87082e302106" kind="function"><name>IsGraphicsResourceRegistered</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1af8957bbf51d3ceea1ede4c2175480454" kind="function"><name>IsGraphicsResourceRegistered</name></member>
   </compound>
   <compound refid="classSR__GRAPH__NS_1_1ILightComponent" kind="class"><name>SR_GRAPH_NS::ILightComponent</name>
     <member refid="classSR__GRAPH__NS_1_1ILightComponent_1af02042fc60deb8d5e34b579b1a4e50c0" kind="variable"><name>m_intensity</name></member>
@@ -5098,7 +5096,7 @@
     <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1acd2426952f16cf3f88068adef2d09a04" kind="function"><name>IsSupportVBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1ab9a915299cbac7482344fcdc270c1094" kind="function"><name>Calculate</name></member>
     <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1adeeebbf20285c62a82ec70bbef37e186" kind="function"><name>CalculateIBO</name></member>
-    <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1a3819bcea53ef97fa3ac221b7a24238e6" kind="function"><name>FreeVideoMemory</name></member>
+    <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1a97d93208ef4f26b746505a922cd684fa" kind="function"><name>FreeVMemory</name></member>
     <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1ad168fddb96e38da5724084b1f46f3864" kind="function"><name>CalculateVBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1ac566d60a8e744908fe1fd4948f56adb1" kind="function"><name>CalculateVBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1a0b23120e9e096f7a60733dfac37790ae" kind="function"><name>FreeVBO</name></member>
@@ -5342,7 +5340,7 @@
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a1087f891a05bea07558f313ffaf54b18" kind="function"><name>SetDirty</name></member>
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ab283e950411fbad853de8e59c5c686ad" kind="function"><name>Init</name></member>
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a8d908e096ffec512294a617fa1109ad2" kind="function"><name>KillTechnique</name></member>
-    <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a596a4017cc0261fcf3d1163958f00ac7" kind="function"><name>FreeVideoMemory</name></member>
+    <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1afc5dde604ae7dccabdb73aabab3ed79b" kind="function"><name>FreeVMemory</name></member>
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a2119c9686c62b599fffcea483955d43a" kind="function"><name>SetCamera</name></member>
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a2fca4b2845f1c2cec6b501230ad6821f" kind="function"><name>SetRenderScene</name></member>
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a35e5446ff2b8a8b8abd694446a8a2308" kind="function"><name>GetCamera</name></member>
@@ -6341,12 +6339,14 @@
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a63ebff43aced52991bb2c7a97bccbb5a" kind="typedef"><name>RenderQueues</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a3b6365455b15767000675149fb88d932" kind="variable"><name>m_renderQueues</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1ac6c0dd4752763f730a0909861c7612cf" kind="variable"><name>m_uboManager</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Mesh_1a486362b25304d02d8b76702ba2fde3e9" kind="variable"><name>m_pipeline</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a025a6751aee4601105000e7c9d960c9a" kind="variable"><name>m_descriptorManager</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1ad4bba700ef6bd6d6e86f2185869011e3" kind="variable"><name>m_virtualUBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a8e92536a0dbb2e45e1f2fda2e74ac7bb" kind="variable"><name>m_virtualDescriptor</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1ad418dcf562fe9670d34c11d93711ab83" kind="variable"><name>m_material</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1abbbdef9e59eb97f8eed740c6e96c1a53" kind="variable"><name>m_frustumCullingType</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a15373448bde91b633ab94a57483baf36" kind="variable"><name>m_isWaitReRegister</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Mesh_1a64f71ac772e672498b13d6ca842ba8f9" kind="variable"><name>m_isCalculated</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1aa12c514db6c826253a1d368e7279e02a" kind="variable"><name>m_hasErrors</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a1eedf6ed8926b01f933ce6d17942d928" kind="variable"><name>m_dirtyMaterial</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a4f1e404ddd0c7f28dd411d1b15ce7606" kind="variable"><name>m_isUniformsDirty</name></member>
@@ -6375,6 +6375,7 @@
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a19f3b3e8388e2a541d2577a20c6b50a5" kind="function"><name>GetIndicesCount</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a5022d2d34048e219f80020fadd5e57a7" kind="function"><name>GetVerticesCount</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a22918d631dae5a7843f30de199b8963b" kind="function"><name>ExecuteInEditMode</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Mesh_1a868d8c0cfc9fb205a903daa953446c1b" kind="function"><name>GetPipeline</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a19c90c90366d059d27a9465ac4c46c8a" kind="function"><name>GetShader</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a1d06cec76546a9849a50b484293b684a" kind="function"><name>GetMaterial</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a53dfdb25e64d474467bdf374cfa227f9" kind="function"><name>GetVirtualUBO</name></member>
@@ -6385,7 +6386,9 @@
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a5f570e2ab732cb7c42d019ccbc211374" kind="function"><name>GetMeshRegistrationInfo</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a2c67cc73081e7682937fe2aaf59c65de" kind="function"><name>GetRenderQueues</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a1857b0420fe2a3b300e35246e756e3c9" kind="function"><name>GetFrustumCullingType</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Mesh_1a8f6c24bf3013ae777a3eca72714b3c9e" kind="function"><name>IsCalculated</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a4a038ee5096e73f581d8c1ba9a9e5ef7" kind="function"><name>SetMeshRegistrationInfo</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Mesh_1a39b340114c4ceae171114ce2d7efaaf6" kind="function"><name>SetPipeline</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1aa4a105cef591fdf2c4d2e9023a729558" kind="function"><name>SetMatrix</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1adff93b7a6119dc188a28c6c0eb8a8e37" kind="function"><name>GetMatrix</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a38cd9c334fee6452c42dd5a7d2fdd41d" kind="function"><name>OnResourceReloaded</name></member>
@@ -6410,7 +6413,7 @@
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a272be772ca42d0f7b1e7c43b2af79bda" kind="function"><name>TryLoad</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a900009c9b385f6ff48081917109c828f" kind="function"><name>Load</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a3446c21b42aef2c72b986aa1a3db55a1" kind="function"><name>Load</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Mesh_1a0539e08ac8e0a491ef3d2f7f4324abb8" kind="function"><name>FreeVideoMemory</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Mesh_1a607b44968faebde0af65f9259677645b" kind="function"><name>FreeVMemory</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a4395ff39f60bb6b7aeb2775fa02109f7" kind="function"><name>Calculate</name></member>
   </compound>
   <compound refid="classSR__GTYPES__NS_1_1Mesh3D" kind="class"><name>SR_GTYPES_NS::Mesh3D</name>
@@ -7841,6 +7844,7 @@
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1abbf897a18ac1d4c2d7f639cb27e179f0" kind="variable"><name>m_enableValidationLayers</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1aff1a6540a018816dc839abee3c42e513" kind="variable"><name>m_errorsCount</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1acec79ba280ff6d871d6f315109f7dd53" kind="variable"><name>m_dirty</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Pipeline_1ae74915965e28656dd6c88c77b534ca04" kind="variable"><name>m_renderStageId</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1ab799c01653464ce90c3241823266de3e" kind="variable"><name>m_window</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a543ddc3c35eb32386f68ccfffcf9e2c2" kind="variable"><name>m_renderContext</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a47ced12c47f7c292d1e1328262213667" kind="variable"><name>m_bindedDescriptors</name></member>
@@ -7912,6 +7916,7 @@
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a54ff7ac52adc334ff752c1d739c2d868" kind="function"><name>IsShaderConstantSupport</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1ac6bf21d75c810b6c846288a448d2a387" kind="function"><name>GetPixelColor</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1ab3f9df613c23c25957a4e4eab167764e" kind="function"><name>GetRenderStageId</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Pipeline_1ad915a47914a0126d2628f6aef0c7b262" kind="function"><name>SetRenderStageId</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a5ad09ba6ded3804ef3f66051f29c8c03" kind="function"><name>SetCurrentShader</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a6b0eaf9e9a90e7632090761fecfbd44b" kind="function"><name>SetCurrentShaderId</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1ab0a9616214bfe183f02aed0dd3fe9107" kind="function"><name>SetCurrentFrameBufferLayer</name></member>
@@ -8204,7 +8209,7 @@
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1ae856ccedae6a060b798f3c37314e36ab" kind="function"><name>IsCalculatable</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1aad460d05b12c64efce8550b4afd06056" kind="function"><name>IsSupportVBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1aac1cff28a39803cd09b5d19d0c4e119b" kind="function"><name>Export</name></member>
-    <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1aee82348fabf1539c105bffb1fe6caaff" kind="function"><name>FreeVideoMemory</name></member>
+    <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1ad15aaf3c317c44bba98e074ab2a918c4" kind="function"><name>FreeVMemory</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a27260cd51b0292e5b9f69fa260bea19d" kind="function"><name>Calculate</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1af0db779a0e3c83254570f0a2eac408c7" kind="function"><name>SetDirtyMesh</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a292312ee2f8a2f8882184fc41366d2aa" kind="function"><name>UseSSBO</name></member>
@@ -8774,18 +8779,19 @@
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a30fd1af4b96a26e9e23d1b4db6a32424" kind="typedef"><name>Super</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a1caa5837e2f226d53c7d9b6bd4ea5f7a" kind="typedef"><name>MaterialPtr</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a5b44c213bf29f1fee66f7fc82b408778" kind="typedef"><name>TexturePtr</name></member>
-    <member refid="classSR__GRAPH__NS_1_1RenderContext_1a09bb1213f82efb4ed769894b183ab192" kind="typedef"><name>SkyboxPtr</name></member>
+    <member refid="classSR__GRAPH__NS_1_1RenderContext_1a6dc19f5f06197fc88c4736c84fa9150f" kind="typedef"><name>SkyboxPtr</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a8313c1ec208dfe9040801dec75ecbf20" kind="typedef"><name>FramebufferPtr</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a8a6bb816bfd8d4a172ed83a6d6063ad3" kind="typedef"><name>CameraPtr</name></member>
-    <member refid="classSR__GRAPH__NS_1_1RenderContext_1a19f02e0f915ee33efb23536f78f3609d" kind="typedef"><name>ShaderPtr</name></member>
+    <member refid="classSR__GRAPH__NS_1_1RenderContext_1a2684a1ec26872bfff697b600781bd453" kind="typedef"><name>ShaderPtr</name></member>
+    <member refid="classSR__GRAPH__NS_1_1RenderContext_1a15a5a017f81e9453621a38a53a8f0f26" kind="typedef"><name>RenderTechniquePtr</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a7ef0f8a2974b4f5a5b4444cd1f5ffce2" kind="typedef"><name>WindowPtr</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a0af83703e1da57d3721ade70b15ea5b0" kind="typedef"><name>RenderScenes</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1ade436770103801f761fb22d40a72c5f3" kind="typedef"><name>Ptr</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a65d15078faff0caaf8af88f7a1f29982" kind="variable"><name>m_updateState</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1ab1ca99222c276ba7e8dcc11b5d94f744" kind="variable"><name>m_framebuffers</name></member>
-    <member refid="classSR__GRAPH__NS_1_1RenderContext_1a614b200233a1c4c01d6f35dd5a09bb10" kind="variable"><name>m_shaders</name></member>
-    <member refid="classSR__GRAPH__NS_1_1RenderContext_1a886bb6ea0eb840e2e2f367ed59eccc68" kind="variable"><name>m_textures</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a87093f52fd849956fdafdd896f6709f4" kind="variable"><name>m_techniques</name></member>
+    <member refid="classSR__GRAPH__NS_1_1RenderContext_1a65ab1365379ad3af833e126bf5aa67e3" kind="variable"><name>m_shaders</name></member>
+    <member refid="classSR__GRAPH__NS_1_1RenderContext_1a886bb6ea0eb840e2e2f367ed59eccc68" kind="variable"><name>m_textures</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1ae013b3c78cd825f180c0d6452e976544" kind="variable"><name>m_skyboxes</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a78f0f56f60a639dabbd5c8ec55a1c3b4" kind="variable"><name>m_scenes</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a88f66af765b92cf21407c688593a2503" kind="variable"><name>m_window</name></member>
@@ -8809,12 +8815,7 @@
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a9326be2c57e86c04e3d3b35ca8b2bdf6" kind="function"><name>OnResize</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a446a568deefa006e503133b8dade0595" kind="function"><name>OnMultiSampleChanged</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1aaec2180927523d5f84ee2395af865093" kind="function"><name>CreateScene</name></member>
-    <member refid="classSR__GRAPH__NS_1_1RenderContext_1afd9018d6a41ef9b50f1991c1f097b6d6" kind="function"><name>Register</name></member>
-    <member refid="classSR__GRAPH__NS_1_1RenderContext_1aa132020a5138acb193436c1813c3a9b0" kind="function"><name>Register</name></member>
-    <member refid="classSR__GRAPH__NS_1_1RenderContext_1ad16a9733e416d769c99122b882ee7e16" kind="function"><name>Register</name></member>
-    <member refid="classSR__GRAPH__NS_1_1RenderContext_1ac03808b01a57a9797c946ea4c38f9679" kind="function"><name>Register</name></member>
-    <member refid="classSR__GRAPH__NS_1_1RenderContext_1ad7a1bfec15a3387cac9c5d6d65c3d6cb" kind="function"><name>Register</name></member>
-    <member refid="classSR__GRAPH__NS_1_1RenderContext_1a5f642f81b2116d108182bbd69e157987" kind="function"><name>Register</name></member>
+    <member refid="classSR__GRAPH__NS_1_1RenderContext_1a6864ce93752e6633bcb7bd9b5f3f86b9" kind="function"><name>Register</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1af8fc37b39d685cf15bbf203d662dc3de" kind="function"><name>IsOptimizedRenderUpdateEnabled</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a234f1db135c12baf3113ac2f002342e3" kind="function"><name>IsEmpty</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a5a2086a4537b4721af1f6ff079e6cd82" kind="function"><name>IsDirty</name></member>
@@ -8830,18 +8831,17 @@
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a5971057bf41b3552a7502a34b206bb83" kind="function"><name>FindFramebuffer</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1aea58069c14d33a788050a0563ef18682" kind="function"><name>FindFramebuffer</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1ae8e621f5aa2808987f07bc24c6f529b2" kind="function"><name>GetWindowSize</name></member>
-    <member refid="classSR__GRAPH__NS_1_1RenderContext_1a6f81160e6943f2d9b3b795591db9b351" kind="function"><name>GetShaders</name></member>
+    <member refid="classSR__GRAPH__NS_1_1RenderContext_1a51c4fbadcf39e959b92152cb2609b27d" kind="function"><name>GetShaders</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a621019f7107333063f6d0c47afa808d3" kind="function"><name>GetFramebuffers</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a539babc3fa489d7318966a683b8eb496" kind="function"><name>GetTextures</name></member>
-    <member refid="classSR__GRAPH__NS_1_1RenderContext_1a0fdd082a10c5a26233ab41a7b69b3f71" kind="function"><name>GetRenderTechniques</name></member>
-    <member refid="classSR__GRAPH__NS_1_1RenderContext_1a8edaf8a83ccb1748b80c9bdd90c34094" kind="function"><name>GetSkyboxes</name></member>
+    <member refid="classSR__GRAPH__NS_1_1RenderContext_1a7064e67488f6ec8956ac6c4a5bc1e0ba" kind="function"><name>GetRenderTechniques</name></member>
+    <member refid="classSR__GRAPH__NS_1_1RenderContext_1a24d85aba97e5119ff7581ba962fd34dd" kind="function"><name>GetSkyboxes</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1af3f3daf4e22f1d758404915b115ad028" kind="function"><name>GetScenes</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1afc45a8ae51d7602dcf82e215bc2182b3" kind="function"><name>SetOptimizedRenderUpdateEnabled</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1ab4d3c92f3c5d081455341a46c0a0a1d8" kind="function"><name>SetCurrentShader</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1ac846347a05d5c8bab0732aab0d889693" kind="function"><name>GarbageCollect</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a6e6e373a7ddac05ef8200bad2f4d56e6" kind="function"><name>LoadDefaultResources</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1aabb42fa2a3675eda2d71bd05631badc0" kind="function"><name>InitPipeline</name></member>
-    <member refid="classSR__GRAPH__NS_1_1RenderContext_1a0d04dd08859bdc70d982b92899355ccd" kind="function"><name>RegisterResource</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a343f088466b35d196b19a5c22a8e6b63" kind="function"><name>Update</name></member>
   </compound>
   <compound refid="classSR__GRAPH__NS_1_1RenderQueue" kind="class"><name>SR_GRAPH_NS::RenderQueue</name>
@@ -10067,8 +10067,8 @@
     <member refid="classSR__GTYPES__NS_1_1Shader_1a8b6a34414216ceedb548983b4866e01b" kind="variable"><name>m_uboManager</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1ade4d036b36ccc03adc155363ea54ed00" kind="variable"><name>m_manager</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a075588b1f1744fb476cbd8b7bf2ed635" kind="variable"><name>m_shaderProgram</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Shader_1ad41ab5ae4aec0e23d87af82430bb625d" kind="variable"><name>m_isDirty</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a7efaf71127fa3ed02bf825e15587c573" kind="variable"><name>m_hasErrors</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Shader_1a1a8cfb19e2bfbb97b662d8aff637bdc3" kind="variable"><name>m_isRegistered</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a8c798790d7d067ee625b5bc4ba5034d3" kind="variable"><name>m_sharedUBOMode</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1ab8409c3706e8c0b8847267a0d2f065fb" kind="variable"><name>m_shaderCreateInfo</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1adef8f431321cd65ecf4121107b92869b" kind="variable"><name>m_virtualUBO</name></member>
@@ -10090,7 +10090,7 @@
     <member refid="classSR__GTYPES__NS_1_1Shader_1aa9085e2854936611a3d269db30e22545" kind="function"><name>Flush</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1ae2190a8714ad803492bdd57a2a0ea9aa" kind="function"><name>FlushSamplers</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a303cc97648b4262344e5d4f16ca42ee6" kind="function"><name>FlushConstants</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Shader_1a909881db8b32e99d5f4051ca8436e870" kind="function"><name>FreeVideoMemory</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Shader_1a714b16fc49e7b43da4d98f46a4437a4e" kind="function"><name>FreeVMemory</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a791831d081b16045a7d5d4facc216f8c" kind="function"><name>Dispatch</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a066553d82af8251a7b41b45e85e2ae14" kind="function"><name>Dispatch</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a7bd3b986354c80acd5aadde8777dfa6a" kind="function"><name>StartWatch</name></member>
@@ -10098,6 +10098,7 @@
     <member refid="classSR__GTYPES__NS_1_1Shader_1a506e578c684c5556fb0f3c6013c687d6" kind="function"><name>BeginSharedUBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1abfc207502ce6c9b358f00fd04ca39873" kind="function"><name>EndSharedUBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a4fc66490b2ead167a963e198d2b0bc36" kind="function"><name>ResetUBOToDefaults</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Shader_1a4a5770462cc13545454bef3af436b509" kind="function"><name>RemoveUsePoint</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a45e1b1cf851a4e8cbd721915d6e4c8ca" kind="function"><name>GetAssociatedPath</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a5512baf8eafe4a9958351fe93a2090e8" kind="function"><name>GetID</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1abc86cf7f4a390fbbcf9f41e5baa50f13" kind="function"><name>GetId</name></member>
@@ -10529,7 +10530,7 @@
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a5b8a1064f113a20c908fc4184bd7e5bd" kind="function"><name>GetMeshIdentifier</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a76f2368ff33497245826c71a26ad3a30" kind="function"><name>GetSkeletonRef</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a1cea0e11ad39db087938dba00f6bac82" kind="function"><name>GetSkeletonRef</name></member>
-    <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a713668b44ac1423a7d7a66b69876e8e6" kind="function"><name>FreeVideoMemory</name></member>
+    <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a9425da8e1dbbaaa550551f6383279616" kind="function"><name>FreeVMemory</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1aed5fe44d2a612d6d6dfd4f1bb3ccb253" kind="function"><name>UseSSBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1ae0b37688ee2bb345e805d176583c6fb8" kind="function"><name>OnResourceReloaded</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a5882874deab2bb403553f7a28ffdc43d" kind="function"><name>OnRawMeshChanged</name></member>
@@ -10562,6 +10563,7 @@
     <member refid="classSR__GTYPES__NS_1_1Skybox_1ab5c92f0799411c36f22bc7db2234d5f6" kind="variable"><name>m_width</name></member>
     <member refid="classSR__GTYPES__NS_1_1Skybox_1a91d4041ad95ec057abf0cfaf788edd89" kind="variable"><name>m_height</name></member>
     <member refid="classSR__GTYPES__NS_1_1Skybox_1a2424cfe5a3bed3b627d960f46a4beb7f" kind="variable"><name>m_hasErrors</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Skybox_1aa56b67cdc8cfcff5543ec03ddc4615b7" kind="variable"><name>m_idDirty</name></member>
     <member refid="classSR__GTYPES__NS_1_1Skybox_1a7821ed61e472d266ae06783efccbe027" kind="variable"><name>m_dirtyShader</name></member>
     <member refid="classSR__GTYPES__NS_1_1Skybox_1a532a944ad2a1347f27987eb4a1538fa0" kind="variable"><name>m_uboManager</name></member>
     <member refid="classSR__GTYPES__NS_1_1Skybox_1a902ac7d2ba7496ef1b6a7605c3a134fe" kind="variable"><name>m_descriptorManager</name></member>
@@ -10573,7 +10575,7 @@
     <member refid="classSR__GTYPES__NS_1_1Skybox_1af29331f74b70b5a441acbb89c4a72b07" kind="function"><name>GetIBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1Skybox_1aa49a9f4fb9e881fd51decd0a48108cc9" kind="function"><name>GetVirtualUBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1Skybox_1a5fb71cea01d9b994d5cdd4525405dd54" kind="function"><name>IsAllowedToRevive</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Skybox_1ab6e78d4a1f033a335c08b4de04d3d0a2" kind="function"><name>FreeVideoMemory</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Skybox_1aa38d813427889024a4269b3fe7db8de9" kind="function"><name>FreeVMemory</name></member>
     <member refid="classSR__GTYPES__NS_1_1Skybox_1aff7ec4b0d77f912fa8e0cce91f5846fa" kind="function"><name>Draw</name></member>
     <member refid="classSR__GTYPES__NS_1_1Skybox_1afbd94f704f5839963810c3fec3914b80" kind="function"><name>SetShader</name></member>
     <member refid="classSR__GTYPES__NS_1_1Skybox_1a14067cdde836d48bd1a8bd2d34a201ab" kind="function"><name>StartWatch</name></member>
@@ -12039,7 +12041,7 @@
     <member refid="classSR__GTYPES__NS_1_1Text_1a3eb372bec3d1acc456c74e18f1f5e7e3" kind="function"><name>SetUseLocalization</name></member>
     <member refid="classSR__GTYPES__NS_1_1Text_1a68790e68f11e8b3630bf8e537b2dc88c" kind="function"><name>SetUsePreprocessor</name></member>
     <member refid="classSR__GTYPES__NS_1_1Text_1a707708bf29aef6266fb4ba93d952e85a" kind="function"><name>Calculate</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Text_1a69ff7aafb753429e2ed6cd135bdfca26" kind="function"><name>FreeVideoMemory</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Text_1a99011b034df9290e2c7ec66f10776691" kind="function"><name>FreeVMemory</name></member>
     <member refid="classSR__GTYPES__NS_1_1Text_1aa0bf875c1c6111f54f477f079f793c18" kind="function"><name>OnTextDirty</name></member>
     <member refid="classSR__GTYPES__NS_1_1Text_1a4d3993567f140461da4b9d2f61080861" kind="function"><name>BuildAtlas</name></member>
   </compound>
@@ -12091,6 +12093,7 @@
     <member refid="classSR__GTYPES__NS_1_1Texture_1ae0e75130b0108dace3b8f6fdfd8773f3" kind="variable"><name>m_textureData</name></member>
     <member refid="classSR__GTYPES__NS_1_1Texture_1a3f4746ac09bce22bb9f757a5eaf6286e" kind="variable"><name>m_id</name></member>
     <member refid="classSR__GTYPES__NS_1_1Texture_1a77a07c5d8f099331ce5194d65a62e466" kind="variable"><name>m_hasErrors</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Texture_1a100c7b20c2f677251e35a781834e627b" kind="variable"><name>m_isDirty</name></member>
     <member refid="classSR__GTYPES__NS_1_1Texture_1a3402aac74de069bac90fd1e9ace3f5ae" kind="variable"><name>m_config</name></member>
     <member refid="classSR__GTYPES__NS_1_1Texture_1a796a2ffec096054f81f3fbf0d58b94bd" kind="function"><name>Texture</name></member>
     <member refid="classSR__GTYPES__NS_1_1Texture_1a5ed7153344ec74d57496c57f79fc3dd2" kind="function"><name>~Texture</name></member>
@@ -12102,8 +12105,7 @@
     <member refid="classSR__GTYPES__NS_1_1Texture_1a743e324e8a7ea5c622ed02b2d04df30d" kind="function"><name>GetAssociatedPath</name></member>
     <member refid="classSR__GTYPES__NS_1_1Texture_1aca68df4e81970699c0294a2c8ce6b13b" kind="function"><name>GetTextureConfig</name></member>
     <member refid="classSR__GTYPES__NS_1_1Texture_1a6614b8299bfa1078c37628ae8686439b" kind="function"><name>IsAllowedToRevive</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Texture_1ade6f800bc468ec796f1d1636cc6c20ff" kind="function"><name>FreeVideoMemory</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Texture_1a7cc424f41115c31297fe77ba0b2c4213" kind="function"><name>RemoveUsePoint</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Texture_1a6a41b8dfb1840e91f667096d053cedd4" kind="function"><name>FreeVMemory</name></member>
     <member refid="classSR__GTYPES__NS_1_1Texture_1a115ae54f6e6cfb73922f42a597a7766f" kind="function"><name>Load</name></member>
     <member refid="classSR__GTYPES__NS_1_1Texture_1a3ec4dcb4ea472f098fa84d514be53fd1" kind="function"><name>LoadRaw</name></member>
     <member refid="classSR__GTYPES__NS_1_1Texture_1a82330744b960b27c827ac837daf0fff9" kind="function"><name>LoadFromMemory</name></member>

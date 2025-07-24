@@ -837,7 +837,7 @@
         <argsstring>()</argsstring>
         <name>RemoveUsePoint</name>
         <qualifiedname>SR_UTILS_NS::IResource::RemoveUsePoint</qualifiedname>
-        <reimplementedby refid="classSR__GTYPES__NS_1_1Texture_1a7cc424f41115c31297fe77ba0b2c4213">RemoveUsePoint</reimplementedby>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1Shader_1a4a5770462cc13545454bef3af436b509">RemoveUsePoint</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>

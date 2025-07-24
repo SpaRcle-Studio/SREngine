@@ -64,7 +64,7 @@ namespace SR_GRAPH_NS {
 
         void KillTechnique() { SRAssert(!m_isDead); m_isDead = true; }
 
-        void FreeVideoMemory() override;
+        void FreeVMemory() override;
 
         void SetCamera(CameraPtr pCamera);
         void SetRenderScene(const RenderScenePtr& pRScene);

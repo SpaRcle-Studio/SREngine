@@ -245,7 +245,7 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  bool | [**Flush**](#function-flush) () const<br> |
 |  void | [**FlushConstants**](#function-flushconstants) () <br> |
 |  void | [**FlushSamplers**](#function-flushsamplers) () <br> |
-|  void | [**FreeVideoMemory**](#function-freevideomemory) () override<br> |
+|  void | [**FreeVMemory**](#function-freevmemory) () override<br> |
 | virtual SR\_NODISCARD [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**GetAssociatedPath**](#function-getassociatedpath) () override const<br> |
 |  SR\_NODISCARD const SR\_MATH\_NS::UVector3 & | [**GetComputeWorkGroupSize**](#function-getcomputeworkgroupsize) () noexcept const<br> |
 |  SR\_DEPRECATED SR\_NODISCARD int32\_t | [**GetID**](#function-getid) () <br> |
@@ -264,6 +264,7 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  SR\_NODISCARD bool | [**IsBlendEnabled**](#function-isblendenabled) () const<br> |
 |  SR\_NODISCARD bool | [**IsSamplersValid**](#function-issamplersvalid) () const<br> |
 |  SR\_NODISCARD bool | [**Ready**](#function-ready) () const<br> |
+| virtual RemoveUPResult | [**RemoveUsePoint**](#function-removeusepoint) () override<br> |
 |  void | [**ResetUBOToDefaults**](#function-resetubotodefaults) () <br> |
 |  void SR\_FASTCALL | [**SetBool**](#function-setbool) (uint64\_t hashId, bool v) noexcept<br> |
 |  void SR\_FASTCALL | [**SetColor**](#function-setcolor) (uint64\_t hashId, const [**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md) & v) noexcept<br> |
@@ -886,10 +887,10 @@ void SR_GTYPES_NS::Shader::FlushSamplers ()
 
 
 
-### function FreeVideoMemory 
+### function FreeVMemory 
 
 ```C++
-void SR_GTYPES_NS::Shader::FreeVideoMemory () override
+void SR_GTYPES_NS::Shader::FreeVMemory () override
 ```
 
 
@@ -1129,6 +1130,25 @@ SR_NODISCARD bool SR_GTYPES_NS::Shader::Ready () const
 ```
 
 
+
+
+<hr>
+
+
+
+### function RemoveUsePoint 
+
+```C++
+virtual RemoveUPResult SR_GTYPES_NS::Shader::RemoveUsePoint () override
+```
+
+
+
+Remove one point from count uses current resource 
+
+
+        
+Implements [*SR\_UTILS\_NS::IResource::RemoveUsePoint*](classSR__UTILS__NS_1_1IResource.md#function-removeusepoint)
 
 
 <hr>

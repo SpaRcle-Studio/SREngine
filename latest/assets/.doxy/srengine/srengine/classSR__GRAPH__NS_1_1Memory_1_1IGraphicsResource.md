@@ -59,15 +59,12 @@ Inherited by the following classes: [SR\_GRAPH\_NS::IRenderTechnique](classSR__G
 
 | Type | Name |
 | ---: | :--- |
-| virtual void | [**DeInitGraphicsResource**](#function-deinitgraphicsresource) () <br> |
-| virtual void | [**FreeVideoMemory**](#function-freevideomemory) () <br> |
+|  void | [**DeInitGraphicsResource**](#function-deinitgraphicsresource) ([**SR\_UTILS\_NS::PassKey**](classSR__UTILS__NS_1_1PassKey.md)&lt; [**RenderContext**](classSR__GRAPH__NS_1_1RenderContext.md) &gt;) <br> |
 |  SR\_NODISCARD const PipelinePtr & | [**GetPipeline**](#function-getpipeline) () noexcept const<br> |
 |  SR\_NODISCARD [**RenderContextPtr**](classSR__GRAPH__NS_1_1RenderContext.md) | [**GetRenderContext**](#function-getrendercontext) () noexcept const<br> |
 |   | [**IGraphicsResource**](#function-igraphicsresource-22) (const [**IGraphicsResource**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md) &) = delete<br> |
-|  SR\_NODISCARD SR\_FORCE\_INLINE bool | [**IsCalculated**](#function-iscalculated) () const<br> |
-|  SR\_NODISCARD SR\_FORCE\_INLINE bool | [**IsGraphicsResourceRegistered**](#function-isgraphicsresourceregistered) () const<br> |
-|  void | [**MarkPipelineUnBuild**](#function-markpipelineunbuild) () <br> |
-|  void | [**SetRenderContext**](#function-setrendercontext) (const [**RenderContextPtr**](classSR__GRAPH__NS_1_1RenderContext.md) & renderContext) <br> |
+|  SR\_NODISCARD bool | [**IsGraphicsResourceRegistered**](#function-isgraphicsresourceregistered) () noexcept const<br> |
+|  void | [**RegisterGraphicsResource**](#function-registergraphicsresource) () <br> |
 |  [**IGraphicsResource**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md) & | [**operator=**](#function-operator) (const [**IGraphicsResource**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md) &) = delete<br> |
 
 
@@ -77,13 +74,6 @@ Inherited by the following classes: [SR\_GRAPH\_NS::IRenderTechnique](classSR__G
 
 
 
-## Protected Attributes
-
-| Type | Name |
-| ---: | :--- |
-|  bool | [**m\_isCalculated**](#variable-m_iscalculated)   = `false`<br> |
-|  PipelinePtr | [**m\_pipeline**](#variable-m_pipeline)  <br> |
-|  [**RenderContextPtr**](classSR__GRAPH__NS_1_1RenderContext.md) | [**m\_renderContext**](#variable-m_rendercontext)   = `nullptr`<br> |
 
 
 
@@ -104,6 +94,7 @@ Inherited by the following classes: [SR\_GRAPH\_NS::IRenderTechnique](classSR__G
 
 | Type | Name |
 | ---: | :--- |
+| virtual void | [**FreeVMemory**](#function-freevmemory) () <br> |
 |   | [**IGraphicsResource**](#function-igraphicsresource-12) () = default<br> |
 | virtual  | [**~IGraphicsResource**](#function-igraphicsresource) () <br> |
 
@@ -146,24 +137,9 @@ using SR_GRAPH_NS::Memory::IGraphicsResource::RenderContextPtr =  RenderContext*
 ### function DeInitGraphicsResource 
 
 ```C++
-virtual void SR_GRAPH_NS::Memory::IGraphicsResource::DeInitGraphicsResource () 
-```
-
-
-
-данный метод можно вызывать только из контекста рендера, в котором он был инициализирован. Либо из кластера если это меш 
-
-
-        
-
-<hr>
-
-
-
-### function FreeVideoMemory 
-
-```C++
-inline virtual void SR_GRAPH_NS::Memory::IGraphicsResource::FreeVideoMemory () 
+void SR_GRAPH_NS::Memory::IGraphicsResource::DeInitGraphicsResource (
+    SR_UTILS_NS::PassKey < RenderContext >
+) 
 ```
 
 
@@ -214,23 +190,10 @@ SR_GRAPH_NS::Memory::IGraphicsResource::IGraphicsResource (
 
 
 
-### function IsCalculated 
-
-```C++
-inline SR_NODISCARD SR_FORCE_INLINE bool SR_GRAPH_NS::Memory::IGraphicsResource::IsCalculated () const
-```
-
-
-
-
-<hr>
-
-
-
 ### function IsGraphicsResourceRegistered 
 
 ```C++
-inline SR_NODISCARD SR_FORCE_INLINE bool SR_GRAPH_NS::Memory::IGraphicsResource::IsGraphicsResourceRegistered () const
+inline SR_NODISCARD bool SR_GRAPH_NS::Memory::IGraphicsResource::IsGraphicsResourceRegistered () noexcept const
 ```
 
 
@@ -240,25 +203,10 @@ inline SR_NODISCARD SR_FORCE_INLINE bool SR_GRAPH_NS::Memory::IGraphicsResource:
 
 
 
-### function MarkPipelineUnBuild 
+### function RegisterGraphicsResource 
 
 ```C++
-void SR_GRAPH_NS::Memory::IGraphicsResource::MarkPipelineUnBuild () 
-```
-
-
-
-
-<hr>
-
-
-
-### function SetRenderContext 
-
-```C++
-void SR_GRAPH_NS::Memory::IGraphicsResource::SetRenderContext (
-    const RenderContextPtr & renderContext
-) 
+void SR_GRAPH_NS::Memory::IGraphicsResource::RegisterGraphicsResource () 
 ```
 
 
@@ -280,49 +228,21 @@ IGraphicsResource & SR_GRAPH_NS::Memory::IGraphicsResource::operator= (
 
 
 <hr>
-## Protected Attributes Documentation
-
-
-
-
-### variable m\_isCalculated 
-
-```C++
-bool SR_GRAPH_NS::Memory::IGraphicsResource::m_isCalculated;
-```
-
-
-
-
-<hr>
-
-
-
-### variable m\_pipeline 
-
-```C++
-PipelinePtr SR_GRAPH_NS::Memory::IGraphicsResource::m_pipeline;
-```
-
-
-
-
-<hr>
-
-
-
-### variable m\_renderContext 
-
-```C++
-RenderContextPtr SR_GRAPH_NS::Memory::IGraphicsResource::m_renderContext;
-```
-
-
-
-
-<hr>
 ## Protected Functions Documentation
 
+
+
+
+### function FreeVMemory 
+
+```C++
+inline virtual void SR_GRAPH_NS::Memory::IGraphicsResource::FreeVMemory () 
+```
+
+
+
+
+<hr>
 
 
 

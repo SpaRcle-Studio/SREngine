@@ -48,7 +48,7 @@ namespace SR_GTYPES_NS {
 
         bool CalculateIBO();
 
-        void FreeVideoMemory() override;
+        void FreeVMemory() override;
 
         template<Vertices::VertexType type, typename Vertex> bool CalculateVBO(const SR_HTYPES_NS::FastMemoryArray<Vertex>& vertices);
         template<Vertices::VertexType type, typename Vertex> bool CalculateVBO(const SR_HTYPES_NS::Function<SR_HTYPES_NS::FastMemoryArray<Vertex>()>& getter);
