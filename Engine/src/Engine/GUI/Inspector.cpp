@@ -189,12 +189,17 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1) {
-            if (*selected.begin() != m_sceneObject) {
-                ResetWeakStorage();
+        if (m_hierarchy) {
+            if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1) {
+                if (*selected.begin() != m_sceneObject) {
+                    ResetWeakStorage();
+                }
+                m_sceneObject = *selected.begin();
+                SRAssert(m_sceneObject);
             }
-            m_sceneObject = *selected.begin();
-            SRAssert(m_sceneObject);
+            else {
+                m_sceneObject = SR_UTILS_NS::SceneObject::Ptr();
+            }
         }
         else {
             m_sceneObject = SR_UTILS_NS::SceneObject::Ptr();

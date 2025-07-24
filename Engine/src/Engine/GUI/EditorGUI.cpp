@@ -73,7 +73,7 @@ namespace SR_CORE_GUI_NS {
         AddWidget(new FileBrowser());
         AddWidget(new Hierarchy());
         AddWidget(new VisualScriptEditor());
-        AddWidget(new Inspector(GetWidget<Hierarchy>()));
+        AddWidget(new Inspector(TryGetWidget<Hierarchy>()));
         AddWidget(new WorldEdit());
         AddWidget(new EngineSettings());
         AddWidget(new AnimatorEditor());
@@ -88,7 +88,9 @@ namespace SR_CORE_GUI_NS {
             Register(widget);
         }
 
-        GetWidget<FileBrowser>()->SetFolder(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+        if (auto&& pWidget = TryGetWidget<FileBrowser>()) {
+            pWidget->SetFolder(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+        }
     }
 
     EditorGUI::~EditorGUI() {
@@ -274,7 +276,7 @@ namespace SR_CORE_GUI_NS {
 
     void EditorGUI::Enable(bool value) {
         if (m_enabled != value) {
-            if (auto&& pViewer = GetWidget<SceneViewer>()) {
+            if (auto&& pViewer = TryGetWidget<SceneViewer>()) {
                 pViewer->Enable(value);
             }
             m_enabled = value;
@@ -285,7 +287,7 @@ namespace SR_CORE_GUI_NS {
         SR_TRACY_ZONE;
         SR_LOCK_GUARD;
 
-        if (auto&& pViewer = GetWidget<SceneViewer>()) {
+        if (auto&& pViewer = TryGetWidget<SceneViewer>()) {
             pViewer->FixedUpdate();
         }
     }
@@ -295,8 +297,12 @@ namespace SR_CORE_GUI_NS {
         SR_LOCK_GUARD;
 
         if (Enabled()) {
-            GetWidget<Hierarchy>()->Update(dt);
-            GetWidget<Inspector>()->Update(dt);
+            if (auto&& pWidget = TryGetWidget<Hierarchy>()) {
+                pWidget->Update(dt);
+            }
+            if (auto&& pWidget = TryGetWidget<Inspector>()) {
+                pWidget->Update(dt);
+            }
         }
     }
 

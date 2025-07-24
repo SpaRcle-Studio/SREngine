@@ -28,6 +28,8 @@ namespace SR_CORE_NS {
         pRenderScene->Submit();
 
         SR_TRACY_PLOT("Draw calls", static_cast<int64_t>(pRenderScene->GetPipeline()->GetBuildState().drawCalls));
+        SR_TRACY_PLOT("Vertices", static_cast<int64_t>(pRenderScene->GetPipeline()->GetBuildState().vertices));
+        SR_TRACY_PLOT("VMem Transfer", static_cast<int64_t>(pRenderScene->GetPipeline()->GetBuildState().transferredMemory));
 
         return SR_UTILS_NS::ThreadWorkerResult::Success;
     }

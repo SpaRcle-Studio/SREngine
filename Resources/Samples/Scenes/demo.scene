@@ -612,7 +612,7 @@ sra format
 																			19-s:Vec4
 																		18-o:value
 																			19-v:x
-																				20-f:3.9000001
+																				20-f:1
 																			19-v:y
 																				20-f:1
 																			19-v:z
@@ -2332,9 +2332,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:874
+											11-f:1611
 										10-v:height
-											11-f:876
+											11-f:965
 									9-v:direction
 										10-s:Column
 									9-v:containerAlign
@@ -2769,9 +2769,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:874
+											11-f:1611
 										10-v:height
-											11-f:876
+											11-f:965
 						6-k:i
 							7-o:d
 								8-v:type
@@ -3210,9 +3210,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:874
+											11-f:1611
 										10-v:height
-											11-f:876
+											11-f:965
 										10-v:align
 											11-s:End
 									9-v:direction
@@ -4153,9 +4153,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:874
+											11-f:1611
 										10-v:height
-											11-f:876
+											11-f:965
 									9-v:containerAlign
 										10-s:Center
 									9-v:justify
@@ -4540,9 +4540,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:874
+											11-f:1611
 										10-v:height
-											11-f:876
+											11-f:965
 									9-v:direction
 										10-s:Column
 									9-v:containerAlign
@@ -5487,9 +5487,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:874
+											11-f:1611
 										10-v:height
-											11-f:876
+											11-f:965
 									9-v:direction
 										10-s:Column
 									9-v:containerAlign

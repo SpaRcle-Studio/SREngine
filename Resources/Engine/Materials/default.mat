@@ -10,7 +10,7 @@ sra format
 				4-o:ptr
 					5-o:default
 						6-v:shader
-							7-s:Engine/Shaders/CascadedShadowMap/spatial.srsl
+							7-s:Engine/Shaders/standard.srsl
 						6-o:data
 							7-a:uniforms
 								8-k:i
@@ -21,13 +21,13 @@ sra format
 											11-s:Vec4
 										10-o:value
 											11-v:x
-												12-f:1.000000
+												12-f:1
 											11-v:y
-												12-f:1.000000
+												12-f:1
 											11-v:z
-												12-f:1.000000
+												12-f:1
 											11-v:w
-												12-f:1.000000
+												12-f:1
 							7-a:samplers
 								8-k:i
 									9-o:d
@@ -53,13 +53,13 @@ sra format
 												12-s:Vec4
 											11-o:value
 												12-v:x
-													13-f:1.000000
+													13-f:1
 												12-v:y
-													13-f:1.000000
+													13-f:1
 												12-v:z
-													13-f:1.000000
+													13-f:1
 												12-v:w
-													13-f:1.000000
+													13-f:1
 								8-a:samplers
 									9-k:i
 										10-o:d
