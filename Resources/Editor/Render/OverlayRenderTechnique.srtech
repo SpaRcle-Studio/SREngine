@@ -1,0 +1,21 @@
+sra format
+0-r:Root
+	1-o:asset
+		2-v:type
+			3-s:FileRenderTechniqueResource
+		2-o:ptr
+			3-o:data
+				4-v:name
+					5-s:Editor Overlay
+				4-o:pass
+					5-v:type
+						6-s:WidgetPass
+					5-o:ptr
+						6-o:samplersPassData
+				4-a:queues
+					5-k:i
+						6-o:d
+							7-a:passNames
+								8-k:i
+									9-v:d
+										10-s:WidgetPass

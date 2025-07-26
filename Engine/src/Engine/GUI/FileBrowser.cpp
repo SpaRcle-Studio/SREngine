@@ -415,7 +415,11 @@ namespace SR_CORE_NS::GUI {
             m_callbackFunction = CallbackFn();
         }
         else {
-            if (path.GetExtensionView() == SR_UTILS_NS::Asset::EXTENSION_NAME || path.GetExtensionView() == "mat") {
+            static std::set<std::string_view> supportedAssets = {
+                SR_UTILS_NS::Asset::EXTENSION_NAME, "mat", "srtech"
+            };
+
+            if (supportedAssets.count(path.GetExtensionView()) != 0) {
                 if (auto&& pAssetInspector = GetManager()->GetWidget<AssetInspector>()) {
                     pAssetInspector->Inspect(path);
                 }

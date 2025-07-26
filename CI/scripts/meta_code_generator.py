@@ -67,6 +67,11 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
         f.write('\n' + '\t' * (tabs + 3) + f'.SetGetter(&SRClassMetaTemplate::Get_{prop.name})')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetChangeCallback(&SRClassMetaTemplate::OnChange_{prop.name})')
 
+        if prop.virtual:
+            f.write('\n' + '\t' * (tabs + 3) + f'.CheckSRClass<decltype(DeclTypeStub()->{prop.getter}())>()')
+        else:
+            f.write('\n' + '\t' * (tabs + 3) + f'.CheckSRClass<decltype({class_obj.name}::{prop.name})>()')
+
         if prop.property_condition:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetPropertyCondition(&SRClassMetaTemplate::IsPropertyActive_{prop.serialize_name})')
 
@@ -315,6 +320,40 @@ def generate_class_meta_load(f, class_obj, tabs):
     f.write('\t' * tabs + '}\n\n')
     pass
 
+
+def generate_class_meta_clone(f, class_obj: reflection_utils.SpaRcleClass, tabs):
+    class_name = '::'.join(class_obj.namespaces) + '::' + class_obj.name
+
+    f.write('\t' * tabs + f'void CloneTo(const SR_UTILS_NS::SRClass& src, SR_UTILS_NS::SRClass& dest) const noexcept final {{\n')
+    tabs += 1
+
+    f.write('\t' * tabs + f'SR_UTILS_NS::SRClassMeta::CloneTo(src, dest);\n\n')
+
+    f.write('\t' * tabs + f'SR_MAYBE_UNUSED auto&& srcObject = const_cast<{class_name}&>(static_cast<const {class_name}&>(src));\n')
+    f.write('\t' * tabs + f'SR_MAYBE_UNUSED auto&& destObject = static_cast<{class_name}&>(dest);\n\n')
+
+    for prop in class_obj.variables:
+        if prop.virtual and (not prop.setter or not prop.getter):
+            continue
+
+        if prop.getter:
+            getter_code = f'srcObject.{prop.getter}()'
+        else:
+            getter_code = f'srcObject.{prop.name}'
+
+        f.write('\t' * (tabs) + f'/// Clone property "{prop.name}"' + '\n')
+
+        if prop.setter:
+            f.write('\t' * (tabs) + f'SR_UTILS_NS::RemoveQualifiersT<decltype({getter_code})> clone_{prop.name};\n')
+            f.write('\t' * (tabs) + f'SR_UTILS_NS::Reflection::CloneTo({getter_code}, clone_{prop.name});\n')
+            f.write('\t' * (tabs) + f'destObject.{prop.setter}(std::move(clone_{prop.name}));\n')
+        else:
+            f.write('\t' * (tabs) + f'SR_UTILS_NS::Reflection::CloneTo({getter_code}, destObject.{prop.name});\n')
+
+    tabs -= 1
+    f.write('\t' * tabs + '}\n\n')
+
+
 def generate_class_meta(f, context: codegen_context.CodegenContext, class_structures, class_obj, tabs):
     if len(class_obj.inherited_classes) > 0:
         f.write('\t' * tabs + f'/// Include inherited classes.\n')
@@ -427,6 +466,7 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
 
     generate_class_meta_save(f, class_obj, tabs)
     generate_class_meta_load(f, class_obj, tabs)
+    generate_class_meta_clone(f, class_obj, tabs)
 
     f.write('\t' * tabs + 'SR_NODISCARD virtual SR_UTILS_NS::StringAtom GetFactoryName() const noexcept final {\n')
     f.write('\t' * (tabs + 1) + f'return {class_name}::GetClassStaticName();' + '\n')

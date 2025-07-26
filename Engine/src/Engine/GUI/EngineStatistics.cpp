@@ -9,7 +9,7 @@
 
 #include <Graphics/Types/Framebuffer.h>
 #include <Graphics/Types/Skybox.h>
-#include <Graphics/Pass/IFramebufferPass.h>
+//#include <Graphics/Pass/IFramebufferPass.h>
 
 #include <Graphics/Memory/ShaderProgramManager.h>
 #include <Graphics/Pass/MeshDrawerPass.h>
@@ -235,7 +235,7 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader("Render Techniques")) {
+            /*if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader("Render Techniques")) {
                 if (SR_GRAPH_GUI_NS::Immediate::BeginTable("##RenderTechniquesTable", 1)) {
                     for (auto&& pRenderTechnique : techniques) {
                         SR_GRAPH_GUI_NS::Immediate::TableNextRow();
@@ -251,7 +251,7 @@ namespace SR_CORE_GUI_NS {
 
                     SR_GRAPH_GUI_NS::Immediate::EndTable();
                 }
-            }
+            }*/
 
             //if (ImGui::CollapsingHeader("Materials")) {
             //    if (ImGui::BeginTable("##MaterialsTable", 1)) {
@@ -352,7 +352,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EngineStatistics::DrawRenderTechnique(SR_GRAPH_NS::IRenderTechnique* pRenderTechnique) {
-        pRenderTechnique->ForEachPass([this](auto&& pPass) -> bool {
+        /*pRenderTechnique->ForEachPass([this](auto&& pPass) -> bool {
             if (auto&& pMeshDrawerPass = dynamic_cast<SR_GRAPH_NS::MeshDrawerPass*>(pPass)) {
                 DrawMeshDrawerPass(pMeshDrawerPass);
             }
@@ -384,13 +384,13 @@ namespace SR_CORE_GUI_NS {
             }
 
             return true;
-        });
+        });*/
     }
 
     void EngineStatistics::DrawMeshDrawerPass(SR_GRAPH_NS::MeshDrawerPass* pMeshDrawerPass) {
-        for (auto&& pRenderQueue : pMeshDrawerPass->GetRenderQueues()) {
-            DrawRenderQueue(pRenderQueue.Get());
-        }
+        //for (auto&& pRenderQueue : pMeshDrawerPass->GetRenderQueues()) {
+        //    DrawRenderQueue(pRenderQueue.Get());
+        //}
     }
 
     void EngineStatistics::DrawRenderQueue(const SR_GRAPH_NS::RenderQueue* pRenderQueue) {
@@ -477,6 +477,12 @@ namespace SR_CORE_GUI_NS {
 
         auto&& pRenderStrategy = pRenderScene->GetRenderStrategy();
         auto&& pPipeline = pRenderScene->GetPipeline();
+
+        static std::string stage = pPipeline->GetRenderStageId();
+        if (SR_GRAPH_GUI_NS::Immediate::InputText("Render stage id", &stage, SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue)) {
+            pPipeline->SetRenderStageId(stage);
+            pPipeline->GetRenderContext()->SetDirty();
+        }
 
         SR_GRAPH_GUI_NS::Immediate::Text("Cameras:");
         auto&& pMainCamera = pRenderScene->GetMainCamera();

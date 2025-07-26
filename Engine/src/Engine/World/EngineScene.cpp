@@ -13,6 +13,7 @@
 
 #include <Utils/DebugDraw.h>
 #include <Utils/Common/Features.h>
+#include <Utils/Common/ToString.h>
 #include <Utils/World/SceneCubeChunkLogic.h>
 #include <Utils/Events/Broadcaster.h>
 
@@ -62,7 +63,7 @@ namespace SR_CORE_NS {
             }
 
             if (pRenderScene) {
-                pRenderScene->SetTechnique("Editor/Configs/OverlayRenderTechnique.xml");
+                pRenderScene->SetTechnique("Editor/Render/OverlayRenderTechnique.srtech");
 
                 pRenderScene->Register(pEngine->GetEditor());
                 pRenderScene->Register(&Graphics::GUI::GlobalWidgetManager::Instance());

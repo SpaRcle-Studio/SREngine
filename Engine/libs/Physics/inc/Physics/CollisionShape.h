@@ -125,6 +125,8 @@ namespace SR_PTYPES_NS {
         /// @propertyCondition(This.HasGeometry())
         SR_VIRTUAL_PROPERTY
         /// @virtualProperty(meshPath) @getter(GetMeshPath) @setter(SetRawMesh)
+        /// @customArgs(pick: enabled, filter name: Meshes)
+        /// @customArg(filter value: fbx,blend,obj,pmx,stl,dae)
         /// @propertyCondition(This.HasGeometry())
         SR_VIRTUAL_PROPERTY
         /// @virtualProperty(meshId) @getter(GetMeshId) @setter(SetMeshId)
