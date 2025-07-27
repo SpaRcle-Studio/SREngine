@@ -92,6 +92,8 @@ namespace SR_CORE_NS::GUI {
                     current.iconType = Core::EditorIcon::Font;
                 } else if (extension == "prefab") {
                     current.iconType = Core::EditorIcon::Prefab;
+                } else if (extension == "srtech") {
+                    current.iconType = Core::EditorIcon::RenderTechnique;
                 } else if (extension == "sras") {
                     current.iconType = Core::EditorIcon::Asset;
                 } else if (extension == "scene") {

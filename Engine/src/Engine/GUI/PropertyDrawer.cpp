@@ -29,6 +29,10 @@ namespace SR_CORE_GUI_NS {
             return "VectorPropertyDrawer";
         }
 
+        if (value.IsAssociativeContainer()) {
+            return "AssociativePropertyDrawer";
+        }
+
         if (value.IsMathSize()) {
             return "MathSizePropertyDrawer";
         }

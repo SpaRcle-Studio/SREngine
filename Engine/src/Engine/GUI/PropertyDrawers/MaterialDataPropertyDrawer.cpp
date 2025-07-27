@@ -33,6 +33,26 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_NS::MaterialData& materialData = *static_cast<SR_GRAPH_NS::MaterialData*>(context.pOwner);
 
+        if ((!context.pProperty || !context.pProperty->IsReadOnly()) && !SR_GRAPH_GUI_NS::Immediate::IsCurrentlyDisabled()) {
+            const float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth);
+            const float_t addStageWidth = totalWidth / 4.f;
+
+            if (SR_GRAPH_GUI_NS::Immediate::Button("Add Stage", {SR_MAX(addStageWidth, 0), context.fieldHeight})) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
+                feedback.isChanged = true;
+                if (!m_newStageName.empty() && !materialData.HasStage(m_newStageName)) {
+                    materialData.AddStage(m_newStageName);
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(totalWidth - addStageWidth);
+            SR_GRAPH_GUI_NS::Immediate::InputText("#Stage Name", &m_newStageName);
+            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+        }
+
         feedback.isChanged |= DrawShaderData(true, "Default", materialData.GetDefaultShaderData(), context);
 
         for (auto&& [stage, data] : materialData.GetShadersData()) {
@@ -62,14 +82,14 @@ namespace SR_CORE_GUI_NS {
             auto&& cursorPos = SR_GRAPH_GUI_NS::Immediate::GetWindowCursorPos(pWindow);
 
             const auto dir = opened ? SR_GRAPH_GUI_NS::Immediate::Direction::Down : SR_GRAPH_GUI_NS::Immediate::Direction::Right;
-            const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(0, 5);
+            const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(1, 5);
             SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
 
-            SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.GetArrowWidth(), 0));
+            //SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.GetArrowWidth(), 0));
+            //SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
-
-            const float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth) - context.GetArrowWidth();
+            //const float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth) - context.GetArrowWidth();
+            const float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth);
             const float_t removeWidth = SR_MAX(context.lineHeight * 2.5f, 0);
 
             const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(totalWidth - removeWidth, 0), context.fieldHeight };

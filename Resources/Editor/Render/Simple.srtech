@@ -25,6 +25,25 @@ sra format
 											11-s:Engine/Skyboxes/Sun.png
 										10-v:shaderPath
 											11-s:Engine/Shaders/skybox.srsl
+							7-k:i
+								8-o:d
+									9-v:type
+										10-s:DebugPass
+									9-o:ptr
+										10-o:samplers
+										10-a:shaders
+											11-k:item
+												12-v:first
+													13-s:mesh
+												12-o:second
+													13-v:shaderPath
+														14-s:Engine/Shaders/Gizmo/wire-mesh.srsl
+											11-k:item
+												12-v:first
+													13-s:line
+												12-o:second
+													13-v:shaderPath
+														14-s:Engine/Shaders/line.srsl
 						6-o:data
 							7-v:frameBufferName
 								8-s:SceneView

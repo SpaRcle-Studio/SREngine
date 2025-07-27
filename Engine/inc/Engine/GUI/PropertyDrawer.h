@@ -43,7 +43,7 @@ namespace SR_CORE_GUI_NS {
         float_t fieldWidth = 250.f;
         float_t fieldHeight = 0.f;
 
-        SR_NODISCARD float_t GetArrowWidth() const { return lineHeight * 0.75f; }
+        SR_NODISCARD float_t GetArrowWidth() const { return lineHeight * 0.85f; }
 
         SR_NODISCARD SR_UTILS_NS::Reflection::Property const& GetProperty() const { SRAssert(pProperty); return *pProperty; }
         SR_NODISCARD SR_UTILS_NS::StringAtom GetPropertyName() const { return pProperty ? pProperty->GetName() : SR_UTILS_NS::StringAtom(); }
@@ -52,6 +52,9 @@ namespace SR_CORE_GUI_NS {
 
         SR_NODISCARD SR_UTILS_NS::Reflection::Value GetValue() const {
             if (pValue) {
+                if (pValue->IsEmbedded() || pValue->IsDynamic()) {
+                    return pValue->Ref();
+                }
                 return *pValue;
             }
 

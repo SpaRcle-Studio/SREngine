@@ -4,6 +4,7 @@
 
 #include <Engine/macros.h>
 
+#include "../src/Engine/GUI/PropertyDrawers/AssociativePropertyDrawer.cpp"
 #include "../src/Engine/GUI/PropertyDrawers/EntityRefPropertyDrawer.cpp"
 #include "../src/Engine/GUI/PropertyDrawers/EnumPropertyDrawer.cpp"
 #include "../src/Engine/GUI/PropertyDrawers/VectorPropertyDrawer.cpp"

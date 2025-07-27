@@ -15,7 +15,7 @@ namespace SR_CORE_NS {
           Unknown,
           Material, Prefab, Asset,
           File, Shader, Scene,
-          Back,
+          Back, RenderTechnique,
           Play,
           Stop,
           PauseActive,

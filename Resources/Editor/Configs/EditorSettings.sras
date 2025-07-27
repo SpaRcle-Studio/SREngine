@@ -165,5 +165,11 @@ sra format
 							7-s:FrameSkip
 						6-v:path
 							7-s:Editor/Textures/frame-skip.png
+				4-k:i
+					5-o:d
+						6-v:icon
+							7-s:RenderTechnique
+						6-v:path
+							7-s:Editor/Textures/waterfall-chart.png
 			3-v:renderTechnique
-				4-s:C:/Work/SREngine/Resources/Editor/Render/Simple.srtech
+				4-s:Editor/Render/Simple.srtech

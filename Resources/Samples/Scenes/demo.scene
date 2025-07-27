@@ -120,6 +120,7 @@ sra format
 								8-o:ptr
 									9-v:entityId
 										10-i:4193520828818589059
+									9-o:associative
 									9-v:platformType
 										10-s:Windows
 									9-o:data
@@ -507,6 +508,29 @@ sra format
 								8-o:ptr
 									9-v:entityId
 										10-i:3374659283479041043
+									9-o:associative
+										10-a:associativeMapAtom
+											11-k:item
+												12-v:first
+													13-s:qwwerteee
+												12-v:second
+													13-i:-47
+											11-k:item
+												12-v:first
+													13-s:qwwert
+												12-v:second
+													13-i:27
+										10-a:associativeMap4
+											11-k:item
+												12-v:first
+													13-s:Android
+												12-v:second
+													13-s:23123
+											11-k:item
+												12-v:first
+													13-s:Emscripten
+												12-v:second
+													13-s:asdas
 									9-v:platformType
 										10-s:Windows
 									9-o:data
@@ -1636,6 +1660,7 @@ ddddцццゔぅヾボ
 								8-o:ptr
 									9-v:entityId
 										10-i:4321541742137885967
+									9-o:associative
 									9-v:platformType
 										10-s:Windows
 									9-o:data
@@ -2332,7 +2357,7 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1512
+											11-f:1513
 										10-v:height
 											11-f:965
 									9-v:direction
@@ -2769,7 +2794,7 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1512
+											11-f:1513
 										10-v:height
 											11-f:965
 						6-k:i
@@ -3210,7 +3235,7 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1512
+											11-f:1513
 										10-v:height
 											11-f:965
 										10-v:align
@@ -4153,7 +4178,7 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1512
+											11-f:1513
 										10-v:height
 											11-f:965
 									9-v:containerAlign
@@ -4540,7 +4565,7 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1512
+											11-f:1513
 										10-v:height
 											11-f:965
 									9-v:direction
@@ -5487,7 +5512,7 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1512
+											11-f:1513
 										10-v:height
 											11-f:965
 									9-v:direction

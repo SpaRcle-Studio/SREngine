@@ -46,15 +46,15 @@ namespace SR_CORE_GUI_NS {
             }
         }
         else {
-            const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(0, 5);
+            const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(1, 5);
             SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
 
-            const float_t arrowWidth = context.lineHeight * 0.75f;
-            SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(arrowWidth, 0));
+            //const float_t arrowWidth = context.lineHeight * 0.75f;
+            //SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(arrowWidth, 0));
+            //SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
-
-            const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(context.fieldTitleWidth - arrowWidth, 0), context.fieldHeight };
+            //const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(context.fieldTitleWidth - arrowWidth, 0), context.fieldHeight };
+            const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(context.fieldTitleWidth, 0), context.fieldHeight };
             const float_t titleTotalWidth = context.fieldTitleWidth + counterButtonWidth.x;
             const float_t partItemWidth = ((context.fieldWidth + context.fieldTitleWidth) - titleTotalWidth) / 3;
             buttonSize = { partItemWidth, context.fieldHeight };
@@ -107,15 +107,33 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (m_isOpened) {
-            for (auto&& pIt = container.begin(); pIt != container.end(); ++pIt) {
+            for (auto pIt = container.begin(); pIt != container.end();) {
                 SR_UTILS_NS::Reflection::Value element = *pIt;
                 uint64_t index = SR_UTILS_NS::Distance(container.begin(), pIt);
                 SR_GRAPH_GUI_NS::Immediate::PushID(index);
 
                 SR_MATH_NS::FVector2 itemButtonSize = { 40, context.fieldHeight };
-                SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
-                SR_GRAPH_GUI_NS::Immediate::Button("[{}] "_format(index).c_str(), itemButtonSize);
-                SR_GRAPH_GUI_NS::Immediate::EndDisabled();
+
+                //SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
+                SR_GRAPH_GUI_NS::Immediate::Button("{}"_format(index).c_str(), itemButtonSize);
+                //SR_GRAPH_GUI_NS::Immediate::EndDisabled();
+
+                if (SR_GRAPH_GUI_NS::Immediate::BeginPopupContextItem("ElementContextMenu")) {
+                    bool removed = false;
+                    if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Remove")) {
+                        if (context.onBeforeChangeCallback) {
+                            context.onBeforeChangeCallback(false);
+                        }
+                        pIt = container.Erase(pIt);
+                        feedback.isChanged = true;
+                        removed = true;
+                    }
+                    SR_GRAPH_GUI_NS::Immediate::EndPopup();
+                    if (removed) {
+                        SR_GRAPH_GUI_NS::Immediate::PopID();
+                        continue;
+                    }
+                }
 
                 SR_GRAPH_GUI_NS::Immediate::SameLine();
 
@@ -132,6 +150,7 @@ namespace SR_CORE_GUI_NS {
                 if (!m_drawers[index]) {
                     SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Missing inspector for element!");
                     SR_GRAPH_GUI_NS::Immediate::PopID();
+                    ++pIt;
                     continue;
                 }
 
@@ -151,6 +170,8 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 SR_GRAPH_GUI_NS::Immediate::PopID();
+
+                ++pIt;
             }
         }
 

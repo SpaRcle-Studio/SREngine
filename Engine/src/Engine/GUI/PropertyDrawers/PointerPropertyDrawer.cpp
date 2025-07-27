@@ -51,15 +51,16 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
         }
         else if (!context.noHeader) {
-            const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(0, 5);
+            const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(1, 5);
             SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
 
-            const float_t arrowWidth = context.lineHeight * 0.75f;
-            SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(arrowWidth, 0));
+            //const float_t arrowWidth = context.lineHeight * 0.75f;
+            //SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(arrowWidth, 0));
 
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            //SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-            const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(context.fieldTitleWidth - arrowWidth, 0), context.fieldHeight };
+            //const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(context.fieldTitleWidth - arrowWidth, 0), context.fieldHeight };
+            const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(context.fieldTitleWidth, 0), context.fieldHeight };
 
             SR_UTILS_NS::StringAtom displayName = editorParams.GetDisplayName();
             auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
@@ -234,6 +235,10 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::PopID();
 
         SetValue(context, feedback, value);
+
+        //if (!context.noHeader && m_isOpened) {
+        //    SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(0, context.fieldHeight / 2.f));
+        //}
 
         return feedback;
     }
