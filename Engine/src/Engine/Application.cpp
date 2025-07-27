@@ -210,7 +210,6 @@ namespace SR_CORE_NS {
 
         SR_SRLM_NS::DataTypeManager::DestroySingleton();
 
-        SR_CORE_NS::EditorSettings::DestroySettings();
         SR_UTILS_NS::TagManager::DestroySettings();
         SR_UTILS_NS::LayerManager::DestroySettings();
 

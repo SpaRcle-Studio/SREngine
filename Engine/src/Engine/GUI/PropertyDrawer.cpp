@@ -17,6 +17,10 @@ namespace SR_CORE_GUI_NS {
             return "BoolPropertyDrawer";
         }
 
+        if (value.IsOptional()) {
+            return "OptionalPropertyDrawer";
+        }
+
         if (value.IsArithmetic()) {
             return "NumericPropertyDrawer";
         }
@@ -110,6 +114,77 @@ namespace SR_CORE_GUI_NS {
         }
         else {
             SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map bool value!");
+        }
+
+        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+
+        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_GRAPH_GUI_NS::Immediate::PopID();
+
+        SetValue(context, feedback, value);
+
+        return feedback;
+    }
+
+    PropertyDrawerFeedback OptionalPropertyDrawer::Draw(const PropertyDrawerContext& context) {
+        PropertyDrawerFeedback feedback;
+
+        SR_UTILS_NS::Reflection::Value value = context.GetValue();
+
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.pOwner);
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
+
+        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+
+        if (!context.pValue) {
+            const SR_MATH_NS::FVector2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
+
+            if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
+                feedback.isChanged = true;
+                value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
+                value = value.DetachIfConst();
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+        }
+
+        const float checkBoxSize = SR_GRAPH_GUI_NS::Immediate::GetFrameHeight();
+
+        if (auto&& pValue = value.TryCast<std::optional<float>>()) {
+            bool hasValue = pValue->has_value();
+            if (SR_GRAPH_GUI_NS::Immediate::Checkbox("##Checkbox", &hasValue)) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
+                if (hasValue) {
+                    *pValue = float();
+                }
+                else {
+                    pValue->reset();
+                }
+                feedback.isChanged = true;
+            }
+
+            float dataValue = pValue->value_or(0.f);
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard lock(!hasValue);
+            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth - checkBoxSize);
+
+            if (SR_GRAPH_GUI_NS::Immediate::DragFloat("##Value", &dataValue, context.GetEditorParams().GetDragSpeed())) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(true);
+                }
+                *pValue = dataValue;
+                feedback.isChanged = true;
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+        }
+        else {
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unsupported optional type!");
         }
 
         SR_GRAPH_GUI_NS::Immediate::PopStyleVar();

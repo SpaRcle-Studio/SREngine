@@ -63,7 +63,7 @@ namespace SR_CORE_NS {
             }
 
             if (pRenderScene) {
-                pRenderScene->SetTechnique("Editor/Render/OverlayRenderTechnique.srtech");
+                pRenderScene->SetTechnique("Editor/Render/Overlay.srtech");
 
                 pRenderScene->Register(pEngine->GetEditor());
                 pRenderScene->Register(&Graphics::GUI::GlobalWidgetManager::Instance());
@@ -132,9 +132,9 @@ namespace SR_CORE_NS {
             return;
         }
 
-        if (!EditorSettings::Instance().IsNeedDebugChunks()) {
-            return;
-        }
+        /// if (!EditorSettings::Instance().IsNeedDebugChunks()) {
+        ///     return;
+        /// }
 
         if (!pScene) {
             return;

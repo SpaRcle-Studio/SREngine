@@ -436,7 +436,7 @@ sra format
 									9-v:entityId
 										10-i:3192905282459000103
 									9-v:renderTechnique
-										10-s:Engine/Configs/MainRenderTechnique.xml
+										10-s:Engine/Render/Swapchain.srtech
 						6-k:i
 							7-o:d
 								8-v:type
@@ -2332,7 +2332,7 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1656
+											11-f:1512
 										10-v:height
 											11-f:965
 									9-v:direction
@@ -2769,7 +2769,7 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1656
+											11-f:1512
 										10-v:height
 											11-f:965
 						6-k:i
@@ -3210,7 +3210,7 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1656
+											11-f:1512
 										10-v:height
 											11-f:965
 										10-v:align
@@ -4153,7 +4153,7 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1656
+											11-f:1512
 										10-v:height
 											11-f:965
 									9-v:containerAlign
@@ -4540,7 +4540,7 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1656
+											11-f:1512
 										10-v:height
 											11-f:965
 									9-v:direction
@@ -5487,7 +5487,7 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1656
+											11-f:1512
 										10-v:height
 											11-f:965
 									9-v:direction
@@ -14778,7 +14778,7 @@ ddddцццゔぅヾボ
 													13-v:entityId
 														14-i:4440690679856616196
 													13-v:renderTechnique
-														14-s:Engine/Configs/MainRenderTechnique.xml
+														14-s:Engine/Render/Swapchain.srtech
 									9-v:name
 										10-s:Camera
 									9-o:transform
@@ -14795,6 +14795,8 @@ ddddцццゔぅヾボ
 													13-f:0.0662739053
 												12-v:w
 													13-f:0.997801483
+					5-v:isEnabled
+						6-b:false
 					5-o:transform
 						6-v:type
 							7-s:Transform3D

@@ -190,6 +190,15 @@ namespace SR_CORE_GUI_NS {
 
     };
 
+    class OptionalPropertyDrawer : public PropertyDrawerBase {
+        SR_CLASS()
+    public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<OptionalPropertyDrawer>;
+    public:
+        PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
+
+    };
+
     class MathSizePropertyDrawer : public PropertyDrawerBase {
         SR_CLASS()
     public:

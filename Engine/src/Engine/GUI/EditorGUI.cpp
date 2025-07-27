@@ -37,6 +37,8 @@
 #include <Graphics/Window/Window.h>
 #include <Graphics/SRSL/Shader.h>
 
+#include <Enum/EditorIcon.hpp>
+
 namespace SR_CORE_GUI_NS {
     static SR_UTILS_NS::Path GetNewScenePath() {
         auto&& scenePath = SR_UTILS_NS::Path(SR_WORLD_NS::Scene::NewScenePath).ConcatExt("scene");
@@ -65,6 +67,7 @@ namespace SR_CORE_GUI_NS {
     EditorGUI::EditorGUI(const EnginePtr& pEngine)
         : Super()
     {
+        m_pSettings = SR_UTILS_NS::Asset::Load<EditorSettings>("Editor/Configs/EditorSettings.sras");
         m_cachedScenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("/PreviousScenePath").ConcatExt("cache");
 
         m_engine = pEngine;
@@ -103,6 +106,11 @@ namespace SR_CORE_GUI_NS {
             SR_SAFE_DELETE_PTR(widget);
         }
         m_widgets.clear();
+
+        if (m_pSettings) {
+            m_pSettings->RemoveUsePoint();
+            m_pSettings = nullptr;
+        }
     }
 
     bool EditorGUI::Init() {
@@ -255,18 +263,25 @@ namespace SR_CORE_GUI_NS {
 
         m_loaded = true;
 
-        auto&& settings = EditorSettings::Instance();
+        if (m_pSettings) {
+            m_pSettings->AddUsePoint();
 
-        for (auto&& [icon, path] : settings.GetIcons()) {
-            auto&& pTexture = SR_GTYPES_NS::Texture::Load(path);
-            if (!pTexture) {
-                SR_WARN("EditorGUI::Load() : icon wasn't not found!\n\tPath: " + path.ToString());
-                pTexture = m_context->GetNoneTexture();
+            for (auto&& iconInfo : m_pSettings->GetIcons()) {
+                if (m_icons.count(iconInfo.icon) == 1) {
+                    SRHalt("EditorGUI::Load() : icon already loaded! Icon: {}", iconInfo.icon);
+                    continue;
+                }
+
+                auto&& pTexture = SR_GTYPES_NS::Texture::Load(iconInfo.path);
+                if (!pTexture) {
+                    SR_WARN("EditorGUI::Load() : icon wasn't not found!\n\tPath: {}", iconInfo.path);
+                    pTexture = m_context->GetNoneTexture();
+                }
+
+                pTexture->AddUsePoint();
+
+                m_icons[iconInfo.icon] = pTexture;
             }
-
-            pTexture->AddUsePoint();
-
-            m_icons[icon] = pTexture;
         }
 
         m_useDocking = SR_UTILS_NS::Features::Instance().Enabled("EditorWidgetsDocking", true);

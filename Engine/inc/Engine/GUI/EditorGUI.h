@@ -12,6 +12,8 @@
 #include <Graphics/GUI/WidgetManager.h>
 #include <Graphics/Types/Texture.h>
 
+#include <Engine/Settings/EditorSettings.h>
+
 namespace SR_WORLD_NS {
     class Scene;
 }
@@ -108,6 +110,7 @@ namespace SR_CORE_GUI_NS {
         SR_NODISCARD const SR_GTYPES_NS::Texture* GetIcon(EditorIcon icon) const;
         SR_NODISCARD const EnginePtr& GetEngine() const { return m_engine; }
         SR_NODISCARD bool IsInitialized() const { return m_isInit; }
+        SR_NODISCARD const EditorSettings::Ptr& GetSettings() const { return m_pSettings; }
 
         void SetDockingEnabled(bool value) { m_useDocking = value; }
 
@@ -143,6 +146,8 @@ namespace SR_CORE_GUI_NS {
         void DrawWindowPage();
 
     private:
+        EditorSettings::Ptr m_pSettings;
+
         SR_UTILS_NS::Path m_cachedScenePath;
 
         RenderContextPtr m_context;

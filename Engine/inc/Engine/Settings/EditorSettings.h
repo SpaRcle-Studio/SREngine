@@ -5,7 +5,9 @@
 #ifndef SR_ENGINE_EDITORSETTINGS_H
 #define SR_ENGINE_EDITORSETTINGS_H
 
-#include <Utils/Settings.h>
+#include <Engine/macros.h>
+
+#include <Utils/Resources/Asset.h>
 
 namespace SR_CORE_NS {
     ///Здесь хранятся названия иконок, движок получает иконку по пути, указанному для названия в файле SREngine/Resources/Editor/Configs/EditorSettings.xml
@@ -35,32 +37,41 @@ namespace SR_CORE_NS {
           Audio
     );
 
-    class EditorSettings : public SR_UTILS_NS::GlobalSettings<EditorSettings> {
-        SR_REGISTER_SINGLETON(EditorSettings)
-        friend class SR_UTILS_NS::GlobalSettings<EditorSettings>;
-        using Icons = std::map<EditorIcon, SR_UTILS_NS::Path>;
-        using Super = SR_UTILS_NS::GlobalSettings<EditorSettings>;
-    protected:
-        ~EditorSettings() override = default;
+    struct EditorSettingsIconInfo : public SR_UTILS_NS::Serializable {
+        SR_STRUCT()
+
+        /// @property
+        EditorIcon icon = EditorIcon::Unknown;
+        /// @property
+        /// @customArgs(pick: enabled, filter name: Image)
+        /// @customArg(filter value: png,jpg,jpeg)
+        SR_UTILS_NS::Path path;
+    };
+
+    class EditorSettings : public SR_UTILS_NS::Asset {
+        SR_CLASS()
+    public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<EditorSettings>;
 
     public:
-        SR_NODISCARD Icons GetIcons() const;
+        SR_NODISCARD const std::vector<EditorSettingsIconInfo>& GetIcons() const noexcept { return m_icons; }
         SR_NODISCARD SR_UTILS_NS::Path GetRenderTechnique() const;
         SR_NODISCARD SR_UTILS_NS::Path GetPrefabEditorRenderTechnique() const;
         SR_NODISCARD bool IsNeedDebugChunks() const noexcept { return m_debugChunks; }
 
-        SR_NODISCARD SR_UTILS_NS::Path InitializeResourcePath() const override;
-
-    protected:
-        void ClearSettings() override;
-        bool LoadSettings(const SR_XML_NS::Node& node) override;
-
     private:
-        Icons m_icons;
+        /// @property
+        std::vector<EditorSettingsIconInfo> m_icons;
 
+        /// @property
+        /// @customArgs(pick: enabled, filter name: Render Techniques)
+        /// @customArg(filter value: srtech)
         SR_UTILS_NS::Path m_renderTechnique;
+        /// @property
+        /// @customArgs(pick: enabled, filter name: Render Techniques)
+        /// @customArg(filter value: srtech)
         SR_UTILS_NS::Path m_prefabEditorRenderTechnique;
-
+        /// @property
         bool m_debugChunks = false;
 
     };

@@ -9,7 +9,6 @@
 
 #include <Graphics/Types/Framebuffer.h>
 #include <Graphics/Types/Skybox.h>
-//#include <Graphics/Pass/IFramebufferPass.h>
 
 #include <Graphics/Memory/ShaderProgramManager.h>
 #include <Graphics/Pass/MeshDrawerPass.h>
