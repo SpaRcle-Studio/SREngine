@@ -331,7 +331,7 @@ sra format
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:4.48393393
+									9-f:-0.105999999
 								8-v:y
 									9-f:2.99001503
 								8-v:z
@@ -693,6 +693,8 @@ sra format
 							7-s:Transform3D
 						6-o:ptr
 							7-o:translation
+								8-v:x
+									9-f:-1.09000003
 								8-v:y
 									9-f:3.5196929
 								8-v:z
@@ -1212,7 +1214,7 @@ ddddцццゔぅヾボ
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:-8.68903637
+									9-f:-8.52900028
 								8-v:y
 									9-f:2.40208697
 								8-v:z
@@ -2357,7 +2359,7 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1513
+											11-f:1572
 										10-v:height
 											11-f:965
 									9-v:direction
@@ -2794,7 +2796,7 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1513
+											11-f:1572
 										10-v:height
 											11-f:965
 						6-k:i
@@ -3235,7 +3237,7 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1513
+											11-f:1572
 										10-v:height
 											11-f:965
 										10-v:align
@@ -4178,7 +4180,7 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1513
+											11-f:1572
 										10-v:height
 											11-f:965
 									9-v:containerAlign
@@ -4565,7 +4567,7 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1513
+											11-f:1572
 										10-v:height
 											11-f:965
 									9-v:direction
@@ -5512,7 +5514,7 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1513
+											11-f:1572
 										10-v:height
 											11-f:965
 									9-v:direction

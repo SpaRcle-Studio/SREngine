@@ -77,6 +77,14 @@ namespace SR_CORE_GUI_NS {
         if (SR_GRAPH_GUI_NS::Immediate::Checkbox("VSync", &vsync)) {
             pPipeline->SetVSyncEnabled(vsync);
         }
+
+        int32_t swapchainImages = SR_UTILS_NS::StoreUtils::User::GetInt("SwapchainImages", pPipeline->GetSwapchainImagesCount());
+
+        if (SR_GRAPH_GUI_NS::Immediate::InputInt("Swapchain images", &swapchainImages, 1, 1, SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue)) {
+            swapchainImages = SR_CLAMP(swapchainImages, 1, 16);
+            SR_UTILS_NS::StoreUtils::User::SetInt("SwapchainImages", swapchainImages);
+            pPipeline->SetSwapchainImagesCount(swapchainImages);
+        }
     }
 
     void EngineSettings::DrawEditorSettings() {

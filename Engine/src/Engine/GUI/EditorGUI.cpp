@@ -266,9 +266,9 @@ namespace SR_CORE_GUI_NS {
         if (m_pSettings) {
             m_pSettings->AddUsePoint();
 
-            for (auto&& iconInfo : m_pSettings->GetIcons()) {
-                if (m_icons.count(iconInfo.icon) == 1) {
-                    SRHalt("EditorGUI::Load() : icon already loaded! Icon: {}", iconInfo.icon);
+            for (auto&& [icon, iconInfo] : m_pSettings->GetIcons()) {
+                if (m_icons.count(icon) == 1) {
+                    SRHalt("EditorGUI::Load() : icon already loaded! Icon: {}", icon);
                     continue;
                 }
 
@@ -280,7 +280,7 @@ namespace SR_CORE_GUI_NS {
 
                 pTexture->AddUsePoint();
 
-                m_icons[iconInfo.icon] = pTexture;
+                m_icons[icon] = pTexture;
             }
         }
 

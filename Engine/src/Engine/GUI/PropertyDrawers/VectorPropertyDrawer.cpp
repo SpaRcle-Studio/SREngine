@@ -114,9 +114,7 @@ namespace SR_CORE_GUI_NS {
 
                 SR_MATH_NS::FVector2 itemButtonSize = { 40, context.fieldHeight };
 
-                //SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
                 SR_GRAPH_GUI_NS::Immediate::Button("{}"_format(index).c_str(), itemButtonSize);
-                //SR_GRAPH_GUI_NS::Immediate::EndDisabled();
 
                 if (SR_GRAPH_GUI_NS::Immediate::BeginPopupContextItem("ElementContextMenu")) {
                     bool removed = false;
@@ -128,6 +126,37 @@ namespace SR_CORE_GUI_NS {
                         feedback.isChanged = true;
                         removed = true;
                     }
+
+                    if (index > 0 && SR_GRAPH_GUI_NS::Immediate::MenuItem("Move up")) {
+                        if (context.onBeforeChangeCallback) {
+                            context.onBeforeChangeCallback(false);
+                        }
+
+                        SR_UTILS_NS::Reflection::Value temp = pIt->Detach();
+                        pIt = container.Erase(pIt);
+                        container.Insert(--SR_UTILS_NS::Reflection::ValueSequenceContainerIterator(pIt), temp);
+
+                        feedback.isChanged = true;
+                        SR_GRAPH_GUI_NS::Immediate::EndPopup();
+                        SR_GRAPH_GUI_NS::Immediate::PopID();
+                        break;
+                    }
+
+                    if (index + 1 < container.Size() && SR_GRAPH_GUI_NS::Immediate::MenuItem("Move down")) {
+                        if (context.onBeforeChangeCallback) {
+                            context.onBeforeChangeCallback(false);
+                        }
+
+                        SR_UTILS_NS::Reflection::Value temp = pIt->Detach();
+                        pIt = container.Erase(pIt);
+                        container.Insert(++SR_UTILS_NS::Reflection::ValueSequenceContainerIterator(pIt), temp);
+
+                        feedback.isChanged = true;
+                        SR_GRAPH_GUI_NS::Immediate::EndPopup();
+                        SR_GRAPH_GUI_NS::Immediate::PopID();
+                        break;
+                    }
+
                     SR_GRAPH_GUI_NS::Immediate::EndPopup();
                     if (removed) {
                         SR_GRAPH_GUI_NS::Immediate::PopID();
@@ -160,6 +189,7 @@ namespace SR_CORE_GUI_NS {
                 elementContext.fieldWidth -= itemButtonSize.x;
                 elementContext.fieldTitleWidth = 0.f;
                 elementContext.noHeader = false;
+                elementContext.openedByDefault = false;
 
                 SR_GRAPH_GUI_NS::Immediate::BeginGroup();
                 PropertyDrawerFeedback elementFeedback = m_drawers[index]->Draw(elementContext);

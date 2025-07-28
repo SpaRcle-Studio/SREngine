@@ -41,11 +41,11 @@ namespace SR_CORE_NS {
         SR_STRUCT()
 
         /// @property
-        EditorIcon icon = EditorIcon::Unknown;
-        /// @property
         /// @customArgs(pick: enabled, filter name: Image)
         /// @customArg(filter value: png,jpg,jpeg)
         SR_UTILS_NS::Path path;
+        /// @property
+        std::string extensions;
     };
 
     class EditorSettings : public SR_UTILS_NS::Asset {
@@ -54,14 +54,14 @@ namespace SR_CORE_NS {
         using Ptr = SR_HTYPES_NS::SharedPtr<EditorSettings>;
 
     public:
-        SR_NODISCARD const std::vector<EditorSettingsIconInfo>& GetIcons() const noexcept { return m_icons; }
+        SR_NODISCARD const std::map<EditorIcon, EditorSettingsIconInfo>& GetIcons() const noexcept { return m_icons; }
         SR_NODISCARD SR_UTILS_NS::Path GetRenderTechnique() const;
         SR_NODISCARD SR_UTILS_NS::Path GetPrefabEditorRenderTechnique() const;
         SR_NODISCARD bool IsNeedDebugChunks() const noexcept { return m_debugChunks; }
 
     private:
         /// @property
-        std::vector<EditorSettingsIconInfo> m_icons;
+        std::map<EditorIcon, EditorSettingsIconInfo> m_icons;
 
         /// @property
         /// @customArgs(pick: enabled, filter name: Render Techniques)

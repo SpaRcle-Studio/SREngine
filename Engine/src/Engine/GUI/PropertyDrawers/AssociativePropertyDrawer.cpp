@@ -12,6 +12,8 @@ namespace SR_CORE_GUI_NS {
     { }
 
     PropertyDrawerFeedback AssociativePropertyDrawer::Draw(const PropertyDrawerContext& context) {
+        SR_TRACY_ZONE;
+
         PropertyDrawerFeedback feedback;
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
@@ -81,6 +83,30 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::SameLine();
 
         PropertyDrawerContext keyCtx = context;
+
+        keyCtx.isEnumValueAvailableCheckFn = [&](SR_UTILS_NS::StringAtom enumValue) {
+            if (!m_keyValue.IsEnum()) {
+                SRHalt("AssociativePropertyDrawer::Draw() : key value is not an enum type!");
+                return true;
+            }
+
+            SR_UTILS_NS::EnumReflector* pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(m_keyValue.GetEnumType());
+            if (!pReflector) {
+                SRHalt("AssociativePropertyDrawer::Draw() : key value enum reflector is not found!");
+                return true;
+            }
+
+            const int64_t enumValueInt = pReflector->FromStringInternal(enumValue).value();
+
+            for (auto&& pIt = container.begin(); pIt != container.end(); ++pIt) {
+                void* pMappedRaw = pIt.First().Detach().Data();
+                if (pReflector->ReadEnumValueFromPointerInternal(pMappedRaw) == enumValueInt) {
+                    return false;
+                }
+            }
+            return true;
+        };
+
         keyCtx.pValue = &m_keyValue;
         keyCtx.fieldTitleWidth = 0.f;
         keyCtx.noHeader = true;
@@ -92,7 +118,15 @@ namespace SR_CORE_GUI_NS {
                 const uint64_t index = SR_UTILS_NS::Distance(container.begin(), pIt);
                 SR_GRAPH_GUI_NS::Immediate::PushID(index);
 
+                SR_UTILS_NS::Reflection::Value firstValue = pIt.First().Detach();
+                SR_UTILS_NS::Reflection::Value secondValue = pIt.Second();
+                const bool isSetLike = secondValue.SizeOf() == 0;
+
                 SR_MATH_NS::FVector2 spaceSize = { 40, context.fieldHeight };
+                if (isSetLike) {
+                    spaceSize.x = context.fieldTitleWidth;
+                }
+
                 SR_GRAPH_GUI_NS::Immediate::Dummy(spaceSize);
                 SR_GRAPH_GUI_NS::Immediate::SameLine();
 
@@ -104,11 +138,14 @@ namespace SR_CORE_GUI_NS {
                     m_keyDrawers[index] = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(GetValueInspector(m_keyValue));
                 }
 
-                SR_UTILS_NS::Reflection::Value firstValue = pIt.First().Detach();
-
                 PropertyDrawerContext keyContext = context;
                 keyContext.pValue = &firstValue;
-                keyContext.fieldWidth = context.fieldTitleWidth - spaceSize.x;
+                if (isSetLike) {
+                    keyContext.fieldWidth = context.fieldWidth;
+                }
+                else {
+                    keyContext.fieldWidth = context.fieldTitleWidth - spaceSize.x;
+                }
                 keyContext.fieldTitleWidth = 0.f;
                 keyContext.noHeader = false;
                 m_keyDrawers[index]->Draw(keyContext);
@@ -130,32 +167,34 @@ namespace SR_CORE_GUI_NS {
                     SR_GRAPH_GUI_NS::Immediate::EndPopup();
                 }
 
-                SR_GRAPH_GUI_NS::Immediate::SameLine();
+                if (!isSetLike) {
+                    SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-                SR_GRAPH_GUI_NS::Immediate::PushID("Value");
+                    SR_GRAPH_GUI_NS::Immediate::PushID("Value");
 
-                SR_UTILS_NS::Reflection::Value secondValue = pIt.Second();
+                    m_valueDrawers.resize(SR_MAX(m_valueDrawers.size(), index + 1));
+                    if (!m_valueDrawers[index]) {
+                        m_valueDrawers[index] = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(GetValueInspector(secondValue));
+                    }
 
-                m_valueDrawers.resize(SR_MAX(m_valueDrawers.size(), index + 1));
-                if (!m_valueDrawers[index]) {
-                    m_valueDrawers[index] = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(GetValueInspector(secondValue));
+                    PropertyDrawerContext valueContext = context;
+                    valueContext.pValue = &secondValue;
+                    valueContext.fieldWidth = context.fieldWidth;
+                    valueContext.fieldTitleWidth = 0.f;
+                    valueContext.noHeader = true;
+                    valueContext.openedByDefault = false;
+
+                    SR_GRAPH_GUI_NS::Immediate::BeginGroup();
+                    PropertyDrawerFeedback elementFeedback = m_valueDrawers[index]->Draw(valueContext);
+                    SR_GRAPH_GUI_NS::Immediate::EndGroup();
+
+                    if (elementFeedback.isChanged) {
+                        feedback.isChanged = true;
+                    }
+
+                    SR_GRAPH_GUI_NS::Immediate::PopID();
                 }
 
-                PropertyDrawerContext valueContext = context;
-                valueContext.pValue = &secondValue;
-                valueContext.fieldWidth = context.fieldWidth;
-                valueContext.fieldTitleWidth = 0.f;
-                valueContext.noHeader = true;
-
-                SR_GRAPH_GUI_NS::Immediate::BeginGroup();
-                PropertyDrawerFeedback elementFeedback = m_valueDrawers[index]->Draw(valueContext);
-                SR_GRAPH_GUI_NS::Immediate::EndGroup();
-
-                if (elementFeedback.isChanged) {
-                    feedback.isChanged = true;
-                }
-
-                SR_GRAPH_GUI_NS::Immediate::PopID();
                 SR_GRAPH_GUI_NS::Immediate::PopID();
             }
         }

@@ -8,6 +8,8 @@
 
 namespace SR_CORE_GUI_NS {
     PropertyDrawerFeedback EnumPropertyDrawer::Draw(const PropertyDrawerContext& context) {
+        SR_TRACY_ZONE;
+
         PropertyDrawerFeedback feedback;
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
@@ -68,6 +70,10 @@ namespace SR_CORE_GUI_NS {
             }
 
             for (uint64_t i = 0; i < names.size(); ++i) {
+                if (context.isEnumValueAvailableCheckFn && !context.isEnumValueAvailableCheckFn(names[i])) {
+                    continue;
+                }
+
                 if (!m_searchBuffer.empty() && !CheckSearchMatch(m_searchBuffer, names[i])) {
                     continue;
                 }
