@@ -117,8 +117,18 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::Immediate::Button("{}"_format(index).c_str(), itemButtonSize);
 
                 if (SR_GRAPH_GUI_NS::Immediate::BeginPopupContextItem("ElementContextMenu")) {
-                    bool removed = false;
-                    if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Remove")) {
+                    bool copy = false; //SR_GRAPH_GUI_NS::Immediate::MenuItem("Copy");
+                    bool removed = SR_GRAPH_GUI_NS::Immediate::MenuItem("Remove");
+                    bool cut = false; //SR_GRAPH_GUI_NS::Immediate::MenuItem("Cut");
+
+                    if (copy || cut) {
+                        //SR_UTILS_NS::SRASerializer serializer;
+                        //SR_UTILS_NS::Serialization::Save(serializer, SR_HTYPES_NS::SharedPtr(pComponent), serializeId);
+                        //std::string encoded = SR_UTILS_NS::StringUtils::Base64Encode(serializer.ToString());
+                        //SR_PLATFORM_NS::TextToClipboard(serializeId.GetName() + encoded);
+                    }
+
+                    if (removed || cut) {
                         if (context.onBeforeChangeCallback) {
                             context.onBeforeChangeCallback(false);
                         }

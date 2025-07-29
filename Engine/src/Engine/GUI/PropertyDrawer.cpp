@@ -436,7 +436,12 @@ namespace SR_CORE_GUI_NS {
                     context.onBeforeChangeCallback(false);
                 }
                 feedback.isChanged = true;
-                auto&& defaultValue = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
+                SR_UTILS_NS::Reflection::Value defaultValue = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
+
+                if (!defaultValue.TryCast<SR_MATH_NS::FColor>()) {
+                    defaultValue = SR_UTILS_NS::Reflection::Value::Create(SR_MATH_NS::FColor());
+                }
+
                 if (SR_MATH_NS::FColor* pColor = value.TryCast<SR_MATH_NS::FColor>()) {
                     if (auto&& pDefaultColor = defaultValue.TryCast<SR_MATH_NS::FColor>()) {
                         switch (i) {

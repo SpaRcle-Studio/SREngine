@@ -96,7 +96,7 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            std::vector<std::string>::iterator pTypeNameIt = m_typeNames.end();
+            std::vector<SR_UTILS_NS::StringAtom>::iterator pTypeNameIt = m_typeNames.end();
 
             if (pClassValue) {
                 const SR_UTILS_NS::SRClassMeta* pMeta = pClassValue->GetMeta();
@@ -152,9 +152,63 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::Immediate::EndDisabled();
             }
 
+            if (SR_GRAPH_GUI_NS::Immediate::BeginPopupContextItem("PointerPropertyContextMenu")) {
+                auto&& pSerializable = dynamic_cast<SR_UTILS_NS::Serializable*>(pClassValue);
+
+                static const SR_UTILS_NS::SerializationId serializeId = SR_UTILS_NS::SerializationId::Create("PointerPropertyDrawerClipboard");
+
+                if (pSerializable && SR_GRAPH_GUI_NS::Immediate::MenuItem("Copy")) {
+                    SR_UTILS_NS::SRASerializer serializer;
+
+                    serializer.BeginObject(serializeId);
+
+                    SR_UTILS_NS::Serialization::Save(serializer, pSerializable->GetMeta()->GetFactoryName(), SR_UTILS_NS::SerializationId::Create("type"));
+                    SR_UTILS_NS::Serialization::Save(serializer, *pSerializable, SR_UTILS_NS::SerializationId::Create("data"));
+
+                    serializer.EndObject();
+
+                    std::string encoded = SR_UTILS_NS::StringUtils::Base64Encode(serializer.ToString());
+                    SR_PLATFORM_NS::TextToClipboard(serializeId.ToString() + encoded);
+                }
+
+                if (auto&& clipboard = SR_PLATFORM_NS::GetClipboardText(); clipboard.starts_with(serializeId.GetName())) {
+                    if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Paste (replace)")) {
+                        clipboard.erase(0, strlen(serializeId.GetName()));
+                        SR_UTILS_NS::SRADeserializer deserializer;
+                        if (deserializer.LoadFromString(SR_UTILS_NS::StringUtils::Base64Decode(clipboard))) {
+                            if (deserializer.BeginObject(serializeId)) {
+                                SR_UTILS_NS::StringAtom loadTypeName;
+                                if (SR_UTILS_NS::Serialization::Load(deserializer, loadTypeName, SR_UTILS_NS::SerializationId::Create("type"))) {
+                                    if (std::ranges::find(m_typeNames, loadTypeName) != m_typeNames.end()) {
+                                        SR_UTILS_NS::SRClass* pNewValue = SR_UTILS_NS::Factory::Instance().CreateBase(loadTypeName);
+                                        if (pNewValue && SR_UTILS_NS::Serialization::Load(deserializer, *dynamic_cast<SR_UTILS_NS::Serializable*>(pNewValue), SR_UTILS_NS::SerializationId::Create("data"))) {
+                                            if (context.onBeforeChangeCallback) {
+                                                context.onBeforeChangeCallback(false);
+                                            }
+                                            OnObjectReplaced(pClassValue, pNewValue);
+                                            if (pSharedPtrBase) {
+                                                pSharedPtrBase->SetPointerFromBase(dynamic_cast<SR_HTYPES_NS::SharedPtrBase*>(pNewValue));
+                                            }
+                                            feedback.isChanged = true;
+                                            pClassValue = value.GetSRClass();
+                                        }
+                                    }
+                                    else {
+                                        SR_WARN("PointerPropertyDrawer::Draw() : type \"{}\" not compatible with current property drawer!", loadTypeName);
+                                    }
+                                }
+                                deserializer.EndObject();
+                            }
+                        }
+                    }
+                }
+
+                SR_GRAPH_GUI_NS::Immediate::EndPopup();
+            }
+
             SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
 
-            if (selectedIndex) {
+            if (selectedIndex && !feedback.isChanged) {
                 SRClass* pNew = nullptr;
 
                 if (m_typeNames[selectedIndex.value()] == "(nullptr)") {
