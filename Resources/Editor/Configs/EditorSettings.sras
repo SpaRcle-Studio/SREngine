@@ -174,4 +174,4 @@ sra format
 						6-v:path
 							7-s:Editor/Textures/sound.png
 			3-v:renderTechnique
-				4-s:Editor/Render/GeometryWithColorPick.srtech
+				4-s:Editor/Render/Geometry.srtech

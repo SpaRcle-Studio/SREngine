@@ -95,6 +95,9 @@ namespace SR_CORE_GUI_NS {
         if (auto&& pFrameBuffer = GetContext()->FindFramebuffer("SceneView"_atom, pCamera.Get())) {
             m_id = pFrameBuffer->GetColorTexture(0);
         }
+        else {
+            m_id = SR_ID_INVALID;
+        }
 
         if (SR_GRAPH_GUI_NS::Immediate::BeginChild("ViewerTexture"))
         {

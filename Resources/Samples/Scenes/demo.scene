@@ -447,8 +447,6 @@ sra format
 										10-i:3445474946150253867
 					5-v:name
 						6-s:GameCamera
-					5-v:isEnabled
-						6-b:false
 					5-o:transform
 						6-v:type
 							7-s:Transform3D
@@ -2359,9 +2357,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1573
+											11-f:2560
 										10-v:height
-											11-f:965
+											11-f:1440
 									9-v:direction
 										10-s:Column
 									9-v:containerAlign
@@ -2796,9 +2794,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1573
+											11-f:2560
 										10-v:height
-											11-f:965
+											11-f:1440
 						6-k:i
 							7-o:d
 								8-v:type
@@ -3237,9 +3235,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1573
+											11-f:2560
 										10-v:height
-											11-f:965
+											11-f:1440
 										10-v:align
 											11-s:End
 									9-v:direction
@@ -4180,9 +4178,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1573
+											11-f:2560
 										10-v:height
-											11-f:965
+											11-f:1440
 									9-v:containerAlign
 										10-s:Center
 									9-v:justify
@@ -4567,9 +4565,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1573
+											11-f:2560
 										10-v:height
-											11-f:965
+											11-f:1440
 									9-v:direction
 										10-s:Column
 									9-v:containerAlign
@@ -5514,9 +5512,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1573
+											11-f:2560
 										10-v:height
-											11-f:965
+											11-f:1440
 									9-v:direction
 										10-s:Column
 									9-v:containerAlign
