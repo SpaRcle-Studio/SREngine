@@ -522,11 +522,13 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::Separator();
         SR_GRAPH_GUI_NS::Immediate::Text("Draw info:");
 
-        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Vertices count: {}", pPipeline->GetBuildState().vertices));
-        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Triangles count: {}", static_cast<uint32_t>(pPipeline->GetBuildState().vertices / 3)));
-        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Draw calls: {}", pPipeline->GetBuildState().drawCalls));
-        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Used textures: {}", pPipeline->GetBuildState().usedTextures));
-        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Used shaders: {}", pPipeline->GetBuildState().usedShaders));
+        auto&& buildState = pPipeline->GetBuildState(pPipeline->GetCurrentFrameIndex());
+
+        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Vertices count: {}", buildState.vertices));
+        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Triangles count: {}", static_cast<uint32_t>(buildState.vertices / 3)));
+        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Draw calls: {}", buildState.drawCalls));
+        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Used textures: {}", buildState.usedTextures));
+        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Used shaders: {}", buildState.usedShaders));
 
         if (auto&& pDebugRenderer = pRenderScene->GetRenderer<SR_GRAPH_NS::DebugRenderer>()) {
             SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Timed objects pool size: {}", pDebugRenderer->GetTimedObjectPoolSize()));

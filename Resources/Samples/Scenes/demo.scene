@@ -62,7 +62,7 @@ sra format
 						6-o:ptr
 							7-o:translation
 								8-v:y
-									9-f:0.00832800008
+									9-f:0.0780000016
 							7-o:scale
 								8-v:x
 									9-f:20
@@ -437,7 +437,7 @@ sra format
 									9-v:entityId
 										10-i:3192905282459000103
 									9-v:renderTechnique
-										10-s:Engine/Render/Swapchain.srtech
+										10-s:Engine/Render/Geometry.srtech
 						6-k:i
 							7-o:d
 								8-v:type
@@ -1212,7 +1212,7 @@ ddddцццゔぅヾボ
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:-8.52900028
+									9-f:-10.2189999
 								8-v:y
 									9-f:2.40208697
 								8-v:z
@@ -14826,3 +14826,35 @@ ddddцццゔぅヾボ
 						6-v:type
 							7-s:Transform3D
 						6-o:ptr
+		2-k:i
+			3-o:d
+				4-v:type
+					5-s:GameObject
+				4-o:ptr
+					5-v:entityId
+						6-i:3943959920745944388
+					5-a:components
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:EditorCamera
+								8-o:ptr
+									9-v:entityId
+										10-i:4580602749432365490
+									9-v:priority
+										10-i:-2147483648
+									9-v:renderTechnique
+										10-s:Editor/Render/Geometry.srtech
+					5-v:name
+						6-s:New GameObject
+					5-v:isEnabled
+						6-b:false
+					5-o:transform
+						6-v:type
+							7-s:Transform3D
+						6-o:ptr
+							7-o:translation
+								8-v:x
+									9-f:-8.71000004
+								8-v:y
+									9-f:1.76999998
