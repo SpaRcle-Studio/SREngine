@@ -21,6 +21,7 @@ namespace SR_CORE_GUI_NS {
         m_numericDrawer = SRNew<NumericPropertyDrawer>();
         m_boolDrawer = SRNew<BoolPropertyDrawer>();
         m_pathDrawer = SRNew<PathPropertyDrawer>();
+        m_enumPropertyDrawer = SRNew<EnumPropertyDrawer>();
         m_shaderDataOpened["Default"] = true;
     }
 
@@ -119,6 +120,10 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::BeginGroup();
 
             isChanged |= DrawShaderPath(name, shaderData, context);
+
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+
+            isChanged |= DrawUseTypeEnum(shaderData, context);
 
             uint32_t editorOrder = 0;
 
@@ -284,6 +289,29 @@ namespace SR_CORE_GUI_NS {
         if (feedback.isChanged || wasReset) {
             const bool onlyUniforms = !SR_GRAPH_NS::IsSamplerType(property.type);
             shaderData.pOwnedMaterialData->OnPropertyChanged(onlyUniforms);
+            return true;
+        }
+
+        return false;
+    }
+
+    bool MaterialDataPropertyDrawer::DrawUseTypeEnum(SR_GRAPH_NS::MaterialShaderData& shaderData, const PropertyDrawerContext& context) {
+        SR_GRAPH_NS::MaterialStageUseType useType = shaderData.useType;
+
+        SR_UTILS_NS::Reflection::Value value = SR_UTILS_NS::Reflection::Value::CreateRef(useType);
+
+        PropertyDrawerContext propertyContext = context;
+        propertyContext.pProperty = nullptr;
+        propertyContext.pValue = &value;
+        float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth) - context.GetArrowWidth();
+        propertyContext.fieldWidth = totalWidth * 0.25f;
+        propertyContext.fieldTitleWidth = 0.f;
+        propertyContext.customDisplayName = "Use mode";
+
+        const PropertyDrawerFeedback feedback = m_enumPropertyDrawer->Draw(propertyContext);
+
+        if (feedback.isChanged) {
+            shaderData.useType = useType;
             return true;
         }
 

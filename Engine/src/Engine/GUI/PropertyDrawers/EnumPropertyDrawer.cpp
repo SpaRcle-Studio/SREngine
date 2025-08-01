@@ -31,7 +31,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         SR_GRAPH_GUI_NS::Immediate::PushID(context.pOwner);
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetProperty().GetName().c_str());
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
 
         SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 

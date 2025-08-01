@@ -147,8 +147,10 @@ sra format
 															15-k:i
 																16-v:d
 																	17-s:Transparent
+														14-v:renderStageId
+															15-s:ColorBuffer
 														14-v:colorMultiplier
-															15-i:1
+															15-i:5000
 										10-o:data
 											11-a:clearColors
 												12-k:i

@@ -40,6 +40,12 @@ sra format
 					5-a:stages
 						6-k:stage
 							7-v:id
+								8-s:ColorBuffer
+							7-v:shader
+								8-s:Engine/Shaders/ColorBuffer/spatial.srsl
+							7-o:data
+						6-k:stage
+							7-v:id
 								8-s:Shadow
 							7-v:shader
 								8-s:Engine/Shaders/CascadedShadowMap/spatial.srsl

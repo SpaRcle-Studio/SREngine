@@ -411,10 +411,10 @@ namespace SR_CORE_GUI_NS {
                     SR_GRAPH_GUI_NS::Immediate::Text("\t* Priority: %lli", priority);
                 }
 
-                if (first || pShader != meshInfo.shaderUseInfo.pShader.Get()) {
-                    pShader = meshInfo.shaderUseInfo.pShader.Get();
-                    if (meshInfo.shaderUseInfo.pShader) {
-                        SR_GRAPH_GUI_NS::Immediate::Text("\t\t* Shader: %s", meshInfo.shaderUseInfo.pShader->GetResourceId().c_str());
+                if (first || pShader != meshInfo.pShader) {
+                    pShader = meshInfo.pShader;
+                    if (meshInfo.pShader) {
+                        SR_GRAPH_GUI_NS::Immediate::Text("\t\t* Shader: %s", meshInfo.pShader->GetResourceId().c_str());
                     }
                     else {
                         SR_GRAPH_GUI_NS::Immediate::Text("\t\t* Shader: [no shader]");
@@ -477,12 +477,6 @@ namespace SR_CORE_GUI_NS {
 
         auto&& pRenderStrategy = pRenderScene->GetRenderStrategy();
         auto&& pPipeline = pRenderScene->GetPipeline();
-
-        static std::string stage = pPipeline->GetRenderStageId();
-        if (SR_GRAPH_GUI_NS::Immediate::InputText("Render stage id", &stage, SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue)) {
-            pPipeline->SetRenderStageId(stage);
-            pPipeline->GetRenderContext()->SetDirty();
-        }
 
         SR_GRAPH_GUI_NS::Immediate::Text("Cameras:");
         auto&& pMainCamera = pRenderScene->GetMainCamera();
