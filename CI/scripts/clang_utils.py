@@ -402,7 +402,7 @@ def parse_sparcle_enum(logger, parent_node, code_structure, namespaces):
         enum_object = reflection_utils.CPPEnum(name, variant, count, enum_type, enum_class, namespaces, parent_node.location.file.name, va_args)
         code_structure.enums.append(enum_object)
     else:
-        logger.log_fatal_error(f'Error: enum {parent_node.spelling} not found all fields! Found {all_found} of 6!')
+        logger.log_fatal_error(f'Error: enum {parent_node.spelling} not found all fields! Found {all_found} of 6! Name: {name}, Variant: {variant}, Count: {count}, Type: {enum_type}, Class: {enum_class}, VA Args: {va_args}')
 
 
 def parse_sparcle_class(logger, parent_node, code_structure, namespaces):
