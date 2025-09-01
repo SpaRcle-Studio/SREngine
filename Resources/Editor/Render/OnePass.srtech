@@ -53,7 +53,7 @@ sra format
 				4-a:queues
 					5-k:i
 						6-o:d
-							7-a:passNames
+							7-a:frameBuffers
 								8-k:i
 									9-v:d
 										10-s:SceneView

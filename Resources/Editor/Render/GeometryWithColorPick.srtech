@@ -147,8 +147,6 @@ sra format
 															15-k:i
 																16-v:d
 																	17-s:Transparent
-														14-v:renderStageId
-															15-s:ColorBuffer
 														14-v:colorMultiplier
 															15-i:5000
 										10-o:data
@@ -212,10 +210,10 @@ sra format
 				4-a:queues
 					5-k:i
 						6-o:d
-							7-a:passNames
-								8-k:i
-									9-v:d
-										10-s:ColorBuffer
+							7-a:frameBuffers
 								8-k:i
 									9-v:d
 										10-s:SceneView
+								8-k:i
+									9-v:d
+										10-s:ColorBuffer

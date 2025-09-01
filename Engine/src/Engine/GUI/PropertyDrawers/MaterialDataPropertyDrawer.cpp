@@ -234,7 +234,7 @@ namespace SR_CORE_GUI_NS {
                 value = SR_UTILS_NS::Reflection::Value::CreateRef(path);
                 feedback = m_pathDrawer->Draw(propertyContext);
                 if (feedback.isChanged) {
-                    auto&& pTexture = SR_GTYPES_NS::Texture::Load(path);
+                    SR_GTYPES_NS::Texture::Ptr pTexture = path.empty() ? nullptr : SR_GTYPES_NS::Texture::Load(path);
                     shaderData.SetData(property.id, pTexture, SR_GRAPH_NS::ShaderVarType::Sampler2D);
                 }
 

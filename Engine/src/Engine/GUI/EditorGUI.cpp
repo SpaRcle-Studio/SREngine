@@ -68,6 +68,10 @@ namespace SR_CORE_GUI_NS {
         : Super()
     {
         m_pSettings = SR_UTILS_NS::Asset::Load<EditorSettings>("Editor/Configs/EditorSettings.sras");
+        if (m_pSettings) {
+            m_pSettings->AddUsePoint();
+        }
+
         m_cachedScenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("/PreviousScenePath").ConcatExt("cache");
 
         m_engine = pEngine;
@@ -264,8 +268,6 @@ namespace SR_CORE_GUI_NS {
         m_loaded = true;
 
         if (m_pSettings) {
-            m_pSettings->AddUsePoint();
-
             for (auto&& [icon, iconInfo] : m_pSettings->GetIcons()) {
                 if (m_icons.count(icon) == 1) {
                     SRHalt("EditorGUI::Load() : icon already loaded! Icon: {}", icon);

@@ -438,16 +438,34 @@ namespace SR_CORE_GUI_NS {
 
                 const bool vboError = SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_VBO_ERROR);
                 const bool shaderError = SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_SHADER_ERROR);
+                const bool notRendered = SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_NOT_RENDERED);
+                const bool waitRegister = SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_WAIT_REGISTER);
+                const bool missingShader = SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_MISSING_SHADER);
 
-                if (vboError || shaderError) {
+                if (vboError || shaderError || notRendered || waitRegister || missingShader) {
                     if (vboError) {
                         SR_GRAPH_GUI_NS::Immediate::SameLine();
-                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1, 0, 0, 1), "VBO");
+                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1, 0, 0, 1), "VBO error");
                     }
 
                     if (shaderError) {
                         SR_GRAPH_GUI_NS::Immediate::SameLine();
-                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1, 0, 0, 1), "Shader");
+                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1, 0, 0, 1), "Shader error");
+                    }
+
+                    if (missingShader) {
+                        SR_GRAPH_GUI_NS::Immediate::SameLine();
+                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1, 0, 0, 1), "Missing shader");
+                    }
+
+                    if (notRendered) {
+                        SR_GRAPH_GUI_NS::Immediate::SameLine();
+                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.0f, 0.5f, 0.0f, 1.0f), "Not rendered");
+                    }
+
+                    if (waitRegister) {
+                        SR_GRAPH_GUI_NS::Immediate::SameLine();
+                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(0.5f, 0.5f, 0.0f, 1.0f), "Wait register");
                     }
                 }
                 else if (SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_ERROR)) {

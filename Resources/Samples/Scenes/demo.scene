@@ -573,11 +573,11 @@ sra format
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:3.78744793
+									9-f:4.36361217
 								8-v:y
-									9-f:1.76946199
+									9-f:4.5353241
 								8-v:z
-									9-f:5.01029015
+									9-f:2.58465028
 		2-k:i
 			3-o:d
 				4-v:type
@@ -809,8 +809,6 @@ sra format
 										10-s:Engine/Models/monkey.obj
 					5-v:name
 						6-s:Monkey
-					5-v:isEnabled
-						6-b:false
 					5-o:transform
 						6-v:type
 							7-s:Transform3D
@@ -1212,11 +1210,11 @@ ddddцццゔぅヾボ
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:-10.2189999
+									9-f:-13.3921623
 								8-v:y
-									9-f:2.40208697
+									9-f:2.58200979
 								8-v:z
-									9-f:5.20022821
+									9-f:2.84277725
 		2-k:i
 			3-o:d
 				4-v:type
