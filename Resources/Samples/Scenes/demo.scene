@@ -686,6 +686,8 @@ sra format
 										10-s:Engine/Models/sphere.obj
 					5-v:name
 						6-s:Sphere
+					5-v:isEnabled
+						6-b:false
 					5-o:transform
 						6-v:type
 							7-s:Transform3D
@@ -744,8 +746,6 @@ sra format
 										10-s:Engine/Models/statue.obj
 					5-v:name
 						6-s:Statue
-					5-v:isEnabled
-						6-b:false
 					5-o:transform
 						6-v:type
 							7-s:Transform3D
@@ -929,6 +929,8 @@ ddddцццゔぅヾボ
 						6-i:4191819035411605343
 					5-v:name
 						6-s:Models/teapot
+					5-v:isEnabled
+						6-b:false
 					5-v:prefab
 						6-s:5345345345.prefab
 					5-o:transform
@@ -951,6 +953,8 @@ ddddцццゔぅヾボ
 						6-i:4022546309212795317
 					5-v:name
 						6-s:Models/teapot
+					5-v:isEnabled
+						6-b:false
 					5-v:prefab
 						6-s:5345345345.prefab
 					5-o:transform
@@ -1210,9 +1214,9 @@ ddddцццゔぅヾボ
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:-13.3921623
+									9-f:-13.0195637
 								8-v:y
-									9-f:2.58200979
+									9-f:2.65349722
 								8-v:z
 									9-f:2.84277725
 		2-k:i

@@ -242,7 +242,7 @@ namespace SR_CORE_GUI_NS {
 
                         SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(0);
 
-                        SR_GRAPH_GUI_NS::Immediate::Text("%s", pRenderTechnique->GetName().data());
+                        SR_GRAPH_GUI_NS::Immediate::Text("Technique: %s", pRenderTechnique->GetName().data());
 
                         DrawRenderTechnique(const_cast<Graphics::IRenderTechnique *>(pRenderTechnique.Get()));
 
@@ -352,18 +352,34 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EngineStatistics::DrawRenderTechnique(SR_GRAPH_NS::IRenderTechnique* pRenderTechnique) {
-        pRenderTechnique->ForEachPass([this](auto&& pass) -> bool {
-            if (auto&& pMeshDrawerPass = dynamic_cast<SR_GRAPH_NS::MeshDrawerPass*>(&pass)) {
+        pRenderTechnique->ForEachPass([this](SR_GRAPH_NS::BasePass& pass) -> bool {
+            auto&& pMeshDrawerPass = dynamic_cast<SR_GRAPH_NS::MeshDrawerPass*>(&pass);
+            auto&& pFramebufferPass = dynamic_cast<SR_GRAPH_NS::FrameBufferPass*>(&pass);
+
+            if (!pMeshDrawerPass && !pFramebufferPass) {
+                return false;
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::PushID((void*)&pass);
+            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, pFramebufferPass ? SR_MATH_NS::FColor::Cyan() : SR_MATH_NS::FColor::White());
+
+            SR_GRAPH_GUI_NS::Immediate::Dummy(10.f);
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+
+            if (!SR_GRAPH_GUI_NS::Immediate::CollapsingHeader(pass.GetPassName())) {
+                SR_GRAPH_GUI_NS::Immediate::PopID();
+                SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
+                return true;
+            }
+            SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
+
+            if (pMeshDrawerPass) {
                 DrawMeshDrawerPass(pMeshDrawerPass);
             }
 
-            auto&& pFramebufferPass = dynamic_cast<SR_GRAPH_NS::FrameBufferPass*>(&pass);
-            if (!pFramebufferPass) {
-                return true;
-            }
-
-            auto&& pFramebuffer = pFramebufferPass->GetFrameBuffer();
+            auto&& pFramebuffer = pFramebufferPass ? pFramebufferPass->GetFrameBuffer() : nullptr;
             if (!pFramebuffer) {
+                SR_GRAPH_GUI_NS::Immediate::PopID();
                 return true;
             }
 
@@ -383,6 +399,7 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
+            SR_GRAPH_GUI_NS::Immediate::PopID();
             return true;
         });
     }

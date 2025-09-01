@@ -4,9 +4,15 @@ PolygonMode Fill;
 CullMode Back;
 DepthCompare LessOrEqual;
 PrimitiveTopology TriangleList;
-BlendEnabled false;
 DepthWrite true;
-DepthTest true;
+
+#ifdef SR_DEFINE_COLOR_PASS
+    BlendEnabled true;
+    DepthTest false;
+#else
+    BlendEnabled false;
+    DepthTest true;
+#endif
 
 [[uniform], [public]] vec4 color;
 [[uniform], [public]] bool useOrthogonal;
