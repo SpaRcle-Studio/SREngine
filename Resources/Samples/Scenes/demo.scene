@@ -62,7 +62,7 @@ sra format
 						6-o:ptr
 							7-o:translation
 								8-v:y
-									9-f:0.0780000016
+									9-f:0.0780000687
 							7-o:scale
 								8-v:x
 									9-f:20
@@ -751,6 +751,8 @@ sra format
 							7-o:translation
 								8-v:x
 									9-f:6.96542501
+								8-v:y
+									9-f:3.57627869e-07
 								8-v:z
 									9-f:12.2890882
 							7-o:scale
