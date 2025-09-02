@@ -436,8 +436,6 @@ sra format
 								8-o:ptr
 									9-v:entityId
 										10-i:3192905282459000103
-									9-v:renderTechnique
-										10-s:Engine/Render/Geometry.srtech
 						6-k:i
 							7-o:d
 								8-v:type
@@ -752,9 +750,9 @@ sra format
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:5.80669689
+									9-f:6.96542501
 								8-v:z
-									9-f:-5.31444883
+									9-f:12.2890882
 							7-o:scale
 								8-v:x
 									9-f:10

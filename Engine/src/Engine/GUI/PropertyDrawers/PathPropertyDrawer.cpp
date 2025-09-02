@@ -47,6 +47,9 @@ namespace SR_CORE_GUI_NS {
                 if (SR_GRAPH_GUI_NS::Immediate::Button("Pick", SR_MATH_NS::FVector2(context.fieldTitleWidth * 0.25f, context.fieldHeight))) {
                     auto&& filterName = context.GetEditorParams().GetCustomArg("filter name");
                     auto&& filterValue = context.GetEditorParams().GetCustomArg("filter value");
+
+                    const bool relativeRes = context.GetEditorParams().GetCustomArg("relative") == "resources";
+
                     if (!filterName.empty() && !filterValue.empty()) {
                         auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                         auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath, { { filterName, filterValue } });
@@ -56,6 +59,11 @@ namespace SR_CORE_GUI_NS {
                                 context.onBeforeChangeCallback(false);
                             }
                             feedback.isChanged = true;
+
+                            if (relativeRes) {
+                                path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+                            }
+
                             *pPath = path;
                         }
                     }

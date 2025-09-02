@@ -5,3 +5,15 @@ sra format
 			3-s:RenderSettings
 		2-o:ptr
 			3-o:defaultPreset
+				4-v:name
+					5-s:Default
+				4-a:shaderDefines
+					5-k:i
+						6-v:d
+							7-s:SR_DEFINE_USE_CASCADED_SHADOW_MAP
+				4-v:mainCameraRenderTechnique
+					5-s:Engine/Render/Geometry.srtech
+				4-v:editorCameraRenderTechnique
+					5-s:Editor/Render/FullRender.srtech
+				4-v:prefabCameraRenderTechnique
+					5-s:Editor/Render/FullRender.srtech

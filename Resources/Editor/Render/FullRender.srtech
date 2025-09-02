@@ -233,9 +233,9 @@ sra format
 									9-s:ColorBuffer
 								8-o:preScale
 									9-v:x
-										10-f:0.850000024
+										10-f:0.649999976
 									9-v:y
-										10-f:0.850000024
+										10-f:0.649999976
 								8-a:colorFormats
 									9-k:i
 										10-v:d

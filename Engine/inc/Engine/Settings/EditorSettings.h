@@ -41,7 +41,7 @@ namespace SR_CORE_NS {
         SR_STRUCT()
 
         /// @property
-        /// @customArgs(pick: enabled, filter name: Image)
+        /// @customArgs(pick: enabled, filter name: Image, relative: resources)
         /// @customArg(filter value: png,jpg,jpeg)
         SR_UTILS_NS::Path path;
         /// @property
@@ -55,22 +55,12 @@ namespace SR_CORE_NS {
 
     public:
         SR_NODISCARD const std::map<EditorIcon, EditorSettingsIconInfo>& GetIcons() const noexcept { return m_icons; }
-        SR_NODISCARD SR_UTILS_NS::Path GetRenderTechnique() const;
-        SR_NODISCARD SR_UTILS_NS::Path GetPrefabEditorRenderTechnique() const;
         SR_NODISCARD bool IsNeedDebugChunks() const noexcept { return m_debugChunks; }
 
     private:
         /// @property
         std::map<EditorIcon, EditorSettingsIconInfo> m_icons;
 
-        /// @property
-        /// @customArgs(pick: enabled, filter name: Render Techniques)
-        /// @customArg(filter value: srtech)
-        SR_UTILS_NS::Path m_renderTechnique;
-        /// @property
-        /// @customArgs(pick: enabled, filter name: Render Techniques)
-        /// @customArg(filter value: srtech)
-        SR_UTILS_NS::Path m_prefabEditorRenderTechnique;
         /// @property
         bool m_debugChunks = false;
 

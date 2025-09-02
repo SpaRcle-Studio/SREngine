@@ -231,14 +231,13 @@ namespace SR_CORE_GUI_NS {
             EditorCamera::Ptr pCameraComponent = pCamera->AddComponent<EditorCamera>();
             pCameraComponent->SetSceneViewer(this);
 
-            if (auto&& pEditor = dynamic_cast<EditorGUI*>(GetManager())) {
-                if (auto&& pSettings = pEditor->GetSettings()) {
-                    if (m_isPrefab) {
-                        pCameraComponent->SetRenderTechnique(pSettings->GetPrefabEditorRenderTechnique());
-                    } else {
-                        pCameraComponent->SetRenderTechnique(pSettings->GetRenderTechnique());
-                    }
-                }
+            auto&& preset = GetRenderScene()->GetContext()->GetSettingsPreset();
+
+            if (m_isPrefab) {
+                pCameraComponent->SetRenderTechnique(preset.prefabCameraRenderTechnique);
+            }
+            else {
+                pCameraComponent->SetRenderTechnique(preset.editorCameraRenderTechnique);
             }
 
             /// Камера редактора имеет наивысшый закадровый приоритет
