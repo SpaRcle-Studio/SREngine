@@ -11,11 +11,3 @@ sra format
 					5-v:type
 						6-s:WidgetPass
 					5-o:ptr
-						6-o:samplersPassData
-				4-a:queues
-					5-k:i
-						6-o:d
-							7-a:passNames
-								8-k:i
-									9-v:d
-										10-s:WidgetPass

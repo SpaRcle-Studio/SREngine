@@ -4,6 +4,21 @@ sra format
 		2-v:type
 			3-s:RenderSettings
 		2-o:ptr
+			3-a:presets
+				4-k:i
+					5-o:d
+						6-v:name
+							7-s:Only geometry
+						6-v:mainCameraRenderTechnique
+							7-s:Engine/Render/Geometry.srtech
+						6-v:editorCameraRenderTechnique
+							7-s:Editor/Render/Geometry.srtech
+						6-v:prefabCameraRenderTechnique
+							7-s:Editor/Render/Geometry.srtech
+				4-k:i
+					5-o:d
+						6-v:name
+							7-s:Empty
 			3-o:defaultPreset
 				4-v:name
 					5-s:Default

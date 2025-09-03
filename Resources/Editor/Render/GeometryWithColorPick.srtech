@@ -6,7 +6,7 @@ sra format
 		2-o:ptr
 			3-o:data
 				4-v:name
-					5-s:Simple FBO Test
+					5-s:Geometry + ColorPick
 				4-o:pass
 					5-v:type
 						6-s:GroupPass

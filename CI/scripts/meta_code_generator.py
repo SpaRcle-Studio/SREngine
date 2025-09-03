@@ -472,6 +472,12 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
     f.write('\t' * (tabs + 1) + f'return {class_name}::GetClassStaticName();' + '\n')
     f.write('\t' * tabs + '}\n\n')
 
+    if class_obj.display_name:
+        f.write('\t' * tabs + 'SR_NODISCARD virtual SR_UTILS_NS::StringAtom GetDisplayName() const noexcept final {\n')
+        f.write('\t' * (tabs + 1) + f'const static SR_UTILS_NS::StringAtom displayName = \"{class_obj.display_name}\";' + '\n')
+        f.write('\t' * (tabs + 1) + f'return displayName;' + '\n')
+        f.write('\t' * tabs + '}\n\n')
+
     f.write('\t' * (tabs - 1) + 'private:\n')
     #f.write('\t' * tabs + f'static inline const bool SR_CODEGEN_REGISTER_FACTORY = SR_UTILS_NS::Factory::Instance().Register<{class_name}>();\n\n')
 

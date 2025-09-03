@@ -231,14 +231,7 @@ namespace SR_CORE_GUI_NS {
             EditorCamera::Ptr pCameraComponent = pCamera->AddComponent<EditorCamera>();
             pCameraComponent->SetSceneViewer(this);
 
-            auto&& preset = GetRenderScene()->GetContext()->GetSettingsPreset();
-
-            if (m_isPrefab) {
-                pCameraComponent->SetRenderTechnique(preset.prefabCameraRenderTechnique);
-            }
-            else {
-                pCameraComponent->SetRenderTechnique(preset.editorCameraRenderTechnique);
-            }
+            pCameraComponent->SetCameraType(m_isPrefab ? SR_GTYPES_NS::CameraType::EditorPrefab : SR_GTYPES_NS::CameraType::Editor);
 
             /// Камера редактора имеет наивысшый закадровый приоритет
             pCameraComponent->SetPriority(SR_INT32_MIN);

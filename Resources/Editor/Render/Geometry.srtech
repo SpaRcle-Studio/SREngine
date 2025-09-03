@@ -6,120 +6,118 @@ sra format
 		2-o:ptr
 			3-o:data
 				4-v:name
-					5-s:Simple FBO Test
+					5-s:Only geometry
 				4-o:pass
 					5-v:type
-						6-s:FrameBufferPass
+						6-s:GroupPass
 					5-o:ptr
-						6-v:customName
-							7-s:SceneView
 						6-a:passes
 							7-k:i
 								8-o:d
 									9-v:type
-										10-s:ClearBuffersPass
+										10-s:FrameBufferPass
 									9-o:ptr
-							7-k:i
-								8-o:d
-									9-v:type
-										10-s:DebugPass
-									9-o:ptr
-										10-a:shaders
-											11-k:item
-												12-v:first
-													13-s:mesh
-												12-o:second
-													13-v:shaderPath
-														14-s:Engine/Shaders/Gizmo/wire-mesh.srsl
-											11-k:item
-												12-v:first
-													13-s:line
-												12-o:second
-													13-v:shaderPath
-														14-s:Engine/Shaders/line.srsl
-							7-k:i
-								8-o:d
-									9-v:type
-										10-s:MeshDrawerPass
-									9-o:ptr
-										10-a:allowedLayers
+										10-v:customName
+											11-s:SceneView
+										10-a:passes
 											11-k:i
-												12-v:d
-													13-s:Default
+												12-o:d
+													13-v:type
+														14-s:ClearBuffersPass
+													13-o:ptr
 											11-k:i
-												12-v:d
-													13-s:Opaque
-							7-k:i
-								8-o:d
-									9-v:type
-										10-s:SkyboxPass
-									9-o:ptr
-										10-v:skyboxPath
-											11-s:Engine/Skyboxes/Sun.png
-										10-v:shaderPath
-											11-s:Engine/Shaders/skybox.srsl
-							7-k:i
-								8-o:d
-									9-v:type
-										10-s:MeshDrawerPass
-									9-o:ptr
-										10-a:disallowedLayers
+												12-o:d
+													13-v:type
+														14-s:DebugPass
+													13-o:ptr
+														14-a:shaders
+															15-k:item
+																16-v:first
+																	17-s:mesh
+																16-o:second
+																	17-v:shaderPath
+																		18-s:Engine/Shaders/Gizmo/wire-mesh.srsl
+															15-k:item
+																16-v:first
+																	17-s:line
+																16-o:second
+																	17-v:shaderPath
+																		18-s:Engine/Shaders/line.srsl
 											11-k:i
-												12-v:d
-													13-s:Gizmo
+												12-o:d
+													13-v:type
+														14-s:MeshDrawerPass
+													13-o:ptr
+														14-a:allowedLayers
+															15-k:i
+																16-v:d
+																	17-s:Default
+															15-k:i
+																16-v:d
+																	17-s:Opaque
 											11-k:i
-												12-v:d
-													13-s:Default
+												12-o:d
+													13-v:type
+														14-s:SkyboxPass
+													13-o:ptr
+														14-v:skyboxPath
+															15-s:Engine/Skyboxes/Sun.png
+														14-v:shaderPath
+															15-s:Engine/Shaders/skybox.srsl
 											11-k:i
-												12-v:d
-													13-s:Opaque
+												12-o:d
+													13-v:type
+														14-s:MeshDrawerPass
+													13-o:ptr
+														14-a:disallowedLayers
+															15-k:i
+																16-v:d
+																	17-s:Gizmo
+															15-k:i
+																16-v:d
+																	17-s:Default
+															15-k:i
+																16-v:d
+																	17-s:Opaque
+															15-k:i
+																16-v:d
+																	17-s:GizmoSelection
 											11-k:i
-												12-v:d
-													13-s:GizmoSelection
-							7-k:i
-								8-o:d
-									9-v:type
-										10-s:PostProcessPass
-									9-o:ptr
-										10-v:vertices
-											11-i:4
-										10-v:shaderPath
-											11-s:Editor/Shaders/grid.srsl
-							7-k:i
-								8-o:d
-									9-v:type
-										10-s:ClearBuffersPass
-									9-o:ptr
-										10-v:clearColor
-											11-b:false
-							7-k:i
-								8-o:d
-									9-v:type
-										10-s:MeshDrawerPass
-									9-o:ptr
-										10-a:allowedLayers
+												12-o:d
+													13-v:type
+														14-s:PostProcessPass
+													13-o:ptr
+														14-v:vertices
+															15-i:4
+														14-v:shaderPath
+															15-s:Editor/Shaders/grid.srsl
 											11-k:i
-												12-v:d
-													13-s:Gizmo
-						6-o:data
-							7-a:clearColors
-								8-k:i
-									9-o:d
-										10-v:r
-											11-f:0.519999981
-										10-v:g
-											11-f:0.680000007
-										10-v:b
-											11-f:0.75999999
-										10-v:a
-											11-f:1
-							7-v:frameBufferName
-								8-s:SceneView
-							7-o:depth
-								8-v:has
-									9-b:true
-								8-v:value
-									9-f:1
+												12-o:d
+													13-v:type
+														14-s:ClearBuffersPass
+													13-o:ptr
+														14-v:clearColor
+															15-b:false
+											11-k:i
+												12-o:d
+													13-v:type
+														14-s:MeshDrawerPass
+													13-o:ptr
+														14-a:allowedLayers
+															15-k:i
+																16-v:d
+																	17-s:Gizmo
+										10-o:data
+											11-a:clearColors
+												12-k:i
+													13-o:d
+											11-v:frameBufferName
+												12-s:SceneView
+											11-o:depth
+												12-v:has
+													13-b:true
+												12-v:value
+													13-f:1
 				4-a:frameBuffers
 					5-k:i
 						6-o:d
@@ -149,7 +147,7 @@ sra format
 				4-a:queues
 					5-k:i
 						6-o:d
-							7-a:passNames
+							7-a:frameBuffers
 								8-k:i
 									9-v:d
 										10-s:SceneView

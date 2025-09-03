@@ -50,10 +50,6 @@ namespace SR_SCRIPTING_NS {
         SetBehaviourName(SR_UTILS_NS::StringAtom());
 
         Super::OnDestroy();
-
-        GetThis().AutoFree([](auto&& pData) {
-            delete pData;
-        });
     }
 
     void Behaviour::OnAttached() {

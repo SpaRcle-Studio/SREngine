@@ -7,10 +7,6 @@
 namespace SR_CORE_UI_NS {
     void Button::OnDestroy() {
         Super::OnDestroy();
-
-        GetThis().AutoFree([](auto&& pData) {
-            delete pData;
-        });
     }
 
     void Button::Update(float_t dt) {
