@@ -193,21 +193,9 @@ namespace SR_CORE_GUI_NS {
             if (SR_GRAPH_GUI_NS::Immediate::IsMouseDragging(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left) && SR_GRAPH_GUI_NS::Immediate::IsWindowHovered()) {
                 m_click = Click::Drag;
             }
-            else {
+            else if (SR_GRAPH_GUI_NS::Immediate::IsMouseReleased(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
                 m_click = Click::None;
             }
-
-            /*auto&& pMenuBarWindow = SR_GRAPH_GUI_NS::Immediate::FindWindowByName("##MainMenuBar");
-
-            if (SR_GRAPH_GUI_NS::Immediate::IsAnyItemHovered() == false && SR_GRAPH_GUI_NS::Immediate::IsWindowHovered(SR_GRAPH_GUI_NS::Immediate::HoveredFlags::ChildWindows) == false) {
-                if (m_click == Click::None && SR_GRAPH_GUI_NS::Immediate::IsMouseDragging(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
-                    m_click = SR_GRAPH_GUI_NS::Immediate::GetWindowRect(pMenuBarWindow).Contains(SR_GRAPH_GUI_NS::Immediate::GetMousePos()) ? Click::Drag : Click::Miss;
-                }
-                else if (SR_GRAPH_GUI_NS::Immediate::IsMouseReleased(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
-                    m_click = Click::None;
-                }
-            }
-            */
 
             m_dragWindow = m_click == Click::Drag;
 

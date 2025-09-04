@@ -207,14 +207,33 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
+        #define __SR_DRAW_COLUMN_DATA(index, ...) \
+            SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(index); \
+            SR_GRAPH_GUI_NS::Immediate::Text(__VA_ARGS__); \
+            SR_GRAPH_GUI_NS::Immediate::Separator(); \
+
             if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader("Framebuffers")) {
-                if (SR_GRAPH_GUI_NS::Immediate::BeginTable("##FramebuffersTable", 1)) {
+                if (SR_GRAPH_GUI_NS::Immediate::BeginTable("##FramebuffersTable", 7)) {
+                    SR_GRAPH_GUI_NS::Immediate::TableNextRow();
+
+                    __SR_DRAW_COLUMN_DATA(0, "Id")
+                    __SR_DRAW_COLUMN_DATA(1, "Name")
+                    __SR_DRAW_COLUMN_DATA(2, "Size")
+                    __SR_DRAW_COLUMN_DATA(3, "Depth")
+                    __SR_DRAW_COLUMN_DATA(4, "Is valid")
+                    __SR_DRAW_COLUMN_DATA(5, "Was rendered")
+                    __SR_DRAW_COLUMN_DATA(6, "Is dirty")
+
                     for (auto&& pFramebuffer : framebuffers) {
                         SR_GRAPH_GUI_NS::Immediate::TableNextRow();
 
-                        SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(0);
-                        SR_GRAPH_GUI_NS::Immediate::Text("%i", pFramebuffer->GetId());
-                        SR_GRAPH_GUI_NS::Immediate::Separator();
+                        __SR_DRAW_COLUMN_DATA(0, "%i", pFramebuffer->GetId());
+                        __SR_DRAW_COLUMN_DATA(1, "%s", pFramebuffer->GetName().c_str());
+                        __SR_DRAW_COLUMN_DATA(2, "%ix%i", pFramebuffer->GetSize().x, pFramebuffer->GetSize().y);
+                        __SR_DRAW_COLUMN_DATA(3, "%s", pFramebuffer->IsDepthEnabled() ? "true" : "false");
+                        __SR_DRAW_COLUMN_DATA(4, "%s", pFramebuffer->IsValid() ? "true" : "false");
+                        __SR_DRAW_COLUMN_DATA(5, "%s", pFramebuffer->IsWasRendered() ? "true" : "false");
+                        __SR_DRAW_COLUMN_DATA(6, "%s", pFramebuffer->IsDirty() ? "true" : "false");
                     }
 
                     SR_GRAPH_GUI_NS::Immediate::EndTable();

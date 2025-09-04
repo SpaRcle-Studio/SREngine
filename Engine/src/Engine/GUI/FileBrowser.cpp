@@ -195,6 +195,10 @@ namespace SR_CORE_NS::GUI {
             //   // pAnimation->Save()
             //}
         }
+        if (SR_GRAPH_GUI_NS::Immediate::Selectable("Copy path")) {
+            SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
+            SR_UTILS_NS::Platform::TextToClipboard(path.ToString());
+        }
         if (SR_GRAPH_GUI_NS::Immediate::Selectable("Copy")) {
             SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
             std::list<SR_UTILS_NS::Path> paths({path}); ///TODO: убрать, когда будет сделано выделение нескольких файлов и их передача в метод
