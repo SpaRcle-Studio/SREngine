@@ -40,6 +40,11 @@ namespace SR_CORE_NS::GUI {
         void DrawMeshDrawerPass(SR_GRAPH_NS::MeshDrawerPass* pMeshDrawerPass);
         void DrawRenderQueue(const SR_GRAPH_NS::RenderQueue* pRenderQueue);
 
+    private:
+        bool m_showShaderMacros = false;
+        bool m_showShaderPrograms = false;
+        bool m_showUnusedShaders = false;
+
     };
 }
 

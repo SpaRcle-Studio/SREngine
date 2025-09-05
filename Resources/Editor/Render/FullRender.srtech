@@ -55,6 +55,23 @@ sra format
 															15-k:i
 																16-v:d
 																	17-s:Opaque
+														14-o:samplers
+															15-a:samplers
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:shadowMap
+																		18-v:usageType
+																			19-s:FrameBufferDepth
+																		18-v:fboName
+																			19-s:DepthCascades
+														14-o:uniforms
+															15-o:shared
+																16-a:useFromPass
+																	17-k:i
+																		18-v:d
+																			19-s:DepthCascades
+															15-o:material
 											11-k:i
 												12-o:d
 													13-v:type
@@ -82,6 +99,10 @@ sra format
 															15-k:i
 																16-v:d
 																	17-s:GizmoSelection
+														14-o:samplers
+														14-o:uniforms
+															15-o:shared
+															15-o:material
 											11-k:i
 												12-o:d
 													13-v:type
@@ -107,6 +128,10 @@ sra format
 															15-k:i
 																16-v:d
 																	17-s:Gizmo
+														14-o:samplers
+														14-o:uniforms
+															15-o:shared
+															15-o:material
 										10-o:data
 											11-a:clearColors
 												12-k:i
@@ -151,6 +176,10 @@ sra format
 															15-k:i
 																16-v:d
 																	17-s:SR_DEFINE_COLOR_PASS
+														14-o:samplers
+														14-o:uniforms
+															15-o:shared
+															15-o:material
 														14-v:colorMultiplier
 															15-i:5000
 										10-o:data
@@ -177,6 +206,8 @@ sra format
 													13-v:type
 														14-s:CascadedShadowMapPass
 													13-o:ptr
+														14-v:customName
+															15-s:DepthCascades
 														14-v:renderLayers
 															15-i:4
 														14-a:allowedLayers
@@ -186,10 +217,21 @@ sra format
 															15-k:i
 																16-v:d
 																	17-s:Opaque
+															15-k:i
+																16-v:d
+																	17-s:Transparent
 														14-a:shaderDefines
 															15-k:i
 																16-v:d
 																	17-s:SR_DEFINE_CASCADED_SHADOW_MAP_PASS
+														14-o:samplers
+														14-o:uniforms
+															15-o:shared
+															15-o:material
+														14-v:far
+															15-f:895.919983
+														14-v:cascadeSplitLambda
+															15-f:0.959999979
 										10-o:data
 											11-v:frameBufferName
 												12-s:DepthCascades

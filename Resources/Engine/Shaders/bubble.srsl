@@ -5,8 +5,13 @@ CullMode Back;
 DepthCompare LessOrEqual;
 PrimitiveTopology TriangleList;
 BlendEnabled true;
-DepthWrite false;
 DepthTest true;
+
+#ifdef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
+    DepthWrite true;
+#else
+    DepthWrite false;
+#endif
 
 #include <Engine/Shaders/Common/utils.srsl>
 
@@ -25,5 +30,10 @@ void fragment() {
 void vertex() {
 	float height = texture(NoiseTex, VERTEX.xz * (NoiseSampleSize / 100.0) + vec2(TIME) * (AnimationSpeed / 1000.0)).r;
 	VERTEX += VERTEX * height * HeightMultiplier;
+
+#ifdef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
+    OUT_POSITION = CASCADE_LIGHT_SPACE_MATRICES[PC_SHADOW_CASCADE_INDEX] * MODEL_MATRIX * vec4(VERTEX, 1.0);
+#else
     OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
+#endif
 }

@@ -181,18 +181,38 @@ namespace SR_CORE_GUI_NS {
             if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader("Shaders")) {
                 auto&& shaders = pContext->GetShaders();
 
+                SR_GRAPH_GUI_NS::Immediate::Checkbox("Macros", &m_showShaderMacros);
+                SR_GRAPH_GUI_NS::Immediate::SameLine();
+                SR_GRAPH_GUI_NS::Immediate::Checkbox("Programs", &m_showShaderPrograms);
+                SR_GRAPH_GUI_NS::Immediate::SameLine();
+                SR_GRAPH_GUI_NS::Immediate::Checkbox("Show unused", &m_showUnusedShaders);
+
                 auto&& shadersManager = SR_GRAPH_NS::Memory::ShaderProgramManager::Instance();
 
                 if (SR_GRAPH_GUI_NS::Immediate::BeginTable("##ShadersTable", 1)) {
                     for (auto&& pShader : shaders) {
-                        SR_GRAPH_GUI_NS::Immediate::TableNextRow();
-
                         auto&& virtualProgram = pShader->GetVirtualProgram();
+                        if (virtualProgram == SR_ID_INVALID && !m_showUnusedShaders) {
+                            continue;
+                        }
+
+                        SR_GRAPH_GUI_NS::Immediate::TableNextRow();
 
                         SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(0);
                         SR_GRAPH_GUI_NS::Immediate::Text("%s [%i]", pShader->GetResourceId().c_str(), virtualProgram);
 
-                        if (shadersManager.HasProgram(virtualProgram)) {
+                        if (auto&& macros = pShader->GetMacros(); m_showShaderMacros && !macros.empty()) {
+                            SR_GRAPH_GUI_NS::Immediate::Text("\tMacros: ");
+                            for (auto&& [key, value] : macros.GetParams()) {
+                                if (value.empty()) {
+                                    SR_GRAPH_GUI_NS::Immediate::Text("\t\t%s ", key.c_str());
+                                    continue;
+                                }
+                                SR_GRAPH_GUI_NS::Immediate::Text("\t\t%s=%s ", key.c_str(), value.c_str());
+                            }
+                        }
+
+                        if (m_showShaderPrograms && shadersManager.HasProgram(virtualProgram)) {
                             auto&& pVirtualInfo = shadersManager.GetInfo(virtualProgram);
 
                             for (auto&& [identifier, program] : pVirtualInfo->m_data) {
