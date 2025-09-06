@@ -54,7 +54,6 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 |  [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**editorCameraRenderTechnique**](#variable-editorcamerarendertechnique)  <br> |
 |  [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**mainCameraRenderTechnique**](#variable-maincamerarendertechnique)  <br> |
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**name**](#variable-name)  <br> |
-|  [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**prefabCameraRenderTechnique**](#variable-prefabcamerarendertechnique)  <br> |
 |  std::set&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; | [**shaderDefines**](#variable-shaderdefines)  <br> |
 
 
@@ -259,19 +258,6 @@ SR_UTILS_NS::Path SR_GRAPH_NS::RenderSettingsPreset::mainCameraRenderTechnique;
 
 ```C++
 SR_UTILS_NS::StringAtom SR_GRAPH_NS::RenderSettingsPreset::name;
-```
-
-
-
-
-<hr>
-
-
-
-### variable prefabCameraRenderTechnique 
-
-```C++
-SR_UTILS_NS::Path SR_GRAPH_NS::RenderSettingsPreset::prefabCameraRenderTechnique;
 ```
 
 

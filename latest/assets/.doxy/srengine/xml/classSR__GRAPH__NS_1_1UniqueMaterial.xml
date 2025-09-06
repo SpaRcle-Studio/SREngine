@@ -260,7 +260,6 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetRawPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetRawPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1addd7a75fff2b7b2a015c1fb6925fc2bb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetRenderStageId</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a56870a4c6dbe8253519d396ccaed8783" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetShader</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a5024eae654109db47310963eadc218f0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetShader</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetSRClass</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetThis</name></member>
@@ -275,6 +274,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>m_basicManually</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a2a5b12f99f4054806650db28fe6d2925" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>m_context</name></member>
       <member refid="classSR__GRAPH__NS_1_1UniqueMaterial_1aba8c096afd0ee871f09809d749f15759" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>m_data</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1acc5750535840a53839ab1886113e9498" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>m_hashRedirect</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a31412c64e09721f9c352ad2a552f125e" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>m_meshes</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a6b2790fc232fecca8d01386a28282d55" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>m_propertyChangedSubscription</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a1caf518d2d7d5d9e2bc45f6eba3ca6fd" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>m_shaderChangedSubscription</name></member>
@@ -313,8 +313,8 @@
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a70ae86eaacce8465fa095b7c7f1bb9f7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>SetColor</name></member>
       <member refid="classSR__GRAPH__NS_1_1UniqueMaterial_1af21600fd89649d5caa64af3cc1baa96a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>SetMaterialData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>SetPointerFromBase</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1aab3c58af7c559c0d45faab3c45334500" prot="public" virt="virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>SetShader</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a8b70231d2e3a61312c808e89d3f69836" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>SetShader</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a5c5ceb6f1b34df16189616d0a77339a8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>SetShader</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1af0e785a400a8ac1eef7340b31aaac031" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>SetShader</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a27b3576be524d33169433cf81e4bc074" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>SetTexture</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a49bcd5177ade3cc781423acc8fb97588" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>SetVec4</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1adcdc6abd219d68f67c2bd1f61a4f1825" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>ShaderPtr</name></member>

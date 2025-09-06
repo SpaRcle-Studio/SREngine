@@ -200,25 +200,22 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**AddStage**](#function-addstage) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) stage) <br> |
 |  void | [**Finalize**](#function-finalize) () <br> |
 |  SR\_NODISCARD [**MaterialShaderData**](structSR__GRAPH__NS_1_1MaterialShaderData.md) & | [**GetDefaultShaderData**](#function-getdefaultshaderdata-12) () noexcept<br> |
 |  SR\_NODISCARD const [**MaterialShaderData**](structSR__GRAPH__NS_1_1MaterialShaderData.md) & | [**GetDefaultShaderData**](#function-getdefaultshaderdata-22) () noexcept const<br> |
 |  SR\_NODISCARD [**MaterialShaderData**](structSR__GRAPH__NS_1_1MaterialShaderData.md) \* | [**GetShaderData**](#function-getshaderdata-12) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id) noexcept<br> |
 |  SR\_NODISCARD const [**MaterialShaderData**](structSR__GRAPH__NS_1_1MaterialShaderData.md) \* | [**GetShaderData**](#function-getshaderdata-22) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id) noexcept const<br> |
-|  SR\_NODISCARD const std::map&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md), [**MaterialShaderData**](structSR__GRAPH__NS_1_1MaterialShaderData.md) &gt; & | [**GetShadersData**](#function-getshadersdata-12) () noexcept const<br> |
-|  SR\_NODISCARD std::map&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md), [**MaterialShaderData**](structSR__GRAPH__NS_1_1MaterialShaderData.md) &gt; & | [**GetShadersData**](#function-getshadersdata-22) () noexcept<br> |
+|  SR\_NODISCARD const std::map&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md), std::string &gt; & | [**GetShaderDefines**](#function-getshaderdefines) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**HasStage**](#function-hasstage) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) stage) noexcept const<br> |
 | virtual bool | [**Load**](#function-load) ([**SR\_UTILS\_NS::IDeserializer**](classSR__UTILS__NS_1_1IDeserializer.md) & deserializer) override<br> |
 |   | [**MaterialData**](#function-materialdata) () <br> |
 |  void | [**OnPropertyChanged**](#function-onpropertychanged) (bool onlyUniforms) <br> |
 |  void SR\_FASTCALL | [**OnSamplerChanged**](#function-onsamplerchanged) (SR\_GTYPES\_NS::Texture::Ptr pOldTexture, SR\_GTYPES\_NS::Texture::Ptr pNewTexture) noexcept<br> |
-|  void | [**RemoveStage**](#function-removestage) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) stage) <br> |
 | virtual void | [**Save**](#function-save) ([**SR\_UTILS\_NS::ISerializer**](classSR__UTILS__NS_1_1ISerializer.md) & serializer) override const<br> |
 |  void SR\_FASTCALL | [**SetData**](#function-setdata) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, const ShaderPropertyVariant & v, ShaderVarType type) noexcept<br> |
 |  void SR\_FASTCALL | [**SetSampler**](#function-setsampler) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) noexcept<br> |
-|  void SR\_FASTCALL | [**SetShader**](#function-setshader-12) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path, [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) stage=[**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md)()) <br> |
-|  void SR\_FASTCALL | [**SetShader**](#function-setshader-22) (SR\_GTYPES\_NS::Shader::Ptr pShader, [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) stage=[**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md)()) <br> |
+|  void SR\_FASTCALL | [**SetShader**](#function-setshader-12) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
+|  void SR\_FASTCALL | [**SetShader**](#function-setshader-22) (SR\_GTYPES\_NS::Shader::Ptr pShader) <br> |
 |  void | [**UseSamplers**](#function-usesamplers) (const [**Pipeline**](classSR__GRAPH__NS_1_1Pipeline.md) \* pPipeline) <br> |
 |  void | [**UseUniforms**](#function-useuniforms) (const [**Pipeline**](classSR__GRAPH__NS_1_1Pipeline.md) \* pPipeline) <br> |
 |   | [**~MaterialData**](#function-materialdata) () override<br> |
@@ -622,21 +619,6 @@ SR_INLINE_STATIC const SR_UTILS_NS::StringAtom SR_GRAPH_NS::MaterialData::SHADER
 
 
 
-### function AddStage 
-
-```C++
-void SR_GRAPH_NS::MaterialData::AddStage (
-    SR_UTILS_NS::StringAtom stage
-) 
-```
-
-
-
-
-<hr>
-
-
-
 ### function Finalize 
 
 ```C++
@@ -706,23 +688,10 @@ SR_NODISCARD const MaterialShaderData * SR_GRAPH_NS::MaterialData::GetShaderData
 
 
 
-### function GetShadersData [1/2]
+### function GetShaderDefines 
 
 ```C++
-inline SR_NODISCARD const std::map< SR_UTILS_NS::StringAtom , MaterialShaderData > & SR_GRAPH_NS::MaterialData::GetShadersData () noexcept const
-```
-
-
-
-
-<hr>
-
-
-
-### function GetShadersData [2/2]
-
-```C++
-inline SR_NODISCARD std::map< SR_UTILS_NS::StringAtom , MaterialShaderData > & SR_GRAPH_NS::MaterialData::GetShadersData () noexcept
+inline SR_NODISCARD const std::map< SR_UTILS_NS::StringAtom , std::string > & SR_GRAPH_NS::MaterialData::GetShaderDefines () noexcept const
 ```
 
 
@@ -808,21 +777,6 @@ void SR_FASTCALL SR_GRAPH_NS::MaterialData::OnSamplerChanged (
 
 
 
-### function RemoveStage 
-
-```C++
-void SR_GRAPH_NS::MaterialData::RemoveStage (
-    SR_UTILS_NS::StringAtom stage
-) 
-```
-
-
-
-
-<hr>
-
-
-
 ### function Save 
 
 ```C++
@@ -877,8 +831,7 @@ void SR_FASTCALL SR_GRAPH_NS::MaterialData::SetSampler (
 
 ```C++
 void SR_FASTCALL SR_GRAPH_NS::MaterialData::SetShader (
-    const SR_UTILS_NS::Path & path,
-    SR_UTILS_NS::StringAtom stage=SR_UTILS_NS::StringAtom ()
+    const SR_UTILS_NS::Path & path
 ) 
 ```
 
@@ -893,8 +846,7 @@ void SR_FASTCALL SR_GRAPH_NS::MaterialData::SetShader (
 
 ```C++
 void SR_FASTCALL SR_GRAPH_NS::MaterialData::SetShader (
-    SR_GTYPES_NS::Shader::Ptr pShader,
-    SR_UTILS_NS::StringAtom stage=SR_UTILS_NS::StringAtom ()
+    SR_GTYPES_NS::Shader::Ptr pShader
 ) 
 ```
 

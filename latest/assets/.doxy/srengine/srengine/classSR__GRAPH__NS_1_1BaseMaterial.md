@@ -179,16 +179,15 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual SR\_NODISCARD const MaterialData::Ptr & | [**GetMaterialData**](#function-getmaterialdata) () noexcept const = 0<br> |
 | virtual SR\_NODISCARD MaterialType | [**GetMaterialType**](#function-getmaterialtype) () noexcept const = 0<br> |
 |  SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetRenderStageId**](#function-getrenderstageid) () noexcept const<br> |
-|  SR\_NODISCARD [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* | [**GetShader**](#function-getshader-12) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id) noexcept const<br> |
-|  SR\_NODISCARD [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* | [**GetShader**](#function-getshader-22) (const [**SR\_SRSL\_NS::ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) & macros) noexcept const<br> |
+|  SR\_NODISCARD [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* | [**GetShader**](#function-getshader) (const [**SR\_SRSL\_NS::ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) & macros) noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsValid**](#function-isvalid) () const<br> |
 |  void | [**OnPropertyChanged**](#function-onpropertychanged) (bool onlyUniforms) const<br> |
 |  void | [**OnShaderChanged**](#function-onshaderchanged) () <br> |
 | virtual SR\_NODISCARD uint32\_t | [**RegisterMesh**](#function-registermesh) (MeshPtr pMesh) <br> |
 |  void SR\_FASTCALL | [**SetBool**](#function-setbool) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, bool v) noexcept<br> |
 |  void SR\_FASTCALL | [**SetColor**](#function-setcolor) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, const [**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md) & v) noexcept<br> |
-| virtual void | [**SetShader**](#function-setshader-12) (ShaderPtr pShader, [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) stage=[**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md)()) <br> |
-|  void | [**SetShader**](#function-setshader-22) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path, [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) stage=[**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md)()) <br> |
+| virtual void | [**SetShader**](#function-setshader-12) (ShaderPtr pShader) <br> |
+|  void | [**SetShader**](#function-setshader-22) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 |  void SR\_FASTCALL | [**SetTexture**](#function-settexture) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_GTYPES\_NS::Texture**](classSR__GTYPES__NS_1_1Texture.md) &gt; & pTexture) noexcept<br> |
 |  void SR\_FASTCALL | [**SetVec4**](#function-setvec4) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, const SR\_MATH\_NS::FVector4 & v) noexcept<br> |
 | virtual void | [**UnregisterMesh**](#function-unregistermesh) (uint32\_t \* pId) <br> |
@@ -366,6 +365,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | Type | Name |
 | ---: | :--- |
 |  RenderContextPtr | [**m\_context**](#variable-m_context)  <br> |
+|  std::map&lt; SR\_UTILS\_NS::SRHashType, [**SR\_SRSL\_NS::ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) &gt; | [**m\_hashRedirect**](#variable-m_hashredirect)  <br> |
 |  [**SR\_HTYPES\_NS::ObjectPool**](classSR__HTYPES__NS_1_1ObjectPool.md)&lt; MeshPtr, uint32\_t &gt; | [**m\_meshes**](#variable-m_meshes)  <br> |
 |  [**SR\_UTILS\_NS::Subscription**](classSR__UTILS__NS_1_1Subscription.md) | [**m\_propertyChangedSubscription**](#variable-m_propertychangedsubscription)  <br> |
 |  [**SR\_UTILS\_NS::Subscription**](classSR__UTILS__NS_1_1Subscription.md) | [**m\_shaderChangedSubscription**](#variable-m_shaderchangedsubscription)  <br> |
@@ -611,22 +611,7 @@ SR_NODISCARD SR_UTILS_NS::StringAtom SR_GRAPH_NS::BaseMaterial::GetRenderStageId
 
 
 
-### function GetShader [1/2]
-
-```C++
-SR_NODISCARD SR_GTYPES_NS::Shader * SR_GRAPH_NS::BaseMaterial::GetShader (
-    SR_UTILS_NS::StringAtom id
-) noexcept const
-```
-
-
-
-
-<hr>
-
-
-
-### function GetShader [2/2]
+### function GetShader 
 
 ```C++
 SR_NODISCARD SR_GTYPES_NS::Shader * SR_GRAPH_NS::BaseMaterial::GetShader (
@@ -733,8 +718,7 @@ void SR_FASTCALL SR_GRAPH_NS::BaseMaterial::SetColor (
 
 ```C++
 virtual void SR_GRAPH_NS::BaseMaterial::SetShader (
-    ShaderPtr pShader,
-    SR_UTILS_NS::StringAtom stage=SR_UTILS_NS::StringAtom ()
+    ShaderPtr pShader
 ) 
 ```
 
@@ -749,8 +733,7 @@ virtual void SR_GRAPH_NS::BaseMaterial::SetShader (
 
 ```C++
 void SR_GRAPH_NS::BaseMaterial::SetShader (
-    const SR_UTILS_NS::Path & path,
-    SR_UTILS_NS::StringAtom stage=SR_UTILS_NS::StringAtom ()
+    const SR_UTILS_NS::Path & path
 ) 
 ```
 
@@ -907,6 +890,19 @@ using SR_GRAPH_NS::BaseMaterial::TexturePtr =  SR_GTYPES_NS::Texture*;
 
 ```C++
 RenderContextPtr SR_GRAPH_NS::BaseMaterial::m_context;
+```
+
+
+
+
+<hr>
+
+
+
+### variable m\_hashRedirect 
+
+```C++
+std::map<SR_UTILS_NS::SRHashType, SR_SRSL_NS::ShaderMacrosParams> SR_GRAPH_NS::BaseMaterial::m_hashRedirect;
 ```
 
 

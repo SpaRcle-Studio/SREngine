@@ -38,7 +38,6 @@ namespace SR_GRAPH_NS {
         std::set<SR_UTILS_NS::StringAtom> shaderDefines;
         SR_UTILS_NS::Path mainCameraRenderTechnique;
         SR_UTILS_NS::Path editorCameraRenderTechnique;
-        SR_UTILS_NS::Path prefabCameraRenderTechnique;
 
     };
 
@@ -54,6 +53,9 @@ namespace SR_GRAPH_NS {
         SR_UTILS_NS::StringAtom appName = "SpaRcle Engine";
         SR_UTILS_NS::StringAtom engineName = "SREngine";
         SR_UTILS_NS::Path overlayRenderTechnique = "Editor/Render/Overlay.srtech";
+        SR_UTILS_NS::Path editorPrefabSkybox = "Engine/Skyboxes/Gray.png";
+        SR_UTILS_NS::Path defaultShader = "Engine/Shaders/standard.srsl";
+        SR_UTILS_NS::Path defaultMaterial = "Engine/Materials/default.mat";
 
         std::vector<RenderSettingsPreset> presets;
         RenderSettingsPreset defaultPreset;

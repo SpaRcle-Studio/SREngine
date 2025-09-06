@@ -85,6 +85,7 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 |  void | [**ForEach**](#function-foreach-22) (const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void(Index, const T &)&gt; & func) const<br> |
 |  SR\_NODISCARD uint32\_t | [**GetAliveCount**](#function-getalivecount) () const<br> |
 |  SR\_NODISCARD uint32\_t | [**GetCapacity**](#function-getcapacity) () const<br> |
+|  T \* | [**GetFirstAlive**](#function-getfirstalive) () <br> |
 |  SR\_NODISCARD uint32\_t | [**GetFreeCount**](#function-getfreecount) () const<br> |
 |  SR\_NODISCARD const std::vector&lt; std::pair&lt; bool, T &gt; &gt; & | [**GetObjects**](#function-getobjects) () const<br> |
 |  SR\_NODISCARD bool SR\_FASTCALL | [**IsAlive**](#function-isalive) (Index index) const<br> |
@@ -324,6 +325,19 @@ inline SR_NODISCARD uint32_t SR_HTYPES_NS::ObjectPool::GetAliveCount () const
 
 ```C++
 inline SR_NODISCARD uint32_t SR_HTYPES_NS::ObjectPool::GetCapacity () const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetFirstAlive 
+
+```C++
+inline T * SR_HTYPES_NS::ObjectPool::GetFirstAlive () 
 ```
 
 

@@ -77,6 +77,15 @@ namespace SR_HTYPES_NS {
             return index;
         }
 
+        T* GetFirstAlive() {
+            for (auto&& [isAlive, object] : m_objects) {
+                if (isAlive) SR_LIKELY_ATTRIBUTE {
+                    return &object;
+                }
+            }
+            return nullptr;
+        }
+
         T& At(Index index) {
             auto&& object = m_objects[index];
             if (!object.first) SR_UNLIKELY_ATTRIBUTE {

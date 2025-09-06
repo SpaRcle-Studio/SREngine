@@ -35,8 +35,7 @@ namespace SR_CORE_GUI_NS {
 
     private:
         std::map<SR_UTILS_NS::StringAtom, bool> m_shaderDataOpened;
-        std::set<SR_UTILS_NS::StringAtom> m_stagesToRemove;
-        std::string m_newStageName = "New Stage";
+        bool m_isNeedArrow = false;
 
         MathVectorPropertyDrawer::Ptr m_vectorDrawer;
         NumericPropertyDrawer::Ptr m_numericDrawer;

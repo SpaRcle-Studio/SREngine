@@ -102,19 +102,16 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD bool HasStage(SR_UTILS_NS::StringAtom stage) const noexcept;
         SR_NODISCARD MaterialShaderData& GetDefaultShaderData() noexcept { return m_defaultShader; }
         SR_NODISCARD const MaterialShaderData& GetDefaultShaderData() const noexcept { return m_defaultShader; }
-        SR_NODISCARD const std::map<SR_UTILS_NS::StringAtom, MaterialShaderData>& GetShadersData() const noexcept { return m_shaders; }
-        SR_NODISCARD std::map<SR_UTILS_NS::StringAtom, MaterialShaderData>& GetShadersData() noexcept { return m_shaders; }
         SR_NODISCARD MaterialShaderData* GetShaderData(SR_UTILS_NS::StringAtom id) noexcept;
         SR_NODISCARD const MaterialShaderData* GetShaderData(SR_UTILS_NS::StringAtom id) const noexcept;
+        SR_NODISCARD const std::map<SR_UTILS_NS::StringAtom, std::string>& GetShaderDefines() const noexcept { return m_shaderDefines; }
 
         void SR_FASTCALL SetSampler(SR_UTILS_NS::StringAtom id, const SR_UTILS_NS::Path& path) noexcept;
-        void SR_FASTCALL SetShader(const SR_UTILS_NS::Path& path, SR_UTILS_NS::StringAtom stage = SR_UTILS_NS::StringAtom());
-        void SR_FASTCALL SetShader(SR_GTYPES_NS::Shader::Ptr pShader, SR_UTILS_NS::StringAtom stage = SR_UTILS_NS::StringAtom());
+        void SR_FASTCALL SetShader(const SR_UTILS_NS::Path& path);
+        void SR_FASTCALL SetShader(SR_GTYPES_NS::Shader::Ptr pShader);
         void SR_FASTCALL SetData(SR_UTILS_NS::StringAtom id, const ShaderPropertyVariant& v, ShaderVarType type) noexcept;
         void SR_FASTCALL OnSamplerChanged(SR_GTYPES_NS::Texture::Ptr pOldTexture, SR_GTYPES_NS::Texture::Ptr pNewTexture) noexcept;
 
-        void AddStage(SR_UTILS_NS::StringAtom stage);
-        void RemoveStage(SR_UTILS_NS::StringAtom stage);
         void OnPropertyChanged(bool onlyUniforms);
 
     private:
@@ -124,7 +121,8 @@ namespace SR_GRAPH_NS {
         std::map<SR_GTYPES_NS::Shader::Ptr, std::pair<SR_UTILS_NS::Subscription, uint32_t>> m_shaderSubscriptions;
         std::map<SR_GTYPES_NS::Texture::Ptr, std::pair<SR_UTILS_NS::Subscription, uint32_t>> m_textureSubscriptions;
         MaterialShaderData m_defaultShader;
-        std::map<SR_UTILS_NS::StringAtom, MaterialShaderData> m_shaders;
+
+        std::map<SR_UTILS_NS::StringAtom, std::string> m_shaderDefines;
 
     };
 }

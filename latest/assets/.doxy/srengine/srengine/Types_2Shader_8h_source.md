@@ -74,8 +74,6 @@ namespace SR_GTYPES_NS {
 
         RemoveUPResult RemoveUsePoint() override;
 
-        SR_NODISCARD Shader::Ptr GetShaderVariant(const SR_SRSL_NS::ShaderMacrosParams& macros);
-
     public:
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
         SR_NODISCARD int32_t GetId() noexcept;

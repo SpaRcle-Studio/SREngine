@@ -65,7 +65,6 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD RenderContextPtr GetContext() const { return m_context; }
         SR_NODISCARD virtual const MaterialData::Ptr& GetMaterialData() const noexcept = 0;
         SR_NODISCARD SR_GTYPES_NS::Shader* GetDefaultShader() const noexcept;
-        SR_NODISCARD SR_GTYPES_NS::Shader* GetShader(SR_UTILS_NS::StringAtom id) const noexcept;
         SR_NODISCARD SR_GTYPES_NS::Shader* GetShader(const SR_SRSL_NS::ShaderMacrosParams& macros) const noexcept;
 
         SR_NODISCARD virtual MaterialType GetMaterialType() const noexcept = 0;
@@ -73,8 +72,8 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual uint32_t RegisterMesh(MeshPtr pMesh);
         virtual void UnregisterMesh(uint32_t* pId);
 
-        virtual void SetShader(ShaderPtr pShader, SR_UTILS_NS::StringAtom stage = SR_UTILS_NS::StringAtom());
-        void SetShader(const SR_UTILS_NS::Path& path, SR_UTILS_NS::StringAtom stage = SR_UTILS_NS::StringAtom());
+        virtual void SetShader(ShaderPtr pShader);
+        void SetShader(const SR_UTILS_NS::Path& path);
 
         void OnPropertyChanged(bool onlyUniforms) const;
         void OnShaderChanged();
@@ -96,6 +95,7 @@ namespace SR_GRAPH_NS {
         mutable SR_UTILS_NS::Subscription m_propertyChangedSubscription;
 
         mutable std::map<SR_UTILS_NS::SRHashType, SR_GTYPES_NS::Shader::Ptr> m_variants;
+        mutable std::map<SR_UTILS_NS::SRHashType, SR_SRSL_NS::ShaderMacrosParams> m_hashRedirect;
 
     };
 }

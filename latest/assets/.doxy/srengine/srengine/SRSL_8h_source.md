@@ -29,7 +29,7 @@ namespace SR_SRSL_NS {
         SR_NODISCARD SR_UTILS_NS::SRHashType GetHash() const;
         SR_NODISCARD std::string GetHashStr() const;
         SR_NODISCARD bool empty() const { return m_params.empty(); }
-        SR_NODISCARD const std::map<std::string, std::string>& GetParams() const { return m_params; }
+        SR_NODISCARD const std::map<SR_UTILS_NS::StringAtom, std::string>& GetParams() const { return m_params; }
 
         void Clear() {
             m_params.clear();
@@ -46,18 +46,18 @@ namespace SR_SRSL_NS {
             return false;
         }
 
-        void SetParam(const std::string& key, const std::string& value) {
+        void SetParam(SR_UTILS_NS::StringAtom key, const std::string& value) {
             m_params[key] = value;
             m_initialized = false;
         }
 
-        void AddDefine(const std::string& define) {
+        void AddDefine(SR_UTILS_NS::StringAtom define) {
             m_params[define];
             m_initialized = false;
         }
 
     private:
-        std::map<std::string, std::string> m_params;
+        std::map<SR_UTILS_NS::StringAtom, std::string> m_params;
         SR_UTILS_NS::SRHashType m_hash = 0;
         bool m_initialized = false;
 

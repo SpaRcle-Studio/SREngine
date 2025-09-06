@@ -253,7 +253,6 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  SR\_NODISCARD const ShaderProperties & | [**GetProperties**](#function-getproperties) () const<br> |
 |  SR\_NODISCARD const ShaderSamplers & | [**GetSamplers**](#function-getsamplers) () noexcept const<br> |
 |  SR\_NODISCARD uint32\_t | [**GetSamplersCount**](#function-getsamplerscount) () const<br> |
-|  SR\_NODISCARD Shader::Ptr | [**GetShaderVariant**](#function-getshadervariant) (const [**SR\_SRSL\_NS::ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) & macros) <br> |
 |  SR\_NODISCARD SR\_SRSL\_NS::ShaderType | [**GetType**](#function-gettype) () noexcept const<br> |
 |  SR\_NODISCARD uint64\_t | [**GetUBOBlockSize**](#function-getuboblocksize) () const<br> |
 |  SR\_NODISCARD ShaderProgram | [**GetVirtualProgram**](#function-getvirtualprogram) () noexcept const<br> |
@@ -987,21 +986,6 @@ inline SR_NODISCARD const ShaderSamplers & SR_GTYPES_NS::Shader::GetSamplers () 
 
 ```C++
 SR_NODISCARD uint32_t SR_GTYPES_NS::Shader::GetSamplersCount () const
-```
-
-
-
-
-<hr>
-
-
-
-### function GetShaderVariant 
-
-```C++
-SR_NODISCARD Shader::Ptr SR_GTYPES_NS::Shader::GetShaderVariant (
-    const SR_SRSL_NS::ShaderMacrosParams & macros
-) 
 ```
 
 

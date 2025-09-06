@@ -865,6 +865,7 @@
     <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a1caf518d2d7d5d9e2bc45f6eba3ca6fd" kind="variable"><name>m_shaderChangedSubscription</name></member>
     <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a6b2790fc232fecca8d01386a28282d55" kind="variable"><name>m_propertyChangedSubscription</name></member>
     <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1aafb898dde21f071c2a1f3b4d1a27219c" kind="variable"><name>m_variants</name></member>
+    <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1acc5750535840a53839ab1886113e9498" kind="variable"><name>m_hashRedirect</name></member>
     <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a5d9dbe6fda56b9b3fce4c03ef7fcade8" kind="function"><name>BaseMaterial</name></member>
     <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1afa769f4b888d7f3900afc25e4019c08b" kind="function"><name>~BaseMaterial</name></member>
     <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a49bcd5177ade3cc781423acc8fb97588" kind="function"><name>SetVec4</name></member>
@@ -876,13 +877,12 @@
     <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1aef301cb16c0609034aeab36bdb616c9b" kind="function"><name>GetContext</name></member>
     <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a932f0df30f2837d4bd3561f458fc4728" kind="function"><name>GetMaterialData</name></member>
     <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a37b649b70f52c2075424d145c105dc6e" kind="function"><name>GetDefaultShader</name></member>
-    <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a56870a4c6dbe8253519d396ccaed8783" kind="function"><name>GetShader</name></member>
     <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a5024eae654109db47310963eadc218f0" kind="function"><name>GetShader</name></member>
     <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1ac188eae5e0af929f3d17dcc8c3d71a0f" kind="function"><name>GetMaterialType</name></member>
     <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a7025adb4e608e7c8c7db2130f4e9dfbf" kind="function"><name>RegisterMesh</name></member>
     <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1aa8b535c58e8a90670b530f67f6df2e53" kind="function"><name>UnregisterMesh</name></member>
-    <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1aab3c58af7c559c0d45faab3c45334500" kind="function"><name>SetShader</name></member>
-    <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a8b70231d2e3a61312c808e89d3f69836" kind="function"><name>SetShader</name></member>
+    <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a5c5ceb6f1b34df16189616d0a77339a8" kind="function"><name>SetShader</name></member>
+    <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1af0e785a400a8ac1eef7340b31aaac031" kind="function"><name>SetShader</name></member>
     <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a92a95b1b6960ed0f5ba00b99acb9ffee" kind="function"><name>OnPropertyChanged</name></member>
     <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1aac0793260cd4545646a8a9f92e449896" kind="function"><name>OnShaderChanged</name></member>
     <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a60e16713e2e63b1797b5c1201713711f" kind="function"><name>Use</name></member>
@@ -3844,7 +3844,7 @@
     <member refid="classSR__GRAPH__NS_1_1FileMaterial_1adfc6013226e693c3b0e3a9766454d407" kind="function"><name>GetMaterialType</name></member>
     <member refid="classSR__GRAPH__NS_1_1FileMaterial_1a20660c1fe32c100da06f8e8750bb62e2" kind="function"><name>GetMaterialData</name></member>
     <member refid="classSR__GRAPH__NS_1_1FileMaterial_1aa89bd110c6111780ed58894cfe59bf28" kind="function"><name>GetMaterialPath</name></member>
-    <member refid="classSR__GRAPH__NS_1_1FileMaterial_1a6df2f81d1bd4ea28650218a6dfa2d7b0" kind="function"><name>SetMaterialPath</name></member>
+    <member refid="classSR__GRAPH__NS_1_1FileMaterial_1a2f765f00ea0ed315a361c2f0e8818d02" kind="function"><name>SetMaterialPath</name></member>
     <member refid="classSR__GRAPH__NS_1_1FileMaterial_1aabab98bbc10ecb3dab7ceba9765d1823" kind="function"><name>Load</name></member>
     <member refid="classSR__GRAPH__NS_1_1FileMaterial_1a8873cdfb51f727cae9b410ec90f6e8a1" kind="function"><name>LoadAsUnique</name></member>
     <member refid="classSR__GRAPH__NS_1_1FileMaterial_1a23cb42553712cc57475a68afd465e197" kind="function"><name>Init</name></member>
@@ -6006,7 +6006,7 @@
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a147a274a333f28b765723158ce589226" kind="variable"><name>m_shaderSubscriptions</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a6ab1075a88352aede27169f0ef900e8f" kind="variable"><name>m_textureSubscriptions</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a192cf46278e5f9a7d6261f1d04f65370" kind="variable"><name>m_defaultShader</name></member>
-    <member refid="classSR__GRAPH__NS_1_1MaterialData_1a45d2d95d8e9b1a2ee391ba37d92b182c" kind="variable"><name>m_shaders</name></member>
+    <member refid="classSR__GRAPH__NS_1_1MaterialData_1ab4dd6f542dc71036d068f83a78afb6bb" kind="variable"><name>m_shaderDefines</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a42b3fc937deb55d131b43d4bb5c043bd" kind="function"><name>MaterialData</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1aba9d73b33e664b20deb418ad902231ea" kind="function"><name>~MaterialData</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1af9ab339d1569c20c25ed861f1cbb5c91" kind="function"><name>Save</name></member>
@@ -6017,25 +6017,21 @@
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a6e1b45e5d7db9b75b0558887628cff96" kind="function"><name>HasStage</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a40b6fc6e023ad0071d3a0cd34b60c067" kind="function"><name>GetDefaultShaderData</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1ab704be2cb81ff691dd3f823f0695a350" kind="function"><name>GetDefaultShaderData</name></member>
-    <member refid="classSR__GRAPH__NS_1_1MaterialData_1aac9f67e5d24ecca0cd89b69c2975a7a6" kind="function"><name>GetShadersData</name></member>
-    <member refid="classSR__GRAPH__NS_1_1MaterialData_1ae37d19b0d25d24bb3e12706bbe4de9a7" kind="function"><name>GetShadersData</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a5723889f5c2f44fd4a61e11962b7a421" kind="function"><name>GetShaderData</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a8741fb9e62ae3ca1a8213029d7a20181" kind="function"><name>GetShaderData</name></member>
+    <member refid="classSR__GRAPH__NS_1_1MaterialData_1af176964b3ae5f043475b3637c052a590" kind="function"><name>GetShaderDefines</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a8fb8e28d7476b9c4e3dddbf46d43c2ec" kind="function"><name>SetSampler</name></member>
-    <member refid="classSR__GRAPH__NS_1_1MaterialData_1a2a383330f719b372eb1d0773961fec65" kind="function"><name>SetShader</name></member>
-    <member refid="classSR__GRAPH__NS_1_1MaterialData_1acbaf9d5a5c4ac7730df3ccc3cb32dde0" kind="function"><name>SetShader</name></member>
+    <member refid="classSR__GRAPH__NS_1_1MaterialData_1a360c0052276c259e38e74cad11d14379" kind="function"><name>SetShader</name></member>
+    <member refid="classSR__GRAPH__NS_1_1MaterialData_1a144d2c0c5a79d5123e95465449f7e4ca" kind="function"><name>SetShader</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a1c4d02b9cb692037222cc3669f72fcd1" kind="function"><name>SetData</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a2639109fe39cd4685fd787ae709cab1b" kind="function"><name>OnSamplerChanged</name></member>
-    <member refid="classSR__GRAPH__NS_1_1MaterialData_1ac23d9588eef0cb9cd7690aa32331bc62" kind="function"><name>AddStage</name></member>
-    <member refid="classSR__GRAPH__NS_1_1MaterialData_1a99fdc18235dc28f37b72c569e5324fef" kind="function"><name>RemoveStage</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a8d3e86291d081bf462d8352701065db2" kind="function"><name>OnPropertyChanged</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1aa0fefda2989d631eaf76d2eafdf05621" kind="function"><name>OnShaderChanged</name></member>
   </compound>
   <compound refid="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer" kind="class"><name>SR_CORE_GUI_NS::MaterialDataPropertyDrawer</name>
     <member refid="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer_1ac0cab5d5b242c661d74f52d0f3fac727" kind="typedef"><name>Super</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer_1a85d6f6b531a8367d934e6e8d48052a87" kind="variable"><name>m_shaderDataOpened</name></member>
-    <member refid="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer_1ac5584e727040e12574d39c1c2b739425" kind="variable"><name>m_stagesToRemove</name></member>
-    <member refid="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer_1a5d63df097537f6654d34536b75ee9374" kind="variable"><name>m_newStageName</name></member>
+    <member refid="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer_1a7ea11229fde8b1d9b5c02b2081d0de26" kind="variable"><name>m_isNeedArrow</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer_1a78ba00919f8aee67362eb901997aa381" kind="variable"><name>m_vectorDrawer</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer_1a2399fa3f2380ea6c0bdcbb54da346a3a" kind="variable"><name>m_numericDrawer</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer_1a297a03314753fba5ac0dba0687364134" kind="variable"><name>m_boolDrawer</name></member>
@@ -7206,6 +7202,7 @@
     <member refid="classSR__HTYPES__NS_1_1ObjectPool_1a121a03920d1d53d2be47483044565195" kind="function"><name>GetObjects</name></member>
     <member refid="classSR__HTYPES__NS_1_1ObjectPool_1ad561a9e491020f3bc8da5d319a4d5efd" kind="function"><name>Add</name></member>
     <member refid="classSR__HTYPES__NS_1_1ObjectPool_1a543d663da2bdb3e551ab8c9cf4b4ff29" kind="function"><name>Add</name></member>
+    <member refid="classSR__HTYPES__NS_1_1ObjectPool_1a6d23fcad7409e9a92f3c2d87bf01807f" kind="function"><name>GetFirstAlive</name></member>
     <member refid="classSR__HTYPES__NS_1_1ObjectPool_1aae333deccc6a08dcee8a95a6f4d75029" kind="function"><name>At</name></member>
     <member refid="classSR__HTYPES__NS_1_1ObjectPool_1a6d9a6bbcf8f993f28ed8d10bc1be299f" kind="function"><name>At</name></member>
     <member refid="classSR__HTYPES__NS_1_1ObjectPool_1a744713e31200ebd36d619f0d9c1dc6a1" kind="function"><name>AtUnchecked</name></member>
@@ -9032,6 +9029,9 @@
     <member refid="classSR__GRAPH__NS_1_1RenderSettings_1a8f5c0c8385572c9ded3b8c8e7d433a4f" kind="variable"><name>appName</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderSettings_1af8737c565ac9b707a005ffd7a1c592f4" kind="variable"><name>engineName</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderSettings_1a0966e10f41f19df279b2654d480e15de" kind="variable"><name>overlayRenderTechnique</name></member>
+    <member refid="classSR__GRAPH__NS_1_1RenderSettings_1ab397a116a889ce6646de61b567f5849e" kind="variable"><name>editorPrefabSkybox</name></member>
+    <member refid="classSR__GRAPH__NS_1_1RenderSettings_1a1152768124a405c34f7c4e444bd66da2" kind="variable"><name>defaultShader</name></member>
+    <member refid="classSR__GRAPH__NS_1_1RenderSettings_1a470d8b668c14eceacc250de85a2bc2fb" kind="variable"><name>defaultMaterial</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderSettings_1a5481d57129b5a9deceb38a794e9cff20" kind="variable"><name>presets</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderSettings_1ab4b775ac8ab8b506affff257f3e013d6" kind="variable"><name>defaultPreset</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderSettings_1a486a5b315bbc187a788406f758615d11" kind="function"><name>GetPreset</name></member>
@@ -9041,7 +9041,6 @@
     <member refid="structSR__GRAPH__NS_1_1RenderSettingsPreset_1a4327530d4260f0dd0bbbfef7506aa11b" kind="variable"><name>shaderDefines</name></member>
     <member refid="structSR__GRAPH__NS_1_1RenderSettingsPreset_1a6f8bdf59c2073cfb382a8411e762d57c" kind="variable"><name>mainCameraRenderTechnique</name></member>
     <member refid="structSR__GRAPH__NS_1_1RenderSettingsPreset_1a0cf5dc19be51276b18486f85b5aeadef" kind="variable"><name>editorCameraRenderTechnique</name></member>
-    <member refid="structSR__GRAPH__NS_1_1RenderSettingsPreset_1a1442b1fafebd55c0a4b4e5f40e0d0d45" kind="variable"><name>prefabCameraRenderTechnique</name></member>
   </compound>
   <compound refid="classSR__GRAPH__NS_1_1RenderStagesSettings" kind="class"><name>SR_GRAPH_NS::RenderStagesSettings</name>
     <member refid="classSR__GRAPH__NS_1_1RenderStagesSettings_1acba011075713a3d6db546488d0e5f952" kind="typedef"><name>Ptr</name></member>
@@ -10178,7 +10177,6 @@
     <member refid="classSR__GTYPES__NS_1_1Shader_1abfc207502ce6c9b358f00fd04ca39873" kind="function"><name>EndSharedUBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a4fc66490b2ead167a963e198d2b0bc36" kind="function"><name>ResetUBOToDefaults</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a4a5770462cc13545454bef3af436b509" kind="function"><name>RemoveUsePoint</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Shader_1a10f0ec3802965911a0b145a5c86e613d" kind="function"><name>GetShaderVariant</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a45e1b1cf851a4e8cbd721915d6e4c8ca" kind="function"><name>GetAssociatedPath</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1abc86cf7f4a390fbbcf9f41e5baa50f13" kind="function"><name>GetId</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1aa8a94db4345d5d45430c4b007a8ff419" kind="function"><name>GetVirtualProgram</name></member>
@@ -10241,18 +10239,18 @@
     <member refid="classSR__GRAPH__NS_1_1ShaderCache_1af829766d643e1a5cfa90b755050c5540" kind="function"><name>LoadUBOBlock</name></member>
   </compound>
   <compound refid="structSR__SRSL__NS_1_1ShaderMacrosParams" kind="struct"><name>SR_SRSL_NS::ShaderMacrosParams</name>
-    <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a61fc0433e5c693adc9ec52fc94a66c67" kind="variable"><name>m_params</name></member>
+    <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a807f2cac2ddeeef5c2b3652cb2c531a0" kind="variable"><name>m_params</name></member>
     <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a6b3625ac6bb3d2ea11d9c6523dd7612a" kind="variable"><name>m_hash</name></member>
     <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a1abbcb06c30bddcedd83965b047737ab" kind="variable"><name>m_initialized</name></member>
     <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a15dfbeaab2c4f44edf04b70c3848f279" kind="function"><name>InitHash</name></member>
     <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a9420d176ba78ab863c6c873fc8b086d2" kind="function"><name>GetHash</name></member>
     <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a3cd3f3f1fc692186b09ab9eb4b6ddf8a" kind="function"><name>GetHashStr</name></member>
     <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a1a691d8ceeb860dd6310dac8b00639f1" kind="function"><name>empty</name></member>
-    <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a00a0a8d35daedbd39798c9f85f83884a" kind="function"><name>GetParams</name></member>
+    <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a63aa203e7efebf5354aa5445eaad1894" kind="function"><name>GetParams</name></member>
     <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1aca15865f9cc3182080f9d4a947b777ef" kind="function"><name>Clear</name></member>
     <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a75345b0e8451a47b4a913a3d346b957b" kind="function"><name>IsDefined</name></member>
-    <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1aaa9c1e653079015b50df397eae2dee8a" kind="function"><name>SetParam</name></member>
-    <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a16136c7f676ad9a1005e32e41fff4ce9" kind="function"><name>AddDefine</name></member>
+    <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a9e72c9d8d2fb1a785d650e933f248d25" kind="function"><name>SetParam</name></member>
+    <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1ac735b09e10da0be951d09a3a21b13f52" kind="function"><name>AddDefine</name></member>
     <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1ae76f71cb89749854d73edcd0a74faa8c" kind="function"><name>GetDefault</name></member>
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualProgramInfo_1_1ShaderProgramInfo" kind="struct"><name>SR_GRAPH_NS::Memory::VirtualProgramInfo::ShaderProgramInfo</name>

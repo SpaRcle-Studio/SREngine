@@ -60,20 +60,6 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" line="37" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" bodystart="37" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1RenderSettingsPreset_1a1442b1fafebd55c0a4b4e5f40e0d0d45" prot="public" static="no" mutable="no">
-        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
-        <definition>SR_UTILS_NS::Path SR_GRAPH_NS::RenderSettingsPreset::prefabCameraRenderTechnique</definition>
-        <argsstring></argsstring>
-        <name>prefabCameraRenderTechnique</name>
-        <qualifiedname>SR_GRAPH_NS::RenderSettingsPreset::prefabCameraRenderTechnique</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" line="41" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" bodystart="41" bodyend="-1"/>
-      </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
@@ -109,7 +95,6 @@
         <childnode refid="5" relation="usage">
           <edgelabel>editorCameraRenderTechnique</edgelabel>
           <edgelabel>mainCameraRenderTechnique</edgelabel>
-          <edgelabel>prefabCameraRenderTechnique</edgelabel>
         </childnode>
       </node>
       <node id="5">
@@ -131,7 +116,7 @@
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" line="23" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" bodystart="23" bodyend="43"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" line="23" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" bodystart="23" bodyend="39"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettingsPreset</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettingsPreset</scope><name>AllocateStatic</name></member>
@@ -150,7 +135,6 @@
       <member refid="classSR__UTILS__NS_1_1Serializable_1a2978d969c09702719b2ed5c84453b02d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::RenderSettingsPreset</scope><name>OnPreLoad</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a8281e1a68416fd493dce2a48fa8ea660" prot="public" virt="virtual"><scope>SR_GRAPH_NS::RenderSettingsPreset</scope><name>OnPreSave</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1ac8b16fec8d4003ae41fd3fe294595b36" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettingsPreset</scope><name>OriginType</name></member>
-      <member refid="structSR__GRAPH__NS_1_1RenderSettingsPreset_1a1442b1fafebd55c0a4b4e5f40e0d0d45" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettingsPreset</scope><name>prefabCameraRenderTechnique</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1afed952eb55d7441a18c4d3381d315fcf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettingsPreset</scope><name>RegisterPropertiesCodegen</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1ab5d15ff431f7405c8ad940333e6417a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettingsPreset</scope><name>RemoveSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::RenderSettingsPreset</scope><name>Save</name></member>

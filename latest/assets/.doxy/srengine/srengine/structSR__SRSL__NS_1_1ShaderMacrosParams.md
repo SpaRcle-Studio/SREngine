@@ -51,14 +51,14 @@
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**AddDefine**](#function-adddefine) (const std::string & define) <br> |
+|  void | [**AddDefine**](#function-adddefine) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) define) <br> |
 |  void | [**Clear**](#function-clear) () <br> |
 |  SR\_NODISCARD SR\_UTILS\_NS::SRHashType | [**GetHash**](#function-gethash) () const<br> |
 |  SR\_NODISCARD std::string | [**GetHashStr**](#function-gethashstr) () const<br> |
-|  SR\_NODISCARD const std::map&lt; std::string, std::string &gt; & | [**GetParams**](#function-getparams) () const<br> |
+|  SR\_NODISCARD const std::map&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md), std::string &gt; & | [**GetParams**](#function-getparams) () const<br> |
 |  void | [**InitHash**](#function-inithash) () <br> |
 |  bool | [**IsDefined**](#function-isdefined) (const std::string\_view & key) const<br> |
-|  void | [**SetParam**](#function-setparam) (const std::string & key, const std::string & value) <br> |
+|  void | [**SetParam**](#function-setparam) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) key, const std::string & value) <br> |
 |  SR\_NODISCARD bool | [**empty**](#function-empty) () const<br> |
 
 
@@ -102,7 +102,7 @@
 
 ```C++
 inline void SR_SRSL_NS::ShaderMacrosParams::AddDefine (
-    const std::string & define
+    SR_UTILS_NS::StringAtom define
 ) 
 ```
 
@@ -155,7 +155,7 @@ SR_NODISCARD std::string SR_SRSL_NS::ShaderMacrosParams::GetHashStr () const
 ### function GetParams 
 
 ```C++
-inline SR_NODISCARD const std::map< std::string, std::string > & SR_SRSL_NS::ShaderMacrosParams::GetParams () const
+inline SR_NODISCARD const std::map< SR_UTILS_NS::StringAtom , std::string > & SR_SRSL_NS::ShaderMacrosParams::GetParams () const
 ```
 
 
@@ -197,7 +197,7 @@ inline bool SR_SRSL_NS::ShaderMacrosParams::IsDefined (
 
 ```C++
 inline void SR_SRSL_NS::ShaderMacrosParams::SetParam (
-    const std::string & key,
+    SR_UTILS_NS::StringAtom key,
     const std::string & value
 ) 
 ```
