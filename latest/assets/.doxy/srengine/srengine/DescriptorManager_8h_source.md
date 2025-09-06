@@ -29,10 +29,12 @@ namespace SR_GRAPH_NS {
     class Pipeline;
 
     class DescriptorManager : public SR_UTILS_NS::Singleton<DescriptorManager> {
+        using Super = SR_UTILS_NS::Singleton<DescriptorManager>;
         SR_REGISTER_SINGLETON(DescriptorManager)
         using DescriptorSet = int32_t;
         struct DescriptorSetInfo {
             void* pShaderHandle = nullptr;
+            uint8_t frameIndex = 0;
             DescriptorSet descriptorSet = SR_ID_INVALID;
         };
     public:
@@ -44,6 +46,8 @@ namespace SR_GRAPH_NS {
             Failed
         };
     public:
+        void InitSingleton() override;
+
         void CollectUnused();
 
         SR_NODISCARD VirtualDescriptorSet AllocateDescriptorSet(VirtualDescriptorSet reallocation = SR_ID_INVALID);
@@ -60,6 +64,8 @@ namespace SR_GRAPH_NS {
     private:
         SR_HTYPES_NS::ObjectPool<std::vector<DescriptorSetInfo>, VirtualDescriptorSet> m_descriptorPool;
         SR_HTYPES_NS::SharedPtr<Pipeline> m_pipeline;
+
+        bool m_multiFrameMode = false;
 
         mutable std::vector<DescriptorType> m_allocationTypesCache;
 

@@ -174,6 +174,8 @@
         <reimplementedby refid="classSR__UTILS__NS_1_1GlobalSettings_1a5eb03779d112028f83c89bad53763d4d">InitSingleton</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1GlobalSettings_1a5eb03779d112028f83c89bad53763d4d">InitSingleton</reimplementedby>
         <reimplementedby refid="classSR__AUDIO__NS_1_1SoundManager_1a23f0e6b01ba1128b419587fc2413c81d">InitSingleton</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1DescriptorManager_1adc3686de2222032481b7d8030cf5cd21">InitSingleton</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1aeec6811c9e423d8b1749d219364304c2">InitSingleton</reimplementedby>
         <reimplementedby refid="classSR__PHYSICS__NS_1_1PhysicsLibrary_1a1b67cead65e57f6e879b7f82fd0ad6d8">InitSingleton</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1FileDialog_1a4b868d1dce7dac3d3c3d98ca0e3c8b3c">InitSingleton</reimplementedby>
         <reimplementedby refid="classSR__SRLM__NS_1_1DataTypeManager_1a62ddcfa7ad17cf500a666beaae8dc800">InitSingleton</reimplementedby>

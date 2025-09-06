@@ -31,6 +31,20 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="33" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="33" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshShaderPair_1a1316473f0cd00308c8cba682f4af856c" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::RenderQueue::MeshShaderPair::updatedFrames[16]</definition>
+        <argsstring>[16]</argsstring>
+        <name>updatedFrames</name>
+        <qualifiedname>SR_GRAPH_NS::RenderQueue::MeshShaderPair::updatedFrames</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="34" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
@@ -177,10 +191,11 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="31" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="31" bodyend="34"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="31" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="31" bodyend="35"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshShaderPair_1a1ad8ae7d805c2992693dd4f1accdecfa" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue::MeshShaderPair</scope><name>pMesh</name></member>
       <member refid="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshShaderPair_1a0cb8aa51245ae104528abc5375d6f77c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue::MeshShaderPair</scope><name>pShader</name></member>
+      <member refid="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshShaderPair_1a1316473f0cd00308c8cba682f4af856c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue::MeshShaderPair</scope><name>updatedFrames</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

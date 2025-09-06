@@ -93,6 +93,21 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="60" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="60" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1DebugPass_1ae07ff35f5099bab25d08016231085311" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::DebugPass::m_updateMeshesOnDemand</definition>
+        <argsstring></argsstring>
+        <name>m_updateMeshesOnDemand</name>
+        <qualifiedname>SR_GRAPH_NS::DebugPass::m_updateMeshesOnDemand</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="61" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1DebugPass_1afcdaa6d6161539d488953eaecaef9aca" prot="private" static="no" mutable="no">
         <type>std::map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, <ref refid="structSR__GRAPH__NS_1_1DebugPassShaderInfo" kindref="compound">DebugPassShaderInfo</ref> &gt;</type>
         <definition>std::map&lt;SR_UTILS_NS::StringAtom, DebugPassShaderInfo&gt; SR_GRAPH_NS::DebugPass::m_shaders</definition>
@@ -105,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="63" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="63" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="64" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="64" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -396,7 +411,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="38" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="38" bodyend="65"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="38" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="38" bodyend="66"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPass</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPass</scope><name>AllocateStatic</name></member>
@@ -455,6 +470,7 @@
       <member refid="classSR__GRAPH__NS_1_1DebugPass_1aeb51de380f2d261c9f284aa7f9bc340f" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPass</scope><name>m_meshesCountCache</name></member>
       <member refid="classSR__GRAPH__NS_1_1DebugPass_1afcdaa6d6161539d488953eaecaef9aca" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPass</scope><name>m_shaders</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8b2e3a39351e9141029bea133f380465" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPass</scope><name>m_uboManager</name></member>
+      <member refid="classSR__GRAPH__NS_1_1DebugPass_1ae07ff35f5099bab25d08016231085311" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPass</scope><name>m_updateMeshesOnDemand</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPass</scope><name>MakeShared</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1aa7c29336844c31150ba16812fc82ad7d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPass</scope><name>MeshPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a974885aecc09a1bc200f87a1fbe39b3c" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DebugPass</scope><name>OnMultisampleChanged</name></member>

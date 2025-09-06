@@ -129,6 +129,7 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 |  void | [**CollectUnused**](#function-collectunused) () <br> |
 |  bool | [**FreeUBO**](#function-freeubo) (VirtualUBO \* ubo) <br> |
 |  SR\_NODISCARD UBO | [**GetUBO**](#function-getubo) (VirtualUBO virtualUbo) noexcept const<br> |
+| virtual void | [**InitSingleton**](#function-initsingleton) () override<br> |
 |  void | [**SetPipeline**](#function-setpipeline) (PipelinePtr pPipeline) <br> |
 
 
@@ -493,6 +494,21 @@ SR_NODISCARD UBO SR_GRAPH_NS::Memory::UBOManager::GetUBO (
 ```
 
 
+
+
+<hr>
+
+
+
+### function InitSingleton 
+
+```C++
+virtual void SR_GRAPH_NS::Memory::UBOManager::InitSingleton () override
+```
+
+
+
+Implements [*SR\_UTILS\_NS::SingletonBase::InitSingleton*](classSR__UTILS__NS_1_1SingletonBase.md#function-initsingleton)
 
 
 <hr>

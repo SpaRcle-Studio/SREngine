@@ -123,6 +123,7 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 |  void | [**CollectUnused**](#function-collectunused) () <br> |
 |  void | [**Flush**](#function-flush) () <br> |
 |  bool | [**FreeDescriptorSet**](#function-freedescriptorset) (VirtualDescriptorSet \* pVirtualDescriptorSet) <br> |
+| virtual void | [**InitSingleton**](#function-initsingleton) () override<br> |
 |  void | [**SetPipeline**](#function-setpipeline) ([**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Pipeline**](classSR__GRAPH__NS_1_1Pipeline.md) &gt; pipeline) noexcept<br> |
 
 
@@ -401,6 +402,21 @@ bool SR_GRAPH_NS::DescriptorManager::FreeDescriptorSet (
 ```
 
 
+
+
+<hr>
+
+
+
+### function InitSingleton 
+
+```C++
+virtual void SR_GRAPH_NS::DescriptorManager::InitSingleton () override
+```
+
+
+
+Implements [*SR\_UTILS\_NS::SingletonBase::InitSingleton*](classSR__UTILS__NS_1_1SingletonBase.md#function-initsingleton)
 
 
 <hr>

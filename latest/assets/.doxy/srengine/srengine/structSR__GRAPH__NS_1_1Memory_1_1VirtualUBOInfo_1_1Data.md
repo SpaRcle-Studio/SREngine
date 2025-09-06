@@ -35,6 +35,7 @@
 
 | Type | Name |
 | ---: | :--- |
+|  uint8\_t | [**frameIndex**](#variable-frameindex)   = `0`<br> |
 |  void \* | [**pShaderHandle**](#variable-pshaderhandle)   = `nullptr`<br> |
 |  UBO | [**ubo**](#variable-ubo)   = `SR\_ID\_INVALID`<br> |
 |  uint16\_t | [**uboSize**](#variable-ubosize)   = `0`<br> |
@@ -89,6 +90,19 @@
 
 ## Public Attributes Documentation
 
+
+
+
+### variable frameIndex 
+
+```C++
+uint8_t SR_GRAPH_NS::Memory::VirtualUBOInfo::Data::frameIndex;
+```
+
+
+
+
+<hr>
 
 
 

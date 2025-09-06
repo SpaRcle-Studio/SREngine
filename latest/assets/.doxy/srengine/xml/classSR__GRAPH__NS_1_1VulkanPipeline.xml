@@ -2295,6 +2295,7 @@
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1acec79ba280ff6d871d6f315109f7dd53" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>m_dirty</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1abbf897a18ac1d4c2d7f639cb27e179f0" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>m_enableValidationLayers</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1aff1a6540a018816dc839abee3c42e513" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>m_errorsCount</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Pipeline_1ab3cea003d5f9a8a7d7cfb6ed12de502a" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>m_FBOForEachSwapchainImage</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a2ff513c21aee7e569113af21d671141f" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>m_fboQueue</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a015d23c7170f5284bbf5b5967535a6c5" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>m_frames</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a0df7e8ff5d6ec0d22845fb6ad1a7a83a" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>m_framesPerSecond</name></member>

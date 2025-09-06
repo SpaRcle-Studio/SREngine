@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="79" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="79" bodyend="84"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="80" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="80" bodyend="85"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a92069511440f0f63ff160e3483b4e4b6" prot="public" static="no">
         <type>int32_t</type>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="76" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="76" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="77" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="77" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1ab38e51f8a2f31f020f642fe204134b4d" prot="public" static="no">
         <type>int32_t</type>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="77" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="77" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="78" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="78" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-type">
@@ -87,7 +87,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="73" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="73" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="74" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="74" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a96d9fb2382298172ab62075b58264caf" prot="private" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1Pipeline" kindref="compound">Pipeline</ref> &gt;</type>
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="74" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="74" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="75" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="75" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -117,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="110" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="110" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="113" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="113" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a3a911f2f4552825a4295cd134ee5ea72" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1ObjectPool" kindref="compound">SR_HTYPES_NS::ObjectPool</ref>&lt; <ref refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo" kindref="compound">VirtualUBOInfo</ref>, VirtualUBO &gt;</type>
@@ -131,7 +131,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="111" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="111" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="114" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1aed56de63a3b98c7ccc31bb57fab926c5" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::Memory::UBOManager::m_multiFrameMode</definition>
+        <argsstring></argsstring>
+        <name>m_multiFrameMode</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::UBOManager::m_multiFrameMode</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="115" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="115" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -147,7 +162,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="86" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="87" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1adec78a4e5354f66a387cfe3c752220e6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -161,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="87" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="88" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a36064cd5400b2d2bec746f41647d8e60" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -183,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="107" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="110" column="27"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -203,7 +218,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="90" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="91" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a73f332ec536c5b707e7859839c9bb3fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -217,7 +232,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="91" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="92" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a2140879c1b8695a0c5515b17b82f42c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD VirtualUBO</type>
@@ -243,7 +258,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="93" column="33"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="94" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1ae0cf339f518de072f8b048d4f4d8cf2d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD VirtualUBO</type>
@@ -265,7 +280,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="94" column="33"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="95" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a7fc83d38a9a0f6f18d00ff15802fe178" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD VirtualUBO</type>
@@ -283,7 +298,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="95" column="33"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="96" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a9f3e5f96f6066cb98de2653ab5a12ae4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -301,7 +316,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="97" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="98" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1affd1406daecca0c8a7907a5e1734e77a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>BindResult</type>
@@ -319,7 +334,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="99" column="20"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="100" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1ab521c2b08f7cfc234f57ed156bf2f847" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>BindResult</type>
@@ -341,7 +356,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="100" column="20"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="101" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a4168770d2f4463ade4bbf0c163ee734d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>BindResult</type>
@@ -359,7 +374,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="102" column="20"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="103" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a24bc4f20fc3088b800ef7d37b5142acc" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD UBO</type>
@@ -377,7 +392,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="104" column="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="105" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1aeec6811c9e423d8b1749d219364304c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::Memory::UBOManager::InitSingleton</definition>
+        <argsstring>() override</argsstring>
+        <name>InitSingleton</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::UBOManager::InitSingleton</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332">InitSingleton</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="107" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -433,7 +463,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="71" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="71" bodyend="113"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="72" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="72" bodyend="117"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a2140879c1b8695a0c5515b17b82f42c1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>AllocateUBO</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1ae0cf339f518de072f8b048d4f4d8cf2d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>AllocateUBO</name></member>
@@ -449,11 +479,12 @@
       <member refid="classSR__UTILS__NS_1_1Singleton_1a6f131e2fa1b2641f7e9ea8662ba8da53" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>GetMutex</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>GetSingletonName</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a24bc4f20fc3088b800ef7d37b5142acc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>GetUBO</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>InitSingleton</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1aeec6811c9e423d8b1749d219364304c2" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>InitSingleton</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1ad6f59c12e431ce503ac7316ceaa4a5f2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>Instance</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>IsSingletonCanBeDestroyed</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a31931d2cbc17f064e27db243b971e202" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>IsSingletonInitialized</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1adab1931732d186e76c89e282c748f253" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>LockSingleton</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1aed56de63a3b98c7ccc31bb57fab926c5" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>m_multiFrameMode</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>m_mutex</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a0c5f2d55a8a52ea5cb826f1c31ebb302" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>m_pipeline</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a3a911f2f4552825a4295cd134ee5ea72" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>m_uboPool</name></member>

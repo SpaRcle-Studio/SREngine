@@ -80,8 +80,6 @@ namespace SR_GRAPH_NS {
         virtual void UseConstants(SR_GTYPES_NS::Shader* pShader);
         void UseSamplers(SR_GTYPES_NS::Shader* pShader) override;
 
-        virtual void OnUniformsUpdated() { }
-
         void OnMultisampleChanged() override;
         void OnResize(const SR_MATH_NS::UVector2& size) override;
 

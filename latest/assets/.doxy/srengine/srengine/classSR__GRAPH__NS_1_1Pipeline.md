@@ -340,6 +340,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 
 | Type | Name |
 | ---: | :--- |
+|  bool | [**m\_FBOForEachSwapchainImage**](#variable-m_fboforeachswapchainimage)   = `false`<br> |
 |  [**SR\_HTYPES\_NS::PoolSet**](classSR__HTYPES__NS_1_1PoolSet.md)&lt; bool &gt; | [**m\_bindedDescriptors**](#variable-m_bindeddescriptors)  <br> |
 |  std::vector&lt; [**PipelineState**](structSR__GRAPH__NS_1_1PipelineState.md) &gt; | [**m\_buildStates**](#variable-m_buildstates)  <br>_Состояние, которое было на момент постоения сцены рендера_  |
 |  uint8\_t | [**m\_currentSampleCount**](#variable-m_currentsamplecount)   = `0`<br> |
@@ -2505,6 +2506,19 @@ virtual SR_GRAPH_NS::Pipeline::~Pipeline ()
 <hr>
 ## Protected Attributes Documentation
 
+
+
+
+### variable m\_FBOForEachSwapchainImage 
+
+```C++
+bool SR_GRAPH_NS::Pipeline::m_FBOForEachSwapchainImage;
+```
+
+
+
+
+<hr>
 
 
 

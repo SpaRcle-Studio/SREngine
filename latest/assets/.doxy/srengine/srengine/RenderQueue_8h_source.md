@@ -41,6 +41,7 @@ namespace SR_GRAPH_NS {
         struct MeshShaderPair {
             SR_GTYPES_NS::Mesh* pMesh;
             SR_GTYPES_NS::Shader* pShader;
+            bool updatedFrames[16];
         };
     public:
         enum QueueState : uint8_t {
@@ -128,6 +129,7 @@ namespace SR_GRAPH_NS {
     private:
         void UpdateShaders();
         void UpdateMeshes();
+        void UpdateAllMeshes();
 
         SR_NODISCARD bool IsSuitable(const MeshRegistrationInfo& info) const;
 
@@ -146,6 +148,8 @@ namespace SR_GRAPH_NS {
         bool m_customMeshDraw = false;
 
     private:
+        bool m_multiFrameMode = false;
+        bool m_updateMeshesOnDemand = false;
         bool m_rendered = false;
         bool m_isInitialized = false;
 
@@ -159,6 +163,7 @@ namespace SR_GRAPH_NS {
 
         SR_HTYPES_NS::SortedVector<SR_GTYPES_NS::Shader*> m_shaders;
         std::vector<MeshShaderPair> m_meshes;
+        std::vector<MeshShaderPair> m_tempMeshes;
 
         MeshDrawerPass* m_meshDrawerPass = nullptr;
         RenderContext* m_renderContext = nullptr;

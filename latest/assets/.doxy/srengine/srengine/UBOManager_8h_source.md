@@ -36,6 +36,7 @@ namespace SR_GRAPH_NS::Memory {
 
         struct Data {
             UBO ubo = SR_ID_INVALID;
+            uint8_t frameIndex = 0;
             void* pShaderHandle = nullptr;
             uint16_t uboSize = 0;
 
@@ -109,12 +110,15 @@ namespace SR_GRAPH_NS::Memory {
 
         SR_NODISCARD UBO GetUBO(VirtualUBO virtualUbo) const noexcept;
 
+        void InitSingleton() override;
+
     private:
         SR_NODISCARD bool AllocMemory(UBO* ubo, uint32_t uboSize);
 
     private:
         PipelinePtr m_pipeline;
         SR_HTYPES_NS::ObjectPool<VirtualUBOInfo, VirtualUBO> m_uboPool;
+        bool m_multiFrameMode = false;
 
     };
 }

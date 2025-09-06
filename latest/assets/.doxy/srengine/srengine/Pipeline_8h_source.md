@@ -279,6 +279,7 @@ namespace SR_GRAPH_NS {
         uint8_t m_requiredSampleCount = 0;
         uint8_t m_supportedSampleCount = 0;
         bool m_isMultiSampleSupported = false;
+        bool m_FBOForEachSwapchainImage = false;
 
         uint32_t m_frames = 0;
         uint32_t m_framesPerSecond = 0;

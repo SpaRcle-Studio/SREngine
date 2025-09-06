@@ -2247,6 +2247,7 @@
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data" kind="struct"><name>SR_GRAPH_NS::Memory::VirtualUBOInfo::Data</name>
     <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data_1ae95caf30965bb84de28fad2ea344a182" kind="variable"><name>ubo</name></member>
+    <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data_1aea28d924041623b986472e1c4ce54986" kind="variable"><name>frameIndex</name></member>
     <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data_1ad958797212adcb53552d32f8ee990d60" kind="variable"><name>pShaderHandle</name></member>
     <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data_1a0dccbb88c9b01fc1b866574f77ec3a5a" kind="variable"><name>uboSize</name></member>
     <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data_1adad7807380cb32d2e365e0a549897a9f" kind="function"><name>Validate</name></member>
@@ -2658,6 +2659,7 @@
     <member refid="classSR__GRAPH__NS_1_1DebugPass_1a61818949ada432c0c78d7f4ebfc03584" kind="variable"><name>m_hasRendered</name></member>
     <member refid="classSR__GRAPH__NS_1_1DebugPass_1a3892bccea7aeb0552aca72b8f0e7c7bb" kind="variable"><name>m_isNeedUpdate</name></member>
     <member refid="classSR__GRAPH__NS_1_1DebugPass_1a32fe8b427e67f245447dbb4c2e4b0922" kind="variable"><name>m_isValid</name></member>
+    <member refid="classSR__GRAPH__NS_1_1DebugPass_1ae07ff35f5099bab25d08016231085311" kind="variable"><name>m_updateMeshesOnDemand</name></member>
     <member refid="classSR__GRAPH__NS_1_1DebugPass_1afcdaa6d6161539d488953eaecaef9aca" kind="variable"><name>m_shaders</name></member>
     <member refid="classSR__GRAPH__NS_1_1DebugPass_1af6340e2214eba8b099b816f2488310cc" kind="function"><name>Prepare</name></member>
     <member refid="classSR__GRAPH__NS_1_1DebugPass_1a501b6e1ebe5566cecf1905dbf55f465f" kind="function"><name>Render</name></member>
@@ -2829,10 +2831,13 @@
     <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1aeb9bcbb5eb9d880a6b65134b6f075e90a5ca95d54c2594160a4dde45c00cf668d" kind="enumvalue"><name>Duplicated</name></member>
     <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1aeb9bcbb5eb9d880a6b65134b6f075e90ad7c8c85bf79bbe1b7188497c32c3b0ca" kind="enumvalue"><name>Failed</name></member>
     <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a89ef4b17aa94cd26134221632713414b" kind="typedef"><name>VirtualDescriptorSet</name></member>
+    <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a24db76e4b0747374a5af7c52e06cb58b" kind="typedef"><name>Super</name></member>
     <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a1afc0ee308fedcab8eec5ab7e5751a66" kind="typedef"><name>DescriptorSet</name></member>
     <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a8a0d107353de4877c54d7f59048ade93" kind="variable"><name>m_descriptorPool</name></member>
     <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1aecf3c2a43605148da6debe626d98acee" kind="variable"><name>m_pipeline</name></member>
+    <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a90fba1c97b3c6bbdac068a07d301838c" kind="variable"><name>m_multiFrameMode</name></member>
     <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a38d76ce5645b49866375dcd4024e8125" kind="variable"><name>m_allocationTypesCache</name></member>
+    <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1adc3686de2222032481b7d8030cf5cd21" kind="function"><name>InitSingleton</name></member>
     <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1ae5263847f34eff5ebd51ac71f13a9487" kind="function"><name>CollectUnused</name></member>
     <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1acb6d2719e41b0b734ab781be63e63b88" kind="function"><name>AllocateDescriptorSet</name></member>
     <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a9df1a047fccd12bdb084198af268bf30" kind="function"><name>Bind</name></member>
@@ -2843,6 +2848,7 @@
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1DescriptorManager_1_1DescriptorSetInfo" kind="struct"><name>SR_GRAPH_NS::DescriptorManager::DescriptorSetInfo</name>
     <member refid="structSR__GRAPH__NS_1_1DescriptorManager_1_1DescriptorSetInfo_1a9cd55b3c6f480ede6b54b604c7445a82" kind="variable"><name>pShaderHandle</name></member>
+    <member refid="structSR__GRAPH__NS_1_1DescriptorManager_1_1DescriptorSetInfo_1a0ecbd317c3e374ef698257c2b3c9ff6c" kind="variable"><name>frameIndex</name></member>
     <member refid="structSR__GRAPH__NS_1_1DescriptorManager_1_1DescriptorSetInfo_1ad56737793465bceeacf2a49c89181983" kind="variable"><name>descriptorSet</name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1DetectedOr" kind="struct"><name>SR_UTILS_NS::DetectedOr</name>
@@ -6483,7 +6489,6 @@
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7c71d4d77dffc063b164f9dd43f3851a" kind="function"><name>UseSharedUniforms</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a77aca67fb7c534f6cc89e5b794cfac6a" kind="function"><name>UseConstants</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1acf61ab11ac383cf0a129b40ee5652361" kind="function"><name>UseSamplers</name></member>
-    <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7c96addbaeb09463d01b26922206431a" kind="function"><name>OnUniformsUpdated</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a2c8facd7b70961d91c011f337c8902f0" kind="function"><name>OnMultisampleChanged</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1aa6fc3fe2752cc600fe681a62a22d4b50" kind="function"><name>OnResize</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7ead50f17c9c553c5d3f3d62666cfc2a" kind="function"><name>IsLayerAllowed</name></member>
@@ -6574,6 +6579,7 @@
   <compound refid="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshShaderPair" kind="struct"><name>SR_GRAPH_NS::RenderQueue::MeshShaderPair</name>
     <member refid="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshShaderPair_1a1ad8ae7d805c2992693dd4f1accdecfa" kind="variable"><name>pMesh</name></member>
     <member refid="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshShaderPair_1a0cb8aa51245ae104528abc5375d6f77c" kind="variable"><name>pShader</name></member>
+    <member refid="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshShaderPair_1a1316473f0cd00308c8cba682f4af856c" kind="variable"><name>updatedFrames</name></member>
   </compound>
   <compound refid="classSR__GRAPH__NS_1_1Memory_1_1MeshVidMemInfo" kind="class"><name>SR_GRAPH_NS::Memory::MeshVidMemInfo</name>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshVidMemInfo_1a23fe7b0dce869815b7f26b1a09612329" kind="friend"><name>MeshManager</name></member>
@@ -7875,6 +7881,7 @@
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a9afe91140696dad60bd1981898da2be1" kind="variable"><name>m_requiredSampleCount</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a4c66f92cb85ee9d6bbdfdc1838bd1e92" kind="variable"><name>m_supportedSampleCount</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a3b2a0e747e1e251e021591a09fe5ad01" kind="variable"><name>m_isMultiSampleSupported</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Pipeline_1ab3cea003d5f9a8a7d7cfb6ed12de502a" kind="variable"><name>m_FBOForEachSwapchainImage</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a015d23c7170f5284bbf5b5967535a6c5" kind="variable"><name>m_frames</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a0df7e8ff5d6ec0d22845fb6ad1a7a83a" kind="variable"><name>m_framesPerSecond</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1aa60bb798bce567a0df5c5afce45f7861" kind="variable"><name>m_lastSecond</name></member>
@@ -8899,6 +8906,8 @@
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1af984f2fee49e48617f66a0092a0a2ee6" kind="typedef"><name>VBO</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1a1e327fdea7a6d0a17bb436606760722f" kind="typedef"><name>Layer</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1a67d606c3dd28738c68744ba2b43b71bc" kind="variable"><name>m_customMeshDraw</name></member>
+    <member refid="classSR__GRAPH__NS_1_1RenderQueue_1a8e9eced64b6647c20f1130a0a98b6c82" kind="variable"><name>m_multiFrameMode</name></member>
+    <member refid="classSR__GRAPH__NS_1_1RenderQueue_1a95d82fd9879375ffd2ec7e68e02599fd" kind="variable"><name>m_updateMeshesOnDemand</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1aa44f8089d7a4f099d40574bffa416851" kind="variable"><name>m_rendered</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1acad8667ea99c850c2b340d409b56b452" kind="variable"><name>m_isInitialized</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1aa2bb25f05689609f488b88a4772b3e9f" kind="variable"><name>m_layersStateHash</name></member>
@@ -8907,6 +8916,7 @@
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1a2226a80ed9891b96777345a67656e8d5" kind="variable"><name>m_queues</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1a16994d7384a0bb8337a7a76def72d903" kind="variable"><name>m_shaders</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1acad20c98d1315c6de0605c6654197172" kind="variable"><name>m_meshes</name></member>
+    <member refid="classSR__GRAPH__NS_1_1RenderQueue_1a1e15bd207f4e65e41f753eb8e4384db8" kind="variable"><name>m_tempMeshes</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1ab85a5448ace088dfa49d051372fba13f" kind="variable"><name>m_meshDrawerPass</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1ab50521cab7561af05e8ec6309d9ebe06" kind="variable"><name>m_renderContext</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1ad1e5a4b8ee84275e9035d7ef0f6cfabe" kind="variable"><name>m_renderStrategy</name></member>
@@ -8925,6 +8935,7 @@
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1a5caaef2e7f95f0838e58e780df70db92" kind="function"><name>GetMeshDrawerPass</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1a334bec781cb1cd2d521d1d61f5566a3f" kind="function"><name>UpdateShaders</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1a64597287eaae87f5d0473a3c4189ea1d" kind="function"><name>UpdateMeshes</name></member>
+    <member refid="classSR__GRAPH__NS_1_1RenderQueue_1ad4be8459dfe0e64c326693861d686297" kind="function"><name>UpdateAllMeshes</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1a204416c218ba4c164480b6dcb44b00b5" kind="function"><name>IsSuitable</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1ac2c39a0214f8baae7f1c1a5ff7d8f566" kind="function"><name>Render</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1a69c47f578d04c372cae7540051cb5bfd" kind="function"><name>FindNextShader</name></member>
@@ -12642,6 +12653,7 @@
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a96d9fb2382298172ab62075b58264caf" kind="typedef"><name>PipelinePtr</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a0c5f2d55a8a52ea5cb826f1c31ebb302" kind="variable"><name>m_pipeline</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a3a911f2f4552825a4295cd134ee5ea72" kind="variable"><name>m_uboPool</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1aed56de63a3b98c7ccc31bb57fab926c5" kind="variable"><name>m_multiFrameMode</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a6ae9c83e178a5476971ff9c9819cd40a" kind="function"><name>UBOManager</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1adec78a4e5354f66a387cfe3c752220e6" kind="function"><name>~UBOManager</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a36064cd5400b2d2bec746f41647d8e60" kind="function"><name>AllocMemory</name></member>
@@ -12655,6 +12667,7 @@
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1ab521c2b08f7cfc234f57ed156bf2f847" kind="function"><name>BindUBO</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a4168770d2f4463ade4bbf0c163ee734d" kind="function"><name>BindNoDublicateUBO</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a24bc4f20fc3088b800ef7d37b5142acc" kind="function"><name>GetUBO</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1aeec6811c9e423d8b1749d219364304c2" kind="function"><name>InitSingleton</name></member>
   </compound>
   <compound refid="classSR__GRAPH__UI__NS_1_1UICanvasComponent" kind="class"><name>SR_GRAPH_UI_NS::UICanvasComponent</name>
     <member refid="classSR__GRAPH__UI__NS_1_1UICanvasComponent_1a2c5f339dfea54ec0e7212354bba6bcf2" kind="typedef"><name>Super</name></member>

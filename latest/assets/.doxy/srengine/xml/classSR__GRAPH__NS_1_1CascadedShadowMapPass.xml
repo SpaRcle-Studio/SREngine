@@ -649,7 +649,6 @@
       <member refid="classSR__UTILS__NS_1_1Serializable_1a2978d969c09702719b2ed5c84453b02d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>OnPreLoad</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a8281e1a68416fd493dce2a48fa8ea660" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>OnPreSave</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1aa6fc3fe2752cc600fe681a62a22d4b50" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>OnResize</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7c96addbaeb09463d01b26922206431a" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>OnUniformsUpdated</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>operator bool</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>operator!=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>operator*</name></member>

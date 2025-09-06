@@ -299,7 +299,6 @@ See [SR\_GRAPH\_NS::MeshDrawerPass](classSR__GRAPH__NS_1_1MeshDrawerPass.md)
 |   | [**MeshDrawerPass**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-meshdrawerpass) () <br> |
 | virtual void | [**OnMultisampleChanged**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-onmultisamplechanged) () override<br> |
 | virtual void | [**OnResize**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-onresize) (const SR\_MATH\_NS::UVector2 & size) override<br> |
-| virtual void | [**OnUniformsUpdated**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-onuniformsupdated) () <br> |
 | virtual void | [**Prepare**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-prepare) () override<br>_Вызывается всегда но полсе оверлея_  |
 | virtual bool | [**Render**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-render) () override<br>_Вызывается только во время построения_  |
 | virtual void | [**SetRenderTechnique**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-setrendertechnique) ([**SR\_GRAPH\_NS::IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* pRenderTechnique) override<br> |

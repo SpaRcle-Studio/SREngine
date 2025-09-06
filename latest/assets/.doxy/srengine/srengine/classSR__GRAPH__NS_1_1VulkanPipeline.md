@@ -470,6 +470,7 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 
 | Type | Name |
 | ---: | :--- |
+|  bool | [**m\_FBOForEachSwapchainImage**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_fboforeachswapchainimage)   = `false`<br> |
 |  [**SR\_HTYPES\_NS::PoolSet**](classSR__HTYPES__NS_1_1PoolSet.md)&lt; bool &gt; | [**m\_bindedDescriptors**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_bindeddescriptors)  <br> |
 |  std::vector&lt; [**PipelineState**](structSR__GRAPH__NS_1_1PipelineState.md) &gt; | [**m\_buildStates**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_buildstates)  <br>_Состояние, которое было на момент постоения сцены рендера_  |
 |  uint8\_t | [**m\_currentSampleCount**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_currentsamplecount)   = `0`<br> |

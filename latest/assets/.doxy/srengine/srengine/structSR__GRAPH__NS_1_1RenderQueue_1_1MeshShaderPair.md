@@ -37,6 +37,7 @@
 | ---: | :--- |
 |  [**SR\_GTYPES\_NS::Mesh**](classSR__GTYPES__NS_1_1Mesh.md) \* | [**pMesh**](#variable-pmesh)  <br> |
 |  [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* | [**pShader**](#variable-pshader)  <br> |
+|  bool | [**updatedFrames**](#variable-updatedframes)  <br> |
 
 
 
@@ -103,6 +104,19 @@ SR_GTYPES_NS::Mesh* SR_GRAPH_NS::RenderQueue::MeshShaderPair::pMesh;
 
 ```C++
 SR_GTYPES_NS::Shader* SR_GRAPH_NS::RenderQueue::MeshShaderPair::pShader;
+```
+
+
+
+
+<hr>
+
+
+
+### variable updatedFrames 
+
+```C++
+bool SR_GRAPH_NS::RenderQueue::MeshShaderPair::updatedFrames[16];
 ```
 
 

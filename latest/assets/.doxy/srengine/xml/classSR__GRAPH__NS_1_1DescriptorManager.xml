@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="30" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="30" bodyend="35"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="32" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="32" bodyend="37"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1DescriptorManager_1a89ef4b17aa94cd26134221632713414b" prot="public" static="no">
         <type>int32_t</type>
@@ -57,10 +57,24 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="29" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="31" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="31" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1DescriptorManager_1a24db76e4b0747374a5af7c52e06cb58b" prot="private" static="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Singleton" kindref="compound">SR_UTILS_NS::Singleton</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1DescriptorManager" kindref="compound">DescriptorManager</ref> &gt;</type>
+        <definition>using SR_GRAPH_NS::DescriptorManager::Super =  SR_UTILS_NS::Singleton&lt;DescriptorManager&gt;</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_GRAPH_NS::DescriptorManager::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="22" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1DescriptorManager_1a1afc0ee308fedcab8eec5ab7e5751a66" prot="private" static="no">
         <type>int32_t</type>
         <definition>using SR_GRAPH_NS::DescriptorManager::DescriptorSet =  int32_t</definition>
@@ -73,7 +87,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="23" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="24" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="24" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -89,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="51" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="55" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="55" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1DescriptorManager_1aecf3c2a43605148da6debe626d98acee" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1Pipeline" kindref="compound">Pipeline</ref> &gt;</type>
@@ -103,7 +117,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="52" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="52" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="56" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1DescriptorManager_1a90fba1c97b3c6bbdac068a07d301838c" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::DescriptorManager::m_multiFrameMode</definition>
+        <argsstring></argsstring>
+        <name>m_multiFrameMode</name>
+        <qualifiedname>SR_GRAPH_NS::DescriptorManager::m_multiFrameMode</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="58" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1DescriptorManager_1a38d76ce5645b49866375dcd4024e8125" prot="private" static="no" mutable="yes">
         <type>std::vector&lt; DescriptorType &gt;</type>
@@ -117,10 +146,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="54" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="54" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="60" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="60" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1DescriptorManager_1adc3686de2222032481b7d8030cf5cd21" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::DescriptorManager::InitSingleton</definition>
+        <argsstring>() override</argsstring>
+        <name>InitSingleton</name>
+        <qualifiedname>SR_GRAPH_NS::DescriptorManager::InitSingleton</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332">InitSingleton</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="39" column="14"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DescriptorManager_1ae5263847f34eff5ebd51ac71f13a9487" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void SR_GRAPH_NS::DescriptorManager::CollectUnused</definition>
@@ -133,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="37" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="41" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DescriptorManager_1acb6d2719e41b0b734ab781be63e63b88" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD VirtualDescriptorSet</type>
@@ -152,7 +196,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="39" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="43" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DescriptorManager_1a9df1a047fccd12bdb084198af268bf30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>BindResult</type>
@@ -170,7 +214,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="40" column="20"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="44" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DescriptorManager_1a38ffbe7ead0bc0c5249739ec6ce9927d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -184,7 +228,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="41" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="45" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DescriptorManager_1a5e6ca1672086cd5a34fd30b854cca2f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -202,7 +246,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="43" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="47" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DescriptorManager_1ae5abda35cce1a6a7f3eb5fdc733478cb" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -220,7 +264,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="45" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="45" bodyend="45"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="49" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="49" bodyend="49"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -240,7 +284,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="48" column="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="52" column="36"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -295,7 +339,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="21" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="21" bodyend="56"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="21" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="21" bodyend="62"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1acb6d2719e41b0b734ab781be63e63b88" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>AllocateDescriptorSet</name></member>
       <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a236ffb02af589b653d82eede9836d721" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>AllocateMemory</name></member>
@@ -308,13 +352,14 @@
       <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a5e6ca1672086cd5a34fd30b854cca2f1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>FreeDescriptorSet</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a6f131e2fa1b2641f7e9ea8662ba8da53" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>GetMutex</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>GetSingletonName</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>InitSingleton</name></member>
+      <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1adc3686de2222032481b7d8030cf5cd21" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>InitSingleton</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1ad6f59c12e431ce503ac7316ceaa4a5f2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>Instance</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>IsSingletonCanBeDestroyed</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a31931d2cbc17f064e27db243b971e202" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>IsSingletonInitialized</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1adab1931732d186e76c89e282c748f253" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>LockSingleton</name></member>
       <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a38d76ce5645b49866375dcd4024e8125" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>m_allocationTypesCache</name></member>
       <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a8a0d107353de4877c54d7f59048ade93" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>m_descriptorPool</name></member>
+      <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a90fba1c97b3c6bbdac068a07d301838c" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>m_multiFrameMode</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>m_mutex</name></member>
       <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1aecf3c2a43605148da6debe626d98acee" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>m_pipeline</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>NonCopyable</name></member>
@@ -325,6 +370,7 @@
       <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1ae5abda35cce1a6a7f3eb5fdc733478cb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>SetPipeline</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a0e21dfc9afab45b0a6a70f6665ce5819" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>Singleton</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8ae4876316f0fa28dc67547db6f64ec6" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>SingletonBase</name></member>
+      <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a24db76e4b0747374a5af7c52e06cb58b" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>Super</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a0338ed248f78e467760d3095f4a4a71a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>UnlockSingleton</name></member>
       <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a89ef4b17aa94cd26134221632713414b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>VirtualDescriptorSet</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>~NonCopyable</name></member>

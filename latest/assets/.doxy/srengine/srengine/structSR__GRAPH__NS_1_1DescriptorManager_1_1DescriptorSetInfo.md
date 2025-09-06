@@ -36,6 +36,7 @@
 | Type | Name |
 | ---: | :--- |
 |  DescriptorSet | [**descriptorSet**](#variable-descriptorset)   = `SR\_ID\_INVALID`<br> |
+|  uint8\_t | [**frameIndex**](#variable-frameindex)   = `0`<br> |
 |  void \* | [**pShaderHandle**](#variable-pshaderhandle)   = `nullptr`<br> |
 
 
@@ -90,6 +91,19 @@
 
 ```C++
 DescriptorSet SR_GRAPH_NS::DescriptorManager::DescriptorSetInfo::descriptorSet;
+```
+
+
+
+
+<hr>
+
+
+
+### variable frameIndex 
+
+```C++
+uint8_t SR_GRAPH_NS::DescriptorManager::DescriptorSetInfo::frameIndex;
 ```
 
 

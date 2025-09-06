@@ -240,7 +240,6 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 |   | [**MeshDrawerPass**](#function-meshdrawerpass) () <br> |
 | virtual void | [**OnMultisampleChanged**](#function-onmultisamplechanged) () override<br> |
 | virtual void | [**OnResize**](#function-onresize) (const SR\_MATH\_NS::UVector2 & size) override<br> |
-| virtual void | [**OnUniformsUpdated**](#function-onuniformsupdated) () <br> |
 | virtual void | [**Prepare**](#function-prepare) () override<br>_Вызывается всегда но полсе оверлея_  |
 | virtual bool | [**Render**](#function-render) () override<br>_Вызывается только во время построения_  |
 | virtual void | [**SetRenderTechnique**](#function-setrendertechnique) ([**SR\_GRAPH\_NS::IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* pRenderTechnique) override<br> |
@@ -858,19 +857,6 @@ virtual void SR_GRAPH_NS::MeshDrawerPass::OnResize (
 
 
 Implements [*SR\_GRAPH\_NS::BasePass::OnResize*](classSR__GRAPH__NS_1_1BasePass.md#function-onresize)
-
-
-<hr>
-
-
-
-### function OnUniformsUpdated 
-
-```C++
-inline virtual void SR_GRAPH_NS::MeshDrawerPass::OnUniformsUpdated () 
-```
-
-
 
 
 <hr>
