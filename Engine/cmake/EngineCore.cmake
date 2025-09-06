@@ -54,7 +54,7 @@ if (NOT SR_ENGINE_FLATPAK_BUILD AND NOT ANDROID_NDK)
     include(libs/Utils/cmake/ResourceEmbedder.cmake)
 
     AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Threads.yml")
-    AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Features.xml")
+    #AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Features.xml")
 
     if (WIN32)
         AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Utilities/git2.exe")

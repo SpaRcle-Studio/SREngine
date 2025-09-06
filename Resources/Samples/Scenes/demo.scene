@@ -411,11 +411,11 @@ sra format
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:-5.01200008
+									9-f:-3.14662552
 								8-v:y
-									9-f:4.68300009
+									9-f:4.28035975
 								8-v:z
-									9-f:-5.80000019
+									9-f:3.6078701
 							7-o:quaternion
 								8-v:x
 									9-f:0.213029996
@@ -445,8 +445,6 @@ sra format
 										10-i:3445474946150253867
 					5-v:name
 						6-s:GameCamera
-					5-v:isEnabled
-						6-b:false
 					5-o:transform
 						6-v:type
 							7-s:Transform3D
@@ -573,11 +571,11 @@ sra format
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:4.36361217
+									9-f:15.3284283
 								8-v:y
 									9-f:4.5353241
 								8-v:z
-									9-f:5.92640591
+									9-f:14.6959143
 		2-k:i
 			3-o:d
 				4-v:type
@@ -851,8 +849,6 @@ ddddцццゔぅヾボ
 						6-i:3114007273209151174
 					5-v:name
 						6-s:Tree
-					5-v:isEnabled
-						6-b:false
 					5-v:prefab
 						6-s:Samples/Oak/oak.prefab
 					5-o:transform
@@ -1152,11 +1148,11 @@ ddddцццゔぅヾボ
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:-13.0195637
+									9-f:-12.34198
 								8-v:y
-									9-f:2.65349722
+									9-f:2.65349674
 								8-v:z
-									9-f:2.84277725
+									9-f:-10.5516682
 		2-k:i
 			3-o:d
 				4-v:type
@@ -5524,7 +5520,9 @@ ddddцццゔぅヾボ
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:-3.13554502
+									9-f:-4.04317141
+								8-v:z
+									9-f:-4.39492035
 							7-o:scale
 								8-v:x
 									9-f:3
@@ -14391,3 +14389,339 @@ ddddцццゔぅヾボ
 									9-f:-8.71000004
 								8-v:y
 									9-f:1.76999998
+		2-k:i
+			3-o:d
+				4-v:type
+					5-s:GameObject
+				4-o:ptr
+					5-v:entityId
+						6-i:4534162250247141703
+					5-a:components
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Rigidbody3D
+								8-o:ptr
+									9-v:entityId
+										10-i:4091622810159070019
+									9-o:shape
+										10-v:type
+											11-s:CollisionShape
+										10-o:ptr
+											11-v:type
+												12-s:Sphere3D
+											11-o:bounds
+												12-v:x
+													13-f:1
+												12-v:y
+													13-f:1
+												12-v:z
+													13-f:1
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Mesh3D
+								8-o:ptr
+									9-v:entityId
+										10-i:4063345223904442466
+									9-o:material
+										10-v:type
+											11-s:FileMaterial
+										10-o:ptr
+											11-v:materialPath
+												12-s:Engine/Materials/default.mat
+									9-v:meshPath
+										10-s:Engine/Models/sphere.obj
+					5-v:name
+						6-s:Sphere
+					5-o:transform
+						6-v:type
+							7-s:Transform3D
+						6-o:ptr
+							7-o:translation
+								8-v:x
+									9-f:7.2418108
+								8-v:y
+									9-f:5.20861959
+								8-v:z
+									9-f:8.28602886
+		2-k:i
+			3-o:d
+				4-v:type
+					5-s:GameObject
+				4-o:ptr
+					5-v:entityId
+						6-i:2330549252018027197
+					5-a:components
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Rigidbody3D
+								8-o:ptr
+									9-v:entityId
+										10-i:4481544769240879666
+									9-o:shape
+										10-v:type
+											11-s:CollisionShape
+										10-o:ptr
+											11-v:type
+												12-s:Sphere3D
+											11-o:bounds
+												12-v:x
+													13-f:1
+												12-v:y
+													13-f:1
+												12-v:z
+													13-f:1
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Mesh3D
+								8-o:ptr
+									9-v:entityId
+										10-i:2774790433649037945
+									9-o:material
+										10-v:type
+											11-s:FileMaterial
+										10-o:ptr
+											11-v:materialPath
+												12-s:Engine/Materials/default.mat
+									9-v:meshPath
+										10-s:Engine/Models/sphere.obj
+					5-v:name
+						6-s:Sphere
+					5-o:transform
+						6-v:type
+							7-s:Transform3D
+						6-o:ptr
+							7-o:translation
+								8-v:x
+									9-f:8.4788332
+								8-v:y
+									9-f:2.55964923
+								8-v:z
+									9-f:8.28602886
+		2-k:i
+			3-o:d
+				4-v:type
+					5-s:GameObject
+				4-o:ptr
+					5-v:entityId
+						6-i:3808158872858107794
+					5-a:components
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Rigidbody3D
+								8-o:ptr
+									9-v:entityId
+										10-i:2611758090129006313
+									9-o:shape
+										10-v:type
+											11-s:CollisionShape
+										10-o:ptr
+											11-v:type
+												12-s:Sphere3D
+											11-o:bounds
+												12-v:x
+													13-f:1
+												12-v:y
+													13-f:1
+												12-v:z
+													13-f:1
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Mesh3D
+								8-o:ptr
+									9-v:entityId
+										10-i:3451056127106430082
+									9-o:material
+										10-v:type
+											11-s:FileMaterial
+										10-o:ptr
+											11-v:materialPath
+												12-s:Engine/Materials/default.mat
+									9-v:meshPath
+										10-s:Engine/Models/sphere.obj
+					5-v:name
+						6-s:Sphere
+					5-o:transform
+						6-v:type
+							7-s:Transform3D
+						6-o:ptr
+							7-o:translation
+								8-v:x
+									9-f:10.6208496
+								8-v:y
+									9-f:2.55964923
+								8-v:z
+									9-f:8.28602886
+		2-k:i
+			3-o:d
+				4-v:type
+					5-s:GameObject
+				4-o:ptr
+					5-v:entityId
+						6-i:3986666376209954761
+					5-a:components
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Rigidbody3D
+								8-o:ptr
+									9-v:entityId
+										10-i:4049346072312005630
+									9-o:shape
+										10-v:type
+											11-s:CollisionShape
+										10-o:ptr
+											11-v:type
+												12-s:Sphere3D
+											11-o:bounds
+												12-v:x
+													13-f:1
+												12-v:y
+													13-f:1
+												12-v:z
+													13-f:1
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Mesh3D
+								8-o:ptr
+									9-v:entityId
+										10-i:3684134155664408707
+									9-o:material
+										10-v:type
+											11-s:FileMaterial
+										10-o:ptr
+											11-v:materialPath
+												12-s:Engine/Materials/default.mat
+									9-v:meshPath
+										10-s:Engine/Models/sphere.obj
+					5-v:name
+						6-s:Sphere
+					5-o:transform
+						6-v:type
+							7-s:Transform3D
+						6-o:ptr
+							7-o:translation
+								8-v:x
+									9-f:9.58549595
+								8-v:y
+									9-f:5.30643702
+								8-v:z
+									9-f:8.28602886
+		2-k:i
+			3-o:d
+				4-v:type
+					5-s:GameObject
+				4-o:ptr
+					5-v:entityId
+						6-i:4585079870258711400
+					5-a:components
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Rigidbody3D
+								8-o:ptr
+									9-v:entityId
+										10-i:4090269953903454453
+									9-o:shape
+										10-v:type
+											11-s:CollisionShape
+										10-o:ptr
+											11-v:type
+												12-s:Sphere3D
+											11-o:bounds
+												12-v:x
+													13-f:1
+												12-v:y
+													13-f:1
+												12-v:z
+													13-f:1
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Mesh3D
+								8-o:ptr
+									9-v:entityId
+										10-i:3782099061609186603
+									9-o:material
+										10-v:type
+											11-s:FileMaterial
+										10-o:ptr
+											11-v:materialPath
+												12-s:Engine/Materials/default.mat
+									9-v:meshPath
+										10-s:Engine/Models/sphere.obj
+					5-v:name
+						6-s:Sphere
+					5-o:transform
+						6-v:type
+							7-s:Transform3D
+						6-o:ptr
+							7-o:translation
+								8-v:x
+									9-f:6.82895279
+								8-v:y
+									9-f:7.39697123
+								8-v:z
+									9-f:8.28602886
+		2-k:i
+			3-o:d
+				4-v:type
+					5-s:GameObject
+				4-o:ptr
+					5-v:entityId
+						6-i:3157476997575059326
+					5-a:components
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Rigidbody3D
+								8-o:ptr
+									9-v:entityId
+										10-i:3478060673469806615
+									9-o:shape
+										10-v:type
+											11-s:CollisionShape
+										10-o:ptr
+											11-v:type
+												12-s:Sphere3D
+											11-o:bounds
+												12-v:x
+													13-f:1
+												12-v:y
+													13-f:1
+												12-v:z
+													13-f:1
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Mesh3D
+								8-o:ptr
+									9-v:entityId
+										10-i:3338789617229262520
+									9-o:material
+										10-v:type
+											11-s:FileMaterial
+										10-o:ptr
+											11-v:materialPath
+												12-s:Engine/Materials/default.mat
+									9-v:meshPath
+										10-s:Engine/Models/sphere.obj
+					5-v:name
+						6-s:Sphere
+					5-o:transform
+						6-v:type
+							7-s:Transform3D
+						6-o:ptr
+							7-o:translation
+								8-v:x
+									9-f:10.1868019
+								8-v:y
+									9-f:8.54655743
+								8-v:z
+									9-f:8.28602886

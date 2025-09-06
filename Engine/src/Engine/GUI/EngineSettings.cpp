@@ -91,7 +91,10 @@ namespace SR_CORE_GUI_NS {
         if (SR_GRAPH_GUI_NS::Immediate::InputInt("Swapchain images", &swapchainImages, 1, 1, SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue)) {
             swapchainImages = SR_CLAMP(swapchainImages, 1, 16);
             SR_UTILS_NS::StoreUtils::User::SetInt("SwapchainImages", swapchainImages);
-            pPipeline->SetSwapchainImagesCount(swapchainImages);
+        }
+
+        if (swapchainImages != pPipeline->GetSwapchainImagesCount()) {
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Requires restart!");
         }
     }
 
