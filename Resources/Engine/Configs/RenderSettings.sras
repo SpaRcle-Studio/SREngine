@@ -13,8 +13,6 @@ sra format
 							7-s:Engine/Render/Geometry.srtech
 						6-v:editorCameraRenderTechnique
 							7-s:Editor/Render/Geometry.srtech
-						6-v:prefabCameraRenderTechnique
-							7-s:Editor/Render/Geometry.srtech
 				4-k:i
 					5-o:d
 						6-v:name
@@ -26,8 +24,6 @@ sra format
 						6-v:mainCameraRenderTechnique
 							7-s:Engine/Render/Geometry.srtech
 						6-v:editorCameraRenderTechnique
-							7-s:Editor/Render/GeometryNoDebug.srtech
-						6-v:prefabCameraRenderTechnique
 							7-s:Editor/Render/GeometryNoDebug.srtech
 				4-k:i
 					5-o:d
@@ -44,8 +40,6 @@ sra format
 							7-s:Engine/Render/Geometry.srtech
 						6-v:editorCameraRenderTechnique
 							7-s:Editor/Render/FullRender.srtech
-						6-v:prefabCameraRenderTechnique
-							7-s:Editor/Render/FullRender.srtech
 			3-o:defaultPreset
 				4-v:name
 					5-s:Default
@@ -54,8 +48,6 @@ sra format
 						6-v:d
 							7-s:SR_DEFINE_USE_CASCADED_SHADOW_MAP
 				4-v:mainCameraRenderTechnique
-					5-s:Engine/Render/Geometry.srtech
+					5-s:Engine/Render/FullRender.srtech
 				4-v:editorCameraRenderTechnique
-					5-s:Editor/Render/FullRender.srtech
-				4-v:prefabCameraRenderTechnique
 					5-s:Editor/Render/FullRender.srtech

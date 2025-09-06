@@ -16,7 +16,7 @@ DepthTest true;
 
 ///[[shared]] vec3 vNormal;
 
-#include <Engine/Shaders/CascadedShadowMap/pcf-utils.inl.srsl>
+#include <Engine/Shaders/Common/pcf-utils.inl.srsl>
 
 void fragment() {
     vec3 diffuseColor = texture(diffuse, UV).rgb * color.rgb;

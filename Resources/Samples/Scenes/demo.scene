@@ -331,11 +331,11 @@ sra format
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:-0.105999999
+									9-f:-2.41069698
 								8-v:y
 									9-f:2.99001503
 								8-v:z
-									9-f:-1.71198201
+									9-f:6.9081955
 		2-k:i
 			3-o:d
 				4-v:type
@@ -445,6 +445,8 @@ sra format
 										10-i:3445474946150253867
 					5-v:name
 						6-s:GameCamera
+					5-v:isEnabled
+						6-b:false
 					5-o:transform
 						6-v:type
 							7-s:Transform3D
@@ -575,7 +577,7 @@ sra format
 								8-v:y
 									9-f:4.5353241
 								8-v:z
-									9-f:2.58465028
+									9-f:5.92640591
 		2-k:i
 			3-o:d
 				4-v:type
@@ -621,65 +623,8 @@ sra format
 												12-o:ptr
 													13-o:default
 														14-v:shader
-															15-s:Engine/Shaders/CascadedShadowMap/spatial.srsl
+															15-s:
 														14-o:data
-															15-a:uniforms
-																16-k:i
-																	17-o:d
-																		18-v:id
-																			19-s:color
-																		18-v:type
-																			19-s:Vec4
-																		18-o:value
-																			19-v:x
-																				20-f:1
-																			19-v:y
-																				20-f:1
-																			19-v:z
-																				20-f:1
-																			19-v:w
-																				20-f:1
-															15-a:samplers
-																16-k:i
-																	17-o:d
-																		18-v:id
-																			19-s:diffuse
-																		18-v:type
-																			19-s:Sampler2D
-																		18-v:value
-																			19-s:Engine/Textures/default_improved.png
-													13-a:stages
-														14-k:stage
-															15-v:id
-																16-s:Shadow
-															15-v:shader
-																16-s:Engine/Shaders/CascadedShadowMap/spatial.srsl
-															15-o:data
-																16-a:uniforms
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:color
-																			19-v:type
-																				20-s:Vec4
-																			19-o:value
-																				20-v:x
-																					21-f:1
-																				20-v:y
-																					21-f:1
-																				20-v:z
-																					21-f:1
-																				20-v:w
-																					21-f:1
-																16-a:samplers
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:diffuse
-																			19-v:type
-																				20-s:Sampler2D
-																			19-v:value
-																				20-s:Engine/Textures/default_improved.png
 									9-v:meshPath
 										10-s:Engine/Models/sphere.obj
 					5-v:name
@@ -815,11 +760,11 @@ sra format
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:-4.19123888
+									9-f:-9.09882927
 								8-v:y
 									9-f:3.13308191
 								8-v:z
-									9-f:0.234900996
+									9-f:6.21408224
 		2-k:i
 			3-o:d
 				4-v:type
@@ -855,7 +800,6 @@ sra format
 																		18-v:type
 																			19-s:Vec3
 																		18-o:value
-													13-a:stages
 									9-v:text
 										10-m:5
 2222😁👀😀📂⚙️🍿🥩😊
@@ -917,9 +861,9 @@ ddddцццゔぅヾボ
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:-11.0159979
+									9-f:-15.7343855
 								8-v:z
-									9-f:5.45560503
+									9-f:11.7106524
 		2-k:i
 			3-o:d
 				4-v:type
@@ -929,8 +873,6 @@ ddddцццゔぅヾボ
 						6-i:4191819035411605343
 					5-v:name
 						6-s:Models/teapot
-					5-v:isEnabled
-						6-b:false
 					5-v:prefab
 						6-s:5345345345.prefab
 					5-o:transform
@@ -939,11 +881,11 @@ ddddцццゔぅヾボ
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:-3.43599391
+									9-f:-11.5481148
 								8-v:y
-									9-f:1.05293405
+									9-f:0.451848418
 								8-v:z
-									9-f:-1.88308096
+									9-f:-1.64829946
 		2-k:i
 			3-o:d
 				4-v:type
@@ -953,8 +895,6 @@ ddddцццゔぅヾボ
 						6-i:4022546309212795317
 					5-v:name
 						6-s:Models/teapot
-					5-v:isEnabled
-						6-b:false
 					5-v:prefab
 						6-s:5345345345.prefab
 					5-o:transform
@@ -963,11 +903,11 @@ ddddцццゔぅヾボ
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:-3.80093789
+									9-f:-12.5984221
 								8-v:y
-									9-f:1.19159997
+									9-f:0.463966042
 								8-v:z
-									9-f:2.94436598
+									9-f:-2.56373668
 		2-k:i
 			3-o:d
 				4-v:type
@@ -1088,7 +1028,6 @@ ddddцццゔぅヾボ
 																			19-s:Sampler2D
 																		18-v:value
 																			19-s:Engine/Textures/default_improved.png
-													13-a:stages
 									9-v:useSSBOInsteadOfVertices
 										10-b:true
 					5-v:name
@@ -1181,7 +1120,6 @@ ddddцццゔぅヾボ
 																			19-s:Sampler2D
 																		18-v:value
 																			19-s:Engine/Textures/default_improved.png
-													13-a:stages
 					5-v:name
 						6-s:MarchingCubesOptimized
 					5-v:isEnabled
@@ -1327,38 +1265,6 @@ ddddцццゔぅヾボ
 																							23-s:Sampler2D
 																						22-v:value
 																							23-s:Samples/grass_path_2_diff_4k.jpg
-																	17-a:stages
-																		18-k:stage
-																			19-v:id
-																				20-s:Shadow
-																			19-v:shader
-																				20-s:Engine/Shaders/CascadedShadowMap/spatial.srsl
-																			19-o:data
-																				20-a:uniforms
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:color
-																							23-v:type
-																								24-s:Vec4
-																							23-o:value
-																								24-v:x
-																									25-f:1
-																								24-v:y
-																									25-f:1
-																								24-v:z
-																									25-f:1
-																								24-v:w
-																									25-f:1
-																				20-a:samplers
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:diffuse
-																							23-v:type
-																								24-s:Sampler2D
-																							23-v:value
-																								24-s:Engine/Textures/default_improved.png
 									9-v:name
 										10-s:MarchingCubes
 									9-o:transform
@@ -1461,38 +1367,6 @@ ddddцццゔぅヾボ
 																							23-s:Sampler2D
 																						22-v:value
 																							23-s:Samples/grass_path_2_diff_4k.jpg
-																	17-a:stages
-																		18-k:stage
-																			19-v:id
-																				20-s:Shadow
-																			19-v:shader
-																				20-s:Engine/Shaders/CascadedShadowMap/spatial.srsl
-																			19-o:data
-																				20-a:uniforms
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:color
-																							23-v:type
-																								24-s:Vec4
-																							23-o:value
-																								24-v:x
-																									25-f:1
-																								24-v:y
-																									25-f:1
-																								24-v:z
-																									25-f:1
-																								24-v:w
-																									25-f:1
-																				20-a:samplers
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:diffuse
-																							23-v:type
-																								24-s:Sampler2D
-																							23-v:value
-																								24-s:Engine/Textures/default_improved.png
 									9-v:name
 										10-s:MarchingCubes
 									9-o:transform
@@ -1597,38 +1471,6 @@ ddddцццゔぅヾボ
 																							23-s:Sampler2D
 																						22-v:value
 																							23-s:Samples/grass_path_2_diff_4k.jpg
-																	17-a:stages
-																		18-k:stage
-																			19-v:id
-																				20-s:Shadow
-																			19-v:shader
-																				20-s:Engine/Shaders/CascadedShadowMap/spatial.srsl
-																			19-o:data
-																				20-a:uniforms
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:color
-																							23-v:type
-																								24-s:Vec4
-																							23-o:value
-																								24-v:x
-																									25-f:1
-																								24-v:y
-																									25-f:1
-																								24-v:z
-																									25-f:1
-																								24-v:w
-																									25-f:1
-																				20-a:samplers
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:diffuse
-																							23-v:type
-																								24-s:Sampler2D
-																							23-v:value
-																								24-s:Engine/Textures/default_improved.png
 									9-v:name
 										10-s:MarchingCubes
 									9-o:transform
@@ -2065,7 +1907,6 @@ ddddцццゔぅヾボ
 																							23-s:Sampler2D
 																						22-v:value
 																							23-s:Engine/Textures/uv.png
-																	17-a:stages
 													13-o:textureBorder
 														14-v:x
 															15-f:0.150000006
@@ -2138,7 +1979,6 @@ ddddцццゔぅヾボ
 																											27-s:Sampler2D
 																										26-v:value
 																											27-s:Samples/Novel/bottom-panel.png
-																					21-a:stages
 																	17-o:textureBorder
 																		18-v:x
 																			19-f:0.100000001
@@ -2211,7 +2051,6 @@ ddddцццゔぅヾボ
 																															31-s:Sampler2D
 																														30-v:value
 																															31-s:Samples/Novel/name-panel.png
-																									25-a:stages
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.150000006
@@ -2303,7 +2142,6 @@ ddddцццゔぅヾボ
 																															31-s:Sampler2D
 																														30-v:value
 																															31-s:Samples/Novel/panel-decor.png
-																									25-a:stages
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.150000006
@@ -2429,7 +2267,6 @@ ddddцццゔぅヾボ
 																							23-s:Sampler2D
 																						22-v:value
 																							23-s:Engine/Textures/uv.png
-																	17-a:stages
 													13-o:textureBorder
 														14-v:x
 															15-f:0.150000006
@@ -2502,7 +2339,6 @@ ddddцццゔぅヾボ
 																											27-s:Sampler2D
 																										26-v:value
 																											27-s:Engine/Textures/uv.png
-																					21-a:stages
 																	17-o:textureBorder
 																		18-v:x
 																			19-f:0.150000006
@@ -2575,7 +2411,6 @@ ddddцццゔぅヾボ
 																															31-s:Sampler2D
 																														30-v:value
 																															31-s:Engine/Textures/uv.png
-																									25-a:stages
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.150000006
@@ -2658,7 +2493,6 @@ ddddцццゔぅヾボ
 																															31-s:Sampler2D
 																														30-v:value
 																															31-s:Engine/Textures/uv.png
-																									25-a:stages
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.150000006
@@ -2731,7 +2565,6 @@ ddddцццゔぅヾボ
 																																			35-s:Sampler2D
 																																		34-v:value
 																																			35-s:Engine/Textures/uv.png
-																													29-a:stages
 																									25-o:textureBorder
 																										26-v:x
 																											27-f:0.150000006
@@ -2860,7 +2693,6 @@ ddddцццゔぅヾボ
 																							23-s:Sampler2D
 																						22-v:value
 																							23-s:Engine/Textures/uv.png
-																	17-a:stages
 													13-o:textureBorder
 														14-v:x
 															15-f:0.150000006
@@ -2933,7 +2765,6 @@ ddddцццゔぅヾボ
 																											27-s:Sampler2D
 																										26-v:value
 																											27-s:Engine/Textures/uv.png
-																					21-a:stages
 																	17-o:textureBorder
 																		18-v:x
 																			19-f:0.150000006
@@ -3006,7 +2837,6 @@ ddddцццゔぅヾボ
 																															31-s:Sampler2D
 																														30-v:value
 																															31-s:Engine/Textures/uv.png
-																									25-a:stages
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.150000006
@@ -3091,7 +2921,6 @@ ddddцццゔぅヾボ
 																															31-s:Sampler2D
 																														30-v:value
 																															31-s:Engine/Textures/uv.png
-																									25-a:stages
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.150000006
@@ -3164,7 +2993,6 @@ ddddцццゔぅヾボ
 																																			35-s:Sampler2D
 																																		34-v:value
 																																			35-s:Engine/Textures/uv.png
-																													29-a:stages
 																									25-o:textureBorder
 																										26-v:x
 																											27-f:0.150000006
@@ -3305,7 +3133,6 @@ ddddцццゔぅヾボ
 																							23-s:Sampler2D
 																						22-v:value
 																							23-s:Engine/Textures/uv.png
-																	17-a:stages
 													13-o:textureBorder
 														14-v:x
 															15-f:0.150000006
@@ -3378,7 +3205,6 @@ ddddцццゔぅヾボ
 																											27-s:Sampler2D
 																										26-v:value
 																											27-s:Engine/Textures/UI/Rounded Outline 32px - 3x.png
-																					21-a:stages
 																	17-o:textureBorder
 																		18-v:x
 																			19-f:0.209999993
@@ -3451,7 +3277,6 @@ ddddцццゔぅヾボ
 																															31-s:Sampler2D
 																														30-v:value
 																															31-s:Engine/Textures/UI/button.png
-																									25-a:stages
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.709999979
@@ -3534,7 +3359,6 @@ ddddцццゔぅヾボ
 																															31-s:Sampler2D
 																														30-v:value
 																															31-s:Engine/Textures/UI/button.png
-																									25-a:stages
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.709999979
@@ -3617,7 +3441,6 @@ ddddцццゔぅヾボ
 																															31-s:Sampler2D
 																														30-v:value
 																															31-s:Engine/Textures/UI/button.png
-																									25-a:stages
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.709999979
@@ -3700,7 +3523,6 @@ ddddцццゔぅヾボ
 																															31-s:Sampler2D
 																														30-v:value
 																															31-s:Engine/Textures/UI/button.png
-																									25-a:stages
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.709999979
@@ -3783,7 +3605,6 @@ ddddцццゔぅヾボ
 																															31-s:Sampler2D
 																														30-v:value
 																															31-s:Engine/Textures/UI/button.png
-																									25-a:stages
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.709999979
@@ -3866,7 +3687,6 @@ ddddцццゔぅヾボ
 																															31-s:Sampler2D
 																														30-v:value
 																															31-s:Engine/Textures/UI/Rounded Filled 1024px.png
-																									25-a:stages
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.270000011
@@ -3939,7 +3759,6 @@ ddddцццゔぅヾボ
 																																			35-s:Sampler2D
 																																		34-v:value
 																																			35-s:Engine/Textures/UI/button.png
-																													29-a:stages
 																									25-o:textureBorder
 																										26-v:x
 																											27-f:0.709999979
@@ -4022,7 +3841,6 @@ ddddцццゔぅヾボ
 																																			35-s:Sampler2D
 																																		34-v:value
 																																			35-s:Engine/Textures/UI/button.png
-																													29-a:stages
 																									25-o:textureBorder
 																										26-v:x
 																											27-f:0.709999979
@@ -4105,7 +3923,6 @@ ddddцццゔぅヾボ
 																																			35-s:Sampler2D
 																																		34-v:value
 																																			35-s:Engine/Textures/UI/button.png
-																													29-a:stages
 																									25-o:textureBorder
 																										26-v:x
 																											27-f:0.709999979
@@ -4248,7 +4065,6 @@ ddddцццゔぅヾボ
 																							23-s:Sampler2D
 																						22-v:value
 																							23-s:Engine/Textures/uv.png
-																	17-a:stages
 													13-o:textureBorder
 														14-v:x
 															15-f:0.150000006
@@ -4331,7 +4147,6 @@ ddddцццゔぅヾボ
 																															31-s:Sampler2D
 																														30-v:value
 																															31-s:Samples/Novel/name-panel.png
-																									25-a:stages
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.409999996
@@ -4421,7 +4236,6 @@ ddddцццゔぅヾボ
 																															31-s:Sampler2D
 																														30-v:value
 																															31-s:Samples/Novel/name-panel.png
-																									25-a:stages
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.409999996
@@ -4511,7 +4325,6 @@ ddddцццゔぅヾボ
 																															31-s:Sampler2D
 																														30-v:value
 																															31-s:Samples/Novel/name-panel.png
-																									25-a:stages
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.409999996
@@ -4637,7 +4450,6 @@ ddddцццゔぅヾボ
 																							23-s:Sampler2D
 																						22-v:value
 																							23-s:Engine/Textures/uv.png
-																	17-a:stages
 													13-o:textureBorder
 														14-v:x
 															15-f:0.150000006
@@ -4710,7 +4522,6 @@ ddddцццゔぅヾボ
 																											27-s:Sampler2D
 																										26-v:value
 																											27-s:Engine/Textures/UI/Rounded Outline 32px - 3x.png
-																					21-a:stages
 																	17-o:textureBorder
 																		18-v:x
 																			19-f:0.209999993
@@ -4783,7 +4594,6 @@ ddddцццゔぅヾボ
 																															31-s:Sampler2D
 																														30-v:value
 																															31-s:Engine/Textures/UI/button.png
-																									25-a:stages
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.709999979
@@ -4866,7 +4676,6 @@ ddddцццゔぅヾボ
 																															31-s:Sampler2D
 																														30-v:value
 																															31-s:Engine/Textures/UI/button.png
-																									25-a:stages
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.709999979
@@ -4949,7 +4758,6 @@ ddddцццゔぅヾボ
 																															31-s:Sampler2D
 																														30-v:value
 																															31-s:Engine/Textures/UI/button.png
-																									25-a:stages
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.709999979
@@ -5032,7 +4840,6 @@ ddddцццゔぅヾボ
 																															31-s:Sampler2D
 																														30-v:value
 																															31-s:Engine/Textures/UI/button.png
-																									25-a:stages
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.709999979
@@ -5115,7 +4922,6 @@ ddddцццゔぅヾボ
 																															31-s:Sampler2D
 																														30-v:value
 																															31-s:Engine/Textures/UI/button.png
-																									25-a:stages
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.709999979
@@ -5198,7 +5004,6 @@ ddddцццゔぅヾボ
 																															31-s:Sampler2D
 																														30-v:value
 																															31-s:Engine/Textures/UI/Rounded Filled 1024px.png
-																									25-a:stages
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.270000011
@@ -5271,7 +5076,6 @@ ddddцццゔぅヾボ
 																																			35-s:Sampler2D
 																																		34-v:value
 																																			35-s:Engine/Textures/UI/button.png
-																													29-a:stages
 																									25-o:textureBorder
 																										26-v:x
 																											27-f:0.709999979
@@ -5354,7 +5158,6 @@ ddddцццゔぅヾボ
 																																			35-s:Sampler2D
 																																		34-v:value
 																																			35-s:Engine/Textures/UI/button.png
-																													29-a:stages
 																									25-o:textureBorder
 																										26-v:x
 																											27-f:0.709999979
@@ -5437,7 +5240,6 @@ ddddцццゔぅヾボ
 																																			35-s:Sampler2D
 																																		34-v:value
 																																			35-s:Engine/Textures/UI/button.png
-																													29-a:stages
 																									25-o:textureBorder
 																										26-v:x
 																											27-f:0.709999979
@@ -5582,7 +5384,6 @@ ddddцццゔぅヾボ
 																							23-s:Sampler2D
 																						22-v:value
 																							23-s:Engine/Textures/UI/button.png
-																	17-a:stages
 													13-o:textureBorder
 														14-v:x
 															15-f:0.709999979
@@ -5644,7 +5445,6 @@ ddddцццゔぅヾボ
 																							23-s:Sampler2D
 																						22-v:value
 																							23-s:Engine/Textures/UI/button.png
-																	17-a:stages
 													13-o:textureBorder
 														14-v:x
 															15-f:0.709999979
@@ -5676,8 +5476,6 @@ ddddцццゔぅヾボ
 						6-i:2783355225797564100
 					5-v:name
 						6-s:Liza/Liza
-					5-v:isEnabled
-						6-b:false
 					5-v:prefab
 						6-s:Samples/Liza/Liza.prefab
 					5-o:transform
@@ -5686,7 +5484,7 @@ ddddцццゔぅヾボ
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:2.05972409
+									9-f:3.20000005
 		2-k:i
 			3-o:d
 				4-v:type
@@ -5696,8 +5494,6 @@ ddddцццゔぅヾボ
 						6-i:3115808586184361988
 					5-v:name
 						6-s:Liza/Liza
-					5-v:isEnabled
-						6-b:false
 					5-v:prefab
 						6-s:Samples/Liza/Liza.prefab
 					5-o:transform
@@ -5720,8 +5516,6 @@ ddddцццゔぅヾボ
 						6-i:3165779197900876662
 					5-v:name
 						6-s:Liza/Liza
-					5-v:isEnabled
-						6-b:false
 					5-v:prefab
 						6-s:Samples/Liza/Liza.prefab
 					5-o:transform
@@ -8574,7 +8368,7 @@ ddddцццゔぅヾボ
 																																																48-o:ptr
 																																																	49-o:default
 																																																		50-v:shader
-																																																			51-s:Engine/Shaders/CascadedShadowMap/spatial.srsl
+																																																			51-s:Engine/Shaders/standard.srsl
 																																																		50-o:data
 																																																			51-a:uniforms
 																																																				52-k:i
@@ -8601,38 +8395,6 @@ ddddцццゔぅヾボ
 																																																							55-s:Sampler2D
 																																																						54-v:value
 																																																							55-s:Engine/Textures/default_improved.png
-																																																	49-a:stages
-																																																		50-k:stage
-																																																			51-v:id
-																																																				52-s:Shadow
-																																																			51-v:shader
-																																																				52-s:Engine/Shaders/CascadedShadowMap/spatial.srsl
-																																																			51-o:data
-																																																				52-a:uniforms
-																																																					53-k:i
-																																																						54-o:d
-																																																							55-v:id
-																																																								56-s:color
-																																																							55-v:type
-																																																								56-s:Vec4
-																																																							55-o:value
-																																																								56-v:x
-																																																									57-f:1
-																																																								56-v:y
-																																																									57-f:1
-																																																								56-v:z
-																																																									57-f:1
-																																																								56-v:w
-																																																									57-f:1
-																																																				52-a:samplers
-																																																					53-k:i
-																																																						54-o:d
-																																																							55-v:id
-																																																								56-s:diffuse
-																																																							55-v:type
-																																																								56-s:Sampler2D
-																																																							55-v:value
-																																																								56-s:Engine/Textures/default_improved.png
 																																													45-v:meshPath
 																																														46-s:Samples/Raptoid/Prop2.fbx
 																																									41-v:name
@@ -13813,9 +13575,15 @@ ddddцццゔぅヾボ
 																16-v:type
 																	17-s:MaterialData
 																16-o:ptr
+																	17-a:shaderDefines
+																		18-k:item
+																			19-v:first
+																				20-s:HAS_SKELETON
+																			19-v:second
+																				20-s:
 																	17-o:default
 																		18-v:shader
-																			19-s:Engine/Shaders/CascadedShadowMap/skinned.srsl
+																			19-s:Engine/Shaders/standard.srsl
 																		18-o:data
 																			19-a:uniforms
 																				20-k:i
@@ -13842,38 +13610,6 @@ ddddцццゔぅヾボ
 																							23-s:Sampler2D
 																						22-v:value
 																							23-s:Engine/Textures/default_improved.png
-																	17-a:stages
-																		18-k:stage
-																			19-v:id
-																				20-s:Shadow
-																			19-v:shader
-																				20-s:Engine/Shaders/CascadedShadowMap/skinned.srsl
-																			19-o:data
-																				20-a:uniforms
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:color
-																							23-v:type
-																								24-s:Vec4
-																							23-o:value
-																								24-v:x
-																									25-f:1
-																								24-v:y
-																									25-f:1
-																								24-v:z
-																									25-f:1
-																								24-v:w
-																									25-f:1
-																				20-a:samplers
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:diffuse
-																							23-v:type
-																								24-s:Sampler2D
-																							23-v:value
-																								24-s:Engine/Textures/default_improved.png
 													13-o:skeleton
 														14-v:entityId
 															15-i:2991360132295831570
@@ -13922,9 +13658,15 @@ ddddцццゔぅヾボ
 																16-v:type
 																	17-s:MaterialData
 																16-o:ptr
+																	17-a:shaderDefines
+																		18-k:item
+																			19-v:first
+																				20-s:HAS_SKELETON
+																			19-v:second
+																				20-s:
 																	17-o:default
 																		18-v:shader
-																			19-s:Engine/Shaders/CascadedShadowMap/skinned.srsl
+																			19-s:Engine/Shaders/standard.srsl
 																		18-o:data
 																			19-a:uniforms
 																				20-k:i
@@ -13951,38 +13693,6 @@ ddddцццゔぅヾボ
 																							23-s:Sampler2D
 																						22-v:value
 																							23-s:Engine/Textures/default_improved.png
-																	17-a:stages
-																		18-k:stage
-																			19-v:id
-																				20-s:Shadow
-																			19-v:shader
-																				20-s:Engine/Shaders/CascadedShadowMap/skinned.srsl
-																			19-o:data
-																				20-a:uniforms
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:color
-																							23-v:type
-																								24-s:Vec4
-																							23-o:value
-																								24-v:x
-																									25-f:1
-																								24-v:y
-																									25-f:1
-																								24-v:z
-																									25-f:1
-																								24-v:w
-																									25-f:1
-																				20-a:samplers
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:diffuse
-																							23-v:type
-																								24-s:Sampler2D
-																							23-v:value
-																								24-s:Engine/Textures/default_improved.png
 													13-o:skeleton
 														14-v:entityId
 															15-i:2991360132295831570
@@ -14031,9 +13741,15 @@ ddddцццゔぅヾボ
 																16-v:type
 																	17-s:MaterialData
 																16-o:ptr
+																	17-a:shaderDefines
+																		18-k:item
+																			19-v:first
+																				20-s:HAS_SKELETON
+																			19-v:second
+																				20-s:
 																	17-o:default
 																		18-v:shader
-																			19-s:Engine/Shaders/CascadedShadowMap/skinned.srsl
+																			19-s:Engine/Shaders/standard.srsl
 																		18-o:data
 																			19-a:uniforms
 																				20-k:i
@@ -14060,38 +13776,6 @@ ddddцццゔぅヾボ
 																							23-s:Sampler2D
 																						22-v:value
 																							23-s:Engine/Textures/default_improved.png
-																	17-a:stages
-																		18-k:stage
-																			19-v:id
-																				20-s:Shadow
-																			19-v:shader
-																				20-s:Engine/Shaders/CascadedShadowMap/skinned.srsl
-																			19-o:data
-																				20-a:uniforms
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:color
-																							23-v:type
-																								24-s:Vec4
-																							23-o:value
-																								24-v:x
-																									25-f:1
-																								24-v:y
-																									25-f:1
-																								24-v:z
-																									25-f:1
-																								24-v:w
-																									25-f:1
-																				20-a:samplers
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:diffuse
-																							23-v:type
-																								24-s:Sampler2D
-																							23-v:value
-																								24-s:Engine/Textures/default_improved.png
 													13-o:skeleton
 														14-v:entityId
 															15-i:2991360132295831570
@@ -14140,9 +13824,15 @@ ddddцццゔぅヾボ
 																16-v:type
 																	17-s:MaterialData
 																16-o:ptr
+																	17-a:shaderDefines
+																		18-k:item
+																			19-v:first
+																				20-s:HAS_SKELETON
+																			19-v:second
+																				20-s:
 																	17-o:default
 																		18-v:shader
-																			19-s:Engine/Shaders/CascadedShadowMap/skinned.srsl
+																			19-s:Engine/Shaders/standard.srsl
 																		18-o:data
 																			19-a:uniforms
 																				20-k:i
@@ -14169,38 +13859,6 @@ ddddцццゔぅヾボ
 																							23-s:Sampler2D
 																						22-v:value
 																							23-s:Engine/Textures/default_improved.png
-																	17-a:stages
-																		18-k:stage
-																			19-v:id
-																				20-s:Shadow
-																			19-v:shader
-																				20-s:Engine/Shaders/CascadedShadowMap/skinned.srsl
-																			19-o:data
-																				20-a:uniforms
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:color
-																							23-v:type
-																								24-s:Vec4
-																							23-o:value
-																								24-v:x
-																									25-f:1
-																								24-v:y
-																									25-f:1
-																								24-v:z
-																									25-f:1
-																								24-v:w
-																									25-f:1
-																				20-a:samplers
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:diffuse
-																							23-v:type
-																								24-s:Sampler2D
-																							23-v:value
-																								24-s:Engine/Textures/default_improved.png
 													13-o:skeleton
 														14-v:entityId
 															15-i:2991360132295831570
@@ -14249,9 +13907,15 @@ ddddцццゔぅヾボ
 																16-v:type
 																	17-s:MaterialData
 																16-o:ptr
+																	17-a:shaderDefines
+																		18-k:item
+																			19-v:first
+																				20-s:HAS_SKELETON
+																			19-v:second
+																				20-s:
 																	17-o:default
 																		18-v:shader
-																			19-s:Engine/Shaders/CascadedShadowMap/skinned.srsl
+																			19-s:Engine/Shaders/standard.srsl
 																		18-o:data
 																			19-a:uniforms
 																				20-k:i
@@ -14278,38 +13942,6 @@ ddddцццゔぅヾボ
 																							23-s:Sampler2D
 																						22-v:value
 																							23-s:Engine/Textures/default_improved.png
-																	17-a:stages
-																		18-k:stage
-																			19-v:id
-																				20-s:Shadow
-																			19-v:shader
-																				20-s:Engine/Shaders/CascadedShadowMap/skinned.srsl
-																			19-o:data
-																				20-a:uniforms
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:color
-																							23-v:type
-																								24-s:Vec4
-																							23-o:value
-																								24-v:x
-																									25-f:1
-																								24-v:y
-																									25-f:1
-																								24-v:z
-																									25-f:1
-																								24-v:w
-																									25-f:1
-																				20-a:samplers
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:diffuse
-																							23-v:type
-																								24-s:Sampler2D
-																							23-v:value
-																								24-s:Engine/Textures/default_improved.png
 													13-o:skeleton
 														14-v:entityId
 															15-i:2991360132295831570
@@ -14358,9 +13990,15 @@ ddddцццゔぅヾボ
 																16-v:type
 																	17-s:MaterialData
 																16-o:ptr
+																	17-a:shaderDefines
+																		18-k:item
+																			19-v:first
+																				20-s:HAS_SKELETON
+																			19-v:second
+																				20-s:
 																	17-o:default
 																		18-v:shader
-																			19-s:Engine/Shaders/CascadedShadowMap/skinned.srsl
+																			19-s:Engine/Shaders/standard.srsl
 																		18-o:data
 																			19-a:uniforms
 																				20-k:i
@@ -14387,38 +14025,6 @@ ddddцццゔぅヾボ
 																							23-s:Sampler2D
 																						22-v:value
 																							23-s:Engine/Textures/default_improved.png
-																	17-a:stages
-																		18-k:stage
-																			19-v:id
-																				20-s:Shadow
-																			19-v:shader
-																				20-s:Engine/Shaders/CascadedShadowMap/skinned.srsl
-																			19-o:data
-																				20-a:uniforms
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:color
-																							23-v:type
-																								24-s:Vec4
-																							23-o:value
-																								24-v:x
-																									25-f:1
-																								24-v:y
-																									25-f:1
-																								24-v:z
-																									25-f:1
-																								24-v:w
-																									25-f:1
-																				20-a:samplers
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:diffuse
-																							23-v:type
-																								24-s:Sampler2D
-																							23-v:value
-																								24-s:Engine/Textures/default_improved.png
 													13-o:skeleton
 														14-v:entityId
 															15-i:2991360132295831570
@@ -14467,9 +14073,15 @@ ddddцццゔぅヾボ
 																16-v:type
 																	17-s:MaterialData
 																16-o:ptr
+																	17-a:shaderDefines
+																		18-k:item
+																			19-v:first
+																				20-s:HAS_SKELETON
+																			19-v:second
+																				20-s:
 																	17-o:default
 																		18-v:shader
-																			19-s:Engine/Shaders/CascadedShadowMap/skinned.srsl
+																			19-s:Engine/Shaders/standard.srsl
 																		18-o:data
 																			19-a:uniforms
 																				20-k:i
@@ -14496,38 +14108,6 @@ ddddцццゔぅヾボ
 																							23-s:Sampler2D
 																						22-v:value
 																							23-s:Engine/Textures/default_improved.png
-																	17-a:stages
-																		18-k:stage
-																			19-v:id
-																				20-s:Shadow
-																			19-v:shader
-																				20-s:Engine/Shaders/CascadedShadowMap/skinned.srsl
-																			19-o:data
-																				20-a:uniforms
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:color
-																							23-v:type
-																								24-s:Vec4
-																							23-o:value
-																								24-v:x
-																									25-f:1
-																								24-v:y
-																									25-f:1
-																								24-v:z
-																									25-f:1
-																								24-v:w
-																									25-f:1
-																				20-a:samplers
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:diffuse
-																							23-v:type
-																								24-s:Sampler2D
-																							23-v:value
-																								24-s:Engine/Textures/default_improved.png
 													13-o:skeleton
 														14-v:entityId
 															15-i:2991360132295831570
@@ -14576,9 +14156,15 @@ ddddцццゔぅヾボ
 																16-v:type
 																	17-s:MaterialData
 																16-o:ptr
+																	17-a:shaderDefines
+																		18-k:item
+																			19-v:first
+																				20-s:HAS_SKELETON
+																			19-v:second
+																				20-s:
 																	17-o:default
 																		18-v:shader
-																			19-s:Engine/Shaders/CascadedShadowMap/skinned.srsl
+																			19-s:Engine/Shaders/standard.srsl
 																		18-o:data
 																			19-a:uniforms
 																				20-k:i
@@ -14605,38 +14191,6 @@ ddddцццゔぅヾボ
 																							23-s:Sampler2D
 																						22-v:value
 																							23-s:Engine/Textures/default_improved.png
-																	17-a:stages
-																		18-k:stage
-																			19-v:id
-																				20-s:Shadow
-																			19-v:shader
-																				20-s:Engine/Shaders/CascadedShadowMap/skinned.srsl
-																			19-o:data
-																				20-a:uniforms
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:color
-																							23-v:type
-																								24-s:Vec4
-																							23-o:value
-																								24-v:x
-																									25-f:1
-																								24-v:y
-																									25-f:1
-																								24-v:z
-																									25-f:1
-																								24-v:w
-																									25-f:1
-																				20-a:samplers
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:diffuse
-																							23-v:type
-																								24-s:Sampler2D
-																							23-v:value
-																								24-s:Engine/Textures/default_improved.png
 													13-o:skeleton
 														14-v:entityId
 															15-i:2991360132295831570
@@ -14685,9 +14239,15 @@ ddddцццゔぅヾボ
 																16-v:type
 																	17-s:MaterialData
 																16-o:ptr
+																	17-a:shaderDefines
+																		18-k:item
+																			19-v:first
+																				20-s:HAS_SKELETON
+																			19-v:second
+																				20-s:
 																	17-o:default
 																		18-v:shader
-																			19-s:Engine/Shaders/CascadedShadowMap/skinned.srsl
+																			19-s:Engine/Shaders/standard.srsl
 																		18-o:data
 																			19-a:uniforms
 																				20-k:i
@@ -14714,38 +14274,6 @@ ddddцццゔぅヾボ
 																							23-s:Sampler2D
 																						22-v:value
 																							23-s:Engine/Textures/default_improved.png
-																	17-a:stages
-																		18-k:stage
-																			19-v:id
-																				20-s:Shadow
-																			19-v:shader
-																				20-s:Engine/Shaders/CascadedShadowMap/skinned.srsl
-																			19-o:data
-																				20-a:uniforms
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:color
-																							23-v:type
-																								24-s:Vec4
-																							23-o:value
-																								24-v:x
-																									25-f:1
-																								24-v:y
-																									25-f:1
-																								24-v:z
-																									25-f:1
-																								24-v:w
-																									25-f:1
-																				20-a:samplers
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:diffuse
-																							23-v:type
-																								24-s:Sampler2D
-																							23-v:value
-																								24-s:Engine/Textures/default_improved.png
 													13-o:skeleton
 														14-v:entityId
 															15-i:2991360132295831570
@@ -14804,8 +14332,6 @@ ddddцццゔぅヾボ
 												12-o:ptr
 													13-v:entityId
 														14-i:4440690679856616196
-													13-v:renderTechnique
-														14-s:Engine/Render/Swapchain.srtech
 									9-v:name
 										10-s:Camera
 									9-o:transform
@@ -14828,6 +14354,11 @@ ddddцццゔぅヾボ
 						6-v:type
 							7-s:Transform3D
 						6-o:ptr
+							7-o:translation
+								8-v:x
+									9-f:10.4883442
+								8-v:y
+									9-f:0.484002918
 		2-k:i
 			3-o:d
 				4-v:type

@@ -524,7 +524,7 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
                 f.write('\t' * (tabs + 2) + 'return;\n')
                 f.write('\t' * (tabs + 1) + '}\n')
 
-                f.write('\t' * (tabs + 1) + f'pClassImpl->{property.setter}(std::move(*pData));' + '\n')
+                f.write('\t' * (tabs + 1) + f'pClassImpl->{property.setter}(*pData);' + '\n')
             else:
                 f.write('\t' * (tabs + 1) + 'auto&& pData = value.TryCast<Type>();\n')
                 f.write('\t' * (tabs + 1) + 'if (!pData) {\n')
@@ -534,9 +534,9 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
                 f.write('\t' * (tabs + 1) + '}\n')
 
                 if property.setter:
-                    f.write('\t' * (tabs + 1) + f'pClassImpl->{property.setter}(std::move(*pData));' + '\n')
+                    f.write('\t' * (tabs + 1) + f'pClassImpl->{property.setter}(*pData);' + '\n')
                 else:
-                    f.write('\t' * (tabs + 1) + f'pClassImpl->{property.name} = std::move(*pData);' + '\n')
+                    f.write('\t' * (tabs + 1) + f'pClassImpl->{property.name} = *pData;' + '\n')
 
             #f.write('\t' * (tabs + 1) + f'}}\n')
 

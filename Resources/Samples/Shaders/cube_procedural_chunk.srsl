@@ -24,7 +24,7 @@ struct SSBOVertex {
 [[shared]] vec2 uv;
 [[shared]] vec3 vPos;
 
-#include <Engine/Shaders/CascadedShadowMap/pcf-utils.inl.srsl>
+#include <Engine/Shaders/Common/pcf-utils.inl.srsl>
 
 void fragment() {
     vec3 diffuseColor = texture(diffuse, uv).rgb * color.rgb;

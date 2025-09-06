@@ -52,73 +52,10 @@ sra format
 																			19-i:4130831695961905015
 																		18-o:material
 																			19-v:type
-																				20-s:UniqueMaterial
+																				20-s:FileMaterial
 																			19-o:ptr
-																				20-o:data
-																					21-v:type
-																						22-s:MaterialData
-																					21-o:ptr
-																						22-o:default
-																							23-v:shader
-																								24-s:Engine/Shaders/CascadedShadowMap/leaf.srsl
-																							23-o:data
-																								24-a:uniforms
-																									25-k:i
-																										26-o:d
-																											27-v:id
-																												28-s:color
-																											27-v:type
-																												28-s:Vec4
-																											27-o:value
-																												28-v:x
-																													29-f:1.000000
-																												28-v:y
-																													29-f:1.000000
-																												28-v:z
-																													29-f:1.000000
-																												28-v:w
-																													29-f:1.000000
-																								24-a:samplers
-																									25-k:i
-																										26-o:d
-																											27-v:id
-																												28-s:diffuse
-																											27-v:type
-																												28-s:Sampler2D
-																											27-v:value
-																												28-s:Samples/Oak/leaf.jpg
-																						22-a:stages
-																							23-k:stage
-																								24-v:id
-																									25-s:Shadow
-																								24-v:shader
-																									25-s:Engine/Shaders/CascadedShadowMap/spatial.srsl
-																								24-o:data
-																									25-a:uniforms
-																										26-k:i
-																											27-o:d
-																												28-v:id
-																													29-s:color
-																												28-v:type
-																													29-s:Vec4
-																												28-o:value
-																													29-v:x
-																														30-f:1.000000
-																													29-v:y
-																														30-f:1.000000
-																													29-v:z
-																														30-f:1.000000
-																													29-v:w
-																														30-f:1.000000
-																									25-a:samplers
-																										26-k:i
-																											27-o:d
-																												28-v:id
-																													29-s:diffuse
-																												28-v:type
-																													29-s:Sampler2D
-																												28-v:value
-																													29-s:Engine/Textures/default_improved.png
+																				20-v:materialPath
+																					21-s:Engine/Materials/default.mat
 																		18-v:meshPath
 																			19-s:Samples/Oak/Tree.3ds
 														14-v:name
@@ -144,73 +81,10 @@ sra format
 																			19-i:3979858644891865804
 																		18-o:material
 																			19-v:type
-																				20-s:UniqueMaterial
+																				20-s:FileMaterial
 																			19-o:ptr
-																				20-o:data
-																					21-v:type
-																						22-s:MaterialData
-																					21-o:ptr
-																						22-o:default
-																							23-v:shader
-																								24-s:Engine/Shaders/CascadedShadowMap/leaf.srsl
-																							23-o:data
-																								24-a:uniforms
-																									25-k:i
-																										26-o:d
-																											27-v:id
-																												28-s:color
-																											27-v:type
-																												28-s:Vec4
-																											27-o:value
-																												28-v:x
-																													29-f:1.000000
-																												28-v:y
-																													29-f:1.000000
-																												28-v:z
-																													29-f:1.000000
-																												28-v:w
-																													29-f:1.000000
-																								24-a:samplers
-																									25-k:i
-																										26-o:d
-																											27-v:id
-																												28-s:diffuse
-																											27-v:type
-																												28-s:Sampler2D
-																											27-v:value
-																												28-s:Samples/Oak/leaf.jpg
-																						22-a:stages
-																							23-k:stage
-																								24-v:id
-																									25-s:Shadow
-																								24-v:shader
-																									25-s:Engine/Shaders/CascadedShadowMap/spatial.srsl
-																								24-o:data
-																									25-a:uniforms
-																										26-k:i
-																											27-o:d
-																												28-v:id
-																													29-s:color
-																												28-v:type
-																													29-s:Vec4
-																												28-o:value
-																													29-v:x
-																														30-f:1.000000
-																													29-v:y
-																														30-f:1.000000
-																													29-v:z
-																														30-f:1.000000
-																													29-v:w
-																														30-f:1.000000
-																									25-a:samplers
-																										26-k:i
-																											27-o:d
-																												28-v:id
-																													29-s:diffuse
-																												28-v:type
-																													29-s:Sampler2D
-																												28-v:value
-																													29-s:Engine/Textures/default_improved.png
+																				20-v:materialPath
+																					21-s:Engine/Materials/default.mat
 																		18-v:meshPath
 																			19-s:Samples/Oak/Tree.3ds
 																		18-v:meshId
@@ -238,73 +112,10 @@ sra format
 																			19-i:4528182189681712322
 																		18-o:material
 																			19-v:type
-																				20-s:UniqueMaterial
+																				20-s:FileMaterial
 																			19-o:ptr
-																				20-o:data
-																					21-v:type
-																						22-s:MaterialData
-																					21-o:ptr
-																						22-o:default
-																							23-v:shader
-																								24-s:Engine/Shaders/CascadedShadowMap/leaf.srsl
-																							23-o:data
-																								24-a:uniforms
-																									25-k:i
-																										26-o:d
-																											27-v:id
-																												28-s:color
-																											27-v:type
-																												28-s:Vec4
-																											27-o:value
-																												28-v:x
-																													29-f:1.000000
-																												28-v:y
-																													29-f:1.000000
-																												28-v:z
-																													29-f:1.000000
-																												28-v:w
-																													29-f:1.000000
-																								24-a:samplers
-																									25-k:i
-																										26-o:d
-																											27-v:id
-																												28-s:diffuse
-																											27-v:type
-																												28-s:Sampler2D
-																											27-v:value
-																												28-s:Samples/Oak/leaf.jpg
-																						22-a:stages
-																							23-k:stage
-																								24-v:id
-																									25-s:Shadow
-																								24-v:shader
-																									25-s:Engine/Shaders/CascadedShadowMap/spatial.srsl
-																								24-o:data
-																									25-a:uniforms
-																										26-k:i
-																											27-o:d
-																												28-v:id
-																													29-s:color
-																												28-v:type
-																													29-s:Vec4
-																												28-o:value
-																													29-v:x
-																														30-f:1.000000
-																													29-v:y
-																														30-f:1.000000
-																													29-v:z
-																														30-f:1.000000
-																													29-v:w
-																														30-f:1.000000
-																									25-a:samplers
-																										26-k:i
-																											27-o:d
-																												28-v:id
-																													29-s:diffuse
-																												28-v:type
-																													29-s:Sampler2D
-																												28-v:value
-																													29-s:Engine/Textures/default_improved.png
+																				20-v:materialPath
+																					21-s:Engine/Materials/default.mat
 																		18-v:meshPath
 																			19-s:Samples/Oak/Tree.3ds
 																		18-v:meshId
@@ -332,73 +143,10 @@ sra format
 																			19-i:4015726381078631969
 																		18-o:material
 																			19-v:type
-																				20-s:UniqueMaterial
+																				20-s:FileMaterial
 																			19-o:ptr
-																				20-o:data
-																					21-v:type
-																						22-s:MaterialData
-																					21-o:ptr
-																						22-o:default
-																							23-v:shader
-																								24-s:Engine/Shaders/CascadedShadowMap/spatial.srsl
-																							23-o:data
-																								24-a:uniforms
-																									25-k:i
-																										26-o:d
-																											27-v:id
-																												28-s:color
-																											27-v:type
-																												28-s:Vec4
-																											27-o:value
-																												28-v:x
-																													29-f:1.000000
-																												28-v:y
-																													29-f:1.000000
-																												28-v:z
-																													29-f:1.000000
-																												28-v:w
-																													29-f:1.000000
-																								24-a:samplers
-																									25-k:i
-																										26-o:d
-																											27-v:id
-																												28-s:diffuse
-																											27-v:type
-																												28-s:Sampler2D
-																											27-v:value
-																												28-s:Samples/Oak/leaf.jpg
-																						22-a:stages
-																							23-k:stage
-																								24-v:id
-																									25-s:Shadow
-																								24-v:shader
-																									25-s:Engine/Shaders/CascadedShadowMap/spatial.srsl
-																								24-o:data
-																									25-a:uniforms
-																										26-k:i
-																											27-o:d
-																												28-v:id
-																													29-s:color
-																												28-v:type
-																													29-s:Vec4
-																												28-o:value
-																													29-v:x
-																														30-f:1.000000
-																													29-v:y
-																														30-f:1.000000
-																													29-v:z
-																														30-f:1.000000
-																													29-v:w
-																														30-f:1.000000
-																									25-a:samplers
-																										26-k:i
-																											27-o:d
-																												28-v:id
-																													29-s:diffuse
-																												28-v:type
-																													29-s:Sampler2D
-																												28-v:value
-																													29-s:Engine/Textures/default_improved.png
+																				20-v:materialPath
+																					21-s:Engine/Materials/default.mat
 																		18-v:meshPath
 																			19-s:Samples/Oak/Tree.3ds
 																		18-v:meshId
@@ -415,14 +163,14 @@ sra format
 											11-o:ptr
 												12-o:translation
 													13-v:y
-														14-f:0.000185
+														14-f:0.000184999997
 													13-v:z
-														14-f:4230.454102
+														14-f:4230.4541
 												12-o:quaternion
 													13-v:x
-														14-f:-0.707107
+														14-f:-0.707107008
 													13-v:w
-														14-f:0.707107
+														14-f:0.707107008
 							7-k:i
 								8-o:d
 									9-v:type
@@ -440,73 +188,10 @@ sra format
 															15-i:3661385524728490659
 														14-o:material
 															15-v:type
-																16-s:UniqueMaterial
+																16-s:FileMaterial
 															15-o:ptr
-																16-o:data
-																	17-v:type
-																		18-s:MaterialData
-																	17-o:ptr
-																		18-o:default
-																			19-v:shader
-																				20-s:Engine/Shaders/CascadedShadowMap/spatial.srsl
-																			19-o:data
-																				20-a:uniforms
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:color
-																							23-v:type
-																								24-s:Vec4
-																							23-o:value
-																								24-v:x
-																									25-f:1.000000
-																								24-v:y
-																									25-f:1.000000
-																								24-v:z
-																									25-f:1.000000
-																								24-v:w
-																									25-f:1.000000
-																				20-a:samplers
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:diffuse
-																							23-v:type
-																								24-s:Sampler2D
-																							23-v:value
-																								24-s:Samples/Oak/tree.jpg
-																		18-a:stages
-																			19-k:stage
-																				20-v:id
-																					21-s:Shadow
-																				20-v:shader
-																					21-s:Engine/Shaders/CascadedShadowMap/spatial.srsl
-																				20-o:data
-																					21-a:uniforms
-																						22-k:i
-																							23-o:d
-																								24-v:id
-																									25-s:color
-																								24-v:type
-																									25-s:Vec4
-																								24-o:value
-																									25-v:x
-																										26-f:1.000000
-																									25-v:y
-																										26-f:1.000000
-																									25-v:z
-																										26-f:1.000000
-																									25-v:w
-																										26-f:1.000000
-																					21-a:samplers
-																						22-k:i
-																							23-o:d
-																								24-v:id
-																									25-s:diffuse
-																								24-v:type
-																									25-s:Sampler2D
-																								24-v:value
-																									25-s:Engine/Textures/default_improved.png
+																16-v:materialPath
+																	17-s:Engine/Materials/default.mat
 														14-v:meshPath
 															15-s:Samples/Oak/Tree.3ds
 														14-v:meshId
@@ -519,35 +204,35 @@ sra format
 											11-o:ptr
 												12-o:translation
 													13-v:y
-														14-f:0.000185
+														14-f:0.000184999997
 													13-v:z
-														14-f:4230.454102
+														14-f:4230.4541
 												12-o:quaternion
 													13-v:x
-														14-f:-0.707107
+														14-f:-0.707107008
 													13-v:w
-														14-f:0.707107
+														14-f:0.707107008
 						6-o:transform
 							7-v:type
 								8-s:Transform3D
 							7-o:ptr
 								8-o:translation
 									9-v:x
-										10-f:-0.340000
+										10-f:-0.340000004
 									9-v:y
-										10-f:10.576680
+										10-f:10.5766802
 								8-o:quaternion
 									9-v:x
-										10-f:0.707107
+										10-f:0.707107008
 									9-v:w
-										10-f:0.707107
+										10-f:0.707107008
 								8-o:scale
 									9-v:x
-										10-f:0.002500
+										10-f:0.00249999994
 									9-v:y
-										10-f:0.002500
+										10-f:0.00249999994
 									9-v:z
-										10-f:0.002500
+										10-f:0.00249999994
 		2-o:transform
 			3-v:type
 				4-s:Transform3D

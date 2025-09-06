@@ -51,11 +51,11 @@ sra format
 																				20-s:Vec3
 																			19-o:value
 																				20-v:x
-																					21-f:0.629000
+																					21-f:0.629000008
 																				20-v:y
-																					21-f:0.732000
+																					21-f:0.731999993
 																				20-v:z
-																					21-f:1.000000
+																					21-f:1
 																	17-k:i
 																		18-o:d
 																			19-v:id
@@ -63,7 +63,7 @@ sra format
 																			19-v:type
 																				20-s:Float
 																			19-v:value
-																				20-f:10.731000
+																				20-f:10.7309999
 																	17-k:i
 																		18-o:d
 																			19-v:id
@@ -71,7 +71,7 @@ sra format
 																			19-v:type
 																				20-s:Float
 																			19-v:value
-																				20-f:0.031000
+																				20-f:0.0309999995
 																	17-k:i
 																		18-o:d
 																			19-v:id
@@ -79,7 +79,7 @@ sra format
 																			19-v:type
 																				20-s:Float
 																			19-v:value
-																				20-f:0.393000
+																				20-f:0.393000007
 																16-a:samplers
 																	17-k:i
 																		18-o:d

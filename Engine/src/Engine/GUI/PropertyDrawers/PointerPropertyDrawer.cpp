@@ -10,7 +10,7 @@ namespace SR_CORE_GUI_NS {
     PropertyDrawerFeedback PointerPropertyDrawer::Draw(const PropertyDrawerContext& context) {
         PropertyDrawerFeedback feedback;
 
-        SR_UTILS_NS::Reflection::Value value = context.GetValue();
+        SR_UTILS_NS::Reflection::Value value = context.HasExplicitSetter() ? context.GetValue().Detach() : context.GetValue();
         SR_UTILS_NS::SRClass* pClassValue = value.GetSRClass();
 
         auto&& editorParams = context.GetEditorParams();
@@ -71,7 +71,6 @@ namespace SR_CORE_GUI_NS {
         }
 
         SR_HTYPES_NS::SharedPtrBase* pSharedPtrBase = value.GetSharedPtrBase();
-
         SRAssert(pSharedPtrBase);
 
         if (!context.noHeader) {

@@ -59,10 +59,7 @@ namespace SR_CORE_GUI_NS {
                 m_platform->AddSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave);
                 if (!m_platform->GetChildren().empty()) {
                     if (auto&& pMesh = m_platform->GetChildren()[0]->GetComponent<SR_GTYPES_NS::Mesh3D>()) {
-                        auto&& pMaterial = new SR_GRAPH_NS::UniqueMaterial();
-                        pMaterial->SetShader("Engine/Shaders/CascadedShadowMap/spatial.srsl");
-                        pMaterial->SetTexture("diffuse"_atom, GetRenderScene()->GetRenderStrategy()->GetRenderContext()->GetDefaultTexture());
-                        pMesh->SetMaterial(pMaterial);
+                        pMesh->SetMaterial(GetContext()->GetDefaultMaterial());
                     }
                 }
                 m_platform->GetTransform()->SetScale(5.f, 1.f, 5.f);

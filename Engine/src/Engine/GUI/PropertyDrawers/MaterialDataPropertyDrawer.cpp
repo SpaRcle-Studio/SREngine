@@ -30,39 +30,9 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::PushID(context.pOwner);
 
-        m_stagesToRemove.clear();
-
         SR_GRAPH_NS::MaterialData& materialData = *static_cast<SR_GRAPH_NS::MaterialData*>(context.pOwner);
 
-        if ((!context.pProperty || !context.pProperty->IsReadOnly()) && !SR_GRAPH_GUI_NS::Immediate::IsCurrentlyDisabled()) {
-            const float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth);
-            const float_t addStageWidth = totalWidth / 4.f;
-
-            if (SR_GRAPH_GUI_NS::Immediate::Button("Add Stage", {SR_MAX(addStageWidth, 0), context.fieldHeight})) {
-                if (context.onBeforeChangeCallback) {
-                    context.onBeforeChangeCallback(false);
-                }
-                feedback.isChanged = true;
-                if (!m_newStageName.empty() && !materialData.HasStage(m_newStageName)) {
-                    materialData.AddStage(m_newStageName);
-                }
-            }
-
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
-            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(totalWidth - addStageWidth);
-            SR_GRAPH_GUI_NS::Immediate::InputText("#Stage Name", &m_newStageName);
-            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
-        }
-
         feedback.isChanged |= DrawShaderData(true, "Default", materialData.GetDefaultShaderData(), context);
-
-        for (auto&& [stage, data] : materialData.GetShadersData()) {
-            feedback.isChanged |= DrawShaderData(false, stage, data, context);
-        }
-
-        for (auto&& stage : m_stagesToRemove) {
-            materialData.RemoveStage(stage);
-        }
 
         SR_GRAPH_GUI_NS::Immediate::PopID();
 
@@ -82,48 +52,39 @@ namespace SR_CORE_GUI_NS {
             auto&& pDrawList = SR_GRAPH_GUI_NS::Immediate::GetWindowDrawList(pWindow);
             auto&& cursorPos = SR_GRAPH_GUI_NS::Immediate::GetWindowCursorPos(pWindow);
 
-            const auto dir = opened ? SR_GRAPH_GUI_NS::Immediate::Direction::Down : SR_GRAPH_GUI_NS::Immediate::Direction::Right;
-            const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(1, 5);
-            SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
+            if (m_isNeedArrow) {
+                const auto dir = opened ? SR_GRAPH_GUI_NS::Immediate::Direction::Down : SR_GRAPH_GUI_NS::Immediate::Direction::Right;
+                const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(1, 5);
+                SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
+            }
 
             //SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.GetArrowWidth(), 0));
             //SR_GRAPH_GUI_NS::Immediate::SameLine();
 
             //const float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth) - context.GetArrowWidth();
             const float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth);
-            const float_t removeWidth = SR_MAX(context.lineHeight * 2.5f, 0);
+            //const float_t removeWidth = SR_MAX(context.lineHeight * 2.5f, 0);
 
-            const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(totalWidth - removeWidth, 0), context.fieldHeight };
+            const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(totalWidth, 0), context.fieldHeight };
 
-            auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
-            if (SR_GRAPH_GUI_NS::Immediate::Button(name.c_str(), mainButtonSize)) {
-                opened = !opened;
-            }
-            SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
-
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
-
-            const SR_MATH_NS::FVector2 removeButtonSize = { SR_MAX(removeWidth, 0), context.fieldHeight };
-            SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard guard(isDefault);
-            if (SR_GRAPH_GUI_NS::Immediate::Button("Delete", removeButtonSize)) {
-                if (context.onBeforeChangeCallback) {
-                    context.onBeforeChangeCallback(false);
+            if (m_isNeedArrow) {
+                auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
+                if (SR_GRAPH_GUI_NS::Immediate::Button(name.c_str(), mainButtonSize)) {
+                    opened = !opened;
                 }
-                isChanged = true;
-                m_stagesToRemove.insert(name);
+                SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
             }
         }
 
         if (opened) {
-            SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.GetArrowWidth(), 0));
+            SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(m_isNeedArrow ? context.GetArrowWidth() : 0, 0));
             SR_GRAPH_GUI_NS::Immediate::SameLine();
             SR_GRAPH_GUI_NS::Immediate::BeginGroup();
 
             isChanged |= DrawShaderPath(name, shaderData, context);
 
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
-
-            isChanged |= DrawUseTypeEnum(shaderData, context);
+            //SR_GRAPH_GUI_NS::Immediate::SameLine();
+            //isChanged |= DrawUseTypeEnum(shaderData, context);
 
             uint32_t editorOrder = 0;
 
@@ -177,7 +138,9 @@ namespace SR_CORE_GUI_NS {
         propertyContext.noHeader = false;
         propertyContext.maxPartsInLine = 4;
         propertyContext.fieldWidth += context.fieldTitleWidth;
-        propertyContext.fieldWidth -= context.GetArrowWidth();
+        if (m_isNeedArrow) {
+            propertyContext.fieldWidth -= context.GetArrowWidth();
+        }
         propertyContext.fieldTitleWidth = 0.f;
 
         const SR_MATH_NS::FVector2 propertyButtonSize = { SR_MAX(propertyContext.fieldWidth * 0.25f, 0), context.fieldHeight };
@@ -326,16 +289,18 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerContext propertyContext = context;
         propertyContext.pProperty = nullptr;
         propertyContext.pValue = &value;
-        float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth) - context.GetArrowWidth();
-        propertyContext.fieldWidth = totalWidth * 0.75f;
-        propertyContext.fieldTitleWidth = totalWidth * 0.25f;
+        float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth) - (m_isNeedArrow ? context.GetArrowWidth() : 0);
+        //propertyContext.fieldWidth = totalWidth * 0.75f;
+        propertyContext.fieldWidth = totalWidth;
+        //propertyContext.fieldTitleWidth = totalWidth * 0.25f;
+        propertyContext.fieldTitleWidth = totalWidth;
         propertyContext.customDisplayName = "Shader";
 
         const PropertyDrawerFeedback feedback = m_pathDrawer->Draw(propertyContext);
 
         if (feedback.isChanged) {
             SR_GRAPH_NS::MaterialData& materialData = *static_cast<SR_GRAPH_NS::MaterialData*>(context.pOwner);
-            materialData.SetShader(shaderPath, name);
+            materialData.SetShader(shaderPath);
             return true;
         }
 

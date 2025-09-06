@@ -39,15 +39,5 @@ namespace SR_CORE_GUI_NS {
                 pNewMaterialData->GetDefaultShaderData().SetData(property.id, property.data, property.type);
             });
         }
-
-        for (auto&& [stage, data] : pOldMaterialData->GetShadersData()) {
-            if (auto&& pShader = data.pShader) {
-                pNewMaterialData->SetShader(pShader, stage);
-                SR_UTILS_NS::StringAtom stageName = stage;
-                data.ForEachProperty([&](const SR_GRAPH_NS::MaterialShaderProperty& property) {
-                    pNewMaterialData->GetShaderData(stageName)->SetData(property.id, property.data, property.type);
-                });
-            }
-        }
     }
 }

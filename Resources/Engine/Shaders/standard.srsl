@@ -1,4 +1,8 @@
-ShaderType Spatial;
+#ifdef HAS_SKELETON
+    ShaderType Skinned;
+#else
+    ShaderType Spatial;
+#endif
 
 PolygonMode Fill;
 CullMode Back;
@@ -8,11 +12,16 @@ BlendEnabled false;
 DepthWrite true;
 DepthTest true;
 
-[[uniform], [public]] vec4 color;
+[[uniform], [public]] vec4 color = vec4(1.0, 1.0, 1.0, 1.0);
 [[uniform], [public]] sampler2D diffuse;
 
+#ifdef HAS_SKELETON
+    [[ssbo(bones)]] mat4[] bones;
+    [[ssbo(offsets)]] mat4[] boneOffsets;
+#endif
+
 #ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
-    #include <Engine/Shaders/CascadedShadowMap/pcf-utils.inl.srsl>
+    #include <Engine/Shaders/Common/pcf-utils.inl.srsl>
 #endif
 
 void fragment() {
@@ -28,12 +37,20 @@ void fragment() {
 }
 
 void vertex() {
+#ifdef HAS_SKELETON
+    #include <Engine/Shaders/Common/bone-transform.inl.srsl>
+    mat4 modelMatrix = boneTransform;
+#else
+    mat4 modelMatrix = MODEL_MATRIX;
+#endif
+
 #ifdef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
-    OUT_POSITION = CASCADE_LIGHT_SPACE_MATRICES[PC_SHADOW_CASCADE_INDEX] * MODEL_MATRIX * vec4(VERTEX, 1.0);
+    OUT_POSITION = CASCADE_LIGHT_SPACE_MATRICES[PC_SHADOW_CASCADE_INDEX] * modelMatrix * vec4(VERTEX, 1.0);
 #else
     #ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
-        PreparePCF(MODEL_MATRIX);
+        PreparePCF(modelMatrix);
     #endif
-    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
+
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * modelMatrix * vec4(VERTEX, 1.0);
 #endif
 }
